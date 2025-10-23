@@ -1,0 +1,4 @@
+var _c_sharp_project_form_view_model_tests_8cs =
+[
+    [ "Luthetus.Extensions.DotNet.Tests.Basis.CSharpProjectForms.Models.CSharpProjectFormViewModelTests", "class_luthetus_1_1_extensions_1_1_dot_net_1_1_tests_1_1_basis_1_1_c_sharp_project_forms_1_1_modee107cc440c0a43d44cd86185d1d1cb0c.html", "class_luthetus_1_1_extensions_1_1_dot_net_1_1_tests_1_1_basis_1_1_c_sharp_project_forms_1_1_modee107cc440c0a43d44cd86185d1d1cb0c" ]
+];

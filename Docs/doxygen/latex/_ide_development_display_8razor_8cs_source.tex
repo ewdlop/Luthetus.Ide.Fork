@@ -1,0 +1,69 @@
+\doxysection{Ide\+Development\+Display.\+razor.\+cs}
+\hypertarget{_ide_development_display_8razor_8cs_source}{}\label{_ide_development_display_8razor_8cs_source}\index{Source/Lib/Ide/Ide.RazorLib/Shareds/Displays/Internals/IdeDevelopmentDisplay.razor.cs@{Source/Lib/Ide/Ide.RazorLib/Shareds/Displays/Internals/IdeDevelopmentDisplay.razor.cs}}
+\mbox{\hyperlink{_ide_development_display_8razor_8cs}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{_ide_development_display_8razor_8cs_source_l00001}00001\ \textcolor{keyword}{using\ }Microsoft.AspNetCore.Components;}
+\DoxyCodeLine{\Hypertarget{_ide_development_display_8razor_8cs_source_l00002}00002\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_luthetus_1_1_common_1_1_razor_lib_1_1_installations_1_1_models}{Luthetus.Common.RazorLib.Installations.Models}};}
+\DoxyCodeLine{\Hypertarget{_ide_development_display_8razor_8cs_source_l00003}00003\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_installations_1_1_models}{Luthetus.TextEditor.RazorLib.Installations.Models}};}
+\DoxyCodeLine{\Hypertarget{_ide_development_display_8razor_8cs_source_l00004}00004\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_luthetus_1_1_ide_1_1_razor_lib_1_1_installations_1_1_models}{Luthetus.Ide.RazorLib.Installations.Models}};}
+\DoxyCodeLine{\Hypertarget{_ide_development_display_8razor_8cs_source_l00005}00005\ }
+\DoxyCodeLine{\Hypertarget{_ide_development_display_8razor_8cs_source_l00006}00006\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespace_luthetus_1_1_ide_1_1_razor_lib_1_1_shareds_1_1_displays_1_1_internals}{Luthetus.Ide.RazorLib.Shareds.Displays.Internals}};}
+\DoxyCodeLine{\Hypertarget{_ide_development_display_8razor_8cs_source_l00007}00007\ }
+\DoxyCodeLine{\Hypertarget{_ide_development_display_8razor_8cs_source_l00008}\mbox{\hyperlink{class_luthetus_1_1_ide_1_1_razor_lib_1_1_shareds_1_1_displays_1_1_internals_1_1_ide_development_display}{00008}}\ \textcolor{keyword}{public}\ \textcolor{keyword}{partial\ class\ }\mbox{\hyperlink{class_luthetus_1_1_ide_1_1_razor_lib_1_1_shareds_1_1_displays_1_1_internals_1_1_ide_development_display}{IdeDevelopmentDisplay}}\ :\ ComponentBase}
+\DoxyCodeLine{\Hypertarget{_ide_development_display_8razor_8cs_source_l00009}00009\ \{}
+\DoxyCodeLine{\Hypertarget{_ide_development_display_8razor_8cs_source_l00010}00010\ \ \ \ \ \textcolor{keyword}{private}\ List<Type>?\ \_commonTypeList;}
+\DoxyCodeLine{\Hypertarget{_ide_development_display_8razor_8cs_source_l00011}00011\ \ \ \ \ \textcolor{keyword}{private}\ List<Type>?\ \_textEditorTypeList;}
+\DoxyCodeLine{\Hypertarget{_ide_development_display_8razor_8cs_source_l00012}00012\ \ \ \ \ \textcolor{keyword}{private}\ List<Type>?\ \_compilerServicesTypeList;}
+\DoxyCodeLine{\Hypertarget{_ide_development_display_8razor_8cs_source_l00013}00013\ \ \ \ \ \textcolor{keyword}{private}\ List<Type>?\ \_ideTypeList;}
+\DoxyCodeLine{\Hypertarget{_ide_development_display_8razor_8cs_source_l00014}00014\ }
+\DoxyCodeLine{\Hypertarget{_ide_development_display_8razor_8cs_source_l00015}00015\ \ \ \ \ \textcolor{keyword}{private}\ \mbox{\hyperlink{class_luthetus_1_1_ide_1_1_razor_lib_1_1_shareds_1_1_displays_1_1_internals_1_1_ide_development_display_a7d60155e4395b6173e8a84ac2275838a}{ProjectKind}}\ \_projectKind\ =\ \mbox{\hyperlink{class_luthetus_1_1_ide_1_1_razor_lib_1_1_shareds_1_1_displays_1_1_internals_1_1_ide_development_display_a7d60155e4395b6173e8a84ac2275838a}{ProjectKind}}.Common;}
+\DoxyCodeLine{\Hypertarget{_ide_development_display_8razor_8cs_source_l00016}00016\ \ \ \ \ \textcolor{keyword}{private}\ Type?\ \_projectComponentType;}
+\DoxyCodeLine{\Hypertarget{_ide_development_display_8razor_8cs_source_l00017}00017\ }
+\DoxyCodeLine{\Hypertarget{_ide_development_display_8razor_8cs_source_l00018}00018\ \ \ \ \ \textcolor{keyword}{private}\ List<Type>\ GetProjectComponentTypeList(\mbox{\hyperlink{class_luthetus_1_1_ide_1_1_razor_lib_1_1_shareds_1_1_displays_1_1_internals_1_1_ide_development_display_a7d60155e4395b6173e8a84ac2275838a}{ProjectKind}}\ projectKind)}
+\DoxyCodeLine{\Hypertarget{_ide_development_display_8razor_8cs_source_l00019}00019\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_ide_development_display_8razor_8cs_source_l00020}00020\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{switch}\ (projectKind)}
+\DoxyCodeLine{\Hypertarget{_ide_development_display_8razor_8cs_source_l00021}00021\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_ide_development_display_8razor_8cs_source_l00022}00022\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{class_luthetus_1_1_ide_1_1_razor_lib_1_1_shareds_1_1_displays_1_1_internals_1_1_ide_development_display_a7d60155e4395b6173e8a84ac2275838a}{ProjectKind}}.Common:}
+\DoxyCodeLine{\Hypertarget{_ide_development_display_8razor_8cs_source_l00023}00023\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \_commonTypeList\ ??=\ typeof(\mbox{\hyperlink{namespace_luthetus_1_1_common_1_1_razor_lib_1_1_installations_1_1_models_a9c0f5abeb1edd8801378900423cf1f40}{LuthetusCommonConfig}}).Assembly.GetTypes()}
+\DoxyCodeLine{\Hypertarget{_ide_development_display_8razor_8cs_source_l00024}00024\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ .Where(x\ =>\ x.IsSubclassOf(typeof(ComponentBase))).OrderBy(x\ =>\ x.Name).ToList();}
+\DoxyCodeLine{\Hypertarget{_ide_development_display_8razor_8cs_source_l00025}00025\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{class_luthetus_1_1_ide_1_1_razor_lib_1_1_shareds_1_1_displays_1_1_internals_1_1_ide_development_display_a7d60155e4395b6173e8a84ac2275838a}{ProjectKind}}.TextEditor:}
+\DoxyCodeLine{\Hypertarget{_ide_development_display_8razor_8cs_source_l00026}00026\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \_textEditorTypeList\ ??=\ typeof(\mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_installations_1_1_models_a93aa7bee7cb16431b8752d669a0286dd}{LuthetusTextEditorConfig}}).Assembly.GetTypes()}
+\DoxyCodeLine{\Hypertarget{_ide_development_display_8razor_8cs_source_l00027}00027\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ .Where(x\ =>\ x.IsSubclassOf(typeof(ComponentBase))).OrderBy(x\ =>\ x.Name).ToList();}
+\DoxyCodeLine{\Hypertarget{_ide_development_display_8razor_8cs_source_l00028}00028\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{class_luthetus_1_1_ide_1_1_razor_lib_1_1_shareds_1_1_displays_1_1_internals_1_1_ide_development_display_a7d60155e4395b6173e8a84ac2275838a}{ProjectKind}}.CompilerServices:}
+\DoxyCodeLine{\Hypertarget{_ide_development_display_8razor_8cs_source_l00029}00029\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \_compilerServicesTypeList\ ??=\ typeof(\mbox{\hyperlink{namespace_luthetus_1_1_common_1_1_razor_lib_1_1_installations_1_1_models_a9c0f5abeb1edd8801378900423cf1f40}{LuthetusCommonConfig}}).Assembly.GetTypes()}
+\DoxyCodeLine{\Hypertarget{_ide_development_display_8razor_8cs_source_l00030}00030\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ .Where(x\ =>\ x.IsSubclassOf(typeof(ComponentBase))).OrderBy(x\ =>\ x.Name).ToList();}
+\DoxyCodeLine{\Hypertarget{_ide_development_display_8razor_8cs_source_l00031}00031\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{class_luthetus_1_1_ide_1_1_razor_lib_1_1_shareds_1_1_displays_1_1_internals_1_1_ide_development_display_a7d60155e4395b6173e8a84ac2275838a}{ProjectKind}}.Ide:}
+\DoxyCodeLine{\Hypertarget{_ide_development_display_8razor_8cs_source_l00032}00032\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \_ideTypeList\ ??=\ typeof(\mbox{\hyperlink{namespace_luthetus_1_1_ide_1_1_razor_lib_1_1_installations_1_1_models_ad58fc11d21392100f35d2c1a4ef0aebb}{LuthetusIdeConfig}}).Assembly.GetTypes()}
+\DoxyCodeLine{\Hypertarget{_ide_development_display_8razor_8cs_source_l00033}00033\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ .Where(x\ =>\ x.IsSubclassOf(typeof(ComponentBase))).OrderBy(x\ =>\ x.Name).ToList();}
+\DoxyCodeLine{\Hypertarget{_ide_development_display_8razor_8cs_source_l00034}00034\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{default}:}
+\DoxyCodeLine{\Hypertarget{_ide_development_display_8razor_8cs_source_l00035}00035\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{new}\ List<Type>();}
+\DoxyCodeLine{\Hypertarget{_ide_development_display_8razor_8cs_source_l00036}00036\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_ide_development_display_8razor_8cs_source_l00037}00037\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_ide_development_display_8razor_8cs_source_l00038}00038\ }
+\DoxyCodeLine{\Hypertarget{_ide_development_display_8razor_8cs_source_l00039}00039\ \ \ \ \ \textcolor{keyword}{private}\ \textcolor{keywordtype}{string}\ GetIsActiveCssClass(\mbox{\hyperlink{class_luthetus_1_1_ide_1_1_razor_lib_1_1_shareds_1_1_displays_1_1_internals_1_1_ide_development_display_a7d60155e4395b6173e8a84ac2275838a}{ProjectKind}}\ projectKind)}
+\DoxyCodeLine{\Hypertarget{_ide_development_display_8razor_8cs_source_l00040}00040\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_ide_development_display_8razor_8cs_source_l00041}00041\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \_projectKind\ ==\ projectKind}
+\DoxyCodeLine{\Hypertarget{_ide_development_display_8razor_8cs_source_l00042}00042\ \ \ \ \ \ \ \ \ \ \ \ \ ?\ \textcolor{stringliteral}{"{}luth\_active"{}}}
+\DoxyCodeLine{\Hypertarget{_ide_development_display_8razor_8cs_source_l00043}00043\ \ \ \ \ \ \ \ \ \ \ \ \ :\ \textcolor{keywordtype}{string}.Empty;}
+\DoxyCodeLine{\Hypertarget{_ide_development_display_8razor_8cs_source_l00044}00044\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_ide_development_display_8razor_8cs_source_l00045}00045\ }
+\DoxyCodeLine{\Hypertarget{_ide_development_display_8razor_8cs_source_l00046}00046\ \ \ \ \ \textcolor{keyword}{private}\ \textcolor{keywordtype}{void}\ SetProjectKindOnClick(\mbox{\hyperlink{class_luthetus_1_1_ide_1_1_razor_lib_1_1_shareds_1_1_displays_1_1_internals_1_1_ide_development_display_a7d60155e4395b6173e8a84ac2275838a}{ProjectKind}}\ projectKind)}
+\DoxyCodeLine{\Hypertarget{_ide_development_display_8razor_8cs_source_l00047}00047\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_ide_development_display_8razor_8cs_source_l00048}00048\ \ \ \ \ \ \ \ \ \_projectKind\ =\ projectKind;}
+\DoxyCodeLine{\Hypertarget{_ide_development_display_8razor_8cs_source_l00049}00049\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_ide_development_display_8razor_8cs_source_l00050}00050\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_ide_development_display_8razor_8cs_source_l00051}00051\ \ \ \ \ \textcolor{keyword}{private}\ \textcolor{keywordtype}{void}\ SetProjectComponentTypeOnClick(Type\ projectComponentType)}
+\DoxyCodeLine{\Hypertarget{_ide_development_display_8razor_8cs_source_l00052}00052\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_ide_development_display_8razor_8cs_source_l00053}00053\ \ \ \ \ \ \ \ \ \_projectComponentType\ =\ projectComponentType;}
+\DoxyCodeLine{\Hypertarget{_ide_development_display_8razor_8cs_source_l00054}00054\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_ide_development_display_8razor_8cs_source_l00055}00055\ }
+\DoxyCodeLine{\Hypertarget{_ide_development_display_8razor_8cs_source_l00056}\mbox{\hyperlink{class_luthetus_1_1_ide_1_1_razor_lib_1_1_shareds_1_1_displays_1_1_internals_1_1_ide_development_display_a7d60155e4395b6173e8a84ac2275838a}{00056}}\ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keyword}{enum}\ \mbox{\hyperlink{class_luthetus_1_1_ide_1_1_razor_lib_1_1_shareds_1_1_displays_1_1_internals_1_1_ide_development_display_a7d60155e4395b6173e8a84ac2275838a}{ProjectKind}}}
+\DoxyCodeLine{\Hypertarget{_ide_development_display_8razor_8cs_source_l00057}00057\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_ide_development_display_8razor_8cs_source_l00058}\mbox{\hyperlink{class_luthetus_1_1_ide_1_1_razor_lib_1_1_shareds_1_1_displays_1_1_internals_1_1_ide_development_display_a7d60155e4395b6173e8a84ac2275838aad13bc5b68b2bd9e18f29777db17cc563}{00058}}\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespace_luthetus_1_1_common}{Common}},}
+\DoxyCodeLine{\Hypertarget{_ide_development_display_8razor_8cs_source_l00059}\mbox{\hyperlink{class_luthetus_1_1_ide_1_1_razor_lib_1_1_shareds_1_1_displays_1_1_internals_1_1_ide_development_display_a7d60155e4395b6173e8a84ac2275838aa86d6c1f7bba26ce35585daac05480cbb}{00059}}\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor}{TextEditor}},}
+\DoxyCodeLine{\Hypertarget{_ide_development_display_8razor_8cs_source_l00060}\mbox{\hyperlink{class_luthetus_1_1_ide_1_1_razor_lib_1_1_shareds_1_1_displays_1_1_internals_1_1_ide_development_display_a7d60155e4395b6173e8a84ac2275838aa7205b1dc208b26669e093ec97ce44018}{00060}}\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespace_luthetus_1_1_compiler_services}{CompilerServices}},}
+\DoxyCodeLine{\Hypertarget{_ide_development_display_8razor_8cs_source_l00061}\mbox{\hyperlink{class_luthetus_1_1_ide_1_1_razor_lib_1_1_shareds_1_1_displays_1_1_internals_1_1_ide_development_display_a7d60155e4395b6173e8a84ac2275838aa378243333caebe1ecb16d2e4b8996a9c}{00061}}\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespace_luthetus_1_1_ide}{Ide}}}
+\DoxyCodeLine{\Hypertarget{_ide_development_display_8razor_8cs_source_l00062}00062\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_ide_development_display_8razor_8cs_source_l00063}00063\ \}}
+
+\end{DoxyCode}

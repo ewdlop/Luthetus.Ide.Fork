@@ -1,0 +1,270 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_interfaces_1_1_i_compiler_service" xml:lang="en-US">
+<title>Luthetus.TextEditor.RazorLib.CompilerServices.Interfaces.ICompilerService Interface Reference</title>
+<indexterm><primary>Luthetus.TextEditor.RazorLib.CompilerServices.Interfaces.ICompilerService</primary></indexterm>
+Inheritance diagram for Luthetus.TextEditor.RazorLib.CompilerServices.Interfaces.ICompilerService:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_interfaces_1_1_i_compiler_service__inherit__graph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+<simplesect>
+    <title>Public Member Functions    </title>
+        <itemizedlist>
+            <listitem><para>void <link linkend="_interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_interfaces_1_1_i_compiler_service_1ad8eea768e8f6d4bddfb5e1706c71ee8e">RegisterResource</link> (<link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1a435ccef09e2ba83022e8cf378fc0f690">ResourceUri</link> <link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1ae531f6ec8ec05e2493aabf8d17c23e4b">resourceUri</link>, bool shouldTriggerResourceWasModified)</para>
+
+<para>Expected to be concurrency safe with <link linkend="_interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_interfaces_1_1_i_compiler_service_1a7e6a70782606886335e75d55103a40f5">DisposeResource</link>. </para>
+</listitem>
+            <listitem><para>void <link linkend="_interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_interfaces_1_1_i_compiler_service_1a024c07deab62e81b456d7775122b628d">ResourceWasModified</link> (<link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1a435ccef09e2ba83022e8cf378fc0f690">ResourceUri</link> <link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1ae531f6ec8ec05e2493aabf8d17c23e4b">resourceUri</link>, ImmutableArray&lt; <link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_lexers_1_1_models_1a1ffd1a7706dfd364560b76d47467812f">TextEditorTextSpan</link> &gt; editTextSpansList)</para>
+
+<para>Expected to be an Microsoft.Extensions.Hosting.IHostedService (or anything which performs background task work). </para>
+</listitem>
+            <listitem><para><link linkend="_interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_interfaces_1_1_i_compiler_service_resource">ICompilerServiceResource</link>? <link linkend="_interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_interfaces_1_1_i_compiler_service_1ae1624012b971994afc85248ecc0663a0">GetCompilerServiceResourceFor</link> (<link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1a435ccef09e2ba83022e8cf378fc0f690">ResourceUri</link> <link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1ae531f6ec8ec05e2493aabf8d17c23e4b">resourceUri</link>)</para>
+</listitem>
+            <listitem><para>void <link linkend="_interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_interfaces_1_1_i_compiler_service_1a90247033a7580c1c3c2ca1a35a360e41">CursorWasModified</link> (<link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1a435ccef09e2ba83022e8cf378fc0f690">ResourceUri</link> <link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1ae531f6ec8ec05e2493aabf8d17c23e4b">resourceUri</link>, <link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_cursors_1_1_models_1a8373e854ca1ddf152a3b5372ea18c20b">TextEditorCursor</link> cursor)</para>
+
+<para>(2024-01-28) Goal: track the cursor&apos;s position within the compilation unit as it moves. </para>
+</listitem>
+            <listitem><para>ImmutableArray&lt; <link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_lexers_1_1_models_1a1ffd1a7706dfd364560b76d47467812f">TextEditorTextSpan</link> &gt; <link linkend="_interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_interfaces_1_1_i_compiler_service_1a6aca60aa5ed5357d61aabf9f4b24c91c">GetTokenTextSpansFor</link> (<link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1a435ccef09e2ba83022e8cf378fc0f690">ResourceUri</link> <link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1ae531f6ec8ec05e2493aabf8d17c23e4b">resourceUri</link>)</para>
+
+<para>Provides syntax highlighting from the lexing result. This method is invoked, and applied, before <link linkend="_interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_interfaces_1_1_i_compiler_service_1a63b7642d94fae8aef04ef7f1c9b862d2">GetSymbolsFor</link>. </para>
+</listitem>
+            <listitem><para>ImmutableArray&lt; <link linkend="_interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_interfaces_1_1_i_text_editor_symbol">ITextEditorSymbol</link> &gt; <link linkend="_interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_interfaces_1_1_i_compiler_service_1a63b7642d94fae8aef04ef7f1c9b862d2">GetSymbolsFor</link> (<link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1a435ccef09e2ba83022e8cf378fc0f690">ResourceUri</link> <link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1ae531f6ec8ec05e2493aabf8d17c23e4b">resourceUri</link>)</para>
+
+<para>Provides syntax highlighting that cannot be determined by lexing alone. This method is invoked, and applied, after <link linkend="_interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_interfaces_1_1_i_compiler_service_1a6aca60aa5ed5357d61aabf9f4b24c91c">GetTokenTextSpansFor</link>. </para>
+</listitem>
+            <listitem><para>ImmutableArray&lt; <link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1a9a73f4ac751a25cd91cce2523e9c166b">TextEditorDiagnostic</link> &gt; <link linkend="_interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_interfaces_1_1_i_compiler_service_1a80942d3a7162dd677ea7d13135a069c7">GetDiagnosticsFor</link> (<link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1a435ccef09e2ba83022e8cf378fc0f690">ResourceUri</link> <link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1ae531f6ec8ec05e2493aabf8d17c23e4b">resourceUri</link>)</para>
+
+<para>Provides &apos;squigglies&apos; which when hovered over display a message, along with a serverity level. </para>
+</listitem>
+            <listitem><para>ImmutableArray&lt; <link linkend="_class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_autocompletes_1_1_models_1_1_autocomplete_entry">AutocompleteEntry</link> &gt; <link linkend="_interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_interfaces_1_1_i_compiler_service_1a6339e8cca6f72ced5b635ccb25739be4">GetAutocompleteEntries</link> (string word, <link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_lexers_1_1_models_1a1ffd1a7706dfd364560b76d47467812f">TextEditorTextSpan</link> textSpan)</para>
+
+<para>When a user types a period (&apos;.&apos;) or hits the keybind: { &apos;Ctrl&apos; + &apos;Space&apos; } this method is invoked to populate the autocomplete menu. </para>
+</listitem>
+            <listitem><para>Task <link linkend="_interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_interfaces_1_1_i_compiler_service_1aaf94cbe6771e3cae3804661a57939e85">ParseAsync</link> (<link linkend="_interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1_1_i_text_editor_edit_context">ITextEditorEditContext</link> editContext, <link linkend="_class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1_1_text_editor_model_modifier">TextEditorModelModifier</link> modelModifier)</para>
+</listitem>
+            <listitem><para>void <link linkend="_interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_interfaces_1_1_i_compiler_service_1a7e6a70782606886335e75d55103a40f5">DisposeResource</link> (<link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1a435ccef09e2ba83022e8cf378fc0f690">ResourceUri</link> <link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1ae531f6ec8ec05e2493aabf8d17c23e4b">resourceUri</link>)</para>
+
+<para>Expected to be concurrency safe with <link linkend="_interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_interfaces_1_1_i_compiler_service_1ad8eea768e8f6d4bddfb5e1706c71ee8e">RegisterResource</link>. </para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Properties    </title>
+        <itemizedlist>
+            <listitem><para>ImmutableArray&lt; <link linkend="_interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_interfaces_1_1_i_compiler_service_resource">ICompilerServiceResource</link> &gt; <link linkend="_interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_interfaces_1_1_i_compiler_service_1af1443390a3735e41afc3ea0a50304eae">CompilerServiceResources</link><computeroutput> [get]</computeroutput>
+</para>
+</listitem>
+            <listitem><para><link linkend="_interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_interfaces_1_1_i_binder">IBinder</link>? <link linkend="_interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_interfaces_1_1_i_compiler_service_1a429850fbce8cdeee07954a090316859b">Binder</link><computeroutput> [get]</computeroutput>
+</para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Events    </title>
+        <itemizedlist>
+            <listitem><para>Action? <link linkend="_interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_interfaces_1_1_i_compiler_service_1a1ae29f961b2043527b90862baacc2ac8">ResourceRegistered</link></para>
+</listitem>
+            <listitem><para>Action? <link linkend="_interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_interfaces_1_1_i_compiler_service_1ac4b6a4febf8bfede1b9673b6a5868e5c">ResourceParsed</link></para>
+</listitem>
+            <listitem><para>Action? <link linkend="_interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_interfaces_1_1_i_compiler_service_1aa41dd7f76aaaa39c4fcecbb924696cc5">ResourceDisposed</link></para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<section>
+<title>Detailed Description</title>
+<para>
+Definition at line <link linkend="__i_compiler_service_8cs_source_1l00009">9</link> of file <link linkend="__i_compiler_service_8cs_source">ICompilerService.cs</link>.</para>
+</section>
+<section>
+<title>Member Function Documentation</title>
+<anchor xml:id="_interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_interfaces_1_1_i_compiler_service_1a90247033a7580c1c3c2ca1a35a360e41"/><section>
+    <title>CursorWasModified()</title>
+<indexterm><primary>CursorWasModified</primary><secondary>Luthetus.TextEditor.RazorLib.CompilerServices.Interfaces.ICompilerService</secondary></indexterm>
+<indexterm><primary>Luthetus.TextEditor.RazorLib.CompilerServices.Interfaces.ICompilerService</primary><secondary>CursorWasModified</secondary></indexterm>
+<para><computeroutput>void Luthetus.TextEditor.RazorLib.CompilerServices.Interfaces.ICompilerService.CursorWasModified (<link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1a435ccef09e2ba83022e8cf378fc0f690">ResourceUri</link> resourceUri, <link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_cursors_1_1_models_1a8373e854ca1ddf152a3b5372ea18c20b">TextEditorCursor</link> cursor)</computeroutput></para><para>
+
+<para>(2024-01-28) Goal: track the cursor&apos;s position within the compilation unit as it moves. </para>
+</para>
+<para>
+Implemented in <link linkend="_class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_implementations_1_1_compiler_service_1a201bba4b614ca2f74e373d02413dbcbd">Luthetus.TextEditor.RazorLib.CompilerServices.Implementations.CompilerService</link>.</para>
+Here is the call graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_interfaces_1_1_i_compiler_service_a90247033a7580c1c3c2ca1a35a360e41_cgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+</section>
+<anchor xml:id="_interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_interfaces_1_1_i_compiler_service_1a7e6a70782606886335e75d55103a40f5"/><section>
+    <title>DisposeResource()</title>
+<indexterm><primary>DisposeResource</primary><secondary>Luthetus.TextEditor.RazorLib.CompilerServices.Interfaces.ICompilerService</secondary></indexterm>
+<indexterm><primary>Luthetus.TextEditor.RazorLib.CompilerServices.Interfaces.ICompilerService</primary><secondary>DisposeResource</secondary></indexterm>
+<para><computeroutput>void Luthetus.TextEditor.RazorLib.CompilerServices.Interfaces.ICompilerService.DisposeResource (<link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1a435ccef09e2ba83022e8cf378fc0f690">ResourceUri</link> resourceUri)</computeroutput></para><para>
+
+<para>Expected to be concurrency safe with <link linkend="_interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_interfaces_1_1_i_compiler_service_1ad8eea768e8f6d4bddfb5e1706c71ee8e">RegisterResource</link>. </para>
+</para>
+<para>
+Implemented in <link linkend="_class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_implementations_1_1_compiler_service_1a91099f01fb4007188e9cf48d765d0b97">Luthetus.TextEditor.RazorLib.CompilerServices.Implementations.CompilerService</link>.</para>
+</section>
+<anchor xml:id="_interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_interfaces_1_1_i_compiler_service_1a6339e8cca6f72ced5b635ccb25739be4"/><section>
+    <title>GetAutocompleteEntries()</title>
+<indexterm><primary>GetAutocompleteEntries</primary><secondary>Luthetus.TextEditor.RazorLib.CompilerServices.Interfaces.ICompilerService</secondary></indexterm>
+<indexterm><primary>Luthetus.TextEditor.RazorLib.CompilerServices.Interfaces.ICompilerService</primary><secondary>GetAutocompleteEntries</secondary></indexterm>
+<para><computeroutput>ImmutableArray&lt; <link linkend="_class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_autocompletes_1_1_models_1_1_autocomplete_entry">AutocompleteEntry</link> &gt; Luthetus.TextEditor.RazorLib.CompilerServices.Interfaces.ICompilerService.GetAutocompleteEntries (string word, <link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_lexers_1_1_models_1a1ffd1a7706dfd364560b76d47467812f">TextEditorTextSpan</link> textSpan)</computeroutput></para><para>
+
+<para>When a user types a period (&apos;.&apos;) or hits the keybind: { &apos;Ctrl&apos; + &apos;Space&apos; } this method is invoked to populate the autocomplete menu. </para>
+</para>
+<para>
+Implemented in <link linkend="_class_luthetus_1_1_compiler_services_1_1_c_sharp_1_1_compiler_service_case_1_1_c_sharp_compiler_service_1afe71b07323c9ab163252106584bd219f">Luthetus.CompilerServices.CSharp.CompilerServiceCase.CSharpCompilerService</link>, and <link linkend="_class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_implementations_1_1_compiler_service_1a581977da4a43e8df1124880707870531">Luthetus.TextEditor.RazorLib.CompilerServices.Implementations.CompilerService</link>.</para>
+Here is the call graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_interfaces_1_1_i_compiler_service_a6339e8cca6f72ced5b635ccb25739be4_cgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+</section>
+<anchor xml:id="_interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_interfaces_1_1_i_compiler_service_1ae1624012b971994afc85248ecc0663a0"/><section>
+    <title>GetCompilerServiceResourceFor()</title>
+<indexterm><primary>GetCompilerServiceResourceFor</primary><secondary>Luthetus.TextEditor.RazorLib.CompilerServices.Interfaces.ICompilerService</secondary></indexterm>
+<indexterm><primary>Luthetus.TextEditor.RazorLib.CompilerServices.Interfaces.ICompilerService</primary><secondary>GetCompilerServiceResourceFor</secondary></indexterm>
+<para><computeroutput><link linkend="_interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_interfaces_1_1_i_compiler_service_resource">ICompilerServiceResource</link>? Luthetus.TextEditor.RazorLib.CompilerServices.Interfaces.ICompilerService.GetCompilerServiceResourceFor (<link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1a435ccef09e2ba83022e8cf378fc0f690">ResourceUri</link> resourceUri)</computeroutput></para><para>
+Implemented in <link linkend="_class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_implementations_1_1_compiler_service_1ae2e5877d30f51b430ac4f46192ec8fd1">Luthetus.TextEditor.RazorLib.CompilerServices.Implementations.CompilerService</link>.</para>
+</section>
+<anchor xml:id="_interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_interfaces_1_1_i_compiler_service_1a80942d3a7162dd677ea7d13135a069c7"/><section>
+    <title>GetDiagnosticsFor()</title>
+<indexterm><primary>GetDiagnosticsFor</primary><secondary>Luthetus.TextEditor.RazorLib.CompilerServices.Interfaces.ICompilerService</secondary></indexterm>
+<indexterm><primary>Luthetus.TextEditor.RazorLib.CompilerServices.Interfaces.ICompilerService</primary><secondary>GetDiagnosticsFor</secondary></indexterm>
+<para><computeroutput>ImmutableArray&lt; <link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1a9a73f4ac751a25cd91cce2523e9c166b">TextEditorDiagnostic</link> &gt; Luthetus.TextEditor.RazorLib.CompilerServices.Interfaces.ICompilerService.GetDiagnosticsFor (<link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1a435ccef09e2ba83022e8cf378fc0f690">ResourceUri</link> resourceUri)</computeroutput></para><para>
+
+<para>Provides &apos;squigglies&apos; which when hovered over display a message, along with a serverity level. </para>
+</para>
+<para>
+Implemented in <link linkend="_class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_implementations_1_1_compiler_service_1a3ba654e19024f187e9cc2372f1e03225">Luthetus.TextEditor.RazorLib.CompilerServices.Implementations.CompilerService</link>.</para>
+</section>
+<anchor xml:id="_interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_interfaces_1_1_i_compiler_service_1a63b7642d94fae8aef04ef7f1c9b862d2"/><section>
+    <title>GetSymbolsFor()</title>
+<indexterm><primary>GetSymbolsFor</primary><secondary>Luthetus.TextEditor.RazorLib.CompilerServices.Interfaces.ICompilerService</secondary></indexterm>
+<indexterm><primary>Luthetus.TextEditor.RazorLib.CompilerServices.Interfaces.ICompilerService</primary><secondary>GetSymbolsFor</secondary></indexterm>
+<para><computeroutput>ImmutableArray&lt; <link linkend="_interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_interfaces_1_1_i_text_editor_symbol">ITextEditorSymbol</link> &gt; Luthetus.TextEditor.RazorLib.CompilerServices.Interfaces.ICompilerService.GetSymbolsFor (<link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1a435ccef09e2ba83022e8cf378fc0f690">ResourceUri</link> resourceUri)</computeroutput></para><para>
+
+<para>Provides syntax highlighting that cannot be determined by lexing alone. This method is invoked, and applied, after <link linkend="_interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_interfaces_1_1_i_compiler_service_1a6aca60aa5ed5357d61aabf9f4b24c91c">GetTokenTextSpansFor</link>. </para>
+</para>
+<para>
+Implemented in <link linkend="_class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_implementations_1_1_compiler_service_1a7d7ccdb16035d24984309f12dce78c5a">Luthetus.TextEditor.RazorLib.CompilerServices.Implementations.CompilerService</link>.</para>
+Here is the caller graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_interfaces_1_1_i_compiler_service_a63b7642d94fae8aef04ef7f1c9b862d2_icgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+</section>
+<anchor xml:id="_interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_interfaces_1_1_i_compiler_service_1a6aca60aa5ed5357d61aabf9f4b24c91c"/><section>
+    <title>GetTokenTextSpansFor()</title>
+<indexterm><primary>GetTokenTextSpansFor</primary><secondary>Luthetus.TextEditor.RazorLib.CompilerServices.Interfaces.ICompilerService</secondary></indexterm>
+<indexterm><primary>Luthetus.TextEditor.RazorLib.CompilerServices.Interfaces.ICompilerService</primary><secondary>GetTokenTextSpansFor</secondary></indexterm>
+<para><computeroutput>ImmutableArray&lt; <link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_lexers_1_1_models_1a1ffd1a7706dfd364560b76d47467812f">TextEditorTextSpan</link> &gt; Luthetus.TextEditor.RazorLib.CompilerServices.Interfaces.ICompilerService.GetTokenTextSpansFor (<link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1a435ccef09e2ba83022e8cf378fc0f690">ResourceUri</link> resourceUri)</computeroutput></para><para>
+
+<para>Provides syntax highlighting from the lexing result. This method is invoked, and applied, before <link linkend="_interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_interfaces_1_1_i_compiler_service_1a63b7642d94fae8aef04ef7f1c9b862d2">GetSymbolsFor</link>. </para>
+</para>
+<para>
+Implemented in <link linkend="_class_luthetus_1_1_ide_1_1_razor_lib_1_1_terminals_1_1_models_1_1_terminal_compiler_service_1a94c68f36a2119a3fbfd702679309c512">Luthetus.Ide.RazorLib.Terminals.Models.TerminalCompilerService</link>, and <link linkend="_class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_implementations_1_1_compiler_service_1a602cb68ba3b4b5a0475b5950e70e37c8">Luthetus.TextEditor.RazorLib.CompilerServices.Implementations.CompilerService</link>.</para>
+Here is the caller graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_interfaces_1_1_i_compiler_service_a6aca60aa5ed5357d61aabf9f4b24c91c_icgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+</section>
+<anchor xml:id="_interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_interfaces_1_1_i_compiler_service_1aaf94cbe6771e3cae3804661a57939e85"/><section>
+    <title>ParseAsync()</title>
+<indexterm><primary>ParseAsync</primary><secondary>Luthetus.TextEditor.RazorLib.CompilerServices.Interfaces.ICompilerService</secondary></indexterm>
+<indexterm><primary>Luthetus.TextEditor.RazorLib.CompilerServices.Interfaces.ICompilerService</primary><secondary>ParseAsync</secondary></indexterm>
+<para><computeroutput>Task Luthetus.TextEditor.RazorLib.CompilerServices.Interfaces.ICompilerService.ParseAsync (<link linkend="_interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1_1_i_text_editor_edit_context">ITextEditorEditContext</link> editContext, <link linkend="_class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1_1_text_editor_model_modifier">TextEditorModelModifier</link> modelModifier)</computeroutput></para><para>
+Implemented in <link linkend="_class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_implementations_1_1_compiler_service_1a7f484c1dc9edc812993571fbf2541b8e">Luthetus.TextEditor.RazorLib.CompilerServices.Implementations.CompilerService</link>, and <link linkend="_class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_implementations_1_1_compiler_service_do_nothing_1a56abb9452a1e5b4cc86ca06a6e700c6b">Luthetus.TextEditor.RazorLib.CompilerServices.Implementations.CompilerServiceDoNothing</link>.</para>
+</section>
+<anchor xml:id="_interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_interfaces_1_1_i_compiler_service_1ad8eea768e8f6d4bddfb5e1706c71ee8e"/><section>
+    <title>RegisterResource()</title>
+<indexterm><primary>RegisterResource</primary><secondary>Luthetus.TextEditor.RazorLib.CompilerServices.Interfaces.ICompilerService</secondary></indexterm>
+<indexterm><primary>Luthetus.TextEditor.RazorLib.CompilerServices.Interfaces.ICompilerService</primary><secondary>RegisterResource</secondary></indexterm>
+<para><computeroutput>void Luthetus.TextEditor.RazorLib.CompilerServices.Interfaces.ICompilerService.RegisterResource (<link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1a435ccef09e2ba83022e8cf378fc0f690">ResourceUri</link> resourceUri, bool shouldTriggerResourceWasModified)</computeroutput></para><para>
+
+<para>Expected to be concurrency safe with <link linkend="_interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_interfaces_1_1_i_compiler_service_1a7e6a70782606886335e75d55103a40f5">DisposeResource</link>. </para>
+</para>
+<para>
+Implemented in <link linkend="_class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_implementations_1_1_compiler_service_1a339da84e3f500a4ef21de14f3918adbb">Luthetus.TextEditor.RazorLib.CompilerServices.Implementations.CompilerService</link>.</para>
+</section>
+<anchor xml:id="_interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_interfaces_1_1_i_compiler_service_1a024c07deab62e81b456d7775122b628d"/><section>
+    <title>ResourceWasModified()</title>
+<indexterm><primary>ResourceWasModified</primary><secondary>Luthetus.TextEditor.RazorLib.CompilerServices.Interfaces.ICompilerService</secondary></indexterm>
+<indexterm><primary>Luthetus.TextEditor.RazorLib.CompilerServices.Interfaces.ICompilerService</primary><secondary>ResourceWasModified</secondary></indexterm>
+<para><computeroutput>void Luthetus.TextEditor.RazorLib.CompilerServices.Interfaces.ICompilerService.ResourceWasModified (<link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1a435ccef09e2ba83022e8cf378fc0f690">ResourceUri</link> resourceUri, ImmutableArray&lt; <link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_lexers_1_1_models_1a1ffd1a7706dfd364560b76d47467812f">TextEditorTextSpan</link> &gt; editTextSpansList)</computeroutput></para><para>
+
+<para>Expected to be an Microsoft.Extensions.Hosting.IHostedService (or anything which performs background task work). </para>
+</para>
+<para>
+Implemented in <link linkend="_class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_implementations_1_1_compiler_service_1a075f073132f5cd64f1d46e5b0ba34c07">Luthetus.TextEditor.RazorLib.CompilerServices.Implementations.CompilerService</link>.</para>
+</section>
+</section>
+<section>
+<title>Property Documentation</title>
+<anchor xml:id="_interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_interfaces_1_1_i_compiler_service_1a429850fbce8cdeee07954a090316859b"/><section>
+    <title>Binder</title>
+<indexterm><primary>Binder</primary><secondary>Luthetus.TextEditor.RazorLib.CompilerServices.Interfaces.ICompilerService</secondary></indexterm>
+<indexterm><primary>Luthetus.TextEditor.RazorLib.CompilerServices.Interfaces.ICompilerService</primary><secondary>Binder</secondary></indexterm>
+<para><computeroutput><link linkend="_interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_interfaces_1_1_i_binder">IBinder</link>? Luthetus.TextEditor.RazorLib.CompilerServices.Interfaces.ICompilerService.Binder<computeroutput>[get]</computeroutput></computeroutput></para><para>
+Implemented in <link linkend="_class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_implementations_1_1_compiler_service_1aced54ac4d1ff9eb5836ad2b777af5d8e">Luthetus.TextEditor.RazorLib.CompilerServices.Implementations.CompilerService</link>.</para>
+<para>
+Definition at line <link linkend="__i_compiler_service_8cs_source_1l00016">16</link> of file <link linkend="__i_compiler_service_8cs_source">ICompilerService.cs</link>.</para>
+</section>
+<anchor xml:id="_interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_interfaces_1_1_i_compiler_service_1af1443390a3735e41afc3ea0a50304eae"/><section>
+    <title>CompilerServiceResources</title>
+<indexterm><primary>CompilerServiceResources</primary><secondary>Luthetus.TextEditor.RazorLib.CompilerServices.Interfaces.ICompilerService</secondary></indexterm>
+<indexterm><primary>Luthetus.TextEditor.RazorLib.CompilerServices.Interfaces.ICompilerService</primary><secondary>CompilerServiceResources</secondary></indexterm>
+<para><computeroutput>ImmutableArray&lt;<link linkend="_interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_interfaces_1_1_i_compiler_service_resource">ICompilerServiceResource</link>&gt; Luthetus.TextEditor.RazorLib.CompilerServices.Interfaces.ICompilerService.CompilerServiceResources<computeroutput>[get]</computeroutput></computeroutput></para><para>
+Implemented in <link linkend="_class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_implementations_1_1_compiler_service_1a0968239e0fa9d21f513262f8b6fe8695">Luthetus.TextEditor.RazorLib.CompilerServices.Implementations.CompilerService</link>.</para>
+<para>
+Definition at line <link linkend="__i_compiler_service_8cs_source_1l00015">15</link> of file <link linkend="__i_compiler_service_8cs_source">ICompilerService.cs</link>.</para>
+</section>
+</section>
+<section>
+<title>Event Documentation</title>
+<anchor xml:id="_interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_interfaces_1_1_i_compiler_service_1aa41dd7f76aaaa39c4fcecbb924696cc5"/><section>
+    <title>ResourceDisposed</title>
+<indexterm><primary>ResourceDisposed</primary><secondary>Luthetus.TextEditor.RazorLib.CompilerServices.Interfaces.ICompilerService</secondary></indexterm>
+<indexterm><primary>Luthetus.TextEditor.RazorLib.CompilerServices.Interfaces.ICompilerService</primary><secondary>ResourceDisposed</secondary></indexterm>
+<para><computeroutput>Action? Luthetus.TextEditor.RazorLib.CompilerServices.Interfaces.ICompilerService.ResourceDisposed</computeroutput></para><para>
+Definition at line <link linkend="__i_compiler_service_8cs_source_1l00013">13</link> of file <link linkend="__i_compiler_service_8cs_source">ICompilerService.cs</link>.</para>
+</section>
+<anchor xml:id="_interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_interfaces_1_1_i_compiler_service_1ac4b6a4febf8bfede1b9673b6a5868e5c"/><section>
+    <title>ResourceParsed</title>
+<indexterm><primary>ResourceParsed</primary><secondary>Luthetus.TextEditor.RazorLib.CompilerServices.Interfaces.ICompilerService</secondary></indexterm>
+<indexterm><primary>Luthetus.TextEditor.RazorLib.CompilerServices.Interfaces.ICompilerService</primary><secondary>ResourceParsed</secondary></indexterm>
+<para><computeroutput>Action? Luthetus.TextEditor.RazorLib.CompilerServices.Interfaces.ICompilerService.ResourceParsed</computeroutput></para><para>
+Definition at line <link linkend="__i_compiler_service_8cs_source_1l00012">12</link> of file <link linkend="__i_compiler_service_8cs_source">ICompilerService.cs</link>.</para>
+</section>
+<anchor xml:id="_interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_interfaces_1_1_i_compiler_service_1a1ae29f961b2043527b90862baacc2ac8"/><section>
+    <title>ResourceRegistered</title>
+<indexterm><primary>ResourceRegistered</primary><secondary>Luthetus.TextEditor.RazorLib.CompilerServices.Interfaces.ICompilerService</secondary></indexterm>
+<indexterm><primary>Luthetus.TextEditor.RazorLib.CompilerServices.Interfaces.ICompilerService</primary><secondary>ResourceRegistered</secondary></indexterm>
+<para><computeroutput>Action? Luthetus.TextEditor.RazorLib.CompilerServices.Interfaces.ICompilerService.ResourceRegistered</computeroutput></para><para>
+Definition at line <link linkend="__i_compiler_service_8cs_source_1l00011">11</link> of file <link linkend="__i_compiler_service_8cs_source">ICompilerService.cs</link>.</para>
+</section>
+<para>
+The documentation for this interface was generated from the following file:</para>
+Source/Lib/TextEditor/CompilerServices/Interfaces/<link linkend="__i_compiler_service_8cs">ICompilerService.cs</link></section>
+</section>

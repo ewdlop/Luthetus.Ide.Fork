@@ -1,0 +1,6 @@
+var class_luthetus_1_1_extensions_1_1_dot_net_1_1_test_explorers_1_1_displays_1_1_internals_1_1_test_explorer_details_display =
+[
+    [ "OnParametersSet", "class_luthetus_1_1_extensions_1_1_dot_net_1_1_test_explorers_1_1_displays_1_1_internals_1_1_test_explorer_details_display.html#aa4f4e8504d70bbb84ba8eeb62869748d", null ],
+    [ "ElementDimensions", "class_luthetus_1_1_extensions_1_1_dot_net_1_1_test_explorers_1_1_displays_1_1_internals_1_1_test_explorer_details_display.html#ac32f637a79db05ea65e33437cb660616", null ],
+    [ "RenderBatch", "class_luthetus_1_1_extensions_1_1_dot_net_1_1_test_explorers_1_1_displays_1_1_internals_1_1_test_explorer_details_display.html#a9debb6106a936a89ea842a42b886bc22", null ]
+];

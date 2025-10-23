@@ -1,0 +1,4 @@
+var _dot_net_solution_state_effector_tests_8cs =
+[
+    [ "Luthetus.Extensions.DotNet.Tests.Basis.DotNetSolutions.States.DotNetSolutionStateEffectorTests", "class_luthetus_1_1_extensions_1_1_dot_net_1_1_tests_1_1_basis_1_1_dot_net_solutions_1_1_states_1fb3ea369f7611b65e1e3cd3303bc6024.html", "class_luthetus_1_1_extensions_1_1_dot_net_1_1_tests_1_1_basis_1_1_dot_net_solutions_1_1_states_1fb3ea369f7611b65e1e3cd3303bc6024" ]
+];

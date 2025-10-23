@@ -1,0 +1,251 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_interfaces_1_1_i_parser_model" xml:lang="en-US">
+<title>Luthetus.TextEditor.RazorLib.CompilerServices.Interfaces.IParserModel Interface Reference</title>
+<indexterm><primary>Luthetus.TextEditor.RazorLib.CompilerServices.Interfaces.IParserModel</primary></indexterm>
+Inheritance diagram for Luthetus.TextEditor.RazorLib.CompilerServices.Interfaces.IParserModel:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_interfaces_1_1_i_parser_model__inherit__graph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+<simplesect>
+    <title>Properties    </title>
+        <itemizedlist>
+            <listitem><para><link linkend="_interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_interfaces_1_1_i_binder">IBinder</link> <link linkend="_interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_interfaces_1_1_i_parser_model_1a460eb8cee7a48f5ca4e3739e0f460bb7">Binder</link><computeroutput> [get]</computeroutput>
+</para>
+</listitem>
+            <listitem><para><link linkend="_interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_interfaces_1_1_i_binder_session">IBinderSession</link> <link linkend="_interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_interfaces_1_1_i_parser_model_1a8f35fabd174a116518e01255e15779ed">BinderSession</link><computeroutput> [get]</computeroutput>
+</para>
+</listitem>
+            <listitem><para>TokenWalker <link linkend="_interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_interfaces_1_1_i_parser_model_1a38ce92822f0b900d2f2c8da6b8ff3cb0">TokenWalker</link><computeroutput> [get]</computeroutput>
+</para>
+</listitem>
+            <listitem><para>Stack&lt; <link linkend="_interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_1_1_i_syntax">ISyntax</link> &gt; <link linkend="_interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_interfaces_1_1_i_parser_model_1a527d420519003bec97536eb97984f14d">SyntaxStack</link><computeroutput> [get, set]</computeroutput>
+</para>
+
+<para>This property is likely to become obsolete. It is a hacky sort of &apos;catch all&apos; case where one can push onto it whatever they want. </para>
+</listitem>
+            <listitem><para>StatementBuilder <link linkend="_interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_interfaces_1_1_i_parser_model_1aacc1fe43eb3c6349f7e2d7dfa04ed666">StatementBuilder</link><computeroutput> [get, set]</computeroutput>
+</para>
+
+<para>Unlike SyntaxStack there are more defined rules for this property. </para>
+</listitem>
+            <listitem><para>List&lt;(<link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_1ae4bcfe414c318a050bbef43ec92f921b">SyntaxKind</link> DelimiterSyntaxKind, <link linkend="_interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_1_1_nodes_1_1_97d7489c2c3077ac339153787f61d38f">IExpressionNode</link> ExpressionNode)&gt; <link linkend="_interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_interfaces_1_1_i_parser_model_1a398c780002a6945f2dd1db819491c341">ExpressionList</link><computeroutput> [get, set]</computeroutput>
+</para>
+
+<para>This list permits primitive recursion via a while loop for the expression parsing logic. </para>
+</listitem>
+            <listitem><para><link linkend="_interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_1_1_nodes_1_1_97d7489c2c3077ac339153787f61d38f">IExpressionNode</link>? <link linkend="_interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_interfaces_1_1_i_parser_model_1a78595c880a3edd5751986d075e4af898">NoLongerRelevantExpressionNode</link><computeroutput> [get, set]</computeroutput>
+</para>
+
+<para>If a <link linkend="_class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_1_1_nodes_1_1_parenthesized_expression_node">ParenthesizedExpressionNode</link> is determined to more accurately be described by a <link linkend="_class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_1_1_nodes_1_1_comma_separated_expression_node">CommaSeparatedExpressionNode</link>, then any state related to the <link linkend="_class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_1_1_nodes_1_1_parenthesized_expression_node">ParenthesizedExpressionNode</link> instance needs to be cleared. </para>
+</listitem>
+            <listitem><para>List&lt; <link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_1ae4bcfe414c318a050bbef43ec92f921b">SyntaxKind</link> &gt; <link linkend="_interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_interfaces_1_1_i_parser_model_1af91614719842153cb67a6696676c889a">TryParseExpressionSyntaxKindList</link><computeroutput> [get]</computeroutput>
+</para>
+
+<para><link linkend="_class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_1_1_nodes_1_1_type_clause_node">TypeClauseNode</link> code exists in the expression code. As a result, some statements need to read a <link linkend="_class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_1_1_nodes_1_1_type_clause_node">TypeClauseNode</link> by invoking &apos;ParseExpression(...)&apos;. </para>
+</listitem>
+            <listitem><para><link linkend="_interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_1_1_nodes_1_1_97d7489c2c3077ac339153787f61d38f">IExpressionNode</link> <link linkend="_interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_interfaces_1_1_i_parser_model_1adcacda57e98057b66c6624a46eae62c5">ForceParseExpressionInitialPrimaryExpression</link><computeroutput> [get, set]</computeroutput>
+</para>
+
+<para>Something that is syntactically recursive but without creating a new scope needs to be parsed as an expression. </para>
+</listitem>
+            <listitem><para>DiagnosticBag <link linkend="_interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_interfaces_1_1_i_parser_model_1a453ae9bec33e0a50885dbb4b77a0aece">DiagnosticBag</link><computeroutput> [get]</computeroutput>
+</para>
+</listitem>
+            <listitem><para><link linkend="_class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_utility_1_1_code_block_builder">CodeBlockBuilder</link> <link linkend="_interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_interfaces_1_1_i_parser_model_1a0f491f9a518dcd2714ea244587cdc7e5">GlobalCodeBlockBuilder</link><computeroutput> [get, set]</computeroutput>
+</para>
+</listitem>
+            <listitem><para><link linkend="_class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_utility_1_1_code_block_builder">CodeBlockBuilder</link> <link linkend="_interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_interfaces_1_1_i_parser_model_1a0c3e2c086f8cad3a7ef5cb036f909a82">CurrentCodeBlockBuilder</link><computeroutput> [get, set]</computeroutput>
+</para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<section>
+<title>Detailed Description</title>
+<para>
+Definition at line <link linkend="__i_parser_model_8cs_source_1l00010">10</link> of file <link linkend="__i_parser_model_8cs_source">IParserModel.cs</link>.</para>
+</section>
+<section>
+<title>Property Documentation</title>
+<anchor xml:id="_interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_interfaces_1_1_i_parser_model_1a460eb8cee7a48f5ca4e3739e0f460bb7"/><section>
+    <title>Binder</title>
+<indexterm><primary>Binder</primary><secondary>Luthetus.TextEditor.RazorLib.CompilerServices.Interfaces.IParserModel</secondary></indexterm>
+<indexterm><primary>Luthetus.TextEditor.RazorLib.CompilerServices.Interfaces.IParserModel</primary><secondary>Binder</secondary></indexterm>
+<para><computeroutput><link linkend="_interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_interfaces_1_1_i_binder">IBinder</link> Luthetus.TextEditor.RazorLib.CompilerServices.Interfaces.IParserModel.Binder<computeroutput>[get]</computeroutput></computeroutput></para><para>
+Implemented in <link linkend="_class_luthetus_1_1_compiler_services_1_1_c_sharp_1_1_parser_case_1_1_c_sharp_parser_model_1ade4bac399adcc71ca8205e109213bace">Luthetus.CompilerServices.CSharp.ParserCase.CSharpParserModel</link>, and <link linkend="_class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_parser_model_1ae5c6a985f575b74931415916a1e342a4">Luthetus.TextEditor.RazorLib.CompilerServices.ParserModel</link>.</para>
+<para>
+Definition at line <link linkend="__i_parser_model_8cs_source_1l00012">12</link> of file <link linkend="__i_parser_model_8cs_source">IParserModel.cs</link>.</para>
+</section>
+<anchor xml:id="_interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_interfaces_1_1_i_parser_model_1a8f35fabd174a116518e01255e15779ed"/><section>
+    <title>BinderSession</title>
+<indexterm><primary>BinderSession</primary><secondary>Luthetus.TextEditor.RazorLib.CompilerServices.Interfaces.IParserModel</secondary></indexterm>
+<indexterm><primary>Luthetus.TextEditor.RazorLib.CompilerServices.Interfaces.IParserModel</primary><secondary>BinderSession</secondary></indexterm>
+<para><computeroutput><link linkend="_interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_interfaces_1_1_i_binder_session">IBinderSession</link> Luthetus.TextEditor.RazorLib.CompilerServices.Interfaces.IParserModel.BinderSession<computeroutput>[get]</computeroutput></computeroutput></para><para>
+Implemented in <link linkend="_class_luthetus_1_1_compiler_services_1_1_c_sharp_1_1_parser_case_1_1_c_sharp_parser_model_1a36461f059c5c462b8c85880b1efc17d2">Luthetus.CompilerServices.CSharp.ParserCase.CSharpParserModel</link>, and <link linkend="_class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_parser_model_1a7a57c172cc0e140d0d7745c5f3253001">Luthetus.TextEditor.RazorLib.CompilerServices.ParserModel</link>.</para>
+<para>
+Definition at line <link linkend="__i_parser_model_8cs_source_1l00013">13</link> of file <link linkend="__i_parser_model_8cs_source">IParserModel.cs</link>.</para>
+</section>
+<anchor xml:id="_interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_interfaces_1_1_i_parser_model_1a0c3e2c086f8cad3a7ef5cb036f909a82"/><section>
+    <title>CurrentCodeBlockBuilder</title>
+<indexterm><primary>CurrentCodeBlockBuilder</primary><secondary>Luthetus.TextEditor.RazorLib.CompilerServices.Interfaces.IParserModel</secondary></indexterm>
+<indexterm><primary>Luthetus.TextEditor.RazorLib.CompilerServices.Interfaces.IParserModel</primary><secondary>CurrentCodeBlockBuilder</secondary></indexterm>
+<para><computeroutput><link linkend="_class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_utility_1_1_code_block_builder">CodeBlockBuilder</link> Luthetus.TextEditor.RazorLib.CompilerServices.Interfaces.IParserModel.CurrentCodeBlockBuilder<computeroutput>[get]</computeroutput>, <computeroutput>[set]</computeroutput></computeroutput></para><para>
+Implemented in <link linkend="_class_luthetus_1_1_compiler_services_1_1_c_sharp_1_1_parser_case_1_1_c_sharp_parser_model_1a36f2a5273c18cedffba77af7be766b32">Luthetus.CompilerServices.CSharp.ParserCase.CSharpParserModel</link>, and <link linkend="_class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_parser_model_1a92e87ac22d600a56c72dc0763b4418ed">Luthetus.TextEditor.RazorLib.CompilerServices.ParserModel</link>.</para>
+<para>
+Definition at line <link linkend="__i_parser_model_8cs_source_1l00117">117</link> of file <link linkend="__i_parser_model_8cs_source">IParserModel.cs</link>.</para>
+</section>
+<anchor xml:id="_interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_interfaces_1_1_i_parser_model_1a453ae9bec33e0a50885dbb4b77a0aece"/><section>
+    <title>DiagnosticBag</title>
+<indexterm><primary>DiagnosticBag</primary><secondary>Luthetus.TextEditor.RazorLib.CompilerServices.Interfaces.IParserModel</secondary></indexterm>
+<indexterm><primary>Luthetus.TextEditor.RazorLib.CompilerServices.Interfaces.IParserModel</primary><secondary>DiagnosticBag</secondary></indexterm>
+<para><computeroutput>DiagnosticBag Luthetus.TextEditor.RazorLib.CompilerServices.Interfaces.IParserModel.DiagnosticBag<computeroutput>[get]</computeroutput></computeroutput></para><para>
+Implemented in <link linkend="_class_luthetus_1_1_compiler_services_1_1_c_sharp_1_1_parser_case_1_1_c_sharp_parser_model_1a3e8e810da268d62171f0c8d6cbe0880d">Luthetus.CompilerServices.CSharp.ParserCase.CSharpParserModel</link>, and <link linkend="_class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_parser_model_1aea32e03a5a1d5baa0852ecdc53e33300">Luthetus.TextEditor.RazorLib.CompilerServices.ParserModel</link>.</para>
+<para>
+Definition at line <link linkend="__i_parser_model_8cs_source_1l00115">115</link> of file <link linkend="__i_parser_model_8cs_source">IParserModel.cs</link>.</para>
+</section>
+<anchor xml:id="_interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_interfaces_1_1_i_parser_model_1a398c780002a6945f2dd1db819491c341"/><section>
+    <title>ExpressionList</title>
+<indexterm><primary>ExpressionList</primary><secondary>Luthetus.TextEditor.RazorLib.CompilerServices.Interfaces.IParserModel</secondary></indexterm>
+<indexterm><primary>Luthetus.TextEditor.RazorLib.CompilerServices.Interfaces.IParserModel</primary><secondary>ExpressionList</secondary></indexterm>
+<para><computeroutput>List&lt;(<link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_1ae4bcfe414c318a050bbef43ec92f921b">SyntaxKind</link> DelimiterSyntaxKind, <link linkend="_interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_1_1_nodes_1_1_97d7489c2c3077ac339153787f61d38f">IExpressionNode</link> ExpressionNode)&gt; Luthetus.TextEditor.RazorLib.CompilerServices.Interfaces.IParserModel.ExpressionList<computeroutput>[get]</computeroutput>, <computeroutput>[set]</computeroutput></computeroutput></para><para>
+
+<para>This list permits primitive recursion via a while loop for the expression parsing logic. </para>
+</para>
+
+<para>Each entry in the list is a &quot;short circuit&quot; such that if a child expression encounters the entry&apos;s DelimiterSyntaxKind, it will set the primary expression to the entry&apos;s ExpressionNode (of which is an ancestor expression to the child).</para>
+
+<para>After that, the restored primary expression &quot;combines&quot; with the child expression that &quot;short circuit&quot;-ed.</para>
+
+<para>Then, the new primary expression expression node parses the &apos;DelimiterSyntaxKind&apos; which triggered the &quot;short circuit&quot;.</para>
+
+<para>The C# <link linkend="_interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_interfaces_1_1_i_parser_model">IParserModel</link> implementation will only &quot;short circuit&quot; if the &apos;<link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_1ae4bcfe414c318a050bbef43ec92f921b">SyntaxKind</link> DelimiterSyntaxKind&apos; is registered as a delimiter.</para>
+
+<para>This is done in order to speed up the while loop, as the list of short circuits doesn&apos;t have to be iterated unless the current token is a possible delimiter.</para>
+
+<para>Luthetus.CompilerServices.CSharp.ParserCase.Internals.ParseOthers.SyntaxIsEndDelimiter(SyntaxKind syntaxKind) {...} </para>
+<para>
+Implemented in <link linkend="_class_luthetus_1_1_compiler_services_1_1_c_sharp_1_1_parser_case_1_1_c_sharp_parser_model_1ab346b2c4bc99f502c0dfecd69f2acabd">Luthetus.CompilerServices.CSharp.ParserCase.CSharpParserModel</link>, and <link linkend="_class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_parser_model_1ab5e274e8349031ad5aecbad251a020a0">Luthetus.TextEditor.RazorLib.CompilerServices.ParserModel</link>.</para>
+<para>
+Definition at line <link linkend="__i_parser_model_8cs_source_1l00062">62</link> of file <link linkend="__i_parser_model_8cs_source">IParserModel.cs</link>.</para>
+</section>
+<anchor xml:id="_interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_interfaces_1_1_i_parser_model_1adcacda57e98057b66c6624a46eae62c5"/><section>
+    <title>ForceParseExpressionInitialPrimaryExpression</title>
+<indexterm><primary>ForceParseExpressionInitialPrimaryExpression</primary><secondary>Luthetus.TextEditor.RazorLib.CompilerServices.Interfaces.IParserModel</secondary></indexterm>
+<indexterm><primary>Luthetus.TextEditor.RazorLib.CompilerServices.Interfaces.IParserModel</primary><secondary>ForceParseExpressionInitialPrimaryExpression</secondary></indexterm>
+<para><computeroutput><link linkend="_interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_1_1_nodes_1_1_97d7489c2c3077ac339153787f61d38f">IExpressionNode</link> Luthetus.TextEditor.RazorLib.CompilerServices.Interfaces.IParserModel.ForceParseExpressionInitialPrimaryExpression<computeroutput>[get]</computeroutput>, <computeroutput>[set]</computeroutput></computeroutput></para><para>
+
+<para>Something that is syntactically recursive but without creating a new scope needs to be parsed as an expression. </para>
+</para>
+
+<para>TODO: It was decided to parse function arguments differently than how this example describes... ...This example should be changed to one that is actually in use. For example: a function definition contains its arguments.</para>
+
+<para>But, the arguments could contain an entry which is a <link linkend="_class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_1_1_nodes_1_1_type_clause_node">TypeClauseNode</link> that has <link linkend="_class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_1_1_nodes_1_1_generic_argument_entry_node">GenericArgumentEntryNode</link> of <link linkend="_class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_1_1_nodes_1_1_type_clause_node">TypeClauseNode</link> that also goes on to have its own <link linkend="_class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_1_1_nodes_1_1_generic_argument_entry_node">GenericArgumentEntryNode</link>...</para>
+
+<para>So the expression code needs to be temporarily invoked from the statement code.</para>
+
+<para>The example that was described is parsing a <link linkend="_class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_1_1_nodes_1_1_function_arguments_listing_node">FunctionArgumentsListingNode</link>.</para>
+
+<para>The expression code only &quot;naturally&quot; can encounter a <link linkend="_class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_1_1_nodes_1_1_function_parameters_listing_node">FunctionParametersListingNode</link> which occurs from function invocation.</para>
+
+<para>So, this property exists in order to change the initial primary expression that is used.</para>
+
+<para>After every invocation of: Luthetus.CompilerServices.CSharp.ParserCase.Internals.ParseOthers.TryParseExpression(SyntaxKind syntaxKind, CSharpParserModel model, out IExpressionNode expressionNode) {...}</para>
+
+<para>This property will be reset to &apos;<link linkend="_class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_1_1_nodes_1_1_empty_expression_node_1a2865cc99f0f737d32e3677ca075340e2">EmptyExpressionNode.Empty</link>&apos;. (which is quite a hacky manner of going about things). TODO: Consider making &apos;ForceParseExpressionInitialPrimaryExpression&apos; an argument to the &apos;TryParseExpression&apos; method?</para>
+
+<para>Through this property, one can tell the expression code to parse a <link linkend="_class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_1_1_nodes_1_1_function_arguments_listing_node">FunctionArgumentsListingNode</link> by providing it as the initial expression. This must be done because it can never occur &quot;naturally&quot; by invoking the expression code and starting with &apos;<link linkend="_class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_1_1_nodes_1_1_empty_expression_node_1a2865cc99f0f737d32e3677ca075340e2">EmptyExpressionNode.Empty</link>&apos;. </para>
+<para>
+Implemented in <link linkend="_class_luthetus_1_1_compiler_services_1_1_c_sharp_1_1_parser_case_1_1_c_sharp_parser_model_1a120de22a710895b11d223f60d94b64e0">Luthetus.CompilerServices.CSharp.ParserCase.CSharpParserModel</link>, and <link linkend="_class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_parser_model_1aa85fbf6be52011f126c1a208550d00f8">Luthetus.TextEditor.RazorLib.CompilerServices.ParserModel</link>.</para>
+<para>
+Definition at line <link linkend="__i_parser_model_8cs_source_1l00113">113</link> of file <link linkend="__i_parser_model_8cs_source">IParserModel.cs</link>.</para>
+</section>
+<anchor xml:id="_interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_interfaces_1_1_i_parser_model_1a0f491f9a518dcd2714ea244587cdc7e5"/><section>
+    <title>GlobalCodeBlockBuilder</title>
+<indexterm><primary>GlobalCodeBlockBuilder</primary><secondary>Luthetus.TextEditor.RazorLib.CompilerServices.Interfaces.IParserModel</secondary></indexterm>
+<indexterm><primary>Luthetus.TextEditor.RazorLib.CompilerServices.Interfaces.IParserModel</primary><secondary>GlobalCodeBlockBuilder</secondary></indexterm>
+<para><computeroutput><link linkend="_class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_utility_1_1_code_block_builder">CodeBlockBuilder</link> Luthetus.TextEditor.RazorLib.CompilerServices.Interfaces.IParserModel.GlobalCodeBlockBuilder<computeroutput>[get]</computeroutput>, <computeroutput>[set]</computeroutput></computeroutput></para><para>
+Implemented in <link linkend="_class_luthetus_1_1_compiler_services_1_1_c_sharp_1_1_parser_case_1_1_c_sharp_parser_model_1af40638431b783b2c4e8f24d8bac92bf5">Luthetus.CompilerServices.CSharp.ParserCase.CSharpParserModel</link>, and <link linkend="_class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_parser_model_1aa9c158b87be45f76993a43a67db9b732">Luthetus.TextEditor.RazorLib.CompilerServices.ParserModel</link>.</para>
+<para>
+Definition at line <link linkend="__i_parser_model_8cs_source_1l00116">116</link> of file <link linkend="__i_parser_model_8cs_source">IParserModel.cs</link>.</para>
+</section>
+<anchor xml:id="_interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_interfaces_1_1_i_parser_model_1a78595c880a3edd5751986d075e4af898"/><section>
+    <title>NoLongerRelevantExpressionNode</title>
+<indexterm><primary>NoLongerRelevantExpressionNode</primary><secondary>Luthetus.TextEditor.RazorLib.CompilerServices.Interfaces.IParserModel</secondary></indexterm>
+<indexterm><primary>Luthetus.TextEditor.RazorLib.CompilerServices.Interfaces.IParserModel</primary><secondary>NoLongerRelevantExpressionNode</secondary></indexterm>
+<para><computeroutput><link linkend="_interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_1_1_nodes_1_1_97d7489c2c3077ac339153787f61d38f">IExpressionNode</link>? Luthetus.TextEditor.RazorLib.CompilerServices.Interfaces.IParserModel.NoLongerRelevantExpressionNode<computeroutput>[get]</computeroutput>, <computeroutput>[set]</computeroutput></computeroutput></para><para>
+
+<para>If a <link linkend="_class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_1_1_nodes_1_1_parenthesized_expression_node">ParenthesizedExpressionNode</link> is determined to more accurately be described by a <link linkend="_class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_1_1_nodes_1_1_comma_separated_expression_node">CommaSeparatedExpressionNode</link>, then any state related to the <link linkend="_class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_1_1_nodes_1_1_parenthesized_expression_node">ParenthesizedExpressionNode</link> instance needs to be cleared. </para>
+</para>
+<para>
+Implemented in <link linkend="_class_luthetus_1_1_compiler_services_1_1_c_sharp_1_1_parser_case_1_1_c_sharp_parser_model_1a8e543d4945ec790a098ba7f59d180ffb">Luthetus.CompilerServices.CSharp.ParserCase.CSharpParserModel</link>, and <link linkend="_class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_parser_model_1ae807e53876f7af55927fc86dffa95849">Luthetus.TextEditor.RazorLib.CompilerServices.ParserModel</link>.</para>
+<para>
+Definition at line <link linkend="__i_parser_model_8cs_source_1l00069">69</link> of file <link linkend="__i_parser_model_8cs_source">IParserModel.cs</link>.</para>
+</section>
+<anchor xml:id="_interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_interfaces_1_1_i_parser_model_1aacc1fe43eb3c6349f7e2d7dfa04ed666"/><section>
+    <title>StatementBuilder</title>
+<indexterm><primary>StatementBuilder</primary><secondary>Luthetus.TextEditor.RazorLib.CompilerServices.Interfaces.IParserModel</secondary></indexterm>
+<indexterm><primary>Luthetus.TextEditor.RazorLib.CompilerServices.Interfaces.IParserModel</primary><secondary>StatementBuilder</secondary></indexterm>
+<para><computeroutput>StatementBuilder Luthetus.TextEditor.RazorLib.CompilerServices.Interfaces.IParserModel.StatementBuilder<computeroutput>[get]</computeroutput>, <computeroutput>[set]</computeroutput></computeroutput></para><para>
+
+<para>Unlike SyntaxStack there are more defined rules for this property. </para>
+</para>
+
+<para>It will be cleared after every <link linkend="_struct_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_1_1_tokens_1_1_statement_delimiter_token">StatementDelimiterToken</link>, <link linkend="_struct_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_1_1_tokens_1_1_open_brace_token">OpenBraceToken</link>, and <link linkend="_struct_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_1_1_tokens_1_1_close_brace_token">CloseBraceToken</link> that is handled by the main loop.</para>
+
+<para>The intent is to build up ambiguous syntax by pushing it onto this stack, then once it can be disambiguated, pop off all the syntax and construct an <link linkend="_interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_1_1_i_syntax_node">ISyntaxNode</link>.</para>
+
+<para>A syntax for a definition is being treated as a &apos;Statement&apos; here. So, to parse a <link linkend="_class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_1_1_nodes_1_1_type_definition_node">TypeDefinitionNode</link> one would check this for the access modifier (public, private, etc...). </para>
+<para>
+Implemented in <link linkend="_class_luthetus_1_1_compiler_services_1_1_c_sharp_1_1_parser_case_1_1_c_sharp_parser_model_1accba7dab91960c0c11731afe1a394621">Luthetus.CompilerServices.CSharp.ParserCase.CSharpParserModel</link>, and <link linkend="_class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_parser_model_1a8e279ea890ce94904d0344d466bc98d5">Luthetus.TextEditor.RazorLib.CompilerServices.ParserModel</link>.</para>
+<para>
+Definition at line <link linkend="__i_parser_model_8cs_source_1l00041">41</link> of file <link linkend="__i_parser_model_8cs_source">IParserModel.cs</link>.</para>
+</section>
+<anchor xml:id="_interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_interfaces_1_1_i_parser_model_1a527d420519003bec97536eb97984f14d"/><section>
+    <title>SyntaxStack</title>
+<indexterm><primary>SyntaxStack</primary><secondary>Luthetus.TextEditor.RazorLib.CompilerServices.Interfaces.IParserModel</secondary></indexterm>
+<indexterm><primary>Luthetus.TextEditor.RazorLib.CompilerServices.Interfaces.IParserModel</primary><secondary>SyntaxStack</secondary></indexterm>
+<para><computeroutput>Stack&lt;<link linkend="_interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_1_1_i_syntax">ISyntax</link>&gt; Luthetus.TextEditor.RazorLib.CompilerServices.Interfaces.IParserModel.SyntaxStack<computeroutput>[get]</computeroutput>, <computeroutput>[set]</computeroutput></computeroutput></para><para>
+
+<para>This property is likely to become obsolete. It is a hacky sort of &apos;catch all&apos; case where one can push onto it whatever they want. </para>
+</para>
+
+<para><link linkend="_class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_utility_1_1_statement_builder">StatementBuilder</link> is being added and is expected to fully replace this property. </para>
+<para>
+Implemented in <link linkend="_class_luthetus_1_1_compiler_services_1_1_c_sharp_1_1_parser_case_1_1_c_sharp_parser_model_1af800993bb886c25f933c6f8af6294358">Luthetus.CompilerServices.CSharp.ParserCase.CSharpParserModel</link>, and <link linkend="_class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_parser_model_1a9d262494d17e3cfe07ef2bdfd611e21a">Luthetus.TextEditor.RazorLib.CompilerServices.ParserModel</link>.</para>
+<para>
+Definition at line <link linkend="__i_parser_model_8cs_source_1l00024">24</link> of file <link linkend="__i_parser_model_8cs_source">IParserModel.cs</link>.</para>
+</section>
+<anchor xml:id="_interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_interfaces_1_1_i_parser_model_1a38ce92822f0b900d2f2c8da6b8ff3cb0"/><section>
+    <title>TokenWalker</title>
+<indexterm><primary>TokenWalker</primary><secondary>Luthetus.TextEditor.RazorLib.CompilerServices.Interfaces.IParserModel</secondary></indexterm>
+<indexterm><primary>Luthetus.TextEditor.RazorLib.CompilerServices.Interfaces.IParserModel</primary><secondary>TokenWalker</secondary></indexterm>
+<para><computeroutput>TokenWalker Luthetus.TextEditor.RazorLib.CompilerServices.Interfaces.IParserModel.TokenWalker<computeroutput>[get]</computeroutput></computeroutput></para><para>
+Implemented in <link linkend="_class_luthetus_1_1_compiler_services_1_1_c_sharp_1_1_parser_case_1_1_c_sharp_parser_model_1abd215a5e763e4c15460f53f711e359fe">Luthetus.CompilerServices.CSharp.ParserCase.CSharpParserModel</link>, and <link linkend="_class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_parser_model_1a7eb1feed52240d80ae22f93ac49e605d">Luthetus.TextEditor.RazorLib.CompilerServices.ParserModel</link>.</para>
+<para>
+Definition at line <link linkend="__i_parser_model_8cs_source_1l00014">14</link> of file <link linkend="__i_parser_model_8cs_source">IParserModel.cs</link>.</para>
+</section>
+<anchor xml:id="_interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_interfaces_1_1_i_parser_model_1af91614719842153cb67a6696676c889a"/><section>
+    <title>TryParseExpressionSyntaxKindList</title>
+<indexterm><primary>TryParseExpressionSyntaxKindList</primary><secondary>Luthetus.TextEditor.RazorLib.CompilerServices.Interfaces.IParserModel</secondary></indexterm>
+<indexterm><primary>Luthetus.TextEditor.RazorLib.CompilerServices.Interfaces.IParserModel</primary><secondary>TryParseExpressionSyntaxKindList</secondary></indexterm>
+<para><computeroutput>List&lt;<link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_1ae4bcfe414c318a050bbef43ec92f921b">SyntaxKind</link>&gt; Luthetus.TextEditor.RazorLib.CompilerServices.Interfaces.IParserModel.TryParseExpressionSyntaxKindList<computeroutput>[get]</computeroutput></computeroutput></para><para>
+
+<para><link linkend="_class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_1_1_nodes_1_1_type_clause_node">TypeClauseNode</link> code exists in the expression code. As a result, some statements need to read a <link linkend="_class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_1_1_nodes_1_1_type_clause_node">TypeClauseNode</link> by invoking &apos;ParseExpression(...)&apos;. </para>
+</para>
+
+<para>In order to &quot;short circut&quot; or &quot;force exit&quot; from the expression code back to the statement code: if the root primary expression is not equal to the model.ForceParseExpressionSyntaxKind then stop &apos;ParseExpression(...)&apos; from consuming any further tokens.</para>
+
+<para>Luthetus.CompilerServices.CSharp.ParserCase.Internals.ParseOthers.TryParseExpression(SyntaxKind syntaxKind, CSharpParserModel model, out IExpressionNode expressionNode) {...} </para>
+<para>
+Implemented in <link linkend="_class_luthetus_1_1_compiler_services_1_1_c_sharp_1_1_parser_case_1_1_c_sharp_parser_model_1ab3177d709c3e07ab2281fc6490bd64c9">Luthetus.CompilerServices.CSharp.ParserCase.CSharpParserModel</link>, and <link linkend="_class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_parser_model_1a6de5e0ad0cf97cbdddfc2264dd730be1">Luthetus.TextEditor.RazorLib.CompilerServices.ParserModel</link>.</para>
+<para>
+Definition at line <link linkend="__i_parser_model_8cs_source_1l00081">81</link> of file <link linkend="__i_parser_model_8cs_source">IParserModel.cs</link>.</para>
+</section>
+<para>
+The documentation for this interface was generated from the following file:</para>
+Source/Lib/TextEditor/CompilerServices/Interfaces/<link linkend="__i_parser_model_8cs">IParserModel.cs</link></section>
+</section>

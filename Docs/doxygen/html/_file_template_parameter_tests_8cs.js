@@ -1,0 +1,4 @@
+var _file_template_parameter_tests_8cs =
+[
+    [ "Luthetus.Ide.Tests.Basis.FileSystems.Models.FileTemplateParameterTests", "class_luthetus_1_1_ide_1_1_tests_1_1_basis_1_1_file_systems_1_1_models_1_1_file_template_parameter_tests.html", "class_luthetus_1_1_ide_1_1_tests_1_1_basis_1_1_file_systems_1_1_models_1_1_file_template_parameter_tests" ]
+];

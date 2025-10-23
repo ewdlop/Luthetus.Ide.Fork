@@ -1,0 +1,4 @@
+var _try_register_view_model_args_8cs =
+[
+    [ "Luthetus.TextEditor.RazorLib.Installations.Models.TryRegisterViewModelArgs", "class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_installations_1_1_models_1_1_try_register_view_model_args.html", "class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_installations_1_1_models_1_1_try_register_view_model_args" ]
+];

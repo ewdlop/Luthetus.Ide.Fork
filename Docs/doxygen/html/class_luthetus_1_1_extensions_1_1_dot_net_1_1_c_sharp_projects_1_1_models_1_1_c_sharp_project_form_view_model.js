@@ -1,0 +1,27 @@
+var class_luthetus_1_1_extensions_1_1_dot_net_1_1_c_sharp_projects_1_1_models_1_1_c_sharp_project_form_view_model =
+[
+    [ "CSharpProjectFormViewModel", "class_luthetus_1_1_extensions_1_1_dot_net_1_1_c_sharp_projects_1_1_models_1_1_c_sharp_project_form_view_model.html#a4244b0a2f968bac73a5f22f752491f49", null ],
+    [ "TryTakeSnapshot", "class_luthetus_1_1_extensions_1_1_dot_net_1_1_c_sharp_projects_1_1_models_1_1_c_sharp_project_form_view_model.html#af2cc08e77af43b14271f65ea62bb44b3", null ],
+    [ "AddCSharpProjectToSolutionTerminalCommandRequestKey", "class_luthetus_1_1_extensions_1_1_dot_net_1_1_c_sharp_projects_1_1_models_1_1_c_sharp_project_form_view_model.html#aad7d5dcd51cc1b238b5895f9cd3d9197", null ],
+    [ "LoadProjectTemplatesTerminalCommandRequestKey", "class_luthetus_1_1_extensions_1_1_dot_net_1_1_c_sharp_projects_1_1_models_1_1_c_sharp_project_form_view_model.html#ab4bd28d5b69695c4c4ae39ee9f301c0b", null ],
+    [ "NewCSharpProjectCancellationTokenSource", "class_luthetus_1_1_extensions_1_1_dot_net_1_1_c_sharp_projects_1_1_models_1_1_c_sharp_project_form_view_model.html#a39b7838a6134d1de46d2117443b6e0b9", null ],
+    [ "NewCSharpProjectTerminalCommandRequestKey", "class_luthetus_1_1_extensions_1_1_dot_net_1_1_c_sharp_projects_1_1_models_1_1_c_sharp_project_form_view_model.html#a09a853bcb392335e783f28317f02d654", null ],
+    [ "ActivePanelKind", "class_luthetus_1_1_extensions_1_1_dot_net_1_1_c_sharp_projects_1_1_models_1_1_c_sharp_project_form_view_model.html#a40a4c5757ecee8d3fe36311247623e30", null ],
+    [ "CSharpProjectNameDisplay", "class_luthetus_1_1_extensions_1_1_dot_net_1_1_c_sharp_projects_1_1_models_1_1_c_sharp_project_form_view_model.html#abc6d2264bb7d82562bc1823f226d41a0", null ],
+    [ "CSharpProjectNameValue", "class_luthetus_1_1_extensions_1_1_dot_net_1_1_c_sharp_projects_1_1_models_1_1_c_sharp_project_form_view_model.html#a973c4e3850681de715d2d67eb516e114", null ],
+    [ "DotNetSolutionModel", "class_luthetus_1_1_extensions_1_1_dot_net_1_1_c_sharp_projects_1_1_models_1_1_c_sharp_project_form_view_model.html#a987ea199eae2ce2c84d0fdc3ed5235e5", null ],
+    [ "EnvironmentProvider", "class_luthetus_1_1_extensions_1_1_dot_net_1_1_c_sharp_projects_1_1_models_1_1_c_sharp_project_form_view_model.html#abc6aecca484f7f2a81a2a7e2e5ed7f85", null ],
+    [ "FormattedAddExistingProjectToSolutionCommand", "class_luthetus_1_1_extensions_1_1_dot_net_1_1_c_sharp_projects_1_1_models_1_1_c_sharp_project_form_view_model.html#a3616d4153282c9f5d3d2c5289b825a45", null ],
+    [ "FormattedNewCSharpProjectCommand", "class_luthetus_1_1_extensions_1_1_dot_net_1_1_c_sharp_projects_1_1_models_1_1_c_sharp_project_form_view_model.html#a69eb8a086754c98fbd383a3f72d1dcb3", null ],
+    [ "IsReadingProjectTemplates", "class_luthetus_1_1_extensions_1_1_dot_net_1_1_c_sharp_projects_1_1_models_1_1_c_sharp_project_form_view_model.html#a6eb05ad59063c913fd6103e06a22605b", null ],
+    [ "IsValid", "class_luthetus_1_1_extensions_1_1_dot_net_1_1_c_sharp_projects_1_1_models_1_1_c_sharp_project_form_view_model.html#afc04b421b105e8608c717d918bf57e67", null ],
+    [ "OptionalParametersDisplay", "class_luthetus_1_1_extensions_1_1_dot_net_1_1_c_sharp_projects_1_1_models_1_1_c_sharp_project_form_view_model.html#a32125f747cafc3a5788e4d444a56e61c", null ],
+    [ "OptionalParametersValue", "class_luthetus_1_1_extensions_1_1_dot_net_1_1_c_sharp_projects_1_1_models_1_1_c_sharp_project_form_view_model.html#a91a1df0c5dd14ba5ca12be538cb9874a", null ],
+    [ "ParentDirectoryNameDisplay", "class_luthetus_1_1_extensions_1_1_dot_net_1_1_c_sharp_projects_1_1_models_1_1_c_sharp_project_form_view_model.html#a00f356488ae33075c4cf9ecb3ed47f17", null ],
+    [ "ParentDirectoryNameValue", "class_luthetus_1_1_extensions_1_1_dot_net_1_1_c_sharp_projects_1_1_models_1_1_c_sharp_project_form_view_model.html#aaf5b4d4b0217089b79eca7629cce2464", null ],
+    [ "ProjectTemplateList", "class_luthetus_1_1_extensions_1_1_dot_net_1_1_c_sharp_projects_1_1_models_1_1_c_sharp_project_form_view_model.html#a890d2689aae86f0c8ffd69cdb929b749", null ],
+    [ "ProjectTemplateShortNameDisplay", "class_luthetus_1_1_extensions_1_1_dot_net_1_1_c_sharp_projects_1_1_models_1_1_c_sharp_project_form_view_model.html#a4b44a6263b49443ac45bf19b0cd60e5b", null ],
+    [ "ProjectTemplateShortNameValue", "class_luthetus_1_1_extensions_1_1_dot_net_1_1_c_sharp_projects_1_1_models_1_1_c_sharp_project_form_view_model.html#a3a07a9e642fc761dbecb1b2497371348", null ],
+    [ "SearchInput", "class_luthetus_1_1_extensions_1_1_dot_net_1_1_c_sharp_projects_1_1_models_1_1_c_sharp_project_form_view_model.html#af0887c83c7703891124aad98a9661ae4", null ],
+    [ "SelectedProjectTemplate", "class_luthetus_1_1_extensions_1_1_dot_net_1_1_c_sharp_projects_1_1_models_1_1_c_sharp_project_form_view_model.html#a92f36e76052254985d4b7c759250e124", null ]
+];

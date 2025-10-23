@@ -1,0 +1,598 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="__tree_view_keyboard_event_handler_tests_8cs_source" xml:lang="en-US">
+<title>TreeViewKeyboardEventHandlerTests.cs</title>
+<indexterm><primary>Source/Tests/Common/Basis/TreeViews/Models/TreeViewKeyboardEventHandlerTests.cs</primary></indexterm>
+Go to the documentation of this file.<programlisting linenumbering="unnumbered"><anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00001"/>00001 <emphasis role="keyword">using&#32;</emphasis>System.Collections.Immutable;
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00002"/>00002 <emphasis role="keyword">using&#32;</emphasis>Microsoft.AspNetCore.Components.Web;
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00003"/>00003 <emphasis role="keyword">using&#32;</emphasis>Microsoft.Extensions.DependencyInjection;
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00004"/>00004 <emphasis role="keyword">using&#32;</emphasis>Fluxor;
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00005"/>00005 <emphasis role="keyword">using&#32;</emphasis><link linkend="_namespace_luthetus_1_1_common_1_1_razor_lib_1_1_component_renderers_1_1_models">Luthetus.Common.RazorLib.ComponentRenderers.Models</link>;
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00006"/>00006 <emphasis role="keyword">using&#32;</emphasis><link linkend="_namespace_luthetus_1_1_common_1_1_razor_lib_1_1_tree_views_1_1_models">Luthetus.Common.RazorLib.TreeViews.Models</link>;
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00007"/>00007 <emphasis role="keyword">using&#32;</emphasis><link linkend="_namespace_luthetus_1_1_common_1_1_razor_lib_1_1_tree_views_1_1_states">Luthetus.Common.RazorLib.TreeViews.States</link>;
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00008"/>00008 <emphasis role="keyword">using&#32;</emphasis><link linkend="_namespace_luthetus_1_1_common_1_1_razor_lib_1_1_notifications_1_1_displays">Luthetus.Common.RazorLib.Notifications.Displays</link>;
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00009"/>00009 <emphasis role="keyword">using&#32;</emphasis><link linkend="_namespace_luthetus_1_1_common_1_1_razor_lib_1_1_watch_windows_1_1_displays">Luthetus.Common.RazorLib.WatchWindows.Displays</link>;
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00010"/>00010 <emphasis role="keyword">using&#32;</emphasis><link linkend="_namespace_luthetus_1_1_common_1_1_razor_lib_1_1_keys_1_1_models">Luthetus.Common.RazorLib.Keys.Models</link>;
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00011"/>00011 <emphasis role="keyword">using&#32;</emphasis><link linkend="_namespace_luthetus_1_1_common_1_1_razor_lib_1_1_commands_1_1_models">Luthetus.Common.RazorLib.Commands.Models</link>;
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00012"/>00012 <emphasis role="keyword">using&#32;</emphasis><link linkend="_namespace_luthetus_1_1_common_1_1_razor_lib_1_1_keyboards_1_1_models">Luthetus.Common.RazorLib.Keyboards.Models</link>;
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00013"/>00013 <emphasis role="keyword">using&#32;</emphasis><link linkend="_namespace_luthetus_1_1_common_1_1_razor_lib_1_1_background_tasks_1_1_models">Luthetus.Common.RazorLib.BackgroundTasks.Models</link>;
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00014"/>00014 <emphasis role="keyword">using&#32;</emphasis><link linkend="_namespace_luthetus_1_1_common_1_1_razor_lib_1_1_tree_views_1_1_displays_1_1_utils">Luthetus.Common.RazorLib.TreeViews.Displays.Utils</link>;
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00015"/>00015 <emphasis role="keyword">using&#32;</emphasis><link linkend="_namespace_luthetus_1_1_common_1_1_tests_1_1_basis_1_1_tree_views_1_1_models_1_1_internals">Luthetus.Common.Tests.Basis.TreeViews.Models.Internals</link>;
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00016"/>00016 
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00017"/>00017 <emphasis role="keyword">namespace&#32;</emphasis><link linkend="_namespace_luthetus_1_1_common_1_1_tests_1_1_basis_1_1_tree_views_1_1_models">Luthetus.Common.Tests.Basis.TreeViews.Models</link>;
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00018"/>00018 
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00022"/><link linkend="_class_luthetus_1_1_common_1_1_tests_1_1_basis_1_1_tree_views_1_1_models_1_1_tree_view_keyboard_event_handler_tests">00022</link> <emphasis role="keyword">public</emphasis>&#32;<emphasis role="keyword">class&#32;</emphasis><link linkend="_class_luthetus_1_1_common_1_1_tests_1_1_basis_1_1_tree_views_1_1_models_1_1_tree_view_keyboard_event_handler_tests">TreeViewKeyboardEventHandlerTests</link>
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00023"/>00023 {
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00027"/>00027 &#32;&#32;&#32;&#32;[Fact]
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00028"/><link linkend="_class_luthetus_1_1_common_1_1_tests_1_1_basis_1_1_tree_views_1_1_models_1_1_tree_view_keyboard_event_handler_tests_1a0fd58046ef123bef7c3193d88be04e63">00028</link> &#32;&#32;&#32;&#32;<emphasis role="keyword">public</emphasis>&#32;<emphasis role="keywordtype">void</emphasis>&#32;<link linkend="_class_luthetus_1_1_common_1_1_tests_1_1_basis_1_1_tree_views_1_1_models_1_1_tree_view_keyboard_event_handler_tests_1a0fd58046ef123bef7c3193d88be04e63">Constructor</link>()
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00029"/>00029 &#32;&#32;&#32;&#32;{
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00030"/>00030 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;InitializeTreeViewKeyboardEventHandlerTests(
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00031"/>00031 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;out&#32;var&#32;dispatcher,
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00032"/>00032 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;out&#32;var&#32;commonTreeViews,
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00033"/>00033 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;out&#32;var&#32;commonComponentRenderers,
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00034"/>00034 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;out&#32;var&#32;treeViewStateWrap,
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00035"/>00035 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;out&#32;var&#32;treeViewService,
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00036"/>00036 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;out&#32;var&#32;backgroundTaskService,
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00037"/>00037 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;out&#32;var&#32;websiteServerState,
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00038"/>00038 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;out&#32;var&#32;websiteServer,
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00039"/>00039 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;out&#32;var&#32;websiteServerTreeView,
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00040"/>00040 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;out&#32;var&#32;websiteServerTreeViewContainer,
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00041"/>00041 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;out&#32;var&#32;keyboardEventHandler);
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00042"/>00042 
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00043"/>00043 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;Assert.NotNull(keyboardEventHandler);
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00044"/>00044 &#32;&#32;&#32;&#32;}
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00045"/>00045 
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00049"/>00049 &#32;&#32;&#32;&#32;[Fact]
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00050"/><link linkend="_class_luthetus_1_1_common_1_1_tests_1_1_basis_1_1_tree_views_1_1_models_1_1_tree_view_keyboard_event_handler_tests_1a7acc46c4fbf9692bdaf9c7fb7abf3f43">00050</link> &#32;&#32;&#32;&#32;<emphasis role="keyword">public</emphasis>&#32;async&#32;Task&#32;<link linkend="_class_luthetus_1_1_common_1_1_tests_1_1_basis_1_1_tree_views_1_1_models_1_1_tree_view_keyboard_event_handler_tests_1a7acc46c4fbf9692bdaf9c7fb7abf3f43">OnKeyDown_MoveLeft</link>()
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00051"/>00051 &#32;&#32;&#32;&#32;{
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00052"/>00052 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;InitializeTreeViewKeyboardEventHandlerTests(
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00053"/>00053 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;out&#32;var&#32;dispatcher,
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00054"/>00054 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;out&#32;var&#32;commonTreeViews,
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00055"/>00055 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;out&#32;var&#32;commonComponentRenderers,
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00056"/>00056 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;out&#32;var&#32;treeViewStateWrap,
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00057"/>00057 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;out&#32;var&#32;treeViewService,
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00058"/>00058 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;out&#32;var&#32;backgroundTaskService,
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00059"/>00059 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;out&#32;var&#32;websiteServerState,
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00060"/>00060 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;out&#32;var&#32;websiteServer,
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00061"/>00061 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;out&#32;var&#32;websiteServerTreeView,
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00062"/>00062 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;out&#32;var&#32;websiteServerTreeViewContainer,
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00063"/>00063 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;out&#32;var&#32;keyboardEventHandler);
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00064"/>00064 
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00065"/>00065 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;Assert.Equal(websiteServerTreeViewContainer.ActiveNode,&#32;websiteServerTreeView);
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00066"/>00066 
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00067"/>00067 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;Test&#32;Setup</emphasis>
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00068"/>00068 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;{
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00069"/>00069 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;The&#32;&apos;InitializeTreeViewKeyboardEventHandlerTests&apos;&#32;method&#32;provides&#32;an&#32;unexpanded</emphasis>
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00070"/>00070 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;node.&#32;Therefore,&#32;make&#32;the&#32;node&#32;expanded.</emphasis>
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00071"/>00071 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;await&#32;keyboardEventHandler.OnKeyDownAsync(<emphasis role="keyword">new</emphasis>&#32;<link linkend="_class_luthetus_1_1_common_1_1_razor_lib_1_1_commands_1_1_models_1_1_tree_view_command_args">TreeViewCommandArgs</link>(
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00072"/>00072 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;treeViewService,
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00073"/>00073 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;websiteServerTreeViewContainer,
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00074"/>00074 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;websiteServerTreeView,
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00075"/>00075 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;()&#32;=&gt;&#32;Task.CompletedTask,
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00076"/>00076 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keyword">null</emphasis>,
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00077"/>00077 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keyword">null</emphasis>,
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00078"/>00078 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keyword">new</emphasis>&#32;KeyboardEventArgs
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00079"/>00079 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;{
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00080"/>00080 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;Key&#32;=&#32;KeyboardKeyFacts.MovementKeys.ARROW_RIGHT,
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00081"/>00081 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;Code&#32;=&#32;KeyboardKeyFacts.MovementKeys.ARROW_RIGHT,
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00082"/>00082 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;}));
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00083"/>00083 
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00084"/>00084 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;Set&#32;active&#32;node&#32;to&#32;root&apos;s&#32;first&#32;child</emphasis>
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00085"/>00085 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;await&#32;keyboardEventHandler.OnKeyDownAsync(<emphasis role="keyword">new</emphasis>&#32;<link linkend="_class_luthetus_1_1_common_1_1_razor_lib_1_1_commands_1_1_models_1_1_tree_view_command_args">TreeViewCommandArgs</link>(
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00086"/>00086 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;treeViewService,
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00087"/>00087 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;websiteServerTreeViewContainer,
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00088"/>00088 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;websiteServerTreeView,
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00089"/>00089 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;()&#32;=&gt;&#32;Task.CompletedTask,
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00090"/>00090 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keyword">null</emphasis>,
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00091"/>00091 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keyword">null</emphasis>,
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00092"/>00092 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keyword">new</emphasis>&#32;KeyboardEventArgs
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00093"/>00093 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;{
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00094"/>00094 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;Key&#32;=&#32;KeyboardKeyFacts.MovementKeys.ARROW_RIGHT,
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00095"/>00095 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;Code&#32;=&#32;KeyboardKeyFacts.MovementKeys.ARROW_RIGHT,
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00096"/>00096 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;}));
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00097"/>00097 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;}
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00098"/>00098 
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00099"/>00099 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;Assert.True(treeViewService.TryGetTreeViewContainer(
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00100"/>00100 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;websiteServerTreeViewContainer.Key,
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00101"/>00101 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;out&#32;websiteServerTreeViewContainer!));
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00102"/>00102 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00103"/>00103 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;Assert.Equal(websiteServerTreeView.ChildList.First(),&#32;websiteServerTreeViewContainer.ActiveNode);
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00104"/>00104 
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00105"/>00105 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;Move&#32;to&#32;parent&#32;of&#32;active&#32;node.&#32;(this&#32;results&#32;in&#32;root&#32;being&#32;the&#32;active&#32;node)</emphasis>
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00106"/>00106 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;await&#32;keyboardEventHandler.OnKeyDownAsync(<emphasis role="keyword">new</emphasis>&#32;<link linkend="_class_luthetus_1_1_common_1_1_razor_lib_1_1_commands_1_1_models_1_1_tree_view_command_args">TreeViewCommandArgs</link>(
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00107"/>00107 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;treeViewService,
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00108"/>00108 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;websiteServerTreeViewContainer,
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00109"/>00109 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;websiteServerTreeView,
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00110"/>00110 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;()&#32;=&gt;&#32;Task.CompletedTask,
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00111"/>00111 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keyword">null</emphasis>,
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00112"/>00112 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keyword">null</emphasis>,
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00113"/>00113 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keyword">new</emphasis>&#32;KeyboardEventArgs
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00114"/>00114 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;{
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00115"/>00115 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;Key&#32;=&#32;KeyboardKeyFacts.MovementKeys.ARROW_LEFT,
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00116"/>00116 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;Code&#32;=&#32;KeyboardKeyFacts.MovementKeys.ARROW_LEFT,
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00117"/>00117 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;}));
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00118"/>00118 
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00119"/>00119 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;Assert.True(treeViewService.TryGetTreeViewContainer(
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00120"/>00120 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;websiteServerTreeViewContainer.Key,
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00121"/>00121 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;out&#32;websiteServerTreeViewContainer!));
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00122"/>00122 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00123"/>00123 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;Assert.Equal(websiteServerTreeView,&#32;websiteServerTreeViewContainer.ActiveNode);
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00124"/>00124 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;Assert.True(websiteServerTreeView.IsExpanded);
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00125"/>00125 
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00126"/>00126 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;Collapse&#32;the&#32;root&#32;node</emphasis>
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00127"/>00127 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;await&#32;keyboardEventHandler.OnKeyDownAsync(<emphasis role="keyword">new</emphasis>&#32;<link linkend="_class_luthetus_1_1_common_1_1_razor_lib_1_1_commands_1_1_models_1_1_tree_view_command_args">TreeViewCommandArgs</link>(
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00128"/>00128 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;treeViewService,
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00129"/>00129 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;websiteServerTreeViewContainer,
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00130"/>00130 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;websiteServerTreeView,
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00131"/>00131 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;()&#32;=&gt;&#32;Task.CompletedTask,
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00132"/>00132 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keyword">null</emphasis>,
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00133"/>00133 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keyword">null</emphasis>,
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00134"/>00134 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keyword">new</emphasis>&#32;KeyboardEventArgs
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00135"/>00135 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;{
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00136"/>00136 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;Key&#32;=&#32;KeyboardKeyFacts.MovementKeys.ARROW_LEFT,
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00137"/>00137 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;Code&#32;=&#32;KeyboardKeyFacts.MovementKeys.ARROW_LEFT,
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00138"/>00138 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;}));
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00139"/>00139 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00140"/>00140 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;Assert.False(websiteServerTreeView.IsExpanded);
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00141"/>00141 &#32;&#32;&#32;&#32;}
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00142"/>00142 
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00146"/>00146 &#32;&#32;&#32;&#32;[Fact]
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00147"/><link linkend="_class_luthetus_1_1_common_1_1_tests_1_1_basis_1_1_tree_views_1_1_models_1_1_tree_view_keyboard_event_handler_tests_1a1a6f535c32d87f7dfa8a8c1e1da02a44">00147</link> &#32;&#32;&#32;&#32;<emphasis role="keyword">public</emphasis>&#32;async&#32;Task&#32;<link linkend="_class_luthetus_1_1_common_1_1_tests_1_1_basis_1_1_tree_views_1_1_models_1_1_tree_view_keyboard_event_handler_tests_1a1a6f535c32d87f7dfa8a8c1e1da02a44">OnKeyDown_MoveDown</link>()
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00148"/>00148 &#32;&#32;&#32;&#32;{
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00149"/>00149 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;InitializeTreeViewKeyboardEventHandlerTests(
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00150"/>00150 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;out&#32;var&#32;dispatcher,
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00151"/>00151 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;out&#32;var&#32;commonTreeViews,
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00152"/>00152 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;out&#32;var&#32;commonComponentRenderers,
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00153"/>00153 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;out&#32;var&#32;treeViewStateWrap,
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00154"/>00154 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;out&#32;var&#32;treeViewService,
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00155"/>00155 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;out&#32;var&#32;backgroundTaskService,
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00156"/>00156 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;out&#32;var&#32;websiteServerState,
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00157"/>00157 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;out&#32;var&#32;websiteServer,
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00158"/>00158 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;out&#32;var&#32;websiteServerTreeView,
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00159"/>00159 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;out&#32;var&#32;websiteServerTreeViewContainer,
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00160"/>00160 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;out&#32;var&#32;keyboardEventHandler);
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00161"/>00161 
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00162"/>00162 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;Test&#32;Setup</emphasis>
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00163"/>00163 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;{
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00164"/>00164 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;The&#32;&apos;InitializeTreeViewKeyboardEventHandlerTests&apos;&#32;method&#32;provides&#32;an&#32;unexpanded</emphasis>
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00165"/>00165 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;node.&#32;Therefore,&#32;make&#32;the&#32;node&#32;expanded.</emphasis>
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00166"/>00166 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;await&#32;keyboardEventHandler.OnKeyDownAsync(<emphasis role="keyword">new</emphasis>&#32;<link linkend="_class_luthetus_1_1_common_1_1_razor_lib_1_1_commands_1_1_models_1_1_tree_view_command_args">TreeViewCommandArgs</link>(
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00167"/>00167 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;treeViewService,
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00168"/>00168 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;websiteServerTreeViewContainer,
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00169"/>00169 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;websiteServerTreeView,
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00170"/>00170 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;()&#32;=&gt;&#32;Task.CompletedTask,
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00171"/>00171 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keyword">null</emphasis>,
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00172"/>00172 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keyword">null</emphasis>,
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00173"/>00173 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keyword">new</emphasis>&#32;KeyboardEventArgs
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00174"/>00174 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;{
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00175"/>00175 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;Key&#32;=&#32;KeyboardKeyFacts.MovementKeys.ARROW_RIGHT,
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00176"/>00176 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;Code&#32;=&#32;KeyboardKeyFacts.MovementKeys.ARROW_RIGHT,
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00177"/>00177 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;}));
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00178"/>00178 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;}
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00179"/>00179 
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00180"/>00180 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;Assert.Equal(websiteServerTreeView,&#32;websiteServerTreeViewContainer.ActiveNode);
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00181"/>00181 
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00182"/>00182 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;await&#32;keyboardEventHandler.OnKeyDownAsync(<emphasis role="keyword">new</emphasis>&#32;<link linkend="_class_luthetus_1_1_common_1_1_razor_lib_1_1_commands_1_1_models_1_1_tree_view_command_args">TreeViewCommandArgs</link>(
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00183"/>00183 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;treeViewService,
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00184"/>00184 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;websiteServerTreeViewContainer,
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00185"/>00185 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;websiteServerTreeView,
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00186"/>00186 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;()&#32;=&gt;&#32;Task.CompletedTask,
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00187"/>00187 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keyword">null</emphasis>,
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00188"/>00188 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keyword">null</emphasis>,
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00189"/>00189 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keyword">new</emphasis>&#32;KeyboardEventArgs
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00190"/>00190 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;{
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00191"/>00191 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;Key&#32;=&#32;KeyboardKeyFacts.MovementKeys.ARROW_DOWN,
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00192"/>00192 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;Code&#32;=&#32;KeyboardKeyFacts.MovementKeys.ARROW_DOWN,
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00193"/>00193 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;}));
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00194"/>00194 
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00195"/>00195 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;Assert.True(treeViewService.TryGetTreeViewContainer(
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00196"/>00196 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;websiteServerTreeViewContainer.Key,
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00197"/>00197 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;out&#32;websiteServerTreeViewContainer));
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00198"/>00198 
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00199"/>00199 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;Assert.NotNull(websiteServerTreeViewContainer);
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00200"/>00200 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;Assert.Equal(websiteServerTreeView.ChildList.First(),&#32;websiteServerTreeViewContainer!.ActiveNode);
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00201"/>00201 &#32;&#32;&#32;&#32;}
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00202"/>00202 
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00206"/>00206 &#32;&#32;&#32;&#32;[Fact]
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00207"/><link linkend="_class_luthetus_1_1_common_1_1_tests_1_1_basis_1_1_tree_views_1_1_models_1_1_tree_view_keyboard_event_handler_tests_1a199c8b8790828788f37451bb9ff99e64">00207</link> &#32;&#32;&#32;&#32;<emphasis role="keyword">public</emphasis>&#32;async&#32;Task&#32;<link linkend="_class_luthetus_1_1_common_1_1_tests_1_1_basis_1_1_tree_views_1_1_models_1_1_tree_view_keyboard_event_handler_tests_1a199c8b8790828788f37451bb9ff99e64">OnKeyDown_MoveUp</link>()
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00208"/>00208 &#32;&#32;&#32;&#32;{
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00209"/>00209 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;InitializeTreeViewKeyboardEventHandlerTests(
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00210"/>00210 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;out&#32;var&#32;dispatcher,
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00211"/>00211 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;out&#32;var&#32;commonTreeViews,
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00212"/>00212 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;out&#32;var&#32;commonComponentRenderers,
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00213"/>00213 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;out&#32;var&#32;treeViewStateWrap,
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00214"/>00214 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;out&#32;var&#32;treeViewService,
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00215"/>00215 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;out&#32;var&#32;backgroundTaskService,
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00216"/>00216 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;out&#32;var&#32;websiteServerState,
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00217"/>00217 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;out&#32;var&#32;websiteServer,
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00218"/>00218 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;out&#32;var&#32;websiteServerTreeView,
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00219"/>00219 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;out&#32;var&#32;websiteServerTreeViewContainer,
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00220"/>00220 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;out&#32;var&#32;keyboardEventHandler);
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00221"/>00221 
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00222"/>00222 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;Test&#32;Setup</emphasis>
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00223"/>00223 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;{
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00224"/>00224 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;The&#32;&apos;InitializeTreeViewKeyboardEventHandlerTests&apos;&#32;method&#32;provides&#32;an&#32;unexpanded</emphasis>
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00225"/>00225 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;node.&#32;Therefore,&#32;make&#32;the&#32;node&#32;expanded.</emphasis>
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00226"/>00226 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;await&#32;keyboardEventHandler.OnKeyDownAsync(<emphasis role="keyword">new</emphasis>&#32;<link linkend="_class_luthetus_1_1_common_1_1_razor_lib_1_1_commands_1_1_models_1_1_tree_view_command_args">TreeViewCommandArgs</link>(
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00227"/>00227 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;treeViewService,
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00228"/>00228 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;websiteServerTreeViewContainer,
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00229"/>00229 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;websiteServerTreeView,
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00230"/>00230 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;()&#32;=&gt;&#32;Task.CompletedTask,
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00231"/>00231 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keyword">null</emphasis>,
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00232"/>00232 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keyword">null</emphasis>,
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00233"/>00233 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keyword">new</emphasis>&#32;KeyboardEventArgs
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00234"/>00234 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;{
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00235"/>00235 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;Key&#32;=&#32;KeyboardKeyFacts.MovementKeys.ARROW_RIGHT,
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00236"/>00236 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;Code&#32;=&#32;KeyboardKeyFacts.MovementKeys.ARROW_RIGHT,
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00237"/>00237 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;}));
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00238"/>00238 
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00239"/>00239 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;Change&#32;the&#32;active&#32;node&#32;to&#32;the&#32;root&#32;node&apos;s&#32;first&#32;child.</emphasis>
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00240"/>00240 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;await&#32;keyboardEventHandler.OnKeyDownAsync(<emphasis role="keyword">new</emphasis>&#32;<link linkend="_class_luthetus_1_1_common_1_1_razor_lib_1_1_commands_1_1_models_1_1_tree_view_command_args">TreeViewCommandArgs</link>(
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00241"/>00241 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;treeViewService,
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00242"/>00242 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;websiteServerTreeViewContainer,
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00243"/>00243 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;websiteServerTreeView,
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00244"/>00244 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;()&#32;=&gt;&#32;Task.CompletedTask,
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00245"/>00245 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keyword">null</emphasis>,
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00246"/>00246 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keyword">null</emphasis>,
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00247"/>00247 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keyword">new</emphasis>&#32;KeyboardEventArgs
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00248"/>00248 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;{
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00249"/>00249 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;Key&#32;=&#32;KeyboardKeyFacts.MovementKeys.ARROW_RIGHT,
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00250"/>00250 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;Code&#32;=&#32;KeyboardKeyFacts.MovementKeys.ARROW_RIGHT,
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00251"/>00251 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;}));
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00252"/>00252 
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00253"/>00253 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;Assert.True(treeViewService.TryGetTreeViewContainer(
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00254"/>00254 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;websiteServerTreeViewContainer.Key,
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00255"/>00255 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;out&#32;websiteServerTreeViewContainer));
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00256"/>00256 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;}
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00257"/>00257 
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00258"/>00258 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;Assert.Equal(websiteServerTreeView.ChildList.First(),&#32;websiteServerTreeViewContainer!.ActiveNode);
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00259"/>00259 
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00260"/>00260 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;await&#32;keyboardEventHandler.OnKeyDownAsync(<emphasis role="keyword">new</emphasis>&#32;<link linkend="_class_luthetus_1_1_common_1_1_razor_lib_1_1_commands_1_1_models_1_1_tree_view_command_args">TreeViewCommandArgs</link>(
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00261"/>00261 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;treeViewService,
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00262"/>00262 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;websiteServerTreeViewContainer,
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00263"/>00263 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;websiteServerTreeView,
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00264"/>00264 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;()&#32;=&gt;&#32;Task.CompletedTask,
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00265"/>00265 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keyword">null</emphasis>,
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00266"/>00266 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keyword">null</emphasis>,
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00267"/>00267 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keyword">new</emphasis>&#32;KeyboardEventArgs
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00268"/>00268 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;{
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00269"/>00269 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;Key&#32;=&#32;KeyboardKeyFacts.MovementKeys.ARROW_UP,
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00270"/>00270 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;Code&#32;=&#32;KeyboardKeyFacts.MovementKeys.ARROW_UP,
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00271"/>00271 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;}));
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00272"/>00272 
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00273"/>00273 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;Assert.True(treeViewService.TryGetTreeViewContainer(
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00274"/>00274 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;websiteServerTreeViewContainer.Key,
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00275"/>00275 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;out&#32;websiteServerTreeViewContainer));
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00276"/>00276 
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00277"/>00277 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;Assert.NotNull(websiteServerTreeViewContainer);
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00278"/>00278 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;Assert.Equal(websiteServerTreeView,&#32;websiteServerTreeViewContainer!.ActiveNode);
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00279"/>00279 
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00280"/>00280 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;TODO:&#32;Add&#32;testing&#32;for&#32;more&#32;complex&#32;cases</emphasis>
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00281"/>00281 &#32;&#32;&#32;&#32;}
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00282"/>00282 
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00286"/>00286 &#32;&#32;&#32;&#32;[Fact]
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00287"/><link linkend="_class_luthetus_1_1_common_1_1_tests_1_1_basis_1_1_tree_views_1_1_models_1_1_tree_view_keyboard_event_handler_tests_1aeacc65fd9a5616388d78d167e34eb933">00287</link> &#32;&#32;&#32;&#32;<emphasis role="keyword">public</emphasis>&#32;async&#32;Task&#32;<link linkend="_class_luthetus_1_1_common_1_1_tests_1_1_basis_1_1_tree_views_1_1_models_1_1_tree_view_keyboard_event_handler_tests_1aeacc65fd9a5616388d78d167e34eb933">OnKeyDown_MoveRight_NOT_IsExpandedAsync</link>()
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00288"/>00288 &#32;&#32;&#32;&#32;{
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00289"/>00289 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;InitializeTreeViewKeyboardEventHandlerTests(
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00290"/>00290 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;out&#32;var&#32;dispatcher,
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00291"/>00291 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;out&#32;var&#32;commonTreeViews,
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00292"/>00292 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;out&#32;var&#32;commonComponentRenderers,
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00293"/>00293 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;out&#32;var&#32;treeViewStateWrap,
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00294"/>00294 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;out&#32;var&#32;treeViewService,
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00295"/>00295 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;out&#32;var&#32;backgroundTaskService,
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00296"/>00296 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;out&#32;var&#32;websiteServerState,
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00297"/>00297 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;out&#32;var&#32;websiteServer,
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00298"/>00298 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;out&#32;var&#32;websiteServerTreeView,
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00299"/>00299 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;out&#32;var&#32;websiteServerTreeViewContainer,
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00300"/>00300 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;out&#32;var&#32;keyboardEventHandler);
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00301"/>00301 
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00302"/>00302 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;Assert.Equal(websiteServerTreeViewContainer.ActiveNode,&#32;websiteServerTreeView);
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00303"/>00303 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;Assert.Empty(websiteServerTreeView.ChildList);
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00304"/>00304 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;Assert.True(websiteServerTreeView.IsExpandable);
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00305"/>00305 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;Assert.False(websiteServerTreeView.IsExpanded);
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00306"/>00306 
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00307"/>00307 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;await&#32;keyboardEventHandler.OnKeyDownAsync(<emphasis role="keyword">new</emphasis>&#32;<link linkend="_class_luthetus_1_1_common_1_1_razor_lib_1_1_commands_1_1_models_1_1_tree_view_command_args">TreeViewCommandArgs</link>(
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00308"/>00308 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;treeViewService,
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00309"/>00309 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;websiteServerTreeViewContainer,
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00310"/>00310 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;websiteServerTreeView,
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00311"/>00311 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;()&#32;=&gt;&#32;Task.CompletedTask,
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00312"/>00312 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keyword">null</emphasis>,
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00313"/>00313 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keyword">null</emphasis>,
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00314"/>00314 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keyword">new</emphasis>&#32;KeyboardEventArgs
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00315"/>00315 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;{
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00316"/>00316 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;Key&#32;=&#32;KeyboardKeyFacts.MovementKeys.ARROW_RIGHT,
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00317"/>00317 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;Code&#32;=&#32;KeyboardKeyFacts.MovementKeys.ARROW_RIGHT,
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00318"/>00318 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;}));
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00319"/>00319 
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00320"/>00320 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;Assert.Single(websiteServerTreeView.ChildList);
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00321"/>00321 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;Assert.Equal(websiteServerTreeViewContainer.ActiveNode,&#32;websiteServerTreeView);
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00322"/>00322 &#32;&#32;&#32;&#32;}
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00323"/>00323 
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00327"/>00327 &#32;&#32;&#32;&#32;[Fact]
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00328"/><link linkend="_class_luthetus_1_1_common_1_1_tests_1_1_basis_1_1_tree_views_1_1_models_1_1_tree_view_keyboard_event_handler_tests_1a6f736e4a5e1657175d5bb1086fd81024">00328</link> &#32;&#32;&#32;&#32;<emphasis role="keyword">public</emphasis>&#32;async&#32;Task&#32;<link linkend="_class_luthetus_1_1_common_1_1_tests_1_1_basis_1_1_tree_views_1_1_models_1_1_tree_view_keyboard_event_handler_tests_1a6f736e4a5e1657175d5bb1086fd81024">OnKeyDown_MoveRight_IsExpandedAsync</link>()
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00329"/>00329 &#32;&#32;&#32;&#32;{
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00330"/>00330 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;InitializeTreeViewKeyboardEventHandlerTests(
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00331"/>00331 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;out&#32;var&#32;dispatcher,
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00332"/>00332 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;out&#32;var&#32;commonTreeViews,
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00333"/>00333 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;out&#32;var&#32;commonComponentRenderers,
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00334"/>00334 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;out&#32;var&#32;treeViewStateWrap,
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00335"/>00335 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;out&#32;var&#32;treeViewService,
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00336"/>00336 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;out&#32;var&#32;backgroundTaskService,
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00337"/>00337 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;out&#32;var&#32;websiteServerState,
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00338"/>00338 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;out&#32;var&#32;websiteServer,
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00339"/>00339 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;out&#32;var&#32;websiteServerTreeView,
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00340"/>00340 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;out&#32;var&#32;websiteServerTreeViewContainer,
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00341"/>00341 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;out&#32;var&#32;keyboardEventHandler);
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00342"/>00342 
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00343"/>00343 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;Test&#32;Setup</emphasis>
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00344"/>00344 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;{
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00345"/>00345 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;The&#32;&apos;InitializeTreeViewKeyboardEventHandlerTests&apos;&#32;method&#32;provides&#32;an&#32;unexpanded</emphasis>
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00346"/>00346 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;node.&#32;Therefore,&#32;make&#32;the&#32;node&#32;expanded.</emphasis>
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00347"/>00347 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;await&#32;keyboardEventHandler.OnKeyDownAsync(<emphasis role="keyword">new</emphasis>&#32;<link linkend="_class_luthetus_1_1_common_1_1_razor_lib_1_1_commands_1_1_models_1_1_tree_view_command_args">TreeViewCommandArgs</link>(
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00348"/>00348 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;treeViewService,
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00349"/>00349 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;websiteServerTreeViewContainer,
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00350"/>00350 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;websiteServerTreeView,
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00351"/>00351 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;()&#32;=&gt;&#32;Task.CompletedTask,
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00352"/>00352 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keyword">null</emphasis>,
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00353"/>00353 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keyword">null</emphasis>,
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00354"/>00354 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keyword">new</emphasis>&#32;KeyboardEventArgs
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00355"/>00355 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;{
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00356"/>00356 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;Key&#32;=&#32;KeyboardKeyFacts.MovementKeys.ARROW_RIGHT,
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00357"/>00357 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;Code&#32;=&#32;KeyboardKeyFacts.MovementKeys.ARROW_RIGHT,
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00358"/>00358 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;}));
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00359"/>00359 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;}
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00360"/>00360 
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00361"/>00361 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;Assert.Equal(websiteServerTreeView,&#32;websiteServerTreeViewContainer.ActiveNode);
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00362"/>00362 
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00363"/>00363 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;MoveRight&#32;for&#32;the&#32;test&#32;itself</emphasis>
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00364"/>00364 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;await&#32;keyboardEventHandler.OnKeyDownAsync(<emphasis role="keyword">new</emphasis>&#32;<link linkend="_class_luthetus_1_1_common_1_1_razor_lib_1_1_commands_1_1_models_1_1_tree_view_command_args">TreeViewCommandArgs</link>(
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00365"/>00365 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;treeViewService,
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00366"/>00366 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;websiteServerTreeViewContainer,
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00367"/>00367 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;websiteServerTreeView,
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00368"/>00368 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;()&#32;=&gt;&#32;Task.CompletedTask,
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00369"/>00369 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keyword">null</emphasis>,
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00370"/>00370 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keyword">null</emphasis>,
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00371"/>00371 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keyword">new</emphasis>&#32;KeyboardEventArgs
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00372"/>00372 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;{
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00373"/>00373 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;Key&#32;=&#32;KeyboardKeyFacts.MovementKeys.ARROW_RIGHT,
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00374"/>00374 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;Code&#32;=&#32;KeyboardKeyFacts.MovementKeys.ARROW_RIGHT,
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00375"/>00375 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;}));
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00376"/>00376 
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00377"/>00377 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;Assert.True(treeViewService.TryGetTreeViewContainer(
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00378"/>00378 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;websiteServerTreeViewContainer.Key,
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00379"/>00379 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;out&#32;websiteServerTreeViewContainer));
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00380"/>00380 
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00381"/>00381 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;Assert.NotNull(websiteServerTreeViewContainer);
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00382"/>00382 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;Assert.Equal(websiteServerTreeView.ChildList.First(),&#32;websiteServerTreeViewContainer!.ActiveNode);
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00383"/>00383 &#32;&#32;&#32;&#32;}
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00384"/>00384 
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00388"/>00388 &#32;&#32;&#32;&#32;[Fact]
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00389"/><link linkend="_class_luthetus_1_1_common_1_1_tests_1_1_basis_1_1_tree_views_1_1_models_1_1_tree_view_keyboard_event_handler_tests_1adbaef30740385e86e34f6bb277ba35a8">00389</link> &#32;&#32;&#32;&#32;<emphasis role="keyword">public</emphasis>&#32;async&#32;Task&#32;<link linkend="_class_luthetus_1_1_common_1_1_tests_1_1_basis_1_1_tree_views_1_1_models_1_1_tree_view_keyboard_event_handler_tests_1adbaef30740385e86e34f6bb277ba35a8">OnKeyDown_MoveHomeAsync</link>()
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00390"/>00390 &#32;&#32;&#32;&#32;{
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00391"/>00391 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;InitializeTreeViewKeyboardEventHandlerTests(
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00392"/>00392 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;out&#32;var&#32;dispatcher,
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00393"/>00393 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;out&#32;var&#32;commonTreeViews,
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00394"/>00394 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;out&#32;var&#32;commonComponentRenderers,
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00395"/>00395 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;out&#32;var&#32;treeViewStateWrap,
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00396"/>00396 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;out&#32;var&#32;treeViewService,
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00397"/>00397 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;out&#32;var&#32;backgroundTaskService,
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00398"/>00398 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;out&#32;var&#32;websiteServerState,
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00399"/>00399 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;out&#32;var&#32;websiteServer,
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00400"/>00400 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;out&#32;var&#32;websiteServerTreeView,
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00401"/>00401 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;out&#32;var&#32;websiteServerTreeViewContainer,
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00402"/>00402 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;out&#32;var&#32;keyboardEventHandler);
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00403"/>00403 
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00404"/>00404 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;Test&#32;Setup</emphasis>
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00405"/>00405 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;{
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00406"/>00406 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;The&#32;&apos;InitializeTreeViewKeyboardEventHandlerTests&apos;&#32;method&#32;provides&#32;an&#32;unexpanded</emphasis>
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00407"/>00407 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;node.&#32;Therefore,&#32;make&#32;the&#32;node&#32;expanded.</emphasis>
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00408"/>00408 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;await&#32;keyboardEventHandler.OnKeyDownAsync(<emphasis role="keyword">new</emphasis>&#32;<link linkend="_class_luthetus_1_1_common_1_1_razor_lib_1_1_commands_1_1_models_1_1_tree_view_command_args">TreeViewCommandArgs</link>(
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00409"/>00409 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;treeViewService,
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00410"/>00410 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;websiteServerTreeViewContainer,
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00411"/>00411 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;websiteServerTreeView,
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00412"/>00412 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;()&#32;=&gt;&#32;Task.CompletedTask,
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00413"/>00413 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keyword">null</emphasis>,
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00414"/>00414 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keyword">null</emphasis>,
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00415"/>00415 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keyword">new</emphasis>&#32;KeyboardEventArgs
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00416"/>00416 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;{
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00417"/>00417 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;Key&#32;=&#32;KeyboardKeyFacts.MovementKeys.ARROW_RIGHT,
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00418"/>00418 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;Code&#32;=&#32;KeyboardKeyFacts.MovementKeys.ARROW_RIGHT,
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00419"/>00419 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;}));
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00420"/>00420 
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00421"/>00421 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;Change&#32;the&#32;active&#32;node&#32;to&#32;the&#32;root&#32;node&apos;s&#32;first&#32;child.</emphasis>
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00422"/>00422 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;await&#32;keyboardEventHandler.OnKeyDownAsync(<emphasis role="keyword">new</emphasis>&#32;<link linkend="_class_luthetus_1_1_common_1_1_razor_lib_1_1_commands_1_1_models_1_1_tree_view_command_args">TreeViewCommandArgs</link>(
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00423"/>00423 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;treeViewService,
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00424"/>00424 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;websiteServerTreeViewContainer,
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00425"/>00425 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;websiteServerTreeView,
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00426"/>00426 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;()&#32;=&gt;&#32;Task.CompletedTask,
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00427"/>00427 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keyword">null</emphasis>,
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00428"/>00428 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keyword">null</emphasis>,
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00429"/>00429 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keyword">new</emphasis>&#32;KeyboardEventArgs
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00430"/>00430 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;{
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00431"/>00431 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;Key&#32;=&#32;KeyboardKeyFacts.MovementKeys.ARROW_RIGHT,
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00432"/>00432 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;Code&#32;=&#32;KeyboardKeyFacts.MovementKeys.ARROW_RIGHT,
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00433"/>00433 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;}));
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00434"/>00434 
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00435"/>00435 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;Assert.True(treeViewService.TryGetTreeViewContainer(
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00436"/>00436 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;websiteServerTreeViewContainer.Key,
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00437"/>00437 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;out&#32;websiteServerTreeViewContainer));
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00438"/>00438 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;}
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00439"/>00439 
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00440"/>00440 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;Assert.Equal(websiteServerTreeView.ChildList.First(),&#32;websiteServerTreeViewContainer!.ActiveNode);
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00441"/>00441 
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00442"/>00442 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;await&#32;keyboardEventHandler.OnKeyDownAsync(<emphasis role="keyword">new</emphasis>&#32;<link linkend="_class_luthetus_1_1_common_1_1_razor_lib_1_1_commands_1_1_models_1_1_tree_view_command_args">TreeViewCommandArgs</link>(
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00443"/>00443 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;treeViewService,
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00444"/>00444 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;websiteServerTreeViewContainer,
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00445"/>00445 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;websiteServerTreeView,
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00446"/>00446 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;()&#32;=&gt;&#32;Task.CompletedTask,
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00447"/>00447 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keyword">null</emphasis>,
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00448"/>00448 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keyword">null</emphasis>,
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00449"/>00449 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keyword">new</emphasis>&#32;KeyboardEventArgs
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00450"/>00450 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;{
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00451"/>00451 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;Key&#32;=&#32;KeyboardKeyFacts.MovementKeys.HOME,
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00452"/>00452 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;Code&#32;=&#32;KeyboardKeyFacts.MovementKeys.HOME,
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00453"/>00453 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;}));
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00454"/>00454 
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00455"/>00455 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;Assert.True(treeViewService.TryGetTreeViewContainer(
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00456"/>00456 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;websiteServerTreeViewContainer.Key,
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00457"/>00457 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;out&#32;websiteServerTreeViewContainer));
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00458"/>00458 
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00459"/>00459 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;Assert.NotNull(websiteServerTreeViewContainer);
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00460"/>00460 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;Assert.Equal(websiteServerTreeView,&#32;websiteServerTreeViewContainer!.ActiveNode);
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00461"/>00461 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00462"/>00462 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;TODO:&#32;Add&#32;testing&#32;for&#32;more&#32;complex&#32;cases</emphasis>
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00463"/>00463 &#32;&#32;&#32;&#32;}
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00464"/>00464 
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00468"/>00468 &#32;&#32;&#32;&#32;[Fact]
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00469"/><link linkend="_class_luthetus_1_1_common_1_1_tests_1_1_basis_1_1_tree_views_1_1_models_1_1_tree_view_keyboard_event_handler_tests_1ab02d20d32a21d980d7c2f9c38b326fa4">00469</link> &#32;&#32;&#32;&#32;<emphasis role="keyword">public</emphasis>&#32;async&#32;Task&#32;<link linkend="_class_luthetus_1_1_common_1_1_tests_1_1_basis_1_1_tree_views_1_1_models_1_1_tree_view_keyboard_event_handler_tests_1ab02d20d32a21d980d7c2f9c38b326fa4">OnKeyDown_MoveEndAsync</link>()
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00470"/>00470 &#32;&#32;&#32;&#32;{
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00471"/>00471 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;InitializeTreeViewKeyboardEventHandlerTests(
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00472"/>00472 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;out&#32;var&#32;dispatcher,
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00473"/>00473 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;out&#32;var&#32;commonTreeViews,
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00474"/>00474 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;out&#32;var&#32;commonComponentRenderers,
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00475"/>00475 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;out&#32;var&#32;treeViewStateWrap,
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00476"/>00476 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;out&#32;var&#32;treeViewService,
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00477"/>00477 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;out&#32;var&#32;backgroundTaskService,
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00478"/>00478 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;out&#32;var&#32;websiteServerState,
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00479"/>00479 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;out&#32;var&#32;websiteServer,
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00480"/>00480 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;out&#32;var&#32;websiteServerTreeView,
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00481"/>00481 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;out&#32;var&#32;websiteServerTreeViewContainer,
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00482"/>00482 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;out&#32;var&#32;keyboardEventHandler);
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00483"/>00483 
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00484"/>00484 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;Test&#32;Setup</emphasis>
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00485"/>00485 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;{
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00486"/>00486 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;The&#32;&apos;InitializeTreeViewKeyboardEventHandlerTests&apos;&#32;method&#32;provides&#32;an&#32;unexpanded</emphasis>
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00487"/>00487 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;node.&#32;Therefore,&#32;make&#32;the&#32;node&#32;expanded.</emphasis>
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00488"/>00488 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;await&#32;keyboardEventHandler.OnKeyDownAsync(<emphasis role="keyword">new</emphasis>&#32;<link linkend="_class_luthetus_1_1_common_1_1_razor_lib_1_1_commands_1_1_models_1_1_tree_view_command_args">TreeViewCommandArgs</link>(
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00489"/>00489 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;treeViewService,
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00490"/>00490 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;websiteServerTreeViewContainer,
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00491"/>00491 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;websiteServerTreeView,
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00492"/>00492 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;()&#32;=&gt;&#32;Task.CompletedTask,
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00493"/>00493 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keyword">null</emphasis>,
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00494"/>00494 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keyword">null</emphasis>,
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00495"/>00495 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keyword">new</emphasis>&#32;KeyboardEventArgs
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00496"/>00496 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;{
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00497"/>00497 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;Key&#32;=&#32;KeyboardKeyFacts.MovementKeys.ARROW_RIGHT,
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00498"/>00498 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;Code&#32;=&#32;KeyboardKeyFacts.MovementKeys.ARROW_RIGHT,
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00499"/>00499 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;}));
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00500"/>00500 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;}
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00501"/>00501 
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00502"/>00502 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;Assert.Equal(websiteServerTreeView,&#32;websiteServerTreeViewContainer.ActiveNode);
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00503"/>00503 
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00504"/>00504 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;Move&#32;from&#32;root&#32;node&#32;to&#32;the&#32;only&#32;child</emphasis>
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00505"/>00505 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;await&#32;keyboardEventHandler.OnKeyDownAsync(<emphasis role="keyword">new</emphasis>&#32;<link linkend="_class_luthetus_1_1_common_1_1_razor_lib_1_1_commands_1_1_models_1_1_tree_view_command_args">TreeViewCommandArgs</link>(
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00506"/>00506 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;treeViewService,
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00507"/>00507 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;websiteServerTreeViewContainer,
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00508"/>00508 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;websiteServerTreeView,
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00509"/>00509 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;()&#32;=&gt;&#32;Task.CompletedTask,
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00510"/>00510 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keyword">null</emphasis>,
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00511"/>00511 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keyword">null</emphasis>,
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00512"/>00512 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keyword">new</emphasis>&#32;KeyboardEventArgs
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00513"/>00513 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;{
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00514"/>00514 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;Key&#32;=&#32;KeyboardKeyFacts.MovementKeys.END,
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00515"/>00515 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;Code&#32;=&#32;KeyboardKeyFacts.MovementKeys.END,
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00516"/>00516 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;}));
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00517"/>00517 
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00518"/>00518 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;Assert.True(treeViewService.TryGetTreeViewContainer(
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00519"/>00519 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;websiteServerTreeViewContainer.Key,
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00520"/>00520 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;out&#32;websiteServerTreeViewContainer));
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00521"/>00521 
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00522"/>00522 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;Assert.NotNull(websiteServerTreeViewContainer);
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00523"/>00523 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;Assert.Equal(websiteServerTreeView.ChildList.First(),&#32;websiteServerTreeViewContainer!.ActiveNode);
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00524"/>00524 &#32;&#32;&#32;&#32;}
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00525"/>00525 
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00529"/>00529 &#32;&#32;&#32;&#32;[Fact]
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00530"/><link linkend="_class_luthetus_1_1_common_1_1_tests_1_1_basis_1_1_tree_views_1_1_models_1_1_tree_view_keyboard_event_handler_tests_1a7ca43e9ff4850059f84e18b311943443">00530</link> &#32;&#32;&#32;&#32;<emphasis role="keyword">public</emphasis>&#32;<emphasis role="keywordtype">void</emphasis>&#32;<link linkend="_class_luthetus_1_1_common_1_1_tests_1_1_basis_1_1_tree_views_1_1_models_1_1_tree_view_keyboard_event_handler_tests_1a7ca43e9ff4850059f84e18b311943443">OnKeyDownAsync</link>()
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00531"/>00531 &#32;&#32;&#32;&#32;{
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00532"/>00532 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">throw</emphasis>&#32;<emphasis role="keyword">new</emphasis>&#32;NotImplementedException();
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00533"/>00533 &#32;&#32;&#32;&#32;}
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00534"/>00534 
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00535"/>00535 &#32;&#32;&#32;&#32;<emphasis role="keyword">private</emphasis>&#32;<emphasis role="keywordtype">void</emphasis>&#32;InitializeTreeViewKeyboardEventHandlerTests(
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00536"/>00536 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;out&#32;IDispatcher&#32;dispatcher,
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00537"/>00537 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;out&#32;<link linkend="_class_luthetus_1_1_common_1_1_razor_lib_1_1_component_renderers_1_1_models_1_1_common_tree_views">CommonTreeViews</link>&#32;commonTreeViews,
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00538"/>00538 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;out&#32;<link linkend="_class_luthetus_1_1_common_1_1_razor_lib_1_1_component_renderers_1_1_models_1_1_common_component_renderers">CommonComponentRenderers</link>&#32;commonComponentRenderers,
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00539"/>00539 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;out&#32;IState&lt;TreeViewState&gt;&#32;treeViewStateWrap,
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00540"/>00540 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;out&#32;<link linkend="_interface_luthetus_1_1_common_1_1_razor_lib_1_1_tree_views_1_1_models_1_1_i_tree_view_service">ITreeViewService</link>&#32;treeViewService,
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00541"/>00541 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;out&#32;<link linkend="_interface_luthetus_1_1_common_1_1_razor_lib_1_1_background_tasks_1_1_models_1_1_i_background_task_service">IBackgroundTaskService</link>&#32;backgroundTaskService,
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00542"/>00542 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;out&#32;<link linkend="_class_luthetus_1_1_common_1_1_tests_1_1_basis_1_1_tree_views_1_1_models_1_1_internals_1_1_website_server_state">WebsiteServerState</link>&#32;websiteServerState,
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00543"/>00543 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;out&#32;<link linkend="_class_luthetus_1_1_common_1_1_tests_1_1_basis_1_1_tree_views_1_1_models_1_1_internals_1_1_website_server">WebsiteServer</link>&#32;websiteServer,
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00544"/>00544 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;out&#32;<link linkend="_class_luthetus_1_1_common_1_1_tests_1_1_basis_1_1_tree_views_1_1_models_1_1_internals_1_1_website_server_tree_view">WebsiteServerTreeView</link>&#32;websiteServerTreeView,
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00545"/>00545 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;out&#32;<link linkend="_namespace_luthetus_1_1_common_1_1_razor_lib_1_1_tree_views_1_1_models_1ace4f137317eda265ad6dd976b61de5c6">TreeViewContainer</link>&#32;websiteServerTreeViewContainer,
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00546"/>00546 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;out&#32;<link linkend="_class_luthetus_1_1_common_1_1_razor_lib_1_1_tree_views_1_1_models_1_1_tree_view_keyboard_event_handler">TreeViewKeyboardEventHandler</link>&#32;keyboardEventHandler)
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00547"/>00547 &#32;&#32;&#32;&#32;{
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00548"/>00548 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;var&#32;temporaryBackgroundTaskService&#32;=&#32;backgroundTaskService&#32;=&#32;<emphasis role="keyword">new</emphasis>&#32;<link linkend="_class_luthetus_1_1_common_1_1_razor_lib_1_1_background_tasks_1_1_models_1_1_background_task_service_synchronous">BackgroundTaskServiceSynchronous</link>();
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00549"/>00549 
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00550"/>00550 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;var&#32;continuousQueue&#32;=&#32;<emphasis role="keyword">new</emphasis>&#32;<link linkend="_class_luthetus_1_1_common_1_1_razor_lib_1_1_background_tasks_1_1_models_1_1_background_task_queue">BackgroundTaskQueue</link>(
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00551"/>00551 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<link linkend="_class_luthetus_1_1_common_1_1_razor_lib_1_1_background_tasks_1_1_models_1_1_continuous_background_task_worker">ContinuousBackgroundTaskWorker</link>.<link linkend="_class_luthetus_1_1_common_1_1_razor_lib_1_1_background_tasks_1_1_models_1_1_continuous_background_task_worker_1a2bbecf18336413ee1caff9d378acc256">GetQueueKey</link>(),
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00552"/>00552 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<link linkend="_class_luthetus_1_1_common_1_1_razor_lib_1_1_background_tasks_1_1_models_1_1_continuous_background_task_worker">ContinuousBackgroundTaskWorker</link>.<link linkend="_class_luthetus_1_1_common_1_1_razor_lib_1_1_background_tasks_1_1_models_1_1_continuous_background_task_worker_1a22c2b04c4f8e393a7ab0f17031f1a43a">QUEUE_DISPLAY_NAME</link>);
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00553"/>00553 
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00554"/>00554 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;backgroundTaskService.RegisterQueue(continuousQueue);
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00555"/>00555 
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00556"/>00556 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;var&#32;blockingQueue&#32;=&#32;<emphasis role="keyword">new</emphasis>&#32;<link linkend="_class_luthetus_1_1_common_1_1_razor_lib_1_1_background_tasks_1_1_models_1_1_background_task_queue">BackgroundTaskQueue</link>(
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00557"/>00557 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<link linkend="_class_luthetus_1_1_common_1_1_razor_lib_1_1_background_tasks_1_1_models_1_1_blocking_background_task_worker">BlockingBackgroundTaskWorker</link>.<link linkend="_class_luthetus_1_1_common_1_1_razor_lib_1_1_background_tasks_1_1_models_1_1_blocking_background_task_worker_1a267091acd637305c1ddcfe78bef3343f">GetQueueKey</link>(),
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00558"/>00558 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<link linkend="_class_luthetus_1_1_common_1_1_razor_lib_1_1_background_tasks_1_1_models_1_1_blocking_background_task_worker">BlockingBackgroundTaskWorker</link>.<link linkend="_class_luthetus_1_1_common_1_1_razor_lib_1_1_background_tasks_1_1_models_1_1_blocking_background_task_worker_1a15164ffc66eccc1ab15eccb3351b13d0">QUEUE_DISPLAY_NAME</link>);
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00559"/>00559 
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00560"/>00560 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;backgroundTaskService.RegisterQueue(blockingQueue);
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00561"/>00561 
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00562"/>00562 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;var&#32;services&#32;=&#32;<emphasis role="keyword">new</emphasis>&#32;ServiceCollection()
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00563"/>00563 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;.AddScoped&lt;<link linkend="_interface_luthetus_1_1_common_1_1_razor_lib_1_1_tree_views_1_1_models_1_1_i_tree_view_service">ITreeViewService</link>,&#32;<link linkend="_class_luthetus_1_1_common_1_1_razor_lib_1_1_tree_views_1_1_models_1_1_tree_view_service">TreeViewService</link>&gt;()
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00564"/>00564 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;.<link linkend="__lib_2_ide_2_host_8_blazor_web_assembly_2_program_8cs_1ad23e038402085511bf6d150f155199f9">AddScoped</link>(sp&#32;=&gt;&#32;temporaryBackgroundTaskService)
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00565"/>00565 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;.AddFluxor(options&#32;=&gt;&#32;options.ScanAssemblies(typeof(TreeViewState).Assembly));
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00566"/>00566 
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00567"/>00567 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;var&#32;serviceProvider&#32;=&#32;services.BuildServiceProvider();
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00568"/>00568 
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00569"/>00569 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;var&#32;store&#32;=&#32;serviceProvider.GetRequiredService&lt;IStore&gt;();
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00570"/>00570 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;store.InitializeAsync().Wait();
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00571"/>00571 
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00572"/>00572 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;treeViewStateWrap&#32;=&#32;serviceProvider.GetRequiredService&lt;IState&lt;TreeViewState&gt;&gt;();
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00573"/>00573 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;treeViewService&#32;=&#32;serviceProvider.GetRequiredService&lt;<link linkend="_interface_luthetus_1_1_common_1_1_razor_lib_1_1_tree_views_1_1_models_1_1_i_tree_view_service">ITreeViewService</link>&gt;();
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00574"/>00574 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;backgroundTaskService&#32;=&#32;serviceProvider.GetRequiredService&lt;<link linkend="_interface_luthetus_1_1_common_1_1_razor_lib_1_1_background_tasks_1_1_models_1_1_i_background_task_service">IBackgroundTaskService</link>&gt;();
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00575"/>00575 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;dispatcher&#32;=&#32;serviceProvider.GetRequiredService&lt;IDispatcher&gt;();
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00576"/>00576 
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00577"/>00577 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;commonTreeViews&#32;=&#32;<emphasis role="keyword">new</emphasis>&#32;<link linkend="_class_luthetus_1_1_common_1_1_razor_lib_1_1_component_renderers_1_1_models_1_1_common_tree_views">CommonTreeViews</link>(
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00578"/>00578 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;typeof(<link linkend="_class_luthetus_1_1_common_1_1_razor_lib_1_1_tree_views_1_1_displays_1_1_utils_1_1_tree_view_exception_display">TreeViewExceptionDisplay</link>),
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00579"/>00579 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;typeof(<link linkend="_class_luthetus_1_1_common_1_1_razor_lib_1_1_watch_windows_1_1_displays_1_1_tree_view_missing_renderer_fallback_display">TreeViewMissingRendererFallbackDisplay</link>),
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00580"/>00580 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;typeof(<link linkend="_class_luthetus_1_1_common_1_1_razor_lib_1_1_watch_windows_1_1_displays_1_1_tree_view_text_display">TreeViewTextDisplay</link>),
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00581"/>00581 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;typeof(<link linkend="_class_luthetus_1_1_common_1_1_razor_lib_1_1_watch_windows_1_1_displays_1_1_tree_view_reflection_display">TreeViewReflectionDisplay</link>),
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00582"/>00582 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;typeof(<link linkend="_class_luthetus_1_1_common_1_1_razor_lib_1_1_watch_windows_1_1_displays_1_1_tree_view_properties_display">TreeViewPropertiesDisplay</link>),
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00583"/>00583 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;typeof(<link linkend="_class_luthetus_1_1_common_1_1_razor_lib_1_1_watch_windows_1_1_displays_1_1_tree_view_interface_implementation_display">TreeViewInterfaceImplementationDisplay</link>),
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00584"/>00584 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;typeof(<link linkend="_class_luthetus_1_1_common_1_1_razor_lib_1_1_watch_windows_1_1_displays_1_1_tree_view_fields_display">TreeViewFieldsDisplay</link>),
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00585"/>00585 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;typeof(<link linkend="_class_luthetus_1_1_common_1_1_razor_lib_1_1_tree_views_1_1_displays_1_1_utils_1_1_tree_view_exception_display">TreeViewExceptionDisplay</link>),
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00586"/>00586 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;typeof(<link linkend="_class_luthetus_1_1_common_1_1_razor_lib_1_1_watch_windows_1_1_displays_1_1_tree_view_enumerable_display">TreeViewEnumerableDisplay</link>));
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00587"/>00587 
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00588"/>00588 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;commonComponentRenderers&#32;=&#32;<emphasis role="keyword">new</emphasis>&#32;<link linkend="_class_luthetus_1_1_common_1_1_razor_lib_1_1_component_renderers_1_1_models_1_1_common_component_renderers">CommonComponentRenderers</link>(
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00589"/>00589 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;typeof(<link linkend="_class_luthetus_1_1_common_1_1_razor_lib_1_1_notifications_1_1_displays_1_1_common_error_notification_display">CommonErrorNotificationDisplay</link>),
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00590"/>00590 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;typeof(<link linkend="_class_luthetus_1_1_common_1_1_razor_lib_1_1_notifications_1_1_displays_1_1_common_informative_notification_display">CommonInformativeNotificationDisplay</link>),
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00591"/>00591 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;typeof(<link linkend="_class_luthetus_1_1_common_1_1_razor_lib_1_1_notifications_1_1_displays_1_1_common_progress_notification_display">CommonProgressNotificationDisplay</link>),
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00592"/>00592 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;commonTreeViews);
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00593"/>00593 
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00594"/>00594 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;websiteServerState&#32;=&#32;<emphasis role="keyword">new</emphasis>&#32;<link linkend="_class_luthetus_1_1_common_1_1_tests_1_1_basis_1_1_tree_views_1_1_models_1_1_internals_1_1_website_server_state">WebsiteServerState</link>();
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00595"/>00595 
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00596"/>00596 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;websiteServer&#32;=&#32;<emphasis role="keyword">new</emphasis>&#32;<link linkend="_class_luthetus_1_1_common_1_1_tests_1_1_basis_1_1_tree_views_1_1_models_1_1_internals_1_1_website_server">WebsiteServer</link>(
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00597"/>00597 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="stringliteral">&quot;TestServer&quot;</emphasis>,
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00598"/>00598 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keyword">new</emphasis>[]
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00599"/>00599 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;{
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00600"/>00600 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="stringliteral">&quot;/&quot;</emphasis>,
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00601"/>00601 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="stringliteral">&quot;/index/&quot;</emphasis>,
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00602"/>00602 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="stringliteral">&quot;/counter/&quot;</emphasis>,
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00603"/>00603 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="stringliteral">&quot;/fetchdata/&quot;</emphasis>,
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00604"/>00604 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;},
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00605"/>00605 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;websiteServerState);
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00606"/>00606 
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00607"/>00607 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;websiteServerTreeView&#32;=&#32;<emphasis role="keyword">new</emphasis>&#32;<link linkend="_class_luthetus_1_1_common_1_1_tests_1_1_basis_1_1_tree_views_1_1_models_1_1_internals_1_1_website_server_tree_view">WebsiteServerTreeView</link>(
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00608"/>00608 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;websiteServer,
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00609"/>00609 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keyword">true</emphasis>,
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00610"/>00610 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keyword">false</emphasis>);
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00611"/>00611 
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00612"/>00612 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;websiteServerTreeViewContainer&#32;=&#32;<emphasis role="keyword">new</emphasis>&#32;<link linkend="_namespace_luthetus_1_1_common_1_1_razor_lib_1_1_tree_views_1_1_models_1ace4f137317eda265ad6dd976b61de5c6">TreeViewContainer</link>(
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00613"/>00613 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;Key&lt;TreeViewContainer&gt;.NewKey(),
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00614"/>00614 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;websiteServerTreeView,
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00615"/>00615 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keyword">new</emphasis>&#32;<link linkend="_class_luthetus_1_1_common_1_1_razor_lib_1_1_tree_views_1_1_models_1_1_tree_view_no_type">TreeViewNoType</link>[]&#32;{&#32;websiteServerTreeView&#32;}.ToImmutableList());
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00616"/>00616 
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00617"/>00617 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;treeViewService.RegisterTreeViewContainer(websiteServerTreeViewContainer);
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00618"/>00618 
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00619"/>00619 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;keyboardEventHandler&#32;=&#32;<emphasis role="keyword">new</emphasis>&#32;<link linkend="_class_luthetus_1_1_common_1_1_razor_lib_1_1_tree_views_1_1_models_1_1_tree_view_keyboard_event_handler">TreeViewKeyboardEventHandler</link>(
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00620"/>00620 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;treeViewService,
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00621"/>00621 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;backgroundTaskService);
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00622"/>00622 &#32;&#32;&#32;&#32;}
+<anchor xml:id="__tree_view_keyboard_event_handler_tests_8cs_source_1l00623"/>00623 }
+</programlisting></section>

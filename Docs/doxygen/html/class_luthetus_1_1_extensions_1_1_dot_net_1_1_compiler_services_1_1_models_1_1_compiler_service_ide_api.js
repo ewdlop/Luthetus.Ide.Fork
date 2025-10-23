@@ -1,0 +1,5 @@
+var class_luthetus_1_1_extensions_1_1_dot_net_1_1_compiler_services_1_1_models_1_1_compiler_service_ide_api =
+[
+    [ "CompilerServiceIdeApi", "class_luthetus_1_1_extensions_1_1_dot_net_1_1_compiler_services_1_1_models_1_1_compiler_service_ide_api.html#a4fa1ac5b1a66d5bbf800b0130e70ba79", null ],
+    [ "SetCompilerServiceExplorerTreeView", "class_luthetus_1_1_extensions_1_1_dot_net_1_1_compiler_services_1_1_models_1_1_compiler_service_ide_api.html#a86b452431060215d5296616d66cdb7ce", null ]
+];

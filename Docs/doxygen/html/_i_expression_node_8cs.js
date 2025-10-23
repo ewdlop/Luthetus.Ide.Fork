@@ -1,0 +1,4 @@
+var _i_expression_node_8cs =
+[
+    [ "Luthetus.TextEditor.RazorLib.CompilerServices.Syntax.Nodes.Interfaces.IExpressionNode", "interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_1_1_nodes_1_1_97d7489c2c3077ac339153787f61d38f.html", "interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_1_1_nodes_1_1_97d7489c2c3077ac339153787f61d38f" ]
+];

@@ -1,0 +1,184 @@
+.TH "md__docs_2_common_2installation" 3 "Version 1.0.0" "Luthetus.Ide" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+md__docs_2_common_2installation \- Luthetus\&.Common (v1\&.4\&.0) 
+.PP
+
+.SH "Installation"
+.PP
+.SS "Source Code"
+The \&.NET Solution: \fRLuthetus\&.Common\&.Usage\&.sln\fP, was made by following steps described here\&. So, the completed result can be found there\&.
+.SS "Goal"
+.IP "\(bu" 2
+Reference the \fR\fBLuthetus\&.Common\fP\fP Nuget Package
+.IP "\(bu" 2
+Register the \fRServices\fP
+.IP "\(bu" 2
+Reference the \fRCSS\fP
+.IP "\(bu" 2
+Reference the \fRJavaScript\fP
+.IP "\(bu" 2
+In \fRApp\&.razor\fP render the \fR<Fluxor\&.Blazor\&.Web\&.StoreInitializer/>\fP
+.IP "\(bu" 2
+In \fRMainLayout\&.razor\fP render the \fR<\fBLuthetus\&.Common\&.RazorLib\&.Installations\&.Displays\&.LuthetusCommonInitializer\fP/>\fP Blazor component
+.PP
+.SS "Steps"
+.IP "\(bu" 2
+Reference the \fR\fBLuthetus\&.Common\fP\fP NuGet Package
+.PP
+
+.PP
+Use your preferred way to install NuGet Packages to install \fR\fBLuthetus\&.Common\fP\fP\&.
+
+.PP
+The nuget\&.org link to the NuGet Package is here: https://www.nuget.org/packages/Luthetus.Common
+
+.PP
+.IP "\(bu" 2
+Register the \fRServices\fP
+.PP
+
+.PP
+Go to the file that you register your services and add the following lines of C# code\&.
+
+.PP
+.RS 4
+\fINOTE:\fP In many C# Project templates, the services are registered in \fRProgram\&.cs\fP\&. 
+.RE
+.PP
+
+.PP
+.PP
+.nf
+// using Luthetus\&.Common\&.RazorLib\&.Installations\&.Models;
+// using Fluxor;
+
+var luthetusHostingInformation = new LuthetusHostingInformation(
+    //LuthetusHostingKind\&.Wasm,
+    // OR
+    // LuthetusHostingKind\&.ServerSide,
+    new BackgroundTaskService());
+
+return services
+    \&.AddLuthetusCommonServices(luthetusHostingInformation) // 
+    \&.AddFluxor(options => options\&.ScanAssemblies(
+        typeof(LuthetusCommonOptions)\&.Assembly));
+.fi
+.PP
+
+.PP
+.IP "\(bu" 2
+Reference the \fRCSS\fP
+.PP
+
+.PP
+Go to the file that you reference CSS files from and add the following CSS reference\&.
+
+.PP
+.RS 4
+\fINOTE:\fP In many Blazor ServerSide apps this file would be \fRPages/_Layout\&.cshtml\fP\&. As for Blazor WASM apps, this file tends to be \fRwwwroot/index\&.html\fP 
+.RE
+.PP
+
+.PP
+.PP
+.nf
+<link href="_content/Luthetus\&.Common/luthetusCommon\&.css" rel="stylesheet" />
+.fi
+.PP
+
+.PP
+.IP "\(bu" 2
+Reference the \fRJavaScript\fP
+.PP
+
+.PP
+Go to the file that you reference JavaScript files from and add the following JavaScript reference below the Blazor framework JavaScript reference
+
+.PP
+.RS 4
+\fINOTE:\fP In many Blazor ServerSide apps this file would be \fRPages/_Layout\&.cshtml\fP\&. As for Blazor WASM apps, this file tends to be \fRwwwroot/index\&.html\fP 
+.RE
+.PP
+
+.PP
+.PP
+.nf
+<script src="_content/Luthetus\&.Common/luthetusCommon\&.js"></script>
+.fi
+.PP
+
+.PP
+.IP "\(bu" 2
+In \fRApp\&.razor\fP render the \fR<Fluxor\&.Blazor\&.Web\&.StoreInitializer/>\fP Blazor component
+.PP
+
+.PP
+.RS 4
+\fINOTE:\fP \fBLuthetus\fP repositories use the state management library named \fRFluxor\fP (\fRgithub link\fP)\&. 
+.RE
+.PP
+
+.PP
+.PP
+.nf
+<!\-\- App\&.razor \-\->
+
+<Fluxor\&.Blazor\&.Web\&.StoreInitializer/>
+
+<Router AppAssembly="@typeof(App)\&.Assembly" AdditionalAssemblies="new [] { typeof(MainLayout)\&.Assembly }">
+    <Found Context="routeData">
+        <RouteView RouteData="@routeData" DefaultLayout="@typeof(MainLayout)"/>
+        <FocusOnNavigate RouteData="@routeData" Selector="h1"/>
+    </Found>
+    <NotFound>
+        <PageTitle>Not found</PageTitle>
+        <LayoutView Layout="@typeof(MainLayout)">
+            <p role="alert">Sorry, there's nothing at this address\&.</p>
+        </LayoutView>
+    </NotFound>
+</Router>
+.fi
+.PP
+
+.PP
+.IP "\(bu" 2
+In \fRMainLayout\&.razor\fP render the \fR<\fBLuthetus\&.Common\&.RazorLib\&.Installations\&.Displays\&.LuthetusCommonInitializer\fP />\fP Blazor component
+.PP
+
+.PP
+.RS 4
+\fINOTE:\fP The placement of the \fR<\fBLuthetus\&.Common\&.RazorLib\&.Installations\&.Displays\&.LuthetusCommonInitializer\fP/>\fP Blazor component should be wrapped in an encompassing div\&. This allows one to cascade css\&. A later tutorial is intended to show this, as to keep the installation tutorial more to the point\&. 
+.RE
+.PP
+
+.PP
+.PP
+.nf
+@inherits LayoutComponentBase
+
+<PageTitle>Luthetus\&.Common\&.Installation\&.ServerSide</PageTitle>
+
+<Luthetus\&.Common\&.RazorLib\&.Installations\&.Displays\&.LuthetusCommonInitializer/>
+
+<div class="page">
+    <div class="sidebar">
+        <NavMenu />
+    </div>
+
+    <main>
+        <div class="top\-row px\-4">
+            <a href="https://docs\&.microsoft\&.com/aspnet/" target="_blank">About</a>
+        </div>
+
+        <article class="content px\-4">
+            @Body
+        </article>
+    </main>
+</div>
+.fi
+.PP
+.SH "Next tutorial: \fBusage\&.md\fP"
+.PP
+

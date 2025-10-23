@@ -1,0 +1,46 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
+  <compounddef id="dir_2ff1e8bca114e08dc1de4be319417fc9" kind="dir">
+    <compoundname>Source/Lib/Extensions/Extensions.DotNet</compoundname>
+    <innerdir refid="dir_9d913068e6c4affffde742e5fe48e8cb">Source/Lib/Extensions/Extensions.DotNet/AppDatas</innerdir>
+    <innerdir refid="dir_19c3dee0d47e4f1b9cc8448c8f4ae0a8">Source/Lib/Extensions/Extensions.DotNet/BackgroundTasks</innerdir>
+    <innerdir refid="dir_528f8a1716750964807facb321625d64">Source/Lib/Extensions/Extensions.DotNet/CodeSearches</innerdir>
+    <innerdir refid="dir_5b31d01861dc4bb549d770342f5e2c09">Source/Lib/Extensions/Extensions.DotNet/CommandLines</innerdir>
+    <innerdir refid="dir_65807243c5bf6cb5dbc412353861ea87">Source/Lib/Extensions/Extensions.DotNet/Commands</innerdir>
+    <innerdir refid="dir_ec62ea314ae628ab6d7d86f56e66963d">Source/Lib/Extensions/Extensions.DotNet/CompilerServices</innerdir>
+    <innerdir refid="dir_f3ca841d0a622b2348765c689eff132a">Source/Lib/Extensions/Extensions.DotNet/ComponentRenderers</innerdir>
+    <innerdir refid="dir_1227c07ec4840d7ab3982d0eca1e13ad">Source/Lib/Extensions/Extensions.DotNet/CSharpProjects</innerdir>
+    <innerdir refid="dir_00813ed724a255122d25fe8019374816">Source/Lib/Extensions/Extensions.DotNet/DotNetSolutions</innerdir>
+    <innerdir refid="dir_7c940dc46d5413d47af636743cb6eb28">Source/Lib/Extensions/Extensions.DotNet/Installations</innerdir>
+    <innerdir refid="dir_ce8869f7a945e684b73458ec5905fcaa">Source/Lib/Extensions/Extensions.DotNet/Menus</innerdir>
+    <innerdir refid="dir_15bffcecbfce96897d51d61193422529">Source/Lib/Extensions/Extensions.DotNet/Namespaces</innerdir>
+    <innerdir refid="dir_82d1ed0ff5eb8a3c603d069f94836b3b">Source/Lib/Extensions/Extensions.DotNet/Nugets</innerdir>
+    <innerdir refid="dir_b6cde0c195b3573973f6a00666fd920e">Source/Lib/Extensions/Extensions.DotNet/Outputs</innerdir>
+    <innerdir refid="dir_841a14003d42d44f482534d67bd21cec">Source/Lib/Extensions/Extensions.DotNet/Shareds</innerdir>
+    <innerdir refid="dir_4463c34c33bac5675458a68af7967292">Source/Lib/Extensions/Extensions.DotNet/TestExplorers</innerdir>
+    <innerdir refid="dir_4e85733844ba850d649447190abb0709">Source/Lib/Extensions/Extensions.DotNet/Websites</innerdir>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+<para>Luthetus.CompilerServices.RazorLib.csproj is the way for a compiler service non-razor lib to provide razor components.</para>
+<para>For example, one might primarily code in C#, but occassionally have to write JavaScript. Perhaps, this individual would prefer to load the JavaScript CompilerService, BUT NOT load the JavaScript specific UI components.</para>
+<para>I&apos;m not certain on the best way to go about this &quot;separate the compiler service
+from its UI components&apos; idea. But this is how I&apos;ll start to try.
+
+Essentially I need to move all the .NET specific code that is in the
+Luthetus.Ide.RazorLib.csproj to this project instead.
+
+After I do that, I need to make the code generic so that any compiler service
+can decide to implement that blazor component.
+
+For example, the solution explorer. I imagine that the name &quot;Solution Explorer" could be changed based on some blazor parameter, and that the nodes in the tree could be populated with different logic, instead of from reading a .sln file and etc...</para>
+<para>I have no idea how I would do that???? These components seem very specialized, and I think I even prefer it that way.</para>
+<para>But do I really want 2 projects per programming language, one for the compiler service and one for the UI?</para>
+<para>Move these: [ ] /CSharpProjects/ [ ] /DotNetSolutions/ [ ] /Nugets/</para>
+<para>[ ] /CommandLines/Models/DotNetCliCommandFormatter.cs [ ] /CommandLines/Models/DotNetCliOutputParser.cs [ ] /ComponentRenderers/Models/INuGetPackageManagerRendererType.cs [ ] /ComponentRenderers/Models/IRemoveCSharpProjectFromSolutionRendererType.cs [ ] /ComponentRenderers/Models/ITreeViewCSharpProjectNugetPackageReferenceRendererType.cs [ ] /ComponentRenderers/Models/ITreeViewCSharpProjectToProjectReferenceRendererType.cs [ ] /ComponentRenderers/Models/ITreeViewSolutionFolderRendererType.cs [ ] /Menus/Models/IMenuOptionsFactory.RemoveCSharpProjectReferenceFromSolution() [ ] /Menus/Models/IMenuOptionsFactory.AddProjectToProjectReference() [ ] /Menus/Models/IMenuOptionsFactory.RemoveProjectToProjectReference() [ ] /Menus/Models/IMenuOptionsFactory.MoveProjectToSolutionFolder() [ ] /Menus/Models/IMenuOptionsFactory.RemoveNuGetPackageReferenceFromProject() [ ] Repeat what is done for <ref refid="_i_menu_options_factory_8cs" kindref="compound">IMenuOptionsFactory.cs</ref> to its implementation <ref refid="_menu_options_factory_8cs" kindref="compound">MenuOptionsFactory.cs</ref> [ ] /Namespaces/Models/TreeViewHelperCSharpClass.cs [ ] /Namespaces/Models/TreeViewHelperCSharpProject.cs [ ] /Namespaces/Models/TreeViewHelperRazorMarkup.cs [ ] /Shareds/Displays/Internals/IdePromptOpenSolutionDisplay.razor [ ] /TestExplorers/ ###### Should /TestExplorers/ be moved???? [ ] /Namespaces/ ###### Should /Namespaces/ be moved????</para>
+<para>I need to make a &apos;Workspace&apos; concept in order to permit arbitrary grouping of directories into a tree view.</para>
+<para>I moved over &apos;/CSharpProjects/&apos; and it is immediately apparent that this will be a headache. Some of the code in &apos;/CSharpProjects/&apos; relies on various bits and pieces of code that exist within the IDE, so I&apos;ll get a circular reference if I try to take the shortcut of having the IDE reference my new project for time being </para>
+    </detaileddescription>
+    <location file="Source/Lib/Extensions/Extensions.DotNet/"/>
+  </compounddef>
+</doxygen>

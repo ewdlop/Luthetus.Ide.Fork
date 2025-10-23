@@ -1,0 +1,331 @@
+.TH "Luthetus.TextEditor.RazorLib.TextEditors.Models.TextEditorViewModelApi" 3 "Version 1.0.0" "Luthetus.Ide" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+Luthetus.TextEditor.RazorLib.TextEditors.Models.TextEditorViewModelApi
+.SH SYNOPSIS
+.br
+.PP
+.PP
+Inherits \fBLuthetus\&.TextEditor\&.RazorLib\&.TextEditors\&.Models\&.ITextEditorViewModelApi\fP\&.
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBTextEditorViewModelApi\fP (\fBITextEditorService\fP \fBtextEditorService\fP, \fBIBackgroundTaskService\fP backgroundTaskService, IState< \fBTextEditorState\fP > textEditorStateWrap, IJSRuntime \fBjsRuntime\fP, IDispatcher \fBdispatcher\fP, \fBIDialogService\fP \fBdialogService\fP)"
+.br
+.ti -1c
+.RI "void \fBSetCursorShouldBlink\fP (bool cursorShouldBlink)"
+.br
+.ti -1c
+.RI "void \fBRegister\fP (Key< \fBTextEditorViewModel\fP > viewModelKey, \fBResourceUri\fP \fBresourceUri\fP, \fBCategory\fP \fBcategory\fP)"
+.br
+.ti -1c
+.RI "void \fBRegister\fP (\fBTextEditorViewModel\fP viewModel)"
+.br
+.ti -1c
+.RI "\fBTextEditorViewModel\fP? \fBGetOrDefault\fP (Key< \fBTextEditorViewModel\fP > viewModelKey)"
+.br
+.ti -1c
+.RI "Dictionary< Key< \fBTextEditorViewModel\fP >, \fBTextEditorViewModel\fP > \fBGetViewModels\fP ()"
+.br
+.RI "Returns a shallow copy\&. "
+.ti -1c
+.RI "\fBTextEditorModel\fP? \fBGetModelOrDefault\fP (Key< \fBTextEditorViewModel\fP > viewModelKey)"
+.br
+.ti -1c
+.RI "string? \fBGetAllText\fP (Key< \fBTextEditorViewModel\fP > viewModelKey)"
+.br
+.ti -1c
+.RI "async Task< \fBTextEditorDimensions\fP > \fBGetTextEditorMeasurementsAsync\fP (string elementId)"
+.br
+.ti -1c
+.RI "async Task< \fBCharAndLineMeasurements\fP > \fBMeasureCharacterWidthAndLineHeightAsync\fP (string measureCharacterWidthAndLineHeightElementId, int countOfTestCharacters)"
+.br
+.ti -1c
+.RI "void \fBSetScrollPosition\fP (\fBITextEditorEditContext\fP editContext, \fBTextEditorViewModelModifier\fP viewModelModifier, double? scrollLeftInPixels, double? scrollTopInPixels)"
+.br
+.RI "If a parameter is null the JavaScript will not modify that value\&. "
+.ti -1c
+.RI "void \fBMutateScrollVerticalPosition\fP (\fBITextEditorEditContext\fP editContext, \fBTextEditorViewModelModifier\fP viewModelModifier, double pixels)"
+.br
+.ti -1c
+.RI "void \fBMutateScrollHorizontalPosition\fP (\fBITextEditorEditContext\fP editContext, \fBTextEditorViewModelModifier\fP viewModelModifier, double pixels)"
+.br
+.ti -1c
+.RI "void \fBScrollIntoView\fP (\fBITextEditorEditContext\fP editContext, \fBTextEditorModelModifier\fP modelModifier, \fBTextEditorViewModelModifier\fP viewModelModifier, \fBTextEditorTextSpan\fP textSpan)"
+.br
+.ti -1c
+.RI "async Task \fBFocusPrimaryCursorAsync\fP (string primaryCursorContentId)"
+.br
+.ti -1c
+.RI "void \fBMoveCursor\fP (\fBKeymapArgs\fP keymapArgs, \fBITextEditorEditContext\fP editContext, \fBTextEditorModelModifier\fP modelModifier, \fBTextEditorViewModelModifier\fP viewModelModifier, \fBCursorModifierBagTextEditor\fP cursorModifierBag)"
+.br
+.ti -1c
+.RI "void \fBMoveCursorUnsafe\fP (\fBKeymapArgs\fP keymapArgs, \fBITextEditorEditContext\fP editContext, \fBTextEditorModelModifier\fP modelModifier, \fBTextEditorViewModelModifier\fP viewModelModifier, \fBCursorModifierBagTextEditor\fP cursorModifierBag, \fBTextEditorCursorModifier\fP cursorModifier)"
+.br
+.RI "If one wants to guarantee that the state is up to date use MoveCursor instead of this method\&. This is because, the \fBITextEditorService\fP will provide you the latest instance of the given \fBTextEditorCursor\fP\&. As opposed to whatever instance of the \fBTextEditorCursorModifier\fP you have at time of enqueueing\&. 
+.br
+
+.br
+ This method is needed however, because if one wants to arbitrarily create a cursor that does not map to the view model's cursors, then one would use this method\&. Since an attempt to map the cursor key would come back as the cursor not existing\&. "
+.ti -1c
+.RI "void \fBCursorMovePageTop\fP (\fBITextEditorEditContext\fP editContext, \fBTextEditorViewModelModifier\fP viewModelModifier, \fBCursorModifierBagTextEditor\fP cursorModifierBag)"
+.br
+.ti -1c
+.RI "void \fBCursorMovePageTopUnsafe\fP (\fBITextEditorEditContext\fP editContext, \fBTextEditorViewModelModifier\fP viewModelModifier, \fBCursorModifierBagTextEditor\fP cursorModifierBag, \fBTextEditorCursorModifier\fP cursorModifier)"
+.br
+.RI "If one wants to guarantee that the state is up to date use CursorMovePageTopFactory instead of this method\&. This is because, the \fBITextEditorService\fP will provide you the latest instance of the given \fBTextEditorCursor\fP\&. As opposed to whatever instance of the \fBTextEditorCursorModifier\fP you have at time of enqueueing\&. 
+.br
+
+.br
+ This method is needed however, because if one wants to arbitrarily create a cursor that does not map to the view model's cursors, then one would use this method\&. Since an attempt to map the cursor key would come back as the cursor not existing\&. "
+.ti -1c
+.RI "void \fBCursorMovePageBottom\fP (\fBITextEditorEditContext\fP editContext, \fBTextEditorModelModifier\fP modelModifier, \fBTextEditorViewModelModifier\fP viewModelModifier, \fBCursorModifierBagTextEditor\fP cursorModifierBag)"
+.br
+.ti -1c
+.RI "void \fBCursorMovePageBottomUnsafe\fP (\fBITextEditorEditContext\fP editContext, \fBTextEditorModelModifier\fP modelModifier, \fBTextEditorViewModelModifier\fP viewModelModifier, \fBCursorModifierBagTextEditor\fP cursorModifierBag, \fBTextEditorCursorModifier\fP cursorModifier)"
+.br
+.RI "If one wants to guarantee that the state is up to date use CursorMovePageBottomFactory instead of this method\&. This is because, the \fBITextEditorService\fP will provide you the latest instance of the given \fBTextEditorCursor\fP\&. As opposed to whatever instance of the \fBTextEditorCursorModifier\fP you have at time of enqueueing\&. 
+.br
+
+.br
+ This method is needed however, because if one wants to arbitrarily create a cursor that does not map to the view model's cursors, then one would use this method\&. Since an attempt to map the cursor key would come back as the cursor not existing\&. "
+.ti -1c
+.RI "void \fBRevealCursor\fP (\fBITextEditorEditContext\fP editContext, \fBTextEditorModelModifier\fP modelModifier, \fBTextEditorViewModelModifier\fP viewModelModifier, \fBCursorModifierBagTextEditor\fP cursorModifierBag, \fBTextEditorCursorModifier\fP cursorModifier)"
+.br
+.ti -1c
+.RI "void \fBCalculateVirtualizationResult\fP (\fBITextEditorEditContext\fP editContext, \fBTextEditorModelModifier\fP modelModifier, \fBTextEditorViewModelModifier\fP viewModelModifier, CancellationToken cancellationToken)"
+.br
+.ti -1c
+.RI "async Task \fBRemeasureAsync\fP (\fBITextEditorEditContext\fP editContext, \fBTextEditorViewModelModifier\fP viewModelModifier, string measureCharacterWidthAndLineHeightElementId, int countOfTestCharacters, CancellationToken cancellationToken)"
+.br
+.ti -1c
+.RI "void \fBForceRender\fP (\fBITextEditorEditContext\fP editContext, \fBTextEditorViewModelModifier\fP viewModelModifier, CancellationToken cancellationToken)"
+.br
+.ti -1c
+.RI "void \fBDispose\fP (Key< \fBTextEditorViewModel\fP > viewModelKey)"
+.br
+.in -1c
+.SS "Properties"
+
+.in +1c
+.ti -1c
+.RI "bool \fBCursorShouldBlink\fP = true\fR [get]\fP"
+.br
+.in -1c
+.SS "Events"
+
+.in +1c
+.ti -1c
+.RI "Action? \fBCursorShouldBlinkChanged\fP"
+.br
+.in -1c
+
+Events inherited from \fBLuthetus\&.TextEditor\&.RazorLib\&.TextEditors\&.Models\&.ITextEditorViewModelApi\fP
+.in +1c
+.ti -1c
+.RI "Action? \fBCursorShouldBlinkChanged\fP"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+Definition at line \fB21\fP of file \fBTextEditorViewModelApi\&.cs\fP\&.
+.SH "Constructor & Destructor Documentation"
+.PP 
+.SS "Luthetus\&.TextEditor\&.RazorLib\&.TextEditors\&.Models\&.TextEditorViewModelApi\&.TextEditorViewModelApi (\fBITextEditorService\fP textEditorService, \fBIBackgroundTaskService\fP backgroundTaskService, IState< \fBTextEditorState\fP > textEditorStateWrap, IJSRuntime jsRuntime, IDispatcher dispatcher, \fBIDialogService\fP dialogService)"
+
+.PP
+Definition at line \fB32\fP of file \fBTextEditorViewModelApi\&.cs\fP\&.
+.SH "Member Function Documentation"
+.PP 
+.SS "void Luthetus\&.TextEditor\&.RazorLib\&.TextEditors\&.Models\&.TextEditorViewModelApi\&.CalculateVirtualizationResult (\fBITextEditorEditContext\fP editContext, \fBTextEditorModelModifier\fP modelModifier, \fBTextEditorViewModelModifier\fP viewModelModifier, CancellationToken cancellationToken)"
+
+.PP
+Implements \fBLuthetus\&.TextEditor\&.RazorLib\&.TextEditors\&.Models\&.ITextEditorViewModelApi\fP\&.
+.PP
+Definition at line \fB741\fP of file \fBTextEditorViewModelApi\&.cs\fP\&.
+.SS "void Luthetus\&.TextEditor\&.RazorLib\&.TextEditors\&.Models\&.TextEditorViewModelApi\&.CursorMovePageBottom (\fBITextEditorEditContext\fP editContext, \fBTextEditorModelModifier\fP modelModifier, \fBTextEditorViewModelModifier\fP viewModelModifier, \fBCursorModifierBagTextEditor\fP cursorModifierBag)"
+
+.PP
+Implements \fBLuthetus\&.TextEditor\&.RazorLib\&.TextEditors\&.Models\&.ITextEditorViewModelApi\fP\&.
+.PP
+Definition at line \fB667\fP of file \fBTextEditorViewModelApi\&.cs\fP\&.
+.SS "void Luthetus\&.TextEditor\&.RazorLib\&.TextEditors\&.Models\&.TextEditorViewModelApi\&.CursorMovePageBottomUnsafe (\fBITextEditorEditContext\fP editContext, \fBTextEditorModelModifier\fP modelModifier, \fBTextEditorViewModelModifier\fP viewModelModifier, \fBCursorModifierBagTextEditor\fP cursorModifierBag, \fBTextEditorCursorModifier\fP cursorModifier)"
+
+.PP
+If one wants to guarantee that the state is up to date use CursorMovePageBottomFactory instead of this method\&. This is because, the \fBITextEditorService\fP will provide you the latest instance of the given \fBTextEditorCursor\fP\&. As opposed to whatever instance of the \fBTextEditorCursorModifier\fP you have at time of enqueueing\&. 
+.br
+
+.br
+ This method is needed however, because if one wants to arbitrarily create a cursor that does not map to the view model's cursors, then one would use this method\&. Since an attempt to map the cursor key would come back as the cursor not existing\&. 
+.PP
+Implements \fBLuthetus\&.TextEditor\&.RazorLib\&.TextEditors\&.Models\&.ITextEditorViewModelApi\fP\&.
+.PP
+Definition at line \fB681\fP of file \fBTextEditorViewModelApi\&.cs\fP\&.
+.SS "void Luthetus\&.TextEditor\&.RazorLib\&.TextEditors\&.Models\&.TextEditorViewModelApi\&.CursorMovePageTop (\fBITextEditorEditContext\fP editContext, \fBTextEditorViewModelModifier\fP viewModelModifier, \fBCursorModifierBagTextEditor\fP cursorModifierBag)"
+
+.PP
+Implements \fBLuthetus\&.TextEditor\&.RazorLib\&.TextEditors\&.Models\&.ITextEditorViewModelApi\fP\&.
+.PP
+Definition at line \fB640\fP of file \fBTextEditorViewModelApi\&.cs\fP\&.
+.SS "void Luthetus\&.TextEditor\&.RazorLib\&.TextEditors\&.Models\&.TextEditorViewModelApi\&.CursorMovePageTopUnsafe (\fBITextEditorEditContext\fP editContext, \fBTextEditorViewModelModifier\fP viewModelModifier, \fBCursorModifierBagTextEditor\fP cursorModifierBag, \fBTextEditorCursorModifier\fP primaryCursor)"
+
+.PP
+If one wants to guarantee that the state is up to date use CursorMovePageTopFactory instead of this method\&. This is because, the \fBITextEditorService\fP will provide you the latest instance of the given \fBTextEditorCursor\fP\&. As opposed to whatever instance of the \fBTextEditorCursorModifier\fP you have at time of enqueueing\&. 
+.br
+
+.br
+ This method is needed however, because if one wants to arbitrarily create a cursor that does not map to the view model's cursors, then one would use this method\&. Since an attempt to map the cursor key would come back as the cursor not existing\&. 
+.PP
+Implements \fBLuthetus\&.TextEditor\&.RazorLib\&.TextEditors\&.Models\&.ITextEditorViewModelApi\fP\&.
+.PP
+Definition at line \fB652\fP of file \fBTextEditorViewModelApi\&.cs\fP\&.
+.SS "void Luthetus\&.TextEditor\&.RazorLib\&.TextEditors\&.Models\&.TextEditorViewModelApi\&.Dispose (Key< \fBTextEditorViewModel\fP > viewModelKey)"
+
+.PP
+Implements \fBLuthetus\&.TextEditor\&.RazorLib\&.TextEditors\&.Models\&.ITextEditorViewModelApi\fP\&.
+.PP
+Definition at line \fB1097\fP of file \fBTextEditorViewModelApi\&.cs\fP\&.
+.SS "async Task Luthetus\&.TextEditor\&.RazorLib\&.TextEditors\&.Models\&.TextEditorViewModelApi\&.FocusPrimaryCursorAsync (string primaryCursorContentId)"
+
+.PP
+Implements \fBLuthetus\&.TextEditor\&.RazorLib\&.TextEditors\&.Models\&.ITextEditorViewModelApi\fP\&.
+.PP
+Definition at line \fB291\fP of file \fBTextEditorViewModelApi\&.cs\fP\&.
+.SS "void Luthetus\&.TextEditor\&.RazorLib\&.TextEditors\&.Models\&.TextEditorViewModelApi\&.ForceRender (\fBITextEditorEditContext\fP editContext, \fBTextEditorViewModelModifier\fP viewModelModifier, CancellationToken cancellationToken)"
+
+.PP
+Implements \fBLuthetus\&.TextEditor\&.RazorLib\&.TextEditors\&.Models\&.ITextEditorViewModelApi\fP\&.
+.PP
+Definition at line \fB1081\fP of file \fBTextEditorViewModelApi\&.cs\fP\&.
+.SS "string? Luthetus\&.TextEditor\&.RazorLib\&.TextEditors\&.Models\&.TextEditorViewModelApi\&.GetAllText (Key< \fBTextEditorViewModel\fP > viewModelKey)"
+
+.PP
+Implements \fBLuthetus\&.TextEditor\&.RazorLib\&.TextEditors\&.Models\&.ITextEditorViewModelApi\fP\&.
+.PP
+Definition at line \fB148\fP of file \fBTextEditorViewModelApi\&.cs\fP\&.
+.SS "\fBTextEditorModel\fP? Luthetus\&.TextEditor\&.RazorLib\&.TextEditors\&.Models\&.TextEditorViewModelApi\&.GetModelOrDefault (Key< \fBTextEditorViewModel\fP > viewModelKey)"
+
+.PP
+Implements \fBLuthetus\&.TextEditor\&.RazorLib\&.TextEditors\&.Models\&.ITextEditorViewModelApi\fP\&.
+.PP
+Definition at line \fB137\fP of file \fBTextEditorViewModelApi\&.cs\fP\&.
+.SS "\fBTextEditorViewModel\fP? Luthetus\&.TextEditor\&.RazorLib\&.TextEditors\&.Models\&.TextEditorViewModelApi\&.GetOrDefault (Key< \fBTextEditorViewModel\fP > viewModelKey)"
+
+.PP
+Implements \fBLuthetus\&.TextEditor\&.RazorLib\&.TextEditors\&.Models\&.ITextEditorViewModelApi\fP\&.
+.PP
+Definition at line \fB126\fP of file \fBTextEditorViewModelApi\&.cs\fP\&.
+.SS "async Task< \fBTextEditorDimensions\fP > Luthetus\&.TextEditor\&.RazorLib\&.TextEditors\&.Models\&.TextEditorViewModelApi\&.GetTextEditorMeasurementsAsync (string elementId)"
+
+.PP
+Implements \fBLuthetus\&.TextEditor\&.RazorLib\&.TextEditors\&.Models\&.ITextEditorViewModelApi\fP\&.
+.PP
+Definition at line \fB157\fP of file \fBTextEditorViewModelApi\&.cs\fP\&.
+.SS "Dictionary< Key< \fBTextEditorViewModel\fP >, \fBTextEditorViewModel\fP > Luthetus\&.TextEditor\&.RazorLib\&.TextEditors\&.Models\&.TextEditorViewModelApi\&.GetViewModels ()"
+
+.PP
+Returns a shallow copy\&. One should store the result of invoking this method in a variable, then reference that variable\&. If one continually invokes this, there is no guarantee that the data had not changed since the previous invocation\&. 
+.PP
+Implements \fBLuthetus\&.TextEditor\&.RazorLib\&.TextEditors\&.Models\&.ITextEditorViewModelApi\fP\&.
+.PP
+Definition at line \fB132\fP of file \fBTextEditorViewModelApi\&.cs\fP\&.
+.SS "async Task< \fBCharAndLineMeasurements\fP > Luthetus\&.TextEditor\&.RazorLib\&.TextEditors\&.Models\&.TextEditorViewModelApi\&.MeasureCharacterWidthAndLineHeightAsync (string measureCharacterWidthAndLineHeightElementId, int countOfTestCharacters)"
+
+.PP
+Implements \fBLuthetus\&.TextEditor\&.RazorLib\&.TextEditors\&.Models\&.ITextEditorViewModelApi\fP\&.
+.PP
+Definition at line \fB164\fP of file \fBTextEditorViewModelApi\&.cs\fP\&.
+.SS "void Luthetus\&.TextEditor\&.RazorLib\&.TextEditors\&.Models\&.TextEditorViewModelApi\&.MoveCursor (\fBKeymapArgs\fP keymapArgs, \fBITextEditorEditContext\fP editContext, \fBTextEditorModelModifier\fP modelModifier, \fBTextEditorViewModelModifier\fP viewModelModifier, \fBCursorModifierBagTextEditor\fP cursorModifierBag)"
+
+.PP
+Implements \fBLuthetus\&.TextEditor\&.RazorLib\&.TextEditors\&.Models\&.ITextEditorViewModelApi\fP\&.
+.PP
+Definition at line \fB297\fP of file \fBTextEditorViewModelApi\&.cs\fP\&.
+.SS "void Luthetus\&.TextEditor\&.RazorLib\&.TextEditors\&.Models\&.TextEditorViewModelApi\&.MoveCursorUnsafe (\fBKeymapArgs\fP keymapArgs, \fBITextEditorEditContext\fP editContext, \fBTextEditorModelModifier\fP modelModifier, \fBTextEditorViewModelModifier\fP viewModelModifier, \fBCursorModifierBagTextEditor\fP cursorModifierBag, \fBTextEditorCursorModifier\fP primaryCursor)"
+
+.PP
+If one wants to guarantee that the state is up to date use MoveCursor instead of this method\&. This is because, the \fBITextEditorService\fP will provide you the latest instance of the given \fBTextEditorCursor\fP\&. As opposed to whatever instance of the \fBTextEditorCursorModifier\fP you have at time of enqueueing\&. 
+.br
+
+.br
+ This method is needed however, because if one wants to arbitrarily create a cursor that does not map to the view model's cursors, then one would use this method\&. Since an attempt to map the cursor key would come back as the cursor not existing\&. 
+.PP
+Implements \fBLuthetus\&.TextEditor\&.RazorLib\&.TextEditors\&.Models\&.ITextEditorViewModelApi\fP\&.
+.PP
+Definition at line \fB315\fP of file \fBTextEditorViewModelApi\&.cs\fP\&.
+.SS "void Luthetus\&.TextEditor\&.RazorLib\&.TextEditors\&.Models\&.TextEditorViewModelApi\&.MutateScrollHorizontalPosition (\fBITextEditorEditContext\fP editContext, \fBTextEditorViewModelModifier\fP viewModelModifier, double pixels)"
+
+.PP
+Implements \fBLuthetus\&.TextEditor\&.RazorLib\&.TextEditors\&.Models\&.ITextEditorViewModelApi\fP\&.
+.PP
+Definition at line \fB221\fP of file \fBTextEditorViewModelApi\&.cs\fP\&.
+.SS "void Luthetus\&.TextEditor\&.RazorLib\&.TextEditors\&.Models\&.TextEditorViewModelApi\&.MutateScrollVerticalPosition (\fBITextEditorEditContext\fP editContext, \fBTextEditorViewModelModifier\fP viewModelModifier, double pixels)"
+
+.PP
+Implements \fBLuthetus\&.TextEditor\&.RazorLib\&.TextEditors\&.Models\&.ITextEditorViewModelApi\fP\&.
+.PP
+Definition at line \fB207\fP of file \fBTextEditorViewModelApi\&.cs\fP\&.
+.SS "void Luthetus\&.TextEditor\&.RazorLib\&.TextEditors\&.Models\&.TextEditorViewModelApi\&.Register (Key< \fBTextEditorViewModel\fP > viewModelKey, \fBResourceUri\fP resourceUri, \fBCategory\fP category)"
+
+.PP
+Implements \fBLuthetus\&.TextEditor\&.RazorLib\&.TextEditors\&.Models\&.ITextEditorViewModelApi\fP\&.
+.PP
+Definition at line \fB104\fP of file \fBTextEditorViewModelApi\&.cs\fP\&.
+.SS "void Luthetus\&.TextEditor\&.RazorLib\&.TextEditors\&.Models\&.TextEditorViewModelApi\&.Register (\fBTextEditorViewModel\fP viewModel)"
+
+.PP
+Implements \fBLuthetus\&.TextEditor\&.RazorLib\&.TextEditors\&.Models\&.ITextEditorViewModelApi\fP\&.
+.PP
+Definition at line \fB119\fP of file \fBTextEditorViewModelApi\&.cs\fP\&.
+.SS "async Task Luthetus\&.TextEditor\&.RazorLib\&.TextEditors\&.Models\&.TextEditorViewModelApi\&.RemeasureAsync (\fBITextEditorEditContext\fP editContext, \fBTextEditorViewModelModifier\fP viewModelModifier, string measureCharacterWidthAndLineHeightElementId, int countOfTestCharacters, CancellationToken cancellationToken)"
+
+.PP
+Implements \fBLuthetus\&.TextEditor\&.RazorLib\&.TextEditors\&.Models\&.ITextEditorViewModelApi\fP\&.
+.PP
+Definition at line \fB1056\fP of file \fBTextEditorViewModelApi\&.cs\fP\&.
+.SS "void Luthetus\&.TextEditor\&.RazorLib\&.TextEditors\&.Models\&.TextEditorViewModelApi\&.RevealCursor (\fBITextEditorEditContext\fP editContext, \fBTextEditorModelModifier\fP modelModifier, \fBTextEditorViewModelModifier\fP viewModelModifier, \fBCursorModifierBagTextEditor\fP cursorModifierBag, \fBTextEditorCursorModifier\fP cursorModifier)"
+
+.PP
+Implements \fBLuthetus\&.TextEditor\&.RazorLib\&.TextEditors\&.Models\&.ITextEditorViewModelApi\fP\&.
+.PP
+Definition at line \fB698\fP of file \fBTextEditorViewModelApi\&.cs\fP\&.
+.SS "void Luthetus\&.TextEditor\&.RazorLib\&.TextEditors\&.Models\&.TextEditorViewModelApi\&.ScrollIntoView (\fBITextEditorEditContext\fP editContext, \fBTextEditorModelModifier\fP modelModifier, \fBTextEditorViewModelModifier\fP viewModelModifier, \fBTextEditorTextSpan\fP textSpan)"
+
+.PP
+Implements \fBLuthetus\&.TextEditor\&.RazorLib\&.TextEditors\&.Models\&.ITextEditorViewModelApi\fP\&.
+.PP
+Definition at line \fB235\fP of file \fBTextEditorViewModelApi\&.cs\fP\&.
+.SS "void Luthetus\&.TextEditor\&.RazorLib\&.TextEditors\&.Models\&.TextEditorViewModelApi\&.SetCursorShouldBlink (bool cursorShouldBlink)"
+
+.PP
+Implements \fBLuthetus\&.TextEditor\&.RazorLib\&.TextEditors\&.Models\&.ITextEditorViewModelApi\fP\&.
+.PP
+Definition at line \fB55\fP of file \fBTextEditorViewModelApi\&.cs\fP\&.
+.SS "void Luthetus\&.TextEditor\&.RazorLib\&.TextEditors\&.Models\&.TextEditorViewModelApi\&.SetScrollPosition (\fBITextEditorEditContext\fP editContext, \fBTextEditorViewModelModifier\fP viewModelModifier, double? scrollLeftInPixels, double? scrollTopInPixels)"
+
+.PP
+If a parameter is null the JavaScript will not modify that value\&. 
+.PP
+Implements \fBLuthetus\&.TextEditor\&.RazorLib\&.TextEditors\&.Models\&.ITextEditorViewModelApi\fP\&.
+.PP
+Definition at line \fB180\fP of file \fBTextEditorViewModelApi\&.cs\fP\&.
+.SH "Property Documentation"
+.PP 
+.SS "bool Luthetus\&.TextEditor\&.RazorLib\&.TextEditors\&.Models\&.TextEditorViewModelApi\&.CursorShouldBlink = true\fR [get]\fP"
+
+.PP
+Implements \fBLuthetus\&.TextEditor\&.RazorLib\&.TextEditors\&.Models\&.ITextEditorViewModelApi\fP\&.
+.PP
+Definition at line \fB52\fP of file \fBTextEditorViewModelApi\&.cs\fP\&.
+.SH "Event Documentation"
+.PP 
+.SS "Action? Luthetus\&.TextEditor\&.RazorLib\&.TextEditors\&.Models\&.TextEditorViewModelApi\&.CursorShouldBlinkChanged"
+
+.PP
+Definition at line \fB53\fP of file \fBTextEditorViewModelApi\&.cs\fP\&.
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for Luthetus\&.Ide from the source code\&.

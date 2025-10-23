@@ -1,0 +1,4 @@
+var class_luthetus_1_1_compiler_services_1_1_python_1_1_facts_1_1_python_language_facts_1_1_whitespace =
+[
+    [ "CARRIAGE_RETURN_LINE_FEED_SUBSTRING", "class_luthetus_1_1_compiler_services_1_1_python_1_1_facts_1_1_python_language_facts_1_1_whitespace.html#ababef766b5f8c0c7899342aa24c3cd1e", null ]
+];

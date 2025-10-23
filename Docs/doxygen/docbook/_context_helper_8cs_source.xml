@@ -1,0 +1,44 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="__context_helper_8cs_source" xml:lang="en-US">
+<title>ContextHelper.cs</title>
+<indexterm><primary>Source/Lib/Common/Contexts/Models/ContextHelper.cs</primary></indexterm>
+Go to the documentation of this file.<programlisting linenumbering="unnumbered"><anchor xml:id="__context_helper_8cs_source_1l00001"/>00001 <emphasis role="keyword">using&#32;</emphasis>Fluxor;
+<anchor xml:id="__context_helper_8cs_source_1l00002"/>00002 <emphasis role="keyword">using&#32;</emphasis><link linkend="_namespace_luthetus_1_1_common_1_1_razor_lib_1_1_commands_1_1_models">Luthetus.Common.RazorLib.Commands.Models</link>;
+<anchor xml:id="__context_helper_8cs_source_1l00003"/>00003 <emphasis role="keyword">using&#32;</emphasis><link linkend="_namespace_luthetus_1_1_common_1_1_razor_lib_1_1_panels_1_1_states">Luthetus.Common.RazorLib.Panels.States</link>;
+<anchor xml:id="__context_helper_8cs_source_1l00004"/>00004 <emphasis role="keyword">using&#32;</emphasis><link linkend="_namespace_luthetus_1_1_common_1_1_razor_lib_1_1_js_runtimes_1_1_models">Luthetus.Common.RazorLib.JsRuntimes.Models</link>;
+<anchor xml:id="__context_helper_8cs_source_1l00005"/>00005 
+<anchor xml:id="__context_helper_8cs_source_1l00006"/>00006 <emphasis role="keyword">namespace&#32;</emphasis><link linkend="_namespace_luthetus_1_1_common_1_1_razor_lib_1_1_contexts_1_1_models">Luthetus.Common.RazorLib.Contexts.Models</link>;
+<anchor xml:id="__context_helper_8cs_source_1l00007"/>00007 
+<anchor xml:id="__context_helper_8cs_source_1l00008"/>00008 <emphasis role="keyword">public</emphasis>&#32;<emphasis role="keyword">static</emphasis>&#32;<emphasis role="keyword">class&#32;</emphasis>ContextHelper
+<anchor xml:id="__context_helper_8cs_source_1l00009"/>00009 {
+<anchor xml:id="__context_helper_8cs_source_1l00013"/>00013 &#32;&#32;&#32;&#32;<emphasis role="keyword">public</emphasis>&#32;<emphasis role="keyword">static</emphasis>&#32;CommandNoType&#32;ConstructFocusContextElementCommand(
+<anchor xml:id="__context_helper_8cs_source_1l00014"/>00014 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;ContextRecord&#32;contextRecord,
+<anchor xml:id="__context_helper_8cs_source_1l00015"/>00015 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordtype">string</emphasis>&#32;displayName,
+<anchor xml:id="__context_helper_8cs_source_1l00016"/>00016 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordtype">string</emphasis>&#32;internalIdentifier,
+<anchor xml:id="__context_helper_8cs_source_1l00017"/>00017 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;LuthetusCommonJavaScriptInteropApi&#32;jsRuntimeCommonApi,
+<anchor xml:id="__context_helper_8cs_source_1l00018"/>00018 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;IDispatcher&#32;dispatcher)
+<anchor xml:id="__context_helper_8cs_source_1l00019"/>00019 &#32;&#32;&#32;&#32;{
+<anchor xml:id="__context_helper_8cs_source_1l00020"/>00020 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;<emphasis role="keyword">new</emphasis>&#32;CommonCommand(
+<anchor xml:id="__context_helper_8cs_source_1l00021"/>00021 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;displayName,&#32;internalIdentifier,&#32;<emphasis role="keyword">false</emphasis>,
+<anchor xml:id="__context_helper_8cs_source_1l00022"/>00022 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;async&#32;commandArgs&#32;=&gt;
+<anchor xml:id="__context_helper_8cs_source_1l00023"/>00023 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;{
+<anchor xml:id="__context_helper_8cs_source_1l00024"/>00024 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;var&#32;success&#32;=&#32;await&#32;TrySetFocus().ConfigureAwait(<emphasis role="keyword">false</emphasis>);
+<anchor xml:id="__context_helper_8cs_source_1l00025"/>00025 
+<anchor xml:id="__context_helper_8cs_source_1l00026"/>00026 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">if</emphasis>&#32;(!success)
+<anchor xml:id="__context_helper_8cs_source_1l00027"/>00027 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;{
+<anchor xml:id="__context_helper_8cs_source_1l00028"/>00028 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1a50f035982e1c206f234851523db5cbc8">dispatcher</link>.Dispatch(<emphasis role="keyword">new</emphasis>&#32;<link linkend="_namespace_luthetus_1_1_common_1_1_razor_lib_1_1_panels_1_1_states_1a3e69a06f395780138ff06e862f45ee3c">PanelState</link>.SetPanelTabAsActiveByContextRecordKeyAction(
+<anchor xml:id="__context_helper_8cs_source_1l00029"/>00029 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;contextRecord.ContextKey));
+<anchor xml:id="__context_helper_8cs_source_1l00030"/>00030 
+<anchor xml:id="__context_helper_8cs_source_1l00031"/>00031 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;_&#32;=&#32;await&#32;TrySetFocus().ConfigureAwait(<emphasis role="keyword">false</emphasis>);
+<anchor xml:id="__context_helper_8cs_source_1l00032"/>00032 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;}
+<anchor xml:id="__context_helper_8cs_source_1l00033"/>00033 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;});
+<anchor xml:id="__context_helper_8cs_source_1l00034"/>00034 
+<anchor xml:id="__context_helper_8cs_source_1l00035"/>00035 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;async&#32;Task&lt;bool&gt;&#32;TrySetFocus()
+<anchor xml:id="__context_helper_8cs_source_1l00036"/>00036 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;{
+<anchor xml:id="__context_helper_8cs_source_1l00037"/>00037 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;await&#32;jsRuntimeCommonApi
+<anchor xml:id="__context_helper_8cs_source_1l00038"/>00038 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;.<link linkend="_class_luthetus_1_1_common_1_1_razor_lib_1_1_js_runtimes_1_1_models_1_1_luthetus_common_java_script_interop_api_1aff90f224dddb8cd855abf4d4cdc04ce2">TryFocusHtmlElementById</link>(contextRecord.ContextElementId)
+<anchor xml:id="__context_helper_8cs_source_1l00039"/>00039 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;.ConfigureAwait(<emphasis role="keyword">false</emphasis>);
+<anchor xml:id="__context_helper_8cs_source_1l00040"/>00040 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;}
+<anchor xml:id="__context_helper_8cs_source_1l00041"/>00041 &#32;&#32;&#32;&#32;}
+<anchor xml:id="__context_helper_8cs_source_1l00042"/>00042 }
+</programlisting></section>

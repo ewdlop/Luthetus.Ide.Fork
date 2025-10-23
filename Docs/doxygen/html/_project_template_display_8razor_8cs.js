@@ -1,0 +1,4 @@
+var _project_template_display_8razor_8cs =
+[
+    [ "Luthetus.Extensions.DotNet.CSharpProjects.Displays.ProjectTemplateDisplay", "class_luthetus_1_1_extensions_1_1_dot_net_1_1_c_sharp_projects_1_1_displays_1_1_project_template_display.html", "class_luthetus_1_1_extensions_1_1_dot_net_1_1_c_sharp_projects_1_1_displays_1_1_project_template_display" ]
+];

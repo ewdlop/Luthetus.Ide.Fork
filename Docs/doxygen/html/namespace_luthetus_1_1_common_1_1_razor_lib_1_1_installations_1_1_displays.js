@@ -1,0 +1,4 @@
+var namespace_luthetus_1_1_common_1_1_razor_lib_1_1_installations_1_1_displays =
+[
+    [ "LuthetusCommonInitializer", "class_luthetus_1_1_common_1_1_razor_lib_1_1_installations_1_1_displays_1_1_luthetus_common_initializer.html", "class_luthetus_1_1_common_1_1_razor_lib_1_1_installations_1_1_displays_1_1_luthetus_common_initializer" ]
+];

@@ -1,0 +1,243 @@
+.TH "Luthetus.Common.RazorLib.FileSystems.Models.IEnvironmentProvider.RelativePath" 3 "Version 1.0.0" "Luthetus.Ide" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+Luthetus.Common.RazorLib.FileSystems.Models.IEnvironmentProvider.RelativePath
+.SH SYNOPSIS
+.br
+.PP
+.PP
+Inherits \fBLuthetus\&.Common\&.RazorLib\&.FileSystems\&.Models\&.IRelativePath\fP\&.
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBRelativePath\fP (string relativePathString, bool isDirectory, \fBIEnvironmentProvider\fP environmentProvider)"
+.br
+.in -1c
+.SS "Properties"
+
+.in +1c
+.ti -1c
+.RI "\fBPathType\fP \fBPathType\fP = \fBPathType\&.RelativePath\fP\fR [get]\fP"
+.br
+.ti -1c
+.RI "bool \fBIsDirectory\fP\fR [get, protected set]\fP"
+.br
+.ti -1c
+.RI "\fBIEnvironmentProvider\fP \fBEnvironmentProvider\fP\fR [get]\fP"
+.br
+.ti -1c
+.RI "List< \fBAncestorDirectory\fP > \fBAncestorDirectoryList\fP = new()\fR [get]\fP"
+.br
+.ti -1c
+.RI "string \fBNameNoExtension\fP\fR [get, protected set]\fP"
+.br
+.ti -1c
+.RI "string \fBExtensionNoPeriod\fP\fR [get, protected set]\fP"
+.br
+.ti -1c
+.RI "int \fBUpDirDirectiveCount\fP\fR [get]\fP"
+.br
+.RI "\fBUpDirDirectiveCount\fP refers to the "\&.\&." in "\&.\&./Todos/myFile\&.cs"\&. In this example the count is 1\&. 
+.br
+
+.br
+ Given "\&./Folder/file\&.txt"\&. The count is 0\&. 
+.br
+
+.br
+ Given "\&.\&./\&.\&./\&.\&./Homework/math\&.txt"\&. The count is 3\&. "
+.ti -1c
+.RI "\fBAncestorDirectory\fP? \fBParentDirectory\fP\fR [get]\fP"
+.br
+.ti -1c
+.RI "string? \fBExactInput\fP\fR [get]\fP"
+.br
+.RI "Given: "/Repos\\\\BlazorCrudApp\\\\"<br/>
+Then: <see cref="ExactInput"/> is "/Repos\\BlazorCrudApp\\"<br/><br/>Given: "\\Repos/BlazorCrudApp/"<br/>Then: <see cref="ExactInput"/> is "\\Repos/BlazorCrudApp/"<br/><br/>Overall reasoning: <see cref="ExactInput"/> is to return the user input exactly as they gave it originally\&. "
+.ti -1c
+.RI "string \fBValue\fP\fR [get]\fP"
+.br
+.RI "\fBValue\fP is the path as a string, but with all directory separating characters having been standardized to be \fBIEnvironmentProvider\&.DirectorySeparatorChar\fP\&. "
+.ti -1c
+.RI "string \fBNameWithExtension\fP\fR [get]\fP"
+.br
+.RI "Given: { "somePath\&.txt", NOT_DIRECTORY }
+.br
+ Then: \fBNameWithExtension\fP is "somePath\&.txt" 
+.br
+
+.br
+ Given: { "somePath\&.txt", IS_DIRECTORY }
+.br
+ Then: \fBNameWithExtension\fP is "somePath\&.txt/" 
+.br
+
+.br
+ Given: { "somePath", NOT_DIRECTORY }
+.br
+ Then: \fBNameWithExtension\fP is "somePath" 
+.br
+
+.br
+ Given: { "somePath", IS_DIRECTORY }
+.br
+ Then: \fBNameWithExtension\fP is "somePath/" 
+.br
+
+.br
+ Given: { "somePath/", NOT_DIRECTORY }
+.br
+ Then: throw new Exception('File names cannot contain directory separators'); 
+.br
+
+.br
+ Given: { "somePath/", IS_DIRECTORY }
+.br
+ Then: \fBNameWithExtension\fP is "somePath/"\&. "
+.in -1c
+.SS "Additional Inherited Members"
+
+
+Static Public Member Functions inherited from \fBLuthetus\&.Common\&.RazorLib\&.FileSystems\&.Models\&.IRelativePath\fP
+.in +1c
+.ti -1c
+.RI "static \fBIRelativePath\fP \fBFactory\fP (string path, bool isDirectory, \fBIEnvironmentProvider\fP environmentProvider)"
+.br
+.RI "One might prefer \fBIEnvironmentProvider\&.RelativePathFactory(string, bool)\fP instead of this method\&.
+.br
+
+.br
+\&. "
+.in -1c
+.SH "Detailed Description"
+.PP 
+Definition at line \fB7\fP of file \fBIEnvironmentProvider\&.RelativePath\&.cs\fP\&.
+.SH "Constructor & Destructor Documentation"
+.PP 
+.SS "Luthetus\&.Common\&.RazorLib\&.FileSystems\&.Models\&.IEnvironmentProvider\&.RelativePath\&.RelativePath (string relativePathString, bool isDirectory, \fBIEnvironmentProvider\fP environmentProvider)"
+
+.PP
+Definition at line \fB16\fP of file \fBIEnvironmentProvider\&.RelativePath\&.cs\fP\&.
+.SH "Property Documentation"
+.PP 
+.SS "List<\fBAncestorDirectory\fP> Luthetus\&.Common\&.RazorLib\&.FileSystems\&.Models\&.IEnvironmentProvider\&.RelativePath\&.AncestorDirectoryList = new()\fR [get]\fP"
+
+.PP
+Implements \fBLuthetus\&.Common\&.RazorLib\&.FileSystems\&.Models\&.IPath\fP\&.
+.PP
+Definition at line \fB124\fP of file \fBIEnvironmentProvider\&.RelativePath\&.cs\fP\&.
+.SS "\fBIEnvironmentProvider\fP Luthetus\&.Common\&.RazorLib\&.FileSystems\&.Models\&.IEnvironmentProvider\&.RelativePath\&.EnvironmentProvider\fR [get]\fP"
+
+.PP
+Implements \fBLuthetus\&.Common\&.RazorLib\&.FileSystems\&.Models\&.IPath\fP\&.
+.PP
+Definition at line \fB123\fP of file \fBIEnvironmentProvider\&.RelativePath\&.cs\fP\&.
+.SS "string? Luthetus\&.Common\&.RazorLib\&.FileSystems\&.Models\&.IEnvironmentProvider\&.RelativePath\&.ExactInput\fR [get]\fP"
+
+.PP
+Given: "/Repos\\\\BlazorCrudApp\\\\"<br/>
+Then: <see cref="ExactInput"/> is "/Repos\\BlazorCrudApp\\"<br/><br/>Given: "\\Repos/BlazorCrudApp/"<br/>Then: <see cref="ExactInput"/> is "\\Repos/BlazorCrudApp/"<br/><br/>Overall reasoning: <see cref="ExactInput"/> is to return the user input exactly as they gave it originally\&. 
+.PP
+Implements \fBLuthetus\&.Common\&.RazorLib\&.FileSystems\&.Models\&.IPath\fP\&.
+.PP
+Definition at line \fB129\fP of file \fBIEnvironmentProvider\&.RelativePath\&.cs\fP\&.
+.SS "string Luthetus\&.Common\&.RazorLib\&.FileSystems\&.Models\&.IEnvironmentProvider\&.RelativePath\&.ExtensionNoPeriod\fR [get]\fP, \fR [protected set]\fP"
+
+.PP
+Implements \fBLuthetus\&.Common\&.RazorLib\&.FileSystems\&.Models\&.IPath\fP\&.
+.PP
+Definition at line \fB126\fP of file \fBIEnvironmentProvider\&.RelativePath\&.cs\fP\&.
+.SS "bool Luthetus\&.Common\&.RazorLib\&.FileSystems\&.Models\&.IEnvironmentProvider\&.RelativePath\&.IsDirectory\fR [get]\fP, \fR [protected set]\fP"
+
+.PP
+Implements \fBLuthetus\&.Common\&.RazorLib\&.FileSystems\&.Models\&.IPath\fP\&.
+.PP
+Definition at line \fB122\fP of file \fBIEnvironmentProvider\&.RelativePath\&.cs\fP\&.
+.SS "string Luthetus\&.Common\&.RazorLib\&.FileSystems\&.Models\&.IEnvironmentProvider\&.RelativePath\&.NameNoExtension\fR [get]\fP, \fR [protected set]\fP"
+
+.PP
+Implements \fBLuthetus\&.Common\&.RazorLib\&.FileSystems\&.Models\&.IPath\fP\&.
+.PP
+Definition at line \fB125\fP of file \fBIEnvironmentProvider\&.RelativePath\&.cs\fP\&.
+.SS "string Luthetus\&.Common\&.RazorLib\&.FileSystems\&.Models\&.IEnvironmentProvider\&.RelativePath\&.NameWithExtension\fR [get]\fP"
+
+.PP
+Given: { "somePath\&.txt", NOT_DIRECTORY }
+.br
+ Then: \fBNameWithExtension\fP is "somePath\&.txt" 
+.br
+
+.br
+ Given: { "somePath\&.txt", IS_DIRECTORY }
+.br
+ Then: \fBNameWithExtension\fP is "somePath\&.txt/" 
+.br
+
+.br
+ Given: { "somePath", NOT_DIRECTORY }
+.br
+ Then: \fBNameWithExtension\fP is "somePath" 
+.br
+
+.br
+ Given: { "somePath", IS_DIRECTORY }
+.br
+ Then: \fBNameWithExtension\fP is "somePath/" 
+.br
+
+.br
+ Given: { "somePath/", NOT_DIRECTORY }
+.br
+ Then: throw new Exception('File names cannot contain directory separators'); 
+.br
+
+.br
+ Given: { "somePath/", IS_DIRECTORY }
+.br
+ Then: \fBNameWithExtension\fP is "somePath/"\&. 
+.PP
+Implements \fBLuthetus\&.Common\&.RazorLib\&.FileSystems\&.Models\&.IPath\fP\&.
+.PP
+Definition at line \fB131\fP of file \fBIEnvironmentProvider\&.RelativePath\&.cs\fP\&.
+.SS "\fBAncestorDirectory\fP? Luthetus\&.Common\&.RazorLib\&.FileSystems\&.Models\&.IEnvironmentProvider\&.RelativePath\&.ParentDirectory\fR [get]\fP"
+
+.PP
+Implements \fBLuthetus\&.Common\&.RazorLib\&.FileSystems\&.Models\&.IPath\fP\&.
+.PP
+Definition at line \fB128\fP of file \fBIEnvironmentProvider\&.RelativePath\&.cs\fP\&.
+.SS "\fBPathType\fP Luthetus\&.Common\&.RazorLib\&.FileSystems\&.Models\&.IEnvironmentProvider\&.RelativePath\&.PathType = \fBPathType\&.RelativePath\fP\fR [get]\fP"
+
+.PP
+Implements \fBLuthetus\&.Common\&.RazorLib\&.FileSystems\&.Models\&.IPath\fP\&.
+.PP
+Definition at line \fB121\fP of file \fBIEnvironmentProvider\&.RelativePath\&.cs\fP\&.
+.SS "int Luthetus\&.Common\&.RazorLib\&.FileSystems\&.Models\&.IEnvironmentProvider\&.RelativePath\&.UpDirDirectiveCount\fR [get]\fP"
+
+.PP
+\fBUpDirDirectiveCount\fP refers to the "\&.\&." in "\&.\&./Todos/myFile\&.cs"\&. In this example the count is 1\&. 
+.br
+
+.br
+ Given "\&./Folder/file\&.txt"\&. The count is 0\&. 
+.br
+
+.br
+ Given "\&.\&./\&.\&./\&.\&./Homework/math\&.txt"\&. The count is 3\&. 
+.PP
+Implements \fBLuthetus\&.Common\&.RazorLib\&.FileSystems\&.Models\&.IRelativePath\fP\&.
+.PP
+Definition at line \fB127\fP of file \fBIEnvironmentProvider\&.RelativePath\&.cs\fP\&.
+.SS "string Luthetus\&.Common\&.RazorLib\&.FileSystems\&.Models\&.IEnvironmentProvider\&.RelativePath\&.Value\fR [get]\fP"
+
+.PP
+\fBValue\fP is the path as a string, but with all directory separating characters having been standardized to be \fBIEnvironmentProvider\&.DirectorySeparatorChar\fP\&. 
+.PP
+Implements \fBLuthetus\&.Common\&.RazorLib\&.FileSystems\&.Models\&.IPath\fP\&.
+.PP
+Definition at line \fB130\fP of file \fBIEnvironmentProvider\&.RelativePath\&.cs\fP\&.
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for Luthetus\&.Ide from the source code\&.

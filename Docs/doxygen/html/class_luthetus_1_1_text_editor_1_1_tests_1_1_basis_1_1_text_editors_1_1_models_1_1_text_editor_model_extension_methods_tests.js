@@ -1,0 +1,27 @@
+var class_luthetus_1_1_text_editor_1_1_tests_1_1_basis_1_1_text_editors_1_1_models_1_1_text_editor_model_extension_methods_tests =
+[
+    [ "CanRedoEdit", "class_luthetus_1_1_text_editor_1_1_tests_1_1_basis_1_1_text_editors_1_1_models_1_1_text_editor_model_extension_methods_tests.html#a4e03e623d9bee6cfc06f06b92b539dc8", null ],
+    [ "CanUndoEdit", "class_luthetus_1_1_text_editor_1_1_tests_1_1_basis_1_1_text_editors_1_1_models_1_1_text_editor_model_extension_methods_tests.html#a141c3ebbd5197288bbade388faa113f0", null ],
+    [ "FindMatches", "class_luthetus_1_1_text_editor_1_1_tests_1_1_basis_1_1_text_editors_1_1_models_1_1_text_editor_model_extension_methods_tests.html#a102a8b78c62b53e0fe0fb8bb304a0ae6", null ],
+    [ "GetAllText", "class_luthetus_1_1_text_editor_1_1_tests_1_1_basis_1_1_text_editors_1_1_models_1_1_text_editor_model_extension_methods_tests.html#ac9288377fac175cdfda6a948df157aca", null ],
+    [ "GetAllText_Equals_GetLines_MadeIntoA_String", "class_luthetus_1_1_text_editor_1_1_tests_1_1_basis_1_1_text_editors_1_1_models_1_1_text_editor_model_extension_methods_tests.html#a7418709fef662010a423b3d47d7dc40e", null ],
+    [ "GetCharacter", "class_luthetus_1_1_text_editor_1_1_tests_1_1_basis_1_1_text_editors_1_1_models_1_1_text_editor_model_extension_methods_tests.html#afccf02d2dd753563f37d72fb06ae3dd3", null ],
+    [ "GetCharacterKind", "class_luthetus_1_1_text_editor_1_1_tests_1_1_basis_1_1_text_editors_1_1_models_1_1_text_editor_model_extension_methods_tests.html#a6f3fe7453b2941ec354bc7e15c48b9fb", null ],
+    [ "GetColumnIndexOfCharacterWithDifferingKind", "class_luthetus_1_1_text_editor_1_1_tests_1_1_basis_1_1_text_editors_1_1_models_1_1_text_editor_model_extension_methods_tests.html#a9911c51a7ccb779ce5ce5eb6a45cd013", null ],
+    [ "GetLengthOfLine", "class_luthetus_1_1_text_editor_1_1_tests_1_1_basis_1_1_text_editors_1_1_models_1_1_text_editor_model_extension_methods_tests.html#a0928b247b20b1b74765624678495aef1", null ],
+    [ "GetLineAndColumnIndicesFromPositionIndex", "class_luthetus_1_1_text_editor_1_1_tests_1_1_basis_1_1_text_editors_1_1_models_1_1_text_editor_model_extension_methods_tests.html#a968b5e0d144f350391950ac6a3c6aa80", null ],
+    [ "GetLineInformation", "class_luthetus_1_1_text_editor_1_1_tests_1_1_basis_1_1_text_editors_1_1_models_1_1_text_editor_model_extension_methods_tests.html#aaa8828c3a9c2eb66a4dd27f7de0055ba", null ],
+    [ "GetLineInformationFromPositionIndex", "class_luthetus_1_1_text_editor_1_1_tests_1_1_basis_1_1_text_editors_1_1_models_1_1_text_editor_model_extension_methods_tests.html#aa3b2a69fb1e67a19b7d139ba7224edac", null ],
+    [ "GetLineRichCharacterRange", "class_luthetus_1_1_text_editor_1_1_tests_1_1_basis_1_1_text_editors_1_1_models_1_1_text_editor_model_extension_methods_tests.html#ad533989b3307d64b601cd27f7407c25c", null ],
+    [ "GetLineText", "class_luthetus_1_1_text_editor_1_1_tests_1_1_basis_1_1_text_editors_1_1_models_1_1_text_editor_model_extension_methods_tests.html#abc408ebd3189e8ab2e70f12d771e0643", null ],
+    [ "GetLineTextRange", "class_luthetus_1_1_text_editor_1_1_tests_1_1_basis_1_1_text_editors_1_1_models_1_1_text_editor_model_extension_methods_tests.html#a6691cf1401f8a2df5c0dcd5aa97d07aa", null ],
+    [ "GetPositionIndex_LineIndex_ColumnIndex", "class_luthetus_1_1_text_editor_1_1_tests_1_1_basis_1_1_text_editors_1_1_models_1_1_text_editor_model_extension_methods_tests.html#af650af1b916d7908068159dd366a5c3c", null ],
+    [ "GetPositionIndex_TextEditorCursor", "class_luthetus_1_1_text_editor_1_1_tests_1_1_basis_1_1_text_editors_1_1_models_1_1_text_editor_model_extension_methods_tests.html#afe962a733724e85866f84e143385e949", null ],
+    [ "GetPositionIndex_TextEditorCursorModifier", "class_luthetus_1_1_text_editor_1_1_tests_1_1_basis_1_1_text_editors_1_1_models_1_1_text_editor_model_extension_methods_tests.html#a1597dbf19c7f80c94bc07493af6b572e", null ],
+    [ "GetString", "class_luthetus_1_1_text_editor_1_1_tests_1_1_basis_1_1_text_editors_1_1_models_1_1_text_editor_model_extension_methods_tests.html#aa0e06ebdbed604790bfcfa0b8d1c339a", null ],
+    [ "GetTabCountOnSameLineBeforeCursor", "class_luthetus_1_1_text_editor_1_1_tests_1_1_basis_1_1_text_editors_1_1_models_1_1_text_editor_model_extension_methods_tests.html#a811efc156b08b20bfcf0526c0f9e8173", null ],
+    [ "GetTextOffsettingCursor", "class_luthetus_1_1_text_editor_1_1_tests_1_1_basis_1_1_text_editors_1_1_models_1_1_text_editor_model_extension_methods_tests.html#a8e3b91b9199f1f0dc551568ef14d7973", null ],
+    [ "GetWordTextSpan", "class_luthetus_1_1_text_editor_1_1_tests_1_1_basis_1_1_text_editors_1_1_models_1_1_text_editor_model_extension_methods_tests.html#a5d67daa9577a775a7ff7bda8f82bb9cd", null ],
+    [ "ReadNextWordOrDefault", "class_luthetus_1_1_text_editor_1_1_tests_1_1_basis_1_1_text_editors_1_1_models_1_1_text_editor_model_extension_methods_tests.html#af33b4d42b4a32568d2e3a3b17a6127fb", null ],
+    [ "ReadPreviousWordOrDefault", "class_luthetus_1_1_text_editor_1_1_tests_1_1_basis_1_1_text_editors_1_1_models_1_1_text_editor_model_extension_methods_tests.html#af087413afe626a2453bb338a5e6f7181", null ]
+];

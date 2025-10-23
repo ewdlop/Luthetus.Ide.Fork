@@ -1,0 +1,111 @@
+.TH "Luthetus.TextEditor.Tests.Adhoc.NewKeybinds" 3 "Version 1.0.0" "Luthetus.Ide" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+Luthetus.TextEditor.Tests.Adhoc.NewKeybinds
+.SH SYNOPSIS
+.br
+.PP
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "void \fBAltPlusDown_THEN_MoveLineDown\fP ()"
+.br
+.RI "[] Alt + Down => move line down [] see the other version of this "
+.ti -1c
+.RI "void \fBAltPlusUp_THEN_MoveLineUp\fP ()"
+.br
+.RI "[] Alt + Up => move line up [] 2 ways about this? [] Way One [] Determine the start position index of the current line\&. [] Cut the line above [] Paste the contents at the determined start position index\&. [] Way Two [] Determine the start position index of the previous line\&. [] Cut the current line [] Paste the contents at the determined start position index "
+.ti -1c
+.RI "void \fBCtrlPlusAltPlusArrowLeftOrArrowRight_THEN_MoveCamelCase\fP ()"
+.br
+.RI "[] Ctrl + Alt + (ArrowLeft | ArrowRight) => move camel case [] while (LetterOrDigit) if IsCapitalized break; "
+.ti -1c
+.RI "void \fBHome_THEN_MoreFunctionality\fP ()"
+.br
+.RI "[] Home keystroke [] Should "stop early" at the end of the indentation\&. [] Go to column 0 [] While (indentation) ++column [] Then repressing the keystroke at the end of the indentation goes to the actual start of the line [] Track current column [] Do the "stop early" logic [] Compare if previous column and new current column are the same [] if the same then go to column 0 [] otherwise stay where you are\&. [] If at start of line then home takes to end of indentation\&. [] Do the "stop early" logic [] If within starting indentation then go to the end of the starting indentation\&. [] Do the "stop early" logic "
+.ti -1c
+.RI "void \fBCtrlPlusEnter_THEN_SupportMatchIndentation\fP ()"
+.br
+.RI "[] Match indentation on newline [] insert line above command [] The code to get the indentation is already done in the 'HandleOnKeyDown(\&.\&.\&.)' method, note: I totally spelled the method name wrong\&. "
+.ti -1c
+.RI "void \fBShiftPlusEnter_THEN_SupportMatchIndentation\fP ()"
+.br
+.RI "[] Match indentation on newline [] insert line below command [] The code to get the indentation is already done in the 'HandleOnKeyDown(\&.\&.\&.)' method, note: I totally spelled the method name wrong\&. "
+.ti -1c
+.RI "void \fBNoSelectionPlusShiftPlusTabPlusCursorAtIndentation_THEN_IndentLess\fP ()"
+.br
+.RI "[] No selection + { Shift + Tab } + Cursor positioned at or in the starting indentation should => IndentLess [] Go to column 0 [] While (indentation) ++column [] if pass by the cursor, then can break early with success [] if sees !indentation then break with failure "
+.ti -1c
+.RI "void \fBF7_THEN_RelatedFilesQuickpick\fP ()"
+.br
+.RI "[] F7 => Related Files quickpick [] Read directory which contains the current file [] If there are any direct descendent files of that directory then check the name against a predicate if it "matches" with the active file and add to list if it does [] Show the list to the user [] Open the file they pick [] Or let them cancel with 'Escape' key "
+.ti -1c
+.RI "void \fBCtrlPlusTab_THEN_FileOrContextOrToolQuickpick\fP ()"
+.br
+.RI "[] Ctrl + Tab => Quick Pick file or context/tool [] I can probably make this task first draft far simpler by not closing the menu on-ctrl-key-up [] Visual Studio has where you hold ctrl, but it sounds like a pain to do and it makes me want to procrastinate\&. [] If I just have Ctrl + Tab open the menu then either enter to select and submit form or escape to close menu then it would be a lot easier\&. [] I say this because I imagine I need something stateful in order to have on-ctrl-key-up logic work\&. I have to maintain the state of this and subscribe to the event in a sort of way\&. "
+.in -1c
+.SH "Detailed Description"
+.PP 
+Definition at line \fB9\fP of file \fBNewKeybinds\&.cs\fP\&.
+.SH "Member Function Documentation"
+.PP 
+.SS "void Luthetus\&.TextEditor\&.Tests\&.Adhoc\&.NewKeybinds\&.AltPlusDown_THEN_MoveLineDown ()"
+
+.PP
+[] Alt + Down => move line down [] see the other version of this 
+.PP
+Definition at line \fB16\fP of file \fBNewKeybinds\&.cs\fP\&.
+.SS "void Luthetus\&.TextEditor\&.Tests\&.Adhoc\&.NewKeybinds\&.AltPlusUp_THEN_MoveLineUp ()"
+
+.PP
+[] Alt + Up => move line up [] 2 ways about this? [] Way One [] Determine the start position index of the current line\&. [] Cut the line above [] Paste the contents at the determined start position index\&. [] Way Two [] Determine the start position index of the previous line\&. [] Cut the current line [] Paste the contents at the determined start position index 
+.PP
+Definition at line \fB58\fP of file \fBNewKeybinds\&.cs\fP\&.
+.SS "void Luthetus\&.TextEditor\&.Tests\&.Adhoc\&.NewKeybinds\&.CtrlPlusAltPlusArrowLeftOrArrowRight_THEN_MoveCamelCase ()"
+
+.PP
+[] Ctrl + Alt + (ArrowLeft | ArrowRight) => move camel case [] while (LetterOrDigit) if IsCapitalized break; 
+.PP
+Definition at line \fB146\fP of file \fBNewKeybinds\&.cs\fP\&.
+.SS "void Luthetus\&.TextEditor\&.Tests\&.Adhoc\&.NewKeybinds\&.CtrlPlusEnter_THEN_SupportMatchIndentation ()"
+
+.PP
+[] Match indentation on newline [] insert line above command [] The code to get the indentation is already done in the 'HandleOnKeyDown(\&.\&.\&.)' method, note: I totally spelled the method name wrong\&. 
+.PP
+Definition at line \fB322\fP of file \fBNewKeybinds\&.cs\fP\&.
+.SS "void Luthetus\&.TextEditor\&.Tests\&.Adhoc\&.NewKeybinds\&.CtrlPlusTab_THEN_FileOrContextOrToolQuickpick ()"
+
+.PP
+[] Ctrl + Tab => Quick Pick file or context/tool [] I can probably make this task first draft far simpler by not closing the menu on-ctrl-key-up [] Visual Studio has where you hold ctrl, but it sounds like a pain to do and it makes me want to procrastinate\&. [] If I just have Ctrl + Tab open the menu then either enter to select and submit form or escape to close menu then it would be a lot easier\&. [] I say this because I imagine I need something stateful in order to have on-ctrl-key-up logic work\&. I have to maintain the state of this and subscribe to the event in a sort of way\&. 
+.PP
+Definition at line \fB461\fP of file \fBNewKeybinds\&.cs\fP\&.
+.SS "void Luthetus\&.TextEditor\&.Tests\&.Adhoc\&.NewKeybinds\&.F7_THEN_RelatedFilesQuickpick ()"
+
+.PP
+[] F7 => Related Files quickpick [] Read directory which contains the current file [] If there are any direct descendent files of that directory then check the name against a predicate if it "matches" with the active file and add to list if it does [] Show the list to the user [] Open the file they pick [] Or let them cancel with 'Escape' key 
+.PP
+Definition at line \fB446\fP of file \fBNewKeybinds\&.cs\fP\&.
+.SS "void Luthetus\&.TextEditor\&.Tests\&.Adhoc\&.NewKeybinds\&.Home_THEN_MoreFunctionality ()"
+
+.PP
+[] Home keystroke [] Should "stop early" at the end of the indentation\&. [] Go to column 0 [] While (indentation) ++column [] Then repressing the keystroke at the end of the indentation goes to the actual start of the line [] Track current column [] Do the "stop early" logic [] Compare if previous column and new current column are the same [] if the same then go to column 0 [] otherwise stay where you are\&. [] If at start of line then home takes to end of indentation\&. [] Do the "stop early" logic [] If within starting indentation then go to the end of the starting indentation\&. [] Do the "stop early" logic 
+.PP
+Definition at line \fB232\fP of file \fBNewKeybinds\&.cs\fP\&.
+.SS "void Luthetus\&.TextEditor\&.Tests\&.Adhoc\&.NewKeybinds\&.NoSelectionPlusShiftPlusTabPlusCursorAtIndentation_THEN_IndentLess ()"
+
+.PP
+[] No selection + { Shift + Tab } + Cursor positioned at or in the starting indentation should => IndentLess [] Go to column 0 [] While (indentation) ++column [] if pass by the cursor, then can break early with success [] if sees !indentation then break with failure 
+.PP
+Definition at line \fB347\fP of file \fBNewKeybinds\&.cs\fP\&.
+.SS "void Luthetus\&.TextEditor\&.Tests\&.Adhoc\&.NewKeybinds\&.ShiftPlusEnter_THEN_SupportMatchIndentation ()"
+
+.PP
+[] Match indentation on newline [] insert line below command [] The code to get the indentation is already done in the 'HandleOnKeyDown(\&.\&.\&.)' method, note: I totally spelled the method name wrong\&. 
+.PP
+Definition at line \fB334\fP of file \fBNewKeybinds\&.cs\fP\&.
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for Luthetus\&.Ide from the source code\&.

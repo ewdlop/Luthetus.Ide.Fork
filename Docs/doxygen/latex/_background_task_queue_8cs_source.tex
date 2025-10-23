@@ -1,0 +1,86 @@
+\doxysection{Background\+Task\+Queue.\+cs}
+\hypertarget{_background_task_queue_8cs_source}{}\label{_background_task_queue_8cs_source}\index{Source/Lib/Common/BackgroundTasks/Models/BackgroundTaskQueue.cs@{Source/Lib/Common/BackgroundTasks/Models/BackgroundTaskQueue.cs}}
+\mbox{\hyperlink{_background_task_queue_8cs}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{_background_task_queue_8cs_source_l00001}00001\ \textcolor{keyword}{using\ }System.Collections.Immutable;}
+\DoxyCodeLine{\Hypertarget{_background_task_queue_8cs_source_l00002}00002\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_luthetus_1_1_common_1_1_razor_lib_1_1_keys_1_1_models}{Luthetus.Common.RazorLib.Keys.Models}};}
+\DoxyCodeLine{\Hypertarget{_background_task_queue_8cs_source_l00003}00003\ }
+\DoxyCodeLine{\Hypertarget{_background_task_queue_8cs_source_l00004}00004\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespace_luthetus_1_1_common_1_1_razor_lib_1_1_background_tasks_1_1_models}{Luthetus.Common.RazorLib.BackgroundTasks.Models}};}
+\DoxyCodeLine{\Hypertarget{_background_task_queue_8cs_source_l00005}00005\ }
+\DoxyCodeLine{\Hypertarget{_background_task_queue_8cs_source_l00009}\mbox{\hyperlink{class_luthetus_1_1_common_1_1_razor_lib_1_1_background_tasks_1_1_models_1_1_background_task_queue}{00009}}\ \textcolor{keyword}{public}\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_luthetus_1_1_common_1_1_razor_lib_1_1_background_tasks_1_1_models_1_1_background_task_queue_a57ef16544d002e899d824c763fd18b21}{BackgroundTaskQueue}}\ :\ \mbox{\hyperlink{interface_luthetus_1_1_common_1_1_razor_lib_1_1_background_tasks_1_1_models_1_1_i_background_task_queue}{IBackgroundTaskQueue}}}
+\DoxyCodeLine{\Hypertarget{_background_task_queue_8cs_source_l00010}00010\ \{}
+\DoxyCodeLine{\Hypertarget{_background_task_queue_8cs_source_l00018}00018\ \ \ \ \ \textcolor{keyword}{private}\ readonly\ LinkedList<IBackgroundTask>\ \_queue\ =\ \textcolor{keyword}{new}();}
+\DoxyCodeLine{\Hypertarget{_background_task_queue_8cs_source_l00022}00022\ \ \ \ \ \textcolor{keyword}{private}\ readonly\ \textcolor{keywordtype}{object}\ \_modifyQueueLock\ =\ \textcolor{keyword}{new}();}
+\DoxyCodeLine{\Hypertarget{_background_task_queue_8cs_source_l00023}00023\ }
+\DoxyCodeLine{\Hypertarget{_background_task_queue_8cs_source_l00024}\mbox{\hyperlink{class_luthetus_1_1_common_1_1_razor_lib_1_1_background_tasks_1_1_models_1_1_background_task_queue_a57ef16544d002e899d824c763fd18b21}{00024}}\ \ \ \ \ \textcolor{keyword}{public}\ \mbox{\hyperlink{class_luthetus_1_1_common_1_1_razor_lib_1_1_background_tasks_1_1_models_1_1_background_task_queue_a57ef16544d002e899d824c763fd18b21}{BackgroundTaskQueue}}(\mbox{\hyperlink{class_luthetus_1_1_common_1_1_razor_lib_1_1_background_tasks_1_1_models_1_1_background_task_queue_aaf229d5988553d4f3fda6e0bcdb8369b}{Key<IBackgroundTaskQueue>}}\ key,\ \textcolor{keywordtype}{string}\ displayName)}
+\DoxyCodeLine{\Hypertarget{_background_task_queue_8cs_source_l00025}00025\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_background_task_queue_8cs_source_l00026}00026\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_luthetus_1_1_common_1_1_razor_lib_1_1_background_tasks_1_1_models_1_1_background_task_queue_aaf229d5988553d4f3fda6e0bcdb8369b}{Key}}\ =\ key;}
+\DoxyCodeLine{\Hypertarget{_background_task_queue_8cs_source_l00027}00027\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_luthetus_1_1_common_1_1_razor_lib_1_1_background_tasks_1_1_models_1_1_background_task_queue_a69fa69dc58244b34fd00d6dd7fb37e1e}{DisplayName}}\ =\ displayName;}
+\DoxyCodeLine{\Hypertarget{_background_task_queue_8cs_source_l00028}00028\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_background_task_queue_8cs_source_l00029}00029\ }
+\DoxyCodeLine{\Hypertarget{_background_task_queue_8cs_source_l00030}00030\ \ \ \ \ \textcolor{keyword}{private}\ \mbox{\hyperlink{interface_luthetus_1_1_common_1_1_razor_lib_1_1_background_tasks_1_1_models_1_1_i_background_task}{IBackgroundTask}}?\ \_executingBackgroundTask;}
+\DoxyCodeLine{\Hypertarget{_background_task_queue_8cs_source_l00031}00031\ }
+\DoxyCodeLine{\Hypertarget{_background_task_queue_8cs_source_l00032}\mbox{\hyperlink{class_luthetus_1_1_common_1_1_razor_lib_1_1_background_tasks_1_1_models_1_1_background_task_queue_aaf229d5988553d4f3fda6e0bcdb8369b}{00032}}\ \ \ \ \ \textcolor{keyword}{public}\ \mbox{\hyperlink{class_luthetus_1_1_common_1_1_razor_lib_1_1_background_tasks_1_1_models_1_1_background_task_queue_aaf229d5988553d4f3fda6e0bcdb8369b}{Key<IBackgroundTaskQueue>}}\ \mbox{\hyperlink{class_luthetus_1_1_common_1_1_razor_lib_1_1_background_tasks_1_1_models_1_1_background_task_queue_aaf229d5988553d4f3fda6e0bcdb8369b}{Key}}\ \{\ \textcolor{keyword}{get};\ \}}
+\DoxyCodeLine{\Hypertarget{_background_task_queue_8cs_source_l00033}\mbox{\hyperlink{class_luthetus_1_1_common_1_1_razor_lib_1_1_background_tasks_1_1_models_1_1_background_task_queue_a69fa69dc58244b34fd00d6dd7fb37e1e}{00033}}\ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keywordtype}{string}\ \mbox{\hyperlink{class_luthetus_1_1_common_1_1_razor_lib_1_1_background_tasks_1_1_models_1_1_background_task_queue_a69fa69dc58244b34fd00d6dd7fb37e1e}{DisplayName}}\ \{\ \textcolor{keyword}{get};\ \}}
+\DoxyCodeLine{\Hypertarget{_background_task_queue_8cs_source_l00034}00034\ }
+\DoxyCodeLine{\Hypertarget{_background_task_queue_8cs_source_l00035}\mbox{\hyperlink{class_luthetus_1_1_common_1_1_razor_lib_1_1_background_tasks_1_1_models_1_1_background_task_queue_aabfa53a5b76d80bab65cc1250e14cc98}{00035}}\ \ \ \ \ \textcolor{keyword}{public}\ \mbox{\hyperlink{interface_luthetus_1_1_common_1_1_razor_lib_1_1_background_tasks_1_1_models_1_1_i_background_task}{IBackgroundTask}}?\ \mbox{\hyperlink{class_luthetus_1_1_common_1_1_razor_lib_1_1_background_tasks_1_1_models_1_1_background_task_queue_aabfa53a5b76d80bab65cc1250e14cc98}{ExecutingBackgroundTask}}}
+\DoxyCodeLine{\Hypertarget{_background_task_queue_8cs_source_l00036}00036\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_background_task_queue_8cs_source_l00037}00037\ \ \ \ \ \ \ \ \ \textcolor{keyword}{get}\ =>\ \_executingBackgroundTask;}
+\DoxyCodeLine{\Hypertarget{_background_task_queue_8cs_source_l00038}00038\ \ \ \ \ \ \ \ \ \textcolor{keyword}{set}}
+\DoxyCodeLine{\Hypertarget{_background_task_queue_8cs_source_l00039}00039\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_background_task_queue_8cs_source_l00040}00040\ \ \ \ \ \ \ \ \ \ \ \ \ \_executingBackgroundTask\ =\ value;}
+\DoxyCodeLine{\Hypertarget{_background_task_queue_8cs_source_l00041}00041\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_luthetus_1_1_common_1_1_razor_lib_1_1_background_tasks_1_1_models_1_1_background_task_queue_a1cfc77a87562dff20f1be450276cc9a2}{ExecutingBackgroundTaskChanged}}?.Invoke();}
+\DoxyCodeLine{\Hypertarget{_background_task_queue_8cs_source_l00042}00042\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_background_task_queue_8cs_source_l00043}00043\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_background_task_queue_8cs_source_l00044}00044\ }
+\DoxyCodeLine{\Hypertarget{_background_task_queue_8cs_source_l00048}\mbox{\hyperlink{class_luthetus_1_1_common_1_1_razor_lib_1_1_background_tasks_1_1_models_1_1_background_task_queue_ad9bd5cba06c053983676f6ba93ab1e34}{00048}}\ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{class_luthetus_1_1_common_1_1_razor_lib_1_1_background_tasks_1_1_models_1_1_background_task_queue_ad9bd5cba06c053983676f6ba93ab1e34}{Count}}\ =>\ \_queue.Count;}
+\DoxyCodeLine{\Hypertarget{_background_task_queue_8cs_source_l00049}00049\ }
+\DoxyCodeLine{\Hypertarget{_background_task_queue_8cs_source_l00050}\mbox{\hyperlink{class_luthetus_1_1_common_1_1_razor_lib_1_1_background_tasks_1_1_models_1_1_background_task_queue_a39959305bb03660d1e0b748ced1f8bb6}{00050}}\ \ \ \ \ \textcolor{keyword}{public}\ ImmutableArray<IBackgroundTask>\ \mbox{\hyperlink{class_luthetus_1_1_common_1_1_razor_lib_1_1_background_tasks_1_1_models_1_1_background_task_queue_a39959305bb03660d1e0b748ced1f8bb6}{BackgroundTaskList}}\ =>\ \_queue.ToImmutableArray();}
+\DoxyCodeLine{\Hypertarget{_background_task_queue_8cs_source_l00051}00051\ }
+\DoxyCodeLine{\Hypertarget{_background_task_queue_8cs_source_l00052}\mbox{\hyperlink{class_luthetus_1_1_common_1_1_razor_lib_1_1_background_tasks_1_1_models_1_1_background_task_queue_abac6f64046fe171a10a4aeeab618b39c}{00052}}\ \ \ \ \ \textcolor{keyword}{public}\ SemaphoreSlim\ \mbox{\hyperlink{class_luthetus_1_1_common_1_1_razor_lib_1_1_background_tasks_1_1_models_1_1_background_task_queue_abac6f64046fe171a10a4aeeab618b39c}{DequeueSemaphoreSlim}}\ \{\ \textcolor{keyword}{get};\ \}\ =\ \textcolor{keyword}{new}(0);}
+\DoxyCodeLine{\Hypertarget{_background_task_queue_8cs_source_l00053}00053\ }
+\DoxyCodeLine{\Hypertarget{_background_task_queue_8cs_source_l00054}\mbox{\hyperlink{class_luthetus_1_1_common_1_1_razor_lib_1_1_background_tasks_1_1_models_1_1_background_task_queue_a1cfc77a87562dff20f1be450276cc9a2}{00054}}\ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keyword}{event}\ Action?\ \mbox{\hyperlink{class_luthetus_1_1_common_1_1_razor_lib_1_1_background_tasks_1_1_models_1_1_background_task_queue_a1cfc77a87562dff20f1be450276cc9a2}{ExecutingBackgroundTaskChanged}};}
+\DoxyCodeLine{\Hypertarget{_background_task_queue_8cs_source_l00055}00055\ }
+\DoxyCodeLine{\Hypertarget{_background_task_queue_8cs_source_l00070}\mbox{\hyperlink{class_luthetus_1_1_common_1_1_razor_lib_1_1_background_tasks_1_1_models_1_1_background_task_queue_a4a7ace436716dce56754de8b6abd7d5e}{00070}}\ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_luthetus_1_1_common_1_1_razor_lib_1_1_background_tasks_1_1_models_1_1_background_task_queue_a4a7ace436716dce56754de8b6abd7d5e}{Enqueue}}(\mbox{\hyperlink{interface_luthetus_1_1_common_1_1_razor_lib_1_1_background_tasks_1_1_models_1_1_i_background_task}{IBackgroundTask}}\ downstreamEvent)}
+\DoxyCodeLine{\Hypertarget{_background_task_queue_8cs_source_l00071}00071\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_background_task_queue_8cs_source_l00072}00072\ \ \ \ \ \ \ \ \ lock\ (\_modifyQueueLock)}
+\DoxyCodeLine{\Hypertarget{_background_task_queue_8cs_source_l00073}00073\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_background_task_queue_8cs_source_l00074}00074\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\_queue.Count\ >\ 0)}
+\DoxyCodeLine{\Hypertarget{_background_task_queue_8cs_source_l00075}00075\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_background_task_queue_8cs_source_l00076}00076\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ var\ upstreamEvent\ =\ \_queue.Last.Value;}
+\DoxyCodeLine{\Hypertarget{_background_task_queue_8cs_source_l00077}00077\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ TODO:\ Rename\ 'BatchOrDefault'\ to\ 'TryMergeIntoUpstream'}}
+\DoxyCodeLine{\Hypertarget{_background_task_queue_8cs_source_l00078}00078\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ var\ batchEvent\ =\ downstreamEvent.\mbox{\hyperlink{interface_luthetus_1_1_common_1_1_razor_lib_1_1_background_tasks_1_1_models_1_1_i_background_task_a1297b3be631c1bb2c38c132674f61911}{BatchOrDefault}}(upstreamEvent);}
+\DoxyCodeLine{\Hypertarget{_background_task_queue_8cs_source_l00079}00079\ }
+\DoxyCodeLine{\Hypertarget{_background_task_queue_8cs_source_l00080}00080\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (batchEvent\ is\ not\ \textcolor{keyword}{null})}
+\DoxyCodeLine{\Hypertarget{_background_task_queue_8cs_source_l00081}00081\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_background_task_queue_8cs_source_l00082}00082\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ The\ length\ of\ the\ queue\ has\ not\ changed,}}
+\DoxyCodeLine{\Hypertarget{_background_task_queue_8cs_source_l00083}00083\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ so\ do\ not\ release\ the\ dequeue\ semaphore\ here.}}
+\DoxyCodeLine{\Hypertarget{_background_task_queue_8cs_source_l00084}00084\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//}}
+\DoxyCodeLine{\Hypertarget{_background_task_queue_8cs_source_l00085}00085\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ The\ batching\ was\ successful\ so\ return\ early.}}
+\DoxyCodeLine{\Hypertarget{_background_task_queue_8cs_source_l00086}00086\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \_queue.RemoveLast();}
+\DoxyCodeLine{\Hypertarget{_background_task_queue_8cs_source_l00087}00087\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \_queue.AddLast(batchEvent);}
+\DoxyCodeLine{\Hypertarget{_background_task_queue_8cs_source_l00088}00088\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return};}
+\DoxyCodeLine{\Hypertarget{_background_task_queue_8cs_source_l00089}00089\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_background_task_queue_8cs_source_l00090}00090\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_background_task_queue_8cs_source_l00091}00091\ }
+\DoxyCodeLine{\Hypertarget{_background_task_queue_8cs_source_l00092}00092\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ The\ batching\ was\ NOT\ successful\ so\ add\ to\ the\ queue.}}
+\DoxyCodeLine{\Hypertarget{_background_task_queue_8cs_source_l00093}00093\ \ \ \ \ \ \ \ \ \ \ \ \ \_queue.AddLast(downstreamEvent);}
+\DoxyCodeLine{\Hypertarget{_background_task_queue_8cs_source_l00094}00094\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_luthetus_1_1_common_1_1_razor_lib_1_1_background_tasks_1_1_models_1_1_background_task_queue_abac6f64046fe171a10a4aeeab618b39c}{DequeueSemaphoreSlim}}.Release();}
+\DoxyCodeLine{\Hypertarget{_background_task_queue_8cs_source_l00095}00095\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_background_task_queue_8cs_source_l00096}00096\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_background_task_queue_8cs_source_l00097}00097\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_background_task_queue_8cs_source_l00101}\mbox{\hyperlink{class_luthetus_1_1_common_1_1_razor_lib_1_1_background_tasks_1_1_models_1_1_background_task_queue_a1f6435764e779461fc1f59682d78532d}{00101}}\ \ \ \ \ \textcolor{keyword}{public}\ \mbox{\hyperlink{interface_luthetus_1_1_common_1_1_razor_lib_1_1_background_tasks_1_1_models_1_1_i_background_task}{IBackgroundTask}}?\ \mbox{\hyperlink{class_luthetus_1_1_common_1_1_razor_lib_1_1_background_tasks_1_1_models_1_1_background_task_queue_a1f6435764e779461fc1f59682d78532d}{DequeueOrDefault}}()}
+\DoxyCodeLine{\Hypertarget{_background_task_queue_8cs_source_l00102}00102\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_background_task_queue_8cs_source_l00103}00103\ \ \ \ \ \ \ \ \ lock\ (\_modifyQueueLock)}
+\DoxyCodeLine{\Hypertarget{_background_task_queue_8cs_source_l00104}00104\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_background_task_queue_8cs_source_l00105}00105\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\_queue.Count\ <=\ 0)}
+\DoxyCodeLine{\Hypertarget{_background_task_queue_8cs_source_l00106}00106\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{null};}
+\DoxyCodeLine{\Hypertarget{_background_task_queue_8cs_source_l00107}00107\ }
+\DoxyCodeLine{\Hypertarget{_background_task_queue_8cs_source_l00108}00108\ \ \ \ \ \ \ \ \ \ \ \ \ var\ task\ =\ \_queue.First.Value;}
+\DoxyCodeLine{\Hypertarget{_background_task_queue_8cs_source_l00109}00109\ \ \ \ \ \ \ \ \ \ \ \ \ \_queue.RemoveFirst();}
+\DoxyCodeLine{\Hypertarget{_background_task_queue_8cs_source_l00110}00110\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ task;}
+\DoxyCodeLine{\Hypertarget{_background_task_queue_8cs_source_l00111}00111\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_background_task_queue_8cs_source_l00112}00112\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_background_task_queue_8cs_source_l00113}00113\ \}}
+
+\end{DoxyCode}

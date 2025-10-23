@@ -1,0 +1,4 @@
+var _luthetus_ide_initializer_8razor_8cs =
+[
+    [ "Luthetus.Ide.RazorLib.Installations.Displays.LuthetusIdeInitializer", "class_luthetus_1_1_ide_1_1_razor_lib_1_1_installations_1_1_displays_1_1_luthetus_ide_initializer.html", "class_luthetus_1_1_ide_1_1_razor_lib_1_1_installations_1_1_displays_1_1_luthetus_ide_initializer" ]
+];

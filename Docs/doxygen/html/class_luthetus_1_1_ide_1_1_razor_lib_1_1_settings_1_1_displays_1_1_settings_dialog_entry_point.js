@@ -1,0 +1,4 @@
+var class_luthetus_1_1_ide_1_1_razor_lib_1_1_settings_1_1_displays_1_1_settings_dialog_entry_point =
+[
+    [ "DispatchRegisterDialogRecordAction", "class_luthetus_1_1_ide_1_1_razor_lib_1_1_settings_1_1_displays_1_1_settings_dialog_entry_point.html#a8c4382c462c0d84dd1ca4b0ee43d9d84", null ]
+];

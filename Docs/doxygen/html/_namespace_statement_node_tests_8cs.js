@@ -1,0 +1,4 @@
+var _namespace_statement_node_tests_8cs =
+[
+    [ "Luthetus.TextEditor.Tests.Basis.CompilerServices.Syntax.SyntaxNodes.NamespaceStatementNodeTests", "class_luthetus_1_1_text_editor_1_1_tests_1_1_basis_1_1_compiler_services_1_1_syntax_1_1_syntax_n452f70b6a271722c4437eb93ea4b58a6.html", "class_luthetus_1_1_text_editor_1_1_tests_1_1_basis_1_1_compiler_services_1_1_syntax_1_1_syntax_n452f70b6a271722c4437eb93ea4b58a6" ]
+];

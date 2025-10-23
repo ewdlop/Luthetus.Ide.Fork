@@ -1,0 +1,4 @@
+var _solution_visualization_settings_display_8razor_8cs =
+[
+    [ "Luthetus.Extensions.DotNet.DotNetSolutions.Displays.Internals.SolutionVisualizationSettingsDisplay", "class_luthetus_1_1_extensions_1_1_dot_net_1_1_dot_net_solutions_1_1_displays_1_1_internals_1_1_sc9a21a940bbb8f222df336a5fe43f419.html", "class_luthetus_1_1_extensions_1_1_dot_net_1_1_dot_net_solutions_1_1_displays_1_1_internals_1_1_sc9a21a940bbb8f222df336a5fe43f419" ]
+];

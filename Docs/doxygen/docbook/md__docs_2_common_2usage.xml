@@ -1,0 +1,312 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_md__docs_2_common_2usage" xml:lang="en-US">
+<title>
+<para>Luthetus.Common (v1.4.0) </para>
+</title>
+<indexterm><primary>Luthetus.Common (v1.4.0)</primary></indexterm>
+
+<para><anchor xml:id="_md__docs_2_common_2usage_1autotoc_md37"/></para>
+<section xml:id="_md__docs_2_common_2usage_1autotoc_md38">
+<title>Usage</title><section xml:id="_md__docs_2_common_2usage_1autotoc_md39">
+<title>Source Code</title>
+<para>The .NET Solution: <link xlink:href="../../Source/Tutorials/Common/Luthetus.Common.Usage.sln">Luthetus.Common.Usage.sln</link>, was made by following steps described here. So, the completed result can be found there.</para>
+</section>
+<section xml:id="_md__docs_2_common_2usage_1autotoc_md40">
+<title>Goal</title>
+<para><itemizedlist>
+<listitem>
+<para>Add the <computeroutput>Light and Dark theme</computeroutput></para>
+</listitem></itemizedlist>
+</para>
+</section>
+<section xml:id="_md__docs_2_common_2usage_1autotoc_md41">
+<title>Steps</title>
+<para><itemizedlist>
+<listitem>
+<para>Create a codebehind for the file: <computeroutput>Shared/MainLayout.razor</computeroutput></para>
+</listitem></itemizedlist>
+</para>
+
+<para><blockquote>
+<para><emphasis>NOTE:</emphasis> In many C# Project templates, <computeroutput>Shared/MainLayout.razor</computeroutput> inherits from <computeroutput>LayoutComponentBase</computeroutput> instead of <computeroutput>ComponentBase</computeroutput>. </para>
+</blockquote></para>
+
+<para><literallayout><computeroutput>//&#32;Shared/MainLayout.razor.cs
+
+using&#32;Microsoft.AspNetCore.Components;
+
+namespace&#32;Luthetus.Common.Usage.RazorLib.Shared;
+
+public&#32;partial&#32;class&#32;MainLayout&#32;:&#32;LayoutComponentBase
+{
+}
+</computeroutput></literallayout></para>
+
+<para><itemizedlist>
+<listitem>
+<para>Inject the <computeroutput>IAppOptionsService</computeroutput> interface.</para>
+</listitem></itemizedlist>
+</para>
+
+<para><literallayout><computeroutput>[Inject]
+private&#32;IAppOptionsService&#32;AppOptionsService&#32;{&#32;get;&#32;set;&#32;}&#32;=&#32;null!;
+</computeroutput></literallayout></para>
+
+<para><itemizedlist>
+<listitem>
+<para>We need to subscribe to the state changes of the IAppOptionsService.</para>
+</listitem><listitem>
+<para>When subscribing to an event. It is possible to create a memory leak, if one does not unsubscribe from the event at a later point.</para>
+</listitem><listitem>
+<para>For this reason, I&apos;ll perform the steps in an order that ensures my code will not compile if I forget to unsubscribe.</para>
+</listitem><listitem>
+<para>Have <computeroutput>MainLayout</computeroutput> implement the interface: <computeroutput>IDisposable</computeroutput>.</para>
+</listitem><listitem>
+<para>Then using a refactor, one can autocomplete the method definition for <computeroutput>void Dispose()</computeroutput>.</para>
+</listitem><listitem>
+<para>At this step, here is the entirety of my <computeroutput>Shared/MainLayout.razor.cs</computeroutput></para>
+</listitem></itemizedlist>
+</para>
+
+<para><literallayout><computeroutput>using&#32;Luthetus.Common.RazorLib.Options.Models;
+using&#32;Microsoft.AspNetCore.Components;
+
+namespace&#32;Luthetus.Common.Usage.RazorLib.Shared;
+
+public&#32;partial&#32;class&#32;MainLayout&#32;:&#32;LayoutComponentBase,&#32;IDisposable
+{
+&#32;&#32;&#32;&#32;[Inject]
+&#32;&#32;&#32;&#32;private&#32;IAppOptionsService&#32;AppOptionsService&#32;{&#32;get;&#32;set;&#32;}&#32;=&#32;null!;
+
+&#32;&#32;&#32;&#32;public&#32;void&#32;Dispose()
+&#32;&#32;&#32;&#32;{
+&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;throw&#32;new&#32;NotImplementedException();
+&#32;&#32;&#32;&#32;}
+}
+</computeroutput></literallayout></para>
+
+<para><itemizedlist>
+<listitem>
+<para>Replace the contents of the <computeroutput>Dispose()</computeroutput> method with <computeroutput>replaceAppOptionsService.AppOptionsStateWrap.StateChanged -= ;</computeroutput>. It looks as follows for me:</para>
+</listitem></itemizedlist>
+</para>
+
+<para><literallayout><computeroutput>public&#32;void&#32;Dispose()
+{
+&#32;&#32;&#32;&#32;AppOptionsService.AppOptionsStateWrap.StateChanged&#32;-=&#32;;
+}
+</computeroutput></literallayout></para>
+
+<para><itemizedlist>
+<listitem>
+<para>Override the Blazor lifecycle method named <computeroutput>OnInitialized()</computeroutput>. See this code snippet:</para>
+</listitem></itemizedlist>
+</para>
+
+<para><literallayout><computeroutput>protected&#32;override&#32;void&#32;OnInitialized()
+{
+&#32;&#32;&#32;&#32;base.OnInitialized();
+}
+</computeroutput></literallayout></para>
+
+<para><itemizedlist>
+<listitem>
+<para>In <computeroutput>OnInitialized()</computeroutput> we can subscribe to the <computeroutput>AppOptionsService</computeroutput> state changes.</para>
+</listitem><listitem>
+<para>Add into the method override for <computeroutput>OnInitialized()</computeroutput>, above the <computeroutput>base.OnInitialized();</computeroutput>, this line of code: <computeroutput>AppOptionsService.AppOptionsStateWrap.StateChanged += AppOptionsStateWrap_StateChanged;</computeroutput>.</para>
+</listitem></itemizedlist>
+</para>
+
+<para><literallayout><computeroutput>protected&#32;override&#32;void&#32;OnInitialized()
+{
+&#32;&#32;&#32;&#32;AppOptionsService.AppOptionsStateWrap.StateChanged&#32;+=&#32;AppOptionsStateWrap_StateChanged;
+
+&#32;&#32;&#32;&#32;base.OnInitialized();
+}
+</computeroutput></literallayout></para>
+
+<para><blockquote>
+<para><emphasis>NOTE:</emphasis> When I was typing out the previously shown line of code, when I typed the <computeroutput>+=</computeroutput> part and hit <computeroutput>space</computeroutput>, I was prompted by Visual Studio to hit <computeroutput>tab</computeroutput> to autocomplete out an EventHandler. </para>
+</blockquote></para>
+
+<para><literallayout><computeroutput>private&#32;void&#32;AppOptionsStateWrap_StateChanged(object?&#32;sender,&#32;EventArgs&#32;e)
+{
+&#32;&#32;&#32;&#32;throw&#32;new&#32;NotImplementedException();
+}
+</computeroutput></literallayout></para>
+
+<para><itemizedlist>
+<listitem>
+<para>Now that we have the subscription occurring in the <computeroutput>OnInitialized()</computeroutput>, we can go back to the <computeroutput>Dispose()</computeroutput> implementation. We had left out the right hand side of the unsubscribe statement. Replace that line with this: <computeroutput>AppOptionsService.AppOptionsStateWrap.StateChanged -= AppOptionsStateWrap_StateChanged;</computeroutput>. Now the code will compile again. My code snippet for <computeroutput>MainLayout.razor.cs</computeroutput> is shown here:</para>
+</listitem></itemizedlist>
+</para>
+
+<para><literallayout><computeroutput>using&#32;Luthetus.Common.RazorLib.Options.Models;
+using&#32;Microsoft.AspNetCore.Components;
+
+namespace&#32;Luthetus.Common.Usage.RazorLib.Shared;
+
+public&#32;partial&#32;class&#32;MainLayout&#32;:&#32;LayoutComponentBase,&#32;IDisposable
+{
+&#32;&#32;&#32;&#32;[Inject]
+&#32;&#32;&#32;&#32;private&#32;IAppOptionsService&#32;AppOptionsService&#32;{&#32;get;&#32;set;&#32;}&#32;=&#32;null!;
+
+&#32;&#32;&#32;&#32;protected&#32;override&#32;void&#32;OnInitialized()
+&#32;&#32;&#32;&#32;{
+&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;AppOptionsService.AppOptionsStateWrap.StateChanged&#32;+=&#32;AppOptionsStateWrap_StateChanged;
+
+&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;base.OnInitialized();
+&#32;&#32;&#32;&#32;}
+
+&#32;&#32;&#32;&#32;private&#32;void&#32;AppOptionsStateWrap_StateChanged(object?&#32;sender,&#32;EventArgs&#32;e)
+&#32;&#32;&#32;&#32;{
+&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;throw&#32;new&#32;NotImplementedException();
+&#32;&#32;&#32;&#32;}
+
+&#32;&#32;&#32;&#32;public&#32;void&#32;Dispose()
+&#32;&#32;&#32;&#32;{
+&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;AppOptionsService.AppOptionsStateWrap.StateChanged&#32;-=&#32;AppOptionsStateWrap_StateChanged;
+&#32;&#32;&#32;&#32;}
+}
+</computeroutput></literallayout></para>
+
+<para><itemizedlist>
+<listitem>
+<para>We need to re-render the component anytime that the AppOptionsState has its state change. So, the <computeroutput>AppOptionsStateWrap_StateChanged()</computeroutput> method needs to be changed.</para>
+</listitem><listitem>
+<para>Make the <computeroutput>AppOptionsStateWrap_StateChanged()</computeroutput> method <computeroutput>async</computeroutput>. But keep <computeroutput>void</computeroutput>, since it is being used as an EventHandler.</para>
+</listitem></itemizedlist>
+</para>
+
+<para>Within the body for <computeroutput>AppOptionsStateWrap_StateChanged()</computeroutput>, put this line of code: <computeroutput>await InvokeAsync(StateHasChanged);</computeroutput>.</para>
+
+<para>In total, my <computeroutput>AppOptionsStateWrap_StateChanged()</computeroutput> method looks as follows:</para>
+
+<para><literallayout><computeroutput>private&#32;async&#32;void&#32;AppOptionsStateWrap_StateChanged(object?&#32;sender,&#32;EventArgs&#32;e)
+{
+&#32;&#32;&#32;&#32;await&#32;InvokeAsync(StateHasChanged);
+}
+</computeroutput></literallayout></para>
+
+<para><itemizedlist>
+<listitem>
+<para>I want a &lt;<computeroutput>select</computeroutput>&gt; HTML element where the options are the various themes that one can choose.</para>
+</listitem><listitem>
+<para><computeroutput>Shared/MainLayout.razor</computeroutput> has a &lt;<computeroutput>div</computeroutput>&gt; HTML element with the css class: <computeroutput>top-row</computeroutput>. Inside this HTML element I will be putting the &lt;<computeroutput>select</computeroutput>&gt; HTML element.</para>
+</listitem><listitem>
+<para>This &lt;<computeroutput>select</computeroutput>&gt; HTML element already exists within the <link linkend="_namespace_luthetus_1_1_common">Luthetus.Common</link> NuGet Package. Inside the previously described &lt;<computeroutput>div</computeroutput>&gt; add the markup: <computeroutput>&lt;<link linkend="_class_luthetus_1_1_common_1_1_razor_lib_1_1_options_1_1_displays_1_1_input_app_theme">Luthetus.Common.RazorLib.Options.Displays.InputAppTheme</link> /&gt;</computeroutput> as shown in the following snippet:</para>
+</listitem></itemizedlist>
+</para>
+
+<para><literallayout><computeroutput>&lt;!--&#32;MainLayout.razor&#32;--&gt;
+
+@inherits&#32;LayoutComponentBase
+
+&lt;PageTitle&gt;Luthetus.Common.Usage.ServerSide&lt;/PageTitle&gt;
+
+&lt;Luthetus.Common.RazorLib.Installations.Displays.LuthetusCommonInitializer/&gt;
+
+&lt;div&#32;class=&quot;page&quot;&gt;
+&#32;&#32;&#32;&#32;&lt;div&#32;class=&quot;sidebar&quot;&gt;
+&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&lt;NavMenu&#32;/&gt;
+&#32;&#32;&#32;&#32;&lt;/div&gt;
+
+&#32;&#32;&#32;&#32;&lt;main&gt;
+&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&lt;div&#32;class=&quot;top-row&#32;px-4&quot;&gt;
+&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&lt;!--&#32;Here&#32;--&gt;
+&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&lt;Luthetus.Common.RazorLib.Options.Displays.InputAppTheme&#32;/&gt;
+&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&lt;a&#32;href=&quot;https://docs.microsoft.com/aspnet/&quot;&#32;target=&quot;_blank&quot;&gt;About&lt;/a&gt;
+&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&lt;/div&gt;
+
+&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&lt;article&#32;class=&quot;content&#32;px-4&quot;&gt;
+&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;@Body
+&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&lt;/article&gt;
+&#32;&#32;&#32;&#32;&lt;/main&gt;
+&lt;/div&gt;
+</computeroutput></literallayout></para>
+
+<para>Here is a quick GIF as well that shows how the website looks as of this step:</para>
+
+<para></para>
+
+<para><itemizedlist>
+<listitem>
+<para>When I change my selection in the <computeroutput>&lt;<link linkend="_class_luthetus_1_1_common_1_1_razor_lib_1_1_options_1_1_displays_1_1_input_app_theme">Luthetus.Common.RazorLib.Options.Displays.InputAppTheme</link> /&gt;</computeroutput>, I want the corresponding CSS class to be applied to the top-most &lt;div&gt; in <computeroutput>MainLayout.razor</computeroutput>. This would then allow me to cascade a color theme to child elements.</para>
+</listitem><listitem>
+<para>In <computeroutput>MainLayout.razor</computeroutput>, we need to locate the top-most &lt;div&gt;. Following that, we need to interpolate the css class which corresponds to the selected theme. I changed my top-most element&apos;s <computeroutput>class</computeroutput> property to <computeroutput>class=&quot;page @AppOptionsService.ThemeCssClassString&quot;</computeroutput>. The following is the entirety of my <computeroutput>MainLayout.razor</computeroutput>:</para>
+</listitem></itemizedlist>
+</para>
+
+<para><literallayout><computeroutput>&lt;!--&#32;MainLayout.razor&#32;--&gt;
+
+@inherits&#32;LayoutComponentBase
+
+&lt;PageTitle&gt;Luthetus.Common.Usage.ServerSide&lt;/PageTitle&gt;
+
+&lt;Luthetus.Common.RazorLib.Installations.Displays.LuthetusCommonInitializer/&gt;
+
+&lt;div&#32;class=&quot;page&#32;@AppOptionsService.ThemeCssClassString&quot;&gt;
+&#32;&#32;&#32;&#32;&lt;div&#32;class=&quot;sidebar&quot;&gt;
+&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&lt;NavMenu&#32;/&gt;
+&#32;&#32;&#32;&#32;&lt;/div&gt;
+
+&#32;&#32;&#32;&#32;&lt;main&gt;
+&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&lt;div&#32;class=&quot;top-row&#32;px-4&quot;&gt;
+&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&lt;Luthetus.Common.RazorLib.Options.Displays.InputAppTheme&#32;/&gt;
+&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&lt;a&#32;href=&quot;https://docs.microsoft.com/aspnet/&quot;&#32;target=&quot;_blank&quot;&gt;About&lt;/a&gt;
+&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&lt;/div&gt;
+
+&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&lt;article&#32;class=&quot;content&#32;px-4&quot;&gt;
+&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;@Body
+&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&lt;/article&gt;
+&#32;&#32;&#32;&#32;&lt;/main&gt;
+&lt;/div&gt;
+</computeroutput></literallayout></para>
+
+<para>The following GIF has open the browser&apos;s developer tools, while changing the selected theme. This shows that we are updating the <computeroutput>class</computeroutput> property correctly.</para>
+
+<para></para>
+
+<para><itemizedlist>
+<listitem>
+<para>Now we need to actually use the <computeroutput>CSS variables</computeroutput> which are defined in <computeroutput>luthetusCommon.css</computeroutput></para>
+</listitem></itemizedlist>
+</para>
+
+<para>In the upcoming GIF I am going to show two ways that one can see all the <computeroutput>CSS variables</computeroutput> which are available from <computeroutput>luthetusCommon.css</computeroutput>.</para>
+
+<para><blockquote>
+<para><emphasis>NOTE:</emphasis> This GIF is 2 minutes and 41 seconds long. #TODO: shorten the length of this GIF. </para>
+</blockquote></para>
+
+<para></para>
+
+<para><itemizedlist>
+<listitem>
+<para>Inside <computeroutput>MainLayout.razor.css</computeroutput> add the following code snippet:</para>
+</listitem></itemizedlist>
+</para>
+
+<para><literallayout><computeroutput>div.top-row&#32;{
+&#32;&#32;&#32;&#32;background-color:&#32;var(--luth_tertiary-background-color);
+&#32;&#32;&#32;&#32;color:&#32;var(--luth_tertiary-foreground-color);
+}
+
+article.content&#32;{
+&#32;&#32;&#32;&#32;background-color:&#32;var(--luth_primary-background-color);
+&#32;&#32;&#32;&#32;color:&#32;var(--luth_primary-foreground-color);
+}
+</computeroutput></literallayout></para>
+
+<para><itemizedlist>
+<listitem>
+<para>Now when we change the theme, parts of the website that use the CSS variables will change. See the following GIF:</para>
+</listitem></itemizedlist>
+</para>
+
+<para></para>
+</section>
+</section>
+<section xml:id="_md__docs_2_common_2usage_1autotoc_md42">
+<title>Next tutorial: #TODO: Continue</title></section>
+</section>

@@ -1,0 +1,10 @@
+var interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_interfaces_1_1_i_compiler_service_resource =
+[
+    [ "GetDiagnostics", "interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_interfaces_1_1_i_compiler_service_resource.html#a3371f6d0fb1c6eb9b56c33def1085c28", null ],
+    [ "GetSymbols", "interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_interfaces_1_1_i_compiler_service_resource.html#a022bb724ad8713936b236e11fe889c77", null ],
+    [ "GetTokenTextSpans", "interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_interfaces_1_1_i_compiler_service_resource.html#af4f6f4bd54b540ff0ee96fda329149eb", null ],
+    [ "CompilationUnit", "interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_interfaces_1_1_i_compiler_service_resource.html#aa7f91301e136fce142431f0c0d76f14f", null ],
+    [ "CompilerService", "interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_interfaces_1_1_i_compiler_service_resource.html#a9de6c41c2763d831c57ba542fa472374", null ],
+    [ "ResourceUri", "interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_interfaces_1_1_i_compiler_service_resource.html#a46213bfac4193b206b779777ebe676cf", null ],
+    [ "SyntaxTokenList", "interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_interfaces_1_1_i_compiler_service_resource.html#a856f53f0d2138624ea9159d2ec5333a5", null ]
+];

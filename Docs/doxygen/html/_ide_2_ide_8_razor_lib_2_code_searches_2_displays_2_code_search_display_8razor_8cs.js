@@ -1,0 +1,4 @@
+var _ide_2_ide_8_razor_lib_2_code_searches_2_displays_2_code_search_display_8razor_8cs =
+[
+    [ "Luthetus.Ide.RazorLib.CodeSearches.Displays.CodeSearchDisplay", "class_luthetus_1_1_ide_1_1_razor_lib_1_1_code_searches_1_1_displays_1_1_code_search_display.html", "class_luthetus_1_1_ide_1_1_razor_lib_1_1_code_searches_1_1_displays_1_1_code_search_display" ]
+];

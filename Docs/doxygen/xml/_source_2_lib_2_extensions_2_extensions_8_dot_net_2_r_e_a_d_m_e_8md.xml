@@ -1,0 +1,74 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
+  <compounddef id="_source_2_lib_2_extensions_2_extensions_8_dot_net_2_r_e_a_d_m_e_8md" kind="file" language="Markdown">
+    <compoundname>README.md</compoundname>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline><highlight class="normal">Luthetus.CompilerServices.RazorLib.csproj<sp/>is<sp/>the</highlight></codeline>
+<codeline><highlight class="normal">way<sp/>for<sp/>a<sp/>compiler<sp/>service<sp/>non-razor<sp/>lib<sp/>to<sp/>provide<sp/>razor<sp/>components.</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">For<sp/>example,</highlight></codeline>
+<codeline><highlight class="normal">one<sp/>might<sp/>primarily<sp/>code<sp/>in<sp/>C#,<sp/>but<sp/>occassionally<sp/>have<sp/>to<sp/>write<sp/>JavaScript.</highlight></codeline>
+<codeline><highlight class="normal">Perhaps,<sp/>this<sp/>individual<sp/>would<sp/>prefer<sp/>to<sp/>load<sp/>the<sp/>JavaScript<sp/>CompilerService,</highlight></codeline>
+<codeline><highlight class="normal">BUT<sp/>NOT<sp/>load<sp/>the<sp/>JavaScript<sp/>specific<sp/>UI<sp/>components.</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">I&apos;m<sp/>not<sp/>certain<sp/>on<sp/>the<sp/>best<sp/>way<sp/>to<sp/>go<sp/>about<sp/>this<sp/>&quot;separate<sp/>the<sp/>compiler<sp/>service</highlight></codeline>
+<codeline><highlight class="normal">from<sp/>its<sp/>UI<sp/>components&apos;<sp/>idea.<sp/>But<sp/>this<sp/>is<sp/>how<sp/>I&apos;ll<sp/>start<sp/>to<sp/>try.</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">Essentially<sp/>I<sp/>need<sp/>to<sp/>move<sp/>all<sp/>the<sp/>.NET<sp/>specific<sp/>code<sp/>that<sp/>is<sp/>in<sp/>the</highlight></codeline>
+<codeline><highlight class="normal">Luthetus.Ide.RazorLib.csproj<sp/>to<sp/>this<sp/>project<sp/>instead.</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">After<sp/>I<sp/>do<sp/>that,<sp/>I<sp/>need<sp/>to<sp/>make<sp/>the<sp/>code<sp/>generic<sp/>so<sp/>that<sp/>any<sp/>compiler<sp/>service</highlight></codeline>
+<codeline><highlight class="normal">can<sp/>decide<sp/>to<sp/>implement<sp/>that<sp/>blazor<sp/>component.</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">For<sp/>example,<sp/>the<sp/>solution<sp/>explorer.<sp/>I<sp/>imagine<sp/>that<sp/>the<sp/>name<sp/>&quot;Solution<sp/>Explorer&quot;</highlight></codeline>
+<codeline><highlight class="normal">could<sp/>be<sp/>changed<sp/>based<sp/>on<sp/>some<sp/>blazor<sp/>parameter,<sp/>and<sp/>that</highlight></codeline>
+<codeline><highlight class="normal">the<sp/>nodes<sp/>in<sp/>the<sp/>tree<sp/>could<sp/>be<sp/>populated<sp/>with<sp/>different<sp/>logic,<sp/>instead</highlight></codeline>
+<codeline><highlight class="normal">of<sp/>from<sp/>reading<sp/>a<sp/>.sln<sp/>file<sp/>and<sp/>etc...</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">I<sp/>have<sp/>no<sp/>idea<sp/>how<sp/>I<sp/>would<sp/>do<sp/>that????<sp/>These<sp/>components<sp/>seem<sp/>very<sp/>specialized,</highlight></codeline>
+<codeline><highlight class="normal">and<sp/>I<sp/>think<sp/>I<sp/>even<sp/>prefer<sp/>it<sp/>that<sp/>way.</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">But<sp/>do<sp/>I<sp/>really<sp/>want<sp/>2<sp/>projects<sp/>per<sp/>programming<sp/>language,</highlight></codeline>
+<codeline><highlight class="normal">one<sp/>for<sp/>the<sp/>compiler<sp/>service<sp/>and<sp/>one<sp/>for<sp/>the<sp/>UI?</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">Move<sp/>these:</highlight></codeline>
+<codeline><highlight class="normal">[<sp/>]<sp/>/CSharpProjects/</highlight></codeline>
+<codeline><highlight class="normal">[<sp/>]<sp/>/DotNetSolutions/</highlight></codeline>
+<codeline><highlight class="normal">[<sp/>]<sp/>/Nugets/</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">[<sp/>]<sp/>/CommandLines/Models/DotNetCliCommandFormatter.cs</highlight></codeline>
+<codeline><highlight class="normal">[<sp/>]<sp/>/CommandLines/Models/DotNetCliOutputParser.cs</highlight></codeline>
+<codeline><highlight class="normal">[<sp/>]<sp/>/ComponentRenderers/Models/INuGetPackageManagerRendererType.cs</highlight></codeline>
+<codeline><highlight class="normal">[<sp/>]<sp/>/ComponentRenderers/Models/IRemoveCSharpProjectFromSolutionRendererType.cs</highlight></codeline>
+<codeline><highlight class="normal">[<sp/>]<sp/>/ComponentRenderers/Models/ITreeViewCSharpProjectNugetPackageReferenceRendererType.cs</highlight></codeline>
+<codeline><highlight class="normal">[<sp/>]<sp/>/ComponentRenderers/Models/ITreeViewCSharpProjectToProjectReferenceRendererType.cs</highlight></codeline>
+<codeline><highlight class="normal">[<sp/>]<sp/>/ComponentRenderers/Models/ITreeViewSolutionFolderRendererType.cs</highlight></codeline>
+<codeline><highlight class="normal">[<sp/>]<sp/>/Menus/Models/IMenuOptionsFactory.RemoveCSharpProjectReferenceFromSolution()</highlight></codeline>
+<codeline><highlight class="normal">[<sp/>]<sp/>/Menus/Models/IMenuOptionsFactory.AddProjectToProjectReference()</highlight></codeline>
+<codeline><highlight class="normal">[<sp/>]<sp/>/Menus/Models/IMenuOptionsFactory.RemoveProjectToProjectReference()</highlight></codeline>
+<codeline><highlight class="normal">[<sp/>]<sp/>/Menus/Models/IMenuOptionsFactory.MoveProjectToSolutionFolder()</highlight></codeline>
+<codeline><highlight class="normal">[<sp/>]<sp/>/Menus/Models/IMenuOptionsFactory.RemoveNuGetPackageReferenceFromProject()</highlight></codeline>
+<codeline><highlight class="normal">[<sp/>]<sp/>Repeat<sp/>what<sp/>is<sp/>done<sp/>for<sp/>IMenuOptionsFactory.cs<sp/>to<sp/>its<sp/>implementation<sp/>MenuOptionsFactory.cs</highlight></codeline>
+<codeline><highlight class="normal">[<sp/>]<sp/>/Namespaces/Models/TreeViewHelperCSharpClass.cs</highlight></codeline>
+<codeline><highlight class="normal">[<sp/>]<sp/>/Namespaces/Models/TreeViewHelperCSharpProject.cs</highlight></codeline>
+<codeline><highlight class="normal">[<sp/>]<sp/>/Namespaces/Models/TreeViewHelperRazorMarkup.cs</highlight></codeline>
+<codeline><highlight class="normal">[<sp/>]<sp/>/Shareds/Displays/Internals/IdePromptOpenSolutionDisplay.razor</highlight></codeline>
+<codeline><highlight class="normal">[<sp/>]<sp/>/TestExplorers/<sp/>######<sp/>Should<sp/>/TestExplorers/<sp/>be<sp/>moved????</highlight></codeline>
+<codeline><highlight class="normal">[<sp/>]<sp/>/Namespaces/<sp/>######<sp/>Should<sp/>/Namespaces/<sp/>be<sp/>moved????</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">I<sp/>need<sp/>to<sp/>make<sp/>a<sp/>&apos;Workspace&apos;<sp/>concept<sp/>in<sp/>order<sp/>to<sp/>permit<sp/>arbitrary<sp/>grouping<sp/>of<sp/>directories</highlight></codeline>
+<codeline><highlight class="normal">into<sp/>a<sp/>tree<sp/>view.</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">I<sp/>moved<sp/>over<sp/>&apos;/CSharpProjects/&apos;<sp/>and<sp/>it<sp/>is<sp/>immediately<sp/>apparent<sp/>that<sp/>this<sp/>will<sp/>be<sp/>a<sp/>headache.</highlight></codeline>
+<codeline><highlight class="normal">Some<sp/>of<sp/>the<sp/>code<sp/>in<sp/>&apos;/CSharpProjects/&apos;<sp/>relies<sp/>on<sp/>various<sp/>bits<sp/>and<sp/>pieces<sp/>of<sp/>code<sp/>that<sp/>exist<sp/>within</highlight></codeline>
+<codeline><highlight class="normal">the<sp/>IDE,<sp/>so<sp/>I&apos;ll<sp/>get<sp/>a<sp/>circular<sp/>reference<sp/>if<sp/>I<sp/>try<sp/>to<sp/>take<sp/>the<sp/>shortcut<sp/>of<sp/>having</highlight></codeline>
+<codeline><highlight class="normal">the<sp/>IDE<sp/>reference<sp/>my<sp/>new<sp/>project<sp/>for<sp/>time<sp/>being</highlight></codeline>
+<codeline></codeline>
+    </programlisting>
+    <location file="Source/Lib/Extensions/Extensions.DotNet/README.md"/>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,11 @@
+var _storage_modifier_kind_8cs =
+[
+    [ "Luthetus.TextEditor.RazorLib.CompilerServices.Syntax.Nodes.Enums.StorageModifierKind", "namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_1_1_nodes_1_1_enums.html#a77f56f3a717590786dc833f24e98e9d1", [
+      [ "Luthetus.TextEditor.RazorLib.CompilerServices.Syntax.Nodes.Enums.StorageModifierKind.Struct", "namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_1_1_nodes_1_1_enums.html#a77f56f3a717590786dc833f24e98e9d1a886ef5dbd655a6c97726d7091c6b173e", null ],
+      [ "Luthetus.TextEditor.RazorLib.CompilerServices.Syntax.Nodes.Enums.StorageModifierKind.Class", "namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_1_1_nodes_1_1_enums.html#a77f56f3a717590786dc833f24e98e9d1a9bd81329febf6efe22788e03ddeaf0af", null ],
+      [ "Luthetus.TextEditor.RazorLib.CompilerServices.Syntax.Nodes.Enums.StorageModifierKind.Interface", "namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_1_1_nodes_1_1_enums.html#a77f56f3a717590786dc833f24e98e9d1a3c1aac82863ed9e5a9aca8ce687f711d", null ],
+      [ "Luthetus.TextEditor.RazorLib.CompilerServices.Syntax.Nodes.Enums.StorageModifierKind.Enum", "namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_1_1_nodes_1_1_enums.html#a77f56f3a717590786dc833f24e98e9d1acf20423ed48998082c20099488a0917c", null ],
+      [ "Luthetus.TextEditor.RazorLib.CompilerServices.Syntax.Nodes.Enums.StorageModifierKind.Record", "namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_1_1_nodes_1_1_enums.html#a77f56f3a717590786dc833f24e98e9d1a6a0d9eaee314c567fd72fb97ee707a36", null ],
+      [ "Luthetus.TextEditor.RazorLib.CompilerServices.Syntax.Nodes.Enums.StorageModifierKind.RecordStruct", "namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_1_1_nodes_1_1_enums.html#a77f56f3a717590786dc833f24e98e9d1ae29d7c96afdd8b6df1839cec603ec836", null ]
+    ] ]
+];

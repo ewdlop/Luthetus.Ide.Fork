@@ -1,0 +1,223 @@
+\doxysection{Reflective\+Model.\+cs}
+\hypertarget{_reflective_model_8cs_source}{}\label{_reflective_model_8cs_source}\index{Source/Lib/Common/Reflectives/Models/ReflectiveModel.cs@{Source/Lib/Common/Reflectives/Models/ReflectiveModel.cs}}
+\mbox{\hyperlink{_reflective_model_8cs}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{_reflective_model_8cs_source_l00001}00001\ \textcolor{keyword}{using\ }Fluxor;}
+\DoxyCodeLine{\Hypertarget{_reflective_model_8cs_source_l00002}00002\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_luthetus_1_1_common_1_1_razor_lib_1_1_reflectives_1_1_states}{Luthetus.Common.RazorLib.Reflectives.States}};}
+\DoxyCodeLine{\Hypertarget{_reflective_model_8cs_source_l00003}00003\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_luthetus_1_1_common_1_1_razor_lib_1_1_keys_1_1_models}{Luthetus.Common.RazorLib.Keys.Models}};}
+\DoxyCodeLine{\Hypertarget{_reflective_model_8cs_source_l00004}00004\ \textcolor{keyword}{using\ }Microsoft.AspNetCore.Components;}
+\DoxyCodeLine{\Hypertarget{_reflective_model_8cs_source_l00005}00005\ \textcolor{keyword}{using\ }System.Reflection;}
+\DoxyCodeLine{\Hypertarget{_reflective_model_8cs_source_l00006}00006\ }
+\DoxyCodeLine{\Hypertarget{_reflective_model_8cs_source_l00007}00007\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespace_luthetus_1_1_common_1_1_razor_lib_1_1_reflectives_1_1_models}{Luthetus.Common.RazorLib.Reflectives.Models}};}
+\DoxyCodeLine{\Hypertarget{_reflective_model_8cs_source_l00008}00008\ }
+\DoxyCodeLine{\Hypertarget{_reflective_model_8cs_source_l00009}\mbox{\hyperlink{namespace_luthetus_1_1_common_1_1_razor_lib_1_1_reflectives_1_1_models_a87d77c11765aadf12d63350b888987e6}{00009}}\ \textcolor{keyword}{public}\ record\ \mbox{\hyperlink{namespace_luthetus_1_1_common_1_1_razor_lib_1_1_reflectives_1_1_models_a87d77c11765aadf12d63350b888987e6}{ReflectiveModel}}(}
+\DoxyCodeLine{\Hypertarget{_reflective_model_8cs_source_l00010}00010\ \ \ \ \ Key<ReflectiveModel>\ Key,}
+\DoxyCodeLine{\Hypertarget{_reflective_model_8cs_source_l00011}00011\ \ \ \ \ List<Type>\ ComponentTypeList,}
+\DoxyCodeLine{\Hypertarget{_reflective_model_8cs_source_l00012}00012\ \ \ \ \ Guid\ ChosenTypeGuid,}
+\DoxyCodeLine{\Hypertarget{_reflective_model_8cs_source_l00013}00013\ \ \ \ \ Guid\ PreviousTypeGuid,}
+\DoxyCodeLine{\Hypertarget{_reflective_model_8cs_source_l00014}00014\ \ \ \ \ PropertyInfo[]\ ComponentPropertyInfoList,}
+\DoxyCodeLine{\Hypertarget{_reflective_model_8cs_source_l00015}00015\ \ \ \ \ Dictionary<string,\ IReflectiveParameter>\ ReflectiveParameterMap,}
+\DoxyCodeLine{\Hypertarget{_reflective_model_8cs_source_l00016}00016\ \ \ \ \ IDispatcher\ Dispatcher)\ \textcolor{comment}{//\ This\ is\ gonna\ be\ a\ hack\ for\ re-\/rendering\ temporarily}}
+\DoxyCodeLine{\Hypertarget{_reflective_model_8cs_source_l00017}00017\ \{}
+\DoxyCodeLine{\Hypertarget{_reflective_model_8cs_source_l00018}00018\ \ \ \ \ \textcolor{keyword}{public}\ Type?\ ChosenType\ =>\ ComponentTypeList}
+\DoxyCodeLine{\Hypertarget{_reflective_model_8cs_source_l00019}00019\ \ \ \ \ \ \ \ \ .FirstOrDefault(x\ =>\ x.GUID\ ==\ ChosenTypeGuid);}
+\DoxyCodeLine{\Hypertarget{_reflective_model_8cs_source_l00020}00020\ }
+\DoxyCodeLine{\Hypertarget{_reflective_model_8cs_source_l00021}00021\ \ \ \ \ \textcolor{keyword}{private}\ readonly\ \textcolor{keywordtype}{object}\ \_parametersLock\ =\ \textcolor{keyword}{new}();}
+\DoxyCodeLine{\Hypertarget{_reflective_model_8cs_source_l00022}00022\ }
+\DoxyCodeLine{\Hypertarget{_reflective_model_8cs_source_l00023}00023\ \ \ \ \ \textcolor{keyword}{public}\ \mbox{\hyperlink{interface_luthetus_1_1_common_1_1_razor_lib_1_1_reflectives_1_1_models_1_1_i_reflective_parameter}{IReflectiveParameter}}\ GetParameter(\textcolor{keywordtype}{string}\ variableName,\ \mbox{\hyperlink{interface_luthetus_1_1_common_1_1_razor_lib_1_1_reflectives_1_1_models_1_1_i_reflective_parameter}{IReflectiveParameter}}\ defaultValueIfKeyNotExists)}
+\DoxyCodeLine{\Hypertarget{_reflective_model_8cs_source_l00024}00024\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_reflective_model_8cs_source_l00025}00025\ \ \ \ \ \ \ \ \ lock\ (\_parametersLock)}
+\DoxyCodeLine{\Hypertarget{_reflective_model_8cs_source_l00026}00026\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_reflective_model_8cs_source_l00027}00027\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!ReflectiveParameterMap.TryGetValue(variableName,\ out\ var\ value))}
+\DoxyCodeLine{\Hypertarget{_reflective_model_8cs_source_l00028}00028\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_reflective_model_8cs_source_l00029}00029\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ value\ =\ defaultValueIfKeyNotExists;}
+\DoxyCodeLine{\Hypertarget{_reflective_model_8cs_source_l00030}00030\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ReflectiveParameterMap.Add(variableName,\ value);}
+\DoxyCodeLine{\Hypertarget{_reflective_model_8cs_source_l00031}00031\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_reflective_model_8cs_source_l00032}00032\ }
+\DoxyCodeLine{\Hypertarget{_reflective_model_8cs_source_l00033}00033\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ value;}
+\DoxyCodeLine{\Hypertarget{_reflective_model_8cs_source_l00034}00034\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_reflective_model_8cs_source_l00035}00035\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_reflective_model_8cs_source_l00036}00036\ }
+\DoxyCodeLine{\Hypertarget{_reflective_model_8cs_source_l00037}00037\ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keywordtype}{void}\ SetParameter(\textcolor{keywordtype}{string}\ name,\ \mbox{\hyperlink{interface_luthetus_1_1_common_1_1_razor_lib_1_1_reflectives_1_1_models_1_1_i_reflective_parameter}{IReflectiveParameter}}\ value)}
+\DoxyCodeLine{\Hypertarget{_reflective_model_8cs_source_l00038}00038\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_reflective_model_8cs_source_l00039}00039\ \ \ \ \ \ \ \ \ lock\ (\_parametersLock)}
+\DoxyCodeLine{\Hypertarget{_reflective_model_8cs_source_l00040}00040\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_reflective_model_8cs_source_l00041}00041\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!ReflectiveParameterMap.TryAdd(name,\ value))}
+\DoxyCodeLine{\Hypertarget{_reflective_model_8cs_source_l00042}00042\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_reflective_model_8cs_source_l00043}00043\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ReflectiveParameterMap[name]\ =\ value;}
+\DoxyCodeLine{\Hypertarget{_reflective_model_8cs_source_l00044}00044\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_reflective_model_8cs_source_l00045}00045\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_reflective_model_8cs_source_l00046}00046\ }
+\DoxyCodeLine{\Hypertarget{_reflective_model_8cs_source_l00047}00047\ \ \ \ \ \ \ \ \ Dispatcher.Dispatch(\textcolor{keyword}{new}\ \mbox{\hyperlink{namespace_luthetus_1_1_common_1_1_razor_lib_1_1_reflectives_1_1_states_acba6b3f1b3436e8855ad1401b1d8718e}{ReflectiveState}}.WithAction(}
+\DoxyCodeLine{\Hypertarget{_reflective_model_8cs_source_l00048}00048\ \ \ \ \ \ \ \ \ \ \ \ \ Key,}
+\DoxyCodeLine{\Hypertarget{_reflective_model_8cs_source_l00049}00049\ \ \ \ \ \ \ \ \ \ \ \ \ inState\ =>\ inState\ with\ \{\ \}));}
+\DoxyCodeLine{\Hypertarget{_reflective_model_8cs_source_l00050}00050\ }
+\DoxyCodeLine{\Hypertarget{_reflective_model_8cs_source_l00051}00051\ \ \ \ \ \ \ \ \ BubbleUpValue(name,\ value);}
+\DoxyCodeLine{\Hypertarget{_reflective_model_8cs_source_l00052}00052\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_reflective_model_8cs_source_l00053}00053\ }
+\DoxyCodeLine{\Hypertarget{_reflective_model_8cs_source_l00054}00054\ \ \ \ \ \textcolor{keyword}{public}\ Dictionary<string,\ object?>?\ ConstructBlazorParameters()}
+\DoxyCodeLine{\Hypertarget{_reflective_model_8cs_source_l00055}00055\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_reflective_model_8cs_source_l00056}00056\ \ \ \ \ \ \ \ \ var\ blazorParameters\ =\ \textcolor{keyword}{new}\ Dictionary<string,\ object?>();}
+\DoxyCodeLine{\Hypertarget{_reflective_model_8cs_source_l00057}00057\ }
+\DoxyCodeLine{\Hypertarget{_reflective_model_8cs_source_l00058}00058\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{foreach}\ (var\ parameterInfo\ \textcolor{keywordflow}{in}\ ComponentPropertyInfoList)}
+\DoxyCodeLine{\Hypertarget{_reflective_model_8cs_source_l00059}00059\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_reflective_model_8cs_source_l00060}00060\ \ \ \ \ \ \ \ \ \ \ \ \ var\ parameterKey\ =\ parameterInfo.Name;}
+\DoxyCodeLine{\Hypertarget{_reflective_model_8cs_source_l00061}00061\ }
+\DoxyCodeLine{\Hypertarget{_reflective_model_8cs_source_l00062}00062\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (parameterInfo.PropertyType.IsPrimitive\ ||}
+\DoxyCodeLine{\Hypertarget{_reflective_model_8cs_source_l00063}00063\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ parameterInfo.PropertyType\ ==\ typeof(\textcolor{keywordtype}{string}))}
+\DoxyCodeLine{\Hypertarget{_reflective_model_8cs_source_l00064}00064\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_reflective_model_8cs_source_l00065}00065\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (ReflectiveParameterMap.TryGetValue(parameterKey,\ out\ var\ value))}
+\DoxyCodeLine{\Hypertarget{_reflective_model_8cs_source_l00066}00066\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_reflective_model_8cs_source_l00067}00067\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ blazorParameters.Add(parameterKey,\ value.Value);}
+\DoxyCodeLine{\Hypertarget{_reflective_model_8cs_source_l00068}00068\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_reflective_model_8cs_source_l00069}00069\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_reflective_model_8cs_source_l00070}00070\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{\Hypertarget{_reflective_model_8cs_source_l00071}00071\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_reflective_model_8cs_source_l00072}00072\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (ReflectiveParameterMap.TryGetValue(parameterKey,\ out\ var\ value)\ \&\&}
+\DoxyCodeLine{\Hypertarget{_reflective_model_8cs_source_l00073}00073\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ value.ChosenConstructorInfo\ is\ not\ \textcolor{keyword}{null})}
+\DoxyCodeLine{\Hypertarget{_reflective_model_8cs_source_l00074}00074\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_reflective_model_8cs_source_l00075}00075\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ var\ topLevelConstructorArgs\ =\ \textcolor{keyword}{new}\ List<object?>();}
+\DoxyCodeLine{\Hypertarget{_reflective_model_8cs_source_l00076}00076\ }
+\DoxyCodeLine{\Hypertarget{_reflective_model_8cs_source_l00077}00077\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{foreach}\ (var\ constructorParameter\ \textcolor{keywordflow}{in}\ value.ChosenConstructorInfo.GetParameters())}
+\DoxyCodeLine{\Hypertarget{_reflective_model_8cs_source_l00078}00078\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_reflective_model_8cs_source_l00079}00079\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ topLevelConstructorArgs.Add(InvokeConstructorRecursively(}
+\DoxyCodeLine{\Hypertarget{_reflective_model_8cs_source_l00080}00080\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ parameterKey,}
+\DoxyCodeLine{\Hypertarget{_reflective_model_8cs_source_l00081}00081\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ constructorParameter));}
+\DoxyCodeLine{\Hypertarget{_reflective_model_8cs_source_l00082}00082\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_reflective_model_8cs_source_l00083}00083\ }
+\DoxyCodeLine{\Hypertarget{_reflective_model_8cs_source_l00084}00084\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ var\ objectInstance\ =\ value.ChosenConstructorInfo.Invoke(}
+\DoxyCodeLine{\Hypertarget{_reflective_model_8cs_source_l00085}00085\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ topLevelConstructorArgs.ToArray());}
+\DoxyCodeLine{\Hypertarget{_reflective_model_8cs_source_l00086}00086\ }
+\DoxyCodeLine{\Hypertarget{_reflective_model_8cs_source_l00087}00087\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ value.Value\ =\ objectInstance;}
+\DoxyCodeLine{\Hypertarget{_reflective_model_8cs_source_l00088}00088\ }
+\DoxyCodeLine{\Hypertarget{_reflective_model_8cs_source_l00089}00089\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ blazorParameters.Add(parameterKey,\ value.Value);}
+\DoxyCodeLine{\Hypertarget{_reflective_model_8cs_source_l00090}00090\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_reflective_model_8cs_source_l00091}00091\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_reflective_model_8cs_source_l00092}00092\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_reflective_model_8cs_source_l00093}00093\ }
+\DoxyCodeLine{\Hypertarget{_reflective_model_8cs_source_l00094}00094\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ blazorParameters;}
+\DoxyCodeLine{\Hypertarget{_reflective_model_8cs_source_l00095}00095\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_reflective_model_8cs_source_l00096}00096\ }
+\DoxyCodeLine{\Hypertarget{_reflective_model_8cs_source_l00097}00097\ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keywordtype}{void}\ CalculateComponentPropertyInfoList(\textcolor{keywordtype}{string}?\ chosenTypeGuidString,\ ref\ \textcolor{keywordtype}{int}\ chosenComponentChangeCounter)}
+\DoxyCodeLine{\Hypertarget{_reflective_model_8cs_source_l00098}00098\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_reflective_model_8cs_source_l00099}00099\ \ \ \ \ \ \ \ \ var\ refDisplayState\ =\ \textcolor{keyword}{this};}
+\DoxyCodeLine{\Hypertarget{_reflective_model_8cs_source_l00100}00100\ }
+\DoxyCodeLine{\Hypertarget{_reflective_model_8cs_source_l00101}00101\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\textcolor{keywordtype}{string}.IsNullOrWhiteSpace(chosenTypeGuidString)\ ||}
+\DoxyCodeLine{\Hypertarget{_reflective_model_8cs_source_l00102}00102\ \ \ \ \ \ \ \ \ \ \ \ \ chosenTypeGuidString\ ==\ Guid.Empty.ToString()\ ||}
+\DoxyCodeLine{\Hypertarget{_reflective_model_8cs_source_l00103}00103\ \ \ \ \ \ \ \ \ \ \ \ \ !Guid.TryParse(chosenTypeGuidString,\ out\ var\ chosenTypeGuid))}
+\DoxyCodeLine{\Hypertarget{_reflective_model_8cs_source_l00104}00104\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_reflective_model_8cs_source_l00105}00105\ \ \ \ \ \ \ \ \ \ \ \ \ refDisplayState\ =\ refDisplayState\ with}
+\DoxyCodeLine{\Hypertarget{_reflective_model_8cs_source_l00106}00106\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_reflective_model_8cs_source_l00107}00107\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ChosenTypeGuid\ =\ Guid.Empty}
+\DoxyCodeLine{\Hypertarget{_reflective_model_8cs_source_l00108}00108\ \ \ \ \ \ \ \ \ \ \ \ \ \};}
+\DoxyCodeLine{\Hypertarget{_reflective_model_8cs_source_l00109}00109\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_reflective_model_8cs_source_l00110}00110\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{\Hypertarget{_reflective_model_8cs_source_l00111}00111\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_reflective_model_8cs_source_l00112}00112\ \ \ \ \ \ \ \ \ \ \ \ \ refDisplayState\ =\ refDisplayState\ with}
+\DoxyCodeLine{\Hypertarget{_reflective_model_8cs_source_l00113}00113\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_reflective_model_8cs_source_l00114}00114\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ChosenTypeGuid\ =\ chosenTypeGuid}
+\DoxyCodeLine{\Hypertarget{_reflective_model_8cs_source_l00115}00115\ \ \ \ \ \ \ \ \ \ \ \ \ \};}
+\DoxyCodeLine{\Hypertarget{_reflective_model_8cs_source_l00116}00116\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_reflective_model_8cs_source_l00117}00117\ }
+\DoxyCodeLine{\Hypertarget{_reflective_model_8cs_source_l00118}00118\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (refDisplayState.PreviousTypeGuid\ !=\ refDisplayState.ChosenTypeGuid)}
+\DoxyCodeLine{\Hypertarget{_reflective_model_8cs_source_l00119}00119\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_reflective_model_8cs_source_l00120}00120\ \ \ \ \ \ \ \ \ \ \ \ \ refDisplayState\ =\ refDisplayState\ with}
+\DoxyCodeLine{\Hypertarget{_reflective_model_8cs_source_l00121}00121\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_reflective_model_8cs_source_l00122}00122\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ PreviousTypeGuid\ =\ refDisplayState.ChosenTypeGuid}
+\DoxyCodeLine{\Hypertarget{_reflective_model_8cs_source_l00123}00123\ \ \ \ \ \ \ \ \ \ \ \ \ \};}
+\DoxyCodeLine{\Hypertarget{_reflective_model_8cs_source_l00124}00124\ }
+\DoxyCodeLine{\Hypertarget{_reflective_model_8cs_source_l00125}00125\ \ \ \ \ \ \ \ \ \ \ \ \ chosenComponentChangeCounter++;}
+\DoxyCodeLine{\Hypertarget{_reflective_model_8cs_source_l00126}00126\ }
+\DoxyCodeLine{\Hypertarget{_reflective_model_8cs_source_l00127}00127\ \ \ \ \ \ \ \ \ \ \ \ \ var\ type\ =\ refDisplayState.ChosenType;}
+\DoxyCodeLine{\Hypertarget{_reflective_model_8cs_source_l00128}00128\ }
+\DoxyCodeLine{\Hypertarget{_reflective_model_8cs_source_l00129}00129\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (type\ is\ not\ \textcolor{keyword}{null})}
+\DoxyCodeLine{\Hypertarget{_reflective_model_8cs_source_l00130}00130\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_reflective_model_8cs_source_l00131}00131\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ refDisplayState\ =\ refDisplayState\ with}
+\DoxyCodeLine{\Hypertarget{_reflective_model_8cs_source_l00132}00132\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_reflective_model_8cs_source_l00133}00133\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ComponentPropertyInfoList\ =\ type}
+\DoxyCodeLine{\Hypertarget{_reflective_model_8cs_source_l00134}00134\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ .GetProperties()}
+\DoxyCodeLine{\Hypertarget{_reflective_model_8cs_source_l00135}00135\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ .Where(x\ =>\ Attribute.IsDefined(x,\ typeof(ParameterAttribute)))}
+\DoxyCodeLine{\Hypertarget{_reflective_model_8cs_source_l00136}00136\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ .ToArray()}
+\DoxyCodeLine{\Hypertarget{_reflective_model_8cs_source_l00137}00137\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \};}
+\DoxyCodeLine{\Hypertarget{_reflective_model_8cs_source_l00138}00138\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_reflective_model_8cs_source_l00139}00139\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{\Hypertarget{_reflective_model_8cs_source_l00140}00140\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_reflective_model_8cs_source_l00141}00141\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ refDisplayState\ =\ refDisplayState\ with}
+\DoxyCodeLine{\Hypertarget{_reflective_model_8cs_source_l00142}00142\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_reflective_model_8cs_source_l00143}00143\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ComponentPropertyInfoList\ =\ Array.Empty<PropertyInfo>()}
+\DoxyCodeLine{\Hypertarget{_reflective_model_8cs_source_l00144}00144\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \};}
+\DoxyCodeLine{\Hypertarget{_reflective_model_8cs_source_l00145}00145\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_reflective_model_8cs_source_l00146}00146\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_reflective_model_8cs_source_l00147}00147\ }
+\DoxyCodeLine{\Hypertarget{_reflective_model_8cs_source_l00148}00148\ \ \ \ \ \ \ \ \ Dispatcher.Dispatch(\textcolor{keyword}{new}\ \mbox{\hyperlink{namespace_luthetus_1_1_common_1_1_razor_lib_1_1_reflectives_1_1_states_acba6b3f1b3436e8855ad1401b1d8718e}{ReflectiveState}}.WithAction(}
+\DoxyCodeLine{\Hypertarget{_reflective_model_8cs_source_l00149}00149\ \ \ \ \ \ \ \ \ \ \ \ \ refDisplayState.Key,\ inDisplayState\ =>\ inDisplayState\ with}
+\DoxyCodeLine{\Hypertarget{_reflective_model_8cs_source_l00150}00150\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_reflective_model_8cs_source_l00151}00151\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ChosenTypeGuid\ =\ refDisplayState.ChosenTypeGuid,}
+\DoxyCodeLine{\Hypertarget{_reflective_model_8cs_source_l00152}00152\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ PreviousTypeGuid\ =\ refDisplayState.PreviousTypeGuid,}
+\DoxyCodeLine{\Hypertarget{_reflective_model_8cs_source_l00153}00153\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ComponentPropertyInfoList\ =\ refDisplayState.ComponentPropertyInfoList,}
+\DoxyCodeLine{\Hypertarget{_reflective_model_8cs_source_l00154}00154\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ReflectiveParameterMap\ =\ new(),}
+\DoxyCodeLine{\Hypertarget{_reflective_model_8cs_source_l00155}00155\ \ \ \ \ \ \ \ \ \ \ \ \ \}));}
+\DoxyCodeLine{\Hypertarget{_reflective_model_8cs_source_l00156}00156\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_reflective_model_8cs_source_l00157}00157\ }
+\DoxyCodeLine{\Hypertarget{_reflective_model_8cs_source_l00161}00161\ \ \ \ \ \textcolor{keyword}{private}\ \textcolor{keywordtype}{object}?\ InvokeConstructorRecursively(}
+\DoxyCodeLine{\Hypertarget{_reflective_model_8cs_source_l00162}00162\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{string}\ parameterKey,}
+\DoxyCodeLine{\Hypertarget{_reflective_model_8cs_source_l00163}00163\ \ \ \ \ \ \ \ \ ParameterInfo\ parameterInfo)}
+\DoxyCodeLine{\Hypertarget{_reflective_model_8cs_source_l00164}00164\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_reflective_model_8cs_source_l00165}00165\ \ \ \ \ \ \ \ \ parameterKey\ +=\ \$\textcolor{stringliteral}{"{}.\{parameterInfo.Name\}"{}};}
+\DoxyCodeLine{\Hypertarget{_reflective_model_8cs_source_l00166}00166\ }
+\DoxyCodeLine{\Hypertarget{_reflective_model_8cs_source_l00167}00167\ \ \ \ \ \ \ \ \ var\ objectInstance\ =\ (\textcolor{keywordtype}{object}?)\textcolor{keyword}{null};}
+\DoxyCodeLine{\Hypertarget{_reflective_model_8cs_source_l00168}00168\ }
+\DoxyCodeLine{\Hypertarget{_reflective_model_8cs_source_l00169}00169\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (parameterInfo.ParameterType.IsPrimitive\ ||}
+\DoxyCodeLine{\Hypertarget{_reflective_model_8cs_source_l00170}00170\ \ \ \ \ \ \ \ \ \ \ \ \ parameterInfo.ParameterType\ ==\ typeof(\textcolor{keywordtype}{string}))}
+\DoxyCodeLine{\Hypertarget{_reflective_model_8cs_source_l00171}00171\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_reflective_model_8cs_source_l00172}00172\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (ReflectiveParameterMap.TryGetValue(parameterKey,\ out\ var\ value))}
+\DoxyCodeLine{\Hypertarget{_reflective_model_8cs_source_l00173}00173\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ objectInstance\ =\ value.Value;}
+\DoxyCodeLine{\Hypertarget{_reflective_model_8cs_source_l00174}00174\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_reflective_model_8cs_source_l00175}00175\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{\Hypertarget{_reflective_model_8cs_source_l00176}00176\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_reflective_model_8cs_source_l00177}00177\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (ReflectiveParameterMap.TryGetValue(parameterKey,\ out\ var\ value)\ \&\&}
+\DoxyCodeLine{\Hypertarget{_reflective_model_8cs_source_l00178}00178\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ value.ChosenConstructorInfo\ is\ not\ \textcolor{keyword}{null})}
+\DoxyCodeLine{\Hypertarget{_reflective_model_8cs_source_l00179}00179\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_reflective_model_8cs_source_l00180}00180\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ var\ topLevelConstructorArgs\ =\ \textcolor{keyword}{new}\ List<object?>();}
+\DoxyCodeLine{\Hypertarget{_reflective_model_8cs_source_l00181}00181\ }
+\DoxyCodeLine{\Hypertarget{_reflective_model_8cs_source_l00182}00182\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{foreach}\ (var\ constructorParameter\ \textcolor{keywordflow}{in}\ value.ChosenConstructorInfo.GetParameters())}
+\DoxyCodeLine{\Hypertarget{_reflective_model_8cs_source_l00183}00183\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_reflective_model_8cs_source_l00184}00184\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ topLevelConstructorArgs.Add(InvokeConstructorRecursively(}
+\DoxyCodeLine{\Hypertarget{_reflective_model_8cs_source_l00185}00185\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ parameterKey,}
+\DoxyCodeLine{\Hypertarget{_reflective_model_8cs_source_l00186}00186\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ constructorParameter));}
+\DoxyCodeLine{\Hypertarget{_reflective_model_8cs_source_l00187}00187\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_reflective_model_8cs_source_l00188}00188\ }
+\DoxyCodeLine{\Hypertarget{_reflective_model_8cs_source_l00189}00189\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ objectInstance\ =\ value.ChosenConstructorInfo.Invoke(}
+\DoxyCodeLine{\Hypertarget{_reflective_model_8cs_source_l00190}00190\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ topLevelConstructorArgs.ToArray());}
+\DoxyCodeLine{\Hypertarget{_reflective_model_8cs_source_l00191}00191\ }
+\DoxyCodeLine{\Hypertarget{_reflective_model_8cs_source_l00192}00192\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ value.Value\ =\ objectInstance;}
+\DoxyCodeLine{\Hypertarget{_reflective_model_8cs_source_l00193}00193\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_reflective_model_8cs_source_l00194}00194\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_reflective_model_8cs_source_l00195}00195\ }
+\DoxyCodeLine{\Hypertarget{_reflective_model_8cs_source_l00196}00196\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ objectInstance;}
+\DoxyCodeLine{\Hypertarget{_reflective_model_8cs_source_l00197}00197\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_reflective_model_8cs_source_l00198}00198\ }
+\DoxyCodeLine{\Hypertarget{_reflective_model_8cs_source_l00199}00199\ \ \ \ \ \textcolor{keyword}{private}\ \textcolor{keywordtype}{void}\ BubbleUpValue(\textcolor{keywordtype}{string}\ name,\ \mbox{\hyperlink{interface_luthetus_1_1_common_1_1_razor_lib_1_1_reflectives_1_1_models_1_1_i_reflective_parameter}{IReflectiveParameter}}\ value)}
+\DoxyCodeLine{\Hypertarget{_reflective_model_8cs_source_l00200}00200\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_reflective_model_8cs_source_l00201}00201\ \ \ \ \ \ \ \ \ var\ splitName\ =\ name.Split(\textcolor{charliteral}{'.'});}
+\DoxyCodeLine{\Hypertarget{_reflective_model_8cs_source_l00202}00202\ }
+\DoxyCodeLine{\Hypertarget{_reflective_model_8cs_source_l00203}00203\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ splitName.Length;\ i++)}
+\DoxyCodeLine{\Hypertarget{_reflective_model_8cs_source_l00204}00204\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_reflective_model_8cs_source_l00205}00205\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (i\ ==\ splitName.Length\ -\/\ 1)}
+\DoxyCodeLine{\Hypertarget{_reflective_model_8cs_source_l00206}00206\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{_reflective_model_8cs_source_l00207}00207\ }
+\DoxyCodeLine{\Hypertarget{_reflective_model_8cs_source_l00208}00208\ \ \ \ \ \ \ \ \ \ \ \ \ var\ parentKey\ =\ \textcolor{keywordtype}{string}.Join(\textcolor{charliteral}{'.'},\ splitName.Take(i\ +\ 1));}
+\DoxyCodeLine{\Hypertarget{_reflective_model_8cs_source_l00209}00209\ \ \ \ \ \ \ \ \ \ \ \ \ var\ childKey\ =\ \textcolor{keywordtype}{string}.Join(\textcolor{charliteral}{'.'},\ splitName.Take(i\ +\ 2));}
+\DoxyCodeLine{\Hypertarget{_reflective_model_8cs_source_l00210}00210\ }
+\DoxyCodeLine{\Hypertarget{_reflective_model_8cs_source_l00211}00211\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!ReflectiveParameterMap.TryGetValue(parentKey,\ out\ var\ parentValue)\ ||}
+\DoxyCodeLine{\Hypertarget{_reflective_model_8cs_source_l00212}00212\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ !ReflectiveParameterMap.TryGetValue(childKey,\ out\ var\ childValue))}
+\DoxyCodeLine{\Hypertarget{_reflective_model_8cs_source_l00213}00213\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{continue};}
+\DoxyCodeLine{\Hypertarget{_reflective_model_8cs_source_l00214}00214\ }
+\DoxyCodeLine{\Hypertarget{_reflective_model_8cs_source_l00215}00215\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (parentValue.ChosenConstructorInfo\ is\ \textcolor{keyword}{null}\ ||}
+\DoxyCodeLine{\Hypertarget{_reflective_model_8cs_source_l00216}00216\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ childValue.ChosenConstructorInfo\ is\ \textcolor{keyword}{null})}
+\DoxyCodeLine{\Hypertarget{_reflective_model_8cs_source_l00217}00217\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{continue};}
+\DoxyCodeLine{\Hypertarget{_reflective_model_8cs_source_l00218}00218\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_reflective_model_8cs_source_l00219}00219\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_reflective_model_8cs_source_l00220}00220\ \}}
+
+\end{DoxyCode}

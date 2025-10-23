@@ -1,0 +1,8 @@
+var interface_luthetus_1_1_extensions_1_1_dot_net_1_1_menus_1_1_models_1_1_i_dot_net_menu_options_factory =
+[
+    [ "AddProjectToProjectReference", "interface_luthetus_1_1_extensions_1_1_dot_net_1_1_menus_1_1_models_1_1_i_dot_net_menu_options_factory.html#a18de6f83b066b20d5cc9645a5d5f79e7", null ],
+    [ "MoveProjectToSolutionFolder", "interface_luthetus_1_1_extensions_1_1_dot_net_1_1_menus_1_1_models_1_1_i_dot_net_menu_options_factory.html#a1a40795d0b36aab4ce51e3fe85009c69", null ],
+    [ "RemoveCSharpProjectReferenceFromSolution", "interface_luthetus_1_1_extensions_1_1_dot_net_1_1_menus_1_1_models_1_1_i_dot_net_menu_options_factory.html#a312cc3667020ca959a2730d8d6f48a55", null ],
+    [ "RemoveNuGetPackageReferenceFromProject", "interface_luthetus_1_1_extensions_1_1_dot_net_1_1_menus_1_1_models_1_1_i_dot_net_menu_options_factory.html#ae2baa4296f2f0e3f2f867af78a5594d0", null ],
+    [ "RemoveProjectToProjectReference", "interface_luthetus_1_1_extensions_1_1_dot_net_1_1_menus_1_1_models_1_1_i_dot_net_menu_options_factory.html#a5d28a5dd5b61340bd2f8606bdaa86be9", null ]
+];

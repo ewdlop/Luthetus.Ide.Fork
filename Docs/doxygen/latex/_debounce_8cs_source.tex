@@ -1,0 +1,171 @@
+\doxysection{Debounce.\+cs}
+\hypertarget{_debounce_8cs_source}{}\label{_debounce_8cs_source}\index{Source/Lib/Common/Reactives/Models/Debounce.cs@{Source/Lib/Common/Reactives/Models/Debounce.cs}}
+\mbox{\hyperlink{_debounce_8cs}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{_debounce_8cs_source_l00001}\mbox{\hyperlink{namespace_luthetus_1_1_common_1_1_razor_lib_1_1_reactives_1_1_models}{00001}}\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespace_luthetus_1_1_common_1_1_razor_lib_1_1_reactives_1_1_models}{Luthetus.Common.RazorLib.Reactives.Models}};}
+\DoxyCodeLine{\Hypertarget{_debounce_8cs_source_l00002}00002\ }
+\DoxyCodeLine{\Hypertarget{_debounce_8cs_source_l00014}\mbox{\hyperlink{class_luthetus_1_1_common_1_1_razor_lib_1_1_reactives_1_1_models_1_1_debounce-1-g}{00014}}\ \textcolor{keyword}{public}\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_luthetus_1_1_common_1_1_razor_lib_1_1_reactives_1_1_models_1_1_debounce-1-g_ab1096129e3cfd0fc1f3a321fa663e4e9}{Debounce}}<TArgs>}
+\DoxyCodeLine{\Hypertarget{_debounce_8cs_source_l00015}00015\ \{}
+\DoxyCodeLine{\Hypertarget{_debounce_8cs_source_l00016}00016\ }
+\DoxyCodeLine{\Hypertarget{_debounce_8cs_source_l00017}00017\ \textcolor{comment}{/*}}
+\DoxyCodeLine{\Hypertarget{_debounce_8cs_source_l00018}00018\ \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{_debounce_8cs_source_l00019}00019\ \textcolor{comment}{jjjjjjj}}
+\DoxyCodeLine{\Hypertarget{_debounce_8cs_source_l00020}00020\ \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{_debounce_8cs_source_l00021}00021\ \textcolor{comment}{j\ -\/>\ Task.Delay(DebounceTimeSpan)}}
+\DoxyCodeLine{\Hypertarget{_debounce_8cs_source_l00022}00022\ \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{_debounce_8cs_source_l00023}00023\ \textcolor{comment}{j\ }}
+\DoxyCodeLine{\Hypertarget{_debounce_8cs_source_l00024}00024\ \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{_debounce_8cs_source_l00025}00025\ \textcolor{comment}{CancellationToken\ share\ between}}
+\DoxyCodeLine{\Hypertarget{_debounce_8cs_source_l00026}00026\ \textcolor{comment}{\ \ \ \ 'j\ -\/>\ Task.Delay(DebounceTimeSpan)'}}
+\DoxyCodeLine{\Hypertarget{_debounce_8cs_source_l00027}00027\ \textcolor{comment}{\ \ \ \ 'taskStartWorkItem'}}
+\DoxyCodeLine{\Hypertarget{_debounce_8cs_source_l00028}00028\ \textcolor{comment}{\ \ \ \ }}
+\DoxyCodeLine{\Hypertarget{_debounce_8cs_source_l00029}00029\ \textcolor{comment}{j\ -\/>}}
+\DoxyCodeLine{\Hypertarget{_debounce_8cs_source_l00030}00030\ \textcolor{comment}{\ \ \ \ Task.Delay(DebounceTimeSpan,\ cancellationToken)\ -\/>}}
+\DoxyCodeLine{\Hypertarget{_debounce_8cs_source_l00031}00031\ \textcolor{comment}{\ \ \ \ \ \ \ \ Task.Run();}}
+\DoxyCodeLine{\Hypertarget{_debounce_8cs_source_l00032}00032\ \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{_debounce_8cs_source_l00033}00033\ \textcolor{comment}{no}}
+\DoxyCodeLine{\Hypertarget{_debounce_8cs_source_l00034}00034\ \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{_debounce_8cs_source_l00035}00035\ \textcolor{comment}{j\ -\/>}}
+\DoxyCodeLine{\Hypertarget{_debounce_8cs_source_l00036}00036\ \textcolor{comment}{\ \ \ \ Task.Run(Task.Delay(DebounceTimeSpan,\ cancellationToken));\ -\/>}}
+\DoxyCodeLine{\Hypertarget{_debounce_8cs_source_l00037}00037\ \textcolor{comment}{\ \ \ \ //\ if\ Task.Run\ is\ given\ the\ cancellationToken\ it\ will\ throw\ an\ exception\ upon\ cancellation}}
+\DoxyCodeLine{\Hypertarget{_debounce_8cs_source_l00038}00038\ \textcolor{comment}{\ \ \ \ //\ the\ user\ probably\ doesn't\ want\ this\ information\ so\ I\ won't\ put\ it\ on\ the\ Task.Run\ itself.}}
+\DoxyCodeLine{\Hypertarget{_debounce_8cs_source_l00039}00039\ \textcolor{comment}{\ \ \ \ //\ Otherwise\ every\ invocation\ would\ require\ me\ to\ start\ a\ task.}}
+\DoxyCodeLine{\Hypertarget{_debounce_8cs_source_l00040}00040\ \textcolor{comment}{\ \ \ \ //}}
+\DoxyCodeLine{\Hypertarget{_debounce_8cs_source_l00041}00041\ \textcolor{comment}{\ \ \ \ //\ Speaking\ of\ which,\ I\ need\ to\ re-\/use\ the\ "{}intent\ to\ start"{}\ task\ rather\ than\ stopping}}
+\DoxyCodeLine{\Hypertarget{_debounce_8cs_source_l00042}00042\ \textcolor{comment}{\ \ \ \ //\ it\ and\ starting\ a\ new\ task.}}
+\DoxyCodeLine{\Hypertarget{_debounce_8cs_source_l00043}00043\ \textcolor{comment}{\ \ \ \ //}}
+\DoxyCodeLine{\Hypertarget{_debounce_8cs_source_l00044}00044\ \textcolor{comment}{\ \ \ \ //\ I\ presume\ this\ would\ be\ a\ massive\ improvement\ in\ all\ regards}}
+\DoxyCodeLine{\Hypertarget{_debounce_8cs_source_l00045}00045\ \textcolor{comment}{\ \ \ \ //\ considering\ how\ often\ the\ debounce\ might\ fire.}}
+\DoxyCodeLine{\Hypertarget{_debounce_8cs_source_l00046}00046\ \textcolor{comment}{\ \ \ \ }}
+\DoxyCodeLine{\Hypertarget{_debounce_8cs_source_l00047}00047\ \textcolor{comment}{j\ -\/>}}
+\DoxyCodeLine{\Hypertarget{_debounce_8cs_source_l00048}00048\ \textcolor{comment}{\ \ \ \ Step\ Cancel:}}
+\DoxyCodeLine{\Hypertarget{_debounce_8cs_source_l00049}00049\ \textcolor{comment}{\ \ \ \ \ \ \ \ CancellationTokenSource.Cancel();}}
+\DoxyCodeLine{\Hypertarget{_debounce_8cs_source_l00050}00050\ \textcolor{comment}{\ \ \ \ if\ (intentToRun.IsCompleted)}}
+\DoxyCodeLine{\Hypertarget{_debounce_8cs_source_l00051}00051\ \textcolor{comment}{\ \ \ \ \{}}
+\DoxyCodeLine{\Hypertarget{_debounce_8cs_source_l00052}00052\ \textcolor{comment}{\ \ \ \ \ \ \ \ //\ Begin\ a\ new\ intentToRun}}
+\DoxyCodeLine{\Hypertarget{_debounce_8cs_source_l00053}00053\ \textcolor{comment}{\ \ \ \ \ \ \ \ var\ intentToRun\ =\ Task.Run(await\ ()\ =>}}
+\DoxyCodeLine{\Hypertarget{_debounce_8cs_source_l00054}00054\ \textcolor{comment}{\ \ \ \ \ \ \ \ \{}}
+\DoxyCodeLine{\Hypertarget{_debounce_8cs_source_l00055}00055\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ Task.Delay(DebounceTimeSpan,\ cancellationToken)}}
+\DoxyCodeLine{\Hypertarget{_debounce_8cs_source_l00056}00056\ \textcolor{comment}{\ \ \ \ \ \ \ \ \});}}
+\DoxyCodeLine{\Hypertarget{_debounce_8cs_source_l00057}00057\ \textcolor{comment}{\ \ \ \ \}}}
+\DoxyCodeLine{\Hypertarget{_debounce_8cs_source_l00058}00058\ \textcolor{comment}{\ \ \ \ else}}
+\DoxyCodeLine{\Hypertarget{_debounce_8cs_source_l00059}00059\ \textcolor{comment}{\ \ \ \ \{}}
+\DoxyCodeLine{\Hypertarget{_debounce_8cs_source_l00060}00060\ \textcolor{comment}{\ \ \ \ \}}}
+\DoxyCodeLine{\Hypertarget{_debounce_8cs_source_l00061}00061\ \textcolor{comment}{\ \ \ \ Step\ Reuse:}}
+\DoxyCodeLine{\Hypertarget{_debounce_8cs_source_l00062}00062\ \textcolor{comment}{\ \ \ \ }}
+\DoxyCodeLine{\Hypertarget{_debounce_8cs_source_l00063}00063\ \textcolor{comment}{No}}
+\DoxyCodeLine{\Hypertarget{_debounce_8cs_source_l00064}00064\ \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{_debounce_8cs_source_l00065}00065\ \textcolor{comment}{TimerSpan?}}
+\DoxyCodeLine{\Hypertarget{_debounce_8cs_source_l00066}00066\ \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{_debounce_8cs_source_l00067}00067\ \textcolor{comment}{Is\ there\ API\ to\ re-\/use\ the\ same\ 'CancellationTokenSource'\ after\ cancelling?}}
+\DoxyCodeLine{\Hypertarget{_debounce_8cs_source_l00068}00068\ \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{_debounce_8cs_source_l00069}00069\ \textcolor{comment}{Every\ second,\ check\ the\ timespan\ of\ the\ most\ recent\ event.}}
+\DoxyCodeLine{\Hypertarget{_debounce_8cs_source_l00070}00070\ \textcolor{comment}{If\ mostRecentEvent\ -\/\ CurrentTimeSpan\ >\ Delay\ =>\ start\ work\ item}}
+\DoxyCodeLine{\Hypertarget{_debounce_8cs_source_l00071}00071\ \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{_debounce_8cs_source_l00072}00072\ \textcolor{comment}{j\ -\/>}}
+\DoxyCodeLine{\Hypertarget{_debounce_8cs_source_l00073}00073\ \textcolor{comment}{\ \ \ \ if\ (intentToRun.IsCompleted)}}
+\DoxyCodeLine{\Hypertarget{_debounce_8cs_source_l00074}00074\ \textcolor{comment}{\ \ \ \ \{}}
+\DoxyCodeLine{\Hypertarget{_debounce_8cs_source_l00075}00075\ \textcolor{comment}{\ \ \ \ \ \ \ \ lock\ (eventLock)}}
+\DoxyCodeLine{\Hypertarget{_debounce_8cs_source_l00076}00076\ \textcolor{comment}{\ \ \ \ \ \ \ \ \{}}
+\DoxyCodeLine{\Hypertarget{_debounce_8cs_source_l00077}00077\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \_eventTimeSpan\ =\ DateTime.UtcNow;}}
+\DoxyCodeLine{\Hypertarget{_debounce_8cs_source_l00078}00078\ \textcolor{comment}{\ \ \ \ \ \ \ \ \}}}
+\DoxyCodeLine{\Hypertarget{_debounce_8cs_source_l00079}00079\ \textcolor{comment}{\ \ \ \ \ \ \ \ }}
+\DoxyCodeLine{\Hypertarget{_debounce_8cs_source_l00080}00080\ \textcolor{comment}{\ \ \ \ \ \ \ \ //\ Begin\ a\ new\ intentToRun}}
+\DoxyCodeLine{\Hypertarget{_debounce_8cs_source_l00081}00081\ \textcolor{comment}{\ \ \ \ \ \ \ \ IntentToRun\ =\ Task.Run(async\ ()\ =>}}
+\DoxyCodeLine{\Hypertarget{_debounce_8cs_source_l00082}00082\ \textcolor{comment}{\ \ \ \ \ \ \ \ \{}}
+\DoxyCodeLine{\Hypertarget{_debounce_8cs_source_l00083}00083\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ //\ Constructor\ takes\ 'CancellationToken'\ so\ the\ outside\ and\ tell\ it\ to\ stop}}
+\DoxyCodeLine{\Hypertarget{_debounce_8cs_source_l00084}00084\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ while\ (!CancellationToken.IsCancellationRequested)}}
+\DoxyCodeLine{\Hypertarget{_debounce_8cs_source_l00085}00085\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \{}}
+\DoxyCodeLine{\Hypertarget{_debounce_8cs_source_l00086}00086\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ await\ Task.Delay(DebounceTimeSpan);}}
+\DoxyCodeLine{\Hypertarget{_debounce_8cs_source_l00087}00087\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }}
+\DoxyCodeLine{\Hypertarget{_debounce_8cs_source_l00088}00088\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ if\ (\_eventTimeSpan\ -\/\ DateTime.UtcNow\ >\ DebounceTimeSpan)}}
+\DoxyCodeLine{\Hypertarget{_debounce_8cs_source_l00089}00089\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ break;}}
+\DoxyCodeLine{\Hypertarget{_debounce_8cs_source_l00090}00090\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \}}}
+\DoxyCodeLine{\Hypertarget{_debounce_8cs_source_l00091}00091\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ }}
+\DoxyCodeLine{\Hypertarget{_debounce_8cs_source_l00092}00092\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ if\ (CancellationToken.IsCancellationRequested)}}
+\DoxyCodeLine{\Hypertarget{_debounce_8cs_source_l00093}00093\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ return;}}
+\DoxyCodeLine{\Hypertarget{_debounce_8cs_source_l00094}00094\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }}
+\DoxyCodeLine{\Hypertarget{_debounce_8cs_source_l00095}00095\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ //\ Await\ the\ previous\ workItem}}
+\DoxyCodeLine{\Hypertarget{_debounce_8cs_source_l00096}00096\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ await\ WorkItem;}}
+\DoxyCodeLine{\Hypertarget{_debounce_8cs_source_l00097}00097\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ }}
+\DoxyCodeLine{\Hypertarget{_debounce_8cs_source_l00098}00098\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ WorkItem\ =\ workItemFunc.Invoke();}}
+\DoxyCodeLine{\Hypertarget{_debounce_8cs_source_l00099}00099\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ await\ WorkItem;}}
+\DoxyCodeLine{\Hypertarget{_debounce_8cs_source_l00100}00100\ \textcolor{comment}{\ \ \ \ \ \ \ \ \});}}
+\DoxyCodeLine{\Hypertarget{_debounce_8cs_source_l00101}00101\ \textcolor{comment}{\ \ \ \ \}}}
+\DoxyCodeLine{\Hypertarget{_debounce_8cs_source_l00102}00102\ \textcolor{comment}{\ \ \ \ else}}
+\DoxyCodeLine{\Hypertarget{_debounce_8cs_source_l00103}00103\ \textcolor{comment}{\ \ \ \ \{}}
+\DoxyCodeLine{\Hypertarget{_debounce_8cs_source_l00104}00104\ \textcolor{comment}{\ \ \ \ \}}}
+\DoxyCodeLine{\Hypertarget{_debounce_8cs_source_l00105}00105\ \textcolor{comment}{\ \ \ \ Step\ Reuse:}}
+\DoxyCodeLine{\Hypertarget{_debounce_8cs_source_l00106}00106\ \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{_debounce_8cs_source_l00107}00107\ \textcolor{comment}{*/}}
+\DoxyCodeLine{\Hypertarget{_debounce_8cs_source_l00108}00108\ }
+\DoxyCodeLine{\Hypertarget{_debounce_8cs_source_l00109}00109\ \ \ \ \ \textcolor{keyword}{private}\ readonly\ \textcolor{keywordtype}{object}\ \_lockWorkItemArgs\ =\ \textcolor{keyword}{new}();}
+\DoxyCodeLine{\Hypertarget{_debounce_8cs_source_l00110}00110\ \ \ \ \ \textcolor{keyword}{private}\ readonly\ Func<TArgs,\ CancellationToken,\ Task>\ \_workItem;}
+\DoxyCodeLine{\Hypertarget{_debounce_8cs_source_l00111}00111\ }
+\DoxyCodeLine{\Hypertarget{_debounce_8cs_source_l00116}\mbox{\hyperlink{class_luthetus_1_1_common_1_1_razor_lib_1_1_reactives_1_1_models_1_1_debounce-1-g_ab1096129e3cfd0fc1f3a321fa663e4e9}{00116}}\ \ \ \ \ \textcolor{keyword}{public}\ \mbox{\hyperlink{class_luthetus_1_1_common_1_1_razor_lib_1_1_reactives_1_1_models_1_1_debounce-1-g_ab1096129e3cfd0fc1f3a321fa663e4e9}{Debounce}}(}
+\DoxyCodeLine{\Hypertarget{_debounce_8cs_source_l00117}00117\ \ \ \ \ \ \ \ \ TimeSpan\ debounceTimeSpan,}
+\DoxyCodeLine{\Hypertarget{_debounce_8cs_source_l00118}00118\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_luthetus_1_1_common_1_1_razor_lib_1_1_reactives_1_1_models_1_1_debounce-1-g_a39168bace598f084d14f852a940d33c4}{CancellationToken}}\ cancellationToken,}
+\DoxyCodeLine{\Hypertarget{_debounce_8cs_source_l00119}00119\ \ \ \ \ \ \ \ \ Func<TArgs,\ CancellationToken,\ Task>\ workItem)}
+\DoxyCodeLine{\Hypertarget{_debounce_8cs_source_l00120}00120\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_debounce_8cs_source_l00121}00121\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_luthetus_1_1_common_1_1_razor_lib_1_1_reactives_1_1_models_1_1_debounce-1-g_afee338d84dca1127eefcdd4b83e34921}{DebounceTimeSpan}}\ =\ debounceTimeSpan;}
+\DoxyCodeLine{\Hypertarget{_debounce_8cs_source_l00122}00122\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_luthetus_1_1_common_1_1_razor_lib_1_1_reactives_1_1_models_1_1_debounce-1-g_a39168bace598f084d14f852a940d33c4}{CancellationToken}}\ =\ cancellationToken;}
+\DoxyCodeLine{\Hypertarget{_debounce_8cs_source_l00123}00123\ \ \ \ \ \ \ \ \ \_workItem\ =\ workItem;}
+\DoxyCodeLine{\Hypertarget{_debounce_8cs_source_l00124}00124\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_debounce_8cs_source_l00125}00125\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_debounce_8cs_source_l00126}00126\ \ \ \ \ \textcolor{keyword}{private}\ TArgs\ \_args;}
+\DoxyCodeLine{\Hypertarget{_debounce_8cs_source_l00127}00127\ \ \ \ \ \textcolor{keyword}{private}\ DateTime\ \_runDateTime;}
+\DoxyCodeLine{\Hypertarget{_debounce_8cs_source_l00128}00128\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_debounce_8cs_source_l00148}00148\ \ \ \ \ \textcolor{keyword}{private}\ \textcolor{keywordtype}{bool}\ \_intentToRun;}
+\DoxyCodeLine{\Hypertarget{_debounce_8cs_source_l00149}00149\ }
+\DoxyCodeLine{\Hypertarget{_debounce_8cs_source_l00150}\mbox{\hyperlink{class_luthetus_1_1_common_1_1_razor_lib_1_1_reactives_1_1_models_1_1_debounce-1-g_aca97b57abbac35ded86cb3c3661ef196}{00150}}\ \ \ \ \ \textcolor{keyword}{public}\ Task\ \mbox{\hyperlink{class_luthetus_1_1_common_1_1_razor_lib_1_1_reactives_1_1_models_1_1_debounce-1-g_aca97b57abbac35ded86cb3c3661ef196}{\_workItemTask}}\ =\ Task.CompletedTask;}
+\DoxyCodeLine{\Hypertarget{_debounce_8cs_source_l00151}00151\ }
+\DoxyCodeLine{\Hypertarget{_debounce_8cs_source_l00152}\mbox{\hyperlink{class_luthetus_1_1_common_1_1_razor_lib_1_1_reactives_1_1_models_1_1_debounce-1-g_afee338d84dca1127eefcdd4b83e34921}{00152}}\ \ \ \ \ \textcolor{keyword}{public}\ TimeSpan\ \mbox{\hyperlink{class_luthetus_1_1_common_1_1_razor_lib_1_1_reactives_1_1_models_1_1_debounce-1-g_afee338d84dca1127eefcdd4b83e34921}{DebounceTimeSpan}}\ \{\ \textcolor{keyword}{get};\ \}}
+\DoxyCodeLine{\Hypertarget{_debounce_8cs_source_l00153}\mbox{\hyperlink{class_luthetus_1_1_common_1_1_razor_lib_1_1_reactives_1_1_models_1_1_debounce-1-g_a39168bace598f084d14f852a940d33c4}{00153}}\ \ \ \ \ \textcolor{keyword}{public}\ \mbox{\hyperlink{class_luthetus_1_1_common_1_1_razor_lib_1_1_reactives_1_1_models_1_1_debounce-1-g_a39168bace598f084d14f852a940d33c4}{CancellationToken}}\ \mbox{\hyperlink{class_luthetus_1_1_common_1_1_razor_lib_1_1_reactives_1_1_models_1_1_debounce-1-g_a39168bace598f084d14f852a940d33c4}{CancellationToken}}\ \{\ \textcolor{keyword}{get};\ \}}
+\DoxyCodeLine{\Hypertarget{_debounce_8cs_source_l00154}00154\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_debounce_8cs_source_l00155}\mbox{\hyperlink{class_luthetus_1_1_common_1_1_razor_lib_1_1_reactives_1_1_models_1_1_debounce-1-g_a1edfade73cfad9d6d3bddf3af0e718f6}{00155}}\ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_luthetus_1_1_common_1_1_razor_lib_1_1_reactives_1_1_models_1_1_debounce-1-g_a1edfade73cfad9d6d3bddf3af0e718f6}{Run}}(TArgs\ args)}
+\DoxyCodeLine{\Hypertarget{_debounce_8cs_source_l00156}00156\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_debounce_8cs_source_l00157}00157\ \ \ \ \ \ \ \ \ lock\ (\_lockWorkItemArgs)}
+\DoxyCodeLine{\Hypertarget{_debounce_8cs_source_l00158}00158\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_debounce_8cs_source_l00159}00159\ \ \ \ \ \ \ \ \ \ \ \ \ \_args\ =\ args;}
+\DoxyCodeLine{\Hypertarget{_debounce_8cs_source_l00160}00160\ \ \ \ \ \ \ \ \ \ \ \ \ \_runDateTime\ =\ DateTime.UtcNow;}
+\DoxyCodeLine{\Hypertarget{_debounce_8cs_source_l00161}00161\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\_intentToRun)}
+\DoxyCodeLine{\Hypertarget{_debounce_8cs_source_l00162}00162\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return};}
+\DoxyCodeLine{\Hypertarget{_debounce_8cs_source_l00163}00163\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_debounce_8cs_source_l00164}00164\ \ \ \ \ \ \ \ \ \ \ \ \ \_intentToRun\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{\Hypertarget{_debounce_8cs_source_l00165}00165\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_debounce_8cs_source_l00166}00166\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_debounce_8cs_source_l00167}00167\ \ \ \ \ \ \ \ \ var\ previousTask\ =\ \mbox{\hyperlink{class_luthetus_1_1_common_1_1_razor_lib_1_1_reactives_1_1_models_1_1_debounce-1-g_aca97b57abbac35ded86cb3c3661ef196}{\_workItemTask}};}
+\DoxyCodeLine{\Hypertarget{_debounce_8cs_source_l00168}00168\ }
+\DoxyCodeLine{\Hypertarget{_debounce_8cs_source_l00169}00169\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_luthetus_1_1_common_1_1_razor_lib_1_1_reactives_1_1_models_1_1_debounce-1-g_aca97b57abbac35ded86cb3c3661ef196}{\_workItemTask}}\ =\ Task.Run(async\ ()\ =>}
+\DoxyCodeLine{\Hypertarget{_debounce_8cs_source_l00170}00170\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_debounce_8cs_source_l00171}00171\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Await\ the\ previous\ work\ item\ task.}}
+\DoxyCodeLine{\Hypertarget{_debounce_8cs_source_l00172}00172\ \ \ \ \ \ \ \ \ \ \ \ \ await\ previousTask.ConfigureAwait(\textcolor{keyword}{false});}
+\DoxyCodeLine{\Hypertarget{_debounce_8cs_source_l00173}00173\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_debounce_8cs_source_l00174}00174\ \ \ \ \ \ \ \ \ \ \ \ \ TArgs\ argsCapture\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{\Hypertarget{_debounce_8cs_source_l00175}00175\ \ \ \ \ \ \ \ \ \ \ \ \ DateTime\ runDateTimeCapture;}
+\DoxyCodeLine{\Hypertarget{_debounce_8cs_source_l00176}00176\ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_debounce_8cs_source_l00177}00177\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{while}\ (!\mbox{\hyperlink{class_luthetus_1_1_common_1_1_razor_lib_1_1_reactives_1_1_models_1_1_debounce-1-g_a39168bace598f084d14f852a940d33c4}{CancellationToken}}.IsCancellationRequested)}
+\DoxyCodeLine{\Hypertarget{_debounce_8cs_source_l00178}00178\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_debounce_8cs_source_l00179}00179\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ await\ Task.Delay(\mbox{\hyperlink{class_luthetus_1_1_common_1_1_razor_lib_1_1_reactives_1_1_models_1_1_debounce-1-g_afee338d84dca1127eefcdd4b83e34921}{DebounceTimeSpan}});}
+\DoxyCodeLine{\Hypertarget{_debounce_8cs_source_l00180}00180\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_debounce_8cs_source_l00181}00181\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ lock\ (\_lockWorkItemArgs)}
+\DoxyCodeLine{\Hypertarget{_debounce_8cs_source_l00182}00182\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_debounce_8cs_source_l00183}00183\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ argsCapture\ =\ \_args;}
+\DoxyCodeLine{\Hypertarget{_debounce_8cs_source_l00184}00184\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ runDateTimeCapture\ =\ \_runDateTime;}
+\DoxyCodeLine{\Hypertarget{_debounce_8cs_source_l00185}00185\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \_intentToRun\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{\Hypertarget{_debounce_8cs_source_l00186}00186\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_debounce_8cs_source_l00187}00187\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_debounce_8cs_source_l00188}00188\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (DateTime.UtcNow\ -\/\ runDateTimeCapture\ >\ \mbox{\hyperlink{class_luthetus_1_1_common_1_1_razor_lib_1_1_reactives_1_1_models_1_1_debounce-1-g_afee338d84dca1127eefcdd4b83e34921}{DebounceTimeSpan}})}
+\DoxyCodeLine{\Hypertarget{_debounce_8cs_source_l00189}00189\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{_debounce_8cs_source_l00190}00190\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_debounce_8cs_source_l00191}00191\ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_debounce_8cs_source_l00192}00192\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{class_luthetus_1_1_common_1_1_razor_lib_1_1_reactives_1_1_models_1_1_debounce-1-g_a39168bace598f084d14f852a940d33c4}{CancellationToken}}.IsCancellationRequested)}
+\DoxyCodeLine{\Hypertarget{_debounce_8cs_source_l00193}00193\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return};}
+\DoxyCodeLine{\Hypertarget{_debounce_8cs_source_l00194}00194\ }
+\DoxyCodeLine{\Hypertarget{_debounce_8cs_source_l00195}00195\ \ \ \ \ \ \ \ \ \ \ \ \ await\ \_workItem.Invoke(argsCapture,\ \mbox{\hyperlink{class_luthetus_1_1_common_1_1_razor_lib_1_1_reactives_1_1_models_1_1_debounce-1-g_a39168bace598f084d14f852a940d33c4}{CancellationToken}})}
+\DoxyCodeLine{\Hypertarget{_debounce_8cs_source_l00196}00196\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ .ConfigureAwait(\textcolor{keyword}{false});}
+\DoxyCodeLine{\Hypertarget{_debounce_8cs_source_l00197}00197\ \ \ \ \ \ \ \ \ \});}
+\DoxyCodeLine{\Hypertarget{_debounce_8cs_source_l00198}00198\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_debounce_8cs_source_l00199}00199\ \}}
+
+\end{DoxyCode}

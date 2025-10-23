@@ -1,0 +1,253 @@
+.TH "Luthetus.TextEditor.RazorLib.Events.Models.OnKeyDownLateBatching" 3 "Version 1.0.0" "Luthetus.Ide" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+Luthetus.TextEditor.RazorLib.Events.Models.OnKeyDownLateBatching \- Use an array with a fixed size to optimize this, usually there are only about 3-5 events that end up batched\&. To construct a non-struct collection is probably a massive performance hit considering the extremely rapid turn over of this type while holding down a keyboard key\&.  
+
+.SH SYNOPSIS
+.br
+.PP
+.PP
+Inherits \fBLuthetus\&.TextEditor\&.RazorLib\&.BackgroundTasks\&.Models\&.ITextEditorWork\fP\&.
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBOnKeyDownLateBatching\fP (\fBTextEditorComponentData\fP componentData, \fBKeymapArgs\fP keymapArgs, \fBResourceUri\fP \fBresourceUri\fP, Key< \fBTextEditorViewModel\fP > viewModelKey)"
+.br
+.ti -1c
+.RI "void \fBAddToBatch\fP (\fBKeymapArgs\fP keymapArgs)"
+.br
+.ti -1c
+.RI "\fBIBackgroundTask\fP? \fBBatchOrDefault\fP (\fBIBackgroundTask\fP upstreamEvent)"
+.br
+.RI "Before a throttle event is enqueued, this method is invoked\&. This allows for batching of 'this' throttle event instance, and the last entry of the queue\&.
+.br
+
+.br
+\&. "
+.ti -1c
+.RI "async Task \fBHandleEvent\fP (CancellationToken cancellationToken)"
+.br
+.RI "This method is the actual work item that gets awaited in order to handle the event\&. "
+.in -1c
+.SS "Static Public Attributes"
+
+.in +1c
+.ti -1c
+.RI "const int \fBMAX_BATCH_SIZE\fP = 8"
+.br
+.ti -1c
+.RI "const string \fBNAME_ZERO\fP = $'{nameof(\fBOnKeyDownLateBatching\fP)}_'"
+.br
+.ti -1c
+.RI "const string \fBNAME_ONE\fP = $'{nameof(\fBOnKeyDownLateBatching\fP)}_1'"
+.br
+.ti -1c
+.RI "const string \fBNAME_TWO\fP = $'{nameof(\fBOnKeyDownLateBatching\fP)}_'"
+.br
+.ti -1c
+.RI "const string \fBNAME_THREE\fP = $'{nameof(\fBOnKeyDownLateBatching\fP)}_3'"
+.br
+.ti -1c
+.RI "const string \fBNAME_FOUR\fP = $'{nameof(\fBOnKeyDownLateBatching\fP)}_4'"
+.br
+.ti -1c
+.RI "const string \fBNAME_FIVE\fP = $'{nameof(\fBOnKeyDownLateBatching\fP)}_'"
+.br
+.ti -1c
+.RI "const string \fBNAME_SIX\fP = $'{nameof(\fBOnKeyDownLateBatching\fP)}_6'"
+.br
+.ti -1c
+.RI "const string \fBNAME_SEVEN\fP = $'{nameof(\fBOnKeyDownLateBatching\fP)}_7'"
+.br
+.ti -1c
+.RI "const string \fBNAME_EIGHT\fP = $'{nameof(\fBOnKeyDownLateBatching\fP)}_'"
+.br
+.ti -1c
+.RI "const string \fBNAME_DEFAULT\fP = nameof(\fBOnKeyDownLateBatching\fP)"
+.br
+.in -1c
+.SS "Properties"
+
+.in +1c
+.ti -1c
+.RI "Key< \fBIBackgroundTask\fP > \fBBackgroundTaskKey\fP = Key<\fBIBackgroundTask\fP>\&.NewKey()\fR [get]\fP"
+.br
+.ti -1c
+.RI "Key< \fBIBackgroundTaskQueue\fP > \fBQueueKey\fP = \fBContinuousBackgroundTaskWorker\&.GetQueueKey\fP()\fR [get]\fP"
+.br
+.ti -1c
+.RI "\fBKeymapArgs\fP[] \fBKeymapArgsList\fP = new \fBKeymapArgs\fP[\fBMAX_BATCH_SIZE\fP]\fR [get]\fP"
+.br
+.ti -1c
+.RI "ResourceUri \fBResourceUri\fP\fR [get]\fP"
+.br
+.ti -1c
+.RI "Key< \fBTextEditorViewModel\fP > \fBViewModelKey\fP\fR [get]\fP"
+.br
+.ti -1c
+.RI "\fBITextEditorEditContext\fP \fBEditContext\fP\fR [get, set]\fP"
+.br
+.ti -1c
+.RI "\fBTextEditorComponentData\fP \fBComponentData\fP\fR [get, set]\fP"
+.br
+.ti -1c
+.RI "int \fBBatchLength\fP\fR [get, set]\fP"
+.br
+.ti -1c
+.RI "bool \fBBatchHasAvailability\fP\fR [get]\fP"
+.br
+.ti -1c
+.RI "string \fBName\fP\fR [get]\fP"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+Use an array with a fixed size to optimize this, usually there are only about 3-5 events that end up batched\&. To construct a non-struct collection is probably a massive performance hit considering the extremely rapid turn over of this type while holding down a keyboard key\&. 
+.PP
+Definition at line \fB26\fP of file \fBOnKeyDownLateBatching\&.cs\fP\&.
+.SH "Constructor & Destructor Documentation"
+.PP 
+.SS "Luthetus\&.TextEditor\&.RazorLib\&.Events\&.Models\&.OnKeyDownLateBatching\&.OnKeyDownLateBatching (\fBTextEditorComponentData\fP componentData, \fBKeymapArgs\fP keymapArgs, \fBResourceUri\fP resourceUri, Key< \fBTextEditorViewModel\fP > viewModelKey)"
+
+.PP
+Definition at line \fB40\fP of file \fBOnKeyDownLateBatching\&.cs\fP\&.
+.SH "Member Function Documentation"
+.PP 
+.SS "void Luthetus\&.TextEditor\&.RazorLib\&.Events\&.Models\&.OnKeyDownLateBatching\&.AddToBatch (\fBKeymapArgs\fP keymapArgs)"
+
+.PP
+Definition at line \fB84\fP of file \fBOnKeyDownLateBatching\&.cs\fP\&.
+.SS "\fBIBackgroundTask\fP? Luthetus\&.TextEditor\&.RazorLib\&.Events\&.Models\&.OnKeyDownLateBatching\&.BatchOrDefault (\fBIBackgroundTask\fP oldEvent)"
+
+.PP
+Before a throttle event is enqueued, this method is invoked\&. This allows for batching of 'this' throttle event instance, and the last entry of the queue\&.
+.br
+
+.br
+\&. This method is invoked from within a 'lock(_queue) { \&.\&.\&. }'\&.
+.br
+
+.br
+
+.PP
+Example use: one reads an entry from the queue, its an event that write out a character\&. Perhaps this throttle event also writes out a character\&. Instead of invoking 'text\&.Insert(character)' two times\&. One might want to invoke 'text\&.InsertRange(bothCharacters)';
+.br
+
+.br
+
+.PP
+Returning null means enqueue the recentEvent without any batching, (leave the old event as it was within the queue) 
+.PP
+Implements \fBLuthetus\&.Common\&.RazorLib\&.BackgroundTasks\&.Models\&.IBackgroundTask\fP\&.
+.PP
+Definition at line \fB93\fP of file \fBOnKeyDownLateBatching\&.cs\fP\&.
+.SS "async Task Luthetus\&.TextEditor\&.RazorLib\&.Events\&.Models\&.OnKeyDownLateBatching\&.HandleEvent (CancellationToken cancellationToken)"
+
+.PP
+This method is the actual work item that gets awaited in order to handle the event\&. 
+.PP
+Implements \fBLuthetus\&.Common\&.RazorLib\&.BackgroundTasks\&.Models\&.IBackgroundTask\fP\&.
+.PP
+Definition at line \fB106\fP of file \fBOnKeyDownLateBatching\&.cs\fP\&.
+.SH "Member Data Documentation"
+.PP 
+.SS "const int Luthetus\&.TextEditor\&.RazorLib\&.Events\&.Models\&.OnKeyDownLateBatching\&.MAX_BATCH_SIZE = 8\fR [static]\fP"
+
+.PP
+Definition at line \fB28\fP of file \fBOnKeyDownLateBatching\&.cs\fP\&.
+.SS "const string Luthetus\&.TextEditor\&.RazorLib\&.Events\&.Models\&.OnKeyDownLateBatching\&.NAME_DEFAULT = nameof(\fBOnKeyDownLateBatching\fP)\fR [static]\fP"
+
+.PP
+Definition at line \fB38\fP of file \fBOnKeyDownLateBatching\&.cs\fP\&.
+.SS "const string Luthetus\&.TextEditor\&.RazorLib\&.Events\&.Models\&.OnKeyDownLateBatching\&.NAME_EIGHT = $'{nameof(\fBOnKeyDownLateBatching\fP)}_'\fR [static]\fP"
+
+.PP
+Definition at line \fB37\fP of file \fBOnKeyDownLateBatching\&.cs\fP\&.
+.SS "const string Luthetus\&.TextEditor\&.RazorLib\&.Events\&.Models\&.OnKeyDownLateBatching\&.NAME_FIVE = $'{nameof(\fBOnKeyDownLateBatching\fP)}_'\fR [static]\fP"
+
+.PP
+Definition at line \fB34\fP of file \fBOnKeyDownLateBatching\&.cs\fP\&.
+.SS "const string Luthetus\&.TextEditor\&.RazorLib\&.Events\&.Models\&.OnKeyDownLateBatching\&.NAME_FOUR = $'{nameof(\fBOnKeyDownLateBatching\fP)}_4'\fR [static]\fP"
+
+.PP
+Definition at line \fB33\fP of file \fBOnKeyDownLateBatching\&.cs\fP\&.
+.SS "const string Luthetus\&.TextEditor\&.RazorLib\&.Events\&.Models\&.OnKeyDownLateBatching\&.NAME_ONE = $'{nameof(\fBOnKeyDownLateBatching\fP)}_1'\fR [static]\fP"
+
+.PP
+Definition at line \fB30\fP of file \fBOnKeyDownLateBatching\&.cs\fP\&.
+.SS "const string Luthetus\&.TextEditor\&.RazorLib\&.Events\&.Models\&.OnKeyDownLateBatching\&.NAME_SEVEN = $'{nameof(\fBOnKeyDownLateBatching\fP)}_7'\fR [static]\fP"
+
+.PP
+Definition at line \fB36\fP of file \fBOnKeyDownLateBatching\&.cs\fP\&.
+.SS "const string Luthetus\&.TextEditor\&.RazorLib\&.Events\&.Models\&.OnKeyDownLateBatching\&.NAME_SIX = $'{nameof(\fBOnKeyDownLateBatching\fP)}_6'\fR [static]\fP"
+
+.PP
+Definition at line \fB35\fP of file \fBOnKeyDownLateBatching\&.cs\fP\&.
+.SS "const string Luthetus\&.TextEditor\&.RazorLib\&.Events\&.Models\&.OnKeyDownLateBatching\&.NAME_THREE = $'{nameof(\fBOnKeyDownLateBatching\fP)}_3'\fR [static]\fP"
+
+.PP
+Definition at line \fB32\fP of file \fBOnKeyDownLateBatching\&.cs\fP\&.
+.SS "const string Luthetus\&.TextEditor\&.RazorLib\&.Events\&.Models\&.OnKeyDownLateBatching\&.NAME_TWO = $'{nameof(\fBOnKeyDownLateBatching\fP)}_'\fR [static]\fP"
+
+.PP
+Definition at line \fB31\fP of file \fBOnKeyDownLateBatching\&.cs\fP\&.
+.SS "const string Luthetus\&.TextEditor\&.RazorLib\&.Events\&.Models\&.OnKeyDownLateBatching\&.NAME_ZERO = $'{nameof(\fBOnKeyDownLateBatching\fP)}_'\fR [static]\fP"
+
+.PP
+Definition at line \fB29\fP of file \fBOnKeyDownLateBatching\&.cs\fP\&.
+.SH "Property Documentation"
+.PP 
+.SS "Key<\fBIBackgroundTask\fP> Luthetus\&.TextEditor\&.RazorLib\&.Events\&.Models\&.OnKeyDownLateBatching\&.BackgroundTaskKey = Key<\fBIBackgroundTask\fP>\&.NewKey()\fR [get]\fP"
+
+.PP
+Implements \fBLuthetus\&.Common\&.RazorLib\&.BackgroundTasks\&.Models\&.IBackgroundTask\fP\&.
+.PP
+Definition at line \fB54\fP of file \fBOnKeyDownLateBatching\&.cs\fP\&.
+.SS "bool Luthetus\&.TextEditor\&.RazorLib\&.Events\&.Models\&.OnKeyDownLateBatching\&.BatchHasAvailability\fR [get]\fP"
+
+.PP
+Definition at line \fB62\fP of file \fBOnKeyDownLateBatching\&.cs\fP\&.
+.SS "int Luthetus\&.TextEditor\&.RazorLib\&.Events\&.Models\&.OnKeyDownLateBatching\&.BatchLength\fR [get]\fP, \fR [set]\fP"
+
+.PP
+Definition at line \fB61\fP of file \fBOnKeyDownLateBatching\&.cs\fP\&.
+.SS "\fBTextEditorComponentData\fP Luthetus\&.TextEditor\&.RazorLib\&.Events\&.Models\&.OnKeyDownLateBatching\&.ComponentData\fR [get]\fP, \fR [set]\fP"
+
+.PP
+Definition at line \fB60\fP of file \fBOnKeyDownLateBatching\&.cs\fP\&.
+.SS "\fBITextEditorEditContext\fP Luthetus\&.TextEditor\&.RazorLib\&.Events\&.Models\&.OnKeyDownLateBatching\&.EditContext\fR [get]\fP, \fR [set]\fP"
+
+.PP
+Implements \fBLuthetus\&.TextEditor\&.RazorLib\&.BackgroundTasks\&.Models\&.ITextEditorWork\fP\&.
+.PP
+Definition at line \fB59\fP of file \fBOnKeyDownLateBatching\&.cs\fP\&.
+.SS "\fBKeymapArgs\fP [] Luthetus\&.TextEditor\&.RazorLib\&.Events\&.Models\&.OnKeyDownLateBatching\&.KeymapArgsList = new \fBKeymapArgs\fP[\fBMAX_BATCH_SIZE\fP]\fR [get]\fP"
+
+.PP
+Definition at line \fB56\fP of file \fBOnKeyDownLateBatching\&.cs\fP\&.
+.SS "string Luthetus\&.TextEditor\&.RazorLib\&.Events\&.Models\&.OnKeyDownLateBatching\&.Name\fR [get]\fP"
+
+.PP
+Implements \fBLuthetus\&.Common\&.RazorLib\&.BackgroundTasks\&.Models\&.IBackgroundTask\fP\&.
+.PP
+Definition at line \fB64\fP of file \fBOnKeyDownLateBatching\&.cs\fP\&.
+.SS "Key<\fBIBackgroundTaskQueue\fP> Luthetus\&.TextEditor\&.RazorLib\&.Events\&.Models\&.OnKeyDownLateBatching\&.QueueKey = \fBContinuousBackgroundTaskWorker\&.GetQueueKey\fP()\fR [get]\fP"
+
+.PP
+Implements \fBLuthetus\&.Common\&.RazorLib\&.BackgroundTasks\&.Models\&.IBackgroundTask\fP\&.
+.PP
+Definition at line \fB55\fP of file \fBOnKeyDownLateBatching\&.cs\fP\&.
+.SS "ResourceUri Luthetus\&.TextEditor\&.RazorLib\&.Events\&.Models\&.OnKeyDownLateBatching\&.ResourceUri\fR [get]\fP"
+
+.PP
+Definition at line \fB57\fP of file \fBOnKeyDownLateBatching\&.cs\fP\&.
+.SS "Key<\fBTextEditorViewModel\fP> Luthetus\&.TextEditor\&.RazorLib\&.Events\&.Models\&.OnKeyDownLateBatching\&.ViewModelKey\fR [get]\fP"
+
+.PP
+Definition at line \fB58\fP of file \fBOnKeyDownLateBatching\&.cs\fP\&.
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for Luthetus\&.Ide from the source code\&.

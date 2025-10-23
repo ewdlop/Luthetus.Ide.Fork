@@ -1,0 +1,5 @@
+var class_luthetus_1_1_text_editor_1_1_tests_1_1_basis_1_1_diffs_1_1_states_1_1_text_editor_diff_state_actions_tests =
+[
+    [ "DisposeAction", "class_luthetus_1_1_text_editor_1_1_tests_1_1_basis_1_1_diffs_1_1_states_1_1_text_editor_diff_state_actions_tests.html#a11b4f38e6a2fc649bf406252b1b67721", null ],
+    [ "RegisterAction", "class_luthetus_1_1_text_editor_1_1_tests_1_1_basis_1_1_diffs_1_1_states_1_1_text_editor_diff_state_actions_tests.html#a5d9d05a0364716d0c0d471d51f195215", null ]
+];

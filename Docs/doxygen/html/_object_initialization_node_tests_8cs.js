@@ -1,0 +1,4 @@
+var _object_initialization_node_tests_8cs =
+[
+    [ "Luthetus.TextEditor.Tests.Basis.CompilerServices.Syntax.SyntaxNodes.ObjectInitializationNodeTests", "class_luthetus_1_1_text_editor_1_1_tests_1_1_basis_1_1_compiler_services_1_1_syntax_1_1_syntax_n24c7da48db78ab707d28a626dcc1297f.html", "class_luthetus_1_1_text_editor_1_1_tests_1_1_basis_1_1_compiler_services_1_1_syntax_1_1_syntax_n24c7da48db78ab707d28a626dcc1297f" ]
+];

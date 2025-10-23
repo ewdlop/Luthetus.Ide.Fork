@@ -1,0 +1,5 @@
+var namespace_luthetus_1_1_compiler_services_1_1_dot_net_solution_1_1_syntax_actors =
+[
+    [ "DotNetSolutionLexer", "class_luthetus_1_1_compiler_services_1_1_dot_net_solution_1_1_syntax_actors_1_1_dot_net_solution_lexer.html", "class_luthetus_1_1_compiler_services_1_1_dot_net_solution_1_1_syntax_actors_1_1_dot_net_solution_lexer" ],
+    [ "DotNetSolutionParser", "class_luthetus_1_1_compiler_services_1_1_dot_net_solution_1_1_syntax_actors_1_1_dot_net_solution_parser.html", "class_luthetus_1_1_compiler_services_1_1_dot_net_solution_1_1_syntax_actors_1_1_dot_net_solution_parser" ]
+];

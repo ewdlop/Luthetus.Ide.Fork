@@ -1,0 +1,4 @@
+var _i_luthetus_text_editor_component_renderers_8cs =
+[
+    [ "Luthetus.TextEditor.RazorLib.ComponentRenderers.Models.ILuthetusTextEditorComponentRenderers", "interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_component_renderers_1_1_models_1_1_i_luthet29607d36dd9519f12e731f8b48bda5a1.html", "interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_component_renderers_1_1_models_1_1_i_luthet29607d36dd9519f12e731f8b48bda5a1" ]
+];

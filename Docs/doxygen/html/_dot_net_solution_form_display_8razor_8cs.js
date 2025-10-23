@@ -1,0 +1,4 @@
+var _dot_net_solution_form_display_8razor_8cs =
+[
+    [ "Luthetus.Extensions.DotNet.DotNetSolutions.Displays.DotNetSolutionFormDisplay", "class_luthetus_1_1_extensions_1_1_dot_net_1_1_dot_net_solutions_1_1_displays_1_1_dot_net_solution_form_display.html", "class_luthetus_1_1_extensions_1_1_dot_net_1_1_dot_net_solutions_1_1_displays_1_1_dot_net_solution_form_display" ]
+];

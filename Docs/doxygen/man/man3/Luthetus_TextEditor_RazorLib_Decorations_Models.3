@@ -1,0 +1,76 @@
+.TH "Luthetus.TextEditor.RazorLib.Decorations.Models" 3 "Version 1.0.0" "Luthetus.Ide" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+Luthetus.TextEditor.RazorLib.Decorations.Models
+.SH SYNOPSIS
+.br
+.PP
+.SS "Classes"
+
+.in +1c
+.ti -1c
+.RI "class \fBDecorationMapperRegistryDefault\fP"
+.br
+.ti -1c
+.RI "interface \fBIDecorationMapper\fP"
+.br
+.ti -1c
+.RI "interface \fBIDecorationMapperRegistry\fP"
+.br
+.ti -1c
+.RI "interface \fBITextEditorRegistryWrap\fP"
+.br
+.ti -1c
+.RI "class \fBTextEditorDecorationMapperDefault\fP"
+.br
+.ti -1c
+.RI "class \fBTextEditorRegistryWrap\fP"
+.br
+.in -1c
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "record \fBTextEditorPresentationModel\fP (Key< TextEditorPresentationModel > TextEditorPresentationKey, int Rank, string CssClassString, \fBIDecorationMapper\fP DecorationMapper)"
+.br
+.ti -1c
+.RI "record \fBTextEditorPresentationModelCalculation\fP (string ContentAtRequest)"
+.br
+.RI "In a concurrent safe manner, get the content from the TextEditorModel such that no insertions or deletions can occur during the setting of this property\&. "
+.ti -1c
+.RI "record \fBTextEditorTextModification\fP (bool WasInsertion, \fBTextEditorTextSpan\fP \fBTextEditorTextSpan\fP)"
+.br
+.in -1c
+.SH "Function Documentation"
+.PP 
+.SS "record Luthetus\&.TextEditor\&.RazorLib\&.Decorations\&.Models\&.TextEditorPresentationModel (Key< TextEditorPresentationModel > TextEditorPresentationKey, int Rank, string CssClassString, \fBIDecorationMapper\fP DecorationMapper)"
+
+.PP
+\fBParameters\fP
+.RS 4
+\fITextEditorPresentationKey\fP Unique Identifier\&. Perhaps one wants to repaint the Diff presentation only\&. They use this to identify the Diff presentation
+.br
+\fIRank\fP The order the presentations get rendered\&. A given a ranks of [ 7, -3, 1, 2 ] the rendering order is ascending therefore it will be reordered as [ -3, 1, 2, 7 ] when iterating over the containing presentation layer
+.br
+\fICssClassString\fP A div is rendered with this css class\&. Inside this div are the divs gotten from the text spans\&. One likely only will use this css class as an identifier while viewing the browser's debugging tools\&.
+.br
+\fIDecorationMapper\fP The decoration mapper that is responsible for converting a decoration byte to a css class
+.br
+\fITextEditorTextSpans\fP The list of position indices that are to painted with certain decoration bytes\&.
+.RE
+.PP
+
+.PP
+Definition at line \fB10\fP of file \fBTextEditorPresentationModel\&.cs\fP\&.
+.SS "record Luthetus\&.TextEditor\&.RazorLib\&.Decorations\&.Models\&.TextEditorPresentationModelCalculation (string ContentAtRequest)"
+
+.PP
+In a concurrent safe manner, get the content from the TextEditorModel such that no insertions or deletions can occur during the setting of this property\&. 
+.PP
+Definition at line \fB10\fP of file \fBTextEditorPresentationModelCalculation\&.cs\fP\&.
+.SS "record Luthetus\&.TextEditor\&.RazorLib\&.Decorations\&.Models\&.TextEditorTextModification (bool WasInsertion, \fBTextEditorTextSpan\fP TextEditorTextSpan)"
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for Luthetus\&.Ide from the source code\&.

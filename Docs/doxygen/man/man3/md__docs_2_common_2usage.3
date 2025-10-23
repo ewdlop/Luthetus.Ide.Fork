@@ -1,0 +1,348 @@
+.TH "md__docs_2_common_2usage" 3 "Version 1.0.0" "Luthetus.Ide" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+md__docs_2_common_2usage \- Luthetus\&.Common (v1\&.4\&.0) 
+.PP
+
+.SH "Usage"
+.PP
+.SS "Source Code"
+The \&.NET Solution: \fRLuthetus\&.Common\&.Usage\&.sln\fP, was made by following steps described here\&. So, the completed result can be found there\&.
+.SS "Goal"
+.IP "\(bu" 2
+Add the \fRLight and Dark theme\fP
+.PP
+.SS "Steps"
+.IP "\(bu" 2
+Create a codebehind for the file: \fRShared/MainLayout\&.razor\fP
+.PP
+
+.PP
+.RS 4
+\fINOTE:\fP In many C# Project templates, \fRShared/MainLayout\&.razor\fP inherits from \fRLayoutComponentBase\fP instead of \fRComponentBase\fP\&. 
+.RE
+.PP
+
+.PP
+.PP
+.nf
+// Shared/MainLayout\&.razor\&.cs
+
+using Microsoft\&.AspNetCore\&.Components;
+
+namespace Luthetus\&.Common\&.Usage\&.RazorLib\&.Shared;
+
+public partial class MainLayout : LayoutComponentBase
+{
+}
+.fi
+.PP
+
+.PP
+.IP "\(bu" 2
+Inject the \fRIAppOptionsService\fP interface\&.
+.PP
+
+.PP
+.PP
+.nf
+[Inject]
+private IAppOptionsService AppOptionsService { get; set; } = null!;
+.fi
+.PP
+
+.PP
+.IP "\(bu" 2
+We need to subscribe to the state changes of the IAppOptionsService\&.
+.IP "\(bu" 2
+When subscribing to an event\&. It is possible to create a memory leak, if one does not unsubscribe from the event at a later point\&.
+.IP "\(bu" 2
+For this reason, I'll perform the steps in an order that ensures my code will not compile if I forget to unsubscribe\&.
+.IP "\(bu" 2
+Have \fRMainLayout\fP implement the interface: \fRIDisposable\fP\&.
+.IP "\(bu" 2
+Then using a refactor, one can autocomplete the method definition for \fRvoid Dispose()\fP\&.
+.IP "\(bu" 2
+At this step, here is the entirety of my \fRShared/MainLayout\&.razor\&.cs\fP
+.PP
+
+.PP
+.PP
+.nf
+using Luthetus\&.Common\&.RazorLib\&.Options\&.Models;
+using Microsoft\&.AspNetCore\&.Components;
+
+namespace Luthetus\&.Common\&.Usage\&.RazorLib\&.Shared;
+
+public partial class MainLayout : LayoutComponentBase, IDisposable
+{
+    [Inject]
+    private IAppOptionsService AppOptionsService { get; set; } = null!;
+
+    public void Dispose()
+    {
+        throw new NotImplementedException();
+    }
+}
+.fi
+.PP
+
+.PP
+.IP "\(bu" 2
+Replace the contents of the \fRDispose()\fP method with \fRreplaceAppOptionsService\&.AppOptionsStateWrap\&.StateChanged -= ;\fP\&. It looks as follows for me:
+.PP
+
+.PP
+.PP
+.nf
+public void Dispose()
+{
+    AppOptionsService\&.AppOptionsStateWrap\&.StateChanged \-= ;
+}
+.fi
+.PP
+
+.PP
+.IP "\(bu" 2
+Override the Blazor lifecycle method named \fROnInitialized()\fP\&. See this code snippet:
+.PP
+
+.PP
+.PP
+.nf
+protected override void OnInitialized()
+{
+    base\&.OnInitialized();
+}
+.fi
+.PP
+
+.PP
+.IP "\(bu" 2
+In \fROnInitialized()\fP we can subscribe to the \fRAppOptionsService\fP state changes\&.
+.IP "\(bu" 2
+Add into the method override for \fROnInitialized()\fP, above the \fRbase\&.OnInitialized();\fP, this line of code: \fRAppOptionsService\&.AppOptionsStateWrap\&.StateChanged += AppOptionsStateWrap_StateChanged;\fP\&.
+.PP
+
+.PP
+.PP
+.nf
+protected override void OnInitialized()
+{
+    AppOptionsService\&.AppOptionsStateWrap\&.StateChanged += AppOptionsStateWrap_StateChanged;
+
+    base\&.OnInitialized();
+}
+.fi
+.PP
+
+.PP
+.RS 4
+\fINOTE:\fP When I was typing out the previously shown line of code, when I typed the \fR+=\fP part and hit \fRspace\fP, I was prompted by Visual Studio to hit \fRtab\fP to autocomplete out an EventHandler\&. 
+.RE
+.PP
+
+.PP
+.PP
+.nf
+private void AppOptionsStateWrap_StateChanged(object? sender, EventArgs e)
+{
+    throw new NotImplementedException();
+}
+.fi
+.PP
+
+.PP
+.IP "\(bu" 2
+Now that we have the subscription occurring in the \fROnInitialized()\fP, we can go back to the \fRDispose()\fP implementation\&. We had left out the right hand side of the unsubscribe statement\&. Replace that line with this: \fRAppOptionsService\&.AppOptionsStateWrap\&.StateChanged -= AppOptionsStateWrap_StateChanged;\fP\&. Now the code will compile again\&. My code snippet for \fRMainLayout\&.razor\&.cs\fP is shown here:
+.PP
+
+.PP
+.PP
+.nf
+using Luthetus\&.Common\&.RazorLib\&.Options\&.Models;
+using Microsoft\&.AspNetCore\&.Components;
+
+namespace Luthetus\&.Common\&.Usage\&.RazorLib\&.Shared;
+
+public partial class MainLayout : LayoutComponentBase, IDisposable
+{
+    [Inject]
+    private IAppOptionsService AppOptionsService { get; set; } = null!;
+
+    protected override void OnInitialized()
+    {
+        AppOptionsService\&.AppOptionsStateWrap\&.StateChanged += AppOptionsStateWrap_StateChanged;
+
+        base\&.OnInitialized();
+    }
+
+    private void AppOptionsStateWrap_StateChanged(object? sender, EventArgs e)
+    {
+        throw new NotImplementedException();
+    }
+
+    public void Dispose()
+    {
+        AppOptionsService\&.AppOptionsStateWrap\&.StateChanged \-= AppOptionsStateWrap_StateChanged;
+    }
+}
+.fi
+.PP
+
+.PP
+.IP "\(bu" 2
+We need to re-render the component anytime that the AppOptionsState has its state change\&. So, the \fRAppOptionsStateWrap_StateChanged()\fP method needs to be changed\&.
+.IP "\(bu" 2
+Make the \fRAppOptionsStateWrap_StateChanged()\fP method \fRasync\fP\&. But keep \fRvoid\fP, since it is being used as an EventHandler\&.
+.PP
+
+.PP
+Within the body for \fRAppOptionsStateWrap_StateChanged()\fP, put this line of code: \fRawait InvokeAsync(StateHasChanged);\fP\&.
+
+.PP
+In total, my \fRAppOptionsStateWrap_StateChanged()\fP method looks as follows:
+
+.PP
+.PP
+.nf
+private async void AppOptionsStateWrap_StateChanged(object? sender, EventArgs e)
+{
+    await InvokeAsync(StateHasChanged);
+}
+.fi
+.PP
+
+.PP
+.IP "\(bu" 2
+I want a <\fRselect\fP> HTML element where the options are the various themes that one can choose\&.
+.IP "\(bu" 2
+\fRShared/MainLayout\&.razor\fP has a <\fRdiv\fP> HTML element with the css class: \fRtop-row\fP\&. Inside this HTML element I will be putting the <\fRselect\fP> HTML element\&.
+.IP "\(bu" 2
+This <\fRselect\fP> HTML element already exists within the \fBLuthetus\&.Common\fP NuGet Package\&. Inside the previously described <\fRdiv\fP> add the markup: \fR<\fBLuthetus\&.Common\&.RazorLib\&.Options\&.Displays\&.InputAppTheme\fP />\fP as shown in the following snippet:
+.PP
+
+.PP
+.PP
+.nf
+<!\-\- MainLayout\&.razor \-\->
+
+@inherits LayoutComponentBase
+
+<PageTitle>Luthetus\&.Common\&.Usage\&.ServerSide</PageTitle>
+
+<Luthetus\&.Common\&.RazorLib\&.Installations\&.Displays\&.LuthetusCommonInitializer/>
+
+<div class="page">
+    <div class="sidebar">
+        <NavMenu />
+    </div>
+
+    <main>
+        <div class="top\-row px\-4">
+            <!\-\- Here \-\->
+            <Luthetus\&.Common\&.RazorLib\&.Options\&.Displays\&.InputAppTheme />
+            <a href="https://docs\&.microsoft\&.com/aspnet/" target="_blank">About</a>
+        </div>
+
+        <article class="content px\-4">
+            @Body
+        </article>
+    </main>
+</div>
+.fi
+.PP
+
+.PP
+Here is a quick GIF as well that shows how the website looks as of this step:
+
+.PP
+
+.PP
+.IP "\(bu" 2
+When I change my selection in the \fR<\fBLuthetus\&.Common\&.RazorLib\&.Options\&.Displays\&.InputAppTheme\fP />\fP, I want the corresponding CSS class to be applied to the top-most <div> in \fRMainLayout\&.razor\fP\&. This would then allow me to cascade a color theme to child elements\&.
+.IP "\(bu" 2
+In \fRMainLayout\&.razor\fP, we need to locate the top-most <div>\&. Following that, we need to interpolate the css class which corresponds to the selected theme\&. I changed my top-most element's \fRclass\fP property to \fRclass="page @AppOptionsService\&.ThemeCssClassString"\fP\&. The following is the entirety of my \fRMainLayout\&.razor\fP:
+.PP
+
+.PP
+.PP
+.nf
+<!\-\- MainLayout\&.razor \-\->
+
+@inherits LayoutComponentBase
+
+<PageTitle>Luthetus\&.Common\&.Usage\&.ServerSide</PageTitle>
+
+<Luthetus\&.Common\&.RazorLib\&.Installations\&.Displays\&.LuthetusCommonInitializer/>
+
+<div class="page @AppOptionsService\&.ThemeCssClassString">
+    <div class="sidebar">
+        <NavMenu />
+    </div>
+
+    <main>
+        <div class="top\-row px\-4">
+            <Luthetus\&.Common\&.RazorLib\&.Options\&.Displays\&.InputAppTheme />
+            <a href="https://docs\&.microsoft\&.com/aspnet/" target="_blank">About</a>
+        </div>
+
+        <article class="content px\-4">
+            @Body
+        </article>
+    </main>
+</div>
+.fi
+.PP
+
+.PP
+The following GIF has open the browser's developer tools, while changing the selected theme\&. This shows that we are updating the \fRclass\fP property correctly\&.
+
+.PP
+
+.PP
+.IP "\(bu" 2
+Now we need to actually use the \fRCSS variables\fP which are defined in \fRluthetusCommon\&.css\fP
+.PP
+
+.PP
+In the upcoming GIF I am going to show two ways that one can see all the \fRCSS variables\fP which are available from \fRluthetusCommon\&.css\fP\&.
+
+.PP
+.RS 4
+\fINOTE:\fP This GIF is 2 minutes and 41 seconds long\&. #TODO: shorten the length of this GIF\&. 
+.RE
+.PP
+
+.PP
+
+.PP
+.IP "\(bu" 2
+Inside \fRMainLayout\&.razor\&.css\fP add the following code snippet:
+.PP
+
+.PP
+.PP
+.nf
+div\&.top\-row {
+    background\-color: var(\-\-luth_tertiary\-background\-color);
+    color: var(\-\-luth_tertiary\-foreground\-color);
+}
+
+article\&.content {
+    background\-color: var(\-\-luth_primary\-background\-color);
+    color: var(\-\-luth_primary\-foreground\-color);
+}
+.fi
+.PP
+
+.PP
+.IP "\(bu" 2
+Now when we change the theme, parts of the website that use the CSS variables will change\&. See the following GIF:
+.PP
+
+.PP
+.SH "Next tutorial: #TODO: Continue"
+.PP
+

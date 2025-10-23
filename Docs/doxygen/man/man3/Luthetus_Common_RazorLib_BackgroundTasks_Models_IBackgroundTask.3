@@ -1,0 +1,96 @@
+.TH "Luthetus.Common.RazorLib.BackgroundTasks.Models.IBackgroundTask" 3 "Version 1.0.0" "Luthetus.Ide" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+Luthetus.Common.RazorLib.BackgroundTasks.Models.IBackgroundTask
+.SH SYNOPSIS
+.br
+.PP
+.PP
+Inherited by \fBLuthetus\&.Common\&.RazorLib\&.BackgroundTasks\&.Models\&.BackgroundTask\fP, and \fBLuthetus\&.TextEditor\&.RazorLib\&.BackgroundTasks\&.Models\&.ITextEditorWork\fP\&.
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBIBackgroundTask\fP? \fBBatchOrDefault\fP (\fBIBackgroundTask\fP oldEvent)"
+.br
+.RI "Before a throttle event is enqueued, this method is invoked\&. This allows for batching of 'this' throttle event instance, and the last entry of the queue\&.
+.br
+
+.br
+\&. "
+.ti -1c
+.RI "Task \fBHandleEvent\fP (CancellationToken cancellationToken)"
+.br
+.RI "This method is the actual work item that gets awaited in order to handle the event\&. "
+.in -1c
+.SS "Properties"
+
+.in +1c
+.ti -1c
+.RI "Key< \fBIBackgroundTask\fP > \fBBackgroundTaskKey\fP\fR [get]\fP"
+.br
+.ti -1c
+.RI "Key< \fBIBackgroundTaskQueue\fP > \fBQueueKey\fP\fR [get]\fP"
+.br
+.ti -1c
+.RI "string \fBName\fP\fR [get]\fP"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+Definition at line \fB5\fP of file \fBIBackgroundTask\&.cs\fP\&.
+.SH "Member Function Documentation"
+.PP 
+.SS "\fBIBackgroundTask\fP? Luthetus\&.Common\&.RazorLib\&.BackgroundTasks\&.Models\&.IBackgroundTask\&.BatchOrDefault (\fBIBackgroundTask\fP oldEvent)"
+
+.PP
+Before a throttle event is enqueued, this method is invoked\&. This allows for batching of 'this' throttle event instance, and the last entry of the queue\&.
+.br
+
+.br
+\&. This method is invoked from within a 'lock(_queue) { \&.\&.\&. }'\&.
+.br
+
+.br
+
+.PP
+Example use: one reads an entry from the queue, its an event that write out a character\&. Perhaps this throttle event also writes out a character\&. Instead of invoking 'text\&.Insert(character)' two times\&. One might want to invoke 'text\&.InsertRange(bothCharacters)';
+.br
+
+.br
+
+.PP
+Returning null means enqueue the recentEvent without any batching, (leave the old event as it was within the queue) 
+.PP
+Implemented in \fBLuthetus\&.Common\&.RazorLib\&.BackgroundTasks\&.Models\&.BackgroundTask\fP, \fBLuthetus\&.TextEditor\&.RazorLib\&.BackgroundTasks\&.Models\&.RedundantTextEditorWork\fP, \fBLuthetus\&.TextEditor\&.RazorLib\&.BackgroundTasks\&.Models\&.UniqueTextEditorWork\fP, \fBLuthetus\&.TextEditor\&.RazorLib\&.Events\&.Models\&.OnDoubleClick\fP, \fBLuthetus\&.TextEditor\&.RazorLib\&.Events\&.Models\&.OnKeyDownLateBatching\fP, \fBLuthetus\&.TextEditor\&.RazorLib\&.Events\&.Models\&.OnMouseDown\fP, \fBLuthetus\&.TextEditor\&.RazorLib\&.Events\&.Models\&.OnMouseMove\fP, \fBLuthetus\&.TextEditor\&.RazorLib\&.Events\&.Models\&.OnScrollHorizontal\fP, \fBLuthetus\&.TextEditor\&.RazorLib\&.Events\&.Models\&.OnScrollVertical\fP, \fBLuthetus\&.TextEditor\&.RazorLib\&.Events\&.Models\&.OnWheel\fP, and \fBLuthetus\&.TextEditor\&.RazorLib\&.Events\&.Models\&.OnWheelBatch\fP\&.
+.SS "Task Luthetus\&.Common\&.RazorLib\&.BackgroundTasks\&.Models\&.IBackgroundTask\&.HandleEvent (CancellationToken cancellationToken)"
+
+.PP
+This method is the actual work item that gets awaited in order to handle the event\&. 
+.PP
+Implemented in \fBLuthetus\&.Common\&.RazorLib\&.BackgroundTasks\&.Models\&.BackgroundTask\fP, \fBLuthetus\&.TextEditor\&.RazorLib\&.BackgroundTasks\&.Models\&.RedundantTextEditorWork\fP, \fBLuthetus\&.TextEditor\&.RazorLib\&.BackgroundTasks\&.Models\&.UniqueTextEditorWork\fP, \fBLuthetus\&.TextEditor\&.RazorLib\&.Events\&.Models\&.OnDoubleClick\fP, \fBLuthetus\&.TextEditor\&.RazorLib\&.Events\&.Models\&.OnKeyDownLateBatching\fP, \fBLuthetus\&.TextEditor\&.RazorLib\&.Events\&.Models\&.OnMouseDown\fP, \fBLuthetus\&.TextEditor\&.RazorLib\&.Events\&.Models\&.OnMouseMove\fP, \fBLuthetus\&.TextEditor\&.RazorLib\&.Events\&.Models\&.OnScrollHorizontal\fP, \fBLuthetus\&.TextEditor\&.RazorLib\&.Events\&.Models\&.OnScrollVertical\fP, \fBLuthetus\&.TextEditor\&.RazorLib\&.Events\&.Models\&.OnWheel\fP, and \fBLuthetus\&.TextEditor\&.RazorLib\&.Events\&.Models\&.OnWheelBatch\fP\&.
+.SH "Property Documentation"
+.PP 
+.SS "Key<\fBIBackgroundTask\fP> Luthetus\&.Common\&.RazorLib\&.BackgroundTasks\&.Models\&.IBackgroundTask\&.BackgroundTaskKey\fR [get]\fP"
+
+.PP
+Implemented in \fBLuthetus\&.Common\&.RazorLib\&.BackgroundTasks\&.Models\&.BackgroundTask\fP, \fBLuthetus\&.TextEditor\&.RazorLib\&.BackgroundTasks\&.Models\&.RedundantTextEditorWork\fP, \fBLuthetus\&.TextEditor\&.RazorLib\&.BackgroundTasks\&.Models\&.UniqueTextEditorWork\fP, \fBLuthetus\&.TextEditor\&.RazorLib\&.Events\&.Models\&.OnDoubleClick\fP, \fBLuthetus\&.TextEditor\&.RazorLib\&.Events\&.Models\&.OnKeyDownLateBatching\fP, \fBLuthetus\&.TextEditor\&.RazorLib\&.Events\&.Models\&.OnMouseDown\fP, \fBLuthetus\&.TextEditor\&.RazorLib\&.Events\&.Models\&.OnMouseMove\fP, \fBLuthetus\&.TextEditor\&.RazorLib\&.Events\&.Models\&.OnScrollHorizontal\fP, \fBLuthetus\&.TextEditor\&.RazorLib\&.Events\&.Models\&.OnScrollVertical\fP, \fBLuthetus\&.TextEditor\&.RazorLib\&.Events\&.Models\&.OnWheel\fP, and \fBLuthetus\&.TextEditor\&.RazorLib\&.Events\&.Models\&.OnWheelBatch\fP\&.
+.PP
+Definition at line \fB7\fP of file \fBIBackgroundTask\&.cs\fP\&.
+.SS "string Luthetus\&.Common\&.RazorLib\&.BackgroundTasks\&.Models\&.IBackgroundTask\&.Name\fR [get]\fP"
+
+.PP
+Implemented in \fBLuthetus\&.Common\&.RazorLib\&.BackgroundTasks\&.Models\&.BackgroundTask\fP, \fBLuthetus\&.TextEditor\&.RazorLib\&.BackgroundTasks\&.Models\&.RedundantTextEditorWork\fP, \fBLuthetus\&.TextEditor\&.RazorLib\&.BackgroundTasks\&.Models\&.UniqueTextEditorWork\fP, \fBLuthetus\&.TextEditor\&.RazorLib\&.Events\&.Models\&.OnDoubleClick\fP, \fBLuthetus\&.TextEditor\&.RazorLib\&.Events\&.Models\&.OnKeyDownLateBatching\fP, \fBLuthetus\&.TextEditor\&.RazorLib\&.Events\&.Models\&.OnMouseDown\fP, \fBLuthetus\&.TextEditor\&.RazorLib\&.Events\&.Models\&.OnMouseMove\fP, \fBLuthetus\&.TextEditor\&.RazorLib\&.Events\&.Models\&.OnScrollHorizontal\fP, \fBLuthetus\&.TextEditor\&.RazorLib\&.Events\&.Models\&.OnScrollVertical\fP, \fBLuthetus\&.TextEditor\&.RazorLib\&.Events\&.Models\&.OnWheel\fP, and \fBLuthetus\&.TextEditor\&.RazorLib\&.Events\&.Models\&.OnWheelBatch\fP\&.
+.PP
+Definition at line \fB9\fP of file \fBIBackgroundTask\&.cs\fP\&.
+.SS "Key<\fBIBackgroundTaskQueue\fP> Luthetus\&.Common\&.RazorLib\&.BackgroundTasks\&.Models\&.IBackgroundTask\&.QueueKey\fR [get]\fP"
+
+.PP
+Implemented in \fBLuthetus\&.Common\&.RazorLib\&.BackgroundTasks\&.Models\&.BackgroundTask\fP, \fBLuthetus\&.TextEditor\&.RazorLib\&.BackgroundTasks\&.Models\&.RedundantTextEditorWork\fP, \fBLuthetus\&.TextEditor\&.RazorLib\&.BackgroundTasks\&.Models\&.UniqueTextEditorWork\fP, \fBLuthetus\&.TextEditor\&.RazorLib\&.Events\&.Models\&.OnDoubleClick\fP, \fBLuthetus\&.TextEditor\&.RazorLib\&.Events\&.Models\&.OnKeyDownLateBatching\fP, \fBLuthetus\&.TextEditor\&.RazorLib\&.Events\&.Models\&.OnMouseDown\fP, \fBLuthetus\&.TextEditor\&.RazorLib\&.Events\&.Models\&.OnMouseMove\fP, \fBLuthetus\&.TextEditor\&.RazorLib\&.Events\&.Models\&.OnScrollHorizontal\fP, \fBLuthetus\&.TextEditor\&.RazorLib\&.Events\&.Models\&.OnScrollVertical\fP, \fBLuthetus\&.TextEditor\&.RazorLib\&.Events\&.Models\&.OnWheel\fP, and \fBLuthetus\&.TextEditor\&.RazorLib\&.Events\&.Models\&.OnWheelBatch\fP\&.
+.PP
+Definition at line \fB8\fP of file \fBIBackgroundTask\&.cs\fP\&.
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for Luthetus\&.Ide from the source code\&.

@@ -1,0 +1,4 @@
+var class_luthetus_1_1_compiler_services_1_1_dot_net_solution_1_1_compiler_service_case_1_1_dot_net_solution_resource =
+[
+    [ "DotNetSolutionResource", "class_luthetus_1_1_compiler_services_1_1_dot_net_solution_1_1_compiler_service_case_1_1_dot_net_solution_resource.html#a55b71eda905528e2c789a9c94ef1c7a2", null ]
+];

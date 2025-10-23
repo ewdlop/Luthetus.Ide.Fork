@@ -1,0 +1,91 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="__file_system_ide_api_8cs_source" xml:lang="en-US">
+<title>FileSystemIdeApi.cs</title>
+<indexterm><primary>Source/Lib/Ide/Ide.RazorLib/FileSystems/Models/FileSystemIdeApi.cs</primary></indexterm>
+Go to the documentation of this file.<programlisting linenumbering="unnumbered"><anchor xml:id="__file_system_ide_api_8cs_source_1l00001"/>00001 <emphasis role="keyword">using&#32;</emphasis>Fluxor;
+<anchor xml:id="__file_system_ide_api_8cs_source_1l00002"/>00002 <emphasis role="keyword">using&#32;</emphasis><link linkend="_namespace_luthetus_1_1_common_1_1_razor_lib_1_1_background_tasks_1_1_models">Luthetus.Common.RazorLib.BackgroundTasks.Models</link>;
+<anchor xml:id="__file_system_ide_api_8cs_source_1l00003"/>00003 <emphasis role="keyword">using&#32;</emphasis><link linkend="_namespace_luthetus_1_1_common_1_1_razor_lib_1_1_component_renderers_1_1_models">Luthetus.Common.RazorLib.ComponentRenderers.Models</link>;
+<anchor xml:id="__file_system_ide_api_8cs_source_1l00004"/>00004 <emphasis role="keyword">using&#32;</emphasis><link linkend="_namespace_luthetus_1_1_common_1_1_razor_lib_1_1_file_systems_1_1_models">Luthetus.Common.RazorLib.FileSystems.Models</link>;
+<anchor xml:id="__file_system_ide_api_8cs_source_1l00005"/>00005 <emphasis role="keyword">using&#32;</emphasis><link linkend="_namespace_luthetus_1_1_common_1_1_razor_lib_1_1_keys_1_1_models">Luthetus.Common.RazorLib.Keys.Models</link>;
+<anchor xml:id="__file_system_ide_api_8cs_source_1l00006"/>00006 <emphasis role="keyword">using&#32;</emphasis><link linkend="_namespace_luthetus_1_1_common_1_1_razor_lib_1_1_notifications_1_1_models">Luthetus.Common.RazorLib.Notifications.Models</link>;
+<anchor xml:id="__file_system_ide_api_8cs_source_1l00007"/>00007 <emphasis role="keyword">using&#32;</emphasis><link linkend="_namespace_luthetus_1_1_ide_1_1_razor_lib_1_1_background_tasks_1_1_models">Luthetus.Ide.RazorLib.BackgroundTasks.Models</link>;
+<anchor xml:id="__file_system_ide_api_8cs_source_1l00008"/>00008 
+<anchor xml:id="__file_system_ide_api_8cs_source_1l00009"/><link linkend="_namespace_luthetus_1_1_ide_1_1_razor_lib_1_1_file_systems_1_1_models">00009</link> <emphasis role="keyword">namespace&#32;</emphasis><link linkend="_namespace_luthetus_1_1_ide_1_1_razor_lib_1_1_file_systems_1_1_models">Luthetus.Ide.RazorLib.FileSystems.Models</link>;
+<anchor xml:id="__file_system_ide_api_8cs_source_1l00010"/>00010 
+<anchor xml:id="__file_system_ide_api_8cs_source_1l00011"/><link linkend="_class_luthetus_1_1_ide_1_1_razor_lib_1_1_file_systems_1_1_models_1_1_file_system_ide_api">00011</link> <emphasis role="keyword">public</emphasis>&#32;<emphasis role="keyword">class&#32;</emphasis><link linkend="_class_luthetus_1_1_ide_1_1_razor_lib_1_1_file_systems_1_1_models_1_1_file_system_ide_api_1ae1fe225f52c2d9e26e09bb22d7391a0f">FileSystemIdeApi</link>
+<anchor xml:id="__file_system_ide_api_8cs_source_1l00012"/>00012 {
+<anchor xml:id="__file_system_ide_api_8cs_source_1l00013"/>00013 &#32;&#32;&#32;&#32;<emphasis role="keyword">private</emphasis>&#32;readonly&#32;<link linkend="_class_luthetus_1_1_ide_1_1_razor_lib_1_1_background_tasks_1_1_models_1_1_ide_background_task_api">IdeBackgroundTaskApi</link>&#32;_ideBackgroundTaskApi;
+<anchor xml:id="__file_system_ide_api_8cs_source_1l00014"/>00014 &#32;&#32;&#32;&#32;<emphasis role="keyword">private</emphasis>&#32;readonly&#32;<link linkend="_interface_luthetus_1_1_common_1_1_razor_lib_1_1_file_systems_1_1_models_1_1_i_file_system_provider">IFileSystemProvider</link>&#32;_fileSystemProvider;
+<anchor xml:id="__file_system_ide_api_8cs_source_1l00015"/>00015 &#32;&#32;&#32;&#32;<emphasis role="keyword">private</emphasis>&#32;readonly&#32;<link linkend="_interface_luthetus_1_1_common_1_1_razor_lib_1_1_component_renderers_1_1_models_1_1_i_common_component_renderers">ICommonComponentRenderers</link>&#32;_commonComponentRenderers;
+<anchor xml:id="__file_system_ide_api_8cs_source_1l00016"/>00016 &#32;&#32;&#32;&#32;<emphasis role="keyword">private</emphasis>&#32;readonly&#32;<link linkend="_interface_luthetus_1_1_common_1_1_razor_lib_1_1_background_tasks_1_1_models_1_1_i_background_task_service">IBackgroundTaskService</link>&#32;_backgroundTaskService;
+<anchor xml:id="__file_system_ide_api_8cs_source_1l00017"/>00017 &#32;&#32;&#32;&#32;<emphasis role="keyword">private</emphasis>&#32;readonly&#32;IDispatcher&#32;_dispatcher;
+<anchor xml:id="__file_system_ide_api_8cs_source_1l00018"/>00018 
+<anchor xml:id="__file_system_ide_api_8cs_source_1l00019"/><link linkend="_class_luthetus_1_1_ide_1_1_razor_lib_1_1_file_systems_1_1_models_1_1_file_system_ide_api_1ae1fe225f52c2d9e26e09bb22d7391a0f">00019</link> &#32;&#32;&#32;&#32;<emphasis role="keyword">public</emphasis>&#32;<link linkend="_class_luthetus_1_1_ide_1_1_razor_lib_1_1_file_systems_1_1_models_1_1_file_system_ide_api_1ae1fe225f52c2d9e26e09bb22d7391a0f">FileSystemIdeApi</link>(
+<anchor xml:id="__file_system_ide_api_8cs_source_1l00020"/>00020 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<link linkend="_class_luthetus_1_1_ide_1_1_razor_lib_1_1_background_tasks_1_1_models_1_1_ide_background_task_api">IdeBackgroundTaskApi</link>&#32;ideBackgroundTaskApi,
+<anchor xml:id="__file_system_ide_api_8cs_source_1l00021"/>00021 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<link linkend="_interface_luthetus_1_1_common_1_1_razor_lib_1_1_file_systems_1_1_models_1_1_i_file_system_provider">IFileSystemProvider</link>&#32;fileSystemProvider,
+<anchor xml:id="__file_system_ide_api_8cs_source_1l00022"/>00022 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<link linkend="_interface_luthetus_1_1_common_1_1_razor_lib_1_1_component_renderers_1_1_models_1_1_i_common_component_renderers">ICommonComponentRenderers</link>&#32;commonComponentRenderers,
+<anchor xml:id="__file_system_ide_api_8cs_source_1l00023"/>00023 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<link linkend="_interface_luthetus_1_1_common_1_1_razor_lib_1_1_background_tasks_1_1_models_1_1_i_background_task_service">IBackgroundTaskService</link>&#32;backgroundTaskService,
+<anchor xml:id="__file_system_ide_api_8cs_source_1l00024"/>00024 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;IDispatcher&#32;dispatcher)
+<anchor xml:id="__file_system_ide_api_8cs_source_1l00025"/>00025 &#32;&#32;&#32;&#32;{
+<anchor xml:id="__file_system_ide_api_8cs_source_1l00026"/>00026 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;_ideBackgroundTaskApi&#32;=&#32;ideBackgroundTaskApi;
+<anchor xml:id="__file_system_ide_api_8cs_source_1l00027"/>00027 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;_fileSystemProvider&#32;=&#32;fileSystemProvider;
+<anchor xml:id="__file_system_ide_api_8cs_source_1l00028"/>00028 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;_commonComponentRenderers&#32;=&#32;commonComponentRenderers;
+<anchor xml:id="__file_system_ide_api_8cs_source_1l00029"/>00029 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;_backgroundTaskService&#32;=&#32;backgroundTaskService;
+<anchor xml:id="__file_system_ide_api_8cs_source_1l00030"/>00030 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;_dispatcher&#32;=&#32;dispatcher;
+<anchor xml:id="__file_system_ide_api_8cs_source_1l00031"/>00031 &#32;&#32;&#32;&#32;}
+<anchor xml:id="__file_system_ide_api_8cs_source_1l00032"/>00032 
+<anchor xml:id="__file_system_ide_api_8cs_source_1l00033"/><link linkend="_class_luthetus_1_1_ide_1_1_razor_lib_1_1_file_systems_1_1_models_1_1_file_system_ide_api_1a8c4724ece2d86ae69c654f54d1113dbf">00033</link> &#32;&#32;&#32;&#32;<emphasis role="keyword">public</emphasis>&#32;<emphasis role="keywordtype">void</emphasis>&#32;<link linkend="_class_luthetus_1_1_ide_1_1_razor_lib_1_1_file_systems_1_1_models_1_1_file_system_ide_api_1a8c4724ece2d86ae69c654f54d1113dbf">SaveFile</link>(
+<anchor xml:id="__file_system_ide_api_8cs_source_1l00034"/>00034 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<link linkend="_interface_luthetus_1_1_common_1_1_razor_lib_1_1_file_systems_1_1_models_1_1_i_absolute_path">IAbsolutePath</link>&#32;absolutePath,
+<anchor xml:id="__file_system_ide_api_8cs_source_1l00035"/>00035 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordtype">string</emphasis>&#32;content,
+<anchor xml:id="__file_system_ide_api_8cs_source_1l00036"/>00036 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;Func&lt;DateTime?,&#32;Task&gt;&#32;onAfterSaveCompletedWrittenDateTimeFunc,
+<anchor xml:id="__file_system_ide_api_8cs_source_1l00037"/>00037 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;CancellationToken&#32;cancellationToken&#32;=&#32;<emphasis role="keywordflow">default</emphasis>)
+<anchor xml:id="__file_system_ide_api_8cs_source_1l00038"/>00038 &#32;&#32;&#32;&#32;{
+<anchor xml:id="__file_system_ide_api_8cs_source_1l00039"/>00039 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;_backgroundTaskService.Enqueue(
+<anchor xml:id="__file_system_ide_api_8cs_source_1l00040"/>00040 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;Key&lt;IBackgroundTask&gt;.NewKey(),
+<anchor xml:id="__file_system_ide_api_8cs_source_1l00041"/>00041 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<link linkend="_class_luthetus_1_1_common_1_1_razor_lib_1_1_background_tasks_1_1_models_1_1_continuous_background_task_worker">ContinuousBackgroundTaskWorker</link>.<link linkend="_class_luthetus_1_1_common_1_1_razor_lib_1_1_background_tasks_1_1_models_1_1_continuous_background_task_worker_1a2bbecf18336413ee1caff9d378acc256">GetQueueKey</link>(),
+<anchor xml:id="__file_system_ide_api_8cs_source_1l00042"/>00042 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="stringliteral">&quot;Save&#32;File&quot;</emphasis>,
+<anchor xml:id="__file_system_ide_api_8cs_source_1l00043"/>00043 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;async&#32;()&#32;=&gt;&#32;await&#32;SaveFileAsync(
+<anchor xml:id="__file_system_ide_api_8cs_source_1l00044"/>00044 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;absolutePath,
+<anchor xml:id="__file_system_ide_api_8cs_source_1l00045"/>00045 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;content,
+<anchor xml:id="__file_system_ide_api_8cs_source_1l00046"/>00046 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;onAfterSaveCompletedWrittenDateTimeFunc,
+<anchor xml:id="__file_system_ide_api_8cs_source_1l00047"/>00047 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;cancellationToken)
+<anchor xml:id="__file_system_ide_api_8cs_source_1l00048"/>00048 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;.ConfigureAwait(<emphasis role="keyword">false</emphasis>));
+<anchor xml:id="__file_system_ide_api_8cs_source_1l00049"/>00049 &#32;&#32;&#32;&#32;}
+<anchor xml:id="__file_system_ide_api_8cs_source_1l00050"/>00050 
+<anchor xml:id="__file_system_ide_api_8cs_source_1l00051"/>00051 &#32;&#32;&#32;&#32;<emphasis role="keyword">private</emphasis>&#32;async&#32;Task&#32;SaveFileAsync(
+<anchor xml:id="__file_system_ide_api_8cs_source_1l00052"/>00052 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<link linkend="_interface_luthetus_1_1_common_1_1_razor_lib_1_1_file_systems_1_1_models_1_1_i_absolute_path">IAbsolutePath</link>&#32;absolutePath,
+<anchor xml:id="__file_system_ide_api_8cs_source_1l00053"/>00053 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordtype">string</emphasis>&#32;content,
+<anchor xml:id="__file_system_ide_api_8cs_source_1l00054"/>00054 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;Func&lt;DateTime?,&#32;Task&gt;&#32;onAfterSaveCompletedWrittenDateTimeFunc,
+<anchor xml:id="__file_system_ide_api_8cs_source_1l00055"/>00055 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;CancellationToken&#32;cancellationToken&#32;=&#32;<emphasis role="keywordflow">default</emphasis>)
+<anchor xml:id="__file_system_ide_api_8cs_source_1l00056"/>00056 &#32;&#32;&#32;&#32;{
+<anchor xml:id="__file_system_ide_api_8cs_source_1l00057"/>00057 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">if</emphasis>&#32;(cancellationToken.IsCancellationRequested)
+<anchor xml:id="__file_system_ide_api_8cs_source_1l00058"/>00058 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>;
+<anchor xml:id="__file_system_ide_api_8cs_source_1l00059"/>00059 
+<anchor xml:id="__file_system_ide_api_8cs_source_1l00060"/>00060 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;var&#32;absolutePathString&#32;=&#32;absolutePath.<link linkend="_interface_luthetus_1_1_common_1_1_razor_lib_1_1_file_systems_1_1_models_1_1_i_path_1a7e1355933523ea47e4fd039626b9f34b">Value</link>;
+<anchor xml:id="__file_system_ide_api_8cs_source_1l00061"/>00061 
+<anchor xml:id="__file_system_ide_api_8cs_source_1l00062"/>00062 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">if</emphasis>&#32;(absolutePathString&#32;is&#32;not&#32;<emphasis role="keyword">null</emphasis>&#32;&amp;&amp;
+<anchor xml:id="__file_system_ide_api_8cs_source_1l00063"/>00063 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;await&#32;_fileSystemProvider.File.ExistsAsync(absolutePathString).ConfigureAwait(<emphasis role="keyword">false</emphasis>))
+<anchor xml:id="__file_system_ide_api_8cs_source_1l00064"/>00064 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;{
+<anchor xml:id="__file_system_ide_api_8cs_source_1l00065"/>00065 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;await&#32;_fileSystemProvider.File.WriteAllTextAsync(absolutePathString,&#32;content).ConfigureAwait(<emphasis role="keyword">false</emphasis>);
+<anchor xml:id="__file_system_ide_api_8cs_source_1l00066"/>00066 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;}
+<anchor xml:id="__file_system_ide_api_8cs_source_1l00067"/>00067 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">else</emphasis>
+<anchor xml:id="__file_system_ide_api_8cs_source_1l00068"/>00068 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;{
+<anchor xml:id="__file_system_ide_api_8cs_source_1l00069"/>00069 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;TODO:&#32;Save&#32;As&#32;to&#32;make&#32;new&#32;file</emphasis>
+<anchor xml:id="__file_system_ide_api_8cs_source_1l00070"/>00070 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;NotificationHelper.DispatchInformative(<emphasis role="stringliteral">&quot;Save&#32;Action&quot;</emphasis>,&#32;<emphasis role="stringliteral">&quot;File&#32;not&#32;found.&#32;TODO:&#32;Save&#32;As&quot;</emphasis>,&#32;_commonComponentRenderers,&#32;_dispatcher,&#32;TimeSpan.FromSeconds(7));
+<anchor xml:id="__file_system_ide_api_8cs_source_1l00071"/>00071 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;}
+<anchor xml:id="__file_system_ide_api_8cs_source_1l00072"/>00072 
+<anchor xml:id="__file_system_ide_api_8cs_source_1l00073"/>00073 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;DateTime?&#32;fileLastWriteTime&#32;=&#32;<emphasis role="keyword">null</emphasis>;
+<anchor xml:id="__file_system_ide_api_8cs_source_1l00074"/>00074 
+<anchor xml:id="__file_system_ide_api_8cs_source_1l00075"/>00075 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">if</emphasis>&#32;(absolutePathString&#32;is&#32;not&#32;<emphasis role="keyword">null</emphasis>)
+<anchor xml:id="__file_system_ide_api_8cs_source_1l00076"/>00076 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;{
+<anchor xml:id="__file_system_ide_api_8cs_source_1l00077"/>00077 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;fileLastWriteTime&#32;=&#32;await&#32;_fileSystemProvider.File.GetLastWriteTimeAsync(
+<anchor xml:id="__file_system_ide_api_8cs_source_1l00078"/>00078 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;absolutePathString,
+<anchor xml:id="__file_system_ide_api_8cs_source_1l00079"/>00079 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;CancellationToken.None)
+<anchor xml:id="__file_system_ide_api_8cs_source_1l00080"/>00080 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;.ConfigureAwait(<emphasis role="keyword">false</emphasis>);
+<anchor xml:id="__file_system_ide_api_8cs_source_1l00081"/>00081 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;}
+<anchor xml:id="__file_system_ide_api_8cs_source_1l00082"/>00082 
+<anchor xml:id="__file_system_ide_api_8cs_source_1l00083"/>00083 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">if</emphasis>&#32;(onAfterSaveCompletedWrittenDateTimeFunc&#32;is&#32;not&#32;<emphasis role="keyword">null</emphasis>)
+<anchor xml:id="__file_system_ide_api_8cs_source_1l00084"/>00084 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;await&#32;onAfterSaveCompletedWrittenDateTimeFunc.Invoke(fileLastWriteTime);
+<anchor xml:id="__file_system_ide_api_8cs_source_1l00085"/>00085 &#32;&#32;&#32;&#32;}
+<anchor xml:id="__file_system_ide_api_8cs_source_1l00086"/>00086 }
+</programlisting></section>

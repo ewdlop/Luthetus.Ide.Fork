@@ -1,0 +1,5 @@
+var dir_cbd140166683adac84f0ce21aa075845 =
+[
+    [ "TEXT_EDITOR_SHOULD_WORK_WITH_LARGE_FILES.Data.cs", "_t_e_x_t___e_d_i_t_o_r___s_h_o_u_l_d___w_o_r_k___w_i_t_h___l_a_r_g_e___f_i_l_e_s_8_data_8cs.html", "_t_e_x_t___e_d_i_t_o_r___s_h_o_u_l_d___w_o_r_k___w_i_t_h___l_a_r_g_e___f_i_l_e_s_8_data_8cs" ],
+    [ "TEXT_EDITOR_SHOULD_WORK_WITH_LARGE_FILES.Main.cs", "_t_e_x_t___e_d_i_t_o_r___s_h_o_u_l_d___w_o_r_k___w_i_t_h___l_a_r_g_e___f_i_l_e_s_8_main_8cs.html", "_t_e_x_t___e_d_i_t_o_r___s_h_o_u_l_d___w_o_r_k___w_i_t_h___l_a_r_g_e___f_i_l_e_s_8_main_8cs" ]
+];

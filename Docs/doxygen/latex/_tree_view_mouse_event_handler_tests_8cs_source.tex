@@ -1,0 +1,193 @@
+\doxysection{Tree\+View\+Mouse\+Event\+Handler\+Tests.\+cs}
+\hypertarget{_tree_view_mouse_event_handler_tests_8cs_source}{}\label{_tree_view_mouse_event_handler_tests_8cs_source}\index{Source/Tests/Common/Basis/TreeViews/Models/TreeViewMouseEventHandlerTests.cs@{Source/Tests/Common/Basis/TreeViews/Models/TreeViewMouseEventHandlerTests.cs}}
+\mbox{\hyperlink{_tree_view_mouse_event_handler_tests_8cs}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{_tree_view_mouse_event_handler_tests_8cs_source_l00001}00001\ \textcolor{keyword}{using\ }System.Collections.Immutable;}
+\DoxyCodeLine{\Hypertarget{_tree_view_mouse_event_handler_tests_8cs_source_l00002}00002\ \textcolor{keyword}{using\ }Microsoft.AspNetCore.Components.Web;}
+\DoxyCodeLine{\Hypertarget{_tree_view_mouse_event_handler_tests_8cs_source_l00003}00003\ \textcolor{keyword}{using\ }Microsoft.Extensions.DependencyInjection;}
+\DoxyCodeLine{\Hypertarget{_tree_view_mouse_event_handler_tests_8cs_source_l00004}00004\ \textcolor{keyword}{using\ }Fluxor;}
+\DoxyCodeLine{\Hypertarget{_tree_view_mouse_event_handler_tests_8cs_source_l00005}00005\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_luthetus_1_1_common_1_1_razor_lib_1_1_tree_views_1_1_models}{Luthetus.Common.RazorLib.TreeViews.Models}};}
+\DoxyCodeLine{\Hypertarget{_tree_view_mouse_event_handler_tests_8cs_source_l00006}00006\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_luthetus_1_1_common_1_1_razor_lib_1_1_tree_views_1_1_displays_1_1_utils}{Luthetus.Common.RazorLib.TreeViews.Displays.Utils}};}
+\DoxyCodeLine{\Hypertarget{_tree_view_mouse_event_handler_tests_8cs_source_l00007}00007\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_luthetus_1_1_common_1_1_razor_lib_1_1_background_tasks_1_1_models}{Luthetus.Common.RazorLib.BackgroundTasks.Models}};}
+\DoxyCodeLine{\Hypertarget{_tree_view_mouse_event_handler_tests_8cs_source_l00008}00008\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_luthetus_1_1_common_1_1_razor_lib_1_1_commands_1_1_models}{Luthetus.Common.RazorLib.Commands.Models}};}
+\DoxyCodeLine{\Hypertarget{_tree_view_mouse_event_handler_tests_8cs_source_l00009}00009\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_luthetus_1_1_common_1_1_razor_lib_1_1_notifications_1_1_displays}{Luthetus.Common.RazorLib.Notifications.Displays}};}
+\DoxyCodeLine{\Hypertarget{_tree_view_mouse_event_handler_tests_8cs_source_l00010}00010\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_luthetus_1_1_common_1_1_razor_lib_1_1_watch_windows_1_1_displays}{Luthetus.Common.RazorLib.WatchWindows.Displays}};}
+\DoxyCodeLine{\Hypertarget{_tree_view_mouse_event_handler_tests_8cs_source_l00011}00011\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_luthetus_1_1_common_1_1_razor_lib_1_1_keys_1_1_models}{Luthetus.Common.RazorLib.Keys.Models}};}
+\DoxyCodeLine{\Hypertarget{_tree_view_mouse_event_handler_tests_8cs_source_l00012}00012\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_luthetus_1_1_common_1_1_razor_lib_1_1_component_renderers_1_1_models}{Luthetus.Common.RazorLib.ComponentRenderers.Models}};}
+\DoxyCodeLine{\Hypertarget{_tree_view_mouse_event_handler_tests_8cs_source_l00013}00013\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_luthetus_1_1_common_1_1_razor_lib_1_1_tree_views_1_1_states}{Luthetus.Common.RazorLib.TreeViews.States}};}
+\DoxyCodeLine{\Hypertarget{_tree_view_mouse_event_handler_tests_8cs_source_l00014}00014\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_luthetus_1_1_common_1_1_tests_1_1_basis_1_1_tree_views_1_1_models_1_1_internals}{Luthetus.Common.Tests.Basis.TreeViews.Models.Internals}};}
+\DoxyCodeLine{\Hypertarget{_tree_view_mouse_event_handler_tests_8cs_source_l00015}00015\ }
+\DoxyCodeLine{\Hypertarget{_tree_view_mouse_event_handler_tests_8cs_source_l00016}00016\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespace_luthetus_1_1_common_1_1_tests_1_1_basis_1_1_tree_views_1_1_models}{Luthetus.Common.Tests.Basis.TreeViews.Models}};}
+\DoxyCodeLine{\Hypertarget{_tree_view_mouse_event_handler_tests_8cs_source_l00017}00017\ }
+\DoxyCodeLine{\Hypertarget{_tree_view_mouse_event_handler_tests_8cs_source_l00021}\mbox{\hyperlink{class_luthetus_1_1_common_1_1_tests_1_1_basis_1_1_tree_views_1_1_models_1_1_tree_view_mouse_event_handler_tests}{00021}}\ \textcolor{keyword}{public}\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_luthetus_1_1_common_1_1_tests_1_1_basis_1_1_tree_views_1_1_models_1_1_tree_view_mouse_event_handler_tests}{TreeViewMouseEventHandlerTests}}}
+\DoxyCodeLine{\Hypertarget{_tree_view_mouse_event_handler_tests_8cs_source_l00022}00022\ \{}
+\DoxyCodeLine{\Hypertarget{_tree_view_mouse_event_handler_tests_8cs_source_l00026}00026\ \ \ \ \ [Fact]}
+\DoxyCodeLine{\Hypertarget{_tree_view_mouse_event_handler_tests_8cs_source_l00027}\mbox{\hyperlink{class_luthetus_1_1_common_1_1_tests_1_1_basis_1_1_tree_views_1_1_models_1_1_tree_view_mouse_event_handler_tests_ae43997b48191fa397ccdb732bed78250}{00027}}\ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_luthetus_1_1_common_1_1_tests_1_1_basis_1_1_tree_views_1_1_models_1_1_tree_view_mouse_event_handler_tests_ae43997b48191fa397ccdb732bed78250}{Constructor}}()}
+\DoxyCodeLine{\Hypertarget{_tree_view_mouse_event_handler_tests_8cs_source_l00028}00028\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_tree_view_mouse_event_handler_tests_8cs_source_l00029}00029\ \ \ \ \ \ \ \ \ InitializeTreeViewMouseEventHandlerTests(}
+\DoxyCodeLine{\Hypertarget{_tree_view_mouse_event_handler_tests_8cs_source_l00030}00030\ \ \ \ \ \ \ \ \ \ \ \ \ out\ var\ dispatcher,}
+\DoxyCodeLine{\Hypertarget{_tree_view_mouse_event_handler_tests_8cs_source_l00031}00031\ \ \ \ \ \ \ \ \ \ \ \ \ out\ var\ commonTreeViews,}
+\DoxyCodeLine{\Hypertarget{_tree_view_mouse_event_handler_tests_8cs_source_l00032}00032\ \ \ \ \ \ \ \ \ \ \ \ \ out\ var\ commonComponentRenderers,}
+\DoxyCodeLine{\Hypertarget{_tree_view_mouse_event_handler_tests_8cs_source_l00033}00033\ \ \ \ \ \ \ \ \ \ \ \ \ out\ var\ treeViewStateWrap,}
+\DoxyCodeLine{\Hypertarget{_tree_view_mouse_event_handler_tests_8cs_source_l00034}00034\ \ \ \ \ \ \ \ \ \ \ \ \ out\ var\ treeViewService,}
+\DoxyCodeLine{\Hypertarget{_tree_view_mouse_event_handler_tests_8cs_source_l00035}00035\ \ \ \ \ \ \ \ \ \ \ \ \ out\ var\ backgroundTaskService,}
+\DoxyCodeLine{\Hypertarget{_tree_view_mouse_event_handler_tests_8cs_source_l00036}00036\ \ \ \ \ \ \ \ \ \ \ \ \ out\ var\ websiteServerState,}
+\DoxyCodeLine{\Hypertarget{_tree_view_mouse_event_handler_tests_8cs_source_l00037}00037\ \ \ \ \ \ \ \ \ \ \ \ \ out\ var\ websiteServer,}
+\DoxyCodeLine{\Hypertarget{_tree_view_mouse_event_handler_tests_8cs_source_l00038}00038\ \ \ \ \ \ \ \ \ \ \ \ \ out\ var\ websiteServerTreeView,}
+\DoxyCodeLine{\Hypertarget{_tree_view_mouse_event_handler_tests_8cs_source_l00039}00039\ \ \ \ \ \ \ \ \ \ \ \ \ out\ var\ websiteServerTreeViewContainer,}
+\DoxyCodeLine{\Hypertarget{_tree_view_mouse_event_handler_tests_8cs_source_l00040}00040\ \ \ \ \ \ \ \ \ \ \ \ \ out\ var\ mouseEventHandler);}
+\DoxyCodeLine{\Hypertarget{_tree_view_mouse_event_handler_tests_8cs_source_l00041}00041\ }
+\DoxyCodeLine{\Hypertarget{_tree_view_mouse_event_handler_tests_8cs_source_l00042}00042\ \ \ \ \ \ \ \ \ Assert.NotNull(mouseEventHandler);}
+\DoxyCodeLine{\Hypertarget{_tree_view_mouse_event_handler_tests_8cs_source_l00043}00043\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_tree_view_mouse_event_handler_tests_8cs_source_l00044}00044\ }
+\DoxyCodeLine{\Hypertarget{_tree_view_mouse_event_handler_tests_8cs_source_l00048}00048\ \ \ \ \ [Fact]}
+\DoxyCodeLine{\Hypertarget{_tree_view_mouse_event_handler_tests_8cs_source_l00049}\mbox{\hyperlink{class_luthetus_1_1_common_1_1_tests_1_1_basis_1_1_tree_views_1_1_models_1_1_tree_view_mouse_event_handler_tests_a85861fdece5d6ada6245e88fec312d60}{00049}}\ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_luthetus_1_1_common_1_1_tests_1_1_basis_1_1_tree_views_1_1_models_1_1_tree_view_mouse_event_handler_tests_a85861fdece5d6ada6245e88fec312d60}{OnClick}}()}
+\DoxyCodeLine{\Hypertarget{_tree_view_mouse_event_handler_tests_8cs_source_l00050}00050\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_tree_view_mouse_event_handler_tests_8cs_source_l00051}00051\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{throw}\ \textcolor{keyword}{new}\ NotImplementedException();}
+\DoxyCodeLine{\Hypertarget{_tree_view_mouse_event_handler_tests_8cs_source_l00052}00052\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_tree_view_mouse_event_handler_tests_8cs_source_l00053}00053\ }
+\DoxyCodeLine{\Hypertarget{_tree_view_mouse_event_handler_tests_8cs_source_l00057}00057\ \ \ \ \ [Fact]}
+\DoxyCodeLine{\Hypertarget{_tree_view_mouse_event_handler_tests_8cs_source_l00058}\mbox{\hyperlink{class_luthetus_1_1_common_1_1_tests_1_1_basis_1_1_tree_views_1_1_models_1_1_tree_view_mouse_event_handler_tests_af2ef62121fe154a144ece86b15684209}{00058}}\ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_luthetus_1_1_common_1_1_tests_1_1_basis_1_1_tree_views_1_1_models_1_1_tree_view_mouse_event_handler_tests_af2ef62121fe154a144ece86b15684209}{OnDoubleClick}}()}
+\DoxyCodeLine{\Hypertarget{_tree_view_mouse_event_handler_tests_8cs_source_l00059}00059\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_tree_view_mouse_event_handler_tests_8cs_source_l00060}00060\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{throw}\ \textcolor{keyword}{new}\ NotImplementedException();}
+\DoxyCodeLine{\Hypertarget{_tree_view_mouse_event_handler_tests_8cs_source_l00061}00061\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_tree_view_mouse_event_handler_tests_8cs_source_l00062}00062\ }
+\DoxyCodeLine{\Hypertarget{_tree_view_mouse_event_handler_tests_8cs_source_l00066}00066\ \ \ \ \ [Fact]}
+\DoxyCodeLine{\Hypertarget{_tree_view_mouse_event_handler_tests_8cs_source_l00067}\mbox{\hyperlink{class_luthetus_1_1_common_1_1_tests_1_1_basis_1_1_tree_views_1_1_models_1_1_tree_view_mouse_event_handler_tests_aca08e0f5799d70a2ce8437956f976215}{00067}}\ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_luthetus_1_1_common_1_1_tests_1_1_basis_1_1_tree_views_1_1_models_1_1_tree_view_mouse_event_handler_tests_aca08e0f5799d70a2ce8437956f976215}{OnDoubleClickAsync}}()}
+\DoxyCodeLine{\Hypertarget{_tree_view_mouse_event_handler_tests_8cs_source_l00068}00068\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_tree_view_mouse_event_handler_tests_8cs_source_l00069}00069\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{throw}\ \textcolor{keyword}{new}\ NotImplementedException();}
+\DoxyCodeLine{\Hypertarget{_tree_view_mouse_event_handler_tests_8cs_source_l00070}00070\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_tree_view_mouse_event_handler_tests_8cs_source_l00071}00071\ }
+\DoxyCodeLine{\Hypertarget{_tree_view_mouse_event_handler_tests_8cs_source_l00075}00075\ \ \ \ \ [Fact]}
+\DoxyCodeLine{\Hypertarget{_tree_view_mouse_event_handler_tests_8cs_source_l00076}\mbox{\hyperlink{class_luthetus_1_1_common_1_1_tests_1_1_basis_1_1_tree_views_1_1_models_1_1_tree_view_mouse_event_handler_tests_a2479a35faed537cc1e1b75dc6f52e35a}{00076}}\ \ \ \ \ \textcolor{keyword}{public}\ async\ Task\ \mbox{\hyperlink{class_luthetus_1_1_common_1_1_tests_1_1_basis_1_1_tree_views_1_1_models_1_1_tree_view_mouse_event_handler_tests_a2479a35faed537cc1e1b75dc6f52e35a}{OnMouseDownAsync}}()}
+\DoxyCodeLine{\Hypertarget{_tree_view_mouse_event_handler_tests_8cs_source_l00077}00077\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_tree_view_mouse_event_handler_tests_8cs_source_l00078}00078\ \ \ \ \ \ \ \ \ InitializeTreeViewMouseEventHandlerTests(}
+\DoxyCodeLine{\Hypertarget{_tree_view_mouse_event_handler_tests_8cs_source_l00079}00079\ \ \ \ \ \ \ \ \ \ \ \ \ out\ var\ dispatcher,}
+\DoxyCodeLine{\Hypertarget{_tree_view_mouse_event_handler_tests_8cs_source_l00080}00080\ \ \ \ \ \ \ \ \ \ \ \ \ out\ var\ commonTreeViews,}
+\DoxyCodeLine{\Hypertarget{_tree_view_mouse_event_handler_tests_8cs_source_l00081}00081\ \ \ \ \ \ \ \ \ \ \ \ \ out\ var\ commonComponentRenderers,}
+\DoxyCodeLine{\Hypertarget{_tree_view_mouse_event_handler_tests_8cs_source_l00082}00082\ \ \ \ \ \ \ \ \ \ \ \ \ out\ var\ treeViewStateWrap,}
+\DoxyCodeLine{\Hypertarget{_tree_view_mouse_event_handler_tests_8cs_source_l00083}00083\ \ \ \ \ \ \ \ \ \ \ \ \ out\ var\ treeViewService,}
+\DoxyCodeLine{\Hypertarget{_tree_view_mouse_event_handler_tests_8cs_source_l00084}00084\ \ \ \ \ \ \ \ \ \ \ \ \ out\ var\ backgroundTaskService,}
+\DoxyCodeLine{\Hypertarget{_tree_view_mouse_event_handler_tests_8cs_source_l00085}00085\ \ \ \ \ \ \ \ \ \ \ \ \ out\ var\ websiteServerState,}
+\DoxyCodeLine{\Hypertarget{_tree_view_mouse_event_handler_tests_8cs_source_l00086}00086\ \ \ \ \ \ \ \ \ \ \ \ \ out\ var\ websiteServer,}
+\DoxyCodeLine{\Hypertarget{_tree_view_mouse_event_handler_tests_8cs_source_l00087}00087\ \ \ \ \ \ \ \ \ \ \ \ \ out\ var\ websiteServerTreeView,}
+\DoxyCodeLine{\Hypertarget{_tree_view_mouse_event_handler_tests_8cs_source_l00088}00088\ \ \ \ \ \ \ \ \ \ \ \ \ out\ var\ websiteServerTreeViewContainer,}
+\DoxyCodeLine{\Hypertarget{_tree_view_mouse_event_handler_tests_8cs_source_l00089}00089\ \ \ \ \ \ \ \ \ \ \ \ \ out\ var\ mouseEventHandler);}
+\DoxyCodeLine{\Hypertarget{_tree_view_mouse_event_handler_tests_8cs_source_l00090}00090\ }
+\DoxyCodeLine{\Hypertarget{_tree_view_mouse_event_handler_tests_8cs_source_l00091}00091\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Test\ Setup}}
+\DoxyCodeLine{\Hypertarget{_tree_view_mouse_event_handler_tests_8cs_source_l00092}00092\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_tree_view_mouse_event_handler_tests_8cs_source_l00093}00093\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ The\ 'InitializeTreeViewKeyboardEventHandlerTests'\ method\ provides\ an\ unexpanded}}
+\DoxyCodeLine{\Hypertarget{_tree_view_mouse_event_handler_tests_8cs_source_l00094}00094\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ node.\ Therefore,\ make\ the\ node\ expanded.}}
+\DoxyCodeLine{\Hypertarget{_tree_view_mouse_event_handler_tests_8cs_source_l00095}00095\ \ \ \ \ \ \ \ \ \ \ \ \ websiteServerTreeView.IsExpanded\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{\Hypertarget{_tree_view_mouse_event_handler_tests_8cs_source_l00096}00096\ \ \ \ \ \ \ \ \ \ \ \ \ await\ websiteServerTreeView.LoadChildListAsync();}
+\DoxyCodeLine{\Hypertarget{_tree_view_mouse_event_handler_tests_8cs_source_l00097}00097\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_tree_view_mouse_event_handler_tests_8cs_source_l00098}00098\ }
+\DoxyCodeLine{\Hypertarget{_tree_view_mouse_event_handler_tests_8cs_source_l00099}00099\ \ \ \ \ \ \ \ \ Assert.Equal(websiteServerTreeView,\ websiteServerTreeViewContainer.ActiveNode);}
+\DoxyCodeLine{\Hypertarget{_tree_view_mouse_event_handler_tests_8cs_source_l00100}00100\ }
+\DoxyCodeLine{\Hypertarget{_tree_view_mouse_event_handler_tests_8cs_source_l00101}00101\ \ \ \ \ \ \ \ \ await\ mouseEventHandler.OnMouseDownAsync(\textcolor{keyword}{new}\ \mbox{\hyperlink{class_luthetus_1_1_common_1_1_razor_lib_1_1_commands_1_1_models_1_1_tree_view_command_args}{TreeViewCommandArgs}}(}
+\DoxyCodeLine{\Hypertarget{_tree_view_mouse_event_handler_tests_8cs_source_l00102}00102\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ treeViewService,}
+\DoxyCodeLine{\Hypertarget{_tree_view_mouse_event_handler_tests_8cs_source_l00103}00103\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ websiteServerTreeViewContainer,}
+\DoxyCodeLine{\Hypertarget{_tree_view_mouse_event_handler_tests_8cs_source_l00104}00104\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ websiteServerTreeView.ChildList.First(),}
+\DoxyCodeLine{\Hypertarget{_tree_view_mouse_event_handler_tests_8cs_source_l00105}00105\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ()\ =>\ Task.CompletedTask,}
+\DoxyCodeLine{\Hypertarget{_tree_view_mouse_event_handler_tests_8cs_source_l00106}00106\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{null},}
+\DoxyCodeLine{\Hypertarget{_tree_view_mouse_event_handler_tests_8cs_source_l00107}00107\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{new}\ MouseEventArgs(),}
+\DoxyCodeLine{\Hypertarget{_tree_view_mouse_event_handler_tests_8cs_source_l00108}00108\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{null}));}
+\DoxyCodeLine{\Hypertarget{_tree_view_mouse_event_handler_tests_8cs_source_l00109}00109\ }
+\DoxyCodeLine{\Hypertarget{_tree_view_mouse_event_handler_tests_8cs_source_l00110}00110\ \ \ \ \ \ \ \ \ Assert.True(treeViewService.TryGetTreeViewContainer(}
+\DoxyCodeLine{\Hypertarget{_tree_view_mouse_event_handler_tests_8cs_source_l00111}00111\ \ \ \ \ \ \ \ \ \ \ \ \ websiteServerTreeViewContainer.Key,}
+\DoxyCodeLine{\Hypertarget{_tree_view_mouse_event_handler_tests_8cs_source_l00112}00112\ \ \ \ \ \ \ \ \ \ \ \ \ out\ websiteServerTreeViewContainer!));}
+\DoxyCodeLine{\Hypertarget{_tree_view_mouse_event_handler_tests_8cs_source_l00113}00113\ }
+\DoxyCodeLine{\Hypertarget{_tree_view_mouse_event_handler_tests_8cs_source_l00114}00114\ \ \ \ \ \ \ \ \ Assert.Equal(websiteServerTreeView.ChildList.First(),\ websiteServerTreeViewContainer.ActiveNode);}
+\DoxyCodeLine{\Hypertarget{_tree_view_mouse_event_handler_tests_8cs_source_l00115}00115\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_tree_view_mouse_event_handler_tests_8cs_source_l00116}00116\ }
+\DoxyCodeLine{\Hypertarget{_tree_view_mouse_event_handler_tests_8cs_source_l00117}00117\ \ \ \ \ \textcolor{keyword}{private}\ \textcolor{keywordtype}{void}\ InitializeTreeViewMouseEventHandlerTests(}
+\DoxyCodeLine{\Hypertarget{_tree_view_mouse_event_handler_tests_8cs_source_l00118}00118\ \ \ \ \ \ \ \ \ out\ IDispatcher\ dispatcher,}
+\DoxyCodeLine{\Hypertarget{_tree_view_mouse_event_handler_tests_8cs_source_l00119}00119\ \ \ \ \ \ \ \ \ out\ \mbox{\hyperlink{class_luthetus_1_1_common_1_1_razor_lib_1_1_component_renderers_1_1_models_1_1_common_tree_views}{CommonTreeViews}}\ commonTreeViews,}
+\DoxyCodeLine{\Hypertarget{_tree_view_mouse_event_handler_tests_8cs_source_l00120}00120\ \ \ \ \ \ \ \ \ out\ \mbox{\hyperlink{class_luthetus_1_1_common_1_1_razor_lib_1_1_component_renderers_1_1_models_1_1_common_component_renderers}{CommonComponentRenderers}}\ commonComponentRenderers,}
+\DoxyCodeLine{\Hypertarget{_tree_view_mouse_event_handler_tests_8cs_source_l00121}00121\ \ \ \ \ \ \ \ \ out\ IState<TreeViewState>\ treeViewStateWrap,}
+\DoxyCodeLine{\Hypertarget{_tree_view_mouse_event_handler_tests_8cs_source_l00122}00122\ \ \ \ \ \ \ \ \ out\ \mbox{\hyperlink{interface_luthetus_1_1_common_1_1_razor_lib_1_1_tree_views_1_1_models_1_1_i_tree_view_service}{ITreeViewService}}\ treeViewService,}
+\DoxyCodeLine{\Hypertarget{_tree_view_mouse_event_handler_tests_8cs_source_l00123}00123\ \ \ \ \ \ \ \ \ out\ \mbox{\hyperlink{interface_luthetus_1_1_common_1_1_razor_lib_1_1_background_tasks_1_1_models_1_1_i_background_task_service}{IBackgroundTaskService}}\ backgroundTaskService,}
+\DoxyCodeLine{\Hypertarget{_tree_view_mouse_event_handler_tests_8cs_source_l00124}00124\ \ \ \ \ \ \ \ \ out\ \mbox{\hyperlink{class_luthetus_1_1_common_1_1_tests_1_1_basis_1_1_tree_views_1_1_models_1_1_internals_1_1_website_server_state}{WebsiteServerState}}\ websiteServerState,}
+\DoxyCodeLine{\Hypertarget{_tree_view_mouse_event_handler_tests_8cs_source_l00125}00125\ \ \ \ \ \ \ \ \ out\ \mbox{\hyperlink{class_luthetus_1_1_common_1_1_tests_1_1_basis_1_1_tree_views_1_1_models_1_1_internals_1_1_website_server}{WebsiteServer}}\ websiteServer,}
+\DoxyCodeLine{\Hypertarget{_tree_view_mouse_event_handler_tests_8cs_source_l00126}00126\ \ \ \ \ \ \ \ \ out\ \mbox{\hyperlink{class_luthetus_1_1_common_1_1_tests_1_1_basis_1_1_tree_views_1_1_models_1_1_internals_1_1_website_server_tree_view}{WebsiteServerTreeView}}\ websiteServerTreeView,}
+\DoxyCodeLine{\Hypertarget{_tree_view_mouse_event_handler_tests_8cs_source_l00127}00127\ \ \ \ \ \ \ \ \ out\ \mbox{\hyperlink{namespace_luthetus_1_1_common_1_1_razor_lib_1_1_tree_views_1_1_models_ace4f137317eda265ad6dd976b61de5c6}{TreeViewContainer}}\ websiteServerTreeViewContainer,}
+\DoxyCodeLine{\Hypertarget{_tree_view_mouse_event_handler_tests_8cs_source_l00128}00128\ \ \ \ \ \ \ \ \ out\ \mbox{\hyperlink{class_luthetus_1_1_common_1_1_razor_lib_1_1_tree_views_1_1_models_1_1_tree_view_mouse_event_handler}{TreeViewMouseEventHandler}}\ mouseEventHandler)}
+\DoxyCodeLine{\Hypertarget{_tree_view_mouse_event_handler_tests_8cs_source_l00129}00129\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_tree_view_mouse_event_handler_tests_8cs_source_l00130}00130\ \ \ \ \ \ \ \ \ var\ temporaryBackgroundTaskService\ =\ backgroundTaskService\ =\ \textcolor{keyword}{new}\ \mbox{\hyperlink{class_luthetus_1_1_common_1_1_razor_lib_1_1_background_tasks_1_1_models_1_1_background_task_service_synchronous}{BackgroundTaskServiceSynchronous}}();}
+\DoxyCodeLine{\Hypertarget{_tree_view_mouse_event_handler_tests_8cs_source_l00131}00131\ }
+\DoxyCodeLine{\Hypertarget{_tree_view_mouse_event_handler_tests_8cs_source_l00132}00132\ \ \ \ \ \ \ \ \ var\ continuousQueue\ =\ \textcolor{keyword}{new}\ \mbox{\hyperlink{class_luthetus_1_1_common_1_1_razor_lib_1_1_background_tasks_1_1_models_1_1_background_task_queue}{BackgroundTaskQueue}}(}
+\DoxyCodeLine{\Hypertarget{_tree_view_mouse_event_handler_tests_8cs_source_l00133}00133\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_luthetus_1_1_common_1_1_razor_lib_1_1_background_tasks_1_1_models_1_1_continuous_background_task_worker}{ContinuousBackgroundTaskWorker}}.\mbox{\hyperlink{class_luthetus_1_1_common_1_1_razor_lib_1_1_background_tasks_1_1_models_1_1_continuous_background_task_worker_a2bbecf18336413ee1caff9d378acc256}{GetQueueKey}}(),}
+\DoxyCodeLine{\Hypertarget{_tree_view_mouse_event_handler_tests_8cs_source_l00134}00134\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_luthetus_1_1_common_1_1_razor_lib_1_1_background_tasks_1_1_models_1_1_continuous_background_task_worker}{ContinuousBackgroundTaskWorker}}.\mbox{\hyperlink{class_luthetus_1_1_common_1_1_razor_lib_1_1_background_tasks_1_1_models_1_1_continuous_background_task_worker_a22c2b04c4f8e393a7ab0f17031f1a43a}{QUEUE\_DISPLAY\_NAME}});}
+\DoxyCodeLine{\Hypertarget{_tree_view_mouse_event_handler_tests_8cs_source_l00135}00135\ }
+\DoxyCodeLine{\Hypertarget{_tree_view_mouse_event_handler_tests_8cs_source_l00136}00136\ \ \ \ \ \ \ \ \ backgroundTaskService.RegisterQueue(continuousQueue);}
+\DoxyCodeLine{\Hypertarget{_tree_view_mouse_event_handler_tests_8cs_source_l00137}00137\ }
+\DoxyCodeLine{\Hypertarget{_tree_view_mouse_event_handler_tests_8cs_source_l00138}00138\ \ \ \ \ \ \ \ \ var\ blockingQueue\ =\ \textcolor{keyword}{new}\ \mbox{\hyperlink{class_luthetus_1_1_common_1_1_razor_lib_1_1_background_tasks_1_1_models_1_1_background_task_queue}{BackgroundTaskQueue}}(}
+\DoxyCodeLine{\Hypertarget{_tree_view_mouse_event_handler_tests_8cs_source_l00139}00139\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_luthetus_1_1_common_1_1_razor_lib_1_1_background_tasks_1_1_models_1_1_blocking_background_task_worker}{BlockingBackgroundTaskWorker}}.\mbox{\hyperlink{class_luthetus_1_1_common_1_1_razor_lib_1_1_background_tasks_1_1_models_1_1_blocking_background_task_worker_a267091acd637305c1ddcfe78bef3343f}{GetQueueKey}}(),}
+\DoxyCodeLine{\Hypertarget{_tree_view_mouse_event_handler_tests_8cs_source_l00140}00140\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_luthetus_1_1_common_1_1_razor_lib_1_1_background_tasks_1_1_models_1_1_blocking_background_task_worker}{BlockingBackgroundTaskWorker}}.\mbox{\hyperlink{class_luthetus_1_1_common_1_1_razor_lib_1_1_background_tasks_1_1_models_1_1_blocking_background_task_worker_a15164ffc66eccc1ab15eccb3351b13d0}{QUEUE\_DISPLAY\_NAME}});}
+\DoxyCodeLine{\Hypertarget{_tree_view_mouse_event_handler_tests_8cs_source_l00141}00141\ }
+\DoxyCodeLine{\Hypertarget{_tree_view_mouse_event_handler_tests_8cs_source_l00142}00142\ \ \ \ \ \ \ \ \ backgroundTaskService.RegisterQueue(blockingQueue);}
+\DoxyCodeLine{\Hypertarget{_tree_view_mouse_event_handler_tests_8cs_source_l00143}00143\ }
+\DoxyCodeLine{\Hypertarget{_tree_view_mouse_event_handler_tests_8cs_source_l00144}00144\ \ \ \ \ \ \ \ \ var\ services\ =\ \textcolor{keyword}{new}\ ServiceCollection()}
+\DoxyCodeLine{\Hypertarget{_tree_view_mouse_event_handler_tests_8cs_source_l00145}00145\ \ \ \ \ \ \ \ \ \ \ \ \ .AddScoped<\mbox{\hyperlink{interface_luthetus_1_1_common_1_1_razor_lib_1_1_tree_views_1_1_models_1_1_i_tree_view_service}{ITreeViewService}},\ \mbox{\hyperlink{class_luthetus_1_1_common_1_1_razor_lib_1_1_tree_views_1_1_models_1_1_tree_view_service}{TreeViewService}}>()}
+\DoxyCodeLine{\Hypertarget{_tree_view_mouse_event_handler_tests_8cs_source_l00146}00146\ \ \ \ \ \ \ \ \ \ \ \ \ .\mbox{\hyperlink{_lib_2_ide_2_host_8_blazor_web_assembly_2_program_8cs_ad23e038402085511bf6d150f155199f9}{AddScoped}}(sp\ =>\ temporaryBackgroundTaskService)}
+\DoxyCodeLine{\Hypertarget{_tree_view_mouse_event_handler_tests_8cs_source_l00147}00147\ \ \ \ \ \ \ \ \ \ \ \ \ .AddFluxor(options\ =>\ options.ScanAssemblies(typeof(TreeViewState).Assembly));}
+\DoxyCodeLine{\Hypertarget{_tree_view_mouse_event_handler_tests_8cs_source_l00148}00148\ }
+\DoxyCodeLine{\Hypertarget{_tree_view_mouse_event_handler_tests_8cs_source_l00149}00149\ \ \ \ \ \ \ \ \ var\ serviceProvider\ =\ services.BuildServiceProvider();}
+\DoxyCodeLine{\Hypertarget{_tree_view_mouse_event_handler_tests_8cs_source_l00150}00150\ }
+\DoxyCodeLine{\Hypertarget{_tree_view_mouse_event_handler_tests_8cs_source_l00151}00151\ \ \ \ \ \ \ \ \ var\ store\ =\ serviceProvider.GetRequiredService<IStore>();}
+\DoxyCodeLine{\Hypertarget{_tree_view_mouse_event_handler_tests_8cs_source_l00152}00152\ \ \ \ \ \ \ \ \ store.InitializeAsync().Wait();}
+\DoxyCodeLine{\Hypertarget{_tree_view_mouse_event_handler_tests_8cs_source_l00153}00153\ }
+\DoxyCodeLine{\Hypertarget{_tree_view_mouse_event_handler_tests_8cs_source_l00154}00154\ \ \ \ \ \ \ \ \ treeViewStateWrap\ =\ serviceProvider.GetRequiredService<IState<TreeViewState>>();}
+\DoxyCodeLine{\Hypertarget{_tree_view_mouse_event_handler_tests_8cs_source_l00155}00155\ \ \ \ \ \ \ \ \ treeViewService\ =\ serviceProvider.GetRequiredService<\mbox{\hyperlink{interface_luthetus_1_1_common_1_1_razor_lib_1_1_tree_views_1_1_models_1_1_i_tree_view_service}{ITreeViewService}}>();}
+\DoxyCodeLine{\Hypertarget{_tree_view_mouse_event_handler_tests_8cs_source_l00156}00156\ \ \ \ \ \ \ \ \ backgroundTaskService\ =\ serviceProvider.GetRequiredService<\mbox{\hyperlink{interface_luthetus_1_1_common_1_1_razor_lib_1_1_background_tasks_1_1_models_1_1_i_background_task_service}{IBackgroundTaskService}}>();}
+\DoxyCodeLine{\Hypertarget{_tree_view_mouse_event_handler_tests_8cs_source_l00157}00157\ \ \ \ \ \ \ \ \ dispatcher\ =\ serviceProvider.GetRequiredService<IDispatcher>();}
+\DoxyCodeLine{\Hypertarget{_tree_view_mouse_event_handler_tests_8cs_source_l00158}00158\ }
+\DoxyCodeLine{\Hypertarget{_tree_view_mouse_event_handler_tests_8cs_source_l00159}00159\ \ \ \ \ \ \ \ \ commonTreeViews\ =\ \textcolor{keyword}{new}\ \mbox{\hyperlink{class_luthetus_1_1_common_1_1_razor_lib_1_1_component_renderers_1_1_models_1_1_common_tree_views}{CommonTreeViews}}(}
+\DoxyCodeLine{\Hypertarget{_tree_view_mouse_event_handler_tests_8cs_source_l00160}00160\ \ \ \ \ \ \ \ \ \ \ \ \ typeof(\mbox{\hyperlink{class_luthetus_1_1_common_1_1_razor_lib_1_1_tree_views_1_1_displays_1_1_utils_1_1_tree_view_exception_display}{TreeViewExceptionDisplay}}),}
+\DoxyCodeLine{\Hypertarget{_tree_view_mouse_event_handler_tests_8cs_source_l00161}00161\ \ \ \ \ \ \ \ \ \ \ \ \ typeof(\mbox{\hyperlink{class_luthetus_1_1_common_1_1_razor_lib_1_1_watch_windows_1_1_displays_1_1_tree_view_missing_renderer_fallback_display}{TreeViewMissingRendererFallbackDisplay}}),}
+\DoxyCodeLine{\Hypertarget{_tree_view_mouse_event_handler_tests_8cs_source_l00162}00162\ \ \ \ \ \ \ \ \ \ \ \ \ typeof(\mbox{\hyperlink{class_luthetus_1_1_common_1_1_razor_lib_1_1_watch_windows_1_1_displays_1_1_tree_view_text_display}{TreeViewTextDisplay}}),}
+\DoxyCodeLine{\Hypertarget{_tree_view_mouse_event_handler_tests_8cs_source_l00163}00163\ \ \ \ \ \ \ \ \ \ \ \ \ typeof(\mbox{\hyperlink{class_luthetus_1_1_common_1_1_razor_lib_1_1_watch_windows_1_1_displays_1_1_tree_view_reflection_display}{TreeViewReflectionDisplay}}),}
+\DoxyCodeLine{\Hypertarget{_tree_view_mouse_event_handler_tests_8cs_source_l00164}00164\ \ \ \ \ \ \ \ \ \ \ \ \ typeof(\mbox{\hyperlink{class_luthetus_1_1_common_1_1_razor_lib_1_1_watch_windows_1_1_displays_1_1_tree_view_properties_display}{TreeViewPropertiesDisplay}}),}
+\DoxyCodeLine{\Hypertarget{_tree_view_mouse_event_handler_tests_8cs_source_l00165}00165\ \ \ \ \ \ \ \ \ \ \ \ \ typeof(\mbox{\hyperlink{class_luthetus_1_1_common_1_1_razor_lib_1_1_watch_windows_1_1_displays_1_1_tree_view_interface_implementation_display}{TreeViewInterfaceImplementationDisplay}}),}
+\DoxyCodeLine{\Hypertarget{_tree_view_mouse_event_handler_tests_8cs_source_l00166}00166\ \ \ \ \ \ \ \ \ \ \ \ \ typeof(\mbox{\hyperlink{class_luthetus_1_1_common_1_1_razor_lib_1_1_watch_windows_1_1_displays_1_1_tree_view_fields_display}{TreeViewFieldsDisplay}}),}
+\DoxyCodeLine{\Hypertarget{_tree_view_mouse_event_handler_tests_8cs_source_l00167}00167\ \ \ \ \ \ \ \ \ \ \ \ \ typeof(\mbox{\hyperlink{class_luthetus_1_1_common_1_1_razor_lib_1_1_tree_views_1_1_displays_1_1_utils_1_1_tree_view_exception_display}{TreeViewExceptionDisplay}}),}
+\DoxyCodeLine{\Hypertarget{_tree_view_mouse_event_handler_tests_8cs_source_l00168}00168\ \ \ \ \ \ \ \ \ \ \ \ \ typeof(\mbox{\hyperlink{class_luthetus_1_1_common_1_1_razor_lib_1_1_watch_windows_1_1_displays_1_1_tree_view_enumerable_display}{TreeViewEnumerableDisplay}}));}
+\DoxyCodeLine{\Hypertarget{_tree_view_mouse_event_handler_tests_8cs_source_l00169}00169\ }
+\DoxyCodeLine{\Hypertarget{_tree_view_mouse_event_handler_tests_8cs_source_l00170}00170\ \ \ \ \ \ \ \ \ commonComponentRenderers\ =\ \textcolor{keyword}{new}\ \mbox{\hyperlink{class_luthetus_1_1_common_1_1_razor_lib_1_1_component_renderers_1_1_models_1_1_common_component_renderers}{CommonComponentRenderers}}(}
+\DoxyCodeLine{\Hypertarget{_tree_view_mouse_event_handler_tests_8cs_source_l00171}00171\ \ \ \ \ \ \ \ \ \ \ \ \ typeof(\mbox{\hyperlink{class_luthetus_1_1_common_1_1_razor_lib_1_1_notifications_1_1_displays_1_1_common_error_notification_display}{CommonErrorNotificationDisplay}}),}
+\DoxyCodeLine{\Hypertarget{_tree_view_mouse_event_handler_tests_8cs_source_l00172}00172\ \ \ \ \ \ \ \ \ \ \ \ \ typeof(\mbox{\hyperlink{class_luthetus_1_1_common_1_1_razor_lib_1_1_notifications_1_1_displays_1_1_common_informative_notification_display}{CommonInformativeNotificationDisplay}}),}
+\DoxyCodeLine{\Hypertarget{_tree_view_mouse_event_handler_tests_8cs_source_l00173}00173\ \ \ \ \ \ \ \ \ \ \ \ \ typeof(\mbox{\hyperlink{class_luthetus_1_1_common_1_1_razor_lib_1_1_notifications_1_1_displays_1_1_common_progress_notification_display}{CommonProgressNotificationDisplay}}),}
+\DoxyCodeLine{\Hypertarget{_tree_view_mouse_event_handler_tests_8cs_source_l00174}00174\ \ \ \ \ \ \ \ \ \ \ \ \ commonTreeViews);}
+\DoxyCodeLine{\Hypertarget{_tree_view_mouse_event_handler_tests_8cs_source_l00175}00175\ }
+\DoxyCodeLine{\Hypertarget{_tree_view_mouse_event_handler_tests_8cs_source_l00176}00176\ \ \ \ \ \ \ \ \ websiteServerState\ =\ \textcolor{keyword}{new}\ \mbox{\hyperlink{class_luthetus_1_1_common_1_1_tests_1_1_basis_1_1_tree_views_1_1_models_1_1_internals_1_1_website_server_state}{WebsiteServerState}}();}
+\DoxyCodeLine{\Hypertarget{_tree_view_mouse_event_handler_tests_8cs_source_l00177}00177\ }
+\DoxyCodeLine{\Hypertarget{_tree_view_mouse_event_handler_tests_8cs_source_l00178}00178\ \ \ \ \ \ \ \ \ websiteServer\ =\ \textcolor{keyword}{new}\ \mbox{\hyperlink{class_luthetus_1_1_common_1_1_tests_1_1_basis_1_1_tree_views_1_1_models_1_1_internals_1_1_website_server}{WebsiteServer}}(}
+\DoxyCodeLine{\Hypertarget{_tree_view_mouse_event_handler_tests_8cs_source_l00179}00179\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}TestServer"{}},}
+\DoxyCodeLine{\Hypertarget{_tree_view_mouse_event_handler_tests_8cs_source_l00180}00180\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{new}[]}
+\DoxyCodeLine{\Hypertarget{_tree_view_mouse_event_handler_tests_8cs_source_l00181}00181\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_tree_view_mouse_event_handler_tests_8cs_source_l00182}00182\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}/"{}},}
+\DoxyCodeLine{\Hypertarget{_tree_view_mouse_event_handler_tests_8cs_source_l00183}00183\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}/index/"{}},}
+\DoxyCodeLine{\Hypertarget{_tree_view_mouse_event_handler_tests_8cs_source_l00184}00184\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}/counter/"{}},}
+\DoxyCodeLine{\Hypertarget{_tree_view_mouse_event_handler_tests_8cs_source_l00185}00185\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}/fetchdata/"{}},}
+\DoxyCodeLine{\Hypertarget{_tree_view_mouse_event_handler_tests_8cs_source_l00186}00186\ \ \ \ \ \ \ \ \ \ \ \ \ \},}
+\DoxyCodeLine{\Hypertarget{_tree_view_mouse_event_handler_tests_8cs_source_l00187}00187\ \ \ \ \ \ \ \ \ \ \ \ \ websiteServerState);}
+\DoxyCodeLine{\Hypertarget{_tree_view_mouse_event_handler_tests_8cs_source_l00188}00188\ }
+\DoxyCodeLine{\Hypertarget{_tree_view_mouse_event_handler_tests_8cs_source_l00189}00189\ \ \ \ \ \ \ \ \ websiteServerTreeView\ =\ \textcolor{keyword}{new}\ \mbox{\hyperlink{class_luthetus_1_1_common_1_1_tests_1_1_basis_1_1_tree_views_1_1_models_1_1_internals_1_1_website_server_tree_view}{WebsiteServerTreeView}}(}
+\DoxyCodeLine{\Hypertarget{_tree_view_mouse_event_handler_tests_8cs_source_l00190}00190\ \ \ \ \ \ \ \ \ \ \ \ \ websiteServer,}
+\DoxyCodeLine{\Hypertarget{_tree_view_mouse_event_handler_tests_8cs_source_l00191}00191\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{true},}
+\DoxyCodeLine{\Hypertarget{_tree_view_mouse_event_handler_tests_8cs_source_l00192}00192\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{false});}
+\DoxyCodeLine{\Hypertarget{_tree_view_mouse_event_handler_tests_8cs_source_l00193}00193\ }
+\DoxyCodeLine{\Hypertarget{_tree_view_mouse_event_handler_tests_8cs_source_l00194}00194\ \ \ \ \ \ \ \ \ websiteServerTreeViewContainer\ =\ \textcolor{keyword}{new}\ \mbox{\hyperlink{namespace_luthetus_1_1_common_1_1_razor_lib_1_1_tree_views_1_1_models_ace4f137317eda265ad6dd976b61de5c6}{TreeViewContainer}}(}
+\DoxyCodeLine{\Hypertarget{_tree_view_mouse_event_handler_tests_8cs_source_l00195}00195\ \ \ \ \ \ \ \ \ \ \ \ \ Key<TreeViewContainer>.NewKey(),}
+\DoxyCodeLine{\Hypertarget{_tree_view_mouse_event_handler_tests_8cs_source_l00196}00196\ \ \ \ \ \ \ \ \ \ \ \ \ websiteServerTreeView,}
+\DoxyCodeLine{\Hypertarget{_tree_view_mouse_event_handler_tests_8cs_source_l00197}00197\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{new}\ \mbox{\hyperlink{class_luthetus_1_1_common_1_1_razor_lib_1_1_tree_views_1_1_models_1_1_tree_view_no_type}{TreeViewNoType}}[]\ \{\ websiteServerTreeView\ \}.ToImmutableList());}
+\DoxyCodeLine{\Hypertarget{_tree_view_mouse_event_handler_tests_8cs_source_l00198}00198\ }
+\DoxyCodeLine{\Hypertarget{_tree_view_mouse_event_handler_tests_8cs_source_l00199}00199\ \ \ \ \ \ \ \ \ treeViewService.RegisterTreeViewContainer(websiteServerTreeViewContainer);}
+\DoxyCodeLine{\Hypertarget{_tree_view_mouse_event_handler_tests_8cs_source_l00200}00200\ }
+\DoxyCodeLine{\Hypertarget{_tree_view_mouse_event_handler_tests_8cs_source_l00201}00201\ \ \ \ \ \ \ \ \ mouseEventHandler\ =\ \textcolor{keyword}{new}\ \mbox{\hyperlink{class_luthetus_1_1_common_1_1_razor_lib_1_1_tree_views_1_1_models_1_1_tree_view_mouse_event_handler}{TreeViewMouseEventHandler}}(}
+\DoxyCodeLine{\Hypertarget{_tree_view_mouse_event_handler_tests_8cs_source_l00202}00202\ \ \ \ \ \ \ \ \ \ \ \ \ treeViewService,}
+\DoxyCodeLine{\Hypertarget{_tree_view_mouse_event_handler_tests_8cs_source_l00203}00203\ \ \ \ \ \ \ \ \ \ \ \ \ backgroundTaskService);}
+\DoxyCodeLine{\Hypertarget{_tree_view_mouse_event_handler_tests_8cs_source_l00204}00204\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_tree_view_mouse_event_handler_tests_8cs_source_l00205}00205\ \}}
+
+\end{DoxyCode}

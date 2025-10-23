@@ -1,0 +1,5 @@
+var class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_installations_1_1_models_1_1_settings_dialog_config =
+[
+    [ "ComponentIsResizable", "class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_installations_1_1_models_1_1_settings_dialog_config.html#aa19a91051f26f19a2ccca2df930041c4", null ],
+    [ "ComponentRendererType", "class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_installations_1_1_models_1_1_settings_dialog_config.html#a524169fde33da0a2f9303eff02fa151b", null ]
+];

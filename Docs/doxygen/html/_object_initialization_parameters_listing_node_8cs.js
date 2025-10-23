@@ -1,0 +1,4 @@
+var _object_initialization_parameters_listing_node_8cs =
+[
+    [ "Luthetus.TextEditor.RazorLib.CompilerServices.Syntax.Nodes.ObjectInitializationParametersListingNode", "class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_1_1_nodes_1_1_objefa7c76d764e48ea8dc57ae0e1c51e194.html", "class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_1_1_nodes_1_1_objefa7c76d764e48ea8dc57ae0e1c51e194" ]
+];

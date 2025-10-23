@@ -1,0 +1,5 @@
+var _statement_tests_8cs =
+[
+    [ "Luthetus.CompilerServices.CSharp.Tests.SmokeTests.Parsers.StatementTests", "class_luthetus_1_1_compiler_services_1_1_c_sharp_1_1_tests_1_1_smoke_tests_1_1_parsers_1_1_statement_tests.html", "class_luthetus_1_1_compiler_services_1_1_c_sharp_1_1_tests_1_1_smoke_tests_1_1_parsers_1_1_statement_tests" ],
+    [ "Luthetus.CompilerServices.CSharp.Tests.SmokeTests.Parsers.StatementTests.Test", "class_luthetus_1_1_compiler_services_1_1_c_sharp_1_1_tests_1_1_smoke_tests_1_1_parsers_1_1_statement_tests_1_1_test.html", "class_luthetus_1_1_compiler_services_1_1_c_sharp_1_1_tests_1_1_smoke_tests_1_1_parsers_1_1_statement_tests_1_1_test" ]
+];

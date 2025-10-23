@@ -1,0 +1,4 @@
+var _watch_window_object_tests_8cs =
+[
+    [ "Luthetus.Common.Tests.Basis.WatchWindows.Models.WatchWindowObjectTests", "class_luthetus_1_1_common_1_1_tests_1_1_basis_1_1_watch_windows_1_1_models_1_1_watch_window_object_tests.html", "class_luthetus_1_1_common_1_1_tests_1_1_basis_1_1_watch_windows_1_1_models_1_1_watch_window_object_tests" ]
+];

@@ -1,0 +1,119 @@
+\doxysection{Ide\+Background\+Task\+Api.\+cs}
+\hypertarget{_ide_background_task_api_8cs_source}{}\label{_ide_background_task_api_8cs_source}\index{Source/Lib/Ide/Ide.RazorLib/BackgroundTasks/Models/IdeBackgroundTaskApi.cs@{Source/Lib/Ide/Ide.RazorLib/BackgroundTasks/Models/IdeBackgroundTaskApi.cs}}
+\mbox{\hyperlink{_ide_background_task_api_8cs}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{_ide_background_task_api_8cs_source_l00001}00001\ \textcolor{keyword}{using\ }Microsoft.JSInterop;}
+\DoxyCodeLine{\Hypertarget{_ide_background_task_api_8cs_source_l00002}00002\ \textcolor{keyword}{using\ }Fluxor;}
+\DoxyCodeLine{\Hypertarget{_ide_background_task_api_8cs_source_l00003}00003\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_luthetus_1_1_common_1_1_razor_lib_1_1_dialogs_1_1_models}{Luthetus.Common.RazorLib.Dialogs.Models}};}
+\DoxyCodeLine{\Hypertarget{_ide_background_task_api_8cs_source_l00004}00004\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_luthetus_1_1_common_1_1_razor_lib_1_1_background_tasks_1_1_models}{Luthetus.Common.RazorLib.BackgroundTasks.Models}};}
+\DoxyCodeLine{\Hypertarget{_ide_background_task_api_8cs_source_l00005}00005\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_luthetus_1_1_common_1_1_razor_lib_1_1_component_renderers_1_1_models}{Luthetus.Common.RazorLib.ComponentRenderers.Models}};}
+\DoxyCodeLine{\Hypertarget{_ide_background_task_api_8cs_source_l00006}00006\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_luthetus_1_1_common_1_1_razor_lib_1_1_file_systems_1_1_models}{Luthetus.Common.RazorLib.FileSystems.Models}};}
+\DoxyCodeLine{\Hypertarget{_ide_background_task_api_8cs_source_l00007}00007\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_luthetus_1_1_common_1_1_razor_lib_1_1_storages_1_1_models}{Luthetus.Common.RazorLib.Storages.Models}};}
+\DoxyCodeLine{\Hypertarget{_ide_background_task_api_8cs_source_l00008}00008\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_luthetus_1_1_common_1_1_razor_lib_1_1_tree_views_1_1_models}{Luthetus.Common.RazorLib.TreeViews.Models}};}
+\DoxyCodeLine{\Hypertarget{_ide_background_task_api_8cs_source_l00009}00009\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib}{Luthetus.TextEditor.RazorLib}};}
+\DoxyCodeLine{\Hypertarget{_ide_background_task_api_8cs_source_l00010}00010\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_interfaces}{Luthetus.TextEditor.RazorLib.CompilerServices.Interfaces}};}
+\DoxyCodeLine{\Hypertarget{_ide_background_task_api_8cs_source_l00011}00011\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_decorations_1_1_models}{Luthetus.TextEditor.RazorLib.Decorations.Models}};}
+\DoxyCodeLine{\Hypertarget{_ide_background_task_api_8cs_source_l00012}00012\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_luthetus_1_1_ide_1_1_razor_lib_1_1_component_renderers_1_1_models}{Luthetus.Ide.RazorLib.ComponentRenderers.Models}};}
+\DoxyCodeLine{\Hypertarget{_ide_background_task_api_8cs_source_l00013}00013\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_luthetus_1_1_ide_1_1_razor_lib_1_1_editors_1_1_models}{Luthetus.Ide.RazorLib.Editors.Models}};}
+\DoxyCodeLine{\Hypertarget{_ide_background_task_api_8cs_source_l00014}00014\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_luthetus_1_1_ide_1_1_razor_lib_1_1_file_systems_1_1_models}{Luthetus.Ide.RazorLib.FileSystems.Models}};}
+\DoxyCodeLine{\Hypertarget{_ide_background_task_api_8cs_source_l00015}00015\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_luthetus_1_1_ide_1_1_razor_lib_1_1_folder_explorers_1_1_models}{Luthetus.Ide.RazorLib.FolderExplorers.Models}};}
+\DoxyCodeLine{\Hypertarget{_ide_background_task_api_8cs_source_l00016}00016\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_luthetus_1_1_ide_1_1_razor_lib_1_1_input_files_1_1_models}{Luthetus.Ide.RazorLib.InputFiles.Models}};}
+\DoxyCodeLine{\Hypertarget{_ide_background_task_api_8cs_source_l00017}00017\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_luthetus_1_1_ide_1_1_razor_lib_1_1_terminals_1_1_states}{Luthetus.Ide.RazorLib.Terminals.States}};}
+\DoxyCodeLine{\Hypertarget{_ide_background_task_api_8cs_source_l00018}00018\ }
+\DoxyCodeLine{\Hypertarget{_ide_background_task_api_8cs_source_l00019}\mbox{\hyperlink{namespace_luthetus_1_1_ide_1_1_razor_lib_1_1_background_tasks}{00019}}\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespace_luthetus_1_1_ide_1_1_razor_lib_1_1_background_tasks_1_1_models}{Luthetus.Ide.RazorLib.BackgroundTasks.Models}};}
+\DoxyCodeLine{\Hypertarget{_ide_background_task_api_8cs_source_l00020}00020\ }
+\DoxyCodeLine{\Hypertarget{_ide_background_task_api_8cs_source_l00021}\mbox{\hyperlink{class_luthetus_1_1_ide_1_1_razor_lib_1_1_background_tasks_1_1_models_1_1_ide_background_task_api}{00021}}\ \textcolor{keyword}{public}\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_luthetus_1_1_ide_1_1_razor_lib_1_1_background_tasks_1_1_models_1_1_ide_background_task_api_a9e65c7c34eed96bb8c27b7eac7513ca3}{IdeBackgroundTaskApi}}}
+\DoxyCodeLine{\Hypertarget{_ide_background_task_api_8cs_source_l00022}00022\ \{}
+\DoxyCodeLine{\Hypertarget{_ide_background_task_api_8cs_source_l00023}00023\ \ \ \ \ \textcolor{keyword}{private}\ readonly\ \mbox{\hyperlink{interface_luthetus_1_1_common_1_1_razor_lib_1_1_background_tasks_1_1_models_1_1_i_background_task_service}{IBackgroundTaskService}}\ \_backgroundTaskService;}
+\DoxyCodeLine{\Hypertarget{_ide_background_task_api_8cs_source_l00024}00024\ \ \ \ \ \textcolor{keyword}{private}\ readonly\ \mbox{\hyperlink{interface_luthetus_1_1_common_1_1_razor_lib_1_1_storages_1_1_models_1_1_i_storage_service}{IStorageService}}\ \_storageService;}
+\DoxyCodeLine{\Hypertarget{_ide_background_task_api_8cs_source_l00025}00025\ \ \ \ \ \textcolor{keyword}{private}\ readonly\ \mbox{\hyperlink{interface_luthetus_1_1_ide_1_1_razor_lib_1_1_component_renderers_1_1_models_1_1_i_ide_component_renderers}{IIdeComponentRenderers}}\ \_ideComponentRenderers;}
+\DoxyCodeLine{\Hypertarget{_ide_background_task_api_8cs_source_l00026}00026\ \ \ \ \ \textcolor{keyword}{private}\ readonly\ \mbox{\hyperlink{interface_luthetus_1_1_common_1_1_razor_lib_1_1_component_renderers_1_1_models_1_1_i_common_component_renderers}{ICommonComponentRenderers}}\ \_commonComponentRenderers;}
+\DoxyCodeLine{\Hypertarget{_ide_background_task_api_8cs_source_l00027}00027\ \ \ \ \ \textcolor{keyword}{private}\ readonly\ \mbox{\hyperlink{interface_luthetus_1_1_common_1_1_razor_lib_1_1_tree_views_1_1_models_1_1_i_tree_view_service}{ITreeViewService}}\ \_treeViewService;}
+\DoxyCodeLine{\Hypertarget{_ide_background_task_api_8cs_source_l00028}00028\ \ \ \ \ \textcolor{keyword}{private}\ readonly\ IDispatcher\ \_dispatcher;}
+\DoxyCodeLine{\Hypertarget{_ide_background_task_api_8cs_source_l00029}00029\ \ \ \ \ \textcolor{keyword}{private}\ readonly\ \mbox{\hyperlink{interface_luthetus_1_1_common_1_1_razor_lib_1_1_file_systems_1_1_models_1_1_i_environment_provider}{IEnvironmentProvider}}\ \_environmentProvider;}
+\DoxyCodeLine{\Hypertarget{_ide_background_task_api_8cs_source_l00030}00030\ \ \ \ \ \textcolor{keyword}{private}\ readonly\ \mbox{\hyperlink{interface_luthetus_1_1_common_1_1_razor_lib_1_1_file_systems_1_1_models_1_1_i_file_system_provider}{IFileSystemProvider}}\ \_fileSystemProvider;}
+\DoxyCodeLine{\Hypertarget{_ide_background_task_api_8cs_source_l00031}00031\ \ \ \ \ \textcolor{keyword}{private}\ readonly\ \mbox{\hyperlink{interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_i_text_editor_service}{ITextEditorService}}\ \_textEditorService;}
+\DoxyCodeLine{\Hypertarget{_ide_background_task_api_8cs_source_l00032}00032\ \ \ \ \ \textcolor{keyword}{private}\ readonly\ \mbox{\hyperlink{interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_interfaces_1_1_i_compiler_service_registry}{ICompilerServiceRegistry}}\ \_compilerServiceRegistry;}
+\DoxyCodeLine{\Hypertarget{_ide_background_task_api_8cs_source_l00033}00033\ \ \ \ \ \textcolor{keyword}{private}\ readonly\ IState<TerminalState>\ \_terminalStateWrap;}
+\DoxyCodeLine{\Hypertarget{_ide_background_task_api_8cs_source_l00034}00034\ \ \ \ \ \textcolor{keyword}{private}\ readonly\ \mbox{\hyperlink{interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_decorations_1_1_models_1_1_i_decoration_mapper_registry}{IDecorationMapperRegistry}}\ \_decorationMapperRegistry;}
+\DoxyCodeLine{\Hypertarget{_ide_background_task_api_8cs_source_l00035}00035\ \ \ \ \ \textcolor{keyword}{private}\ readonly\ \mbox{\hyperlink{interface_luthetus_1_1_common_1_1_razor_lib_1_1_dialogs_1_1_models_1_1_i_dialog_service}{IDialogService}}\ \_dialogService;}
+\DoxyCodeLine{\Hypertarget{_ide_background_task_api_8cs_source_l00036}00036\ \ \ \ \ \textcolor{keyword}{private}\ readonly\ IJSRuntime\ \_jsRuntime;}
+\DoxyCodeLine{\Hypertarget{_ide_background_task_api_8cs_source_l00037}00037\ }
+\DoxyCodeLine{\Hypertarget{_ide_background_task_api_8cs_source_l00038}\mbox{\hyperlink{class_luthetus_1_1_ide_1_1_razor_lib_1_1_background_tasks_1_1_models_1_1_ide_background_task_api_a9e65c7c34eed96bb8c27b7eac7513ca3}{00038}}\ \ \ \ \ \textcolor{keyword}{public}\ \mbox{\hyperlink{class_luthetus_1_1_ide_1_1_razor_lib_1_1_background_tasks_1_1_models_1_1_ide_background_task_api_a9e65c7c34eed96bb8c27b7eac7513ca3}{IdeBackgroundTaskApi}}(}
+\DoxyCodeLine{\Hypertarget{_ide_background_task_api_8cs_source_l00039}00039\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{interface_luthetus_1_1_common_1_1_razor_lib_1_1_background_tasks_1_1_models_1_1_i_background_task_service}{IBackgroundTaskService}}\ backgroundTaskService,}
+\DoxyCodeLine{\Hypertarget{_ide_background_task_api_8cs_source_l00040}00040\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{interface_luthetus_1_1_common_1_1_razor_lib_1_1_storages_1_1_models_1_1_i_storage_service}{IStorageService}}\ storageService,}
+\DoxyCodeLine{\Hypertarget{_ide_background_task_api_8cs_source_l00041}00041\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_interfaces_1_1_i_compiler_service_registry}{ICompilerServiceRegistry}}\ compilerServiceRegistry,}
+\DoxyCodeLine{\Hypertarget{_ide_background_task_api_8cs_source_l00042}00042\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{interface_luthetus_1_1_ide_1_1_razor_lib_1_1_component_renderers_1_1_models_1_1_i_ide_component_renderers}{IIdeComponentRenderers}}\ ideComponentRenderers,}
+\DoxyCodeLine{\Hypertarget{_ide_background_task_api_8cs_source_l00043}00043\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{interface_luthetus_1_1_common_1_1_razor_lib_1_1_component_renderers_1_1_models_1_1_i_common_component_renderers}{ICommonComponentRenderers}}\ commonComponentRenderers,}
+\DoxyCodeLine{\Hypertarget{_ide_background_task_api_8cs_source_l00044}00044\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{interface_luthetus_1_1_common_1_1_razor_lib_1_1_tree_views_1_1_models_1_1_i_tree_view_service}{ITreeViewService}}\ treeViewService,}
+\DoxyCodeLine{\Hypertarget{_ide_background_task_api_8cs_source_l00045}00045\ \ \ \ \ \ \ \ \ IDispatcher\ dispatcher,}
+\DoxyCodeLine{\Hypertarget{_ide_background_task_api_8cs_source_l00046}00046\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{interface_luthetus_1_1_common_1_1_razor_lib_1_1_file_systems_1_1_models_1_1_i_environment_provider}{IEnvironmentProvider}}\ environmentProvider,}
+\DoxyCodeLine{\Hypertarget{_ide_background_task_api_8cs_source_l00047}00047\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{interface_luthetus_1_1_common_1_1_razor_lib_1_1_file_systems_1_1_models_1_1_i_file_system_provider}{IFileSystemProvider}}\ fileSystemProvider,}
+\DoxyCodeLine{\Hypertarget{_ide_background_task_api_8cs_source_l00048}00048\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_i_text_editor_service}{ITextEditorService}}\ textEditorService,}
+\DoxyCodeLine{\Hypertarget{_ide_background_task_api_8cs_source_l00049}00049\ \ \ \ \ \ \ \ \ IState<TerminalState>\ terminalStateWrap,}
+\DoxyCodeLine{\Hypertarget{_ide_background_task_api_8cs_source_l00050}00050\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_decorations_1_1_models_1_1_i_decoration_mapper_registry}{IDecorationMapperRegistry}}\ decorationMapperRegistry,}
+\DoxyCodeLine{\Hypertarget{_ide_background_task_api_8cs_source_l00051}00051\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{interface_luthetus_1_1_common_1_1_razor_lib_1_1_dialogs_1_1_models_1_1_i_dialog_service}{IDialogService}}\ dialogService,}
+\DoxyCodeLine{\Hypertarget{_ide_background_task_api_8cs_source_l00052}00052\ \ \ \ \ \ \ \ \ IJSRuntime\ jsRuntime,}
+\DoxyCodeLine{\Hypertarget{_ide_background_task_api_8cs_source_l00053}00053\ \ \ \ \ \ \ \ \ IServiceProvider\ serviceProvider)}
+\DoxyCodeLine{\Hypertarget{_ide_background_task_api_8cs_source_l00054}00054\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_ide_background_task_api_8cs_source_l00055}00055\ \ \ \ \ \ \ \ \ \_backgroundTaskService\ =\ backgroundTaskService;}
+\DoxyCodeLine{\Hypertarget{_ide_background_task_api_8cs_source_l00056}00056\ \ \ \ \ \ \ \ \ \_storageService\ =\ storageService;}
+\DoxyCodeLine{\Hypertarget{_ide_background_task_api_8cs_source_l00057}00057\ \ \ \ \ \ \ \ \ \_ideComponentRenderers\ =\ ideComponentRenderers;}
+\DoxyCodeLine{\Hypertarget{_ide_background_task_api_8cs_source_l00058}00058\ \ \ \ \ \ \ \ \ \_commonComponentRenderers\ =\ commonComponentRenderers;}
+\DoxyCodeLine{\Hypertarget{_ide_background_task_api_8cs_source_l00059}00059\ \ \ \ \ \ \ \ \ \_treeViewService\ =\ treeViewService;}
+\DoxyCodeLine{\Hypertarget{_ide_background_task_api_8cs_source_l00060}00060\ \ \ \ \ \ \ \ \ \_dispatcher\ =\ dispatcher;}
+\DoxyCodeLine{\Hypertarget{_ide_background_task_api_8cs_source_l00061}00061\ \ \ \ \ \ \ \ \ \_environmentProvider\ =\ environmentProvider;}
+\DoxyCodeLine{\Hypertarget{_ide_background_task_api_8cs_source_l00062}00062\ \ \ \ \ \ \ \ \ \_fileSystemProvider\ =\ fileSystemProvider;}
+\DoxyCodeLine{\Hypertarget{_ide_background_task_api_8cs_source_l00063}00063\ \ \ \ \ \ \ \ \ \_textEditorService\ =\ textEditorService;}
+\DoxyCodeLine{\Hypertarget{_ide_background_task_api_8cs_source_l00064}00064\ \ \ \ \ \ \ \ \ \_compilerServiceRegistry\ =\ compilerServiceRegistry;}
+\DoxyCodeLine{\Hypertarget{_ide_background_task_api_8cs_source_l00065}00065\ \ \ \ \ \ \ \ \ \_terminalStateWrap\ =\ terminalStateWrap;}
+\DoxyCodeLine{\Hypertarget{_ide_background_task_api_8cs_source_l00066}00066\ \ \ \ \ \ \ \ \ \_decorationMapperRegistry\ =\ decorationMapperRegistry;}
+\DoxyCodeLine{\Hypertarget{_ide_background_task_api_8cs_source_l00067}00067\ \ \ \ \ \ \ \ \ \_dialogService\ =\ dialogService;}
+\DoxyCodeLine{\Hypertarget{_ide_background_task_api_8cs_source_l00068}00068\ \ \ \ \ \ \ \ \ \_jsRuntime\ =\ jsRuntime;}
+\DoxyCodeLine{\Hypertarget{_ide_background_task_api_8cs_source_l00069}00069\ }
+\DoxyCodeLine{\Hypertarget{_ide_background_task_api_8cs_source_l00070}00070\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_luthetus_1_1_ide_1_1_razor_lib_1_1_background_tasks_1_1_models_1_1_ide_background_task_api_acfe79f4eb7a0493f1dcf40ea4b266597}{Editor}}\ =\ \textcolor{keyword}{new}\ \mbox{\hyperlink{class_luthetus_1_1_ide_1_1_razor_lib_1_1_editors_1_1_models_1_1_editor_ide_api}{EditorIdeApi}}(}
+\DoxyCodeLine{\Hypertarget{_ide_background_task_api_8cs_source_l00071}00071\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{this},}
+\DoxyCodeLine{\Hypertarget{_ide_background_task_api_8cs_source_l00072}00072\ \ \ \ \ \ \ \ \ \ \ \ \ \_backgroundTaskService,}
+\DoxyCodeLine{\Hypertarget{_ide_background_task_api_8cs_source_l00073}00073\ \ \ \ \ \ \ \ \ \ \ \ \ \_textEditorService,}
+\DoxyCodeLine{\Hypertarget{_ide_background_task_api_8cs_source_l00074}00074\ \ \ \ \ \ \ \ \ \ \ \ \ \_commonComponentRenderers,}
+\DoxyCodeLine{\Hypertarget{_ide_background_task_api_8cs_source_l00075}00075\ \ \ \ \ \ \ \ \ \ \ \ \ \_ideComponentRenderers,}
+\DoxyCodeLine{\Hypertarget{_ide_background_task_api_8cs_source_l00076}00076\ \ \ \ \ \ \ \ \ \ \ \ \ \_fileSystemProvider,}
+\DoxyCodeLine{\Hypertarget{_ide_background_task_api_8cs_source_l00077}00077\ \ \ \ \ \ \ \ \ \ \ \ \ \_environmentProvider,}
+\DoxyCodeLine{\Hypertarget{_ide_background_task_api_8cs_source_l00078}00078\ \ \ \ \ \ \ \ \ \ \ \ \ \_decorationMapperRegistry,}
+\DoxyCodeLine{\Hypertarget{_ide_background_task_api_8cs_source_l00079}00079\ \ \ \ \ \ \ \ \ \ \ \ \ \_compilerServiceRegistry,}
+\DoxyCodeLine{\Hypertarget{_ide_background_task_api_8cs_source_l00080}00080\ \ \ \ \ \ \ \ \ \ \ \ \ \_dialogService,}
+\DoxyCodeLine{\Hypertarget{_ide_background_task_api_8cs_source_l00081}00081\ \ \ \ \ \ \ \ \ \ \ \ \ \_dispatcher,}
+\DoxyCodeLine{\Hypertarget{_ide_background_task_api_8cs_source_l00082}00082\ \ \ \ \ \ \ \ \ \ \ \ \ \_jsRuntime,}
+\DoxyCodeLine{\Hypertarget{_ide_background_task_api_8cs_source_l00083}00083\ \ \ \ \ \ \ \ \ \ \ \ \ serviceProvider);}
+\DoxyCodeLine{\Hypertarget{_ide_background_task_api_8cs_source_l00084}00084\ }
+\DoxyCodeLine{\Hypertarget{_ide_background_task_api_8cs_source_l00085}00085\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_luthetus_1_1_ide_1_1_razor_lib_1_1_background_tasks_1_1_models_1_1_ide_background_task_api_a7364b092236280f9ad34872a0bbfbefa}{FileSystem}}\ =\ \textcolor{keyword}{new}\ \mbox{\hyperlink{class_luthetus_1_1_ide_1_1_razor_lib_1_1_file_systems_1_1_models_1_1_file_system_ide_api}{FileSystemIdeApi}}(}
+\DoxyCodeLine{\Hypertarget{_ide_background_task_api_8cs_source_l00086}00086\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{this},}
+\DoxyCodeLine{\Hypertarget{_ide_background_task_api_8cs_source_l00087}00087\ \ \ \ \ \ \ \ \ \ \ \ \ \_fileSystemProvider,}
+\DoxyCodeLine{\Hypertarget{_ide_background_task_api_8cs_source_l00088}00088\ \ \ \ \ \ \ \ \ \ \ \ \ \_commonComponentRenderers,}
+\DoxyCodeLine{\Hypertarget{_ide_background_task_api_8cs_source_l00089}00089\ \ \ \ \ \ \ \ \ \ \ \ \ \_backgroundTaskService,}
+\DoxyCodeLine{\Hypertarget{_ide_background_task_api_8cs_source_l00090}00090\ \ \ \ \ \ \ \ \ \ \ \ \ \_dispatcher);}
+\DoxyCodeLine{\Hypertarget{_ide_background_task_api_8cs_source_l00091}00091\ }
+\DoxyCodeLine{\Hypertarget{_ide_background_task_api_8cs_source_l00092}00092\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_luthetus_1_1_ide_1_1_razor_lib_1_1_background_tasks_1_1_models_1_1_ide_background_task_api_a70cc819f1c6de8985a1840a4a8a232e7}{FolderExplorer}}\ =\ \textcolor{keyword}{new}\ \mbox{\hyperlink{class_luthetus_1_1_ide_1_1_razor_lib_1_1_folder_explorers_1_1_models_1_1_folder_explorer_ide_api}{FolderExplorerIdeApi}}(}
+\DoxyCodeLine{\Hypertarget{_ide_background_task_api_8cs_source_l00093}00093\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{this},}
+\DoxyCodeLine{\Hypertarget{_ide_background_task_api_8cs_source_l00094}00094\ \ \ \ \ \ \ \ \ \ \ \ \ \_fileSystemProvider,}
+\DoxyCodeLine{\Hypertarget{_ide_background_task_api_8cs_source_l00095}00095\ \ \ \ \ \ \ \ \ \ \ \ \ \_environmentProvider,}
+\DoxyCodeLine{\Hypertarget{_ide_background_task_api_8cs_source_l00096}00096\ \ \ \ \ \ \ \ \ \ \ \ \ \_ideComponentRenderers,}
+\DoxyCodeLine{\Hypertarget{_ide_background_task_api_8cs_source_l00097}00097\ \ \ \ \ \ \ \ \ \ \ \ \ \_commonComponentRenderers,}
+\DoxyCodeLine{\Hypertarget{_ide_background_task_api_8cs_source_l00098}00098\ \ \ \ \ \ \ \ \ \ \ \ \ \_treeViewService,}
+\DoxyCodeLine{\Hypertarget{_ide_background_task_api_8cs_source_l00099}00099\ \ \ \ \ \ \ \ \ \ \ \ \ \_backgroundTaskService,}
+\DoxyCodeLine{\Hypertarget{_ide_background_task_api_8cs_source_l00100}00100\ \ \ \ \ \ \ \ \ \ \ \ \ \_dispatcher);}
+\DoxyCodeLine{\Hypertarget{_ide_background_task_api_8cs_source_l00101}00101\ }
+\DoxyCodeLine{\Hypertarget{_ide_background_task_api_8cs_source_l00102}00102\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_luthetus_1_1_ide_1_1_razor_lib_1_1_background_tasks_1_1_models_1_1_ide_background_task_api_a552136046a7de86f6cfa7b7e0b9b8d50}{InputFile}}\ =\ \textcolor{keyword}{new}\ \mbox{\hyperlink{class_luthetus_1_1_ide_1_1_razor_lib_1_1_input_files_1_1_models_1_1_input_file_ide_api}{InputFileIdeApi}}(}
+\DoxyCodeLine{\Hypertarget{_ide_background_task_api_8cs_source_l00103}00103\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{this},}
+\DoxyCodeLine{\Hypertarget{_ide_background_task_api_8cs_source_l00104}00104\ \ \ \ \ \ \ \ \ \ \ \ \ \_ideComponentRenderers,}
+\DoxyCodeLine{\Hypertarget{_ide_background_task_api_8cs_source_l00105}00105\ \ \ \ \ \ \ \ \ \ \ \ \ \_backgroundTaskService,}
+\DoxyCodeLine{\Hypertarget{_ide_background_task_api_8cs_source_l00106}00106\ \ \ \ \ \ \ \ \ \ \ \ \ \_dispatcher);}
+\DoxyCodeLine{\Hypertarget{_ide_background_task_api_8cs_source_l00107}00107\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_ide_background_task_api_8cs_source_l00108}00108\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_ide_background_task_api_8cs_source_l00109}\mbox{\hyperlink{class_luthetus_1_1_ide_1_1_razor_lib_1_1_background_tasks_1_1_models_1_1_ide_background_task_api_acfe79f4eb7a0493f1dcf40ea4b266597}{00109}}\ \ \ \ \ \textcolor{keyword}{public}\ \mbox{\hyperlink{class_luthetus_1_1_ide_1_1_razor_lib_1_1_editors_1_1_models_1_1_editor_ide_api}{EditorIdeApi}}\ \mbox{\hyperlink{class_luthetus_1_1_ide_1_1_razor_lib_1_1_background_tasks_1_1_models_1_1_ide_background_task_api_acfe79f4eb7a0493f1dcf40ea4b266597}{Editor}}\ \{\ \textcolor{keyword}{get};\ \}}
+\DoxyCodeLine{\Hypertarget{_ide_background_task_api_8cs_source_l00110}\mbox{\hyperlink{class_luthetus_1_1_ide_1_1_razor_lib_1_1_background_tasks_1_1_models_1_1_ide_background_task_api_a7364b092236280f9ad34872a0bbfbefa}{00110}}\ \ \ \ \ \textcolor{keyword}{public}\ \mbox{\hyperlink{class_luthetus_1_1_ide_1_1_razor_lib_1_1_file_systems_1_1_models_1_1_file_system_ide_api}{FileSystemIdeApi}}\ \mbox{\hyperlink{class_luthetus_1_1_ide_1_1_razor_lib_1_1_background_tasks_1_1_models_1_1_ide_background_task_api_a7364b092236280f9ad34872a0bbfbefa}{FileSystem}}\ \{\ \textcolor{keyword}{get};\ \}}
+\DoxyCodeLine{\Hypertarget{_ide_background_task_api_8cs_source_l00111}\mbox{\hyperlink{class_luthetus_1_1_ide_1_1_razor_lib_1_1_background_tasks_1_1_models_1_1_ide_background_task_api_a70cc819f1c6de8985a1840a4a8a232e7}{00111}}\ \ \ \ \ \textcolor{keyword}{public}\ \mbox{\hyperlink{class_luthetus_1_1_ide_1_1_razor_lib_1_1_folder_explorers_1_1_models_1_1_folder_explorer_ide_api}{FolderExplorerIdeApi}}\ \mbox{\hyperlink{class_luthetus_1_1_ide_1_1_razor_lib_1_1_background_tasks_1_1_models_1_1_ide_background_task_api_a70cc819f1c6de8985a1840a4a8a232e7}{FolderExplorer}}\ \{\ \textcolor{keyword}{get};\ \}}
+\DoxyCodeLine{\Hypertarget{_ide_background_task_api_8cs_source_l00112}\mbox{\hyperlink{class_luthetus_1_1_ide_1_1_razor_lib_1_1_background_tasks_1_1_models_1_1_ide_background_task_api_a552136046a7de86f6cfa7b7e0b9b8d50}{00112}}\ \ \ \ \ \textcolor{keyword}{public}\ \mbox{\hyperlink{class_luthetus_1_1_ide_1_1_razor_lib_1_1_input_files_1_1_models_1_1_input_file_ide_api}{InputFileIdeApi}}\ \mbox{\hyperlink{class_luthetus_1_1_ide_1_1_razor_lib_1_1_background_tasks_1_1_models_1_1_ide_background_task_api_a552136046a7de86f6cfa7b7e0b9b8d50}{InputFile}}\ \{\ \textcolor{keyword}{get};\ \}}
+\DoxyCodeLine{\Hypertarget{_ide_background_task_api_8cs_source_l00113}00113\ \}}
+
+\end{DoxyCode}

@@ -1,0 +1,210 @@
+.TH "Luthetus.CompilerServices.CSharp.ParserCase.CSharpParserModel" 3 "Version 1.0.0" "Luthetus.Ide" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+Luthetus.CompilerServices.CSharp.ParserCase.CSharpParserModel
+.SH SYNOPSIS
+.br
+.PP
+.PP
+Inherits \fBLuthetus\&.TextEditor\&.RazorLib\&.CompilerServices\&.Interfaces\&.IParserModel\fP\&.
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBCSharpParserModel\fP (\fBCSharpBinder\fP binder, \fBCSharpBinderSession\fP binderSession, \fBTokenWalker\fP tokenWalker, Stack< \fBISyntax\fP > syntaxStack, \fBDiagnosticBag\fP diagnosticBag, \fBCodeBlockBuilder\fP globalCodeBlockBuilder, \fBCodeBlockBuilder\fP currentCodeBlockBuilder)"
+.br
+.in -1c
+.SS "Properties"
+
+.in +1c
+.ti -1c
+.RI "\fBCSharpBinder\fP \fBBinder\fP\fR [get]\fP"
+.br
+.ti -1c
+.RI "\fBCSharpBinderSession\fP \fBBinderSession\fP\fR [get]\fP"
+.br
+.ti -1c
+.RI "TokenWalker \fBTokenWalker\fP\fR [get]\fP"
+.br
+.ti -1c
+.RI "Stack< \fBISyntax\fP > \fBSyntaxStack\fP\fR [get, set]\fP"
+.br
+.RI "This property is likely to become obsolete\&. It is a hacky sort of 'catch all' case where one can push onto it whatever they want\&. "
+.ti -1c
+.RI "StatementBuilder \fBStatementBuilder\fP = new()\fR [get, set]\fP"
+.br
+.RI "Unlike \fBSyntaxStack\fP there are more defined rules for this property\&. "
+.ti -1c
+.RI "List<(\fBSyntaxKind\fP DelimiterSyntaxKind, \fBIExpressionNode\fP ExpressionNode)> \fBExpressionList\fP\fR [get, set]\fP"
+.br
+.RI "This list permits primitive recursion via a while loop for the expression parsing logic\&. "
+.ti -1c
+.RI "\fBIExpressionNode\fP? \fBNoLongerRelevantExpressionNode\fP\fR [get, set]\fP"
+.br
+.RI "If a \fBParenthesizedExpressionNode\fP is determined to more accurately be described by a \fBCommaSeparatedExpressionNode\fP, then any state related to the \fBParenthesizedExpressionNode\fP instance needs to be cleared\&. "
+.ti -1c
+.RI "List< \fBSyntaxKind\fP > \fBTryParseExpressionSyntaxKindList\fP = new()\fR [get]\fP"
+.br
+.RI "\fBTypeClauseNode\fP code exists in the expression code\&. As a result, some statements need to read a \fBTypeClauseNode\fP by invoking 'ParseExpression(\&.\&.\&.)'\&. "
+.ti -1c
+.RI "\fBIExpressionNode\fP \fBForceParseExpressionInitialPrimaryExpression\fP\fR [get, set]\fP"
+.br
+.RI "Something that is syntactically recursive but without creating a new scope needs to be parsed as an expression\&. "
+.ti -1c
+.RI "DiagnosticBag \fBDiagnosticBag\fP\fR [get]\fP"
+.br
+.ti -1c
+.RI "\fBCodeBlockBuilder\fP \fBGlobalCodeBlockBuilder\fP\fR [get, set]\fP"
+.br
+.ti -1c
+.RI "\fBCodeBlockBuilder\fP \fBCurrentCodeBlockBuilder\fP\fR [get, set]\fP"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+Definition at line \fB14\fP of file \fBCSharpParserModel\&.cs\fP\&.
+.SH "Constructor & Destructor Documentation"
+.PP 
+.SS "Luthetus\&.CompilerServices\&.CSharp\&.ParserCase\&.CSharpParserModel\&.CSharpParserModel (\fBCSharpBinder\fP binder, \fBCSharpBinderSession\fP binderSession, \fBTokenWalker\fP tokenWalker, Stack< \fBISyntax\fP > syntaxStack, \fBDiagnosticBag\fP diagnosticBag, \fBCodeBlockBuilder\fP globalCodeBlockBuilder, \fBCodeBlockBuilder\fP currentCodeBlockBuilder)"
+
+.PP
+Definition at line \fB16\fP of file \fBCSharpParserModel\&.cs\fP\&.
+.SH "Property Documentation"
+.PP 
+.SS "\fBCSharpBinder\fP Luthetus\&.CompilerServices\&.CSharp\&.ParserCase\&.CSharpParserModel\&.Binder\fR [get]\fP"
+
+.PP
+Implements \fBLuthetus\&.TextEditor\&.RazorLib\&.CompilerServices\&.Interfaces\&.IParserModel\fP\&.
+.PP
+Definition at line \fB39\fP of file \fBCSharpParserModel\&.cs\fP\&.
+.SS "\fBCSharpBinderSession\fP Luthetus\&.CompilerServices\&.CSharp\&.ParserCase\&.CSharpParserModel\&.BinderSession\fR [get]\fP"
+
+.PP
+Implements \fBLuthetus\&.TextEditor\&.RazorLib\&.CompilerServices\&.Interfaces\&.IParserModel\fP\&.
+.PP
+Definition at line \fB40\fP of file \fBCSharpParserModel\&.cs\fP\&.
+.SS "\fBCodeBlockBuilder\fP Luthetus\&.CompilerServices\&.CSharp\&.ParserCase\&.CSharpParserModel\&.CurrentCodeBlockBuilder\fR [get]\fP, \fR [set]\fP"
+
+.PP
+Implements \fBLuthetus\&.TextEditor\&.RazorLib\&.CompilerServices\&.Interfaces\&.IParserModel\fP\&.
+.PP
+Definition at line \fB50\fP of file \fBCSharpParserModel\&.cs\fP\&.
+.SS "DiagnosticBag Luthetus\&.CompilerServices\&.CSharp\&.ParserCase\&.CSharpParserModel\&.DiagnosticBag\fR [get]\fP"
+
+.PP
+Implements \fBLuthetus\&.TextEditor\&.RazorLib\&.CompilerServices\&.Interfaces\&.IParserModel\fP\&.
+.PP
+Definition at line \fB48\fP of file \fBCSharpParserModel\&.cs\fP\&.
+.SS "List<(\fBSyntaxKind\fP DelimiterSyntaxKind, \fBIExpressionNode\fP ExpressionNode)> Luthetus\&.CompilerServices\&.CSharp\&.ParserCase\&.CSharpParserModel\&.ExpressionList\fR [get]\fP, \fR [set]\fP"
+
+.PP
+This list permits primitive recursion via a while loop for the expression parsing logic\&. Each entry in the list is a "short circuit" such that if a child expression encounters the entry's DelimiterSyntaxKind, it will set the primary expression to the entry's ExpressionNode (of which is an ancestor expression to the child)\&.
+
+.PP
+After that, the restored primary expression "combines" with the child expression that "short circuit"-ed\&.
+
+.PP
+Then, the new primary expression expression node parses the 'DelimiterSyntaxKind' which triggered the "short circuit"\&.
+
+.PP
+The \fBC\fP# IParserModel implementation will only "short circuit" if the '\fBSyntaxKind\fP DelimiterSyntaxKind' is registered as a delimiter\&.
+
+.PP
+This is done in order to speed up the while loop, as the list of short circuits doesn't have to be iterated unless the current token is a possible delimiter\&.
+
+.PP
+Luthetus\&.CompilerServices\&.CSharp\&.ParserCase\&.Internals\&.ParseOthers\&.SyntaxIsEndDelimiter(SyntaxKind syntaxKind) {\&.\&.\&.} 
+.PP
+Implements \fBLuthetus\&.TextEditor\&.RazorLib\&.CompilerServices\&.Interfaces\&.IParserModel\fP\&.
+.PP
+Definition at line \fB44\fP of file \fBCSharpParserModel\&.cs\fP\&.
+.SS "\fBIExpressionNode\fP Luthetus\&.CompilerServices\&.CSharp\&.ParserCase\&.CSharpParserModel\&.ForceParseExpressionInitialPrimaryExpression\fR [get]\fP, \fR [set]\fP"
+
+.PP
+Something that is syntactically recursive but without creating a new scope needs to be parsed as an expression\&. TODO: It was decided to parse function arguments differently than how this example describes\&.\&.\&. \&.\&.\&.This example should be changed to one that is actually in use\&. For example: a function definition contains its arguments\&.
+
+.PP
+But, the arguments could contain an entry which is a \fBTypeClauseNode\fP that has \fBGenericArgumentEntryNode\fP of \fBTypeClauseNode\fP that also goes on to have its own \fBGenericArgumentEntryNode\fP\&.\&.\&.
+
+.PP
+So the expression code needs to be temporarily invoked from the statement code\&.
+
+.PP
+The example that was described is parsing a \fBFunctionArgumentsListingNode\fP\&.
+
+.PP
+The expression code only "naturally" can encounter a \fBFunctionParametersListingNode\fP which occurs from function invocation\&.
+
+.PP
+So, this property exists in order to change the initial primary expression that is used\&.
+
+.PP
+After every invocation of: Luthetus\&.CompilerServices\&.CSharp\&.ParserCase\&.Internals\&.ParseOthers\&.TryParseExpression(SyntaxKind syntaxKind, CSharpParserModel model, out IExpressionNode expressionNode) {\&.\&.\&.}
+
+.PP
+This property will be reset to '\fBEmptyExpressionNode\&.Empty\fP'\&. (which is quite a hacky manner of going about things)\&. TODO: Consider making 'ForceParseExpressionInitialPrimaryExpression' an argument to the 'TryParseExpression' method?
+
+.PP
+Through this property, one can tell the expression code to parse a \fBFunctionArgumentsListingNode\fP by providing it as the initial expression\&. This must be done because it can never occur "naturally" by invoking the expression code and starting with '\fBEmptyExpressionNode\&.Empty\fP'\&. 
+.PP
+Implements \fBLuthetus\&.TextEditor\&.RazorLib\&.CompilerServices\&.Interfaces\&.IParserModel\fP\&.
+.PP
+Definition at line \fB47\fP of file \fBCSharpParserModel\&.cs\fP\&.
+.SS "\fBCodeBlockBuilder\fP Luthetus\&.CompilerServices\&.CSharp\&.ParserCase\&.CSharpParserModel\&.GlobalCodeBlockBuilder\fR [get]\fP, \fR [set]\fP"
+
+.PP
+Implements \fBLuthetus\&.TextEditor\&.RazorLib\&.CompilerServices\&.Interfaces\&.IParserModel\fP\&.
+.PP
+Definition at line \fB49\fP of file \fBCSharpParserModel\&.cs\fP\&.
+.SS "\fBIExpressionNode\fP? Luthetus\&.CompilerServices\&.CSharp\&.ParserCase\&.CSharpParserModel\&.NoLongerRelevantExpressionNode\fR [get]\fP, \fR [set]\fP"
+
+.PP
+If a \fBParenthesizedExpressionNode\fP is determined to more accurately be described by a \fBCommaSeparatedExpressionNode\fP, then any state related to the \fBParenthesizedExpressionNode\fP instance needs to be cleared\&. 
+.PP
+Implements \fBLuthetus\&.TextEditor\&.RazorLib\&.CompilerServices\&.Interfaces\&.IParserModel\fP\&.
+.PP
+Definition at line \fB45\fP of file \fBCSharpParserModel\&.cs\fP\&.
+.SS "StatementBuilder Luthetus\&.CompilerServices\&.CSharp\&.ParserCase\&.CSharpParserModel\&.StatementBuilder = new()\fR [get]\fP, \fR [set]\fP"
+
+.PP
+Unlike \fBSyntaxStack\fP there are more defined rules for this property\&. It will be cleared after every \fBStatementDelimiterToken\fP, \fBOpenBraceToken\fP, and \fBCloseBraceToken\fP that is handled by the main loop\&.
+
+.PP
+The intent is to build up ambiguous syntax by pushing it onto this stack, then once it can be disambiguated, pop off all the syntax and construct an \fBISyntaxNode\fP\&.
+
+.PP
+A syntax for a definition is being treated as a 'Statement' here\&. So, to parse a \fBTypeDefinitionNode\fP one would check this for the access modifier (public, private, etc\&.\&.\&.)\&. 
+.PP
+Implements \fBLuthetus\&.TextEditor\&.RazorLib\&.CompilerServices\&.Interfaces\&.IParserModel\fP\&.
+.PP
+Definition at line \fB43\fP of file \fBCSharpParserModel\&.cs\fP\&.
+.SS "Stack<\fBISyntax\fP> Luthetus\&.CompilerServices\&.CSharp\&.ParserCase\&.CSharpParserModel\&.SyntaxStack\fR [get]\fP, \fR [set]\fP"
+
+.PP
+This property is likely to become obsolete\&. It is a hacky sort of 'catch all' case where one can push onto it whatever they want\&. \fBStatementBuilder\fP is being added and is expected to fully replace this property\&. 
+.PP
+Implements \fBLuthetus\&.TextEditor\&.RazorLib\&.CompilerServices\&.Interfaces\&.IParserModel\fP\&.
+.PP
+Definition at line \fB42\fP of file \fBCSharpParserModel\&.cs\fP\&.
+.SS "TokenWalker Luthetus\&.CompilerServices\&.CSharp\&.ParserCase\&.CSharpParserModel\&.TokenWalker\fR [get]\fP"
+
+.PP
+Implements \fBLuthetus\&.TextEditor\&.RazorLib\&.CompilerServices\&.Interfaces\&.IParserModel\fP\&.
+.PP
+Definition at line \fB41\fP of file \fBCSharpParserModel\&.cs\fP\&.
+.SS "List<\fBSyntaxKind\fP> Luthetus\&.CompilerServices\&.CSharp\&.ParserCase\&.CSharpParserModel\&.TryParseExpressionSyntaxKindList = new()\fR [get]\fP"
+
+.PP
+\fBTypeClauseNode\fP code exists in the expression code\&. As a result, some statements need to read a \fBTypeClauseNode\fP by invoking 'ParseExpression(\&.\&.\&.)'\&. In order to "short circut" or "force exit" from the expression code back to the statement code: if the root primary expression is not equal to the model\&.ForceParseExpressionSyntaxKind then stop 'ParseExpression(\&.\&.\&.)' from consuming any further tokens\&.
+
+.PP
+Luthetus\&.CompilerServices\&.CSharp\&.ParserCase\&.Internals\&.ParseOthers\&.TryParseExpression(SyntaxKind syntaxKind, CSharpParserModel model, out IExpressionNode expressionNode) {\&.\&.\&.} 
+.PP
+Implements \fBLuthetus\&.TextEditor\&.RazorLib\&.CompilerServices\&.Interfaces\&.IParserModel\fP\&.
+.PP
+Definition at line \fB46\fP of file \fBCSharpParserModel\&.cs\fP\&.
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for Luthetus\&.Ide from the source code\&.

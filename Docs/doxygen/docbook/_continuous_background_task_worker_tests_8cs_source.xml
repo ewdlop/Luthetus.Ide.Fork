@@ -1,0 +1,31 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="__continuous_background_task_worker_tests_8cs_source" xml:lang="en-US">
+<title>ContinuousBackgroundTaskWorkerTests.cs</title>
+<indexterm><primary>Source/Tests/Common/Basis/BackgroundTasks/Models/ContinuousBackgroundTaskWorkerTests.cs</primary></indexterm>
+Go to the documentation of this file.<programlisting linenumbering="unnumbered"><anchor xml:id="__continuous_background_task_worker_tests_8cs_source_1l00001"/>00001 <emphasis role="keyword">using&#32;</emphasis>Microsoft.Extensions.DependencyInjection;
+<anchor xml:id="__continuous_background_task_worker_tests_8cs_source_1l00002"/>00002 <emphasis role="keyword">using&#32;</emphasis>Microsoft.Extensions.Logging;
+<anchor xml:id="__continuous_background_task_worker_tests_8cs_source_1l00003"/>00003 <emphasis role="keyword">using&#32;</emphasis>Microsoft.Extensions.Logging.Abstractions;
+<anchor xml:id="__continuous_background_task_worker_tests_8cs_source_1l00004"/>00004 <emphasis role="keyword">using&#32;</emphasis><link linkend="_namespace_luthetus_1_1_common_1_1_razor_lib_1_1_background_tasks_1_1_models">Luthetus.Common.RazorLib.BackgroundTasks.Models</link>;
+<anchor xml:id="__continuous_background_task_worker_tests_8cs_source_1l00005"/>00005 <emphasis role="keyword">using&#32;</emphasis><link linkend="_namespace_luthetus_1_1_common_1_1_razor_lib_1_1_keys_1_1_models">Luthetus.Common.RazorLib.Keys.Models</link>;
+<anchor xml:id="__continuous_background_task_worker_tests_8cs_source_1l00006"/>00006 
+<anchor xml:id="__continuous_background_task_worker_tests_8cs_source_1l00007"/>00007 <emphasis role="keyword">namespace&#32;</emphasis><link linkend="_namespace_luthetus_1_1_common_1_1_tests_1_1_basis_1_1_background_tasks_1_1_models">Luthetus.Common.Tests.Basis.BackgroundTasks.Models</link>;
+<anchor xml:id="__continuous_background_task_worker_tests_8cs_source_1l00008"/>00008 
+<anchor xml:id="__continuous_background_task_worker_tests_8cs_source_1l00012"/><link linkend="_class_luthetus_1_1_common_1_1_tests_1_1_basis_1_1_background_tasks_1_1_models_1_1_continuous_background_task_worker_tests">00012</link> <emphasis role="keyword">public</emphasis>&#32;<emphasis role="keyword">class&#32;</emphasis><link linkend="_class_luthetus_1_1_common_1_1_tests_1_1_basis_1_1_background_tasks_1_1_models_1_1_continuous_background_task_worker_tests">ContinuousBackgroundTaskWorkerTests</link>
+<anchor xml:id="__continuous_background_task_worker_tests_8cs_source_1l00013"/>00013 {
+<anchor xml:id="__continuous_background_task_worker_tests_8cs_source_1l00017"/>00017 &#32;&#32;&#32;&#32;[Fact]
+<anchor xml:id="__continuous_background_task_worker_tests_8cs_source_1l00018"/><link linkend="_class_luthetus_1_1_common_1_1_tests_1_1_basis_1_1_background_tasks_1_1_models_1_1_continuous_background_task_worker_tests_1a556d809f4c6fac223fe1cf291bd9520b">00018</link> &#32;&#32;&#32;&#32;<emphasis role="keyword">public</emphasis>&#32;<emphasis role="keywordtype">void</emphasis>&#32;<link linkend="_class_luthetus_1_1_common_1_1_tests_1_1_basis_1_1_background_tasks_1_1_models_1_1_continuous_background_task_worker_tests_1a556d809f4c6fac223fe1cf291bd9520b">Constructor</link>()
+<anchor xml:id="__continuous_background_task_worker_tests_8cs_source_1l00019"/>00019 &#32;&#32;&#32;&#32;{
+<anchor xml:id="__continuous_background_task_worker_tests_8cs_source_1l00020"/>00020 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;var&#32;services&#32;=&#32;<emphasis role="keyword">new</emphasis>&#32;ServiceCollection()
+<anchor xml:id="__continuous_background_task_worker_tests_8cs_source_1l00021"/>00021 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;.AddSingleton&lt;ILoggerFactory,&#32;NullLoggerFactory&gt;()
+<anchor xml:id="__continuous_background_task_worker_tests_8cs_source_1l00022"/>00022 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;.AddSingleton&lt;IBackgroundTaskService,&#32;BackgroundTaskServiceSynchronous&gt;();
+<anchor xml:id="__continuous_background_task_worker_tests_8cs_source_1l00023"/>00023 
+<anchor xml:id="__continuous_background_task_worker_tests_8cs_source_1l00024"/>00024 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;var&#32;sp&#32;=&#32;services.BuildServiceProvider();
+<anchor xml:id="__continuous_background_task_worker_tests_8cs_source_1l00025"/>00025 
+<anchor xml:id="__continuous_background_task_worker_tests_8cs_source_1l00026"/>00026 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;var&#32;queueKey&#32;=&#32;<link linkend="_class_luthetus_1_1_common_1_1_razor_lib_1_1_background_tasks_1_1_models_1_1_blocking_background_task_worker">BlockingBackgroundTaskWorker</link>.<link linkend="_class_luthetus_1_1_common_1_1_razor_lib_1_1_background_tasks_1_1_models_1_1_blocking_background_task_worker_1a267091acd637305c1ddcfe78bef3343f">GetQueueKey</link>();
+<anchor xml:id="__continuous_background_task_worker_tests_8cs_source_1l00027"/>00027 
+<anchor xml:id="__continuous_background_task_worker_tests_8cs_source_1l00028"/>00028 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;var&#32;continuousBackgroundTaskWorker&#32;=&#32;<emphasis role="keyword">new</emphasis>&#32;<link linkend="_class_luthetus_1_1_common_1_1_razor_lib_1_1_background_tasks_1_1_models_1_1_continuous_background_task_worker">ContinuousBackgroundTaskWorker</link>(
+<anchor xml:id="__continuous_background_task_worker_tests_8cs_source_1l00029"/>00029 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;sp.GetRequiredService&lt;<link linkend="_interface_luthetus_1_1_common_1_1_razor_lib_1_1_background_tasks_1_1_models_1_1_i_background_task_service">IBackgroundTaskService</link>&gt;(),
+<anchor xml:id="__continuous_background_task_worker_tests_8cs_source_1l00030"/>00030 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;sp.GetRequiredService&lt;ILoggerFactory&gt;());
+<anchor xml:id="__continuous_background_task_worker_tests_8cs_source_1l00031"/>00031 &#32;&#32;&#32;&#32;}
+<anchor xml:id="__continuous_background_task_worker_tests_8cs_source_1l00032"/>00032 }
+</programlisting></section>

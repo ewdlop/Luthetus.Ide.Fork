@@ -1,0 +1,4 @@
+var _t_e_x_t___e_d_i_t_o_r___s_h_o_u_l_d___w_o_r_k___w_i_t_h___l_a_r_g_e___f_i_l_e_s_8_main_8cs =
+[
+    [ "Luthetus.TextEditor.Tests.UserStories.TextEditors.Models.TEXT_EDITOR_SHOULD_WORK_WITH_LARGE_FILES", "class_luthetus_1_1_text_editor_1_1_tests_1_1_user_stories_1_1_text_editors_1_1_models_1_1_t_e_x_bd9ee31609aa24692c145234c2708790.html", "class_luthetus_1_1_text_editor_1_1_tests_1_1_user_stories_1_1_text_editors_1_1_models_1_1_t_e_x_bd9ee31609aa24692c145234c2708790" ]
+];

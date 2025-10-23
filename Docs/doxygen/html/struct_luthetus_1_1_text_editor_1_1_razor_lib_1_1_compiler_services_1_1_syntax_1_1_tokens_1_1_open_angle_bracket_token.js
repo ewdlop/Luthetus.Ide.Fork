@@ -1,0 +1,8 @@
+var struct_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_1_1_tokens_1_1_open_angle_bracket_token =
+[
+    [ "OpenAngleBracketToken", "struct_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_1_1_tokens_1_1_open_angle_bracket_token.html#ae1f4a8499e18a3ad2fd8722e90fb4d8c", null ],
+    [ "ConstructorWasInvoked", "struct_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_1_1_tokens_1_1_open_angle_bracket_token.html#a58eb86e96fedffeba888454843ebc536", null ],
+    [ "IsFabricated", "struct_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_1_1_tokens_1_1_open_angle_bracket_token.html#ad6cf8c7955a906425614e2c788d5f6c3", null ],
+    [ "SyntaxKind", "struct_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_1_1_tokens_1_1_open_angle_bracket_token.html#a75d3ac0038bb57494a0c431636a99965", null ],
+    [ "TextSpan", "struct_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_1_1_tokens_1_1_open_angle_bracket_token.html#acbcf55239ccc580ac436dd4619b1190d", null ]
+];

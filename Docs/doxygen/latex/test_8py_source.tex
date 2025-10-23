@@ -1,0 +1,38 @@
+\doxysection{test.\+py}
+\hypertarget{test_8py_source}{}\label{test_8py_source}\index{Source/Lib/Ide/Ide.RazorLib/Pythons/test.py@{Source/Lib/Ide/Ide.RazorLib/Pythons/test.py}}
+\mbox{\hyperlink{test_8py}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{test_8py_source_l00001}\mbox{\hyperlink{namespacetest}{00001}}\ \textcolor{comment}{\#\ https://biriukov.dev/docs/fd-\/pipe-\/session-\/terminal/4-\/terminals-\/and-\/pseudoterminals/}}
+\DoxyCodeLine{\Hypertarget{test_8py_source_l00002}00002\ }
+\DoxyCodeLine{\Hypertarget{test_8py_source_l00003}00003\ \textcolor{keyword}{import}\ os}
+\DoxyCodeLine{\Hypertarget{test_8py_source_l00004}00004\ \textcolor{keyword}{import}\ time}
+\DoxyCodeLine{\Hypertarget{test_8py_source_l00005}00005\ \textcolor{keyword}{import}\ sys}
+\DoxyCodeLine{\Hypertarget{test_8py_source_l00006}00006\ }
+\DoxyCodeLine{\Hypertarget{test_8py_source_l00007}00007\ print(f\textcolor{stringliteral}{"{}parent:\ \{os.getpid()\}"{}})}
+\DoxyCodeLine{\Hypertarget{test_8py_source_l00008}00008\ }
+\DoxyCodeLine{\Hypertarget{test_8py_source_l00009}\mbox{\hyperlink{namespacetest_a654965e57b0ddcdcb8b072982a6c36e9}{00009}}\ ptmx,\ secondary\ =\ os.openpty()}
+\DoxyCodeLine{\Hypertarget{test_8py_source_l00010}00010\ }
+\DoxyCodeLine{\Hypertarget{test_8py_source_l00011}\mbox{\hyperlink{namespacetest_aaf77a9efa72bcbaab763c3fc2706d35e}{00011}}\ pid\ =\ os.fork()}
+\DoxyCodeLine{\Hypertarget{test_8py_source_l00012}00012\ \textcolor{keywordflow}{if}\ pid\ ==\ 0:}
+\DoxyCodeLine{\Hypertarget{test_8py_source_l00013}00013\ \ \ \ \ print(f\textcolor{stringliteral}{"{}child:\ \{os.getpid()\}"{}})}
+\DoxyCodeLine{\Hypertarget{test_8py_source_l00014}00014\ \ \ \ \ os.close(ptmx)}
+\DoxyCodeLine{\Hypertarget{test_8py_source_l00015}00015\ \ \ \ \ os.setsid()}
+\DoxyCodeLine{\Hypertarget{test_8py_source_l00016}\mbox{\hyperlink{namespacetest_ac5ddc75d7029ace1bfb95e457e5c3510}{00016}}\ \ \ \ \ name\ =\ os.ttyname(secondary)}
+\DoxyCodeLine{\Hypertarget{test_8py_source_l00017}00017\ \ \ \ \ print(name)}
+\DoxyCodeLine{\Hypertarget{test_8py_source_l00018}\mbox{\hyperlink{namespacetest_a91a88df52e09e64ff8cc9e5d8277c8d4}{00018}}\ \ \ \ \ s\ =\ os.open(name,\ os.O\_RDWR)}
+\DoxyCodeLine{\Hypertarget{test_8py_source_l00019}00019\ \ \ \ \ os.dup2(s,\ 0)}
+\DoxyCodeLine{\Hypertarget{test_8py_source_l00020}00020\ \ \ \ \ os.dup2(s,\ 1)}
+\DoxyCodeLine{\Hypertarget{test_8py_source_l00021}00021\ \ \ \ \ os.dup2(s,\ 2)}
+\DoxyCodeLine{\Hypertarget{test_8py_source_l00022}00022\ \ \ \ \ os.close(secondary)}
+\DoxyCodeLine{\Hypertarget{test_8py_source_l00023}00023\ \ \ \ \ os.close(s)}
+\DoxyCodeLine{\Hypertarget{test_8py_source_l00024}00024\ \ \ \ \ \textcolor{keyword}{with}\ open(\textcolor{stringliteral}{'/tmp/file.txt'},\ \textcolor{stringliteral}{"{}w"{}})\ \textcolor{keyword}{as}\ f:}
+\DoxyCodeLine{\Hypertarget{test_8py_source_l00025}00025\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ l\ \textcolor{keywordflow}{in}\ sys.stdin:}
+\DoxyCodeLine{\Hypertarget{test_8py_source_l00026}00026\ \ \ \ \ \ \ \ \ \ \ \ \ f.write(l)}
+\DoxyCodeLine{\Hypertarget{test_8py_source_l00027}00027\ \ \ \ \ \ \ \ \ \ \ \ \ f.flush()}
+\DoxyCodeLine{\Hypertarget{test_8py_source_l00028}00028\ \ \ \ \ time.sleep(999999)}
+\DoxyCodeLine{\Hypertarget{test_8py_source_l00029}00029\ \textcolor{keywordflow}{else}:}
+\DoxyCodeLine{\Hypertarget{test_8py_source_l00030}00030\ \ \ \ \ os.close(secondary)}
+\DoxyCodeLine{\Hypertarget{test_8py_source_l00031}00031\ \ \ \ \ os.write(ptmx,\ b\textcolor{stringliteral}{"{}text\(\backslash\)n"{}})}
+\DoxyCodeLine{\Hypertarget{test_8py_source_l00032}00032\ \ \ \ \ os.waitpid(-\/1,0)}
+
+\end{DoxyCode}

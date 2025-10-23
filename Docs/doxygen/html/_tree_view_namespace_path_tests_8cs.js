@@ -1,0 +1,4 @@
+var _tree_view_namespace_path_tests_8cs =
+[
+    [ "Luthetus.Extensions.DotNet.Tests.Basis.TreeViewImplementations.Models.TreeViewNamespacePathTests", "class_luthetus_1_1_extensions_1_1_dot_net_1_1_tests_1_1_basis_1_1_tree_view_implementations_1_1_faeee9ca843e795c12c0b726f1fc6a19.html", "class_luthetus_1_1_extensions_1_1_dot_net_1_1_tests_1_1_basis_1_1_tree_view_implementations_1_1_faeee9ca843e795c12c0b726f1fc6a19" ]
+];

@@ -1,0 +1,4 @@
+var _ide_2_basis_2_command_lines_2_models_2_dot_net_cli_output_parser_tests_8cs =
+[
+    [ "Luthetus.Ide.Tests.Basis.CommandLines.Models.DotNetCliOutputParserTests", "class_luthetus_1_1_ide_1_1_tests_1_1_basis_1_1_command_lines_1_1_models_1_1_dot_net_cli_output_parser_tests.html", "class_luthetus_1_1_ide_1_1_tests_1_1_basis_1_1_command_lines_1_1_models_1_1_dot_net_cli_output_parser_tests" ]
+];

@@ -1,0 +1,345 @@
+.TH "Luthetus.TextEditor.RazorLib.TextEditors.Models.ITextEditorModel" 3 "Version 1.0.0" "Luthetus.Ide" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+Luthetus.TextEditor.RazorLib.TextEditors.Models.ITextEditorModel \- Stores the \fBRichCharacter\fP class instances that represent the text\&.
+.br
+
+.br
+ Each \fBTextEditorModel\fP has a unique underlying resource uri\&.
+.br
+
+.br
+ Therefore, if one has a text file named "myHomework\&.txt", then only one \fBTextEditorModel\fP can exist with the resource uri of "myHomework\&.txt"\&.
+.br
+
+.br
+\&.  
+
+.SH SYNOPSIS
+.br
+.PP
+.PP
+Inherited by \fBLuthetus\&.TextEditor\&.RazorLib\&.TextEditors\&.Models\&.TextEditorModel\fP, \fBLuthetus\&.TextEditor\&.RazorLib\&.TextEditors\&.Models\&.TextEditorModelModifier\fP, \fBLuthetus\&.TextEditor\&.RazorLib\&.TextEditors\&.Models\&.TextEditorModelModifier\fP, and \fBLuthetus\&.TextEditor\&.RazorLib\&.TextEditors\&.Models\&.TextEditorModelModifier\fP\&.
+.SS "Public Attributes"
+
+.in +1c
+.ti -1c
+.RI "int \fBlineIndex\fP"
+.br
+.in -1c
+.SS "Properties"
+
+.in +1c
+.ti -1c
+.RI "\fBRichCharacter\fP[] \fBRichCharacterList\fP\fR [get]\fP"
+.br
+.ti -1c
+.RI "ImmutableList< \fBTextEditorPartition\fP > \fBPartitionList\fP\fR [get]\fP"
+.br
+.ti -1c
+.RI "IList< \fBITextEditorEdit\fP > \fBEditBlockList\fP\fR [get]\fP"
+.br
+.ti -1c
+.RI "IList< \fBLineEnd\fP > \fBLineEndList\fP\fR [get]\fP"
+.br
+.RI "Convert an index for a \fBLineEnd\fP to a \fBLineInformation\fP, use the method: TextEditorModelExtensionMethods\&.GetLineInformation(ITextEditorModel, int)\&. "
+.ti -1c
+.RI "IList<(\fBLineEndKind\fP lineEndKind, int count)> \fBLineEndKindCountList\fP\fR [get]\fP"
+.br
+.ti -1c
+.RI "IList< \fBTextEditorPresentationModel\fP > \fBPresentationModelList\fP\fR [get]\fP"
+.br
+.ti -1c
+.RI "IList< int > \fBTabKeyPositionList\fP\fR [get]\fP"
+.br
+.RI "Provides exact position index of a tab character\&. "
+.ti -1c
+.RI "\fBLineEndKind\fP? \fBOnlyLineEndKind\fP\fR [get]\fP"
+.br
+.RI "If there is a mixture of
+.br
+-Carriage Return
+.br
+-Linefeed
+.br
+-CRLF
+.br
+ Then this will be null\&.
+.br
+
+.br
+ If there are no line endings then this will be null\&. "
+.ti -1c
+.RI "\fBLineEndKind\fP \fBLineEndKindPreference\fP\fR [get]\fP"
+.br
+.ti -1c
+.RI "ResourceUri \fBResourceUri\fP\fR [get]\fP"
+.br
+.RI "TODO: On (2023-10-02) Key<\fBTextEditorModel\fP> was removed, because it felt redundant\&.\&.\&. \&.\&.\&.given only 1 \fBTextEditorModel\fP can exist for a given \fBResourceUri\fP\&. This change however creates an issue regarding 'fake' resource uri's that are used for in-memory files\&. For example, \fBOptions\&.Displays\&.TextEditorSettingsPreview\fP now has the resource URI of "__LUTHETUS_SETTINGS_PREVIEW__"\&. This is an issue because could a user have on their filesystem the file "__LUTHETUS_SETTINGS_PREVIEW__"? (at that exact resource uri)\&. "
+.ti -1c
+.RI "DateTime \fBResourceLastWriteTime\fP\fR [get]\fP"
+.br
+.ti -1c
+.RI "string \fBFileExtension\fP\fR [get]\fP"
+.br
+.RI "This is displayed within theDisplays\&.Internals\&.TextEditorFooter\&. "
+.ti -1c
+.RI "\fBIDecorationMapper\fP \fBDecorationMapper\fP\fR [get]\fP"
+.br
+.ti -1c
+.RI "\fBICompilerService\fP \fBCompilerService\fP\fR [get]\fP"
+.br
+.ti -1c
+.RI "\fBSaveFileHelper\fP \fBTextEditorSaveFileHelper\fP\fR [get]\fP"
+.br
+.ti -1c
+.RI "int \fBEditBlockIndex\fP\fR [get]\fP"
+.br
+.ti -1c
+.RI "bool \fBIsDirty\fP\fR [get]\fP"
+.br
+.ti -1c
+.RI "int int lineLength \fBMostCharactersOnASingleLineTuple\fP\fR [get]\fP"
+.br
+.ti -1c
+.RI "Key< \fBRenderState\fP > \fBRenderStateKey\fP\fR [get]\fP"
+.br
+.ti -1c
+.RI "string \fBAllText\fP\fR [get]\fP"
+.br
+.ti -1c
+.RI "int \fBLineCount\fP\fR [get]\fP"
+.br
+.ti -1c
+.RI "int \fBCharCount\fP\fR [get]\fP"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+Stores the \fBRichCharacter\fP class instances that represent the text\&.
+.br
+
+.br
+ Each \fBTextEditorModel\fP has a unique underlying resource uri\&.
+.br
+
+.br
+ Therefore, if one has a text file named "myHomework\&.txt", then only one \fBTextEditorModel\fP can exist with the resource uri of "myHomework\&.txt"\&.
+.br
+
+.br
+\&. 
+
+In regards to the use of the words: "line", and "row": A "line" is being defined as a contiguous block of characters, up to and including a \fBLineEnd\fP\&.
+.br
+
+.PP
+A "row" is being defined as a UI rendering term\&. Such that, without a line-wrap, a line of text will be rendered at the same 'y-axis' position, with only a difference in 'x-axis' between each character\&. With line-wrap, a line can span many "row"(s) on the UI\&. That is, the same line of text can be rendered as '1 row' up until the 'x-coordinate' goes out of view\&. At that point the 'y-axis' will be incremented by the height of 1 'line', and the 'x-coordinate' is reset, and more of the line can be rendered\&.
+.br
+
+.br
+
+.PP
+\fBTextEditorModel\fP uses \fBResourceUri\fP as its unique identifier\&. Throughout this library, one finds Key<T> to be a unique identifier\&. However, since \fBResourceUri\fP should be unique, \fBTextEditorModel\fP is an exception to this pattern\&. 
+.PP
+Definition at line \fB36\fP of file \fBITextEditorModel\&.cs\fP\&.
+.SH "Member Data Documentation"
+.PP 
+.SS "int Luthetus\&.TextEditor\&.RazorLib\&.TextEditors\&.Models\&.ITextEditorModel\&.lineIndex"
+
+.PP
+Definition at line \fB122\fP of file \fBITextEditorModel\&.cs\fP\&.
+.SH "Property Documentation"
+.PP 
+.SS "string Luthetus\&.TextEditor\&.RazorLib\&.TextEditors\&.Models\&.ITextEditorModel\&.AllText\fR [get]\fP"
+
+.PP
+Implemented in \fBLuthetus\&.TextEditor\&.RazorLib\&.TextEditors\&.Models\&.TextEditorModel\fP, and \fBLuthetus\&.TextEditor\&.RazorLib\&.TextEditors\&.Models\&.TextEditorModelModifier\fP\&.
+.PP
+Definition at line \fB124\fP of file \fBITextEditorModel\&.cs\fP\&.
+.SS "int Luthetus\&.TextEditor\&.RazorLib\&.TextEditors\&.Models\&.ITextEditorModel\&.CharCount\fR [get]\fP"
+
+.PP
+Implemented in \fBLuthetus\&.TextEditor\&.RazorLib\&.TextEditors\&.Models\&.TextEditorModelModifier\fP\&.
+.PP
+Definition at line \fB127\fP of file \fBITextEditorModel\&.cs\fP\&.
+.SS "\fBICompilerService\fP Luthetus\&.TextEditor\&.RazorLib\&.TextEditors\&.Models\&.ITextEditorModel\&.CompilerService\fR [get]\fP"
+
+.PP
+Implemented in \fBLuthetus\&.TextEditor\&.RazorLib\&.TextEditors\&.Models\&.TextEditorModel\fP, and \fBLuthetus\&.TextEditor\&.RazorLib\&.TextEditors\&.Models\&.TextEditorModelModifier\fP\&.
+.PP
+Definition at line \fB118\fP of file \fBITextEditorModel\&.cs\fP\&.
+.SS "\fBIDecorationMapper\fP Luthetus\&.TextEditor\&.RazorLib\&.TextEditors\&.Models\&.ITextEditorModel\&.DecorationMapper\fR [get]\fP"
+
+.PP
+Implemented in \fBLuthetus\&.TextEditor\&.RazorLib\&.TextEditors\&.Models\&.TextEditorModel\fP, and \fBLuthetus\&.TextEditor\&.RazorLib\&.TextEditors\&.Models\&.TextEditorModelModifier\fP\&.
+.PP
+Definition at line \fB117\fP of file \fBITextEditorModel\&.cs\fP\&.
+.SS "int Luthetus\&.TextEditor\&.RazorLib\&.TextEditors\&.Models\&.ITextEditorModel\&.EditBlockIndex\fR [get]\fP"
+
+.PP
+Implemented in \fBLuthetus\&.TextEditor\&.RazorLib\&.TextEditors\&.Models\&.TextEditorModel\fP, and \fBLuthetus\&.TextEditor\&.RazorLib\&.TextEditors\&.Models\&.TextEditorModelModifier\fP\&.
+.PP
+Definition at line \fB120\fP of file \fBITextEditorModel\&.cs\fP\&.
+.SS "IList<\fBITextEditorEdit\fP> Luthetus\&.TextEditor\&.RazorLib\&.TextEditors\&.Models\&.ITextEditorModel\&.EditBlockList\fR [get]\fP"
+
+.PP
+Implemented in \fBLuthetus\&.TextEditor\&.RazorLib\&.TextEditors\&.Models\&.TextEditorModel\fP, and \fBLuthetus\&.TextEditor\&.RazorLib\&.TextEditors\&.Models\&.TextEditorModelModifier\fP\&.
+.PP
+Definition at line \fB84\fP of file \fBITextEditorModel\&.cs\fP\&.
+.SS "string Luthetus\&.TextEditor\&.RazorLib\&.TextEditors\&.Models\&.ITextEditorModel\&.FileExtension\fR [get]\fP"
+
+.PP
+This is displayed within theDisplays\&.Internals\&.TextEditorFooter\&. 
+.PP
+Implemented in \fBLuthetus\&.TextEditor\&.RazorLib\&.TextEditors\&.Models\&.TextEditorModel\fP, and \fBLuthetus\&.TextEditor\&.RazorLib\&.TextEditors\&.Models\&.TextEditorModelModifier\fP\&.
+.PP
+Definition at line \fB116\fP of file \fBITextEditorModel\&.cs\fP\&.
+.SS "bool Luthetus\&.TextEditor\&.RazorLib\&.TextEditors\&.Models\&.ITextEditorModel\&.IsDirty\fR [get]\fP"
+
+.PP
+Implemented in \fBLuthetus\&.TextEditor\&.RazorLib\&.TextEditors\&.Models\&.TextEditorModel\fP, and \fBLuthetus\&.TextEditor\&.RazorLib\&.TextEditors\&.Models\&.TextEditorModelModifier\fP\&.
+.PP
+Definition at line \fB121\fP of file \fBITextEditorModel\&.cs\fP\&.
+.SS "int Luthetus\&.TextEditor\&.RazorLib\&.TextEditors\&.Models\&.ITextEditorModel\&.LineCount\fR [get]\fP"
+
+.PP
+Implemented in \fBLuthetus\&.TextEditor\&.RazorLib\&.TextEditors\&.Models\&.TextEditorModel\fP, and \fBLuthetus\&.TextEditor\&.RazorLib\&.TextEditors\&.Models\&.TextEditorModelModifier\fP\&.
+.PP
+Definition at line \fB126\fP of file \fBITextEditorModel\&.cs\fP\&.
+.SS "IList<(\fBLineEndKind\fP lineEndKind, int count)> Luthetus\&.TextEditor\&.RazorLib\&.TextEditors\&.Models\&.ITextEditorModel\&.LineEndKindCountList\fR [get]\fP"
+
+.PP
+Implemented in \fBLuthetus\&.TextEditor\&.RazorLib\&.TextEditors\&.Models\&.TextEditorModel\fP, and \fBLuthetus\&.TextEditor\&.RazorLib\&.TextEditors\&.Models\&.TextEditorModelModifier\fP\&.
+.PP
+Definition at line \fB90\fP of file \fBITextEditorModel\&.cs\fP\&.
+.SS "\fBLineEndKind\fP Luthetus\&.TextEditor\&.RazorLib\&.TextEditors\&.Models\&.ITextEditorModel\&.LineEndKindPreference\fR [get]\fP"
+
+.PP
+Implemented in \fBLuthetus\&.TextEditor\&.RazorLib\&.TextEditors\&.Models\&.TextEditorModel\fP, and \fBLuthetus\&.TextEditor\&.RazorLib\&.TextEditors\&.Models\&.TextEditorModelModifier\fP\&.
+.PP
+Definition at line \fB102\fP of file \fBITextEditorModel\&.cs\fP\&.
+.SS "IList<\fBLineEnd\fP> Luthetus\&.TextEditor\&.RazorLib\&.TextEditors\&.Models\&.ITextEditorModel\&.LineEndList\fR [get]\fP"
+
+.PP
+Convert an index for a \fBLineEnd\fP to a \fBLineInformation\fP, use the method: TextEditorModelExtensionMethods\&.GetLineInformation(ITextEditorModel, int)\&. 
+.PP
+Implemented in \fBLuthetus\&.TextEditor\&.RazorLib\&.TextEditors\&.Models\&.TextEditorModel\fP, and \fBLuthetus\&.TextEditor\&.RazorLib\&.TextEditors\&.Models\&.TextEditorModelModifier\fP\&.
+.PP
+Definition at line \fB89\fP of file \fBITextEditorModel\&.cs\fP\&.
+.SS "int int lineLength Luthetus\&.TextEditor\&.RazorLib\&.TextEditors\&.Models\&.ITextEditorModel\&.MostCharactersOnASingleLineTuple\fR [get]\fP"
+
+.PP
+Implemented in \fBLuthetus\&.TextEditor\&.RazorLib\&.TextEditors\&.Models\&.TextEditorModel\fP, and \fBLuthetus\&.TextEditor\&.RazorLib\&.TextEditors\&.Models\&.TextEditorModelModifier\fP\&.
+.PP
+Definition at line \fB122\fP of file \fBITextEditorModel\&.cs\fP\&.
+.SS "\fBLineEndKind\fP? Luthetus\&.TextEditor\&.RazorLib\&.TextEditors\&.Models\&.ITextEditorModel\&.OnlyLineEndKind\fR [get]\fP"
+
+.PP
+If there is a mixture of
+.br
+-Carriage Return
+.br
+-Linefeed
+.br
+-CRLF
+.br
+ Then this will be null\&.
+.br
+
+.br
+ If there are no line endings then this will be null\&. 
+.PP
+Implemented in \fBLuthetus\&.TextEditor\&.RazorLib\&.TextEditors\&.Models\&.TextEditorModel\fP, and \fBLuthetus\&.TextEditor\&.RazorLib\&.TextEditors\&.Models\&.TextEditorModelModifier\fP\&.
+.PP
+Definition at line \fB101\fP of file \fBITextEditorModel\&.cs\fP\&.
+.SS "ImmutableList<\fBTextEditorPartition\fP> Luthetus\&.TextEditor\&.RazorLib\&.TextEditors\&.Models\&.ITextEditorModel\&.PartitionList\fR [get]\fP"
+
+.PP
+Implemented in \fBLuthetus\&.TextEditor\&.RazorLib\&.TextEditors\&.Models\&.TextEditorModel\fP, and \fBLuthetus\&.TextEditor\&.RazorLib\&.TextEditors\&.Models\&.TextEditorModelModifier\fP\&.
+.PP
+Definition at line \fB83\fP of file \fBITextEditorModel\&.cs\fP\&.
+.SS "IList<\fBTextEditorPresentationModel\fP> Luthetus\&.TextEditor\&.RazorLib\&.TextEditors\&.Models\&.ITextEditorModel\&.PresentationModelList\fR [get]\fP"
+
+.PP
+Implemented in \fBLuthetus\&.TextEditor\&.RazorLib\&.TextEditors\&.Models\&.TextEditorModel\fP, and \fBLuthetus\&.TextEditor\&.RazorLib\&.TextEditors\&.Models\&.TextEditorModelModifier\fP\&.
+.PP
+Definition at line \fB91\fP of file \fBITextEditorModel\&.cs\fP\&.
+.SS "Key<\fBRenderState\fP> Luthetus\&.TextEditor\&.RazorLib\&.TextEditors\&.Models\&.ITextEditorModel\&.RenderStateKey\fR [get]\fP"
+
+.PP
+Implemented in \fBLuthetus\&.TextEditor\&.RazorLib\&.TextEditors\&.Models\&.TextEditorModel\fP, and \fBLuthetus\&.TextEditor\&.RazorLib\&.TextEditors\&.Models\&.TextEditorModelModifier\fP\&.
+.PP
+Definition at line \fB123\fP of file \fBITextEditorModel\&.cs\fP\&.
+.SS "DateTime Luthetus\&.TextEditor\&.RazorLib\&.TextEditors\&.Models\&.ITextEditorModel\&.ResourceLastWriteTime\fR [get]\fP"
+
+.PP
+Implemented in \fBLuthetus\&.TextEditor\&.RazorLib\&.TextEditors\&.Models\&.TextEditorModel\fP, and \fBLuthetus\&.TextEditor\&.RazorLib\&.TextEditors\&.Models\&.TextEditorModelModifier\fP\&.
+.PP
+Definition at line \fB112\fP of file \fBITextEditorModel\&.cs\fP\&.
+.SS "ResourceUri Luthetus\&.TextEditor\&.RazorLib\&.TextEditors\&.Models\&.ITextEditorModel\&.ResourceUri\fR [get]\fP"
+
+.PP
+TODO: On (2023-10-02) Key<\fBTextEditorModel\fP> was removed, because it felt redundant\&.\&.\&. \&.\&.\&.given only 1 \fBTextEditorModel\fP can exist for a given \fBResourceUri\fP\&. This change however creates an issue regarding 'fake' resource uri's that are used for in-memory files\&. For example, \fBOptions\&.Displays\&.TextEditorSettingsPreview\fP now has the resource URI of "__LUTHETUS_SETTINGS_PREVIEW__"\&. This is an issue because could a user have on their filesystem the file "__LUTHETUS_SETTINGS_PREVIEW__"? (at that exact resource uri)\&. 
+.PP
+Implemented in \fBLuthetus\&.TextEditor\&.RazorLib\&.TextEditors\&.Models\&.TextEditorModel\fP, and \fBLuthetus\&.TextEditor\&.RazorLib\&.TextEditors\&.Models\&.TextEditorModelModifier\fP\&.
+.PP
+Definition at line \fB111\fP of file \fBITextEditorModel\&.cs\fP\&.
+.SS "\fBRichCharacter\fP [] Luthetus\&.TextEditor\&.RazorLib\&.TextEditors\&.Models\&.ITextEditorModel\&.RichCharacterList\fR [get]\fP"
+
+.SH "Changed this property to an array from an ImmutableList (2024-08-13)\&."
+.PP
+The motivation for this change comes from calculating the virtualization result\&.
+
+.PP
+The storage for the underlying data of a 'ImmutableList' is believed to be more of a 'tree' structure than a contiguous array\&.
+
+.PP
+And therefore, when we virtualize vertically, and then horizontally after, this is an incredible amount of overhead if performed on a 'tree'-like structure\&.
+
+.PP
+A contiguous array is expected to be a dramatic improvement in performance when calculating the virtualization result\&.
+
+.PP
+A side note on this change: could \&.NET internally more easily leverage caching with this now being a contiguous array, rather than a 'tree'?
+
+.PP
+A worry: I'm not quite certain on the details of the idea in my head\&. It is something along lines of an array being treated as a struct and that this could cause a mess somehow? | Copying the entire list of rich characters versus just passing around a pointer kind of thing\&. | But, this array is located on an object, the text editor model, and it is the model that is being passed around in the code base\&. So this shouldn't be an issue\&.
+
+.PP
+Quite non-scientifically I simply took note of the memory usage that the Task Manager on windows reported for the IDE while this used to be an ImmutableList, before I made the change\&. | It was 1,744 MB of memory pre change\&. It is 1,568 MB of memory after change\&.
+
+.PP
+There is 0 control of variables going on here so the change of 200 MB perhaps is completely meaningless\&.
+
+.PP
+More so, I took a simple note of memory usage incase I see that the memory usage doubled or something absurd\&.
+
+.PP
+Would the app's memory go up, or would the so called "\&.NET Host" have its memory go up? I'm seeing in task manager a process called "\&.NET Host", separate to that of "Luthetus\&.Ide\&.Photino"\&.
+
+.PP
+I'm now seeing 643 MB of memory usage after changing \fBRichCharacter\fP to a struct from a class 
+.PP
+Implemented in \fBLuthetus\&.TextEditor\&.RazorLib\&.TextEditors\&.Models\&.TextEditorModel\fP, and \fBLuthetus\&.TextEditor\&.RazorLib\&.TextEditors\&.Models\&.TextEditorModelModifier\fP\&.
+.PP
+Definition at line \fB82\fP of file \fBITextEditorModel\&.cs\fP\&.
+.SS "IList<int> Luthetus\&.TextEditor\&.RazorLib\&.TextEditors\&.Models\&.ITextEditorModel\&.TabKeyPositionList\fR [get]\fP"
+
+.PP
+Provides exact position index of a tab character\&. 
+.PP
+Implemented in \fBLuthetus\&.TextEditor\&.RazorLib\&.TextEditors\&.Models\&.TextEditorModelModifier\fP\&.
+.PP
+Definition at line \fB95\fP of file \fBITextEditorModel\&.cs\fP\&.
+.SS "\fBSaveFileHelper\fP Luthetus\&.TextEditor\&.RazorLib\&.TextEditors\&.Models\&.ITextEditorModel\&.TextEditorSaveFileHelper\fR [get]\fP"
+
+.PP
+Implemented in \fBLuthetus\&.TextEditor\&.RazorLib\&.TextEditors\&.Models\&.TextEditorModel\fP, and \fBLuthetus\&.TextEditor\&.RazorLib\&.TextEditors\&.Models\&.TextEditorModelModifier\fP\&.
+.PP
+Definition at line \fB119\fP of file \fBITextEditorModel\&.cs\fP\&.
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for Luthetus\&.Ide from the source code\&.

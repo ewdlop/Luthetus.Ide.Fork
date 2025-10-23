@@ -1,0 +1,4 @@
+var _i_text_editor_diagnostic_renderer_8cs =
+[
+    [ "Luthetus.TextEditor.RazorLib.ComponentRenderers.Models.ITextEditorDiagnosticRenderer", "interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_component_renderers_1_1_models_1_1_i_text_editor_diagnostic_renderer.html", "interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_component_renderers_1_1_models_1_1_i_text_editor_diagnostic_renderer" ]
+];

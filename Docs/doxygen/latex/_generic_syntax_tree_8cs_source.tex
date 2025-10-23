@@ -1,0 +1,419 @@
+\doxysection{Generic\+Syntax\+Tree.\+cs}
+\hypertarget{_generic_syntax_tree_8cs_source}{}\label{_generic_syntax_tree_8cs_source}\index{Source/Lib/TextEditor/CompilerServices/GenericLexer/SyntaxActors/GenericSyntaxTree.cs@{Source/Lib/TextEditor/CompilerServices/GenericLexer/SyntaxActors/GenericSyntaxTree.cs}}
+\mbox{\hyperlink{_generic_syntax_tree_8cs}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{_generic_syntax_tree_8cs_source_l00001}00001\ \textcolor{keyword}{using\ }System.Collections.Immutable;}
+\DoxyCodeLine{\Hypertarget{_generic_syntax_tree_8cs_source_l00002}00002\ \textcolor{keyword}{using\ }System.Text;}
+\DoxyCodeLine{\Hypertarget{_generic_syntax_tree_8cs_source_l00003}00003\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_luthetus_1_1_common_1_1_razor_lib_1_1_keyboards_1_1_models}{Luthetus.Common.RazorLib.Keyboards.Models}};}
+\DoxyCodeLine{\Hypertarget{_generic_syntax_tree_8cs_source_l00004}00004\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_facts}{Luthetus.TextEditor.RazorLib.CompilerServices.Facts}};}
+\DoxyCodeLine{\Hypertarget{_generic_syntax_tree_8cs_source_l00005}00005\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_generic_lexer_1_1_decoration}{Luthetus.TextEditor.RazorLib.CompilerServices.GenericLexer.Decoration}};}
+\DoxyCodeLine{\Hypertarget{_generic_syntax_tree_8cs_source_l00006}00006\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_generic_lexer_1_1_syntax_objects}{Luthetus.TextEditor.RazorLib.CompilerServices.GenericLexer.SyntaxObjects}};}
+\DoxyCodeLine{\Hypertarget{_generic_syntax_tree_8cs_source_l00007}00007\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_utility}{Luthetus.TextEditor.RazorLib.CompilerServices.Utility}};}
+\DoxyCodeLine{\Hypertarget{_generic_syntax_tree_8cs_source_l00008}00008\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_lexers_1_1_models}{Luthetus.TextEditor.RazorLib.Lexers.Models}};}
+\DoxyCodeLine{\Hypertarget{_generic_syntax_tree_8cs_source_l00009}00009\ }
+\DoxyCodeLine{\Hypertarget{_generic_syntax_tree_8cs_source_l00010}\mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_generic_lexer_1_1_syntax_actors}{00010}}\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_generic_lexer_1_1_syntax_actors}{Luthetus.TextEditor.RazorLib.CompilerServices.GenericLexer.SyntaxActors}};}
+\DoxyCodeLine{\Hypertarget{_generic_syntax_tree_8cs_source_l00011}00011\ }
+\DoxyCodeLine{\Hypertarget{_generic_syntax_tree_8cs_source_l00012}\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_generic_lexer_1_1_syntax_actors_1_1_generic_syntax_tree}{00012}}\ \textcolor{keyword}{public}\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_generic_lexer_1_1_syntax_actors_1_1_generic_syntax_tree_a881fd5f399afc9739e128460b6f51882}{GenericSyntaxTree}}}
+\DoxyCodeLine{\Hypertarget{_generic_syntax_tree_8cs_source_l00013}00013\ \{}
+\DoxyCodeLine{\Hypertarget{_generic_syntax_tree_8cs_source_l00014}\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_generic_lexer_1_1_syntax_actors_1_1_generic_syntax_tree_a881fd5f399afc9739e128460b6f51882}{00014}}\ \ \ \ \ \textcolor{keyword}{public}\ \mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_generic_lexer_1_1_syntax_actors_1_1_generic_syntax_tree_a881fd5f399afc9739e128460b6f51882}{GenericSyntaxTree}}(\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_generic_lexer_1_1_syntax_actors_1_1_generic_syntax_tree_a6d15501f51284e18d9ecbd93b136d2f7}{GenericLanguageDefinition}}\ genericLanguageDefinition)}
+\DoxyCodeLine{\Hypertarget{_generic_syntax_tree_8cs_source_l00015}00015\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_generic_syntax_tree_8cs_source_l00016}00016\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_generic_lexer_1_1_syntax_actors_1_1_generic_syntax_tree_a6d15501f51284e18d9ecbd93b136d2f7}{GenericLanguageDefinition}}\ =\ genericLanguageDefinition;}
+\DoxyCodeLine{\Hypertarget{_generic_syntax_tree_8cs_source_l00017}00017\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_generic_syntax_tree_8cs_source_l00018}00018\ }
+\DoxyCodeLine{\Hypertarget{_generic_syntax_tree_8cs_source_l00019}\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_generic_lexer_1_1_syntax_actors_1_1_generic_syntax_tree_a6d15501f51284e18d9ecbd93b136d2f7}{00019}}\ \ \ \ \ \textcolor{keyword}{public}\ \mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_generic_lexer_1_1_syntax_actors_1_1_generic_syntax_tree_a6d15501f51284e18d9ecbd93b136d2f7}{GenericLanguageDefinition}}\ \mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_generic_lexer_1_1_syntax_actors_1_1_generic_syntax_tree_a6d15501f51284e18d9ecbd93b136d2f7}{GenericLanguageDefinition}}\ \{\ \textcolor{keyword}{get};\ \}}
+\DoxyCodeLine{\Hypertarget{_generic_syntax_tree_8cs_source_l00020}00020\ }
+\DoxyCodeLine{\Hypertarget{_generic_syntax_tree_8cs_source_l00021}\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_generic_lexer_1_1_syntax_actors_1_1_generic_syntax_tree_a10a19fc4ec13b66dfb447020387de03f}{00021}}\ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keyword}{virtual}\ \mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_generic_lexer_1_1_generic_syntax_unit}{GenericSyntaxUnit}}\ \mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_generic_lexer_1_1_syntax_actors_1_1_generic_syntax_tree_a10a19fc4ec13b66dfb447020387de03f}{ParseText}}(\mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_lexers_1_1_models_a26a1b63ad28ec7955b30bc6c91571eca}{ResourceUri}}\ resourceUri,\ \textcolor{keywordtype}{string}\ content)}
+\DoxyCodeLine{\Hypertarget{_generic_syntax_tree_8cs_source_l00022}00022\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_generic_syntax_tree_8cs_source_l00023}00023\ \ \ \ \ \ \ \ \ var\ documentChildList\ =\ \textcolor{keyword}{new}\ List<IGenericSyntax>();}
+\DoxyCodeLine{\Hypertarget{_generic_syntax_tree_8cs_source_l00024}00024\ \ \ \ \ \ \ \ \ var\ diagnosticBag\ =\ \textcolor{keyword}{new}\ \mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_diagnostic_bag}{DiagnosticBag}}();}
+\DoxyCodeLine{\Hypertarget{_generic_syntax_tree_8cs_source_l00025}00025\ }
+\DoxyCodeLine{\Hypertarget{_generic_syntax_tree_8cs_source_l00026}00026\ \ \ \ \ \ \ \ \ var\ stringWalker\ =\ \textcolor{keyword}{new}\ \mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_utility_1_1_string_walker}{StringWalker}}(resourceUri,\ content);}
+\DoxyCodeLine{\Hypertarget{_generic_syntax_tree_8cs_source_l00027}00027\ }
+\DoxyCodeLine{\Hypertarget{_generic_syntax_tree_8cs_source_l00028}00028\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{while}\ (!stringWalker.IsEof)}
+\DoxyCodeLine{\Hypertarget{_generic_syntax_tree_8cs_source_l00029}00029\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_generic_syntax_tree_8cs_source_l00030}00030\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (stringWalker.PeekForSubstring(\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_generic_lexer_1_1_syntax_actors_1_1_generic_syntax_tree_a6d15501f51284e18d9ecbd93b136d2f7}{GenericLanguageDefinition}}.StringStart))}
+\DoxyCodeLine{\Hypertarget{_generic_syntax_tree_8cs_source_l00031}00031\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_generic_syntax_tree_8cs_source_l00032}00032\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ var\ genericStringSyntax\ =\ \mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_generic_lexer_1_1_syntax_actors_1_1_generic_syntax_tree_ae85974cf1b5f1e8e1a62ff4c62044ca3}{ParseString}}(stringWalker,\ diagnosticBag);}
+\DoxyCodeLine{\Hypertarget{_generic_syntax_tree_8cs_source_l00033}00033\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ documentChildList.Add(genericStringSyntax);}
+\DoxyCodeLine{\Hypertarget{_generic_syntax_tree_8cs_source_l00034}00034\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_generic_syntax_tree_8cs_source_l00035}00035\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ (stringWalker.PeekForSubstring(\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_generic_lexer_1_1_syntax_actors_1_1_generic_syntax_tree_a6d15501f51284e18d9ecbd93b136d2f7}{GenericLanguageDefinition}}.CommentSingleLineStart))}
+\DoxyCodeLine{\Hypertarget{_generic_syntax_tree_8cs_source_l00036}00036\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_generic_syntax_tree_8cs_source_l00037}00037\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ var\ genericCommentSingleLineSyntax\ =\ \mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_generic_lexer_1_1_syntax_actors_1_1_generic_syntax_tree_a34333e7f93e1587b053f52b1d5294c67}{ParseCommentSingleLine}}(stringWalker,\ diagnosticBag);}
+\DoxyCodeLine{\Hypertarget{_generic_syntax_tree_8cs_source_l00038}00038\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ documentChildList.Add(genericCommentSingleLineSyntax);}
+\DoxyCodeLine{\Hypertarget{_generic_syntax_tree_8cs_source_l00039}00039\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_generic_syntax_tree_8cs_source_l00040}00040\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ (stringWalker.PeekForSubstring(\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_generic_lexer_1_1_syntax_actors_1_1_generic_syntax_tree_a6d15501f51284e18d9ecbd93b136d2f7}{GenericLanguageDefinition}}.CommentMultiLineStart))}
+\DoxyCodeLine{\Hypertarget{_generic_syntax_tree_8cs_source_l00041}00041\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_generic_syntax_tree_8cs_source_l00042}00042\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ var\ genericCommentMultiLineSyntax\ =\ \mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_generic_lexer_1_1_syntax_actors_1_1_generic_syntax_tree_a74d6390f1bebcd5742d8e1aed0f1de50}{ParseCommentMultiLine}}(stringWalker,\ diagnosticBag);}
+\DoxyCodeLine{\Hypertarget{_generic_syntax_tree_8cs_source_l00043}00043\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ documentChildList.Add(genericCommentMultiLineSyntax);}
+\DoxyCodeLine{\Hypertarget{_generic_syntax_tree_8cs_source_l00044}00044\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_generic_syntax_tree_8cs_source_l00045}00045\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ (stringWalker.PeekForSubstring(\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_generic_lexer_1_1_syntax_actors_1_1_generic_syntax_tree_a6d15501f51284e18d9ecbd93b136d2f7}{GenericLanguageDefinition}}.FunctionInvocationStart))}
+\DoxyCodeLine{\Hypertarget{_generic_syntax_tree_8cs_source_l00046}00046\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_generic_syntax_tree_8cs_source_l00047}00047\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (TryParseFunctionIdentifier(stringWalker,\ diagnosticBag,\ out\ var\ genericFunctionSyntax)\ \&\&}
+\DoxyCodeLine{\Hypertarget{_generic_syntax_tree_8cs_source_l00048}00048\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ genericFunctionSyntax\ is\ not\ \textcolor{keyword}{null})}
+\DoxyCodeLine{\Hypertarget{_generic_syntax_tree_8cs_source_l00049}00049\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_generic_syntax_tree_8cs_source_l00050}00050\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ documentChildList.Add(genericFunctionSyntax);}
+\DoxyCodeLine{\Hypertarget{_generic_syntax_tree_8cs_source_l00051}00051\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_generic_syntax_tree_8cs_source_l00052}00052\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_generic_syntax_tree_8cs_source_l00053}00053\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ (!WhitespaceFacts.ALL\_LIST.Contains(stringWalker.CurrentCharacter)\ \&\&}
+\DoxyCodeLine{\Hypertarget{_generic_syntax_tree_8cs_source_l00054}00054\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ !KeyboardKeyFacts.PunctuationCharacters.AllList.Contains(stringWalker.CurrentCharacter))}
+\DoxyCodeLine{\Hypertarget{_generic_syntax_tree_8cs_source_l00055}00055\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_generic_syntax_tree_8cs_source_l00056}00056\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (TryParseKeyword(stringWalker,\ diagnosticBag,\ out\ var\ genericKeywordSyntax)\ \&\&}
+\DoxyCodeLine{\Hypertarget{_generic_syntax_tree_8cs_source_l00057}00057\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ genericKeywordSyntax\ is\ not\ \textcolor{keyword}{null})}
+\DoxyCodeLine{\Hypertarget{_generic_syntax_tree_8cs_source_l00058}00058\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_generic_syntax_tree_8cs_source_l00059}00059\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ documentChildList.Add(genericKeywordSyntax);}
+\DoxyCodeLine{\Hypertarget{_generic_syntax_tree_8cs_source_l00060}00060\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_generic_syntax_tree_8cs_source_l00061}00061\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_generic_syntax_tree_8cs_source_l00062}00062\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ (stringWalker.PeekForSubstring(\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_generic_lexer_1_1_syntax_actors_1_1_generic_syntax_tree_a6d15501f51284e18d9ecbd93b136d2f7}{GenericLanguageDefinition}}.PreprocessorDefinition.TransitionSubstring))}
+\DoxyCodeLine{\Hypertarget{_generic_syntax_tree_8cs_source_l00063}00063\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_generic_syntax_tree_8cs_source_l00064}00064\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ var\ genericCommentMultiLineSyntax\ =\ ParsePreprocessorDirective(stringWalker,\ diagnosticBag);}
+\DoxyCodeLine{\Hypertarget{_generic_syntax_tree_8cs_source_l00065}00065\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ documentChildList.Add(genericCommentMultiLineSyntax);}
+\DoxyCodeLine{\Hypertarget{_generic_syntax_tree_8cs_source_l00066}00066\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_generic_syntax_tree_8cs_source_l00067}00067\ }
+\DoxyCodeLine{\Hypertarget{_generic_syntax_tree_8cs_source_l00068}00068\ \ \ \ \ \ \ \ \ \ \ \ \ \_\ =\ stringWalker.ReadCharacter();}
+\DoxyCodeLine{\Hypertarget{_generic_syntax_tree_8cs_source_l00069}00069\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_generic_syntax_tree_8cs_source_l00070}00070\ }
+\DoxyCodeLine{\Hypertarget{_generic_syntax_tree_8cs_source_l00071}00071\ \ \ \ \ \ \ \ \ var\ genericDocumentSyntax\ =\ \textcolor{keyword}{new}\ \mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_generic_lexer_1_1_syntax_1f5addb531ff24aa4378d03cd469864b}{GenericDocumentSyntax}}(\textcolor{keyword}{new}\ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_lexers_1_1_models_a1ffd1a7706dfd364560b76d47467812f}{TextEditorTextSpan}}(}
+\DoxyCodeLine{\Hypertarget{_generic_syntax_tree_8cs_source_l00072}00072\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 0,}
+\DoxyCodeLine{\Hypertarget{_generic_syntax_tree_8cs_source_l00073}00073\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ stringWalker.PositionIndex,}
+\DoxyCodeLine{\Hypertarget{_generic_syntax_tree_8cs_source_l00074}00074\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (\textcolor{keywordtype}{byte})\mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_generic_lexer_1_1_decoration_a7f6068f17a9d3ed70d4b8eefd0fcbcf0}{GenericDecorationKind}}.None,}
+\DoxyCodeLine{\Hypertarget{_generic_syntax_tree_8cs_source_l00075}00075\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ stringWalker.ResourceUri,}
+\DoxyCodeLine{\Hypertarget{_generic_syntax_tree_8cs_source_l00076}00076\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ stringWalker.SourceText),}
+\DoxyCodeLine{\Hypertarget{_generic_syntax_tree_8cs_source_l00077}00077\ \ \ \ \ \ \ \ \ \ \ \ \ documentChildList.ToImmutableArray());}
+\DoxyCodeLine{\Hypertarget{_generic_syntax_tree_8cs_source_l00078}00078\ }
+\DoxyCodeLine{\Hypertarget{_generic_syntax_tree_8cs_source_l00079}00079\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{new}\ \mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_generic_lexer_1_1_generic_syntax_unit}{GenericSyntaxUnit}}(genericDocumentSyntax,\ diagnosticBag);}
+\DoxyCodeLine{\Hypertarget{_generic_syntax_tree_8cs_source_l00080}00080\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_generic_syntax_tree_8cs_source_l00081}00081\ }
+\DoxyCodeLine{\Hypertarget{_generic_syntax_tree_8cs_source_l00082}\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_generic_lexer_1_1_syntax_actors_1_1_generic_syntax_tree_a34333e7f93e1587b053f52b1d5294c67}{00082}}\ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keyword}{virtual}\ \mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_generic_lexer_1_1_syntax_29cec4fe8c819ba5061e4f1c46ca8999}{GenericCommentSingleLineSyntax}}\ \mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_generic_lexer_1_1_syntax_actors_1_1_generic_syntax_tree_a34333e7f93e1587b053f52b1d5294c67}{ParseCommentSingleLine}}(}
+\DoxyCodeLine{\Hypertarget{_generic_syntax_tree_8cs_source_l00083}00083\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_utility_1_1_string_walker}{StringWalker}}\ stringWalker,}
+\DoxyCodeLine{\Hypertarget{_generic_syntax_tree_8cs_source_l00084}00084\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_diagnostic_bag}{DiagnosticBag}}\ diagnosticBag)}
+\DoxyCodeLine{\Hypertarget{_generic_syntax_tree_8cs_source_l00085}00085\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_generic_syntax_tree_8cs_source_l00086}00086\ \ \ \ \ \ \ \ \ var\ startingPositionIndex\ =\ stringWalker.\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_utility_1_1_string_walker_a192423c8188b55e1e16376095b7dfc62}{PositionIndex}};}
+\DoxyCodeLine{\Hypertarget{_generic_syntax_tree_8cs_source_l00087}00087\ }
+\DoxyCodeLine{\Hypertarget{_generic_syntax_tree_8cs_source_l00088}00088\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{while}\ (!stringWalker.\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_utility_1_1_string_walker_a7c895ef73ed57523b1a78779cc0e2528}{IsEof}})}
+\DoxyCodeLine{\Hypertarget{_generic_syntax_tree_8cs_source_l00089}00089\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_generic_syntax_tree_8cs_source_l00090}00090\ \ \ \ \ \ \ \ \ \ \ \ \ \_\ =\ stringWalker.\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_utility_1_1_string_walker_a1533f73189c0e55efe7da8278c1d32df}{ReadCharacter}}();}
+\DoxyCodeLine{\Hypertarget{_generic_syntax_tree_8cs_source_l00091}00091\ }
+\DoxyCodeLine{\Hypertarget{_generic_syntax_tree_8cs_source_l00092}00092\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (stringWalker.\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_utility_1_1_string_walker_a45c9d49f994e5415c930179fbcdfdd9a}{PeekForSubstringRange}}(}
+\DoxyCodeLine{\Hypertarget{_generic_syntax_tree_8cs_source_l00093}00093\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_generic_lexer_1_1_syntax_actors_1_1_generic_syntax_tree_a6d15501f51284e18d9ecbd93b136d2f7}{GenericLanguageDefinition}}.CommentSingleLineEndingsList,}
+\DoxyCodeLine{\Hypertarget{_generic_syntax_tree_8cs_source_l00094}00094\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ out\ \_))}
+\DoxyCodeLine{\Hypertarget{_generic_syntax_tree_8cs_source_l00095}00095\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_generic_syntax_tree_8cs_source_l00096}00096\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{_generic_syntax_tree_8cs_source_l00097}00097\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_generic_syntax_tree_8cs_source_l00098}00098\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_generic_syntax_tree_8cs_source_l00099}00099\ }
+\DoxyCodeLine{\Hypertarget{_generic_syntax_tree_8cs_source_l00100}00100\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (stringWalker.\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_utility_1_1_string_walker_a7c895ef73ed57523b1a78779cc0e2528}{IsEof}})}
+\DoxyCodeLine{\Hypertarget{_generic_syntax_tree_8cs_source_l00101}00101\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_generic_syntax_tree_8cs_source_l00102}00102\ \ \ \ \ \ \ \ \ \ \ \ \ diagnosticBag.\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_diagnostic_bag_a356b5e28089638e9367941a0bd9873ce}{ReportEndOfFileUnexpected}}(}
+\DoxyCodeLine{\Hypertarget{_generic_syntax_tree_8cs_source_l00103}00103\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{new}\ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_lexers_1_1_models_a1ffd1a7706dfd364560b76d47467812f}{TextEditorTextSpan}}(}
+\DoxyCodeLine{\Hypertarget{_generic_syntax_tree_8cs_source_l00104}00104\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ startingPositionIndex,}
+\DoxyCodeLine{\Hypertarget{_generic_syntax_tree_8cs_source_l00105}00105\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ stringWalker.\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_utility_1_1_string_walker_a192423c8188b55e1e16376095b7dfc62}{PositionIndex}},}
+\DoxyCodeLine{\Hypertarget{_generic_syntax_tree_8cs_source_l00106}00106\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (\textcolor{keywordtype}{byte})\mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_generic_lexer_1_1_decoration_a7f6068f17a9d3ed70d4b8eefd0fcbcf0}{GenericDecorationKind}}.Error,}
+\DoxyCodeLine{\Hypertarget{_generic_syntax_tree_8cs_source_l00107}00107\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ stringWalker.\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_utility_1_1_string_walker_abf00a8613dfc137bea3c366e277fbde4}{ResourceUri}},}
+\DoxyCodeLine{\Hypertarget{_generic_syntax_tree_8cs_source_l00108}00108\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ stringWalker.\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_utility_1_1_string_walker_a35f8247f3eea6c6937856215770af815}{SourceText}}));}
+\DoxyCodeLine{\Hypertarget{_generic_syntax_tree_8cs_source_l00109}00109\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_generic_syntax_tree_8cs_source_l00110}00110\ }
+\DoxyCodeLine{\Hypertarget{_generic_syntax_tree_8cs_source_l00111}00111\ \ \ \ \ \ \ \ \ var\ commentTextEditorTextSpan\ =\ \textcolor{keyword}{new}\ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_lexers_1_1_models_a1ffd1a7706dfd364560b76d47467812f}{TextEditorTextSpan}}(}
+\DoxyCodeLine{\Hypertarget{_generic_syntax_tree_8cs_source_l00112}00112\ \ \ \ \ \ \ \ \ \ \ \ \ startingPositionIndex,}
+\DoxyCodeLine{\Hypertarget{_generic_syntax_tree_8cs_source_l00113}00113\ \ \ \ \ \ \ \ \ \ \ \ \ stringWalker.\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_utility_1_1_string_walker_a192423c8188b55e1e16376095b7dfc62}{PositionIndex}},}
+\DoxyCodeLine{\Hypertarget{_generic_syntax_tree_8cs_source_l00114}00114\ \ \ \ \ \ \ \ \ \ \ \ \ (\textcolor{keywordtype}{byte})\mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_generic_lexer_1_1_decoration_a7f6068f17a9d3ed70d4b8eefd0fcbcf0}{GenericDecorationKind}}.CommentSingleLine,}
+\DoxyCodeLine{\Hypertarget{_generic_syntax_tree_8cs_source_l00115}00115\ \ \ \ \ \ \ \ \ \ \ \ \ stringWalker.\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_utility_1_1_string_walker_abf00a8613dfc137bea3c366e277fbde4}{ResourceUri}},}
+\DoxyCodeLine{\Hypertarget{_generic_syntax_tree_8cs_source_l00116}00116\ \ \ \ \ \ \ \ \ \ \ \ \ stringWalker.\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_utility_1_1_string_walker_a35f8247f3eea6c6937856215770af815}{SourceText}});}
+\DoxyCodeLine{\Hypertarget{_generic_syntax_tree_8cs_source_l00117}00117\ }
+\DoxyCodeLine{\Hypertarget{_generic_syntax_tree_8cs_source_l00118}00118\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{new}\ \mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_generic_lexer_1_1_syntax_29cec4fe8c819ba5061e4f1c46ca8999}{GenericCommentSingleLineSyntax}}(commentTextEditorTextSpan);}
+\DoxyCodeLine{\Hypertarget{_generic_syntax_tree_8cs_source_l00119}00119\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_generic_syntax_tree_8cs_source_l00120}00120\ }
+\DoxyCodeLine{\Hypertarget{_generic_syntax_tree_8cs_source_l00121}\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_generic_lexer_1_1_syntax_actors_1_1_generic_syntax_tree_a74d6390f1bebcd5742d8e1aed0f1de50}{00121}}\ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keyword}{virtual}\ \mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_generic_lexer_1_1_syntax_530bc8297d68129fa98e0a9dc162f936}{GenericCommentMultiLineSyntax}}\ \mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_generic_lexer_1_1_syntax_actors_1_1_generic_syntax_tree_a74d6390f1bebcd5742d8e1aed0f1de50}{ParseCommentMultiLine}}(}
+\DoxyCodeLine{\Hypertarget{_generic_syntax_tree_8cs_source_l00122}00122\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_utility_1_1_string_walker}{StringWalker}}\ stringWalker,}
+\DoxyCodeLine{\Hypertarget{_generic_syntax_tree_8cs_source_l00123}00123\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_diagnostic_bag}{DiagnosticBag}}\ diagnosticBag)}
+\DoxyCodeLine{\Hypertarget{_generic_syntax_tree_8cs_source_l00124}00124\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_generic_syntax_tree_8cs_source_l00125}00125\ \ \ \ \ \ \ \ \ var\ startingPositionIndex\ =\ stringWalker.\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_utility_1_1_string_walker_a192423c8188b55e1e16376095b7dfc62}{PositionIndex}};}
+\DoxyCodeLine{\Hypertarget{_generic_syntax_tree_8cs_source_l00126}00126\ }
+\DoxyCodeLine{\Hypertarget{_generic_syntax_tree_8cs_source_l00127}00127\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{while}\ (!stringWalker.\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_utility_1_1_string_walker_a7c895ef73ed57523b1a78779cc0e2528}{IsEof}})}
+\DoxyCodeLine{\Hypertarget{_generic_syntax_tree_8cs_source_l00128}00128\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_generic_syntax_tree_8cs_source_l00129}00129\ \ \ \ \ \ \ \ \ \ \ \ \ \_\ =\ stringWalker.\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_utility_1_1_string_walker_a1533f73189c0e55efe7da8278c1d32df}{ReadCharacter}}();}
+\DoxyCodeLine{\Hypertarget{_generic_syntax_tree_8cs_source_l00130}00130\ }
+\DoxyCodeLine{\Hypertarget{_generic_syntax_tree_8cs_source_l00131}00131\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (stringWalker.\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_utility_1_1_string_walker_a292d4713572d97ec249ccc383e1c2fb3}{PeekForSubstring}}(\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_generic_lexer_1_1_syntax_actors_1_1_generic_syntax_tree_a6d15501f51284e18d9ecbd93b136d2f7}{GenericLanguageDefinition}}.CommentMultiLineEnd))}
+\DoxyCodeLine{\Hypertarget{_generic_syntax_tree_8cs_source_l00132}00132\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{_generic_syntax_tree_8cs_source_l00133}00133\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_generic_syntax_tree_8cs_source_l00134}00134\ }
+\DoxyCodeLine{\Hypertarget{_generic_syntax_tree_8cs_source_l00135}00135\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (stringWalker.\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_utility_1_1_string_walker_a7c895ef73ed57523b1a78779cc0e2528}{IsEof}})}
+\DoxyCodeLine{\Hypertarget{_generic_syntax_tree_8cs_source_l00136}00136\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_generic_syntax_tree_8cs_source_l00137}00137\ \ \ \ \ \ \ \ \ \ \ \ \ diagnosticBag.\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_diagnostic_bag_a356b5e28089638e9367941a0bd9873ce}{ReportEndOfFileUnexpected}}(}
+\DoxyCodeLine{\Hypertarget{_generic_syntax_tree_8cs_source_l00138}00138\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{new}\ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_lexers_1_1_models_a1ffd1a7706dfd364560b76d47467812f}{TextEditorTextSpan}}(}
+\DoxyCodeLine{\Hypertarget{_generic_syntax_tree_8cs_source_l00139}00139\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ startingPositionIndex,}
+\DoxyCodeLine{\Hypertarget{_generic_syntax_tree_8cs_source_l00140}00140\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ stringWalker.\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_utility_1_1_string_walker_a192423c8188b55e1e16376095b7dfc62}{PositionIndex}},}
+\DoxyCodeLine{\Hypertarget{_generic_syntax_tree_8cs_source_l00141}00141\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (\textcolor{keywordtype}{byte})\mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_generic_lexer_1_1_decoration_a7f6068f17a9d3ed70d4b8eefd0fcbcf0}{GenericDecorationKind}}.Error,}
+\DoxyCodeLine{\Hypertarget{_generic_syntax_tree_8cs_source_l00142}00142\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ stringWalker.\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_utility_1_1_string_walker_abf00a8613dfc137bea3c366e277fbde4}{ResourceUri}},}
+\DoxyCodeLine{\Hypertarget{_generic_syntax_tree_8cs_source_l00143}00143\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ stringWalker.\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_utility_1_1_string_walker_a35f8247f3eea6c6937856215770af815}{SourceText}}));}
+\DoxyCodeLine{\Hypertarget{_generic_syntax_tree_8cs_source_l00144}00144\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_generic_syntax_tree_8cs_source_l00145}00145\ }
+\DoxyCodeLine{\Hypertarget{_generic_syntax_tree_8cs_source_l00146}00146\ \ \ \ \ \ \ \ \ var\ commentTextEditorTextSpan\ =\ \textcolor{keyword}{new}\ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_lexers_1_1_models_a1ffd1a7706dfd364560b76d47467812f}{TextEditorTextSpan}}(}
+\DoxyCodeLine{\Hypertarget{_generic_syntax_tree_8cs_source_l00147}00147\ \ \ \ \ \ \ \ \ \ \ \ \ startingPositionIndex,}
+\DoxyCodeLine{\Hypertarget{_generic_syntax_tree_8cs_source_l00148}00148\ \ \ \ \ \ \ \ \ \ \ \ \ stringWalker.\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_utility_1_1_string_walker_a192423c8188b55e1e16376095b7dfc62}{PositionIndex}}\ +\ \mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_generic_lexer_1_1_syntax_actors_1_1_generic_syntax_tree_a6d15501f51284e18d9ecbd93b136d2f7}{GenericLanguageDefinition}}.CommentMultiLineEnd.Length,}
+\DoxyCodeLine{\Hypertarget{_generic_syntax_tree_8cs_source_l00149}00149\ \ \ \ \ \ \ \ \ \ \ \ \ (\textcolor{keywordtype}{byte})\mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_generic_lexer_1_1_decoration_a7f6068f17a9d3ed70d4b8eefd0fcbcf0}{GenericDecorationKind}}.CommentMultiLine,}
+\DoxyCodeLine{\Hypertarget{_generic_syntax_tree_8cs_source_l00150}00150\ \ \ \ \ \ \ \ \ \ \ \ \ stringWalker.\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_utility_1_1_string_walker_abf00a8613dfc137bea3c366e277fbde4}{ResourceUri}},}
+\DoxyCodeLine{\Hypertarget{_generic_syntax_tree_8cs_source_l00151}00151\ \ \ \ \ \ \ \ \ \ \ \ \ stringWalker.\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_utility_1_1_string_walker_a35f8247f3eea6c6937856215770af815}{SourceText}});}
+\DoxyCodeLine{\Hypertarget{_generic_syntax_tree_8cs_source_l00152}00152\ }
+\DoxyCodeLine{\Hypertarget{_generic_syntax_tree_8cs_source_l00153}00153\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{new}\ \mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_generic_lexer_1_1_syntax_530bc8297d68129fa98e0a9dc162f936}{GenericCommentMultiLineSyntax}}(commentTextEditorTextSpan);}
+\DoxyCodeLine{\Hypertarget{_generic_syntax_tree_8cs_source_l00154}00154\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_generic_syntax_tree_8cs_source_l00155}00155\ }
+\DoxyCodeLine{\Hypertarget{_generic_syntax_tree_8cs_source_l00156}\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_generic_lexer_1_1_syntax_actors_1_1_generic_syntax_tree_ae85974cf1b5f1e8e1a62ff4c62044ca3}{00156}}\ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keyword}{virtual}\ \mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_generic_lexer_1_1_syntax_1035a5ed28b484d1d6a580469ec87752}{GenericStringSyntax}}\ \mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_generic_lexer_1_1_syntax_actors_1_1_generic_syntax_tree_ae85974cf1b5f1e8e1a62ff4c62044ca3}{ParseString}}(}
+\DoxyCodeLine{\Hypertarget{_generic_syntax_tree_8cs_source_l00157}00157\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_utility_1_1_string_walker}{StringWalker}}\ stringWalker,}
+\DoxyCodeLine{\Hypertarget{_generic_syntax_tree_8cs_source_l00158}00158\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_diagnostic_bag}{DiagnosticBag}}\ diagnosticBag)}
+\DoxyCodeLine{\Hypertarget{_generic_syntax_tree_8cs_source_l00159}00159\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_generic_syntax_tree_8cs_source_l00160}00160\ \ \ \ \ \ \ \ \ var\ startingPositionIndex\ =\ stringWalker.\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_utility_1_1_string_walker_a192423c8188b55e1e16376095b7dfc62}{PositionIndex}};}
+\DoxyCodeLine{\Hypertarget{_generic_syntax_tree_8cs_source_l00161}00161\ }
+\DoxyCodeLine{\Hypertarget{_generic_syntax_tree_8cs_source_l00162}00162\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{while}\ (!stringWalker.\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_utility_1_1_string_walker_a7c895ef73ed57523b1a78779cc0e2528}{IsEof}})}
+\DoxyCodeLine{\Hypertarget{_generic_syntax_tree_8cs_source_l00163}00163\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_generic_syntax_tree_8cs_source_l00164}00164\ \ \ \ \ \ \ \ \ \ \ \ \ \_\ =\ stringWalker.\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_utility_1_1_string_walker_a1533f73189c0e55efe7da8278c1d32df}{ReadCharacter}}();}
+\DoxyCodeLine{\Hypertarget{_generic_syntax_tree_8cs_source_l00165}00165\ }
+\DoxyCodeLine{\Hypertarget{_generic_syntax_tree_8cs_source_l00166}00166\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (stringWalker.\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_utility_1_1_string_walker_a292d4713572d97ec249ccc383e1c2fb3}{PeekForSubstring}}(\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_generic_lexer_1_1_syntax_actors_1_1_generic_syntax_tree_a6d15501f51284e18d9ecbd93b136d2f7}{GenericLanguageDefinition}}.StringEnd))}
+\DoxyCodeLine{\Hypertarget{_generic_syntax_tree_8cs_source_l00167}00167\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{_generic_syntax_tree_8cs_source_l00168}00168\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_generic_syntax_tree_8cs_source_l00169}00169\ }
+\DoxyCodeLine{\Hypertarget{_generic_syntax_tree_8cs_source_l00170}00170\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (stringWalker.\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_utility_1_1_string_walker_a7c895ef73ed57523b1a78779cc0e2528}{IsEof}})}
+\DoxyCodeLine{\Hypertarget{_generic_syntax_tree_8cs_source_l00171}00171\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_generic_syntax_tree_8cs_source_l00172}00172\ \ \ \ \ \ \ \ \ \ \ \ \ diagnosticBag.\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_diagnostic_bag_a356b5e28089638e9367941a0bd9873ce}{ReportEndOfFileUnexpected}}(\textcolor{keyword}{new}\ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_lexers_1_1_models_a1ffd1a7706dfd364560b76d47467812f}{TextEditorTextSpan}}(}
+\DoxyCodeLine{\Hypertarget{_generic_syntax_tree_8cs_source_l00173}00173\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ startingPositionIndex,}
+\DoxyCodeLine{\Hypertarget{_generic_syntax_tree_8cs_source_l00174}00174\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ stringWalker.\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_utility_1_1_string_walker_a192423c8188b55e1e16376095b7dfc62}{PositionIndex}},}
+\DoxyCodeLine{\Hypertarget{_generic_syntax_tree_8cs_source_l00175}00175\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (\textcolor{keywordtype}{byte})\mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_generic_lexer_1_1_decoration_a7f6068f17a9d3ed70d4b8eefd0fcbcf0}{GenericDecorationKind}}.Error,}
+\DoxyCodeLine{\Hypertarget{_generic_syntax_tree_8cs_source_l00176}00176\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ stringWalker.\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_utility_1_1_string_walker_abf00a8613dfc137bea3c366e277fbde4}{ResourceUri}},}
+\DoxyCodeLine{\Hypertarget{_generic_syntax_tree_8cs_source_l00177}00177\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ stringWalker.\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_utility_1_1_string_walker_a35f8247f3eea6c6937856215770af815}{SourceText}}));}
+\DoxyCodeLine{\Hypertarget{_generic_syntax_tree_8cs_source_l00178}00178\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_generic_syntax_tree_8cs_source_l00179}00179\ }
+\DoxyCodeLine{\Hypertarget{_generic_syntax_tree_8cs_source_l00180}00180\ \ \ \ \ \ \ \ \ var\ stringTextEditorTextSpan\ =\ \textcolor{keyword}{new}\ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_lexers_1_1_models_a1ffd1a7706dfd364560b76d47467812f}{TextEditorTextSpan}}(}
+\DoxyCodeLine{\Hypertarget{_generic_syntax_tree_8cs_source_l00181}00181\ \ \ \ \ \ \ \ \ \ \ \ \ startingPositionIndex,}
+\DoxyCodeLine{\Hypertarget{_generic_syntax_tree_8cs_source_l00182}00182\ \ \ \ \ \ \ \ \ \ \ \ \ stringWalker.\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_utility_1_1_string_walker_a192423c8188b55e1e16376095b7dfc62}{PositionIndex}}\ +\ 1,}
+\DoxyCodeLine{\Hypertarget{_generic_syntax_tree_8cs_source_l00183}00183\ \ \ \ \ \ \ \ \ \ \ \ \ (\textcolor{keywordtype}{byte})\mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_generic_lexer_1_1_decoration_a7f6068f17a9d3ed70d4b8eefd0fcbcf0}{GenericDecorationKind}}.StringLiteral,}
+\DoxyCodeLine{\Hypertarget{_generic_syntax_tree_8cs_source_l00184}00184\ \ \ \ \ \ \ \ \ \ \ \ \ stringWalker.\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_utility_1_1_string_walker_abf00a8613dfc137bea3c366e277fbde4}{ResourceUri}},}
+\DoxyCodeLine{\Hypertarget{_generic_syntax_tree_8cs_source_l00185}00185\ \ \ \ \ \ \ \ \ \ \ \ \ stringWalker.\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_utility_1_1_string_walker_a35f8247f3eea6c6937856215770af815}{SourceText}});}
+\DoxyCodeLine{\Hypertarget{_generic_syntax_tree_8cs_source_l00186}00186\ }
+\DoxyCodeLine{\Hypertarget{_generic_syntax_tree_8cs_source_l00187}00187\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{new}\ \mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_generic_lexer_1_1_syntax_1035a5ed28b484d1d6a580469ec87752}{GenericStringSyntax}}(stringTextEditorTextSpan);}
+\DoxyCodeLine{\Hypertarget{_generic_syntax_tree_8cs_source_l00188}00188\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_generic_syntax_tree_8cs_source_l00189}00189\ }
+\DoxyCodeLine{\Hypertarget{_generic_syntax_tree_8cs_source_l00194}00194\ \ \ \ \ \textcolor{keyword}{private}\ \textcolor{keywordtype}{bool}\ TryParseKeyword(}
+\DoxyCodeLine{\Hypertarget{_generic_syntax_tree_8cs_source_l00195}00195\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_utility_1_1_string_walker}{StringWalker}}\ stringWalker,}
+\DoxyCodeLine{\Hypertarget{_generic_syntax_tree_8cs_source_l00196}00196\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_diagnostic_bag}{DiagnosticBag}}\ diagnosticBag,}
+\DoxyCodeLine{\Hypertarget{_generic_syntax_tree_8cs_source_l00197}00197\ \ \ \ \ \ \ \ \ out\ \mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_generic_lexer_1_1_syntax_37b8743f21f7ae513b2e43cbc33e7150}{GenericKeywordSyntax}}?\ genericKeywordSyntax)}
+\DoxyCodeLine{\Hypertarget{_generic_syntax_tree_8cs_source_l00198}00198\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_generic_syntax_tree_8cs_source_l00199}00199\ \ \ \ \ \ \ \ \ var\ startingPositionIndex\ =\ stringWalker.\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_utility_1_1_string_walker_a192423c8188b55e1e16376095b7dfc62}{PositionIndex}};}
+\DoxyCodeLine{\Hypertarget{_generic_syntax_tree_8cs_source_l00200}00200\ }
+\DoxyCodeLine{\Hypertarget{_generic_syntax_tree_8cs_source_l00201}00201\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{while}\ (!stringWalker.\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_utility_1_1_string_walker_a7c895ef73ed57523b1a78779cc0e2528}{IsEof}})}
+\DoxyCodeLine{\Hypertarget{_generic_syntax_tree_8cs_source_l00202}00202\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_generic_syntax_tree_8cs_source_l00203}00203\ \ \ \ \ \ \ \ \ \ \ \ \ var\ backtrackedToCharacter\ =\ stringWalker.\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_utility_1_1_string_walker_af22e0b0f2c09f4aa85785b519a13f95f}{BacktrackCharacter}}();}
+\DoxyCodeLine{\Hypertarget{_generic_syntax_tree_8cs_source_l00204}00204\ }
+\DoxyCodeLine{\Hypertarget{_generic_syntax_tree_8cs_source_l00205}00205\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (backtrackedToCharacter\ ==\ ParserFacts.END\_OF\_FILE)}
+\DoxyCodeLine{\Hypertarget{_generic_syntax_tree_8cs_source_l00206}00206\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{_generic_syntax_tree_8cs_source_l00207}00207\ }
+\DoxyCodeLine{\Hypertarget{_generic_syntax_tree_8cs_source_l00208}00208\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (WhitespaceFacts.ALL\_LIST.Contains(stringWalker.\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_utility_1_1_string_walker_abbf32c2054872ff9d6dda8e6697c46ce}{CurrentCharacter}})\ ||}
+\DoxyCodeLine{\Hypertarget{_generic_syntax_tree_8cs_source_l00209}00209\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ KeyboardKeyFacts.PunctuationCharacters.AllList.Contains(stringWalker.\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_utility_1_1_string_walker_abbf32c2054872ff9d6dda8e6697c46ce}{CurrentCharacter}}))}
+\DoxyCodeLine{\Hypertarget{_generic_syntax_tree_8cs_source_l00210}00210\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_generic_syntax_tree_8cs_source_l00211}00211\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \_\ =\ stringWalker.\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_utility_1_1_string_walker_a1533f73189c0e55efe7da8278c1d32df}{ReadCharacter}}();}
+\DoxyCodeLine{\Hypertarget{_generic_syntax_tree_8cs_source_l00212}00212\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{_generic_syntax_tree_8cs_source_l00213}00213\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_generic_syntax_tree_8cs_source_l00214}00214\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_generic_syntax_tree_8cs_source_l00215}00215\ }
+\DoxyCodeLine{\Hypertarget{_generic_syntax_tree_8cs_source_l00216}00216\ \ \ \ \ \ \ \ \ var\ wordTuple\ =\ stringWalker.\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_utility_1_1_string_walker_a2838308b224f8503d8fcf8d286727b89}{ReadWordTuple}}(KeyboardKeyFacts.PunctuationCharacters.AllList);}
+\DoxyCodeLine{\Hypertarget{_generic_syntax_tree_8cs_source_l00217}00217\ }
+\DoxyCodeLine{\Hypertarget{_generic_syntax_tree_8cs_source_l00218}00218\ \ \ \ \ \ \ \ \ var\ foundKeyword\ =\ \mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_generic_lexer_1_1_generic_language_definition}{GenericLanguageDefinition}}.\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_generic_lexer_1_1_generic_language_definition_a91bc8cbae6ba1770355eb24f7153cb0c}{KeywordsList}}.FirstOrDefault(}
+\DoxyCodeLine{\Hypertarget{_generic_syntax_tree_8cs_source_l00219}00219\ \ \ \ \ \ \ \ \ \ \ \ \ keyword\ =>\ keyword\ ==\ wordTuple.value);}
+\DoxyCodeLine{\Hypertarget{_generic_syntax_tree_8cs_source_l00220}00220\ }
+\DoxyCodeLine{\Hypertarget{_generic_syntax_tree_8cs_source_l00221}00221\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (foundKeyword\ is\ not\ \textcolor{keyword}{null})}
+\DoxyCodeLine{\Hypertarget{_generic_syntax_tree_8cs_source_l00222}00222\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_generic_syntax_tree_8cs_source_l00223}00223\ \ \ \ \ \ \ \ \ \ \ \ \ stringWalker.\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_utility_1_1_string_walker_af22e0b0f2c09f4aa85785b519a13f95f}{BacktrackCharacter}}();}
+\DoxyCodeLine{\Hypertarget{_generic_syntax_tree_8cs_source_l00224}00224\ }
+\DoxyCodeLine{\Hypertarget{_generic_syntax_tree_8cs_source_l00225}00225\ \ \ \ \ \ \ \ \ \ \ \ \ genericKeywordSyntax\ =\ \textcolor{keyword}{new}\ \mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_generic_lexer_1_1_syntax_37b8743f21f7ae513b2e43cbc33e7150}{GenericKeywordSyntax}}(wordTuple.textSpan\ with}
+\DoxyCodeLine{\Hypertarget{_generic_syntax_tree_8cs_source_l00226}00226\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_generic_syntax_tree_8cs_source_l00227}00227\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ DecorationByte\ =\ (byte)GenericDecorationKind.Keyword}
+\DoxyCodeLine{\Hypertarget{_generic_syntax_tree_8cs_source_l00228}00228\ \ \ \ \ \ \ \ \ \ \ \ \ \});}
+\DoxyCodeLine{\Hypertarget{_generic_syntax_tree_8cs_source_l00229}00229\ }
+\DoxyCodeLine{\Hypertarget{_generic_syntax_tree_8cs_source_l00230}00230\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{true};}
+\DoxyCodeLine{\Hypertarget{_generic_syntax_tree_8cs_source_l00231}00231\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_generic_syntax_tree_8cs_source_l00232}00232\ }
+\DoxyCodeLine{\Hypertarget{_generic_syntax_tree_8cs_source_l00233}00233\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (wordTuple.textSpan.StartingIndexInclusive\ !=\ -\/1)}
+\DoxyCodeLine{\Hypertarget{_generic_syntax_tree_8cs_source_l00234}00234\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_generic_syntax_tree_8cs_source_l00235}00235\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ backtrack\ to\ the\ original\ starting\ position}}
+\DoxyCodeLine{\Hypertarget{_generic_syntax_tree_8cs_source_l00236}00236\ \ \ \ \ \ \ \ \ \ \ \ \ stringWalker.\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_utility_1_1_string_walker_a56cf417b76ed47752797a36ef2499c7b}{BacktrackRange}}(stringWalker.\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_utility_1_1_string_walker_a192423c8188b55e1e16376095b7dfc62}{PositionIndex}}\ -\/\ startingPositionIndex);}
+\DoxyCodeLine{\Hypertarget{_generic_syntax_tree_8cs_source_l00237}00237\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_generic_syntax_tree_8cs_source_l00238}00238\ }
+\DoxyCodeLine{\Hypertarget{_generic_syntax_tree_8cs_source_l00239}00239\ \ \ \ \ \ \ \ \ genericKeywordSyntax\ =\ \textcolor{keyword}{null};}
+\DoxyCodeLine{\Hypertarget{_generic_syntax_tree_8cs_source_l00240}00240\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};}
+\DoxyCodeLine{\Hypertarget{_generic_syntax_tree_8cs_source_l00241}00241\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_generic_syntax_tree_8cs_source_l00242}00242\ }
+\DoxyCodeLine{\Hypertarget{_generic_syntax_tree_8cs_source_l00243}00243\ \ \ \ \ \textcolor{keyword}{private}\ \textcolor{keywordtype}{bool}\ TryParseFunctionIdentifier(}
+\DoxyCodeLine{\Hypertarget{_generic_syntax_tree_8cs_source_l00244}00244\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_utility_1_1_string_walker}{StringWalker}}\ stringWalker,}
+\DoxyCodeLine{\Hypertarget{_generic_syntax_tree_8cs_source_l00245}00245\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_diagnostic_bag}{DiagnosticBag}}\ diagnosticBag,}
+\DoxyCodeLine{\Hypertarget{_generic_syntax_tree_8cs_source_l00246}00246\ \ \ \ \ \ \ \ \ out\ \mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_generic_lexer_1_1_syntax_71be4451d6cff5f09b93dab57e613570}{GenericFunctionSyntax}}?\ genericFunctionSyntax)}
+\DoxyCodeLine{\Hypertarget{_generic_syntax_tree_8cs_source_l00247}00247\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_generic_syntax_tree_8cs_source_l00248}00248\ \ \ \ \ \ \ \ \ var\ rememberPositionIndex\ =\ stringWalker.\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_utility_1_1_string_walker_a192423c8188b55e1e16376095b7dfc62}{PositionIndex}};}
+\DoxyCodeLine{\Hypertarget{_generic_syntax_tree_8cs_source_l00249}00249\ }
+\DoxyCodeLine{\Hypertarget{_generic_syntax_tree_8cs_source_l00250}00250\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ startedReadingWord\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{\Hypertarget{_generic_syntax_tree_8cs_source_l00251}00251\ }
+\DoxyCodeLine{\Hypertarget{_generic_syntax_tree_8cs_source_l00252}00252\ \ \ \ \ \ \ \ \ var\ wordBuilder\ =\ \textcolor{keyword}{new}\ StringBuilder();}
+\DoxyCodeLine{\Hypertarget{_generic_syntax_tree_8cs_source_l00253}00253\ }
+\DoxyCodeLine{\Hypertarget{_generic_syntax_tree_8cs_source_l00254}00254\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Enter\ here\ at\ '('}}
+\DoxyCodeLine{\Hypertarget{_generic_syntax_tree_8cs_source_l00255}00255\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{while}\ (!stringWalker.\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_utility_1_1_string_walker_a7c895ef73ed57523b1a78779cc0e2528}{IsEof}})}
+\DoxyCodeLine{\Hypertarget{_generic_syntax_tree_8cs_source_l00256}00256\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_generic_syntax_tree_8cs_source_l00257}00257\ \ \ \ \ \ \ \ \ \ \ \ \ var\ backtrackedToCharacter\ =\ stringWalker.\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_utility_1_1_string_walker_af22e0b0f2c09f4aa85785b519a13f95f}{BacktrackCharacter}}();}
+\DoxyCodeLine{\Hypertarget{_generic_syntax_tree_8cs_source_l00258}00258\ }
+\DoxyCodeLine{\Hypertarget{_generic_syntax_tree_8cs_source_l00259}00259\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (backtrackedToCharacter\ ==\ ParserFacts.END\_OF\_FILE)}
+\DoxyCodeLine{\Hypertarget{_generic_syntax_tree_8cs_source_l00260}00260\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{_generic_syntax_tree_8cs_source_l00261}00261\ }
+\DoxyCodeLine{\Hypertarget{_generic_syntax_tree_8cs_source_l00262}00262\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (WhitespaceFacts.ALL\_LIST.Contains(stringWalker.\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_utility_1_1_string_walker_abbf32c2054872ff9d6dda8e6697c46ce}{CurrentCharacter}}))}
+\DoxyCodeLine{\Hypertarget{_generic_syntax_tree_8cs_source_l00263}00263\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_generic_syntax_tree_8cs_source_l00264}00264\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (startedReadingWord)}
+\DoxyCodeLine{\Hypertarget{_generic_syntax_tree_8cs_source_l00265}00265\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{_generic_syntax_tree_8cs_source_l00266}00266\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_generic_syntax_tree_8cs_source_l00267}00267\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ (KeyboardKeyFacts.IsPunctuationCharacter(stringWalker.\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_utility_1_1_string_walker_abbf32c2054872ff9d6dda8e6697c46ce}{CurrentCharacter}})\ ||}
+\DoxyCodeLine{\Hypertarget{_generic_syntax_tree_8cs_source_l00268}00268\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ stringWalker.\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_utility_1_1_string_walker_a292d4713572d97ec249ccc383e1c2fb3}{PeekForSubstring}}(\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_generic_lexer_1_1_generic_language_definition}{GenericLanguageDefinition}}.\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_generic_lexer_1_1_generic_language_definition_a5a763c17663ba079fae4b5273a29f13b}{MemberAccessToken}})\ ||}
+\DoxyCodeLine{\Hypertarget{_generic_syntax_tree_8cs_source_l00269}00269\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ stringWalker.\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_utility_1_1_string_walker_a292d4713572d97ec249ccc383e1c2fb3}{PeekForSubstring}}(\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_generic_lexer_1_1_generic_language_definition}{GenericLanguageDefinition}}.\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_generic_lexer_1_1_generic_language_definition_a264920e5714b6fa2462c3d0c7fc01eb7}{FunctionInvocationEnd}}))}
+\DoxyCodeLine{\Hypertarget{_generic_syntax_tree_8cs_source_l00270}00270\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_generic_syntax_tree_8cs_source_l00271}00271\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{_generic_syntax_tree_8cs_source_l00272}00272\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_generic_syntax_tree_8cs_source_l00273}00273\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{\Hypertarget{_generic_syntax_tree_8cs_source_l00274}00274\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_generic_syntax_tree_8cs_source_l00275}00275\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ startedReadingWord\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{\Hypertarget{_generic_syntax_tree_8cs_source_l00276}00276\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ wordBuilder.Insert(0,\ stringWalker.\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_utility_1_1_string_walker_abbf32c2054872ff9d6dda8e6697c46ce}{CurrentCharacter}});}
+\DoxyCodeLine{\Hypertarget{_generic_syntax_tree_8cs_source_l00277}00277\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_generic_syntax_tree_8cs_source_l00278}00278\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_generic_syntax_tree_8cs_source_l00279}00279\ }
+\DoxyCodeLine{\Hypertarget{_generic_syntax_tree_8cs_source_l00280}00280\ \ \ \ \ \ \ \ \ var\ word\ =\ wordBuilder.ToString();}
+\DoxyCodeLine{\Hypertarget{_generic_syntax_tree_8cs_source_l00281}00281\ }
+\DoxyCodeLine{\Hypertarget{_generic_syntax_tree_8cs_source_l00282}00282\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (word.Length\ ==\ 0\ ||\ \textcolor{keywordtype}{char}.IsDigit(word[0]))}
+\DoxyCodeLine{\Hypertarget{_generic_syntax_tree_8cs_source_l00283}00283\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_generic_syntax_tree_8cs_source_l00284}00284\ \ \ \ \ \ \ \ \ \ \ \ \ genericFunctionSyntax\ =\ \textcolor{keyword}{null};}
+\DoxyCodeLine{\Hypertarget{_generic_syntax_tree_8cs_source_l00285}00285\ }
+\DoxyCodeLine{\Hypertarget{_generic_syntax_tree_8cs_source_l00286}00286\ \ \ \ \ \ \ \ \ \ \ \ \ \_\ =\ stringWalker.\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_utility_1_1_string_walker_a1c60b2612ff22cdb9e04d858d2d454ff}{ReadRange}}(rememberPositionIndex\ -\/\ stringWalker.\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_utility_1_1_string_walker_a192423c8188b55e1e16376095b7dfc62}{PositionIndex}});}
+\DoxyCodeLine{\Hypertarget{_generic_syntax_tree_8cs_source_l00287}00287\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};}
+\DoxyCodeLine{\Hypertarget{_generic_syntax_tree_8cs_source_l00288}00288\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_generic_syntax_tree_8cs_source_l00289}00289\ }
+\DoxyCodeLine{\Hypertarget{_generic_syntax_tree_8cs_source_l00290}00290\ \ \ \ \ \ \ \ \ genericFunctionSyntax\ =\ \textcolor{keyword}{new}\ GenericFunctionSyntax(}
+\DoxyCodeLine{\Hypertarget{_generic_syntax_tree_8cs_source_l00291}00291\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{new}\ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_lexers_1_1_models_a1ffd1a7706dfd364560b76d47467812f}{TextEditorTextSpan}}(}
+\DoxyCodeLine{\Hypertarget{_generic_syntax_tree_8cs_source_l00292}00292\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ stringWalker.\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_utility_1_1_string_walker_a192423c8188b55e1e16376095b7dfc62}{PositionIndex}}\ +\ 1,}
+\DoxyCodeLine{\Hypertarget{_generic_syntax_tree_8cs_source_l00293}00293\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ rememberPositionIndex,}
+\DoxyCodeLine{\Hypertarget{_generic_syntax_tree_8cs_source_l00294}00294\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (\textcolor{keywordtype}{byte})\mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_generic_lexer_1_1_decoration_a7f6068f17a9d3ed70d4b8eefd0fcbcf0}{GenericDecorationKind}}.Function,}
+\DoxyCodeLine{\Hypertarget{_generic_syntax_tree_8cs_source_l00295}00295\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ stringWalker.\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_utility_1_1_string_walker_abf00a8613dfc137bea3c366e277fbde4}{ResourceUri}},}
+\DoxyCodeLine{\Hypertarget{_generic_syntax_tree_8cs_source_l00296}00296\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ stringWalker.\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_utility_1_1_string_walker_a35f8247f3eea6c6937856215770af815}{SourceText}}));}
+\DoxyCodeLine{\Hypertarget{_generic_syntax_tree_8cs_source_l00297}00297\ }
+\DoxyCodeLine{\Hypertarget{_generic_syntax_tree_8cs_source_l00298}00298\ \ \ \ \ \ \ \ \ \_\ =\ stringWalker.\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_utility_1_1_string_walker_a1c60b2612ff22cdb9e04d858d2d454ff}{ReadRange}}(rememberPositionIndex\ -\/\ stringWalker.\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_utility_1_1_string_walker_a192423c8188b55e1e16376095b7dfc62}{PositionIndex}});}
+\DoxyCodeLine{\Hypertarget{_generic_syntax_tree_8cs_source_l00299}00299\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{true};}
+\DoxyCodeLine{\Hypertarget{_generic_syntax_tree_8cs_source_l00300}00300\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_generic_syntax_tree_8cs_source_l00301}00301\ }
+\DoxyCodeLine{\Hypertarget{_generic_syntax_tree_8cs_source_l00302}00302\ \ \ \ \ \textcolor{keyword}{private}\ GenericPreprocessorDirectiveSyntax\ ParsePreprocessorDirective(}
+\DoxyCodeLine{\Hypertarget{_generic_syntax_tree_8cs_source_l00303}00303\ \ \ \ \ \ \ \ \ StringWalker\ stringWalker,}
+\DoxyCodeLine{\Hypertarget{_generic_syntax_tree_8cs_source_l00304}00304\ \ \ \ \ \ \ \ \ DiagnosticBag\ diagnosticBag)}
+\DoxyCodeLine{\Hypertarget{_generic_syntax_tree_8cs_source_l00305}00305\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_generic_syntax_tree_8cs_source_l00306}00306\ \ \ \ \ \ \ \ \ var\ startingPositionIndex\ =\ stringWalker.\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_utility_1_1_string_walker_a192423c8188b55e1e16376095b7dfc62}{PositionIndex}};}
+\DoxyCodeLine{\Hypertarget{_generic_syntax_tree_8cs_source_l00307}00307\ }
+\DoxyCodeLine{\Hypertarget{_generic_syntax_tree_8cs_source_l00308}00308\ \ \ \ \ \ \ \ \ \_\ =\ stringWalker.\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_utility_1_1_string_walker_a1c60b2612ff22cdb9e04d858d2d454ff}{ReadRange}}(}
+\DoxyCodeLine{\Hypertarget{_generic_syntax_tree_8cs_source_l00309}00309\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_generic_lexer_1_1_syntax_actors_1_1_generic_syntax_tree_a6d15501f51284e18d9ecbd93b136d2f7}{GenericLanguageDefinition}}.PreprocessorDefinition.TransitionSubstring.Length);}
+\DoxyCodeLine{\Hypertarget{_generic_syntax_tree_8cs_source_l00310}00310\ }
+\DoxyCodeLine{\Hypertarget{_generic_syntax_tree_8cs_source_l00311}00311\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{while}\ (!stringWalker.\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_utility_1_1_string_walker_a7c895ef73ed57523b1a78779cc0e2528}{IsEof}})}
+\DoxyCodeLine{\Hypertarget{_generic_syntax_tree_8cs_source_l00312}00312\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_generic_syntax_tree_8cs_source_l00313}00313\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (WhitespaceFacts.ALL\_LIST.Contains(stringWalker.\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_utility_1_1_string_walker_abbf32c2054872ff9d6dda8e6697c46ce}{CurrentCharacter}}))}
+\DoxyCodeLine{\Hypertarget{_generic_syntax_tree_8cs_source_l00314}00314\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_generic_syntax_tree_8cs_source_l00315}00315\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \_\ =\ stringWalker.\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_utility_1_1_string_walker_a1533f73189c0e55efe7da8278c1d32df}{ReadCharacter}}();}
+\DoxyCodeLine{\Hypertarget{_generic_syntax_tree_8cs_source_l00316}00316\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{continue};}
+\DoxyCodeLine{\Hypertarget{_generic_syntax_tree_8cs_source_l00317}00317\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_generic_syntax_tree_8cs_source_l00318}00318\ }
+\DoxyCodeLine{\Hypertarget{_generic_syntax_tree_8cs_source_l00319}00319\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{_generic_syntax_tree_8cs_source_l00320}00320\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_generic_syntax_tree_8cs_source_l00321}00321\ }
+\DoxyCodeLine{\Hypertarget{_generic_syntax_tree_8cs_source_l00322}00322\ \ \ \ \ \ \ \ \ var\ identifierBuilder\ =\ \textcolor{keyword}{new}\ StringBuilder();}
+\DoxyCodeLine{\Hypertarget{_generic_syntax_tree_8cs_source_l00323}00323\ }
+\DoxyCodeLine{\Hypertarget{_generic_syntax_tree_8cs_source_l00324}00324\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{while}\ (!stringWalker.\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_utility_1_1_string_walker_a7c895ef73ed57523b1a78779cc0e2528}{IsEof}})}
+\DoxyCodeLine{\Hypertarget{_generic_syntax_tree_8cs_source_l00325}00325\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_generic_syntax_tree_8cs_source_l00326}00326\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (WhitespaceFacts.ALL\_LIST.Contains(stringWalker.\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_utility_1_1_string_walker_abbf32c2054872ff9d6dda8e6697c46ce}{CurrentCharacter}}))}
+\DoxyCodeLine{\Hypertarget{_generic_syntax_tree_8cs_source_l00327}00327\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{_generic_syntax_tree_8cs_source_l00328}00328\ }
+\DoxyCodeLine{\Hypertarget{_generic_syntax_tree_8cs_source_l00329}00329\ \ \ \ \ \ \ \ \ \ \ \ \ identifierBuilder.Append(stringWalker.\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_utility_1_1_string_walker_abbf32c2054872ff9d6dda8e6697c46ce}{CurrentCharacter}});}
+\DoxyCodeLine{\Hypertarget{_generic_syntax_tree_8cs_source_l00330}00330\ }
+\DoxyCodeLine{\Hypertarget{_generic_syntax_tree_8cs_source_l00331}00331\ \ \ \ \ \ \ \ \ \ \ \ \ \_\ =\ stringWalker.\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_utility_1_1_string_walker_a1533f73189c0e55efe7da8278c1d32df}{ReadCharacter}}();}
+\DoxyCodeLine{\Hypertarget{_generic_syntax_tree_8cs_source_l00332}00332\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_generic_syntax_tree_8cs_source_l00333}00333\ }
+\DoxyCodeLine{\Hypertarget{_generic_syntax_tree_8cs_source_l00334}00334\ \ \ \ \ \ \ \ \ var\ textSpan\ =\ \textcolor{keyword}{new}\ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_lexers_1_1_models_a1ffd1a7706dfd364560b76d47467812f}{TextEditorTextSpan}}(}
+\DoxyCodeLine{\Hypertarget{_generic_syntax_tree_8cs_source_l00335}00335\ \ \ \ \ \ \ \ \ \ \ \ \ startingPositionIndex,}
+\DoxyCodeLine{\Hypertarget{_generic_syntax_tree_8cs_source_l00336}00336\ \ \ \ \ \ \ \ \ \ \ \ \ stringWalker.\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_utility_1_1_string_walker_a192423c8188b55e1e16376095b7dfc62}{PositionIndex}},}
+\DoxyCodeLine{\Hypertarget{_generic_syntax_tree_8cs_source_l00337}00337\ \ \ \ \ \ \ \ \ \ \ \ \ (\textcolor{keywordtype}{byte})\mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_generic_lexer_1_1_decoration_a7f6068f17a9d3ed70d4b8eefd0fcbcf0}{GenericDecorationKind}}.PreprocessorDirective,}
+\DoxyCodeLine{\Hypertarget{_generic_syntax_tree_8cs_source_l00338}00338\ \ \ \ \ \ \ \ \ \ \ \ \ stringWalker.\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_utility_1_1_string_walker_abf00a8613dfc137bea3c366e277fbde4}{ResourceUri}},}
+\DoxyCodeLine{\Hypertarget{_generic_syntax_tree_8cs_source_l00339}00339\ \ \ \ \ \ \ \ \ \ \ \ \ stringWalker.\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_utility_1_1_string_walker_a35f8247f3eea6c6937856215770af815}{SourceText}});}
+\DoxyCodeLine{\Hypertarget{_generic_syntax_tree_8cs_source_l00340}00340\ }
+\DoxyCodeLine{\Hypertarget{_generic_syntax_tree_8cs_source_l00341}00341\ \ \ \ \ \ \ \ \ var\ success\ =\ TryParsePreprocessorDirectiveDeliminationExtendedSyntaxes(}
+\DoxyCodeLine{\Hypertarget{_generic_syntax_tree_8cs_source_l00342}00342\ \ \ \ \ \ \ \ \ \ \ \ \ stringWalker,}
+\DoxyCodeLine{\Hypertarget{_generic_syntax_tree_8cs_source_l00343}00343\ \ \ \ \ \ \ \ \ \ \ \ \ diagnosticBag,}
+\DoxyCodeLine{\Hypertarget{_generic_syntax_tree_8cs_source_l00344}00344\ \ \ \ \ \ \ \ \ \ \ \ \ out\ var\ genericSyntax);}
+\DoxyCodeLine{\Hypertarget{_generic_syntax_tree_8cs_source_l00345}00345\ }
+\DoxyCodeLine{\Hypertarget{_generic_syntax_tree_8cs_source_l00346}00346\ \ \ \ \ \ \ \ \ var\ children\ =\ success\ \&\&\ genericSyntax\ is\ not\ \textcolor{keyword}{null}}
+\DoxyCodeLine{\Hypertarget{_generic_syntax_tree_8cs_source_l00347}00347\ \ \ \ \ \ \ \ \ \ \ \ \ ?\ \textcolor{keyword}{new}[]\ \{\ genericSyntax\ \}.ToImmutableArray()}
+\DoxyCodeLine{\Hypertarget{_generic_syntax_tree_8cs_source_l00348}00348\ \ \ \ \ \ \ \ \ \ \ \ \ :\ ImmutableArray<IGenericSyntax>.Empty;}
+\DoxyCodeLine{\Hypertarget{_generic_syntax_tree_8cs_source_l00349}00349\ }
+\DoxyCodeLine{\Hypertarget{_generic_syntax_tree_8cs_source_l00350}00350\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{new}\ GenericPreprocessorDirectiveSyntax(textSpan,\ children);}
+\DoxyCodeLine{\Hypertarget{_generic_syntax_tree_8cs_source_l00351}00351\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_generic_syntax_tree_8cs_source_l00352}00352\ }
+\DoxyCodeLine{\Hypertarget{_generic_syntax_tree_8cs_source_l00353}00353\ \ \ \ \ \textcolor{keyword}{private}\ \textcolor{keywordtype}{bool}\ TryParsePreprocessorDirectiveDeliminationExtendedSyntaxes(}
+\DoxyCodeLine{\Hypertarget{_generic_syntax_tree_8cs_source_l00354}00354\ \ \ \ \ \ \ \ \ StringWalker\ stringWalker,}
+\DoxyCodeLine{\Hypertarget{_generic_syntax_tree_8cs_source_l00355}00355\ \ \ \ \ \ \ \ \ DiagnosticBag\ diagnosticBag,}
+\DoxyCodeLine{\Hypertarget{_generic_syntax_tree_8cs_source_l00356}00356\ \ \ \ \ \ \ \ \ out\ IGenericSyntax?\ genericSyntax)}
+\DoxyCodeLine{\Hypertarget{_generic_syntax_tree_8cs_source_l00357}00357\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_generic_syntax_tree_8cs_source_l00358}00358\ \ \ \ \ \ \ \ \ var\ entryPositionIndex\ =\ stringWalker.\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_utility_1_1_string_walker_a192423c8188b55e1e16376095b7dfc62}{PositionIndex}};}
+\DoxyCodeLine{\Hypertarget{_generic_syntax_tree_8cs_source_l00359}00359\ }
+\DoxyCodeLine{\Hypertarget{_generic_syntax_tree_8cs_source_l00360}00360\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{while}\ (!stringWalker.\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_utility_1_1_string_walker_a7c895ef73ed57523b1a78779cc0e2528}{IsEof}})}
+\DoxyCodeLine{\Hypertarget{_generic_syntax_tree_8cs_source_l00361}00361\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_generic_syntax_tree_8cs_source_l00362}00362\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (WhitespaceFacts.ALL\_LIST.Contains(stringWalker.\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_utility_1_1_string_walker_abbf32c2054872ff9d6dda8e6697c46ce}{CurrentCharacter}}))}
+\DoxyCodeLine{\Hypertarget{_generic_syntax_tree_8cs_source_l00363}00363\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_generic_syntax_tree_8cs_source_l00364}00364\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \_\ =\ stringWalker.\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_utility_1_1_string_walker_a1533f73189c0e55efe7da8278c1d32df}{ReadCharacter}}();}
+\DoxyCodeLine{\Hypertarget{_generic_syntax_tree_8cs_source_l00365}00365\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{continue};}
+\DoxyCodeLine{\Hypertarget{_generic_syntax_tree_8cs_source_l00366}00366\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_generic_syntax_tree_8cs_source_l00367}00367\ }
+\DoxyCodeLine{\Hypertarget{_generic_syntax_tree_8cs_source_l00368}00368\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{_generic_syntax_tree_8cs_source_l00369}00369\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_generic_syntax_tree_8cs_source_l00370}00370\ }
+\DoxyCodeLine{\Hypertarget{_generic_syntax_tree_8cs_source_l00371}00371\ \ \ \ \ \ \ \ \ DeliminationExtendedSyntaxDefinition?\ matchedDeliminationExtendedSyntax\ =\ \textcolor{keyword}{null};}
+\DoxyCodeLine{\Hypertarget{_generic_syntax_tree_8cs_source_l00372}00372\ }
+\DoxyCodeLine{\Hypertarget{_generic_syntax_tree_8cs_source_l00373}00373\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{foreach}\ (var\ deliminationExtendedSyntax\ \textcolor{keywordflow}{in}\ \mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_generic_lexer_1_1_syntax_actors_1_1_generic_syntax_tree_a6d15501f51284e18d9ecbd93b136d2f7}{GenericLanguageDefinition}}.PreprocessorDefinition.DeliminationExtendedSyntaxList)}
+\DoxyCodeLine{\Hypertarget{_generic_syntax_tree_8cs_source_l00374}00374\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_generic_syntax_tree_8cs_source_l00375}00375\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (stringWalker.\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_utility_1_1_string_walker_a292d4713572d97ec249ccc383e1c2fb3}{PeekForSubstring}}(deliminationExtendedSyntax.SyntaxStart))}
+\DoxyCodeLine{\Hypertarget{_generic_syntax_tree_8cs_source_l00376}00376\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_generic_syntax_tree_8cs_source_l00377}00377\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ matchedDeliminationExtendedSyntax\ =\ deliminationExtendedSyntax;}
+\DoxyCodeLine{\Hypertarget{_generic_syntax_tree_8cs_source_l00378}00378\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{_generic_syntax_tree_8cs_source_l00379}00379\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_generic_syntax_tree_8cs_source_l00380}00380\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_generic_syntax_tree_8cs_source_l00381}00381\ }
+\DoxyCodeLine{\Hypertarget{_generic_syntax_tree_8cs_source_l00382}00382\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (matchedDeliminationExtendedSyntax\ is\ not\ \textcolor{keyword}{null})}
+\DoxyCodeLine{\Hypertarget{_generic_syntax_tree_8cs_source_l00383}00383\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_generic_syntax_tree_8cs_source_l00384}00384\ \ \ \ \ \ \ \ \ \ \ \ \ var\ deliminationExtendedSyntaxStartingInclusiveIndex\ =\ stringWalker.\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_utility_1_1_string_walker_a192423c8188b55e1e16376095b7dfc62}{PositionIndex}};}
+\DoxyCodeLine{\Hypertarget{_generic_syntax_tree_8cs_source_l00385}00385\ \ \ \ \ \ \ \ \ \ \ \ \ var\ deliminationExtendedSyntaxBuilder\ =\ \textcolor{keyword}{new}\ StringBuilder();}
+\DoxyCodeLine{\Hypertarget{_generic_syntax_tree_8cs_source_l00386}00386\ }
+\DoxyCodeLine{\Hypertarget{_generic_syntax_tree_8cs_source_l00387}00387\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{while}\ (!stringWalker.\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_utility_1_1_string_walker_a7c895ef73ed57523b1a78779cc0e2528}{IsEof}})}
+\DoxyCodeLine{\Hypertarget{_generic_syntax_tree_8cs_source_l00388}00388\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_generic_syntax_tree_8cs_source_l00389}00389\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (stringWalker.\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_utility_1_1_string_walker_a292d4713572d97ec249ccc383e1c2fb3}{PeekForSubstring}}(matchedDeliminationExtendedSyntax.\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_generic_lexer_1_1_delimin4227f7f6d403839b2744751702436ac8_a9666f3ef3df72443c43213c0f35ce1dd}{SyntaxEnd}}))}
+\DoxyCodeLine{\Hypertarget{_generic_syntax_tree_8cs_source_l00390}00390\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_generic_syntax_tree_8cs_source_l00391}00391\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \_\ =\ stringWalker.\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_utility_1_1_string_walker_a1533f73189c0e55efe7da8278c1d32df}{ReadCharacter}}();}
+\DoxyCodeLine{\Hypertarget{_generic_syntax_tree_8cs_source_l00392}00392\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{_generic_syntax_tree_8cs_source_l00393}00393\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_generic_syntax_tree_8cs_source_l00394}00394\ }
+\DoxyCodeLine{\Hypertarget{_generic_syntax_tree_8cs_source_l00395}00395\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ deliminationExtendedSyntaxBuilder.Append(stringWalker.\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_utility_1_1_string_walker_abbf32c2054872ff9d6dda8e6697c46ce}{CurrentCharacter}});}
+\DoxyCodeLine{\Hypertarget{_generic_syntax_tree_8cs_source_l00396}00396\ }
+\DoxyCodeLine{\Hypertarget{_generic_syntax_tree_8cs_source_l00397}00397\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \_\ =\ stringWalker.\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_utility_1_1_string_walker_a1533f73189c0e55efe7da8278c1d32df}{ReadCharacter}}();}
+\DoxyCodeLine{\Hypertarget{_generic_syntax_tree_8cs_source_l00398}00398\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_generic_syntax_tree_8cs_source_l00399}00399\ }
+\DoxyCodeLine{\Hypertarget{_generic_syntax_tree_8cs_source_l00400}00400\ \ \ \ \ \ \ \ \ \ \ \ \ var\ textSpan\ =\ \textcolor{keyword}{new}\ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_lexers_1_1_models_a1ffd1a7706dfd364560b76d47467812f}{TextEditorTextSpan}}(}
+\DoxyCodeLine{\Hypertarget{_generic_syntax_tree_8cs_source_l00401}00401\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ deliminationExtendedSyntaxStartingInclusiveIndex,}
+\DoxyCodeLine{\Hypertarget{_generic_syntax_tree_8cs_source_l00402}00402\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ stringWalker.\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_utility_1_1_string_walker_a192423c8188b55e1e16376095b7dfc62}{PositionIndex}},}
+\DoxyCodeLine{\Hypertarget{_generic_syntax_tree_8cs_source_l00403}00403\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (\textcolor{keywordtype}{byte})matchedDeliminationExtendedSyntax.\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_generic_lexer_1_1_delimin4227f7f6d403839b2744751702436ac8_a5b0e83c9107c1d1037254baed5e5ca8a}{GenericDecorationKind}},}
+\DoxyCodeLine{\Hypertarget{_generic_syntax_tree_8cs_source_l00404}00404\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ stringWalker.\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_utility_1_1_string_walker_abf00a8613dfc137bea3c366e277fbde4}{ResourceUri}},}
+\DoxyCodeLine{\Hypertarget{_generic_syntax_tree_8cs_source_l00405}00405\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ stringWalker.\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_utility_1_1_string_walker_a35f8247f3eea6c6937856215770af815}{SourceText}});}
+\DoxyCodeLine{\Hypertarget{_generic_syntax_tree_8cs_source_l00406}00406\ }
+\DoxyCodeLine{\Hypertarget{_generic_syntax_tree_8cs_source_l00407}00407\ \ \ \ \ \ \ \ \ \ \ \ \ genericSyntax\ =\ \textcolor{keyword}{new}\ GenericDeliminationExtendedSyntax(textSpan);}
+\DoxyCodeLine{\Hypertarget{_generic_syntax_tree_8cs_source_l00408}00408\ }
+\DoxyCodeLine{\Hypertarget{_generic_syntax_tree_8cs_source_l00409}00409\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{true};}
+\DoxyCodeLine{\Hypertarget{_generic_syntax_tree_8cs_source_l00410}00410\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_generic_syntax_tree_8cs_source_l00411}00411\ }
+\DoxyCodeLine{\Hypertarget{_generic_syntax_tree_8cs_source_l00412}00412\ \ \ \ \ \ \ \ \ stringWalker.\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_utility_1_1_string_walker_a56cf417b76ed47752797a36ef2499c7b}{BacktrackRange}}(stringWalker.\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_utility_1_1_string_walker_a192423c8188b55e1e16376095b7dfc62}{PositionIndex}}\ -\/\ entryPositionIndex);}
+\DoxyCodeLine{\Hypertarget{_generic_syntax_tree_8cs_source_l00413}00413\ }
+\DoxyCodeLine{\Hypertarget{_generic_syntax_tree_8cs_source_l00414}00414\ \ \ \ \ \ \ \ \ genericSyntax\ =\ \textcolor{keyword}{null};}
+\DoxyCodeLine{\Hypertarget{_generic_syntax_tree_8cs_source_l00415}00415\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};}
+\DoxyCodeLine{\Hypertarget{_generic_syntax_tree_8cs_source_l00416}00416\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_generic_syntax_tree_8cs_source_l00417}00417\ \}}
+
+\end{DoxyCode}

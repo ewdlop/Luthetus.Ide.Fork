@@ -1,0 +1,348 @@
+.TH "Luthetus.TextEditor.RazorLib.TextEditors.Models.TextEditorModelApi" 3 "Version 1.0.0" "Luthetus.Ide" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+Luthetus.TextEditor.RazorLib.TextEditors.Models.TextEditorModelApi
+.SH SYNOPSIS
+.br
+.PP
+.PP
+Inherits \fBLuthetus\&.TextEditor\&.RazorLib\&.TextEditors\&.Models\&.ITextEditorModelApi\fP\&.
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBTextEditorModelApi\fP (\fBITextEditorService\fP \fBtextEditorService\fP, \fBIDecorationMapperRegistry\fP decorationMapperRegistry, \fBICompilerServiceRegistry\fP compilerServiceRegistry, \fBIBackgroundTaskService\fP backgroundTaskService, IDispatcher \fBdispatcher\fP)"
+.br
+.ti -1c
+.RI "void \fBRegisterCustom\fP (\fBTextEditorModel\fP model)"
+.br
+.RI "It is recommended to use the RegisterTemplated method as it will internally reference the ITextEditorLexer and \fBIDecorationMapper\fP that correspond to the desired text editor\&. "
+.ti -1c
+.RI "void \fBRegisterTemplated\fP (string extensionNoPeriod, \fBResourceUri\fP \fBresourceUri\fP, DateTime resourceLastWriteTime, string initialContent, string? overrideDisplayTextForFileExtension=null)"
+.br
+.RI "Plain Text Editor: one would pass in an extensionNoPeriod of "txt" or the constant varible: ExtensionNoPeriodFacts\&.TXT\&.
+.br
+
+.br
+\&. "
+.ti -1c
+.RI "ImmutableArray< \fBTextEditorViewModel\fP > \fBGetViewModelsOrEmpty\fP (\fBResourceUri\fP \fBresourceUri\fP)"
+.br
+.ti -1c
+.RI "string? \fBGetAllText\fP (\fBResourceUri\fP \fBresourceUri\fP)"
+.br
+.ti -1c
+.RI "\fBTextEditorModel\fP? \fBGetOrDefault\fP (\fBResourceUri\fP \fBresourceUri\fP)"
+.br
+.ti -1c
+.RI "Dictionary< \fBResourceUri\fP, \fBTextEditorModel\fP > \fBGetModels\fP ()"
+.br
+.RI "Returns a shallow copy\&. "
+.ti -1c
+.RI "int \fBGetModelsCount\fP ()"
+.br
+.ti -1c
+.RI "void \fBUndoEdit\fP (\fBITextEditorEditContext\fP editContext, \fBTextEditorModelModifier\fP modelModifier)"
+.br
+.ti -1c
+.RI "void \fBSetUsingLineEndKind\fP (\fBITextEditorEditContext\fP editContext, \fBTextEditorModelModifier\fP modelModifier, \fBLineEndKind\fP lineEndKind)"
+.br
+.ti -1c
+.RI "void \fBSetResourceData\fP (\fBITextEditorEditContext\fP editContext, \fBTextEditorModelModifier\fP modelModifier, DateTime resourceLastWriteTime)"
+.br
+.ti -1c
+.RI "void \fBReload\fP (\fBITextEditorEditContext\fP editContext, \fBTextEditorModelModifier\fP modelModifier, string content, DateTime resourceLastWriteTime)"
+.br
+.ti -1c
+.RI "void \fBRedoEdit\fP (\fBITextEditorEditContext\fP editContext, \fBTextEditorModelModifier\fP modelModifier)"
+.br
+.ti -1c
+.RI "void \fBInsertText\fP (\fBITextEditorEditContext\fP editContext, \fBTextEditorModelModifier\fP modelModifier, \fBCursorModifierBagTextEditor\fP cursorModifierBag, string content, CancellationToken cancellationToken)"
+.br
+.ti -1c
+.RI "void \fBInsertTextUnsafe\fP (\fBITextEditorEditContext\fP editContext, \fBTextEditorModelModifier\fP modelModifier, \fBCursorModifierBagTextEditor\fP cursorModifierBag, string content, CancellationToken cancellationToken)"
+.br
+.RI "If one wants to guarantee that the state is up to date use InsertTextFactory instead of this method\&. This is because, the \fBITextEditorService\fP will provide you the latest instance of the given TextEditorCursor\&. As opposed to whatever instance of the TextEditorCursorModifier you have at time of enqueueing\&. 
+.br
+
+.br
+ This method is needed however, because if one wants to arbitrarily create a cursor that does not map to the view model's cursors, then one would use this method\&. Since an attempt to map the cursor key would come back as the cursor not existing\&. "
+.ti -1c
+.RI "void \fBHandleKeyboardEvent\fP (\fBITextEditorEditContext\fP editContext, \fBTextEditorModelModifier\fP modelModifier, \fBCursorModifierBagTextEditor\fP cursorModifierBag, \fBKeymapArgs\fP keymapArgs, CancellationToken cancellationToken)"
+.br
+.ti -1c
+.RI "void \fBHandleKeyboardEventUnsafe\fP (\fBITextEditorEditContext\fP editContext, \fBTextEditorModelModifier\fP modelModifier, \fBCursorModifierBagTextEditor\fP cursorModifierBag, \fBKeymapArgs\fP keymapArgs, CancellationToken cancellationToken)"
+.br
+.RI "If one wants to guarantee that the state is up to date use HandleKeyboardEvent instead of this method\&. This is because, the \fBITextEditorService\fP will provide you the latest instance of the given TextEditorCursor\&. As opposed to whatever instance of the TextEditorCursorModifier you have at time of enqueueing\&. 
+.br
+
+.br
+ This method is needed however, because if one wants to arbitrarily create a cursor that does not map to the view model's cursors, then one would use this method\&. Since an attempt to map the cursor key would come back as the cursor not existing\&. "
+.ti -1c
+.RI "void \fBDeleteTextByRange\fP (\fBITextEditorEditContext\fP editContext, \fBTextEditorModelModifier\fP modelModifier, \fBCursorModifierBagTextEditor\fP cursorModifierBag, int count, CancellationToken cancellationToken)"
+.br
+.ti -1c
+.RI "void \fBDeleteTextByRangeUnsafe\fP (\fBITextEditorEditContext\fP editContext, \fBTextEditorModelModifier\fP modelModifier, \fBCursorModifierBagTextEditor\fP cursorModifierBag, int count, CancellationToken cancellationToken)"
+.br
+.RI "If one wants to guarantee that the state is up to date use DeleteTextByRangeFactory instead of this method\&. This is because, the \fBITextEditorService\fP will provide you the latest instance of the given TextEditorCursor\&. As opposed to whatever instance of the TextEditorCursorModifier you have at time of enqueueing\&. 
+.br
+
+.br
+ This method is needed however, because if one wants to arbitrarily create a cursor that does not map to the view model's cursors, then one would use this method\&. Since an attempt to map the cursor key would come back as the cursor not existing\&. "
+.ti -1c
+.RI "void \fBDeleteTextByMotion\fP (\fBITextEditorEditContext\fP editContext, \fBTextEditorModelModifier\fP modelModifier, \fBCursorModifierBagTextEditor\fP cursorModifierBag, \fBMotionKind\fP motionKind, CancellationToken cancellationToken)"
+.br
+.ti -1c
+.RI "void \fBDeleteTextByMotionUnsafe\fP (\fBITextEditorEditContext\fP editContext, \fBTextEditorModelModifier\fP modelModifier, \fBCursorModifierBagTextEditor\fP cursorModifierBag, \fBMotionKind\fP motionKind, CancellationToken cancellationToken)"
+.br
+.RI "If one wants to guarantee that the state is up to date use DeleteTextByMotionFactory instead of this method\&. This is because, the \fBITextEditorService\fP will provide you the latest instance of the given TextEditorCursor\&. As opposed to whatever instance of the TextEditorCursorModifier you have at time of enqueueing\&. 
+.br
+
+.br
+ This method is needed however, because if one wants to arbitrarily create a cursor that does not map to the view model's cursors, then one would use this method\&. Since an attempt to map the cursor key would come back as the cursor not existing\&. "
+.ti -1c
+.RI "void \fBAddPresentationModel\fP (\fBITextEditorEditContext\fP editContext, \fBTextEditorModelModifier\fP modelModifier, \fBTextEditorPresentationModel\fP emptyPresentationModel)"
+.br
+.ti -1c
+.RI "void \fBStartPendingCalculatePresentationModel\fP (\fBITextEditorEditContext\fP editContext, \fBTextEditorModelModifier\fP modelModifier, Key< \fBTextEditorPresentationModel\fP > presentationKey, \fBTextEditorPresentationModel\fP emptyPresentationModel)"
+.br
+.ti -1c
+.RI "void \fBCompletePendingCalculatePresentationModel\fP (\fBITextEditorEditContext\fP editContext, \fBTextEditorModelModifier\fP modelModifier, Key< \fBTextEditorPresentationModel\fP > presentationKey, \fBTextEditorPresentationModel\fP emptyPresentationModel, ImmutableArray< \fBTextEditorTextSpan\fP > calculatedTextSpans)"
+.br
+.ti -1c
+.RI "void \fBApplyDecorationRange\fP (\fBITextEditorEditContext\fP editContext, \fBTextEditorModelModifier\fP modelModifier, IEnumerable< \fBTextEditorTextSpan\fP > textSpans)"
+.br
+.RI "If applying syntax highlighting it may be preferred to use ApplySyntaxHighlightingAsync\&. It is effectively just invoking the lexer and then ApplyDecorationRange\&. "
+.ti -1c
+.RI "void \fBApplySyntaxHighlighting\fP (\fBITextEditorEditContext\fP editContext, \fBTextEditorModelModifier\fP modelModifier)"
+.br
+.ti -1c
+.RI "void \fBDispose\fP (\fBResourceUri\fP \fBresourceUri\fP)"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+Definition at line \fB15\fP of file \fBTextEditorModelApi\&.cs\fP\&.
+.SH "Constructor & Destructor Documentation"
+.PP 
+.SS "Luthetus\&.TextEditor\&.RazorLib\&.TextEditors\&.Models\&.TextEditorModelApi\&.TextEditorModelApi (\fBITextEditorService\fP textEditorService, \fBIDecorationMapperRegistry\fP decorationMapperRegistry, \fBICompilerServiceRegistry\fP compilerServiceRegistry, \fBIBackgroundTaskService\fP backgroundTaskService, IDispatcher dispatcher)"
+
+.PP
+Definition at line \fB23\fP of file \fBTextEditorModelApi\&.cs\fP\&.
+.SH "Member Function Documentation"
+.PP 
+.SS "void Luthetus\&.TextEditor\&.RazorLib\&.TextEditors\&.Models\&.TextEditorModelApi\&.AddPresentationModel (\fBITextEditorEditContext\fP editContext, \fBTextEditorModelModifier\fP modelModifier, \fBTextEditorPresentationModel\fP emptyPresentationModel)"
+
+.PP
+Implements \fBLuthetus\&.TextEditor\&.RazorLib\&.TextEditors\&.Models\&.ITextEditorModelApi\fP\&.
+.PP
+Definition at line \fB215\fP of file \fBTextEditorModelApi\&.cs\fP\&.
+.SS "void Luthetus\&.TextEditor\&.RazorLib\&.TextEditors\&.Models\&.TextEditorModelApi\&.ApplyDecorationRange (\fBITextEditorEditContext\fP editContext, \fBTextEditorModelModifier\fP modelModifier, IEnumerable< \fBTextEditorTextSpan\fP > textSpans)"
+
+.PP
+If applying syntax highlighting it may be preferred to use ApplySyntaxHighlightingAsync\&. It is effectively just invoking the lexer and then ApplyDecorationRange\&. 
+.PP
+Implements \fBLuthetus\&.TextEditor\&.RazorLib\&.TextEditors\&.Models\&.ITextEditorModelApi\fP\&.
+.PP
+Definition at line \fB245\fP of file \fBTextEditorModelApi\&.cs\fP\&.
+.SS "void Luthetus\&.TextEditor\&.RazorLib\&.TextEditors\&.Models\&.TextEditorModelApi\&.ApplySyntaxHighlighting (\fBITextEditorEditContext\fP editContext, \fBTextEditorModelModifier\fP modelModifier)"
+
+.PP
+Implements \fBLuthetus\&.TextEditor\&.RazorLib\&.TextEditors\&.Models\&.ITextEditorModelApi\fP\&.
+.PP
+Definition at line \fB278\fP of file \fBTextEditorModelApi\&.cs\fP\&.
+.SS "void Luthetus\&.TextEditor\&.RazorLib\&.TextEditors\&.Models\&.TextEditorModelApi\&.CompletePendingCalculatePresentationModel (\fBITextEditorEditContext\fP editContext, \fBTextEditorModelModifier\fP modelModifier, Key< \fBTextEditorPresentationModel\fP > presentationKey, \fBTextEditorPresentationModel\fP emptyPresentationModel, ImmutableArray< \fBTextEditorTextSpan\fP > calculatedTextSpans)"
+
+.PP
+\fBParameters\fP
+.RS 4
+\fIemptyPresentationModel\fP If the presentation model was not found, the empty presentation model will be registered\&. 
+.RE
+.PP
+
+.PP
+Implements \fBLuthetus\&.TextEditor\&.RazorLib\&.TextEditors\&.Models\&.ITextEditorModelApi\fP\&.
+.PP
+Definition at line \fB232\fP of file \fBTextEditorModelApi\&.cs\fP\&.
+.SS "void Luthetus\&.TextEditor\&.RazorLib\&.TextEditors\&.Models\&.TextEditorModelApi\&.DeleteTextByMotion (\fBITextEditorEditContext\fP editContext, \fBTextEditorModelModifier\fP modelModifier, \fBCursorModifierBagTextEditor\fP cursorModifierBag, \fBMotionKind\fP motionKind, CancellationToken cancellationToken)"
+
+.PP
+Implements \fBLuthetus\&.TextEditor\&.RazorLib\&.TextEditors\&.Models\&.ITextEditorModelApi\fP\&.
+.PP
+Definition at line \fB195\fP of file \fBTextEditorModelApi\&.cs\fP\&.
+.SS "void Luthetus\&.TextEditor\&.RazorLib\&.TextEditors\&.Models\&.TextEditorModelApi\&.DeleteTextByMotionUnsafe (\fBITextEditorEditContext\fP editContext, \fBTextEditorModelModifier\fP modelModifier, \fBCursorModifierBagTextEditor\fP cursorModifierBag, \fBMotionKind\fP motionKind, CancellationToken cancellationToken)"
+
+.PP
+If one wants to guarantee that the state is up to date use DeleteTextByMotionFactory instead of this method\&. This is because, the \fBITextEditorService\fP will provide you the latest instance of the given TextEditorCursor\&. As opposed to whatever instance of the TextEditorCursorModifier you have at time of enqueueing\&. 
+.br
+
+.br
+ This method is needed however, because if one wants to arbitrarily create a cursor that does not map to the view model's cursors, then one would use this method\&. Since an attempt to map the cursor key would come back as the cursor not existing\&. 
+.PP
+Implements \fBLuthetus\&.TextEditor\&.RazorLib\&.TextEditors\&.Models\&.ITextEditorModelApi\fP\&.
+.PP
+Definition at line \fB205\fP of file \fBTextEditorModelApi\&.cs\fP\&.
+.SS "void Luthetus\&.TextEditor\&.RazorLib\&.TextEditors\&.Models\&.TextEditorModelApi\&.DeleteTextByRange (\fBITextEditorEditContext\fP editContext, \fBTextEditorModelModifier\fP modelModifier, \fBCursorModifierBagTextEditor\fP cursorModifierBag, int count, CancellationToken cancellationToken)"
+
+.PP
+Implements \fBLuthetus\&.TextEditor\&.RazorLib\&.TextEditors\&.Models\&.ITextEditorModelApi\fP\&.
+.PP
+Definition at line \fB175\fP of file \fBTextEditorModelApi\&.cs\fP\&.
+.SS "void Luthetus\&.TextEditor\&.RazorLib\&.TextEditors\&.Models\&.TextEditorModelApi\&.DeleteTextByRangeUnsafe (\fBITextEditorEditContext\fP editContext, \fBTextEditorModelModifier\fP modelModifier, \fBCursorModifierBagTextEditor\fP cursorModifierBag, int count, CancellationToken cancellationToken)"
+
+.PP
+If one wants to guarantee that the state is up to date use DeleteTextByRangeFactory instead of this method\&. This is because, the \fBITextEditorService\fP will provide you the latest instance of the given TextEditorCursor\&. As opposed to whatever instance of the TextEditorCursorModifier you have at time of enqueueing\&. 
+.br
+
+.br
+ This method is needed however, because if one wants to arbitrarily create a cursor that does not map to the view model's cursors, then one would use this method\&. Since an attempt to map the cursor key would come back as the cursor not existing\&. 
+.PP
+Implements \fBLuthetus\&.TextEditor\&.RazorLib\&.TextEditors\&.Models\&.ITextEditorModelApi\fP\&.
+.PP
+Definition at line \fB185\fP of file \fBTextEditorModelApi\&.cs\fP\&.
+.SS "void Luthetus\&.TextEditor\&.RazorLib\&.TextEditors\&.Models\&.TextEditorModelApi\&.Dispose (\fBResourceUri\fP resourceUri)"
+
+.PP
+Implements \fBLuthetus\&.TextEditor\&.RazorLib\&.TextEditors\&.Models\&.ITextEditorModelApi\fP\&.
+.PP
+Definition at line \fB299\fP of file \fBTextEditorModelApi\&.cs\fP\&.
+.SS "string? Luthetus\&.TextEditor\&.RazorLib\&.TextEditors\&.Models\&.TextEditorModelApi\&.GetAllText (\fBResourceUri\fP resourceUri)"
+
+.PP
+Implements \fBLuthetus\&.TextEditor\&.RazorLib\&.TextEditors\&.Models\&.ITextEditorModelApi\fP\&.
+.PP
+Definition at line \fB72\fP of file \fBTextEditorModelApi\&.cs\fP\&.
+.SS "Dictionary< \fBResourceUri\fP, \fBTextEditorModel\fP > Luthetus\&.TextEditor\&.RazorLib\&.TextEditors\&.Models\&.TextEditorModelApi\&.GetModels ()"
+
+.PP
+Returns a shallow copy\&. One should store the result of invoking this method in a variable, then reference that variable\&. If one continually invokes this, there is no guarantee that the data had not changed since the previous invocation\&. 
+.PP
+Implements \fBLuthetus\&.TextEditor\&.RazorLib\&.TextEditors\&.Models\&.ITextEditorModelApi\fP\&.
+.PP
+Definition at line \fB83\fP of file \fBTextEditorModelApi\&.cs\fP\&.
+.SS "int Luthetus\&.TextEditor\&.RazorLib\&.TextEditors\&.Models\&.TextEditorModelApi\&.GetModelsCount ()"
+
+.PP
+Implements \fBLuthetus\&.TextEditor\&.RazorLib\&.TextEditors\&.Models\&.ITextEditorModelApi\fP\&.
+.PP
+Definition at line \fB88\fP of file \fBTextEditorModelApi\&.cs\fP\&.
+.SS "\fBTextEditorModel\fP? Luthetus\&.TextEditor\&.RazorLib\&.TextEditors\&.Models\&.TextEditorModelApi\&.GetOrDefault (\fBResourceUri\fP resourceUri)"
+
+.PP
+Implements \fBLuthetus\&.TextEditor\&.RazorLib\&.TextEditors\&.Models\&.ITextEditorModelApi\fP\&.
+.PP
+Definition at line \fB77\fP of file \fBTextEditorModelApi\&.cs\fP\&.
+.SS "ImmutableArray< \fBTextEditorViewModel\fP > Luthetus\&.TextEditor\&.RazorLib\&.TextEditors\&.Models\&.TextEditorModelApi\&.GetViewModelsOrEmpty (\fBResourceUri\fP resourceUri)"
+
+.PP
+Implements \fBLuthetus\&.TextEditor\&.RazorLib\&.TextEditors\&.Models\&.ITextEditorModelApi\fP\&.
+.PP
+Definition at line \fB67\fP of file \fBTextEditorModelApi\&.cs\fP\&.
+.SS "void Luthetus\&.TextEditor\&.RazorLib\&.TextEditors\&.Models\&.TextEditorModelApi\&.HandleKeyboardEvent (\fBITextEditorEditContext\fP editContext, \fBTextEditorModelModifier\fP modelModifier, \fBCursorModifierBagTextEditor\fP cursorModifierBag, \fBKeymapArgs\fP keymapArgs, CancellationToken cancellationToken)"
+
+.PP
+Implements \fBLuthetus\&.TextEditor\&.RazorLib\&.TextEditors\&.Models\&.ITextEditorModelApi\fP\&.
+.PP
+Definition at line \fB155\fP of file \fBTextEditorModelApi\&.cs\fP\&.
+.SS "void Luthetus\&.TextEditor\&.RazorLib\&.TextEditors\&.Models\&.TextEditorModelApi\&.HandleKeyboardEventUnsafe (\fBITextEditorEditContext\fP editContext, \fBTextEditorModelModifier\fP modelModifier, \fBCursorModifierBagTextEditor\fP cursorModifierBag, \fBKeymapArgs\fP keymapArgs, CancellationToken cancellationToken)"
+
+.PP
+If one wants to guarantee that the state is up to date use HandleKeyboardEvent instead of this method\&. This is because, the \fBITextEditorService\fP will provide you the latest instance of the given TextEditorCursor\&. As opposed to whatever instance of the TextEditorCursorModifier you have at time of enqueueing\&. 
+.br
+
+.br
+ This method is needed however, because if one wants to arbitrarily create a cursor that does not map to the view model's cursors, then one would use this method\&. Since an attempt to map the cursor key would come back as the cursor not existing\&. 
+.PP
+Implements \fBLuthetus\&.TextEditor\&.RazorLib\&.TextEditors\&.Models\&.ITextEditorModelApi\fP\&.
+.PP
+Definition at line \fB165\fP of file \fBTextEditorModelApi\&.cs\fP\&.
+.SS "void Luthetus\&.TextEditor\&.RazorLib\&.TextEditors\&.Models\&.TextEditorModelApi\&.InsertText (\fBITextEditorEditContext\fP editContext, \fBTextEditorModelModifier\fP modelModifier, \fBCursorModifierBagTextEditor\fP cursorModifierBag, string content, CancellationToken cancellationToken)"
+
+.PP
+Implements \fBLuthetus\&.TextEditor\&.RazorLib\&.TextEditors\&.Models\&.ITextEditorModelApi\fP\&.
+.PP
+Definition at line \fB135\fP of file \fBTextEditorModelApi\&.cs\fP\&.
+.SS "void Luthetus\&.TextEditor\&.RazorLib\&.TextEditors\&.Models\&.TextEditorModelApi\&.InsertTextUnsafe (\fBITextEditorEditContext\fP editContext, \fBTextEditorModelModifier\fP modelModifier, \fBCursorModifierBagTextEditor\fP cursorModifierBag, string content, CancellationToken cancellationToken)"
+
+.PP
+If one wants to guarantee that the state is up to date use InsertTextFactory instead of this method\&. This is because, the \fBITextEditorService\fP will provide you the latest instance of the given TextEditorCursor\&. As opposed to whatever instance of the TextEditorCursorModifier you have at time of enqueueing\&. 
+.br
+
+.br
+ This method is needed however, because if one wants to arbitrarily create a cursor that does not map to the view model's cursors, then one would use this method\&. Since an attempt to map the cursor key would come back as the cursor not existing\&. 
+.PP
+Implements \fBLuthetus\&.TextEditor\&.RazorLib\&.TextEditors\&.Models\&.ITextEditorModelApi\fP\&.
+.PP
+Definition at line \fB145\fP of file \fBTextEditorModelApi\&.cs\fP\&.
+.SS "void Luthetus\&.TextEditor\&.RazorLib\&.TextEditors\&.Models\&.TextEditorModelApi\&.RedoEdit (\fBITextEditorEditContext\fP editContext, \fBTextEditorModelModifier\fP modelModifier)"
+
+.PP
+Implements \fBLuthetus\&.TextEditor\&.RazorLib\&.TextEditors\&.Models\&.ITextEditorModelApi\fP\&.
+.PP
+Definition at line \fB128\fP of file \fBTextEditorModelApi\&.cs\fP\&.
+.SS "void Luthetus\&.TextEditor\&.RazorLib\&.TextEditors\&.Models\&.TextEditorModelApi\&.RegisterCustom (\fBTextEditorModel\fP model)"
+
+.PP
+It is recommended to use the RegisterTemplated method as it will internally reference the ITextEditorLexer and \fBIDecorationMapper\fP that correspond to the desired text editor\&. 
+.PP
+Implements \fBLuthetus\&.TextEditor\&.RazorLib\&.TextEditors\&.Models\&.ITextEditorModelApi\fP\&.
+.PP
+Definition at line \fB38\fP of file \fBTextEditorModelApi\&.cs\fP\&.
+.SS "void Luthetus\&.TextEditor\&.RazorLib\&.TextEditors\&.Models\&.TextEditorModelApi\&.RegisterTemplated (string extensionNoPeriod, \fBResourceUri\fP resourceUri, DateTime resourceLastWriteTime, string initialContent, string? overrideDisplayTextForFileExtension = \fRnull\fP)"
+
+.PP
+Plain Text Editor: one would pass in an extensionNoPeriod of "txt" or the constant varible: ExtensionNoPeriodFacts\&.TXT\&.
+.br
+
+.br
+\&. C# Text Editor: one would pass in an extensionNoPeriod of "cs" or the constant varible: ExtensionNoPeriodFacts\&.C_SHARP_CLASS; NOTE: One must first install the \fBLuthetus\&.CompilerServices\&.CSharp\fP NuGet package\&.
+.br
+
+.br
+ 
+.PP
+Implements \fBLuthetus\&.TextEditor\&.RazorLib\&.TextEditors\&.Models\&.ITextEditorModelApi\fP\&.
+.PP
+Definition at line \fB45\fP of file \fBTextEditorModelApi\&.cs\fP\&.
+.SS "void Luthetus\&.TextEditor\&.RazorLib\&.TextEditors\&.Models\&.TextEditorModelApi\&.Reload (\fBITextEditorEditContext\fP editContext, \fBTextEditorModelModifier\fP modelModifier, string content, DateTime resourceLastWriteTime)"
+
+.PP
+Implements \fBLuthetus\&.TextEditor\&.RazorLib\&.TextEditors\&.Models\&.ITextEditorModelApi\fP\&.
+.PP
+Definition at line \fB118\fP of file \fBTextEditorModelApi\&.cs\fP\&.
+.SS "void Luthetus\&.TextEditor\&.RazorLib\&.TextEditors\&.Models\&.TextEditorModelApi\&.SetResourceData (\fBITextEditorEditContext\fP editContext, \fBTextEditorModelModifier\fP modelModifier, DateTime resourceLastWriteTime)"
+
+.PP
+Implements \fBLuthetus\&.TextEditor\&.RazorLib\&.TextEditors\&.Models\&.ITextEditorModelApi\fP\&.
+.PP
+Definition at line \fB110\fP of file \fBTextEditorModelApi\&.cs\fP\&.
+.SS "void Luthetus\&.TextEditor\&.RazorLib\&.TextEditors\&.Models\&.TextEditorModelApi\&.SetUsingLineEndKind (\fBITextEditorEditContext\fP editContext, \fBTextEditorModelModifier\fP modelModifier, \fBLineEndKind\fP lineEndKind)"
+
+.PP
+Implements \fBLuthetus\&.TextEditor\&.RazorLib\&.TextEditors\&.Models\&.ITextEditorModelApi\fP\&.
+.PP
+Definition at line \fB102\fP of file \fBTextEditorModelApi\&.cs\fP\&.
+.SS "void Luthetus\&.TextEditor\&.RazorLib\&.TextEditors\&.Models\&.TextEditorModelApi\&.StartPendingCalculatePresentationModel (\fBITextEditorEditContext\fP editContext, \fBTextEditorModelModifier\fP modelModifier, Key< \fBTextEditorPresentationModel\fP > presentationKey, \fBTextEditorPresentationModel\fP emptyPresentationModel)"
+
+.PP
+\fBParameters\fP
+.RS 4
+\fIemptyPresentationModel\fP If the presentation model was not found, the empty presentation model will be registered\&. 
+.RE
+.PP
+
+.PP
+Implements \fBLuthetus\&.TextEditor\&.RazorLib\&.TextEditors\&.Models\&.ITextEditorModelApi\fP\&.
+.PP
+Definition at line \fB223\fP of file \fBTextEditorModelApi\&.cs\fP\&.
+.SS "void Luthetus\&.TextEditor\&.RazorLib\&.TextEditors\&.Models\&.TextEditorModelApi\&.UndoEdit (\fBITextEditorEditContext\fP editContext, \fBTextEditorModelModifier\fP modelModifier)"
+
+.PP
+Implements \fBLuthetus\&.TextEditor\&.RazorLib\&.TextEditors\&.Models\&.ITextEditorModelApi\fP\&.
+.PP
+Definition at line \fB95\fP of file \fBTextEditorModelApi\&.cs\fP\&.
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for Luthetus\&.Ide from the source code\&.

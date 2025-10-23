@@ -1,0 +1,47 @@
+\doxysection{Context\+Switch\+State.\+cs}
+\hypertarget{_context_switch_state_8cs_source}{}\label{_context_switch_state_8cs_source}\index{Source/Lib/Common/Contexts/States/ContextSwitchState.cs@{Source/Lib/Common/Contexts/States/ContextSwitchState.cs}}
+\mbox{\hyperlink{_context_switch_state_8cs}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{_context_switch_state_8cs_source_l00001}00001\ \textcolor{keyword}{using\ }System.Collections.Immutable;}
+\DoxyCodeLine{\Hypertarget{_context_switch_state_8cs_source_l00002}00002\ \textcolor{keyword}{using\ }Fluxor;}
+\DoxyCodeLine{\Hypertarget{_context_switch_state_8cs_source_l00003}00003\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_luthetus_1_1_common_1_1_razor_lib_1_1_contexts_1_1_models}{Luthetus.Common.RazorLib.Contexts.Models}};}
+\DoxyCodeLine{\Hypertarget{_context_switch_state_8cs_source_l00004}00004\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_luthetus_1_1_common_1_1_razor_lib_1_1_keys_1_1_models}{Luthetus.Common.RazorLib.Keys.Models}};}
+\DoxyCodeLine{\Hypertarget{_context_switch_state_8cs_source_l00005}00005\ }
+\DoxyCodeLine{\Hypertarget{_context_switch_state_8cs_source_l00006}00006\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespace_luthetus_1_1_common_1_1_razor_lib_1_1_contexts_1_1_states}{Luthetus.Common.RazorLib.Contexts.States}};}
+\DoxyCodeLine{\Hypertarget{_context_switch_state_8cs_source_l00007}00007\ }
+\DoxyCodeLine{\Hypertarget{_context_switch_state_8cs_source_l00008}00008\ [FeatureState]}
+\DoxyCodeLine{\Hypertarget{_context_switch_state_8cs_source_l00009}\mbox{\hyperlink{namespace_luthetus_1_1_common_1_1_razor_lib_1_1_contexts_1_1_states_a16d3c40b09dc0c8786d6153c03951615}{00009}}\ \textcolor{keyword}{public}\ partial\ record\ \mbox{\hyperlink{namespace_luthetus_1_1_common_1_1_razor_lib_1_1_contexts_1_1_states_a16d3c40b09dc0c8786d6153c03951615}{ContextSwitchState}}(ImmutableList<ContextSwitchGroup>\ ContextSwitchGroupList)}
+\DoxyCodeLine{\Hypertarget{_context_switch_state_8cs_source_l00010}00010\ \{}
+\DoxyCodeLine{\Hypertarget{_context_switch_state_8cs_source_l00011}00011\ \ \ \ \ \textcolor{keyword}{public}\ \mbox{\hyperlink{namespace_luthetus_1_1_common_1_1_razor_lib_1_1_contexts_1_1_states_a16d3c40b09dc0c8786d6153c03951615}{ContextSwitchState}}()\ :\ \textcolor{keyword}{this}(ImmutableList<ContextSwitchGroup>.Empty)}
+\DoxyCodeLine{\Hypertarget{_context_switch_state_8cs_source_l00012}00012\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_context_switch_state_8cs_source_l00013}00013\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_context_switch_state_8cs_source_l00014}00014\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_context_switch_state_8cs_source_l00019}00019\ \ \ \ \ \textcolor{keyword}{public}\ Key<ContextSwitchGroup>\ FocusInitiallyContextSwitchGroupKey\ \{\ \textcolor{keyword}{get};\ \textcolor{keyword}{set};\ \}}
+\DoxyCodeLine{\Hypertarget{_context_switch_state_8cs_source_l00020}00020\ }
+\DoxyCodeLine{\Hypertarget{_context_switch_state_8cs_source_l00021}00021\ \ \ \ \ \textcolor{keyword}{public}\ record\ RegisterContextSwitchGroupAction(\mbox{\hyperlink{class_luthetus_1_1_common_1_1_razor_lib_1_1_contexts_1_1_models_1_1_context_switch_group}{ContextSwitchGroup}}\ \mbox{\hyperlink{class_luthetus_1_1_common_1_1_razor_lib_1_1_contexts_1_1_models_1_1_context_switch_group}{ContextSwitchGroup}});}
+\DoxyCodeLine{\Hypertarget{_context_switch_state_8cs_source_l00022}00022\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_context_switch_state_8cs_source_l00023}00023\ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keyword}{class\ }Reducer}
+\DoxyCodeLine{\Hypertarget{_context_switch_state_8cs_source_l00024}00024\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_context_switch_state_8cs_source_l00025}00025\ \ \ \ \ \ \ \ \ [ReducerMethod]}
+\DoxyCodeLine{\Hypertarget{_context_switch_state_8cs_source_l00026}00026\ \ \ \ \ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keyword}{static}\ \mbox{\hyperlink{namespace_luthetus_1_1_common_1_1_razor_lib_1_1_contexts_1_1_states_a16d3c40b09dc0c8786d6153c03951615}{ContextSwitchState}}\ ReduceRegisterContextSwitchGroupAction(}
+\DoxyCodeLine{\Hypertarget{_context_switch_state_8cs_source_l00027}00027\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespace_luthetus_1_1_common_1_1_razor_lib_1_1_contexts_1_1_states_a16d3c40b09dc0c8786d6153c03951615}{ContextSwitchState}}\ inState,}
+\DoxyCodeLine{\Hypertarget{_context_switch_state_8cs_source_l00028}00028\ \ \ \ \ \ \ \ \ \ \ \ \ RegisterContextSwitchGroupAction\ registerContextSwitchGroupAction)}
+\DoxyCodeLine{\Hypertarget{_context_switch_state_8cs_source_l00029}00029\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_context_switch_state_8cs_source_l00030}00030\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (inState.ContextSwitchGroupList.Any(x\ =>}
+\DoxyCodeLine{\Hypertarget{_context_switch_state_8cs_source_l00031}00031\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ x.Key\ ==\ registerContextSwitchGroupAction.ContextSwitchGroup.Key))}
+\DoxyCodeLine{\Hypertarget{_context_switch_state_8cs_source_l00032}00032\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_context_switch_state_8cs_source_l00033}00033\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ inState;}
+\DoxyCodeLine{\Hypertarget{_context_switch_state_8cs_source_l00034}00034\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_context_switch_state_8cs_source_l00035}00035\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_context_switch_state_8cs_source_l00036}00036\ \ \ \ \ \ \ \ \ \ \ \ \ var\ outContextSwitchGroupList\ =\ inState.ContextSwitchGroupList.Add(}
+\DoxyCodeLine{\Hypertarget{_context_switch_state_8cs_source_l00037}00037\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ registerContextSwitchGroupAction.ContextSwitchGroup);}
+\DoxyCodeLine{\Hypertarget{_context_switch_state_8cs_source_l00038}00038\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_context_switch_state_8cs_source_l00039}00039\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ inState\ with}
+\DoxyCodeLine{\Hypertarget{_context_switch_state_8cs_source_l00040}00040\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_context_switch_state_8cs_source_l00041}00041\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ContextSwitchGroupList\ =\ outContextSwitchGroupList}
+\DoxyCodeLine{\Hypertarget{_context_switch_state_8cs_source_l00042}00042\ \ \ \ \ \ \ \ \ \ \ \ \ \};}
+\DoxyCodeLine{\Hypertarget{_context_switch_state_8cs_source_l00043}00043\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_context_switch_state_8cs_source_l00044}00044\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_context_switch_state_8cs_source_l00045}00045\ \}}
+
+\end{DoxyCode}

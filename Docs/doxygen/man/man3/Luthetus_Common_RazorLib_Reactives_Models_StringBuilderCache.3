@@ -1,0 +1,75 @@
+.TH "Luthetus.Common.RazorLib.Reactives.Models.StringBuilderCache" 3 "Version 1.0.0" "Luthetus.Ide" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+Luthetus.Common.RazorLib.Reactives.Models.StringBuilderCache
+.SH SYNOPSIS
+.br
+.PP
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "void \fBAppend\fP (string text)"
+.br
+.ti -1c
+.RI "void \fBAppendTwo\fP (string firstAppendText, string secondAppendText)"
+.br
+.RI "The issue this method solves is as follows: "
+.ti -1c
+.RI "int \fBGetLength\fP ()"
+.br
+.ti -1c
+.RI "override string \fBToString\fP ()"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+Definition at line \fB5\fP of file \fBStringBuilderCache\&.cs\fP\&.
+.SH "Member Function Documentation"
+.PP 
+.SS "void Luthetus\&.Common\&.RazorLib\&.Reactives\&.Models\&.StringBuilderCache\&.Append (string text)"
+
+.PP
+Definition at line \fB13\fP of file \fBStringBuilderCache\&.cs\fP\&.
+.SS "void Luthetus\&.Common\&.RazorLib\&.Reactives\&.Models\&.StringBuilderCache\&.AppendTwo (string firstAppendText, string secondAppendText)"
+
+.PP
+The issue this method solves is as follows: If one invokes \fBAppend\fP with the expression: (someStringVar + '
+.br
+') Then one is saving the concatenation of the destination, BUT, still is creating a concatenation in the middle as 'someStringVar' and '
+.br
+' would now need to be concatenated before the invocation to Append can occur\&.
+
+.PP
+I do not believe it is the case that the compiler will convert Append(someStringVar + '
+.br
+') to Append(someStringVar)\&.Append('
+.br
+') because this optimization is highly dependent on the size of 'someStringVar'\&.
+
+.PP
+If 'someStringVar' is very short in length, then it can be faster to do the middleman concatenation https://stackoverflow.com/a/22527492/14847452
+
+.PP
+In the case of terminal output though, I wonder if one could in a single output put out an extremely long length string\&.
+
+.PP
+I'm wondering now, why am I appending the newline character anyway? The output should be occurring on newline, so the output would end in a newline, I think?
+
+.PP
+I need to look into this further\&. 
+.PP
+Definition at line \fB49\fP of file \fBStringBuilderCache\&.cs\fP\&.
+.SS "int Luthetus\&.Common\&.RazorLib\&.Reactives\&.Models\&.StringBuilderCache\&.GetLength ()"
+
+.PP
+Definition at line \fB61\fP of file \fBStringBuilderCache\&.cs\fP\&.
+.SS "override string Luthetus\&.Common\&.RazorLib\&.Reactives\&.Models\&.StringBuilderCache\&.ToString ()"
+
+.PP
+Definition at line \fB69\fP of file \fBStringBuilderCache\&.cs\fP\&.
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for Luthetus\&.Ide from the source code\&.

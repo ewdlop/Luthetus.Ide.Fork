@@ -1,0 +1,4 @@
+var interface_luthetus_1_1_common_1_1_razor_lib_1_1_component_renderers_1_1_models_1_1_i_progress_notification_renderer_type =
+[
+    [ "ProgressBarModel", "interface_luthetus_1_1_common_1_1_razor_lib_1_1_component_renderers_1_1_models_1_1_i_progress_notification_renderer_type.html#a5ab3646caba55fadd76b96c6d2ff7a71", null ]
+];

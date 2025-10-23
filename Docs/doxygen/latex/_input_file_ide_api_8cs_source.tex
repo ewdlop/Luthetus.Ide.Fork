@@ -1,0 +1,83 @@
+\doxysection{Input\+File\+Ide\+Api.\+cs}
+\hypertarget{_input_file_ide_api_8cs_source}{}\label{_input_file_ide_api_8cs_source}\index{Source/Lib/Ide/Ide.RazorLib/InputFiles/Models/InputFileIdeApi.cs@{Source/Lib/Ide/Ide.RazorLib/InputFiles/Models/InputFileIdeApi.cs}}
+\mbox{\hyperlink{_input_file_ide_api_8cs}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{_input_file_ide_api_8cs_source_l00001}00001\ \textcolor{keyword}{using\ }System.Collections.Immutable;}
+\DoxyCodeLine{\Hypertarget{_input_file_ide_api_8cs_source_l00002}00002\ \textcolor{keyword}{using\ }Fluxor;}
+\DoxyCodeLine{\Hypertarget{_input_file_ide_api_8cs_source_l00003}00003\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_luthetus_1_1_common_1_1_razor_lib_1_1_background_tasks_1_1_models}{Luthetus.Common.RazorLib.BackgroundTasks.Models}};}
+\DoxyCodeLine{\Hypertarget{_input_file_ide_api_8cs_source_l00004}00004\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_luthetus_1_1_common_1_1_razor_lib_1_1_dialogs_1_1_models}{Luthetus.Common.RazorLib.Dialogs.Models}};}
+\DoxyCodeLine{\Hypertarget{_input_file_ide_api_8cs_source_l00005}00005\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_luthetus_1_1_common_1_1_razor_lib_1_1_dialogs_1_1_states}{Luthetus.Common.RazorLib.Dialogs.States}};}
+\DoxyCodeLine{\Hypertarget{_input_file_ide_api_8cs_source_l00006}00006\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_luthetus_1_1_common_1_1_razor_lib_1_1_file_systems_1_1_models}{Luthetus.Common.RazorLib.FileSystems.Models}};}
+\DoxyCodeLine{\Hypertarget{_input_file_ide_api_8cs_source_l00007}00007\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_luthetus_1_1_common_1_1_razor_lib_1_1_keys_1_1_models}{Luthetus.Common.RazorLib.Keys.Models}};}
+\DoxyCodeLine{\Hypertarget{_input_file_ide_api_8cs_source_l00008}00008\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_luthetus_1_1_ide_1_1_razor_lib_1_1_background_tasks_1_1_models}{Luthetus.Ide.RazorLib.BackgroundTasks.Models}};}
+\DoxyCodeLine{\Hypertarget{_input_file_ide_api_8cs_source_l00009}00009\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_luthetus_1_1_ide_1_1_razor_lib_1_1_component_renderers_1_1_models}{Luthetus.Ide.RazorLib.ComponentRenderers.Models}};}
+\DoxyCodeLine{\Hypertarget{_input_file_ide_api_8cs_source_l00010}00010\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_luthetus_1_1_ide_1_1_razor_lib_1_1_htmls_1_1_models}{Luthetus.Ide.RazorLib.Htmls.Models}};}
+\DoxyCodeLine{\Hypertarget{_input_file_ide_api_8cs_source_l00011}00011\ \textcolor{keyword}{using\ }static\ \mbox{\hyperlink{namespace_luthetus}{Luthetus}}.\mbox{\hyperlink{namespace_luthetus_1_1_ide}{Ide}}.\mbox{\hyperlink{namespace_luthetus_1_1_ide_1_1_razor_lib}{RazorLib}}.\mbox{\hyperlink{namespace_luthetus_1_1_ide_1_1_razor_lib_1_1_input_files}{InputFiles}}.\mbox{\hyperlink{namespace_luthetus_1_1_ide_1_1_razor_lib_1_1_input_files_1_1_states}{States}}.InputFileState;}
+\DoxyCodeLine{\Hypertarget{_input_file_ide_api_8cs_source_l00012}00012\ }
+\DoxyCodeLine{\Hypertarget{_input_file_ide_api_8cs_source_l00013}\mbox{\hyperlink{namespace_luthetus_1_1_ide_1_1_razor_lib_1_1_input_files_1_1_models}{00013}}\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespace_luthetus_1_1_ide_1_1_razor_lib_1_1_input_files_1_1_models}{Luthetus.Ide.RazorLib.InputFiles.Models}};}
+\DoxyCodeLine{\Hypertarget{_input_file_ide_api_8cs_source_l00014}00014\ }
+\DoxyCodeLine{\Hypertarget{_input_file_ide_api_8cs_source_l00015}\mbox{\hyperlink{class_luthetus_1_1_ide_1_1_razor_lib_1_1_input_files_1_1_models_1_1_input_file_ide_api}{00015}}\ \textcolor{keyword}{public}\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_luthetus_1_1_ide_1_1_razor_lib_1_1_input_files_1_1_models_1_1_input_file_ide_api_aa15c9d794bf671bd945b69fab311f243}{InputFileIdeApi}}}
+\DoxyCodeLine{\Hypertarget{_input_file_ide_api_8cs_source_l00016}00016\ \{}
+\DoxyCodeLine{\Hypertarget{_input_file_ide_api_8cs_source_l00017}00017\ \ \ \ \ \textcolor{keyword}{private}\ readonly\ \mbox{\hyperlink{class_luthetus_1_1_ide_1_1_razor_lib_1_1_background_tasks_1_1_models_1_1_ide_background_task_api}{IdeBackgroundTaskApi}}\ \_ideBackgroundTaskApi;}
+\DoxyCodeLine{\Hypertarget{_input_file_ide_api_8cs_source_l00018}00018\ \ \ \ \ \textcolor{keyword}{private}\ readonly\ \mbox{\hyperlink{interface_luthetus_1_1_ide_1_1_razor_lib_1_1_component_renderers_1_1_models_1_1_i_ide_component_renderers}{IIdeComponentRenderers}}\ \_ideComponentRenderers;}
+\DoxyCodeLine{\Hypertarget{_input_file_ide_api_8cs_source_l00019}00019\ \ \ \ \ \textcolor{keyword}{private}\ readonly\ \mbox{\hyperlink{interface_luthetus_1_1_common_1_1_razor_lib_1_1_background_tasks_1_1_models_1_1_i_background_task_service}{IBackgroundTaskService}}\ \_backgroundTaskService;}
+\DoxyCodeLine{\Hypertarget{_input_file_ide_api_8cs_source_l00020}00020\ \ \ \ \ \textcolor{keyword}{private}\ readonly\ IDispatcher\ \_dispatcher;}
+\DoxyCodeLine{\Hypertarget{_input_file_ide_api_8cs_source_l00021}00021\ }
+\DoxyCodeLine{\Hypertarget{_input_file_ide_api_8cs_source_l00022}\mbox{\hyperlink{class_luthetus_1_1_ide_1_1_razor_lib_1_1_input_files_1_1_models_1_1_input_file_ide_api_aa15c9d794bf671bd945b69fab311f243}{00022}}\ \ \ \ \ \textcolor{keyword}{public}\ \mbox{\hyperlink{class_luthetus_1_1_ide_1_1_razor_lib_1_1_input_files_1_1_models_1_1_input_file_ide_api_aa15c9d794bf671bd945b69fab311f243}{InputFileIdeApi}}(}
+\DoxyCodeLine{\Hypertarget{_input_file_ide_api_8cs_source_l00023}00023\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_luthetus_1_1_ide_1_1_razor_lib_1_1_background_tasks_1_1_models_1_1_ide_background_task_api}{IdeBackgroundTaskApi}}\ ideBackgroundTaskApi,}
+\DoxyCodeLine{\Hypertarget{_input_file_ide_api_8cs_source_l00024}00024\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{interface_luthetus_1_1_ide_1_1_razor_lib_1_1_component_renderers_1_1_models_1_1_i_ide_component_renderers}{IIdeComponentRenderers}}\ ideComponentRenderers,}
+\DoxyCodeLine{\Hypertarget{_input_file_ide_api_8cs_source_l00025}00025\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{interface_luthetus_1_1_common_1_1_razor_lib_1_1_background_tasks_1_1_models_1_1_i_background_task_service}{IBackgroundTaskService}}\ backgroundTaskService,}
+\DoxyCodeLine{\Hypertarget{_input_file_ide_api_8cs_source_l00026}00026\ \ \ \ \ \ \ \ \ IDispatcher\ dispatcher)}
+\DoxyCodeLine{\Hypertarget{_input_file_ide_api_8cs_source_l00027}00027\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_input_file_ide_api_8cs_source_l00028}00028\ \ \ \ \ \ \ \ \ \_ideBackgroundTaskApi\ =\ ideBackgroundTaskApi;}
+\DoxyCodeLine{\Hypertarget{_input_file_ide_api_8cs_source_l00029}00029\ \ \ \ \ \ \ \ \ \_ideComponentRenderers\ =\ ideComponentRenderers;}
+\DoxyCodeLine{\Hypertarget{_input_file_ide_api_8cs_source_l00030}00030\ \ \ \ \ \ \ \ \ \_backgroundTaskService\ =\ backgroundTaskService;}
+\DoxyCodeLine{\Hypertarget{_input_file_ide_api_8cs_source_l00031}00031\ \ \ \ \ \ \ \ \ \_dispatcher\ =\ dispatcher;}
+\DoxyCodeLine{\Hypertarget{_input_file_ide_api_8cs_source_l00032}00032\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_input_file_ide_api_8cs_source_l00033}00033\ }
+\DoxyCodeLine{\Hypertarget{_input_file_ide_api_8cs_source_l00034}\mbox{\hyperlink{class_luthetus_1_1_ide_1_1_razor_lib_1_1_input_files_1_1_models_1_1_input_file_ide_api_a7075fdb62eeecd4353b1711dcfa49903}{00034}}\ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_luthetus_1_1_ide_1_1_razor_lib_1_1_input_files_1_1_models_1_1_input_file_ide_api_a7075fdb62eeecd4353b1711dcfa49903}{RequestInputFileStateForm}}(}
+\DoxyCodeLine{\Hypertarget{_input_file_ide_api_8cs_source_l00035}00035\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{string}\ message,}
+\DoxyCodeLine{\Hypertarget{_input_file_ide_api_8cs_source_l00036}00036\ \ \ \ \ \ \ \ \ Func<IAbsolutePath?,\ Task>\ onAfterSubmitFunc,}
+\DoxyCodeLine{\Hypertarget{_input_file_ide_api_8cs_source_l00037}00037\ \ \ \ \ \ \ \ \ Func<\mbox{\hyperlink{interface_luthetus_1_1_common_1_1_razor_lib_1_1_file_systems_1_1_models_1_1_i_absolute_path}{IAbsolutePath}}?,\ Task<bool>>\ selectionIsValidFunc,}
+\DoxyCodeLine{\Hypertarget{_input_file_ide_api_8cs_source_l00038}00038\ \ \ \ \ \ \ \ \ ImmutableArray<InputFilePattern>\ inputFilePatterns)}
+\DoxyCodeLine{\Hypertarget{_input_file_ide_api_8cs_source_l00039}00039\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_input_file_ide_api_8cs_source_l00040}00040\ \ \ \ \ \ \ \ \ \_backgroundTaskService.Enqueue(}
+\DoxyCodeLine{\Hypertarget{_input_file_ide_api_8cs_source_l00041}00041\ \ \ \ \ \ \ \ \ \ \ \ \ Key<IBackgroundTask>.NewKey(),}
+\DoxyCodeLine{\Hypertarget{_input_file_ide_api_8cs_source_l00042}00042\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_luthetus_1_1_common_1_1_razor_lib_1_1_background_tasks_1_1_models_1_1_continuous_background_task_worker}{ContinuousBackgroundTaskWorker}}.\mbox{\hyperlink{class_luthetus_1_1_common_1_1_razor_lib_1_1_background_tasks_1_1_models_1_1_continuous_background_task_worker_a2bbecf18336413ee1caff9d378acc256}{GetQueueKey}}(),}
+\DoxyCodeLine{\Hypertarget{_input_file_ide_api_8cs_source_l00043}00043\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}Request\ InputFileState\ Form"{}},}
+\DoxyCodeLine{\Hypertarget{_input_file_ide_api_8cs_source_l00044}00044\ \ \ \ \ \ \ \ \ \ \ \ \ async\ ()\ =>\ await\ HandleRequestInputFileStateFormActionAsync(}
+\DoxyCodeLine{\Hypertarget{_input_file_ide_api_8cs_source_l00045}00045\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ message,}
+\DoxyCodeLine{\Hypertarget{_input_file_ide_api_8cs_source_l00046}00046\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ onAfterSubmitFunc,}
+\DoxyCodeLine{\Hypertarget{_input_file_ide_api_8cs_source_l00047}00047\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ selectionIsValidFunc,}
+\DoxyCodeLine{\Hypertarget{_input_file_ide_api_8cs_source_l00048}00048\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ inputFilePatterns)}
+\DoxyCodeLine{\Hypertarget{_input_file_ide_api_8cs_source_l00049}00049\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ .ConfigureAwait(\textcolor{keyword}{false}));}
+\DoxyCodeLine{\Hypertarget{_input_file_ide_api_8cs_source_l00050}00050\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_input_file_ide_api_8cs_source_l00051}00051\ }
+\DoxyCodeLine{\Hypertarget{_input_file_ide_api_8cs_source_l00052}00052\ \ \ \ \ \textcolor{keyword}{private}\ Task\ HandleRequestInputFileStateFormActionAsync(}
+\DoxyCodeLine{\Hypertarget{_input_file_ide_api_8cs_source_l00053}00053\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{string}\ message,}
+\DoxyCodeLine{\Hypertarget{_input_file_ide_api_8cs_source_l00054}00054\ \ \ \ \ \ \ \ \ Func<IAbsolutePath?,\ Task>\ onAfterSubmitFunc,}
+\DoxyCodeLine{\Hypertarget{_input_file_ide_api_8cs_source_l00055}00055\ \ \ \ \ \ \ \ \ Func<\mbox{\hyperlink{interface_luthetus_1_1_common_1_1_razor_lib_1_1_file_systems_1_1_models_1_1_i_absolute_path}{IAbsolutePath}}?,\ Task<bool>>\ selectionIsValidFunc,}
+\DoxyCodeLine{\Hypertarget{_input_file_ide_api_8cs_source_l00056}00056\ \ \ \ \ \ \ \ \ ImmutableArray<InputFilePattern>\ inputFilePatternsList)}
+\DoxyCodeLine{\Hypertarget{_input_file_ide_api_8cs_source_l00057}00057\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_input_file_ide_api_8cs_source_l00058}00058\ \ \ \ \ \ \ \ \ \_dispatcher.Dispatch(\textcolor{keyword}{new}\ StartInputFileStateFormAction(}
+\DoxyCodeLine{\Hypertarget{_input_file_ide_api_8cs_source_l00059}00059\ \ \ \ \ \ \ \ \ \ \ \ \ message,}
+\DoxyCodeLine{\Hypertarget{_input_file_ide_api_8cs_source_l00060}00060\ \ \ \ \ \ \ \ \ \ \ \ \ onAfterSubmitFunc,}
+\DoxyCodeLine{\Hypertarget{_input_file_ide_api_8cs_source_l00061}00061\ \ \ \ \ \ \ \ \ \ \ \ \ selectionIsValidFunc,}
+\DoxyCodeLine{\Hypertarget{_input_file_ide_api_8cs_source_l00062}00062\ \ \ \ \ \ \ \ \ \ \ \ \ inputFilePatternsList));}
+\DoxyCodeLine{\Hypertarget{_input_file_ide_api_8cs_source_l00063}00063\ }
+\DoxyCodeLine{\Hypertarget{_input_file_ide_api_8cs_source_l00064}00064\ \ \ \ \ \ \ \ \ var\ inputFileDialog\ =\ \textcolor{keyword}{new}\ \mbox{\hyperlink{namespace_luthetus_1_1_common_1_1_razor_lib_1_1_dialogs_1_1_models_ae2e54632fac386f81ebbbc781bf17fed}{DialogViewModel}}(}
+\DoxyCodeLine{\Hypertarget{_input_file_ide_api_8cs_source_l00065}00065\ \ \ \ \ \ \ \ \ \ \ \ \ DialogFacts.InputFileDialogKey,}
+\DoxyCodeLine{\Hypertarget{_input_file_ide_api_8cs_source_l00066}00066\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}Input\ File"{}},}
+\DoxyCodeLine{\Hypertarget{_input_file_ide_api_8cs_source_l00067}00067\ \ \ \ \ \ \ \ \ \ \ \ \ \_ideComponentRenderers.InputFileRendererType,}
+\DoxyCodeLine{\Hypertarget{_input_file_ide_api_8cs_source_l00068}00068\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{null},}
+\DoxyCodeLine{\Hypertarget{_input_file_ide_api_8cs_source_l00069}00069\ \ \ \ \ \ \ \ \ \ \ \ \ HtmlFacts.Classes.DIALOG\_PADDING\_0,}
+\DoxyCodeLine{\Hypertarget{_input_file_ide_api_8cs_source_l00070}00070\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{true},}
+\DoxyCodeLine{\Hypertarget{_input_file_ide_api_8cs_source_l00071}00071\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{null});}
+\DoxyCodeLine{\Hypertarget{_input_file_ide_api_8cs_source_l00072}00072\ }
+\DoxyCodeLine{\Hypertarget{_input_file_ide_api_8cs_source_l00073}00073\ \ \ \ \ \ \ \ \ \_dispatcher.Dispatch(\textcolor{keyword}{new}\ \mbox{\hyperlink{namespace_luthetus_1_1_common_1_1_razor_lib_1_1_dialogs_1_1_states_a1c299b7ac4927ba6c5bede4e57cd963f}{DialogState}}.RegisterAction(inputFileDialog));}
+\DoxyCodeLine{\Hypertarget{_input_file_ide_api_8cs_source_l00074}00074\ }
+\DoxyCodeLine{\Hypertarget{_input_file_ide_api_8cs_source_l00075}00075\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ Task.CompletedTask;}
+\DoxyCodeLine{\Hypertarget{_input_file_ide_api_8cs_source_l00076}00076\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_input_file_ide_api_8cs_source_l00077}00077\ \}}
+
+\end{DoxyCode}

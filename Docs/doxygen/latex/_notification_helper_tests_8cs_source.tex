@@ -1,0 +1,108 @@
+\doxysection{Notification\+Helper\+Tests.\+cs}
+\hypertarget{_notification_helper_tests_8cs_source}{}\label{_notification_helper_tests_8cs_source}\index{Source/Tests/Common/Basis/Notifications/Models/NotificationHelperTests.cs@{Source/Tests/Common/Basis/Notifications/Models/NotificationHelperTests.cs}}
+\mbox{\hyperlink{_notification_helper_tests_8cs}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{_notification_helper_tests_8cs_source_l00001}00001\ \textcolor{keyword}{using\ }Microsoft.Extensions.DependencyInjection;}
+\DoxyCodeLine{\Hypertarget{_notification_helper_tests_8cs_source_l00002}00002\ \textcolor{keyword}{using\ }Fluxor;}
+\DoxyCodeLine{\Hypertarget{_notification_helper_tests_8cs_source_l00003}00003\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_luthetus_1_1_common_1_1_razor_lib_1_1_notifications_1_1_models}{Luthetus.Common.RazorLib.Notifications.Models}};}
+\DoxyCodeLine{\Hypertarget{_notification_helper_tests_8cs_source_l00004}00004\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_luthetus_1_1_common_1_1_razor_lib_1_1_component_renderers_1_1_models}{Luthetus.Common.RazorLib.ComponentRenderers.Models}};}
+\DoxyCodeLine{\Hypertarget{_notification_helper_tests_8cs_source_l00005}00005\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_luthetus_1_1_common_1_1_razor_lib_1_1_notifications_1_1_displays}{Luthetus.Common.RazorLib.Notifications.Displays}};}
+\DoxyCodeLine{\Hypertarget{_notification_helper_tests_8cs_source_l00006}00006\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_luthetus_1_1_common_1_1_razor_lib_1_1_watch_windows_1_1_displays}{Luthetus.Common.RazorLib.WatchWindows.Displays}};}
+\DoxyCodeLine{\Hypertarget{_notification_helper_tests_8cs_source_l00007}00007\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_luthetus_1_1_common_1_1_razor_lib_1_1_tree_views_1_1_displays_1_1_utils}{Luthetus.Common.RazorLib.TreeViews.Displays.Utils}};}
+\DoxyCodeLine{\Hypertarget{_notification_helper_tests_8cs_source_l00008}00008\ }
+\DoxyCodeLine{\Hypertarget{_notification_helper_tests_8cs_source_l00009}\mbox{\hyperlink{namespace_luthetus_1_1_common_1_1_tests_1_1_basis_1_1_notifications}{00009}}\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespace_luthetus_1_1_common_1_1_tests_1_1_basis_1_1_notifications_1_1_models}{Luthetus.Common.Tests.Basis.Notifications.Models}};}
+\DoxyCodeLine{\Hypertarget{_notification_helper_tests_8cs_source_l00010}00010\ }
+\DoxyCodeLine{\Hypertarget{_notification_helper_tests_8cs_source_l00014}\mbox{\hyperlink{class_luthetus_1_1_common_1_1_tests_1_1_basis_1_1_notifications_1_1_models_1_1_notification_helper_tests}{00014}}\ \textcolor{keyword}{public}\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_luthetus_1_1_common_1_1_tests_1_1_basis_1_1_notifications_1_1_models_1_1_notification_helper_tests}{NotificationHelperTests}}}
+\DoxyCodeLine{\Hypertarget{_notification_helper_tests_8cs_source_l00015}00015\ \{}
+\DoxyCodeLine{\Hypertarget{_notification_helper_tests_8cs_source_l00019}00019\ \ \ \ \ [Fact]}
+\DoxyCodeLine{\Hypertarget{_notification_helper_tests_8cs_source_l00020}\mbox{\hyperlink{class_luthetus_1_1_common_1_1_tests_1_1_basis_1_1_notifications_1_1_models_1_1_notification_helper_tests_ac72270a783b8961e8a54e5c31810c303}{00020}}\ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_luthetus_1_1_common_1_1_tests_1_1_basis_1_1_notifications_1_1_models_1_1_notification_helper_tests_ac72270a783b8961e8a54e5c31810c303}{DispatchInformative}}()}
+\DoxyCodeLine{\Hypertarget{_notification_helper_tests_8cs_source_l00021}00021\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_notification_helper_tests_8cs_source_l00022}00022\ \ \ \ \ \ \ \ \ var\ services\ =\ \textcolor{keyword}{new}\ ServiceCollection()}
+\DoxyCodeLine{\Hypertarget{_notification_helper_tests_8cs_source_l00023}00023\ \ \ \ \ \ \ \ \ \ \ \ \ .AddScoped<\mbox{\hyperlink{interface_luthetus_1_1_common_1_1_razor_lib_1_1_notifications_1_1_models_1_1_i_notification_service}{INotificationService}},\ \mbox{\hyperlink{class_luthetus_1_1_common_1_1_razor_lib_1_1_notifications_1_1_models_1_1_notification_service}{NotificationService}}>()}
+\DoxyCodeLine{\Hypertarget{_notification_helper_tests_8cs_source_l00024}00024\ \ \ \ \ \ \ \ \ \ \ \ \ .AddFluxor(options\ =>\ options.ScanAssemblies(typeof(\mbox{\hyperlink{interface_luthetus_1_1_common_1_1_razor_lib_1_1_notifications_1_1_models_1_1_i_notification_service}{INotificationService}}).Assembly));}
+\DoxyCodeLine{\Hypertarget{_notification_helper_tests_8cs_source_l00025}00025\ }
+\DoxyCodeLine{\Hypertarget{_notification_helper_tests_8cs_source_l00026}00026\ \ \ \ \ \ \ \ \ var\ serviceProvider\ =\ services.BuildServiceProvider();}
+\DoxyCodeLine{\Hypertarget{_notification_helper_tests_8cs_source_l00027}00027\ }
+\DoxyCodeLine{\Hypertarget{_notification_helper_tests_8cs_source_l00028}00028\ \ \ \ \ \ \ \ \ var\ store\ =\ serviceProvider.GetRequiredService<IStore>();}
+\DoxyCodeLine{\Hypertarget{_notification_helper_tests_8cs_source_l00029}00029\ \ \ \ \ \ \ \ \ store.InitializeAsync().Wait();}
+\DoxyCodeLine{\Hypertarget{_notification_helper_tests_8cs_source_l00030}00030\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_notification_helper_tests_8cs_source_l00031}00031\ \ \ \ \ \ \ \ \ var\ dispatcher\ =\ serviceProvider.GetRequiredService<IDispatcher>();}
+\DoxyCodeLine{\Hypertarget{_notification_helper_tests_8cs_source_l00032}00032\ }
+\DoxyCodeLine{\Hypertarget{_notification_helper_tests_8cs_source_l00033}00033\ \ \ \ \ \ \ \ \ var\ notificationService\ =\ serviceProvider.GetRequiredService<\mbox{\hyperlink{interface_luthetus_1_1_common_1_1_razor_lib_1_1_notifications_1_1_models_1_1_i_notification_service}{INotificationService}}>();}
+\DoxyCodeLine{\Hypertarget{_notification_helper_tests_8cs_source_l00034}00034\ }
+\DoxyCodeLine{\Hypertarget{_notification_helper_tests_8cs_source_l00035}00035\ \ \ \ \ \ \ \ \ var\ commonTreeViews\ =\ \textcolor{keyword}{new}\ \mbox{\hyperlink{class_luthetus_1_1_common_1_1_razor_lib_1_1_component_renderers_1_1_models_1_1_common_tree_views}{CommonTreeViews}}(}
+\DoxyCodeLine{\Hypertarget{_notification_helper_tests_8cs_source_l00036}00036\ \ \ \ \ \ \ \ \ \ \ \ \ typeof(\mbox{\hyperlink{class_luthetus_1_1_common_1_1_razor_lib_1_1_tree_views_1_1_displays_1_1_utils_1_1_tree_view_exception_display}{TreeViewExceptionDisplay}}),}
+\DoxyCodeLine{\Hypertarget{_notification_helper_tests_8cs_source_l00037}00037\ \ \ \ \ \ \ \ \ \ \ \ \ typeof(\mbox{\hyperlink{class_luthetus_1_1_common_1_1_razor_lib_1_1_watch_windows_1_1_displays_1_1_tree_view_missing_renderer_fallback_display}{TreeViewMissingRendererFallbackDisplay}}),}
+\DoxyCodeLine{\Hypertarget{_notification_helper_tests_8cs_source_l00038}00038\ \ \ \ \ \ \ \ \ \ \ \ \ typeof(\mbox{\hyperlink{class_luthetus_1_1_common_1_1_razor_lib_1_1_watch_windows_1_1_displays_1_1_tree_view_text_display}{TreeViewTextDisplay}}),}
+\DoxyCodeLine{\Hypertarget{_notification_helper_tests_8cs_source_l00039}00039\ \ \ \ \ \ \ \ \ \ \ \ \ typeof(\mbox{\hyperlink{class_luthetus_1_1_common_1_1_razor_lib_1_1_watch_windows_1_1_displays_1_1_tree_view_reflection_display}{TreeViewReflectionDisplay}}),}
+\DoxyCodeLine{\Hypertarget{_notification_helper_tests_8cs_source_l00040}00040\ \ \ \ \ \ \ \ \ \ \ \ \ typeof(\mbox{\hyperlink{class_luthetus_1_1_common_1_1_razor_lib_1_1_watch_windows_1_1_displays_1_1_tree_view_properties_display}{TreeViewPropertiesDisplay}}),}
+\DoxyCodeLine{\Hypertarget{_notification_helper_tests_8cs_source_l00041}00041\ \ \ \ \ \ \ \ \ \ \ \ \ typeof(\mbox{\hyperlink{class_luthetus_1_1_common_1_1_razor_lib_1_1_watch_windows_1_1_displays_1_1_tree_view_interface_implementation_display}{TreeViewInterfaceImplementationDisplay}}),}
+\DoxyCodeLine{\Hypertarget{_notification_helper_tests_8cs_source_l00042}00042\ \ \ \ \ \ \ \ \ \ \ \ \ typeof(\mbox{\hyperlink{class_luthetus_1_1_common_1_1_razor_lib_1_1_watch_windows_1_1_displays_1_1_tree_view_fields_display}{TreeViewFieldsDisplay}}),}
+\DoxyCodeLine{\Hypertarget{_notification_helper_tests_8cs_source_l00043}00043\ \ \ \ \ \ \ \ \ \ \ \ \ typeof(\mbox{\hyperlink{class_luthetus_1_1_common_1_1_razor_lib_1_1_tree_views_1_1_displays_1_1_utils_1_1_tree_view_exception_display}{TreeViewExceptionDisplay}}),}
+\DoxyCodeLine{\Hypertarget{_notification_helper_tests_8cs_source_l00044}00044\ \ \ \ \ \ \ \ \ \ \ \ \ typeof(\mbox{\hyperlink{class_luthetus_1_1_common_1_1_razor_lib_1_1_watch_windows_1_1_displays_1_1_tree_view_enumerable_display}{TreeViewEnumerableDisplay}}));}
+\DoxyCodeLine{\Hypertarget{_notification_helper_tests_8cs_source_l00045}00045\ }
+\DoxyCodeLine{\Hypertarget{_notification_helper_tests_8cs_source_l00046}00046\ \ \ \ \ \ \ \ \ var\ commonComponentRenderers\ =\ \textcolor{keyword}{new}\ \mbox{\hyperlink{class_luthetus_1_1_common_1_1_razor_lib_1_1_component_renderers_1_1_models_1_1_common_component_renderers}{CommonComponentRenderers}}(}
+\DoxyCodeLine{\Hypertarget{_notification_helper_tests_8cs_source_l00047}00047\ \ \ \ \ \ \ \ \ \ \ \ \ typeof(\mbox{\hyperlink{class_luthetus_1_1_common_1_1_razor_lib_1_1_notifications_1_1_displays_1_1_common_error_notification_display}{CommonErrorNotificationDisplay}}),}
+\DoxyCodeLine{\Hypertarget{_notification_helper_tests_8cs_source_l00048}00048\ \ \ \ \ \ \ \ \ \ \ \ \ typeof(\mbox{\hyperlink{class_luthetus_1_1_common_1_1_razor_lib_1_1_notifications_1_1_displays_1_1_common_informative_notification_display}{CommonInformativeNotificationDisplay}}),}
+\DoxyCodeLine{\Hypertarget{_notification_helper_tests_8cs_source_l00049}00049\ \ \ \ \ \ \ \ \ \ \ \ \ typeof(\mbox{\hyperlink{class_luthetus_1_1_common_1_1_razor_lib_1_1_notifications_1_1_displays_1_1_common_progress_notification_display}{CommonProgressNotificationDisplay}}),}
+\DoxyCodeLine{\Hypertarget{_notification_helper_tests_8cs_source_l00050}00050\ \ \ \ \ \ \ \ \ \ \ \ \ commonTreeViews);}
+\DoxyCodeLine{\Hypertarget{_notification_helper_tests_8cs_source_l00051}00051\ }
+\DoxyCodeLine{\Hypertarget{_notification_helper_tests_8cs_source_l00052}00052\ \ \ \ \ \ \ \ \ Assert.Empty(notificationService.NotificationStateWrap.Value.DefaultList);}
+\DoxyCodeLine{\Hypertarget{_notification_helper_tests_8cs_source_l00053}00053\ }
+\DoxyCodeLine{\Hypertarget{_notification_helper_tests_8cs_source_l00054}00054\ \ \ \ \ \ \ \ \ NotificationHelper.DispatchInformative(}
+\DoxyCodeLine{\Hypertarget{_notification_helper_tests_8cs_source_l00055}00055\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}Test"{}},}
+\DoxyCodeLine{\Hypertarget{_notification_helper_tests_8cs_source_l00056}00056\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}Message\ testing"{}},}
+\DoxyCodeLine{\Hypertarget{_notification_helper_tests_8cs_source_l00057}00057\ \ \ \ \ \ \ \ \ \ \ \ \ commonComponentRenderers,}
+\DoxyCodeLine{\Hypertarget{_notification_helper_tests_8cs_source_l00058}00058\ \ \ \ \ \ \ \ \ \ \ \ \ dispatcher,}
+\DoxyCodeLine{\Hypertarget{_notification_helper_tests_8cs_source_l00059}00059\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{null});}
+\DoxyCodeLine{\Hypertarget{_notification_helper_tests_8cs_source_l00060}00060\ }
+\DoxyCodeLine{\Hypertarget{_notification_helper_tests_8cs_source_l00061}00061\ \ \ \ \ \ \ \ \ Assert.NotEmpty(notificationService.NotificationStateWrap.Value.DefaultList);}
+\DoxyCodeLine{\Hypertarget{_notification_helper_tests_8cs_source_l00062}00062\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_notification_helper_tests_8cs_source_l00063}00063\ }
+\DoxyCodeLine{\Hypertarget{_notification_helper_tests_8cs_source_l00067}00067\ \ \ \ \ [Fact]}
+\DoxyCodeLine{\Hypertarget{_notification_helper_tests_8cs_source_l00068}\mbox{\hyperlink{class_luthetus_1_1_common_1_1_tests_1_1_basis_1_1_notifications_1_1_models_1_1_notification_helper_tests_a03c492d6de90830ee483ff45b56706de}{00068}}\ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_luthetus_1_1_common_1_1_tests_1_1_basis_1_1_notifications_1_1_models_1_1_notification_helper_tests_a03c492d6de90830ee483ff45b56706de}{DispatchError}}()}
+\DoxyCodeLine{\Hypertarget{_notification_helper_tests_8cs_source_l00069}00069\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_notification_helper_tests_8cs_source_l00070}00070\ \ \ \ \ \ \ \ \ var\ services\ =\ \textcolor{keyword}{new}\ ServiceCollection()}
+\DoxyCodeLine{\Hypertarget{_notification_helper_tests_8cs_source_l00071}00071\ \ \ \ \ \ \ \ \ \ \ \ \ .AddScoped<\mbox{\hyperlink{interface_luthetus_1_1_common_1_1_razor_lib_1_1_notifications_1_1_models_1_1_i_notification_service}{INotificationService}},\ \mbox{\hyperlink{class_luthetus_1_1_common_1_1_razor_lib_1_1_notifications_1_1_models_1_1_notification_service}{NotificationService}}>()}
+\DoxyCodeLine{\Hypertarget{_notification_helper_tests_8cs_source_l00072}00072\ \ \ \ \ \ \ \ \ \ \ \ \ .AddFluxor(options\ =>\ options.ScanAssemblies(typeof(\mbox{\hyperlink{interface_luthetus_1_1_common_1_1_razor_lib_1_1_notifications_1_1_models_1_1_i_notification_service}{INotificationService}}).Assembly));}
+\DoxyCodeLine{\Hypertarget{_notification_helper_tests_8cs_source_l00073}00073\ }
+\DoxyCodeLine{\Hypertarget{_notification_helper_tests_8cs_source_l00074}00074\ \ \ \ \ \ \ \ \ var\ serviceProvider\ =\ services.BuildServiceProvider();}
+\DoxyCodeLine{\Hypertarget{_notification_helper_tests_8cs_source_l00075}00075\ }
+\DoxyCodeLine{\Hypertarget{_notification_helper_tests_8cs_source_l00076}00076\ \ \ \ \ \ \ \ \ var\ store\ =\ serviceProvider.GetRequiredService<IStore>();}
+\DoxyCodeLine{\Hypertarget{_notification_helper_tests_8cs_source_l00077}00077\ \ \ \ \ \ \ \ \ store.InitializeAsync().Wait();}
+\DoxyCodeLine{\Hypertarget{_notification_helper_tests_8cs_source_l00078}00078\ }
+\DoxyCodeLine{\Hypertarget{_notification_helper_tests_8cs_source_l00079}00079\ \ \ \ \ \ \ \ \ var\ dispatcher\ =\ serviceProvider.GetRequiredService<IDispatcher>();}
+\DoxyCodeLine{\Hypertarget{_notification_helper_tests_8cs_source_l00080}00080\ }
+\DoxyCodeLine{\Hypertarget{_notification_helper_tests_8cs_source_l00081}00081\ \ \ \ \ \ \ \ \ var\ notificationService\ =\ serviceProvider.GetRequiredService<\mbox{\hyperlink{interface_luthetus_1_1_common_1_1_razor_lib_1_1_notifications_1_1_models_1_1_i_notification_service}{INotificationService}}>();}
+\DoxyCodeLine{\Hypertarget{_notification_helper_tests_8cs_source_l00082}00082\ }
+\DoxyCodeLine{\Hypertarget{_notification_helper_tests_8cs_source_l00083}00083\ \ \ \ \ \ \ \ \ var\ commonTreeViews\ =\ \textcolor{keyword}{new}\ \mbox{\hyperlink{class_luthetus_1_1_common_1_1_razor_lib_1_1_component_renderers_1_1_models_1_1_common_tree_views}{CommonTreeViews}}(}
+\DoxyCodeLine{\Hypertarget{_notification_helper_tests_8cs_source_l00084}00084\ \ \ \ \ \ \ \ \ \ \ \ \ typeof(\mbox{\hyperlink{class_luthetus_1_1_common_1_1_razor_lib_1_1_tree_views_1_1_displays_1_1_utils_1_1_tree_view_exception_display}{TreeViewExceptionDisplay}}),}
+\DoxyCodeLine{\Hypertarget{_notification_helper_tests_8cs_source_l00085}00085\ \ \ \ \ \ \ \ \ \ \ \ \ typeof(\mbox{\hyperlink{class_luthetus_1_1_common_1_1_razor_lib_1_1_watch_windows_1_1_displays_1_1_tree_view_missing_renderer_fallback_display}{TreeViewMissingRendererFallbackDisplay}}),}
+\DoxyCodeLine{\Hypertarget{_notification_helper_tests_8cs_source_l00086}00086\ \ \ \ \ \ \ \ \ \ \ \ \ typeof(\mbox{\hyperlink{class_luthetus_1_1_common_1_1_razor_lib_1_1_watch_windows_1_1_displays_1_1_tree_view_text_display}{TreeViewTextDisplay}}),}
+\DoxyCodeLine{\Hypertarget{_notification_helper_tests_8cs_source_l00087}00087\ \ \ \ \ \ \ \ \ \ \ \ \ typeof(\mbox{\hyperlink{class_luthetus_1_1_common_1_1_razor_lib_1_1_watch_windows_1_1_displays_1_1_tree_view_reflection_display}{TreeViewReflectionDisplay}}),}
+\DoxyCodeLine{\Hypertarget{_notification_helper_tests_8cs_source_l00088}00088\ \ \ \ \ \ \ \ \ \ \ \ \ typeof(\mbox{\hyperlink{class_luthetus_1_1_common_1_1_razor_lib_1_1_watch_windows_1_1_displays_1_1_tree_view_properties_display}{TreeViewPropertiesDisplay}}),}
+\DoxyCodeLine{\Hypertarget{_notification_helper_tests_8cs_source_l00089}00089\ \ \ \ \ \ \ \ \ \ \ \ \ typeof(\mbox{\hyperlink{class_luthetus_1_1_common_1_1_razor_lib_1_1_watch_windows_1_1_displays_1_1_tree_view_interface_implementation_display}{TreeViewInterfaceImplementationDisplay}}),}
+\DoxyCodeLine{\Hypertarget{_notification_helper_tests_8cs_source_l00090}00090\ \ \ \ \ \ \ \ \ \ \ \ \ typeof(\mbox{\hyperlink{class_luthetus_1_1_common_1_1_razor_lib_1_1_watch_windows_1_1_displays_1_1_tree_view_fields_display}{TreeViewFieldsDisplay}}),}
+\DoxyCodeLine{\Hypertarget{_notification_helper_tests_8cs_source_l00091}00091\ \ \ \ \ \ \ \ \ \ \ \ \ typeof(\mbox{\hyperlink{class_luthetus_1_1_common_1_1_razor_lib_1_1_tree_views_1_1_displays_1_1_utils_1_1_tree_view_exception_display}{TreeViewExceptionDisplay}}),}
+\DoxyCodeLine{\Hypertarget{_notification_helper_tests_8cs_source_l00092}00092\ \ \ \ \ \ \ \ \ \ \ \ \ typeof(\mbox{\hyperlink{class_luthetus_1_1_common_1_1_razor_lib_1_1_watch_windows_1_1_displays_1_1_tree_view_enumerable_display}{TreeViewEnumerableDisplay}}));}
+\DoxyCodeLine{\Hypertarget{_notification_helper_tests_8cs_source_l00093}00093\ }
+\DoxyCodeLine{\Hypertarget{_notification_helper_tests_8cs_source_l00094}00094\ \ \ \ \ \ \ \ \ var\ commonComponentRenderers\ =\ \textcolor{keyword}{new}\ \mbox{\hyperlink{class_luthetus_1_1_common_1_1_razor_lib_1_1_component_renderers_1_1_models_1_1_common_component_renderers}{CommonComponentRenderers}}(}
+\DoxyCodeLine{\Hypertarget{_notification_helper_tests_8cs_source_l00095}00095\ \ \ \ \ \ \ \ \ \ \ \ \ typeof(\mbox{\hyperlink{class_luthetus_1_1_common_1_1_razor_lib_1_1_notifications_1_1_displays_1_1_common_error_notification_display}{CommonErrorNotificationDisplay}}),}
+\DoxyCodeLine{\Hypertarget{_notification_helper_tests_8cs_source_l00096}00096\ \ \ \ \ \ \ \ \ \ \ \ \ typeof(\mbox{\hyperlink{class_luthetus_1_1_common_1_1_razor_lib_1_1_notifications_1_1_displays_1_1_common_informative_notification_display}{CommonInformativeNotificationDisplay}}),}
+\DoxyCodeLine{\Hypertarget{_notification_helper_tests_8cs_source_l00097}00097\ \ \ \ \ \ \ \ \ \ \ \ \ typeof(\mbox{\hyperlink{class_luthetus_1_1_common_1_1_razor_lib_1_1_notifications_1_1_displays_1_1_common_progress_notification_display}{CommonProgressNotificationDisplay}}),}
+\DoxyCodeLine{\Hypertarget{_notification_helper_tests_8cs_source_l00098}00098\ \ \ \ \ \ \ \ \ \ \ \ \ commonTreeViews);}
+\DoxyCodeLine{\Hypertarget{_notification_helper_tests_8cs_source_l00099}00099\ }
+\DoxyCodeLine{\Hypertarget{_notification_helper_tests_8cs_source_l00100}00100\ \ \ \ \ \ \ \ \ Assert.Empty(notificationService.NotificationStateWrap.Value.DefaultList);}
+\DoxyCodeLine{\Hypertarget{_notification_helper_tests_8cs_source_l00101}00101\ }
+\DoxyCodeLine{\Hypertarget{_notification_helper_tests_8cs_source_l00102}00102\ \ \ \ \ \ \ \ \ NotificationHelper.DispatchError(}
+\DoxyCodeLine{\Hypertarget{_notification_helper_tests_8cs_source_l00103}00103\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}Test"{}},}
+\DoxyCodeLine{\Hypertarget{_notification_helper_tests_8cs_source_l00104}00104\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}Message\ testing"{}},}
+\DoxyCodeLine{\Hypertarget{_notification_helper_tests_8cs_source_l00105}00105\ \ \ \ \ \ \ \ \ \ \ \ \ commonComponentRenderers,}
+\DoxyCodeLine{\Hypertarget{_notification_helper_tests_8cs_source_l00106}00106\ \ \ \ \ \ \ \ \ \ \ \ \ dispatcher,}
+\DoxyCodeLine{\Hypertarget{_notification_helper_tests_8cs_source_l00107}00107\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{null});}
+\DoxyCodeLine{\Hypertarget{_notification_helper_tests_8cs_source_l00108}00108\ }
+\DoxyCodeLine{\Hypertarget{_notification_helper_tests_8cs_source_l00109}00109\ \ \ \ \ \ \ \ \ Assert.NotEmpty(notificationService.NotificationStateWrap.Value.DefaultList);}
+\DoxyCodeLine{\Hypertarget{_notification_helper_tests_8cs_source_l00110}00110\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_notification_helper_tests_8cs_source_l00111}00111\ \}}
+
+\end{DoxyCode}

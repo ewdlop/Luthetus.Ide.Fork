@@ -1,0 +1,6 @@
+var class_luthetus_1_1_common_1_1_tests_1_1_basis_1_1_background_tasks_1_1_models_1_1_background_task_queue_tests =
+[
+    [ "Constructor", "class_luthetus_1_1_common_1_1_tests_1_1_basis_1_1_background_tasks_1_1_models_1_1_background_task_queue_tests.html#a791e062f2e1541906378e404090f5bb5", null ],
+    [ "ExecutingBackgroundTask", "class_luthetus_1_1_common_1_1_tests_1_1_basis_1_1_background_tasks_1_1_models_1_1_background_task_queue_tests.html#afd85a8e1d6c3ff3eb95acc298f98f154", null ],
+    [ "WorkItemAvailableSemaphoreSlim", "class_luthetus_1_1_common_1_1_tests_1_1_basis_1_1_background_tasks_1_1_models_1_1_background_task_queue_tests.html#a078e9c26640e4448f5b925532cefe8ca", null ]
+];

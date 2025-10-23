@@ -1,0 +1,543 @@
+.TH "Luthetus.TextEditor.RazorLib.CompilerServices.Syntax" 3 "Version 1.0.0" "Luthetus.Ide" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+Luthetus.TextEditor.RazorLib.CompilerServices.Syntax
+.SH SYNOPSIS
+.br
+.PP
+.SS "Namespaces"
+
+.in +1c
+.ti -1c
+.RI "namespace \fBNodes\fP"
+.br
+.ti -1c
+.RI "namespace \fBSymbols\fP"
+.br
+.ti -1c
+.RI "namespace \fBTokens\fP"
+.br
+.in -1c
+.SS "Classes"
+
+.in +1c
+.ti -1c
+.RI "class \fBFunctionHelper\fP"
+.br
+.ti -1c
+.RI "interface \fBISyntax\fP"
+.br
+.ti -1c
+.RI "interface \fBISyntaxNode\fP"
+.br
+.ti -1c
+.RI "interface \fBISyntaxToken\fP"
+.br
+.ti -1c
+.RI "class \fBSyntaxReader\fP"
+.br
+.ti -1c
+.RI "class \fBTokenFactory\fP"
+.br
+.in -1c
+.SS "Enumerations"
+
+.in +1c
+.ti -1c
+.RI "enum \fBSyntaxKind\fP { \fBCommentMultiLineToken\fP, \fBCommentSingleLineToken\fP, \fBIdentifierToken\fP, \fBNameableToken\fP, \fBNumericLiteralToken\fP, \fBCharLiteralToken\fP, \fBStringLiteralToken\fP, \fBTriviaToken\fP, \fBPreprocessorDirectiveToken\fP, \fBLibraryReferenceToken\fP, \fBPlusToken\fP, \fBPlusPlusToken\fP, \fBMinusToken\fP, \fBMinusMinusToken\fP, \fBStarToken\fP, \fBDivisionToken\fP, \fBEqualsToken\fP, \fBEqualsEqualsToken\fP, \fBQuestionMarkToken\fP, \fBQuestionMarkQuestionMarkToken\fP, \fBBangToken\fP, \fBStatementDelimiterToken\fP, \fBArraySyntaxToken\fP, \fBAssociatedNameToken\fP, \fBAssociatedValueToken\fP, \fBOpenAssociatedGroupToken\fP, \fBCloseAssociatedGroupToken\fP, \fBOpenParenthesisToken\fP, \fBCloseParenthesisToken\fP, \fBOpenBraceToken\fP, \fBCloseBraceToken\fP, \fBOpenAngleBracketToken\fP, \fBCloseAngleBracketToken\fP, \fBOpenSquareBracketToken\fP, \fBCloseSquareBracketToken\fP, \fBDollarSignToken\fP, \fBAtToken\fP, \fBColonToken\fP, \fBMemberAccessToken\fP, \fBCommaToken\fP, \fBBadToken\fP, \fBEndOfFileToken\fP, \fBAbstractTokenKeyword\fP, \fBAsTokenKeyword\fP, \fBBaseTokenKeyword\fP, \fBBoolTokenKeyword\fP, \fBBreakTokenKeyword\fP, \fBByteTokenKeyword\fP, \fBCaseTokenKeyword\fP, \fBCatchTokenKeyword\fP, \fBCharTokenKeyword\fP, \fBCheckedTokenKeyword\fP, \fBClassTokenKeyword\fP, \fBConstTokenKeyword\fP, \fBContinueTokenKeyword\fP, \fBDecimalTokenKeyword\fP, \fBDefaultTokenKeyword\fP, \fBDelegateTokenKeyword\fP, \fBDoTokenKeyword\fP, \fBDoubleTokenKeyword\fP, \fBElseTokenKeyword\fP, \fBEnumTokenKeyword\fP, \fBEventTokenKeyword\fP, \fBExplicitTokenKeyword\fP, \fBExternTokenKeyword\fP, \fBFalseTokenKeyword\fP, \fBFinallyTokenKeyword\fP, \fBFixedTokenKeyword\fP, \fBFloatTokenKeyword\fP, \fBForTokenKeyword\fP, \fBForeachTokenKeyword\fP, \fBGotoTokenKeyword\fP, \fBIfTokenKeyword\fP, \fBImplicitTokenKeyword\fP, \fBInTokenKeyword\fP, \fBIntTokenKeyword\fP, \fBInterfaceTokenKeyword\fP, \fBInternalTokenKeyword\fP, \fBIsTokenKeyword\fP, \fBLockTokenKeyword\fP, \fBLongTokenKeyword\fP, \fBNamespaceTokenKeyword\fP, \fBNewTokenKeyword\fP, \fBNullTokenKeyword\fP, \fBObjectTokenKeyword\fP, \fBOperatorTokenKeyword\fP, \fBOutTokenKeyword\fP, \fBOverrideTokenKeyword\fP, \fBParamsTokenKeyword\fP, \fBPrivateTokenKeyword\fP, \fBProtectedTokenKeyword\fP, \fBPublicTokenKeyword\fP, \fBReadonlyTokenKeyword\fP, \fBRefTokenKeyword\fP, \fBReturnTokenKeyword\fP, \fBSbyteTokenKeyword\fP, \fBSealedTokenKeyword\fP, \fBShortTokenKeyword\fP, \fBSizeofTokenKeyword\fP, \fBStackallocTokenKeyword\fP, \fBStaticTokenKeyword\fP, \fBStringTokenKeyword\fP, \fBStructTokenKeyword\fP, \fBSwitchTokenKeyword\fP, \fBThisTokenKeyword\fP, \fBThrowTokenKeyword\fP, \fBTrueTokenKeyword\fP, \fBTryTokenKeyword\fP, \fBTryStatementTryNode\fP, \fBTryStatementCatchNode\fP, \fBTryStatementFinallyNode\fP, \fBTypeofTokenKeyword\fP, \fBUintTokenKeyword\fP, \fBUlongTokenKeyword\fP, \fBUncheckedTokenKeyword\fP, \fBUnsafeTokenKeyword\fP, \fBUshortTokenKeyword\fP, \fBUsingTokenKeyword\fP, \fBVirtualTokenKeyword\fP, \fBVoidTokenKeyword\fP, \fBVolatileTokenKeyword\fP, \fBWhileTokenKeyword\fP, \fBUnrecognizedTokenKeyword\fP, \fBAddTokenContextualKeyword\fP, \fBAndTokenContextualKeyword\fP, \fBAliasTokenContextualKeyword\fP, \fBAscendingTokenContextualKeyword\fP, \fBArgsTokenContextualKeyword\fP, \fBAsyncTokenContextualKeyword\fP, \fBAwaitTokenContextualKeyword\fP, \fBByTokenContextualKeyword\fP, \fBDescendingTokenContextualKeyword\fP, \fBDynamicTokenContextualKeyword\fP, \fBEqualsTokenContextualKeyword\fP, \fBFileTokenContextualKeyword\fP, \fBFromTokenContextualKeyword\fP, \fBGetTokenContextualKeyword\fP, \fBGlobalTokenContextualKeyword\fP, \fBGroupTokenContextualKeyword\fP, \fBInitTokenContextualKeyword\fP, \fBIntoTokenContextualKeyword\fP, \fBJoinTokenContextualKeyword\fP, \fBLetTokenContextualKeyword\fP, \fBManagedTokenContextualKeyword\fP, \fBNameofTokenContextualKeyword\fP, \fBNintTokenContextualKeyword\fP, \fBNotTokenContextualKeyword\fP, \fBNotnullTokenContextualKeyword\fP, \fBNuintTokenContextualKeyword\fP, \fBOnTokenContextualKeyword\fP, \fBOrTokenContextualKeyword\fP, \fBOrderbyTokenContextualKeyword\fP, \fBPartialTokenContextualKeyword\fP, \fBRecordTokenContextualKeyword\fP, \fBRemoveTokenContextualKeyword\fP, \fBRequiredTokenContextualKeyword\fP, \fBScopedTokenContextualKeyword\fP, \fBSelectTokenContextualKeyword\fP, \fBSetTokenContextualKeyword\fP, \fBUnmanagedTokenContextualKeyword\fP, \fBValueTokenContextualKeyword\fP, \fBVarTokenContextualKeyword\fP, \fBWhenTokenContextualKeyword\fP, \fBWhereTokenContextualKeyword\fP, \fBWithTokenContextualKeyword\fP, \fBYieldTokenContextualKeyword\fP, \fBUnrecognizedTokenContextualKeyword\fP, \fBCompilationUnit\fP, \fBCodeBlockNode\fP, \fBLiteralExpressionNode\fP, \fBParenthesizedExpressionNode\fP, \fBEmptyExpressionNode\fP, \fBAmbiguousIdentifierExpressionNode\fP, \fBPreprocessorLibraryReferenceStatementNode\fP, \fBTypeDefinitionNode\fP, \fBTypeClauseNode\fP, \fBExplicitCastNode\fP, \fBConstraintNode\fP, \fBVariableDeclarationNode\fP, \fBVariableReferenceNode\fP, \fBVariableAssignmentExpressionNode\fP, \fBVariableExpressionNode\fP, \fBWithExpressionNode\fP, \fBPropertyDefinitionNode\fP, \fBFieldDefinitionNode\fP, \fBConstructorDefinitionNode\fP, \fBConstructorInvocationExpressionNode\fP, \fBObjectInitializationParametersListingNode\fP, \fBObjectInitializationParameterEntryNode\fP, \fBFunctionDefinitionNode\fP, \fBFunctionArgumentsListingNode\fP, \fBFunctionArgumentEntryNode\fP, \fBFunctionParametersListingNode\fP, \fBFunctionParameterEntryNode\fP, \fBFunctionInvocationNode\fP, \fBLambdaExpressionNode\fP, \fBTupleExpressionNode\fP, \fBCommaSeparatedExpressionNode\fP, \fBGenericArgumentsListingNode\fP, \fBGenericArgumentEntryNode\fP, \fBGenericParametersListingNode\fP, \fBGenericParameterEntryNode\fP, \fBArbitraryCodeBlockNode\fP, \fBInheritanceStatementNode\fP, \fBAmbiguousIdentifierNode\fP, \fBEmptyNode\fP, \fBIfStatementNode\fP, \fBForeachStatementNode\fP, \fBDoWhileStatementNode\fP, \fBWhileStatementNode\fP, \fBForStatementNode\fP, \fBSwitchStatementNode\fP, \fBSwitchExpressionNode\fP, \fBTryStatementNode\fP, \fBLockStatementNode\fP, \fBReturnStatementNode\fP, \fBNamespaceStatementNode\fP, \fBNamespaceGroupNode\fP, \fBObjectInitializationNode\fP, \fBUsingStatementNode\fP, \fBBadExpressionNode\fP, \fBUnaryOperatorNode\fP, \fBUnaryExpressionNode\fP, \fBBinaryOperatorNode\fP, \fBBinaryExpressionNode\fP, \fBAttributeNode\fP, \fBTypeSymbol\fP, \fBConstructorSymbol\fP, \fBFunctionSymbol\fP, \fBLambdaSymbol\fP, \fBVariableSymbol\fP, \fBFieldSymbol\fP, \fBPropertySymbol\fP, \fBStringInterpolationSymbol\fP, \fBStringVerbatimSymbol\fP, \fBNamespaceSymbol\fP, \fBInjectedLanguageComponentSymbol\fP, \fBSourceFileSymbol\fP, \fBOnClickSymbol\fP }"
+.br
+.RI "In order to share identical logic with C and CSharp code analysis I need to have them share the SyntaxKind enum\&. I don't like this because some enum members are used in one language but not the other\&. "
+.in -1c
+.SH "Enumeration Type Documentation"
+.PP 
+.SS "enum \fBLuthetus\&.TextEditor\&.RazorLib\&.CompilerServices\&.Syntax\&.SyntaxKind\fP"
+
+.PP
+In order to share identical logic with C and CSharp code analysis I need to have them share the \fBSyntaxKind\fP enum\&. I don't like this because some enum members are used in one language but not the other\&. 
+.PP
+\fBEnumerator\fP
+.in +1c
+.TP
+\f(BICommentMultiLineToken \fP
+.TP
+\f(BICommentSingleLineToken \fP
+.TP
+\f(BIIdentifierToken \fP
+.TP
+\f(BINameableToken \fP
+.TP
+\f(BINumericLiteralToken \fP
+.TP
+\f(BICharLiteralToken \fP
+.TP
+\f(BIStringLiteralToken \fP
+.TP
+\f(BITriviaToken \fP
+.TP
+\f(BIPreprocessorDirectiveToken \fP
+.TP
+\f(BILibraryReferenceToken \fP
+.TP
+\f(BIPlusToken \fP
+.TP
+\f(BIPlusPlusToken \fP
+.TP
+\f(BIMinusToken \fP
+.TP
+\f(BIMinusMinusToken \fP
+.TP
+\f(BIStarToken \fP
+.TP
+\f(BIDivisionToken \fP
+.TP
+\f(BIEqualsToken \fP
+.TP
+\f(BIEqualsEqualsToken \fP
+.TP
+\f(BIQuestionMarkToken \fP
+.TP
+\f(BIQuestionMarkQuestionMarkToken \fP
+.TP
+\f(BIBangToken \fP
+.TP
+\f(BIStatementDelimiterToken \fP
+.TP
+\f(BIArraySyntaxToken \fP
+.TP
+\f(BIAssociatedNameToken \fP
+.TP
+\f(BIAssociatedValueToken \fP
+.TP
+\f(BIOpenAssociatedGroupToken \fP
+.TP
+\f(BICloseAssociatedGroupToken \fP
+.TP
+\f(BIOpenParenthesisToken \fP
+.TP
+\f(BICloseParenthesisToken \fP
+.TP
+\f(BIOpenBraceToken \fP
+.TP
+\f(BICloseBraceToken \fP
+.TP
+\f(BIOpenAngleBracketToken \fP
+.TP
+\f(BICloseAngleBracketToken \fP
+.TP
+\f(BIOpenSquareBracketToken \fP
+.TP
+\f(BICloseSquareBracketToken \fP
+.TP
+\f(BIDollarSignToken \fP
+.TP
+\f(BIAtToken \fP
+.TP
+\f(BIColonToken \fP
+.TP
+\f(BIMemberAccessToken \fP
+.TP
+\f(BICommaToken \fP
+.TP
+\f(BIBadToken \fP
+.TP
+\f(BIEndOfFileToken \fP
+.TP
+\f(BIAbstractTokenKeyword \fP
+.TP
+\f(BIAsTokenKeyword \fP
+.TP
+\f(BIBaseTokenKeyword \fP
+.TP
+\f(BIBoolTokenKeyword \fP
+.TP
+\f(BIBreakTokenKeyword \fP
+.TP
+\f(BIByteTokenKeyword \fP
+.TP
+\f(BICaseTokenKeyword \fP
+.TP
+\f(BICatchTokenKeyword \fP
+.TP
+\f(BICharTokenKeyword \fP
+.TP
+\f(BICheckedTokenKeyword \fP
+.TP
+\f(BIClassTokenKeyword \fP
+.TP
+\f(BIConstTokenKeyword \fP
+.TP
+\f(BIContinueTokenKeyword \fP
+.TP
+\f(BIDecimalTokenKeyword \fP
+.TP
+\f(BIDefaultTokenKeyword \fP
+.TP
+\f(BIDelegateTokenKeyword \fP
+.TP
+\f(BIDoTokenKeyword \fP
+.TP
+\f(BIDoubleTokenKeyword \fP
+.TP
+\f(BIElseTokenKeyword \fP
+.TP
+\f(BIEnumTokenKeyword \fP
+.TP
+\f(BIEventTokenKeyword \fP
+.TP
+\f(BIExplicitTokenKeyword \fP
+.TP
+\f(BIExternTokenKeyword \fP
+.TP
+\f(BIFalseTokenKeyword \fP
+.TP
+\f(BIFinallyTokenKeyword \fP
+.TP
+\f(BIFixedTokenKeyword \fP
+.TP
+\f(BIFloatTokenKeyword \fP
+.TP
+\f(BIForTokenKeyword \fP
+.TP
+\f(BIForeachTokenKeyword \fP
+.TP
+\f(BIGotoTokenKeyword \fP
+.TP
+\f(BIIfTokenKeyword \fP
+.TP
+\f(BIImplicitTokenKeyword \fP
+.TP
+\f(BIInTokenKeyword \fP
+.TP
+\f(BIIntTokenKeyword \fP
+.TP
+\f(BIInterfaceTokenKeyword \fP
+.TP
+\f(BIInternalTokenKeyword \fP
+.TP
+\f(BIIsTokenKeyword \fP
+.TP
+\f(BILockTokenKeyword \fP
+.TP
+\f(BILongTokenKeyword \fP
+.TP
+\f(BINamespaceTokenKeyword \fP
+.TP
+\f(BINewTokenKeyword \fP
+.TP
+\f(BINullTokenKeyword \fP
+.TP
+\f(BIObjectTokenKeyword \fP
+.TP
+\f(BIOperatorTokenKeyword \fP
+.TP
+\f(BIOutTokenKeyword \fP
+.TP
+\f(BIOverrideTokenKeyword \fP
+.TP
+\f(BIParamsTokenKeyword \fP
+.TP
+\f(BIPrivateTokenKeyword \fP
+.TP
+\f(BIProtectedTokenKeyword \fP
+.TP
+\f(BIPublicTokenKeyword \fP
+.TP
+\f(BIReadonlyTokenKeyword \fP
+.TP
+\f(BIRefTokenKeyword \fP
+.TP
+\f(BIReturnTokenKeyword \fP
+.TP
+\f(BISbyteTokenKeyword \fP
+.TP
+\f(BISealedTokenKeyword \fP
+.TP
+\f(BIShortTokenKeyword \fP
+.TP
+\f(BISizeofTokenKeyword \fP
+.TP
+\f(BIStackallocTokenKeyword \fP
+.TP
+\f(BIStaticTokenKeyword \fP
+.TP
+\f(BIStringTokenKeyword \fP
+.TP
+\f(BIStructTokenKeyword \fP
+.TP
+\f(BISwitchTokenKeyword \fP
+.TP
+\f(BIThisTokenKeyword \fP
+.TP
+\f(BIThrowTokenKeyword \fP
+.TP
+\f(BITrueTokenKeyword \fP
+.TP
+\f(BITryTokenKeyword \fP
+.TP
+\f(BITryStatementTryNode \fP
+.TP
+\f(BITryStatementCatchNode \fP
+.TP
+\f(BITryStatementFinallyNode \fP
+.TP
+\f(BITypeofTokenKeyword \fP
+.TP
+\f(BIUintTokenKeyword \fP
+.TP
+\f(BIUlongTokenKeyword \fP
+.TP
+\f(BIUncheckedTokenKeyword \fP
+.TP
+\f(BIUnsafeTokenKeyword \fP
+.TP
+\f(BIUshortTokenKeyword \fP
+.TP
+\f(BIUsingTokenKeyword \fP
+.TP
+\f(BIVirtualTokenKeyword \fP
+.TP
+\f(BIVoidTokenKeyword \fP
+.TP
+\f(BIVolatileTokenKeyword \fP
+.TP
+\f(BIWhileTokenKeyword \fP
+.TP
+\f(BIUnrecognizedTokenKeyword \fP
+.TP
+\f(BIAddTokenContextualKeyword \fP
+.TP
+\f(BIAndTokenContextualKeyword \fP
+.TP
+\f(BIAliasTokenContextualKeyword \fP
+.TP
+\f(BIAscendingTokenContextualKeyword \fP
+.TP
+\f(BIArgsTokenContextualKeyword \fP
+.TP
+\f(BIAsyncTokenContextualKeyword \fP
+.TP
+\f(BIAwaitTokenContextualKeyword \fP
+.TP
+\f(BIByTokenContextualKeyword \fP
+.TP
+\f(BIDescendingTokenContextualKeyword \fP
+.TP
+\f(BIDynamicTokenContextualKeyword \fP
+.TP
+\f(BIEqualsTokenContextualKeyword \fP
+.TP
+\f(BIFileTokenContextualKeyword \fP
+.TP
+\f(BIFromTokenContextualKeyword \fP
+.TP
+\f(BIGetTokenContextualKeyword \fP
+.TP
+\f(BIGlobalTokenContextualKeyword \fP
+.TP
+\f(BIGroupTokenContextualKeyword \fP
+.TP
+\f(BIInitTokenContextualKeyword \fP
+.TP
+\f(BIIntoTokenContextualKeyword \fP
+.TP
+\f(BIJoinTokenContextualKeyword \fP
+.TP
+\f(BILetTokenContextualKeyword \fP
+.TP
+\f(BIManagedTokenContextualKeyword \fP
+.TP
+\f(BINameofTokenContextualKeyword \fP
+.TP
+\f(BINintTokenContextualKeyword \fP
+.TP
+\f(BINotTokenContextualKeyword \fP
+.TP
+\f(BINotnullTokenContextualKeyword \fP
+.TP
+\f(BINuintTokenContextualKeyword \fP
+.TP
+\f(BIOnTokenContextualKeyword \fP
+.TP
+\f(BIOrTokenContextualKeyword \fP
+.TP
+\f(BIOrderbyTokenContextualKeyword \fP
+.TP
+\f(BIPartialTokenContextualKeyword \fP
+.TP
+\f(BIRecordTokenContextualKeyword \fP
+.TP
+\f(BIRemoveTokenContextualKeyword \fP
+.TP
+\f(BIRequiredTokenContextualKeyword \fP
+.TP
+\f(BIScopedTokenContextualKeyword \fP
+.TP
+\f(BISelectTokenContextualKeyword \fP
+.TP
+\f(BISetTokenContextualKeyword \fP
+.TP
+\f(BIUnmanagedTokenContextualKeyword \fP
+.TP
+\f(BIValueTokenContextualKeyword \fP
+.TP
+\f(BIVarTokenContextualKeyword \fP
+.TP
+\f(BIWhenTokenContextualKeyword \fP
+.TP
+\f(BIWhereTokenContextualKeyword \fP
+.TP
+\f(BIWithTokenContextualKeyword \fP
+.TP
+\f(BIYieldTokenContextualKeyword \fP
+.TP
+\f(BIUnrecognizedTokenContextualKeyword \fP
+.TP
+\f(BICompilationUnit \fP
+.TP
+\f(BICodeBlockNode \fP
+.TP
+\f(BILiteralExpressionNode \fP
+.TP
+\f(BIParenthesizedExpressionNode \fP
+.TP
+\f(BIEmptyExpressionNode \fP
+.TP
+\f(BIAmbiguousIdentifierExpressionNode \fP
+.TP
+\f(BIPreprocessorLibraryReferenceStatementNode \fP
+.TP
+\f(BITypeDefinitionNode \fP
+.TP
+\f(BITypeClauseNode \fP
+.TP
+\f(BIExplicitCastNode \fP
+.TP
+\f(BIConstraintNode \fP
+.TP
+\f(BIVariableDeclarationNode \fP
+.TP
+\f(BIVariableReferenceNode \fP
+.TP
+\f(BIVariableAssignmentExpressionNode \fP
+.TP
+\f(BIVariableExpressionNode \fP
+.TP
+\f(BIWithExpressionNode \fP
+.TP
+\f(BIPropertyDefinitionNode \fP
+.TP
+\f(BIFieldDefinitionNode \fP
+.TP
+\f(BIConstructorDefinitionNode \fP
+.TP
+\f(BIConstructorInvocationExpressionNode \fP
+.TP
+\f(BIObjectInitializationParametersListingNode \fP
+.TP
+\f(BIObjectInitializationParameterEntryNode \fP
+.TP
+\f(BIFunctionDefinitionNode \fP
+.TP
+\f(BIFunctionArgumentsListingNode \fP
+.TP
+\f(BIFunctionArgumentEntryNode \fP
+.TP
+\f(BIFunctionParametersListingNode \fP
+.TP
+\f(BIFunctionParameterEntryNode \fP
+.TP
+\f(BIFunctionInvocationNode \fP
+.TP
+\f(BILambdaExpressionNode \fP
+.TP
+\f(BITupleExpressionNode \fP
+.TP
+\f(BICommaSeparatedExpressionNode \fP
+.TP
+\f(BIGenericArgumentsListingNode \fP
+.TP
+\f(BIGenericArgumentEntryNode \fP
+.TP
+\f(BIGenericParametersListingNode \fP
+.TP
+\f(BIGenericParameterEntryNode \fP
+.TP
+\f(BIArbitraryCodeBlockNode \fP
+.TP
+\f(BIInheritanceStatementNode \fP
+.TP
+\f(BIAmbiguousIdentifierNode \fP
+.TP
+\f(BIEmptyNode \fP
+.TP
+\f(BIIfStatementNode \fP
+.TP
+\f(BIForeachStatementNode \fP
+.TP
+\f(BIDoWhileStatementNode \fP
+.TP
+\f(BIWhileStatementNode \fP
+.TP
+\f(BIForStatementNode \fP
+.TP
+\f(BISwitchStatementNode \fP
+.TP
+\f(BISwitchExpressionNode \fP
+.TP
+\f(BITryStatementNode \fP
+.TP
+\f(BILockStatementNode \fP
+.TP
+\f(BIReturnStatementNode \fP
+.TP
+\f(BINamespaceStatementNode \fP
+.TP
+\f(BINamespaceGroupNode \fP
+.TP
+\f(BIObjectInitializationNode \fP
+.TP
+\f(BIUsingStatementNode \fP
+.TP
+\f(BIBadExpressionNode \fP
+.TP
+\f(BIUnaryOperatorNode \fP
+.TP
+\f(BIUnaryExpressionNode \fP
+.TP
+\f(BIBinaryOperatorNode \fP
+.TP
+\f(BIBinaryExpressionNode \fP
+.TP
+\f(BIAttributeNode \fP
+.TP
+\f(BITypeSymbol \fP
+.TP
+\f(BIConstructorSymbol \fP
+.TP
+\f(BIFunctionSymbol \fP
+.TP
+\f(BILambdaSymbol \fP
+.TP
+\f(BIVariableSymbol \fP
+.TP
+\f(BIFieldSymbol \fP
+.TP
+\f(BIPropertySymbol \fP
+.TP
+\f(BIStringInterpolationSymbol \fP
+.TP
+\f(BIStringVerbatimSymbol \fP
+.TP
+\f(BINamespaceSymbol \fP
+.TP
+\f(BIInjectedLanguageComponentSymbol \fP
+.TP
+\f(BISourceFileSymbol \fP
+.TP
+\f(BIOnClickSymbol \fP
+.PP
+Definition at line \fB6\fP of file \fBSyntaxKind\&.cs\fP\&.
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for Luthetus\&.Ide from the source code\&.

@@ -1,0 +1,320 @@
+\chapter{Luthetus.\+Common (v1.\+4.\+0) }
+\hypertarget{md__docs_2_common_2usage}{}\label{md__docs_2_common_2usage}\index{Luthetus.Common (v1.4.0)@{Luthetus.Common (v1.4.0)}}
+\label{md__docs_2_common_2usage_autotoc_md37}%
+\Hypertarget{md__docs_2_common_2usage_autotoc_md37}%
+\hypertarget{md__docs_2_common_2usage_autotoc_md38}{}\doxysection{\texorpdfstring{Usage}{Usage}}\label{md__docs_2_common_2usage_autotoc_md38}
+\hypertarget{md__docs_2_common_2usage_autotoc_md39}{}\doxysubsection{\texorpdfstring{Source Code}{Source Code}}\label{md__docs_2_common_2usage_autotoc_md39}
+The .NET Solution\+: \href{../../Source/Tutorials/Common/Luthetus.Common.Usage.sln}{\texttt{Luthetus.\+Common.\+Usage.\+sln}}, was made by following steps described here. So, the completed result can be found there.\hypertarget{md__docs_2_common_2usage_autotoc_md40}{}\doxysubsection{\texorpdfstring{Goal}{Goal}}\label{md__docs_2_common_2usage_autotoc_md40}
+
+\begin{DoxyItemize}
+\item Add the {\ttfamily Light and Dark theme}
+\end{DoxyItemize}\hypertarget{md__docs_2_common_2usage_autotoc_md41}{}\doxysubsection{\texorpdfstring{Steps}{Steps}}\label{md__docs_2_common_2usage_autotoc_md41}
+
+\begin{DoxyItemize}
+\item Create a codebehind for the file\+: {\ttfamily Shared/\+Main\+Layout.\+razor}
+\end{DoxyItemize}
+
+\begin{quote}
+{\itshape NOTE\+:} In many C\# Project templates, {\ttfamily Shared/\+Main\+Layout.\+razor} inherits from {\ttfamily Layout\+Component\+Base} instead of {\ttfamily Component\+Base}. \end{quote}
+
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{comment}{//\ Shared/MainLayout.razor.cs}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keyword}{using\ }Microsoft.AspNetCore.Components;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keyword}{namespace\ }Luthetus.Common.Usage.RazorLib.Shared;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keyword}{public}\ \textcolor{keyword}{partial\ class\ }MainLayout\ :\ LayoutComponentBase}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{\}}
+
+\end{DoxyCode}
+
+
+
+\begin{DoxyItemize}
+\item Inject the {\ttfamily IApp\+Options\+Service} interface.
+\end{DoxyItemize}
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{[Inject]}
+\DoxyCodeLine{\textcolor{keyword}{private}\ IAppOptionsService\ AppOptionsService\ \{\ \textcolor{keyword}{get};\ \textcolor{keyword}{set};\ \}\ =\ \textcolor{keyword}{null}!;}
+
+\end{DoxyCode}
+
+
+
+\begin{DoxyItemize}
+\item We need to subscribe to the state changes of the IApp\+Options\+Service.
+\item When subscribing to an event. It is possible to create a memory leak, if one does not unsubscribe from the event at a later point.
+\item For this reason, I\textquotesingle{}ll perform the steps in an order that ensures my code will not compile if I forget to unsubscribe.
+\item Have {\ttfamily Main\+Layout} implement the interface\+: {\ttfamily IDisposable}.
+\item Then using a refactor, one can autocomplete the method definition for {\ttfamily void Dispose()}.
+\item At this step, here is the entirety of my {\ttfamily Shared/\+Main\+Layout.\+razor.\+cs}
+\end{DoxyItemize}
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_luthetus_1_1_common_1_1_razor_lib_1_1_options_1_1_models}{Luthetus.Common.RazorLib.Options.Models}};}
+\DoxyCodeLine{\textcolor{keyword}{using\ }Microsoft.AspNetCore.Components;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keyword}{namespace\ }Luthetus.Common.Usage.RazorLib.Shared;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keyword}{public}\ \textcolor{keyword}{partial\ class\ }MainLayout\ :\ LayoutComponentBase,\ IDisposable}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{\ \ \ \ [Inject]}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{private}\ IAppOptionsService\ AppOptionsService\ \{\ \textcolor{keyword}{get};\ \textcolor{keyword}{set};\ \}\ =\ \textcolor{keyword}{null}!;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{public}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_af402300cee2b4a03928758a3577a0ede}{Dispose}}()}
+\DoxyCodeLine{\ \ \ \ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{keywordflow}{throw}\ \textcolor{keyword}{new}\ NotImplementedException();}
+\DoxyCodeLine{\ \ \ \ \}}
+\DoxyCodeLine{\}}
+
+\end{DoxyCode}
+
+
+
+\begin{DoxyItemize}
+\item Replace the contents of the {\ttfamily Dispose()} method with {\ttfamily replace\+App\+Options\+Service.\+App\+Options\+State\+Wrap.\+State\+Changed -\/= ;}. It looks as follows for me\+:
+\end{DoxyItemize}
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keyword}{public}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_af402300cee2b4a03928758a3577a0ede}{Dispose}}()}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{\ \ \ \ AppOptionsService.AppOptionsStateWrap.StateChanged\ -\/=\ ;}
+\DoxyCodeLine{\}}
+
+\end{DoxyCode}
+
+
+
+\begin{DoxyItemize}
+\item Override the Blazor lifecycle method named {\ttfamily On\+Initialized()}. See this code snippet\+:
+\end{DoxyItemize}
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keyword}{protected}\ \textcolor{keyword}{override}\ \textcolor{keywordtype}{void}\ OnInitialized()}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{\ \ \ \ base.OnInitialized();}
+\DoxyCodeLine{\}}
+
+\end{DoxyCode}
+
+
+
+\begin{DoxyItemize}
+\item In {\ttfamily On\+Initialized()} we can subscribe to the {\ttfamily App\+Options\+Service} state changes.
+\item Add into the method override for {\ttfamily On\+Initialized()}, above the {\ttfamily base.\+On\+Initialized();}, this line of code\+: {\ttfamily App\+Options\+Service.\+App\+Options\+State\+Wrap.\+State\+Changed += App\+Options\+State\+Wrap\+\_\+\+State\+Changed;}.
+\end{DoxyItemize}
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keyword}{protected}\ \textcolor{keyword}{override}\ \textcolor{keywordtype}{void}\ OnInitialized()}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{\ \ \ \ AppOptionsService.AppOptionsStateWrap.StateChanged\ +=\ AppOptionsStateWrap\_StateChanged;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ base.OnInitialized();}
+\DoxyCodeLine{\}}
+
+\end{DoxyCode}
+
+
+\begin{quote}
+{\itshape NOTE\+:} When I was typing out the previously shown line of code, when I typed the {\ttfamily +=} part and hit {\ttfamily space}, I was prompted by Visual Studio to hit {\ttfamily tab} to autocomplete out an Event\+Handler. \end{quote}
+
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keyword}{private}\ \textcolor{keywordtype}{void}\ AppOptionsStateWrap\_StateChanged(\textcolor{keywordtype}{object}?\ sender,\ EventArgs\ e)}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{throw}\ \textcolor{keyword}{new}\ NotImplementedException();}
+\DoxyCodeLine{\}}
+
+\end{DoxyCode}
+
+
+
+\begin{DoxyItemize}
+\item Now that we have the subscription occurring in the {\ttfamily On\+Initialized()}, we can go back to the {\ttfamily Dispose()} implementation. We had left out the right hand side of the unsubscribe statement. Replace that line with this\+: {\ttfamily App\+Options\+Service.\+App\+Options\+State\+Wrap.\+State\+Changed -\/= App\+Options\+State\+Wrap\+\_\+\+State\+Changed;}. Now the code will compile again. My code snippet for {\ttfamily Main\+Layout.\+razor.\+cs} is shown here\+:
+\end{DoxyItemize}
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_luthetus_1_1_common_1_1_razor_lib_1_1_options_1_1_models}{Luthetus.Common.RazorLib.Options.Models}};}
+\DoxyCodeLine{\textcolor{keyword}{using\ }Microsoft.AspNetCore.Components;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keyword}{namespace\ }Luthetus.Common.Usage.RazorLib.Shared;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keyword}{public}\ \textcolor{keyword}{partial\ class\ }MainLayout\ :\ LayoutComponentBase,\ IDisposable}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{\ \ \ \ [Inject]}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{private}\ IAppOptionsService\ AppOptionsService\ \{\ \textcolor{keyword}{get};\ \textcolor{keyword}{set};\ \}\ =\ \textcolor{keyword}{null}!;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{protected}\ \textcolor{keyword}{override}\ \textcolor{keywordtype}{void}\ OnInitialized()}
+\DoxyCodeLine{\ \ \ \ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ AppOptionsService.AppOptionsStateWrap.StateChanged\ +=\ AppOptionsStateWrap\_StateChanged;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ base.OnInitialized();}
+\DoxyCodeLine{\ \ \ \ \}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{private}\ \textcolor{keywordtype}{void}\ AppOptionsStateWrap\_StateChanged(\textcolor{keywordtype}{object}?\ sender,\ EventArgs\ e)}
+\DoxyCodeLine{\ \ \ \ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{keywordflow}{throw}\ \textcolor{keyword}{new}\ NotImplementedException();}
+\DoxyCodeLine{\ \ \ \ \}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{public}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_af402300cee2b4a03928758a3577a0ede}{Dispose}}()}
+\DoxyCodeLine{\ \ \ \ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ AppOptionsService.AppOptionsStateWrap.StateChanged\ -\/=\ AppOptionsStateWrap\_StateChanged;}
+\DoxyCodeLine{\ \ \ \ \}}
+\DoxyCodeLine{\}}
+
+\end{DoxyCode}
+
+
+
+\begin{DoxyItemize}
+\item We need to re-\/render the component anytime that the App\+Options\+State has its state change. So, the {\ttfamily App\+Options\+State\+Wrap\+\_\+\+State\+Changed()} method needs to be changed.
+\item Make the {\ttfamily App\+Options\+State\+Wrap\+\_\+\+State\+Changed()} method {\ttfamily async}. But keep {\ttfamily void}, since it is being used as an Event\+Handler.
+\end{DoxyItemize}
+
+Within the body for {\ttfamily App\+Options\+State\+Wrap\+\_\+\+State\+Changed()}, put this line of code\+: {\ttfamily await Invoke\+Async(\+State\+Has\+Changed);}.
+
+In total, my {\ttfamily App\+Options\+State\+Wrap\+\_\+\+State\+Changed()} method looks as follows\+:
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keyword}{private}\ async\ \textcolor{keywordtype}{void}\ AppOptionsStateWrap\_StateChanged(\textcolor{keywordtype}{object}?\ sender,\ EventArgs\ e)}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{\ \ \ \ await\ InvokeAsync(StateHasChanged);}
+\DoxyCodeLine{\}}
+
+\end{DoxyCode}
+
+
+
+\begin{DoxyItemize}
+\item I want a \texorpdfstring{$<$}{<}{\ttfamily select}\texorpdfstring{$>$}{>} HTML element where the options are the various themes that one can choose.
+\item {\ttfamily Shared/\+Main\+Layout.\+razor} has a \texorpdfstring{$<$}{<}{\ttfamily div}\texorpdfstring{$>$}{>} HTML element with the css class\+: {\ttfamily top-\/row}. Inside this HTML element I will be putting the \texorpdfstring{$<$}{<}{\ttfamily select}\texorpdfstring{$>$}{>} HTML element.
+\item This \texorpdfstring{$<$}{<}{\ttfamily select}\texorpdfstring{$>$}{>} HTML element already exists within the \doxylink{namespace_luthetus_1_1_common}{Luthetus.\+Common} Nu\+Get Package. Inside the previously described \texorpdfstring{$<$}{<}{\ttfamily div}\texorpdfstring{$>$}{>} add the markup\+: {\ttfamily \texorpdfstring{$<$}{<}\doxylink{class_luthetus_1_1_common_1_1_razor_lib_1_1_options_1_1_displays_1_1_input_app_theme}{Luthetus.\+Common.\+Razor\+Lib.\+Options.\+Displays.\+Input\+App\+Theme} /\texorpdfstring{$>$}{>}} as shown in the following snippet\+:
+\end{DoxyItemize}
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{<!-\/-\/\ MainLayout.razor\ -\/-\/>}
+\DoxyCodeLine{}
+\DoxyCodeLine{@inherits\ LayoutComponentBase}
+\DoxyCodeLine{}
+\DoxyCodeLine{<PageTitle>Luthetus.Common.Usage.ServerSide</PageTitle>}
+\DoxyCodeLine{}
+\DoxyCodeLine{<Luthetus.Common.RazorLib.Installations.Displays.LuthetusCommonInitializer/>}
+\DoxyCodeLine{}
+\DoxyCodeLine{<div\ class="{}page"{}>}
+\DoxyCodeLine{\ \ \ \ <div\ class="{}sidebar"{}>}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ <NavMenu\ />}
+\DoxyCodeLine{\ \ \ \ </div>}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ <main>}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ <div\ class="{}top-\/row\ px-\/4"{}>}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ <!-\/-\/\ Here\ -\/-\/>}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ <Luthetus.Common.RazorLib.Options.Displays.InputAppTheme\ />}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ <a\ href="{}https://docs.microsoft.com/aspnet/"{}\ target="{}\_blank"{}>About</a>}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ </div>}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ <article\ class="{}content\ px-\/4"{}>}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ @Body}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ </article>}
+\DoxyCodeLine{\ \ \ \ </main>}
+\DoxyCodeLine{</div>}
+
+\end{DoxyCode}
+
+
+Here is a quick GIF as well that shows how the website looks as of this step\+:
+
+
+
+
+\begin{DoxyItemize}
+\item When I change my selection in the {\ttfamily \texorpdfstring{$<$}{<}\doxylink{class_luthetus_1_1_common_1_1_razor_lib_1_1_options_1_1_displays_1_1_input_app_theme}{Luthetus.\+Common.\+Razor\+Lib.\+Options.\+Displays.\+Input\+App\+Theme} /\texorpdfstring{$>$}{>}}, I want the corresponding CSS class to be applied to the top-\/most \texorpdfstring{$<$}{<}div\texorpdfstring{$>$}{>} in {\ttfamily Main\+Layout.\+razor}. This would then allow me to cascade a color theme to child elements.
+\item In {\ttfamily Main\+Layout.\+razor}, we need to locate the top-\/most \texorpdfstring{$<$}{<}div\texorpdfstring{$>$}{>}. Following that, we need to interpolate the css class which corresponds to the selected theme. I changed my top-\/most element\textquotesingle{}s {\ttfamily class} property to {\ttfamily class="{}page @App\+Options\+Service.\+Theme\+Css\+Class\+String"{}}. The following is the entirety of my {\ttfamily Main\+Layout.\+razor}\+:
+\end{DoxyItemize}
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{<!-\/-\/\ MainLayout.razor\ -\/-\/>}
+\DoxyCodeLine{}
+\DoxyCodeLine{@inherits\ LayoutComponentBase}
+\DoxyCodeLine{}
+\DoxyCodeLine{<PageTitle>Luthetus.Common.Usage.ServerSide</PageTitle>}
+\DoxyCodeLine{}
+\DoxyCodeLine{<Luthetus.Common.RazorLib.Installations.Displays.LuthetusCommonInitializer/>}
+\DoxyCodeLine{}
+\DoxyCodeLine{<div\ class="{}page\ @AppOptionsService.ThemeCssClassString"{}>}
+\DoxyCodeLine{\ \ \ \ <div\ class="{}sidebar"{}>}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ <NavMenu\ />}
+\DoxyCodeLine{\ \ \ \ </div>}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ <main>}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ <div\ class="{}top-\/row\ px-\/4"{}>}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ <Luthetus.Common.RazorLib.Options.Displays.InputAppTheme\ />}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ <a\ href="{}https://docs.microsoft.com/aspnet/"{}\ target="{}\_blank"{}>About</a>}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ </div>}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ <article\ class="{}content\ px-\/4"{}>}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ @Body}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ </article>}
+\DoxyCodeLine{\ \ \ \ </main>}
+\DoxyCodeLine{</div>}
+
+\end{DoxyCode}
+
+
+The following GIF has open the browser\textquotesingle{}s developer tools, while changing the selected theme. This shows that we are updating the {\ttfamily class} property correctly.
+
+
+
+
+\begin{DoxyItemize}
+\item Now we need to actually use the {\ttfamily CSS variables} which are defined in {\ttfamily luthetus\+Common.\+css}
+\end{DoxyItemize}
+
+In the upcoming GIF I am going to show two ways that one can see all the {\ttfamily CSS variables} which are available from {\ttfamily luthetus\+Common.\+css}.
+
+\begin{quote}
+{\itshape NOTE\+:} This GIF is 2 minutes and 41 seconds long. \#\+TODO\+: shorten the length of this GIF. \end{quote}
+
+
+
+
+
+\begin{DoxyItemize}
+\item Inside {\ttfamily Main\+Layout.\+razor.\+css} add the following code snippet\+:
+\end{DoxyItemize}
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{div.top-\/row\ \{}
+\DoxyCodeLine{\ \ \ \ background-\/color:\ var(-\/-\/luth\_tertiary-\/background-\/color);}
+\DoxyCodeLine{\ \ \ \ color:\ var(-\/-\/luth\_tertiary-\/foreground-\/color);}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{article.content\ \{}
+\DoxyCodeLine{\ \ \ \ background-\/color:\ var(-\/-\/luth\_primary-\/background-\/color);}
+\DoxyCodeLine{\ \ \ \ color:\ var(-\/-\/luth\_primary-\/foreground-\/color);}
+\DoxyCodeLine{\}}
+
+\end{DoxyCode}
+
+
+
+\begin{DoxyItemize}
+\item Now when we change the theme, parts of the website that use the CSS variables will change. See the following GIF\+:
+\end{DoxyItemize}
+
+\hypertarget{md__docs_2_common_2usage_autotoc_md42}{}\doxysection{\texorpdfstring{Next tutorial\+: \#\+TODO\+: Continue}{Next tutorial\+: \#\+TODO\+: Continue}}\label{md__docs_2_common_2usage_autotoc_md42}

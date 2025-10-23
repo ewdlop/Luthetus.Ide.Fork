@@ -1,0 +1,223 @@
+\doxysection{Binder.\+cs}
+\hypertarget{_binder_8cs_source}{}\label{_binder_8cs_source}\index{Source/Lib/TextEditor/CompilerServices/Implementations/Binder.cs@{Source/Lib/TextEditor/CompilerServices/Implementations/Binder.cs}}
+\mbox{\hyperlink{_binder_8cs}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{_binder_8cs_source_l00001}00001\ \textcolor{keyword}{using\ }System.Collections.Immutable;}
+\DoxyCodeLine{\Hypertarget{_binder_8cs_source_l00002}00002\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_luthetus_1_1_common_1_1_razor_lib_1_1_keys_1_1_models}{Luthetus.Common.RazorLib.Keys.Models}};}
+\DoxyCodeLine{\Hypertarget{_binder_8cs_source_l00003}00003\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_implementations}{Luthetus.TextEditor.RazorLib.CompilerServices.Implementations}};}
+\DoxyCodeLine{\Hypertarget{_binder_8cs_source_l00004}00004\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_interfaces}{Luthetus.TextEditor.RazorLib.CompilerServices.Interfaces}};}
+\DoxyCodeLine{\Hypertarget{_binder_8cs_source_l00005}00005\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax}{Luthetus.TextEditor.RazorLib.CompilerServices.Syntax}};}
+\DoxyCodeLine{\Hypertarget{_binder_8cs_source_l00006}00006\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_1_1_nodes}{Luthetus.TextEditor.RazorLib.CompilerServices.Syntax.Nodes}};}
+\DoxyCodeLine{\Hypertarget{_binder_8cs_source_l00007}00007\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_1_1_nodes_1_1_interfaces}{Luthetus.TextEditor.RazorLib.CompilerServices.Syntax.Nodes.Interfaces}};}
+\DoxyCodeLine{\Hypertarget{_binder_8cs_source_l00008}00008\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_lexers_1_1_models}{Luthetus.TextEditor.RazorLib.Lexers.Models}};}
+\DoxyCodeLine{\Hypertarget{_binder_8cs_source_l00009}00009\ }
+\DoxyCodeLine{\Hypertarget{_binder_8cs_source_l00010}00010\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services}{Luthetus.TextEditor.RazorLib.CompilerServices}};}
+\DoxyCodeLine{\Hypertarget{_binder_8cs_source_l00011}00011\ }
+\DoxyCodeLine{\Hypertarget{_binder_8cs_source_l00012}\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_binder}{00012}}\ \textcolor{keyword}{public}\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_binder}{Binder}}\ :\ \mbox{\hyperlink{interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_interfaces_1_1_i_binder}{IBinder}}}
+\DoxyCodeLine{\Hypertarget{_binder_8cs_source_l00013}00013\ \{}
+\DoxyCodeLine{\Hypertarget{_binder_8cs_source_l00014}00014\ \ \ \ \ \textcolor{keyword}{private}\ readonly\ Dictionary<ResourceUri,\ IBinderSession>\ \_binderSessionMap\ =\ \textcolor{keyword}{new}();}
+\DoxyCodeLine{\Hypertarget{_binder_8cs_source_l00015}00015\ \ \ \ \ \textcolor{keyword}{private}\ readonly\ \textcolor{keywordtype}{object}\ \_binderSessionMapLock\ =\ \textcolor{keyword}{new}();}
+\DoxyCodeLine{\Hypertarget{_binder_8cs_source_l00016}00016\ }
+\DoxyCodeLine{\Hypertarget{_binder_8cs_source_l00017}\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_binder_a12233123d630cba9d4145971b2435916}{00017}}\ \ \ \ \ \textcolor{keyword}{public}\ ImmutableArray<TextEditorDiagnostic>\ \mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_binder_a12233123d630cba9d4145971b2435916}{DiagnosticsList}}\ \{\ \textcolor{keyword}{get};\ \}\ =\ ImmutableArray<TextEditorDiagnostic>.Empty;}
+\DoxyCodeLine{\Hypertarget{_binder_8cs_source_l00018}\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_binder_a3e3538ac6b6e1d1e287e35cc177768be}{00018}}\ \ \ \ \ \textcolor{keyword}{public}\ ImmutableArray<ITextEditorSymbol>\ \mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_binder_a3e3538ac6b6e1d1e287e35cc177768be}{SymbolsList}}\ \{\ \textcolor{keyword}{get};\ \}\ =\ ImmutableArray<ITextEditorSymbol>.Empty;}
+\DoxyCodeLine{\Hypertarget{_binder_8cs_source_l00019}\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_binder_a1ab568c27c8d1a3907d8a2afbe491465}{00019}}\ \ \ \ \ \textcolor{keyword}{public}\ ImmutableDictionary<ResourceUri,\ List<IScope>>\ \mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_binder_a1ab568c27c8d1a3907d8a2afbe491465}{ScopeList}}\ \{\ \textcolor{keyword}{get};\ \}\ =\ ImmutableDictionary<ResourceUri,\ List<IScope>>.Empty;}
+\DoxyCodeLine{\Hypertarget{_binder_8cs_source_l00020}00020\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_binder_8cs_source_l00021}00021\ }
+\DoxyCodeLine{\Hypertarget{_binder_8cs_source_l00022}\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_binder_a6a284b0a4d0b959bba38e0e6449fc28c}{00022}}\ \ \ \ \ \textcolor{keyword}{public}\ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_lexers_1_1_models_a1ffd1a7706dfd364560b76d47467812f}{TextEditorTextSpan}}?\ \mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_binder_a6a284b0a4d0b959bba38e0e6449fc28c}{GetDefinition}}(\mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_lexers_1_1_models_a1ffd1a7706dfd364560b76d47467812f}{TextEditorTextSpan}}\ textSpan,\ \mbox{\hyperlink{interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_interfaces_1_1_i_compiler_service_resource}{ICompilerServiceResource}}\ compilerServiceResource)}
+\DoxyCodeLine{\Hypertarget{_binder_8cs_source_l00023}00023\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_binder_8cs_source_l00024}00024\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{null};}
+\DoxyCodeLine{\Hypertarget{_binder_8cs_source_l00025}00025\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_binder_8cs_source_l00026}00026\ }
+\DoxyCodeLine{\Hypertarget{_binder_8cs_source_l00027}\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_binder_a0890c303b35e34fe8f2e999354acd1bd}{00027}}\ \ \ \ \ \textcolor{keyword}{public}\ \mbox{\hyperlink{interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_1_1_i_syntax_node}{ISyntaxNode}}?\ \mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_binder_a0890c303b35e34fe8f2e999354acd1bd}{GetSyntaxNode}}(\textcolor{keywordtype}{int}\ positionIndex,\ \mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_1_1_nodes_1_1_compilation_unit}{CompilationUnit}}\ compilationUnit)}
+\DoxyCodeLine{\Hypertarget{_binder_8cs_source_l00028}00028\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_binder_8cs_source_l00029}00029\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{null};}
+\DoxyCodeLine{\Hypertarget{_binder_8cs_source_l00030}00030\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_binder_8cs_source_l00031}00031\ }
+\DoxyCodeLine{\Hypertarget{_binder_8cs_source_l00032}\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_binder_a98bf121fbc5a92ceebcf7430ef6a0909}{00032}}\ \ \ \ \ \textcolor{keyword}{public}\ \mbox{\hyperlink{interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_interfaces_1_1_i_scope}{IScope}}?\ \mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_binder_a98bf121fbc5a92ceebcf7430ef6a0909}{GetScopeByPositionIndex}}(\mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_lexers_1_1_models_a26a1b63ad28ec7955b30bc6c91571eca}{ResourceUri}}\ resourceUri,\ \textcolor{keywordtype}{int}\ positionIndex)}
+\DoxyCodeLine{\Hypertarget{_binder_8cs_source_l00033}00033\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_binder_8cs_source_l00034}00034\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{null};}
+\DoxyCodeLine{\Hypertarget{_binder_8cs_source_l00035}00035\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_binder_8cs_source_l00036}00036\ }
+\DoxyCodeLine{\Hypertarget{_binder_8cs_source_l00037}\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_binder_af9e48a72357d714be606c56c3d37e461}{00037}}\ \ \ \ \ \textcolor{keyword}{public}\ \mbox{\hyperlink{interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_interfaces_1_1_i_scope}{IScope}}?\ \mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_binder_af9e48a72357d714be606c56c3d37e461}{GetScope}}(\mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_lexers_1_1_models_a1ffd1a7706dfd364560b76d47467812f}{TextEditorTextSpan}}\ textSpan)}
+\DoxyCodeLine{\Hypertarget{_binder_8cs_source_l00038}00038\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_binder_8cs_source_l00039}00039\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{null};}
+\DoxyCodeLine{\Hypertarget{_binder_8cs_source_l00040}00040\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_binder_8cs_source_l00041}00041\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_binder_8cs_source_l00042}\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_binder_a25ec7cc921841a064d74fccc0e31ce98}{00042}}\ \ \ \ \ \textcolor{keyword}{public}\ \mbox{\hyperlink{interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_interfaces_1_1_i_scope}{IScope}}?\ \mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_binder_a25ec7cc921841a064d74fccc0e31ce98}{GetScopeByScopeIndexKey}}(\mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_lexers_1_1_models_a26a1b63ad28ec7955b30bc6c91571eca}{ResourceUri}}\ resourceUri,\ \textcolor{keywordtype}{int}\ scopeIndexKey)}
+\DoxyCodeLine{\Hypertarget{_binder_8cs_source_l00043}00043\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_binder_8cs_source_l00044}00044\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{null};}
+\DoxyCodeLine{\Hypertarget{_binder_8cs_source_l00045}00045\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_binder_8cs_source_l00046}00046\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_binder_8cs_source_l00047}\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_binder_aeb2ce139fa30b1d664f5383da5c8e9df}{00047}}\ \ \ \ \ \textcolor{keyword}{public}\ \mbox{\hyperlink{interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_interfaces_1_1_i_scope}{IScope}}[]?\ \mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_binder_aeb2ce139fa30b1d664f5383da5c8e9df}{GetScopeList}}(\mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_lexers_1_1_models_a26a1b63ad28ec7955b30bc6c91571eca}{ResourceUri}}\ resourceUri)}
+\DoxyCodeLine{\Hypertarget{_binder_8cs_source_l00048}00048\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_binder_8cs_source_l00049}00049\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{null};}
+\DoxyCodeLine{\Hypertarget{_binder_8cs_source_l00050}00050\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_binder_8cs_source_l00051}00051\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_binder_8cs_source_l00052}\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_binder_ad112d2ddf81a0011ea0916ad38420477}{00052}}\ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_binder_ad112d2ddf81a0011ea0916ad38420477}{TryGetBinderSession}}(\mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_lexers_1_1_models_a26a1b63ad28ec7955b30bc6c91571eca}{ResourceUri}}\ resourceUri,\ out\ \mbox{\hyperlink{interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_interfaces_1_1_i_binder_session}{IBinderSession}}\ binderSession)}
+\DoxyCodeLine{\Hypertarget{_binder_8cs_source_l00053}00053\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_binder_8cs_source_l00054}00054\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \_binderSessionMap.TryGetValue(resourceUri,\ out\ binderSession);}
+\DoxyCodeLine{\Hypertarget{_binder_8cs_source_l00055}00055\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_binder_8cs_source_l00056}00056\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_binder_8cs_source_l00057}\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_binder_a68a76a53e697113331c1a67589b73cfc}{00057}}\ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_binder_a68a76a53e697113331c1a67589b73cfc}{UpsertBinderSession}}(\mbox{\hyperlink{interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_interfaces_1_1_i_binder_session}{IBinderSession}}\ binderSession)}
+\DoxyCodeLine{\Hypertarget{_binder_8cs_source_l00058}00058\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_binder_8cs_source_l00059}00059\ \ \ \ \ \ \ \ \ lock\ (\_binderSessionMapLock)}
+\DoxyCodeLine{\Hypertarget{_binder_8cs_source_l00060}00060\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_binder_8cs_source_l00061}00061\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\_binderSessionMap.ContainsKey(binderSession.\mbox{\hyperlink{interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_interfaces_1_1_i_binder_session_a28b68515155cd23a2b61bfdcb86eb270}{ResourceUri}}))}
+\DoxyCodeLine{\Hypertarget{_binder_8cs_source_l00062}00062\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \_binderSessionMap[binderSession.\mbox{\hyperlink{interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_interfaces_1_1_i_binder_session_a28b68515155cd23a2b61bfdcb86eb270}{ResourceUri}}]\ =\ binderSession;}
+\DoxyCodeLine{\Hypertarget{_binder_8cs_source_l00063}00063\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{\Hypertarget{_binder_8cs_source_l00064}00064\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \_binderSessionMap.Add(binderSession.\mbox{\hyperlink{interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_interfaces_1_1_i_binder_session_a28b68515155cd23a2b61bfdcb86eb270}{ResourceUri}},\ binderSession);}
+\DoxyCodeLine{\Hypertarget{_binder_8cs_source_l00065}00065\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_binder_8cs_source_l00066}00066\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_binder_8cs_source_l00067}00067\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_binder_8cs_source_l00068}\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_binder_a93aafcb8b3daf404fb40d540b9cb7ed6}{00068}}\ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_binder_a93aafcb8b3daf404fb40d540b9cb7ed6}{RemoveBinderSession}}(\mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_lexers_1_1_models_a26a1b63ad28ec7955b30bc6c91571eca}{ResourceUri}}\ resourceUri)}
+\DoxyCodeLine{\Hypertarget{_binder_8cs_source_l00069}00069\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_binder_8cs_source_l00070}00070\ \ \ \ \ \ \ \ \ lock\ (\_binderSessionMapLock)}
+\DoxyCodeLine{\Hypertarget{_binder_8cs_source_l00071}00071\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_binder_8cs_source_l00072}00072\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \_binderSessionMap.Remove(resourceUri);}
+\DoxyCodeLine{\Hypertarget{_binder_8cs_source_l00073}00073\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_binder_8cs_source_l00074}00074\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_binder_8cs_source_l00075}00075\ }
+\DoxyCodeLine{\Hypertarget{_binder_8cs_source_l00076}\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_binder_aacdee6f2648b7052ed0bc9a5d8b40988}{00076}}\ \ \ \ \ \textcolor{keyword}{public}\ \mbox{\hyperlink{interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_interfaces_1_1_i_binder_session}{IBinderSession}}\ \mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_binder_aacdee6f2648b7052ed0bc9a5d8b40988}{StartBinderSession}}(\mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_lexers_1_1_models_a26a1b63ad28ec7955b30bc6c91571eca}{ResourceUri}}\ resourceUri)}
+\DoxyCodeLine{\Hypertarget{_binder_8cs_source_l00077}00077\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_binder_8cs_source_l00078}00078\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{new}\ \mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_implementations_1_1_binder_session}{BinderSession}}(resourceUri,\ 0,\ \textcolor{keyword}{null},\ \textcolor{keyword}{this});}
+\DoxyCodeLine{\Hypertarget{_binder_8cs_source_l00079}00079\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_binder_8cs_source_l00080}00080\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_binder_8cs_source_l00081}\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_binder_aca1ace0e8a8881bcee8cb902100dae52}{00081}}\ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_binder_aca1ace0e8a8881bcee8cb902100dae52}{FinalizeBinderSession}}(\mbox{\hyperlink{interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_interfaces_1_1_i_binder_session}{IBinderSession}}\ binderSession)}
+\DoxyCodeLine{\Hypertarget{_binder_8cs_source_l00082}00082\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_binder_8cs_source_l00083}00083\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_binder_a68a76a53e697113331c1a67589b73cfc}{UpsertBinderSession}}(binderSession);}
+\DoxyCodeLine{\Hypertarget{_binder_8cs_source_l00084}00084\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_binder_8cs_source_l00085}00085\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_binder_8cs_source_l00086}\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_binder_aa2244578f61d515239452c5d819fc1cf}{00086}}\ \ \ \ \ \textcolor{keyword}{public}\ \mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_1_1_nodes_1_1_type_definition_node}{TypeDefinitionNode}}[]\ \mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_binder_aa2244578f61d515239452c5d819fc1cf}{GetTypeDefinitionNodesByScope}}(\mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_lexers_1_1_models_a26a1b63ad28ec7955b30bc6c91571eca}{ResourceUri}}\ resourceUri,\ \textcolor{keywordtype}{int}\ scopeIndexKey)}
+\DoxyCodeLine{\Hypertarget{_binder_8cs_source_l00087}00087\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_binder_8cs_source_l00088}00088\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ Array.Empty<\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_1_1_nodes_1_1_type_definition_node}{TypeDefinitionNode}}>();}
+\DoxyCodeLine{\Hypertarget{_binder_8cs_source_l00089}00089\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_binder_8cs_source_l00090}00090\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_binder_8cs_source_l00091}\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_binder_af620943a9486f15747638b2815a29d45}{00091}}\ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_binder_af620943a9486f15747638b2815a29d45}{TryGetTypeDefinitionNodeByScope}}(}
+\DoxyCodeLine{\Hypertarget{_binder_8cs_source_l00092}00092\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_lexers_1_1_models_a26a1b63ad28ec7955b30bc6c91571eca}{ResourceUri}}\ resourceUri,}
+\DoxyCodeLine{\Hypertarget{_binder_8cs_source_l00093}00093\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ scopeIndexKey,}
+\DoxyCodeLine{\Hypertarget{_binder_8cs_source_l00094}00094\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{string}\ typeIdentifierText,}
+\DoxyCodeLine{\Hypertarget{_binder_8cs_source_l00095}00095\ \ \ \ \ \ \ \ \ out\ \mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_1_1_nodes_1_1_type_definition_node}{TypeDefinitionNode}}\ typeDefinitionNode)}
+\DoxyCodeLine{\Hypertarget{_binder_8cs_source_l00096}00096\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_binder_8cs_source_l00097}00097\ \ \ \ \ \ \ \ \ typeDefinitionNode\ =\ \textcolor{keyword}{null};}
+\DoxyCodeLine{\Hypertarget{_binder_8cs_source_l00098}00098\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};}
+\DoxyCodeLine{\Hypertarget{_binder_8cs_source_l00099}00099\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_binder_8cs_source_l00100}00100\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_binder_8cs_source_l00101}\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_binder_acd0f33606921a3c6f1ba7d6e73af397f}{00101}}\ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_binder_acd0f33606921a3c6f1ba7d6e73af397f}{TryAddTypeDefinitionNodeByScope}}(}
+\DoxyCodeLine{\Hypertarget{_binder_8cs_source_l00102}00102\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_lexers_1_1_models_a26a1b63ad28ec7955b30bc6c91571eca}{ResourceUri}}\ resourceUri,}
+\DoxyCodeLine{\Hypertarget{_binder_8cs_source_l00103}00103\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ scopeIndexKey,}
+\DoxyCodeLine{\Hypertarget{_binder_8cs_source_l00104}00104\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{string}\ typeIdentifierText,}
+\DoxyCodeLine{\Hypertarget{_binder_8cs_source_l00105}00105\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_1_1_nodes_1_1_type_definition_node}{TypeDefinitionNode}}\ typeDefinitionNode)}
+\DoxyCodeLine{\Hypertarget{_binder_8cs_source_l00106}00106\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_binder_8cs_source_l00107}00107\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};}
+\DoxyCodeLine{\Hypertarget{_binder_8cs_source_l00108}00108\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_binder_8cs_source_l00109}00109\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_binder_8cs_source_l00110}\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_binder_aa7cec7f9c9fff06bde9338046f8ca7f8}{00110}}\ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_binder_aa7cec7f9c9fff06bde9338046f8ca7f8}{SetTypeDefinitionNodeByScope}}(}
+\DoxyCodeLine{\Hypertarget{_binder_8cs_source_l00111}00111\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_lexers_1_1_models_a26a1b63ad28ec7955b30bc6c91571eca}{ResourceUri}}\ resourceUri,}
+\DoxyCodeLine{\Hypertarget{_binder_8cs_source_l00112}00112\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ scopeIndexKey,}
+\DoxyCodeLine{\Hypertarget{_binder_8cs_source_l00113}00113\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{string}\ typeIdentifierText,}
+\DoxyCodeLine{\Hypertarget{_binder_8cs_source_l00114}00114\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_1_1_nodes_1_1_type_definition_node}{TypeDefinitionNode}}\ typeDefinitionNode)}
+\DoxyCodeLine{\Hypertarget{_binder_8cs_source_l00115}00115\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_binder_8cs_source_l00116}00116\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return};}
+\DoxyCodeLine{\Hypertarget{_binder_8cs_source_l00117}00117\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_binder_8cs_source_l00118}00118\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_binder_8cs_source_l00119}\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_binder_a68d5cfe87cba3605b8b66defcb248a1d}{00119}}\ \ \ \ \ \textcolor{keyword}{public}\ \mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_1_1_nodes_1_1_function_definition_node}{FunctionDefinitionNode}}[]\ \mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_binder_a68d5cfe87cba3605b8b66defcb248a1d}{GetFunctionDefinitionNodesByScope}}(\mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_lexers_1_1_models_a26a1b63ad28ec7955b30bc6c91571eca}{ResourceUri}}\ resourceUri,\ \textcolor{keywordtype}{int}\ scopeIndexKey)}
+\DoxyCodeLine{\Hypertarget{_binder_8cs_source_l00120}00120\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_binder_8cs_source_l00121}00121\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ Array.Empty<\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_1_1_nodes_1_1_function_definition_node}{FunctionDefinitionNode}}>();}
+\DoxyCodeLine{\Hypertarget{_binder_8cs_source_l00122}00122\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_binder_8cs_source_l00123}00123\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_binder_8cs_source_l00124}\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_binder_a66cf7934cf9e6a5fb8792b0d47c9c141}{00124}}\ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_binder_a66cf7934cf9e6a5fb8792b0d47c9c141}{TryGetFunctionDefinitionNodeByScope}}(}
+\DoxyCodeLine{\Hypertarget{_binder_8cs_source_l00125}00125\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_lexers_1_1_models_a26a1b63ad28ec7955b30bc6c91571eca}{ResourceUri}}\ resourceUri,}
+\DoxyCodeLine{\Hypertarget{_binder_8cs_source_l00126}00126\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ scopeIndexKey,}
+\DoxyCodeLine{\Hypertarget{_binder_8cs_source_l00127}00127\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{string}\ functionIdentifierText,}
+\DoxyCodeLine{\Hypertarget{_binder_8cs_source_l00128}00128\ \ \ \ \ \ \ \ \ out\ \mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_1_1_nodes_1_1_function_definition_node}{FunctionDefinitionNode}}\ functionDefinitionNode)}
+\DoxyCodeLine{\Hypertarget{_binder_8cs_source_l00129}00129\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_binder_8cs_source_l00130}00130\ \ \ \ \ \ \ \ \ functionDefinitionNode\ =\ \textcolor{keyword}{null};}
+\DoxyCodeLine{\Hypertarget{_binder_8cs_source_l00131}00131\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};}
+\DoxyCodeLine{\Hypertarget{_binder_8cs_source_l00132}00132\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_binder_8cs_source_l00133}00133\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_binder_8cs_source_l00134}\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_binder_a56ef8da7617739d2685cc927502e8532}{00134}}\ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_binder_a56ef8da7617739d2685cc927502e8532}{TryAddFunctionDefinitionNodeByScope}}(}
+\DoxyCodeLine{\Hypertarget{_binder_8cs_source_l00135}00135\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_lexers_1_1_models_a26a1b63ad28ec7955b30bc6c91571eca}{ResourceUri}}\ resourceUri,}
+\DoxyCodeLine{\Hypertarget{_binder_8cs_source_l00136}00136\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ scopeIndexKey,}
+\DoxyCodeLine{\Hypertarget{_binder_8cs_source_l00137}00137\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{string}\ functionIdentifierText,}
+\DoxyCodeLine{\Hypertarget{_binder_8cs_source_l00138}00138\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_1_1_nodes_1_1_function_definition_node}{FunctionDefinitionNode}}\ functionDefinitionNode)}
+\DoxyCodeLine{\Hypertarget{_binder_8cs_source_l00139}00139\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_binder_8cs_source_l00140}00140\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};}
+\DoxyCodeLine{\Hypertarget{_binder_8cs_source_l00141}00141\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_binder_8cs_source_l00142}00142\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_binder_8cs_source_l00143}\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_binder_a527cb48182449aba23df4fc9b53946d0}{00143}}\ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_binder_a527cb48182449aba23df4fc9b53946d0}{SetFunctionDefinitionNodeByScope}}(}
+\DoxyCodeLine{\Hypertarget{_binder_8cs_source_l00144}00144\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_lexers_1_1_models_a26a1b63ad28ec7955b30bc6c91571eca}{ResourceUri}}\ resourceUri,}
+\DoxyCodeLine{\Hypertarget{_binder_8cs_source_l00145}00145\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ scopeIndexKey,}
+\DoxyCodeLine{\Hypertarget{_binder_8cs_source_l00146}00146\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{string}\ functionIdentifierText,}
+\DoxyCodeLine{\Hypertarget{_binder_8cs_source_l00147}00147\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_1_1_nodes_1_1_function_definition_node}{FunctionDefinitionNode}}\ functionDefinitionNode)}
+\DoxyCodeLine{\Hypertarget{_binder_8cs_source_l00148}00148\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_binder_8cs_source_l00149}00149\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return};}
+\DoxyCodeLine{\Hypertarget{_binder_8cs_source_l00150}00150\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_binder_8cs_source_l00151}00151\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_binder_8cs_source_l00152}\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_binder_ade96a5be338f50c1b850432c17f7cf45}{00152}}\ \ \ \ \ \textcolor{keyword}{public}\ \mbox{\hyperlink{interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_1_1_nodes_1_1_fe75dbb5fedb96209546156f80d0cb75}{IVariableDeclarationNode}}[]\ \mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_binder_ade96a5be338f50c1b850432c17f7cf45}{GetVariableDeclarationNodesByScope}}(\mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_lexers_1_1_models_a26a1b63ad28ec7955b30bc6c91571eca}{ResourceUri}}\ resourceUri,\ \textcolor{keywordtype}{int}\ scopeIndexKey)}
+\DoxyCodeLine{\Hypertarget{_binder_8cs_source_l00153}00153\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_binder_8cs_source_l00154}00154\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ Array.Empty<\mbox{\hyperlink{interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_1_1_nodes_1_1_fe75dbb5fedb96209546156f80d0cb75}{IVariableDeclarationNode}}>();}
+\DoxyCodeLine{\Hypertarget{_binder_8cs_source_l00155}00155\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_binder_8cs_source_l00156}00156\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_binder_8cs_source_l00157}\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_binder_a81ad3d0f5c60b32ae418074e554df9f8}{00157}}\ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_binder_a81ad3d0f5c60b32ae418074e554df9f8}{TryGetVariableDeclarationNodeByScope}}(}
+\DoxyCodeLine{\Hypertarget{_binder_8cs_source_l00158}00158\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_lexers_1_1_models_a26a1b63ad28ec7955b30bc6c91571eca}{ResourceUri}}\ resourceUri,}
+\DoxyCodeLine{\Hypertarget{_binder_8cs_source_l00159}00159\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ scopeIndexKey,}
+\DoxyCodeLine{\Hypertarget{_binder_8cs_source_l00160}00160\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{string}\ variableIdentifierText,}
+\DoxyCodeLine{\Hypertarget{_binder_8cs_source_l00161}00161\ \ \ \ \ \ \ \ \ out\ \mbox{\hyperlink{interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_1_1_nodes_1_1_fe75dbb5fedb96209546156f80d0cb75}{IVariableDeclarationNode}}\ variableDeclarationNode)}
+\DoxyCodeLine{\Hypertarget{_binder_8cs_source_l00162}00162\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_binder_8cs_source_l00163}00163\ \ \ \ \ \ \ \ \ variableDeclarationNode\ =\ \textcolor{keyword}{null};}
+\DoxyCodeLine{\Hypertarget{_binder_8cs_source_l00164}00164\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};}
+\DoxyCodeLine{\Hypertarget{_binder_8cs_source_l00165}00165\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_binder_8cs_source_l00166}00166\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_binder_8cs_source_l00167}\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_binder_a4ce81865457e61c9425a2ed18ae16e64}{00167}}\ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_binder_a4ce81865457e61c9425a2ed18ae16e64}{TryAddVariableDeclarationNodeByScope}}(}
+\DoxyCodeLine{\Hypertarget{_binder_8cs_source_l00168}00168\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_lexers_1_1_models_a26a1b63ad28ec7955b30bc6c91571eca}{ResourceUri}}\ resourceUri,}
+\DoxyCodeLine{\Hypertarget{_binder_8cs_source_l00169}00169\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ scopeIndexKey,}
+\DoxyCodeLine{\Hypertarget{_binder_8cs_source_l00170}00170\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{string}\ variableIdentifierText,}
+\DoxyCodeLine{\Hypertarget{_binder_8cs_source_l00171}00171\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_1_1_nodes_1_1_fe75dbb5fedb96209546156f80d0cb75}{IVariableDeclarationNode}}\ variableDeclarationNode)}
+\DoxyCodeLine{\Hypertarget{_binder_8cs_source_l00172}00172\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_binder_8cs_source_l00173}00173\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};}
+\DoxyCodeLine{\Hypertarget{_binder_8cs_source_l00174}00174\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_binder_8cs_source_l00175}00175\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_binder_8cs_source_l00176}\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_binder_aa8a95b982c6183dc28b71922f92fc453}{00176}}\ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_binder_aa8a95b982c6183dc28b71922f92fc453}{SetVariableDeclarationNodeByScope}}(}
+\DoxyCodeLine{\Hypertarget{_binder_8cs_source_l00177}00177\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_lexers_1_1_models_a26a1b63ad28ec7955b30bc6c91571eca}{ResourceUri}}\ resourceUri,}
+\DoxyCodeLine{\Hypertarget{_binder_8cs_source_l00178}00178\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ scopeIndexKey,}
+\DoxyCodeLine{\Hypertarget{_binder_8cs_source_l00179}00179\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{string}\ variableIdentifierText,}
+\DoxyCodeLine{\Hypertarget{_binder_8cs_source_l00180}00180\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_1_1_nodes_1_1_fe75dbb5fedb96209546156f80d0cb75}{IVariableDeclarationNode}}\ variableDeclarationNode)}
+\DoxyCodeLine{\Hypertarget{_binder_8cs_source_l00181}00181\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_binder_8cs_source_l00182}00182\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return};}
+\DoxyCodeLine{\Hypertarget{_binder_8cs_source_l00183}00183\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_binder_8cs_source_l00184}00184\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_binder_8cs_source_l00185}\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_binder_a470f86d58cfecbc77a298e9365b370f0}{00185}}\ \ \ \ \ \textcolor{keyword}{public}\ \mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_1_1_nodes_1_1_type_clause_node}{TypeClauseNode}}?\ \mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_binder_a470f86d58cfecbc77a298e9365b370f0}{GetReturnTypeClauseNodeByScope}}(\mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_lexers_1_1_models_a26a1b63ad28ec7955b30bc6c91571eca}{ResourceUri}}\ resourceUri,\ \textcolor{keywordtype}{int}\ scopeIndexKey)}
+\DoxyCodeLine{\Hypertarget{_binder_8cs_source_l00186}00186\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_binder_8cs_source_l00187}00187\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{null};}
+\DoxyCodeLine{\Hypertarget{_binder_8cs_source_l00188}00188\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_binder_8cs_source_l00189}00189\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_binder_8cs_source_l00190}\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_binder_a8dc7d333a8c5ca818093ba7132b27ae3}{00190}}\ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_binder_a8dc7d333a8c5ca818093ba7132b27ae3}{TryAddReturnTypeClauseNodeByScope}}(}
+\DoxyCodeLine{\Hypertarget{_binder_8cs_source_l00191}00191\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_lexers_1_1_models_a26a1b63ad28ec7955b30bc6c91571eca}{ResourceUri}}\ resourceUri,}
+\DoxyCodeLine{\Hypertarget{_binder_8cs_source_l00192}00192\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ scopeIndexKey,}
+\DoxyCodeLine{\Hypertarget{_binder_8cs_source_l00193}00193\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_1_1_nodes_1_1_type_clause_node}{TypeClauseNode}}\ typeClauseNode)}
+\DoxyCodeLine{\Hypertarget{_binder_8cs_source_l00194}00194\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_binder_8cs_source_l00195}00195\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};}
+\DoxyCodeLine{\Hypertarget{_binder_8cs_source_l00196}00196\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_binder_8cs_source_l00197}00197\ }
+\DoxyCodeLine{\Hypertarget{_binder_8cs_source_l00198}\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_binder_ab02c8a7ee973f0e60d9ac043964395af}{00198}}\ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_binder_ab02c8a7ee973f0e60d9ac043964395af}{ClearStateByResourceUri}}(\mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_lexers_1_1_models_a26a1b63ad28ec7955b30bc6c91571eca}{ResourceUri}}\ resourceUri)}
+\DoxyCodeLine{\Hypertarget{_binder_8cs_source_l00199}00199\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_binder_8cs_source_l00200}00200\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return};}
+\DoxyCodeLine{\Hypertarget{_binder_8cs_source_l00201}00201\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_binder_8cs_source_l00202}00202\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_binder_8cs_source_l00203}\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_binder_a6e9659e7a1e4c77ad974ab133f93d871}{00203}}\ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_binder_a6e9659e7a1e4c77ad974ab133f93d871}{AddNamespaceToCurrentScope}}(\textcolor{keywordtype}{string}\ namespaceString,\ \mbox{\hyperlink{interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_interfaces_1_1_i_parser_model}{IParserModel}}\ model)}
+\DoxyCodeLine{\Hypertarget{_binder_8cs_source_l00204}00204\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_binder_8cs_source_l00205}00205\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return};}
+\DoxyCodeLine{\Hypertarget{_binder_8cs_source_l00206}00206\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_binder_8cs_source_l00207}00207\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_binder_8cs_source_l00208}\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_binder_a7987e05a52523c545462861c19ccb309}{00208}}\ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_binder_a7987e05a52523c545462861c19ccb309}{BindFunctionOptionalArgument}}(\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_1_1_nodes_1_1_function_argument_entry_node}{FunctionArgumentEntryNode}}\ functionArgumentEntryNode,\ \mbox{\hyperlink{interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_interfaces_1_1_i_parser_model}{IParserModel}}\ model)}
+\DoxyCodeLine{\Hypertarget{_binder_8cs_source_l00209}00209\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_binder_8cs_source_l00210}00210\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return};}
+\DoxyCodeLine{\Hypertarget{_binder_8cs_source_l00211}00211\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_binder_8cs_source_l00212}00212\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_binder_8cs_source_l00213}\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_binder_a64df62dd29979c8d9ae8eee730939381}{00213}}\ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_binder_a64df62dd29979c8d9ae8eee730939381}{BindVariableDeclarationNode}}(\mbox{\hyperlink{interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_1_1_nodes_1_1_fe75dbb5fedb96209546156f80d0cb75}{IVariableDeclarationNode}}\ variableDeclarationNode,\ \mbox{\hyperlink{interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_interfaces_1_1_i_parser_model}{IParserModel}}\ model)}
+\DoxyCodeLine{\Hypertarget{_binder_8cs_source_l00214}00214\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_binder_8cs_source_l00215}00215\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return};}
+\DoxyCodeLine{\Hypertarget{_binder_8cs_source_l00216}00216\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_binder_8cs_source_l00217}00217\ \}}
+
+\end{DoxyCode}

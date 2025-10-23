@@ -1,0 +1,4 @@
+var _tree_view_code_search_text_span_8cs =
+[
+    [ "Luthetus.Ide.RazorLib.CodeSearches.Models.TreeViewCodeSearchTextSpan", "class_luthetus_1_1_ide_1_1_razor_lib_1_1_code_searches_1_1_models_1_1_tree_view_code_search_text_span.html", "class_luthetus_1_1_ide_1_1_razor_lib_1_1_code_searches_1_1_models_1_1_tree_view_code_search_text_span" ]
+];

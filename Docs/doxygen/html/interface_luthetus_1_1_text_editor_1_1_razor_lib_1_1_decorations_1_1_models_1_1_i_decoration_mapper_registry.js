@@ -1,0 +1,4 @@
+var interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_decorations_1_1_models_1_1_i_decoration_mapper_registry =
+[
+    [ "GetDecorationMapper", "interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_decorations_1_1_models_1_1_i_decoration_mapper_registry.html#a000cd34558000251f2c3959104d80a8e", null ]
+];

@@ -1,0 +1,7 @@
+var struct_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_1_1_symbols_1_1_string_interpolation_symbol =
+[
+    [ "StringInterpolationSymbol", "struct_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_1_1_symbols_1_1_string_interpolation_symbol.html#a4b7dd864860d523795ff1f300eddf8b2", null ],
+    [ "SymbolKindString", "struct_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_1_1_symbols_1_1_string_interpolation_symbol.html#afbd9944a3b5c9bb295587c757b1620c4", null ],
+    [ "SyntaxKind", "struct_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_1_1_symbols_1_1_string_interpolation_symbol.html#aa73aa6afc5816e6f5376927862a129db", null ],
+    [ "TextSpan", "struct_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_1_1_symbols_1_1_string_interpolation_symbol.html#ad22bafbc846a943b0a1d3980fb78f437", null ]
+];

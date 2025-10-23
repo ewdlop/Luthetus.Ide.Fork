@@ -1,0 +1,40 @@
+.TH "Luthetus.TextEditor.RazorLib.Commands.Models.Defaults.TextEditorRefactorFunctions" 3 "Version 1.0.0" "Luthetus.Ide" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+Luthetus.TextEditor.RazorLib.Commands.Models.Defaults.TextEditorRefactorFunctions \- TODO: Decide on what folder this class belongs in\&.\&.\&. \&.\&.\&.I'm working on the Quick Actions / Refactor context menu (2024-08-16) and the issue is that, the context menu is populated with menu options from within the \fBITextEditorEditContext\fP\&. | But by the time the user picks a context menu option, the text editor may have been edited, thus invalidating any stored Func<Task> that is given for a menu option's onclick\&. | So, each menu option needs to make a separate Post to the \fBITextEditorService\fP upon onclick\&. | But, all of the variables that were created to construct the menu options, during the old post, are still within scope when typing out code for the menu option's onclick if written inline as a lambda function\&. | So, most importantly this class exists to avoid accidental usage of old text editor state due to the variables being in scope\&. | But this also probably is nice for readability, and re-usability of the refactor itself\&. | I don't want a separate function within \fBTextEditorCommandDefaultFunctions\fP because it is a nice separation of concern to keep compiler service refactors in a separate file\&.  
+
+.SH SYNOPSIS
+.br
+.PP
+.SS "Static Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "static void \fBGenerateConstructor\fP (\fBTypeDefinitionNode\fP unsafeTypeDefinitionNode, IEnumerable< \fBIVariableDeclarationNode\fP > variableDeclarationNodeList, IServiceProvider serviceProvider, \fBITextEditorEditContext\fP editContext, \fBTextEditorModelModifier\fP modelModifier, \fBTextEditorViewModelModifier\fP viewModelModifier, \fBCursorModifierBagTextEditor\fP cursorModifierBag, \fBTextEditorCursorModifier\fP primaryCursorModifier)"
+.br
+.RI "How much concern should be given to the text editor changing between the time that the context menu option was generated, and this function is invoked? "
+.in -1c
+.SH "Detailed Description"
+.PP 
+TODO: Decide on what folder this class belongs in\&.\&.\&. \&.\&.\&.I'm working on the Quick Actions / Refactor context menu (2024-08-16) and the issue is that, the context menu is populated with menu options from within the \fBITextEditorEditContext\fP\&. | But by the time the user picks a context menu option, the text editor may have been edited, thus invalidating any stored Func<Task> that is given for a menu option's onclick\&. | So, each menu option needs to make a separate Post to the \fBITextEditorService\fP upon onclick\&. | But, all of the variables that were created to construct the menu options, during the old post, are still within scope when typing out code for the menu option's onclick if written inline as a lambda function\&. | So, most importantly this class exists to avoid accidental usage of old text editor state due to the variables being in scope\&. | But this also probably is nice for readability, and re-usability of the refactor itself\&. | I don't want a separate function within \fBTextEditorCommandDefaultFunctions\fP because it is a nice separation of concern to keep compiler service refactors in a separate file\&. 
+.PP
+Definition at line \fB39\fP of file \fBTextEditorRefactorFunctions\&.cs\fP\&.
+.SH "Member Function Documentation"
+.PP 
+.SS "void Luthetus\&.TextEditor\&.RazorLib\&.Commands\&.Models\&.Defaults\&.TextEditorRefactorFunctions\&.GenerateConstructor (\fBTypeDefinitionNode\fP unsafeTypeDefinitionNode, IEnumerable< \fBIVariableDeclarationNode\fP > variableDeclarationNodeList, IServiceProvider serviceProvider, \fBITextEditorEditContext\fP editContext, \fBTextEditorModelModifier\fP modelModifier, \fBTextEditorViewModelModifier\fP viewModelModifier, \fBCursorModifierBagTextEditor\fP cursorModifierBag, \fBTextEditorCursorModifier\fP primaryCursorModifier)\fR [static]\fP"
+
+.PP
+How much concern should be given to the text editor changing between the time that the context menu option was generated, and this function is invoked? If the { Ctrl + Period } keybind is hit when the cursor is at positionIndex 30\&. But then 100 characters of text was inserted at positionIndex 0, by the time this function gets access to the text editor, anything the menu option tells this function will be wrong by 100 position indices\&.
+
+.PP
+Preferably, long term, 100% concern should be given to the text editor changing between the time that the context menu option was generated, and this function is invoked\&.
+
+.PP
+But, in terms of progressively approaching that goal, how should this be handled? 
+.PP
+Definition at line \fB55\fP of file \fBTextEditorRefactorFunctions\&.cs\fP\&.
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for Luthetus\&.Ide from the source code\&.

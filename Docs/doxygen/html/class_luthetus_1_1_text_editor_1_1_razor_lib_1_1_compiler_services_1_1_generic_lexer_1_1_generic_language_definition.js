@@ -1,0 +1,15 @@
+var class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_generic_lexer_1_1_generic_language_definition =
+[
+    [ "GenericLanguageDefinition", "class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_generic_lexer_1_1_generic_language_definition.html#a22ea5554e9e07845243070be9d7e6329", null ],
+    [ "CommentMultiLineEnd", "class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_generic_lexer_1_1_generic_language_definition.html#a62aeaed47319d511960d9f5996d2961e", null ],
+    [ "CommentMultiLineStart", "class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_generic_lexer_1_1_generic_language_definition.html#a20b76bc2bdffe22bc5fe360b76b2c193", null ],
+    [ "CommentSingleLineEndingsList", "class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_generic_lexer_1_1_generic_language_definition.html#a9bfd59c4c6fab92eb52a829759853b9a", null ],
+    [ "CommentSingleLineStart", "class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_generic_lexer_1_1_generic_language_definition.html#a4b30ff6a868e1e4ede45f63d95c71d83", null ],
+    [ "FunctionInvocationEnd", "class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_generic_lexer_1_1_generic_language_definition.html#a264920e5714b6fa2462c3d0c7fc01eb7", null ],
+    [ "FunctionInvocationStart", "class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_generic_lexer_1_1_generic_language_definition.html#acff1127b87efc2d23256e16d0b52878e", null ],
+    [ "KeywordsList", "class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_generic_lexer_1_1_generic_language_definition.html#a91bc8cbae6ba1770355eb24f7153cb0c", null ],
+    [ "MemberAccessToken", "class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_generic_lexer_1_1_generic_language_definition.html#a5a763c17663ba079fae4b5273a29f13b", null ],
+    [ "PreprocessorDefinition", "class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_generic_lexer_1_1_generic_language_definition.html#a3796883bb1086630c2ffdfdcc40a4ea2", null ],
+    [ "StringEnd", "class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_generic_lexer_1_1_generic_language_definition.html#ab2020f75df87787c546b016e9f4686a3", null ],
+    [ "StringStart", "class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_generic_lexer_1_1_generic_language_definition.html#a65e7cee17d049746e034a05c1b17fd1b", null ]
+];

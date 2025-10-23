@@ -1,0 +1,7 @@
+var struct_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_1_1_symbols_1_1_string_verbatim_symbol =
+[
+    [ "StringVerbatimSymbol", "struct_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_1_1_symbols_1_1_string_verbatim_symbol.html#a15b8d90ac7843512def10c0111fa27e1", null ],
+    [ "SymbolKindString", "struct_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_1_1_symbols_1_1_string_verbatim_symbol.html#ae6e97aa9204451bd2aaec058c3c19b0a", null ],
+    [ "SyntaxKind", "struct_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_1_1_symbols_1_1_string_verbatim_symbol.html#a88a6ce1006e516c4f0a3331b719e69e6", null ],
+    [ "TextSpan", "struct_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_1_1_symbols_1_1_string_verbatim_symbol.html#a23194f61f93b72dfa1e2e9274b19e50b", null ]
+];

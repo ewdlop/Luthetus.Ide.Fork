@@ -1,0 +1,197 @@
+.TH "Luthetus.Extensions.DotNet.CSharpProjects.Models.TreeViewCSharpProjectToProjectReferences" 3 "Version 1.0.0" "Luthetus.Ide" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+Luthetus.Extensions.DotNet.CSharpProjects.Models.TreeViewCSharpProjectToProjectReferences
+.SH SYNOPSIS
+.br
+.PP
+.PP
+Inherits \fBLuthetus\&.Common\&.RazorLib\&.TreeViews\&.Models\&.TreeViewWithType< T >\fP\&.
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBTreeViewCSharpProjectToProjectReferences\fP (\fBCSharpProjectToProjectReferences\fP cSharpProjectToProjectReferences, \fBIDotNetComponentRenderers\fP dotNetComponentRenderers, \fBIIdeComponentRenderers\fP ideComponentRenderers, \fBIFileSystemProvider\fP fileSystemProvider, \fBIEnvironmentProvider\fP environmentProvider, bool isExpandable, bool isExpanded)"
+.br
+.ti -1c
+.RI "override bool \fBEquals\fP (object? obj)"
+.br
+.ti -1c
+.RI "override int \fBGetHashCode\fP ()"
+.br
+.ti -1c
+.RI "override \fBTreeViewRenderer\fP \fBGetTreeViewRenderer\fP ()"
+.br
+.ti -1c
+.RI "override async Task \fBLoadChildListAsync\fP ()"
+.br
+.ti -1c
+.RI "override void \fBRemoveRelatedFilesFromParent\fP (List< \fBTreeViewNoType\fP > siblingsAndSelfTreeViews)"
+.br
+.RI "RemoveRelatedFilesFromParent is used for showing codebehinds such that a file on the filesystem can be displayed as having children in the TreeView\&.
+.br
+
+.br
+ In the case of a directory loading its children\&. After the directory loads all its children it will loop through the children invoking RemoveRelatedFilesFromParent on each of the children\&.
+.br
+
+.br
+ For example: if a directory has the children { 'Component\&.razor', 'Component\&.razor\&.cs' } then 'Component\&.razor' will remove 'Component\&.razor\&.cs' from the parent directories children and mark itself as expandable as it saw a related file in its parent\&. "
+.in -1c
+
+Public Member Functions inherited from \fBLuthetus\&.Common\&.RazorLib\&.TreeViews\&.Models\&.TreeViewWithType< T >\fP
+.in +1c
+.ti -1c
+.RI "\fBTreeViewWithType\fP (T item, bool isExpandable, bool isExpanded)"
+.br
+.in -1c
+
+Public Member Functions inherited from \fBLuthetus\&.Common\&.RazorLib\&.TreeViews\&.Models\&.TreeViewNoType\fP
+.in +1c
+.ti -1c
+.RI "\fBTreeViewRenderer\fP \fBGetTreeViewRenderer\fP ()"
+.br
+.ti -1c
+.RI "Task \fBLoadChildListAsync\fP ()"
+.br
+.ti -1c
+.RI "virtual void \fBLinkChildren\fP (List< \fBTreeViewNoType\fP > previousChildList, List< \fBTreeViewNoType\fP > nextChildList)"
+.br
+.RI "Sets foreach child: child\&.Parent = this; As well it sets the child\&.IndexAmongSiblings, and maintains expanded state\&. "
+.in -1c
+.SS "Properties"
+
+.in +1c
+.ti -1c
+.RI "\fBIDotNetComponentRenderers\fP \fBDotNetComponentRenderers\fP\fR [get]\fP"
+.br
+.ti -1c
+.RI "\fBIIdeComponentRenderers\fP \fBIdeComponentRenderers\fP\fR [get]\fP"
+.br
+.ti -1c
+.RI "\fBIFileSystemProvider\fP \fBFileSystemProvider\fP\fR [get]\fP"
+.br
+.ti -1c
+.RI "\fBIEnvironmentProvider\fP \fBEnvironmentProvider\fP\fR [get]\fP"
+.br
+.in -1c
+
+Properties inherited from \fBLuthetus\&.Common\&.RazorLib\&.TreeViews\&.Models\&.TreeViewWithType< T >\fP
+.in +1c
+.ti -1c
+.RI "T \fBItem\fP\fR [get]\fP"
+.br
+.RI "Do not allow \fBItem\fP to be null\&.
+.br
+
+.br
+ If one wishes to have a 'null' concept as a TreeViewNode, then make a datatype that acts as a psuedo null\&. "
+.ti -1c
+.RI "override object \fBUntypedItem\fP\fR [get]\fP"
+.br
+.ti -1c
+.RI "override Type \fBItemType\fP\fR [get]\fP"
+.br
+.in -1c
+
+Properties inherited from \fBLuthetus\&.Common\&.RazorLib\&.TreeViews\&.Models\&.TreeViewNoType\fP
+.in +1c
+.ti -1c
+.RI "object \fBUntypedItem\fP\fR [get]\fP"
+.br
+.ti -1c
+.RI "Type \fBItemType\fP\fR [get]\fP"
+.br
+.ti -1c
+.RI "\fBTreeViewNoType\fP? \fBParent\fP\fR [get, set]\fP"
+.br
+.ti -1c
+.RI "List< \fBTreeViewNoType\fP > \fBChildList\fP = new()\fR [get, set]\fP"
+.br
+.ti -1c
+.RI "int \fBIndexAmongSiblings\fP\fR [get, set]\fP"
+.br
+.RI "IndexAmongSiblings refers to the index which this \fBTreeViewNoType\fP is found at within their Parent's ChildList "
+.ti -1c
+.RI "bool \fBIsRoot\fP\fR [get, set]\fP"
+.br
+.ti -1c
+.RI "bool \fBIsHidden\fP\fR [get, set]\fP"
+.br
+.ti -1c
+.RI "bool \fBIsExpandable\fP\fR [get, set]\fP"
+.br
+.ti -1c
+.RI "bool \fBIsExpanded\fP\fR [get, set]\fP"
+.br
+.ti -1c
+.RI "\fBKey\fP< \fBTreeViewChanged\fP > \fBTreeViewChangedKey\fP = \fBKey\fP<\fBTreeViewChanged\fP>\&.NewKey()\fR [get, set]\fP"
+.br
+.ti -1c
+.RI "Key< \fBTreeViewNoType\fP > \fBKey\fP = Key<\fBTreeViewNoType\fP>\&.NewKey()\fR [get, set]\fP"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+Definition at line \fB11\fP of file \fBTreeViewCSharpProjectToProjectReferences\&.cs\fP\&.
+.SH "Constructor & Destructor Documentation"
+.PP 
+.SS "Luthetus\&.Extensions\&.DotNet\&.CSharpProjects\&.Models\&.TreeViewCSharpProjectToProjectReferences\&.TreeViewCSharpProjectToProjectReferences (\fBCSharpProjectToProjectReferences\fP cSharpProjectToProjectReferences, \fBIDotNetComponentRenderers\fP dotNetComponentRenderers, \fBIIdeComponentRenderers\fP ideComponentRenderers, \fBIFileSystemProvider\fP fileSystemProvider, \fBIEnvironmentProvider\fP environmentProvider, bool isExpandable, bool isExpanded)"
+
+.PP
+Definition at line \fB13\fP of file \fBTreeViewCSharpProjectToProjectReferences\&.cs\fP\&.
+.SH "Member Function Documentation"
+.PP 
+.SS "override bool Luthetus\&.Extensions\&.DotNet\&.CSharpProjects\&.Models\&.TreeViewCSharpProjectToProjectReferences\&.Equals (object? obj)"
+
+.PP
+Definition at line \fB34\fP of file \fBTreeViewCSharpProjectToProjectReferences\&.cs\fP\&.
+.SS "override int Luthetus\&.Extensions\&.DotNet\&.CSharpProjects\&.Models\&.TreeViewCSharpProjectToProjectReferences\&.GetHashCode ()"
+
+.SS "override \fBTreeViewRenderer\fP Luthetus\&.Extensions\&.DotNet\&.CSharpProjects\&.Models\&.TreeViewCSharpProjectToProjectReferences\&.GetTreeViewRenderer ()"
+
+.PP
+Definition at line \fB44\fP of file \fBTreeViewCSharpProjectToProjectReferences\&.cs\fP\&.
+.SS "override async Task Luthetus\&.Extensions\&.DotNet\&.CSharpProjects\&.Models\&.TreeViewCSharpProjectToProjectReferences\&.LoadChildListAsync ()"
+
+.PP
+Definition at line \fB51\fP of file \fBTreeViewCSharpProjectToProjectReferences\&.cs\fP\&.
+.SS "override void Luthetus\&.Extensions\&.DotNet\&.CSharpProjects\&.Models\&.TreeViewCSharpProjectToProjectReferences\&.RemoveRelatedFilesFromParent (List< \fBTreeViewNoType\fP > siblingsAndSelfTreeViews)\fR [virtual]\fP"
+
+.PP
+RemoveRelatedFilesFromParent is used for showing codebehinds such that a file on the filesystem can be displayed as having children in the TreeView\&.
+.br
+
+.br
+ In the case of a directory loading its children\&. After the directory loads all its children it will loop through the children invoking RemoveRelatedFilesFromParent on each of the children\&.
+.br
+
+.br
+ For example: if a directory has the children { 'Component\&.razor', 'Component\&.razor\&.cs' } then 'Component\&.razor' will remove 'Component\&.razor\&.cs' from the parent directories children and mark itself as expandable as it saw a related file in its parent\&. 
+.PP
+Reimplemented from \fBLuthetus\&.Common\&.RazorLib\&.TreeViews\&.Models\&.TreeViewNoType\fP\&.
+.PP
+Definition at line \fB127\fP of file \fBTreeViewCSharpProjectToProjectReferences\&.cs\fP\&.
+.SH "Property Documentation"
+.PP 
+.SS "\fBIDotNetComponentRenderers\fP Luthetus\&.Extensions\&.DotNet\&.CSharpProjects\&.Models\&.TreeViewCSharpProjectToProjectReferences\&.DotNetComponentRenderers\fR [get]\fP"
+
+.PP
+Definition at line \fB29\fP of file \fBTreeViewCSharpProjectToProjectReferences\&.cs\fP\&.
+.SS "\fBIEnvironmentProvider\fP Luthetus\&.Extensions\&.DotNet\&.CSharpProjects\&.Models\&.TreeViewCSharpProjectToProjectReferences\&.EnvironmentProvider\fR [get]\fP"
+
+.PP
+Definition at line \fB32\fP of file \fBTreeViewCSharpProjectToProjectReferences\&.cs\fP\&.
+.SS "\fBIFileSystemProvider\fP Luthetus\&.Extensions\&.DotNet\&.CSharpProjects\&.Models\&.TreeViewCSharpProjectToProjectReferences\&.FileSystemProvider\fR [get]\fP"
+
+.PP
+Definition at line \fB31\fP of file \fBTreeViewCSharpProjectToProjectReferences\&.cs\fP\&.
+.SS "\fBIIdeComponentRenderers\fP Luthetus\&.Extensions\&.DotNet\&.CSharpProjects\&.Models\&.TreeViewCSharpProjectToProjectReferences\&.IdeComponentRenderers\fR [get]\fP"
+
+.PP
+Definition at line \fB30\fP of file \fBTreeViewCSharpProjectToProjectReferences\&.cs\fP\&.
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for Luthetus\&.Ide from the source code\&.

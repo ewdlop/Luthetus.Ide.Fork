@@ -1,0 +1,252 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
+  <compounddef id="class_luthetus_1_1_ide_1_1_tests_1_1_adhoc_1_1_synchronization_context_tests" kind="class" language="C#" prot="public">
+    <compoundname>Luthetus::Ide::Tests::Adhoc::SynchronizationContextTests</compoundname>
+    <innerclass refid="class_luthetus_1_1_ide_1_1_tests_1_1_adhoc_1_1_synchronization_context_tests_1_1_test" prot="private">Luthetus::Ide::Tests::Adhoc::SynchronizationContextTests::Test</innerclass>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="class_luthetus_1_1_ide_1_1_tests_1_1_adhoc_1_1_synchronization_context_tests_1acd375081173a230d49e43dab7601bbea" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void Luthetus.Ide.Tests.Adhoc.SynchronizationContextTests.Synchronous</definition>
+        <argsstring>()</argsstring>
+        <name>Synchronous</name>
+        <qualifiedname>Luthetus.Ide.Tests.Adhoc.SynchronizationContextTests.Synchronous</qualifiedname>
+        <briefdescription>
+<para>Idea: Assign a value, increment that value, then assert initialValue + 1.<linebreak/>
+<linebreak/>
+. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Reason: This code runs synchronously, therefore by the time the program reaches the assertion, the increment is guaranteed to have occurred. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Tests/Ide/Adhoc/SynchronizationContextTests.cs" line="41" column="13" bodyfile="Source/Tests/Ide/Adhoc/SynchronizationContextTests.cs" bodystart="41" bodyend="50"/>
+      </memberdef>
+      <memberdef kind="function" id="class_luthetus_1_1_ide_1_1_tests_1_1_adhoc_1_1_synchronization_context_tests_1a0204609155382c9e2089d20874b2e00a" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>async Task</type>
+        <definition>async Task Luthetus.Ide.Tests.Adhoc.SynchronizationContextTests.AsynchronousWithAwait</definition>
+        <argsstring>()</argsstring>
+        <name>AsynchronousWithAwait</name>
+        <qualifiedname>Luthetus.Ide.Tests.Adhoc.SynchronizationContextTests.AsynchronousWithAwait</qualifiedname>
+        <briefdescription>
+<para>Idea: Assign a value, increment that value, then assert initialValue + 1.<linebreak/>
+<linebreak/>
+. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Reason: This code runs asynchronously, but the task is awaited, therefore by the time the program reaches the assertion, the increment is guaranteed to have occurred. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Tests/Ide/Adhoc/SynchronizationContextTests.cs" line="59" column="23" bodyfile="Source/Tests/Ide/Adhoc/SynchronizationContextTests.cs" bodystart="59" bodyend="68"/>
+      </memberdef>
+      <memberdef kind="function" id="class_luthetus_1_1_ide_1_1_tests_1_1_adhoc_1_1_synchronization_context_tests_1ac084ebb129deff829b4fc8f6b98f2e04" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>async Task</type>
+        <definition>async Task Luthetus.Ide.Tests.Adhoc.SynchronizationContextTests.AsynchronousNoAwait</definition>
+        <argsstring>()</argsstring>
+        <name>AsynchronousNoAwait</name>
+        <qualifiedname>Luthetus.Ide.Tests.Adhoc.SynchronizationContextTests.AsynchronousNoAwait</qualifiedname>
+        <briefdescription>
+<para>Idea: Assign a value, increment that value, then assert initialValue + 1.<linebreak/>
+<linebreak/>
+. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Reason: This code runs asynchronously, but the task is NOT awaited, therefore by the time the program reaches the assertion, the increment is guaranteed to NOT have occurred.</para>
+<para>Thoughts: -Is it true that the increment is guaranteed to NOT have occurred? -If I run this enough times could the scheduler for some reason decide to run it immediately? -If I run this code on various operating systems, could the output be different, by nature of the operating system&apos;s scheduler? -Does the computer&apos;s architecture come into play with scheduling tasks? -If it does, how much variance can I encounter by changing the computer&apos;s architecture? -If I add enough code between the &apos;Task.Run&apos; that isn&apos;t awaited, and the assertion, could I manage to have the task complete prior to the assertion? -I specifically say &apos;code&apos; here rather than &apos;await Task.Delay(...)&apos;, because I imagine the inclusion of the &apos;await&apos; keyword could result in a different outcome than if I just added something synchronous, but long enough timespan to compute, that the task somehow finishes. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Tests/Ide/Adhoc/SynchronizationContextTests.cs" line="92" column="23" bodyfile="Source/Tests/Ide/Adhoc/SynchronizationContextTests.cs" bodystart="92" bodyend="104"/>
+      </memberdef>
+      <memberdef kind="function" id="class_luthetus_1_1_ide_1_1_tests_1_1_adhoc_1_1_synchronization_context_tests_1aa60f58c443bfaf0e11fea31a65f3fba7" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>async Task</type>
+        <definition>async Task Luthetus.Ide.Tests.Adhoc.SynchronizationContextTests.AsynchronousNoAwait_TryToGetTheNotAwaitedTaskToComplete_ByExecutingSynchronousCodeBetweenItAndTheIncrementation_LargeForLoopUpperBound</definition>
+        <argsstring>()</argsstring>
+        <name>AsynchronousNoAwait_TryToGetTheNotAwaitedTaskToComplete_ByExecutingSynchronousCodeBetweenItAndTheIncrementation_LargeForLoopUpperBound</name>
+        <qualifiedname>Luthetus.Ide.Tests.Adhoc.SynchronizationContextTests.AsynchronousNoAwait_TryToGetTheNotAwaitedTaskToComplete_ByExecutingSynchronousCodeBetweenItAndTheIncrementation_LargeForLoopUpperBound</qualifiedname>
+        <briefdescription>
+<para>This test says the actual value is 3 for my current computer. But why did it decide to complete the task here? What if I have the for loop go up to a smaller upper limit. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Tests/Ide/Adhoc/SynchronizationContextTests.cs" line="113" column="23" bodyfile="Source/Tests/Ide/Adhoc/SynchronizationContextTests.cs" bodystart="113" bodyend="131"/>
+      </memberdef>
+      <memberdef kind="function" id="class_luthetus_1_1_ide_1_1_tests_1_1_adhoc_1_1_synchronization_context_tests_1a3b1e5f4e5ad4be57203500b92644a4a9" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>async Task</type>
+        <definition>async Task Luthetus.Ide.Tests.Adhoc.SynchronizationContextTests.AsynchronousNoAwait_TryToGetTheNotAwaitedTaskToComplete_ByExecutingSynchronousCodeBetweenItAndTheIncrementation_SmallForLoopUpperBound</definition>
+        <argsstring>()</argsstring>
+        <name>AsynchronousNoAwait_TryToGetTheNotAwaitedTaskToComplete_ByExecutingSynchronousCodeBetweenItAndTheIncrementation_SmallForLoopUpperBound</name>
+        <qualifiedname>Luthetus.Ide.Tests.Adhoc.SynchronizationContextTests.AsynchronousNoAwait_TryToGetTheNotAwaitedTaskToComplete_ByExecutingSynchronousCodeBetweenItAndTheIncrementation_SmallForLoopUpperBound</qualifiedname>
+        <briefdescription>
+<para>This test says the actual value is 2 on my computer. It is deeply unsettling that when the upper bound was &apos;1_000_000&apos; it did increment, yet here it didn&apos;t<linebreak/>
+<linebreak/>
+. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>In terms of a &quot;human feeling&quot;. It &quot;feels&quot; like it makes sense. But at the end of the day, I have no idea why it did this.<linebreak/>
+<linebreak/>
+</para>
+<para>Its horrifying to think that my computer is running, and I&apos;m using it at this moment. Because there is an unfathomable amount of code being executed, and tasks communicating to one another.<linebreak/>
+<linebreak/>
+</para>
+<para>How is it possible for the internet to function? Perhaps I purchase something online. I then get charged for &quot;some&quot;-dollar amount, maybe $50 is the charge. I then attempt to pay $50, but somehow the &quot;bytes&quot; that are sent over the internet, are incorrectly saying that I am paying $5,000?<linebreak/>
+<linebreak/>
+</para>
+<para>Computers appear to be like glass to me. I feel like at any moment everything could shatter, and yet it often works.<linebreak/>
+<linebreak/>
+</para>
+<para>My perspective here is largely from a &quot;human&quot;-perspective. That is, what if my computer tries to add &quot;4 + 4&quot;, but is feeling a bit tired that day, and tells me the result is 44 instead of 8?<linebreak/>
+<linebreak/>
+</para>
+<para>Wouldn&apos;t it only take 1 tiny error in my computer for the entire thing to crash? Suppossedly 1s and 0s are set/unset. How many times per second is this being done? Its nauseating to think of doing this as a human, and not making a mistake.<linebreak/>
+<linebreak/>
+</para>
+<para>Its like some odd anxiety that I could write a for loop in C# that writes &quot;Hello World\n&quot;. But if I run it for enough loops it somehow writes out &quot;Abc123&quot;?<linebreak/>
+<linebreak/>
+</para>
+<para>I am struggling to wrap my head around the setting of 1s and 0s. I imagine a computer going along setting its bits, then lightning strikes, and this somehow makes the computer write out a 1 instead of a 0. Then the result of this singular bit being incorrectly written out results in some catastrophic event.<linebreak/>
+<linebreak/>
+</para>
+<para>Even worse, simply imagining a computer settings 1s and 0s, in my head, there is an extremely anxious thought that it goes to mess up, due to no external circumstances, and it will be solely inexplainable.<linebreak/>
+<linebreak/>
+ </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Tests/Ide/Adhoc/SynchronizationContextTests.cs" line="174" column="23" bodyfile="Source/Tests/Ide/Adhoc/SynchronizationContextTests.cs" bodystart="174" bodyend="192"/>
+      </memberdef>
+      <memberdef kind="function" id="class_luthetus_1_1_ide_1_1_tests_1_1_adhoc_1_1_synchronization_context_tests_1a9a95ae60246c950f91694f80a8357bc9" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>async Task</type>
+        <definition>async Task Luthetus.Ide.Tests.Adhoc.SynchronizationContextTests.AsynchronousNoAwait_TryToGetTheNotAwaitedTaskToComplete_ByAwaitingATaskBetweenItAndTheIncrementation_TaskDelayNonZero</definition>
+        <argsstring>()</argsstring>
+        <name>AsynchronousNoAwait_TryToGetTheNotAwaitedTaskToComplete_ByAwaitingATaskBetweenItAndTheIncrementation_TaskDelayNonZero</name>
+        <qualifiedname>Luthetus.Ide.Tests.Adhoc.SynchronizationContextTests.AsynchronousNoAwait_TryToGetTheNotAwaitedTaskToComplete_ByAwaitingATaskBetweenItAndTheIncrementation_TaskDelayNonZero</qualifiedname>
+        <briefdescription>
+<para>This test has 3 as the actual value on my computer. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Tests/Ide/Adhoc/SynchronizationContextTests.cs" line="198" column="23" bodyfile="Source/Tests/Ide/Adhoc/SynchronizationContextTests.cs" bodystart="198" bodyend="211"/>
+      </memberdef>
+      <memberdef kind="function" id="class_luthetus_1_1_ide_1_1_tests_1_1_adhoc_1_1_synchronization_context_tests_1a188ba522857c739aa993046d5f2db7f1" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>async Task</type>
+        <definition>async Task Luthetus.Ide.Tests.Adhoc.SynchronizationContextTests.AsynchronousNoAwait_TryToGetTheNotAwaitedTaskToComplete_ByAwaitingATaskBetweenItAndTheIncrementationTaskDelayZero</definition>
+        <argsstring>()</argsstring>
+        <name>AsynchronousNoAwait_TryToGetTheNotAwaitedTaskToComplete_ByAwaitingATaskBetweenItAndTheIncrementationTaskDelayZero</name>
+        <qualifiedname>Luthetus.Ide.Tests.Adhoc.SynchronizationContextTests.AsynchronousNoAwait_TryToGetTheNotAwaitedTaskToComplete_ByAwaitingATaskBetweenItAndTheIncrementationTaskDelayZero</qualifiedname>
+        <briefdescription>
+<para>This test has 2 as the actual value on my computer. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Tests/Ide/Adhoc/SynchronizationContextTests.cs" line="217" column="23" bodyfile="Source/Tests/Ide/Adhoc/SynchronizationContextTests.cs" bodystart="217" bodyend="230"/>
+      </memberdef>
+      <memberdef kind="function" id="class_luthetus_1_1_ide_1_1_tests_1_1_adhoc_1_1_synchronization_context_tests_1a6171884db76ec3c2d3426b068743d8f2" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>async Task</type>
+        <definition>async Task Luthetus.Ide.Tests.Adhoc.SynchronizationContextTests.AsynchronousNoAwait_TryToGetTheNotAwaitedTaskToComplete_ByAwaitingATaskBetweenItAndTheIncrementationTaskDelayOne</definition>
+        <argsstring>()</argsstring>
+        <name>AsynchronousNoAwait_TryToGetTheNotAwaitedTaskToComplete_ByAwaitingATaskBetweenItAndTheIncrementationTaskDelayOne</name>
+        <qualifiedname>Luthetus.Ide.Tests.Adhoc.SynchronizationContextTests.AsynchronousNoAwait_TryToGetTheNotAwaitedTaskToComplete_ByAwaitingATaskBetweenItAndTheIncrementationTaskDelayOne</qualifiedname>
+        <briefdescription>
+<para>This test has 2 as the actual value on my computer.<linebreak/>
+<linebreak/>
+. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Idea: I have a test for a 0ms delay, and a 1000ms delay. The 0ms delay says the actual value is 2, whereas the 1000ms delay says the actual value is 3. | I&apos;m wondering if maybe the 0ms delay results in some sort of short circuiting, as if the &apos;await&apos; keyword isn&apos;t even there. | For that reasoning, I&apos;m going to use a 1ms delay, to see if it ends up with the actual value being 3. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Tests/Ide/Adhoc/SynchronizationContextTests.cs" line="246" column="23" bodyfile="Source/Tests/Ide/Adhoc/SynchronizationContextTests.cs" bodystart="246" bodyend="259"/>
+      </memberdef>
+      <memberdef kind="function" id="class_luthetus_1_1_ide_1_1_tests_1_1_adhoc_1_1_synchronization_context_tests_1a7b892bae8808820a3accf384ec109758" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>async Task</type>
+        <definition>async Task Luthetus.Ide.Tests.Adhoc.SynchronizationContextTests.Concurrency_WhenAll</definition>
+        <argsstring>()</argsstring>
+        <name>Concurrency_WhenAll</name>
+        <qualifiedname>Luthetus.Ide.Tests.Adhoc.SynchronizationContextTests.Concurrency_WhenAll</qualifiedname>
+        <briefdescription>
+<para>Can concurrency be performed with a single thread? -An &apos;async-await&apos; model allows this. Can concurrency be performed with a multiple threads? -I&apos;m struggling to respond to this, because would this be parallelism? -What is the difference between concurrency and parallelism. -I suppose you could execute multiple threads concurrently, by using an &apos;async-await&apos; model. -But that furthermore if one ran the threads on two separate computers, then that would be parallelism (no longer concurrent) -I found it easier to think of &quot;two separate computers&quot;, rather than one computer performing parallelism with its own hardware. -I think this clearly shows that I don&apos;t understand computer hardware, and that I should learn more about it. -Is concurrency referring to running many tasks on a single processor with an &apos;await-async&apos; like model, where as parallelism refers to having each task run on a separate processor? -Furthermore, what is a processor, is this the correct word? </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Tests/Ide/Adhoc/SynchronizationContextTests.cs" line="284" column="23" bodyfile="Source/Tests/Ide/Adhoc/SynchronizationContextTests.cs" bodystart="284" bodyend="300"/>
+      </memberdef>
+      <memberdef kind="function" id="class_luthetus_1_1_ide_1_1_tests_1_1_adhoc_1_1_synchronization_context_tests_1a5b85d3fc42489018135560ed815657b6" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>async Task</type>
+        <definition>async Task Luthetus.Ide.Tests.Adhoc.SynchronizationContextTests.Concurrency_OneAtATime</definition>
+        <argsstring>()</argsstring>
+        <name>Concurrency_OneAtATime</name>
+        <qualifiedname>Luthetus.Ide.Tests.Adhoc.SynchronizationContextTests.Concurrency_OneAtATime</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Tests/Ide/Adhoc/SynchronizationContextTests.cs" line="303" column="23" bodyfile="Source/Tests/Ide/Adhoc/SynchronizationContextTests.cs" bodystart="303" bodyend="320"/>
+      </memberdef>
+      <memberdef kind="function" id="class_luthetus_1_1_ide_1_1_tests_1_1_adhoc_1_1_synchronization_context_tests_1aabd5fd38d0b6f33648437452adcd87b7" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void Luthetus.Ide.Tests.Adhoc.SynchronizationContextTests.Parallel_Sync</definition>
+        <argsstring>()</argsstring>
+        <name>Parallel_Sync</name>
+        <qualifiedname>Luthetus.Ide.Tests.Adhoc.SynchronizationContextTests.Parallel_Sync</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Tests/Ide/Adhoc/SynchronizationContextTests.cs" line="355" column="17" bodyfile="Source/Tests/Ide/Adhoc/SynchronizationContextTests.cs" bodystart="355" bodyend="380"/>
+      </memberdef>
+      <memberdef kind="function" id="class_luthetus_1_1_ide_1_1_tests_1_1_adhoc_1_1_synchronization_context_tests_1a0ef8e06e0da6ebd62edaed01c4689ae4" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void Luthetus.Ide.Tests.Adhoc.SynchronizationContextTests.Parallel_Async</definition>
+        <argsstring>()</argsstring>
+        <name>Parallel_Async</name>
+        <qualifiedname>Luthetus.Ide.Tests.Adhoc.SynchronizationContextTests.Parallel_Async</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Tests/Ide/Adhoc/SynchronizationContextTests.cs" line="386" column="17" bodyfile="Source/Tests/Ide/Adhoc/SynchronizationContextTests.cs" bodystart="386" bodyend="389"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>Personal tests of &quot;Hunter Freeman&quot; are in this file. Probably delete this file long term. </para>
+    </briefdescription>
+    <detaileddescription>
+<para>Purpose of these tests: I like to think that I understand the phrases: -Synchronous -Asynchronous -Concurrency -Parallel -Single Threaded (should the word &apos;runtime&apos; be added to the end of this?) -Multi Threaded (should the word &apos;runtime&apos; be added to the end of this?) -Threads as a general concept -Operating System task vs process &apos;things&apos; -Operating System level Task Scheduling -.NET level Task Scheduling -.NET to Operating System interop relating to tasks -.NET SynchronizationContext -.NET HostedService -.NET BackgroundService -ConfigureAwait(false)</para>
+<para>But, I think the reality is that I don&apos;t have clue what I&apos;m doing.</para>
+<para>So, I&apos;d like to learn, and do better.</para>
+<para>Hopefully I can write a test for every detail of how these things work, and by doing so learn something. </para>
+    </detaileddescription>
+    <location file="Source/Tests/Ide/Adhoc/SynchronizationContextTests.cs" line="32" column="7" bodyfile="Source/Tests/Ide/Adhoc/SynchronizationContextTests.cs" bodystart="33" bodyend="390"/>
+    <listofallmembers>
+      <member refid="class_luthetus_1_1_ide_1_1_tests_1_1_adhoc_1_1_synchronization_context_tests_1ac084ebb129deff829b4fc8f6b98f2e04" prot="public" virt="non-virtual"><scope>Luthetus::Ide::Tests::Adhoc::SynchronizationContextTests</scope><name>AsynchronousNoAwait</name></member>
+      <member refid="class_luthetus_1_1_ide_1_1_tests_1_1_adhoc_1_1_synchronization_context_tests_1a9a95ae60246c950f91694f80a8357bc9" prot="public" virt="non-virtual"><scope>Luthetus::Ide::Tests::Adhoc::SynchronizationContextTests</scope><name>AsynchronousNoAwait_TryToGetTheNotAwaitedTaskToComplete_ByAwaitingATaskBetweenItAndTheIncrementation_TaskDelayNonZero</name></member>
+      <member refid="class_luthetus_1_1_ide_1_1_tests_1_1_adhoc_1_1_synchronization_context_tests_1a6171884db76ec3c2d3426b068743d8f2" prot="public" virt="non-virtual"><scope>Luthetus::Ide::Tests::Adhoc::SynchronizationContextTests</scope><name>AsynchronousNoAwait_TryToGetTheNotAwaitedTaskToComplete_ByAwaitingATaskBetweenItAndTheIncrementationTaskDelayOne</name></member>
+      <member refid="class_luthetus_1_1_ide_1_1_tests_1_1_adhoc_1_1_synchronization_context_tests_1a188ba522857c739aa993046d5f2db7f1" prot="public" virt="non-virtual"><scope>Luthetus::Ide::Tests::Adhoc::SynchronizationContextTests</scope><name>AsynchronousNoAwait_TryToGetTheNotAwaitedTaskToComplete_ByAwaitingATaskBetweenItAndTheIncrementationTaskDelayZero</name></member>
+      <member refid="class_luthetus_1_1_ide_1_1_tests_1_1_adhoc_1_1_synchronization_context_tests_1aa60f58c443bfaf0e11fea31a65f3fba7" prot="public" virt="non-virtual"><scope>Luthetus::Ide::Tests::Adhoc::SynchronizationContextTests</scope><name>AsynchronousNoAwait_TryToGetTheNotAwaitedTaskToComplete_ByExecutingSynchronousCodeBetweenItAndTheIncrementation_LargeForLoopUpperBound</name></member>
+      <member refid="class_luthetus_1_1_ide_1_1_tests_1_1_adhoc_1_1_synchronization_context_tests_1a3b1e5f4e5ad4be57203500b92644a4a9" prot="public" virt="non-virtual"><scope>Luthetus::Ide::Tests::Adhoc::SynchronizationContextTests</scope><name>AsynchronousNoAwait_TryToGetTheNotAwaitedTaskToComplete_ByExecutingSynchronousCodeBetweenItAndTheIncrementation_SmallForLoopUpperBound</name></member>
+      <member refid="class_luthetus_1_1_ide_1_1_tests_1_1_adhoc_1_1_synchronization_context_tests_1a0204609155382c9e2089d20874b2e00a" prot="public" virt="non-virtual"><scope>Luthetus::Ide::Tests::Adhoc::SynchronizationContextTests</scope><name>AsynchronousWithAwait</name></member>
+      <member refid="class_luthetus_1_1_ide_1_1_tests_1_1_adhoc_1_1_synchronization_context_tests_1a5b85d3fc42489018135560ed815657b6" prot="public" virt="non-virtual"><scope>Luthetus::Ide::Tests::Adhoc::SynchronizationContextTests</scope><name>Concurrency_OneAtATime</name></member>
+      <member refid="class_luthetus_1_1_ide_1_1_tests_1_1_adhoc_1_1_synchronization_context_tests_1a7b892bae8808820a3accf384ec109758" prot="public" virt="non-virtual"><scope>Luthetus::Ide::Tests::Adhoc::SynchronizationContextTests</scope><name>Concurrency_WhenAll</name></member>
+      <member refid="class_luthetus_1_1_ide_1_1_tests_1_1_adhoc_1_1_synchronization_context_tests_1a0ef8e06e0da6ebd62edaed01c4689ae4" prot="public" virt="non-virtual"><scope>Luthetus::Ide::Tests::Adhoc::SynchronizationContextTests</scope><name>Parallel_Async</name></member>
+      <member refid="class_luthetus_1_1_ide_1_1_tests_1_1_adhoc_1_1_synchronization_context_tests_1aabd5fd38d0b6f33648437452adcd87b7" prot="public" virt="non-virtual"><scope>Luthetus::Ide::Tests::Adhoc::SynchronizationContextTests</scope><name>Parallel_Sync</name></member>
+      <member refid="class_luthetus_1_1_ide_1_1_tests_1_1_adhoc_1_1_synchronization_context_tests_1acd375081173a230d49e43dab7601bbea" prot="public" virt="non-virtual"><scope>Luthetus::Ide::Tests::Adhoc::SynchronizationContextTests</scope><name>Synchronous</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

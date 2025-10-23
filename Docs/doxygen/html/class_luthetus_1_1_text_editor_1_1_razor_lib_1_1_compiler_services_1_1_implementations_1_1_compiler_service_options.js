@@ -1,0 +1,9 @@
+var class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_implementations_1_1_compiler_service_options =
+[
+    [ "GetBinderFunc", "class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_implementations_1_1_compiler_service_options.html#a1d1d16195c734340e3e7618393c813c1", null ],
+    [ "GetLexerFunc", "class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_implementations_1_1_compiler_service_options.html#a060e4ed61f2fa313a55f4f9d8cede936", null ],
+    [ "GetParserFunc", "class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_implementations_1_1_compiler_service_options.html#a8a7d4796a6c895f3a6ec45c0b0385b98", null ],
+    [ "OnAfterLexAction", "class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_implementations_1_1_compiler_service_options.html#a34559f3092ea77b7b4b218af90608164", null ],
+    [ "OnAfterParseAction", "class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_implementations_1_1_compiler_service_options.html#a632438ecdb357604593767a3b0938c48", null ],
+    [ "RegisterResourceFunc", "class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_implementations_1_1_compiler_service_options.html#af733a568383e9c55602961986b36f977", null ]
+];

@@ -1,0 +1,4 @@
+var class_luthetus_1_1_extensions_1_1_dot_net_1_1_tests_1_1_basis_1_1_compiler_services_1_1_models_12d4060ebf6a78b840eac41e49f21f943 =
+[
+    [ "Properties", "class_luthetus_1_1_extensions_1_1_dot_net_1_1_tests_1_1_basis_1_1_compiler_services_1_1_models_12d4060ebf6a78b840eac41e49f21f943.html#a5b3c444bac8d81a7db1234de0f226b96", null ]
+];

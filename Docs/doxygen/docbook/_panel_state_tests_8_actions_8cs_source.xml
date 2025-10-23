@@ -1,0 +1,182 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="__panel_state_tests_8_actions_8cs_source" xml:lang="en-US">
+<title>PanelStateTests.Actions.cs</title>
+<indexterm><primary>Source/Tests/Common/Basis/Panels/States/PanelStateTests.Actions.cs</primary></indexterm>
+Go to the documentation of this file.<programlisting linenumbering="unnumbered"><anchor xml:id="__panel_state_tests_8_actions_8cs_source_1l00001"/>00001 <emphasis role="keyword">using&#32;</emphasis>Fluxor;
+<anchor xml:id="__panel_state_tests_8_actions_8cs_source_1l00002"/>00002 <emphasis role="keyword">using&#32;</emphasis><link linkend="_namespace_luthetus_1_1_common_1_1_razor_lib_1_1_background_tasks_1_1_models">Luthetus.Common.RazorLib.BackgroundTasks.Models</link>;
+<anchor xml:id="__panel_state_tests_8_actions_8cs_source_1l00003"/>00003 <emphasis role="keyword">using&#32;</emphasis><link linkend="_namespace_luthetus_1_1_common_1_1_razor_lib_1_1_contexts_1_1_models">Luthetus.Common.RazorLib.Contexts.Models</link>;
+<anchor xml:id="__panel_state_tests_8_actions_8cs_source_1l00004"/>00004 <emphasis role="keyword">using&#32;</emphasis><link linkend="_namespace_luthetus_1_1_common_1_1_razor_lib_1_1_dialogs_1_1_models">Luthetus.Common.RazorLib.Dialogs.Models</link>;
+<anchor xml:id="__panel_state_tests_8_actions_8cs_source_1l00005"/>00005 <emphasis role="keyword">using&#32;</emphasis><link linkend="_namespace_luthetus_1_1_common_1_1_razor_lib_1_1_dimensions_1_1_models">Luthetus.Common.RazorLib.Dimensions.Models</link>;
+<anchor xml:id="__panel_state_tests_8_actions_8cs_source_1l00006"/>00006 <emphasis role="keyword">using&#32;</emphasis><link linkend="_namespace_luthetus_1_1_common_1_1_razor_lib_1_1_dynamics_1_1_models">Luthetus.Common.RazorLib.Dynamics.Models</link>;
+<anchor xml:id="__panel_state_tests_8_actions_8cs_source_1l00007"/>00007 <emphasis role="keyword">using&#32;</emphasis>Luthetus.Common.RazorLib.Icons.Displays.Codicon;
+<anchor xml:id="__panel_state_tests_8_actions_8cs_source_1l00008"/>00008 <emphasis role="keyword">using&#32;</emphasis><link linkend="_namespace_luthetus_1_1_common_1_1_razor_lib_1_1_installations_1_1_models">Luthetus.Common.RazorLib.Installations.Models</link>;
+<anchor xml:id="__panel_state_tests_8_actions_8cs_source_1l00009"/>00009 <emphasis role="keyword">using&#32;</emphasis><link linkend="_namespace_luthetus_1_1_common_1_1_razor_lib_1_1_keys_1_1_models">Luthetus.Common.RazorLib.Keys.Models</link>;
+<anchor xml:id="__panel_state_tests_8_actions_8cs_source_1l00010"/>00010 <emphasis role="keyword">using&#32;</emphasis><link linkend="_namespace_luthetus_1_1_common_1_1_razor_lib_1_1_misc">Luthetus.Common.RazorLib.Misc</link>;
+<anchor xml:id="__panel_state_tests_8_actions_8cs_source_1l00011"/>00011 <emphasis role="keyword">using&#32;</emphasis><link linkend="_namespace_luthetus_1_1_common_1_1_razor_lib_1_1_panels_1_1_models">Luthetus.Common.RazorLib.Panels.Models</link>;
+<anchor xml:id="__panel_state_tests_8_actions_8cs_source_1l00012"/>00012 <emphasis role="keyword">using&#32;</emphasis><link linkend="_namespace_luthetus_1_1_common_1_1_razor_lib_1_1_panels_1_1_states">Luthetus.Common.RazorLib.Panels.States</link>;
+<anchor xml:id="__panel_state_tests_8_actions_8cs_source_1l00013"/>00013 <emphasis role="keyword">using&#32;</emphasis><link linkend="_namespace_luthetus_1_1_common_1_1_razor_lib_1_1_resizes_1_1_displays">Luthetus.Common.RazorLib.Resizes.Displays</link>;
+<anchor xml:id="__panel_state_tests_8_actions_8cs_source_1l00014"/>00014 <emphasis role="keyword">using&#32;</emphasis>Microsoft.Extensions.DependencyInjection;
+<anchor xml:id="__panel_state_tests_8_actions_8cs_source_1l00015"/>00015 <emphasis role="keyword">using&#32;</emphasis>Microsoft.JSInterop;
+<anchor xml:id="__panel_state_tests_8_actions_8cs_source_1l00016"/>00016 <emphasis role="keyword">using&#32;</emphasis>System.Collections.Immutable;
+<anchor xml:id="__panel_state_tests_8_actions_8cs_source_1l00017"/>00017 
+<anchor xml:id="__panel_state_tests_8_actions_8cs_source_1l00018"/><link linkend="_namespace_luthetus_1_1_common_1_1_tests_1_1_basis_1_1_panels_1_1_states">00018</link> <emphasis role="keyword">namespace&#32;</emphasis><link linkend="_namespace_luthetus_1_1_common_1_1_tests_1_1_basis_1_1_panels_1_1_states">Luthetus.Common.Tests.Basis.Panels.States</link>;
+<anchor xml:id="__panel_state_tests_8_actions_8cs_source_1l00019"/>00019 
+<anchor xml:id="__panel_state_tests_8_actions_8cs_source_1l00023"/><link linkend="_class_luthetus_1_1_common_1_1_tests_1_1_basis_1_1_panels_1_1_states_1_1_panel_state_actions_tests">00023</link> <emphasis role="keyword">public</emphasis>&#32;<emphasis role="keyword">class&#32;</emphasis><link linkend="_class_luthetus_1_1_common_1_1_tests_1_1_basis_1_1_panels_1_1_states_1_1_panel_state_actions_tests">PanelStateActionsTests</link>
+<anchor xml:id="__panel_state_tests_8_actions_8cs_source_1l00024"/>00024 {
+<anchor xml:id="__panel_state_tests_8_actions_8cs_source_1l00028"/>00028 &#32;&#32;&#32;&#32;[Fact]
+<anchor xml:id="__panel_state_tests_8_actions_8cs_source_1l00029"/><link linkend="_class_luthetus_1_1_common_1_1_tests_1_1_basis_1_1_panels_1_1_states_1_1_panel_state_actions_tests_1a502c56c0e871dd9809b41cad06863750">00029</link> &#32;&#32;&#32;&#32;<emphasis role="keyword">public</emphasis>&#32;<emphasis role="keywordtype">void</emphasis>&#32;<link linkend="_class_luthetus_1_1_common_1_1_tests_1_1_basis_1_1_panels_1_1_states_1_1_panel_state_actions_tests_1a502c56c0e871dd9809b41cad06863750">RegisterPanelGroupAction</link>()
+<anchor xml:id="__panel_state_tests_8_actions_8cs_source_1l00030"/>00030 &#32;&#32;&#32;&#32;{
+<anchor xml:id="__panel_state_tests_8_actions_8cs_source_1l00031"/>00031 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;InitializePanelStateActionsTests(out&#32;var&#32;panelGroup,&#32;out&#32;var&#32;panelTab);
+<anchor xml:id="__panel_state_tests_8_actions_8cs_source_1l00032"/>00032 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;var&#32;registerPanelGroupAction&#32;=&#32;<emphasis role="keyword">new</emphasis>&#32;<link linkend="_namespace_luthetus_1_1_common_1_1_razor_lib_1_1_panels_1_1_states_1a3e69a06f395780138ff06e862f45ee3c">PanelState</link>.RegisterPanelGroupAction(panelGroup);
+<anchor xml:id="__panel_state_tests_8_actions_8cs_source_1l00033"/>00033 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;Assert.Equal(panelGroup,&#32;registerPanelGroupAction.PanelGroup);
+<anchor xml:id="__panel_state_tests_8_actions_8cs_source_1l00034"/>00034 &#32;&#32;&#32;&#32;}
+<anchor xml:id="__panel_state_tests_8_actions_8cs_source_1l00035"/>00035 
+<anchor xml:id="__panel_state_tests_8_actions_8cs_source_1l00039"/>00039 &#32;&#32;&#32;&#32;[Fact]
+<anchor xml:id="__panel_state_tests_8_actions_8cs_source_1l00040"/><link linkend="_class_luthetus_1_1_common_1_1_tests_1_1_basis_1_1_panels_1_1_states_1_1_panel_state_actions_tests_1a23f7728c6b173e06c9d1dc5190b6af66">00040</link> &#32;&#32;&#32;&#32;<emphasis role="keyword">public</emphasis>&#32;<emphasis role="keywordtype">void</emphasis>&#32;<link linkend="_class_luthetus_1_1_common_1_1_tests_1_1_basis_1_1_panels_1_1_states_1_1_panel_state_actions_tests_1a23f7728c6b173e06c9d1dc5190b6af66">DisposePanelGroupAction</link>()
+<anchor xml:id="__panel_state_tests_8_actions_8cs_source_1l00041"/>00041 &#32;&#32;&#32;&#32;{
+<anchor xml:id="__panel_state_tests_8_actions_8cs_source_1l00042"/>00042 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;InitializePanelStateActionsTests(out&#32;var&#32;panelGroup,&#32;out&#32;var&#32;panelTab);
+<anchor xml:id="__panel_state_tests_8_actions_8cs_source_1l00043"/>00043 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;var&#32;disposePanelGroupAction&#32;=&#32;<emphasis role="keyword">new</emphasis>&#32;<link linkend="_namespace_luthetus_1_1_common_1_1_razor_lib_1_1_panels_1_1_states_1a3e69a06f395780138ff06e862f45ee3c">PanelState</link>.DisposePanelGroupAction(panelGroup.Key);
+<anchor xml:id="__panel_state_tests_8_actions_8cs_source_1l00044"/>00044 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;Assert.Equal(panelGroup.Key,&#32;disposePanelGroupAction.PanelGroupKey);
+<anchor xml:id="__panel_state_tests_8_actions_8cs_source_1l00045"/>00045 &#32;&#32;&#32;&#32;}
+<anchor xml:id="__panel_state_tests_8_actions_8cs_source_1l00046"/>00046 
+<anchor xml:id="__panel_state_tests_8_actions_8cs_source_1l00050"/>00050 &#32;&#32;&#32;&#32;[Fact]
+<anchor xml:id="__panel_state_tests_8_actions_8cs_source_1l00051"/><link linkend="_class_luthetus_1_1_common_1_1_tests_1_1_basis_1_1_panels_1_1_states_1_1_panel_state_actions_tests_1ae8fcca981aa727d243b440cc14026e73">00051</link> &#32;&#32;&#32;&#32;<emphasis role="keyword">public</emphasis>&#32;<emphasis role="keywordtype">void</emphasis>&#32;<link linkend="_class_luthetus_1_1_common_1_1_tests_1_1_basis_1_1_panels_1_1_states_1_1_panel_state_actions_tests_1ae8fcca981aa727d243b440cc14026e73">RegisterPanelTabAction</link>()
+<anchor xml:id="__panel_state_tests_8_actions_8cs_source_1l00052"/>00052 &#32;&#32;&#32;&#32;{
+<anchor xml:id="__panel_state_tests_8_actions_8cs_source_1l00053"/>00053 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;InitializePanelStateActionsTests(out&#32;var&#32;panelGroup,&#32;out&#32;var&#32;panelTab);
+<anchor xml:id="__panel_state_tests_8_actions_8cs_source_1l00054"/>00054 
+<anchor xml:id="__panel_state_tests_8_actions_8cs_source_1l00055"/>00055 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;InsertAtIndexZero&#32;==&#32;false</emphasis>
+<anchor xml:id="__panel_state_tests_8_actions_8cs_source_1l00056"/>00056 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;{
+<anchor xml:id="__panel_state_tests_8_actions_8cs_source_1l00057"/>00057 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;var&#32;insertAtIndexZero&#32;=&#32;<emphasis role="keyword">false</emphasis>;
+<anchor xml:id="__panel_state_tests_8_actions_8cs_source_1l00058"/>00058 
+<anchor xml:id="__panel_state_tests_8_actions_8cs_source_1l00059"/>00059 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;var&#32;registerPanelTabAction&#32;=&#32;<emphasis role="keyword">new</emphasis>&#32;<link linkend="_namespace_luthetus_1_1_common_1_1_razor_lib_1_1_panels_1_1_states_1a3e69a06f395780138ff06e862f45ee3c">PanelState</link>.RegisterPanelTabAction(
+<anchor xml:id="__panel_state_tests_8_actions_8cs_source_1l00060"/>00060 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;panelGroup.Key,
+<anchor xml:id="__panel_state_tests_8_actions_8cs_source_1l00061"/>00061 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;panelTab,
+<anchor xml:id="__panel_state_tests_8_actions_8cs_source_1l00062"/>00062 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;insertAtIndexZero);
+<anchor xml:id="__panel_state_tests_8_actions_8cs_source_1l00063"/>00063 
+<anchor xml:id="__panel_state_tests_8_actions_8cs_source_1l00064"/>00064 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;Assert.Equal(panelGroup.Key,&#32;registerPanelTabAction.PanelGroupKey);
+<anchor xml:id="__panel_state_tests_8_actions_8cs_source_1l00065"/>00065 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;Assert.Equal(panelTab,&#32;registerPanelTabAction.PanelTab);
+<anchor xml:id="__panel_state_tests_8_actions_8cs_source_1l00066"/>00066 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;Assert.Equal(insertAtIndexZero,&#32;registerPanelTabAction.InsertAtIndexZero);
+<anchor xml:id="__panel_state_tests_8_actions_8cs_source_1l00067"/>00067 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;}
+<anchor xml:id="__panel_state_tests_8_actions_8cs_source_1l00068"/>00068 
+<anchor xml:id="__panel_state_tests_8_actions_8cs_source_1l00069"/>00069 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;InsertAtIndexZero&#32;==&#32;true</emphasis>
+<anchor xml:id="__panel_state_tests_8_actions_8cs_source_1l00070"/>00070 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;{
+<anchor xml:id="__panel_state_tests_8_actions_8cs_source_1l00071"/>00071 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;var&#32;insertAtIndexZero&#32;=&#32;<emphasis role="keyword">true</emphasis>;
+<anchor xml:id="__panel_state_tests_8_actions_8cs_source_1l00072"/>00072 
+<anchor xml:id="__panel_state_tests_8_actions_8cs_source_1l00073"/>00073 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;var&#32;registerPanelTabAction&#32;=&#32;<emphasis role="keyword">new</emphasis>&#32;<link linkend="_namespace_luthetus_1_1_common_1_1_razor_lib_1_1_panels_1_1_states_1a3e69a06f395780138ff06e862f45ee3c">PanelState</link>.RegisterPanelTabAction(
+<anchor xml:id="__panel_state_tests_8_actions_8cs_source_1l00074"/>00074 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;panelGroup.Key,
+<anchor xml:id="__panel_state_tests_8_actions_8cs_source_1l00075"/>00075 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;panelTab,
+<anchor xml:id="__panel_state_tests_8_actions_8cs_source_1l00076"/>00076 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;insertAtIndexZero);
+<anchor xml:id="__panel_state_tests_8_actions_8cs_source_1l00077"/>00077 
+<anchor xml:id="__panel_state_tests_8_actions_8cs_source_1l00078"/>00078 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;Assert.Equal(panelGroup.Key,&#32;registerPanelTabAction.PanelGroupKey);
+<anchor xml:id="__panel_state_tests_8_actions_8cs_source_1l00079"/>00079 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;Assert.Equal(panelTab,&#32;registerPanelTabAction.PanelTab);
+<anchor xml:id="__panel_state_tests_8_actions_8cs_source_1l00080"/>00080 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;Assert.Equal(insertAtIndexZero,&#32;registerPanelTabAction.InsertAtIndexZero);
+<anchor xml:id="__panel_state_tests_8_actions_8cs_source_1l00081"/>00081 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;}
+<anchor xml:id="__panel_state_tests_8_actions_8cs_source_1l00082"/>00082 &#32;&#32;&#32;&#32;}
+<anchor xml:id="__panel_state_tests_8_actions_8cs_source_1l00083"/>00083 
+<anchor xml:id="__panel_state_tests_8_actions_8cs_source_1l00087"/>00087 &#32;&#32;&#32;&#32;[Fact]
+<anchor xml:id="__panel_state_tests_8_actions_8cs_source_1l00088"/><link linkend="_class_luthetus_1_1_common_1_1_tests_1_1_basis_1_1_panels_1_1_states_1_1_panel_state_actions_tests_1a6bc6bee6ed67341806e0696a518a18ae">00088</link> &#32;&#32;&#32;&#32;<emphasis role="keyword">public</emphasis>&#32;<emphasis role="keywordtype">void</emphasis>&#32;<link linkend="_class_luthetus_1_1_common_1_1_tests_1_1_basis_1_1_panels_1_1_states_1_1_panel_state_actions_tests_1a6bc6bee6ed67341806e0696a518a18ae">DisposePanelTabAction</link>()
+<anchor xml:id="__panel_state_tests_8_actions_8cs_source_1l00089"/>00089 &#32;&#32;&#32;&#32;{
+<anchor xml:id="__panel_state_tests_8_actions_8cs_source_1l00090"/>00090 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;InitializePanelStateActionsTests(out&#32;var&#32;panelGroup,&#32;out&#32;var&#32;panelTab);
+<anchor xml:id="__panel_state_tests_8_actions_8cs_source_1l00091"/>00091 
+<anchor xml:id="__panel_state_tests_8_actions_8cs_source_1l00092"/>00092 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;var&#32;disposePanelTabAction&#32;=&#32;<emphasis role="keyword">new</emphasis>&#32;<link linkend="_namespace_luthetus_1_1_common_1_1_razor_lib_1_1_panels_1_1_states_1a3e69a06f395780138ff06e862f45ee3c">PanelState</link>.DisposePanelTabAction(
+<anchor xml:id="__panel_state_tests_8_actions_8cs_source_1l00093"/>00093 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;panelGroup.Key,
+<anchor xml:id="__panel_state_tests_8_actions_8cs_source_1l00094"/>00094 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;panelTab.Key);
+<anchor xml:id="__panel_state_tests_8_actions_8cs_source_1l00095"/>00095 
+<anchor xml:id="__panel_state_tests_8_actions_8cs_source_1l00096"/>00096 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;Assert.Equal(panelGroup.Key,&#32;disposePanelTabAction.PanelGroupKey);
+<anchor xml:id="__panel_state_tests_8_actions_8cs_source_1l00097"/>00097 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;Assert.Equal(panelTab.Key,&#32;disposePanelTabAction.PanelTabKey);
+<anchor xml:id="__panel_state_tests_8_actions_8cs_source_1l00098"/>00098 &#32;&#32;&#32;&#32;}
+<anchor xml:id="__panel_state_tests_8_actions_8cs_source_1l00099"/>00099 
+<anchor xml:id="__panel_state_tests_8_actions_8cs_source_1l00103"/>00103 &#32;&#32;&#32;&#32;[Fact]
+<anchor xml:id="__panel_state_tests_8_actions_8cs_source_1l00104"/><link linkend="_class_luthetus_1_1_common_1_1_tests_1_1_basis_1_1_panels_1_1_states_1_1_panel_state_actions_tests_1ad6fb5ee040eb3cc7f7696a954643a549">00104</link> &#32;&#32;&#32;&#32;<emphasis role="keyword">public</emphasis>&#32;<emphasis role="keywordtype">void</emphasis>&#32;<link linkend="_class_luthetus_1_1_common_1_1_tests_1_1_basis_1_1_panels_1_1_states_1_1_panel_state_actions_tests_1ad6fb5ee040eb3cc7f7696a954643a549">SetActivePanelTabAction</link>()
+<anchor xml:id="__panel_state_tests_8_actions_8cs_source_1l00105"/>00105 &#32;&#32;&#32;&#32;{
+<anchor xml:id="__panel_state_tests_8_actions_8cs_source_1l00106"/>00106 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;InitializePanelStateActionsTests(out&#32;var&#32;panelGroup,&#32;out&#32;var&#32;panelTab);
+<anchor xml:id="__panel_state_tests_8_actions_8cs_source_1l00107"/>00107 
+<anchor xml:id="__panel_state_tests_8_actions_8cs_source_1l00108"/>00108 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;var&#32;setActivePanelTabAction&#32;=&#32;<emphasis role="keyword">new</emphasis>&#32;<link linkend="_namespace_luthetus_1_1_common_1_1_razor_lib_1_1_panels_1_1_states_1a3e69a06f395780138ff06e862f45ee3c">PanelState</link>.SetActivePanelTabAction(
+<anchor xml:id="__panel_state_tests_8_actions_8cs_source_1l00109"/>00109 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;panelGroup.Key,
+<anchor xml:id="__panel_state_tests_8_actions_8cs_source_1l00110"/>00110 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;panelTab.Key);
+<anchor xml:id="__panel_state_tests_8_actions_8cs_source_1l00111"/>00111 
+<anchor xml:id="__panel_state_tests_8_actions_8cs_source_1l00112"/>00112 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;Assert.Equal(panelGroup.Key,&#32;setActivePanelTabAction.PanelGroupKey);
+<anchor xml:id="__panel_state_tests_8_actions_8cs_source_1l00113"/>00113 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;Assert.Equal(panelTab.Key,&#32;setActivePanelTabAction.PanelTabKey);
+<anchor xml:id="__panel_state_tests_8_actions_8cs_source_1l00114"/>00114 &#32;&#32;&#32;&#32;}
+<anchor xml:id="__panel_state_tests_8_actions_8cs_source_1l00115"/>00115 
+<anchor xml:id="__panel_state_tests_8_actions_8cs_source_1l00119"/>00119 &#32;&#32;&#32;&#32;[Fact]
+<anchor xml:id="__panel_state_tests_8_actions_8cs_source_1l00120"/><link linkend="_class_luthetus_1_1_common_1_1_tests_1_1_basis_1_1_panels_1_1_states_1_1_panel_state_actions_tests_1a2c19c8bf3ef38e3245f25aff70524bab">00120</link> &#32;&#32;&#32;&#32;<emphasis role="keyword">public</emphasis>&#32;<emphasis role="keywordtype">void</emphasis>&#32;<link linkend="_class_luthetus_1_1_common_1_1_tests_1_1_basis_1_1_panels_1_1_states_1_1_panel_state_actions_tests_1a2c19c8bf3ef38e3245f25aff70524bab">SetPanelTabAsActiveByContextRecordKeyAction</link>()
+<anchor xml:id="__panel_state_tests_8_actions_8cs_source_1l00121"/>00121 &#32;&#32;&#32;&#32;{
+<anchor xml:id="__panel_state_tests_8_actions_8cs_source_1l00122"/>00122 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;InitializePanelStateActionsTests(out&#32;var&#32;panelGroup,&#32;out&#32;var&#32;panelTab);
+<anchor xml:id="__panel_state_tests_8_actions_8cs_source_1l00123"/>00123 
+<anchor xml:id="__panel_state_tests_8_actions_8cs_source_1l00124"/>00124 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;var&#32;setPanelTabAsActiveByContextRecordKeyAction&#32;=&#32;<emphasis role="keyword">new</emphasis>&#32;<link linkend="_namespace_luthetus_1_1_common_1_1_razor_lib_1_1_panels_1_1_states_1a3e69a06f395780138ff06e862f45ee3c">PanelState</link>.SetPanelTabAsActiveByContextRecordKeyAction(
+<anchor xml:id="__panel_state_tests_8_actions_8cs_source_1l00125"/>00125 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;ContextFacts.SolutionExplorerContext.ContextKey);
+<anchor xml:id="__panel_state_tests_8_actions_8cs_source_1l00126"/>00126 
+<anchor xml:id="__panel_state_tests_8_actions_8cs_source_1l00127"/>00127 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;Assert.Equal(
+<anchor xml:id="__panel_state_tests_8_actions_8cs_source_1l00128"/>00128 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;ContextFacts.SolutionExplorerContext.ContextKey,
+<anchor xml:id="__panel_state_tests_8_actions_8cs_source_1l00129"/>00129 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;setPanelTabAsActiveByContextRecordKeyAction.ContextRecordKey);
+<anchor xml:id="__panel_state_tests_8_actions_8cs_source_1l00130"/>00130 &#32;&#32;&#32;&#32;}
+<anchor xml:id="__panel_state_tests_8_actions_8cs_source_1l00131"/>00131 
+<anchor xml:id="__panel_state_tests_8_actions_8cs_source_1l00135"/>00135 &#32;&#32;&#32;&#32;[Fact]
+<anchor xml:id="__panel_state_tests_8_actions_8cs_source_1l00136"/><link linkend="_class_luthetus_1_1_common_1_1_tests_1_1_basis_1_1_panels_1_1_states_1_1_panel_state_actions_tests_1a885bac30390e3446e21370fca59467a8">00136</link> &#32;&#32;&#32;&#32;<emphasis role="keyword">public</emphasis>&#32;<emphasis role="keywordtype">void</emphasis>&#32;<link linkend="_class_luthetus_1_1_common_1_1_tests_1_1_basis_1_1_panels_1_1_states_1_1_panel_state_actions_tests_1a885bac30390e3446e21370fca59467a8">SetDragEventArgsAction</link>()
+<anchor xml:id="__panel_state_tests_8_actions_8cs_source_1l00137"/>00137 &#32;&#32;&#32;&#32;{
+<anchor xml:id="__panel_state_tests_8_actions_8cs_source_1l00138"/>00138 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;InitializePanelStateActionsTests(out&#32;var&#32;panelGroup,&#32;out&#32;var&#32;panelTab);
+<anchor xml:id="__panel_state_tests_8_actions_8cs_source_1l00139"/>00139 
+<anchor xml:id="__panel_state_tests_8_actions_8cs_source_1l00140"/>00140 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;var&#32;setDragEventArgsAction&#32;=&#32;<emphasis role="keyword">new</emphasis>&#32;<link linkend="_namespace_luthetus_1_1_common_1_1_razor_lib_1_1_panels_1_1_states_1a3e69a06f395780138ff06e862f45ee3c">PanelState</link>.SetDragEventArgsAction(
+<anchor xml:id="__panel_state_tests_8_actions_8cs_source_1l00141"/>00141 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;(panelTab,&#32;panelGroup));
+<anchor xml:id="__panel_state_tests_8_actions_8cs_source_1l00142"/>00142 
+<anchor xml:id="__panel_state_tests_8_actions_8cs_source_1l00143"/>00143 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;Assert.NotNull(setDragEventArgsAction.DragEventArgs);
+<anchor xml:id="__panel_state_tests_8_actions_8cs_source_1l00144"/>00144 
+<anchor xml:id="__panel_state_tests_8_actions_8cs_source_1l00145"/>00145 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;Assert.Equal(panelTab,&#32;setDragEventArgsAction.DragEventArgs!.Value.PanelTab);
+<anchor xml:id="__panel_state_tests_8_actions_8cs_source_1l00146"/>00146 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;Assert.Equal(panelGroup,&#32;setDragEventArgsAction.DragEventArgs.Value.PanelGroup);
+<anchor xml:id="__panel_state_tests_8_actions_8cs_source_1l00147"/>00147 &#32;&#32;&#32;&#32;}
+<anchor xml:id="__panel_state_tests_8_actions_8cs_source_1l00148"/>00148 
+<anchor xml:id="__panel_state_tests_8_actions_8cs_source_1l00149"/>00149 &#32;&#32;&#32;&#32;<emphasis role="keyword">private</emphasis>&#32;<emphasis role="keywordtype">void</emphasis>&#32;InitializePanelStateActionsTests(
+<anchor xml:id="__panel_state_tests_8_actions_8cs_source_1l00150"/>00150 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;out&#32;PanelGroup&#32;samplePanelGroup,
+<anchor xml:id="__panel_state_tests_8_actions_8cs_source_1l00151"/>00151 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;out&#32;<link linkend="_interface_luthetus_1_1_common_1_1_razor_lib_1_1_panels_1_1_models_1_1_i_panel_tab">IPanelTab</link>&#32;samplePanelTab)
+<anchor xml:id="__panel_state_tests_8_actions_8cs_source_1l00152"/>00152 &#32;&#32;&#32;&#32;{
+<anchor xml:id="__panel_state_tests_8_actions_8cs_source_1l00153"/>00153 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;samplePanelGroup&#32;=&#32;<emphasis role="keyword">new</emphasis>&#32;PanelGroup(
+<anchor xml:id="__panel_state_tests_8_actions_8cs_source_1l00154"/>00154 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;PanelFacts.LeftPanelGroupKey,
+<anchor xml:id="__panel_state_tests_8_actions_8cs_source_1l00155"/>00155 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;Key&lt;Panel&gt;.Empty,
+<anchor xml:id="__panel_state_tests_8_actions_8cs_source_1l00156"/>00156 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keyword">new</emphasis>&#32;<link linkend="_class_luthetus_1_1_common_1_1_razor_lib_1_1_dimensions_1_1_models_1_1_element_dimensions">ElementDimensions</link>(),
+<anchor xml:id="__panel_state_tests_8_actions_8cs_source_1l00157"/>00157 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;ImmutableArray&lt;IPanelTab&gt;.Empty);
+<anchor xml:id="__panel_state_tests_8_actions_8cs_source_1l00158"/>00158 
+<anchor xml:id="__panel_state_tests_8_actions_8cs_source_1l00159"/>00159 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;var&#32;leftPanelGroupWidth&#32;=&#32;samplePanelGroup.ElementDimensions.DimensionAttributeList
+<anchor xml:id="__panel_state_tests_8_actions_8cs_source_1l00160"/>00160 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;.Single(da&#32;=&gt;&#32;da.DimensionAttributeKind&#32;==&#32;<link linkend="_namespace_luthetus_1_1_common_1_1_razor_lib_1_1_dimensions_1_1_models_1ab42cbfab74a6a286a2eb53313a9e37f0">DimensionAttributeKind</link>.Width);
+<anchor xml:id="__panel_state_tests_8_actions_8cs_source_1l00161"/>00161 
+<anchor xml:id="__panel_state_tests_8_actions_8cs_source_1l00162"/>00162 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;leftPanelGroupWidth.DimensionUnitList.AddRange(<emphasis role="keyword">new</emphasis>[]
+<anchor xml:id="__panel_state_tests_8_actions_8cs_source_1l00163"/>00163 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;{
+<anchor xml:id="__panel_state_tests_8_actions_8cs_source_1l00164"/>00164 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keyword">new</emphasis>&#32;<link linkend="_class_luthetus_1_1_common_1_1_razor_lib_1_1_dimensions_1_1_models_1_1_dimension_unit">DimensionUnit</link>
+<anchor xml:id="__panel_state_tests_8_actions_8cs_source_1l00165"/>00165 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;{
+<anchor xml:id="__panel_state_tests_8_actions_8cs_source_1l00166"/>00166 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;Value&#32;=&#32;33.3333,
+<anchor xml:id="__panel_state_tests_8_actions_8cs_source_1l00167"/>00167 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<link linkend="_namespace_luthetus_1_1_common_1_1_razor_lib_1_1_dimensions_1_1_models_1ac011df04cfd59ccb7947a4ced86ba4f6">DimensionUnitKind</link>&#32;=&#32;<link linkend="_namespace_luthetus_1_1_common_1_1_razor_lib_1_1_dimensions_1_1_models_1ac011df04cfd59ccb7947a4ced86ba4f6a37be07209f53a5d636d5c904ca9ae64c">DimensionUnitKind.Percentage</link>
+<anchor xml:id="__panel_state_tests_8_actions_8cs_source_1l00168"/>00168 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;},
+<anchor xml:id="__panel_state_tests_8_actions_8cs_source_1l00169"/>00169 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keyword">new</emphasis>&#32;<link linkend="_class_luthetus_1_1_common_1_1_razor_lib_1_1_dimensions_1_1_models_1_1_dimension_unit">DimensionUnit</link>
+<anchor xml:id="__panel_state_tests_8_actions_8cs_source_1l00170"/>00170 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;{
+<anchor xml:id="__panel_state_tests_8_actions_8cs_source_1l00171"/>00171 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;Value&#32;=&#32;ResizableColumn.RESIZE_HANDLE_WIDTH_IN_PIXELS&#32;/&#32;2,
+<anchor xml:id="__panel_state_tests_8_actions_8cs_source_1l00172"/>00172 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<link linkend="_namespace_luthetus_1_1_common_1_1_razor_lib_1_1_dimensions_1_1_models_1ac011df04cfd59ccb7947a4ced86ba4f6">DimensionUnitKind</link>&#32;=&#32;<link linkend="_namespace_luthetus_1_1_common_1_1_razor_lib_1_1_dimensions_1_1_models_1ac011df04cfd59ccb7947a4ced86ba4f6">DimensionUnitKind</link>.Pixels,
+<anchor xml:id="__panel_state_tests_8_actions_8cs_source_1l00173"/>00173 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<link linkend="_namespace_luthetus_1_1_common_1_1_razor_lib_1_1_dimensions_1_1_models_1a9685f3cd2b69870157680e43d93c011e">DimensionOperatorKind</link>&#32;=&#32;<link linkend="_namespace_luthetus_1_1_common_1_1_razor_lib_1_1_dimensions_1_1_models_1a9685f3cd2b69870157680e43d93c011ea1d9baf077ee87921f57a8fe42d510b65">DimensionOperatorKind.Subtract</link>
+<anchor xml:id="__panel_state_tests_8_actions_8cs_source_1l00174"/>00174 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;}
+<anchor xml:id="__panel_state_tests_8_actions_8cs_source_1l00175"/>00175 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;});
+<anchor xml:id="__panel_state_tests_8_actions_8cs_source_1l00176"/>00176 
+<anchor xml:id="__panel_state_tests_8_actions_8cs_source_1l00177"/>00177 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;var&#32;backgroundTaskService&#32;=&#32;<emphasis role="keyword">new</emphasis>&#32;<link linkend="_class_luthetus_1_1_common_1_1_razor_lib_1_1_background_tasks_1_1_models_1_1_background_task_service_synchronous">BackgroundTaskServiceSynchronous</link>();
+<anchor xml:id="__panel_state_tests_8_actions_8cs_source_1l00178"/>00178 
+<anchor xml:id="__panel_state_tests_8_actions_8cs_source_1l00179"/>00179 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;var&#32;serviceCollection&#32;=&#32;<emphasis role="keyword">new</emphasis>&#32;ServiceCollection()
+<anchor xml:id="__panel_state_tests_8_actions_8cs_source_1l00180"/>00180 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;.AddScoped&lt;IJSRuntime,&#32;<link linkend="_class_luthetus_1_1_common_1_1_razor_lib_1_1_misc_1_1_do_nothing_js_runtime">DoNothingJsRuntime</link>&gt;()
+<anchor xml:id="__panel_state_tests_8_actions_8cs_source_1l00181"/>00181 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;.AddLuthetusCommonServices(
+<anchor xml:id="__panel_state_tests_8_actions_8cs_source_1l00182"/>00182 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keyword">new</emphasis>&#32;<link linkend="_namespace_luthetus_1_1_common_1_1_razor_lib_1_1_installations_1_1_models_1a761f9bfb52cfd9ffaa1a4bbdddf1aebb">LuthetusHostingInformation</link>(
+<anchor xml:id="__panel_state_tests_8_actions_8cs_source_1l00183"/>00183 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<link linkend="_namespace_luthetus_1_1_common_1_1_razor_lib_1_1_installations_1_1_models_1a6fa014b5a7072b6304fd9fe595cc2a60">LuthetusHostingKind</link>.UnitTestingSynchronous,
+<anchor xml:id="__panel_state_tests_8_actions_8cs_source_1l00184"/>00184 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<link linkend="_namespace_luthetus_1_1_common_1_1_razor_lib_1_1_installations_1_1_models_1a6de164b4b02fa971f5eddc7f274686a6">LuthetusPurposeKind</link>.Common,
+<anchor xml:id="__panel_state_tests_8_actions_8cs_source_1l00185"/>00185 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;backgroundTaskService))
+<anchor xml:id="__panel_state_tests_8_actions_8cs_source_1l00186"/>00186 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;.AddFluxor(options&#32;=&gt;&#32;options.ScanAssemblies(typeof(<link linkend="_namespace_luthetus_1_1_common_1_1_razor_lib_1_1_installations_1_1_models_1a9c0f5abeb1edd8801378900423cf1f40">LuthetusCommonConfig</link>).Assembly));
+<anchor xml:id="__panel_state_tests_8_actions_8cs_source_1l00187"/>00187 
+<anchor xml:id="__panel_state_tests_8_actions_8cs_source_1l00188"/>00188 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;var&#32;serviceProvider&#32;=&#32;serviceCollection.BuildServiceProvider();
+<anchor xml:id="__panel_state_tests_8_actions_8cs_source_1l00189"/>00189 
+<anchor xml:id="__panel_state_tests_8_actions_8cs_source_1l00190"/>00190 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;samplePanelTab&#32;=&#32;<emphasis role="keyword">new</emphasis>&#32;<link linkend="_namespace_luthetus_1_1_common_1_1_razor_lib_1_1_panels_1_1_models_1a7d7bfac20e261a4775279a1ce23fb6f8">Panel</link>(
+<anchor xml:id="__panel_state_tests_8_actions_8cs_source_1l00191"/>00191 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="stringliteral">&quot;Solution&#32;Explorer&quot;</emphasis>,
+<anchor xml:id="__panel_state_tests_8_actions_8cs_source_1l00192"/>00192 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;Key&lt;Panel&gt;.NewKey(),
+<anchor xml:id="__panel_state_tests_8_actions_8cs_source_1l00193"/>00193 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;Key&lt;IDynamicViewModel&gt;.NewKey(),
+<anchor xml:id="__panel_state_tests_8_actions_8cs_source_1l00194"/>00194 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;ContextFacts.SolutionExplorerContext.ContextKey,
+<anchor xml:id="__panel_state_tests_8_actions_8cs_source_1l00195"/>00195 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;typeof(IconCSharpClassFragment),
+<anchor xml:id="__panel_state_tests_8_actions_8cs_source_1l00196"/>00196 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keyword">null</emphasis>,
+<anchor xml:id="__panel_state_tests_8_actions_8cs_source_1l00197"/>00197 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;serviceProvider.GetRequiredService&lt;IDispatcher&gt;(),
+<anchor xml:id="__panel_state_tests_8_actions_8cs_source_1l00198"/>00198 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;serviceProvider.GetRequiredService&lt;<link linkend="_interface_luthetus_1_1_common_1_1_razor_lib_1_1_dialogs_1_1_models_1_1_i_dialog_service">IDialogService</link>&gt;(),
+<anchor xml:id="__panel_state_tests_8_actions_8cs_source_1l00199"/>00199 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;serviceProvider.GetRequiredService&lt;IJSRuntime&gt;());
+<anchor xml:id="__panel_state_tests_8_actions_8cs_source_1l00200"/>00200 &#32;&#32;&#32;&#32;}
+<anchor xml:id="__panel_state_tests_8_actions_8cs_source_1l00201"/>00201 }
+</programlisting></section>

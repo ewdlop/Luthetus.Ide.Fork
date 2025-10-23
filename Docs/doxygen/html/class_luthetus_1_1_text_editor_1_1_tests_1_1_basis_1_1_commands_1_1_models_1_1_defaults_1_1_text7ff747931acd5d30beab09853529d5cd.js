@@ -1,0 +1,28 @@
+var class_luthetus_1_1_text_editor_1_1_tests_1_1_basis_1_1_commands_1_1_models_1_1_defaults_1_1_text7ff747931acd5d30beab09853529d5cd =
+[
+    [ "ClearTextSelection", "class_luthetus_1_1_text_editor_1_1_tests_1_1_basis_1_1_commands_1_1_models_1_1_defaults_1_1_text7ff747931acd5d30beab09853529d5cd.html#a7b8e6d0a078c52edf1ce4b8a18f4d394", null ],
+    [ "Copy", "class_luthetus_1_1_text_editor_1_1_tests_1_1_basis_1_1_commands_1_1_models_1_1_defaults_1_1_text7ff747931acd5d30beab09853529d5cd.html#afffc71bc4e22645e92e603fec56c1b02", null ],
+    [ "CursorMovePageBottom", "class_luthetus_1_1_text_editor_1_1_tests_1_1_basis_1_1_commands_1_1_models_1_1_defaults_1_1_text7ff747931acd5d30beab09853529d5cd.html#a8333fbd9f18396c2170a324361442655", null ],
+    [ "CursorMovePageTop", "class_luthetus_1_1_text_editor_1_1_tests_1_1_basis_1_1_commands_1_1_models_1_1_defaults_1_1_text7ff747931acd5d30beab09853529d5cd.html#aac797419f73a031952a65d6023ebf349", null ],
+    [ "Cut", "class_luthetus_1_1_text_editor_1_1_tests_1_1_basis_1_1_commands_1_1_models_1_1_defaults_1_1_text7ff747931acd5d30beab09853529d5cd.html#ada0955dc6dbea5674f50f60ebc209645", null ],
+    [ "DoNothingDiscard", "class_luthetus_1_1_text_editor_1_1_tests_1_1_basis_1_1_commands_1_1_models_1_1_defaults_1_1_text7ff747931acd5d30beab09853529d5cd.html#a2dc5f6e94747ea5de181978e5282be28", null ],
+    [ "Duplicate", "class_luthetus_1_1_text_editor_1_1_tests_1_1_basis_1_1_commands_1_1_models_1_1_defaults_1_1_text7ff747931acd5d30beab09853529d5cd.html#a7eda1940b81c7cfb48866921341b63c7", null ],
+    [ "GoToDefinition", "class_luthetus_1_1_text_editor_1_1_tests_1_1_basis_1_1_commands_1_1_models_1_1_defaults_1_1_text7ff747931acd5d30beab09853529d5cd.html#a3c4ed874f5144189e4711d8ca31b50ef", null ],
+    [ "GoToMatchingCharacter", "class_luthetus_1_1_text_editor_1_1_tests_1_1_basis_1_1_commands_1_1_models_1_1_defaults_1_1_text7ff747931acd5d30beab09853529d5cd.html#adddd8bcde4a5659ac9ee770455aeb0b5", null ],
+    [ "IndentLess", "class_luthetus_1_1_text_editor_1_1_tests_1_1_basis_1_1_commands_1_1_models_1_1_defaults_1_1_text7ff747931acd5d30beab09853529d5cd.html#a05132767ff585c9467b58ca36bfa8c0a", null ],
+    [ "IndentMore", "class_luthetus_1_1_text_editor_1_1_tests_1_1_basis_1_1_commands_1_1_models_1_1_defaults_1_1_text7ff747931acd5d30beab09853529d5cd.html#ac40bdbabace941785f3497d18b3acc71", null ],
+    [ "NewLineAbove", "class_luthetus_1_1_text_editor_1_1_tests_1_1_basis_1_1_commands_1_1_models_1_1_defaults_1_1_text7ff747931acd5d30beab09853529d5cd.html#a00628b17761b817edc8c9ec43141cc0b", null ],
+    [ "NewLineBelow", "class_luthetus_1_1_text_editor_1_1_tests_1_1_basis_1_1_commands_1_1_models_1_1_defaults_1_1_text7ff747931acd5d30beab09853529d5cd.html#a035868d4191295541b5247b7250de16b", null ],
+    [ "Paste", "class_luthetus_1_1_text_editor_1_1_tests_1_1_basis_1_1_commands_1_1_models_1_1_defaults_1_1_text7ff747931acd5d30beab09853529d5cd.html#aad04d0d007e7ca9d9fd9a408dbe0a460", null ],
+    [ "Redo", "class_luthetus_1_1_text_editor_1_1_tests_1_1_basis_1_1_commands_1_1_models_1_1_defaults_1_1_text7ff747931acd5d30beab09853529d5cd.html#a52a379e5494f0ab9bb16fa310194aa8b", null ],
+    [ "Remeasure", "class_luthetus_1_1_text_editor_1_1_tests_1_1_basis_1_1_commands_1_1_models_1_1_defaults_1_1_text7ff747931acd5d30beab09853529d5cd.html#ad644b4e09e25af950d37131592612e23", null ],
+    [ "Save", "class_luthetus_1_1_text_editor_1_1_tests_1_1_basis_1_1_commands_1_1_models_1_1_defaults_1_1_text7ff747931acd5d30beab09853529d5cd.html#a079c8d02999764a8698d9bf34f9d2412", null ],
+    [ "ScrollLineDown", "class_luthetus_1_1_text_editor_1_1_tests_1_1_basis_1_1_commands_1_1_models_1_1_defaults_1_1_text7ff747931acd5d30beab09853529d5cd.html#a4e8bc2e3dc32718d538480434d6e2cd7", null ],
+    [ "ScrollLineUp", "class_luthetus_1_1_text_editor_1_1_tests_1_1_basis_1_1_commands_1_1_models_1_1_defaults_1_1_text7ff747931acd5d30beab09853529d5cd.html#ac3d3c8f25f12db492d85e62ed4ee3d1f", null ],
+    [ "ScrollPageDown", "class_luthetus_1_1_text_editor_1_1_tests_1_1_basis_1_1_commands_1_1_models_1_1_defaults_1_1_text7ff747931acd5d30beab09853529d5cd.html#a7496bfbebec405bb79d0dad3e8275967", null ],
+    [ "ScrollPageUp", "class_luthetus_1_1_text_editor_1_1_tests_1_1_basis_1_1_commands_1_1_models_1_1_defaults_1_1_text7ff747931acd5d30beab09853529d5cd.html#a4234ee3fcc8f9912c357b0e82ea19d05", null ],
+    [ "SelectAll", "class_luthetus_1_1_text_editor_1_1_tests_1_1_basis_1_1_commands_1_1_models_1_1_defaults_1_1_text7ff747931acd5d30beab09853529d5cd.html#a1c4a6e886b3bca327ba26dc8fbd3225e", null ],
+    [ "ShowFindDialog", "class_luthetus_1_1_text_editor_1_1_tests_1_1_basis_1_1_commands_1_1_models_1_1_defaults_1_1_text7ff747931acd5d30beab09853529d5cd.html#a275e58fd2bb4bb26054aa276f4598639", null ],
+    [ "ShowTooltipByCursorPosition", "class_luthetus_1_1_text_editor_1_1_tests_1_1_basis_1_1_commands_1_1_models_1_1_defaults_1_1_text7ff747931acd5d30beab09853529d5cd.html#ae71f4bfc51fac362e38022ecd20182c1", null ],
+    [ "Undo", "class_luthetus_1_1_text_editor_1_1_tests_1_1_basis_1_1_commands_1_1_models_1_1_defaults_1_1_text7ff747931acd5d30beab09853529d5cd.html#a594a33adba318ecdc8a2e69f486f4f0f", null ]
+];

@@ -1,0 +1,4 @@
+var _dot_net_solution_parser_8cs =
+[
+    [ "Luthetus.CompilerServices.DotNetSolution.SyntaxActors.DotNetSolutionParser", "class_luthetus_1_1_compiler_services_1_1_dot_net_solution_1_1_syntax_actors_1_1_dot_net_solution_parser.html", "class_luthetus_1_1_compiler_services_1_1_dot_net_solution_1_1_syntax_actors_1_1_dot_net_solution_parser" ]
+];

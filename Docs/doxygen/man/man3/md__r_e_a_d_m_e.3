@@ -1,0 +1,240 @@
+.TH "md__r_e_a_d_m_e" 3 "Version 1.0.0" "Luthetus.Ide" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+md__r_e_a_d_m_e \- Luthetus\&.Ide (In Development) 
+.PP
+
+
+.PP
+ Gif length is 1 minute 35 seconds
+
+.PP
+ Memory usage after parsing the entirety of Luthetus\&.Ide\&.sln with its own - from scratch - C# parser (v0\&.9\&.7\&.2)
+.SH "Demo:"
+.PP
+https://luthetus.github.io/Luthetus.Ide/
+.SH "Installation:"
+.PP
+\fBINSTALLATION\&.md\fP
+.SH "Introduction:"
+.PP
+.IP "\(bu" 2
+A free and open source IDE
+.IP "\(bu" 2
+Runs on Linux, Windows, and Mac
+.IP "\(bu" 2
+Written with the \&.NET environment: C#, \fRBlazor UI Framework\fP, and a \fRlightweight Photino webview\fP\&.
+.PP
+
+.PP
+The IDE can support any programming language by way of the 'ICompilerService' interface (see links to source code below)\&.
+
+.PP
+See for example the C# support:
+.IP "\(bu" 2
+\fRCSharpParser\&.cs\fP
+.IP "\(bu" 2
+\fRCSharpBinder\&.Main\&.cs\fP
+.IP "\(bu" 2
+\fRCSharpBinder\&.Expressions\&.cs\fP
+.IP "\(bu" 2
+\fRCSharpCompilerService\&.cs\fP
+.IP "\(bu" 2
+\fRCSharpResource\&.cs\fP
+.PP
+
+.PP
+These are links to the interfaces:
+.IP "\(bu" 2
+\fRIParser\&.cs\fP
+.IP "\(bu" 2
+\fRIBinder\&.cs\fP
+.IP "\(bu" 2
+\fRICompilerService\&.cs\fP
+.IP "\(bu" 2
+\fRICompilerServiceResource\&.cs\fP
+.PP
+
+.PP
+One maps a file extension to an ICompilerService with the:
+.IP "\(bu" 2
+\fRICompilerServiceRegistry\&.cs\fP
+.PP
+
+.PP
+The colors used for syntax highlighting and presentation are provided with the:
+.IP "\(bu" 2
+\fRIDecorationMapperRegistry\&.cs\fP
+.IP "\(bu" 2
+\fRIDecorationMapper\&.cs\fP
+.PP
+.SH "Donations:"
+.PP
+\fR\fP.SH "Layout:"
+.PP
+NOTE: The prefix '\fBLuthetus\fP' has been ommitted here from some types for brevity\&.
+
+.PP
+Given: <App/>, the '\&.razor' pseudo code has the following as App's descendent nodes\&.
+
+.PP
+.IP "\(bu" 2
+\fR<CommonInitializer/>\fP | \fRcodebehind\fP
+.IP "  \(bu" 4
+override void OnInitialized()
+.IP "    \(bu" 6
+AppOptions\&.SetActiveThemeRecordKey(default);
+.IP "    \(bu" 6
+AppOptions\&.SetFromLocalStorageAsync();
+.IP "    \(bu" 6
+AddToContextSwitch(this); // 'Ctrl' + 'Tab' keybind
+.PP
+
+.IP "  \(bu" 4
+\fR<DragInitializer/>\fP | \fRcodebehind\fP | \fRcss\fP
+.IP "  \(bu" 4
+\fR<DialogInitializer/>\fP | \fRcodebehind\fP
+.IP "  \(bu" 4
+\fR<WidgetInitializer/>\fP | \fRcodebehind\fP
+.IP "  \(bu" 4
+\fR<NotificationInitializer/>\fP | \fRcodebehind\fP
+.IP "  \(bu" 4
+\fR<DropdownInitializer/>\fP | \fRcodebehind\fP
+.IP "  \(bu" 4
+\fR<OutlineInitializer/>\fP | \fRcodebehind\fP | \fRcss\fP
+.PP
+
+.IP "\(bu" 2
+\fR<TextEditorInitializer/>\fP | only has \fRcodebehind\fP, no markup
+.IP "  \(bu" 4
+override void OnInitialized()
+.IP "    \(bu" 6
+EditorOptions\&.RegisterThemes(customThemeList);
+.IP "    \(bu" 6
+EditorOptions\&.SetActiveThemeRecordKey(default);
+.IP "    \(bu" 6
+EditorOptions\&.SetFromLocalStorageAsync();
+.IP "    \(bu" 6
+AddToContextSwitch(this);
+.IP "    \(bu" 6
+RegisterKeymapLayer();
+.PP
+
+.PP
+
+.IP "\(bu" 2
+\fR<LuthetusIdeInitializer/>\fP | \fRcodebehind\fP
+.IP "  \(bu" 4
+override void OnInitialized()
+.IP "    \(bu" 6
+EditorOptions\&.RegisterThemes(customThemeList);
+.IP "    \(bu" 6
+RegisterTerminals(terminalList);
+.IP "    \(bu" 6
+InitializePanelTabs();
+.IP "    \(bu" 6
+InitializeCommands();
+.PP
+
+.IP "  \(bu" 4
+override Task OnAfterRenderAsync(bool firstRender)
+.IP "    \(bu" 6
+if (LuthetusHostingKind == Photino) then JsRuntime\&.GetLuthetusIdeApi()\&.PreventDefaultBrowserKeybindings();
+.PP
+
+.IP "  \(bu" 4
+\fR<ContextInitializerDisplay/>\fP | \fRcodebehind\fP
+.PP
+
+.IP "\(bu" 2
+Header
+.IP "\(bu" 2
+Body
+.IP "  \(bu" 4
+PanelGroupLeft | \fRPanelGroupDisplay\&.razor\fP | \fR\&.cs\fP | \fR\&.css\fP
+.IP "    \(bu" 6
+\fR<TabListDisplay/>\fP | \fR\&.cs\fP | \fR\&.css\fP
+.IP "    \(bu" 6
+PanelGroupBody
+.IP "      \(bu" 8
+DynamicComponent | \fRlearn\&.microsoft\&.com\fP
+.PP
+
+.PP
+
+.IP "  \(bu" 4
+\fR<EditorDisplay/>\fP | \fR\&.cs\fP | \fR\&.css\fP
+.IP "    \(bu" 6
+\fR<TextEditorGroupDisplay/>\fP | \fR\&.cs\fP
+.IP "      \(bu" 8
+\fR<TabListDisplay/>\fP | \fR\&.cs\fP | \fR\&.css\fP
+.IP "      \(bu" 8
+\fR<TextEditorViewModelDisplay/>\fP | \fR\&.cs\fP
+.PP
+
+.PP
+
+.IP "  \(bu" 4
+PanelGroupRight | \fRPanelGroupDisplay\&.razor\fP | \fR\&.cs\fP | \fR\&.css\fP
+.IP "    \(bu" 6
+\fR<TabListDisplay/>\fP | \fR\&.cs\fP | \fR\&.css\fP
+.IP "    \(bu" 6
+PanelGroupBody
+.IP "      \(bu" 8
+DynamicComponent | \fRlearn\&.microsoft\&.com\fP
+.PP
+
+.PP
+
+.PP
+
+.IP "\(bu" 2
+Footer
+.IP "  \(bu" 4
+PanelGroupBottom | \fRPanelGroupDisplay\&.razor\fP | \fR\&.cs\fP | \fR\&.css\fP
+.IP "    \(bu" 6
+PanelGroupTabs
+.IP "      \(bu" 8
+\fR<TabListDisplay/>\fP | \fR\&.cs\fP | \fR\&.css\fP
+.IP "      \(bu" 8
+InteractiveIconUi
+.IP "        \(bu" 10
+\fRGitInteractiveIconDisplay\&.razor\fP | \fR\&.cs\fP
+.IP "        \(bu" 10
+\fRDirtyResourceUriInteractiveIconDisplay\&.razor\fP | \fR\&.cs\fP | \fR\&.css\fP
+.IP "        \(bu" 10
+\fRNotificationsInteractiveIconDisplay\&.razor\fP | \fR\&.cs\fP | \fR\&.css\fP
+.PP
+
+.PP
+
+.IP "    \(bu" 6
+PanelGroupBody
+.IP "      \(bu" 8
+DynamicComponent | \fRlearn\&.microsoft\&.com\fP
+.PP
+
+.PP
+
+.PP
+
+.PP
+.SH "NuGet Packages:"
+.PP
+The individual libraries used in \fBLuthetus\&.Ide\fP are available as NuGet Packages\&.
+
+.PP
+There is a README\&.md for each of the libraries to aid in installation:
+
+.PP
+.IP "\(bu" 2
+\fBLuthetus\&.Common\fP
+.IP "\(bu" 2
+\fBLuthetus\&.TextEditor\fP
+.IP "\(bu" 2
+\fBLuthetus\&.CompilerServices\fP
+.PP
+.SH "Youtube Videos"
+.PP
+There are videos about the IDE here: \fRyoutube channel\fP\&. 

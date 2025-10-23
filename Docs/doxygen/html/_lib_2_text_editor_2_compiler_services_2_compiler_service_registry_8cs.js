@@ -1,0 +1,4 @@
+var _lib_2_text_editor_2_compiler_services_2_compiler_service_registry_8cs =
+[
+    [ "Luthetus.TextEditor.RazorLib.CompilerServices.CompilerServiceRegistryDefault", "class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_compiler_service_registry_default.html", "class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_compiler_service_registry_default" ]
+];

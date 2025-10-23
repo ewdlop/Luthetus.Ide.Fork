@@ -1,0 +1,7 @@
+var interface_luthetus_1_1_extensions_1_1_dot_net_1_1_dot_net_solutions_1_1_models_1_1_internals_1_19a5a8cc17b2f974e14da55eeb8733ecd =
+[
+    [ "CenterX", "interface_luthetus_1_1_extensions_1_1_dot_net_1_1_dot_net_solutions_1_1_models_1_1_internals_1_19a5a8cc17b2f974e14da55eeb8733ecd.html#a7c1190646682e70849a3f91f03effc0f", null ],
+    [ "CenterY", "interface_luthetus_1_1_extensions_1_1_dot_net_1_1_dot_net_solutions_1_1_models_1_1_internals_1_19a5a8cc17b2f974e14da55eeb8733ecd.html#a8015d099eb82c9e6704f64a5e8b9171c", null ],
+    [ "Fill", "interface_luthetus_1_1_extensions_1_1_dot_net_1_1_dot_net_solutions_1_1_models_1_1_internals_1_19a5a8cc17b2f974e14da55eeb8733ecd.html#ac80d670dbb8482c1eb0c6b07bbce99f9", null ],
+    [ "Radius", "interface_luthetus_1_1_extensions_1_1_dot_net_1_1_dot_net_solutions_1_1_models_1_1_internals_1_19a5a8cc17b2f974e14da55eeb8733ecd.html#a3649cdbd9ec1939fd5e2a0be9deefa28", null ]
+];

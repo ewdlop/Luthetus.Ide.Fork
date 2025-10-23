@@ -1,0 +1,4 @@
+var _state_has_changed_boundary_8razor_8cs =
+[
+    [ "Luthetus.Common.RazorLib.StateHasChangedBoundaries.Displays.StateHasChangedBoundary", "class_luthetus_1_1_common_1_1_razor_lib_1_1_state_has_changed_boundaries_1_1_displays_1_1_state_has_changed_boundary.html", "class_luthetus_1_1_common_1_1_razor_lib_1_1_state_has_changed_boundaries_1_1_displays_1_1_state_has_changed_boundary" ]
+];

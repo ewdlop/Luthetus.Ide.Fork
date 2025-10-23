@@ -1,0 +1,5 @@
+var _global_section_solution_configuration_platforms_8cs =
+[
+    [ "Luthetus.CompilerServices.DotNetSolution.Facts.LexSolutionFacts", "class_luthetus_1_1_compiler_services_1_1_dot_net_solution_1_1_facts_1_1_lex_solution_facts.html", "class_luthetus_1_1_compiler_services_1_1_dot_net_solution_1_1_facts_1_1_lex_solution_facts" ],
+    [ "Luthetus.CompilerServices.DotNetSolution.Facts.LexSolutionFacts.GlobalSectionSolutionConfigurationPlatforms", "class_luthetus_1_1_compiler_services_1_1_dot_net_solution_1_1_facts_1_1_lex_solution_facts_1_1_gd0cc97a1cfd0cf680ecff0768456e1cd.html", null ]
+];

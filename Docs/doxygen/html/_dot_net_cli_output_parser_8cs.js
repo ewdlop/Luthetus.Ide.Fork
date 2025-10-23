@@ -1,0 +1,5 @@
+var _dot_net_cli_output_parser_8cs =
+[
+    [ "Luthetus.Extensions.DotNet.CommandLines.Models.DotNetCliOutputParser", "class_luthetus_1_1_extensions_1_1_dot_net_1_1_command_lines_1_1_models_1_1_dot_net_cli_output_parser.html", "class_luthetus_1_1_extensions_1_1_dot_net_1_1_command_lines_1_1_models_1_1_dot_net_cli_output_parser" ],
+    [ "Luthetus.Extensions.DotNet.CommandLines.Models.DotNetCliOutputParser.NewListModel", "class_luthetus_1_1_extensions_1_1_dot_net_1_1_command_lines_1_1_models_1_1_dot_net_cli_output_parser_1_1_new_list_model.html", "class_luthetus_1_1_extensions_1_1_dot_net_1_1_command_lines_1_1_models_1_1_dot_net_cli_output_parser_1_1_new_list_model" ]
+];

@@ -1,0 +1,163 @@
+\chapter{Luthetus.\+Text\+Editor (v2.\+1.\+0) }
+\hypertarget{md__docs_2_text_editor_2installation}{}\label{md__docs_2_text_editor_2installation}\index{Luthetus.TextEditor (v2.1.0)@{Luthetus.TextEditor (v2.1.0)}}
+\label{md__docs_2_text_editor_2installation_autotoc_md183}%
+\Hypertarget{md__docs_2_text_editor_2installation_autotoc_md183}%
+\hypertarget{md__docs_2_text_editor_2installation_autotoc_md184}{}\doxysection{\texorpdfstring{Installation}{Installation}}\label{md__docs_2_text_editor_2installation_autotoc_md184}
+The .NET Solution\+: \href{../../Source/Tutorials/Luthetus.Tutorials.sln}{\texttt{Luthetus.\+Tutorials.\+sln}}, was made by following steps described here. So, the completed result can be found there.\hypertarget{md__docs_2_text_editor_2installation_autotoc_md185}{}\doxysubsection{\texorpdfstring{Goal}{Goal}}\label{md__docs_2_text_editor_2installation_autotoc_md185}
+
+
+
+\begin{DoxyItemize}
+\item Reference the {\ttfamily \doxylink{namespace_luthetus_1_1_text_editor}{Luthetus.\+Text\+Editor}} Nuget Package
+\item Register the {\ttfamily Services}
+\item Reference the {\ttfamily CSS}
+\item Reference the {\ttfamily Java\+Script}
+\item In {\ttfamily App.\+razor} render the {\ttfamily \texorpdfstring{$<$}{<}Fluxor.\+Blazor.\+Web.\+Store\+Initializer/\texorpdfstring{$>$}{>}}
+\item In {\ttfamily Main\+Layout.\+razor} render the {\ttfamily \texorpdfstring{$<$}{<}\doxylink{class_luthetus_1_1_common_1_1_razor_lib_1_1_installations_1_1_displays_1_1_luthetus_common_initializer}{Luthetus.\+Common.\+Razor\+Lib.\+Installations.\+Displays.\+Luthetus\+Common\+Initializer} /\texorpdfstring{$>$}{>}} and the {\ttfamily \texorpdfstring{$<$}{<}\doxylink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_installations_1_1_displays_1_1_luthetus_text_editor_initializer}{Luthetus.\+Text\+Editor.\+Razor\+Lib.\+Installations.\+Displays.\+Luthetus\+Text\+Editor\+Initializer} /\texorpdfstring{$>$}{>}} Blazor components
+\end{DoxyItemize}\hypertarget{md__docs_2_text_editor_2installation_autotoc_md186}{}\doxysubsection{\texorpdfstring{Steps}{Steps}}\label{md__docs_2_text_editor_2installation_autotoc_md186}
+
+\begin{DoxyItemize}
+\item Reference the {\ttfamily \doxylink{namespace_luthetus_1_1_text_editor}{Luthetus.\+Text\+Editor}} Nu\+Get Package
+\end{DoxyItemize}
+
+Use your preferred way to install Nu\+Get Packages to install {\ttfamily \doxylink{namespace_luthetus_1_1_text_editor}{Luthetus.\+Text\+Editor}}.
+
+The nuget.\+org link to the Nu\+Get Package is here\+: \href{https://www.nuget.org/packages/Luthetus.TextEditor}{\texttt{https\+://www.\+nuget.\+org/packages/\+Luthetus.\+Text\+Editor}}
+
+
+\begin{DoxyItemize}
+\item Register the {\ttfamily Services}
+\end{DoxyItemize}
+
+Go to the file that you register your services and add the following lines of C\# code.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{comment}{//\ using\ Fluxor;}}
+\DoxyCodeLine{\textcolor{comment}{//\ using\ Luthetus.Common.RazorLib.BackgroundTasks.Models;}}
+\DoxyCodeLine{\textcolor{comment}{//\ using\ Luthetus.Common.RazorLib.Installations.Models;}}
+\DoxyCodeLine{\textcolor{comment}{//\ using\ Luthetus.TextEditor.RazorLib.Installations.Models;}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{//\ Use\ either\ Wasm\ or\ ServerSide\ depending\ on\ how\ your\ app\ is\ being\ hosted.}}
+\DoxyCodeLine{\textcolor{comment}{//\ var\ luthetusHostingKind\ =\ LuthetusHostingKind.ServerSide;}}
+\DoxyCodeLine{var\ luthetusHostingKind\ =\ \mbox{\hyperlink{namespace_luthetus_1_1_common_1_1_razor_lib_1_1_installations_1_1_models_a6fa014b5a7072b6304fd9fe595cc2a60}{LuthetusHostingKind}}.Wasm;}
+\DoxyCodeLine{}
+\DoxyCodeLine{var\ \mbox{\hyperlink{_lib_2_ide_2_host_8_blazor_server_side_2_program_8cs_aeee0b60aab9a620e5403b5af0d821d4c}{hostingInformation}}\ =\ \textcolor{keyword}{new}\ \mbox{\hyperlink{namespace_luthetus_1_1_common_1_1_razor_lib_1_1_installations_1_1_models_a761f9bfb52cfd9ffaa1a4bbdddf1aebb}{LuthetusHostingInformation}}(}
+\DoxyCodeLine{\ \ \ \ luthetusHostingKind,}
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{namespace_luthetus_1_1_common_1_1_razor_lib_1_1_installations_1_1_models_a6de164b4b02fa971f5eddc7f274686a6}{LuthetusPurposeKind}}.TextEditor,}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{new}\ BackgroundTaskService());}
+\DoxyCodeLine{}
+\DoxyCodeLine{services.AddLuthetusTextEditor(\mbox{\hyperlink{_lib_2_ide_2_host_8_blazor_server_side_2_program_8cs_aeee0b60aab9a620e5403b5af0d821d4c}{hostingInformation}});}
+\DoxyCodeLine{}
+\DoxyCodeLine{services.AddFluxor(options\ =>\ options.ScanAssemblies(}
+\DoxyCodeLine{\ \ \ \ typeof(LuthetusCommonConfig).Assembly,}
+\DoxyCodeLine{\ \ \ \ typeof(LuthetusTextEditorConfig).Assembly));}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{//\ If\ NOT\ running\ ServerSide\ then\ one\ needs\ to\ run:}}
+\DoxyCodeLine{\textcolor{comment}{//\ 'hostingInformation.StartBackgroundTaskWorkers(host.Services);'}}
+\DoxyCodeLine{\textcolor{comment}{//}}
+\DoxyCodeLine{\textcolor{comment}{//\ Some\ builders\ have\ 'Build()'\ invoked\ then\ fluent\ API\ into\ their\ 'Run()'\ or\ 'RunAsync()'.}}
+\DoxyCodeLine{\textcolor{comment}{//\ This\ might\ require\ one\ to\ capture\ the\ 'Build()'\ result}}
+\DoxyCodeLine{\textcolor{comment}{//}}
+\DoxyCodeLine{\textcolor{comment}{//\ This\ can\ be\ done\ anywhere,\ so\ long\ as\ the\ services\ have\ been\ built}}
+\DoxyCodeLine{\textcolor{comment}{//\ (by\ "{}can\ be\ done\ anywhere"{}\ this\ includes\ even\ after\ the\ app\ rendered,}}
+\DoxyCodeLine{\textcolor{comment}{//\ \ I\ wonder\ if\ you\ could\ tie\ it\ to\ the\ lifecycle\ of\ a\ Blazor\ component\ with\ IDisposable?)}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{/*}}
+\DoxyCodeLine{\textcolor{comment}{var\ host\ =\ builder.Build();}}
+\DoxyCodeLine{\textcolor{comment}{hostingInformation.StartBackgroundTaskWorkers(host.Services);}}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{await\ host.RunAsync();}}
+\DoxyCodeLine{\textcolor{comment}{*/}}
+
+\end{DoxyCode}
+
+
+
+\begin{DoxyItemize}
+\item Reference the {\ttfamily CSS}
+\end{DoxyItemize}
+
+Go to the file that you reference CSS files from and add the following CSS references.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{<link\ href="{}\_content/Luthetus.Common/luthetusCommon.css"{}\ rel="{}stylesheet"{}\ />}
+\DoxyCodeLine{<link\ href="{}\_content/Luthetus.TextEditor/luthetusTextEditor.css"{}\ rel="{}stylesheet"{}\ />}
+
+\end{DoxyCode}
+
+
+
+\begin{DoxyItemize}
+\item Reference the {\ttfamily Java\+Script}
+\end{DoxyItemize}
+
+Go to the file that you reference Java\+Script files from and add the following Java\+Script reference below the Blazor framework Java\+Script reference
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{<script\ src="{}\_content/Luthetus.Common/luthetusCommon.js"{}></script>}
+\DoxyCodeLine{<script\ src="{}\_content/Luthetus.TextEditor/luthetusTextEditor.js"{}></script>}
+
+\end{DoxyCode}
+
+
+
+\begin{DoxyItemize}
+\item In {\ttfamily App.\+razor} add the following towards the top of the file\+:
+\end{DoxyItemize}
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{<Fluxor.Blazor.Web.StoreInitializer\ />}
+\DoxyCodeLine{}
+\DoxyCodeLine{<!-\/-\/}
+\DoxyCodeLine{\ \ \ \ The\ Luthetus\ components\ here,\ can\ be\ moved\ wherever.}
+\DoxyCodeLine{\ \ \ \ Preferably,\ these\ are\ in\ one's\ LayoutComponentBase.}
+\DoxyCodeLine{\ \ \ \ As\ here\ they\ cannot\ receive\ any\ cascading\ css.}
+\DoxyCodeLine{-\/-\/>}
+\DoxyCodeLine{<Luthetus.Common.RazorLib.Installations.Displays.LuthetusCommonInitializer\ />}
+\DoxyCodeLine{<Luthetus.TextEditor.RazorLib.Installations.Displays.LuthetusTextEditorInitializer\ />}
+
+\end{DoxyCode}
+
+
+\begin{quote}
+{\itshape NOTE\+:} \doxylink{namespace_luthetus}{Luthetus} repositories use the state management library named {\ttfamily Fluxor} (\href{https://github.com/mrpmorris/Fluxor}{\texttt{github link}}). \end{quote}
+
+
+
+\begin{DoxyItemize}
+\item My Entire App.\+razor file as of this step\+:
+\end{DoxyItemize}
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{<!-\/-\/\ App.razor\ -\/-\/>}
+\DoxyCodeLine{}
+\DoxyCodeLine{<Fluxor.Blazor.Web.StoreInitializer\ />}
+\DoxyCodeLine{}
+\DoxyCodeLine{<!-\/-\/}
+\DoxyCodeLine{\ \ \ \ The\ Luthetus\ components\ here,\ can\ be\ more\ wherever.}
+\DoxyCodeLine{\ \ \ \ Preferably,\ these\ are\ in\ one's\ LayoutComponentBase.}
+\DoxyCodeLine{\ \ \ \ As\ here\ they\ cannot\ receive\ any\ cascading\ css.}
+\DoxyCodeLine{-\/-\/>}
+\DoxyCodeLine{<Luthetus.Common.RazorLib.Installations.Displays.LuthetusCommonInitializer\ />}
+\DoxyCodeLine{<Luthetus.TextEditor.RazorLib.Installations.Displays.LuthetusTextEditorInitializer\ />}
+\DoxyCodeLine{}
+\DoxyCodeLine{<Router\ AppAssembly="{}@typeof(App).Assembly"{}\ AdditionalAssemblies="{}new\ []\ \{\ typeof(MainLayout).Assembly\ \}"{}>}
+\DoxyCodeLine{\ \ \ \ <Found\ Context="{}routeData"{}>}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ <RouteView\ RouteData="{}@routeData"{}\ DefaultLayout="{}@typeof(MainLayout)"{}/>}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ <FocusOnNavigate\ RouteData="{}@routeData"{}\ Selector="{}h1"{}/>}
+\DoxyCodeLine{\ \ \ \ </Found>}
+\DoxyCodeLine{\ \ \ \ <NotFound>}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ <PageTitle>Not\ found</PageTitle>}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ <LayoutView\ Layout="{}@typeof(MainLayout)"{}>}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ <p\ role="{}alert"{}>Sorry,\ there's\ nothing\ at\ this\ address.</p>}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ </LayoutView>}
+\DoxyCodeLine{\ \ \ \ </NotFound>}
+\DoxyCodeLine{</Router>}
+
+\end{DoxyCode}
+\hypertarget{md__docs_2_text_editor_2installation_autotoc_md187}{}\doxysection{\texorpdfstring{Next tutorial\+: \protect\doxysectlink{md__docs_2_text_editor_2usage}{usage.md}{0}}{Next tutorial\+: {usage.md}}}\label{md__docs_2_text_editor_2installation_autotoc_md187}

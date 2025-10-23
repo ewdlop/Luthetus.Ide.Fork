@@ -1,0 +1,4 @@
+var interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_background_tasks_1_1_models_1_1_i_text_editor_work =
+[
+    [ "EditContext", "interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_background_tasks_1_1_models_1_1_i_text_editor_work.html#a4cdd759a4930bd6066a84a86cac60450", null ]
+];

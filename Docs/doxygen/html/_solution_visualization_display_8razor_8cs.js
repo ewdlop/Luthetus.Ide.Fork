@@ -1,0 +1,4 @@
+var _solution_visualization_display_8razor_8cs =
+[
+    [ "Luthetus.Extensions.DotNet.DotNetSolutions.Displays.SolutionVisualizationDisplay", "class_luthetus_1_1_extensions_1_1_dot_net_1_1_dot_net_solutions_1_1_displays_1_1_solution_visualization_display.html", "class_luthetus_1_1_extensions_1_1_dot_net_1_1_dot_net_solutions_1_1_displays_1_1_solution_visualization_display" ]
+];

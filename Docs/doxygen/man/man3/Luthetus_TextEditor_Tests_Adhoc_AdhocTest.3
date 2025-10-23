@@ -1,0 +1,90 @@
+.TH "Luthetus.TextEditor.Tests.Adhoc.AdhocTest" 3 "Version 1.0.0" "Luthetus.Ide" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+Luthetus.TextEditor.Tests.Adhoc.AdhocTest
+.SH SYNOPSIS
+.br
+.PP
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "void \fBWhy_Is_Command_Cut_Very_Slow\fP ()"
+.br
+.ti -1c
+.RI "void \fBInsert_Into_Empty_Model_A_LetterOrDigit\fP ()"
+.br
+.ti -1c
+.RI "void \fBInsert_Into_Empty_Model_A_LineFeed\fP ()"
+.br
+.ti -1c
+.RI "void \fBInsert_Into_Empty_Model_A_CarriageReturn\fP ()"
+.br
+.ti -1c
+.RI "void \fBInsert_Into_Empty_Model_A_CarriageReturnNewLine\fP ()"
+.br
+.ti -1c
+.RI "void \fBContentList_Change\fP ()"
+.br
+.RI "ITextEditorModel\&.ContentList
+.br
+
+.br
+ TODO: This needs to be separated out into an IReadOnlyList<char>\&.\&.\&. \&.\&.\&.and a IReadOnlyList<byte> | This change is needed because, a large part of optimizing the text editor is to reduce the operations done on the entirety of the text editor\&. | And, currently one invokes textEditorModel\&.GetAllText() rather frequently, and redundantly\&. | This invocation of 'GetAllText()' needs to iterate over every character in the text editor, and select its 'Value' property\&. | This is an operation done on the entirety of the text editor, and therefore it should be optimized\&. | The result of the change will make 'GetAllText()' simply return a reference "
+.in -1c
+.SS "Static Public Attributes"
+
+.in +1c
+.ti -1c
+.RI "const string \fB_bigString\fP"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+Definition at line \fB3\fP of file \fBAdhocTest\&.Data\&.cs\fP\&.
+.SH "Member Function Documentation"
+.PP 
+.SS "void Luthetus\&.TextEditor\&.Tests\&.Adhoc\&.AdhocTest\&.ContentList_Change ()"
+
+.PP
+ITextEditorModel\&.ContentList
+.br
+
+.br
+ TODO: This needs to be separated out into an IReadOnlyList<char>\&.\&.\&. \&.\&.\&.and a IReadOnlyList<byte> | This change is needed because, a large part of optimizing the text editor is to reduce the operations done on the entirety of the text editor\&. | And, currently one invokes textEditorModel\&.GetAllText() rather frequently, and redundantly\&. | This invocation of 'GetAllText()' needs to iterate over every character in the text editor, and select its 'Value' property\&. | This is an operation done on the entirety of the text editor, and therefore it should be optimized\&. | The result of the change will make 'GetAllText()' simply return a reference 
+.SH "to the underlying list of characters\&."
+.PP
+What might break with this change?: -\fBDecoration\fP, more specifically syntax highlighting, could break with this change\&. -Could I, prior to making the change, write a unit test that applies syntax highlighting to a simple C# class definition\&. The, run this test throughout the time I'm making the change, and afterwards to ensure that syntax highlighting was (seemingly) not broken? -SampleText: "public class MyClass { }" -Determine what the Lexer's syntax tokens are after the 'Lex()' method invocation\&. As well, dermine result of the Parser, CompilationUnit, and \fBCSharpResource\fP\&. -Save the data so it can be compared against for future tests, to see if the result erroneously changed\&. -Regarding 'GetAllText()' method on '\fBITextEditorModel\fP'\&. -What will become of the 'GetAllText()' method after these changes? -Regarding 'PartitionList' property on '\fBITextEditorModel\fP'\&. -This is currently an 'ImmutableList<ImmutableList<RichCharacter>>' -This would need be changed to an 'ImmutableList<ImmutableList<char>>' -NOTE: The 'PartitionList' is supposed to encompase all the metadata for the text within that partition\&. -This is quite difficult, so to start, I moved the RichCharacters to be partitioned\&. and am "globally" tracking the metadata\&. -The metadata meaning: -RowEndingPositionsList -RowEndingKindCountsList -TabKeyPositionsList -OnlyRowEndingKind -UsingRowEndingKind -EditBlockIndex -MostCharactersOnASingleRowTuple -RowCount -PartitionLength -NOTE: Should 'PresentationModelsList' be part of a partition? -If one were to have a sufficiently-large file C# file\&. Then there might be an overwhelming amount of "squigglies" (diagnostics), if they were stored "globally"\&. -How would one lookup the decoration byte for a given character after this change? -The 'CharDecorationByteList' would have an index which is 1 to 1 with the character's index in the list of characters\&. -Could implicit conversions between byte and char (or vice versa) cause hard to debug confusion? -The implicit conversion of byte and char (and vice versa) should be checked\&. -A char is 2 bytes in C#, so it isn't believed that any implicit conversion would be done (vice versa)\&. -What properties will replace the 'IReadOnlyList<RichCharacter> ContentList' property? -IReadOnlyList<char> CharList -IReadOnlyList<byte> DecorationByteList 
+.PP
+Definition at line \fB395\fP of file \fBAdhocTest\&.Main\&.cs\fP\&.
+.SS "void Luthetus\&.TextEditor\&.Tests\&.Adhoc\&.AdhocTest\&.Insert_Into_Empty_Model_A_CarriageReturn ()"
+
+.PP
+Definition at line \fB186\fP of file \fBAdhocTest\&.Main\&.cs\fP\&.
+.SS "void Luthetus\&.TextEditor\&.Tests\&.Adhoc\&.AdhocTest\&.Insert_Into_Empty_Model_A_CarriageReturnNewLine ()"
+
+.PP
+Definition at line \fB259\fP of file \fBAdhocTest\&.Main\&.cs\fP\&.
+.SS "void Luthetus\&.TextEditor\&.Tests\&.Adhoc\&.AdhocTest\&.Insert_Into_Empty_Model_A_LetterOrDigit ()"
+
+.PP
+Definition at line \fB52\fP of file \fBAdhocTest\&.Main\&.cs\fP\&.
+.SS "void Luthetus\&.TextEditor\&.Tests\&.Adhoc\&.AdhocTest\&.Insert_Into_Empty_Model_A_LineFeed ()"
+
+.PP
+Definition at line \fB119\fP of file \fBAdhocTest\&.Main\&.cs\fP\&.
+.SS "void Luthetus\&.TextEditor\&.Tests\&.Adhoc\&.AdhocTest\&.Why_Is_Command_Cut_Very_Slow ()"
+
+.PP
+Definition at line \fB28\fP of file \fBAdhocTest\&.Main\&.cs\fP\&.
+.SH "Member Data Documentation"
+.PP 
+.SS "const string Luthetus\&.TextEditor\&.Tests\&.Adhoc\&.AdhocTest\&._bigString\fR [static]\fP"
+
+.PP
+Definition at line \fB5\fP of file \fBAdhocTest\&.Data\&.cs\fP\&.
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for Luthetus\&.Ide from the source code\&.

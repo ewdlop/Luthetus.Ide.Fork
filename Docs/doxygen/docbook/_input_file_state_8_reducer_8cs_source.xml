@@ -1,0 +1,161 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="__input_file_state_8_reducer_8cs_source" xml:lang="en-US">
+<title>InputFileState.Reducer.cs</title>
+<indexterm><primary>Source/Lib/Ide/Ide.RazorLib/InputFiles/States/InputFileState.Reducer.cs</primary></indexterm>
+Go to the documentation of this file.<programlisting linenumbering="unnumbered"><anchor xml:id="__input_file_state_8_reducer_8cs_source_1l00001"/>00001 <emphasis role="keyword">using&#32;</emphasis>Fluxor;
+<anchor xml:id="__input_file_state_8_reducer_8cs_source_1l00002"/>00002 <emphasis role="keyword">using&#32;</emphasis><link linkend="_namespace_luthetus_1_1_ide_1_1_razor_lib_1_1_file_systems_1_1_models">Luthetus.Ide.RazorLib.FileSystems.Models</link>;
+<anchor xml:id="__input_file_state_8_reducer_8cs_source_1l00003"/>00003 
+<anchor xml:id="__input_file_state_8_reducer_8cs_source_1l00004"/>00004 <emphasis role="keyword">namespace&#32;</emphasis><link linkend="_namespace_luthetus_1_1_ide_1_1_razor_lib_1_1_input_files_1_1_states">Luthetus.Ide.RazorLib.InputFiles.States</link>;
+<anchor xml:id="__input_file_state_8_reducer_8cs_source_1l00005"/>00005 
+<anchor xml:id="__input_file_state_8_reducer_8cs_source_1l00006"/>00006 <emphasis role="keyword">public</emphasis>&#32;partial&#32;record&#32;<link linkend="_namespace_luthetus_1_1_ide_1_1_razor_lib_1_1_input_files_1_1_states_1adea9f28dd37beadbdebbbcda3e108036">InputFileState</link>
+<anchor xml:id="__input_file_state_8_reducer_8cs_source_1l00007"/>00007 {
+<anchor xml:id="__input_file_state_8_reducer_8cs_source_1l00008"/>00008 &#32;&#32;&#32;&#32;<emphasis role="keyword">public</emphasis>&#32;<emphasis role="keyword">static</emphasis>&#32;<emphasis role="keyword">class&#32;</emphasis>Reducer
+<anchor xml:id="__input_file_state_8_reducer_8cs_source_1l00009"/>00009 &#32;&#32;&#32;&#32;{
+<anchor xml:id="__input_file_state_8_reducer_8cs_source_1l00010"/>00010 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;[ReducerMethod]
+<anchor xml:id="__input_file_state_8_reducer_8cs_source_1l00011"/>00011 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keyword">public</emphasis>&#32;<emphasis role="keyword">static</emphasis>&#32;<link linkend="_namespace_luthetus_1_1_ide_1_1_razor_lib_1_1_input_files_1_1_states_1adea9f28dd37beadbdebbbcda3e108036">InputFileState</link>&#32;ReduceStartInputFileStateFormAction(
+<anchor xml:id="__input_file_state_8_reducer_8cs_source_1l00012"/>00012 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;InputFileState&#32;inState,
+<anchor xml:id="__input_file_state_8_reducer_8cs_source_1l00013"/>00013 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;StartInputFileStateFormAction&#32;startInputFileStateFormAction)
+<anchor xml:id="__input_file_state_8_reducer_8cs_source_1l00014"/>00014 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;{
+<anchor xml:id="__input_file_state_8_reducer_8cs_source_1l00015"/>00015 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;inState&#32;with
+<anchor xml:id="__input_file_state_8_reducer_8cs_source_1l00016"/>00016 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;{
+<anchor xml:id="__input_file_state_8_reducer_8cs_source_1l00017"/>00017 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;SelectionIsValidFunc&#32;=&#32;startInputFileStateFormAction.SelectionIsValidFunc,
+<anchor xml:id="__input_file_state_8_reducer_8cs_source_1l00018"/>00018 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;OnAfterSubmitFunc&#32;=&#32;startInputFileStateFormAction.OnAfterSubmitFunc,
+<anchor xml:id="__input_file_state_8_reducer_8cs_source_1l00019"/>00019 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;InputFilePatternsList&#32;=&#32;startInputFileStateFormAction.InputFilePatterns,
+<anchor xml:id="__input_file_state_8_reducer_8cs_source_1l00020"/>00020 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;SelectedInputFilePattern&#32;=&#32;startInputFileStateFormAction.InputFilePatterns.First(),
+<anchor xml:id="__input_file_state_8_reducer_8cs_source_1l00021"/>00021 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;Message&#32;=&#32;startInputFileStateFormAction.Message
+<anchor xml:id="__input_file_state_8_reducer_8cs_source_1l00022"/>00022 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;};
+<anchor xml:id="__input_file_state_8_reducer_8cs_source_1l00023"/>00023 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;}
+<anchor xml:id="__input_file_state_8_reducer_8cs_source_1l00024"/>00024 
+<anchor xml:id="__input_file_state_8_reducer_8cs_source_1l00025"/>00025 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;[ReducerMethod]
+<anchor xml:id="__input_file_state_8_reducer_8cs_source_1l00026"/>00026 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keyword">public</emphasis>&#32;<emphasis role="keyword">static</emphasis>&#32;<link linkend="_namespace_luthetus_1_1_ide_1_1_razor_lib_1_1_input_files_1_1_states_1adea9f28dd37beadbdebbbcda3e108036">InputFileState</link>&#32;ReduceSetSelectedTreeViewModelAction(
+<anchor xml:id="__input_file_state_8_reducer_8cs_source_1l00027"/>00027 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;InputFileState&#32;inState,
+<anchor xml:id="__input_file_state_8_reducer_8cs_source_1l00028"/>00028 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;SetSelectedTreeViewModelAction&#32;setSelectedTreeViewModelAction)
+<anchor xml:id="__input_file_state_8_reducer_8cs_source_1l00029"/>00029 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;{
+<anchor xml:id="__input_file_state_8_reducer_8cs_source_1l00030"/>00030 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;inState&#32;with
+<anchor xml:id="__input_file_state_8_reducer_8cs_source_1l00031"/>00031 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;{
+<anchor xml:id="__input_file_state_8_reducer_8cs_source_1l00032"/>00032 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;SelectedTreeViewModel&#32;=&#32;setSelectedTreeViewModelAction.SelectedTreeViewModel
+<anchor xml:id="__input_file_state_8_reducer_8cs_source_1l00033"/>00033 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;};
+<anchor xml:id="__input_file_state_8_reducer_8cs_source_1l00034"/>00034 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;}
+<anchor xml:id="__input_file_state_8_reducer_8cs_source_1l00035"/>00035 
+<anchor xml:id="__input_file_state_8_reducer_8cs_source_1l00036"/>00036 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;[ReducerMethod]
+<anchor xml:id="__input_file_state_8_reducer_8cs_source_1l00037"/>00037 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keyword">public</emphasis>&#32;<emphasis role="keyword">static</emphasis>&#32;<link linkend="_namespace_luthetus_1_1_ide_1_1_razor_lib_1_1_input_files_1_1_states_1adea9f28dd37beadbdebbbcda3e108036">InputFileState</link>&#32;ReduceSetOpenedTreeViewModelAction(
+<anchor xml:id="__input_file_state_8_reducer_8cs_source_1l00038"/>00038 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;InputFileState&#32;inState,
+<anchor xml:id="__input_file_state_8_reducer_8cs_source_1l00039"/>00039 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;SetOpenedTreeViewModelAction&#32;setOpenedTreeViewModelAction)
+<anchor xml:id="__input_file_state_8_reducer_8cs_source_1l00040"/>00040 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;{
+<anchor xml:id="__input_file_state_8_reducer_8cs_source_1l00041"/>00041 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">if</emphasis>&#32;(setOpenedTreeViewModelAction.TreeViewModel.Item.IsDirectory)
+<anchor xml:id="__input_file_state_8_reducer_8cs_source_1l00042"/>00042 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;{
+<anchor xml:id="__input_file_state_8_reducer_8cs_source_1l00043"/>00043 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;NewOpenedTreeViewModelHistory(
+<anchor xml:id="__input_file_state_8_reducer_8cs_source_1l00044"/>00044 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;inState,
+<anchor xml:id="__input_file_state_8_reducer_8cs_source_1l00045"/>00045 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;setOpenedTreeViewModelAction.TreeViewModel,
+<anchor xml:id="__input_file_state_8_reducer_8cs_source_1l00046"/>00046 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;setOpenedTreeViewModelAction.IdeComponentRenderers,
+<anchor xml:id="__input_file_state_8_reducer_8cs_source_1l00047"/>00047 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;setOpenedTreeViewModelAction.CommonComponentRenderers,
+<anchor xml:id="__input_file_state_8_reducer_8cs_source_1l00048"/>00048 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;setOpenedTreeViewModelAction.FileSystemProvider,
+<anchor xml:id="__input_file_state_8_reducer_8cs_source_1l00049"/>00049 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;setOpenedTreeViewModelAction.EnvironmentProvider);
+<anchor xml:id="__input_file_state_8_reducer_8cs_source_1l00050"/>00050 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;}
+<anchor xml:id="__input_file_state_8_reducer_8cs_source_1l00051"/>00051 
+<anchor xml:id="__input_file_state_8_reducer_8cs_source_1l00052"/>00052 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;inState;
+<anchor xml:id="__input_file_state_8_reducer_8cs_source_1l00053"/>00053 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;}
+<anchor xml:id="__input_file_state_8_reducer_8cs_source_1l00054"/>00054 
+<anchor xml:id="__input_file_state_8_reducer_8cs_source_1l00055"/>00055 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;[ReducerMethod]
+<anchor xml:id="__input_file_state_8_reducer_8cs_source_1l00056"/>00056 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keyword">public</emphasis>&#32;<emphasis role="keyword">static</emphasis>&#32;<link linkend="_namespace_luthetus_1_1_ide_1_1_razor_lib_1_1_input_files_1_1_states_1adea9f28dd37beadbdebbbcda3e108036">InputFileState</link>&#32;ReduceSetSelectedInputFilePatternAction(
+<anchor xml:id="__input_file_state_8_reducer_8cs_source_1l00057"/>00057 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;InputFileState&#32;inState,
+<anchor xml:id="__input_file_state_8_reducer_8cs_source_1l00058"/>00058 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;SetSelectedInputFilePatternAction&#32;setSelectedInputFilePatternAction)
+<anchor xml:id="__input_file_state_8_reducer_8cs_source_1l00059"/>00059 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;{
+<anchor xml:id="__input_file_state_8_reducer_8cs_source_1l00060"/>00060 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;inState&#32;with
+<anchor xml:id="__input_file_state_8_reducer_8cs_source_1l00061"/>00061 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;{
+<anchor xml:id="__input_file_state_8_reducer_8cs_source_1l00062"/>00062 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;SelectedInputFilePattern&#32;=&#32;setSelectedInputFilePatternAction.InputFilePattern
+<anchor xml:id="__input_file_state_8_reducer_8cs_source_1l00063"/>00063 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;};
+<anchor xml:id="__input_file_state_8_reducer_8cs_source_1l00064"/>00064 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;}
+<anchor xml:id="__input_file_state_8_reducer_8cs_source_1l00065"/>00065 
+<anchor xml:id="__input_file_state_8_reducer_8cs_source_1l00066"/>00066 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;[ReducerMethod(typeof(MoveBackwardsInHistoryAction))]
+<anchor xml:id="__input_file_state_8_reducer_8cs_source_1l00067"/>00067 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keyword">public</emphasis>&#32;<emphasis role="keyword">static</emphasis>&#32;<link linkend="_namespace_luthetus_1_1_ide_1_1_razor_lib_1_1_input_files_1_1_states_1adea9f28dd37beadbdebbbcda3e108036">InputFileState</link>&#32;ReduceMoveBackwardsInHistoryAction(InputFileState&#32;inState)
+<anchor xml:id="__input_file_state_8_reducer_8cs_source_1l00068"/>00068 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;{
+<anchor xml:id="__input_file_state_8_reducer_8cs_source_1l00069"/>00069 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">if</emphasis>&#32;(inState.CanMoveBackwardsInHistory)
+<anchor xml:id="__input_file_state_8_reducer_8cs_source_1l00070"/>00070 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;inState&#32;with&#32;{&#32;IndexInHistory&#32;=&#32;inState.IndexInHistory&#32;-&#32;1&#32;};
+<anchor xml:id="__input_file_state_8_reducer_8cs_source_1l00071"/>00071 
+<anchor xml:id="__input_file_state_8_reducer_8cs_source_1l00072"/>00072 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;inState;
+<anchor xml:id="__input_file_state_8_reducer_8cs_source_1l00073"/>00073 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;}
+<anchor xml:id="__input_file_state_8_reducer_8cs_source_1l00074"/>00074 
+<anchor xml:id="__input_file_state_8_reducer_8cs_source_1l00075"/>00075 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;[ReducerMethod(typeof(MoveForwardsInHistoryAction))]
+<anchor xml:id="__input_file_state_8_reducer_8cs_source_1l00076"/>00076 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keyword">public</emphasis>&#32;<emphasis role="keyword">static</emphasis>&#32;<link linkend="_namespace_luthetus_1_1_ide_1_1_razor_lib_1_1_input_files_1_1_states_1adea9f28dd37beadbdebbbcda3e108036">InputFileState</link>&#32;ReduceMoveForwardsInHistoryAction(InputFileState&#32;inState)
+<anchor xml:id="__input_file_state_8_reducer_8cs_source_1l00077"/>00077 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;{
+<anchor xml:id="__input_file_state_8_reducer_8cs_source_1l00078"/>00078 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">if</emphasis>&#32;(inState.CanMoveForwardsInHistory)
+<anchor xml:id="__input_file_state_8_reducer_8cs_source_1l00079"/>00079 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;inState&#32;with&#32;{&#32;IndexInHistory&#32;=&#32;inState.IndexInHistory&#32;+&#32;1&#32;};
+<anchor xml:id="__input_file_state_8_reducer_8cs_source_1l00080"/>00080 
+<anchor xml:id="__input_file_state_8_reducer_8cs_source_1l00081"/>00081 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;inState;
+<anchor xml:id="__input_file_state_8_reducer_8cs_source_1l00082"/>00082 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;}
+<anchor xml:id="__input_file_state_8_reducer_8cs_source_1l00083"/>00083 
+<anchor xml:id="__input_file_state_8_reducer_8cs_source_1l00084"/>00084 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;[ReducerMethod]
+<anchor xml:id="__input_file_state_8_reducer_8cs_source_1l00085"/>00085 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keyword">public</emphasis>&#32;<emphasis role="keyword">static</emphasis>&#32;<link linkend="_namespace_luthetus_1_1_ide_1_1_razor_lib_1_1_input_files_1_1_states_1adea9f28dd37beadbdebbbcda3e108036">InputFileState</link>&#32;ReduceOpenParentDirectoryAction(
+<anchor xml:id="__input_file_state_8_reducer_8cs_source_1l00086"/>00086 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;InputFileState&#32;inState,
+<anchor xml:id="__input_file_state_8_reducer_8cs_source_1l00087"/>00087 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;OpenParentDirectoryAction&#32;openParentDirectoryAction)
+<anchor xml:id="__input_file_state_8_reducer_8cs_source_1l00088"/>00088 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;{
+<anchor xml:id="__input_file_state_8_reducer_8cs_source_1l00089"/>00089 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;var&#32;currentSelection&#32;=&#32;inState.OpenedTreeViewModelHistoryList[inState.IndexInHistory];
+<anchor xml:id="__input_file_state_8_reducer_8cs_source_1l00090"/>00090 
+<anchor xml:id="__input_file_state_8_reducer_8cs_source_1l00091"/>00091 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;TreeViewAbsolutePath?&#32;parentDirectoryTreeViewModel&#32;=&#32;<emphasis role="keyword">null</emphasis>;
+<anchor xml:id="__input_file_state_8_reducer_8cs_source_1l00092"/>00092 
+<anchor xml:id="__input_file_state_8_reducer_8cs_source_1l00093"/>00093 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;If&#32;has&#32;a&#32;ParentDirectory&#32;select&#32;it</emphasis>
+<anchor xml:id="__input_file_state_8_reducer_8cs_source_1l00094"/>00094 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">if</emphasis>&#32;(currentSelection.Item.AncestorDirectoryList.Any())
+<anchor xml:id="__input_file_state_8_reducer_8cs_source_1l00095"/>00095 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;{
+<anchor xml:id="__input_file_state_8_reducer_8cs_source_1l00096"/>00096 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;var&#32;parentDirectory&#32;=&#32;currentSelection.Item.AncestorDirectoryList.Last();
+<anchor xml:id="__input_file_state_8_reducer_8cs_source_1l00097"/>00097 
+<anchor xml:id="__input_file_state_8_reducer_8cs_source_1l00098"/>00098 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;var&#32;parentDirectoryAbsolutePath&#32;=&#32;openParentDirectoryAction.EnvironmentProvider.AbsolutePathFactory(
+<anchor xml:id="__input_file_state_8_reducer_8cs_source_1l00099"/>00099 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;parentDirectory.Value,
+<anchor xml:id="__input_file_state_8_reducer_8cs_source_1l00100"/>00100 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keyword">true</emphasis>);
+<anchor xml:id="__input_file_state_8_reducer_8cs_source_1l00101"/>00101 
+<anchor xml:id="__input_file_state_8_reducer_8cs_source_1l00102"/>00102 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;parentDirectoryTreeViewModel&#32;=&#32;<emphasis role="keyword">new</emphasis>&#32;TreeViewAbsolutePath(
+<anchor xml:id="__input_file_state_8_reducer_8cs_source_1l00103"/>00103 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;parentDirectoryAbsolutePath,
+<anchor xml:id="__input_file_state_8_reducer_8cs_source_1l00104"/>00104 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;openParentDirectoryAction.IdeComponentRenderers,
+<anchor xml:id="__input_file_state_8_reducer_8cs_source_1l00105"/>00105 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;openParentDirectoryAction.CommonComponentRenderers,
+<anchor xml:id="__input_file_state_8_reducer_8cs_source_1l00106"/>00106 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;openParentDirectoryAction.FileSystemProvider,
+<anchor xml:id="__input_file_state_8_reducer_8cs_source_1l00107"/>00107 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;openParentDirectoryAction.EnvironmentProvider,
+<anchor xml:id="__input_file_state_8_reducer_8cs_source_1l00108"/>00108 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keyword">false</emphasis>,
+<anchor xml:id="__input_file_state_8_reducer_8cs_source_1l00109"/>00109 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keyword">true</emphasis>);
+<anchor xml:id="__input_file_state_8_reducer_8cs_source_1l00110"/>00110 
+<anchor xml:id="__input_file_state_8_reducer_8cs_source_1l00111"/>00111 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;openParentDirectoryAction.ParentDirectoryTreeViewModel&#32;=&#32;parentDirectoryTreeViewModel;
+<anchor xml:id="__input_file_state_8_reducer_8cs_source_1l00112"/>00112 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;}
+<anchor xml:id="__input_file_state_8_reducer_8cs_source_1l00113"/>00113 
+<anchor xml:id="__input_file_state_8_reducer_8cs_source_1l00114"/>00114 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">if</emphasis>&#32;(parentDirectoryTreeViewModel&#32;is&#32;not&#32;<emphasis role="keyword">null</emphasis>)
+<anchor xml:id="__input_file_state_8_reducer_8cs_source_1l00115"/>00115 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;{
+<anchor xml:id="__input_file_state_8_reducer_8cs_source_1l00116"/>00116 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;NewOpenedTreeViewModelHistory(
+<anchor xml:id="__input_file_state_8_reducer_8cs_source_1l00117"/>00117 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;inState,
+<anchor xml:id="__input_file_state_8_reducer_8cs_source_1l00118"/>00118 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;parentDirectoryTreeViewModel,
+<anchor xml:id="__input_file_state_8_reducer_8cs_source_1l00119"/>00119 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;openParentDirectoryAction.IdeComponentRenderers,
+<anchor xml:id="__input_file_state_8_reducer_8cs_source_1l00120"/>00120 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;openParentDirectoryAction.CommonComponentRenderers,
+<anchor xml:id="__input_file_state_8_reducer_8cs_source_1l00121"/>00121 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;openParentDirectoryAction.FileSystemProvider,
+<anchor xml:id="__input_file_state_8_reducer_8cs_source_1l00122"/>00122 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;openParentDirectoryAction.EnvironmentProvider);
+<anchor xml:id="__input_file_state_8_reducer_8cs_source_1l00123"/>00123 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;}
+<anchor xml:id="__input_file_state_8_reducer_8cs_source_1l00124"/>00124 
+<anchor xml:id="__input_file_state_8_reducer_8cs_source_1l00125"/>00125 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;inState;
+<anchor xml:id="__input_file_state_8_reducer_8cs_source_1l00126"/>00126 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;}
+<anchor xml:id="__input_file_state_8_reducer_8cs_source_1l00127"/>00127 
+<anchor xml:id="__input_file_state_8_reducer_8cs_source_1l00128"/>00128 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;[ReducerMethod]
+<anchor xml:id="__input_file_state_8_reducer_8cs_source_1l00129"/>00129 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keyword">public</emphasis>&#32;<emphasis role="keyword">static</emphasis>&#32;<link linkend="_namespace_luthetus_1_1_ide_1_1_razor_lib_1_1_input_files_1_1_states_1adea9f28dd37beadbdebbbcda3e108036">InputFileState</link>&#32;ReduceRefreshCurrentSelectionAction(
+<anchor xml:id="__input_file_state_8_reducer_8cs_source_1l00130"/>00130 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;InputFileState&#32;inState,
+<anchor xml:id="__input_file_state_8_reducer_8cs_source_1l00131"/>00131 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;RefreshCurrentSelectionAction&#32;refreshCurrentSelectionAction)
+<anchor xml:id="__input_file_state_8_reducer_8cs_source_1l00132"/>00132 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;{
+<anchor xml:id="__input_file_state_8_reducer_8cs_source_1l00133"/>00133 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;refreshCurrentSelectionAction.CurrentSelection&#32;=&#32;inState.OpenedTreeViewModelHistoryList[inState.IndexInHistory];
+<anchor xml:id="__input_file_state_8_reducer_8cs_source_1l00134"/>00134 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;inState;
+<anchor xml:id="__input_file_state_8_reducer_8cs_source_1l00135"/>00135 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;}
+<anchor xml:id="__input_file_state_8_reducer_8cs_source_1l00136"/>00136 
+<anchor xml:id="__input_file_state_8_reducer_8cs_source_1l00137"/>00137 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;[ReducerMethod]
+<anchor xml:id="__input_file_state_8_reducer_8cs_source_1l00138"/>00138 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keyword">public</emphasis>&#32;<emphasis role="keyword">static</emphasis>&#32;<link linkend="_namespace_luthetus_1_1_ide_1_1_razor_lib_1_1_input_files_1_1_states_1adea9f28dd37beadbdebbbcda3e108036">InputFileState</link>&#32;ReduceSetSearchQueryAction(
+<anchor xml:id="__input_file_state_8_reducer_8cs_source_1l00139"/>00139 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;InputFileState&#32;inState,
+<anchor xml:id="__input_file_state_8_reducer_8cs_source_1l00140"/>00140 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;SetSearchQueryAction&#32;setSearchQueryAction)
+<anchor xml:id="__input_file_state_8_reducer_8cs_source_1l00141"/>00141 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;{
+<anchor xml:id="__input_file_state_8_reducer_8cs_source_1l00142"/>00142 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;var&#32;openedTreeViewModel&#32;=&#32;inState.OpenedTreeViewModelHistoryList[inState.IndexInHistory];
+<anchor xml:id="__input_file_state_8_reducer_8cs_source_1l00143"/>00143 
+<anchor xml:id="__input_file_state_8_reducer_8cs_source_1l00144"/>00144 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">foreach</emphasis>&#32;(var&#32;treeViewModel&#32;<emphasis role="keywordflow">in</emphasis>&#32;openedTreeViewModel.ChildList)
+<anchor xml:id="__input_file_state_8_reducer_8cs_source_1l00145"/>00145 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;{
+<anchor xml:id="__input_file_state_8_reducer_8cs_source_1l00146"/>00146 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;var&#32;treeViewAbsolutePath&#32;=&#32;(TreeViewAbsolutePath)treeViewModel;
+<anchor xml:id="__input_file_state_8_reducer_8cs_source_1l00147"/>00147 
+<anchor xml:id="__input_file_state_8_reducer_8cs_source_1l00148"/>00148 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;treeViewModel.IsHidden&#32;=&#32;!treeViewAbsolutePath.Item.NameWithExtension.Contains(
+<anchor xml:id="__input_file_state_8_reducer_8cs_source_1l00149"/>00149 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;setSearchQueryAction.SearchQuery,
+<anchor xml:id="__input_file_state_8_reducer_8cs_source_1l00150"/>00150 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;StringComparison.InvariantCultureIgnoreCase);
+<anchor xml:id="__input_file_state_8_reducer_8cs_source_1l00151"/>00151 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;}
+<anchor xml:id="__input_file_state_8_reducer_8cs_source_1l00152"/>00152 
+<anchor xml:id="__input_file_state_8_reducer_8cs_source_1l00153"/>00153 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;inState&#32;with&#32;{&#32;SearchQuery&#32;=&#32;setSearchQueryAction.SearchQuery&#32;};
+<anchor xml:id="__input_file_state_8_reducer_8cs_source_1l00154"/>00154 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;}
+<anchor xml:id="__input_file_state_8_reducer_8cs_source_1l00155"/>00155 &#32;&#32;&#32;&#32;}
+<anchor xml:id="__input_file_state_8_reducer_8cs_source_1l00156"/>00156 }
+</programlisting></section>

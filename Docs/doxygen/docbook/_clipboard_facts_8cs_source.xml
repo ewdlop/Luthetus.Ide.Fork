@@ -1,0 +1,57 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="__clipboard_facts_8cs_source" xml:lang="en-US">
+<title>ClipboardFacts.cs</title>
+<indexterm><primary>Source/Lib/Ide/Ide.RazorLib/Clipboards/Models/ClipboardFacts.cs</primary></indexterm>
+Go to the documentation of this file.<programlisting linenumbering="unnumbered"><anchor xml:id="__clipboard_facts_8cs_source_1l00001"/><link linkend="_namespace_luthetus_1_1_ide_1_1_razor_lib_1_1_clipboards">00001</link> <emphasis role="keyword">namespace&#32;</emphasis><link linkend="_namespace_luthetus_1_1_ide_1_1_razor_lib_1_1_clipboards_1_1_models">Luthetus.Ide.RazorLib.Clipboards.Models</link>;
+<anchor xml:id="__clipboard_facts_8cs_source_1l00002"/>00002 
+<anchor xml:id="__clipboard_facts_8cs_source_1l00003"/>00003 <emphasis role="keyword">public</emphasis>&#32;<emphasis role="keyword">static</emphasis>&#32;<emphasis role="keyword">class&#32;</emphasis>ClipboardFacts
+<anchor xml:id="__clipboard_facts_8cs_source_1l00004"/>00004 {
+<anchor xml:id="__clipboard_facts_8cs_source_1l00009"/>00009 &#32;&#32;&#32;&#32;<emphasis role="keyword">public</emphasis>&#32;<emphasis role="keyword">const</emphasis>&#32;<emphasis role="keywordtype">string</emphasis>&#32;Tag&#32;=&#32;<emphasis role="stringliteral">&quot;`&apos;\&quot;;luth_clipboard&quot;</emphasis>;
+<anchor xml:id="__clipboard_facts_8cs_source_1l00011"/>00011 &#32;&#32;&#32;&#32;<emphasis role="keyword">public</emphasis>&#32;<emphasis role="keyword">const</emphasis>&#32;<emphasis role="keywordtype">string</emphasis>&#32;FieldDelimiter&#32;=&#32;<emphasis role="stringliteral">&quot;_&quot;</emphasis>;
+<anchor xml:id="__clipboard_facts_8cs_source_1l00012"/>00012 
+<anchor xml:id="__clipboard_facts_8cs_source_1l00013"/>00013 &#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;Commands</emphasis>
+<anchor xml:id="__clipboard_facts_8cs_source_1l00014"/>00014 &#32;&#32;&#32;&#32;<emphasis role="keyword">public</emphasis>&#32;<emphasis role="keyword">const</emphasis>&#32;<emphasis role="keywordtype">string</emphasis>&#32;CopyCommand&#32;=&#32;<emphasis role="stringliteral">&quot;copy&quot;</emphasis>;
+<anchor xml:id="__clipboard_facts_8cs_source_1l00015"/>00015 &#32;&#32;&#32;&#32;<emphasis role="keyword">public</emphasis>&#32;<emphasis role="keyword">const</emphasis>&#32;<emphasis role="keywordtype">string</emphasis>&#32;CutCommand&#32;=&#32;<emphasis role="stringliteral">&quot;cut&quot;</emphasis>;
+<anchor xml:id="__clipboard_facts_8cs_source_1l00016"/>00016 &#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;DataTypes</emphasis>
+<anchor xml:id="__clipboard_facts_8cs_source_1l00017"/>00017 &#32;&#32;&#32;&#32;<emphasis role="keyword">public</emphasis>&#32;<emphasis role="keyword">const</emphasis>&#32;<emphasis role="keywordtype">string</emphasis>&#32;AbsolutePathDataType&#32;=&#32;<emphasis role="stringliteral">&quot;absolute-file-path&quot;</emphasis>;
+<anchor xml:id="__clipboard_facts_8cs_source_1l00018"/>00018 
+<anchor xml:id="__clipboard_facts_8cs_source_1l00019"/>00019 &#32;&#32;&#32;&#32;<emphasis role="keyword">public</emphasis>&#32;<emphasis role="keyword">static</emphasis>&#32;<emphasis role="keywordtype">string</emphasis>&#32;FormatPhrase(<emphasis role="keywordtype">string</emphasis>&#32;command,&#32;<emphasis role="keywordtype">string</emphasis>&#32;dataType,&#32;<emphasis role="keywordtype">string</emphasis>&#32;value)
+<anchor xml:id="__clipboard_facts_8cs_source_1l00020"/>00020 &#32;&#32;&#32;&#32;{
+<anchor xml:id="__clipboard_facts_8cs_source_1l00021"/>00021 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;Tag&#32;+&#32;FieldDelimiter&#32;+&#32;command&#32;+&#32;FieldDelimiter&#32;+&#32;dataType&#32;+&#32;FieldDelimiter&#32;+&#32;value;
+<anchor xml:id="__clipboard_facts_8cs_source_1l00022"/>00022 &#32;&#32;&#32;&#32;}
+<anchor xml:id="__clipboard_facts_8cs_source_1l00023"/>00023 
+<anchor xml:id="__clipboard_facts_8cs_source_1l00024"/>00024 &#32;&#32;&#32;&#32;<emphasis role="keyword">public</emphasis>&#32;<emphasis role="keyword">static</emphasis>&#32;<emphasis role="keywordtype">bool</emphasis>&#32;TryParseString(<emphasis role="keywordtype">string</emphasis>&#32;clipboardContents,&#32;out&#32;ClipboardPhrase?&#32;clipboardPhrase)
+<anchor xml:id="__clipboard_facts_8cs_source_1l00025"/>00025 &#32;&#32;&#32;&#32;{
+<anchor xml:id="__clipboard_facts_8cs_source_1l00026"/>00026 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;clipboardPhrase&#32;=&#32;<emphasis role="keyword">null</emphasis>;
+<anchor xml:id="__clipboard_facts_8cs_source_1l00027"/>00027 
+<anchor xml:id="__clipboard_facts_8cs_source_1l00028"/>00028 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">if</emphasis>&#32;(clipboardContents.StartsWith(Tag))
+<anchor xml:id="__clipboard_facts_8cs_source_1l00029"/>00029 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;{
+<anchor xml:id="__clipboard_facts_8cs_source_1l00030"/>00030 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;Skip&#32;Tag</emphasis>
+<anchor xml:id="__clipboard_facts_8cs_source_1l00031"/>00031 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;clipboardContents&#32;=&#32;clipboardContents[Tag.Length..];
+<anchor xml:id="__clipboard_facts_8cs_source_1l00032"/>00032 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;Skip&#32;Delimiter&#32;following&#32;the&#32;Tag</emphasis>
+<anchor xml:id="__clipboard_facts_8cs_source_1l00033"/>00033 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;clipboardContents&#32;=&#32;clipboardContents[FieldDelimiter.Length..];
+<anchor xml:id="__clipboard_facts_8cs_source_1l00034"/>00034 
+<anchor xml:id="__clipboard_facts_8cs_source_1l00035"/>00035 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;var&#32;nextDelimiter&#32;=&#32;clipboardContents.IndexOf(FieldDelimiter,&#32;StringComparison.Ordinal);
+<anchor xml:id="__clipboard_facts_8cs_source_1l00036"/>00036 
+<anchor xml:id="__clipboard_facts_8cs_source_1l00037"/>00037 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;Take&#32;Command</emphasis>
+<anchor xml:id="__clipboard_facts_8cs_source_1l00038"/>00038 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;var&#32;command&#32;=&#32;clipboardContents[..nextDelimiter];
+<anchor xml:id="__clipboard_facts_8cs_source_1l00039"/>00039 
+<anchor xml:id="__clipboard_facts_8cs_source_1l00040"/>00040 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;clipboardContents&#32;=&#32;clipboardContents[(nextDelimiter&#32;+&#32;1)..];
+<anchor xml:id="__clipboard_facts_8cs_source_1l00041"/>00041 
+<anchor xml:id="__clipboard_facts_8cs_source_1l00042"/>00042 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;nextDelimiter&#32;=&#32;clipboardContents.IndexOf(FieldDelimiter,&#32;StringComparison.Ordinal);
+<anchor xml:id="__clipboard_facts_8cs_source_1l00043"/>00043 
+<anchor xml:id="__clipboard_facts_8cs_source_1l00044"/>00044 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;Take&#32;DataType</emphasis>
+<anchor xml:id="__clipboard_facts_8cs_source_1l00045"/>00045 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;var&#32;dataType&#32;=&#32;clipboardContents[..nextDelimiter];
+<anchor xml:id="__clipboard_facts_8cs_source_1l00046"/>00046 
+<anchor xml:id="__clipboard_facts_8cs_source_1l00047"/>00047 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;Value&#32;is&#32;whatever&#32;remains&#32;in&#32;the&#32;string</emphasis>
+<anchor xml:id="__clipboard_facts_8cs_source_1l00048"/>00048 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;var&#32;value&#32;=&#32;clipboardContents[(nextDelimiter&#32;+&#32;1)..];
+<anchor xml:id="__clipboard_facts_8cs_source_1l00049"/>00049 
+<anchor xml:id="__clipboard_facts_8cs_source_1l00050"/>00050 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;clipboardPhrase&#32;=&#32;<emphasis role="keyword">new</emphasis>&#32;ClipboardPhrase(command,&#32;dataType,&#32;value);
+<anchor xml:id="__clipboard_facts_8cs_source_1l00051"/>00051 
+<anchor xml:id="__clipboard_facts_8cs_source_1l00052"/>00052 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;<emphasis role="keyword">true</emphasis>;
+<anchor xml:id="__clipboard_facts_8cs_source_1l00053"/>00053 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;}
+<anchor xml:id="__clipboard_facts_8cs_source_1l00054"/>00054 
+<anchor xml:id="__clipboard_facts_8cs_source_1l00055"/>00055 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;<emphasis role="keyword">false</emphasis>;
+<anchor xml:id="__clipboard_facts_8cs_source_1l00056"/>00056 &#32;&#32;&#32;&#32;}
+<anchor xml:id="__clipboard_facts_8cs_source_1l00057"/>00057 }
+</programlisting></section>

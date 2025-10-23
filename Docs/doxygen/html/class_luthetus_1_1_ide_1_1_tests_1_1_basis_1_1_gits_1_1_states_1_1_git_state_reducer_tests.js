@@ -1,0 +1,4 @@
+var class_luthetus_1_1_ide_1_1_tests_1_1_basis_1_1_gits_1_1_states_1_1_git_state_reducer_tests =
+[
+    [ "ReduceSetGitStateWithAction", "class_luthetus_1_1_ide_1_1_tests_1_1_basis_1_1_gits_1_1_states_1_1_git_state_reducer_tests.html#ad6a4967b5acf79d616fdc600a10f0c1f", null ]
+];

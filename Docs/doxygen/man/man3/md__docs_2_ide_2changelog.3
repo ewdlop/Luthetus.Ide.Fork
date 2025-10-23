@@ -1,0 +1,515 @@
+.TH "md__docs_2_ide_2changelog" 3 "Version 1.0.0" "Luthetus.Ide" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+md__docs_2_ide_2changelog \- Change Log 
+.PP
+
+
+.PP
+All notable changes to the "Luthetus\&.Ide" repository will be documented in this file\&.
+
+.PP
+The format is based on \fRKeep a Changelog\fP, and this project adheres to \fRSemantic Versioning\fP\&.
+.SH "[0\&.9\&.1\&.0] - WIP_DATE"
+.PP
+\fBClick to show changes\fP
+.PP
+.PP
+.RS 4
+
+
+.PP
+.RE
+.PP
+.SS "FIX"
+.IP "\(bu" 2
+'Find All' tool shows results in a tree view\&. As well, it shows multiple results per file, preview text for each result, and moves cursor to the respective result within the file\&.
+.IP "\(bu" 2
+'@onkeydown="EventUtil\&.AsNonRenderingEventHandler<KeyboardEventArgs>(ReceiveOnKeyDown)"' This avoids unnecessary rendering due to implicit state has changed in the Blazor events\&. Note: the exact version this was added in is uncertain\&. It was recent though\&. 
+.PP
+
+.PP
+.PP
+.SH "[0\&.9\&.0\&.0] - 2024-07-18"
+.PP
+\fBClick to show changes\fP
+.PP
+.PP
+.RS 4
+
+
+.PP
+.RE
+.PP
+.SS "FIX"
+.IP "\(bu" 2
+IDE is language "neutral"\&. All \&.NET support was moved to its own project 'Luthetus\&.Extensions\&.DotNet\&.csproj'\&. This allows one to pick and choose which programming languages the IDE supports\&. 
+.PP
+
+.PP
+.PP
+.SH "[0\&.8\&.6\&.0] - 2024-07-05"
+.PP
+\fBClick to show changes\fP
+.PP
+.PP
+.RS 4
+
+
+.PP
+.RE
+.PP
+.SS "FIX"
+.IP "\(bu" 2
+If a context menu is rendered off-screen, then it is repositioned\&. 
+.PP
+
+.PP
+.PP
+.SH "[0\&.8\&.5\&.0] - 2024-06-19"
+.PP
+\fBClick to show changes\fP
+.PP
+.PP
+.RS 4
+
+
+.PP
+.RE
+.PP
+.SS "FIX"
+.IP "\(bu" 2
+Added Lexer support for C# char type\&.
+.IP "\(bu" 2
+Added Lexer support for C# escape characters (both string and char types)\&.
+.IP "\(bu" 2
+Breadth first C# parser (used to be depth first)\&. This lets the parser see same scope definitions that occur below in the text, relative to where its being referenced from\&.
+.IP "\(bu" 2
+Re-written undo/redo\&. In short, only changes are tracked now\&. Whereas previously a copy of the entire file was being stored\&.
+.IP "\(bu" 2
+Various text editor optimizations\&. One of which is not to re-calculate the virtualization result if the user's action did not cause an edit\&. In otherwords, any movement keys for the cursor won't re-calculate the virtualization result\&.
+.IP "\(bu" 2
+Enqueueing a background task is a "synchronous" method, (it used to be async)\&. 
+.PP
+
+.PP
+.PP
+.SH "[0\&.8\&.4\&.0] - 2024-05-12"
+.PP
+\fBClick to show changes\fP
+.PP
+.PP
+.RS 4
+
+
+.PP
+.RE
+.PP
+.SS "FIX"
+.IP "\(bu" 2
+Optimization: scrolling can be done to a C# model with IEditContext\&. This is a massive optimization, instead of every change to the text editor scrollbar invoking JavaScript interop to set the scrollbar, the IEditContext will gather many events that ask to modify the scrollbar, and batch them into a single JavaScript interop call to set the scrollbar\&.
+.IP "\(bu" 2
+Change: Re-write \fBThrottleAsync\&.cs\fP
+.IP "\(bu" 2
+Change: A lot of synchronous UI code was re-written to be async\&. The goal is that all UI code should be async from top to bottom (generally speaking)\&.
+.IP "\(bu" 2
+Fix: MostCharactersOnASingleLineTuple
+.IP "\(bu" 2
+Fix: \&.NET Solution text editor syntax highlighting (right click the \&.NET Solution in the treeview and pick the menu option to open it in the text editor) 
+.PP
+
+.PP
+.PP
+.SH "[0\&.8\&.3\&.0] - 2024-05-05"
+.PP
+\fBClick to show changes\fP
+.PP
+.PP
+.RS 4
+
+
+.PP
+.RE
+.PP
+.SS "FIX"
+.IP "\(bu" 2
+Fix Linux solution explorer paths\&. (issue was relating to '\\' vs '/' directory separator)\&.
+.IP "\(bu" 2
+Fix Linux copy and paste\&.
+.IP "\(bu" 2
+Fix get local storage\&.
+.IP "\(bu" 2
+Fix unit test output\&. (still isn't perfect)
+.IP "\(bu" 2
+Fix insertion of text when text-editor-cursor has a selection
+.IP "\(bu" 2
+Fix text editor mouse wheel scrolling
+.IP "\(bu" 2
+Fix text editor bring cursor into view\&.
+.IP "\(bu" 2
+Batch terminal output\&. (this is a massive performance improvement, instead of writing line by line, if many lines of output need to be written, they all are written in one operation\&.)
+.IP "\(bu" 2
+Parse the output of the terminal on a 'by-command-basis'\&. One can run 'dotnet run' with a \&.net cli output parser, then run 'git status' with a git cli output parser, as an example\&.
+.IP "\(bu" 2
+Git integration progress\&. For example, a button that runs "git status", parses the terminal output, and creates a tree view of all the changed files\&. The git integration is still in progress though\&. (more usage of the '\&.git' folder instead of just parsing the terminal so much is likely a path to take)\&. 
+.PP
+
+.PP
+.PP
+.SH "[0\&.8\&.2\&.0] - 2024-04-27"
+.PP
+\fBClick to show changes\fP
+.PP
+.PP
+.RS 4
+
+
+.PP
+.RE
+.PP
+.SS "FIX"
+.IP "\(bu" 2
+Integrated Terminal\&.
+.IP "\(bu" 2
+Moving github publish action to this repo itself (old website is located in the repo: Luthetus/Luthetus\&.Website)\&. 
+.PP
+
+.PP
+.PP
+.SH "[0\&.8\&.1\&.0] - 2024-03-17"
+.PP
+\fBClick to show changes\fP
+.PP
+.PP
+.RS 4
+
+
+.PP
+.RE
+.PP
+.SS "FIX"
+.IP "\(bu" 2
+TextEditorDynamicViewModelAdapter\&.cs: Drag a text editor tab to dock it on a panel, or out into a dialog, and vice versa\&.
+.IP "\(bu" 2
+\fBIDynamicViewModel\&.cs\fP: Interface to implement drag, drop, or dock for a UI element\&. 
+.PP
+
+.PP
+.PP
+.SH "[0\&.8\&.0\&.0] - 2024-03-11"
+.PP
+\fBClick to show changes\fP
+.PP
+.PP
+.RS 4
+
+
+.PP
+.RE
+.PP
+.SS "FIX"
+.IP "\(bu" 2
+TextEditorModelModifier\&.Partition\&.cs: Text Editor content is partitioned in 4096 character chunks\&.
+.IP "\(bu" 2
+\fBDirtyResourceUriInteractiveIconDisplay\&.razor\&.cs\fP: Text Editor models which are unsaved now appear in bottom right\&.
+.IP "\(bu" 2
+PolymorphicTabDisplay\&.razor\&.cs (2024-03-15: renamed to \fBTabDisplay\&.razor\&.cs\fP and moved) PolymorphicUi has been started\&. One can see it in action by dragging a text editor tab off of the editor, and then letting go\&. This will turn that tab into a dialog\&.
+.IP "\(bu" 2
+ThrottleController\&.cs has been started\&. All UI events are passed through the same throttle\&. Furthermore, each UI event can specify its own throttle delay, while maintaining the execution by order in which the UI events occurred\&.
+.IP "\(bu" 2
+ThrottleEventOnKeyDown\&.cs Text Editor event batching\&. By way of the previously mentioned ThrottleController, consecutive UI events which are batchable with one another\&. Will merge into a batch event\&. For example, if 20 onkeydown events are waiting in the throttle controller, then 1 onkeydownBatch event will occur which contains all 20 onkeydown events\&.
+.IP "\(bu" 2
+\fBSolutionExplorerContextMenu\&.razor\&.cs\fP: Solution Explorer multi-select context menu options\&. If one selects many files/directories, then the 'delete' context menu option will be available\&. This option will delete all the selected files/directories\&.
+.IP "\(bu" 2
+WASM Performance issues: with this update it seems I introduced a UI thread blockage\&. Holding down any key while typing in the text editor will freeze the UI as a result (more or less) until one lets go\&. I wanted to fix this issue before updating the website, but there are so many vital changes in this update, that I want to make them known\&.
+.IP "\(bu" 2
+Native IDE Performance issues: I find any file with more than 10,000 characters in it is a bit laggy\&. I'm still able to myself, use the IDE to develop the IDE, but large files aren't too great of an experience at the moment\&. I wrote partitioning for text editor content in chunks of 4,096 characters\&. But, still there are many more optimizations I have planned for large files optimization\&. 
+.PP
+
+.PP
+.PP
+.SH "[0\&.7\&.7\&.0] - 2024-02-23"
+.PP
+\fBClick to show changes\fP
+.PP
+.PP
+.RS 4
+
+
+.PP
+.RE
+.PP
+.SS "FIX"
+.IP "\(bu" 2
+The diagnostics should render properly now\&. Prior to this, if one opened "Program\&.cs", then opened any other file, the diagnostics from "Program\&.cs" may have rendered in the other file that was opened after the fact\&. 
+.PP
+
+.PP
+.PP
+.SH "[0\&.7\&.6\&.0] - 2024-02-22"
+.PP
+\fBClick to show changes\fP
+.PP
+.PP
+.RS 4
+
+
+.PP
+.RE
+.PP
+.SS "FIX"
+.IP "\(bu" 2
+{ Ctrl + f } (find within texteditor) will scroll the found results into view as one iterates over the search results\&.
+.IP "\(bu" 2
+Add 'Tools' dropdown to header\&.
+.IP "\(bu" 2
+'BackgroundTasks' dialog shows all the background tasks that the IDE is performing, as they happen\&. For example, open the dialog, move it so you can see the text editor, then click and drag your cursor within the text editor\&. Each on mouse move event fires a 'BackgroundTask' named "te_HandleContentOnMouseMove"
+.IP "\(bu" 2
+Progress with debugger integration 'IntegratedTerminalDisplay\&.razor\&.cs'\&. This component came about because, after attaching to a process ID with \fRgithub: Samsung/netcoredbg\fP I wanted to use the CLI to give commands, like a command to put a breakpoint for example\&. But when running netcoredbg, the program immediately would return, as opposed to reading user input\&. I wrote a simple C program that prompts the user for their name\&. When the C program then tries to read standard input, they await a SemaphoreSlim, and an input HTML element gets rendered\&. Once the input HTML element receives an 'Enter' keystroke, the standard input is set as the HTML element value, and the SemaphoreSlim is released by the UI thread\&. Then the CLI program reads standard input\&. 
+.PP
+
+.PP
+.PP
+.SH "[0\&.7\&.5\&.0] - 2024-02-04"
+.PP
+\fBClick to show changes\fP
+.PP
+.PP
+.RS 4
+
+
+.PP
+.RE
+.PP
+.SS "FIX"
+.IP "\(bu" 2
+Fix Fluxor related deadlocks in Photino hosted app version of the IDE\&. I made a PR to the Fluxor repo: \fRhttps://github\&.com/mrpmorris/Fluxor/pull/469\fP This seems to only happen in the Photino hosted app\&. I hope to hear back from the creator of Fluxor, I might just be doing something silly on my end to even encounter this\&. 
+.PP
+
+.PP
+.PP
+.SH "[0\&.7\&.4\&.0] - 2024-02-03"
+.PP
+\fBClick to show changes\fP
+.PP
+.PP
+.RS 4
+
+
+.PP
+.RE
+.PP
+.SS "FIX"
+.IP "\(bu" 2
+Fix the IDE freezing "randomly": I wrote the \fRThrottle\&.cs\fP initially as async\&. But if the source that wants to be throttled awaits the throttle timer, its just sort of nonsense, right? I believe this was locking\&. Now its a fire and forget, so the invoker doesn't have to await the throttle\&. 
+.PP
+
+.PP
+.PP
+.SH "[0\&.7\&.3\&.0] - 2024-02-02"
+.PP
+\fBClick to show changes\fP
+.PP
+.PP
+.RS 4
+
+
+.PP
+.RE
+.PP
+.SS "FIX"
+.IP "\(bu" 2
+A preview text editor when using 'Code Search' ({ Ctrl + , } written out: "Control + Comma")\&.
+.IP "\(bu" 2
+The most recently interacted with Dialog will render above any other\&. (this refers to two dialogs overlapping)\&.
+.IP "\(bu" 2
+A newly opened dialog will be set as focused (this is for keyboard usage ease of use)\&.
+.IP "\(bu" 2
+Open a find overlay within a texteditor: { Ctrl + f } 
+.PP
+
+.PP
+.PP
+.SH "[0\&.7\&.2\&.0] - 2024-01-31"
+.PP
+\fBClick to show changes\fP
+.PP
+.PP
+.RS 4
+
+
+.PP
+.RE
+.PP
+.SS "FIX"
+.IP "\(bu" 2
+Add usings when autocompleting a type
+.IP "\(bu" 2
+GUI editor for C# Compiler Service\&. (follows the text editor cursor)
+.IP "\(bu" 2
+A file cannot be deleted unless it is first given deletion rights
+.IP "\(bu" 2
+'Ctrl + ,' progress (only searches on files are being done\&. Clicking a resulting file will open that file in the text editor)
+.IP "\(bu" 2
+'Ctrl + Shift + F' progress (the search query, find all button, and file system path to seach in are the only UI elements in effect currently)\&. A list gets made at the bottom of the dialog wth the results, and clicking a result will open that file in the text editor\&. 
+.PP
+
+.PP
+.PP
+.SH "[0\&.7\&.1\&.0] - 2024-01-26"
+.PP
+\fBClick to show changes\fP
+.PP
+.PP
+.RS 4
+
+
+.PP
+.RE
+.PP
+.SS "FIX"
+.IP "\(bu" 2
+Import repositories from GitHub 
+.PP
+
+.PP
+.PP
+.SH "[0\&.7\&.0\&.0] - 2024-01-23"
+.PP
+\fBClick to show changes\fP
+.PP
+.PP
+.RS 4
+
+
+.PP
+.RE
+.PP
+.SS "FIX"
+.IP "\(bu" 2
+Added all storage types\&. (struct, class, interface, enum, record)
+.IP "\(bu" 2
+Added Primary constructors (for records only at the moment)
+.IP "\(bu" 2
+Object initialization (new Type { Property = Value, })
+.IP "\(bu" 2
+Improved 'var' contextual keyword\&. (detecting it as a keyword or an identifier)
+.IP "\(bu" 2
+Generic Type syntax highlighting\&. (List<int> myVariable;)
+.IP "\(bu" 2
+The following syntaxes are now expressions: constructor invocation, variable references, function invocation\&.
+.IP "\(bu" 2
+If parser throws an exception, still draw the valid Lexer syntax highlighting\&. (lexer syntax highlighting does the keywords, and more syntactic related things)
+.IP "\(bu" 2
+Added access modifiers to type definition\&. (public, "protected internal", protected, internal, "private protected", private)\&. Usage of access modifiers is not yet implemented, only the parsing of them\&.
+.IP "\(bu" 2
+Added the "partial" modifier to type definition\&. Usage of the modifier is not yet implemented, only the parsing of it\&. 
+.PP
+
+.PP
+.PP
+.SH "[0\&.6\&.0\&.0] - 2024-01-19"
+.PP
+\fBClick to show changes\fP
+.PP
+.PP
+.RS 4
+
+
+.PP
+.RE
+.PP
+.SS "FIX"
+.IP "\(bu" 2
+Fixed 'Go To Definition' (F12 when in text editor)
+.IP "\(bu" 2
+Fixed 'Go To Matching Character' ("Ctrl + ]" when in text editor\&. Holding shift will select the text\&.)
+.IP "\(bu" 2
+Improved the C# Compiler Service, namespaces were changed the most\&. 
+.PP
+
+.PP
+.PP
+.SH "[0\&.5\&.0\&.0] - 2024-01-14"
+.PP
+\fBClick to show changes\fP
+.PP
+.PP
+.RS 4
+
+
+.PP
+.RE
+.PP
+.SS "FIX"
+.IP "\(bu" 2
+Tab characters are rendered properly when scrolling horizontally in the text editor\&.
+.IP "\(bu" 2
+Fix the majority of bugs that came about from the re-write of the Text Editor for immutability\&.
+.IP "\(bu" 2
+Progress on tree view for multi-selecting nodes 
+.PP
+
+.PP
+.PP
+.SH "[0\&.4\&.0\&.0] - 2024-01-02"
+.PP
+\fBClick to show changes\fP
+.PP
+.PP
+.RS 4
+
+
+.PP
+.RE
+.PP
+.SS "FIX"
+.IP "\(bu" 2
+Unit Test Explorer
+.IP "\(bu" 2
+Re-write text editor for immutability 
+.PP
+
+.PP
+.PP
+.SH "[0\&.2\&.0\&.0] - 2023-10-21"
+.PP
+\fBClick to show changes\fP
+.PP
+.PP
+.RS 4
+
+
+.PP
+.RE
+.PP
+.SS "FIX"
+.IP "\(bu" 2
+C# Autocompletion via Binder
+.IP "\(bu" 2
+C# Parsing improvements 
+.PP
+
+.PP
+.PP
+.SH "[0\&.1\&.1\&.0] - 2023-10-04"
+.PP
+\fBClick to show changes\fP
+.PP
+.PP
+.RS 4
+
+
+.PP
+.RE
+.PP
+.SS "FIX"
+.IP "\(bu" 2
+Keymaps to navigate user's focus with the keyboard to PanelTabs\&.
+.IP "\(bu" 2
+(Example:) "Ctrl + Alt + S" => Set focus to solution explorer\&. Also, if the solution explorer isn't the active tab, make it the active tab\&.
+.IP "\(bu" 2
+The active contexts panel tab (default position is in bottom panel) will show the keymap available given the user's focus\&. Use the "Inspect Element" like functionality to lock the Context so you can see the keymap without losing it once you click on the active contexts panel tab to view the keymap\&. 
+.PP
+

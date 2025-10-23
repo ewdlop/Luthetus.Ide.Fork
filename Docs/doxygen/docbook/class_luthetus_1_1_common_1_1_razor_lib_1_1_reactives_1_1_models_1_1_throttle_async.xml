@@ -1,0 +1,125 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_class_luthetus_1_1_common_1_1_razor_lib_1_1_reactives_1_1_models_1_1_throttle_async" xml:lang="en-US">
+<title>Luthetus.Common.RazorLib.Reactives.Models.ThrottleAsync Class Reference</title>
+<indexterm><primary>Luthetus.Common.RazorLib.Reactives.Models.ThrottleAsync</primary></indexterm>
+<para>
+
+<para><link linkend="_class_luthetus_1_1_common_1_1_razor_lib_1_1_reactives_1_1_models_1_1_throttle_async">ThrottleAsync</link> does not achieve the desired result. It blocks itself, and therefore is useless? I like the idea I had with a blocking background task. But it doesn&apos;t really extend here much, at least given how its currently written? </para>
+ 
+</para>
+<simplesect>
+    <title>Public Member Functions    </title>
+        <itemizedlist>
+            <listitem><para><link linkend="_class_luthetus_1_1_common_1_1_razor_lib_1_1_reactives_1_1_models_1_1_throttle_async_1af1971dc5e9e94fceb853f4d7cece20d8">ThrottleAsync</link> (TimeSpan throttleTimeSpan)</para>
+</listitem>
+            <listitem><para>Task <link linkend="_class_luthetus_1_1_common_1_1_razor_lib_1_1_reactives_1_1_models_1_1_throttle_async_1aae9fc2226e3005d308b43781b57db870">RunAsync</link> (Func&lt; CancellationToken, Task &gt; workItem)</para>
+</listitem>
+            <listitem><para>async Task <link linkend="_class_luthetus_1_1_common_1_1_razor_lib_1_1_reactives_1_1_models_1_1_throttle_async_1ae2442663d99f2ab8a42f8b4a0a77200c">UntilIsEmpty</link> (TimeSpan? pollingTimeSpan=null, CancellationToken cancellationToken=default)</para>
+
+<para>This method awaits the last task prior to returning.<?linebreak?><?linebreak?>. </para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Properties    </title>
+        <itemizedlist>
+            <listitem><para>TimeSpan <link linkend="_class_luthetus_1_1_common_1_1_razor_lib_1_1_reactives_1_1_models_1_1_throttle_async_1a334c7f9e5c9e767230183e6791e3349a">ThrottleTimeSpan</link><computeroutput> [get]</computeroutput>
+</para>
+</listitem>
+            <listitem><para>Stack&lt; Func&lt; CancellationToken, Task &gt; &gt; <link linkend="_class_luthetus_1_1_common_1_1_razor_lib_1_1_reactives_1_1_models_1_1_throttle_async_1a49e5e55e3cd54d394c0c420f46f870f7">WorkItemStack</link> = new()<computeroutput> [get, protected set]</computeroutput>
+</para>
+</listitem>
+            <listitem><para>Task <link linkend="_class_luthetus_1_1_common_1_1_razor_lib_1_1_reactives_1_1_models_1_1_throttle_async_1a8a301937581614b77e1cf0e6e02cd6e9">WorkItemTask</link> = Task.CompletedTask<computeroutput> [get, protected set]</computeroutput>
+</para>
+</listitem>
+            <listitem><para>bool <link linkend="_class_luthetus_1_1_common_1_1_razor_lib_1_1_reactives_1_1_models_1_1_throttle_async_1abccf84bc1b5ac11ebb228368ec1dfa26">IsStoppingFurtherPushes</link><computeroutput> [get]</computeroutput>
+</para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<section>
+<title>Detailed Description</title>
+
+<para><link linkend="_class_luthetus_1_1_common_1_1_razor_lib_1_1_reactives_1_1_models_1_1_throttle_async">ThrottleAsync</link> does not achieve the desired result. It blocks itself, and therefore is useless? I like the idea I had with a blocking background task. But it doesn&apos;t really extend here much, at least given how its currently written? </para>
+
+
+
+<para>Okay, I see, <link linkend="_class_luthetus_1_1_common_1_1_razor_lib_1_1_reactives_1_1_models_1_1_throttle_async">ThrottleAsync</link> works SOLELY from the idea that you are using a fire and forget Task.Run and want to throttle the logic within the Task.Run at a top level. But you cannot use it inside a foreach loop because you are awaiting yourself.</para>
+
+<para>In short <link linkend="_class_luthetus_1_1_common_1_1_razor_lib_1_1_reactives_1_1_models_1_1_throttle_async">ThrottleAsync</link> is actually useful... because it keeps two invocations of code running concurrently. Because one has to wait for the other to finish.</para>
+
+<para>And that many Task.Run will cancel out to the most recent one. But it still seems quite asinine? </para>
+<para>
+Definition at line <link linkend="__throttle_async_8cs_source_1l00020">20</link> of file <link linkend="__throttle_async_8cs_source">ThrottleAsync.cs</link>.</para>
+</section>
+<section>
+<title>Constructor &amp; Destructor Documentation</title>
+<anchor xml:id="_class_luthetus_1_1_common_1_1_razor_lib_1_1_reactives_1_1_models_1_1_throttle_async_1af1971dc5e9e94fceb853f4d7cece20d8"/><section>
+    <title>ThrottleAsync()</title>
+<indexterm><primary>ThrottleAsync</primary><secondary>Luthetus.Common.RazorLib.Reactives.Models.ThrottleAsync</secondary></indexterm>
+<indexterm><primary>Luthetus.Common.RazorLib.Reactives.Models.ThrottleAsync</primary><secondary>ThrottleAsync</secondary></indexterm>
+<para><computeroutput>Luthetus.Common.RazorLib.Reactives.Models.ThrottleAsync.ThrottleAsync (TimeSpan throttleTimeSpan)</computeroutput></para><para>
+Definition at line <link linkend="__throttle_async_8cs_source_1l00024">24</link> of file <link linkend="__throttle_async_8cs_source">ThrottleAsync.cs</link>.</para>
+</section>
+</section>
+<section>
+<title>Member Function Documentation</title>
+<anchor xml:id="_class_luthetus_1_1_common_1_1_razor_lib_1_1_reactives_1_1_models_1_1_throttle_async_1aae9fc2226e3005d308b43781b57db870"/><section>
+    <title>RunAsync()</title>
+<indexterm><primary>RunAsync</primary><secondary>Luthetus.Common.RazorLib.Reactives.Models.ThrottleAsync</secondary></indexterm>
+<indexterm><primary>Luthetus.Common.RazorLib.Reactives.Models.ThrottleAsync</primary><secondary>RunAsync</secondary></indexterm>
+<para><computeroutput>Task Luthetus.Common.RazorLib.Reactives.Models.ThrottleAsync.RunAsync (Func&lt; CancellationToken, Task &gt; workItem)</computeroutput></para><para>
+Definition at line <link linkend="__throttle_async_8cs_source_1l00034">34</link> of file <link linkend="__throttle_async_8cs_source">ThrottleAsync.cs</link>.</para>
+</section>
+<anchor xml:id="_class_luthetus_1_1_common_1_1_razor_lib_1_1_reactives_1_1_models_1_1_throttle_async_1ae2442663d99f2ab8a42f8b4a0a77200c"/><section>
+    <title>UntilIsEmpty()</title>
+<indexterm><primary>UntilIsEmpty</primary><secondary>Luthetus.Common.RazorLib.Reactives.Models.ThrottleAsync</secondary></indexterm>
+<indexterm><primary>Luthetus.Common.RazorLib.Reactives.Models.ThrottleAsync</primary><secondary>UntilIsEmpty</secondary></indexterm>
+<para><computeroutput>async Task Luthetus.Common.RazorLib.Reactives.Models.ThrottleAsync.UntilIsEmpty (TimeSpan? pollingTimeSpan = <computeroutput>null</computeroutput>
+, CancellationToken cancellationToken = <computeroutput>default</computeroutput>
+)</computeroutput></para><para>
+
+<para>This method awaits the last task prior to returning.<?linebreak?><?linebreak?>. </para>
+</para>
+
+<para>This method does NOT prevent pushes while flushing. To do so, invoke StopFurtherPushes() prior to invoking this method.<?linebreak?><?linebreak?></para>
+
+<para>The implementation of this method is a polling solution (as of this comment (2024-05-09)). </para>
+<para>
+Definition at line <link linkend="__throttle_async_8cs_source_1l00079">79</link> of file <link linkend="__throttle_async_8cs_source">ThrottleAsync.cs</link>.</para>
+</section>
+</section>
+<section>
+<title>Property Documentation</title>
+<anchor xml:id="_class_luthetus_1_1_common_1_1_razor_lib_1_1_reactives_1_1_models_1_1_throttle_async_1abccf84bc1b5ac11ebb228368ec1dfa26"/><section>
+    <title>IsStoppingFurtherPushes</title>
+<indexterm><primary>IsStoppingFurtherPushes</primary><secondary>Luthetus.Common.RazorLib.Reactives.Models.ThrottleAsync</secondary></indexterm>
+<indexterm><primary>Luthetus.Common.RazorLib.Reactives.Models.ThrottleAsync</primary><secondary>IsStoppingFurtherPushes</secondary></indexterm>
+<para><computeroutput>bool Luthetus.Common.RazorLib.Reactives.Models.ThrottleAsync.IsStoppingFurtherPushes<computeroutput>[get]</computeroutput></computeroutput></para><para>
+Definition at line <link linkend="__throttle_async_8cs_source_1l00032">32</link> of file <link linkend="__throttle_async_8cs_source">ThrottleAsync.cs</link>.</para>
+</section>
+<anchor xml:id="_class_luthetus_1_1_common_1_1_razor_lib_1_1_reactives_1_1_models_1_1_throttle_async_1a334c7f9e5c9e767230183e6791e3349a"/><section>
+    <title>ThrottleTimeSpan</title>
+<indexterm><primary>ThrottleTimeSpan</primary><secondary>Luthetus.Common.RazorLib.Reactives.Models.ThrottleAsync</secondary></indexterm>
+<indexterm><primary>Luthetus.Common.RazorLib.Reactives.Models.ThrottleAsync</primary><secondary>ThrottleTimeSpan</secondary></indexterm>
+<para><computeroutput>TimeSpan Luthetus.Common.RazorLib.Reactives.Models.ThrottleAsync.ThrottleTimeSpan<computeroutput>[get]</computeroutput></computeroutput></para><para>
+Definition at line <link linkend="__throttle_async_8cs_source_1l00029">29</link> of file <link linkend="__throttle_async_8cs_source">ThrottleAsync.cs</link>.</para>
+</section>
+<anchor xml:id="_class_luthetus_1_1_common_1_1_razor_lib_1_1_reactives_1_1_models_1_1_throttle_async_1a49e5e55e3cd54d394c0c420f46f870f7"/><section>
+    <title>WorkItemStack</title>
+<indexterm><primary>WorkItemStack</primary><secondary>Luthetus.Common.RazorLib.Reactives.Models.ThrottleAsync</secondary></indexterm>
+<indexterm><primary>Luthetus.Common.RazorLib.Reactives.Models.ThrottleAsync</primary><secondary>WorkItemStack</secondary></indexterm>
+<para><computeroutput>Stack&lt;Func&lt;CancellationToken, Task&gt; &gt; Luthetus.Common.RazorLib.Reactives.Models.ThrottleAsync.WorkItemStack = new()<computeroutput>[get]</computeroutput>, <computeroutput>[protected set]</computeroutput></computeroutput></para><para>
+Definition at line <link linkend="__throttle_async_8cs_source_1l00030">30</link> of file <link linkend="__throttle_async_8cs_source">ThrottleAsync.cs</link>.</para>
+</section>
+<anchor xml:id="_class_luthetus_1_1_common_1_1_razor_lib_1_1_reactives_1_1_models_1_1_throttle_async_1a8a301937581614b77e1cf0e6e02cd6e9"/><section>
+    <title>WorkItemTask</title>
+<indexterm><primary>WorkItemTask</primary><secondary>Luthetus.Common.RazorLib.Reactives.Models.ThrottleAsync</secondary></indexterm>
+<indexterm><primary>Luthetus.Common.RazorLib.Reactives.Models.ThrottleAsync</primary><secondary>WorkItemTask</secondary></indexterm>
+<para><computeroutput>Task Luthetus.Common.RazorLib.Reactives.Models.ThrottleAsync.WorkItemTask = Task.CompletedTask<computeroutput>[get]</computeroutput>, <computeroutput>[protected set]</computeroutput></computeroutput></para><para>
+Definition at line <link linkend="__throttle_async_8cs_source_1l00031">31</link> of file <link linkend="__throttle_async_8cs_source">ThrottleAsync.cs</link>.</para>
+</section>
+<para>
+The documentation for this class was generated from the following file:</para>
+Source/Lib/Common/Reactives/Models/<link linkend="__throttle_async_8cs">ThrottleAsync.cs</link></section>
+</section>

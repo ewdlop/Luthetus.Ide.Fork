@@ -1,0 +1,10 @@
+var class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_displays_1_1_internals_1_1_virtualization_driver =
+[
+    [ "VirtualizationDriver", "class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_displays_1_1_internals_1_1_virtualization_driver.html#aef2b034ab7d5f117849c4692a8c3f73b", null ],
+    [ "GetRenderFragment", "class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_displays_1_1_internals_1_1_virtualization_driver.html#a951cf67dc596f8ff2c06cb96be27a831", null ],
+    [ "GetStyleCssString", "class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_displays_1_1_internals_1_1_virtualization_driver.html#a9070b0a034c59644d066ac77eefcea00", null ],
+    [ "_renderBatch", "class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_displays_1_1_internals_1_1_virtualization_driver.html#a5e6b825150ff46e6230ddd65d0a94e25", null ],
+    [ "_root", "class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_displays_1_1_internals_1_1_virtualization_driver.html#a726088075320780a443cbcc6a762a52b", null ],
+    [ "UseHorizontalVirtualization", "class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_displays_1_1_internals_1_1_virtualization_driver.html#a56077e6a48277136607ecc26809363d2", null ],
+    [ "UseVerticalVirtualization", "class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_displays_1_1_internals_1_1_virtualization_driver.html#a9404514fc37f8e95648c9b29b4368a7f", null ]
+];

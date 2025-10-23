@@ -1,0 +1,4 @@
+var class_luthetus_1_1_common_1_1_razor_lib_1_1_exceptions_1_1_luthetus_unit_test_exception =
+[
+    [ "LuthetusUnitTestException", "class_luthetus_1_1_common_1_1_razor_lib_1_1_exceptions_1_1_luthetus_unit_test_exception.html#a40300101f4f74c92c1c19196223f7599", null ]
+];

@@ -1,0 +1,44 @@
+\doxysection{In\+Memory\+File\+System\+Provider.\+Main.\+cs}
+\hypertarget{_in_memory_file_system_provider_8_main_8cs_source}{}\label{_in_memory_file_system_provider_8_main_8cs_source}\index{Source/Lib/Common/FileSystems/Models/InMemoryFileSystemProvider.Main.cs@{Source/Lib/Common/FileSystems/Models/InMemoryFileSystemProvider.Main.cs}}
+\mbox{\hyperlink{_in_memory_file_system_provider_8_main_8cs}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{_in_memory_file_system_provider_8_main_8cs_source_l00001}00001\ \textcolor{keyword}{using\ }System.Collections.Immutable;}
+\DoxyCodeLine{\Hypertarget{_in_memory_file_system_provider_8_main_8cs_source_l00002}00002\ \textcolor{keyword}{using\ }Fluxor;}
+\DoxyCodeLine{\Hypertarget{_in_memory_file_system_provider_8_main_8cs_source_l00003}00003\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_luthetus_1_1_common_1_1_razor_lib_1_1_component_renderers_1_1_models}{Luthetus.Common.RazorLib.ComponentRenderers.Models}};}
+\DoxyCodeLine{\Hypertarget{_in_memory_file_system_provider_8_main_8cs_source_l00004}00004\ }
+\DoxyCodeLine{\Hypertarget{_in_memory_file_system_provider_8_main_8cs_source_l00005}00005\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespace_luthetus_1_1_common_1_1_razor_lib_1_1_file_systems_1_1_models}{Luthetus.Common.RazorLib.FileSystems.Models}};}
+\DoxyCodeLine{\Hypertarget{_in_memory_file_system_provider_8_main_8cs_source_l00006}00006\ }
+\DoxyCodeLine{\Hypertarget{_in_memory_file_system_provider_8_main_8cs_source_l00007}00007\ \textcolor{keyword}{public}\ \textcolor{keyword}{partial\ class\ }InMemoryFileSystemProvider\ :\ IFileSystemProvider}
+\DoxyCodeLine{\Hypertarget{_in_memory_file_system_provider_8_main_8cs_source_l00008}00008\ \{}
+\DoxyCodeLine{\Hypertarget{_in_memory_file_system_provider_8_main_8cs_source_l00009}00009\ \ \ \ \ \textcolor{keyword}{private}\ readonly\ IEnvironmentProvider\ \_environmentProvider;}
+\DoxyCodeLine{\Hypertarget{_in_memory_file_system_provider_8_main_8cs_source_l00010}00010\ \ \ \ \ \textcolor{keyword}{private}\ readonly\ List<InMemoryFile>\ \_files\ =\ \textcolor{keyword}{new}();}
+\DoxyCodeLine{\Hypertarget{_in_memory_file_system_provider_8_main_8cs_source_l00011}00011\ \ \ \ \ \textcolor{keyword}{private}\ readonly\ SemaphoreSlim\ \_modificationSemaphore\ =\ \textcolor{keyword}{new}(1,\ 1);}
+\DoxyCodeLine{\Hypertarget{_in_memory_file_system_provider_8_main_8cs_source_l00012}00012\ \ \ \ \ \textcolor{keyword}{private}\ readonly\ InMemoryFileHandler\ \_file;}
+\DoxyCodeLine{\Hypertarget{_in_memory_file_system_provider_8_main_8cs_source_l00013}00013\ \ \ \ \ \textcolor{keyword}{private}\ readonly\ InMemoryDirectoryHandler\ \_directory;}
+\DoxyCodeLine{\Hypertarget{_in_memory_file_system_provider_8_main_8cs_source_l00014}00014\ }
+\DoxyCodeLine{\Hypertarget{_in_memory_file_system_provider_8_main_8cs_source_l00015}\mbox{\hyperlink{class_luthetus_1_1_common_1_1_razor_lib_1_1_file_systems_1_1_models_1_1_in_memory_file_system_provider_a3817840a9dd445e5234c225cb06d71a5}{00015}}\ \ \ \ \ \textcolor{keyword}{public}\ \mbox{\hyperlink{class_luthetus_1_1_common_1_1_razor_lib_1_1_file_systems_1_1_models_1_1_in_memory_file_system_provider_a3817840a9dd445e5234c225cb06d71a5}{InMemoryFileSystemProvider}}(}
+\DoxyCodeLine{\Hypertarget{_in_memory_file_system_provider_8_main_8cs_source_l00016}00016\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{interface_luthetus_1_1_common_1_1_razor_lib_1_1_file_systems_1_1_models_1_1_i_environment_provider}{IEnvironmentProvider}}\ environmentProvider,}
+\DoxyCodeLine{\Hypertarget{_in_memory_file_system_provider_8_main_8cs_source_l00017}00017\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{interface_luthetus_1_1_common_1_1_razor_lib_1_1_component_renderers_1_1_models_1_1_i_common_component_renderers}{ICommonComponentRenderers}}\ commonComponentRenderers,}
+\DoxyCodeLine{\Hypertarget{_in_memory_file_system_provider_8_main_8cs_source_l00018}00018\ \ \ \ \ \ \ \ \ IDispatcher\ dispatcher)}
+\DoxyCodeLine{\Hypertarget{_in_memory_file_system_provider_8_main_8cs_source_l00019}00019\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_in_memory_file_system_provider_8_main_8cs_source_l00020}00020\ \ \ \ \ \ \ \ \ \_environmentProvider\ =\ environmentProvider;}
+\DoxyCodeLine{\Hypertarget{_in_memory_file_system_provider_8_main_8cs_source_l00021}00021\ }
+\DoxyCodeLine{\Hypertarget{_in_memory_file_system_provider_8_main_8cs_source_l00022}00022\ \ \ \ \ \ \ \ \ \_file\ =\ \textcolor{keyword}{new}\ \mbox{\hyperlink{class_luthetus_1_1_common_1_1_razor_lib_1_1_file_systems_1_1_models_1_1_in_memory_file_system_pr6a97163461279b9ae048c493d1647589}{InMemoryFileHandler}}(\textcolor{keyword}{this},\ \_environmentProvider,\ commonComponentRenderers,\ dispatcher);}
+\DoxyCodeLine{\Hypertarget{_in_memory_file_system_provider_8_main_8cs_source_l00023}00023\ \ \ \ \ \ \ \ \ \_directory\ =\ \textcolor{keyword}{new}\ \mbox{\hyperlink{class_luthetus_1_1_common_1_1_razor_lib_1_1_file_systems_1_1_models_1_1_in_memory_file_system_pr216732e0861cf8e4f9271cba28da8459}{InMemoryDirectoryHandler}}(\textcolor{keyword}{this},\ \_environmentProvider,\ commonComponentRenderers,\ dispatcher);}
+\DoxyCodeLine{\Hypertarget{_in_memory_file_system_provider_8_main_8cs_source_l00024}00024\ }
+\DoxyCodeLine{\Hypertarget{_in_memory_file_system_provider_8_main_8cs_source_l00025}00025\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_luthetus_1_1_common_1_1_razor_lib_1_1_file_systems_1_1_models_1_1_in_memory_file_system_provider_a3e7ce2a324fa3a407b0d0b78e19a27a3}{Directory}}}
+\DoxyCodeLine{\Hypertarget{_in_memory_file_system_provider_8_main_8cs_source_l00026}00026\ \ \ \ \ \ \ \ \ \ \ \ \ .CreateDirectoryAsync(\_environmentProvider.RootDirectoryAbsolutePath.Value)}
+\DoxyCodeLine{\Hypertarget{_in_memory_file_system_provider_8_main_8cs_source_l00027}00027\ \ \ \ \ \ \ \ \ \ \ \ \ .Wait();}
+\DoxyCodeLine{\Hypertarget{_in_memory_file_system_provider_8_main_8cs_source_l00028}00028\ }
+\DoxyCodeLine{\Hypertarget{_in_memory_file_system_provider_8_main_8cs_source_l00029}00029\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_luthetus_1_1_common_1_1_razor_lib_1_1_file_systems_1_1_models_1_1_in_memory_file_system_provider_a3e7ce2a324fa3a407b0d0b78e19a27a3}{Directory}}}
+\DoxyCodeLine{\Hypertarget{_in_memory_file_system_provider_8_main_8cs_source_l00030}00030\ \ \ \ \ \ \ \ \ \ \ \ \ .CreateDirectoryAsync(\_environmentProvider.HomeDirectoryAbsolutePath.Value)}
+\DoxyCodeLine{\Hypertarget{_in_memory_file_system_provider_8_main_8cs_source_l00031}00031\ \ \ \ \ \ \ \ \ \ \ \ \ .Wait();}
+\DoxyCodeLine{\Hypertarget{_in_memory_file_system_provider_8_main_8cs_source_l00032}00032\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_in_memory_file_system_provider_8_main_8cs_source_l00033}00033\ }
+\DoxyCodeLine{\Hypertarget{_in_memory_file_system_provider_8_main_8cs_source_l00034}\mbox{\hyperlink{class_luthetus_1_1_common_1_1_razor_lib_1_1_file_systems_1_1_models_1_1_in_memory_file_system_provider_a20d8c9c15b6940baa6f1829e1f73a699}{00034}}\ \ \ \ \ \textcolor{keyword}{public}\ ImmutableArray<InMemoryFile>\ \mbox{\hyperlink{class_luthetus_1_1_common_1_1_razor_lib_1_1_file_systems_1_1_models_1_1_in_memory_file_system_provider_a20d8c9c15b6940baa6f1829e1f73a699}{Files}}\ =>\ \_files.ToImmutableArray();}
+\DoxyCodeLine{\Hypertarget{_in_memory_file_system_provider_8_main_8cs_source_l00035}00035\ }
+\DoxyCodeLine{\Hypertarget{_in_memory_file_system_provider_8_main_8cs_source_l00036}\mbox{\hyperlink{class_luthetus_1_1_common_1_1_razor_lib_1_1_file_systems_1_1_models_1_1_in_memory_file_system_provider_a80228f35630d6a71648772665e101a1a}{00036}}\ \ \ \ \ \textcolor{keyword}{public}\ \mbox{\hyperlink{interface_luthetus_1_1_common_1_1_razor_lib_1_1_file_systems_1_1_models_1_1_i_file_handler}{IFileHandler}}\ \mbox{\hyperlink{class_luthetus_1_1_common_1_1_razor_lib_1_1_file_systems_1_1_models_1_1_in_memory_file_system_provider_a80228f35630d6a71648772665e101a1a}{File}}\ =>\ \_file;}
+\DoxyCodeLine{\Hypertarget{_in_memory_file_system_provider_8_main_8cs_source_l00037}\mbox{\hyperlink{class_luthetus_1_1_common_1_1_razor_lib_1_1_file_systems_1_1_models_1_1_in_memory_file_system_provider_a3e7ce2a324fa3a407b0d0b78e19a27a3}{00037}}\ \ \ \ \ \textcolor{keyword}{public}\ \mbox{\hyperlink{interface_luthetus_1_1_common_1_1_razor_lib_1_1_file_systems_1_1_models_1_1_i_directory_handler}{IDirectoryHandler}}\ \mbox{\hyperlink{class_luthetus_1_1_common_1_1_razor_lib_1_1_file_systems_1_1_models_1_1_in_memory_file_system_provider_a3e7ce2a324fa3a407b0d0b78e19a27a3}{Directory}}\ =>\ \_directory;}
+\DoxyCodeLine{\Hypertarget{_in_memory_file_system_provider_8_main_8cs_source_l00038}00038\ \}}
+
+\end{DoxyCode}

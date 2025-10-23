@@ -1,0 +1,831 @@
+\doxysection{Git\+Ide\+Api.\+cs}
+\hypertarget{_git_ide_api_8cs_source}{}\label{_git_ide_api_8cs_source}\index{Source/Lib/Extensions/Extensions.Git/Models/GitIdeApi.cs@{Source/Lib/Extensions/Extensions.Git/Models/GitIdeApi.cs}}
+\mbox{\hyperlink{_git_ide_api_8cs}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00001}00001\ \textcolor{keyword}{using\ }System.Text;}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00002}00002\ \textcolor{keyword}{using\ }Fluxor;}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00003}00003\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_luthetus_1_1_common_1_1_razor_lib_1_1_keys_1_1_models}{Luthetus.Common.RazorLib.Keys.Models}};}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00004}00004\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_luthetus_1_1_common_1_1_razor_lib_1_1_file_systems_1_1_models}{Luthetus.Common.RazorLib.FileSystems.Models}};}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00005}00005\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_luthetus_1_1_common_1_1_razor_lib_1_1_background_tasks_1_1_models}{Luthetus.Common.RazorLib.BackgroundTasks.Models}};}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00006}00006\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_luthetus_1_1_common_1_1_razor_lib_1_1_notifications_1_1_models}{Luthetus.Common.RazorLib.Notifications.Models}};}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00007}00007\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_luthetus_1_1_common_1_1_razor_lib_1_1_component_renderers_1_1_models}{Luthetus.Common.RazorLib.ComponentRenderers.Models}};}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00008}00008\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_utility}{Luthetus.TextEditor.RazorLib.CompilerServices.Utility}};}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00009}00009\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_lexers_1_1_models}{Luthetus.TextEditor.RazorLib.Lexers.Models}};}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00010}00010\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_facts}{Luthetus.TextEditor.RazorLib.CompilerServices.Facts}};}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00011}00011\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_luthetus_1_1_ide_1_1_razor_lib_1_1_terminals_1_1_models}{Luthetus.Ide.RazorLib.Terminals.Models}};}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00012}00012\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_luthetus_1_1_ide_1_1_razor_lib_1_1_terminals_1_1_states}{Luthetus.Ide.RazorLib.Terminals.States}};}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00013}00013\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_luthetus_1_1_ide_1_1_razor_lib_1_1_background_tasks_1_1_models}{Luthetus.Ide.RazorLib.BackgroundTasks.Models}};}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00014}00014\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_luthetus_1_1_ide_1_1_razor_lib_1_1_command_lines_1_1_models}{Luthetus.Ide.RazorLib.CommandLines.Models}};}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00015}00015\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_luthetus_1_1_ide_1_1_razor_lib_1_1_background_tasks_1_1_models}{Luthetus.Ide.RazorLib.BackgroundTasks.Models}};}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00016}00016\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_luthetus_1_1_extensions_1_1_git_1_1_states}{Luthetus.Extensions.Git.States}};}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00017}00017\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_luthetus_1_1_extensions_1_1_git_1_1_background_tasks_1_1_models}{Luthetus.Extensions.Git.BackgroundTasks.Models}};}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00018}00018\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_luthetus_1_1_extensions_1_1_git_1_1_command_lines_1_1_models}{Luthetus.Extensions.Git.CommandLines.Models}};}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00019}00019\ }
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00020}00020\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespace_luthetus_1_1_extensions_1_1_git_1_1_models}{Luthetus.Extensions.Git.Models}};}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00021}00021\ }
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00022}\mbox{\hyperlink{class_luthetus_1_1_extensions_1_1_git_1_1_models_1_1_git_ide_api}{00022}}\ \textcolor{keyword}{public}\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_luthetus_1_1_extensions_1_1_git_1_1_models_1_1_git_ide_api_abac049abf1b6a1c3776e7aff84bc8b1d}{GitIdeApi}}}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00023}00023\ \{}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00024}00024\ \ \ \ \ \textcolor{keyword}{private}\ readonly\ \mbox{\hyperlink{class_luthetus_1_1_extensions_1_1_git_1_1_background_tasks_1_1_models_1_1_git_background_task_api}{GitBackgroundTaskApi}}\ \_gitBackgroundTaskApi;}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00025}00025\ \ \ \ \ \textcolor{keyword}{private}\ readonly\ \mbox{\hyperlink{class_luthetus_1_1_ide_1_1_razor_lib_1_1_background_tasks_1_1_models_1_1_ide_background_task_api}{IdeBackgroundTaskApi}}\ \_ideBackgroundTaskApi;}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00026}00026\ \ \ \ \ \textcolor{keyword}{private}\ readonly\ IState<TerminalState>\ \_terminalStateWrap;}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00027}00027\ \ \ \ \ \textcolor{keyword}{private}\ readonly\ IState<GitState>\ \_gitStateWrap;}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00028}00028\ \ \ \ \ \textcolor{keyword}{private}\ readonly\ \mbox{\hyperlink{class_luthetus_1_1_extensions_1_1_git_1_1_models_1_1_git_cli_output_parser}{GitCliOutputParser}}\ \_gitCliOutputParser;}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00029}00029\ \ \ \ \ \textcolor{keyword}{private}\ readonly\ \mbox{\hyperlink{interface_luthetus_1_1_common_1_1_razor_lib_1_1_file_systems_1_1_models_1_1_i_environment_provider}{IEnvironmentProvider}}\ \_environmentProvider;}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00030}00030\ \ \ \ \ \textcolor{keyword}{private}\ readonly\ \mbox{\hyperlink{interface_luthetus_1_1_common_1_1_razor_lib_1_1_background_tasks_1_1_models_1_1_i_background_task_service}{IBackgroundTaskService}}\ \_backgroundTaskService;}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00031}00031\ \ \ \ \ \textcolor{keyword}{private}\ readonly\ \mbox{\hyperlink{interface_luthetus_1_1_common_1_1_razor_lib_1_1_component_renderers_1_1_models_1_1_i_common_component_renderers}{ICommonComponentRenderers}}\ \_commonComponentRenderers;}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00032}00032\ \ \ \ \ \textcolor{keyword}{private}\ readonly\ IDispatcher\ \_dispatcher;}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00033}00033\ }
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00034}\mbox{\hyperlink{class_luthetus_1_1_extensions_1_1_git_1_1_models_1_1_git_ide_api_abac049abf1b6a1c3776e7aff84bc8b1d}{00034}}\ \ \ \ \ \textcolor{keyword}{public}\ \mbox{\hyperlink{class_luthetus_1_1_extensions_1_1_git_1_1_models_1_1_git_ide_api_abac049abf1b6a1c3776e7aff84bc8b1d}{GitIdeApi}}(}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00035}00035\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_luthetus_1_1_extensions_1_1_git_1_1_background_tasks_1_1_models_1_1_git_background_task_api}{GitBackgroundTaskApi}}\ gitBackgroundTaskApi,}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00036}00036\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_luthetus_1_1_ide_1_1_razor_lib_1_1_background_tasks_1_1_models_1_1_ide_background_task_api}{IdeBackgroundTaskApi}}\ ideBackgroundTaskApi,}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00037}00037\ \ \ \ \ \ \ \ \ IState<TerminalState>\ terminalStateWrap,}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00038}00038\ \ \ \ \ \ \ \ \ IState<GitState>\ gitStateWrap,}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00039}00039\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_luthetus_1_1_extensions_1_1_git_1_1_models_1_1_git_cli_output_parser}{GitCliOutputParser}}\ gitCliOutputParser,}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00040}00040\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{interface_luthetus_1_1_common_1_1_razor_lib_1_1_file_systems_1_1_models_1_1_i_environment_provider}{IEnvironmentProvider}}\ environmentProvider,}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00041}00041\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{interface_luthetus_1_1_common_1_1_razor_lib_1_1_background_tasks_1_1_models_1_1_i_background_task_service}{IBackgroundTaskService}}\ backgroundTaskService,}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00042}00042\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{interface_luthetus_1_1_common_1_1_razor_lib_1_1_component_renderers_1_1_models_1_1_i_common_component_renderers}{ICommonComponentRenderers}}\ commonComponentRenderers,}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00043}00043\ \ \ \ \ \ \ \ \ IDispatcher\ dispatcher)}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00044}00044\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00045}00045\ \ \ \ \ \ \ \ \ \_gitBackgroundTaskApi\ =\ gitBackgroundTaskApi;}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00046}00046\ \ \ \ \ \ \ \ \ \_ideBackgroundTaskApi\ =\ ideBackgroundTaskApi;}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00047}00047\ \ \ \ \ \ \ \ \ \_terminalStateWrap\ =\ terminalStateWrap;}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00048}00048\ \ \ \ \ \ \ \ \ \_gitStateWrap\ =\ gitStateWrap;}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00049}00049\ \ \ \ \ \ \ \ \ \_gitCliOutputParser\ =\ gitCliOutputParser;}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00050}00050\ \ \ \ \ \ \ \ \ \_environmentProvider\ =\ environmentProvider;}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00051}00051\ \ \ \ \ \ \ \ \ \_backgroundTaskService\ =\ backgroundTaskService;}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00052}00052\ \ \ \ \ \ \ \ \ \_commonComponentRenderers\ =\ commonComponentRenderers;}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00053}00053\ \ \ \ \ \ \ \ \ \_dispatcher\ =\ dispatcher;}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00054}00054\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00055}00055\ }
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00056}\mbox{\hyperlink{class_luthetus_1_1_extensions_1_1_git_1_1_models_1_1_git_ide_api_aa53c94f8de8b3bce5732e5a802e707a0}{00056}}\ \ \ \ \ \textcolor{keyword}{public}\ Key<TerminalCommandRequest>\ \mbox{\hyperlink{class_luthetus_1_1_extensions_1_1_git_1_1_models_1_1_git_ide_api_aa53c94f8de8b3bce5732e5a802e707a0}{GitTerminalCommandRequestKey}}\ \{\ \textcolor{keyword}{get};\ \}\ =\ Key<TerminalCommandRequest>.NewKey();}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00057}00057\ }
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00058}\mbox{\hyperlink{class_luthetus_1_1_extensions_1_1_git_1_1_models_1_1_git_ide_api_aebc69e5672fb59432890286ec08eecd6}{00058}}\ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_luthetus_1_1_extensions_1_1_git_1_1_models_1_1_git_ide_api_aebc69e5672fb59432890286ec08eecd6}{StatusEnqueue}}()}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00059}00059\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00060}00060\ \ \ \ \ \ \ \ \ \_backgroundTaskService.Enqueue(}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00061}00061\ \ \ \ \ \ \ \ \ \ \ \ \ Key<IBackgroundTask>.NewKey(),}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00062}00062\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_luthetus_1_1_common_1_1_razor_lib_1_1_background_tasks_1_1_models_1_1_continuous_background_task_worker}{ContinuousBackgroundTaskWorker}}.\mbox{\hyperlink{class_luthetus_1_1_common_1_1_razor_lib_1_1_background_tasks_1_1_models_1_1_continuous_background_task_worker_a2bbecf18336413ee1caff9d378acc256}{GetQueueKey}}(),}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00063}00063\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}git\ status\ -\/u"{}},}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00064}00064\ \ \ \ \ \ \ \ \ \ \ \ \ ()\ =>}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00065}00065\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00066}00066\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ var\ localGitState\ =\ \_gitStateWrap.Value;}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00067}00067\ }
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00068}00068\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ if\ (localGitState.Repo\ is\ null)}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00069}00069\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ return\ Task.CompletedTask;}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00070}00070\ }
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00071}00071\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ var\ gitStatusDashUCommand\ =\ \$\textcolor{stringliteral}{"{}\{GitCliFacts.STATUS\_COMMAND\}\ -\/u"{}};}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00072}00072\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ var\ formattedCommand\ =\ new\ FormattedCommand(}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00073}00073\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ GitCliFacts.TARGET\_FILE\_NAME,}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00074}00074\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ new\ string[]\ \{\ gitStatusDashUCommand\ \})}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00075}00075\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00076}00076\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ HACK\_ArgumentsString\ =\ gitStatusDashUCommand,}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00077}00077\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Tag\ =\ \mbox{\hyperlink{class_luthetus_1_1_extensions_1_1_git_1_1_models_1_1_git_cli_output_parser}{GitCliOutputParser}}.\mbox{\hyperlink{class_luthetus_1_1_extensions_1_1_git_1_1_models_1_1_git_cli_output_parser_1_1_tag_constants}{TagConstants}}.StatusEnqueue,}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00078}00078\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \};}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00079}00079\ }
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00080}00080\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ var\ terminalCommandRequest\ =\ \textcolor{keyword}{new}\ \mbox{\hyperlink{class_luthetus_1_1_ide_1_1_razor_lib_1_1_terminals_1_1_models_1_1_terminal_command_request}{TerminalCommandRequest}}(}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00081}00081\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ formattedCommand.Value,}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00082}00082\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ localGitState.Repo.AbsolutePath.Value)}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00083}00083\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00084}00084\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ContinueWithFunc\ =\ parsedCommand\ =>}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00085}00085\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00086}00086\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ var\ textSpanList\ =\ \_gitCliOutputParser.StatusParseEntire(}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00087}00087\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ parsedCommand.OutputCache.ToString());}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00088}00088\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00089}00089\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \_gitCliOutputParser.DispatchSetStatusAction();}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00090}00090\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00091}00091\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ parsedCommand.TextSpanList\ =\ textSpanList;}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00092}00092\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ Task.CompletedTask;}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00093}00093\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00094}00094\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \};}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00095}00095\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00096}00096\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \_terminalStateWrap.Value.TerminalMap[TerminalFacts.GENERAL\_KEY].EnqueueCommand(terminalCommandRequest);}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00097}00097\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ Task.CompletedTask;}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00098}00098\ \ \ \ \ \ \ \ \ \ \ \ \ \});}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00099}00099\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00100}00100\ }
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00101}\mbox{\hyperlink{class_luthetus_1_1_extensions_1_1_git_1_1_models_1_1_git_ide_api_a649542caab0826bcee1fedf2ff557c8f}{00101}}\ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_luthetus_1_1_extensions_1_1_git_1_1_models_1_1_git_ide_api_a649542caab0826bcee1fedf2ff557c8f}{RefreshEnqueue}}(\mbox{\hyperlink{namespace_luthetus_1_1_extensions_1_1_git_1_1_models_acfcc10aa7ca94ea134cc43cd40e790ab}{GitRepo}}\ repoAtTimeOfRequest)}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00102}00102\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00103}00103\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_luthetus_1_1_extensions_1_1_git_1_1_models_1_1_git_ide_api_aebc69e5672fb59432890286ec08eecd6}{StatusEnqueue}}();}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00104}00104\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_luthetus_1_1_extensions_1_1_git_1_1_models_1_1_git_ide_api_a418f22c689b9c9f7aefa74550b15cc3f}{BranchGetAllEnqueue}}(repoAtTimeOfRequest);}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00105}00105\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_luthetus_1_1_extensions_1_1_git_1_1_models_1_1_git_ide_api_ab740f39e8f73fcd1a571d7202aa89c18}{GetActiveBranchNameEnqueue}}(repoAtTimeOfRequest);}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00106}00106\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_luthetus_1_1_extensions_1_1_git_1_1_models_1_1_git_ide_api_a098360b247fcf5e4b2bda5d5b0a0f2ef}{GetOriginNameEnqueue}}(repoAtTimeOfRequest);}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00107}00107\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00108}00108\ }
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00109}\mbox{\hyperlink{class_luthetus_1_1_extensions_1_1_git_1_1_models_1_1_git_ide_api_ab740f39e8f73fcd1a571d7202aa89c18}{00109}}\ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_luthetus_1_1_extensions_1_1_git_1_1_models_1_1_git_ide_api_ab740f39e8f73fcd1a571d7202aa89c18}{GetActiveBranchNameEnqueue}}(\mbox{\hyperlink{namespace_luthetus_1_1_extensions_1_1_git_1_1_models_acfcc10aa7ca94ea134cc43cd40e790ab}{GitRepo}}\ repoAtTimeOfRequest)}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00110}00110\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00111}00111\ \ \ \ \ \ \ \ \ \_backgroundTaskService.Enqueue(}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00112}00112\ \ \ \ \ \ \ \ \ \ \ \ \ Key<IBackgroundTask>.NewKey(),}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00113}00113\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_luthetus_1_1_common_1_1_razor_lib_1_1_background_tasks_1_1_models_1_1_continuous_background_task_worker}{ContinuousBackgroundTaskWorker}}.\mbox{\hyperlink{class_luthetus_1_1_common_1_1_razor_lib_1_1_background_tasks_1_1_models_1_1_continuous_background_task_worker_a2bbecf18336413ee1caff9d378acc256}{GetQueueKey}}(),}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00114}00114\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}git\ get\ active\ branch\ name"{}},}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00115}00115\ \ \ \ \ \ \ \ \ \ \ \ \ ()\ =>}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00116}00116\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00117}00117\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ var\ localGitState\ =\ \_gitStateWrap.Value;}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00118}00118\ }
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00119}00119\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ if\ (localGitState.Repo\ is\ null\ ||\ localGitState.Repo\ !=\ repoAtTimeOfRequest)}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00120}00120\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ return\ Task.CompletedTask;}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00121}00121\ }
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00122}00122\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ var\ terminalCommandArgs\ =\ \$\textcolor{stringliteral}{"{}branch\ -\/-\/show-\/current"{}};}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00123}00123\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ var\ formattedCommand\ =\ new\ FormattedCommand(}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00124}00124\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ GitCliFacts.TARGET\_FILE\_NAME,}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00125}00125\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ new\ string[]\ \{\ terminalCommandArgs\ \})}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00126}00126\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00127}00127\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ HACK\_ArgumentsString\ =\ terminalCommandArgs,}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00128}00128\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Tag\ =\ GitCliOutputParser.TagConstants.GetActiveBranchNameEnqueue}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00129}00129\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \};}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00130}00130\ }
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00131}00131\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ var\ terminalCommandRequest\ =\ \textcolor{keyword}{new}\ \mbox{\hyperlink{class_luthetus_1_1_ide_1_1_razor_lib_1_1_terminals_1_1_models_1_1_terminal_command_request}{TerminalCommandRequest}}(}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00132}00132\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ formattedCommand.Value,}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00133}00133\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ localGitState.Repo.AbsolutePath.Value)}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00134}00134\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00135}00135\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ContinueWithFunc\ =\ parsedCommand\ =>}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00136}00136\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00137}00137\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \_gitCliOutputParser.GetBranchParse(}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00138}00138\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ parsedCommand.OutputCache.ToString());}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00139}00139\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00140}00140\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \_gitCliOutputParser.DispatchSetBranchAction();}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00141}00141\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ Task.CompletedTask;}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00142}00142\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00143}00143\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \};}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00144}00144\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00145}00145\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \_terminalStateWrap.Value.TerminalMap[TerminalFacts.GENERAL\_KEY].EnqueueCommand(terminalCommandRequest);}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00146}00146\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ Task.CompletedTask;}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00147}00147\ \ \ \ \ \ \ \ \ \ \ \ \ \});}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00148}00148\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00149}00149\ }
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00150}\mbox{\hyperlink{class_luthetus_1_1_extensions_1_1_git_1_1_models_1_1_git_ide_api_a098360b247fcf5e4b2bda5d5b0a0f2ef}{00150}}\ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_luthetus_1_1_extensions_1_1_git_1_1_models_1_1_git_ide_api_a098360b247fcf5e4b2bda5d5b0a0f2ef}{GetOriginNameEnqueue}}(\mbox{\hyperlink{namespace_luthetus_1_1_extensions_1_1_git_1_1_models_acfcc10aa7ca94ea134cc43cd40e790ab}{GitRepo}}\ repoAtTimeOfRequest)}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00151}00151\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00152}00152\ \ \ \ \ \ \ \ \ \_backgroundTaskService.Enqueue(}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00153}00153\ \ \ \ \ \ \ \ \ \ \ \ \ Key<IBackgroundTask>.NewKey(),}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00154}00154\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_luthetus_1_1_common_1_1_razor_lib_1_1_background_tasks_1_1_models_1_1_continuous_background_task_worker}{ContinuousBackgroundTaskWorker}}.\mbox{\hyperlink{class_luthetus_1_1_common_1_1_razor_lib_1_1_background_tasks_1_1_models_1_1_continuous_background_task_worker_a2bbecf18336413ee1caff9d378acc256}{GetQueueKey}}(),}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00155}00155\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}git\ get\ origin\ name"{}},}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00156}00156\ \ \ \ \ \ \ \ \ \ \ \ \ ()\ =>}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00157}00157\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00158}00158\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ var\ localGitState\ =\ \_gitStateWrap.Value;}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00159}00159\ }
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00160}00160\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ if\ (localGitState.Repo\ is\ null\ ||\ localGitState.Repo\ !=\ repoAtTimeOfRequest)}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00161}00161\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ return\ Task.CompletedTask;}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00162}00162\ }
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00163}00163\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ var\ terminalCommandArgs\ =\ \$\textcolor{stringliteral}{"{}config\ -\/-\/get\ remote.origin.url"{}};}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00164}00164\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ var\ formattedCommand\ =\ new\ FormattedCommand(}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00165}00165\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ GitCliFacts.TARGET\_FILE\_NAME,}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00166}00166\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ new\ string[]\ \{\ terminalCommandArgs\ \})}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00167}00167\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00168}00168\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ HACK\_ArgumentsString\ =\ terminalCommandArgs,}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00169}00169\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Tag\ =\ \mbox{\hyperlink{class_luthetus_1_1_extensions_1_1_git_1_1_models_1_1_git_cli_output_parser}{GitCliOutputParser}}.\mbox{\hyperlink{class_luthetus_1_1_extensions_1_1_git_1_1_models_1_1_git_cli_output_parser_1_1_tag_constants}{TagConstants}}.GetOriginNameEnqueue,}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00170}00170\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \};}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00171}00171\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00172}00172\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ var\ terminalCommandRequest\ =\ \textcolor{keyword}{new}\ \mbox{\hyperlink{class_luthetus_1_1_ide_1_1_razor_lib_1_1_terminals_1_1_models_1_1_terminal_command_request}{TerminalCommandRequest}}(}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00173}00173\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ formattedCommand.Value,}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00174}00174\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ localGitState.Repo.AbsolutePath.Value)}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00175}00175\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00176}00176\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ContinueWithFunc\ =\ parsedCommand\ =>}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00177}00177\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00178}00178\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \_gitCliOutputParser.GetOriginParse(}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00179}00179\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ parsedCommand.OutputCache.ToString());}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00180}00180\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00181}00181\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \_gitCliOutputParser.DispatchSetOriginAction();}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00182}00182\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ Task.CompletedTask;}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00183}00183\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00184}00184\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \};}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00185}00185\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00186}00186\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \_terminalStateWrap.Value.TerminalMap[TerminalFacts.GENERAL\_KEY].EnqueueCommand(terminalCommandRequest);}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00187}00187\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ Task.CompletedTask;}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00188}00188\ \ \ \ \ \ \ \ \ \});}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00189}00189\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00190}00190\ }
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00191}\mbox{\hyperlink{class_luthetus_1_1_extensions_1_1_git_1_1_models_1_1_git_ide_api_a654a8cfbad1fa234968b9140ab1b9f91}{00191}}\ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_luthetus_1_1_extensions_1_1_git_1_1_models_1_1_git_ide_api_a654a8cfbad1fa234968b9140ab1b9f91}{AddEnqueue}}(\mbox{\hyperlink{namespace_luthetus_1_1_extensions_1_1_git_1_1_models_acfcc10aa7ca94ea134cc43cd40e790ab}{GitRepo}}\ repoAtTimeOfRequest)}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00192}00192\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00193}00193\ \ \ \ \ \ \ \ \ \_backgroundTaskService.Enqueue(}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00194}00194\ \ \ \ \ \ \ \ \ \ \ \ \ Key<IBackgroundTask>.NewKey(),}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00195}00195\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_luthetus_1_1_common_1_1_razor_lib_1_1_background_tasks_1_1_models_1_1_continuous_background_task_worker}{ContinuousBackgroundTaskWorker}}.\mbox{\hyperlink{class_luthetus_1_1_common_1_1_razor_lib_1_1_background_tasks_1_1_models_1_1_continuous_background_task_worker_a2bbecf18336413ee1caff9d378acc256}{GetQueueKey}}(),}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00196}00196\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}git\ add"{}},}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00197}00197\ \ \ \ \ \ \ \ \ \ \ \ \ ()\ =>}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00198}00198\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00199}00199\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ var\ localGitState\ =\ \_gitStateWrap.Value;}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00200}00200\ }
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00201}00201\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ if\ (localGitState.Repo\ is\ null\ ||\ localGitState.Repo\ !=\ repoAtTimeOfRequest)}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00202}00202\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ return\ Task.CompletedTask;}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00203}00203\ }
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00204}00204\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ var\ filesBuilder\ =\ \ new\ StringBuilder();}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00205}00205\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00206}00206\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ foreach\ (var\ gitFile\ in\ localGitState.SelectedFileList)}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00207}00207\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00208}00208\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ var\ relativePathString\ =\ gitFile.RelativePathString;}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00209}00209\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00210}00210\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ if\ (\_environmentProvider.DirectorySeparatorChar\ ==\ \textcolor{stringliteral}{'\(\backslash\)\(\backslash\)'})}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00211}00211\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00212}00212\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ The\ following\ fails\ (directory\ separator\ character):}}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00213}00213\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ git\ add\ "{}.\(\backslash\)MyApp\(\backslash\)"{}}}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00214}00214\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//}}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00215}00215\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Whereas\ the\ following\ succeeds}}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00216}00216\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ git\ add\ "{}./MyApp/"{}}}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00217}00217\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ relativePathString\ =\ relativePathString.Replace(}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00218}00218\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \_environmentProvider.DirectorySeparatorChar,}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00219}00219\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \_environmentProvider.AltDirectorySeparatorChar);}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00220}00220\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00221}00221\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00222}00222\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ filesBuilder.Append(\$\textcolor{stringliteral}{"{}\(\backslash\)"{}\{relativePathString\}\(\backslash\)"{}\ "{}});}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00223}00223\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00224}00224\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00225}00225\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ var\ terminalCommandArgs\ =\ \textcolor{stringliteral}{"{}add\ "{}}\ +\ filesBuilder.ToString();}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00226}00226\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00227}00227\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ var\ formattedCommand\ =\ \textcolor{keyword}{new}\ \mbox{\hyperlink{class_luthetus_1_1_ide_1_1_razor_lib_1_1_command_lines_1_1_models_1_1_formatted_command}{FormattedCommand}}(}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00228}00228\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ GitCliFacts.TARGET\_FILE\_NAME,}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00229}00229\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{new}\ \textcolor{keywordtype}{string}[]\ \{\ terminalCommandArgs\ \})}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00230}00230\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00231}00231\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ HACK\_ArgumentsString\ =\ terminalCommandArgs}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00232}00232\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \};}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00233}00233\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00234}00234\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ var\ terminalCommandRequest\ =\ \textcolor{keyword}{new}\ \mbox{\hyperlink{class_luthetus_1_1_ide_1_1_razor_lib_1_1_terminals_1_1_models_1_1_terminal_command_request}{TerminalCommandRequest}}(}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00235}00235\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ formattedCommand.Value,}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00236}00236\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ localGitState.Repo.AbsolutePath.Value)}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00237}00237\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00238}00238\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ContinueWithFunc\ =\ parsedCommand\ =>}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00239}00239\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00240}00240\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ StatusEnqueue();}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00241}00241\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ return\ Task.CompletedTask;}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00242}00242\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00243}00243\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \};}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00244}00244\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00245}00245\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \_terminalStateWrap.Value.TerminalMap[TerminalFacts.GENERAL\_KEY].EnqueueCommand(terminalCommandRequest);}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00246}00246\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ Task.CompletedTask;}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00247}00247\ \ \ \ \ \ \ \ \ \ \ \ \ \});}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00248}00248\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00249}00249\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00250}\mbox{\hyperlink{class_luthetus_1_1_extensions_1_1_git_1_1_models_1_1_git_ide_api_aec58cdd4101301ba687d597a5aabd538}{00250}}\ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_luthetus_1_1_extensions_1_1_git_1_1_models_1_1_git_ide_api_aec58cdd4101301ba687d597a5aabd538}{UnstageEnqueue}}(\mbox{\hyperlink{namespace_luthetus_1_1_extensions_1_1_git_1_1_models_acfcc10aa7ca94ea134cc43cd40e790ab}{GitRepo}}\ repoAtTimeOfRequest)}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00251}00251\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00252}00252\ \ \ \ \ \ \ \ \ \_backgroundTaskService.Enqueue(}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00253}00253\ \ \ \ \ \ \ \ \ \ \ \ \ Key<IBackgroundTask>.NewKey(),}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00254}00254\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_luthetus_1_1_common_1_1_razor_lib_1_1_background_tasks_1_1_models_1_1_continuous_background_task_worker}{ContinuousBackgroundTaskWorker}}.\mbox{\hyperlink{class_luthetus_1_1_common_1_1_razor_lib_1_1_background_tasks_1_1_models_1_1_continuous_background_task_worker_a2bbecf18336413ee1caff9d378acc256}{GetQueueKey}}(),}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00255}00255\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}git\ unstage"{}},}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00256}00256\ \ \ \ \ \ \ \ \ \ \ \ \ ()\ =>}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00257}00257\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00258}00258\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ var\ localGitState\ =\ \_gitStateWrap.Value;}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00259}00259\ }
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00260}00260\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ if\ (localGitState.Repo\ is\ null\ ||\ localGitState.Repo\ !=\ repoAtTimeOfRequest)}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00261}00261\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ return\ Task.CompletedTask;}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00262}00262\ }
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00263}00263\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ var\ filesBuilder\ =\ \ new\ StringBuilder();}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00264}00264\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00265}00265\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ foreach\ (var\ gitFile\ in\ localGitState.SelectedFileList)}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00266}00266\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00267}00267\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ var\ relativePathString\ =\ gitFile.RelativePathString;}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00268}00268\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00269}00269\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ if\ (\_environmentProvider.DirectorySeparatorChar\ ==\ \textcolor{stringliteral}{'\(\backslash\)\(\backslash\)'})}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00270}00270\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00271}00271\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ The\ following\ fails\ (directory\ separator\ character):}}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00272}00272\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ git\ restore\ -\/-\/staged\ "{}.\(\backslash\)MyApp\(\backslash\)"{}}}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00273}00273\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//}}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00274}00274\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Whereas\ the\ following\ succeeds}}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00275}00275\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ git\ restore\ -\/-\/staged\ "{}./MyApp/"{}}}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00276}00276\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ relativePathString\ =\ relativePathString.Replace(}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00277}00277\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \_environmentProvider.DirectorySeparatorChar,}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00278}00278\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \_environmentProvider.AltDirectorySeparatorChar);}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00279}00279\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00280}00280\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00281}00281\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ filesBuilder.Append(\$\textcolor{stringliteral}{"{}\(\backslash\)"{}\{relativePathString\}\(\backslash\)"{}\ "{}});}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00282}00282\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00283}00283\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00284}00284\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ var\ terminalCommandArgs\ =\ \textcolor{stringliteral}{"{}restore\ -\/-\/staged\ "{}}\ +\ filesBuilder.ToString();}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00285}00285\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00286}00286\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ var\ formattedCommand\ =\ \textcolor{keyword}{new}\ \mbox{\hyperlink{class_luthetus_1_1_ide_1_1_razor_lib_1_1_command_lines_1_1_models_1_1_formatted_command}{FormattedCommand}}(}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00287}00287\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ GitCliFacts.TARGET\_FILE\_NAME,}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00288}00288\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{new}\ \textcolor{keywordtype}{string}[]\ \{\ terminalCommandArgs\ \})}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00289}00289\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00290}00290\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ HACK\_ArgumentsString\ =\ terminalCommandArgs}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00291}00291\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \};}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00292}00292\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00293}00293\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ var\ terminalCommandRequest\ =\ \textcolor{keyword}{new}\ \mbox{\hyperlink{class_luthetus_1_1_ide_1_1_razor_lib_1_1_terminals_1_1_models_1_1_terminal_command_request}{TerminalCommandRequest}}(}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00294}00294\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ formattedCommand.Value,}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00295}00295\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ localGitState.Repo.AbsolutePath.Value)}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00296}00296\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00297}00297\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ContinueWithFunc\ =\ parsedCommand\ =>}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00298}00298\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00299}00299\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ StatusEnqueue();}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00300}00300\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ return\ Task.CompletedTask;}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00301}00301\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00302}00302\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \};}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00303}00303\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00304}00304\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \_terminalStateWrap.Value.TerminalMap[TerminalFacts.GENERAL\_KEY].EnqueueCommand(terminalCommandRequest);}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00305}00305\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ Task.CompletedTask;}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00306}00306\ \ \ \ \ \ \ \ \ \ \ \ \ \});}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00307}00307\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00308}00308\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00309}\mbox{\hyperlink{class_luthetus_1_1_extensions_1_1_git_1_1_models_1_1_git_ide_api_a88a41bd77e80dfb30820f3e82f8f993d}{00309}}\ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_luthetus_1_1_extensions_1_1_git_1_1_models_1_1_git_ide_api_a88a41bd77e80dfb30820f3e82f8f993d}{CommitEnqueue}}(\mbox{\hyperlink{namespace_luthetus_1_1_extensions_1_1_git_1_1_models_acfcc10aa7ca94ea134cc43cd40e790ab}{GitRepo}}\ repoAtTimeOfRequest,\ \textcolor{keywordtype}{string}\ commitSummary)}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00310}00310\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00311}00311\ \ \ \ \ \ \ \ \ \_backgroundTaskService.Enqueue(}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00312}00312\ \ \ \ \ \ \ \ \ \ \ \ \ Key<IBackgroundTask>.NewKey(),}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00313}00313\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_luthetus_1_1_common_1_1_razor_lib_1_1_background_tasks_1_1_models_1_1_continuous_background_task_worker}{ContinuousBackgroundTaskWorker}}.\mbox{\hyperlink{class_luthetus_1_1_common_1_1_razor_lib_1_1_background_tasks_1_1_models_1_1_continuous_background_task_worker_a2bbecf18336413ee1caff9d378acc256}{GetQueueKey}}(),}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00314}00314\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}git\ commit"{}},}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00315}00315\ \ \ \ \ \ \ \ \ \ \ \ \ ()\ =>}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00316}00316\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00317}00317\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ var\ localGitState\ =\ \_gitStateWrap.Value;}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00318}00318\ }
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00319}00319\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ if\ (localGitState.Repo\ is\ null\ ||\ localGitState.Repo\ !=\ repoAtTimeOfRequest)}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00320}00320\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ return\ Task.CompletedTask;}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00321}00321\ }
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00322}00322\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ var\ argumentsString\ =\ \$\textcolor{stringliteral}{"{}commit\ -\/m\ \(\backslash\)"{}\{commitSummary\}\(\backslash\)"{}"{}};}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00323}00323\ }
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00324}00324\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ var\ formattedCommand\ =\ new\ FormattedCommand(}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00325}00325\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ GitCliFacts.TARGET\_FILE\_NAME,}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00326}00326\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ new\ string[]\ \{\ argumentsString\ \})}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00327}00327\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00328}00328\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ HACK\_ArgumentsString\ =\ argumentsString}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00329}00329\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \};}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00330}00330\ }
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00331}00331\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ var\ terminalCommandRequest\ =\ \textcolor{keyword}{new}\ \mbox{\hyperlink{class_luthetus_1_1_ide_1_1_razor_lib_1_1_terminals_1_1_models_1_1_terminal_command_request}{TerminalCommandRequest}}(}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00332}00332\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ formattedCommand.Value,}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00333}00333\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ localGitState.Repo.AbsolutePath.Value)}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00334}00334\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00335}00335\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ContinueWithFunc\ =\ parsedCommand\ =>}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00336}00336\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00337}00337\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_luthetus_1_1_extensions_1_1_git_1_1_models_1_1_git_ide_api_aebc69e5672fb59432890286ec08eecd6}{StatusEnqueue}}();}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00338}00338\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00339}00339\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ NotificationHelper.DispatchInformative(}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00340}00340\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}Git:\ committed"{}},}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00341}00341\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ commitSummary,}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00342}00342\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \_commonComponentRenderers,}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00343}00343\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \_dispatcher,}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00344}00344\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ TimeSpan.FromSeconds(5));}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00345}00345\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00346}00346\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ Task.CompletedTask;}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00347}00347\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00348}00348\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \};}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00349}00349\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00350}00350\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \_terminalStateWrap.Value.TerminalMap[TerminalFacts.GENERAL\_KEY].EnqueueCommand(terminalCommandRequest);}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00351}00351\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ Task.CompletedTask;}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00352}00352\ \ \ \ \ \ \ \ \ \ \ \ \ \});}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00353}00353\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00354}00354\ }
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00355}\mbox{\hyperlink{class_luthetus_1_1_extensions_1_1_git_1_1_models_1_1_git_ide_api_a71e9a9b2e2bb040fe8ea5359c5b0dc3a}{00355}}\ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_luthetus_1_1_extensions_1_1_git_1_1_models_1_1_git_ide_api_a71e9a9b2e2bb040fe8ea5359c5b0dc3a}{BranchNewEnqueue}}(\mbox{\hyperlink{namespace_luthetus_1_1_extensions_1_1_git_1_1_models_acfcc10aa7ca94ea134cc43cd40e790ab}{GitRepo}}\ repoAtTimeOfRequest,\ \textcolor{keywordtype}{string}\ branchName)}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00356}00356\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00357}00357\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\textcolor{keywordtype}{string}.IsNullOrWhiteSpace(branchName))}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00358}00358\ \ \ \ \ \ \ \ \ \ \ \ \ NotificationHelper.DispatchError(nameof(\mbox{\hyperlink{class_luthetus_1_1_extensions_1_1_git_1_1_models_1_1_git_ide_api_a71e9a9b2e2bb040fe8ea5359c5b0dc3a}{BranchNewEnqueue}}),\ \textcolor{stringliteral}{"{}branchName\ was\ null\ or\ whitespace"{}},\ \_commonComponentRenderers,\ \_dispatcher,\ TimeSpan.FromSeconds(6));}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00359}00359\ }
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00360}00360\ \ \ \ \ \ \ \ \ \_backgroundTaskService.Enqueue(}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00361}00361\ \ \ \ \ \ \ \ \ \ \ \ \ Key<IBackgroundTask>.NewKey(),}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00362}00362\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_luthetus_1_1_common_1_1_razor_lib_1_1_background_tasks_1_1_models_1_1_continuous_background_task_worker}{ContinuousBackgroundTaskWorker}}.\mbox{\hyperlink{class_luthetus_1_1_common_1_1_razor_lib_1_1_background_tasks_1_1_models_1_1_continuous_background_task_worker_a2bbecf18336413ee1caff9d378acc256}{GetQueueKey}}(),}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00363}00363\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}git\ new\ branch"{}},}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00364}00364\ \ \ \ \ \ \ \ \ \ \ \ \ ()\ =>}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00365}00365\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00366}00366\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ var\ localGitState\ =\ \_gitStateWrap.Value;}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00367}00367\ }
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00368}00368\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ if\ (localGitState.Repo\ is\ null\ ||\ localGitState.Repo\ !=\ repoAtTimeOfRequest)}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00369}00369\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ return\ Task.CompletedTask;}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00370}00370\ }
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00371}00371\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ var\ argumentsString\ =\ \textcolor{stringliteral}{"{}checkout\ -\/b\ "{}}\ +\ branchName;}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00372}00372\ }
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00373}00373\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ var\ formattedCommand\ =\ new\ FormattedCommand(}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00374}00374\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ GitCliFacts.TARGET\_FILE\_NAME,}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00375}00375\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ new\ string[]\ \{\ argumentsString\ \})}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00376}00376\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00377}00377\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ HACK\_ArgumentsString\ =\ argumentsString}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00378}00378\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \};}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00379}00379\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00380}00380\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ var\ terminalCommandRequest\ =\ \textcolor{keyword}{new}\ \mbox{\hyperlink{class_luthetus_1_1_ide_1_1_razor_lib_1_1_terminals_1_1_models_1_1_terminal_command_request}{TerminalCommandRequest}}(}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00381}00381\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ formattedCommand.Value,}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00382}00382\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ localGitState.Repo.AbsolutePath.Value)}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00383}00383\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00384}00384\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ContinueWithFunc\ =\ parsedCommand\ =>}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00385}00385\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00386}00386\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_luthetus_1_1_extensions_1_1_git_1_1_models_1_1_git_ide_api_a649542caab0826bcee1fedf2ff557c8f}{RefreshEnqueue}}(repoAtTimeOfRequest);}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00387}00387\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ Task.CompletedTask;}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00388}00388\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00389}00389\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \};}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00390}00390\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00391}00391\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \_terminalStateWrap.Value.TerminalMap[TerminalFacts.GENERAL\_KEY].EnqueueCommand(terminalCommandRequest);}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00392}00392\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ Task.CompletedTask;}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00393}00393\ \ \ \ \ \ \ \ \ \ \ \ \ \});}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00394}00394\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00395}00395\ }
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00396}\mbox{\hyperlink{class_luthetus_1_1_extensions_1_1_git_1_1_models_1_1_git_ide_api_a418f22c689b9c9f7aefa74550b15cc3f}{00396}}\ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_luthetus_1_1_extensions_1_1_git_1_1_models_1_1_git_ide_api_a418f22c689b9c9f7aefa74550b15cc3f}{BranchGetAllEnqueue}}(\mbox{\hyperlink{namespace_luthetus_1_1_extensions_1_1_git_1_1_models_acfcc10aa7ca94ea134cc43cd40e790ab}{GitRepo}}\ repoAtTimeOfRequest)}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00397}00397\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00398}00398\ \ \ \ \ \ \ \ \ \_backgroundTaskService.Enqueue(}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00399}00399\ \ \ \ \ \ \ \ \ \ \ \ \ Key<IBackgroundTask>.NewKey(),}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00400}00400\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_luthetus_1_1_common_1_1_razor_lib_1_1_background_tasks_1_1_models_1_1_continuous_background_task_worker}{ContinuousBackgroundTaskWorker}}.\mbox{\hyperlink{class_luthetus_1_1_common_1_1_razor_lib_1_1_background_tasks_1_1_models_1_1_continuous_background_task_worker_a2bbecf18336413ee1caff9d378acc256}{GetQueueKey}}(),}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00401}00401\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}git\ branch\ -\/a"{}},}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00402}00402\ \ \ \ \ \ \ \ \ \ \ \ \ ()\ =>}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00403}00403\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00404}00404\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ var\ localGitState\ =\ \_gitStateWrap.Value;}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00405}00405\ }
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00406}00406\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ if\ (localGitState.Repo\ is\ null\ ||\ localGitState.Repo\ !=\ repoAtTimeOfRequest)}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00407}00407\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ return\ Task.CompletedTask;}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00408}00408\ }
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00409}00409\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ var\ argumentsString\ =\ \textcolor{stringliteral}{"{}branch\ -\/a"{}};}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00410}00410\ }
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00411}00411\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ var\ formattedCommand\ =\ new\ FormattedCommand(}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00412}00412\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ GitCliFacts.TARGET\_FILE\_NAME,}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00413}00413\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ new\ string[]\ \{\ argumentsString\ \})}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00414}00414\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00415}00415\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ HACK\_ArgumentsString\ =\ argumentsString,}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00416}00416\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Tag\ =\ \mbox{\hyperlink{class_luthetus_1_1_extensions_1_1_git_1_1_models_1_1_git_cli_output_parser}{GitCliOutputParser}}.\mbox{\hyperlink{class_luthetus_1_1_extensions_1_1_git_1_1_models_1_1_git_cli_output_parser_1_1_tag_constants}{TagConstants}}.BranchGetAllEnqueue,}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00417}00417\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \};}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00418}00418\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00419}00419\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ var\ terminalCommandRequest\ =\ \textcolor{keyword}{new}\ \mbox{\hyperlink{class_luthetus_1_1_ide_1_1_razor_lib_1_1_terminals_1_1_models_1_1_terminal_command_request}{TerminalCommandRequest}}(}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00420}00420\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ formattedCommand.Value,}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00421}00421\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ localGitState.Repo.AbsolutePath.Value)}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00422}00422\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00423}00423\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ContinueWithFunc\ =\ parsedCommand\ =>}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00424}00424\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00425}00425\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \_gitCliOutputParser.GetBranchListEntire(}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00426}00426\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ parsedCommand.OutputCache.ToString());}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00427}00427\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00428}00428\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \_gitCliOutputParser.DispatchSetBranchListAction();}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00429}00429\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ Task.CompletedTask;}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00430}00430\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00431}00431\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \};}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00432}00432\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00433}00433\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \_terminalStateWrap.Value.TerminalMap[TerminalFacts.GENERAL\_KEY].EnqueueCommand(terminalCommandRequest);}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00434}00434\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ Task.CompletedTask;}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00435}00435\ \ \ \ \ \ \ \ \ \ \ \ \ \});}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00436}00436\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00437}00437\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00438}\mbox{\hyperlink{class_luthetus_1_1_extensions_1_1_git_1_1_models_1_1_git_ide_api_a26276afc98fdf8c456c86ddcaa3791e9}{00438}}\ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_luthetus_1_1_extensions_1_1_git_1_1_models_1_1_git_ide_api_a26276afc98fdf8c456c86ddcaa3791e9}{BranchSetEnqueue}}(\mbox{\hyperlink{namespace_luthetus_1_1_extensions_1_1_git_1_1_models_acfcc10aa7ca94ea134cc43cd40e790ab}{GitRepo}}\ repoAtTimeOfRequest,\ \textcolor{keywordtype}{string}\ branchName)}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00439}00439\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00440}00440\ \ \ \ \ \ \ \ \ \_backgroundTaskService.Enqueue(}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00441}00441\ \ \ \ \ \ \ \ \ \ \ \ \ Key<IBackgroundTask>.NewKey(),}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00442}00442\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_luthetus_1_1_common_1_1_razor_lib_1_1_background_tasks_1_1_models_1_1_continuous_background_task_worker}{ContinuousBackgroundTaskWorker}}.\mbox{\hyperlink{class_luthetus_1_1_common_1_1_razor_lib_1_1_background_tasks_1_1_models_1_1_continuous_background_task_worker_a2bbecf18336413ee1caff9d378acc256}{GetQueueKey}}(),}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00443}00443\ \ \ \ \ \ \ \ \ \ \ \ \ \$\textcolor{stringliteral}{"{}git\ checkout\ \{branchName\}"{}},}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00444}00444\ \ \ \ \ \ \ \ \ \ \ \ \ ()\ =>}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00445}00445\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00446}00446\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ var\ localGitState\ =\ \_gitStateWrap.Value;}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00447}00447\ }
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00448}00448\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ if\ (localGitState.Repo\ is\ null\ ||\ localGitState.Repo\ !=\ repoAtTimeOfRequest)}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00449}00449\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ return\ Task.CompletedTask;}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00450}00450\ }
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00451}00451\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ var\ argumentsString\ =\ \$\textcolor{stringliteral}{"{}checkout\ \{branchName\}"{}};}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00452}00452\ }
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00453}00453\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ var\ formattedCommand\ =\ new\ FormattedCommand(}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00454}00454\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ GitCliFacts.TARGET\_FILE\_NAME,}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00455}00455\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ new\ string[]\ \{\ argumentsString\ \})}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00456}00456\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00457}00457\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ HACK\_ArgumentsString\ =\ argumentsString,}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00458}00458\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Tag\ =\ \mbox{\hyperlink{class_luthetus_1_1_extensions_1_1_git_1_1_models_1_1_git_cli_output_parser}{GitCliOutputParser}}.\mbox{\hyperlink{class_luthetus_1_1_extensions_1_1_git_1_1_models_1_1_git_cli_output_parser_1_1_tag_constants}{TagConstants}}.BranchSetEnqueue,}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00459}00459\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \};}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00460}00460\ }
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00461}00461\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ var\ terminalCommandRequest\ =\ \textcolor{keyword}{new}\ \mbox{\hyperlink{class_luthetus_1_1_ide_1_1_razor_lib_1_1_terminals_1_1_models_1_1_terminal_command_request}{TerminalCommandRequest}}(}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00462}00462\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ formattedCommand.Value,}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00463}00463\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ localGitState.Repo.AbsolutePath.Value)}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00464}00464\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00465}00465\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ContinueWithFunc\ =\ parsedCommand\ =>}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00466}00466\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00467}00467\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_luthetus_1_1_extensions_1_1_git_1_1_models_1_1_git_ide_api_a649542caab0826bcee1fedf2ff557c8f}{RefreshEnqueue}}(repoAtTimeOfRequest);}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00468}00468\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ Task.CompletedTask;}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00469}00469\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00470}00470\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \};}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00471}00471\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00472}00472\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \_terminalStateWrap.Value.TerminalMap[TerminalFacts.GENERAL\_KEY].EnqueueCommand(terminalCommandRequest);}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00473}00473\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ Task.CompletedTask;}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00474}00474\ \ \ \ \ \ \ \ \ \ \ \ \ \});}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00475}00475\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00476}00476\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00477}\mbox{\hyperlink{class_luthetus_1_1_extensions_1_1_git_1_1_models_1_1_git_ide_api_af62bb43dfb3e94c1e1525710fc31ebad}{00477}}\ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_luthetus_1_1_extensions_1_1_git_1_1_models_1_1_git_ide_api_af62bb43dfb3e94c1e1525710fc31ebad}{PushToOriginWithTrackingEnqueue}}(\mbox{\hyperlink{namespace_luthetus_1_1_extensions_1_1_git_1_1_models_acfcc10aa7ca94ea134cc43cd40e790ab}{GitRepo}}\ repoAtTimeOfRequest)}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00478}00478\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00479}00479\ \ \ \ \ \ \ \ \ \_backgroundTaskService.Enqueue(}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00480}00480\ \ \ \ \ \ \ \ \ \ \ \ \ Key<IBackgroundTask>.NewKey(),}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00481}00481\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_luthetus_1_1_common_1_1_razor_lib_1_1_background_tasks_1_1_models_1_1_continuous_background_task_worker}{ContinuousBackgroundTaskWorker}}.\mbox{\hyperlink{class_luthetus_1_1_common_1_1_razor_lib_1_1_background_tasks_1_1_models_1_1_continuous_background_task_worker_a2bbecf18336413ee1caff9d378acc256}{GetQueueKey}}(),}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00482}00482\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}git\ push\ -\/u\ origin\ \{branchName\ will\ go\ here\}"{}},}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00483}00483\ \ \ \ \ \ \ \ \ \ \ \ \ ()\ =>}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00484}00484\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00485}00485\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ var\ localGitState\ =\ \_gitStateWrap.Value;}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00486}00486\ }
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00487}00487\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ if\ (localGitState.Repo\ is\ null\ ||\ localGitState.Repo\ !=\ repoAtTimeOfRequest)}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00488}00488\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ return\ Task.CompletedTask;}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00489}00489\ }
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00490}00490\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ This\ command\ will\ push\ to\ origin,\ and\ then\ set\ the\ upstream\ variable}}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00491}00491\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ (unsure\ if\ this\ is\ the\ correct\ description)}}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00492}00492\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ var\ argumentsString\ =\ \$\textcolor{stringliteral}{"{}push\ -\/u\ origin\ \{localGitState.Branch\}"{}};}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00493}00493\ }
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00494}00494\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ var\ formattedCommand\ =\ new\ FormattedCommand(}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00495}00495\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ GitCliFacts.TARGET\_FILE\_NAME,}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00496}00496\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ new\ string[]\ \{\ argumentsString\ \})}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00497}00497\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00498}00498\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ HACK\_ArgumentsString\ =\ argumentsString,}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00499}00499\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Tag\ =\ GitCliOutputParser.TagConstants.PushToOriginWithTrackingEnqueue}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00500}00500\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \};}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00501}00501\ }
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00502}00502\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ var\ terminalCommandRequest\ =\ \textcolor{keyword}{new}\ \mbox{\hyperlink{class_luthetus_1_1_ide_1_1_razor_lib_1_1_terminals_1_1_models_1_1_terminal_command_request}{TerminalCommandRequest}}(}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00503}00503\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ formattedCommand.Value,}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00504}00504\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ localGitState.Repo.AbsolutePath.Value)}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00505}00505\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00506}00506\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ContinueWithFunc\ =\ parsedCommand\ =>}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00507}00507\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00508}00508\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_luthetus_1_1_extensions_1_1_git_1_1_models_1_1_git_ide_api_a649542caab0826bcee1fedf2ff557c8f}{RefreshEnqueue}}(repoAtTimeOfRequest);}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00509}00509\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ Task.CompletedTask;}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00510}00510\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00511}00511\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \};}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00512}00512\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00513}00513\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \_terminalStateWrap.Value.TerminalMap[TerminalFacts.GENERAL\_KEY].EnqueueCommand(terminalCommandRequest);}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00514}00514\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ Task.CompletedTask;}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00515}00515\ \ \ \ \ \ \ \ \ \ \ \ \ \});}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00516}00516\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00517}00517\ }
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00518}\mbox{\hyperlink{class_luthetus_1_1_extensions_1_1_git_1_1_models_1_1_git_ide_api_ab0ea1abd66cc5a696a44d3b1e4d2cabb}{00518}}\ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_luthetus_1_1_extensions_1_1_git_1_1_models_1_1_git_ide_api_ab0ea1abd66cc5a696a44d3b1e4d2cabb}{PullEnqueue}}(\mbox{\hyperlink{namespace_luthetus_1_1_extensions_1_1_git_1_1_models_acfcc10aa7ca94ea134cc43cd40e790ab}{GitRepo}}\ repoAtTimeOfRequest)}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00519}00519\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00520}00520\ \ \ \ \ \ \ \ \ \_backgroundTaskService.Enqueue(}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00521}00521\ \ \ \ \ \ \ \ \ \ \ \ \ Key<IBackgroundTask>.NewKey(),}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00522}00522\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_luthetus_1_1_common_1_1_razor_lib_1_1_background_tasks_1_1_models_1_1_continuous_background_task_worker}{ContinuousBackgroundTaskWorker}}.\mbox{\hyperlink{class_luthetus_1_1_common_1_1_razor_lib_1_1_background_tasks_1_1_models_1_1_continuous_background_task_worker_a2bbecf18336413ee1caff9d378acc256}{GetQueueKey}}(),}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00523}00523\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}git\ pull"{}},}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00524}00524\ \ \ \ \ \ \ \ \ \ \ \ \ ()\ =>}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00525}00525\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00526}00526\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ var\ localGitState\ =\ \_gitStateWrap.Value;}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00527}00527\ }
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00528}00528\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ if\ (localGitState.Repo\ is\ null\ ||\ localGitState.Repo\ !=\ repoAtTimeOfRequest)}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00529}00529\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ return\ Task.CompletedTask;}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00530}00530\ }
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00531}00531\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ var\ argumentsString\ =\ \$\textcolor{stringliteral}{"{}pull"{}};}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00532}00532\ }
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00533}00533\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ var\ formattedCommand\ =\ new\ FormattedCommand(}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00534}00534\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ GitCliFacts.TARGET\_FILE\_NAME,}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00535}00535\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ new\ string[]\ \{\ argumentsString\ \})}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00536}00536\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00537}00537\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ HACK\_ArgumentsString\ =\ argumentsString,}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00538}00538\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Tag\ =\ GitCliOutputParser.TagConstants.PullEnqueue}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00539}00539\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \};}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00540}00540\ }
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00541}00541\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ var\ terminalCommandRequest\ =\ \textcolor{keyword}{new}\ \mbox{\hyperlink{class_luthetus_1_1_ide_1_1_razor_lib_1_1_terminals_1_1_models_1_1_terminal_command_request}{TerminalCommandRequest}}(}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00542}00542\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ formattedCommand.Value,}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00543}00543\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ localGitState.Repo.AbsolutePath.Value)}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00544}00544\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00545}00545\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ContinueWithFunc\ =\ parsedCommand\ =>}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00546}00546\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00547}00547\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_luthetus_1_1_extensions_1_1_git_1_1_models_1_1_git_ide_api_a649542caab0826bcee1fedf2ff557c8f}{RefreshEnqueue}}(repoAtTimeOfRequest);}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00548}00548\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ Task.CompletedTask;}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00549}00549\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00550}00550\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \};}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00551}00551\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00552}00552\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \_terminalStateWrap.Value.TerminalMap[TerminalFacts.GENERAL\_KEY].EnqueueCommand(terminalCommandRequest);}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00553}00553\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ Task.CompletedTask;}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00554}00554\ \ \ \ \ \ \ \ \ \ \ \ \ \});}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00555}00555\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00556}00556\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00557}\mbox{\hyperlink{class_luthetus_1_1_extensions_1_1_git_1_1_models_1_1_git_ide_api_ace0d50de71b4baf0d9bb2c1d1bd9afcd}{00557}}\ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_luthetus_1_1_extensions_1_1_git_1_1_models_1_1_git_ide_api_ace0d50de71b4baf0d9bb2c1d1bd9afcd}{FetchEnqueue}}(\mbox{\hyperlink{namespace_luthetus_1_1_extensions_1_1_git_1_1_models_acfcc10aa7ca94ea134cc43cd40e790ab}{GitRepo}}\ repoAtTimeOfRequest)}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00558}00558\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00559}00559\ \ \ \ \ \ \ \ \ \_backgroundTaskService.Enqueue(}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00560}00560\ \ \ \ \ \ \ \ \ \ \ \ \ Key<IBackgroundTask>.NewKey(),}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00561}00561\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_luthetus_1_1_common_1_1_razor_lib_1_1_background_tasks_1_1_models_1_1_continuous_background_task_worker}{ContinuousBackgroundTaskWorker}}.\mbox{\hyperlink{class_luthetus_1_1_common_1_1_razor_lib_1_1_background_tasks_1_1_models_1_1_continuous_background_task_worker_a2bbecf18336413ee1caff9d378acc256}{GetQueueKey}}(),}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00562}00562\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}git\ fetch"{}},}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00563}00563\ \ \ \ \ \ \ \ \ \ \ \ \ ()\ =>}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00564}00564\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00565}00565\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ var\ localGitState\ =\ \_gitStateWrap.Value;}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00566}00566\ }
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00567}00567\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ if\ (localGitState.Repo\ is\ null\ ||\ localGitState.Repo\ !=\ repoAtTimeOfRequest)}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00568}00568\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ return\ Task.CompletedTask;}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00569}00569\ }
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00570}00570\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ var\ argumentsString\ =\ \$\textcolor{stringliteral}{"{}fetch"{}};}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00571}00571\ }
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00572}00572\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ var\ formattedCommand\ =\ new\ FormattedCommand(}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00573}00573\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ GitCliFacts.TARGET\_FILE\_NAME,}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00574}00574\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ new\ string[]\ \{\ argumentsString\ \})}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00575}00575\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00576}00576\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ HACK\_ArgumentsString\ =\ argumentsString,}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00577}00577\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Tag\ =\ GitCliOutputParser.TagConstants.FetchEnqueue}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00578}00578\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \};}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00579}00579\ }
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00580}00580\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ var\ terminalCommandRequest\ =\ \textcolor{keyword}{new}\ \mbox{\hyperlink{class_luthetus_1_1_ide_1_1_razor_lib_1_1_terminals_1_1_models_1_1_terminal_command_request}{TerminalCommandRequest}}(}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00581}00581\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ formattedCommand.Value,}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00582}00582\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ localGitState.Repo.AbsolutePath.Value)}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00583}00583\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00584}00584\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ContinueWithFunc\ =\ parsedCommand\ =>}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00585}00585\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00586}00586\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_luthetus_1_1_extensions_1_1_git_1_1_models_1_1_git_ide_api_a649542caab0826bcee1fedf2ff557c8f}{RefreshEnqueue}}(repoAtTimeOfRequest);}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00587}00587\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ Task.CompletedTask;}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00588}00588\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00589}00589\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \};}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00590}00590\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00591}00591\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \_terminalStateWrap.Value.TerminalMap[TerminalFacts.GENERAL\_KEY].EnqueueCommand(terminalCommandRequest);}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00592}00592\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ Task.CompletedTask;}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00593}00593\ \ \ \ \ \ \ \ \ \ \ \ \ \});}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00594}00594\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00595}00595\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00596}\mbox{\hyperlink{class_luthetus_1_1_extensions_1_1_git_1_1_models_1_1_git_ide_api_a797be9bd8b42cc3b185a41f3d41040ba}{00596}}\ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_luthetus_1_1_extensions_1_1_git_1_1_models_1_1_git_ide_api_a797be9bd8b42cc3b185a41f3d41040ba}{LogFileEnqueue}}(}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00597}00597\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespace_luthetus_1_1_extensions_1_1_git_1_1_models_acfcc10aa7ca94ea134cc43cd40e790ab}{GitRepo}}\ repoAtTimeOfRequest,}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00598}00598\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{string}\ relativePathToFile,}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00599}00599\ \ \ \ \ \ \ \ \ Func<GitCliOutputParser,\ string,\ Task>\ callback)}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00600}00600\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00601}00601\ \ \ \ \ \ \ \ \ \_backgroundTaskService.Enqueue(}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00602}00602\ \ \ \ \ \ \ \ \ \ \ \ \ Key<IBackgroundTask>.NewKey(),}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00603}00603\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_luthetus_1_1_common_1_1_razor_lib_1_1_background_tasks_1_1_models_1_1_continuous_background_task_worker}{ContinuousBackgroundTaskWorker}}.\mbox{\hyperlink{class_luthetus_1_1_common_1_1_razor_lib_1_1_background_tasks_1_1_models_1_1_continuous_background_task_worker_a2bbecf18336413ee1caff9d378acc256}{GetQueueKey}}(),}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00604}00604\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}git\ log\ file"{}},}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00605}00605\ \ \ \ \ \ \ \ \ \ \ \ \ ()\ =>}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00606}00606\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00607}00607\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ var\ localGitState\ =\ \_gitStateWrap.Value;}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00608}00608\ }
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00609}00609\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ if\ (localGitState.Repo\ is\ null\ ||\ localGitState.Repo\ !=\ repoAtTimeOfRequest)}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00610}00610\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ return\ Task.CompletedTask;}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00611}00611\ }
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00612}00612\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ var\ terminalCommandArgs\ =\ \$\textcolor{stringliteral}{"{}log\ -\/p\ \{relativePathToFile\}"{}};}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00613}00613\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ var\ formattedCommand\ =\ new\ FormattedCommand(}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00614}00614\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ GitCliFacts.TARGET\_FILE\_NAME,}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00615}00615\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ new\ string[]\ \{\ terminalCommandArgs\ \})}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00616}00616\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00617}00617\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ HACK\_ArgumentsString\ =\ terminalCommandArgs,}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00618}00618\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Tag\ =\ GitCliOutputParser.TagConstants.LogFileEnqueue}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00619}00619\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \};}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00620}00620\ }
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00621}00621\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ var\ terminalCommandRequest\ =\ \textcolor{keyword}{new}\ \mbox{\hyperlink{class_luthetus_1_1_ide_1_1_razor_lib_1_1_terminals_1_1_models_1_1_terminal_command_request}{TerminalCommandRequest}}(}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00622}00622\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ formattedCommand.Value,}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00623}00623\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ localGitState.Repo.AbsolutePath.Value)}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00624}00624\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00625}00625\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ContinueWithFunc\ =\ parsedCommand\ =>}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00626}00626\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00627}00627\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ callback.Invoke(}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00628}00628\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \_gitCliOutputParser,}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00629}00629\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ parsedCommand.OutputCache.ToString());}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00630}00630\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00631}00631\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \};}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00632}00632\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00633}00633\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \_terminalStateWrap.Value.TerminalMap[TerminalFacts.GENERAL\_KEY].EnqueueCommand(terminalCommandRequest);}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00634}00634\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ Task.CompletedTask;}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00635}00635\ \ \ \ \ \ \ \ \ \ \ \ \ \});}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00636}00636\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00637}00637\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00638}\mbox{\hyperlink{class_luthetus_1_1_extensions_1_1_git_1_1_models_1_1_git_ide_api_a8e602b5bae59e997072993729eb2d629}{00638}}\ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_luthetus_1_1_extensions_1_1_git_1_1_models_1_1_git_ide_api_a8e602b5bae59e997072993729eb2d629}{ShowFileEnqueue}}(}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00639}00639\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespace_luthetus_1_1_extensions_1_1_git_1_1_models_acfcc10aa7ca94ea134cc43cd40e790ab}{GitRepo}}\ repoAtTimeOfRequest,}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00640}00640\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{string}\ relativePathToFile,}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00641}00641\ \ \ \ \ \ \ \ \ Func<GitCliOutputParser,\ string,\ Task>\ callback)}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00642}00642\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00643}00643\ \ \ \ \ \ \ \ \ \_backgroundTaskService.Enqueue(}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00644}00644\ \ \ \ \ \ \ \ \ \ \ \ \ Key<IBackgroundTask>.NewKey(),}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00645}00645\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_luthetus_1_1_common_1_1_razor_lib_1_1_background_tasks_1_1_models_1_1_continuous_background_task_worker}{ContinuousBackgroundTaskWorker}}.\mbox{\hyperlink{class_luthetus_1_1_common_1_1_razor_lib_1_1_background_tasks_1_1_models_1_1_continuous_background_task_worker_a2bbecf18336413ee1caff9d378acc256}{GetQueueKey}}(),}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00646}00646\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}git\ show\ file"{}},}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00647}00647\ \ \ \ \ \ \ \ \ \ \ \ \ ()\ =>}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00648}00648\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00649}00649\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ var\ localGitState\ =\ \_gitStateWrap.Value;}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00650}00650\ }
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00651}00651\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ if\ (localGitState.Repo\ is\ null\ ||\ localGitState.Repo\ !=\ repoAtTimeOfRequest)}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00652}00652\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ return\ Task.CompletedTask;}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00653}00653\ }
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00654}00654\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Example\ output:}}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00655}00655\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*}}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00656}00656\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ PS\ C:\(\backslash\)Users\(\backslash\)hunte\(\backslash\)Repos\(\backslash\)Demos\(\backslash\)BlazorApp4NetCoreDbg>\ git\ log\ BlazorApp4NetCoreDbg/Pages/FetchData.razor}}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00657}00657\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ commit\ 87c2893b1006defc36770c166ab13fdbc6b7f959}}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00658}00658\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Author:\ Luthetus\ <45454132+huntercfreeman@users.noreply.github.com>}}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00659}00659\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Date:\ \ \ Fri\ May\ 3\ 16:15:17\ 2024\ -\/0400}}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00660}00660\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00661}00661\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Abc123\ 3}}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00662}00662\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00663}00663\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00664}00664\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ var\ skipTextLength\ =\ \textcolor{stringliteral}{"{}commit\ "{}}.Length;}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00665}00665\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ var\ takeTextLength\ =\ \textcolor{stringliteral}{"{}87c2893b1006defc36770c166ab13fdbc6b7f959"{}}.Length;}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00666}00666\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00667}00667\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ var\ logTerminalCommandArgs\ =\ \$\textcolor{stringliteral}{"{}log\ -\/p\ \{relativePathToFile\}"{}};}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00668}00668\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ var\ formattedCommand\ =\ new\ FormattedCommand(}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00669}00669\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ GitCliFacts.TARGET\_FILE\_NAME,}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00670}00670\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ new\ string[]\ \{\ logTerminalCommandArgs\ \})}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00671}00671\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00672}00672\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ HACK\_ArgumentsString\ =\ logTerminalCommandArgs,}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00673}00673\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Tag\ =\ GitCliOutputParser.TagConstants.LogFileEnqueue}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00674}00674\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \};}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00675}00675\ }
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00676}00676\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ var\ logTerminalCommandRequest\ =\ \textcolor{keyword}{new}\ \mbox{\hyperlink{class_luthetus_1_1_ide_1_1_razor_lib_1_1_terminals_1_1_models_1_1_terminal_command_request}{TerminalCommandRequest}}(}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00677}00677\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ formattedCommand.Value,}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00678}00678\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ localGitState.Repo.AbsolutePath.Value)}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00679}00679\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00680}00680\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ContinueWithFunc\ =\ gitHashParsedCommand\ =>}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00681}00681\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00682}00682\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ var\ hash\ =\ gitHashParsedCommand.OutputCache}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00683}00683\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ .ToString()}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00684}00684\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ .Substring(skipTextLength,\ takeTextLength)}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00685}00685\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ .Trim();}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00686}00686\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00687}00687\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ var\ showTerminalCommandRequest\ =\ \textcolor{keyword}{new}\ \mbox{\hyperlink{class_luthetus_1_1_ide_1_1_razor_lib_1_1_terminals_1_1_models_1_1_terminal_command_request}{TerminalCommandRequest}}(}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00688}00688\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \$\textcolor{stringliteral}{"{}git\ show\ \{hash\}:\{relativePathToFile\}"{}},}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00689}00689\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ localGitState.Repo.AbsolutePath.Value)}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00690}00690\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00691}00691\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ContinueWithFunc\ =\ parsedCommand\ =>}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00692}00692\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00693}00693\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ var\ output\ =\ parsedCommand.OutputCache.ToString();}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00694}00694\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00695}00695\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (output.StartsWith(\textcolor{stringliteral}{"{}ï»¿"{}}))}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00696}00696\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ output\ =\ output[\textcolor{stringliteral}{"{}ï»¿"{}}.Length..];}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00697}00697\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00698}00698\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ callback.Invoke(}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00699}00699\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \_gitCliOutputParser,}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00700}00700\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ output);}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00701}00701\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00702}00702\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \};}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00703}00703\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00704}00704\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \_terminalStateWrap.Value.TerminalMap[TerminalFacts.GENERAL\_KEY].EnqueueCommand(showTerminalCommandRequest);}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00705}00705\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ Task.CompletedTask;}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00706}00706\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00707}00707\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \};}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00708}00708\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00709}00709\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \_terminalStateWrap.Value.TerminalMap[TerminalFacts.GENERAL\_KEY].EnqueueCommand(logTerminalCommandRequest);}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00710}00710\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ Task.CompletedTask;}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00711}00711\ \ \ \ \ \ \ \ \ \ \ \ \ \});}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00712}00712\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00713}00713\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00714}00714\ \ \ \ \ \textcolor{keyword}{private}\ List<int>\ GetPlusMarkedLineIndexList(\textcolor{keywordtype}{string}\ gitLogDashPOutput)}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00715}00715\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00716}00716\ \ \ \ \ \ \ \ \ var\ stringWalker\ =\ \textcolor{keyword}{new}\ \mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_utility_1_1_string_walker}{StringWalker}}(\textcolor{keyword}{new}\ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_lexers_1_1_models_a26a1b63ad28ec7955b30bc6c91571eca}{ResourceUri}}(\textcolor{stringliteral}{"{}/getPlusMarkedLineIndexList.txt"{}}),\ gitLogDashPOutput);}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00717}00717\ \ \ \ \ \ \ \ \ var\ linesReadCount\ =\ 0;}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00718}00718\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00719}00719\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ The\ hunk\ header\ looks\ like:}}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00720}00720\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ "{}@@\ -\/1,6\ +1,23\ @@"{}}}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00721}00721\ \ \ \ \ \ \ \ \ var\ atAtReadCount\ =\ 0;}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00722}00722\ \ \ \ \ \ \ \ \ var\ oldAndNewHaveEqualFirstLine\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00723}00723\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}?\ sourceLineNumber\ =\ \textcolor{keyword}{null};}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00724}00724\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00725}00725\ \ \ \ \ \ \ \ \ var\ isFirstCharacterOnLine\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00726}00726\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00727}00727\ \ \ \ \ \ \ \ \ var\ plusMarkedLineIndexList\ =\ \textcolor{keyword}{new}\ List<int>();}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00728}00728\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00729}00729\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{while}\ (!stringWalker.IsEof)}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00730}00730\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00731}00731\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (WhitespaceFacts.LINE\_ENDING\_CHARACTER\_LIST.Contains(stringWalker.CurrentCharacter))}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00732}00732\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00733}00733\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (stringWalker.CurrentCharacter\ ==\ \textcolor{charliteral}{'\(\backslash\)r'}\ \&\&\ stringWalker.NextCharacter\ ==\ \textcolor{charliteral}{'\(\backslash\)n'})}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00734}00734\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \_\ =\ stringWalker.ReadCharacter();}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00735}00735\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00736}00736\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ linesReadCount++;}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00737}00737\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ isFirstCharacterOnLine\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00738}00738\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00739}00739\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (sourceLineNumber\ is\ not\ \textcolor{keyword}{null})}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00740}00740\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ sourceLineNumber++;}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00741}00741\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00742}00742\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ (linesReadCount\ ==\ 4\ \&\&\ sourceLineNumber\ is\ \textcolor{keyword}{null})}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00743}00743\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00744}00744\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Naively\ going\ to\ assume\ that\ the\ 5th\ line\ is\ always\ the\ start\ of\ the\ hunk\ header...\ for\ now}}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00745}00745\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (stringWalker.CurrentCharacter\ ==\ \textcolor{charliteral}{'@'}\ \&\&\ stringWalker.NextCharacter\ ==\ \textcolor{charliteral}{'@'})}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00746}00746\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00747}00747\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ atAtReadCount++;}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00748}00748\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00749}00749\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (atAtReadCount\ ==\ 2)}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00750}00750\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00751}00751\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (WhitespaceFacts.LINE\_ENDING\_CHARACTER\_LIST.Contains(stringWalker.PeekCharacter(2)))}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00752}00752\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00753}00753\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ If\ immediately\ after\ the\ hunk\ header\ there\ is\ a\ newline\ character,}}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00754}00754\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ then\ the\ old\ and\ new\ text\ are\ NOT\ equal\ with\ respects\ to\ the\ first\ line.}}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00755}00755\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00756}00756\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00757}00757\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00758}00758\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ If\ after\ the\ hunk\ header\ there\ is\ NOT\ a\ newline\ character,}}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00759}00759\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ then\ the\ old\ and\ new\ text\ are\ equal\ with\ respects\ to\ the\ first\ line.}}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00760}00760\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//}}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00761}00761\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ (Does\ modificaton\ imply\ deletion\ of\ old,\ and\ insertion\ of\ new?)}}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00762}00762\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ oldAndNewHaveEqualFirstLine\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00763}00763\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00764}00764\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00765}00765\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ sourceLineNumber\ =\ 0;}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00766}00766\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00767}00767\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00768}00768\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00769}00769\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ (sourceLineNumber\ is\ not\ \textcolor{keyword}{null})}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00770}00770\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00771}00771\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (isFirstCharacterOnLine\ \&\&\ stringWalker.CurrentCharacter\ ==\ \textcolor{charliteral}{'+'})}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00772}00772\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ plusMarkedLineIndexList.Add(sourceLineNumber.Value\ -\/\ 1);}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00773}00773\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00774}00774\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00775}00775\ \ \ \ \ \ \ \ \ \ \ \ \ \_\ =\ stringWalker.ReadCharacter();}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00776}00776\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00777}00777\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00778}00778\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ plusMarkedLineIndexList;}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00779}00779\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00780}00780\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00781}\mbox{\hyperlink{class_luthetus_1_1_extensions_1_1_git_1_1_models_1_1_git_ide_api_a42264c1741bc2a754cf02ff61f7bdc45}{00781}}\ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_luthetus_1_1_extensions_1_1_git_1_1_models_1_1_git_ide_api_a42264c1741bc2a754cf02ff61f7bdc45}{DiffFileEnqueue}}(}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00782}00782\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespace_luthetus_1_1_extensions_1_1_git_1_1_models_acfcc10aa7ca94ea134cc43cd40e790ab}{GitRepo}}\ repoAtTimeOfRequest,}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00783}00783\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{string}\ relativePathToFile,}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00784}00784\ \ \ \ \ \ \ \ \ Func<\mbox{\hyperlink{class_luthetus_1_1_extensions_1_1_git_1_1_models_1_1_git_cli_output_parser}{GitCliOutputParser}},\ \textcolor{keywordtype}{string},\ List<int>,\ Task>\ callback)}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00785}00785\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00786}00786\ \ \ \ \ \ \ \ \ \_backgroundTaskService.Enqueue(}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00787}00787\ \ \ \ \ \ \ \ \ \ \ \ \ Key<IBackgroundTask>.NewKey(),}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00788}00788\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_luthetus_1_1_common_1_1_razor_lib_1_1_background_tasks_1_1_models_1_1_continuous_background_task_worker}{ContinuousBackgroundTaskWorker}}.\mbox{\hyperlink{class_luthetus_1_1_common_1_1_razor_lib_1_1_background_tasks_1_1_models_1_1_continuous_background_task_worker_a2bbecf18336413ee1caff9d378acc256}{GetQueueKey}}(),}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00789}00789\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}git\ diff\ file"{}},}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00790}00790\ \ \ \ \ \ \ \ \ \ \ \ \ ()\ =>}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00791}00791\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00792}00792\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ var\ localGitState\ =\ \_gitStateWrap.Value;}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00793}00793\ }
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00794}00794\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ if\ (localGitState.Repo\ is\ null\ ||\ localGitState.Repo\ !=\ repoAtTimeOfRequest)}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00795}00795\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ return\ Task.CompletedTask;}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00796}00796\ }
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00797}00797\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ var\ terminalCommandArgs\ =\ \$\textcolor{stringliteral}{"{}diff\ -\/p\ \{relativePathToFile\}"{}};}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00798}00798\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ var\ formattedCommand\ =\ new\ FormattedCommand(}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00799}00799\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ GitCliFacts.TARGET\_FILE\_NAME,}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00800}00800\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ new\ string[]\ \{\ terminalCommandArgs\ \})}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00801}00801\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00802}00802\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ HACK\_ArgumentsString\ =\ terminalCommandArgs,}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00803}00803\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Tag\ =\ GitCliOutputParser.TagConstants.LogFileEnqueue}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00804}00804\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \};}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00805}00805\ }
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00806}00806\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ var\ terminalCommandRequest\ =\ \textcolor{keyword}{new}\ \mbox{\hyperlink{class_luthetus_1_1_ide_1_1_razor_lib_1_1_terminals_1_1_models_1_1_terminal_command_request}{TerminalCommandRequest}}(}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00807}00807\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ formattedCommand.Value,}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00808}00808\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ localGitState.Repo.AbsolutePath.Value)}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00809}00809\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00810}00810\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ContinueWithFunc\ =\ parsedCommand\ =>}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00811}00811\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00812}00812\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ var\ plusMarkedLineIndexList\ =\ GetPlusMarkedLineIndexList(parsedCommand.OutputCache.ToString());}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00813}00813\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00814}00814\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ callback.Invoke(}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00815}00815\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \_gitCliOutputParser,}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00816}00816\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ parsedCommand.OutputCache.ToString(),}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00817}00817\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ plusMarkedLineIndexList);}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00818}00818\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00819}00819\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \};}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00820}00820\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00821}00821\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \_terminalStateWrap.Value.TerminalMap[TerminalFacts.GENERAL\_KEY].EnqueueCommand(terminalCommandRequest);}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00822}00822\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ Task.CompletedTask;}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00823}00823\ \ \ \ \ \ \ \ \ \ \ \ \ \});}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00824}00824\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_git_ide_api_8cs_source_l00825}00825\ \}}
+
+\end{DoxyCode}

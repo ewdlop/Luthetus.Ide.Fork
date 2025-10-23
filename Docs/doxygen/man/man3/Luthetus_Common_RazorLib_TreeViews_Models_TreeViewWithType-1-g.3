@@ -1,0 +1,149 @@
+.TH "Luthetus.Common.RazorLib.TreeViews.Models.TreeViewWithType< T >" 3 "Version 1.0.0" "Luthetus.Ide" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+Luthetus.Common.RazorLib.TreeViews.Models.TreeViewWithType< T > \- Implement the abstract class \fBTreeViewWithType<T>\fP in order to make a TreeView\&.
+.br
+
+.br
+ An abstract class is used because a good deal of customization is required on a per TreeView basis depending on what data type one displays in that TreeView\&.  
+
+.SH SYNOPSIS
+.br
+.PP
+.PP
+Inherits \fBLuthetus\&.Common\&.RazorLib\&.TreeViews\&.Models\&.TreeViewNoType\fP\&.
+.PP
+Inherited by \fBLuthetus\&.Common\&.RazorLib\&.TreeViews\&.Models\&.TreeViewAdhoc\fP, \fBLuthetus\&.Common\&.RazorLib\&.TreeViews\&.Models\&.Utils\&.TreeViewGroup\fP, \fBLuthetus\&.Common\&.RazorLib\&.TreeViews\&.Models\&.Utils\&.TreeViewMarkupString\fP, \fBLuthetus\&.Common\&.RazorLib\&.TreeViews\&.Models\&.Utils\&.TreeViewSpinner\fP, \fBLuthetus\&.Common\&.RazorLib\&.WatchWindows\&.Models\&.TreeViewEnumerable\fP, \fBLuthetus\&.Common\&.RazorLib\&.WatchWindows\&.Models\&.TreeViewException\fP, \fBLuthetus\&.Common\&.RazorLib\&.WatchWindows\&.Models\&.TreeViewFields\fP, \fBLuthetus\&.Common\&.RazorLib\&.WatchWindows\&.Models\&.TreeViewProperties\fP, \fBLuthetus\&.Common\&.RazorLib\&.WatchWindows\&.Models\&.TreeViewReflection\fP, \fBLuthetus\&.Common\&.RazorLib\&.WatchWindows\&.Models\&.TreeViewText\fP, \fBLuthetus\&.Common\&.Tests\&.Basis\&.TreeViews\&.Models\&.Internals\&.RouteTreeView\fP, \fBLuthetus\&.Common\&.Tests\&.Basis\&.TreeViews\&.Models\&.Internals\&.WebsiteServerTreeView\fP, \fBLuthetus\&.Extensions\&.DotNet\&.CSharpProjects\&.Models\&.TreeViewCSharpProjectDependencies\fP, \fBLuthetus\&.Extensions\&.DotNet\&.CSharpProjects\&.Models\&.TreeViewCSharpProjectNugetPackageReference\fP, \fBLuthetus\&.Extensions\&.DotNet\&.CSharpProjects\&.Models\&.TreeViewCSharpProjectNugetPackageReferences\fP, \fBLuthetus\&.Extensions\&.DotNet\&.CSharpProjects\&.Models\&.TreeViewCSharpProjectToProjectReference\fP, \fBLuthetus\&.Extensions\&.DotNet\&.CSharpProjects\&.Models\&.TreeViewCSharpProjectToProjectReferences\fP, \fBLuthetus\&.Extensions\&.DotNet\&.CompilerServices\&.Models\&.TreeViewCompilerService\fP, \fBLuthetus\&.Extensions\&.DotNet\&.DotNetSolutions\&.Models\&.TreeViewSolution\fP, \fBLuthetus\&.Extensions\&.DotNet\&.DotNetSolutions\&.Models\&.TreeViewSolutionFolder\fP, \fBLuthetus\&.Extensions\&.DotNet\&.Namespaces\&.Models\&.TreeViewNamespacePath\fP, \fBLuthetus\&.Extensions\&.DotNet\&.Outputs\&.Models\&.TreeViewDiagnosticLine\fP, \fBLuthetus\&.Extensions\&.DotNet\&.TestExplorers\&.Models\&.TreeViewProjectTestModel\fP, \fBLuthetus\&.Extensions\&.DotNet\&.TestExplorers\&.Models\&.TreeViewStringFragment\fP, \fBLuthetus\&.Extensions\&.Git\&.Models\&.TreeViewGitFile\fP, \fBLuthetus\&.Extensions\&.Git\&.Models\&.TreeViewGitFileGroup\fP, \fBLuthetus\&.Ide\&.RazorLib\&.CodeSearches\&.Models\&.TreeViewCodeSearchTextSpan\fP, \fBLuthetus\&.Ide\&.RazorLib\&.FileSystems\&.Models\&.TreeViewAbsolutePath\fP, \fBLuthetus\&.TextEditor\&.RazorLib\&.FindAlls\&.Models\&.TreeViewFindAllGroup\fP, and \fBLuthetus\&.TextEditor\&.RazorLib\&.FindAlls\&.Models\&.TreeViewFindAllTextSpan\fP\&.
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBTreeViewWithType\fP (T item, bool isExpandable, bool isExpanded)"
+.br
+.in -1c
+
+Public Member Functions inherited from \fBLuthetus\&.Common\&.RazorLib\&.TreeViews\&.Models\&.TreeViewNoType\fP
+.in +1c
+.ti -1c
+.RI "\fBTreeViewRenderer\fP \fBGetTreeViewRenderer\fP ()"
+.br
+.ti -1c
+.RI "Task \fBLoadChildListAsync\fP ()"
+.br
+.ti -1c
+.RI "virtual void \fBLinkChildren\fP (List< \fBTreeViewNoType\fP > previousChildList, List< \fBTreeViewNoType\fP > nextChildList)"
+.br
+.RI "Sets foreach child: child\&.Parent = this; As well it sets the child\&.IndexAmongSiblings, and maintains expanded state\&. "
+.ti -1c
+.RI "virtual void \fBRemoveRelatedFilesFromParent\fP (List< \fBTreeViewNoType\fP > siblingsAndSelfTreeViews)"
+.br
+.RI "RemoveRelatedFilesFromParent is used for showing codebehinds such that a file on the filesystem can be displayed as having children in the TreeView\&.
+.br
+
+.br
+ In the case of a directory loading its children\&. After the directory loads all its children it will loop through the children invoking RemoveRelatedFilesFromParent on each of the children\&.
+.br
+
+.br
+ For example: if a directory has the children { 'Component\&.razor', 'Component\&.razor\&.cs' } then 'Component\&.razor' will remove 'Component\&.razor\&.cs' from the parent directories children and mark itself as expandable as it saw a related file in its parent\&. "
+.in -1c
+.SS "Properties"
+
+.in +1c
+.ti -1c
+.RI "T \fBItem\fP\fR [get]\fP"
+.br
+.RI "Do not allow \fBItem\fP to be null\&.
+.br
+
+.br
+ If one wishes to have a 'null' concept as a TreeViewNode, then make a datatype that acts as a psuedo null\&. "
+.ti -1c
+.RI "override object \fBUntypedItem\fP\fR [get]\fP"
+.br
+.ti -1c
+.RI "override Type \fBItemType\fP\fR [get]\fP"
+.br
+.in -1c
+
+Properties inherited from \fBLuthetus\&.Common\&.RazorLib\&.TreeViews\&.Models\&.TreeViewNoType\fP
+.in +1c
+.ti -1c
+.RI "object \fBUntypedItem\fP\fR [get]\fP"
+.br
+.ti -1c
+.RI "Type \fBItemType\fP\fR [get]\fP"
+.br
+.ti -1c
+.RI "\fBTreeViewNoType\fP? \fBParent\fP\fR [get, set]\fP"
+.br
+.ti -1c
+.RI "List< \fBTreeViewNoType\fP > \fBChildList\fP = new()\fR [get, set]\fP"
+.br
+.ti -1c
+.RI "int \fBIndexAmongSiblings\fP\fR [get, set]\fP"
+.br
+.RI "IndexAmongSiblings refers to the index which this \fBTreeViewNoType\fP is found at within their Parent's ChildList "
+.ti -1c
+.RI "bool \fBIsRoot\fP\fR [get, set]\fP"
+.br
+.ti -1c
+.RI "bool \fBIsHidden\fP\fR [get, set]\fP"
+.br
+.ti -1c
+.RI "bool \fBIsExpandable\fP\fR [get, set]\fP"
+.br
+.ti -1c
+.RI "bool \fBIsExpanded\fP\fR [get, set]\fP"
+.br
+.ti -1c
+.RI "\fBKey\fP< \fBTreeViewChanged\fP > \fBTreeViewChangedKey\fP = \fBKey\fP<\fBTreeViewChanged\fP>\&.NewKey()\fR [get, set]\fP"
+.br
+.ti -1c
+.RI "Key< \fBTreeViewNoType\fP > \fBKey\fP = Key<\fBTreeViewNoType\fP>\&.NewKey()\fR [get, set]\fP"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+Implement the abstract class \fBTreeViewWithType<T>\fP in order to make a TreeView\&.
+.br
+
+.br
+ An abstract class is used because a good deal of customization is required on a per TreeView basis depending on what data type one displays in that TreeView\&. 
+.PP
+\fBType Constraints\fP
+.TP
+\fIT\fP : \fInotnull\fP
+.PP
+Definition at line \fB8\fP of file \fBTreeViewWithType\&.cs\fP\&.
+.SH "Member Function Documentation"
+.PP 
+.SS "Luthetus\&.Common\&.RazorLib\&.TreeViews\&.Models\&.TreeViewWithType< T >\&.TreeViewWithType (T item, bool isExpandable, bool isExpanded)"
+
+.PP
+Definition at line \fB10\fP of file \fBTreeViewWithType\&.cs\fP\&.
+.SH "Property Documentation"
+.PP 
+.SS "T Luthetus\&.Common\&.RazorLib\&.TreeViews\&.Models\&.TreeViewWithType< T >\&.Item\fR [get]\fP"
+
+.PP
+Do not allow \fBItem\fP to be null\&.
+.br
+
+.br
+ If one wishes to have a 'null' concept as a TreeViewNode, then make a datatype that acts as a psuedo null\&. 
+.PP
+Definition at line \fB22\fP of file \fBTreeViewWithType\&.cs\fP\&.
+.SS "override Type Luthetus\&.Common\&.RazorLib\&.TreeViews\&.Models\&.TreeViewWithType< T >\&.ItemType\fR [get]\fP"
+
+.PP
+Definition at line \fB24\fP of file \fBTreeViewWithType\&.cs\fP\&.
+.SS "override object Luthetus\&.Common\&.RazorLib\&.TreeViews\&.Models\&.TreeViewWithType< T >\&.UntypedItem\fR [get]\fP"
+
+.PP
+Definition at line \fB23\fP of file \fBTreeViewWithType\&.cs\fP\&.
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for Luthetus\&.Ide from the source code\&.

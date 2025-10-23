@@ -1,0 +1,6 @@
+var class_luthetus_1_1_extensions_1_1_dot_net_1_1_c_sharp_projects_1_1_displays_1_1_project_template_display =
+[
+    [ "OnProjectTemplateSelectedEventCallback", "class_luthetus_1_1_extensions_1_1_dot_net_1_1_c_sharp_projects_1_1_displays_1_1_project_template_display.html#a2a313fd5c90b6180fd6523cb1bb6d5ea", null ],
+    [ "ProjectTemplate", "class_luthetus_1_1_extensions_1_1_dot_net_1_1_c_sharp_projects_1_1_displays_1_1_project_template_display.html#a1bb4efb7b05da638ebb040f4452d0c74", null ],
+    [ "ShortNameOfSelectedProjectTemplate", "class_luthetus_1_1_extensions_1_1_dot_net_1_1_c_sharp_projects_1_1_displays_1_1_project_template_display.html#a0f3df3643a9f4550edc8431bfa3fbba6", null ]
+];

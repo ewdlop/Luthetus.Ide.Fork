@@ -1,0 +1,7 @@
+var class_luthetus_1_1_common_1_1_tests_1_1_basis_1_1_reflectives_1_1_models_1_1_reflective_parameter_tests_1_1_sample_complex_type =
+[
+    [ "SampleComplexType", "class_luthetus_1_1_common_1_1_tests_1_1_basis_1_1_reflectives_1_1_models_1_1_reflective_parameter_tests_1_1_sample_complex_type.html#af9957aeec66b71fb5653a7d09a14a63b", null ],
+    [ "DisplayName", "class_luthetus_1_1_common_1_1_tests_1_1_basis_1_1_reflectives_1_1_models_1_1_reflective_parameter_tests_1_1_sample_complex_type.html#a319a123a439f70a406b2a87118826591", null ],
+    [ "FirstName", "class_luthetus_1_1_common_1_1_tests_1_1_basis_1_1_reflectives_1_1_models_1_1_reflective_parameter_tests_1_1_sample_complex_type.html#aea76e35394d29a7eb8f69be727d3a0a5", null ],
+    [ "LastName", "class_luthetus_1_1_common_1_1_tests_1_1_basis_1_1_reflectives_1_1_models_1_1_reflective_parameter_tests_1_1_sample_complex_type.html#a01173d2b53e4afe8275927d6853fdc8b", null ]
+];

@@ -1,0 +1,103 @@
+\doxysection{Luthetus.\+Common.\+Razor\+Lib.\+Reactives.\+Models.\+Throttle\+Optimized\texorpdfstring{$<$}{<} TArgs \texorpdfstring{$>$}{>} Class Template Reference}
+\hypertarget{class_luthetus_1_1_common_1_1_razor_lib_1_1_reactives_1_1_models_1_1_throttle_optimized-1-g}{}\label{class_luthetus_1_1_common_1_1_razor_lib_1_1_reactives_1_1_models_1_1_throttle_optimized-1-g}\index{Luthetus.Common.RazorLib.Reactives.Models.ThrottleOptimized$<$ TArgs $>$@{Luthetus.Common.RazorLib.Reactives.Models.ThrottleOptimized$<$ TArgs $>$}}
+
+
+Sometimes when using the \doxylink{class_luthetus_1_1_common_1_1_razor_lib_1_1_reactives_1_1_models_1_1_throttle}{Throttle}, one is just re-\/using the same Func.  
+
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_luthetus_1_1_common_1_1_razor_lib_1_1_reactives_1_1_models_1_1_throttle_optimized-1-g_a7dd5a4e90b6c6be102d36a7febf1bdcc}{Throttle\+Optimized}} (Time\+Span throttle\+Time\+Span, Func$<$ TArgs, Cancellation\+Token, Task $>$ work\+Item)
+\item 
+void \mbox{\hyperlink{class_luthetus_1_1_common_1_1_razor_lib_1_1_reactives_1_1_models_1_1_throttle_optimized-1-g_af3fb0c11e976fa6b0782460b97e094a4}{Run}} (TArgs args)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+Task \mbox{\hyperlink{class_luthetus_1_1_common_1_1_razor_lib_1_1_reactives_1_1_models_1_1_throttle_optimized-1-g_a33cdb6dd905fd0a351448487b98e47ca}{\+\_\+work\+Item\+Task}} = Task.\+Completed\+Task
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Properties}
+\begin{DoxyCompactItemize}
+\item 
+Time\+Span \mbox{\hyperlink{class_luthetus_1_1_common_1_1_razor_lib_1_1_reactives_1_1_models_1_1_throttle_optimized-1-g_a2bc947c6968b700782c65612d8457767}{Throttle\+Time\+Span}}\hspace{0.3cm}{\ttfamily  \mbox{[}get\mbox{]}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Sometimes when using the \doxylink{class_luthetus_1_1_common_1_1_razor_lib_1_1_reactives_1_1_models_1_1_throttle}{Throttle}, one is just re-\/using the same Func. 
+
+The current implementation of \doxylink{class_luthetus_1_1_common_1_1_razor_lib_1_1_reactives_1_1_models_1_1_throttle}{Throttle} allows one to \textquotesingle{}Run\textquotesingle{} various Func(s) all through the same throttle.
+
+And this has its uses. But, if you only want to run 1 Func each \textquotesingle{}Run\textquotesingle{} invocation, why re-\/allocate a Func object and closure the variables? \texorpdfstring{$\vert$}{|} Followup\+: one can use a conditional branch within the singular Func to replicate this logic. Add a property to the TArgs that is a bool, enum, or etc... and then if or switch on it.
+
+So, this verson will take in the constructor, the Func to \textquotesingle{}Run\textquotesingle{}.
+
+Then, if any closure is necessary, use the generic argument to this type to define the args.
+
+Preferably, have the args be a struct, and then a pretty sizable optimization (relative to garbage collection CPU usage and memory) is expected.
+
+Side note\+: why does \doxylink{class_luthetus_1_1_common_1_1_razor_lib_1_1_reactives_1_1_models_1_1_throttle}{Throttle} use a Stack for the work items, just to take the top work item, then clear the stack within a lock? \texorpdfstring{$\vert$}{|} Isn\textquotesingle{}t it equivalent to just set a field from within a lock which is simply a \textquotesingle{}Func$<$\+Cancellation\+Token, Task$>$\textquotesingle{} and avoid the stack entirely? 
+
+Definition at line \mbox{\hyperlink{_throttle_optimized_8cs_source_l00036}{36}} of file \mbox{\hyperlink{_throttle_optimized_8cs_source}{Throttle\+Optimized.\+cs}}.
+
+
+
+\label{doc-func-members}
+\Hypertarget{class_luthetus_1_1_common_1_1_razor_lib_1_1_reactives_1_1_models_1_1_throttle_optimized-1-g_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_luthetus_1_1_common_1_1_razor_lib_1_1_reactives_1_1_models_1_1_throttle_optimized-1-g_af3fb0c11e976fa6b0782460b97e094a4}\index{Luthetus.Common.RazorLib.Reactives.Models.ThrottleOptimized$<$ TArgs $>$@{Luthetus.Common.RazorLib.Reactives.Models.ThrottleOptimized$<$ TArgs $>$}!Run@{Run}}
+\index{Run@{Run}!Luthetus.Common.RazorLib.Reactives.Models.ThrottleOptimized$<$ TArgs $>$@{Luthetus.Common.RazorLib.Reactives.Models.ThrottleOptimized$<$ TArgs $>$}}
+\doxysubsubsection{\texorpdfstring{Run()}{Run()}}
+{\footnotesize\ttfamily \label{class_luthetus_1_1_common_1_1_razor_lib_1_1_reactives_1_1_models_1_1_throttle_optimized-1-g_af3fb0c11e976fa6b0782460b97e094a4} 
+void Luthetus.\+Common.\+Razor\+Lib.\+Reactives.\+Models.\+Throttle\+Optimized$<$ TArgs $>$.Run (\begin{DoxyParamCaption}\item[{TArgs}]{args}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{_throttle_optimized_8cs_source_l00074}{74}} of file \mbox{\hyperlink{_throttle_optimized_8cs_source}{Throttle\+Optimized.\+cs}}.
+
+\Hypertarget{class_luthetus_1_1_common_1_1_razor_lib_1_1_reactives_1_1_models_1_1_throttle_optimized-1-g_a7dd5a4e90b6c6be102d36a7febf1bdcc}\index{Luthetus.Common.RazorLib.Reactives.Models.ThrottleOptimized$<$ TArgs $>$@{Luthetus.Common.RazorLib.Reactives.Models.ThrottleOptimized$<$ TArgs $>$}!ThrottleOptimized@{ThrottleOptimized}}
+\index{ThrottleOptimized@{ThrottleOptimized}!Luthetus.Common.RazorLib.Reactives.Models.ThrottleOptimized$<$ TArgs $>$@{Luthetus.Common.RazorLib.Reactives.Models.ThrottleOptimized$<$ TArgs $>$}}
+\doxysubsubsection{\texorpdfstring{ThrottleOptimized()}{ThrottleOptimized()}}
+{\footnotesize\ttfamily \label{class_luthetus_1_1_common_1_1_razor_lib_1_1_reactives_1_1_models_1_1_throttle_optimized-1-g_a7dd5a4e90b6c6be102d36a7febf1bdcc} 
+Luthetus.\+Common.\+Razor\+Lib.\+Reactives.\+Models.\+Throttle\+Optimized$<$ TArgs $>$.Throttle\+Optimized (\begin{DoxyParamCaption}\item[{Time\+Span}]{throttle\+Time\+Span}{, }\item[{Func$<$ TArgs, Cancellation\+Token, Task $>$}]{work\+Item}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{_throttle_optimized_8cs_source_l00041}{41}} of file \mbox{\hyperlink{_throttle_optimized_8cs_source}{Throttle\+Optimized.\+cs}}.
+
+
+
+\label{doc-variable-members}
+\Hypertarget{class_luthetus_1_1_common_1_1_razor_lib_1_1_reactives_1_1_models_1_1_throttle_optimized-1-g_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{class_luthetus_1_1_common_1_1_razor_lib_1_1_reactives_1_1_models_1_1_throttle_optimized-1-g_a33cdb6dd905fd0a351448487b98e47ca}\index{Luthetus.Common.RazorLib.Reactives.Models.ThrottleOptimized$<$ TArgs $>$@{Luthetus.Common.RazorLib.Reactives.Models.ThrottleOptimized$<$ TArgs $>$}!\_workItemTask@{\_workItemTask}}
+\index{\_workItemTask@{\_workItemTask}!Luthetus.Common.RazorLib.Reactives.Models.ThrottleOptimized$<$ TArgs $>$@{Luthetus.Common.RazorLib.Reactives.Models.ThrottleOptimized$<$ TArgs $>$}}
+\doxysubsubsection{\texorpdfstring{\_workItemTask}{\_workItemTask}}
+{\footnotesize\ttfamily \label{class_luthetus_1_1_common_1_1_razor_lib_1_1_reactives_1_1_models_1_1_throttle_optimized-1-g_a33cdb6dd905fd0a351448487b98e47ca} 
+Task Luthetus.\+Common.\+Razor\+Lib.\+Reactives.\+Models.\+Throttle\+Optimized$<$ TArgs $>$.\+\_\+work\+Item\+Task = Task.\+Completed\+Task}
+
+
+
+Definition at line \mbox{\hyperlink{_throttle_optimized_8cs_source_l00070}{70}} of file \mbox{\hyperlink{_throttle_optimized_8cs_source}{Throttle\+Optimized.\+cs}}.
+
+
+
+\label{doc-property-members}
+\Hypertarget{class_luthetus_1_1_common_1_1_razor_lib_1_1_reactives_1_1_models_1_1_throttle_optimized-1-g_doc-property-members}
+\doxysubsection{Property Documentation}
+\Hypertarget{class_luthetus_1_1_common_1_1_razor_lib_1_1_reactives_1_1_models_1_1_throttle_optimized-1-g_a2bc947c6968b700782c65612d8457767}\index{Luthetus.Common.RazorLib.Reactives.Models.ThrottleOptimized$<$ TArgs $>$@{Luthetus.Common.RazorLib.Reactives.Models.ThrottleOptimized$<$ TArgs $>$}!ThrottleTimeSpan@{ThrottleTimeSpan}}
+\index{ThrottleTimeSpan@{ThrottleTimeSpan}!Luthetus.Common.RazorLib.Reactives.Models.ThrottleOptimized$<$ TArgs $>$@{Luthetus.Common.RazorLib.Reactives.Models.ThrottleOptimized$<$ TArgs $>$}}
+\doxysubsubsection{\texorpdfstring{ThrottleTimeSpan}{ThrottleTimeSpan}}
+{\footnotesize\ttfamily \label{class_luthetus_1_1_common_1_1_razor_lib_1_1_reactives_1_1_models_1_1_throttle_optimized-1-g_a2bc947c6968b700782c65612d8457767} 
+Time\+Span Luthetus.\+Common.\+Razor\+Lib.\+Reactives.\+Models.\+Throttle\+Optimized$<$ TArgs $>$.Throttle\+Time\+Span\hspace{0.3cm}{\ttfamily [get]}}
+
+
+
+Definition at line \mbox{\hyperlink{_throttle_optimized_8cs_source_l00072}{72}} of file \mbox{\hyperlink{_throttle_optimized_8cs_source}{Throttle\+Optimized.\+cs}}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Source/\+Lib/\+Common/\+Reactives/\+Models/\mbox{\hyperlink{_throttle_optimized_8cs}{Throttle\+Optimized.\+cs}}\end{DoxyCompactItemize}

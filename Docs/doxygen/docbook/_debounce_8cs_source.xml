@@ -1,0 +1,170 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="__debounce_8cs_source" xml:lang="en-US">
+<title>Debounce.cs</title>
+<indexterm><primary>Source/Lib/Common/Reactives/Models/Debounce.cs</primary></indexterm>
+Go to the documentation of this file.<programlisting linenumbering="unnumbered"><anchor xml:id="__debounce_8cs_source_1l00001"/><link linkend="_namespace_luthetus_1_1_common_1_1_razor_lib_1_1_reactives_1_1_models">00001</link> <emphasis role="keyword">namespace&#32;</emphasis><link linkend="_namespace_luthetus_1_1_common_1_1_razor_lib_1_1_reactives_1_1_models">Luthetus.Common.RazorLib.Reactives.Models</link>;
+<anchor xml:id="__debounce_8cs_source_1l00002"/>00002 
+<anchor xml:id="__debounce_8cs_source_1l00014"/><link linkend="_class_luthetus_1_1_common_1_1_razor_lib_1_1_reactives_1_1_models_1_1_debounce-1-g">00014</link> <emphasis role="keyword">public</emphasis>&#32;<emphasis role="keyword">class&#32;</emphasis><link linkend="_class_luthetus_1_1_common_1_1_razor_lib_1_1_reactives_1_1_models_1_1_debounce-1-g_1ab1096129e3cfd0fc1f3a321fa663e4e9">Debounce</link>&lt;TArgs&gt;
+<anchor xml:id="__debounce_8cs_source_1l00015"/>00015 {
+<anchor xml:id="__debounce_8cs_source_1l00016"/>00016 
+<anchor xml:id="__debounce_8cs_source_1l00017"/>00017 <emphasis role="comment">/*</emphasis>
+<anchor xml:id="__debounce_8cs_source_1l00018"/>00018 <emphasis role="comment"></emphasis>
+<anchor xml:id="__debounce_8cs_source_1l00019"/>00019 <emphasis role="comment">jjjjjjj</emphasis>
+<anchor xml:id="__debounce_8cs_source_1l00020"/>00020 <emphasis role="comment"></emphasis>
+<anchor xml:id="__debounce_8cs_source_1l00021"/>00021 <emphasis role="comment">j&#32;-&gt;&#32;Task.Delay(DebounceTimeSpan)</emphasis>
+<anchor xml:id="__debounce_8cs_source_1l00022"/>00022 <emphasis role="comment"></emphasis>
+<anchor xml:id="__debounce_8cs_source_1l00023"/>00023 <emphasis role="comment">j&#32;</emphasis>
+<anchor xml:id="__debounce_8cs_source_1l00024"/>00024 <emphasis role="comment"></emphasis>
+<anchor xml:id="__debounce_8cs_source_1l00025"/>00025 <emphasis role="comment">CancellationToken&#32;share&#32;between</emphasis>
+<anchor xml:id="__debounce_8cs_source_1l00026"/>00026 <emphasis role="comment">&#32;&#32;&#32;&#32;&apos;j&#32;-&gt;&#32;Task.Delay(DebounceTimeSpan)&apos;</emphasis>
+<anchor xml:id="__debounce_8cs_source_1l00027"/>00027 <emphasis role="comment">&#32;&#32;&#32;&#32;&apos;taskStartWorkItem&apos;</emphasis>
+<anchor xml:id="__debounce_8cs_source_1l00028"/>00028 <emphasis role="comment">&#32;&#32;&#32;&#32;</emphasis>
+<anchor xml:id="__debounce_8cs_source_1l00029"/>00029 <emphasis role="comment">j&#32;-&gt;</emphasis>
+<anchor xml:id="__debounce_8cs_source_1l00030"/>00030 <emphasis role="comment">&#32;&#32;&#32;&#32;Task.Delay(DebounceTimeSpan,&#32;cancellationToken)&#32;-&gt;</emphasis>
+<anchor xml:id="__debounce_8cs_source_1l00031"/>00031 <emphasis role="comment">&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;Task.Run();</emphasis>
+<anchor xml:id="__debounce_8cs_source_1l00032"/>00032 <emphasis role="comment"></emphasis>
+<anchor xml:id="__debounce_8cs_source_1l00033"/>00033 <emphasis role="comment">no</emphasis>
+<anchor xml:id="__debounce_8cs_source_1l00034"/>00034 <emphasis role="comment"></emphasis>
+<anchor xml:id="__debounce_8cs_source_1l00035"/>00035 <emphasis role="comment">j&#32;-&gt;</emphasis>
+<anchor xml:id="__debounce_8cs_source_1l00036"/>00036 <emphasis role="comment">&#32;&#32;&#32;&#32;Task.Run(Task.Delay(DebounceTimeSpan,&#32;cancellationToken));&#32;-&gt;</emphasis>
+<anchor xml:id="__debounce_8cs_source_1l00037"/>00037 <emphasis role="comment">&#32;&#32;&#32;&#32;//&#32;if&#32;Task.Run&#32;is&#32;given&#32;the&#32;cancellationToken&#32;it&#32;will&#32;throw&#32;an&#32;exception&#32;upon&#32;cancellation</emphasis>
+<anchor xml:id="__debounce_8cs_source_1l00038"/>00038 <emphasis role="comment">&#32;&#32;&#32;&#32;//&#32;the&#32;user&#32;probably&#32;doesn&apos;t&#32;want&#32;this&#32;information&#32;so&#32;I&#32;won&apos;t&#32;put&#32;it&#32;on&#32;the&#32;Task.Run&#32;itself.</emphasis>
+<anchor xml:id="__debounce_8cs_source_1l00039"/>00039 <emphasis role="comment">&#32;&#32;&#32;&#32;//&#32;Otherwise&#32;every&#32;invocation&#32;would&#32;require&#32;me&#32;to&#32;start&#32;a&#32;task.</emphasis>
+<anchor xml:id="__debounce_8cs_source_1l00040"/>00040 <emphasis role="comment">&#32;&#32;&#32;&#32;//</emphasis>
+<anchor xml:id="__debounce_8cs_source_1l00041"/>00041 <emphasis role="comment">&#32;&#32;&#32;&#32;//&#32;Speaking&#32;of&#32;which,&#32;I&#32;need&#32;to&#32;re-use&#32;the&#32;&quot;intent&#32;to&#32;start&quot;&#32;task&#32;rather&#32;than&#32;stopping</emphasis>
+<anchor xml:id="__debounce_8cs_source_1l00042"/>00042 <emphasis role="comment">&#32;&#32;&#32;&#32;//&#32;it&#32;and&#32;starting&#32;a&#32;new&#32;task.</emphasis>
+<anchor xml:id="__debounce_8cs_source_1l00043"/>00043 <emphasis role="comment">&#32;&#32;&#32;&#32;//</emphasis>
+<anchor xml:id="__debounce_8cs_source_1l00044"/>00044 <emphasis role="comment">&#32;&#32;&#32;&#32;//&#32;I&#32;presume&#32;this&#32;would&#32;be&#32;a&#32;massive&#32;improvement&#32;in&#32;all&#32;regards</emphasis>
+<anchor xml:id="__debounce_8cs_source_1l00045"/>00045 <emphasis role="comment">&#32;&#32;&#32;&#32;//&#32;considering&#32;how&#32;often&#32;the&#32;debounce&#32;might&#32;fire.</emphasis>
+<anchor xml:id="__debounce_8cs_source_1l00046"/>00046 <emphasis role="comment">&#32;&#32;&#32;&#32;</emphasis>
+<anchor xml:id="__debounce_8cs_source_1l00047"/>00047 <emphasis role="comment">j&#32;-&gt;</emphasis>
+<anchor xml:id="__debounce_8cs_source_1l00048"/>00048 <emphasis role="comment">&#32;&#32;&#32;&#32;Step&#32;Cancel:</emphasis>
+<anchor xml:id="__debounce_8cs_source_1l00049"/>00049 <emphasis role="comment">&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;CancellationTokenSource.Cancel();</emphasis>
+<anchor xml:id="__debounce_8cs_source_1l00050"/>00050 <emphasis role="comment">&#32;&#32;&#32;&#32;if&#32;(intentToRun.IsCompleted)</emphasis>
+<anchor xml:id="__debounce_8cs_source_1l00051"/>00051 <emphasis role="comment">&#32;&#32;&#32;&#32;{</emphasis>
+<anchor xml:id="__debounce_8cs_source_1l00052"/>00052 <emphasis role="comment">&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;//&#32;Begin&#32;a&#32;new&#32;intentToRun</emphasis>
+<anchor xml:id="__debounce_8cs_source_1l00053"/>00053 <emphasis role="comment">&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;var&#32;intentToRun&#32;=&#32;Task.Run(await&#32;()&#32;=&gt;</emphasis>
+<anchor xml:id="__debounce_8cs_source_1l00054"/>00054 <emphasis role="comment">&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;{</emphasis>
+<anchor xml:id="__debounce_8cs_source_1l00055"/>00055 <emphasis role="comment">&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;Task.Delay(DebounceTimeSpan,&#32;cancellationToken)</emphasis>
+<anchor xml:id="__debounce_8cs_source_1l00056"/>00056 <emphasis role="comment">&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;});</emphasis>
+<anchor xml:id="__debounce_8cs_source_1l00057"/>00057 <emphasis role="comment">&#32;&#32;&#32;&#32;}</emphasis>
+<anchor xml:id="__debounce_8cs_source_1l00058"/>00058 <emphasis role="comment">&#32;&#32;&#32;&#32;else</emphasis>
+<anchor xml:id="__debounce_8cs_source_1l00059"/>00059 <emphasis role="comment">&#32;&#32;&#32;&#32;{</emphasis>
+<anchor xml:id="__debounce_8cs_source_1l00060"/>00060 <emphasis role="comment">&#32;&#32;&#32;&#32;}</emphasis>
+<anchor xml:id="__debounce_8cs_source_1l00061"/>00061 <emphasis role="comment">&#32;&#32;&#32;&#32;Step&#32;Reuse:</emphasis>
+<anchor xml:id="__debounce_8cs_source_1l00062"/>00062 <emphasis role="comment">&#32;&#32;&#32;&#32;</emphasis>
+<anchor xml:id="__debounce_8cs_source_1l00063"/>00063 <emphasis role="comment">No</emphasis>
+<anchor xml:id="__debounce_8cs_source_1l00064"/>00064 <emphasis role="comment"></emphasis>
+<anchor xml:id="__debounce_8cs_source_1l00065"/>00065 <emphasis role="comment">TimerSpan?</emphasis>
+<anchor xml:id="__debounce_8cs_source_1l00066"/>00066 <emphasis role="comment"></emphasis>
+<anchor xml:id="__debounce_8cs_source_1l00067"/>00067 <emphasis role="comment">Is&#32;there&#32;API&#32;to&#32;re-use&#32;the&#32;same&#32;&apos;CancellationTokenSource&apos;&#32;after&#32;cancelling?</emphasis>
+<anchor xml:id="__debounce_8cs_source_1l00068"/>00068 <emphasis role="comment"></emphasis>
+<anchor xml:id="__debounce_8cs_source_1l00069"/>00069 <emphasis role="comment">Every&#32;second,&#32;check&#32;the&#32;timespan&#32;of&#32;the&#32;most&#32;recent&#32;event.</emphasis>
+<anchor xml:id="__debounce_8cs_source_1l00070"/>00070 <emphasis role="comment">If&#32;mostRecentEvent&#32;-&#32;CurrentTimeSpan&#32;&gt;&#32;Delay&#32;=&gt;&#32;start&#32;work&#32;item</emphasis>
+<anchor xml:id="__debounce_8cs_source_1l00071"/>00071 <emphasis role="comment"></emphasis>
+<anchor xml:id="__debounce_8cs_source_1l00072"/>00072 <emphasis role="comment">j&#32;-&gt;</emphasis>
+<anchor xml:id="__debounce_8cs_source_1l00073"/>00073 <emphasis role="comment">&#32;&#32;&#32;&#32;if&#32;(intentToRun.IsCompleted)</emphasis>
+<anchor xml:id="__debounce_8cs_source_1l00074"/>00074 <emphasis role="comment">&#32;&#32;&#32;&#32;{</emphasis>
+<anchor xml:id="__debounce_8cs_source_1l00075"/>00075 <emphasis role="comment">&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;lock&#32;(eventLock)</emphasis>
+<anchor xml:id="__debounce_8cs_source_1l00076"/>00076 <emphasis role="comment">&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;{</emphasis>
+<anchor xml:id="__debounce_8cs_source_1l00077"/>00077 <emphasis role="comment">&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;_eventTimeSpan&#32;=&#32;DateTime.UtcNow;</emphasis>
+<anchor xml:id="__debounce_8cs_source_1l00078"/>00078 <emphasis role="comment">&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;}</emphasis>
+<anchor xml:id="__debounce_8cs_source_1l00079"/>00079 <emphasis role="comment">&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;</emphasis>
+<anchor xml:id="__debounce_8cs_source_1l00080"/>00080 <emphasis role="comment">&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;//&#32;Begin&#32;a&#32;new&#32;intentToRun</emphasis>
+<anchor xml:id="__debounce_8cs_source_1l00081"/>00081 <emphasis role="comment">&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;IntentToRun&#32;=&#32;Task.Run(async&#32;()&#32;=&gt;</emphasis>
+<anchor xml:id="__debounce_8cs_source_1l00082"/>00082 <emphasis role="comment">&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;{</emphasis>
+<anchor xml:id="__debounce_8cs_source_1l00083"/>00083 <emphasis role="comment">&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;//&#32;Constructor&#32;takes&#32;&apos;CancellationToken&apos;&#32;so&#32;the&#32;outside&#32;and&#32;tell&#32;it&#32;to&#32;stop</emphasis>
+<anchor xml:id="__debounce_8cs_source_1l00084"/>00084 <emphasis role="comment">&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;while&#32;(!CancellationToken.IsCancellationRequested)</emphasis>
+<anchor xml:id="__debounce_8cs_source_1l00085"/>00085 <emphasis role="comment">&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;{</emphasis>
+<anchor xml:id="__debounce_8cs_source_1l00086"/>00086 <emphasis role="comment">&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;await&#32;Task.Delay(DebounceTimeSpan);</emphasis>
+<anchor xml:id="__debounce_8cs_source_1l00087"/>00087 <emphasis role="comment">&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;</emphasis>
+<anchor xml:id="__debounce_8cs_source_1l00088"/>00088 <emphasis role="comment">&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;if&#32;(_eventTimeSpan&#32;-&#32;DateTime.UtcNow&#32;&gt;&#32;DebounceTimeSpan)</emphasis>
+<anchor xml:id="__debounce_8cs_source_1l00089"/>00089 <emphasis role="comment">&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;break;</emphasis>
+<anchor xml:id="__debounce_8cs_source_1l00090"/>00090 <emphasis role="comment">&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;}</emphasis>
+<anchor xml:id="__debounce_8cs_source_1l00091"/>00091 <emphasis role="comment">&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;</emphasis>
+<anchor xml:id="__debounce_8cs_source_1l00092"/>00092 <emphasis role="comment">&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;if&#32;(CancellationToken.IsCancellationRequested)</emphasis>
+<anchor xml:id="__debounce_8cs_source_1l00093"/>00093 <emphasis role="comment">&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;return;</emphasis>
+<anchor xml:id="__debounce_8cs_source_1l00094"/>00094 <emphasis role="comment">&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;</emphasis>
+<anchor xml:id="__debounce_8cs_source_1l00095"/>00095 <emphasis role="comment">&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;//&#32;Await&#32;the&#32;previous&#32;workItem</emphasis>
+<anchor xml:id="__debounce_8cs_source_1l00096"/>00096 <emphasis role="comment">&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;await&#32;WorkItem;</emphasis>
+<anchor xml:id="__debounce_8cs_source_1l00097"/>00097 <emphasis role="comment">&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;</emphasis>
+<anchor xml:id="__debounce_8cs_source_1l00098"/>00098 <emphasis role="comment">&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;WorkItem&#32;=&#32;workItemFunc.Invoke();</emphasis>
+<anchor xml:id="__debounce_8cs_source_1l00099"/>00099 <emphasis role="comment">&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;await&#32;WorkItem;</emphasis>
+<anchor xml:id="__debounce_8cs_source_1l00100"/>00100 <emphasis role="comment">&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;});</emphasis>
+<anchor xml:id="__debounce_8cs_source_1l00101"/>00101 <emphasis role="comment">&#32;&#32;&#32;&#32;}</emphasis>
+<anchor xml:id="__debounce_8cs_source_1l00102"/>00102 <emphasis role="comment">&#32;&#32;&#32;&#32;else</emphasis>
+<anchor xml:id="__debounce_8cs_source_1l00103"/>00103 <emphasis role="comment">&#32;&#32;&#32;&#32;{</emphasis>
+<anchor xml:id="__debounce_8cs_source_1l00104"/>00104 <emphasis role="comment">&#32;&#32;&#32;&#32;}</emphasis>
+<anchor xml:id="__debounce_8cs_source_1l00105"/>00105 <emphasis role="comment">&#32;&#32;&#32;&#32;Step&#32;Reuse:</emphasis>
+<anchor xml:id="__debounce_8cs_source_1l00106"/>00106 <emphasis role="comment"></emphasis>
+<anchor xml:id="__debounce_8cs_source_1l00107"/>00107 <emphasis role="comment">*/</emphasis>
+<anchor xml:id="__debounce_8cs_source_1l00108"/>00108 
+<anchor xml:id="__debounce_8cs_source_1l00109"/>00109 &#32;&#32;&#32;&#32;<emphasis role="keyword">private</emphasis>&#32;readonly&#32;<emphasis role="keywordtype">object</emphasis>&#32;_lockWorkItemArgs&#32;=&#32;<emphasis role="keyword">new</emphasis>();
+<anchor xml:id="__debounce_8cs_source_1l00110"/>00110 &#32;&#32;&#32;&#32;<emphasis role="keyword">private</emphasis>&#32;readonly&#32;Func&lt;TArgs,&#32;CancellationToken,&#32;Task&gt;&#32;_workItem;
+<anchor xml:id="__debounce_8cs_source_1l00111"/>00111 
+<anchor xml:id="__debounce_8cs_source_1l00116"/><link linkend="_class_luthetus_1_1_common_1_1_razor_lib_1_1_reactives_1_1_models_1_1_debounce-1-g_1ab1096129e3cfd0fc1f3a321fa663e4e9">00116</link> &#32;&#32;&#32;&#32;<emphasis role="keyword">public</emphasis>&#32;<link linkend="_class_luthetus_1_1_common_1_1_razor_lib_1_1_reactives_1_1_models_1_1_debounce-1-g_1ab1096129e3cfd0fc1f3a321fa663e4e9">Debounce</link>(
+<anchor xml:id="__debounce_8cs_source_1l00117"/>00117 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;TimeSpan&#32;debounceTimeSpan,
+<anchor xml:id="__debounce_8cs_source_1l00118"/>00118 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<link linkend="_class_luthetus_1_1_common_1_1_razor_lib_1_1_reactives_1_1_models_1_1_debounce-1-g_1a39168bace598f084d14f852a940d33c4">CancellationToken</link>&#32;cancellationToken,
+<anchor xml:id="__debounce_8cs_source_1l00119"/>00119 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;Func&lt;TArgs,&#32;CancellationToken,&#32;Task&gt;&#32;workItem)
+<anchor xml:id="__debounce_8cs_source_1l00120"/>00120 &#32;&#32;&#32;&#32;{
+<anchor xml:id="__debounce_8cs_source_1l00121"/>00121 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<link linkend="_class_luthetus_1_1_common_1_1_razor_lib_1_1_reactives_1_1_models_1_1_debounce-1-g_1afee338d84dca1127eefcdd4b83e34921">DebounceTimeSpan</link>&#32;=&#32;debounceTimeSpan;
+<anchor xml:id="__debounce_8cs_source_1l00122"/>00122 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<link linkend="_class_luthetus_1_1_common_1_1_razor_lib_1_1_reactives_1_1_models_1_1_debounce-1-g_1a39168bace598f084d14f852a940d33c4">CancellationToken</link>&#32;=&#32;cancellationToken;
+<anchor xml:id="__debounce_8cs_source_1l00123"/>00123 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;_workItem&#32;=&#32;workItem;
+<anchor xml:id="__debounce_8cs_source_1l00124"/>00124 &#32;&#32;&#32;&#32;}
+<anchor xml:id="__debounce_8cs_source_1l00125"/>00125 &#32;&#32;&#32;&#32;
+<anchor xml:id="__debounce_8cs_source_1l00126"/>00126 &#32;&#32;&#32;&#32;<emphasis role="keyword">private</emphasis>&#32;TArgs&#32;_args;
+<anchor xml:id="__debounce_8cs_source_1l00127"/>00127 &#32;&#32;&#32;&#32;<emphasis role="keyword">private</emphasis>&#32;DateTime&#32;_runDateTime;
+<anchor xml:id="__debounce_8cs_source_1l00128"/>00128 &#32;&#32;&#32;&#32;
+<anchor xml:id="__debounce_8cs_source_1l00148"/>00148 &#32;&#32;&#32;&#32;<emphasis role="keyword">private</emphasis>&#32;<emphasis role="keywordtype">bool</emphasis>&#32;_intentToRun;
+<anchor xml:id="__debounce_8cs_source_1l00149"/>00149 
+<anchor xml:id="__debounce_8cs_source_1l00150"/><link linkend="_class_luthetus_1_1_common_1_1_razor_lib_1_1_reactives_1_1_models_1_1_debounce-1-g_1aca97b57abbac35ded86cb3c3661ef196">00150</link> &#32;&#32;&#32;&#32;<emphasis role="keyword">public</emphasis>&#32;Task&#32;<link linkend="_class_luthetus_1_1_common_1_1_razor_lib_1_1_reactives_1_1_models_1_1_debounce-1-g_1aca97b57abbac35ded86cb3c3661ef196">_workItemTask</link>&#32;=&#32;Task.CompletedTask;
+<anchor xml:id="__debounce_8cs_source_1l00151"/>00151 
+<anchor xml:id="__debounce_8cs_source_1l00152"/><link linkend="_class_luthetus_1_1_common_1_1_razor_lib_1_1_reactives_1_1_models_1_1_debounce-1-g_1afee338d84dca1127eefcdd4b83e34921">00152</link> &#32;&#32;&#32;&#32;<emphasis role="keyword">public</emphasis>&#32;TimeSpan&#32;<link linkend="_class_luthetus_1_1_common_1_1_razor_lib_1_1_reactives_1_1_models_1_1_debounce-1-g_1afee338d84dca1127eefcdd4b83e34921">DebounceTimeSpan</link>&#32;{&#32;<emphasis role="keyword">get</emphasis>;&#32;}
+<anchor xml:id="__debounce_8cs_source_1l00153"/><link linkend="_class_luthetus_1_1_common_1_1_razor_lib_1_1_reactives_1_1_models_1_1_debounce-1-g_1a39168bace598f084d14f852a940d33c4">00153</link> &#32;&#32;&#32;&#32;<emphasis role="keyword">public</emphasis>&#32;<link linkend="_class_luthetus_1_1_common_1_1_razor_lib_1_1_reactives_1_1_models_1_1_debounce-1-g_1a39168bace598f084d14f852a940d33c4">CancellationToken</link>&#32;<link linkend="_class_luthetus_1_1_common_1_1_razor_lib_1_1_reactives_1_1_models_1_1_debounce-1-g_1a39168bace598f084d14f852a940d33c4">CancellationToken</link>&#32;{&#32;<emphasis role="keyword">get</emphasis>;&#32;}
+<anchor xml:id="__debounce_8cs_source_1l00154"/>00154 &#32;&#32;&#32;&#32;
+<anchor xml:id="__debounce_8cs_source_1l00155"/><link linkend="_class_luthetus_1_1_common_1_1_razor_lib_1_1_reactives_1_1_models_1_1_debounce-1-g_1a1edfade73cfad9d6d3bddf3af0e718f6">00155</link> &#32;&#32;&#32;&#32;<emphasis role="keyword">public</emphasis>&#32;<emphasis role="keywordtype">void</emphasis>&#32;<link linkend="_class_luthetus_1_1_common_1_1_razor_lib_1_1_reactives_1_1_models_1_1_debounce-1-g_1a1edfade73cfad9d6d3bddf3af0e718f6">Run</link>(TArgs&#32;args)
+<anchor xml:id="__debounce_8cs_source_1l00156"/>00156 &#32;&#32;&#32;&#32;{
+<anchor xml:id="__debounce_8cs_source_1l00157"/>00157 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;lock&#32;(_lockWorkItemArgs)
+<anchor xml:id="__debounce_8cs_source_1l00158"/>00158 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;{
+<anchor xml:id="__debounce_8cs_source_1l00159"/>00159 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;_args&#32;=&#32;args;
+<anchor xml:id="__debounce_8cs_source_1l00160"/>00160 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;_runDateTime&#32;=&#32;DateTime.UtcNow;
+<anchor xml:id="__debounce_8cs_source_1l00161"/>00161 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">if</emphasis>&#32;(_intentToRun)
+<anchor xml:id="__debounce_8cs_source_1l00162"/>00162 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>;
+<anchor xml:id="__debounce_8cs_source_1l00163"/>00163 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;
+<anchor xml:id="__debounce_8cs_source_1l00164"/>00164 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;_intentToRun&#32;=&#32;<emphasis role="keyword">true</emphasis>;
+<anchor xml:id="__debounce_8cs_source_1l00165"/>00165 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;}
+<anchor xml:id="__debounce_8cs_source_1l00166"/>00166 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;
+<anchor xml:id="__debounce_8cs_source_1l00167"/>00167 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;var&#32;previousTask&#32;=&#32;<link linkend="_class_luthetus_1_1_common_1_1_razor_lib_1_1_reactives_1_1_models_1_1_debounce-1-g_1aca97b57abbac35ded86cb3c3661ef196">_workItemTask</link>;
+<anchor xml:id="__debounce_8cs_source_1l00168"/>00168 
+<anchor xml:id="__debounce_8cs_source_1l00169"/>00169 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<link linkend="_class_luthetus_1_1_common_1_1_razor_lib_1_1_reactives_1_1_models_1_1_debounce-1-g_1aca97b57abbac35ded86cb3c3661ef196">_workItemTask</link>&#32;=&#32;Task.Run(async&#32;()&#32;=&gt;
+<anchor xml:id="__debounce_8cs_source_1l00170"/>00170 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;{
+<anchor xml:id="__debounce_8cs_source_1l00171"/>00171 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;Await&#32;the&#32;previous&#32;work&#32;item&#32;task.</emphasis>
+<anchor xml:id="__debounce_8cs_source_1l00172"/>00172 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;await&#32;previousTask.ConfigureAwait(<emphasis role="keyword">false</emphasis>);
+<anchor xml:id="__debounce_8cs_source_1l00173"/>00173 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;
+<anchor xml:id="__debounce_8cs_source_1l00174"/>00174 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;TArgs&#32;argsCapture&#32;=&#32;<emphasis role="keywordflow">default</emphasis>;
+<anchor xml:id="__debounce_8cs_source_1l00175"/>00175 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;DateTime&#32;runDateTimeCapture;
+<anchor xml:id="__debounce_8cs_source_1l00176"/>00176 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;
+<anchor xml:id="__debounce_8cs_source_1l00177"/>00177 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">while</emphasis>&#32;(!<link linkend="_class_luthetus_1_1_common_1_1_razor_lib_1_1_reactives_1_1_models_1_1_debounce-1-g_1a39168bace598f084d14f852a940d33c4">CancellationToken</link>.IsCancellationRequested)
+<anchor xml:id="__debounce_8cs_source_1l00178"/>00178 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;{
+<anchor xml:id="__debounce_8cs_source_1l00179"/>00179 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;await&#32;Task.Delay(<link linkend="_class_luthetus_1_1_common_1_1_razor_lib_1_1_reactives_1_1_models_1_1_debounce-1-g_1afee338d84dca1127eefcdd4b83e34921">DebounceTimeSpan</link>);
+<anchor xml:id="__debounce_8cs_source_1l00180"/>00180 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;
+<anchor xml:id="__debounce_8cs_source_1l00181"/>00181 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;lock&#32;(_lockWorkItemArgs)
+<anchor xml:id="__debounce_8cs_source_1l00182"/>00182 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;{
+<anchor xml:id="__debounce_8cs_source_1l00183"/>00183 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;argsCapture&#32;=&#32;_args;
+<anchor xml:id="__debounce_8cs_source_1l00184"/>00184 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;runDateTimeCapture&#32;=&#32;_runDateTime;
+<anchor xml:id="__debounce_8cs_source_1l00185"/>00185 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;_intentToRun&#32;=&#32;<emphasis role="keyword">false</emphasis>;
+<anchor xml:id="__debounce_8cs_source_1l00186"/>00186 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;}
+<anchor xml:id="__debounce_8cs_source_1l00187"/>00187 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;
+<anchor xml:id="__debounce_8cs_source_1l00188"/>00188 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">if</emphasis>&#32;(DateTime.UtcNow&#32;-&#32;runDateTimeCapture&#32;&gt;&#32;<link linkend="_class_luthetus_1_1_common_1_1_razor_lib_1_1_reactives_1_1_models_1_1_debounce-1-g_1afee338d84dca1127eefcdd4b83e34921">DebounceTimeSpan</link>)
+<anchor xml:id="__debounce_8cs_source_1l00189"/>00189 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">break</emphasis>;
+<anchor xml:id="__debounce_8cs_source_1l00190"/>00190 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;}
+<anchor xml:id="__debounce_8cs_source_1l00191"/>00191 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;
+<anchor xml:id="__debounce_8cs_source_1l00192"/>00192 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">if</emphasis>&#32;(<link linkend="_class_luthetus_1_1_common_1_1_razor_lib_1_1_reactives_1_1_models_1_1_debounce-1-g_1a39168bace598f084d14f852a940d33c4">CancellationToken</link>.IsCancellationRequested)
+<anchor xml:id="__debounce_8cs_source_1l00193"/>00193 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>;
+<anchor xml:id="__debounce_8cs_source_1l00194"/>00194 
+<anchor xml:id="__debounce_8cs_source_1l00195"/>00195 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;await&#32;_workItem.Invoke(argsCapture,&#32;<link linkend="_class_luthetus_1_1_common_1_1_razor_lib_1_1_reactives_1_1_models_1_1_debounce-1-g_1a39168bace598f084d14f852a940d33c4">CancellationToken</link>)
+<anchor xml:id="__debounce_8cs_source_1l00196"/>00196 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;.ConfigureAwait(<emphasis role="keyword">false</emphasis>);
+<anchor xml:id="__debounce_8cs_source_1l00197"/>00197 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;});
+<anchor xml:id="__debounce_8cs_source_1l00198"/>00198 &#32;&#32;&#32;&#32;}
+<anchor xml:id="__debounce_8cs_source_1l00199"/>00199 }
+</programlisting></section>

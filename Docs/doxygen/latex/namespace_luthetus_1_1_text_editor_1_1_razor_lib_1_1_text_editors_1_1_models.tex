@@ -1,0 +1,387 @@
+\doxysection{Luthetus.\+Text\+Editor.\+Razor\+Lib.\+Text\+Editors.\+Models Namespace Reference}
+\hypertarget{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models}{}\label{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models}\index{Luthetus.TextEditor.RazorLib.TextEditors.Models@{Luthetus.TextEditor.RazorLib.TextEditors.Models}}
+\doxysubsubsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+namespace \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1_1_internals}{Internals}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1_1_cursor_modifier_bag_text_editor}{Cursor\+Modifier\+Bag\+Text\+Editor}}
+\item 
+class \mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1_1_dynamic_view_model_adapter_text_editor}{Dynamic\+View\+Model\+Adapter\+Text\+Editor}}
+\begin{DoxyCompactList}\small\item\em This type contains all data, and logic, necessary to render a text editor from within a dialog, a panel tab, or a text editor group tab. \end{DoxyCompactList}\item 
+class {\bfseries Extension\+No\+Period\+Facts}
+\begin{DoxyCompactList}\small\item\em The constants do not start with a period. \end{DoxyCompactList}\item 
+interface \mbox{\hyperlink{interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1_1_i_tab_text_editor}{ITab\+Text\+Editor}}
+\item 
+interface \mbox{\hyperlink{interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1_1_i_text_editor_dependent_component}{IText\+Editor\+Dependent\+Component}}
+\item 
+interface \mbox{\hyperlink{interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1_1_i_text_editor_edit_context}{IText\+Editor\+Edit\+Context}}
+\begin{DoxyCompactList}\small\item\em If one invokes, "{}\+\_\+ = edit\+Context.\+Get\+View\+Model\+Modifier(view\+Model\+Key);"{}.~\newline
+ Then a side effect occurs where the view model with the provided view\+Model\+Key, will be marked as a having been modified.~\newline
+ After a Post is finished, the text editor service iterates over all \textquotesingle{}modified\textquotesingle{} view models and re-\/renders them.~\newline
+ This behavior is a bit hacky since it requires some amount of \textquotesingle{}hidden knowledge\textquotesingle{}.~\newline
+ To get a view model without marking it as modified, use the optional parameter, \textquotesingle{}is\+Readonly\textquotesingle{} and set it to \textquotesingle{}true\textquotesingle{}.~\newline
+ The main reason for making this comment, is that I sometimes assign the result of \textquotesingle{}Get\+View\+Model\+Modifier\textquotesingle{} to discard.~\newline
+ When I do this it feels especially hacky, so I want to leave a paper trail of what I mean by that statement.~\newline
+. \end{DoxyCompactList}\item 
+interface \mbox{\hyperlink{interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1_1_i_text_editor_model}{IText\+Editor\+Model}}
+\begin{DoxyCompactList}\small\item\em Stores the \doxylink{struct_luthetus_1_1_text_editor_1_1_razor_lib_1_1_characters_1_1_models_1_1_rich_character}{Rich\+Character} class instances that represent the text.~\newline
+~\newline
+ Each \doxylink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1_1_text_editor_model}{Text\+Editor\+Model} has a unique underlying resource uri.~\newline
+~\newline
+ Therefore, if one has a text file named "{}my\+Homework.\+txt"{}, then only one \doxylink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1_1_text_editor_model}{Text\+Editor\+Model} can exist with the resource uri of "{}my\+Homework.\+txt"{}.~\newline
+~\newline
+. \end{DoxyCompactList}\item 
+interface \mbox{\hyperlink{interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1_1_i_text_editor_model_api}{IText\+Editor\+Model\+Api}}
+\item 
+interface \mbox{\hyperlink{interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1_1_i_text_editor_view_model_api}{IText\+Editor\+View\+Model\+Api}}
+\item 
+class \mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1_1_text_editor_model}{Text\+Editor\+Model}}
+\item 
+class \mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1_1_text_editor_model_api}{Text\+Editor\+Model\+Api}}
+\item 
+class {\bfseries Text\+Editor\+Model\+Extension\+Methods}
+\item 
+class \mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1_1_text_editor_model_modifier}{Text\+Editor\+Model\+Modifier}}
+\begin{DoxyCompactList}\small\item\em (2024-\/06-\/08) I belive there are too many ways to edit a text editor. There should only be \textquotesingle{}Insert(...)\textquotesingle{} and \textquotesingle{}Remove(...)\textquotesingle{} methods. Any code I currently have in \textquotesingle{}Text\+Editor\+Model\+Modifier.\+cs\textquotesingle{} that I deem as technical debt or a bad idea will be put in this file. Then, once organized I hope to make sense of what the "{}lean"{} solution is. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1_1_text_editor_partition}{Text\+Editor\+Partition}}
+\item 
+class \mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1_1_text_editor_view_model_api}{Text\+Editor\+View\+Model\+Api}}
+\item 
+class \mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1_1_text_editor_view_model_modifier}{Text\+Editor\+View\+Model\+Modifier}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Enumerations}
+\begin{DoxyCompactItemize}
+\item 
+enum \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_a6ae5c9d10a22e55cc84906bef2c99328}{Motion\+Kind}} \{ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_a6ae5c9d10a22e55cc84906bef2c99328acd7d13ceea728b08555f7c818cfb13ef}{Backspace}}
+, \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_a6ae5c9d10a22e55cc84906bef2c99328af2a6c498fb90ee345d997f888fce3b18}{Delete}}
+ \}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+record \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_a95663f563f9d12aa199fab4bf5de55b4}{Category}} (string Value)
+\begin{DoxyCompactList}\small\item\em An optional distinction between many \doxylink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_aa2a2da032900659e3cf98e4b28fc476d}{Text\+Editor\+View\+Model}(s) which display the same \doxylink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1_1_text_editor_model}{Text\+Editor\+Model}. ~\newline
+ Example\+: one might have a \textquotesingle{}main\textquotesingle{} text editor. Perhaps this category is named "{}main"{}. Furthermore one might have a \textquotesingle{}peek\textquotesingle{} window. Perhaps this category is named "{}peek"{}. This results in one being able to have two separate view models, which display the same underlying model, and distinguish between them. \end{DoxyCompactList}\item 
+record \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_aa9c065de43982111d7d0551bde99ea48}{Scrollbar\+Dimensions}} (double Scroll\+Left, double Scroll\+Top, double Scroll\+Width, double Scroll\+Height, double Margin\+Scroll\+Height)
+\begin{DoxyCompactList}\small\item\em The unit of measurement is Pixels (px) C\# controls the scrollbar dimensions. \end{DoxyCompactList}\item 
+record \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_a55c218009ea8a8cc459c4207cd9f218f}{Text\+Editor\+Dimensions}} (double Width, double Height, double Bounding\+Client\+Rect\+Left, double Bounding\+Client\+Rect\+Top)
+\begin{DoxyCompactList}\small\item\em The unit of measurement is Pixels (px) Java\+Script/\+Html controls the text editor dimensions. \end{DoxyCompactList}\item 
+Task \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_ad166293aee0a276e57f06b201684b008}{Focus\+Async}} ()
+\item 
+void \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_af402300cee2b4a03928758a3577a0ede}{Dispose}} ()
+\item 
+record \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_a70108df61e9a559805a772a0fc0891a1}{Widget\+Block}} (Key$<$ Widget\+Block $>$ Key, string Title, string Html\+Element\+Id, int Line\+Index, Type Component\+Type, Dictionary$<$ string, object?$>$? Component\+Parameter\+Map)
+\begin{DoxyCompactList}\small\item\em This type takes up 100\% of the width of a text editor row, and therefore shifts the top position of any rows that follow. \end{DoxyCompactList}\item 
+record \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_af0bf990d182f463bb30a353bfa58fc10}{Widget\+Inline}} (Key$<$ Widget\+Inline $>$ Key, string Title, string Html\+Element\+Id, Type Component\+Type, Dictionary$<$ string, object?$>$? Component\+Parameter\+Map)
+\begin{DoxyCompactList}\small\item\em This type takes up some amount of width of a text editor row, and therefore shifts any the left position of any columns that follow. \end{DoxyCompactList}\item 
+record \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_add745df1063319c10358ccfa47c3ca1e}{Widget\+Overlay}} (Key$<$ Widget\+Overlay $>$ Key, string Title, string Html\+Element\+Id, Type Component\+Type, Dictionary$<$ string, object?$>$? Component\+Parameter\+Map)
+\begin{DoxyCompactList}\small\item\em This type is rendered \textquotesingle{}on-\/top\textquotesingle{} of with respect to "{}z-\/index"{} the content. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+record \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_aa2a2da032900659e3cf98e4b28fc476d}{Text\+Editor\+View\+Model}}
+\begin{DoxyCompactList}\small\item\em Stores the state of the user interface. For example, the user\textquotesingle{}s \doxylink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_cursors_1_1_models_a8373e854ca1ddf152a3b5372ea18c20b}{Text\+Editor\+Cursor} instances are stored here.~\newline
+~\newline
+. \end{DoxyCompactList}\item 
+record \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_a435ccef09e2ba83022e8cf378fc0f690}{Resource\+Uri}} \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_ae531f6ec8ec05e2493aabf8d17c23e4b}{resource\+Uri}}
+\item 
+record \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_a435ccef09e2ba83022e8cf378fc0f690}{Resource\+Uri}} \mbox{\hyperlink{interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_i_text_editor_service}{IText\+Editor\+Service}} \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_aecfb76d19da117c025734259242d144d}{text\+Editor\+Service}}
+\item 
+record \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_a435ccef09e2ba83022e8cf378fc0f690}{Resource\+Uri}} \mbox{\hyperlink{interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_i_text_editor_service}{IText\+Editor\+Service}} IDispatcher \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_a50f035982e1c206f234851523db5cbc8}{dispatcher}}
+\item 
+record \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_a435ccef09e2ba83022e8cf378fc0f690}{Resource\+Uri}} \mbox{\hyperlink{interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_i_text_editor_service}{IText\+Editor\+Service}} IDispatcher \mbox{\hyperlink{interface_luthetus_1_1_common_1_1_razor_lib_1_1_dialogs_1_1_models_1_1_i_dialog_service}{IDialog\+Service}} \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_a41ef8059adde5ddfbf288ffddb30a7c0}{dialog\+Service}}
+\item 
+record \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_a435ccef09e2ba83022e8cf378fc0f690}{Resource\+Uri}} \mbox{\hyperlink{interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_i_text_editor_service}{IText\+Editor\+Service}} IDispatcher \mbox{\hyperlink{interface_luthetus_1_1_common_1_1_razor_lib_1_1_dialogs_1_1_models_1_1_i_dialog_service}{IDialog\+Service}} IJSRuntime \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_a9b516c6b689d02d1a5f28c73390ac908}{js\+Runtime}}
+\item 
+record \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_a435ccef09e2ba83022e8cf378fc0f690}{Resource\+Uri}} \mbox{\hyperlink{interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_i_text_editor_service}{IText\+Editor\+Service}} IDispatcher \mbox{\hyperlink{interface_luthetus_1_1_common_1_1_razor_lib_1_1_dialogs_1_1_models_1_1_i_dialog_service}{IDialog\+Service}} IJSRuntime \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_a479abb7968c44629c9ee977673af1973}{Virtualization\+Result}}$<$ \mbox{\hyperlink{struct_luthetus_1_1_text_editor_1_1_razor_lib_1_1_characters_1_1_models_1_1_rich_character}{Rich\+Character}}\mbox{[}$\,$\mbox{]}$>$ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_a78bf6f6b4690f819d2536c2b3177ebde}{virtualization\+Result}}
+\item 
+record \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_a435ccef09e2ba83022e8cf378fc0f690}{Resource\+Uri}} \mbox{\hyperlink{interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_i_text_editor_service}{IText\+Editor\+Service}} IDispatcher \mbox{\hyperlink{interface_luthetus_1_1_common_1_1_razor_lib_1_1_dialogs_1_1_models_1_1_i_dialog_service}{IDialog\+Service}} IJSRuntime \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_a479abb7968c44629c9ee977673af1973}{Virtualization\+Result}}$<$ \mbox{\hyperlink{struct_luthetus_1_1_text_editor_1_1_razor_lib_1_1_characters_1_1_models_1_1_rich_character}{Rich\+Character}}\mbox{[}$\,$\mbox{]}$>$ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_af1eb54dcb15fe9154a163055233460ec}{Text\+Editor\+Dimensions}} \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_aa88b6eb61932a3f0562e94da59125234}{text\+Editor\+Dimensions}}
+\item 
+record \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_a435ccef09e2ba83022e8cf378fc0f690}{Resource\+Uri}} \mbox{\hyperlink{interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_i_text_editor_service}{IText\+Editor\+Service}} IDispatcher \mbox{\hyperlink{interface_luthetus_1_1_common_1_1_razor_lib_1_1_dialogs_1_1_models_1_1_i_dialog_service}{IDialog\+Service}} IJSRuntime \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_a479abb7968c44629c9ee977673af1973}{Virtualization\+Result}}$<$ \mbox{\hyperlink{struct_luthetus_1_1_text_editor_1_1_razor_lib_1_1_characters_1_1_models_1_1_rich_character}{Rich\+Character}}\mbox{[}$\,$\mbox{]}$>$ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_af1eb54dcb15fe9154a163055233460ec}{Text\+Editor\+Dimensions}} \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_af95b7406fbb23b5589ae2f3a639b572b}{Scrollbar\+Dimensions}} \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_adff938f4a5c2b32938f2597d52525338}{scrollbar\+Dimensions}}
+\item 
+record \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_a435ccef09e2ba83022e8cf378fc0f690}{Resource\+Uri}} \mbox{\hyperlink{interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_i_text_editor_service}{IText\+Editor\+Service}} IDispatcher \mbox{\hyperlink{interface_luthetus_1_1_common_1_1_razor_lib_1_1_dialogs_1_1_models_1_1_i_dialog_service}{IDialog\+Service}} IJSRuntime \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_a479abb7968c44629c9ee977673af1973}{Virtualization\+Result}}$<$ \mbox{\hyperlink{struct_luthetus_1_1_text_editor_1_1_razor_lib_1_1_characters_1_1_models_1_1_rich_character}{Rich\+Character}}\mbox{[}$\,$\mbox{]}$>$ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_af1eb54dcb15fe9154a163055233460ec}{Text\+Editor\+Dimensions}} \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_af95b7406fbb23b5589ae2f3a639b572b}{Scrollbar\+Dimensions}} \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_a7bb77f18da211cc58be24a6bcf54ecc3}{Char\+And\+Line\+Measurements}} \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_a47c51efe9864385e5cc288f2c6ec8426}{char\+And\+Line\+Measurements}}
+\item 
+record \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_a435ccef09e2ba83022e8cf378fc0f690}{Resource\+Uri}} \mbox{\hyperlink{interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_i_text_editor_service}{IText\+Editor\+Service}} IDispatcher \mbox{\hyperlink{interface_luthetus_1_1_common_1_1_razor_lib_1_1_dialogs_1_1_models_1_1_i_dialog_service}{IDialog\+Service}} IJSRuntime \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_a479abb7968c44629c9ee977673af1973}{Virtualization\+Result}}$<$ \mbox{\hyperlink{struct_luthetus_1_1_text_editor_1_1_razor_lib_1_1_characters_1_1_models_1_1_rich_character}{Rich\+Character}}\mbox{[}$\,$\mbox{]}$>$ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_af1eb54dcb15fe9154a163055233460ec}{Text\+Editor\+Dimensions}} \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_af95b7406fbb23b5589ae2f3a639b572b}{Scrollbar\+Dimensions}} \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_a7bb77f18da211cc58be24a6bcf54ecc3}{Char\+And\+Line\+Measurements}} bool \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_a3e0df2c9204c363537f0b67bdcca579c}{display\+Command\+Bar}}
+\end{DoxyCompactItemize}
+
+
+\label{doc-enum-members}
+\Hypertarget{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_doc-enum-members}
+\doxysubsection{Enumeration Type Documentation}
+\Hypertarget{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_a6ae5c9d10a22e55cc84906bef2c99328}\index{Luthetus.TextEditor.RazorLib.TextEditors.Models@{Luthetus.TextEditor.RazorLib.TextEditors.Models}!MotionKind@{MotionKind}}
+\index{MotionKind@{MotionKind}!Luthetus.TextEditor.RazorLib.TextEditors.Models@{Luthetus.TextEditor.RazorLib.TextEditors.Models}}
+\doxysubsubsection{\texorpdfstring{MotionKind}{MotionKind}}
+{\footnotesize\ttfamily \label{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_a6ae5c9d10a22e55cc84906bef2c99328} 
+enum \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_a6ae5c9d10a22e55cc84906bef2c99328}{Luthetus.\+Text\+Editor.\+Razor\+Lib.\+Text\+Editors.\+Models.\+Motion\+Kind}}}
+
+\begin{DoxyEnumFields}[2]{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Backspace@{Backspace}!Luthetus.TextEditor.RazorLib.TextEditors.Models@{Luthetus.TextEditor.RazorLib.TextEditors.Models}}\index{Luthetus.TextEditor.RazorLib.TextEditors.Models@{Luthetus.TextEditor.RazorLib.TextEditors.Models}!Backspace@{Backspace}}}\Hypertarget{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_a6ae5c9d10a22e55cc84906bef2c99328acd7d13ceea728b08555f7c818cfb13ef}\label{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_a6ae5c9d10a22e55cc84906bef2c99328acd7d13ceea728b08555f7c818cfb13ef} 
+Backspace&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Delete@{Delete}!Luthetus.TextEditor.RazorLib.TextEditors.Models@{Luthetus.TextEditor.RazorLib.TextEditors.Models}}\index{Luthetus.TextEditor.RazorLib.TextEditors.Models@{Luthetus.TextEditor.RazorLib.TextEditors.Models}!Delete@{Delete}}}\Hypertarget{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_a6ae5c9d10a22e55cc84906bef2c99328af2a6c498fb90ee345d997f888fce3b18}\label{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_a6ae5c9d10a22e55cc84906bef2c99328af2a6c498fb90ee345d997f888fce3b18} 
+Delete&\\
+\hline
+
+\end{DoxyEnumFields}
+
+
+Definition at line \mbox{\hyperlink{_motion_kind_8cs_source_l00003}{3}} of file \mbox{\hyperlink{_motion_kind_8cs_source}{Motion\+Kind.\+cs}}.
+
+
+
+\label{doc-func-members}
+\Hypertarget{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_doc-func-members}
+\doxysubsection{Function Documentation}
+\Hypertarget{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_a95663f563f9d12aa199fab4bf5de55b4}\index{Luthetus.TextEditor.RazorLib.TextEditors.Models@{Luthetus.TextEditor.RazorLib.TextEditors.Models}!Category@{Category}}
+\index{Category@{Category}!Luthetus.TextEditor.RazorLib.TextEditors.Models@{Luthetus.TextEditor.RazorLib.TextEditors.Models}}
+\doxysubsubsection{\texorpdfstring{Category()}{Category()}}
+{\footnotesize\ttfamily \label{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_a95663f563f9d12aa199fab4bf5de55b4} 
+record Luthetus.\+Text\+Editor.\+Razor\+Lib.\+Text\+Editors.\+Models.\+Category (\begin{DoxyParamCaption}\item[{string}]{Value}{}\end{DoxyParamCaption})}
+
+
+
+An optional distinction between many \doxylink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_aa2a2da032900659e3cf98e4b28fc476d}{Text\+Editor\+View\+Model}(s) which display the same \doxylink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1_1_text_editor_model}{Text\+Editor\+Model}. ~\newline
+ Example\+: one might have a \textquotesingle{}main\textquotesingle{} text editor. Perhaps this category is named "{}main"{}. Furthermore one might have a \textquotesingle{}peek\textquotesingle{} window. Perhaps this category is named "{}peek"{}. This results in one being able to have two separate view models, which display the same underlying model, and distinguish between them. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em Value} & The category string value itself. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_af402300cee2b4a03928758a3577a0ede}\index{Luthetus.TextEditor.RazorLib.TextEditors.Models@{Luthetus.TextEditor.RazorLib.TextEditors.Models}!Dispose@{Dispose}}
+\index{Dispose@{Dispose}!Luthetus.TextEditor.RazorLib.TextEditors.Models@{Luthetus.TextEditor.RazorLib.TextEditors.Models}}
+\doxysubsubsection{\texorpdfstring{Dispose()}{Dispose()}}
+{\footnotesize\ttfamily \label{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_af402300cee2b4a03928758a3577a0ede} 
+void Luthetus.\+Text\+Editor.\+Razor\+Lib.\+Text\+Editors.\+Models.\+Dispose (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{_text_editor_view_model_8cs_source_l00199}{199}} of file \mbox{\hyperlink{_text_editor_view_model_8cs_source}{Text\+Editor\+View\+Model.\+cs}}.
+
+\Hypertarget{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_ad166293aee0a276e57f06b201684b008}\index{Luthetus.TextEditor.RazorLib.TextEditors.Models@{Luthetus.TextEditor.RazorLib.TextEditors.Models}!FocusAsync@{FocusAsync}}
+\index{FocusAsync@{FocusAsync}!Luthetus.TextEditor.RazorLib.TextEditors.Models@{Luthetus.TextEditor.RazorLib.TextEditors.Models}}
+\doxysubsubsection{\texorpdfstring{FocusAsync()}{FocusAsync()}}
+{\footnotesize\ttfamily \label{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_ad166293aee0a276e57f06b201684b008} 
+Task Luthetus.\+Text\+Editor.\+Razor\+Lib.\+Text\+Editors.\+Models.\+Focus\+Async (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{_text_editor_view_model_8cs_source_l00194}{194}} of file \mbox{\hyperlink{_text_editor_view_model_8cs_source}{Text\+Editor\+View\+Model.\+cs}}.
+
+\Hypertarget{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_aa9c065de43982111d7d0551bde99ea48}\index{Luthetus.TextEditor.RazorLib.TextEditors.Models@{Luthetus.TextEditor.RazorLib.TextEditors.Models}!ScrollbarDimensions@{ScrollbarDimensions}}
+\index{ScrollbarDimensions@{ScrollbarDimensions}!Luthetus.TextEditor.RazorLib.TextEditors.Models@{Luthetus.TextEditor.RazorLib.TextEditors.Models}}
+\doxysubsubsection{\texorpdfstring{ScrollbarDimensions()}{ScrollbarDimensions()}}
+{\footnotesize\ttfamily \label{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_aa9c065de43982111d7d0551bde99ea48} 
+record Luthetus.\+Text\+Editor.\+Razor\+Lib.\+Text\+Editors.\+Models.\+Scrollbar\+Dimensions (\begin{DoxyParamCaption}\item[{double}]{Scroll\+Left}{, }\item[{double}]{Scroll\+Top}{, }\item[{double}]{Scroll\+Width}{, }\item[{double}]{Scroll\+Height}{, }\item[{double}]{Margin\+Scroll\+Height}{}\end{DoxyParamCaption})}
+
+
+
+The unit of measurement is Pixels (px) C\# controls the scrollbar dimensions. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em Scroll\+Left} & The unit of measurement is Pixels (px)\\
+\hline
+{\em Scroll\+Top} & The unit of measurement is Pixels (px)\\
+\hline
+{\em Scroll\+Width} & The unit of measurement is Pixels (px)\\
+\hline
+{\em Scroll\+Height} & The unit of measurement is Pixels (px)\\
+\hline
+{\em Margin\+Scroll\+Height} & The unit of measurement is Pixels (px)\\
+\hline
+\end{DoxyParams}
+
+
+Definition at line \mbox{\hyperlink{_scrollbar_dimensions_8cs_source_l00012}{12}} of file \mbox{\hyperlink{_scrollbar_dimensions_8cs_source}{Scrollbar\+Dimensions.\+cs}}.
+
+\Hypertarget{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_a55c218009ea8a8cc459c4207cd9f218f}\index{Luthetus.TextEditor.RazorLib.TextEditors.Models@{Luthetus.TextEditor.RazorLib.TextEditors.Models}!TextEditorDimensions@{TextEditorDimensions}}
+\index{TextEditorDimensions@{TextEditorDimensions}!Luthetus.TextEditor.RazorLib.TextEditors.Models@{Luthetus.TextEditor.RazorLib.TextEditors.Models}}
+\doxysubsubsection{\texorpdfstring{TextEditorDimensions()}{TextEditorDimensions()}}
+{\footnotesize\ttfamily \label{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_a55c218009ea8a8cc459c4207cd9f218f} 
+record Luthetus.\+Text\+Editor.\+Razor\+Lib.\+Text\+Editors.\+Models.\+Text\+Editor\+Dimensions (\begin{DoxyParamCaption}\item[{double}]{Width}{, }\item[{double}]{Height}{, }\item[{double}]{Bounding\+Client\+Rect\+Left}{, }\item[{double}]{Bounding\+Client\+Rect\+Top}{}\end{DoxyParamCaption})}
+
+
+
+The unit of measurement is Pixels (px) Java\+Script/\+Html controls the text editor dimensions. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em Width} & The unit of measurement is Pixels (px)\\
+\hline
+{\em Height} & The unit of measurement is Pixels (px)\\
+\hline
+{\em Bounding\+Client\+Rect\+Left} & The unit of measurement is Pixels (px)\\
+\hline
+{\em Bounding\+Client\+Rect\+Top} & The unit of measurement is Pixels (px)\\
+\hline
+\end{DoxyParams}
+\Hypertarget{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_a70108df61e9a559805a772a0fc0891a1}\index{Luthetus.TextEditor.RazorLib.TextEditors.Models@{Luthetus.TextEditor.RazorLib.TextEditors.Models}!WidgetBlock@{WidgetBlock}}
+\index{WidgetBlock@{WidgetBlock}!Luthetus.TextEditor.RazorLib.TextEditors.Models@{Luthetus.TextEditor.RazorLib.TextEditors.Models}}
+\doxysubsubsection{\texorpdfstring{WidgetBlock()}{WidgetBlock()}}
+{\footnotesize\ttfamily \label{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_a70108df61e9a559805a772a0fc0891a1} 
+record Luthetus.\+Text\+Editor.\+Razor\+Lib.\+Text\+Editors.\+Models.\+Widget\+Block (\begin{DoxyParamCaption}\item[{Key$<$ Widget\+Block $>$}]{Key}{, }\item[{string}]{Title}{, }\item[{string}]{Html\+Element\+Id}{, }\item[{int}]{Line\+Index}{, }\item[{Type}]{Component\+Type}{, }\item[{Dictionary$<$ string, object?$>$?}]{Component\+Parameter\+Map}{}\end{DoxyParamCaption})}
+
+
+
+This type takes up 100\% of the width of a text editor row, and therefore shifts the top position of any rows that follow. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em Line\+Index} & When the text editor renders this line, it will then render where the line is, the corresponding widget.\\
+\hline
+\end{DoxyParams}
+So, the widget block-\/wise takes the UI row that the line was occupying, and the line content is moved down by the height of the widget.
+
+An index greater than or equal to the count of lines is permitted, to have the widget render at the bottom of the text editor.
+
+If the index is greater than the count of lines, then the index is taken to be the count of lines instead. \Hypertarget{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_af0bf990d182f463bb30a353bfa58fc10}\index{Luthetus.TextEditor.RazorLib.TextEditors.Models@{Luthetus.TextEditor.RazorLib.TextEditors.Models}!WidgetInline@{WidgetInline}}
+\index{WidgetInline@{WidgetInline}!Luthetus.TextEditor.RazorLib.TextEditors.Models@{Luthetus.TextEditor.RazorLib.TextEditors.Models}}
+\doxysubsubsection{\texorpdfstring{WidgetInline()}{WidgetInline()}}
+{\footnotesize\ttfamily \label{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_af0bf990d182f463bb30a353bfa58fc10} 
+record Luthetus.\+Text\+Editor.\+Razor\+Lib.\+Text\+Editors.\+Models.\+Widget\+Inline (\begin{DoxyParamCaption}\item[{Key$<$ Widget\+Inline $>$}]{Key}{, }\item[{string}]{Title}{, }\item[{string}]{Html\+Element\+Id}{, }\item[{Type}]{Component\+Type}{, }\item[{Dictionary$<$ string, object?$>$?}]{Component\+Parameter\+Map}{}\end{DoxyParamCaption})}
+
+
+
+This type takes up some amount of width of a text editor row, and therefore shifts any the left position of any columns that follow. 
+
+\Hypertarget{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_add745df1063319c10358ccfa47c3ca1e}\index{Luthetus.TextEditor.RazorLib.TextEditors.Models@{Luthetus.TextEditor.RazorLib.TextEditors.Models}!WidgetOverlay@{WidgetOverlay}}
+\index{WidgetOverlay@{WidgetOverlay}!Luthetus.TextEditor.RazorLib.TextEditors.Models@{Luthetus.TextEditor.RazorLib.TextEditors.Models}}
+\doxysubsubsection{\texorpdfstring{WidgetOverlay()}{WidgetOverlay()}}
+{\footnotesize\ttfamily \label{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_add745df1063319c10358ccfa47c3ca1e} 
+record Luthetus.\+Text\+Editor.\+Razor\+Lib.\+Text\+Editors.\+Models.\+Widget\+Overlay (\begin{DoxyParamCaption}\item[{Key$<$ Widget\+Overlay $>$}]{Key}{, }\item[{string}]{Title}{, }\item[{string}]{Html\+Element\+Id}{, }\item[{Type}]{Component\+Type}{, }\item[{Dictionary$<$ string, object?$>$?}]{Component\+Parameter\+Map}{}\end{DoxyParamCaption})}
+
+
+
+This type is rendered \textquotesingle{}on-\/top\textquotesingle{} of with respect to "{}z-\/index"{} the content. 
+
+
+
+\label{doc-var-members}
+\Hypertarget{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_doc-var-members}
+\doxysubsection{Variable Documentation}
+\Hypertarget{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_a47c51efe9864385e5cc288f2c6ec8426}\index{Luthetus.TextEditor.RazorLib.TextEditors.Models@{Luthetus.TextEditor.RazorLib.TextEditors.Models}!charAndLineMeasurements@{charAndLineMeasurements}}
+\index{charAndLineMeasurements@{charAndLineMeasurements}!Luthetus.TextEditor.RazorLib.TextEditors.Models@{Luthetus.TextEditor.RazorLib.TextEditors.Models}}
+\doxysubsubsection{\texorpdfstring{charAndLineMeasurements}{charAndLineMeasurements}}
+{\footnotesize\ttfamily \label{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_a47c51efe9864385e5cc288f2c6ec8426} 
+record \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_a435ccef09e2ba83022e8cf378fc0f690}{Resource\+Uri}} \mbox{\hyperlink{interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_i_text_editor_service}{IText\+Editor\+Service}} IDispatcher \mbox{\hyperlink{interface_luthetus_1_1_common_1_1_razor_lib_1_1_dialogs_1_1_models_1_1_i_dialog_service}{IDialog\+Service}} IJSRuntime \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_a479abb7968c44629c9ee977673af1973}{Virtualization\+Result}}$<$\mbox{\hyperlink{struct_luthetus_1_1_text_editor_1_1_razor_lib_1_1_characters_1_1_models_1_1_rich_character}{Rich\+Character}}\mbox{[}$\,$\mbox{]}$>$ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_af1eb54dcb15fe9154a163055233460ec}{Text\+Editor\+Dimensions}} \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_af95b7406fbb23b5589ae2f3a639b572b}{Scrollbar\+Dimensions}} \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_a7bb77f18da211cc58be24a6bcf54ecc3}{Char\+And\+Line\+Measurements}} Luthetus.\+Text\+Editor.\+Razor\+Lib.\+Text\+Editors.\+Models.\+char\+And\+Line\+Measurements}
+
+
+
+Definition at line \mbox{\hyperlink{_text_editor_view_model_8cs_source_l00040}{40}} of file \mbox{\hyperlink{_text_editor_view_model_8cs_source}{Text\+Editor\+View\+Model.\+cs}}.
+
+\Hypertarget{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_a41ef8059adde5ddfbf288ffddb30a7c0}\index{Luthetus.TextEditor.RazorLib.TextEditors.Models@{Luthetus.TextEditor.RazorLib.TextEditors.Models}!dialogService@{dialogService}}
+\index{dialogService@{dialogService}!Luthetus.TextEditor.RazorLib.TextEditors.Models@{Luthetus.TextEditor.RazorLib.TextEditors.Models}}
+\doxysubsubsection{\texorpdfstring{dialogService}{dialogService}}
+{\footnotesize\ttfamily \label{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_a41ef8059adde5ddfbf288ffddb30a7c0} 
+record \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_a435ccef09e2ba83022e8cf378fc0f690}{Resource\+Uri}} \mbox{\hyperlink{interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_i_text_editor_service}{IText\+Editor\+Service}} IDispatcher \mbox{\hyperlink{interface_luthetus_1_1_common_1_1_razor_lib_1_1_dialogs_1_1_models_1_1_i_dialog_service}{IDialog\+Service}} Luthetus.\+Text\+Editor.\+Razor\+Lib.\+Text\+Editors.\+Models.\+dialog\+Service}
+
+
+
+Definition at line \mbox{\hyperlink{_text_editor_view_model_8cs_source_l00035}{35}} of file \mbox{\hyperlink{_text_editor_view_model_8cs_source}{Text\+Editor\+View\+Model.\+cs}}.
+
+\Hypertarget{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_a50f035982e1c206f234851523db5cbc8}\index{Luthetus.TextEditor.RazorLib.TextEditors.Models@{Luthetus.TextEditor.RazorLib.TextEditors.Models}!dispatcher@{dispatcher}}
+\index{dispatcher@{dispatcher}!Luthetus.TextEditor.RazorLib.TextEditors.Models@{Luthetus.TextEditor.RazorLib.TextEditors.Models}}
+\doxysubsubsection{\texorpdfstring{dispatcher}{dispatcher}}
+{\footnotesize\ttfamily \label{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_a50f035982e1c206f234851523db5cbc8} 
+record \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_a435ccef09e2ba83022e8cf378fc0f690}{Resource\+Uri}} \mbox{\hyperlink{interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_i_text_editor_service}{IText\+Editor\+Service}} IDispatcher Luthetus.\+Text\+Editor.\+Razor\+Lib.\+Text\+Editors.\+Models.\+dispatcher}
+
+
+
+Definition at line \mbox{\hyperlink{_text_editor_view_model_8cs_source_l00034}{34}} of file \mbox{\hyperlink{_text_editor_view_model_8cs_source}{Text\+Editor\+View\+Model.\+cs}}.
+
+\Hypertarget{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_a3e0df2c9204c363537f0b67bdcca579c}\index{Luthetus.TextEditor.RazorLib.TextEditors.Models@{Luthetus.TextEditor.RazorLib.TextEditors.Models}!displayCommandBar@{displayCommandBar}}
+\index{displayCommandBar@{displayCommandBar}!Luthetus.TextEditor.RazorLib.TextEditors.Models@{Luthetus.TextEditor.RazorLib.TextEditors.Models}}
+\doxysubsubsection{\texorpdfstring{displayCommandBar}{displayCommandBar}}
+{\footnotesize\ttfamily \label{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_a3e0df2c9204c363537f0b67bdcca579c} 
+record \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_a435ccef09e2ba83022e8cf378fc0f690}{Resource\+Uri}} \mbox{\hyperlink{interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_i_text_editor_service}{IText\+Editor\+Service}} IDispatcher \mbox{\hyperlink{interface_luthetus_1_1_common_1_1_razor_lib_1_1_dialogs_1_1_models_1_1_i_dialog_service}{IDialog\+Service}} IJSRuntime \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_a479abb7968c44629c9ee977673af1973}{Virtualization\+Result}}$<$\mbox{\hyperlink{struct_luthetus_1_1_text_editor_1_1_razor_lib_1_1_characters_1_1_models_1_1_rich_character}{Rich\+Character}}\mbox{[}$\,$\mbox{]}$>$ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_af1eb54dcb15fe9154a163055233460ec}{Text\+Editor\+Dimensions}} \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_af95b7406fbb23b5589ae2f3a639b572b}{Scrollbar\+Dimensions}} \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_a7bb77f18da211cc58be24a6bcf54ecc3}{Char\+And\+Line\+Measurements}} bool Luthetus.\+Text\+Editor.\+Razor\+Lib.\+Text\+Editors.\+Models.\+display\+Command\+Bar}
+
+
+
+Definition at line \mbox{\hyperlink{_text_editor_view_model_8cs_source_l00041}{41}} of file \mbox{\hyperlink{_text_editor_view_model_8cs_source}{Text\+Editor\+View\+Model.\+cs}}.
+
+\Hypertarget{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_a9b516c6b689d02d1a5f28c73390ac908}\index{Luthetus.TextEditor.RazorLib.TextEditors.Models@{Luthetus.TextEditor.RazorLib.TextEditors.Models}!jsRuntime@{jsRuntime}}
+\index{jsRuntime@{jsRuntime}!Luthetus.TextEditor.RazorLib.TextEditors.Models@{Luthetus.TextEditor.RazorLib.TextEditors.Models}}
+\doxysubsubsection{\texorpdfstring{jsRuntime}{jsRuntime}}
+{\footnotesize\ttfamily \label{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_a9b516c6b689d02d1a5f28c73390ac908} 
+record \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_a435ccef09e2ba83022e8cf378fc0f690}{Resource\+Uri}} \mbox{\hyperlink{interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_i_text_editor_service}{IText\+Editor\+Service}} IDispatcher \mbox{\hyperlink{interface_luthetus_1_1_common_1_1_razor_lib_1_1_dialogs_1_1_models_1_1_i_dialog_service}{IDialog\+Service}} IJSRuntime Luthetus.\+Text\+Editor.\+Razor\+Lib.\+Text\+Editors.\+Models.\+js\+Runtime}
+
+
+
+Definition at line \mbox{\hyperlink{_text_editor_view_model_8cs_source_l00036}{36}} of file \mbox{\hyperlink{_text_editor_view_model_8cs_source}{Text\+Editor\+View\+Model.\+cs}}.
+
+\Hypertarget{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_ae531f6ec8ec05e2493aabf8d17c23e4b}\index{Luthetus.TextEditor.RazorLib.TextEditors.Models@{Luthetus.TextEditor.RazorLib.TextEditors.Models}!resourceUri@{resourceUri}}
+\index{resourceUri@{resourceUri}!Luthetus.TextEditor.RazorLib.TextEditors.Models@{Luthetus.TextEditor.RazorLib.TextEditors.Models}}
+\doxysubsubsection{\texorpdfstring{resourceUri}{resourceUri}}
+{\footnotesize\ttfamily \label{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_ae531f6ec8ec05e2493aabf8d17c23e4b} 
+record \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_a435ccef09e2ba83022e8cf378fc0f690}{Resource\+Uri}} Luthetus.\+Text\+Editor.\+Razor\+Lib.\+Text\+Editors.\+Models.\+resource\+Uri}
+
+
+
+Definition at line \mbox{\hyperlink{_text_editor_view_model_8cs_source_l00032}{32}} of file \mbox{\hyperlink{_text_editor_view_model_8cs_source}{Text\+Editor\+View\+Model.\+cs}}.
+
+\Hypertarget{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_adff938f4a5c2b32938f2597d52525338}\index{Luthetus.TextEditor.RazorLib.TextEditors.Models@{Luthetus.TextEditor.RazorLib.TextEditors.Models}!scrollbarDimensions@{scrollbarDimensions}}
+\index{scrollbarDimensions@{scrollbarDimensions}!Luthetus.TextEditor.RazorLib.TextEditors.Models@{Luthetus.TextEditor.RazorLib.TextEditors.Models}}
+\doxysubsubsection{\texorpdfstring{scrollbarDimensions}{scrollbarDimensions}}
+{\footnotesize\ttfamily \label{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_adff938f4a5c2b32938f2597d52525338} 
+record \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_a435ccef09e2ba83022e8cf378fc0f690}{Resource\+Uri}} \mbox{\hyperlink{interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_i_text_editor_service}{IText\+Editor\+Service}} IDispatcher \mbox{\hyperlink{interface_luthetus_1_1_common_1_1_razor_lib_1_1_dialogs_1_1_models_1_1_i_dialog_service}{IDialog\+Service}} IJSRuntime \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_a479abb7968c44629c9ee977673af1973}{Virtualization\+Result}}$<$\mbox{\hyperlink{struct_luthetus_1_1_text_editor_1_1_razor_lib_1_1_characters_1_1_models_1_1_rich_character}{Rich\+Character}}\mbox{[}$\,$\mbox{]}$>$ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_af1eb54dcb15fe9154a163055233460ec}{Text\+Editor\+Dimensions}} \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_af95b7406fbb23b5589ae2f3a639b572b}{Scrollbar\+Dimensions}} Luthetus.\+Text\+Editor.\+Razor\+Lib.\+Text\+Editors.\+Models.\+scrollbar\+Dimensions}
+
+
+
+Definition at line \mbox{\hyperlink{_text_editor_view_model_8cs_source_l00039}{39}} of file \mbox{\hyperlink{_text_editor_view_model_8cs_source}{Text\+Editor\+View\+Model.\+cs}}.
+
+\Hypertarget{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_aa88b6eb61932a3f0562e94da59125234}\index{Luthetus.TextEditor.RazorLib.TextEditors.Models@{Luthetus.TextEditor.RazorLib.TextEditors.Models}!textEditorDimensions@{textEditorDimensions}}
+\index{textEditorDimensions@{textEditorDimensions}!Luthetus.TextEditor.RazorLib.TextEditors.Models@{Luthetus.TextEditor.RazorLib.TextEditors.Models}}
+\doxysubsubsection{\texorpdfstring{textEditorDimensions}{textEditorDimensions}}
+{\footnotesize\ttfamily \label{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_aa88b6eb61932a3f0562e94da59125234} 
+record \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_a435ccef09e2ba83022e8cf378fc0f690}{Resource\+Uri}} \mbox{\hyperlink{interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_i_text_editor_service}{IText\+Editor\+Service}} IDispatcher \mbox{\hyperlink{interface_luthetus_1_1_common_1_1_razor_lib_1_1_dialogs_1_1_models_1_1_i_dialog_service}{IDialog\+Service}} IJSRuntime \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_a479abb7968c44629c9ee977673af1973}{Virtualization\+Result}}$<$\mbox{\hyperlink{struct_luthetus_1_1_text_editor_1_1_razor_lib_1_1_characters_1_1_models_1_1_rich_character}{Rich\+Character}}\mbox{[}$\,$\mbox{]}$>$ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_af1eb54dcb15fe9154a163055233460ec}{Text\+Editor\+Dimensions}} Luthetus.\+Text\+Editor.\+Razor\+Lib.\+Text\+Editors.\+Models.\+text\+Editor\+Dimensions}
+
+
+
+Definition at line \mbox{\hyperlink{_text_editor_view_model_8cs_source_l00038}{38}} of file \mbox{\hyperlink{_text_editor_view_model_8cs_source}{Text\+Editor\+View\+Model.\+cs}}.
+
+\Hypertarget{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_aecfb76d19da117c025734259242d144d}\index{Luthetus.TextEditor.RazorLib.TextEditors.Models@{Luthetus.TextEditor.RazorLib.TextEditors.Models}!textEditorService@{textEditorService}}
+\index{textEditorService@{textEditorService}!Luthetus.TextEditor.RazorLib.TextEditors.Models@{Luthetus.TextEditor.RazorLib.TextEditors.Models}}
+\doxysubsubsection{\texorpdfstring{textEditorService}{textEditorService}}
+{\footnotesize\ttfamily \label{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_aecfb76d19da117c025734259242d144d} 
+record \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_a435ccef09e2ba83022e8cf378fc0f690}{Resource\+Uri}} \mbox{\hyperlink{interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_i_text_editor_service}{IText\+Editor\+Service}} Luthetus.\+Text\+Editor.\+Razor\+Lib.\+Text\+Editors.\+Models.\+text\+Editor\+Service}
+
+
+
+Definition at line \mbox{\hyperlink{_text_editor_view_model_8cs_source_l00033}{33}} of file \mbox{\hyperlink{_text_editor_view_model_8cs_source}{Text\+Editor\+View\+Model.\+cs}}.
+
+\Hypertarget{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_aa2a2da032900659e3cf98e4b28fc476d}\index{Luthetus.TextEditor.RazorLib.TextEditors.Models@{Luthetus.TextEditor.RazorLib.TextEditors.Models}!TextEditorViewModel@{TextEditorViewModel}}
+\index{TextEditorViewModel@{TextEditorViewModel}!Luthetus.TextEditor.RazorLib.TextEditors.Models@{Luthetus.TextEditor.RazorLib.TextEditors.Models}}
+\doxysubsubsection{\texorpdfstring{TextEditorViewModel}{TextEditorViewModel}}
+{\footnotesize\ttfamily \label{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_aa2a2da032900659e3cf98e4b28fc476d} 
+record Luthetus.\+Text\+Editor.\+Razor\+Lib.\+Text\+Editors.\+Models.\+Text\+Editor\+View\+Model\hspace{0.3cm}{\ttfamily [sealed]}}
+
+
+
+Stores the state of the user interface. For example, the user\textquotesingle{}s \doxylink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_cursors_1_1_models_a8373e854ca1ddf152a3b5372ea18c20b}{Text\+Editor\+Cursor} instances are stored here.~\newline
+~\newline
+. 
+
+Each \doxylink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_aa2a2da032900659e3cf98e4b28fc476d}{Text\+Editor\+View\+Model} has a unique underlying \doxylink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1_1_text_editor_model}{Text\+Editor\+Model}. Therefore, if one has a \doxylink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1_1_text_editor_model}{Text\+Editor\+Model} of a text file named "{}my\+Homework.\+txt"{}, then arbitrary amount of \doxylink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_aa2a2da032900659e3cf98e4b28fc476d}{Text\+Editor\+View\+Model}(s) can reference that \doxylink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1_1_text_editor_model}{Text\+Editor\+Model}.~\newline
+~\newline
+
+
+For example, maybe one has a main text editor, but also a peek window open of the same underlying \doxylink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1_1_text_editor_model}{Text\+Editor\+Model}. The main text editor is one \doxylink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_aa2a2da032900659e3cf98e4b28fc476d}{Text\+Editor\+View\+Model} and the peek window is a separate \doxylink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_aa2a2da032900659e3cf98e4b28fc476d}{Text\+Editor\+View\+Model}. Both of those \doxylink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_aa2a2da032900659e3cf98e4b28fc476d}{Text\+Editor\+View\+Model}(s) are referencing the same \doxylink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1_1_text_editor_model}{Text\+Editor\+Model}. Therefore typing into the peek window will also result in the main text editor re-\/rendering with the updated text and vice versa. 
+
+Definition at line \mbox{\hyperlink{_text_editor_view_model_8cs_source_l00028}{28}} of file \mbox{\hyperlink{_text_editor_view_model_8cs_source}{Text\+Editor\+View\+Model.\+cs}}.
+
+\Hypertarget{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_a78bf6f6b4690f819d2536c2b3177ebde}\index{Luthetus.TextEditor.RazorLib.TextEditors.Models@{Luthetus.TextEditor.RazorLib.TextEditors.Models}!virtualizationResult@{virtualizationResult}}
+\index{virtualizationResult@{virtualizationResult}!Luthetus.TextEditor.RazorLib.TextEditors.Models@{Luthetus.TextEditor.RazorLib.TextEditors.Models}}
+\doxysubsubsection{\texorpdfstring{virtualizationResult}{virtualizationResult}}
+{\footnotesize\ttfamily \label{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_a78bf6f6b4690f819d2536c2b3177ebde} 
+record \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_a435ccef09e2ba83022e8cf378fc0f690}{Resource\+Uri}} \mbox{\hyperlink{interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_i_text_editor_service}{IText\+Editor\+Service}} IDispatcher \mbox{\hyperlink{interface_luthetus_1_1_common_1_1_razor_lib_1_1_dialogs_1_1_models_1_1_i_dialog_service}{IDialog\+Service}} IJSRuntime \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_a479abb7968c44629c9ee977673af1973}{Virtualization\+Result}}$<$\mbox{\hyperlink{struct_luthetus_1_1_text_editor_1_1_razor_lib_1_1_characters_1_1_models_1_1_rich_character}{Rich\+Character}}\mbox{[}$\,$\mbox{]}$>$ Luthetus.\+Text\+Editor.\+Razor\+Lib.\+Text\+Editors.\+Models.\+virtualization\+Result}
+
+
+
+Definition at line \mbox{\hyperlink{_text_editor_view_model_8cs_source_l00037}{37}} of file \mbox{\hyperlink{_text_editor_view_model_8cs_source}{Text\+Editor\+View\+Model.\+cs}}.
+

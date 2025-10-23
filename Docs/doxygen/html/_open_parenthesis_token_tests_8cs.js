@@ -1,0 +1,4 @@
+var _open_parenthesis_token_tests_8cs =
+[
+    [ "Luthetus.TextEditor.Tests.Basis.CompilerServices.Syntax.SyntaxTokens.OpenParenthesisTokenTests", "class_luthetus_1_1_text_editor_1_1_tests_1_1_basis_1_1_compiler_services_1_1_syntax_1_1_syntax_t9e56162453dab04717ae878729ec8a64.html", "class_luthetus_1_1_text_editor_1_1_tests_1_1_basis_1_1_compiler_services_1_1_syntax_1_1_syntax_t9e56162453dab04717ae878729ec8a64" ]
+];

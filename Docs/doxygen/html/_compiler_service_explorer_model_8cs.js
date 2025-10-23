@@ -1,0 +1,4 @@
+var _compiler_service_explorer_model_8cs =
+[
+    [ "Luthetus.Extensions.DotNet.CompilerServices.Models.CompilerServiceExplorerModel", "class_luthetus_1_1_extensions_1_1_dot_net_1_1_compiler_services_1_1_models_1_1_compiler_service_explorer_model.html", "class_luthetus_1_1_extensions_1_1_dot_net_1_1_compiler_services_1_1_models_1_1_compiler_service_explorer_model" ]
+];

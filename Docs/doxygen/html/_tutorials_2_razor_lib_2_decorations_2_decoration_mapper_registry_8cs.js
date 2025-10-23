@@ -1,0 +1,4 @@
+var _tutorials_2_razor_lib_2_decorations_2_decoration_mapper_registry_8cs =
+[
+    [ "Luthetus.Tutorials.RazorLib.Decorations.DecorationMapperRegistry", "class_luthetus_1_1_tutorials_1_1_razor_lib_1_1_decorations_1_1_decoration_mapper_registry.html", "class_luthetus_1_1_tutorials_1_1_razor_lib_1_1_decorations_1_1_decoration_mapper_registry" ]
+];

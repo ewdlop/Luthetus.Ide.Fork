@@ -1,0 +1,8 @@
+var class_luthetus_1_1_extensions_1_1_dot_net_1_1_nugets_1_1_models_1_1_nuget_package_manager_provider_azure_search_usnc =
+[
+    [ "NugetPackageManagerProviderAzureSearchUsnc", "class_luthetus_1_1_extensions_1_1_dot_net_1_1_nugets_1_1_models_1_1_nuget_package_manager_provider_azure_search_usnc.html#a583bc8feb75f5e6bcdde82bf78f59a62", null ],
+    [ "BuildQuery", "class_luthetus_1_1_extensions_1_1_dot_net_1_1_nugets_1_1_models_1_1_nuget_package_manager_provider_azure_search_usnc.html#ae0c3f8aa91103edb0d0b0db00aae075f", null ],
+    [ "QueryForNugetPackagesAsync", "class_luthetus_1_1_extensions_1_1_dot_net_1_1_nugets_1_1_models_1_1_nuget_package_manager_provider_azure_search_usnc.html#a87cab678b33db1d4c3621c58206bf132", null ],
+    [ "QueryForNugetPackagesAsync", "class_luthetus_1_1_extensions_1_1_dot_net_1_1_nugets_1_1_models_1_1_nuget_package_manager_provider_azure_search_usnc.html#a2e55693e85a3f87ca54749d401c14c60", null ],
+    [ "ProviderWebsiteUrlNoFormatting", "class_luthetus_1_1_extensions_1_1_dot_net_1_1_nugets_1_1_models_1_1_nuget_package_manager_provider_azure_search_usnc.html#aa428c1d2c5cf300a26ca6052f728f1d6", null ]
+];

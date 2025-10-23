@@ -1,0 +1,4 @@
+var class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_diffs_1_1_displays_1_1_internals_1_1_diff_details_in_text_display =
+[
+    [ "DiffResult", "class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_diffs_1_1_displays_1_1_internals_1_1_diff_details_in_text_display.html#a5733a2caa49fe6f6d3f608b80b5adc79", null ]
+];

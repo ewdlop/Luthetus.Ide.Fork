@@ -1,0 +1,5 @@
+var class_luthetus_1_1_common_1_1_tests_1_1_basis_1_1_notifications_1_1_models_1_1_notification_helper_tests =
+[
+    [ "DispatchError", "class_luthetus_1_1_common_1_1_tests_1_1_basis_1_1_notifications_1_1_models_1_1_notification_helper_tests.html#a03c492d6de90830ee483ff45b56706de", null ],
+    [ "DispatchInformative", "class_luthetus_1_1_common_1_1_tests_1_1_basis_1_1_notifications_1_1_models_1_1_notification_helper_tests.html#ac72270a783b8961e8a54e5c31810c303", null ]
+];

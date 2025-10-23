@@ -1,0 +1,160 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="__background_task_service_tests_8cs_source" xml:lang="en-US">
+<title>BackgroundTaskServiceTests.cs</title>
+<indexterm><primary>Source/Tests/Common/Basis/BackgroundTasks/Models/BackgroundTaskServiceTests.cs</primary></indexterm>
+Go to the documentation of this file.<programlisting linenumbering="unnumbered"><anchor xml:id="__background_task_service_tests_8cs_source_1l00001"/>00001 <emphasis role="keyword">using&#32;</emphasis>Microsoft.Extensions.DependencyInjection;
+<anchor xml:id="__background_task_service_tests_8cs_source_1l00002"/>00002 <emphasis role="keyword">using&#32;</emphasis>Microsoft.Extensions.Logging;
+<anchor xml:id="__background_task_service_tests_8cs_source_1l00003"/>00003 <emphasis role="keyword">using&#32;</emphasis>Microsoft.Extensions.Logging.Abstractions;
+<anchor xml:id="__background_task_service_tests_8cs_source_1l00004"/>00004 <emphasis role="keyword">using&#32;</emphasis>Fluxor;
+<anchor xml:id="__background_task_service_tests_8cs_source_1l00005"/>00005 <emphasis role="keyword">using&#32;</emphasis><link linkend="_namespace_luthetus_1_1_common_1_1_razor_lib_1_1_background_tasks_1_1_models">Luthetus.Common.RazorLib.BackgroundTasks.Models</link>;
+<anchor xml:id="__background_task_service_tests_8cs_source_1l00006"/>00006 <emphasis role="keyword">using&#32;</emphasis><link linkend="_namespace_luthetus_1_1_common_1_1_razor_lib_1_1_keys_1_1_models">Luthetus.Common.RazorLib.Keys.Models</link>;
+<anchor xml:id="__background_task_service_tests_8cs_source_1l00007"/>00007 
+<anchor xml:id="__background_task_service_tests_8cs_source_1l00008"/>00008 <emphasis role="keyword">namespace&#32;</emphasis><link linkend="_namespace_luthetus_1_1_common_1_1_tests_1_1_basis_1_1_background_tasks_1_1_models">Luthetus.Common.Tests.Basis.BackgroundTasks.Models</link>;
+<anchor xml:id="__background_task_service_tests_8cs_source_1l00009"/>00009 
+<anchor xml:id="__background_task_service_tests_8cs_source_1l00013"/><link linkend="_class_luthetus_1_1_common_1_1_tests_1_1_basis_1_1_background_tasks_1_1_models_1_1_background_task_service_tests">00013</link> <emphasis role="keyword">public</emphasis>&#32;<emphasis role="keyword">class&#32;</emphasis><link linkend="_class_luthetus_1_1_common_1_1_tests_1_1_basis_1_1_background_tasks_1_1_models_1_1_background_task_service_tests">BackgroundTaskServiceTests</link>
+<anchor xml:id="__background_task_service_tests_8cs_source_1l00014"/>00014 {
+<anchor xml:id="__background_task_service_tests_8cs_source_1l00029"/>00029 &#32;&#32;&#32;&#32;[Fact]
+<anchor xml:id="__background_task_service_tests_8cs_source_1l00030"/><link linkend="_class_luthetus_1_1_common_1_1_tests_1_1_basis_1_1_background_tasks_1_1_models_1_1_background_task_service_tests_1ae1ad703588edc6c4ece91087db0ddfec">00030</link> &#32;&#32;&#32;&#32;<emphasis role="keyword">public</emphasis>&#32;async&#32;<emphasis role="keywordtype">void</emphasis>&#32;<link linkend="_class_luthetus_1_1_common_1_1_tests_1_1_basis_1_1_background_tasks_1_1_models_1_1_background_task_service_tests_1ae1ad703588edc6c4ece91087db0ddfec">EnqueueA</link>()
+<anchor xml:id="__background_task_service_tests_8cs_source_1l00031"/>00031 &#32;&#32;&#32;&#32;{
+<anchor xml:id="__background_task_service_tests_8cs_source_1l00032"/>00032 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;InitializeBackgroundTaskServiceTests(
+<anchor xml:id="__background_task_service_tests_8cs_source_1l00033"/>00033 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;out&#32;var&#32;backgroundTaskService,
+<anchor xml:id="__background_task_service_tests_8cs_source_1l00034"/>00034 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;out&#32;var&#32;worker,
+<anchor xml:id="__background_task_service_tests_8cs_source_1l00035"/>00035 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;out&#32;var&#32;queue,
+<anchor xml:id="__background_task_service_tests_8cs_source_1l00036"/>00036 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;out&#32;var&#32;cancellationTokenSource,
+<anchor xml:id="__background_task_service_tests_8cs_source_1l00037"/>00037 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;out&#32;_,
+<anchor xml:id="__background_task_service_tests_8cs_source_1l00038"/>00038 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;out&#32;_,
+<anchor xml:id="__background_task_service_tests_8cs_source_1l00039"/>00039 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;out&#32;_);
+<anchor xml:id="__background_task_service_tests_8cs_source_1l00040"/>00040 
+<anchor xml:id="__background_task_service_tests_8cs_source_1l00041"/>00041 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;Assert.Null(queue.ExecutingBackgroundTask);
+<anchor xml:id="__background_task_service_tests_8cs_source_1l00042"/>00042 
+<anchor xml:id="__background_task_service_tests_8cs_source_1l00043"/>00043 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;var&#32;number&#32;=&#32;0;
+<anchor xml:id="__background_task_service_tests_8cs_source_1l00044"/>00044 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;Assert.Equal(0,&#32;number);
+<anchor xml:id="__background_task_service_tests_8cs_source_1l00045"/>00045 
+<anchor xml:id="__background_task_service_tests_8cs_source_1l00046"/>00046 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;foreach&#32;backgroundTask&#32;(number&#32;+=&#32;2);&#32;from&#32;the&#32;event.</emphasis>
+<anchor xml:id="__background_task_service_tests_8cs_source_1l00047"/>00047 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;Set&#32;executing&#32;to&#32;the&#32;task&#32;is&#32;+1,&#32;then&#32;set&#32;the&#32;executing&#32;to&#32;null&#32;is&#32;another&#32;+1</emphasis>
+<anchor xml:id="__background_task_service_tests_8cs_source_1l00048"/>00048 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordtype">void</emphasis>&#32;OnExecutingBackgroundTaskChanged()
+<anchor xml:id="__background_task_service_tests_8cs_source_1l00049"/>00049 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;{
+<anchor xml:id="__background_task_service_tests_8cs_source_1l00050"/>00050 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;number++;
+<anchor xml:id="__background_task_service_tests_8cs_source_1l00051"/>00051 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;}
+<anchor xml:id="__background_task_service_tests_8cs_source_1l00052"/>00052 
+<anchor xml:id="__background_task_service_tests_8cs_source_1l00053"/>00053 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;queue.ExecutingBackgroundTaskChanged&#32;+=&#32;OnExecutingBackgroundTaskChanged;
+<anchor xml:id="__background_task_service_tests_8cs_source_1l00054"/>00054 
+<anchor xml:id="__background_task_service_tests_8cs_source_1l00055"/>00055 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;1st&#32;backgroundTask</emphasis>
+<anchor xml:id="__background_task_service_tests_8cs_source_1l00056"/>00056 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;{
+<anchor xml:id="__background_task_service_tests_8cs_source_1l00057"/>00057 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;var&#32;firstBackgroundTaskKey&#32;=&#32;Key&lt;IBackgroundTask&gt;.NewKey();
+<anchor xml:id="__background_task_service_tests_8cs_source_1l00058"/>00058 
+<anchor xml:id="__background_task_service_tests_8cs_source_1l00059"/>00059 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;var&#32;firstBackgroundTask&#32;=&#32;<emphasis role="keyword">new</emphasis>&#32;<link linkend="_class_luthetus_1_1_common_1_1_razor_lib_1_1_background_tasks_1_1_models_1_1_background_task">BackgroundTask</link>(
+<anchor xml:id="__background_task_service_tests_8cs_source_1l00060"/>00060 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;firstBackgroundTaskKey,
+<anchor xml:id="__background_task_service_tests_8cs_source_1l00061"/>00061 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;queue.Key,
+<anchor xml:id="__background_task_service_tests_8cs_source_1l00062"/>00062 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="stringliteral">&quot;Abc&quot;</emphasis>,
+<anchor xml:id="__background_task_service_tests_8cs_source_1l00063"/>00063 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;async&#32;()&#32;=&gt;
+<anchor xml:id="__background_task_service_tests_8cs_source_1l00064"/>00064 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;{
+<anchor xml:id="__background_task_service_tests_8cs_source_1l00065"/>00065 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;Have&#32;both&#32;backgroundTasks&#32;enqueue&apos;d&#32;by&#32;invoking&#32;&apos;await&#32;Task.Yield();&apos;</emphasis>
+<anchor xml:id="__background_task_service_tests_8cs_source_1l00066"/>00066 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;await&#32;Task.Yield();
+<anchor xml:id="__background_task_service_tests_8cs_source_1l00067"/>00067 
+<anchor xml:id="__background_task_service_tests_8cs_source_1l00068"/>00068 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;Assert.NotNull(queue.ExecutingBackgroundTask);
+<anchor xml:id="__background_task_service_tests_8cs_source_1l00069"/>00069 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;Assert.Equal(firstBackgroundTaskKey,&#32;queue.ExecutingBackgroundTask!.BackgroundTaskKey);
+<anchor xml:id="__background_task_service_tests_8cs_source_1l00070"/>00070 
+<anchor xml:id="__background_task_service_tests_8cs_source_1l00071"/>00071 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;number&#32;+=&#32;1;&#32;from&#32;the&#32;task.</emphasis>
+<anchor xml:id="__background_task_service_tests_8cs_source_1l00072"/>00072 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;number++;
+<anchor xml:id="__background_task_service_tests_8cs_source_1l00073"/>00073 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;});
+<anchor xml:id="__background_task_service_tests_8cs_source_1l00074"/>00074 
+<anchor xml:id="__background_task_service_tests_8cs_source_1l00075"/>00075 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;backgroundTaskService.Enqueue(firstBackgroundTask);
+<anchor xml:id="__background_task_service_tests_8cs_source_1l00076"/>00076 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;}
+<anchor xml:id="__background_task_service_tests_8cs_source_1l00077"/>00077 
+<anchor xml:id="__background_task_service_tests_8cs_source_1l00078"/>00078 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;2nd&#32;backgroundTask</emphasis>
+<anchor xml:id="__background_task_service_tests_8cs_source_1l00079"/>00079 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;{
+<anchor xml:id="__background_task_service_tests_8cs_source_1l00080"/>00080 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;var&#32;secondBackgroundTaskKey&#32;=&#32;Key&lt;IBackgroundTask&gt;.NewKey();
+<anchor xml:id="__background_task_service_tests_8cs_source_1l00081"/>00081 
+<anchor xml:id="__background_task_service_tests_8cs_source_1l00082"/>00082 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;backgroundTaskService.Enqueue(
+<anchor xml:id="__background_task_service_tests_8cs_source_1l00083"/>00083 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;secondBackgroundTaskKey,
+<anchor xml:id="__background_task_service_tests_8cs_source_1l00084"/>00084 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;queue.Key,
+<anchor xml:id="__background_task_service_tests_8cs_source_1l00085"/>00085 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="stringliteral">&quot;Zyx&quot;</emphasis>,
+<anchor xml:id="__background_task_service_tests_8cs_source_1l00086"/>00086 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;()&#32;=&gt;
+<anchor xml:id="__background_task_service_tests_8cs_source_1l00087"/>00087 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;{
+<anchor xml:id="__background_task_service_tests_8cs_source_1l00088"/>00088 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;Assert&#32;that&#32;the&#32;first&#32;backgroundTask&#32;is&#32;finished.</emphasis>
+<anchor xml:id="__background_task_service_tests_8cs_source_1l00089"/>00089 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;(4&#32;happens&#32;to&#32;be&#32;the&#32;result&#32;given&#32;the&#32;current&#32;unorganized&#32;state-mutations&#32;that&#32;I&#32;wrote&#32;|&#32;(2023-11-19))</emphasis>
+<anchor xml:id="__background_task_service_tests_8cs_source_1l00090"/>00090 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;Assert.Equal(4,&#32;number);
+<anchor xml:id="__background_task_service_tests_8cs_source_1l00091"/>00091 
+<anchor xml:id="__background_task_service_tests_8cs_source_1l00092"/>00092 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;Assert.NotNull(queue.ExecutingBackgroundTask);
+<anchor xml:id="__background_task_service_tests_8cs_source_1l00093"/>00093 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;Assert.Equal(secondBackgroundTaskKey,&#32;queue.ExecutingBackgroundTask!.BackgroundTaskKey);
+<anchor xml:id="__background_task_service_tests_8cs_source_1l00094"/>00094 
+<anchor xml:id="__background_task_service_tests_8cs_source_1l00095"/>00095 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;number&#32;+=&#32;1;&#32;from&#32;the&#32;task.</emphasis>
+<anchor xml:id="__background_task_service_tests_8cs_source_1l00096"/>00096 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;number++;
+<anchor xml:id="__background_task_service_tests_8cs_source_1l00097"/>00097 
+<anchor xml:id="__background_task_service_tests_8cs_source_1l00098"/>00098 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;return&#32;Task.CompletedTask;
+<anchor xml:id="__background_task_service_tests_8cs_source_1l00099"/>00099 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;});
+<anchor xml:id="__background_task_service_tests_8cs_source_1l00100"/>00100 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;}
+<anchor xml:id="__background_task_service_tests_8cs_source_1l00101"/>00101 
+<anchor xml:id="__background_task_service_tests_8cs_source_1l00102"/>00102 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;await&#32;worker.StopAsync(CancellationToken.None);
+<anchor xml:id="__background_task_service_tests_8cs_source_1l00103"/>00103 
+<anchor xml:id="__background_task_service_tests_8cs_source_1l00104"/>00104 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;queue.ExecutingBackgroundTaskChanged&#32;-=&#32;OnExecutingBackgroundTaskChanged;
+<anchor xml:id="__background_task_service_tests_8cs_source_1l00105"/>00105 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;Assert.Null(queue.ExecutingBackgroundTask);
+<anchor xml:id="__background_task_service_tests_8cs_source_1l00106"/>00106 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;Assert.Equal(6,&#32;number);
+<anchor xml:id="__background_task_service_tests_8cs_source_1l00107"/>00107 &#32;&#32;&#32;&#32;}
+<anchor xml:id="__background_task_service_tests_8cs_source_1l00108"/>00108 
+<anchor xml:id="__background_task_service_tests_8cs_source_1l00109"/>00109 &#32;&#32;&#32;&#32;<emphasis role="keyword">private</emphasis>&#32;<emphasis role="keywordtype">void</emphasis>&#32;InitializeBackgroundTaskServiceTests(
+<anchor xml:id="__background_task_service_tests_8cs_source_1l00110"/>00110 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;out&#32;<link linkend="_class_luthetus_1_1_common_1_1_razor_lib_1_1_background_tasks_1_1_models_1_1_background_task_service">BackgroundTaskService</link>&#32;backgroundTaskService,
+<anchor xml:id="__background_task_service_tests_8cs_source_1l00111"/>00111 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;out&#32;<link linkend="_class_luthetus_1_1_common_1_1_razor_lib_1_1_background_tasks_1_1_models_1_1_background_task_worker">BackgroundTaskWorker</link>&#32;continuousWorker,
+<anchor xml:id="__background_task_service_tests_8cs_source_1l00112"/>00112 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;out&#32;<link linkend="_class_luthetus_1_1_common_1_1_razor_lib_1_1_background_tasks_1_1_models_1_1_background_task_queue">BackgroundTaskQueue</link>&#32;continuousQueue,
+<anchor xml:id="__background_task_service_tests_8cs_source_1l00113"/>00113 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;out&#32;CancellationTokenSource&#32;continuousCancellationTokenSource,
+<anchor xml:id="__background_task_service_tests_8cs_source_1l00114"/>00114 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;out&#32;<link linkend="_class_luthetus_1_1_common_1_1_razor_lib_1_1_background_tasks_1_1_models_1_1_background_task_worker">BackgroundTaskWorker</link>&#32;blockingWorker,
+<anchor xml:id="__background_task_service_tests_8cs_source_1l00115"/>00115 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;out&#32;<link linkend="_class_luthetus_1_1_common_1_1_razor_lib_1_1_background_tasks_1_1_models_1_1_background_task_queue">BackgroundTaskQueue</link>&#32;blockingQueue,
+<anchor xml:id="__background_task_service_tests_8cs_source_1l00116"/>00116 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;out&#32;CancellationTokenSource&#32;blockingCancellationTokenSource)
+<anchor xml:id="__background_task_service_tests_8cs_source_1l00117"/>00117 &#32;&#32;&#32;&#32;{
+<anchor xml:id="__background_task_service_tests_8cs_source_1l00118"/>00118 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;var&#32;services&#32;=&#32;<emphasis role="keyword">new</emphasis>&#32;ServiceCollection()
+<anchor xml:id="__background_task_service_tests_8cs_source_1l00119"/>00119 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;.AddScoped&lt;ILoggerFactory,&#32;NullLoggerFactory&gt;()
+<anchor xml:id="__background_task_service_tests_8cs_source_1l00120"/>00120 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;.<link linkend="__lib_2_ide_2_host_8_blazor_web_assembly_2_program_8cs_1ad23e038402085511bf6d150f155199f9">AddScoped&lt;IBackgroundTaskService&gt;</link>(_&#32;=&gt;&#32;<emphasis role="keyword">new</emphasis>&#32;<link linkend="_class_luthetus_1_1_common_1_1_razor_lib_1_1_background_tasks_1_1_models_1_1_background_task_service">BackgroundTaskService</link>())
+<anchor xml:id="__background_task_service_tests_8cs_source_1l00121"/>00121 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;.AddScoped(sp&#32;=&gt;&#32;<emphasis role="keyword">new</emphasis>&#32;<link linkend="_class_luthetus_1_1_common_1_1_razor_lib_1_1_background_tasks_1_1_models_1_1_continuous_background_task_worker">ContinuousBackgroundTaskWorker</link>(
+<anchor xml:id="__background_task_service_tests_8cs_source_1l00122"/>00122 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;sp.GetRequiredService&lt;<link linkend="_interface_luthetus_1_1_common_1_1_razor_lib_1_1_background_tasks_1_1_models_1_1_i_background_task_service">IBackgroundTaskService</link>&gt;(),
+<anchor xml:id="__background_task_service_tests_8cs_source_1l00123"/>00123 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;sp.GetRequiredService&lt;ILoggerFactory&gt;()))
+<anchor xml:id="__background_task_service_tests_8cs_source_1l00124"/>00124 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;.AddScoped(sp&#32;=&gt;&#32;<emphasis role="keyword">new</emphasis>&#32;<link linkend="_class_luthetus_1_1_common_1_1_razor_lib_1_1_background_tasks_1_1_models_1_1_blocking_background_task_worker">BlockingBackgroundTaskWorker</link>(
+<anchor xml:id="__background_task_service_tests_8cs_source_1l00125"/>00125 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;sp.GetRequiredService&lt;<link linkend="_interface_luthetus_1_1_common_1_1_razor_lib_1_1_background_tasks_1_1_models_1_1_i_background_task_service">IBackgroundTaskService</link>&gt;(),
+<anchor xml:id="__background_task_service_tests_8cs_source_1l00126"/>00126 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;sp.GetRequiredService&lt;ILoggerFactory&gt;()))
+<anchor xml:id="__background_task_service_tests_8cs_source_1l00127"/>00127 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;.AddFluxor(options&#32;=&gt;&#32;options.ScanAssemblies(typeof(<link linkend="_interface_luthetus_1_1_common_1_1_razor_lib_1_1_background_tasks_1_1_models_1_1_i_background_task_service">IBackgroundTaskService</link>).Assembly));
+<anchor xml:id="__background_task_service_tests_8cs_source_1l00128"/>00128 
+<anchor xml:id="__background_task_service_tests_8cs_source_1l00129"/>00129 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;var&#32;serviceProvider&#32;=&#32;services.BuildServiceProvider();
+<anchor xml:id="__background_task_service_tests_8cs_source_1l00130"/>00130 
+<anchor xml:id="__background_task_service_tests_8cs_source_1l00131"/>00131 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;var&#32;store&#32;=&#32;serviceProvider.GetRequiredService&lt;IStore&gt;();
+<anchor xml:id="__background_task_service_tests_8cs_source_1l00132"/>00132 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;store.InitializeAsync().Wait();
+<anchor xml:id="__background_task_service_tests_8cs_source_1l00133"/>00133 
+<anchor xml:id="__background_task_service_tests_8cs_source_1l00134"/>00134 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;backgroundTaskService&#32;=&#32;(<link linkend="_class_luthetus_1_1_common_1_1_razor_lib_1_1_background_tasks_1_1_models_1_1_background_task_service">BackgroundTaskService</link>)serviceProvider.GetRequiredService&lt;<link linkend="_interface_luthetus_1_1_common_1_1_razor_lib_1_1_background_tasks_1_1_models_1_1_i_background_task_service">IBackgroundTaskService</link>&gt;();
+<anchor xml:id="__background_task_service_tests_8cs_source_1l00135"/>00135 
+<anchor xml:id="__background_task_service_tests_8cs_source_1l00136"/>00136 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;var&#32;temporaryContinuousWorker&#32;=
+<anchor xml:id="__background_task_service_tests_8cs_source_1l00137"/>00137 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;continuousWorker&#32;=
+<anchor xml:id="__background_task_service_tests_8cs_source_1l00138"/>00138 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;serviceProvider.GetRequiredService&lt;<link linkend="_class_luthetus_1_1_common_1_1_razor_lib_1_1_background_tasks_1_1_models_1_1_continuous_background_task_worker">ContinuousBackgroundTaskWorker</link>&gt;();
+<anchor xml:id="__background_task_service_tests_8cs_source_1l00139"/>00139 
+<anchor xml:id="__background_task_service_tests_8cs_source_1l00140"/>00140 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;continuousQueue&#32;=&#32;<emphasis role="keyword">new</emphasis>&#32;<link linkend="_class_luthetus_1_1_common_1_1_razor_lib_1_1_background_tasks_1_1_models_1_1_background_task_queue">BackgroundTaskQueue</link>(
+<anchor xml:id="__background_task_service_tests_8cs_source_1l00141"/>00141 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<link linkend="_class_luthetus_1_1_common_1_1_razor_lib_1_1_background_tasks_1_1_models_1_1_continuous_background_task_worker">ContinuousBackgroundTaskWorker</link>.<link linkend="_class_luthetus_1_1_common_1_1_razor_lib_1_1_background_tasks_1_1_models_1_1_continuous_background_task_worker_1a2bbecf18336413ee1caff9d378acc256">GetQueueKey</link>(),
+<anchor xml:id="__background_task_service_tests_8cs_source_1l00142"/>00142 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<link linkend="_class_luthetus_1_1_common_1_1_razor_lib_1_1_background_tasks_1_1_models_1_1_continuous_background_task_worker">ContinuousBackgroundTaskWorker</link>.<link linkend="_class_luthetus_1_1_common_1_1_razor_lib_1_1_background_tasks_1_1_models_1_1_continuous_background_task_worker_1a22c2b04c4f8e393a7ab0f17031f1a43a">QUEUE_DISPLAY_NAME</link>);
+<anchor xml:id="__background_task_service_tests_8cs_source_1l00143"/>00143 
+<anchor xml:id="__background_task_service_tests_8cs_source_1l00144"/>00144 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;backgroundTaskService.RegisterQueue(continuousQueue);
+<anchor xml:id="__background_task_service_tests_8cs_source_1l00145"/>00145 
+<anchor xml:id="__background_task_service_tests_8cs_source_1l00146"/>00146 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;var&#32;temporaryBlockingWorker&#32;=
+<anchor xml:id="__background_task_service_tests_8cs_source_1l00147"/>00147 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;blockingWorker&#32;=
+<anchor xml:id="__background_task_service_tests_8cs_source_1l00148"/>00148 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;serviceProvider.GetRequiredService&lt;<link linkend="_class_luthetus_1_1_common_1_1_razor_lib_1_1_background_tasks_1_1_models_1_1_blocking_background_task_worker">BlockingBackgroundTaskWorker</link>&gt;();
+<anchor xml:id="__background_task_service_tests_8cs_source_1l00149"/>00149 
+<anchor xml:id="__background_task_service_tests_8cs_source_1l00150"/>00150 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;blockingQueue&#32;=&#32;<emphasis role="keyword">new</emphasis>&#32;<link linkend="_class_luthetus_1_1_common_1_1_razor_lib_1_1_background_tasks_1_1_models_1_1_background_task_queue">BackgroundTaskQueue</link>(
+<anchor xml:id="__background_task_service_tests_8cs_source_1l00151"/>00151 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<link linkend="_class_luthetus_1_1_common_1_1_razor_lib_1_1_background_tasks_1_1_models_1_1_blocking_background_task_worker">BlockingBackgroundTaskWorker</link>.<link linkend="_class_luthetus_1_1_common_1_1_razor_lib_1_1_background_tasks_1_1_models_1_1_blocking_background_task_worker_1a267091acd637305c1ddcfe78bef3343f">GetQueueKey</link>(),
+<anchor xml:id="__background_task_service_tests_8cs_source_1l00152"/>00152 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<link linkend="_class_luthetus_1_1_common_1_1_razor_lib_1_1_background_tasks_1_1_models_1_1_blocking_background_task_worker">BlockingBackgroundTaskWorker</link>.<link linkend="_class_luthetus_1_1_common_1_1_razor_lib_1_1_background_tasks_1_1_models_1_1_blocking_background_task_worker_1a15164ffc66eccc1ab15eccb3351b13d0">QUEUE_DISPLAY_NAME</link>);
+<anchor xml:id="__background_task_service_tests_8cs_source_1l00153"/>00153 
+<anchor xml:id="__background_task_service_tests_8cs_source_1l00154"/>00154 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;backgroundTaskService.RegisterQueue(blockingQueue);
+<anchor xml:id="__background_task_service_tests_8cs_source_1l00155"/>00155 
+<anchor xml:id="__background_task_service_tests_8cs_source_1l00156"/>00156 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;continuousCancellationTokenSource&#32;=&#32;<emphasis role="keyword">new</emphasis>&#32;CancellationTokenSource();
+<anchor xml:id="__background_task_service_tests_8cs_source_1l00157"/>00157 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;var&#32;continuousCancellationToken&#32;=&#32;continuousCancellationTokenSource.Token;
+<anchor xml:id="__background_task_service_tests_8cs_source_1l00158"/>00158 
+<anchor xml:id="__background_task_service_tests_8cs_source_1l00159"/>00159 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;_&#32;=&#32;Task.Run(async&#32;()&#32;=&gt;&#32;await&#32;temporaryContinuousWorker
+<anchor xml:id="__background_task_service_tests_8cs_source_1l00160"/>00160 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;.StartAsync(continuousCancellationToken)
+<anchor xml:id="__background_task_service_tests_8cs_source_1l00161"/>00161 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;.ConfigureAwait(<emphasis role="keyword">false</emphasis>),
+<anchor xml:id="__background_task_service_tests_8cs_source_1l00162"/>00162 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;continuousCancellationToken);
+<anchor xml:id="__background_task_service_tests_8cs_source_1l00163"/>00163 
+<anchor xml:id="__background_task_service_tests_8cs_source_1l00164"/>00164 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;blockingCancellationTokenSource&#32;=&#32;<emphasis role="keyword">new</emphasis>&#32;CancellationTokenSource();
+<anchor xml:id="__background_task_service_tests_8cs_source_1l00165"/>00165 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;var&#32;blockingCancellationToken&#32;=&#32;blockingCancellationTokenSource.Token;
+<anchor xml:id="__background_task_service_tests_8cs_source_1l00166"/>00166 
+<anchor xml:id="__background_task_service_tests_8cs_source_1l00167"/>00167 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;_&#32;=&#32;Task.Run(async&#32;()&#32;=&gt;&#32;await&#32;temporaryBlockingWorker
+<anchor xml:id="__background_task_service_tests_8cs_source_1l00168"/>00168 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;.StartAsync(blockingCancellationToken)
+<anchor xml:id="__background_task_service_tests_8cs_source_1l00169"/>00169 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;.ConfigureAwait(<emphasis role="keyword">false</emphasis>),
+<anchor xml:id="__background_task_service_tests_8cs_source_1l00170"/>00170 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;blockingCancellationToken);
+<anchor xml:id="__background_task_service_tests_8cs_source_1l00171"/>00171 &#32;&#32;&#32;&#32;}
+<anchor xml:id="__background_task_service_tests_8cs_source_1l00172"/>00172 }
+</programlisting></section>

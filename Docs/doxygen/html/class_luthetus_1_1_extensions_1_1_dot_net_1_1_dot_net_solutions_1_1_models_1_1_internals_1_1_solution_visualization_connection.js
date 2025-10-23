@@ -1,0 +1,6 @@
+var class_luthetus_1_1_extensions_1_1_dot_net_1_1_dot_net_solutions_1_1_models_1_1_internals_1_1_solution_visualization_connection =
+[
+    [ "SolutionVisualizationConnection", "class_luthetus_1_1_extensions_1_1_dot_net_1_1_dot_net_solutions_1_1_models_1_1_internals_1_1_solution_visualization_connection.html#a11c64ac5b48023a76a34488f0e3293da", null ],
+    [ "EndSolutionVisualizationDrawing", "class_luthetus_1_1_extensions_1_1_dot_net_1_1_dot_net_solutions_1_1_models_1_1_internals_1_1_solution_visualization_connection.html#a09c3a5ee46fdcfdedad3b4ac5a8a6e33", null ],
+    [ "StartSolutionVisualizationDrawing", "class_luthetus_1_1_extensions_1_1_dot_net_1_1_dot_net_solutions_1_1_models_1_1_internals_1_1_solution_visualization_connection.html#a5b65976d22a5866fa3ccd8bd0efb039a", null ]
+];

@@ -1,0 +1,137 @@
+.TH "Luthetus.Common.RazorLib.Reactives.Models.ThrottleEventQueueAsync" 3 "Version 1.0.0" "Luthetus.Ide" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+Luthetus.Common.RazorLib.Reactives.Models.ThrottleEventQueueAsync \- This type is thread safe\&.
+.br
+
+.br
+\&.  
+
+.SH SYNOPSIS
+.br
+.PP
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "async Task \fBEnqueueAsync\fP (\fBIBackgroundTask\fP downstreamEvent)"
+.br
+.RI "When enqueueing an event, a batchFunc is also provided\&.
+.br
+
+.br
+\&. "
+.ti -1c
+.RI "async Task< \fBIBackgroundTask\fP > \fBDequeueOrDefaultAsync\fP ()"
+.br
+.RI "Returns the first entry in the queue, according to 'first in first out'\&. "
+.ti -1c
+.RI "async Task \fBStopFurtherEnqueuesAsync\fP ()"
+.br
+.ti -1c
+.RI "async Task \fBUntilIsEmptyAsync\fP (TimeSpan? pollingTimeSpan=null, CancellationToken cancellationToken=default)"
+.br
+.RI "This method does NOT prevent enqueues while flushing\&. To do so, invoke StopFurtherEnqueuesAsync() prior to invoking this method\&.
+.br
+
+.br
+\&. "
+.in -1c
+.SS "Properties"
+
+.in +1c
+.ti -1c
+.RI "bool \fBIsStoppingFurtherEnqueues\fP\fR [get]\fP"
+.br
+.ti -1c
+.RI "int \fBCount\fP\fR [get]\fP"
+.br
+.RI "Returns the amount of \fBIBackgroundTask\fP(s) in the queue\&. "
+.ti -1c
+.RI "ImmutableArray< \fBIBackgroundTask\fP > \fBThrottleEventList\fP\fR [get]\fP"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+This type is thread safe\&.
+.br
+
+.br
+\&. 
+.PP
+Definition at line \fB10\fP of file \fBThrottleEventQueueAsync\&.cs\fP\&.
+.SH "Member Function Documentation"
+.PP 
+.SS "async Task< \fBIBackgroundTask\fP > Luthetus\&.Common\&.RazorLib\&.Reactives\&.Models\&.ThrottleEventQueueAsync\&.DequeueOrDefaultAsync ()"
+
+.PP
+Returns the first entry in the queue, according to 'first in first out'\&. 
+.PP
+Definition at line \fB117\fP of file \fBThrottleEventQueueAsync\&.cs\fP\&.
+.SS "async Task Luthetus\&.Common\&.RazorLib\&.Reactives\&.Models\&.ThrottleEventQueueAsync\&.EnqueueAsync (\fBIBackgroundTask\fP downstreamEvent)"
+
+.PP
+When enqueueing an event, a batchFunc is also provided\&.
+.br
+
+.br
+\&. The batchFunc is to take the 'to-be-queued' entry, and decide if it can merge with the last event in the queue, as to make a batched event\&.
+.br
+
+.br
+
+.PP
+This batchFunc is invoked over and over, until either a null 'batch event' is returned\&. Or, there are no more entries in the queue to merge with\&.
+.br
+
+.br
+
+.PP
+When a null 'batch event' is returned, then the last item in the queue remains unchanged, and after it the 'to-be-queued' is ultimately queued\&.
+.br
+
+.br
+
+.PP
+Each invocation of the 'batchFunc' will replace the 'to-be-queued' unless the 'batch event' returned was null\&.
+.br
+
+.br
+ 
+.PP
+Definition at line \fB52\fP of file \fBThrottleEventQueueAsync\&.cs\fP\&.
+.SS "async Task Luthetus\&.Common\&.RazorLib\&.Reactives\&.Models\&.ThrottleEventQueueAsync\&.StopFurtherEnqueuesAsync ()"
+
+.PP
+Definition at line \fB162\fP of file \fBThrottleEventQueueAsync\&.cs\fP\&.
+.SS "async Task Luthetus\&.Common\&.RazorLib\&.Reactives\&.Models\&.ThrottleEventQueueAsync\&.UntilIsEmptyAsync (TimeSpan? pollingTimeSpan = \fRnull\fP, CancellationToken cancellationToken = \fRdefault\fP)"
+
+.PP
+This method does NOT prevent enqueues while flushing\&. To do so, invoke StopFurtherEnqueuesAsync() prior to invoking this method\&.
+.br
+
+.br
+\&. The implementation of this method is a polling solution (as of this comment (2024-05-09))\&. 
+.PP
+Definition at line \fB183\fP of file \fBThrottleEventQueueAsync\&.cs\fP\&.
+.SH "Property Documentation"
+.PP 
+.SS "int Luthetus\&.Common\&.RazorLib\&.Reactives\&.Models\&.ThrottleEventQueueAsync\&.Count\fR [get]\fP"
+
+.PP
+Returns the amount of \fBIBackgroundTask\fP(s) in the queue\&. 
+.PP
+Definition at line \fB34\fP of file \fBThrottleEventQueueAsync\&.cs\fP\&.
+.SS "bool Luthetus\&.Common\&.RazorLib\&.Reactives\&.Models\&.ThrottleEventQueueAsync\&.IsStoppingFurtherEnqueues\fR [get]\fP"
+
+.PP
+Definition at line \fB29\fP of file \fBThrottleEventQueueAsync\&.cs\fP\&.
+.SS "ImmutableArray<\fBIBackgroundTask\fP> Luthetus\&.Common\&.RazorLib\&.Reactives\&.Models\&.ThrottleEventQueueAsync\&.ThrottleEventList\fR [get]\fP"
+
+.PP
+Definition at line \fB36\fP of file \fBThrottleEventQueueAsync\&.cs\fP\&.
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for Luthetus\&.Ide from the source code\&.

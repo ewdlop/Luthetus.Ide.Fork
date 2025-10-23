@@ -1,0 +1,69 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="__input_file_state_8_common_8cs_source" xml:lang="en-US">
+<title>InputFileState.Common.cs</title>
+<indexterm><primary>Source/Lib/Ide/Ide.RazorLib/InputFiles/States/InputFileState.Common.cs</primary></indexterm>
+Go to the documentation of this file.<programlisting linenumbering="unnumbered"><anchor xml:id="__input_file_state_8_common_8cs_source_1l00001"/>00001 <emphasis role="keyword">using&#32;</emphasis><link linkend="_namespace_luthetus_1_1_common_1_1_razor_lib_1_1_component_renderers_1_1_models">Luthetus.Common.RazorLib.ComponentRenderers.Models</link>;
+<anchor xml:id="__input_file_state_8_common_8cs_source_1l00002"/>00002 <emphasis role="keyword">using&#32;</emphasis><link linkend="_namespace_luthetus_1_1_common_1_1_razor_lib_1_1_file_systems_1_1_models">Luthetus.Common.RazorLib.FileSystems.Models</link>;
+<anchor xml:id="__input_file_state_8_common_8cs_source_1l00003"/>00003 <emphasis role="keyword">using&#32;</emphasis><link linkend="_namespace_luthetus_1_1_ide_1_1_razor_lib_1_1_component_renderers_1_1_models">Luthetus.Ide.RazorLib.ComponentRenderers.Models</link>;
+<anchor xml:id="__input_file_state_8_common_8cs_source_1l00004"/>00004 <emphasis role="keyword">using&#32;</emphasis><link linkend="_namespace_luthetus_1_1_ide_1_1_razor_lib_1_1_file_systems_1_1_models">Luthetus.Ide.RazorLib.FileSystems.Models</link>;
+<anchor xml:id="__input_file_state_8_common_8cs_source_1l00005"/>00005 
+<anchor xml:id="__input_file_state_8_common_8cs_source_1l00006"/>00006 <emphasis role="keyword">namespace&#32;</emphasis><link linkend="_namespace_luthetus_1_1_ide_1_1_razor_lib_1_1_input_files_1_1_states">Luthetus.Ide.RazorLib.InputFiles.States</link>;
+<anchor xml:id="__input_file_state_8_common_8cs_source_1l00007"/>00007 
+<anchor xml:id="__input_file_state_8_common_8cs_source_1l00008"/>00008 <emphasis role="keyword">public</emphasis>&#32;partial&#32;record&#32;<link linkend="_namespace_luthetus_1_1_ide_1_1_razor_lib_1_1_input_files_1_1_states_1adea9f28dd37beadbdebbbcda3e108036">InputFileState</link>
+<anchor xml:id="__input_file_state_8_common_8cs_source_1l00009"/>00009 {
+<anchor xml:id="__input_file_state_8_common_8cs_source_1l00010"/>00010 &#32;&#32;&#32;&#32;<emphasis role="keyword">public</emphasis>&#32;<emphasis role="keywordtype">bool</emphasis>&#32;CanMoveBackwardsInHistory&#32;=&gt;&#32;IndexInHistory&#32;&gt;&#32;0;
+<anchor xml:id="__input_file_state_8_common_8cs_source_1l00011"/>00011 &#32;&#32;&#32;&#32;<emphasis role="keyword">public</emphasis>&#32;<emphasis role="keywordtype">bool</emphasis>&#32;CanMoveForwardsInHistory&#32;=&gt;&#32;IndexInHistory&#32;&lt;&#32;OpenedTreeViewModelHistoryList.Count&#32;-&#32;1;
+<anchor xml:id="__input_file_state_8_common_8cs_source_1l00012"/>00012 
+<anchor xml:id="__input_file_state_8_common_8cs_source_1l00013"/>00013 &#32;&#32;&#32;&#32;<emphasis role="keyword">public</emphasis>&#32;TreeViewAbsolutePath?&#32;GetOpenedTreeView()
+<anchor xml:id="__input_file_state_8_common_8cs_source_1l00014"/>00014 &#32;&#32;&#32;&#32;{
+<anchor xml:id="__input_file_state_8_common_8cs_source_1l00015"/>00015 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">if</emphasis>&#32;(IndexInHistory&#32;==&#32;-1&#32;||&#32;IndexInHistory&#32;&gt;=&#32;OpenedTreeViewModelHistoryList.Count)
+<anchor xml:id="__input_file_state_8_common_8cs_source_1l00016"/>00016 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;<emphasis role="keyword">null</emphasis>;
+<anchor xml:id="__input_file_state_8_common_8cs_source_1l00017"/>00017 
+<anchor xml:id="__input_file_state_8_common_8cs_source_1l00018"/>00018 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;OpenedTreeViewModelHistoryList[IndexInHistory];
+<anchor xml:id="__input_file_state_8_common_8cs_source_1l00019"/>00019 &#32;&#32;&#32;&#32;}
+<anchor xml:id="__input_file_state_8_common_8cs_source_1l00020"/>00020 
+<anchor xml:id="__input_file_state_8_common_8cs_source_1l00021"/>00021 &#32;&#32;&#32;&#32;<emphasis role="keyword">private</emphasis>&#32;<emphasis role="keyword">static</emphasis>&#32;<link linkend="_namespace_luthetus_1_1_ide_1_1_razor_lib_1_1_input_files_1_1_states_1adea9f28dd37beadbdebbbcda3e108036">InputFileState</link>&#32;NewOpenedTreeViewModelHistory(
+<anchor xml:id="__input_file_state_8_common_8cs_source_1l00022"/>00022 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<link linkend="_namespace_luthetus_1_1_ide_1_1_razor_lib_1_1_input_files_1_1_states_1adea9f28dd37beadbdebbbcda3e108036">InputFileState</link>&#32;inInputFileState,
+<anchor xml:id="__input_file_state_8_common_8cs_source_1l00023"/>00023 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;TreeViewAbsolutePath&#32;selectedTreeViewModel,
+<anchor xml:id="__input_file_state_8_common_8cs_source_1l00024"/>00024 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;IIdeComponentRenderers&#32;ideComponentRenderers,
+<anchor xml:id="__input_file_state_8_common_8cs_source_1l00025"/>00025 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;ICommonComponentRenderers&#32;commonComponentRenderers,
+<anchor xml:id="__input_file_state_8_common_8cs_source_1l00026"/>00026 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;IFileSystemProvider&#32;fileSystemProvider,
+<anchor xml:id="__input_file_state_8_common_8cs_source_1l00027"/>00027 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;IEnvironmentProvider&#32;environmentProvider)
+<anchor xml:id="__input_file_state_8_common_8cs_source_1l00028"/>00028 &#32;&#32;&#32;&#32;{
+<anchor xml:id="__input_file_state_8_common_8cs_source_1l00029"/>00029 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;var&#32;selectionClone&#32;=&#32;<emphasis role="keyword">new</emphasis>&#32;TreeViewAbsolutePath(
+<anchor xml:id="__input_file_state_8_common_8cs_source_1l00030"/>00030 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;selectedTreeViewModel.<link linkend="_class_luthetus_1_1_common_1_1_razor_lib_1_1_tree_views_1_1_models_1_1_tree_view_with_type-1-g_1a4f46d99a34756894b183f9ce601825bc">Item</link>,
+<anchor xml:id="__input_file_state_8_common_8cs_source_1l00031"/>00031 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;ideComponentRenderers,
+<anchor xml:id="__input_file_state_8_common_8cs_source_1l00032"/>00032 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;commonComponentRenderers,
+<anchor xml:id="__input_file_state_8_common_8cs_source_1l00033"/>00033 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;fileSystemProvider,
+<anchor xml:id="__input_file_state_8_common_8cs_source_1l00034"/>00034 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;environmentProvider,
+<anchor xml:id="__input_file_state_8_common_8cs_source_1l00035"/>00035 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keyword">false</emphasis>,
+<anchor xml:id="__input_file_state_8_common_8cs_source_1l00036"/>00036 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keyword">true</emphasis>);
+<anchor xml:id="__input_file_state_8_common_8cs_source_1l00037"/>00037 
+<anchor xml:id="__input_file_state_8_common_8cs_source_1l00038"/>00038 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;selectionClone.IsExpanded&#32;=&#32;<emphasis role="keyword">true</emphasis>;
+<anchor xml:id="__input_file_state_8_common_8cs_source_1l00039"/>00039 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;selectionClone.ChildList&#32;=&#32;selectedTreeViewModel.<link linkend="_class_luthetus_1_1_common_1_1_razor_lib_1_1_tree_views_1_1_models_1_1_tree_view_no_type_1a8b306a73a4bbf27fc2475e3deec43a89">ChildList</link>;
+<anchor xml:id="__input_file_state_8_common_8cs_source_1l00040"/>00040 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;
+<anchor xml:id="__input_file_state_8_common_8cs_source_1l00041"/>00041 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;var&#32;nextHistory&#32;=&#32;inInputFileState.OpenedTreeViewModelHistoryList;
+<anchor xml:id="__input_file_state_8_common_8cs_source_1l00042"/>00042 
+<anchor xml:id="__input_file_state_8_common_8cs_source_1l00043"/>00043 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;If&#32;not&#32;at&#32;end&#32;of&#32;history&#32;the&#32;more&#32;recent&#32;history&#32;is</emphasis>
+<anchor xml:id="__input_file_state_8_common_8cs_source_1l00044"/>00044 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;replaced&#32;by&#32;the&#32;to&#32;be&#32;selected&#32;TreeViewModel</emphasis>
+<anchor xml:id="__input_file_state_8_common_8cs_source_1l00045"/>00045 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">if</emphasis>&#32;(inInputFileState.IndexInHistory&#32;!=&#32;inInputFileState.OpenedTreeViewModelHistoryList.Count&#32;-&#32;1)
+<anchor xml:id="__input_file_state_8_common_8cs_source_1l00046"/>00046 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;{
+<anchor xml:id="__input_file_state_8_common_8cs_source_1l00047"/>00047 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;var&#32;historyCount&#32;=&#32;inInputFileState.OpenedTreeViewModelHistoryList.Count;
+<anchor xml:id="__input_file_state_8_common_8cs_source_1l00048"/>00048 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;var&#32;startingIndexToRemove&#32;=&#32;inInputFileState.IndexInHistory&#32;+&#32;1;
+<anchor xml:id="__input_file_state_8_common_8cs_source_1l00049"/>00049 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;var&#32;countToRemove&#32;=&#32;historyCount&#32;-&#32;startingIndexToRemove;
+<anchor xml:id="__input_file_state_8_common_8cs_source_1l00050"/>00050 
+<anchor xml:id="__input_file_state_8_common_8cs_source_1l00051"/>00051 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;nextHistory&#32;=&#32;inInputFileState.OpenedTreeViewModelHistoryList.RemoveRange(
+<anchor xml:id="__input_file_state_8_common_8cs_source_1l00052"/>00052 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;startingIndexToRemove,
+<anchor xml:id="__input_file_state_8_common_8cs_source_1l00053"/>00053 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;countToRemove);
+<anchor xml:id="__input_file_state_8_common_8cs_source_1l00054"/>00054 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;}
+<anchor xml:id="__input_file_state_8_common_8cs_source_1l00055"/>00055 
+<anchor xml:id="__input_file_state_8_common_8cs_source_1l00056"/>00056 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;nextHistory&#32;=&#32;nextHistory.Add(selectionClone);
+<anchor xml:id="__input_file_state_8_common_8cs_source_1l00057"/>00057 
+<anchor xml:id="__input_file_state_8_common_8cs_source_1l00058"/>00058 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;inInputFileState&#32;with
+<anchor xml:id="__input_file_state_8_common_8cs_source_1l00059"/>00059 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;{
+<anchor xml:id="__input_file_state_8_common_8cs_source_1l00060"/>00060 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;IndexInHistory&#32;=&#32;inInputFileState.IndexInHistory&#32;+&#32;1,
+<anchor xml:id="__input_file_state_8_common_8cs_source_1l00061"/>00061 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;OpenedTreeViewModelHistoryList&#32;=&#32;nextHistory,
+<anchor xml:id="__input_file_state_8_common_8cs_source_1l00062"/>00062 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;};
+<anchor xml:id="__input_file_state_8_common_8cs_source_1l00063"/>00063 &#32;&#32;&#32;&#32;}
+<anchor xml:id="__input_file_state_8_common_8cs_source_1l00064"/>00064 }
+</programlisting></section>

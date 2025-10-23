@@ -1,0 +1,187 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
+  <compounddef id="struct_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_implementations_1_1_scope" kind="struct" language="C#" prot="public">
+    <compoundname>Luthetus::TextEditor::RazorLib::CompilerServices::Implementations::Scope</compoundname>
+    <basecompoundref refid="interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_interfaces_1_1_i_scope" prot="public" virt="non-virtual">Luthetus.TextEditor.RazorLib.CompilerServices.Interfaces.IScope</basecompoundref>
+    <sectiondef kind="property">
+      <memberdef kind="property" id="struct_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_implementations_1_1_scope_1a987feea04974b183f1e6d4dcf04894de" prot="public" static="no" readable="no" writable="no" gettable="yes" privategettable="no" protectedgettable="no" settable="no" privatesettable="no" protectedsettable="no">
+        <type><ref refid="interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_1_1_nodes_1_1_fbb89b74d57a0670c22846a0a2d85ed6" kindref="compound">ICodeBlockOwner</ref></type>
+        <definition>ICodeBlockOwner Luthetus.TextEditor.RazorLib.CompilerServices.Implementations.Scope.CodeBlockOwner</definition>
+        <argsstring></argsstring>
+        <name>CodeBlockOwner</name>
+        <qualifiedname>Luthetus.TextEditor.RazorLib.CompilerServices.Implementations.Scope.CodeBlockOwner</qualifiedname>
+        <reimplements refid="interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_interfaces_1_1_i_scope_1ac864a69c5039a944689ef6e02d803e3a">CodeBlockOwner</reimplements>
+        <briefdescription>
+<para>This is believed to be far better than a <ref refid="interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_1_1_i_syntax_node" kindref="compound">ISyntaxNode</ref> having a pointer to its parent. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>(i.e.: with this the <ref refid="namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_1_1_nodes" kindref="compound">Nodes</ref> can be left as a singly linked tree.)</para>
+<para>Then, one can query the IBinder to determine what the active scope is given a positionIndex within a file, or etc...</para>
+<para>This scope struct then acts as an index into the compilation unit&apos;s node tree.</para>
+<para>If a scope contains 100 nodes, then 100 pointers would have previously been needed due to 1 per node.</para>
+<para>By having the &apos;<ref refid="struct_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_implementations_1_1_scope" kindref="compound">Scope</ref>&apos; contain a pointer to a node, the same example only requires 1 pointer to the node that created the scope.</para>
+<para>From there, traversal down the tree is done with <ref refid="interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_1_1_i_syntax_node_1a73d81f1c4e42db7e80bfdd4db97c10fe" kindref="member">ISyntaxNode.GetChildList()</ref>;</para>
+<para>Traversal up the tree is done by reading from the IBinderSession inside the IBinderSession.ScopeList at index <ref refid="struct_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_implementations_1_1_scope_1aebbd763d50ce5b2f6d2d4231a270f718" kindref="member">ParentIndexKey</ref>.</para>
+<para>This tells you the node that owns the parent scope.</para>
+<para>If it turns out that this is too cumbersome to use in practice then perhaps a different solution should be considered. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Lib/TextEditor/CompilerServices/Implementations/Scope.cs" line="24" column="24" bodyfile="Source/Lib/TextEditor/CompilerServices/Implementations/Scope.cs" bodystart="24" bodyend="24"/>
+        <referencedby refid="struct_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_implementations_1_1_scope_1a0a81c1613fa7267249d0329e2a488d24" compoundref="_scope_8cs" startline="10" endline="22">Luthetus.TextEditor.RazorLib.CompilerServices.Implementations.Scope.Scope</referencedby>
+      </memberdef>
+      <memberdef kind="property" id="struct_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_implementations_1_1_scope_1a04a947ddeab9d6ca90394113f40afd78" prot="public" static="no" readable="no" writable="no" gettable="yes" privategettable="no" protectedgettable="no" settable="no" privatesettable="no" protectedsettable="no">
+        <type>int</type>
+        <definition>int Luthetus.TextEditor.RazorLib.CompilerServices.Implementations.Scope.IndexKey</definition>
+        <argsstring></argsstring>
+        <name>IndexKey</name>
+        <qualifiedname>Luthetus.TextEditor.RazorLib.CompilerServices.Implementations.Scope.IndexKey</qualifiedname>
+        <reimplements refid="interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_interfaces_1_1_i_scope_1a61522fba59477beb1f3cafe27c43cb9c">IndexKey</reimplements>
+        <briefdescription>
+<para>All scopes in a file are stored in a flat list, grouped by the ResourceUri they were found in. Everytime a scope is instantiated, it gets an incrementing counter as its IndexKey (which is equal to the index it was inserted at... &apos;list.Count&apos;). </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Therefore, to go to the parent scope: &apos;var parentScope = list[ParentIndexKey]&apos; To get &quot;yourself&quot;: &apos;var selfScope = list[IndexKey]&apos;</para>
+<para>Every time the file is parsed the counter resets to 0.</para>
+<para>In the future there should be optimizations that don&apos;t reparse the entire file, but instead only the scopes that need to be re-parsed given the change made.</para>
+<para>This shouldn&apos;t be an issue beyond integer overflow. And to in the future solve the integer overflow, in the rare case that someone parses int.MaxValue number of scopes in a singular C# ResourceUri they likely don&apos;t actually have that many scopes in the file, but instead hit that number due to the future optimization that wasn&apos;t reseting the counter. Then that would trigger a counter reset to 0, and the entire file would have to be reparsed for that edge case.</para>
+<para>If a file needs int.MaxValue number of scopes during a fresh parse with the counter starting at 0, then I presume this code will throw an exception.</para>
+<para>But wouldn&apos;t it just the same do so with the previous code once the list of scopes hit a count &gt; int.MaxValue?</para>
+<para>If it turns out that int.MaxValue is an issue, the storage of scopes needs to be re-worked. But it isn&apos;t expected to be the case.</para>
+<para>Side note: in order to avoid race conditions involving out dated data, should the list itself have an int associated with it, that the <ref refid="_i_scope_8cs" kindref="compound">IScope.cs</ref> has as a property, so it can verify that the &quot;batch id&quot; is the same. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Lib/TextEditor/CompilerServices/Implementations/Scope.cs" line="25" column="12" bodyfile="Source/Lib/TextEditor/CompilerServices/Implementations/Scope.cs" bodystart="25" bodyend="25"/>
+        <referencedby refid="struct_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_implementations_1_1_scope_1a0a81c1613fa7267249d0329e2a488d24" compoundref="_scope_8cs" startline="10" endline="22">Luthetus.TextEditor.RazorLib.CompilerServices.Implementations.Scope.Scope</referencedby>
+      </memberdef>
+      <memberdef kind="property" id="struct_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_implementations_1_1_scope_1aebbd763d50ce5b2f6d2d4231a270f718" prot="public" static="no" readable="no" writable="no" gettable="yes" privategettable="no" protectedgettable="no" settable="no" privatesettable="no" protectedsettable="no">
+        <type>int?</type>
+        <definition>int? Luthetus.TextEditor.RazorLib.CompilerServices.Implementations.Scope.ParentIndexKey</definition>
+        <argsstring></argsstring>
+        <name>ParentIndexKey</name>
+        <qualifiedname>Luthetus.TextEditor.RazorLib.CompilerServices.Implementations.Scope.ParentIndexKey</qualifiedname>
+        <reimplements refid="interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_interfaces_1_1_i_scope_1abfaa5ee6ee4ef26f6072fc309d244d71">ParentIndexKey</reimplements>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Lib/TextEditor/CompilerServices/Implementations/Scope.cs" line="26" column="16" bodyfile="Source/Lib/TextEditor/CompilerServices/Implementations/Scope.cs" bodystart="26" bodyend="26"/>
+        <referencedby refid="struct_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_implementations_1_1_scope_1a0a81c1613fa7267249d0329e2a488d24" compoundref="_scope_8cs" startline="10" endline="22">Luthetus.TextEditor.RazorLib.CompilerServices.Implementations.Scope.Scope</referencedby>
+      </memberdef>
+      <memberdef kind="property" id="struct_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_implementations_1_1_scope_1aed1dfed81e67665c03b198b28a64469f" prot="public" static="no" readable="no" writable="no" gettable="yes" privategettable="no" protectedgettable="no" settable="no" privatesettable="no" protectedsettable="no">
+        <type>int</type>
+        <definition>int Luthetus.TextEditor.RazorLib.CompilerServices.Implementations.Scope.StartingIndexInclusive</definition>
+        <argsstring></argsstring>
+        <name>StartingIndexInclusive</name>
+        <qualifiedname>Luthetus.TextEditor.RazorLib.CompilerServices.Implementations.Scope.StartingIndexInclusive</qualifiedname>
+        <reimplements refid="interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_interfaces_1_1_i_scope_1a7e7db70d787bcdb4c9ffd3d5f11f9ca4">StartingIndexInclusive</reimplements>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Lib/TextEditor/CompilerServices/Implementations/Scope.cs" line="27" column="16" bodyfile="Source/Lib/TextEditor/CompilerServices/Implementations/Scope.cs" bodystart="27" bodyend="27"/>
+        <referencedby refid="struct_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_implementations_1_1_scope_1a0a81c1613fa7267249d0329e2a488d24" compoundref="_scope_8cs" startline="10" endline="22">Luthetus.TextEditor.RazorLib.CompilerServices.Implementations.Scope.Scope</referencedby>
+      </memberdef>
+      <memberdef kind="property" id="struct_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_implementations_1_1_scope_1a9596716656a60b22ba986b427319b22a" prot="public" static="no" readable="no" writable="no" gettable="yes" privategettable="no" protectedgettable="no" settable="yes" privatesettable="no" protectedsettable="no">
+        <type>int?</type>
+        <definition>int? Luthetus.TextEditor.RazorLib.CompilerServices.Implementations.Scope.EndingIndexExclusive</definition>
+        <argsstring></argsstring>
+        <name>EndingIndexExclusive</name>
+        <qualifiedname>Luthetus.TextEditor.RazorLib.CompilerServices.Implementations.Scope.EndingIndexExclusive</qualifiedname>
+        <reimplements refid="interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_interfaces_1_1_i_scope_1a3aafa57351a91d8b8be8f76045501186">EndingIndexExclusive</reimplements>
+        <briefdescription>
+<para>Beware of this property&apos;s setter, as a hack to set the ending index later on in this type&apos;s lifecycle because it isn&apos;t immediately known. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Lib/TextEditor/CompilerServices/Implementations/Scope.cs" line="28" column="16" bodyfile="Source/Lib/TextEditor/CompilerServices/Implementations/Scope.cs" bodystart="28" bodyend="28"/>
+        <referencedby refid="struct_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_implementations_1_1_scope_1a0a81c1613fa7267249d0329e2a488d24" compoundref="_scope_8cs" startline="10" endline="22">Luthetus.TextEditor.RazorLib.CompilerServices.Implementations.Scope.Scope</referencedby>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="struct_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_implementations_1_1_scope_1a0a81c1613fa7267249d0329e2a488d24" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>Luthetus.TextEditor.RazorLib.CompilerServices.Implementations.Scope.Scope</definition>
+        <argsstring>(ICodeBlockOwner codeBlockOwner, int indexKey, int? parentIndexKey, int startingIndexInclusive, int? endingIndexExclusive)</argsstring>
+        <name>Scope</name>
+        <qualifiedname>Luthetus.TextEditor.RazorLib.CompilerServices.Implementations.Scope.Scope</qualifiedname>
+        <param>
+          <type><ref refid="interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_1_1_nodes_1_1_fbb89b74d57a0670c22846a0a2d85ed6" kindref="compound">ICodeBlockOwner</ref></type>
+          <declname>codeBlockOwner</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>indexKey</declname>
+        </param>
+        <param>
+          <type>int?</type>
+          <declname>parentIndexKey</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>startingIndexInclusive</declname>
+        </param>
+        <param>
+          <type>int?</type>
+          <declname>endingIndexExclusive</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Lib/TextEditor/CompilerServices/Implementations/Scope.cs" line="10" column="8" bodyfile="Source/Lib/TextEditor/CompilerServices/Implementations/Scope.cs" bodystart="10" bodyend="22"/>
+        <references refid="struct_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_implementations_1_1_scope_1a987feea04974b183f1e6d4dcf04894de" compoundref="_scope_8cs" startline="24" endline="24">Luthetus.TextEditor.RazorLib.CompilerServices.Implementations.Scope.CodeBlockOwner</references>
+        <references refid="struct_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_implementations_1_1_scope_1a9596716656a60b22ba986b427319b22a" compoundref="_scope_8cs" startline="28" endline="28">Luthetus.TextEditor.RazorLib.CompilerServices.Implementations.Scope.EndingIndexExclusive</references>
+        <references refid="struct_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_implementations_1_1_scope_1a04a947ddeab9d6ca90394113f40afd78" compoundref="_scope_8cs" startline="25" endline="25">Luthetus.TextEditor.RazorLib.CompilerServices.Implementations.Scope.IndexKey</references>
+        <references refid="struct_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_implementations_1_1_scope_1aebbd763d50ce5b2f6d2d4231a270f718" compoundref="_scope_8cs" startline="26" endline="26">Luthetus.TextEditor.RazorLib.CompilerServices.Implementations.Scope.ParentIndexKey</references>
+        <references refid="struct_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_implementations_1_1_scope_1aed1dfed81e67665c03b198b28a64469f" compoundref="_scope_8cs" startline="27" endline="27">Luthetus.TextEditor.RazorLib.CompilerServices.Implementations.Scope.StartingIndexInclusive</references>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="1">
+        <label>Luthetus.TextEditor.RazorLib.CompilerServices.Implementations.Scope</label>
+        <link refid="struct_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_implementations_1_1_scope"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>Luthetus.TextEditor.RazorLib.CompilerServices.Interfaces.IScope</label>
+        <link refid="interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_interfaces_1_1_i_scope"/>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="1">
+        <label>Luthetus.TextEditor.RazorLib.CompilerServices.Implementations.Scope</label>
+        <link refid="struct_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_implementations_1_1_scope"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>Luthetus.TextEditor.RazorLib.CompilerServices.Interfaces.IScope</label>
+        <link refid="interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_interfaces_1_1_i_scope"/>
+      </node>
+    </collaborationgraph>
+    <location file="Source/Lib/TextEditor/CompilerServices/Implementations/Scope.cs" line="8" column="7" bodyfile="Source/Lib/TextEditor/CompilerServices/Implementations/Scope.cs" bodystart="9" bodyend="29"/>
+    <listofallmembers>
+      <member refid="struct_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_implementations_1_1_scope_1a987feea04974b183f1e6d4dcf04894de" prot="public" virt="non-virtual"><scope>Luthetus::TextEditor::RazorLib::CompilerServices::Implementations::Scope</scope><name>CodeBlockOwner</name></member>
+      <member refid="struct_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_implementations_1_1_scope_1a9596716656a60b22ba986b427319b22a" prot="public" virt="non-virtual"><scope>Luthetus::TextEditor::RazorLib::CompilerServices::Implementations::Scope</scope><name>EndingIndexExclusive</name></member>
+      <member refid="struct_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_implementations_1_1_scope_1a04a947ddeab9d6ca90394113f40afd78" prot="public" virt="non-virtual"><scope>Luthetus::TextEditor::RazorLib::CompilerServices::Implementations::Scope</scope><name>IndexKey</name></member>
+      <member refid="struct_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_implementations_1_1_scope_1aebbd763d50ce5b2f6d2d4231a270f718" prot="public" virt="non-virtual"><scope>Luthetus::TextEditor::RazorLib::CompilerServices::Implementations::Scope</scope><name>ParentIndexKey</name></member>
+      <member refid="struct_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_implementations_1_1_scope_1a0a81c1613fa7267249d0329e2a488d24" prot="public" virt="non-virtual"><scope>Luthetus::TextEditor::RazorLib::CompilerServices::Implementations::Scope</scope><name>Scope</name></member>
+      <member refid="struct_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_implementations_1_1_scope_1aed1dfed81e67665c03b198b28a64469f" prot="public" virt="non-virtual"><scope>Luthetus::TextEditor::RazorLib::CompilerServices::Implementations::Scope</scope><name>StartingIndexInclusive</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

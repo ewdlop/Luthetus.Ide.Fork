@@ -1,0 +1,4 @@
+var _nuget_response_tests_8cs =
+[
+    [ "Luthetus.Extensions.DotNet.Tests.Basis.Nugets.Models.NugetResponseTests", "class_luthetus_1_1_extensions_1_1_dot_net_1_1_tests_1_1_basis_1_1_nugets_1_1_models_1_1_nuget_response_tests.html", "class_luthetus_1_1_extensions_1_1_dot_net_1_1_tests_1_1_basis_1_1_nugets_1_1_models_1_1_nuget_response_tests" ]
+];

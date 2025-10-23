@@ -1,0 +1,83 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_dir_2ff1e8bca114e08dc1de4be319417fc9" xml:lang="en-US">
+<title>Source/Lib/Extensions/Extensions.DotNet Directory Reference</title>
+<indexterm><primary>Source/Lib/Extensions/Extensions.DotNet Directory Reference</primary></indexterm>
+Directory dependency graph for Extensions.DotNet:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="dir_2ff1e8bca114e08dc1de4be319417fc9_dep.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+<simplesect>
+    <title>Directories    </title>
+        <itemizedlist>
+            <listitem><para>directory <link linkend="_dir_9d913068e6c4affffde742e5fe48e8cb">AppDatas</link></para>
+</listitem>
+            <listitem><para>directory <link linkend="_dir_19c3dee0d47e4f1b9cc8448c8f4ae0a8">BackgroundTasks</link></para>
+</listitem>
+            <listitem><para>directory <link linkend="_dir_528f8a1716750964807facb321625d64">CodeSearches</link></para>
+</listitem>
+            <listitem><para>directory <link linkend="_dir_5b31d01861dc4bb549d770342f5e2c09">CommandLines</link></para>
+</listitem>
+            <listitem><para>directory <link linkend="_dir_65807243c5bf6cb5dbc412353861ea87">Commands</link></para>
+</listitem>
+            <listitem><para>directory <link linkend="_dir_ec62ea314ae628ab6d7d86f56e66963d">CompilerServices</link></para>
+</listitem>
+            <listitem><para>directory <link linkend="_dir_f3ca841d0a622b2348765c689eff132a">ComponentRenderers</link></para>
+</listitem>
+            <listitem><para>directory <link linkend="_dir_1227c07ec4840d7ab3982d0eca1e13ad">CSharpProjects</link></para>
+</listitem>
+            <listitem><para>directory <link linkend="_dir_00813ed724a255122d25fe8019374816">DotNetSolutions</link></para>
+</listitem>
+            <listitem><para>directory <link linkend="_dir_7c940dc46d5413d47af636743cb6eb28">Installations</link></para>
+</listitem>
+            <listitem><para>directory <link linkend="_dir_ce8869f7a945e684b73458ec5905fcaa">Menus</link></para>
+</listitem>
+            <listitem><para>directory <link linkend="_dir_15bffcecbfce96897d51d61193422529">Namespaces</link></para>
+</listitem>
+            <listitem><para>directory <link linkend="_dir_82d1ed0ff5eb8a3c603d069f94836b3b">Nugets</link></para>
+</listitem>
+            <listitem><para>directory <link linkend="_dir_b6cde0c195b3573973f6a00666fd920e">Outputs</link></para>
+</listitem>
+            <listitem><para>directory <link linkend="_dir_841a14003d42d44f482534d67bd21cec">Shareds</link></para>
+</listitem>
+            <listitem><para>directory <link linkend="_dir_4463c34c33bac5675458a68af7967292">TestExplorers</link></para>
+</listitem>
+            <listitem><para>directory <link linkend="_dir_4e85733844ba850d649447190abb0709">Websites</link></para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<section>
+<title>Detailed Description</title>
+
+<para>Luthetus.CompilerServices.RazorLib.csproj is the way for a compiler service non-razor lib to provide razor components.</para>
+
+<para>For example, one might primarily code in C#, but occassionally have to write JavaScript. Perhaps, this individual would prefer to load the JavaScript CompilerService, BUT NOT load the JavaScript specific UI components.</para>
+
+<para>I&apos;m not certain on the best way to go about this &quot;separate the compiler service
+from its UI components&apos; idea. But this is how I&apos;ll start to try.
+
+Essentially I need to move all the .NET specific code that is in the
+Luthetus.Ide.RazorLib.csproj to this project instead.
+
+After I do that, I need to make the code generic so that any compiler service
+can decide to implement that blazor component.
+
+For example, the solution explorer. I imagine that the name &quot;Solution Explorer&quot; could be changed based on some blazor parameter, and that the nodes in the tree could be populated with different logic, instead of from reading a .sln file and etc...</para>
+
+<para>I have no idea how I would do that???? These components seem very specialized, and I think I even prefer it that way.</para>
+
+<para>But do I really want 2 projects per programming language, one for the compiler service and one for the UI?</para>
+
+<para>Move these: [ ] /CSharpProjects/ [ ] /DotNetSolutions/ [ ] /Nugets/</para>
+
+<para>[ ] /CommandLines/Models/DotNetCliCommandFormatter.cs [ ] /CommandLines/Models/DotNetCliOutputParser.cs [ ] /ComponentRenderers/Models/INuGetPackageManagerRendererType.cs [ ] /ComponentRenderers/Models/IRemoveCSharpProjectFromSolutionRendererType.cs [ ] /ComponentRenderers/Models/ITreeViewCSharpProjectNugetPackageReferenceRendererType.cs [ ] /ComponentRenderers/Models/ITreeViewCSharpProjectToProjectReferenceRendererType.cs [ ] /ComponentRenderers/Models/ITreeViewSolutionFolderRendererType.cs [ ] /Menus/Models/IMenuOptionsFactory.RemoveCSharpProjectReferenceFromSolution() [ ] /Menus/Models/IMenuOptionsFactory.AddProjectToProjectReference() [ ] /Menus/Models/IMenuOptionsFactory.RemoveProjectToProjectReference() [ ] /Menus/Models/IMenuOptionsFactory.MoveProjectToSolutionFolder() [ ] /Menus/Models/IMenuOptionsFactory.RemoveNuGetPackageReferenceFromProject() [ ] Repeat what is done for <link linkend="__i_menu_options_factory_8cs">IMenuOptionsFactory.cs</link> to its implementation <link linkend="__menu_options_factory_8cs">MenuOptionsFactory.cs</link> [ ] /Namespaces/Models/TreeViewHelperCSharpClass.cs [ ] /Namespaces/Models/TreeViewHelperCSharpProject.cs [ ] /Namespaces/Models/TreeViewHelperRazorMarkup.cs [ ] /Shareds/Displays/Internals/IdePromptOpenSolutionDisplay.razor [ ] /TestExplorers/ ###### Should /TestExplorers/ be moved???? [ ] /Namespaces/ ###### Should /Namespaces/ be moved????</para>
+
+<para>I need to make a &apos;Workspace&apos; concept in order to permit arbitrary grouping of directories into a tree view.</para>
+
+<para>I moved over &apos;/CSharpProjects/&apos; and it is immediately apparent that this will be a headache. Some of the code in &apos;/CSharpProjects/&apos; relies on various bits and pieces of code that exist within the IDE, so I&apos;ll get a circular reference if I try to take the shortcut of having the IDE reference my new project for time being </para>
+</section>
+</section>

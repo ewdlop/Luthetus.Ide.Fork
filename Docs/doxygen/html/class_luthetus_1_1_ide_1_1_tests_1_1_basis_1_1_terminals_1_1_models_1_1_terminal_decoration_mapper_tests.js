@@ -1,0 +1,4 @@
+var class_luthetus_1_1_ide_1_1_tests_1_1_basis_1_1_terminals_1_1_models_1_1_terminal_decoration_mapper_tests =
+[
+    [ "Map", "class_luthetus_1_1_ide_1_1_tests_1_1_basis_1_1_terminals_1_1_models_1_1_terminal_decoration_mapper_tests.html#a897bf20b075af2c67264cc3a6e36a1ca", null ]
+];

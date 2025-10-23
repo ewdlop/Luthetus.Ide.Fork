@@ -1,0 +1,4 @@
+var _dot_net_solution_global_section_builder_8cs =
+[
+    [ "Luthetus.CompilerServices.DotNetSolution.Models.DotNetSolutionGlobalSectionBuilder", "class_luthetus_1_1_compiler_services_1_1_dot_net_solution_1_1_models_1_1_dot_net_solution_global_section_builder.html", "class_luthetus_1_1_compiler_services_1_1_dot_net_solution_1_1_models_1_1_dot_net_solution_global_section_builder" ]
+];

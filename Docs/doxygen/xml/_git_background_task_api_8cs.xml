@@ -1,0 +1,74 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
+  <compounddef id="_git_background_task_api_8cs" kind="file" language="C#">
+    <compoundname>GitBackgroundTaskApi.cs</compoundname>
+    <innerclass refid="class_luthetus_1_1_extensions_1_1_git_1_1_background_tasks_1_1_models_1_1_git_background_task_api" prot="public">Luthetus::Extensions::Git::BackgroundTasks::Models::GitBackgroundTaskApi</innerclass>
+    <innernamespace refid="namespace_luthetus">Luthetus</innernamespace>
+    <innernamespace refid="namespace_luthetus_1_1_extensions">Luthetus::Extensions</innernamespace>
+    <innernamespace refid="namespace_luthetus_1_1_extensions_1_1_git">Luthetus::Extensions::Git</innernamespace>
+    <innernamespace refid="namespace_luthetus_1_1_extensions_1_1_git_1_1_background_tasks">Luthetus::Extensions::Git::BackgroundTasks</innernamespace>
+    <innernamespace refid="namespace_luthetus_1_1_extensions_1_1_git_1_1_background_tasks_1_1_models">Luthetus::Extensions::Git::BackgroundTasks::Models</innernamespace>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="keyword">using<sp/></highlight><highlight class="normal">Fluxor;</highlight></codeline>
+<codeline lineno="2"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="namespace_luthetus_1_1_common_1_1_razor_lib_1_1_file_systems_1_1_models" kindref="compound">Luthetus.Common.RazorLib.FileSystems.Models</ref>;</highlight></codeline>
+<codeline lineno="3"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="namespace_luthetus_1_1_common_1_1_razor_lib_1_1_component_renderers_1_1_models" kindref="compound">Luthetus.Common.RazorLib.ComponentRenderers.Models</ref>;</highlight></codeline>
+<codeline lineno="4"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="namespace_luthetus_1_1_common_1_1_razor_lib_1_1_background_tasks_1_1_models" kindref="compound">Luthetus.Common.RazorLib.BackgroundTasks.Models</ref>;</highlight></codeline>
+<codeline lineno="5"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="namespace_luthetus_1_1_ide_1_1_razor_lib_1_1_terminals_1_1_states" kindref="compound">Luthetus.Ide.RazorLib.Terminals.States</ref>;</highlight></codeline>
+<codeline lineno="6"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="namespace_luthetus_1_1_ide_1_1_razor_lib_1_1_background_tasks_1_1_models" kindref="compound">Luthetus.Ide.RazorLib.BackgroundTasks.Models</ref>;</highlight></codeline>
+<codeline lineno="7"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="namespace_luthetus_1_1_extensions_1_1_git_1_1_models" kindref="compound">Luthetus.Extensions.Git.Models</ref>;</highlight></codeline>
+<codeline lineno="8"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="namespace_luthetus_1_1_extensions_1_1_git_1_1_states" kindref="compound">Luthetus.Extensions.Git.States</ref>;</highlight></codeline>
+<codeline lineno="9"><highlight class="normal"></highlight></codeline>
+<codeline lineno="10" refid="namespace_luthetus_1_1_extensions_1_1_git" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal"><ref refid="namespace_luthetus_1_1_extensions_1_1_git_1_1_background_tasks_1_1_models" kindref="compound">Luthetus.Extensions.Git.BackgroundTasks.Models</ref>;</highlight></codeline>
+<codeline lineno="11"><highlight class="normal"></highlight></codeline>
+<codeline lineno="12" refid="class_luthetus_1_1_extensions_1_1_git_1_1_background_tasks_1_1_models_1_1_git_background_task_api" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">public</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="class_luthetus_1_1_extensions_1_1_git_1_1_background_tasks_1_1_models_1_1_git_background_task_api_1a396ddeb52f08039fd028c1a7c1cc6482" kindref="member">GitBackgroundTaskApi</ref></highlight></codeline>
+<codeline lineno="13"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="14"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">private</highlight><highlight class="normal"><sp/>readonly<sp/>IState&lt;GitState&gt;<sp/>_gitStateWrap;</highlight></codeline>
+<codeline lineno="15"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">private</highlight><highlight class="normal"><sp/>readonly<sp/>IState&lt;TerminalState&gt;<sp/>_terminalStateWrap;</highlight></codeline>
+<codeline lineno="16"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">private</highlight><highlight class="normal"><sp/>readonly<sp/><ref refid="class_luthetus_1_1_ide_1_1_razor_lib_1_1_background_tasks_1_1_models_1_1_ide_background_task_api" kindref="compound">IdeBackgroundTaskApi</ref><sp/>_ideBackgroundTaskApi;</highlight></codeline>
+<codeline lineno="17"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">private</highlight><highlight class="normal"><sp/>readonly<sp/><ref refid="class_luthetus_1_1_extensions_1_1_git_1_1_models_1_1_git_cli_output_parser" kindref="compound">GitCliOutputParser</ref><sp/>_gitCliOutputParser;</highlight></codeline>
+<codeline lineno="18"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">private</highlight><highlight class="normal"><sp/>readonly<sp/><ref refid="interface_luthetus_1_1_common_1_1_razor_lib_1_1_file_systems_1_1_models_1_1_i_environment_provider" kindref="compound">IEnvironmentProvider</ref><sp/>_environmentProvider;</highlight></codeline>
+<codeline lineno="19"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">private</highlight><highlight class="normal"><sp/>readonly<sp/><ref refid="interface_luthetus_1_1_common_1_1_razor_lib_1_1_background_tasks_1_1_models_1_1_i_background_task_service" kindref="compound">IBackgroundTaskService</ref><sp/>_backgroundTaskService;</highlight></codeline>
+<codeline lineno="20"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">private</highlight><highlight class="normal"><sp/>readonly<sp/><ref refid="interface_luthetus_1_1_common_1_1_razor_lib_1_1_component_renderers_1_1_models_1_1_i_common_component_renderers" kindref="compound">ICommonComponentRenderers</ref><sp/>_commonComponentRenderers;</highlight></codeline>
+<codeline lineno="21"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">private</highlight><highlight class="normal"><sp/>readonly<sp/>IDispatcher<sp/>_dispatcher;</highlight></codeline>
+<codeline lineno="22"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="23" refid="class_luthetus_1_1_extensions_1_1_git_1_1_background_tasks_1_1_models_1_1_git_background_task_api_1a396ddeb52f08039fd028c1a7c1cc6482" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal"><sp/><ref refid="class_luthetus_1_1_extensions_1_1_git_1_1_background_tasks_1_1_models_1_1_git_background_task_api_1a396ddeb52f08039fd028c1a7c1cc6482" kindref="member">GitBackgroundTaskApi</ref>(</highlight></codeline>
+<codeline lineno="24"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="class_luthetus_1_1_ide_1_1_razor_lib_1_1_background_tasks_1_1_models_1_1_ide_background_task_api" kindref="compound">IdeBackgroundTaskApi</ref><sp/>ideBackgroundTaskApi,</highlight></codeline>
+<codeline lineno="25"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>IState&lt;GitState&gt;<sp/>gitStateWrap,</highlight></codeline>
+<codeline lineno="26"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>IState&lt;TerminalState&gt;<sp/>terminalStateWrap,</highlight></codeline>
+<codeline lineno="27"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="class_luthetus_1_1_extensions_1_1_git_1_1_models_1_1_git_cli_output_parser" kindref="compound">GitCliOutputParser</ref><sp/>gitCliOutputParser,</highlight></codeline>
+<codeline lineno="28"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="interface_luthetus_1_1_common_1_1_razor_lib_1_1_file_systems_1_1_models_1_1_i_environment_provider" kindref="compound">IEnvironmentProvider</ref><sp/>environmentProvider,</highlight></codeline>
+<codeline lineno="29"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="interface_luthetus_1_1_common_1_1_razor_lib_1_1_background_tasks_1_1_models_1_1_i_background_task_service" kindref="compound">IBackgroundTaskService</ref><sp/>backgroundTaskService,</highlight></codeline>
+<codeline lineno="30"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="interface_luthetus_1_1_common_1_1_razor_lib_1_1_component_renderers_1_1_models_1_1_i_common_component_renderers" kindref="compound">ICommonComponentRenderers</ref><sp/>commonComponentRenderers,</highlight></codeline>
+<codeline lineno="31"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>IDispatcher<sp/>dispatcher)</highlight></codeline>
+<codeline lineno="32"><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="33"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>_ideBackgroundTaskApi<sp/>=<sp/>ideBackgroundTaskApi;</highlight></codeline>
+<codeline lineno="34"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>_gitStateWrap<sp/>=<sp/>gitStateWrap;</highlight></codeline>
+<codeline lineno="35"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>_terminalStateWrap<sp/>=<sp/>terminalStateWrap;</highlight></codeline>
+<codeline lineno="36"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>_gitCliOutputParser<sp/>=<sp/>gitCliOutputParser;</highlight></codeline>
+<codeline lineno="37"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>_environmentProvider<sp/>=<sp/>environmentProvider;</highlight></codeline>
+<codeline lineno="38"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>_backgroundTaskService<sp/>=<sp/>backgroundTaskService;</highlight></codeline>
+<codeline lineno="39"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>_commonComponentRenderers<sp/>=<sp/>commonComponentRenderers;</highlight></codeline>
+<codeline lineno="40"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>_dispatcher<sp/>=<sp/>dispatcher;</highlight></codeline>
+<codeline lineno="41"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="42"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="class_luthetus_1_1_extensions_1_1_git_1_1_background_tasks_1_1_models_1_1_git_background_task_api_1a2c059afb23ea38591a882933b9972492" kindref="member">Git</ref><sp/>=<sp/></highlight><highlight class="keyword">new</highlight><highlight class="normal"><sp/><ref refid="class_luthetus_1_1_extensions_1_1_git_1_1_models_1_1_git_ide_api" kindref="compound">GitIdeApi</ref>(</highlight></codeline>
+<codeline lineno="43"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">this</highlight><highlight class="normal">,</highlight></codeline>
+<codeline lineno="44"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>_ideBackgroundTaskApi,</highlight></codeline>
+<codeline lineno="45"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>_terminalStateWrap,</highlight></codeline>
+<codeline lineno="46"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>_gitStateWrap,</highlight></codeline>
+<codeline lineno="47"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>_gitCliOutputParser,</highlight></codeline>
+<codeline lineno="48"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>_environmentProvider,</highlight></codeline>
+<codeline lineno="49"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>_backgroundTaskService,</highlight></codeline>
+<codeline lineno="50"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>_commonComponentRenderers,</highlight></codeline>
+<codeline lineno="51"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>_dispatcher);</highlight></codeline>
+<codeline lineno="52"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="53"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="54" refid="class_luthetus_1_1_extensions_1_1_git_1_1_background_tasks_1_1_models_1_1_git_background_task_api_1a2c059afb23ea38591a882933b9972492" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal"><sp/><ref refid="class_luthetus_1_1_extensions_1_1_git_1_1_models_1_1_git_ide_api" kindref="compound">GitIdeApi</ref><sp/><ref refid="class_luthetus_1_1_extensions_1_1_git_1_1_background_tasks_1_1_models_1_1_git_background_task_api_1a2c059afb23ea38591a882933b9972492" kindref="member">Git</ref><sp/>{<sp/></highlight><highlight class="keyword">get</highlight><highlight class="normal">;<sp/>}</highlight></codeline>
+<codeline lineno="55"><highlight class="normal">}</highlight></codeline>
+    </programlisting>
+    <location file="Source/Lib/Extensions/Extensions.Git/BackgroundTasks/Models/GitBackgroundTaskApi.cs"/>
+  </compounddef>
+</doxygen>

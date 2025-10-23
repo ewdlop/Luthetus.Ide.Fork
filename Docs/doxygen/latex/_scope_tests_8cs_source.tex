@@ -1,0 +1,1127 @@
+\doxysection{Scope\+Tests.\+cs}
+\hypertarget{_scope_tests_8cs_source}{}\label{_scope_tests_8cs_source}\index{Source/Tests/CompilerServices/CSharp/SmokeTests/Parsers/ScopeTests.cs@{Source/Tests/CompilerServices/CSharp/SmokeTests/Parsers/ScopeTests.cs}}
+\mbox{\hyperlink{_scope_tests_8cs}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00001}00001\ \textcolor{keyword}{using\ }System.Text;}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00002}00002\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_lexers_1_1_models}{Luthetus.TextEditor.RazorLib.Lexers.Models}};}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00003}00003\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services}{Luthetus.TextEditor.RazorLib.CompilerServices}};}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00004}00004\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_interfaces}{Luthetus.TextEditor.RazorLib.CompilerServices.Interfaces}};}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00005}00005\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax}{Luthetus.TextEditor.RazorLib.CompilerServices.Syntax}};}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00006}00006\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_1_1_tokens}{Luthetus.TextEditor.RazorLib.CompilerServices.Syntax.Tokens}};}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00007}00007\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_1_1_nodes}{Luthetus.TextEditor.RazorLib.CompilerServices.Syntax.Nodes}};}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00008}00008\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_1_1_nodes_1_1_interfaces}{Luthetus.TextEditor.RazorLib.CompilerServices.Syntax.Nodes.Interfaces}};}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00009}00009\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_1_1_nodes_1_1_enums}{Luthetus.TextEditor.RazorLib.CompilerServices.Syntax.Nodes.Enums}};}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00010}00010\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_luthetus_1_1_compiler_services_1_1_c_sharp_1_1_lexer_case}{Luthetus.CompilerServices.CSharp.LexerCase}};}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00011}00011\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_luthetus_1_1_compiler_services_1_1_c_sharp_1_1_parser_case}{Luthetus.CompilerServices.CSharp.ParserCase}};}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00012}00012\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_luthetus_1_1_compiler_services_1_1_c_sharp_1_1_parser_case_1_1_internals}{Luthetus.CompilerServices.CSharp.ParserCase.Internals}};}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00013}00013\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_luthetus_1_1_compiler_services_1_1_c_sharp_1_1_facts}{Luthetus.CompilerServices.CSharp.Facts}};}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00014}00014\ }
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00015}00015\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespace_luthetus_1_1_compiler_services_1_1_c_sharp_1_1_tests_1_1_smoke_tests_1_1_parsers}{Luthetus.CompilerServices.CSharp.Tests.SmokeTests.Parsers}};}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00016}00016\ }
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00036}\mbox{\hyperlink{class_luthetus_1_1_compiler_services_1_1_c_sharp_1_1_tests_1_1_smoke_tests_1_1_parsers_1_1_scope_tests}{00036}}\ \textcolor{keyword}{public}\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_luthetus_1_1_compiler_services_1_1_c_sharp_1_1_tests_1_1_smoke_tests_1_1_parsers_1_1_scope_tests}{ScopeTests}}}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00037}00037\ \{}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00038}\mbox{\hyperlink{class_luthetus_1_1_compiler_services_1_1_c_sharp_1_1_tests_1_1_smoke_tests_1_1_parsers_1_1_scope_tests_1_1_test}{00038}}\ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_luthetus_1_1_compiler_services_1_1_c_sharp_1_1_tests_1_1_smoke_tests_1_1_parsers_1_1_scope_tests_1_1_test_a73a9c2f8be8eebb7d8c3356086a7f6dc}{Test}}}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00039}00039\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00040}\mbox{\hyperlink{class_luthetus_1_1_compiler_services_1_1_c_sharp_1_1_tests_1_1_smoke_tests_1_1_parsers_1_1_scope_tests_1_1_test_a73a9c2f8be8eebb7d8c3356086a7f6dc}{00040}}\ \ \ \ \ \ \ \ \ \textcolor{keyword}{public}\ \mbox{\hyperlink{class_luthetus_1_1_compiler_services_1_1_c_sharp_1_1_tests_1_1_smoke_tests_1_1_parsers_1_1_scope_tests_1_1_test_a73a9c2f8be8eebb7d8c3356086a7f6dc}{Test}}(\textcolor{keywordtype}{string}\ sourceText)}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00041}00041\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00042}00042\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_luthetus_1_1_compiler_services_1_1_c_sharp_1_1_tests_1_1_smoke_tests_1_1_parsers_1_1_scope_tests_1_1_test_aa7b753860e729416ad50c2d9ec1f97e0}{SourceText}}\ =\ sourceText;}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00043}00043\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_luthetus_1_1_compiler_services_1_1_c_sharp_1_1_tests_1_1_smoke_tests_1_1_parsers_1_1_scope_tests_1_1_test_ab1c960b7de2be104a63d278bd520c3ec}{ResourceUri}}\ =\ \textcolor{keyword}{new}\ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_lexers_1_1_models_a26a1b63ad28ec7955b30bc6c91571eca}{ResourceUri}}(\textcolor{stringliteral}{"{}./unitTesting.txt"{}});}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00044}00044\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_luthetus_1_1_compiler_services_1_1_c_sharp_1_1_tests_1_1_smoke_tests_1_1_parsers_1_1_scope_tests_1_1_test_a916e30ec093a6bd2a152bb1730b8469a}{Lexer}}\ =\ \textcolor{keyword}{new}\ \mbox{\hyperlink{class_luthetus_1_1_compiler_services_1_1_c_sharp_1_1_lexer_case_1_1_c_sharp_lexer}{CSharpLexer}}(\mbox{\hyperlink{class_luthetus_1_1_compiler_services_1_1_c_sharp_1_1_tests_1_1_smoke_tests_1_1_parsers_1_1_scope_tests_1_1_test_ab1c960b7de2be104a63d278bd520c3ec}{ResourceUri}},\ \mbox{\hyperlink{class_luthetus_1_1_compiler_services_1_1_c_sharp_1_1_tests_1_1_smoke_tests_1_1_parsers_1_1_scope_tests_1_1_test_aa7b753860e729416ad50c2d9ec1f97e0}{SourceText}});}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00045}00045\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_luthetus_1_1_compiler_services_1_1_c_sharp_1_1_tests_1_1_smoke_tests_1_1_parsers_1_1_scope_tests_1_1_test_a916e30ec093a6bd2a152bb1730b8469a}{Lexer}}.Lex();}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00046}00046\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_luthetus_1_1_compiler_services_1_1_c_sharp_1_1_tests_1_1_smoke_tests_1_1_parsers_1_1_scope_tests_1_1_test_a121ec1fe8c7656bf7f6f2e62f23be55c}{Parser}}\ =\ \textcolor{keyword}{new}\ \mbox{\hyperlink{class_luthetus_1_1_compiler_services_1_1_c_sharp_1_1_parser_case_1_1_c_sharp_parser}{CSharpParser}}(\mbox{\hyperlink{class_luthetus_1_1_compiler_services_1_1_c_sharp_1_1_tests_1_1_smoke_tests_1_1_parsers_1_1_scope_tests_1_1_test_a916e30ec093a6bd2a152bb1730b8469a}{Lexer}});}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00047}00047\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_luthetus_1_1_compiler_services_1_1_c_sharp_1_1_tests_1_1_smoke_tests_1_1_parsers_1_1_scope_tests_1_1_test_a32030df395d09283d80e4f4ac326ff14}{CompilationUnit}}\ =\ \mbox{\hyperlink{class_luthetus_1_1_compiler_services_1_1_c_sharp_1_1_tests_1_1_smoke_tests_1_1_parsers_1_1_scope_tests_1_1_test_a121ec1fe8c7656bf7f6f2e62f23be55c}{Parser}}.Parse();}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00048}00048\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00049}00049\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00050}\mbox{\hyperlink{class_luthetus_1_1_compiler_services_1_1_c_sharp_1_1_tests_1_1_smoke_tests_1_1_parsers_1_1_scope_tests_1_1_test_aa7b753860e729416ad50c2d9ec1f97e0}{00050}}\ \ \ \ \ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keywordtype}{string}\ \mbox{\hyperlink{class_luthetus_1_1_compiler_services_1_1_c_sharp_1_1_tests_1_1_smoke_tests_1_1_parsers_1_1_scope_tests_1_1_test_aa7b753860e729416ad50c2d9ec1f97e0}{SourceText}}\ \{\ \textcolor{keyword}{get};\ \textcolor{keyword}{set};\ \}}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00051}\mbox{\hyperlink{class_luthetus_1_1_compiler_services_1_1_c_sharp_1_1_tests_1_1_smoke_tests_1_1_parsers_1_1_scope_tests_1_1_test_ab1c960b7de2be104a63d278bd520c3ec}{00051}}\ \ \ \ \ \ \ \ \ \textcolor{keyword}{public}\ \mbox{\hyperlink{class_luthetus_1_1_compiler_services_1_1_c_sharp_1_1_tests_1_1_smoke_tests_1_1_parsers_1_1_scope_tests_1_1_test_ab1c960b7de2be104a63d278bd520c3ec}{ResourceUri}}\ \mbox{\hyperlink{class_luthetus_1_1_compiler_services_1_1_c_sharp_1_1_tests_1_1_smoke_tests_1_1_parsers_1_1_scope_tests_1_1_test_ab1c960b7de2be104a63d278bd520c3ec}{ResourceUri}}\ \{\ \textcolor{keyword}{get};\ \textcolor{keyword}{set};\ \}}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00052}\mbox{\hyperlink{class_luthetus_1_1_compiler_services_1_1_c_sharp_1_1_tests_1_1_smoke_tests_1_1_parsers_1_1_scope_tests_1_1_test_a916e30ec093a6bd2a152bb1730b8469a}{00052}}\ \ \ \ \ \ \ \ \ \textcolor{keyword}{public}\ \mbox{\hyperlink{class_luthetus_1_1_compiler_services_1_1_c_sharp_1_1_lexer_case_1_1_c_sharp_lexer}{CSharpLexer}}\ \mbox{\hyperlink{class_luthetus_1_1_compiler_services_1_1_c_sharp_1_1_tests_1_1_smoke_tests_1_1_parsers_1_1_scope_tests_1_1_test_a916e30ec093a6bd2a152bb1730b8469a}{Lexer}}\ \{\ \textcolor{keyword}{get};\ \textcolor{keyword}{set};\ \}}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00053}\mbox{\hyperlink{class_luthetus_1_1_compiler_services_1_1_c_sharp_1_1_tests_1_1_smoke_tests_1_1_parsers_1_1_scope_tests_1_1_test_a121ec1fe8c7656bf7f6f2e62f23be55c}{00053}}\ \ \ \ \ \ \ \ \ \textcolor{keyword}{public}\ \mbox{\hyperlink{class_luthetus_1_1_compiler_services_1_1_c_sharp_1_1_parser_case_1_1_c_sharp_parser}{CSharpParser}}\ \mbox{\hyperlink{class_luthetus_1_1_compiler_services_1_1_c_sharp_1_1_tests_1_1_smoke_tests_1_1_parsers_1_1_scope_tests_1_1_test_a121ec1fe8c7656bf7f6f2e62f23be55c}{Parser}}\ \{\ \textcolor{keyword}{get};\ \textcolor{keyword}{set};\ \}}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00054}\mbox{\hyperlink{class_luthetus_1_1_compiler_services_1_1_c_sharp_1_1_tests_1_1_smoke_tests_1_1_parsers_1_1_scope_tests_1_1_test_ac1e1da5feb0c8c3495cc3781fdd80283}{00054}}\ \ \ \ \ \ \ \ \ \textcolor{keyword}{public}\ \mbox{\hyperlink{interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_interfaces_1_1_i_binder}{IBinder}}\ \mbox{\hyperlink{class_luthetus_1_1_compiler_services_1_1_c_sharp_1_1_tests_1_1_smoke_tests_1_1_parsers_1_1_scope_tests_1_1_test_ac1e1da5feb0c8c3495cc3781fdd80283}{Binder}}\ =>\ \mbox{\hyperlink{class_luthetus_1_1_compiler_services_1_1_c_sharp_1_1_tests_1_1_smoke_tests_1_1_parsers_1_1_scope_tests_1_1_test_a32030df395d09283d80e4f4ac326ff14}{CompilationUnit}}.Binder;}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00055}\mbox{\hyperlink{class_luthetus_1_1_compiler_services_1_1_c_sharp_1_1_tests_1_1_smoke_tests_1_1_parsers_1_1_scope_tests_1_1_test_a32030df395d09283d80e4f4ac326ff14}{00055}}\ \ \ \ \ \ \ \ \ \textcolor{keyword}{public}\ \mbox{\hyperlink{class_luthetus_1_1_compiler_services_1_1_c_sharp_1_1_tests_1_1_smoke_tests_1_1_parsers_1_1_scope_tests_1_1_test_a32030df395d09283d80e4f4ac326ff14}{CompilationUnit}}\ \mbox{\hyperlink{class_luthetus_1_1_compiler_services_1_1_c_sharp_1_1_tests_1_1_smoke_tests_1_1_parsers_1_1_scope_tests_1_1_test_a32030df395d09283d80e4f4ac326ff14}{CompilationUnit}}\ \{\ \textcolor{keyword}{get};\ \textcolor{keyword}{set};\ \}}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00056}00056\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00057}00057\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00058}00058\ \ \ \ \ [Fact]}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00059}\mbox{\hyperlink{class_luthetus_1_1_compiler_services_1_1_c_sharp_1_1_tests_1_1_smoke_tests_1_1_parsers_1_1_scope_tests_a687a86a64cbe3dd73a50eddfe0e967a4}{00059}}\ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_luthetus_1_1_compiler_services_1_1_c_sharp_1_1_tests_1_1_smoke_tests_1_1_parsers_1_1_scope_tests_a687a86a64cbe3dd73a50eddfe0e967a4}{GlobalScope}}()}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00060}00060\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00061}00061\ \ \ \ \ \ \ \ \ var\ \mbox{\hyperlink{namespacetest}{test}}\ =\ \textcolor{keyword}{new}\ \mbox{\hyperlink{class_luthetus_1_1_compiler_services_1_1_c_sharp_1_1_tests_1_1_smoke_tests_1_1_parsers_1_1_scope_tests_1_1_test}{Test}}(\textcolor{stringliteral}{@"{}"{}});}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00062}00062\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00063}00063\ \ \ \ \ \ \ \ \ var\ success\ =\ \mbox{\hyperlink{namespacetest}{test}}.Binder.TryGetBinderSession(\mbox{\hyperlink{namespacetest}{test}}.ResourceUri,\ out\ var\ binderSession);}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00064}00064\ \ \ \ \ \ \ \ \ Assert.True(success);}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00065}00065\ \ \ \ \ \ \ \ \ Assert.Equal(1,\ binderSession.ScopeList.Count);}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00066}00066\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00067}00067\ \ \ \ \ \ \ \ \ var\ scope\ =\ \mbox{\hyperlink{namespacetest}{test}}.Binder.GetScopeByPositionIndex(\mbox{\hyperlink{namespacetest}{test}}.ResourceUri,\ 0);}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00068}00068\ \ \ \ \ \ \ \ \ Assert.NotNull(scope);}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00069}00069\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00070}00070\ \ \ \ \ \ \ \ \ \{\ \textcolor{comment}{//\ Global}}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00071}00071\ \ \ \ \ \ \ \ \ \ \ \ \ var\ globalScope\ =\ binderSession.ScopeList.Single();}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00072}00072\ \ \ \ \ \ \ \ \ \ \ \ \ Assert.Equal(0,\ globalScope.IndexKey);}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00073}00073\ \ \ \ \ \ \ \ \ \ \ \ \ Assert.Null(globalScope.ParentIndexKey);}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00074}00074\ \ \ \ \ \ \ \ \ \ \ \ \ Assert.Equal(0,\ globalScope.StartingIndexInclusive);}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00075}00075\ \ \ \ \ \ \ \ \ \ \ \ \ Assert.Null(globalScope.EndingIndexExclusive);}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00076}00076\ \ \ \ \ \ \ \ \ \ \ \ \ Assert.Null(globalScope.CodeBlockOwner);}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00077}00077\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00078}00078\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00079}00079\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00080}00080\ \ \ \ \ [Fact]}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00081}\mbox{\hyperlink{class_luthetus_1_1_compiler_services_1_1_c_sharp_1_1_tests_1_1_smoke_tests_1_1_parsers_1_1_scope_tests_a466295910f601203b5c493c731347017}{00081}}\ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_luthetus_1_1_compiler_services_1_1_c_sharp_1_1_tests_1_1_smoke_tests_1_1_parsers_1_1_scope_tests_a466295910f601203b5c493c731347017}{GlobalScope\_ArbitraryScope}}()}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00082}00082\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00083}00083\ \ \ \ \ \ \ \ \ var\ \mbox{\hyperlink{namespacetest}{test}}\ =\ \textcolor{keyword}{new}\ \mbox{\hyperlink{class_luthetus_1_1_compiler_services_1_1_c_sharp_1_1_tests_1_1_smoke_tests_1_1_parsers_1_1_scope_tests_1_1_test}{Test}}(\textcolor{stringliteral}{@"{}\{\}"{}});}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00084}00084\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00085}00085\ \ \ \ \ \ \ \ \ var\ success\ =\ \mbox{\hyperlink{namespacetest}{test}}.Binder.TryGetBinderSession(\mbox{\hyperlink{namespacetest}{test}}.ResourceUri,\ out\ var\ binderSession);}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00086}00086\ \ \ \ \ \ \ \ \ Assert.True(success);}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00087}00087\ \ \ \ \ \ \ \ \ Assert.Equal(2,\ binderSession.ScopeList.Count);}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00088}00088\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00089}00089\ \ \ \ \ \ \ \ \ \{\ \textcolor{comment}{//\ Global}}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00090}00090\ \ \ \ \ \ \ \ \ \ \ \ \ var\ globalScope\ =\ binderSession.ScopeList[0];}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00091}00091\ \ \ \ \ \ \ \ \ \ \ \ \ Assert.Equal(0,\ globalScope.IndexKey);}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00092}00092\ \ \ \ \ \ \ \ \ \ \ \ \ Assert.Null(globalScope.ParentIndexKey);}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00093}00093\ \ \ \ \ \ \ \ \ \ \ \ \ Assert.Equal(0,\ globalScope.StartingIndexInclusive);}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00094}00094\ \ \ \ \ \ \ \ \ \ \ \ \ Assert.Null(globalScope.EndingIndexExclusive);}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00095}00095\ \ \ \ \ \ \ \ \ \ \ \ \ Assert.Null(globalScope.CodeBlockOwner);}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00096}00096\ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00097}00097\ \ \ \ \ \ \ \ \ \ \ \ \ \{\ \textcolor{comment}{//\ Arbitrary\ scope}}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00098}00098\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ var\ arbitraryScope\ =\ binderSession.ScopeList[1];}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00099}00099\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Assert.Equal(1,\ arbitraryScope.IndexKey);}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00100}00100\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Assert.Equal(0,\ arbitraryScope.ParentIndexKey);}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00101}00101\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Assert.Equal(0,\ arbitraryScope.StartingIndexInclusive);}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00102}00102\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Assert.Equal(2,\ arbitraryScope.EndingIndexExclusive);}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00103}00103\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Assert.Equal(\mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_ae4bcfe414c318a050bbef43ec92f921b}{SyntaxKind}}.ArbitraryCodeBlockNode,\ arbitraryScope.CodeBlockOwner.SyntaxKind);}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00104}00104\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00105}00105\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00106}00106\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00107}00107\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00108}00108\ \ \ \ \ [Fact]}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00109}\mbox{\hyperlink{class_luthetus_1_1_compiler_services_1_1_c_sharp_1_1_tests_1_1_smoke_tests_1_1_parsers_1_1_scope_tests_af694a140fcb6ba69ab90c55a2999f0c8}{00109}}\ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_luthetus_1_1_compiler_services_1_1_c_sharp_1_1_tests_1_1_smoke_tests_1_1_parsers_1_1_scope_tests_af694a140fcb6ba69ab90c55a2999f0c8}{GlobalScope\_ArbitraryScope\_ArbitraryScope}}()}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00110}00110\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00111}00111\ \ \ \ \ \ \ \ \ var\ \mbox{\hyperlink{namespacetest}{test}}\ =\ \textcolor{keyword}{new}\ \mbox{\hyperlink{class_luthetus_1_1_compiler_services_1_1_c_sharp_1_1_tests_1_1_smoke_tests_1_1_parsers_1_1_scope_tests_1_1_test}{Test}}(\textcolor{stringliteral}{@"{}\{\}\ \{\}"{}});}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00112}00112\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00113}00113\ \ \ \ \ \ \ \ \ var\ success\ =\ \mbox{\hyperlink{namespacetest}{test}}.Binder.TryGetBinderSession(\mbox{\hyperlink{namespacetest}{test}}.ResourceUri,\ out\ var\ binderSession);}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00114}00114\ \ \ \ \ \ \ \ \ Assert.True(success);}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00115}00115\ \ \ \ \ \ \ \ \ Assert.Equal(3,\ binderSession.ScopeList.Count);}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00116}00116\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00117}00117\ \ \ \ \ \ \ \ \ \{\ \textcolor{comment}{//\ Global}}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00118}00118\ \ \ \ \ \ \ \ \ \ \ \ \ var\ globalScope\ =\ binderSession.ScopeList[0];}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00119}00119\ \ \ \ \ \ \ \ \ \ \ \ \ Assert.Equal(0,\ globalScope.IndexKey);}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00120}00120\ \ \ \ \ \ \ \ \ \ \ \ \ Assert.Null(globalScope.ParentIndexKey);}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00121}00121\ \ \ \ \ \ \ \ \ \ \ \ \ Assert.Equal(0,\ globalScope.StartingIndexInclusive);}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00122}00122\ \ \ \ \ \ \ \ \ \ \ \ \ Assert.Null(globalScope.EndingIndexExclusive);}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00123}00123\ \ \ \ \ \ \ \ \ \ \ \ \ Assert.Null(globalScope.CodeBlockOwner);}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00124}00124\ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00125}00125\ \ \ \ \ \ \ \ \ \ \ \ \ \{\ \textcolor{comment}{//\ Arbitrary\ scope\ 1}}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00126}00126\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ var\ arbitraryScope\ =\ binderSession.ScopeList[1];}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00127}00127\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Assert.Equal(1,\ arbitraryScope.IndexKey);}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00128}00128\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Assert.Equal(0,\ arbitraryScope.ParentIndexKey);}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00129}00129\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Assert.Equal(0,\ arbitraryScope.StartingIndexInclusive);}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00130}00130\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Assert.Equal(2,\ arbitraryScope.EndingIndexExclusive);}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00131}00131\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Assert.Equal(\mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_ae4bcfe414c318a050bbef43ec92f921b}{SyntaxKind}}.ArbitraryCodeBlockNode,\ arbitraryScope.CodeBlockOwner.SyntaxKind);}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00132}00132\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00133}00133\ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00134}00134\ \ \ \ \ \ \ \ \ \ \ \ \ \{\ \textcolor{comment}{//\ Arbitrary\ scope\ 2}}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00135}00135\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ var\ arbitraryScope\ =\ binderSession.ScopeList[2];}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00136}00136\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Assert.Equal(2,\ arbitraryScope.IndexKey);}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00137}00137\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Assert.Equal(0,\ arbitraryScope.ParentIndexKey);}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00138}00138\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Assert.Equal(3,\ arbitraryScope.StartingIndexInclusive);}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00139}00139\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Assert.Equal(5,\ arbitraryScope.EndingIndexExclusive);}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00140}00140\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Assert.Equal(\mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_ae4bcfe414c318a050bbef43ec92f921b}{SyntaxKind}}.ArbitraryCodeBlockNode,\ arbitraryScope.CodeBlockOwner.SyntaxKind);}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00141}00141\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00142}00142\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00143}00143\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00144}00144\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00145}00145\ \ \ \ \ [Fact]}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00146}\mbox{\hyperlink{class_luthetus_1_1_compiler_services_1_1_c_sharp_1_1_tests_1_1_smoke_tests_1_1_parsers_1_1_scope_tests_a96a61b1549fd4810da146b82dec7fc47}{00146}}\ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_luthetus_1_1_compiler_services_1_1_c_sharp_1_1_tests_1_1_smoke_tests_1_1_parsers_1_1_scope_tests_a96a61b1549fd4810da146b82dec7fc47}{GlobalScope\_ArbitraryScope\_Depth\_ArbitraryScope\_ArbitraryScope}}()}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00147}00147\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00148}00148\ \ \ \ \ \ \ \ \ var\ \mbox{\hyperlink{namespacetest}{test}}\ =\ \textcolor{keyword}{new}\ \mbox{\hyperlink{class_luthetus_1_1_compiler_services_1_1_c_sharp_1_1_tests_1_1_smoke_tests_1_1_parsers_1_1_scope_tests_1_1_test}{Test}}(\textcolor{stringliteral}{@"{}\{\ \{\}\ \{\}\ \}"{}});}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00149}00149\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00150}00150\ \ \ \ \ \ \ \ \ var\ success\ =\ \mbox{\hyperlink{namespacetest}{test}}.Binder.TryGetBinderSession(\mbox{\hyperlink{namespacetest}{test}}.ResourceUri,\ out\ var\ binderSession);}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00151}00151\ \ \ \ \ \ \ \ \ Assert.True(success);}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00152}00152\ \ \ \ \ \ \ \ \ Assert.Equal(4,\ binderSession.ScopeList.Count);}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00153}00153\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00154}00154\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_interfaces_1_1_i_scope}{IScope}}\ arbitraryScope;}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00155}00155\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00156}00156\ \ \ \ \ \ \ \ \ \{\ \textcolor{comment}{//\ Global}}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00157}00157\ \ \ \ \ \ \ \ \ \ \ \ \ var\ globalScope\ =\ binderSession.ScopeList[0];}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00158}00158\ \ \ \ \ \ \ \ \ \ \ \ \ Assert.Equal(0,\ globalScope.IndexKey);}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00159}00159\ \ \ \ \ \ \ \ \ \ \ \ \ Assert.Null(globalScope.ParentIndexKey);}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00160}00160\ \ \ \ \ \ \ \ \ \ \ \ \ Assert.Equal(0,\ globalScope.StartingIndexInclusive);}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00161}00161\ \ \ \ \ \ \ \ \ \ \ \ \ Assert.Null(globalScope.EndingIndexExclusive);}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00162}00162\ \ \ \ \ \ \ \ \ \ \ \ \ Assert.Null(globalScope.CodeBlockOwner);}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00163}00163\ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00164}00164\ \ \ \ \ \ \ \ \ \ \ \ \ \{\ \textcolor{comment}{//\ Arbitrary\ scope}}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00165}00165\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ arbitraryScope\ =\ binderSession.ScopeList[1];}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00166}00166\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Assert.Equal(1,\ arbitraryScope.\mbox{\hyperlink{interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_interfaces_1_1_i_scope_a61522fba59477beb1f3cafe27c43cb9c}{IndexKey}});}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00167}00167\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Assert.Equal(0,\ arbitraryScope.\mbox{\hyperlink{interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_interfaces_1_1_i_scope_abfaa5ee6ee4ef26f6072fc309d244d71}{ParentIndexKey}});}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00168}00168\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Assert.Equal(0,\ arbitraryScope.\mbox{\hyperlink{interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_interfaces_1_1_i_scope_a7e7db70d787bcdb4c9ffd3d5f11f9ca4}{StartingIndexInclusive}});}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00169}00169\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Assert.Equal(9,\ arbitraryScope.\mbox{\hyperlink{interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_interfaces_1_1_i_scope_a3aafa57351a91d8b8be8f76045501186}{EndingIndexExclusive}});}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00170}00170\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Assert.Equal(\mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_ae4bcfe414c318a050bbef43ec92f921b}{SyntaxKind}}.ArbitraryCodeBlockNode,\ arbitraryScope.\mbox{\hyperlink{interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_interfaces_1_1_i_scope_ac864a69c5039a944689ef6e02d803e3a}{CodeBlockOwner}}.\mbox{\hyperlink{interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_1_1_i_syntax_a29fb0ee8667648a748dfdca9d4e71a26}{SyntaxKind}});}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00171}00171\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00172}00172\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{\ \textcolor{comment}{//\ Arbitrary\ scope\ 1}}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00173}00173\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ arbitraryScope\ =\ binderSession.ScopeList[2];}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00174}00174\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Assert.Equal(2,\ arbitraryScope.\mbox{\hyperlink{interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_interfaces_1_1_i_scope_a61522fba59477beb1f3cafe27c43cb9c}{IndexKey}});}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00175}00175\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Assert.Equal(1,\ arbitraryScope.\mbox{\hyperlink{interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_interfaces_1_1_i_scope_abfaa5ee6ee4ef26f6072fc309d244d71}{ParentIndexKey}});}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00176}00176\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Assert.Equal(2,\ arbitraryScope.\mbox{\hyperlink{interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_interfaces_1_1_i_scope_a7e7db70d787bcdb4c9ffd3d5f11f9ca4}{StartingIndexInclusive}});}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00177}00177\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Assert.Equal(4,\ arbitraryScope.\mbox{\hyperlink{interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_interfaces_1_1_i_scope_a3aafa57351a91d8b8be8f76045501186}{EndingIndexExclusive}});}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00178}00178\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Assert.Equal(\mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_ae4bcfe414c318a050bbef43ec92f921b}{SyntaxKind}}.ArbitraryCodeBlockNode,\ arbitraryScope.\mbox{\hyperlink{interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_interfaces_1_1_i_scope_ac864a69c5039a944689ef6e02d803e3a}{CodeBlockOwner}}.\mbox{\hyperlink{interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_1_1_i_syntax_a29fb0ee8667648a748dfdca9d4e71a26}{SyntaxKind}});}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00179}00179\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00180}00180\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00181}00181\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{\ \textcolor{comment}{//\ Arbitrary\ scope\ 2}}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00182}00182\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ arbitraryScope\ =\ binderSession.ScopeList[3];}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00183}00183\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Assert.Equal(3,\ arbitraryScope.\mbox{\hyperlink{interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_interfaces_1_1_i_scope_a61522fba59477beb1f3cafe27c43cb9c}{IndexKey}});}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00184}00184\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Assert.Equal(1,\ arbitraryScope.\mbox{\hyperlink{interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_interfaces_1_1_i_scope_abfaa5ee6ee4ef26f6072fc309d244d71}{ParentIndexKey}});}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00185}00185\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Assert.Equal(5,\ arbitraryScope.\mbox{\hyperlink{interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_interfaces_1_1_i_scope_a7e7db70d787bcdb4c9ffd3d5f11f9ca4}{StartingIndexInclusive}});}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00186}00186\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Assert.Equal(7,\ arbitraryScope.\mbox{\hyperlink{interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_interfaces_1_1_i_scope_a3aafa57351a91d8b8be8f76045501186}{EndingIndexExclusive}});}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00187}00187\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Assert.Equal(\mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_ae4bcfe414c318a050bbef43ec92f921b}{SyntaxKind}}.ArbitraryCodeBlockNode,\ arbitraryScope.\mbox{\hyperlink{interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_interfaces_1_1_i_scope_ac864a69c5039a944689ef6e02d803e3a}{CodeBlockOwner}}.\mbox{\hyperlink{interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_1_1_i_syntax_a29fb0ee8667648a748dfdca9d4e71a26}{SyntaxKind}});}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00188}00188\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00189}00189\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00190}00190\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00191}00191\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00192}00192\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00193}00193\ \ \ \ \ [Fact]}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00194}\mbox{\hyperlink{class_luthetus_1_1_compiler_services_1_1_c_sharp_1_1_tests_1_1_smoke_tests_1_1_parsers_1_1_scope_tests_ac5c61971cbd92b68eb9783cde42d3b9e}{00194}}\ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_luthetus_1_1_compiler_services_1_1_c_sharp_1_1_tests_1_1_smoke_tests_1_1_parsers_1_1_scope_tests_ac5c61971cbd92b68eb9783cde42d3b9e}{GlobalScope\_TypeDefinitionNode}}()}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00195}00195\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00196}00196\ \ \ \ \ \ \ \ \ var\ \mbox{\hyperlink{namespacetest}{test}}\ =\ \textcolor{keyword}{new}\ \mbox{\hyperlink{class_luthetus_1_1_compiler_services_1_1_c_sharp_1_1_tests_1_1_smoke_tests_1_1_parsers_1_1_scope_tests_1_1_test}{Test}}(\textcolor{stringliteral}{@"{}public\ class\ Person\ \{\ \}"{}});}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00197}00197\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00198}00198\ \ \ \ \ \ \ \ \ var\ success\ =\ \mbox{\hyperlink{namespacetest}{test}}.Binder.TryGetBinderSession(\mbox{\hyperlink{namespacetest}{test}}.ResourceUri,\ out\ var\ binderSession);}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00199}00199\ \ \ \ \ \ \ \ \ Assert.True(success);}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00200}00200\ \ \ \ \ \ \ \ \ Assert.Equal(2,\ binderSession.ScopeList.Count);}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00201}00201\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00202}00202\ \ \ \ \ \ \ \ \ \{\ \textcolor{comment}{//\ Global}}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00203}00203\ \ \ \ \ \ \ \ \ \ \ \ \ var\ globalScope\ =\ binderSession.ScopeList[0];}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00204}00204\ \ \ \ \ \ \ \ \ \ \ \ \ Assert.Equal(0,\ globalScope.IndexKey);}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00205}00205\ \ \ \ \ \ \ \ \ \ \ \ \ Assert.Null(globalScope.ParentIndexKey);}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00206}00206\ \ \ \ \ \ \ \ \ \ \ \ \ Assert.Equal(0,\ globalScope.StartingIndexInclusive);}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00207}00207\ \ \ \ \ \ \ \ \ \ \ \ \ Assert.Null(globalScope.EndingIndexExclusive);}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00208}00208\ \ \ \ \ \ \ \ \ \ \ \ \ Assert.Null(globalScope.CodeBlockOwner);}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00209}00209\ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00210}00210\ \ \ \ \ \ \ \ \ \ \ \ \ \{\ \textcolor{comment}{//\ Type\ definition}}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00211}00211\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ var\ typeDefinitionScope\ =\ binderSession.ScopeList[1];}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00212}00212\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Assert.Equal(1,\ typeDefinitionScope.IndexKey);}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00213}00213\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Assert.Equal(0,\ typeDefinitionScope.ParentIndexKey);}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00214}00214\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Assert.Equal(20,\ typeDefinitionScope.StartingIndexInclusive);}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00215}00215\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Assert.Equal(23,\ typeDefinitionScope.EndingIndexExclusive);}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00216}00216\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Assert.Equal(\mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_ae4bcfe414c318a050bbef43ec92f921b}{SyntaxKind}}.TypeDefinitionNode,\ typeDefinitionScope.CodeBlockOwner.SyntaxKind);}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00217}00217\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00218}00218\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00219}00219\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00220}00220\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00221}00221\ \ \ \ \ [Fact]}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00222}\mbox{\hyperlink{class_luthetus_1_1_compiler_services_1_1_c_sharp_1_1_tests_1_1_smoke_tests_1_1_parsers_1_1_scope_tests_ac6ce8aed55398d7cb2fd96040cd54c66}{00222}}\ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_luthetus_1_1_compiler_services_1_1_c_sharp_1_1_tests_1_1_smoke_tests_1_1_parsers_1_1_scope_tests_ac6ce8aed55398d7cb2fd96040cd54c66}{GlobalScope\_TypeDefinitionNode\_Depth\_ConstructorDefinitionNode}}()}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00223}00223\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00224}00224\ \ \ \ \ \ \ \ \ var\ \mbox{\hyperlink{namespacetest}{test}}\ =\ \textcolor{keyword}{new}\ \mbox{\hyperlink{class_luthetus_1_1_compiler_services_1_1_c_sharp_1_1_tests_1_1_smoke_tests_1_1_parsers_1_1_scope_tests_1_1_test}{Test}}(\textcolor{stringliteral}{@"{}public\ class\ Person\ \{\ public\ Person()\ \{\ \}\ \}"{}});}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00225}00225\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00226}00226\ \ \ \ \ \ \ \ \ var\ success\ =\ \mbox{\hyperlink{namespacetest}{test}}.Binder.TryGetBinderSession(\mbox{\hyperlink{namespacetest}{test}}.ResourceUri,\ out\ var\ binderSession);}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00227}00227\ \ \ \ \ \ \ \ \ Assert.True(success);}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00228}00228\ \ \ \ \ \ \ \ \ Assert.Equal(3,\ binderSession.ScopeList.Count);}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00229}00229\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00230}00230\ \ \ \ \ \ \ \ \ \{\ \textcolor{comment}{//\ Global}}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00231}00231\ \ \ \ \ \ \ \ \ \ \ \ \ var\ globalScope\ =\ binderSession.ScopeList[0];}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00232}00232\ \ \ \ \ \ \ \ \ \ \ \ \ Assert.Equal(0,\ globalScope.IndexKey);}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00233}00233\ \ \ \ \ \ \ \ \ \ \ \ \ Assert.Null(globalScope.ParentIndexKey);}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00234}00234\ \ \ \ \ \ \ \ \ \ \ \ \ Assert.Equal(0,\ globalScope.StartingIndexInclusive);}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00235}00235\ \ \ \ \ \ \ \ \ \ \ \ \ Assert.Null(globalScope.EndingIndexExclusive);}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00236}00236\ \ \ \ \ \ \ \ \ \ \ \ \ Assert.Null(globalScope.CodeBlockOwner);}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00237}00237\ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00238}00238\ \ \ \ \ \ \ \ \ \ \ \ \ \{\ \textcolor{comment}{//\ Type\ definition}}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00239}00239\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ var\ typeDefinitionScope\ =\ binderSession.ScopeList[1];}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00240}00240\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Assert.Equal(1,\ typeDefinitionScope.IndexKey);}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00241}00241\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Assert.Equal(0,\ typeDefinitionScope.ParentIndexKey);}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00242}00242\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Assert.Equal(20,\ typeDefinitionScope.StartingIndexInclusive);}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00243}00243\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Assert.Equal(43,\ typeDefinitionScope.EndingIndexExclusive);}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00244}00244\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Assert.Equal(\mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_ae4bcfe414c318a050bbef43ec92f921b}{SyntaxKind}}.TypeDefinitionNode,\ typeDefinitionScope.CodeBlockOwner.SyntaxKind);}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00245}00245\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00246}00246\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{\ \textcolor{comment}{//\ Constructor\ definition}}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00247}00247\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ var\ constructorDefinitionScope\ =\ binderSession.ScopeList[2];}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00248}00248\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Assert.Equal(2,\ constructorDefinitionScope.IndexKey);}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00249}00249\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Assert.Equal(1,\ constructorDefinitionScope.ParentIndexKey);}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00250}00250\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Assert.Equal(38,\ constructorDefinitionScope.StartingIndexInclusive);}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00251}00251\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Assert.Equal(41,\ constructorDefinitionScope.EndingIndexExclusive);}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00252}00252\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Assert.Equal(\mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_ae4bcfe414c318a050bbef43ec92f921b}{SyntaxKind}}.ConstructorDefinitionNode,\ constructorDefinitionScope.CodeBlockOwner.SyntaxKind);}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00253}00253\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00254}00254\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00255}00255\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00256}00256\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00257}00257\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00258}00258\ \ \ \ \ [Fact]}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00259}\mbox{\hyperlink{class_luthetus_1_1_compiler_services_1_1_c_sharp_1_1_tests_1_1_smoke_tests_1_1_parsers_1_1_scope_tests_a6ddd3b3fb85e0c6074550cee6557501b}{00259}}\ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_luthetus_1_1_compiler_services_1_1_c_sharp_1_1_tests_1_1_smoke_tests_1_1_parsers_1_1_scope_tests_a6ddd3b3fb85e0c6074550cee6557501b}{GlobalScope\_TypeDefinitionNode\_Depth\_ConstructorDefinitionNode\_PropertyInitialized}}()}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00260}00260\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00261}00261\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Erroneous\ behavior:}}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00262}00262\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ ===================}}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00263}00263\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Property\ definitions\ being\ initialized\ can\ break\ the\ scope\ of\ constructors\ that\ appear\ in\ source\ code\ text-\/wise\ above\ them.}}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00264}00264\ \ \ \ \ \ \ \ \ \textcolor{comment}{//}}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00265}00265\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ This\ is\ not\ happening\ if\ the\ property\ definition\ with\ initialization\ is\ moved\ above\ the\ constructor,\ only\ if\ it\ is\ below.}}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00266}00266\ \ \ \ \ \ \ \ \ \textcolor{comment}{//}}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00267}00267\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ When\ this\ behavior\ occurs,\ instead\ of\ a\ scope\ being\ defined\ at\ the\ constructor's\ OpenBraceToken}}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00268}00268\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ to\ its\ CloseBraceToken.}}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00269}00269\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ |}}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00270}00270\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ It\ will\ instead\ create\ a\ scope\ at\ the\ semicolon\ of\ the\ property\ definition\ with\ initialization.}}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00271}00271\ \ \ \ \ \ \ \ \ \textcolor{comment}{//}}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00272}00272\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ The\ constructor\ having\ or\ not\ having\ arguments\ has\ no\ impact\ on\ the\ behavior.}}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00273}00273\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00274}00274\ \ \ \ \ \ \ \ \ var\ \mbox{\hyperlink{namespacetest}{test}}\ =\ \textcolor{keyword}{new}\ \mbox{\hyperlink{class_luthetus_1_1_compiler_services_1_1_c_sharp_1_1_tests_1_1_smoke_tests_1_1_parsers_1_1_scope_tests_1_1_test}{Test}}(}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00275}00275\ \textcolor{stringliteral}{@"{}public\ class\ Person}}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00276}00276\ \textcolor{stringliteral}{\{}}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00277}00277\ \textcolor{stringliteral}{\ \ \ \ public\ Person(string\ firstName)}}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00278}00278\ \textcolor{stringliteral}{\ \ \ \ \{}}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00279}00279\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ FirstName\ =\ firstName;}}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00280}00280\ \textcolor{stringliteral}{\ \ \ \ \}}}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00281}00281\ \textcolor{stringliteral}{\ \ \ \ }}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00282}00282\ \textcolor{stringliteral}{\ \ \ \ public\ string\ FirstName\ \{\ get;\ set;\ \}\ =\ "{}"{}abc"{}"{};}}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00283}00283\ \textcolor{stringliteral}{\}"{}});}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00284}00284\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00285}00285\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{throw}\ \textcolor{keyword}{new}\ NotImplementedException();}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00286}00286\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00287}00287\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00288}00288\ \ \ \ \ [Fact]}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00289}\mbox{\hyperlink{class_luthetus_1_1_compiler_services_1_1_c_sharp_1_1_tests_1_1_smoke_tests_1_1_parsers_1_1_scope_tests_a3e798aa117efc42be33b1914aae2a2cf}{00289}}\ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_luthetus_1_1_compiler_services_1_1_c_sharp_1_1_tests_1_1_smoke_tests_1_1_parsers_1_1_scope_tests_a3e798aa117efc42be33b1914aae2a2cf}{GlobalScope\_TypeDefinitionNode\_Depth\_PropertyDefinitionNode}}()}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00290}00290\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00291}00291\ \ \ \ \ \ \ \ \ var\ \mbox{\hyperlink{namespacetest}{test}}\ =\ \textcolor{keyword}{new}\ \mbox{\hyperlink{class_luthetus_1_1_compiler_services_1_1_c_sharp_1_1_tests_1_1_smoke_tests_1_1_parsers_1_1_scope_tests_1_1_test}{Test}}(\textcolor{stringliteral}{@"{}public\ class\ Person\ \{\ public\ string\ FirstName\ \{\ get;\ set;\ \}\ \}"{}});}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00292}00292\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00293}00293\ \ \ \ \ \ \ \ \ var\ success\ =\ \mbox{\hyperlink{namespacetest}{test}}.Binder.TryGetBinderSession(\mbox{\hyperlink{namespacetest}{test}}.ResourceUri,\ out\ var\ binderSession);}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00294}00294\ \ \ \ \ \ \ \ \ Assert.True(success);}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00295}00295\ \ \ \ \ \ \ \ \ Assert.Equal(2,\ binderSession.ScopeList.Count);}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00296}00296\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00297}00297\ \ \ \ \ \ \ \ \ \{\ \textcolor{comment}{//\ Global}}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00298}00298\ \ \ \ \ \ \ \ \ \ \ \ \ var\ globalScope\ =\ binderSession.ScopeList[0];}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00299}00299\ \ \ \ \ \ \ \ \ \ \ \ \ Assert.Equal(0,\ globalScope.IndexKey);}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00300}00300\ \ \ \ \ \ \ \ \ \ \ \ \ Assert.Null(globalScope.ParentIndexKey);}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00301}00301\ \ \ \ \ \ \ \ \ \ \ \ \ Assert.Equal(0,\ globalScope.StartingIndexInclusive);}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00302}00302\ \ \ \ \ \ \ \ \ \ \ \ \ Assert.Null(globalScope.EndingIndexExclusive);}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00303}00303\ \ \ \ \ \ \ \ \ \ \ \ \ Assert.Null(globalScope.CodeBlockOwner);}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00304}00304\ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00305}00305\ \ \ \ \ \ \ \ \ \ \ \ \ \{\ \textcolor{comment}{//\ Type\ definition}}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00306}00306\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ var\ typeDefinitionScope\ =\ binderSession.ScopeList[1];}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00307}00307\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Assert.Equal(1,\ typeDefinitionScope.IndexKey);}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00308}00308\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Assert.Equal(0,\ typeDefinitionScope.ParentIndexKey);}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00309}00309\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Assert.Equal(20,\ typeDefinitionScope.StartingIndexInclusive);}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00310}00310\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Assert.Equal(61,\ typeDefinitionScope.EndingIndexExclusive);}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00311}00311\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Assert.Equal(\mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_ae4bcfe414c318a050bbef43ec92f921b}{SyntaxKind}}.TypeDefinitionNode,\ typeDefinitionScope.CodeBlockOwner.SyntaxKind);}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00312}00312\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00313}00313\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00314}00314\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00315}00315\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00316}00316\ \ \ \ \ [Fact]}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00317}\mbox{\hyperlink{class_luthetus_1_1_compiler_services_1_1_c_sharp_1_1_tests_1_1_smoke_tests_1_1_parsers_1_1_scope_tests_a35be4a91dfc1cbc943763d926e7f1ed6}{00317}}\ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_luthetus_1_1_compiler_services_1_1_c_sharp_1_1_tests_1_1_smoke_tests_1_1_parsers_1_1_scope_tests_a35be4a91dfc1cbc943763d926e7f1ed6}{GlobalScope\_TypeDefinitionNode\_Depth\_PropertyDefinitionNodeWithAttribute}}()}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00318}00318\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00319}00319\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ line\_1:\ position\_0}}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00320}00320\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ line\_2:\ position\_20}}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00321}00321\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ line\_3:\ position\_22}}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00322}00322\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ line\_4:\ position\_51}}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00323}00323\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ line\_5:\ position\_90}}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00324}00324\ \ \ \ \ \ \ \ \ var\ \mbox{\hyperlink{namespacetest}{test}}\ =\ \textcolor{keyword}{new}\ \mbox{\hyperlink{class_luthetus_1_1_compiler_services_1_1_c_sharp_1_1_tests_1_1_smoke_tests_1_1_parsers_1_1_scope_tests_1_1_test}{Test}}(}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00325}00325\ \textcolor{stringliteral}{@"{}public\ class\ Person}}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00326}00326\ \textcolor{stringliteral}{\{}}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00327}00327\ \textcolor{stringliteral}{\ \ \ \ [Parameter,\ EditorRequired]}}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00328}00328\ \textcolor{stringliteral}{\ \ \ \ public\ string\ FirstName\ \{\ get;\ set;\ \}}}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00329}00329\ \textcolor{stringliteral}{\}"{}}.ReplaceLineEndings(\textcolor{stringliteral}{"{}\(\backslash\)n"{}}));}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00330}00330\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00331}00331\ \ \ \ \ \ \ \ \ var\ success\ =\ \mbox{\hyperlink{namespacetest}{test}}.Binder.TryGetBinderSession(\mbox{\hyperlink{namespacetest}{test}}.ResourceUri,\ out\ var\ binderSession);}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00332}00332\ \ \ \ \ \ \ \ \ Assert.True(success);}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00333}00333\ \ \ \ \ \ \ \ \ Assert.Equal(2,\ binderSession.ScopeList.Count);}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00334}00334\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00335}00335\ \ \ \ \ \ \ \ \ \{\ \textcolor{comment}{//\ Global}}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00336}00336\ \ \ \ \ \ \ \ \ \ \ \ \ var\ globalScope\ =\ binderSession.ScopeList[0];}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00337}00337\ \ \ \ \ \ \ \ \ \ \ \ \ Assert.Equal(0,\ globalScope.IndexKey);}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00338}00338\ \ \ \ \ \ \ \ \ \ \ \ \ Assert.Null(globalScope.ParentIndexKey);}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00339}00339\ \ \ \ \ \ \ \ \ \ \ \ \ Assert.Equal(0,\ globalScope.StartingIndexInclusive);}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00340}00340\ \ \ \ \ \ \ \ \ \ \ \ \ Assert.Null(globalScope.EndingIndexExclusive);}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00341}00341\ \ \ \ \ \ \ \ \ \ \ \ \ Assert.Null(globalScope.CodeBlockOwner);}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00342}00342\ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00343}00343\ \ \ \ \ \ \ \ \ \ \ \ \ \{\ \textcolor{comment}{//\ Type\ definition}}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00344}00344\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ var\ typeDefinitionScope\ =\ binderSession.ScopeList[1];}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00345}00345\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Assert.Equal(1,\ typeDefinitionScope.IndexKey);}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00346}00346\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Assert.Equal(0,\ typeDefinitionScope.ParentIndexKey);}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00347}00347\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Assert.Equal(20,\ typeDefinitionScope.StartingIndexInclusive);}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00348}00348\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Assert.Equal(91,\ typeDefinitionScope.EndingIndexExclusive);}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00349}00349\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Assert.Equal(\mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_ae4bcfe414c318a050bbef43ec92f921b}{SyntaxKind}}.TypeDefinitionNode,\ typeDefinitionScope.CodeBlockOwner.SyntaxKind);}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00350}00350\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00351}00351\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00352}00352\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00353}00353\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00365}00365\ \ \ \ \ [Fact]}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00366}\mbox{\hyperlink{class_luthetus_1_1_compiler_services_1_1_c_sharp_1_1_tests_1_1_smoke_tests_1_1_parsers_1_1_scope_tests_a66a2ec96bda4810b0c59a628f67a07a8}{00366}}\ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_luthetus_1_1_compiler_services_1_1_c_sharp_1_1_tests_1_1_smoke_tests_1_1_parsers_1_1_scope_tests_a66a2ec96bda4810b0c59a628f67a07a8}{GlobalScope\_TypeDefinitionNode\_Depth\_PropertyDefinitionNodeWithAttributeThatInvokesConstructor}}()}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00367}00367\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00368}00368\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ line\_1:\ position\_0}}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00369}00369\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ line\_2:\ position\_20}}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00370}00370\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ line\_3:\ position\_22}}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00371}00371\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ line\_4:\ position\_68}}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00372}00372\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ line\_5:\ position\_107}}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00373}00373\ \ \ \ \ \ \ \ \ var\ \mbox{\hyperlink{namespacetest}{test}}\ =\ \textcolor{keyword}{new}\ \mbox{\hyperlink{class_luthetus_1_1_compiler_services_1_1_c_sharp_1_1_tests_1_1_smoke_tests_1_1_parsers_1_1_scope_tests_1_1_test}{Test}}(}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00374}00374\ \textcolor{stringliteral}{@"{}public\ class\ Person}}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00375}00375\ \textcolor{stringliteral}{\{}}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00376}00376\ \textcolor{stringliteral}{\ \ \ \ [Parameter(Name="{}"{}Aaa"{}"{}),\ EditorRequired(3)]}}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00377}00377\ \textcolor{stringliteral}{\ \ \ \ public\ string\ FirstName\ \{\ get;\ set;\ \}}}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00378}00378\ \textcolor{stringliteral}{\}"{}}.ReplaceLineEndings(\textcolor{stringliteral}{"{}\(\backslash\)n"{}}));}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00379}00379\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00380}00380\ \ \ \ \ \ \ \ \ var\ success\ =\ \mbox{\hyperlink{namespacetest}{test}}.Binder.TryGetBinderSession(\mbox{\hyperlink{namespacetest}{test}}.ResourceUri,\ out\ var\ binderSession);}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00381}00381\ \ \ \ \ \ \ \ \ Assert.True(success);}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00382}00382\ \ \ \ \ \ \ \ \ Assert.Equal(2,\ binderSession.ScopeList.Count);}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00383}00383\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00384}00384\ \ \ \ \ \ \ \ \ \{\ \textcolor{comment}{//\ Global}}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00385}00385\ \ \ \ \ \ \ \ \ \ \ \ \ var\ globalScope\ =\ binderSession.ScopeList[0];}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00386}00386\ \ \ \ \ \ \ \ \ \ \ \ \ Assert.Equal(0,\ globalScope.IndexKey);}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00387}00387\ \ \ \ \ \ \ \ \ \ \ \ \ Assert.Null(globalScope.ParentIndexKey);}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00388}00388\ \ \ \ \ \ \ \ \ \ \ \ \ Assert.Equal(0,\ globalScope.StartingIndexInclusive);}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00389}00389\ \ \ \ \ \ \ \ \ \ \ \ \ Assert.Null(globalScope.EndingIndexExclusive);}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00390}00390\ \ \ \ \ \ \ \ \ \ \ \ \ Assert.Null(globalScope.CodeBlockOwner);}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00391}00391\ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00392}00392\ \ \ \ \ \ \ \ \ \ \ \ \ \{\ \textcolor{comment}{//\ Type\ definition}}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00393}00393\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ var\ typeDefinitionScope\ =\ binderSession.ScopeList[1];}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00394}00394\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Assert.Equal(1,\ typeDefinitionScope.IndexKey);}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00395}00395\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Assert.Equal(0,\ typeDefinitionScope.ParentIndexKey);}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00396}00396\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Assert.Equal(20,\ typeDefinitionScope.StartingIndexInclusive);}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00397}00397\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Assert.Equal(108,\ typeDefinitionScope.EndingIndexExclusive);}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00398}00398\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Assert.Equal(\mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_ae4bcfe414c318a050bbef43ec92f921b}{SyntaxKind}}.TypeDefinitionNode,\ typeDefinitionScope.CodeBlockOwner.SyntaxKind);}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00399}00399\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00400}00400\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00401}00401\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00402}00402\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00403}00403\ \ \ \ \ [Fact]}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00404}\mbox{\hyperlink{class_luthetus_1_1_compiler_services_1_1_c_sharp_1_1_tests_1_1_smoke_tests_1_1_parsers_1_1_scope_tests_ae7cff070d7d2f2b4fdd1a9d0f56245c9}{00404}}\ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_luthetus_1_1_compiler_services_1_1_c_sharp_1_1_tests_1_1_smoke_tests_1_1_parsers_1_1_scope_tests_ae7cff070d7d2f2b4fdd1a9d0f56245c9}{GlobalScope\_TypeDefinitionNode\_Depth\_PropertyDefinitionNodeGetterAndSetterCodeBlock}}()}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00405}00405\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00406}00406\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ line\_\string~1:\ position\_0}}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00407}00407\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ line\_\string~2:\ position\_20}}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00408}00408\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ line\_\string~3:\ position\_22}}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00409}00409\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ line\_\string~4:\ position\_47}}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00410}00410\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ line\_\string~5:\ position\_50}}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00411}00411\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ line\_\string~6:\ position\_56}}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00412}00412\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ line\_\string~7:\ position\_60}}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00413}00413\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ line\_\string~8:\ position\_82}}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00414}00414\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ line\_\string~9:\ position\_86}}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00415}00415\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ line\_10:\ position\_92}}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00416}00416\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ line\_11:\ position\_96}}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00417}00417\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ line\_12:\ position\_119}}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00418}00418\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ line\_13:\ position\_123}}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00419}00419\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ line\_14:\ position\_126}}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00420}00420\ \ \ \ \ \ \ \ \ var\ \mbox{\hyperlink{namespacetest}{test}}\ =\ \textcolor{keyword}{new}\ \mbox{\hyperlink{class_luthetus_1_1_compiler_services_1_1_c_sharp_1_1_tests_1_1_smoke_tests_1_1_parsers_1_1_scope_tests_1_1_test}{Test}}(}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00421}00421\ \textcolor{stringliteral}{@"{}public\ class\ Person}}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00422}00422\ \textcolor{stringliteral}{\{}}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00423}00423\ \textcolor{stringliteral}{\ \ \ \ public\ string\ FirstName}}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00424}00424\ \textcolor{stringliteral}{\ \ \ \ \{}}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00425}00425\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ get}}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00426}00426\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \{}}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00427}00427\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ \ \ return\ \_firstName;}}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00428}00428\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \}}}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00429}00429\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ set}}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00430}00430\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \{}}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00431}00431\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ \ \ \_firstName\ =\ value;}}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00432}00432\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \}}}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00433}00433\ \textcolor{stringliteral}{\ \ \ \ \}}}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00434}00434\ \textcolor{stringliteral}{\}"{}}.ReplaceLineEndings(\textcolor{stringliteral}{"{}\(\backslash\)n"{}}));}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00435}00435\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00436}00436\ \ \ \ \ \ \ \ \ var\ success\ =\ \mbox{\hyperlink{namespacetest}{test}}.Binder.TryGetBinderSession(\mbox{\hyperlink{namespacetest}{test}}.ResourceUri,\ out\ var\ binderSession);}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00437}00437\ \ \ \ \ \ \ \ \ Assert.True(success);}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00438}00438\ \ \ \ \ \ \ \ \ Assert.Equal(2,\ binderSession.ScopeList.Count);}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00439}00439\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00440}00440\ \ \ \ \ \ \ \ \ \{\ \textcolor{comment}{//\ Global}}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00441}00441\ \ \ \ \ \ \ \ \ \ \ \ \ var\ globalScope\ =\ binderSession.ScopeList[0];}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00442}00442\ \ \ \ \ \ \ \ \ \ \ \ \ Assert.Equal(0,\ globalScope.IndexKey);}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00443}00443\ \ \ \ \ \ \ \ \ \ \ \ \ Assert.Null(globalScope.ParentIndexKey);}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00444}00444\ \ \ \ \ \ \ \ \ \ \ \ \ Assert.Equal(0,\ globalScope.StartingIndexInclusive);}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00445}00445\ \ \ \ \ \ \ \ \ \ \ \ \ Assert.Null(globalScope.EndingIndexExclusive);}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00446}00446\ \ \ \ \ \ \ \ \ \ \ \ \ Assert.Null(globalScope.CodeBlockOwner);}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00447}00447\ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00448}00448\ \ \ \ \ \ \ \ \ \ \ \ \ \{\ \textcolor{comment}{//\ Type\ definition}}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00449}00449\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ var\ typeDefinitionScope\ =\ binderSession.ScopeList[1];}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00450}00450\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Assert.Equal(1,\ typeDefinitionScope.IndexKey);}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00451}00451\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Assert.Equal(0,\ typeDefinitionScope.ParentIndexKey);}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00452}00452\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Assert.Equal(20,\ typeDefinitionScope.StartingIndexInclusive);}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00453}00453\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Assert.Equal(127,\ typeDefinitionScope.EndingIndexExclusive);}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00454}00454\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Assert.Equal(\mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_ae4bcfe414c318a050bbef43ec92f921b}{SyntaxKind}}.TypeDefinitionNode,\ typeDefinitionScope.CodeBlockOwner.SyntaxKind);}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00455}00455\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00456}00456\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00457}00457\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00458}00458\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00459}00459\ \ \ \ \ [Fact]}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00460}\mbox{\hyperlink{class_luthetus_1_1_compiler_services_1_1_c_sharp_1_1_tests_1_1_smoke_tests_1_1_parsers_1_1_scope_tests_aa2c80c44768c56de73cf13b18915a6eb}{00460}}\ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_luthetus_1_1_compiler_services_1_1_c_sharp_1_1_tests_1_1_smoke_tests_1_1_parsers_1_1_scope_tests_aa2c80c44768c56de73cf13b18915a6eb}{GlobalScope\_TypeDefinitionNode\_Depth\_FunctionDefinitionNode}}()}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00461}00461\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00462}00462\ \ \ \ \ \ \ \ \ var\ \mbox{\hyperlink{namespacetest}{test}}\ =\ \textcolor{keyword}{new}\ \mbox{\hyperlink{class_luthetus_1_1_compiler_services_1_1_c_sharp_1_1_tests_1_1_smoke_tests_1_1_parsers_1_1_scope_tests_1_1_test}{Test}}(\textcolor{stringliteral}{@"{}public\ class\ Person\ \{\ public\ void\ MyMethod()\ \{\ \}\ \}"{}});}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00463}00463\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00464}00464\ \ \ \ \ \ \ \ \ var\ success\ =\ \mbox{\hyperlink{namespacetest}{test}}.Binder.TryGetBinderSession(\mbox{\hyperlink{namespacetest}{test}}.ResourceUri,\ out\ var\ binderSession);}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00465}00465\ \ \ \ \ \ \ \ \ Assert.True(success);}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00466}00466\ \ \ \ \ \ \ \ \ Assert.Equal(3,\ binderSession.ScopeList.Count);}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00467}00467\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00468}00468\ \ \ \ \ \ \ \ \ \{\ \textcolor{comment}{//\ Global}}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00469}00469\ \ \ \ \ \ \ \ \ \ \ \ \ var\ globalScope\ =\ binderSession.ScopeList[0];}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00470}00470\ \ \ \ \ \ \ \ \ \ \ \ \ Assert.Equal(0,\ globalScope.IndexKey);}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00471}00471\ \ \ \ \ \ \ \ \ \ \ \ \ Assert.Null(globalScope.ParentIndexKey);}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00472}00472\ \ \ \ \ \ \ \ \ \ \ \ \ Assert.Equal(0,\ globalScope.StartingIndexInclusive);}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00473}00473\ \ \ \ \ \ \ \ \ \ \ \ \ Assert.Null(globalScope.EndingIndexExclusive);}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00474}00474\ \ \ \ \ \ \ \ \ \ \ \ \ Assert.Null(globalScope.CodeBlockOwner);}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00475}00475\ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00476}00476\ \ \ \ \ \ \ \ \ \ \ \ \ \{\ \textcolor{comment}{//\ Type\ definition}}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00477}00477\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ var\ typeDefinitionScope\ =\ binderSession.ScopeList[1];}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00478}00478\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Assert.Equal(1,\ typeDefinitionScope.IndexKey);}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00479}00479\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Assert.Equal(0,\ typeDefinitionScope.ParentIndexKey);}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00480}00480\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Assert.Equal(20,\ typeDefinitionScope.StartingIndexInclusive);}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00481}00481\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Assert.Equal(50,\ typeDefinitionScope.EndingIndexExclusive);}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00482}00482\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Assert.Equal(\mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_ae4bcfe414c318a050bbef43ec92f921b}{SyntaxKind}}.TypeDefinitionNode,\ typeDefinitionScope.CodeBlockOwner.SyntaxKind);}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00483}00483\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00484}00484\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{\ \textcolor{comment}{//\ Function\ definition}}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00485}00485\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ var\ functionDefinitionScope\ =\ binderSession.ScopeList[2];}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00486}00486\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Assert.Equal(2,\ functionDefinitionScope.IndexKey);}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00487}00487\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Assert.Equal(1,\ functionDefinitionScope.ParentIndexKey);}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00488}00488\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Assert.Equal(45,\ functionDefinitionScope.StartingIndexInclusive);}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00489}00489\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Assert.Equal(48,\ functionDefinitionScope.EndingIndexExclusive);}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00490}00490\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Assert.Equal(\mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_ae4bcfe414c318a050bbef43ec92f921b}{SyntaxKind}}.FunctionDefinitionNode,\ functionDefinitionScope.CodeBlockOwner.SyntaxKind);}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00491}00491\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00492}00492\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00493}00493\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00494}00494\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00495}00495\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00496}00496\ \ \ \ \ [Fact]}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00497}\mbox{\hyperlink{class_luthetus_1_1_compiler_services_1_1_c_sharp_1_1_tests_1_1_smoke_tests_1_1_parsers_1_1_scope_tests_ae528a580922456e543662e242a83f7be}{00497}}\ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_luthetus_1_1_compiler_services_1_1_c_sharp_1_1_tests_1_1_smoke_tests_1_1_parsers_1_1_scope_tests_ae528a580922456e543662e242a83f7be}{GlobalScope\_TypeDefinitionNode\_Depth\_ArbitraryCodeBlock}}()}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00498}00498\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00499}00499\ \ \ \ \ \ \ \ \ var\ \mbox{\hyperlink{namespacetest}{test}}\ =\ \textcolor{keyword}{new}\ \mbox{\hyperlink{class_luthetus_1_1_compiler_services_1_1_c_sharp_1_1_tests_1_1_smoke_tests_1_1_parsers_1_1_scope_tests_1_1_test}{Test}}(\textcolor{stringliteral}{@"{}public\ class\ Person\ \{\ \{\ \}\ \}"{}});}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00500}00500\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00501}00501\ \ \ \ \ \ \ \ \ var\ success\ =\ \mbox{\hyperlink{namespacetest}{test}}.Binder.TryGetBinderSession(\mbox{\hyperlink{namespacetest}{test}}.ResourceUri,\ out\ var\ binderSession);}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00502}00502\ \ \ \ \ \ \ \ \ Assert.True(success);}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00503}00503\ \ \ \ \ \ \ \ \ Assert.Equal(3,\ binderSession.ScopeList.Count);}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00504}00504\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00505}00505\ \ \ \ \ \ \ \ \ \{\ \textcolor{comment}{//\ Global}}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00506}00506\ \ \ \ \ \ \ \ \ \ \ \ \ var\ globalScope\ =\ binderSession.ScopeList[0];}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00507}00507\ \ \ \ \ \ \ \ \ \ \ \ \ Assert.Equal(0,\ globalScope.IndexKey);}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00508}00508\ \ \ \ \ \ \ \ \ \ \ \ \ Assert.Null(globalScope.ParentIndexKey);}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00509}00509\ \ \ \ \ \ \ \ \ \ \ \ \ Assert.Equal(0,\ globalScope.StartingIndexInclusive);}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00510}00510\ \ \ \ \ \ \ \ \ \ \ \ \ Assert.Null(globalScope.EndingIndexExclusive);}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00511}00511\ \ \ \ \ \ \ \ \ \ \ \ \ Assert.Null(globalScope.CodeBlockOwner);}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00512}00512\ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00513}00513\ \ \ \ \ \ \ \ \ \ \ \ \ \{\ \textcolor{comment}{//\ Type\ definition}}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00514}00514\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ var\ typeDefinitionScope\ =\ binderSession.ScopeList[1];}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00515}00515\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Assert.Equal(1,\ typeDefinitionScope.IndexKey);}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00516}00516\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Assert.Equal(0,\ typeDefinitionScope.ParentIndexKey);}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00517}00517\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Assert.Equal(20,\ typeDefinitionScope.StartingIndexInclusive);}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00518}00518\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Assert.Equal(27,\ typeDefinitionScope.EndingIndexExclusive);}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00519}00519\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Assert.Equal(\mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_ae4bcfe414c318a050bbef43ec92f921b}{SyntaxKind}}.TypeDefinitionNode,\ typeDefinitionScope.CodeBlockOwner.SyntaxKind);}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00520}00520\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00521}00521\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{\ \textcolor{comment}{//\ Arbitrary\ scope}}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00522}00522\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ var\ arbitraryScope\ =\ binderSession.ScopeList[2];}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00523}00523\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Assert.Equal(2,\ arbitraryScope.IndexKey);}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00524}00524\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Assert.Equal(1,\ arbitraryScope.ParentIndexKey);}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00525}00525\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Assert.Equal(22,\ arbitraryScope.StartingIndexInclusive);}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00526}00526\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Assert.Equal(25,\ arbitraryScope.EndingIndexExclusive);}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00527}00527\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Assert.Equal(\mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_ae4bcfe414c318a050bbef43ec92f921b}{SyntaxKind}}.ArbitraryCodeBlockNode,\ arbitraryScope.CodeBlockOwner.SyntaxKind);}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00528}00528\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00529}00529\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00530}00530\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00531}00531\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00532}00532\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00533}00533\ \ \ \ \ [Fact]}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00534}\mbox{\hyperlink{class_luthetus_1_1_compiler_services_1_1_c_sharp_1_1_tests_1_1_smoke_tests_1_1_parsers_1_1_scope_tests_a766db9647999b4d247bedc2153bd9ca8}{00534}}\ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_luthetus_1_1_compiler_services_1_1_c_sharp_1_1_tests_1_1_smoke_tests_1_1_parsers_1_1_scope_tests_a766db9647999b4d247bedc2153bd9ca8}{GlobalScope\_FunctionDefinitionNode}}()}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00535}00535\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00536}00536\ \ \ \ \ \ \ \ \ var\ \mbox{\hyperlink{namespacetest}{test}}\ =\ \textcolor{keyword}{new}\ \mbox{\hyperlink{class_luthetus_1_1_compiler_services_1_1_c_sharp_1_1_tests_1_1_smoke_tests_1_1_parsers_1_1_scope_tests_1_1_test}{Test}}(\textcolor{stringliteral}{@"{}public\ void\ MyMethod()\ \{\ \}"{}});}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00537}00537\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00538}00538\ \ \ \ \ \ \ \ \ var\ success\ =\ \mbox{\hyperlink{namespacetest}{test}}.Binder.TryGetBinderSession(\mbox{\hyperlink{namespacetest}{test}}.ResourceUri,\ out\ var\ binderSession);}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00539}00539\ \ \ \ \ \ \ \ \ Assert.True(success);}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00540}00540\ \ \ \ \ \ \ \ \ Assert.Equal(2,\ binderSession.ScopeList.Count);}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00541}00541\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00542}00542\ \ \ \ \ \ \ \ \ \{\ \textcolor{comment}{//\ Global}}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00543}00543\ \ \ \ \ \ \ \ \ \ \ \ \ var\ globalScope\ =\ binderSession.ScopeList[0];}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00544}00544\ \ \ \ \ \ \ \ \ \ \ \ \ Assert.Equal(0,\ globalScope.IndexKey);}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00545}00545\ \ \ \ \ \ \ \ \ \ \ \ \ Assert.Null(globalScope.ParentIndexKey);}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00546}00546\ \ \ \ \ \ \ \ \ \ \ \ \ Assert.Equal(0,\ globalScope.StartingIndexInclusive);}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00547}00547\ \ \ \ \ \ \ \ \ \ \ \ \ Assert.Null(globalScope.EndingIndexExclusive);}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00548}00548\ \ \ \ \ \ \ \ \ \ \ \ \ Assert.Null(globalScope.CodeBlockOwner);}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00549}00549\ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00550}00550\ \ \ \ \ \ \ \ \ \ \ \ \ \{\ \textcolor{comment}{//\ Function\ definition}}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00551}00551\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ var\ functionDefinitionScope\ =\ binderSession.ScopeList[1];}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00552}00552\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Assert.Equal(1,\ functionDefinitionScope.IndexKey);}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00553}00553\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Assert.Equal(0,\ functionDefinitionScope.ParentIndexKey);}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00554}00554\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Assert.Equal(23,\ functionDefinitionScope.StartingIndexInclusive);}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00555}00555\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Assert.Equal(26,\ functionDefinitionScope.EndingIndexExclusive);}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00556}00556\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Assert.Equal(\mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_ae4bcfe414c318a050bbef43ec92f921b}{SyntaxKind}}.FunctionDefinitionNode,\ functionDefinitionScope.CodeBlockOwner.SyntaxKind);}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00557}00557\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00558}00558\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00559}00559\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00560}00560\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00571}00571\ \ \ \ \ [Fact]}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00572}\mbox{\hyperlink{class_luthetus_1_1_compiler_services_1_1_c_sharp_1_1_tests_1_1_smoke_tests_1_1_parsers_1_1_scope_tests_a29c3e40ecbf15f2ccba770e650969de3}{00572}}\ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_luthetus_1_1_compiler_services_1_1_c_sharp_1_1_tests_1_1_smoke_tests_1_1_parsers_1_1_scope_tests_a29c3e40ecbf15f2ccba770e650969de3}{GlobalScope\_ConstructorDefinitionNode}}()}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00573}00573\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00574}00574\ \ \ \ \ \ \ \ \ var\ \mbox{\hyperlink{namespacetest}{test}}\ =\ \textcolor{keyword}{new}\ \mbox{\hyperlink{class_luthetus_1_1_compiler_services_1_1_c_sharp_1_1_tests_1_1_smoke_tests_1_1_parsers_1_1_scope_tests_1_1_test}{Test}}(\textcolor{stringliteral}{@"{}public\ Person()\ \{\ \}"{}});}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00575}00575\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00576}00576\ \ \ \ \ \ \ \ \ var\ success\ =\ \mbox{\hyperlink{namespacetest}{test}}.Binder.TryGetBinderSession(\mbox{\hyperlink{namespacetest}{test}}.ResourceUri,\ out\ var\ binderSession);}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00577}00577\ \ \ \ \ \ \ \ \ Assert.True(success);}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00578}00578\ \ \ \ \ \ \ \ \ Assert.Equal(2,\ binderSession.ScopeList.Count);}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00579}00579\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00580}00580\ \ \ \ \ \ \ \ \ \{\ \textcolor{comment}{//\ Global}}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00581}00581\ \ \ \ \ \ \ \ \ \ \ \ \ var\ globalScope\ =\ binderSession.ScopeList[0];}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00582}00582\ \ \ \ \ \ \ \ \ \ \ \ \ Assert.Equal(0,\ globalScope.IndexKey);}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00583}00583\ \ \ \ \ \ \ \ \ \ \ \ \ Assert.Null(globalScope.ParentIndexKey);}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00584}00584\ \ \ \ \ \ \ \ \ \ \ \ \ Assert.Equal(0,\ globalScope.StartingIndexInclusive);}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00585}00585\ \ \ \ \ \ \ \ \ \ \ \ \ Assert.Null(globalScope.EndingIndexExclusive);}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00586}00586\ \ \ \ \ \ \ \ \ \ \ \ \ Assert.Null(globalScope.CodeBlockOwner);}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00587}00587\ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00588}00588\ \ \ \ \ \ \ \ \ \ \ \ \ \{\ \textcolor{comment}{//\ Function\ definition}}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00589}00589\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ var\ functionDefinitionScope\ =\ binderSession.ScopeList[1];}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00590}00590\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Assert.Equal(1,\ functionDefinitionScope.IndexKey);}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00591}00591\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Assert.Equal(0,\ functionDefinitionScope.ParentIndexKey);}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00592}00592\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Assert.Equal(16,\ functionDefinitionScope.StartingIndexInclusive);}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00593}00593\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Assert.Equal(19,\ functionDefinitionScope.EndingIndexExclusive);}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00594}00594\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Assert.Equal(\mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_ae4bcfe414c318a050bbef43ec92f921b}{SyntaxKind}}.FunctionDefinitionNode,\ functionDefinitionScope.CodeBlockOwner.SyntaxKind);}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00595}00595\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00596}00596\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00597}00597\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00598}00598\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00599}00599\ \ \ \ \ [Fact]}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00600}\mbox{\hyperlink{class_luthetus_1_1_compiler_services_1_1_c_sharp_1_1_tests_1_1_smoke_tests_1_1_parsers_1_1_scope_tests_a772c549fef5b94a8f5c5c2b1ce3ac429}{00600}}\ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_luthetus_1_1_compiler_services_1_1_c_sharp_1_1_tests_1_1_smoke_tests_1_1_parsers_1_1_scope_tests_a772c549fef5b94a8f5c5c2b1ce3ac429}{GlobalScope\_FunctionDefinitionNode\_Depth\_ArbitraryCodeBlock}}()}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00601}00601\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00602}00602\ \ \ \ \ \ \ \ \ var\ \mbox{\hyperlink{namespacetest}{test}}\ =\ \textcolor{keyword}{new}\ \mbox{\hyperlink{class_luthetus_1_1_compiler_services_1_1_c_sharp_1_1_tests_1_1_smoke_tests_1_1_parsers_1_1_scope_tests_1_1_test}{Test}}(\textcolor{stringliteral}{@"{}public\ void\ MyMethod()\ \{\ \{\ \}\ \}"{}});}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00603}00603\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00604}00604\ \ \ \ \ \ \ \ \ var\ success\ =\ \mbox{\hyperlink{namespacetest}{test}}.Binder.TryGetBinderSession(\mbox{\hyperlink{namespacetest}{test}}.ResourceUri,\ out\ var\ binderSession);}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00605}00605\ \ \ \ \ \ \ \ \ Assert.True(success);}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00606}00606\ \ \ \ \ \ \ \ \ Assert.Equal(3,\ binderSession.ScopeList.Count);}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00607}00607\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00608}00608\ \ \ \ \ \ \ \ \ \{\ \textcolor{comment}{//\ Global}}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00609}00609\ \ \ \ \ \ \ \ \ \ \ \ \ var\ globalScope\ =\ binderSession.ScopeList[0];}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00610}00610\ \ \ \ \ \ \ \ \ \ \ \ \ Assert.Equal(0,\ globalScope.IndexKey);}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00611}00611\ \ \ \ \ \ \ \ \ \ \ \ \ Assert.Null(globalScope.ParentIndexKey);}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00612}00612\ \ \ \ \ \ \ \ \ \ \ \ \ Assert.Equal(0,\ globalScope.StartingIndexInclusive);}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00613}00613\ \ \ \ \ \ \ \ \ \ \ \ \ Assert.Null(globalScope.EndingIndexExclusive);}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00614}00614\ \ \ \ \ \ \ \ \ \ \ \ \ Assert.Null(globalScope.CodeBlockOwner);}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00615}00615\ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00616}00616\ \ \ \ \ \ \ \ \ \ \ \ \ \{\ \textcolor{comment}{//\ Function\ definition}}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00617}00617\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ var\ functionDefinitionScope\ =\ binderSession.ScopeList[1];}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00618}00618\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Assert.Equal(1,\ functionDefinitionScope.IndexKey);}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00619}00619\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Assert.Equal(0,\ functionDefinitionScope.ParentIndexKey);}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00620}00620\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Assert.Equal(23,\ functionDefinitionScope.StartingIndexInclusive);}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00621}00621\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Assert.Equal(30,\ functionDefinitionScope.EndingIndexExclusive);}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00622}00622\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Assert.Equal(\mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_ae4bcfe414c318a050bbef43ec92f921b}{SyntaxKind}}.FunctionDefinitionNode,\ functionDefinitionScope.CodeBlockOwner.SyntaxKind);}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00623}00623\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00624}00624\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{\ \textcolor{comment}{//\ Arbitrary\ scope}}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00625}00625\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ var\ arbitraryScope\ =\ binderSession.ScopeList[2];}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00626}00626\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Assert.Equal(2,\ arbitraryScope.IndexKey);}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00627}00627\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Assert.Equal(1,\ arbitraryScope.ParentIndexKey);}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00628}00628\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Assert.Equal(25,\ arbitraryScope.StartingIndexInclusive);}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00629}00629\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Assert.Equal(28,\ arbitraryScope.EndingIndexExclusive);}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00630}00630\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Assert.Equal(\mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_ae4bcfe414c318a050bbef43ec92f921b}{SyntaxKind}}.ArbitraryCodeBlockNode,\ arbitraryScope.CodeBlockOwner.SyntaxKind);}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00631}00631\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00632}00632\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00633}00633\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00634}00634\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00635}00635\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00636}00636\ \ \ \ \ [Fact]}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00637}\mbox{\hyperlink{class_luthetus_1_1_compiler_services_1_1_c_sharp_1_1_tests_1_1_smoke_tests_1_1_parsers_1_1_scope_tests_a49adb9da1ed50a43162e983e3faefe47}{00637}}\ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_luthetus_1_1_compiler_services_1_1_c_sharp_1_1_tests_1_1_smoke_tests_1_1_parsers_1_1_scope_tests_a49adb9da1ed50a43162e983e3faefe47}{GlobalScope\_PropertyDefinitionNode\_ArbitraryScope}}()}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00638}00638\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00639}00639\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ The\ property\ definition\ node\ isn't\ creating\ scope.}}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00640}00640\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ So,\ the\ final\ 'ArbitraryCodeBlockNode'}}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00641}00641\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ is\ there\ to\ check\ that\ the\ scope\ logic\ did\ not\ break\ due\ to\ the}}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00642}00642\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ OpenBraceToken\ and\ CloseBraceToken\ being\ used\ as\ part\ of\ the\ property\ definition\ node\ syntax.}}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00643}00643\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00644}00644\ \ \ \ \ \ \ \ \ var\ \mbox{\hyperlink{namespacetest}{test}}\ =\ \textcolor{keyword}{new}\ \mbox{\hyperlink{class_luthetus_1_1_compiler_services_1_1_c_sharp_1_1_tests_1_1_smoke_tests_1_1_parsers_1_1_scope_tests_1_1_test}{Test}}(\textcolor{stringliteral}{@"{}public\ string\ FirstName\ \{\ get;\ set;\ \}\ \{\}"{}});}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00645}00645\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00646}00646\ \ \ \ \ \ \ \ \ var\ success\ =\ \mbox{\hyperlink{namespacetest}{test}}.Binder.TryGetBinderSession(\mbox{\hyperlink{namespacetest}{test}}.ResourceUri,\ out\ var\ binderSession);}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00647}00647\ \ \ \ \ \ \ \ \ Assert.True(success);}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00648}00648\ \ \ \ \ \ \ \ \ Assert.Equal(2,\ binderSession.ScopeList.Count);}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00649}00649\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00650}00650\ \ \ \ \ \ \ \ \ var\ scope\ =\ \mbox{\hyperlink{namespacetest}{test}}.Binder.GetScopeByPositionIndex(\mbox{\hyperlink{namespacetest}{test}}.ResourceUri,\ 0);}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00651}00651\ \ \ \ \ \ \ \ \ Assert.NotNull(scope);}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00652}00652\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00653}00653\ \ \ \ \ \ \ \ \ \{\ \textcolor{comment}{//\ Global}}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00654}00654\ \ \ \ \ \ \ \ \ \ \ \ \ var\ globalScope\ =\ binderSession.ScopeList[0];}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00655}00655\ \ \ \ \ \ \ \ \ \ \ \ \ Assert.Equal(0,\ globalScope.IndexKey);}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00656}00656\ \ \ \ \ \ \ \ \ \ \ \ \ Assert.Null(globalScope.ParentIndexKey);}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00657}00657\ \ \ \ \ \ \ \ \ \ \ \ \ Assert.Equal(0,\ globalScope.StartingIndexInclusive);}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00658}00658\ \ \ \ \ \ \ \ \ \ \ \ \ Assert.Null(globalScope.EndingIndexExclusive);}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00659}00659\ \ \ \ \ \ \ \ \ \ \ \ \ Assert.Null(globalScope.CodeBlockOwner);}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00660}00660\ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00661}00661\ \ \ \ \ \ \ \ \ \ \ \ \ \{\ \textcolor{comment}{//\ Arbitrary\ scope}}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00662}00662\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ var\ arbitraryScope\ =\ binderSession.ScopeList[1];}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00663}00663\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Assert.Equal(1,\ arbitraryScope.IndexKey);}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00664}00664\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Assert.Equal(0,\ arbitraryScope.ParentIndexKey);}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00665}00665\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Assert.Equal(38,\ arbitraryScope.StartingIndexInclusive);}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00666}00666\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Assert.Equal(40,\ arbitraryScope.EndingIndexExclusive);}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00667}00667\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Assert.Equal(\mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_ae4bcfe414c318a050bbef43ec92f921b}{SyntaxKind}}.ArbitraryCodeBlockNode,\ arbitraryScope.CodeBlockOwner.SyntaxKind);}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00668}00668\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00669}00669\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00670}00670\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00671}00671\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00672}00672\ \ \ \ \ [Fact]}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00673}\mbox{\hyperlink{class_luthetus_1_1_compiler_services_1_1_c_sharp_1_1_tests_1_1_smoke_tests_1_1_parsers_1_1_scope_tests_a7632145ea95518f01720ee91db798832}{00673}}\ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_luthetus_1_1_compiler_services_1_1_c_sharp_1_1_tests_1_1_smoke_tests_1_1_parsers_1_1_scope_tests_a7632145ea95518f01720ee91db798832}{GlobalScope\_PropertyDefinitionNodeGetterAndSetterCodeBlock\_ArbitraryScope}}()}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00674}00674\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00675}00675\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ The\ property\ definition\ node\ isn't\ creating\ scope.}}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00676}00676\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ So,\ the\ final\ 'ArbitraryCodeBlockNode'}}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00677}00677\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ is\ there\ to\ check\ that\ the\ scope\ logic\ did\ not\ break\ due\ to\ the}}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00678}00678\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ OpenBraceToken\ and\ CloseBraceToken\ being\ used\ as\ part\ of\ the\ property\ definition\ node\ syntax.}}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00679}00679\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00680}00680\ \ \ \ \ \ \ \ \ var\ \mbox{\hyperlink{namespacetest}{test}}\ =\ \textcolor{keyword}{new}\ \mbox{\hyperlink{class_luthetus_1_1_compiler_services_1_1_c_sharp_1_1_tests_1_1_smoke_tests_1_1_parsers_1_1_scope_tests_1_1_test}{Test}}(}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00681}00681\ \textcolor{stringliteral}{@"{}public\ string\ FirstName}}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00682}00682\ \textcolor{stringliteral}{\{}}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00683}00683\ \textcolor{stringliteral}{\ \ \ \ get}}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00684}00684\ \textcolor{stringliteral}{\ \ \ \ \{}}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00685}00685\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ return\ \_firstName;}}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00686}00686\ \textcolor{stringliteral}{\ \ \ \ \}}}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00687}00687\ \textcolor{stringliteral}{\ \ \ \ set}}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00688}00688\ \textcolor{stringliteral}{\ \ \ \ \{}}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00689}00689\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \_firstName\ =\ value;}}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00690}00690\ \textcolor{stringliteral}{\ \ \ \ \}}}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00691}00691\ \textcolor{stringliteral}{\}}}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00692}00692\ \textcolor{stringliteral}{}}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00693}00693\ \textcolor{stringliteral}{\{\}"{}}.ReplaceLineEndings(\textcolor{stringliteral}{"{}\(\backslash\)n"{}}));}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00694}00694\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00695}00695\ \ \ \ \ \ \ \ \ var\ success\ =\ \mbox{\hyperlink{namespacetest}{test}}.Binder.TryGetBinderSession(\mbox{\hyperlink{namespacetest}{test}}.ResourceUri,\ out\ var\ binderSession);}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00696}00696\ \ \ \ \ \ \ \ \ Assert.True(success);}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00697}00697\ \ \ \ \ \ \ \ \ Assert.Equal(2,\ binderSession.ScopeList.Count);}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00698}00698\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00699}00699\ \ \ \ \ \ \ \ \ var\ scope\ =\ \mbox{\hyperlink{namespacetest}{test}}.Binder.GetScopeByPositionIndex(\mbox{\hyperlink{namespacetest}{test}}.ResourceUri,\ 0);}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00700}00700\ \ \ \ \ \ \ \ \ Assert.NotNull(scope);}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00701}00701\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00702}00702\ \ \ \ \ \ \ \ \ \{\ \textcolor{comment}{//\ Global}}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00703}00703\ \ \ \ \ \ \ \ \ \ \ \ \ var\ globalScope\ =\ binderSession.ScopeList[0];}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00704}00704\ \ \ \ \ \ \ \ \ \ \ \ \ Assert.Equal(0,\ globalScope.IndexKey);}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00705}00705\ \ \ \ \ \ \ \ \ \ \ \ \ Assert.Null(globalScope.ParentIndexKey);}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00706}00706\ \ \ \ \ \ \ \ \ \ \ \ \ Assert.Equal(0,\ globalScope.StartingIndexInclusive);}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00707}00707\ \ \ \ \ \ \ \ \ \ \ \ \ Assert.Null(globalScope.EndingIndexExclusive);}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00708}00708\ \ \ \ \ \ \ \ \ \ \ \ \ Assert.Null(globalScope.CodeBlockOwner);}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00709}00709\ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00710}00710\ \ \ \ \ \ \ \ \ \ \ \ \ \{\ \textcolor{comment}{//\ Arbitrary\ scope}}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00711}00711\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ var\ arbitraryScope\ =\ binderSession.ScopeList[1];}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00712}00712\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Assert.Equal(1,\ arbitraryScope.IndexKey);}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00713}00713\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Assert.Equal(0,\ arbitraryScope.ParentIndexKey);}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00714}00714\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Assert.Equal(94,\ arbitraryScope.StartingIndexInclusive);}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00715}00715\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Assert.Equal(96,\ arbitraryScope.EndingIndexExclusive);}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00716}00716\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Assert.Equal(\mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_ae4bcfe414c318a050bbef43ec92f921b}{SyntaxKind}}.ArbitraryCodeBlockNode,\ arbitraryScope.CodeBlockOwner.SyntaxKind);}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00717}00717\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00718}00718\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00719}00719\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00720}00720\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00721}00721\ \ \ \ \ [Fact]}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00722}\mbox{\hyperlink{class_luthetus_1_1_compiler_services_1_1_c_sharp_1_1_tests_1_1_smoke_tests_1_1_parsers_1_1_scope_tests_a4dcfece34b6cb6a05f5e51fbfdc48ca1}{00722}}\ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_luthetus_1_1_compiler_services_1_1_c_sharp_1_1_tests_1_1_smoke_tests_1_1_parsers_1_1_scope_tests_a4dcfece34b6cb6a05f5e51fbfdc48ca1}{GlobalScope\_RecordWith\_ArbitraryScope}}()}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00723}00723\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00724}00724\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ The\ record\ 'with'\ keyword\ isn't\ creating\ scope.}}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00725}00725\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ So,\ the\ final\ 'ArbitraryCodeBlockNode'}}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00726}00726\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ is\ there\ to\ check\ that\ the\ scope\ logic\ did\ not\ break\ due\ to\ the}}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00727}00727\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ OpenBraceToken\ and\ CloseBraceToken\ being\ used\ as\ part\ of\ the\ record\ 'with'\ keyword\ syntax.}}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00728}00728\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00729}00729\ \ \ \ \ \ \ \ \ var\ \mbox{\hyperlink{namespacetest}{test}}\ =\ \textcolor{keyword}{new}\ \mbox{\hyperlink{class_luthetus_1_1_compiler_services_1_1_c_sharp_1_1_tests_1_1_smoke_tests_1_1_parsers_1_1_scope_tests_1_1_test}{Test}}(}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00730}00730\ \textcolor{stringliteral}{@"{}var\ x\ =\ new\ PersonRecord();}}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00731}00731\ \textcolor{stringliteral}{}}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00732}00732\ \textcolor{stringliteral}{x\ =\ x\ with}}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00733}00733\ \textcolor{stringliteral}{\{}}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00734}00734\ \textcolor{stringliteral}{\ \ \ \ FirstName\ =\ "{}"{}John"{}"{},}}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00735}00735\ \textcolor{stringliteral}{\ \ \ \ LastName\ =\ "{}"{}Doe"{}"{},}}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00736}00736\ \textcolor{stringliteral}{\};}}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00737}00737\ \textcolor{stringliteral}{}}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00738}00738\ \textcolor{stringliteral}{\{\}"{}}.ReplaceLineEndings(\textcolor{stringliteral}{"{}\(\backslash\)n"{}}));}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00739}00739\ }
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00740}00740\ \ \ \ \ \ \ \ \ var\ success\ =\ \mbox{\hyperlink{namespacetest}{test}}.Binder.TryGetBinderSession(\mbox{\hyperlink{namespacetest}{test}}.ResourceUri,\ out\ var\ binderSession);}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00741}00741\ \ \ \ \ \ \ \ \ Assert.True(success);}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00742}00742\ \ \ \ \ \ \ \ \ Assert.Equal(2,\ binderSession.ScopeList.Count);}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00743}00743\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00744}00744\ \ \ \ \ \ \ \ \ var\ scope\ =\ \mbox{\hyperlink{namespacetest}{test}}.Binder.GetScopeByPositionIndex(\mbox{\hyperlink{namespacetest}{test}}.ResourceUri,\ 0);}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00745}00745\ \ \ \ \ \ \ \ \ Assert.NotNull(scope);}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00746}00746\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00747}00747\ \ \ \ \ \ \ \ \ \{\ \textcolor{comment}{//\ Global}}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00748}00748\ \ \ \ \ \ \ \ \ \ \ \ \ var\ globalScope\ =\ binderSession.ScopeList[0];}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00749}00749\ \ \ \ \ \ \ \ \ \ \ \ \ Assert.Equal(0,\ globalScope.IndexKey);}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00750}00750\ \ \ \ \ \ \ \ \ \ \ \ \ Assert.Null(globalScope.ParentIndexKey);}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00751}00751\ \ \ \ \ \ \ \ \ \ \ \ \ Assert.Equal(0,\ globalScope.StartingIndexInclusive);}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00752}00752\ \ \ \ \ \ \ \ \ \ \ \ \ Assert.Null(globalScope.EndingIndexExclusive);}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00753}00753\ \ \ \ \ \ \ \ \ \ \ \ \ Assert.Null(globalScope.CodeBlockOwner);}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00754}00754\ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00755}00755\ \ \ \ \ \ \ \ \ \ \ \ \ \{\ \textcolor{comment}{//\ Arbitrary\ scope}}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00756}00756\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ var\ arbitraryScope\ =\ binderSession.ScopeList[1];}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00757}00757\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Assert.Equal(1,\ arbitraryScope.IndexKey);}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00758}00758\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Assert.Equal(0,\ arbitraryScope.ParentIndexKey);}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00759}00759\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Assert.Equal(89,\ arbitraryScope.StartingIndexInclusive);}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00760}00760\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Assert.Equal(91,\ arbitraryScope.EndingIndexExclusive);}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00761}00761\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Assert.Equal(\mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_ae4bcfe414c318a050bbef43ec92f921b}{SyntaxKind}}.ArbitraryCodeBlockNode,\ arbitraryScope.CodeBlockOwner.SyntaxKind);}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00762}00762\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00763}00763\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00764}00764\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00765}00765\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00766}00766\ \ \ \ \ [Fact]}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00767}\mbox{\hyperlink{class_luthetus_1_1_compiler_services_1_1_c_sharp_1_1_tests_1_1_smoke_tests_1_1_parsers_1_1_scope_tests_a935e380af402685dd7767fffa5bc5e9b}{00767}}\ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_luthetus_1_1_compiler_services_1_1_c_sharp_1_1_tests_1_1_smoke_tests_1_1_parsers_1_1_scope_tests_a935e380af402685dd7767fffa5bc5e9b}{GlobalScope\_ObjectInitialization\_ArbitraryScope}}()}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00768}00768\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00769}00769\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ The\ object\ initialization\ syntax\ isn't\ creating\ scope.}}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00770}00770\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ So,\ the\ final\ 'ArbitraryCodeBlockNode'}}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00771}00771\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ is\ there\ to\ check\ that\ the\ scope\ logic\ did\ not\ break\ due\ to\ the}}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00772}00772\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ OpenBraceToken\ and\ CloseBraceToken\ being\ used\ as\ part\ of\ the\ object\ initialization\ syntax.}}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00773}00773\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00774}00774\ \ \ \ \ \ \ \ \ var\ \mbox{\hyperlink{namespacetest}{test}}\ =\ \textcolor{keyword}{new}\ \mbox{\hyperlink{class_luthetus_1_1_compiler_services_1_1_c_sharp_1_1_tests_1_1_smoke_tests_1_1_parsers_1_1_scope_tests_1_1_test}{Test}}(}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00775}00775\ \textcolor{stringliteral}{@"{}var\ x\ =\ new\ PersonRecord}}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00776}00776\ \textcolor{stringliteral}{\{}}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00777}00777\ \textcolor{stringliteral}{\ \ \ \ FirstName\ =\ "{}"{}John"{}"{},}}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00778}00778\ \textcolor{stringliteral}{\ \ \ \ LastName\ =\ "{}"{}Doe"{}"{},}}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00779}00779\ \textcolor{stringliteral}{\};}}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00780}00780\ \textcolor{stringliteral}{}}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00781}00781\ \textcolor{stringliteral}{\{\}"{}}.ReplaceLineEndings(\textcolor{stringliteral}{"{}\(\backslash\)n"{}}));}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00782}00782\ }
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00783}00783\ \ \ \ \ \ \ \ \ var\ success\ =\ \mbox{\hyperlink{namespacetest}{test}}.Binder.TryGetBinderSession(\mbox{\hyperlink{namespacetest}{test}}.ResourceUri,\ out\ var\ binderSession);}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00784}00784\ \ \ \ \ \ \ \ \ Assert.True(success);}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00785}00785\ \ \ \ \ \ \ \ \ Assert.Equal(2,\ binderSession.ScopeList.Count);}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00786}00786\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00787}00787\ \ \ \ \ \ \ \ \ var\ scope\ =\ \mbox{\hyperlink{namespacetest}{test}}.Binder.GetScopeByPositionIndex(\mbox{\hyperlink{namespacetest}{test}}.ResourceUri,\ 0);}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00788}00788\ \ \ \ \ \ \ \ \ Assert.NotNull(scope);}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00789}00789\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00790}00790\ \ \ \ \ \ \ \ \ \{\ \textcolor{comment}{//\ Global}}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00791}00791\ \ \ \ \ \ \ \ \ \ \ \ \ var\ globalScope\ =\ binderSession.ScopeList[0];}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00792}00792\ \ \ \ \ \ \ \ \ \ \ \ \ Assert.Equal(0,\ globalScope.IndexKey);}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00793}00793\ \ \ \ \ \ \ \ \ \ \ \ \ Assert.Null(globalScope.ParentIndexKey);}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00794}00794\ \ \ \ \ \ \ \ \ \ \ \ \ Assert.Equal(0,\ globalScope.StartingIndexInclusive);}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00795}00795\ \ \ \ \ \ \ \ \ \ \ \ \ Assert.Null(globalScope.EndingIndexExclusive);}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00796}00796\ \ \ \ \ \ \ \ \ \ \ \ \ Assert.Null(globalScope.CodeBlockOwner);}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00797}00797\ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00798}00798\ \ \ \ \ \ \ \ \ \ \ \ \ \{\ \textcolor{comment}{//\ Arbitrary\ scope}}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00799}00799\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ var\ arbitraryScope\ =\ binderSession.ScopeList[1];}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00800}00800\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Assert.Equal(1,\ arbitraryScope.IndexKey);}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00801}00801\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Assert.Equal(0,\ arbitraryScope.ParentIndexKey);}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00802}00802\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Assert.Equal(75,\ arbitraryScope.StartingIndexInclusive);}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00803}00803\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Assert.Equal(77,\ arbitraryScope.EndingIndexExclusive);}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00804}00804\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Assert.Equal(\mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_ae4bcfe414c318a050bbef43ec92f921b}{SyntaxKind}}.ArbitraryCodeBlockNode,\ arbitraryScope.CodeBlockOwner.SyntaxKind);}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00805}00805\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00806}00806\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00807}00807\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00808}00808\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00809}00809\ \ \ \ \ [Fact]}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00810}\mbox{\hyperlink{class_luthetus_1_1_compiler_services_1_1_c_sharp_1_1_tests_1_1_smoke_tests_1_1_parsers_1_1_scope_tests_a7f7efcb056adab84986ea280708d60e2}{00810}}\ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_luthetus_1_1_compiler_services_1_1_c_sharp_1_1_tests_1_1_smoke_tests_1_1_parsers_1_1_scope_tests_a7f7efcb056adab84986ea280708d60e2}{GlobalScope\_CollectionInitialization\_ArbitraryScope}}()}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00811}00811\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00812}00812\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ The\ collection\ initialization\ syntax\ isn't\ creating\ scope.}}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00813}00813\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ So,\ the\ final\ 'ArbitraryCodeBlockNode'}}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00814}00814\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ is\ there\ to\ check\ that\ the\ scope\ logic\ did\ not\ break\ due\ to\ the}}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00815}00815\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ OpenBraceToken\ and\ CloseBraceToken\ being\ used\ as\ part\ of\ the\ collection\ initialization\ syntax.}}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00816}00816\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00817}00817\ \ \ \ \ \ \ \ \ var\ \mbox{\hyperlink{namespacetest}{test}}\ =\ \textcolor{keyword}{new}\ \mbox{\hyperlink{class_luthetus_1_1_compiler_services_1_1_c_sharp_1_1_tests_1_1_smoke_tests_1_1_parsers_1_1_scope_tests_1_1_test}{Test}}(}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00818}00818\ \textcolor{stringliteral}{@"{}var\ x\ =\ new\ List<int>}}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00819}00819\ \textcolor{stringliteral}{\{}}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00820}00820\ \textcolor{stringliteral}{\ \ \ \ 1,}}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00821}00821\ \textcolor{stringliteral}{\ \ \ \ 2,}}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00822}00822\ \textcolor{stringliteral}{\};}}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00823}00823\ \textcolor{stringliteral}{}}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00824}00824\ \textcolor{stringliteral}{\{\}"{}}.ReplaceLineEndings(\textcolor{stringliteral}{"{}\(\backslash\)n"{}}));}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00825}00825\ }
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00826}00826\ \ \ \ \ \ \ \ \ var\ success\ =\ \mbox{\hyperlink{namespacetest}{test}}.Binder.TryGetBinderSession(\mbox{\hyperlink{namespacetest}{test}}.ResourceUri,\ out\ var\ binderSession);}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00827}00827\ \ \ \ \ \ \ \ \ Assert.True(success);}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00828}00828\ \ \ \ \ \ \ \ \ Assert.Equal(2,\ binderSession.ScopeList.Count);}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00829}00829\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00830}00830\ \ \ \ \ \ \ \ \ var\ scope\ =\ \mbox{\hyperlink{namespacetest}{test}}.Binder.GetScopeByPositionIndex(\mbox{\hyperlink{namespacetest}{test}}.ResourceUri,\ 0);}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00831}00831\ \ \ \ \ \ \ \ \ Assert.NotNull(scope);}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00832}00832\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00833}00833\ \ \ \ \ \ \ \ \ \{\ \textcolor{comment}{//\ Global}}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00834}00834\ \ \ \ \ \ \ \ \ \ \ \ \ var\ globalScope\ =\ binderSession.ScopeList[0];}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00835}00835\ \ \ \ \ \ \ \ \ \ \ \ \ Assert.Equal(0,\ globalScope.IndexKey);}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00836}00836\ \ \ \ \ \ \ \ \ \ \ \ \ Assert.Null(globalScope.ParentIndexKey);}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00837}00837\ \ \ \ \ \ \ \ \ \ \ \ \ Assert.Equal(0,\ globalScope.StartingIndexInclusive);}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00838}00838\ \ \ \ \ \ \ \ \ \ \ \ \ Assert.Null(globalScope.EndingIndexExclusive);}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00839}00839\ \ \ \ \ \ \ \ \ \ \ \ \ Assert.Null(globalScope.CodeBlockOwner);}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00840}00840\ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00841}00841\ \ \ \ \ \ \ \ \ \ \ \ \ \{\ \textcolor{comment}{//\ Arbitrary\ scope}}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00842}00842\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ var\ arbitraryScope\ =\ binderSession.ScopeList[1];}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00843}00843\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Assert.Equal(1,\ arbitraryScope.IndexKey);}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00844}00844\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Assert.Equal(0,\ arbitraryScope.ParentIndexKey);}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00845}00845\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Assert.Equal(36,\ arbitraryScope.StartingIndexInclusive);}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00846}00846\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Assert.Equal(38,\ arbitraryScope.EndingIndexExclusive);}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00847}00847\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Assert.Equal(\mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_ae4bcfe414c318a050bbef43ec92f921b}{SyntaxKind}}.ArbitraryCodeBlockNode,\ arbitraryScope.CodeBlockOwner.SyntaxKind);}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00848}00848\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00849}00849\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00850}00850\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00851}00851\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00852}00852\ \ \ \ \ [Fact]}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00853}\mbox{\hyperlink{class_luthetus_1_1_compiler_services_1_1_c_sharp_1_1_tests_1_1_smoke_tests_1_1_parsers_1_1_scope_tests_ab9119e6776a16693fca0eb8ba5c9cbde}{00853}}\ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_luthetus_1_1_compiler_services_1_1_c_sharp_1_1_tests_1_1_smoke_tests_1_1_parsers_1_1_scope_tests_ab9119e6776a16693fca0eb8ba5c9cbde}{GlobalScope\_CollectionInitializationFromArray\_ArbitraryScope}}()}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00854}00854\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00855}00855\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ The\ collection\ initialization\ syntax\ isn't\ creating\ scope.}}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00856}00856\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ So,\ the\ final\ 'ArbitraryCodeBlockNode'}}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00857}00857\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ is\ there\ to\ check\ that\ the\ scope\ logic\ did\ not\ break\ due\ to\ the}}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00858}00858\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ OpenBraceToken\ and\ CloseBraceToken\ being\ used\ as\ part\ of\ the\ collection\ initialization\ syntax.}}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00859}00859\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00860}00860\ \ \ \ \ \ \ \ \ var\ \mbox{\hyperlink{namespacetest}{test}}\ =\ \textcolor{keyword}{new}\ \mbox{\hyperlink{class_luthetus_1_1_compiler_services_1_1_c_sharp_1_1_tests_1_1_smoke_tests_1_1_parsers_1_1_scope_tests_1_1_test}{Test}}(}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00861}00861\ \textcolor{stringliteral}{@"{}var\ x\ =\ new\ int[]}}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00862}00862\ \textcolor{stringliteral}{\{}}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00863}00863\ \textcolor{stringliteral}{\ \ \ \ 1,}}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00864}00864\ \textcolor{stringliteral}{\ \ \ \ 2,}}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00865}00865\ \textcolor{stringliteral}{\};}}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00866}00866\ \textcolor{stringliteral}{}}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00867}00867\ \textcolor{stringliteral}{\{\}"{}}.ReplaceLineEndings(\textcolor{stringliteral}{"{}\(\backslash\)n"{}}));}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00868}00868\ }
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00869}00869\ \ \ \ \ \ \ \ \ var\ success\ =\ \mbox{\hyperlink{namespacetest}{test}}.Binder.TryGetBinderSession(\mbox{\hyperlink{namespacetest}{test}}.ResourceUri,\ out\ var\ binderSession);}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00870}00870\ \ \ \ \ \ \ \ \ Assert.True(success);}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00871}00871\ \ \ \ \ \ \ \ \ Assert.Equal(2,\ binderSession.ScopeList.Count);}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00872}00872\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00873}00873\ \ \ \ \ \ \ \ \ var\ scope\ =\ \mbox{\hyperlink{namespacetest}{test}}.Binder.GetScopeByPositionIndex(\mbox{\hyperlink{namespacetest}{test}}.ResourceUri,\ 0);}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00874}00874\ \ \ \ \ \ \ \ \ Assert.NotNull(scope);}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00875}00875\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00876}00876\ \ \ \ \ \ \ \ \ \{\ \textcolor{comment}{//\ Global}}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00877}00877\ \ \ \ \ \ \ \ \ \ \ \ \ var\ globalScope\ =\ binderSession.ScopeList[0];}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00878}00878\ \ \ \ \ \ \ \ \ \ \ \ \ Assert.Equal(0,\ globalScope.IndexKey);}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00879}00879\ \ \ \ \ \ \ \ \ \ \ \ \ Assert.Null(globalScope.ParentIndexKey);}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00880}00880\ \ \ \ \ \ \ \ \ \ \ \ \ Assert.Equal(0,\ globalScope.StartingIndexInclusive);}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00881}00881\ \ \ \ \ \ \ \ \ \ \ \ \ Assert.Null(globalScope.EndingIndexExclusive);}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00882}00882\ \ \ \ \ \ \ \ \ \ \ \ \ Assert.Null(globalScope.CodeBlockOwner);}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00883}00883\ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00884}00884\ \ \ \ \ \ \ \ \ \ \ \ \ \{\ \textcolor{comment}{//\ Arbitrary\ scope}}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00885}00885\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ var\ arbitraryScope\ =\ binderSession.ScopeList[1];}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00886}00886\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Assert.Equal(1,\ arbitraryScope.IndexKey);}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00887}00887\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Assert.Equal(0,\ arbitraryScope.ParentIndexKey);}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00888}00888\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Assert.Equal(32,\ arbitraryScope.StartingIndexInclusive);}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00889}00889\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Assert.Equal(34,\ arbitraryScope.EndingIndexExclusive);}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00890}00890\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Assert.Equal(\mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_ae4bcfe414c318a050bbef43ec92f921b}{SyntaxKind}}.ArbitraryCodeBlockNode,\ arbitraryScope.CodeBlockOwner.SyntaxKind);}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00891}00891\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00892}00892\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00893}00893\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00894}00894\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00895}00895\ \ \ \ \ [Fact]}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00896}\mbox{\hyperlink{class_luthetus_1_1_compiler_services_1_1_c_sharp_1_1_tests_1_1_smoke_tests_1_1_parsers_1_1_scope_tests_adfb38f2e4fcd218fe85c04b9c5501256}{00896}}\ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_luthetus_1_1_compiler_services_1_1_c_sharp_1_1_tests_1_1_smoke_tests_1_1_parsers_1_1_scope_tests_adfb38f2e4fcd218fe85c04b9c5501256}{Find\_VariableDeclaration\_ThatWasDeclaredInParentScope}}()}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00897}00897\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00898}00898\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Erroneous\ behavior:}}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00899}00899\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ ===================}}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00900}00900\ \ \ \ \ \ \ \ \ \textcolor{comment}{//}}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00901}00901\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ A\ variable\ declared\ in\ a\ parent\ scope,}}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00902}00902\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ will\ not\ be\ found\ as\ a\ variable\ reference\ if\ it\ is\ referenced\ from\ a\ child\ scope.}}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00903}00903\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00904}00904\ \ \ \ \ \ \ \ \ var\ \mbox{\hyperlink{namespacetest}{test}}\ =\ \textcolor{keyword}{new}\ \mbox{\hyperlink{class_luthetus_1_1_compiler_services_1_1_c_sharp_1_1_tests_1_1_smoke_tests_1_1_parsers_1_1_scope_tests_1_1_test}{Test}}(}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00905}00905\ \textcolor{stringliteral}{@"{}var\ ccc\ =\ 2;}}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00906}00906\ \textcolor{stringliteral}{ccc;}}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00907}00907\ \textcolor{stringliteral}{\{}}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00908}00908\ \textcolor{stringliteral}{\ \ \ \ ccc;}}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00909}00909\ \textcolor{stringliteral}{\}"{}}.ReplaceLineEndings(\textcolor{stringliteral}{"{}\(\backslash\)n"{}}));}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00910}00910\ }
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00911}00911\ \ \ \ \ \ \ \ \ var\ success\ =\ \mbox{\hyperlink{namespacetest}{test}}.Binder.TryGetBinderSession(\mbox{\hyperlink{namespacetest}{test}}.ResourceUri,\ out\ var\ binderSession);}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00912}00912\ \ \ \ \ \ \ \ \ Assert.True(success);}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00913}00913\ \ \ \ \ \ \ \ \ Assert.Equal(2,\ binderSession.ScopeList.Count);}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00914}00914\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00915}00915\ \ \ \ \ \ \ \ \ var\ scope\ =\ \mbox{\hyperlink{namespacetest}{test}}.Binder.GetScopeByPositionIndex(\mbox{\hyperlink{namespacetest}{test}}.ResourceUri,\ 0);}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00916}00916\ \ \ \ \ \ \ \ \ Assert.NotNull(scope);}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00917}00917\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00918}00918\ \ \ \ \ \ \ \ \ \{\ \textcolor{comment}{//\ Global}}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00919}00919\ \ \ \ \ \ \ \ \ \ \ \ \ var\ globalScope\ =\ binderSession.ScopeList[0];}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00920}00920\ \ \ \ \ \ \ \ \ \ \ \ \ Assert.Equal(0,\ globalScope.IndexKey);}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00921}00921\ \ \ \ \ \ \ \ \ \ \ \ \ Assert.Null(globalScope.ParentIndexKey);}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00922}00922\ \ \ \ \ \ \ \ \ \ \ \ \ Assert.Equal(0,\ globalScope.StartingIndexInclusive);}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00923}00923\ \ \ \ \ \ \ \ \ \ \ \ \ Assert.Null(globalScope.EndingIndexExclusive);}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00924}00924\ \ \ \ \ \ \ \ \ \ \ \ \ Assert.Null(globalScope.CodeBlockOwner);}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00925}00925\ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00926}00926\ \ \ \ \ \ \ \ \ \ \ \ \ \{\ \textcolor{comment}{//\ Arbitrary\ scope}}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00927}00927\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ var\ arbitraryScope\ =\ binderSession.ScopeList[1];}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00928}00928\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Assert.Equal(1,\ arbitraryScope.IndexKey);}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00929}00929\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Assert.Equal(0,\ arbitraryScope.ParentIndexKey);}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00930}00930\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Assert.Equal(18,\ arbitraryScope.StartingIndexInclusive);}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00931}00931\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Assert.Equal(27,\ arbitraryScope.EndingIndexExclusive);}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00932}00932\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Assert.Equal(\mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_ae4bcfe414c318a050bbef43ec92f921b}{SyntaxKind}}.ArbitraryCodeBlockNode,\ arbitraryScope.CodeBlockOwner.SyntaxKind);}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00933}00933\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00934}00934\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Assert.Equal(2,\ arbitraryScope.CodeBlockOwner.GetChildList().Length);}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00935}00935\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Assert.Equal(\mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_ae4bcfe414c318a050bbef43ec92f921b}{SyntaxKind}}.OpenBraceToken,\ arbitraryScope.CodeBlockOwner.GetChildList()[0].SyntaxKind);}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00936}00936\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Assert.Equal(\mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_ae4bcfe414c318a050bbef43ec92f921b}{SyntaxKind}}.VariableReferenceNode,\ arbitraryScope.CodeBlockOwner.CodeBlockNode.GetChildList().Single().SyntaxKind);}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00937}00937\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00938}00938\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00939}00939\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00940}00940\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00941}00941\ \ \ \ \ [Fact]}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00942}\mbox{\hyperlink{class_luthetus_1_1_compiler_services_1_1_c_sharp_1_1_tests_1_1_smoke_tests_1_1_parsers_1_1_scope_tests_ae379dba0b6875788f6365fb630029247}{00942}}\ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_luthetus_1_1_compiler_services_1_1_c_sharp_1_1_tests_1_1_smoke_tests_1_1_parsers_1_1_scope_tests_ae379dba0b6875788f6365fb630029247}{Keyword\_CreatesScopeWithOpenAndCloseBraceToken\_ButGetsSingleStatementBody}}()}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00943}00943\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00944}00944\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Erroneous\ behavior:}}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00945}00945\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ ===================}}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00946}00946\ \ \ \ \ \ \ \ \ \textcolor{comment}{//}}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00947}00947\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ A\ keyword\ that\ creates\ a\ code\ block}}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00948}00948\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ (either\ with\ OpenBraceToken\ and\ CloseBraceToken,\ or\ as\ a\ "{}single\ statement\ body"{}\ deliminated\ by\ a\ semicolon)}}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00949}00949\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ At\ times\ will\ use\ the\ 'OpenBraceToken\ and\ CloseBraceToken'\ syntax,\ yet\ capture}}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00950}00950\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ the\ next\ statement\ inside\ 'OpenBraceToken\ and\ CloseBraceToken'\ deliminated\ code\ block}}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00951}00951\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ to\ be\ '"{}single\ statement\ body"{}\ deliminated\ by\ a\ semicolon'\ syntax.}}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00952}00952\ \ \ \ \ \ \ \ \ \textcolor{comment}{//}}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00953}00953\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ In\ the\ cases\ where\ this\ happens,\ "{}simplifying"{}\ the\ keyword's\ syntax\ within\ the\ parentheses\ (if\ it\ has\ this\ syntax)}}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00954}00954\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ can\ sometimes\ fix\ the\ issue.}}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00955}00955\ \ \ \ \ \ \ \ \ \textcolor{comment}{//}}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00956}00956\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ As\ well,\ it\ seems\ that\ not\ all\ statements\ will\ be\ taken\ erroneously\ as\ the\ "{}single\ statement\ body"{}.}}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00957}00957\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ It\ is\ believed\ that\ at\ one\ point\ changing\ a\ FunctionInvocation\ statement\ to\ a\ variable\ declaration}}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00958}00958\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ and\ assignment\ statement\ "{}fixed"{}\ this\ issue,\ but\ this\ cannot\ currently\ be\ replicated\ anymore\ it\ seems.}}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00959}00959\ \ \ \ \ \ \ \ \ \textcolor{comment}{//}}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00960}00960\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ More\ Details:}}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00961}00961\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00962}00962\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ }}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00963}00963\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ The\ following\ code\ correctly\ puts\ the\ scope\ at\ the\ OpenBraceToken\ and\ CloseBraceToken:}}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00964}00964\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ |}}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00965}00965\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ \`{}\`{}\`{}\`{}if\ (false)}}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00966}00966\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ \`{}\`{}\`{}\`{}\{}}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00967}00967\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ \`{}\`{}\`{}\`{}\ \_queue.RemoveLast();}}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00968}00968\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ \`{}\`{}\`{}\`{}\}}}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00969}00969\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ }}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00970}00970\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ The\ following\ code\ erroneously\ puts\ the\ scope\ at\ the\ StatementDelimiterToken\ that\ appears\ at\ the\ end\ of\ the\ 3rd\ line\ of\ the\ text.}}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00971}00971\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ |}}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00972}00972\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ \`{}\`{}\`{}\`{}if\ (batchEvent\ is\ not\ null)}}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00973}00973\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ \`{}\`{}\`{}\`{}\{}}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00974}00974\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ \`{}\`{}\`{}\`{}\ \_queue.RemoveLast();}}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00975}00975\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ \`{}\`{}\`{}\`{}\}}}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00976}00976\ \ \ \ \ \ \ \ \ \textcolor{comment}{//}}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00977}00977\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ It\ appears\ that\ the\ issue\ is\ with\ parsing\ an\ expression,\ and\ erroneously\ consuming\ an\ OpenBraceToken.}}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00978}00978\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ The\ console\ messages\ show\ that\ a\ 'BadExpressionNode\ +\ OpenBraceToken\ =>\ BadExpressionNode'}}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00979}00979\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Note\ the\ 'OpenBraceToken',\ this\ message\ is\ saying\ that\ it\ was\ consumed.}}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00980}00980\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00981}00981\ \ \ \ \ \ \ \ \ var\ \mbox{\hyperlink{namespacetest}{test}}\ =\ \textcolor{keyword}{new}\ \mbox{\hyperlink{class_luthetus_1_1_compiler_services_1_1_c_sharp_1_1_tests_1_1_smoke_tests_1_1_parsers_1_1_scope_tests_1_1_test}{Test}}(}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00982}00982\ \textcolor{stringliteral}{@"{}if\ (batchEvent\ is\ not\ null)}}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00983}00983\ \textcolor{stringliteral}{\{}}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00984}00984\ \textcolor{stringliteral}{\ \ \ \ \_queue.RemoveLast();}}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00985}00985\ \textcolor{stringliteral}{\}"{}}.ReplaceLineEndings(\textcolor{stringliteral}{"{}\(\backslash\)n"{}}));}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00986}00986\ }
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00987}00987\ \ \ \ \ \ \ \ \ var\ success\ =\ \mbox{\hyperlink{namespacetest}{test}}.Binder.TryGetBinderSession(\mbox{\hyperlink{namespacetest}{test}}.ResourceUri,\ out\ var\ binderSession);}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00988}00988\ \ \ \ \ \ \ \ \ Assert.True(success);}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00989}00989\ \ \ \ \ \ \ \ \ Assert.Equal(2,\ binderSession.ScopeList.Count);}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00990}00990\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00991}00991\ \ \ \ \ \ \ \ \ var\ scope\ =\ \mbox{\hyperlink{namespacetest}{test}}.Binder.GetScopeByPositionIndex(\mbox{\hyperlink{namespacetest}{test}}.ResourceUri,\ 0);}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00992}00992\ \ \ \ \ \ \ \ \ Assert.NotNull(scope);}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00993}00993\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00994}00994\ \ \ \ \ \ \ \ \ \{\ \textcolor{comment}{//\ Global}}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00995}00995\ \ \ \ \ \ \ \ \ \ \ \ \ var\ globalScope\ =\ binderSession.ScopeList[0];}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00996}00996\ \ \ \ \ \ \ \ \ \ \ \ \ Assert.Equal(0,\ globalScope.IndexKey);}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00997}00997\ \ \ \ \ \ \ \ \ \ \ \ \ Assert.Null(globalScope.ParentIndexKey);}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00998}00998\ \ \ \ \ \ \ \ \ \ \ \ \ Assert.Equal(0,\ globalScope.StartingIndexInclusive);}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l00999}00999\ \ \ \ \ \ \ \ \ \ \ \ \ Assert.Null(globalScope.EndingIndexExclusive);}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l01000}01000\ \ \ \ \ \ \ \ \ \ \ \ \ Assert.Null(globalScope.CodeBlockOwner);}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l01001}01001\ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l01002}01002\ \ \ \ \ \ \ \ \ \ \ \ \ \{\ \textcolor{comment}{//\ If\ statement\ scope}}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l01003}01003\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ var\ ifStatementScope\ =\ binderSession.ScopeList[1];}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l01004}01004\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Assert.Equal(1,\ ifStatementScope.IndexKey);}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l01005}01005\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Assert.Equal(0,\ ifStatementScope.ParentIndexKey);}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l01006}01006\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Assert.Equal(28,\ ifStatementScope.StartingIndexInclusive);}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l01007}01007\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Assert.Equal(53,\ ifStatementScope.EndingIndexExclusive);}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l01008}01008\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Assert.Equal(\mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_ae4bcfe414c318a050bbef43ec92f921b}{SyntaxKind}}.IfStatementNode,\ ifStatementScope.CodeBlockOwner.SyntaxKind);}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l01009}01009\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l01010}01010\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l01011}01011\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l01012}01012\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l01013}01013\ \ \ \ \ [Fact]}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l01014}\mbox{\hyperlink{class_luthetus_1_1_compiler_services_1_1_c_sharp_1_1_tests_1_1_smoke_tests_1_1_parsers_1_1_scope_tests_ad8629dd0a3f5bd16109ad7c850313737}{01014}}\ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_luthetus_1_1_compiler_services_1_1_c_sharp_1_1_tests_1_1_smoke_tests_1_1_parsers_1_1_scope_tests_ad8629dd0a3f5bd16109ad7c850313737}{If\_IsPatternMatchVariableDefinition\_Misses\_OpenBraceToken}}()}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l01015}01015\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l01016}01016\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Erroneous\ behavior:}}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l01017}01017\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ ===================}}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l01018}01018\ \ \ \ \ \ \ \ \ \textcolor{comment}{//}}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l01019}01019\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ The\ OpenBraceToken\ of\ the\ if\ statement\ is\ being\ missed,\ and\ the\ scope\ for\ the\ IfStatementNode}}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l01020}01020\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ is\ placed\ at\ the\ StatementDelimiterToken\ which\ is\ at\ the\ end\ of\ the\ 3rd\ line\ of\ the\ text.}}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l01021}01021\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l01022}01022\ \ \ \ \ \ \ \ \ var\ \mbox{\hyperlink{namespacetest}{test}}\ =\ \textcolor{keyword}{new}\ \mbox{\hyperlink{class_luthetus_1_1_compiler_services_1_1_c_sharp_1_1_tests_1_1_smoke_tests_1_1_parsers_1_1_scope_tests_1_1_test}{Test}}(}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l01023}01023\ \textcolor{stringliteral}{@"{}if\ (child\ is\ ISyntaxNode\ syntaxNode)}}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l01024}01024\ \textcolor{stringliteral}{\{}}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l01025}01025\ \textcolor{stringliteral}{\ \ \ \ WriteChildrenIndentedRecursive(syntaxNode,\ "{}"{}node"{}"{},\ indentation\ +\ 1);}}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l01026}01026\ \textcolor{stringliteral}{\}"{}}.ReplaceLineEndings(\textcolor{stringliteral}{"{}\(\backslash\)n"{}}));}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l01027}01027\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l01028}01028\ }
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l01029}01029\ \ \ \ \ [Fact]}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l01030}\mbox{\hyperlink{class_luthetus_1_1_compiler_services_1_1_c_sharp_1_1_tests_1_1_smoke_tests_1_1_parsers_1_1_scope_tests_a2d0a504b6e9e2fae1ef759a838e807a8}{01030}}\ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_luthetus_1_1_compiler_services_1_1_c_sharp_1_1_tests_1_1_smoke_tests_1_1_parsers_1_1_scope_tests_a2d0a504b6e9e2fae1ef759a838e807a8}{Statement\_Inside\_If\_CodeBlock\_Causes\_Miss\_CloseBraceToken\_CaseA}}()}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l01031}01031\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l01032}01032\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Erroneous\ behavior:}}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l01033}01033\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ ===================}}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l01034}01034\ \ \ \ \ \ \ \ \ \textcolor{comment}{//}}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l01035}01035\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ The\ issue\ occurs\ with\ the\ following\ input\ (and\ probably\ some\ others):}}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l01036}01036\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ \`{}\`{}\`{}\`{}if\ (false)}}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l01037}01037\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ \`{}\`{}\`{}\`{}\{}}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l01038}01038\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ \`{}\`{}\`{}\`{}\ \_queue.RemoveLast();}}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l01039}01039\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ \`{}\`{}\`{}\`{}\}}}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l01040}01040\ \ \ \ \ \ \ \ \ \textcolor{comment}{//}}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l01041}01041\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ But,\ it\ does\ NOT\ occur\ with\ this\ input:}}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l01042}01042\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ \`{}\`{}\`{}\`{}if\ (false)}}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l01043}01043\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ \`{}\`{}\`{}\`{}\{}}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l01044}01044\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ \`{}\`{}\`{}\`{}\ var\ x\ =\ \_queue.RemoveLast();}}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l01045}01045\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ \`{}\`{}\`{}\`{}\}}}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l01046}01046\ \ \ \ \ \ \ \ \ \textcolor{comment}{//}}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l01047}01047\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ The\ scope\ should\ start\ at\ the\ OpenBraceToken,\ and\ end\ at\ the\ CloseBraceToken.}}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l01048}01048\ \ \ \ \ \ \ \ \ \textcolor{comment}{//}}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l01049}01049\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ However,\ in\ the\ erroneous\ example,\ the\ CloseBraceToken\ is\ somehow\ skipped\ over,}}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l01050}01050\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ and\ the\ IfStatementNode\ will\ use\ the\ next\ CloseBraceToken\ as\ the\ end\ of\ the\ scope}}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l01051}01051\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ (if\ there\ happens\ to\ be\ another\ CloseBraceToken\ deeper\ in\ the\ text\ file).}}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l01052}01052\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l01053}01053\ \ \ \ \ \ \ \ \ var\ \mbox{\hyperlink{namespacetest}{test}}\ =\ \textcolor{keyword}{new}\ \mbox{\hyperlink{class_luthetus_1_1_compiler_services_1_1_c_sharp_1_1_tests_1_1_smoke_tests_1_1_parsers_1_1_scope_tests_1_1_test}{Test}}(}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l01054}01054\ \textcolor{stringliteral}{@"{}if\ (false)}}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l01055}01055\ \textcolor{stringliteral}{\{}}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l01056}01056\ \textcolor{stringliteral}{\ \ \ \ \_queue.RemoveLast();}}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l01057}01057\ \textcolor{stringliteral}{\}"{}}.ReplaceLineEndings(\textcolor{stringliteral}{"{}\(\backslash\)n"{}}));}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l01058}01058\ }
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l01059}01059\ \ \ \ \ \ \ \ \ var\ success\ =\ \mbox{\hyperlink{namespacetest}{test}}.Binder.TryGetBinderSession(\mbox{\hyperlink{namespacetest}{test}}.ResourceUri,\ out\ var\ binderSession);}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l01060}01060\ \ \ \ \ \ \ \ \ Assert.True(success);}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l01061}01061\ \ \ \ \ \ \ \ \ Assert.Equal(2,\ binderSession.ScopeList.Count);}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l01062}01062\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l01063}01063\ \ \ \ \ \ \ \ \ var\ scope\ =\ \mbox{\hyperlink{namespacetest}{test}}.Binder.GetScopeByPositionIndex(\mbox{\hyperlink{namespacetest}{test}}.ResourceUri,\ 0);}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l01064}01064\ \ \ \ \ \ \ \ \ Assert.NotNull(scope);}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l01065}01065\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l01066}01066\ \ \ \ \ \ \ \ \ \{\ \textcolor{comment}{//\ Global}}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l01067}01067\ \ \ \ \ \ \ \ \ \ \ \ \ var\ globalScope\ =\ binderSession.ScopeList[0];}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l01068}01068\ \ \ \ \ \ \ \ \ \ \ \ \ Assert.Equal(0,\ globalScope.IndexKey);}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l01069}01069\ \ \ \ \ \ \ \ \ \ \ \ \ Assert.Null(globalScope.ParentIndexKey);}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l01070}01070\ \ \ \ \ \ \ \ \ \ \ \ \ Assert.Equal(0,\ globalScope.StartingIndexInclusive);}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l01071}01071\ \ \ \ \ \ \ \ \ \ \ \ \ Assert.Null(globalScope.EndingIndexExclusive);}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l01072}01072\ \ \ \ \ \ \ \ \ \ \ \ \ Assert.Null(globalScope.CodeBlockOwner);}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l01073}01073\ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l01074}01074\ \ \ \ \ \ \ \ \ \ \ \ \ \{\ \textcolor{comment}{//\ If\ statement\ scope}}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l01075}01075\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ var\ ifStatementScope\ =\ binderSession.ScopeList[1];}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l01076}01076\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Assert.Equal(1,\ ifStatementScope.IndexKey);}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l01077}01077\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Assert.Equal(0,\ ifStatementScope.ParentIndexKey);}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l01078}01078\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Assert.Equal(28,\ ifStatementScope.StartingIndexInclusive);}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l01079}01079\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Assert.Equal(53,\ ifStatementScope.EndingIndexExclusive);}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l01080}01080\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Assert.Equal(\mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_ae4bcfe414c318a050bbef43ec92f921b}{SyntaxKind}}.IfStatementNode,\ ifStatementScope.CodeBlockOwner.SyntaxKind);}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l01081}01081\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l01082}01082\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l01083}01083\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l01084}01084\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l01085}01085\ \ \ \ \ [Fact]}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l01086}\mbox{\hyperlink{class_luthetus_1_1_compiler_services_1_1_c_sharp_1_1_tests_1_1_smoke_tests_1_1_parsers_1_1_scope_tests_ac073df070b7f569c9fb59b95f8b73f0f}{01086}}\ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_luthetus_1_1_compiler_services_1_1_c_sharp_1_1_tests_1_1_smoke_tests_1_1_parsers_1_1_scope_tests_ac073df070b7f569c9fb59b95f8b73f0f}{Statement\_Inside\_If\_CodeBlock\_Causes\_Miss\_CloseBraceToken\_CaseB}}()}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l01087}01087\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l01088}01088\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ See\ 'Statement\_Inside\_If\_CodeBlock\_Causes\_Miss\_CloseBraceToken\_CaseA'\ above\ this.}}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l01089}01089\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ This\ is\ an\ extra\ test\ to\ ensure\ that\ a\ fix\ to\ the\ erroneous\ case\ doesn't\ break}}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l01090}01090\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ the\ related,\ and\ working,\ case.}}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l01091}01091\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l01092}01092\ \ \ \ \ \ \ \ \ var\ \mbox{\hyperlink{namespacetest}{test}}\ =\ \textcolor{keyword}{new}\ \mbox{\hyperlink{class_luthetus_1_1_compiler_services_1_1_c_sharp_1_1_tests_1_1_smoke_tests_1_1_parsers_1_1_scope_tests_1_1_test}{Test}}(}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l01093}01093\ \textcolor{stringliteral}{@"{}if\ (false)}}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l01094}01094\ \textcolor{stringliteral}{\{}}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l01095}01095\ \textcolor{stringliteral}{\ \ \ \ var\ x\ =\ \_queue.RemoveLast();}}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l01096}01096\ \textcolor{stringliteral}{\}"{}}.ReplaceLineEndings(\textcolor{stringliteral}{"{}\(\backslash\)n"{}}));}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l01097}01097\ }
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l01098}01098\ \ \ \ \ \ \ \ \ var\ success\ =\ \mbox{\hyperlink{namespacetest}{test}}.Binder.TryGetBinderSession(\mbox{\hyperlink{namespacetest}{test}}.ResourceUri,\ out\ var\ binderSession);}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l01099}01099\ \ \ \ \ \ \ \ \ Assert.True(success);}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l01100}01100\ \ \ \ \ \ \ \ \ Assert.Equal(2,\ binderSession.ScopeList.Count);}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l01101}01101\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l01102}01102\ \ \ \ \ \ \ \ \ var\ scope\ =\ \mbox{\hyperlink{namespacetest}{test}}.Binder.GetScopeByPositionIndex(\mbox{\hyperlink{namespacetest}{test}}.ResourceUri,\ 0);}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l01103}01103\ \ \ \ \ \ \ \ \ Assert.NotNull(scope);}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l01104}01104\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l01105}01105\ \ \ \ \ \ \ \ \ \{\ \textcolor{comment}{//\ Global}}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l01106}01106\ \ \ \ \ \ \ \ \ \ \ \ \ var\ globalScope\ =\ binderSession.ScopeList[0];}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l01107}01107\ \ \ \ \ \ \ \ \ \ \ \ \ Assert.Equal(0,\ globalScope.IndexKey);}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l01108}01108\ \ \ \ \ \ \ \ \ \ \ \ \ Assert.Null(globalScope.ParentIndexKey);}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l01109}01109\ \ \ \ \ \ \ \ \ \ \ \ \ Assert.Equal(0,\ globalScope.StartingIndexInclusive);}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l01110}01110\ \ \ \ \ \ \ \ \ \ \ \ \ Assert.Null(globalScope.EndingIndexExclusive);}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l01111}01111\ \ \ \ \ \ \ \ \ \ \ \ \ Assert.Null(globalScope.CodeBlockOwner);}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l01112}01112\ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l01113}01113\ \ \ \ \ \ \ \ \ \ \ \ \ \{\ \textcolor{comment}{//\ If\ statement\ scope}}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l01114}01114\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ var\ ifStatementScope\ =\ binderSession.ScopeList[1];}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l01115}01115\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Assert.Equal(1,\ ifStatementScope.IndexKey);}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l01116}01116\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Assert.Equal(0,\ ifStatementScope.ParentIndexKey);}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l01117}01117\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Assert.Equal(28,\ ifStatementScope.StartingIndexInclusive);}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l01118}01118\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Assert.Equal(53,\ ifStatementScope.EndingIndexExclusive);}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l01119}01119\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Assert.Equal(\mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_ae4bcfe414c318a050bbef43ec92f921b}{SyntaxKind}}.IfStatementNode,\ ifStatementScope.CodeBlockOwner.SyntaxKind);}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l01120}01120\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l01121}01121\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l01122}01122\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l01123}01123\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l01124}01124\ \ \ \ \ \textcolor{keyword}{private}\ \textcolor{keywordtype}{void}\ WriteChildrenIndented(\mbox{\hyperlink{interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_1_1_i_syntax_node}{ISyntaxNode}}\ node,\ \textcolor{keywordtype}{string}\ name\ =\ \textcolor{stringliteral}{"{}node"{}})}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l01125}01125\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l01126}01126\ \ \ \ \ \ \ \ \ Console.WriteLine(\$\textcolor{stringliteral}{"{}foreach\ (var\ child\ in\ \{name\}.GetChildList())"{}});}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l01127}01127\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{foreach}\ (var\ child\ \textcolor{keywordflow}{in}\ node.\mbox{\hyperlink{interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_1_1_i_syntax_node_a73d81f1c4e42db7e80bfdd4db97c10fe}{GetChildList}}())}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l01128}01128\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l01129}01129\ \ \ \ \ \ \ \ \ \ \ \ \ Console.WriteLine(\textcolor{stringliteral}{"{}\(\backslash\)t"{}}\ +\ child.SyntaxKind);}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l01130}01130\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l01131}01131\ \ \ \ \ \ \ \ \ Console.WriteLine();}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l01132}01132\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l01133}01133\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l01134}01134\ \ \ \ \ \textcolor{keyword}{private}\ \textcolor{keywordtype}{void}\ WriteChildrenIndentedRecursive(\mbox{\hyperlink{interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_1_1_i_syntax_node}{ISyntaxNode}}\ node,\ \textcolor{keywordtype}{string}\ name\ =\ \textcolor{stringliteral}{"{}node"{}},\ \textcolor{keywordtype}{int}\ indentation\ =\ 0)}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l01135}01135\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l01136}01136\ \ \ \ \ \ \ \ \ var\ indentationStringBuilder\ =\ \textcolor{keyword}{new}\ StringBuilder();}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l01137}01137\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ indentation;\ i++)}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l01138}01138\ \ \ \ \ \ \ \ \ \ \ \ \ indentationStringBuilder.Append(\textcolor{charliteral}{'\(\backslash\)t'});}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l01139}01139\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l01140}01140\ \ \ \ \ \ \ \ \ Console.WriteLine(\$\textcolor{stringliteral}{"{}\{indentationStringBuilder.ToString()\}\{node.SyntaxKind\}"{}});}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l01141}01141\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l01142}01142\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ For\ the\ child\ tokens}}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l01143}01143\ \ \ \ \ \ \ \ \ indentationStringBuilder.Append(\textcolor{charliteral}{'\(\backslash\)t'});}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l01144}01144\ \ \ \ \ \ \ \ \ var\ childIndentation\ =\ indentationStringBuilder.ToString();}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l01145}01145\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l01146}01146\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{foreach}\ (var\ child\ \textcolor{keywordflow}{in}\ node.\mbox{\hyperlink{interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_1_1_i_syntax_node_a73d81f1c4e42db7e80bfdd4db97c10fe}{GetChildList}}())}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l01147}01147\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l01148}01148\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (child\ is\ \mbox{\hyperlink{interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_1_1_i_syntax_node}{ISyntaxNode}}\ syntaxNode)}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l01149}01149\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l01150}01150\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ WriteChildrenIndentedRecursive(syntaxNode,\ \textcolor{stringliteral}{"{}node"{}},\ indentation\ +\ 1);}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l01151}01151\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l01152}01152\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ (child\ is\ \mbox{\hyperlink{interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_1_1_i_syntax_token}{ISyntaxToken}}\ syntaxToken)}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l01153}01153\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l01154}01154\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Console.WriteLine(\$\textcolor{stringliteral}{"{}\{childIndentation\}\{child.SyntaxKind\}\_\_\{syntaxToken.TextSpan.GetText()\}"{}});}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l01155}01155\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l01156}01156\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l01157}01157\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l01158}01158\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (indentation\ ==\ 0)}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l01159}01159\ \ \ \ \ \ \ \ \ \ \ \ \ Console.WriteLine();}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l01160}01160\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_scope_tests_8cs_source_l01161}01161\ \}}
+
+\end{DoxyCode}

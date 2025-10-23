@@ -1,0 +1,595 @@
+.TH "md__docs_2_text_editor_2usage" 3 "Version 1.0.0" "Luthetus.Ide" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+md__docs_2_text_editor_2usage \- Luthetus\&.TextEditor (v2\&.1\&.0) 
+.PP
+
+.SH "Usage"
+.PP
+.SS "Source Code"
+The \&.NET Solution: \fRLuthetus\&.Tutorials\&.sln\fP, was made by following steps described here\&. So, the completed result can be found there\&.
+.SS "Goal"
+
+.PP
+.IP "\(bu" 2
+Render a C# Text Editor which makes use of the CSharpCompilerService
+.PP
+.SS "Steps"
+.IP "\(bu" 2
+Create a codebehind for the file: \fRPages/Index\&.razor\fP
+.PP
+
+.PP
+.PP
+.nf
+// Pages/Index\&.razor\&.cs
+
+using Microsoft\&.AspNetCore\&.Components;
+
+namespace Luthetus\&.Tutorials\&.RazorLib\&.Pages;
+
+public partial class Index : ComponentBase
+{
+}
+.fi
+.PP
+
+.PP
+.IP "\(bu" 2
+There are 2 parts to rendering a Text Editor\&.
+.IP "\(bu" 2
+First, one needs to make a \fRTextEditorModel\fP\&.
+.IP "\(bu" 2
+Then, one needs to make a \fRTextEditorViewModel\fP for that previously made \fRmodel\fP\&.
+.IP "\(bu" 2
+In \fBIndex\&.razor\&.cs\fP add the following line of code:
+.PP
+
+.PP
+.PP
+.nf
+// using Luthetus\&.TextEditor\&.RazorLib\&.Lexers\&.Models;
+public static ResourceUri ResourceUri { get; } = new("/index\&.txt");
+.fi
+.PP
+
+.PP
+.IP "\(bu" 2
+The \fRResourceUri\fP is a unique identifier for a given \fRTextEditorModel\fP\&.
+.IP "\(bu" 2
+One might think of a \fRTextEditorModel\fP as mapping to a file on their filesystem, as an example\&.
+.IP "\(bu" 2
+Override the Blazor lifecycle method named: \fROnInitialized()\fP
+.PP
+
+.PP
+.PP
+.nf
+protected override void OnInitialized()
+{
+    base\&.OnInitialized();
+}
+.fi
+.PP
+
+.PP
+.IP "\(bu" 2
+Inside this override, and above the \fRbase\&.OnInitialized();\fP invocation, we can register the \fRTextEditorModel\fP\&.
+.IP "\(bu" 2
+We need access to the \fRITextEditorService\fP to register a \fRTextEditorModel\fP\&. So, inject the \fRITextEditorService\fP\&.
+.PP
+
+.PP
+.PP
+.nf
+// using Luthetus\&.TextEditor\&.RazorLib;
+[Inject]
+private ITextEditorService TextEditorService { get; set; } = null!;
+.fi
+.PP
+
+.PP
+.IP "\(bu" 2
+The \fRITextEditorService\fP has public properties that encapsulate the API for a given datatype in the \fR\fBLuthetus\&.TextEditor\fP\fP namespace\&. For example, \fRTextEditorService\&.ModelApi\fP accesses the \fRModelApi\fP property, which has all of the API related to the \fRTextEditorModel\fP datatype\&.
+.IP "\(bu" 2
+By invoking \fRTextEditorService\&.ModelApi\&.RegisterCustom(\&.\&.\&.);\fP, we can create register a TextEditorModel\&. The \fRRegisterCustom(\&.\&.\&.)\fP method takes as a parameter an instance of \fRTextEditorModel\fP\&. So we need to make that instance\&.
+.IP "\(bu" 2
+In the override for \fROnInitialized()\fP, create an instance of a \fRTextEditorModel\fP\&. Then, pass it in to the \fRTextEditorService\&.Model\&.RegisterCustom(\&.\&.\&.)\fP invocation\&.
+.PP
+
+.PP
+.PP
+.nf
+protected override void OnInitialized()
+{
+    var model = new TextEditorModel(
+            ResourceUri,
+            DateTime\&.UtcNow,
+            ExtensionNoPeriodFacts\&.TXT,
+            @"public class MyClass
+{
+    public MyClass(string firstName, string lastName)
+    {
+        FirstName = firstName;
+        LastName = lastName;
+    }
+    
+    public string FirstName { get; set; }
+    public string LastName { get; set; }
+    
+    public string DisplayName => $""{{FirstName}} {LastName}"";
+    
+    public void SomeMethod(int arg1, MyClass arg2)
+    {
+        if (arg1 == 2)
+            return;
+        
+        return;
+    }
+}",
+        decorationMapper: null,
+        compilerService: null);
+
+    TextEditorService\&.ModelApi\&.RegisterCustom(model);
+
+    base\&.OnInitialized();
+}
+.fi
+.PP
+
+.PP
+.IP "\(bu" 2
+In order to render a \fRTextEditorModel\fP, we need a \fRTextEditorViewModel\fP\&. A file on one's operating system would relate to a \fRmodel\fP\&. Whereas, an open text editor would relate to a \fRviewModel\fP\&.
+.IP "\(bu" 2
+Many \fRTextEditorViewModel\fP can reference an underlying \fRTextEditorModel\fP\&. But, only 1 \fRmodel\fP for a given file on one's operating system can exist\&.
+.PP
+
+.PP
+.RS 4
+\fINOTE:\fP I use an example of a operating system's file system but, it is just an example, one can make a TextEditorModel out of "thin air" if they'd like to\&. 
+.RE
+.PP
+
+.PP
+.IP "\(bu" 2
+We need a TextEditorViewModelKey so we can maintain the TextEditorViewModel state between page changes\&.
+.IP "\(bu" 2
+Add the following line of code:
+.PP
+
+.PP
+.PP
+.nf
+public static Key<TextEditorViewModel> ViewModelKey { get; } = Key<TextEditorViewModel>\&.NewKey();
+.fi
+.PP
+
+.PP
+.IP "\(bu" 2
+Now, in the override for \fROnInitialized()\fP, invoke \fRTextEditorService\&.ViewModelApi\&.Register(\&.\&.\&.)\fP\&.
+.PP
+
+.PP
+.RS 4
+\fINOTE:\fP The argument 'Category' to 'TextEditorService\&.ViewModelApi\&.Register(\&.\&.\&.)' can be passed as 'new Category("main")'\&. It acts only as a way to filter a list of view models\&. 
+.RE
+.PP
+
+.PP
+.PP
+.nf
+TextEditorService\&.ViewModelApi\&.Register(
+    ViewModelKey,
+    ResourceUri,
+    new Category("main"));
+.fi
+.PP
+
+.PP
+.IP "\(bu" 2
+My \fR\fBPages/Index\&.razor\&.cs\fP\fP file as of this step looks as follows:
+.PP
+
+.PP
+.PP
+.nf
+using Microsoft\&.AspNetCore\&.Components;
+using Luthetus\&.Common\&.RazorLib\&.Keys\&.Models;
+using Luthetus\&.TextEditor\&.RazorLib;
+using Luthetus\&.TextEditor\&.RazorLib\&.TextEditors\&.Models;
+using Luthetus\&.TextEditor\&.RazorLib\&.Lexers\&.Models;
+using Luthetus\&.TextEditor\&.RazorLib\&.CompilerServices\&.Interfaces;
+using Luthetus\&.TextEditor\&.RazorLib\&.Decorations\&.Models;
+
+namespace Luthetus\&.Tutorials\&.RazorLib\&.Pages;
+
+public partial class Index : ComponentBase
+{
+    [Inject]
+    private ITextEditorService TextEditorService { get; set; } = null!;
+
+    public static ResourceUri ResourceUri { get; } = new("/index\&.txt");
+    public static Key<TextEditorViewModel> ViewModelKey { get; } = Key<TextEditorViewModel>\&.NewKey();
+    
+    protected override void OnInitialized()
+    {
+        var model = new TextEditorModel(
+            ResourceUri,
+            DateTime\&.UtcNow,
+            ExtensionNoPeriodFacts\&.TXT,
+            @"public class MyClass
+{
+    public MyClass(string firstName, string lastName)
+    {
+        FirstName = firstName;
+        LastName = lastName;
+    }
+    
+    public string FirstName { get; set; }
+    public string LastName { get; set; }
+    
+    public string DisplayName => $""{{FirstName}} {LastName}"";
+    
+    public void SomeMethod(int arg1, MyClass arg2)
+    {
+        if (arg1 == 2)
+            return;
+        
+        return;
+    }
+}",
+        decorationMapper: null,
+        compilerService: null);
+    
+        TextEditorService\&.ModelApi\&.RegisterCustom(model);
+        
+        TextEditorService\&.ViewModelApi\&.Register(
+            ViewModelKey,
+            ResourceUri,
+            new Category("main"));
+            
+        base\&.OnInitialized();
+    }
+}
+.fi
+.PP
+
+.PP
+.IP "\(bu" 2
+In the \&.razor markup (\fRPages/Index\&.razor\fP) render the Blazor component: \fR<\fBLuthetus\&.TextEditor\&.RazorLib\&.TextEditors\&.Displays\&.TextEditorViewModelDisplay\fP/>\fP
+.IP "\(bu" 2
+This component takes various parameters, but only one of them is required\&. The rest of the parameters are for customization\&.
+.IP "\(bu" 2
+Pass in the required parameter \fRTextEditorViewModelKey\fP to have the value of the \fRTextEditorViewModelKey\fP property from the codebehind\&.
+.PP
+
+.PP
+.PP
+.nf
+@page "/"
+
+@using Luthetus\&.TextEditor\&.RazorLib\&.TextEditors\&.Displays;
+
+<PageTitle>Index</PageTitle>
+
+<h1>Hello, world!</h1>
+
+Welcome to your new app\&.
+
+<TextEditorViewModelDisplay TextEditorViewModelKey="ViewModelKey" />
+.fi
+.PP
+
+.PP
+.IP "\(bu" 2
+A plain text editor without syntax highlighting should render now when the app is ran\&.
+.PP
+
+.PP
+
+.PP
+.RS 4
+\fINOTE:\fP Height of the text editor is 100% of the parent element\&. In the Blazor default project template one needs the following: 
+.RE
+.PP
+
+.PP
+.PP
+.nf
+ html
+<!\-\- Example for more height in the Blazor default project template (this is not an example of ideal responsive UI css but it gets across the idea and one can customize as needed\&.) \-\->
+
+<!\-\- Index\&.razor \-\->
+
+@page "/"
+
+@using Luthetus\&.TextEditor\&.RazorLib\&.TextEditors\&.Displays;
+
+<PageTitle>Index</PageTitle>
+
+<div style="height: 5em;">
+    <h1>Hello, world!</h1>
+    
+    Welcome to your new app\&.
+</div>
+
+@* 10px for padding *@
+<div style="height: calc(100% \- 5em \- 10px);">
+    <TextEditorViewModelDisplay TextEditorViewModelKey="ViewModelKey"/>
+</div>
+.fi
+.PP
+
+.PP
+.PP
+.nf
+ html
+<!\-\- Example for more height in the Blazor default project template (this is not an example of ideal responsive UI css but it gets across the idea and one can customize as needed\&.) \-\->
+
+<!\-\- MainLayout\&.razor \-\->
+
+@inherits LayoutComponentBase
+
+<PageTitle>Luthetus\&.Tutorials</PageTitle>
+
+<div class="page">
+    <div class="sidebar">
+        <NavMenu />
+    </div>
+
+    <main>
+        <div class="top\-row px\-4">
+            <a href="https://docs\&.microsoft\&.com/aspnet/" target="_blank">About</a>
+        </div>
+
+        <!\-\- THE CHANGE IS HERE TO THE STYLE ATTRIBUTE OF THE ARTCILE ELEMENT\&. 56px is the height of the top\-row\&. \-\->
+        <article class="content px\-4" style="height: calc(100% \- 56px);">
+            @Body
+        </article>
+    </main>
+</div>
+.fi
+.PP
+
+.PP
+
+.PP
+.IP "\(bu" 2
+Now we can add in the C# Compiler Service\&.
+.IP "\(bu" 2
+Reference the \fR\fBLuthetus\&.CompilerServices\&.CSharp\fP\fP Nuget Package
+.PP
+
+.PP
+Go to the file that you register your services and add the following lines of C# code\&.
+
+.PP
+.PP
+.nf
+using Luthetus\&.TextEditor\&.RazorLib\&.CompilerServices\&.Interfaces;
+using Luthetus\&.TextEditor\&.RazorLib\&.Decorations\&.Models;
+
+// NOTE: the next step creates the implementations
+services
+    \&.AddScoped<ICompilerServiceRegistry, CompilerServiceRegistry>()
+    \&.AddScoped<IDecorationMapperRegistry, DecorationMapperRegistry>();
+.fi
+.PP
+
+.PP
+Add CompilerServiceRegistry\&.cs as follows: 
+.PP
+.nf
+using System\&.Collections\&.Immutable;
+using Fluxor;
+using Luthetus\&.Common\&.RazorLib\&.FileSystems\&.Models;
+using Luthetus\&.TextEditor\&.RazorLib;
+using Luthetus\&.TextEditor\&.RazorLib\&.CompilerServices\&.Implementations;
+using Luthetus\&.TextEditor\&.RazorLib\&.CompilerServices\&.Interfaces;
+using Luthetus\&.TextEditor\&.RazorLib\&.TextEditors\&.Models;
+using Luthetus\&.CompilerServices\&.CSharp\&.CompilerServiceCase;
+
+namespace Luthetus\&.Tutorials\&.RazorLib\&.CompilerServices;
+
+public class CompilerServiceRegistry : ICompilerServiceRegistry
+{
+    private readonly Dictionary<string, ICompilerService> _map = new();
+
+    public ImmutableDictionary<string, ICompilerService> Map => _map\&.ToImmutableDictionary();
+    public ImmutableList<ICompilerService> CompilerServiceList => _map\&.Select(x => x\&.Value)\&.ToImmutableList();
+
+    public CompilerServiceRegistry(ITextEditorService textEditorService)
+    {
+        CSharpCompilerService = new CSharpCompilerService(textEditorService);
+        DefaultCompilerService = new CompilerService(textEditorService);
+        
+        _map\&.Add(ExtensionNoPeriodFacts\&.C_SHARP_CLASS, CSharpCompilerService);
+    }
+
+    public CSharpCompilerService CSharpCompilerService { get; }
+    public CompilerService DefaultCompilerService { get; }
+
+    public ICompilerService GetCompilerService(string extensionNoPeriod)
+    {
+        if (_map\&.TryGetValue(extensionNoPeriod, out var compilerService))
+            return compilerService;
+
+        return DefaultCompilerService;
+    }
+}
+
+.fi
+.PP
+
+.PP
+Add DecorationMapperRegistry\&.cs as follows:
+
+.PP
+.PP
+.nf
+using System\&.Collections\&.Immutable;
+using Luthetus\&.TextEditor\&.RazorLib\&.CompilerServices\&.GenericLexer\&.Decoration;
+using Luthetus\&.TextEditor\&.RazorLib\&.Decorations\&.Models;
+using Luthetus\&.TextEditor\&.RazorLib\&.TextEditors\&.Models;
+
+namespace Luthetus\&.Tutorials\&.RazorLib\&.Decorations;
+
+public class DecorationMapperRegistry : IDecorationMapperRegistry
+{
+    private Dictionary<string, IDecorationMapper> _map { get; } = new();
+
+    public ImmutableDictionary<string, IDecorationMapper> Map => _map\&.ToImmutableDictionary();
+
+    public DecorationMapperRegistry()
+    {
+        GenericDecorationMapper = new GenericDecorationMapper();
+        DefaultDecorationMapper = new TextEditorDecorationMapperDefault();
+
+        _map\&.Add(ExtensionNoPeriodFacts\&.C_SHARP_CLASS, GenericDecorationMapper);
+    }
+
+    public GenericDecorationMapper GenericDecorationMapper { get; }
+    public TextEditorDecorationMapperDefault DefaultDecorationMapper { get; }
+
+    public IDecorationMapper GetDecorationMapper(string extensionNoPeriod)
+    {
+        if (_map\&.TryGetValue(extensionNoPeriod, out var decorationMapper))
+            return decorationMapper;
+
+        return DefaultDecorationMapper;
+    }
+}
+.fi
+.PP
+
+.PP
+.IP "\(bu" 2
+In the \fR\fBPages/Index\&.razor\&.cs\fP\fP file we now can provide the \fRCSharpCompilerService\fP when instantiating a \fRTextEditorModel\fP\&.
+.IP "\(bu" 2
+Inject the \fRICompilerServiceRegistry\fP and the \fRIDecorationMapperRegistry\fP
+.PP
+
+.PP
+.PP
+.nf
+// using Luthetus\&.TextEditor\&.RazorLib\&.CompilerServices\&.Interfaces;
+// using Luthetus\&.TextEditor\&.RazorLib\&.Decorations\&.Models;
+
+[Inject]
+private ICompilerServiceRegistry CompilerServiceRegistry { get; set; } = null!;
+[Inject]
+private IDecorationMapperRegistry DecorationMapperRegistry { get; set; } = null!;
+.fi
+.PP
+
+.PP
+.IP "\(bu" 2
+In \fROnInitialized()\fP, prior to constructing the \fRTextEditorModel\fP we can get the decoration mapper, and compiler service we wish to use\&.
+.PP
+
+.PP
+.PP
+.nf
+var genericDecorationMapper = DecorationMapperRegistry\&.GetDecorationMapper(
+    ExtensionNoPeriodFacts\&.C_SHARP_CLASS);
+
+var cSharpCompilerService = CompilerServiceRegistry\&.GetCompilerService(
+    ExtensionNoPeriodFacts\&.C_SHARP_CLASS);
+.fi
+.PP
+
+.PP
+.IP "\(bu" 2
+Then pass in \fRgenericDecorationMapper\fP and \fRcSharpCompilerService\fP instead of the nulls when invoking the \fRTextEditorModel\fP constructor\&.
+.IP "\(bu" 2
+One last step, on the line immediately following, \fRTextEditorService\&.ModelApi\&.RegisterCustom(model);\fP add the line: \fRcSharpCompilerService\&.RegisterResource(model\&.ResourceUri, shouldTriggerResourceWasModified: true);\fP
+.IP "\(bu" 2
+My \fR\fBPages/Index\&.razor\&.cs\fP\fP file as of this step is shown in the following code snippet:
+.PP
+
+.PP
+.PP
+.nf
+using Luthetus\&.Common\&.RazorLib\&.Keys\&.Models;
+using Luthetus\&.TextEditor\&.RazorLib;
+using Luthetus\&.TextEditor\&.RazorLib\&.CompilerServices\&.Interfaces;
+using Luthetus\&.TextEditor\&.RazorLib\&.Decorations\&.Models;
+using Luthetus\&.TextEditor\&.RazorLib\&.Lexers\&.Models;
+using Luthetus\&.TextEditor\&.RazorLib\&.TextEditors\&.Models;
+using Microsoft\&.AspNetCore\&.Components;
+
+namespace NugetPackageTest\&.Pages;
+
+public partial class Home : ComponentBase
+{
+    [Inject]
+    private ITextEditorService TextEditorService { get; set; } = null!;
+    [Inject]
+    private ICompilerServiceRegistry CompilerServiceRegistry { get; set; } = null!;
+    [Inject]
+    private IDecorationMapperRegistry DecorationMapperRegistry { get; set; } = null!;
+
+    public static ResourceUri ResourceUri { get; } = new("/index\&.txt");
+    public static Key<TextEditorViewModel> ViewModelKey { get; } = Key<TextEditorViewModel>\&.NewKey();
+
+    protected override void OnInitialized()
+    {
+        var genericDecorationMapper = DecorationMapperRegistry\&.GetDecorationMapper(
+            ExtensionNoPeriodFacts\&.C_SHARP_CLASS);
+
+        var cSharpCompilerService = CompilerServiceRegistry\&.GetCompilerService(
+            ExtensionNoPeriodFacts\&.C_SHARP_CLASS);
+
+        var model = new TextEditorModel(
+                ResourceUri,
+                DateTime\&.UtcNow,
+                ExtensionNoPeriodFacts\&.TXT,
+                @"public class MyClass
+{
+    public MyClass(string firstName, string lastName)
+    {
+        FirstName = firstName;
+        LastName = lastName;
+    }
+    
+    public string FirstName { get; set; }
+    public string LastName { get; set; }
+    
+    public string DisplayName => $""{{FirstName}} {LastName}"";
+    
+    public void SomeMethod(int arg1, MyClass arg2)
+    {
+        if (arg1 == 2)
+            return;
+        
+        return;
+    }
+}",
+            genericDecorationMapper,
+            cSharpCompilerService);
+
+        TextEditorService\&.ModelApi\&.RegisterCustom(model);
+
+        cSharpCompilerService\&.RegisterResource(model\&.ResourceUri, shouldTriggerResourceWasModified: true);
+
+        TextEditorService\&.ViewModelApi\&.Register(
+            ViewModelKey,
+            ResourceUri,
+            new Category("main"));
+
+        base\&.OnInitialized();
+    }
+}
+.fi
+.PP
+
+.PP
+.IP "\(bu" 2
+Now you should have a Text Editor with the CSharpCompilerService as shown in this GIF:
+.PP
+
+.PP
+.SH "Next tutorial: #TODO: Continue"
+.PP
+

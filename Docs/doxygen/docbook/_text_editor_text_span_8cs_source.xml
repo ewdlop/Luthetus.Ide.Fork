@@ -1,0 +1,76 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="__text_editor_text_span_8cs_source" xml:lang="en-US">
+<title>TextEditorTextSpan.cs</title>
+<indexterm><primary>Source/Lib/TextEditor/Lexers/Models/TextEditorTextSpan.cs</primary></indexterm>
+Go to the documentation of this file.<programlisting linenumbering="unnumbered"><anchor xml:id="__text_editor_text_span_8cs_source_1l00001"/>00001 <emphasis role="keyword">using&#32;</emphasis><link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_utility">Luthetus.TextEditor.RazorLib.CompilerServices.Utility</link>;
+<anchor xml:id="__text_editor_text_span_8cs_source_1l00002"/>00002 
+<anchor xml:id="__text_editor_text_span_8cs_source_1l00003"/>00003 <emphasis role="keyword">namespace&#32;</emphasis><link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_lexers_1_1_models">Luthetus.TextEditor.RazorLib.Lexers.Models</link>;
+<anchor xml:id="__text_editor_text_span_8cs_source_1l00004"/>00004 
+<anchor xml:id="__text_editor_text_span_8cs_source_1l00048"/><link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_lexers_1_1_models_1a1ffd1a7706dfd364560b76d47467812f">00048</link> <emphasis role="keyword">public</emphasis>&#32;record&#32;<emphasis role="keyword">struct&#32;</emphasis><link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_lexers_1_1_models_1a1ffd1a7706dfd364560b76d47467812f">TextEditorTextSpan</link>(
+<anchor xml:id="__text_editor_text_span_8cs_source_1l00049"/>00049 &#32;&#32;&#32;&#32;int&#32;StartingIndexInclusive,
+<anchor xml:id="__text_editor_text_span_8cs_source_1l00050"/>00050 &#32;&#32;&#32;&#32;int&#32;EndingIndexExclusive,
+<anchor xml:id="__text_editor_text_span_8cs_source_1l00051"/>00051 &#32;&#32;&#32;&#32;byte&#32;DecorationByte,
+<anchor xml:id="__text_editor_text_span_8cs_source_1l00052"/>00052 &#32;&#32;&#32;&#32;<link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_lexers_1_1_models_1a26a1b63ad28ec7955b30bc6c91571eca">ResourceUri</link>&#32;<link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_lexers_1_1_models_1a26a1b63ad28ec7955b30bc6c91571eca">ResourceUri</link>,
+<anchor xml:id="__text_editor_text_span_8cs_source_1l00053"/>00053 &#32;&#32;&#32;&#32;string&#32;SourceText)
+<anchor xml:id="__text_editor_text_span_8cs_source_1l00054"/>00054 {
+<anchor xml:id="__text_editor_text_span_8cs_source_1l00055"/>00055 &#32;&#32;&#32;&#32;<emphasis role="keyword">private</emphasis>&#32;<emphasis role="keywordtype">string</emphasis>?&#32;_text;
+<anchor xml:id="__text_editor_text_span_8cs_source_1l00056"/>00056 
+<anchor xml:id="__text_editor_text_span_8cs_source_1l00062"/>00062 &#32;&#32;&#32;&#32;<emphasis role="keyword">public</emphasis>&#32;<link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_lexers_1_1_models_1a1ffd1a7706dfd364560b76d47467812f">TextEditorTextSpan</link>(
+<anchor xml:id="__text_editor_text_span_8cs_source_1l00063"/>00063 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordtype">int</emphasis>&#32;StartingIndexInclusive,
+<anchor xml:id="__text_editor_text_span_8cs_source_1l00064"/>00064 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<link linkend="_class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_utility_1_1_string_walker">StringWalker</link>&#32;stringWalker,
+<anchor xml:id="__text_editor_text_span_8cs_source_1l00065"/>00065 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordtype">byte</emphasis>&#32;decorationByte)
+<anchor xml:id="__text_editor_text_span_8cs_source_1l00066"/>00066 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;:&#32;<emphasis role="keyword">this</emphasis>(
+<anchor xml:id="__text_editor_text_span_8cs_source_1l00067"/>00067 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;StartingIndexInclusive,
+<anchor xml:id="__text_editor_text_span_8cs_source_1l00068"/>00068 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;stringWalker.<link linkend="_class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_utility_1_1_string_walker_1a192423c8188b55e1e16376095b7dfc62">PositionIndex</link>,
+<anchor xml:id="__text_editor_text_span_8cs_source_1l00069"/>00069 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;decorationByte,
+<anchor xml:id="__text_editor_text_span_8cs_source_1l00070"/>00070 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;stringWalker.<link linkend="_class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_utility_1_1_string_walker_1abf00a8613dfc137bea3c366e277fbde4">ResourceUri</link>,
+<anchor xml:id="__text_editor_text_span_8cs_source_1l00071"/>00071 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;stringWalker.<link linkend="_class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_utility_1_1_string_walker_1a35f8247f3eea6c6937856215770af815">SourceText</link>)
+<anchor xml:id="__text_editor_text_span_8cs_source_1l00072"/>00072 &#32;&#32;&#32;&#32;{
+<anchor xml:id="__text_editor_text_span_8cs_source_1l00073"/>00073 
+<anchor xml:id="__text_editor_text_span_8cs_source_1l00074"/>00074 &#32;&#32;&#32;&#32;}
+<anchor xml:id="__text_editor_text_span_8cs_source_1l00075"/>00075 &#32;&#32;&#32;&#32;
+<anchor xml:id="__text_editor_text_span_8cs_source_1l00088"/>00088 &#32;&#32;&#32;&#32;<emphasis role="keyword">public</emphasis>&#32;<link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_lexers_1_1_models_1a1ffd1a7706dfd364560b76d47467812f">TextEditorTextSpan</link>(
+<anchor xml:id="__text_editor_text_span_8cs_source_1l00089"/>00089 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordtype">int</emphasis>&#32;startingIndexInclusive,
+<anchor xml:id="__text_editor_text_span_8cs_source_1l00090"/>00090 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordtype">int</emphasis>&#32;endingIndexExclusive,
+<anchor xml:id="__text_editor_text_span_8cs_source_1l00091"/>00091 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordtype">byte</emphasis>&#32;decorationByte,
+<anchor xml:id="__text_editor_text_span_8cs_source_1l00092"/>00092 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_lexers_1_1_models_1a26a1b63ad28ec7955b30bc6c91571eca">ResourceUri</link>&#32;resourceUri,
+<anchor xml:id="__text_editor_text_span_8cs_source_1l00093"/>00093 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordtype">string</emphasis>&#32;sourceText,
+<anchor xml:id="__text_editor_text_span_8cs_source_1l00094"/>00094 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordtype">string</emphasis>&#32;getTextPrecalculatedResult)
+<anchor xml:id="__text_editor_text_span_8cs_source_1l00095"/>00095 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;:&#32;<emphasis role="keyword">this</emphasis>(
+<anchor xml:id="__text_editor_text_span_8cs_source_1l00096"/>00096 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;startingIndexInclusive,
+<anchor xml:id="__text_editor_text_span_8cs_source_1l00097"/>00097 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;endingIndexExclusive,
+<anchor xml:id="__text_editor_text_span_8cs_source_1l00098"/>00098 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;decorationByte,
+<anchor xml:id="__text_editor_text_span_8cs_source_1l00099"/>00099 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;resourceUri,
+<anchor xml:id="__text_editor_text_span_8cs_source_1l00100"/>00100 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;sourceText)
+<anchor xml:id="__text_editor_text_span_8cs_source_1l00101"/>00101 &#32;&#32;&#32;&#32;{
+<anchor xml:id="__text_editor_text_span_8cs_source_1l00102"/>00102 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;_text&#32;=&#32;getTextPrecalculatedResult;
+<anchor xml:id="__text_editor_text_span_8cs_source_1l00103"/>00103 &#32;&#32;&#32;&#32;}
+<anchor xml:id="__text_editor_text_span_8cs_source_1l00104"/>00104 
+<anchor xml:id="__text_editor_text_span_8cs_source_1l00105"/>00105 &#32;&#32;&#32;&#32;<emphasis role="keyword">public</emphasis>&#32;<emphasis role="keywordtype">int</emphasis>&#32;Length&#32;=&gt;&#32;EndingIndexExclusive&#32;-&#32;StartingIndexInclusive;
+<anchor xml:id="__text_editor_text_span_8cs_source_1l00106"/>00106 
+<anchor xml:id="__text_editor_text_span_8cs_source_1l00107"/>00107 &#32;&#32;&#32;&#32;<emphasis role="keyword">public</emphasis>&#32;<emphasis role="keywordtype">string</emphasis>&#32;GetText()
+<anchor xml:id="__text_editor_text_span_8cs_source_1l00108"/>00108 &#32;&#32;&#32;&#32;{
+<anchor xml:id="__text_editor_text_span_8cs_source_1l00109"/>00109 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;_text&#32;??=&#32;SourceText.Substring(StartingIndexInclusive,&#32;Length);
+<anchor xml:id="__text_editor_text_span_8cs_source_1l00110"/>00110 &#32;&#32;&#32;&#32;}
+<anchor xml:id="__text_editor_text_span_8cs_source_1l00111"/>00111 &#32;&#32;&#32;&#32;
+<anchor xml:id="__text_editor_text_span_8cs_source_1l00116"/>00116 &#32;&#32;&#32;&#32;<emphasis role="keyword">public</emphasis>&#32;<emphasis role="keywordtype">string</emphasis>&#32;ClearTextCache()
+<anchor xml:id="__text_editor_text_span_8cs_source_1l00117"/>00117 &#32;&#32;&#32;&#32;{
+<anchor xml:id="__text_editor_text_span_8cs_source_1l00118"/>00118 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;_text&#32;=&#32;<emphasis role="keyword">null</emphasis>;
+<anchor xml:id="__text_editor_text_span_8cs_source_1l00119"/>00119 &#32;&#32;&#32;&#32;}
+<anchor xml:id="__text_editor_text_span_8cs_source_1l00120"/>00120 
+<anchor xml:id="__text_editor_text_span_8cs_source_1l00121"/>00121 <emphasis role="preprocessor">#if&#32;DEBUG</emphasis>
+<anchor xml:id="__text_editor_text_span_8cs_source_1l00123"/>00123 &#32;&#32;&#32;&#32;[Obsolete(<emphasis role="stringliteral">&quot;This&#32;property&#32;is&#32;only&#32;meant&#32;for&#32;when&#32;running&#32;in&#32;&apos;DEBUG&apos;&#32;mode&#32;and&#32;viewing&#32;the&#32;debugger.&#32;One&#32;should&#32;invoke&#32;the&#32;method:&#32;GetText()&#32;instead.&quot;</emphasis>)]
+<anchor xml:id="__text_editor_text_span_8cs_source_1l00124"/>00124 &#32;&#32;&#32;&#32;<emphasis role="keyword">public</emphasis>&#32;<emphasis role="keywordtype">string</emphasis>&#32;Text&#32;=&gt;&#32;GetText();
+<anchor xml:id="__text_editor_text_span_8cs_source_1l00125"/>00125 <emphasis role="preprocessor">#endif</emphasis>
+<anchor xml:id="__text_editor_text_span_8cs_source_1l00126"/>00126 
+<anchor xml:id="__text_editor_text_span_8cs_source_1l00138"/>00138 &#32;&#32;&#32;&#32;<emphasis role="keyword">public</emphasis>&#32;<emphasis role="keyword">static</emphasis>&#32;<link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_lexers_1_1_models_1a1ffd1a7706dfd364560b76d47467812f">TextEditorTextSpan</link>&#32;FabricateTextSpan(<emphasis role="keywordtype">string</emphasis>&#32;text)
+<anchor xml:id="__text_editor_text_span_8cs_source_1l00139"/>00139 &#32;&#32;&#32;&#32;{
+<anchor xml:id="__text_editor_text_span_8cs_source_1l00140"/>00140 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;<emphasis role="keyword">new</emphasis>&#32;<link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_lexers_1_1_models_1a1ffd1a7706dfd364560b76d47467812f">TextEditorTextSpan</link>(
+<anchor xml:id="__text_editor_text_span_8cs_source_1l00141"/>00141 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;0,
+<anchor xml:id="__text_editor_text_span_8cs_source_1l00142"/>00142 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;text.Length,
+<anchor xml:id="__text_editor_text_span_8cs_source_1l00143"/>00143 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;0,
+<anchor xml:id="__text_editor_text_span_8cs_source_1l00144"/>00144 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keyword">new</emphasis>(<emphasis role="stringliteral">&quot;aaa.cs&quot;</emphasis>),
+<anchor xml:id="__text_editor_text_span_8cs_source_1l00145"/>00145 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;text);
+<anchor xml:id="__text_editor_text_span_8cs_source_1l00146"/>00146 &#32;&#32;&#32;&#32;}
+<anchor xml:id="__text_editor_text_span_8cs_source_1l00147"/>00147 }
+</programlisting></section>

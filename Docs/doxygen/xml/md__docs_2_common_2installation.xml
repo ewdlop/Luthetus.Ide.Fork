@@ -1,0 +1,129 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
+  <compounddef id="md__docs_2_common_2installation" kind="page">
+    <compoundname>md__docs_2_common_2installation</compoundname>
+    <title>Luthetus.Common (v1.4.0)</title>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+<para><anchor id="md__docs_2_common_2installation_1autotoc_md20"/></para>
+<sect1 id="md__docs_2_common_2installation_1autotoc_md21">
+<title>Installation</title><sect2 id="md__docs_2_common_2installation_1autotoc_md22">
+<title>Source Code</title><para>The .NET Solution: <ulink url="../../Source/Tutorials/Common/Luthetus.Common.Usage.sln">Luthetus.Common.Usage.sln</ulink>, was made by following steps described here. So, the completed result can be found there.</para>
+</sect2>
+<sect2 id="md__docs_2_common_2installation_1autotoc_md23">
+<title>Goal</title><para><itemizedlist>
+<listitem><para>Reference the <computeroutput><ref refid="namespace_luthetus_1_1_common" kindref="compound">Luthetus.Common</ref></computeroutput> Nuget Package</para>
+</listitem><listitem><para>Register the <computeroutput>Services</computeroutput></para>
+</listitem><listitem><para>Reference the <computeroutput>CSS</computeroutput></para>
+</listitem><listitem><para>Reference the <computeroutput>JavaScript</computeroutput></para>
+</listitem><listitem><para>In <computeroutput>App.razor</computeroutput> render the <computeroutput>&lt;Fluxor.Blazor.Web.StoreInitializer/&gt;</computeroutput></para>
+</listitem><listitem><para>In <computeroutput>MainLayout.razor</computeroutput> render the <computeroutput>&lt;<ref refid="class_luthetus_1_1_common_1_1_razor_lib_1_1_installations_1_1_displays_1_1_luthetus_common_initializer" kindref="compound">Luthetus.Common.RazorLib.Installations.Displays.LuthetusCommonInitializer</ref>/&gt;</computeroutput> Blazor component</para>
+</listitem></itemizedlist>
+</para>
+</sect2>
+<sect2 id="md__docs_2_common_2installation_1autotoc_md24">
+<title>Steps</title><para><itemizedlist>
+<listitem><para>Reference the <computeroutput><ref refid="namespace_luthetus_1_1_common" kindref="compound">Luthetus.Common</ref></computeroutput> NuGet Package</para>
+</listitem></itemizedlist>
+</para>
+<para>Use your preferred way to install NuGet Packages to install <computeroutput><ref refid="namespace_luthetus_1_1_common" kindref="compound">Luthetus.Common</ref></computeroutput>.</para>
+<para>The nuget.org link to the NuGet Package is here: <ulink url="https://www.nuget.org/packages/Luthetus.Common">https://www.nuget.org/packages/Luthetus.Common</ulink></para>
+<para><itemizedlist>
+<listitem><para>Register the <computeroutput>Services</computeroutput></para>
+</listitem></itemizedlist>
+</para>
+<para>Go to the file that you register your services and add the following lines of C# code.</para>
+<para><blockquote><para><emphasis>NOTE:</emphasis> In many C# Project templates, the services are registered in <computeroutput>Program.cs</computeroutput>. </para>
+</blockquote></para>
+<para><programlisting filename=".cs"><codeline><highlight class="comment">//<sp/>using<sp/>Luthetus.Common.RazorLib.Installations.Models;</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="comment">//<sp/>using<sp/>Fluxor;</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal">var<sp/>luthetusHostingInformation<sp/>=<sp/></highlight><highlight class="keyword">new</highlight><highlight class="normal"><sp/><ref refid="namespace_luthetus_1_1_common_1_1_razor_lib_1_1_installations_1_1_models_1a761f9bfb52cfd9ffaa1a4bbdddf1aebb" kindref="member">LuthetusHostingInformation</ref>(</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//LuthetusHostingKind.Wasm,</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>OR</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>LuthetusHostingKind.ServerSide,</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">new</highlight><highlight class="normal"><sp/>BackgroundTaskService());</highlight></codeline>
+<codeline><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>services</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>.AddLuthetusCommonServices(luthetusHostingInformation)<sp/></highlight><highlight class="comment">//<sp/></highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>.AddFluxor(options<sp/>=&gt;<sp/>options.ScanAssemblies(</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>typeof(LuthetusCommonOptions).Assembly));</highlight></codeline>
+</programlisting></para>
+<para><itemizedlist>
+<listitem><para>Reference the <computeroutput>CSS</computeroutput></para>
+</listitem></itemizedlist>
+</para>
+<para>Go to the file that you reference CSS files from and add the following CSS reference.</para>
+<para><blockquote><para><emphasis>NOTE:</emphasis> In many Blazor ServerSide apps this file would be <computeroutput>Pages/_Layout.cshtml</computeroutput>. As for Blazor WASM apps, this file tends to be <computeroutput>wwwroot/index.html</computeroutput> </para>
+</blockquote></para>
+<para><programlisting filename=".html"><codeline><highlight class="normal">&lt;link<sp/>href=&quot;_content/Luthetus.Common/luthetusCommon.css&quot;<sp/>rel=&quot;stylesheet&quot;<sp/>/&gt;</highlight></codeline>
+</programlisting></para>
+<para><itemizedlist>
+<listitem><para>Reference the <computeroutput>JavaScript</computeroutput></para>
+</listitem></itemizedlist>
+</para>
+<para>Go to the file that you reference JavaScript files from and add the following JavaScript reference below the Blazor framework JavaScript reference</para>
+<para><blockquote><para><emphasis>NOTE:</emphasis> In many Blazor ServerSide apps this file would be <computeroutput>Pages/_Layout.cshtml</computeroutput>. As for Blazor WASM apps, this file tends to be <computeroutput>wwwroot/index.html</computeroutput> </para>
+</blockquote></para>
+<para><programlisting filename=".html"><codeline><highlight class="normal">&lt;script<sp/>src=&quot;_content/Luthetus.Common/luthetusCommon.js&quot;&gt;&lt;/script&gt;</highlight></codeline>
+</programlisting></para>
+<para><itemizedlist>
+<listitem><para>In <computeroutput>App.razor</computeroutput> render the <computeroutput>&lt;Fluxor.Blazor.Web.StoreInitializer/&gt;</computeroutput> Blazor component</para>
+</listitem></itemizedlist>
+</para>
+<para><blockquote><para><emphasis>NOTE:</emphasis> <ref refid="namespace_luthetus" kindref="compound">Luthetus</ref> repositories use the state management library named <computeroutput>Fluxor</computeroutput> (<ulink url="https://github.com/mrpmorris/Fluxor">github link</ulink>). </para>
+</blockquote></para>
+<para><programlisting filename=".html"><codeline><highlight class="normal">&lt;!--<sp/>App.razor<sp/>--&gt;</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">&lt;Fluxor.Blazor.Web.StoreInitializer/&gt;</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">&lt;Router<sp/>AppAssembly=&quot;@typeof(App).Assembly&quot;<sp/>AdditionalAssemblies=&quot;new<sp/>[]<sp/>{<sp/>typeof(MainLayout).Assembly<sp/>}&quot;&gt;</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>&lt;Found<sp/>Context=&quot;routeData&quot;&gt;</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>&lt;RouteView<sp/>RouteData=&quot;@routeData&quot;<sp/>DefaultLayout=&quot;@typeof(MainLayout)&quot;/&gt;</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>&lt;FocusOnNavigate<sp/>RouteData=&quot;@routeData&quot;<sp/>Selector=&quot;h1&quot;/&gt;</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>&lt;/Found&gt;</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>&lt;NotFound&gt;</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>&lt;PageTitle&gt;Not<sp/>found&lt;/PageTitle&gt;</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>&lt;LayoutView<sp/>Layout=&quot;@typeof(MainLayout)&quot;&gt;</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>&lt;p<sp/>role=&quot;alert&quot;&gt;Sorry,<sp/>there&apos;s<sp/>nothing<sp/>at<sp/>this<sp/>address.&lt;/p&gt;</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>&lt;/LayoutView&gt;</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>&lt;/NotFound&gt;</highlight></codeline>
+<codeline><highlight class="normal">&lt;/Router&gt;</highlight></codeline>
+</programlisting></para>
+<para><itemizedlist>
+<listitem><para>In <computeroutput>MainLayout.razor</computeroutput> render the <computeroutput>&lt;<ref refid="class_luthetus_1_1_common_1_1_razor_lib_1_1_installations_1_1_displays_1_1_luthetus_common_initializer" kindref="compound">Luthetus.Common.RazorLib.Installations.Displays.LuthetusCommonInitializer</ref> /&gt;</computeroutput> Blazor component</para>
+</listitem></itemizedlist>
+</para>
+<para><blockquote><para><emphasis>NOTE:</emphasis> The placement of the <computeroutput>&lt;<ref refid="class_luthetus_1_1_common_1_1_razor_lib_1_1_installations_1_1_displays_1_1_luthetus_common_initializer" kindref="compound">Luthetus.Common.RazorLib.Installations.Displays.LuthetusCommonInitializer</ref>/&gt;</computeroutput> Blazor component should be wrapped in an encompassing div. This allows one to cascade css. A later tutorial is intended to show this, as to keep the installation tutorial more to the point. </para>
+</blockquote></para>
+<para><programlisting filename=".html"><codeline><highlight class="normal">@inherits<sp/>LayoutComponentBase</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">&lt;PageTitle&gt;Luthetus.Common.Installation.ServerSide&lt;/PageTitle&gt;</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">&lt;Luthetus.Common.RazorLib.Installations.Displays.LuthetusCommonInitializer/&gt;</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">&lt;div<sp/>class=&quot;page&quot;&gt;</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>&lt;div<sp/>class=&quot;sidebar&quot;&gt;</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>&lt;NavMenu<sp/>/&gt;</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>&lt;/div&gt;</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>&lt;main&gt;</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>&lt;div<sp/>class=&quot;top-row<sp/>px-4&quot;&gt;</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>&lt;a<sp/>href=&quot;https://docs.microsoft.com/aspnet/&quot;<sp/>target=&quot;_blank&quot;&gt;About&lt;/a&gt;</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>&lt;/div&gt;</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>&lt;article<sp/>class=&quot;content<sp/>px-4&quot;&gt;</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>@Body</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>&lt;/article&gt;</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>&lt;/main&gt;</highlight></codeline>
+<codeline><highlight class="normal">&lt;/div&gt;</highlight></codeline>
+</programlisting></para>
+</sect2>
+</sect1>
+<sect1 id="md__docs_2_common_2installation_1autotoc_md25">
+<title>Next tutorial: <ref refid="md__docs_2_common_2usage" kindref="compound">usage.md</ref></title></sect1>
+    </detaileddescription>
+    <location file="Docs/Common/installation.md"/>
+  </compounddef>
+</doxygen>

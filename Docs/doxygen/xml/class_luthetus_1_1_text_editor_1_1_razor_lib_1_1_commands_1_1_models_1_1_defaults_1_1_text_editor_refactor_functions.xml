@@ -1,0 +1,68 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
+  <compounddef id="class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_commands_1_1_models_1_1_defaults_1_1_text_editor_refactor_functions" kind="class" language="C#" prot="public">
+    <compoundname>Luthetus::TextEditor::RazorLib::Commands::Models::Defaults::TextEditorRefactorFunctions</compoundname>
+    <sectiondef kind="public-static-func">
+      <memberdef kind="function" id="class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_commands_1_1_models_1_1_defaults_1_1_text_editor_refactor_functions_1a0890c8472421c02d247e5f2757bb772e" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>static void Luthetus.TextEditor.RazorLib.Commands.Models.Defaults.TextEditorRefactorFunctions.GenerateConstructor</definition>
+        <argsstring>(TypeDefinitionNode unsafeTypeDefinitionNode, IEnumerable&lt; IVariableDeclarationNode &gt; variableDeclarationNodeList, IServiceProvider serviceProvider, ITextEditorEditContext editContext, TextEditorModelModifier modelModifier, TextEditorViewModelModifier viewModelModifier, CursorModifierBagTextEditor cursorModifierBag, TextEditorCursorModifier primaryCursorModifier)</argsstring>
+        <name>GenerateConstructor</name>
+        <qualifiedname>Luthetus.TextEditor.RazorLib.Commands.Models.Defaults.TextEditorRefactorFunctions.GenerateConstructor</qualifiedname>
+        <param>
+          <type><ref refid="class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_1_1_nodes_1_1_type_definition_node" kindref="compound">TypeDefinitionNode</ref></type>
+          <declname>unsafeTypeDefinitionNode</declname>
+        </param>
+        <param>
+          <type>IEnumerable&lt; <ref refid="interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_1_1_nodes_1_1_fe75dbb5fedb96209546156f80d0cb75" kindref="compound">IVariableDeclarationNode</ref> &gt;</type>
+          <declname>variableDeclarationNodeList</declname>
+        </param>
+        <param>
+          <type>IServiceProvider</type>
+          <declname>serviceProvider</declname>
+        </param>
+        <param>
+          <type><ref refid="interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1_1_i_text_editor_edit_context" kindref="compound">ITextEditorEditContext</ref></type>
+          <declname>editContext</declname>
+        </param>
+        <param>
+          <type><ref refid="class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1_1_text_editor_model_modifier" kindref="compound">TextEditorModelModifier</ref></type>
+          <declname>modelModifier</declname>
+        </param>
+        <param>
+          <type><ref refid="class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1_1_text_editor_view_model_modifier" kindref="compound">TextEditorViewModelModifier</ref></type>
+          <declname>viewModelModifier</declname>
+        </param>
+        <param>
+          <type><ref refid="class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1_1_cursor_modifier_bag_text_editor" kindref="compound">CursorModifierBagTextEditor</ref></type>
+          <declname>cursorModifierBag</declname>
+        </param>
+        <param>
+          <type><ref refid="class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_cursors_1_1_models_1_1_text_editor_cursor_modifier" kindref="compound">TextEditorCursorModifier</ref></type>
+          <declname>primaryCursorModifier</declname>
+        </param>
+        <briefdescription>
+<para>How much concern should be given to the text editor changing between the time that the context menu option was generated, and this function is invoked? </para>
+        </briefdescription>
+        <detaileddescription>
+<para>If the { Ctrl + Period } keybind is hit when the cursor is at positionIndex 30. But then 100 characters of text was inserted at positionIndex 0, by the time this function gets access to the text editor, anything the menu option tells this function will be wrong by 100 position indices.</para>
+<para>Preferably, long term, 100% concern should be given to the text editor changing between the time that the context menu option was generated, and this function is invoked.</para>
+<para>But, in terms of progressively approaching that goal, how should this be handled? </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Lib/TextEditor/Commands/Models/Defaults/TextEditorRefactorFunctions.cs" line="55" column="20" bodyfile="Source/Lib/TextEditor/Commands/Models/Defaults/TextEditorRefactorFunctions.cs" bodystart="55" bodyend="135"/>
+        <referencedby refid="class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_commands_1_1_models_1_1_defaults_1_1_text_editor_refactor_facts_1a354b7783acaa26ab5cb4f185aaab44a5" compoundref="_text_editor_refactor_facts_8cs" startline="15" endline="44">Luthetus.TextEditor.RazorLib.Commands.Models.Defaults.TextEditorRefactorFacts.GenerateConstructor</referencedby>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>TODO: Decide on what folder this class belongs in... ...I&apos;m working on the Quick Actions / Refactor context menu (2024-08-16) and the issue is that, the context menu is populated with menu options from within the <ref refid="interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1_1_i_text_editor_edit_context" kindref="compound">ITextEditorEditContext</ref>. | But by the time the user picks a context menu option, the text editor may have been edited, thus invalidating any stored Func&lt;Task&gt; that is given for a menu option&apos;s onclick. | So, each menu option needs to make a separate Post to the <ref refid="interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_i_text_editor_service" kindref="compound">ITextEditorService</ref> upon onclick. | But, all of the variables that were created to construct the menu options, during the old post, are still within scope when typing out code for the menu option&apos;s onclick if written inline as a lambda function. | So, most importantly this class exists to avoid accidental usage of old text editor state due to the variables being in scope. | But this also probably is nice for readability, and re-usability of the refactor itself. | I don&apos;t want a separate function within <ref refid="class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_commands_1_1_models_1_1_defaults_1_1_text_editor_command_default_functions" kindref="compound">TextEditorCommandDefaultFunctions</ref> because it is a nice separation of concern to keep compiler service refactors in a separate file. </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="Source/Lib/TextEditor/Commands/Models/Defaults/TextEditorRefactorFunctions.cs" line="39" column="7" bodyfile="Source/Lib/TextEditor/Commands/Models/Defaults/TextEditorRefactorFunctions.cs" bodystart="40" bodyend="136"/>
+    <listofallmembers>
+      <member refid="class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_commands_1_1_models_1_1_defaults_1_1_text_editor_refactor_functions_1a0890c8472421c02d247e5f2757bb772e" prot="public" virt="non-virtual"><scope>Luthetus::TextEditor::RazorLib::Commands::Models::Defaults::TextEditorRefactorFunctions</scope><name>GenerateConstructor</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

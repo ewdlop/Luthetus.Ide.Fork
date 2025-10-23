@@ -1,0 +1,340 @@
+.TH "Luthetus.TextEditor.RazorLib.CompilerServices.Syntax.Nodes.TypeDefinitionNode" 3 "Version 1.0.0" "Luthetus.Ide" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+Luthetus.TextEditor.RazorLib.CompilerServices.Syntax.Nodes.TypeDefinitionNode \- \fBTypeDefinitionNode\fP is used anywhere a type is defined\&.  
+
+.SH SYNOPSIS
+.br
+.PP
+.PP
+Inherits \fBLuthetus\&.TextEditor\&.RazorLib\&.CompilerServices\&.Syntax\&.Nodes\&.Interfaces\&.ICodeBlockOwner\fP\&.
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBTypeDefinitionNode\fP (\fBAccessModifierKind\fP accessModifierKind, bool hasPartialModifier, \fBStorageModifierKind\fP storageModifierKind, \fBIdentifierToken\fP typeIdentifier, Type? valueType, \fBGenericArgumentsListingNode\fP? genericArgumentsListingNode, \fBFunctionArgumentsListingNode\fP? primaryConstructorFunctionArgumentsListingNode, \fBTypeClauseNode\fP? inheritedTypeClauseNode, \fBOpenBraceToken\fP openBraceToken, \fBCodeBlockNode\fP? codeBlockNode)"
+.br
+.ti -1c
+.RI "ImmutableArray< \fBFunctionDefinitionNode\fP > \fBGetFunctionDefinitionNodes\fP ()"
+.br
+.ti -1c
+.RI "\fBTypeClauseNode\fP \fBToTypeClause\fP ()"
+.br
+.ti -1c
+.RI "\fBTypeClauseNode\fP? \fBGetReturnTypeClauseNode\fP ()"
+.br
+.ti -1c
+.RI "\fBICodeBlockOwner\fP \fBSetOpenBraceToken\fP (\fBOpenBraceToken\fP openBraceToken, \fBIParserModel\fP parserModel)"
+.br
+.ti -1c
+.RI "\fBICodeBlockOwner\fP \fBSetCloseBraceToken\fP (\fBCloseBraceToken\fP closeBraceToken, \fBIParserModel\fP parserModel)"
+.br
+.ti -1c
+.RI "\fBICodeBlockOwner\fP \fBSetStatementDelimiterToken\fP (\fBStatementDelimiterToken\fP statementDelimiterToken, \fBIParserModel\fP parserModel)"
+.br
+.ti -1c
+.RI "\fBICodeBlockOwner\fP \fBSetCodeBlockNode\fP (\fBCodeBlockNode\fP codeBlockNode, \fBIParserModel\fP parserModel)"
+.br
+.ti -1c
+.RI "void \fBOnBoundScopeCreatedAndSetAsCurrent\fP (\fBIParserModel\fP parserModel)"
+.br
+.RI "Once the code block owner's scope has been constructed, this method gives them an opportunity to pull any variables into scope that ought to be there\&. As well, the current code block builder will have been updated\&. "
+.ti -1c
+.RI "\fBICodeBlockOwner\fP \fBSetPrimaryConstructorFunctionArgumentsListingNode\fP (\fBFunctionArgumentsListingNode\fP functionArgumentsListingNode)"
+.br
+.ti -1c
+.RI "\fBICodeBlockOwner\fP \fBSetInheritedTypeClauseNode\fP (\fBTypeClauseNode\fP typeClauseNode)"
+.br
+.ti -1c
+.RI "\fBISyntax\fP[] \fBGetChildList\fP ()"
+.br
+.in -1c
+.SS "Properties"
+
+.in +1c
+.ti -1c
+.RI "\fBAccessModifierKind\fP \fBAccessModifierKind\fP\fR [get]\fP"
+.br
+.ti -1c
+.RI "bool \fBHasPartialModifier\fP\fR [get]\fP"
+.br
+.ti -1c
+.RI "\fBStorageModifierKind\fP \fBStorageModifierKind\fP\fR [get]\fP"
+.br
+.ti -1c
+.RI "\fBIdentifierToken\fP \fBTypeIdentifierToken\fP\fR [get]\fP"
+.br
+.RI "Given: 'public class Person { /* class definition here */ }'
+.br
+ Then: 'Person' is the \fBTypeIdentifierToken\fP
+.br
+ And: \fBGenericArgumentsListingNode\fP would be null\&. "
+.ti -1c
+.RI "Type? \fBValueType\fP\fR [get]\fP"
+.br
+.ti -1c
+.RI "GenericArgumentsListingNode? \fBGenericArgumentsListingNode\fP\fR [get]\fP"
+.br
+.RI "Given: 'public struct Array<T> { /* struct definition here */ }'
+.br
+ Then: 'Array<T>' is the \fBTypeIdentifierToken\fP
+.br
+ And: '<T>' is the \fBGenericArgumentsListingNode\fP\&. "
+.ti -1c
+.RI "\fBFunctionArgumentsListingNode\fP? \fBPrimaryConstructorFunctionArgumentsListingNode\fP\fR [get]\fP"
+.br
+.ti -1c
+.RI "OpenBraceToken \fBOpenBraceToken\fP\fR [get]\fP"
+.br
+.RI "The open brace for the body code block node\&. "
+.ti -1c
+.RI "\fBTypeClauseNode\fP? \fBInheritedTypeClauseNode\fP\fR [get]\fP"
+.br
+.RI "Given:
+.br
+ public class Person : IPerson { \&.\&.\&. }
+.br
+
+.br
+ Then: 'IPerson' is the \fBInheritedTypeClauseNode\fP\&. "
+.ti -1c
+.RI "CodeBlockNode? \fBCodeBlockNode\fP\fR [get]\fP"
+.br
+.ti -1c
+.RI "bool \fBIsInterface\fP\fR [get]\fP"
+.br
+.ti -1c
+.RI "CloseBraceToken \fBCloseBraceToken\fP\fR [get]\fP"
+.br
+.ti -1c
+.RI "StatementDelimiterToken \fBStatementDelimiterToken\fP\fR [get]\fP"
+.br
+.ti -1c
+.RI "bool \fBIsSingleStatementBody\fP\fR [get]\fP"
+.br
+.ti -1c
+.RI "\fBScopeDirectionKind\fP \fBScopeDirectionKind\fP\fR [get]\fP"
+.br
+.ti -1c
+.RI "bool \fBIsFabricated\fP\fR [get]\fP"
+.br
+.RI "\fBIsFabricated\fP refers to when the ParserSession expected a node to be valid, but it wasn't\&.
+.br
+
+.br
+For example, a function invocation on an undefined function will construct a BoundFunctionInvocationNode with \fBIsFabricated\fP set to true\&. "
+.ti -1c
+.RI "\fBSyntaxKind\fP \fBSyntaxKind\fP\fR [get]\fP"
+.br
+.ti -1c
+.RI "string \fBEncompassingNamespaceIdentifierString\fP\fR [get, set]\fP"
+.br
+.in -1c
+.SS "Additional Inherited Members"
+
+
+Static Public Member Functions inherited from \fBLuthetus\&.TextEditor\&.RazorLib\&.CompilerServices\&.Syntax\&.Nodes\&.Interfaces\&.ICodeBlockOwner\fP
+.in +1c
+.ti -1c
+.RI "static void \fBThrowMultipleScopeDelimiterException\fP (\fBIParserModel\fP parserModel)"
+.br
+.ti -1c
+.RI "static void \fBThrowAlreadyAssignedCodeBlockNodeException\fP (\fBIParserModel\fP parserModel)"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+\fBTypeDefinitionNode\fP is used anywhere a type is defined\&. 
+.PP
+Definition at line \fB12\fP of file \fBTypeDefinitionNode\&.cs\fP\&.
+.SH "Constructor & Destructor Documentation"
+.PP 
+.SS "Luthetus\&.TextEditor\&.RazorLib\&.CompilerServices\&.Syntax\&.Nodes\&.TypeDefinitionNode\&.TypeDefinitionNode (\fBAccessModifierKind\fP accessModifierKind, bool hasPartialModifier, \fBStorageModifierKind\fP storageModifierKind, \fBIdentifierToken\fP typeIdentifier, Type? valueType, \fBGenericArgumentsListingNode\fP? genericArgumentsListingNode, \fBFunctionArgumentsListingNode\fP? primaryConstructorFunctionArgumentsListingNode, \fBTypeClauseNode\fP? inheritedTypeClauseNode, \fBOpenBraceToken\fP openBraceToken, \fBCodeBlockNode\fP? codeBlockNode)"
+
+.PP
+Definition at line \fB14\fP of file \fBTypeDefinitionNode\&.cs\fP\&.
+.SH "Member Function Documentation"
+.PP 
+.SS "\fBISyntax\fP[] Luthetus\&.TextEditor\&.RazorLib\&.CompilerServices\&.Syntax\&.Nodes\&.TypeDefinitionNode\&.GetChildList ()"
+
+.PP
+Implements \fBLuthetus\&.TextEditor\&.RazorLib\&.CompilerServices\&.Syntax\&.ISyntaxNode\fP\&.
+.PP
+Definition at line \fB186\fP of file \fBTypeDefinitionNode\&.cs\fP\&.
+.SS "ImmutableArray< \fBFunctionDefinitionNode\fP > Luthetus\&.TextEditor\&.RazorLib\&.CompilerServices\&.Syntax\&.Nodes\&.TypeDefinitionNode\&.GetFunctionDefinitionNodes ()"
+
+.PP
+Definition at line \fB86\fP of file \fBTypeDefinitionNode\&.cs\fP\&.
+.SS "\fBTypeClauseNode\fP? Luthetus\&.TextEditor\&.RazorLib\&.CompilerServices\&.Syntax\&.Nodes\&.TypeDefinitionNode\&.GetReturnTypeClauseNode ()"
+
+.PP
+Implements \fBLuthetus\&.TextEditor\&.RazorLib\&.CompilerServices\&.Syntax\&.Nodes\&.Interfaces\&.ICodeBlockOwner\fP\&.
+.PP
+Definition at line \fB105\fP of file \fBTypeDefinitionNode\&.cs\fP\&.
+.SS "void Luthetus\&.TextEditor\&.RazorLib\&.CompilerServices\&.Syntax\&.Nodes\&.TypeDefinitionNode\&.OnBoundScopeCreatedAndSetAsCurrent (\fBIParserModel\fP parserModel)"
+
+.PP
+Once the code block owner's scope has been constructed, this method gives them an opportunity to pull any variables into scope that ought to be there\&. As well, the current code block builder will have been updated\&. (i\&.e\&.: a function definition's arguments) 
+.PP
+Implements \fBLuthetus\&.TextEditor\&.RazorLib\&.CompilerServices\&.Syntax\&.Nodes\&.Interfaces\&.ICodeBlockOwner\fP\&.
+.PP
+Definition at line \fB154\fP of file \fBTypeDefinitionNode\&.cs\fP\&.
+.SS "\fBICodeBlockOwner\fP Luthetus\&.TextEditor\&.RazorLib\&.CompilerServices\&.Syntax\&.Nodes\&.TypeDefinitionNode\&.SetCloseBraceToken (\fBCloseBraceToken\fP closeBraceToken, \fBIParserModel\fP parserModel)"
+
+.PP
+Implements \fBLuthetus\&.TextEditor\&.RazorLib\&.CompilerServices\&.Syntax\&.Nodes\&.Interfaces\&.ICodeBlockOwner\fP\&.
+.PP
+Definition at line \fB121\fP of file \fBTypeDefinitionNode\&.cs\fP\&.
+.SS "\fBICodeBlockOwner\fP Luthetus\&.TextEditor\&.RazorLib\&.CompilerServices\&.Syntax\&.Nodes\&.TypeDefinitionNode\&.SetCodeBlockNode (\fBCodeBlockNode\fP codeBlockNode, \fBIParserModel\fP parserModel)"
+
+.PP
+Implements \fBLuthetus\&.TextEditor\&.RazorLib\&.CompilerServices\&.Syntax\&.Nodes\&.Interfaces\&.ICodeBlockOwner\fP\&.
+.PP
+Definition at line \fB141\fP of file \fBTypeDefinitionNode\&.cs\fP\&.
+.SS "\fBICodeBlockOwner\fP Luthetus\&.TextEditor\&.RazorLib\&.CompilerServices\&.Syntax\&.Nodes\&.TypeDefinitionNode\&.SetInheritedTypeClauseNode (\fBTypeClauseNode\fP typeClauseNode)"
+
+.PP
+Definition at line \fB178\fP of file \fBTypeDefinitionNode\&.cs\fP\&.
+.SS "\fBICodeBlockOwner\fP Luthetus\&.TextEditor\&.RazorLib\&.CompilerServices\&.Syntax\&.Nodes\&.TypeDefinitionNode\&.SetOpenBraceToken (\fBOpenBraceToken\fP openBraceToken, \fBIParserModel\fP parserModel)"
+
+.PP
+Implements \fBLuthetus\&.TextEditor\&.RazorLib\&.CompilerServices\&.Syntax\&.Nodes\&.Interfaces\&.ICodeBlockOwner\fP\&.
+.PP
+Definition at line \fB111\fP of file \fBTypeDefinitionNode\&.cs\fP\&.
+.SS "\fBICodeBlockOwner\fP Luthetus\&.TextEditor\&.RazorLib\&.CompilerServices\&.Syntax\&.Nodes\&.TypeDefinitionNode\&.SetPrimaryConstructorFunctionArgumentsListingNode (\fBFunctionArgumentsListingNode\fP functionArgumentsListingNode)"
+
+.PP
+Definition at line \fB170\fP of file \fBTypeDefinitionNode\&.cs\fP\&.
+.SS "\fBICodeBlockOwner\fP Luthetus\&.TextEditor\&.RazorLib\&.CompilerServices\&.Syntax\&.Nodes\&.TypeDefinitionNode\&.SetStatementDelimiterToken (\fBStatementDelimiterToken\fP statementDelimiterToken, \fBIParserModel\fP parserModel)"
+
+.PP
+Implements \fBLuthetus\&.TextEditor\&.RazorLib\&.CompilerServices\&.Syntax\&.Nodes\&.Interfaces\&.ICodeBlockOwner\fP\&.
+.PP
+Definition at line \fB131\fP of file \fBTypeDefinitionNode\&.cs\fP\&.
+.SS "\fBTypeClauseNode\fP Luthetus\&.TextEditor\&.RazorLib\&.CompilerServices\&.Syntax\&.Nodes\&.TypeDefinitionNode\&.ToTypeClause ()"
+
+.PP
+Definition at line \fB97\fP of file \fBTypeDefinitionNode\&.cs\fP\&.
+.SH "Property Documentation"
+.PP 
+.SS "\fBAccessModifierKind\fP Luthetus\&.TextEditor\&.RazorLib\&.CompilerServices\&.Syntax\&.Nodes\&.TypeDefinitionNode\&.AccessModifierKind\fR [get]\fP"
+
+.PP
+Definition at line \fB43\fP of file \fBTypeDefinitionNode\&.cs\fP\&.
+.SS "CloseBraceToken Luthetus\&.TextEditor\&.RazorLib\&.CompilerServices\&.Syntax\&.Nodes\&.TypeDefinitionNode\&.CloseBraceToken\fR [get]\fP"
+
+.PP
+Implements \fBLuthetus\&.TextEditor\&.RazorLib\&.CompilerServices\&.Syntax\&.Nodes\&.Interfaces\&.ICodeBlockOwner\fP\&.
+.PP
+Definition at line \fB75\fP of file \fBTypeDefinitionNode\&.cs\fP\&.
+.SS "CodeBlockNode? Luthetus\&.TextEditor\&.RazorLib\&.CompilerServices\&.Syntax\&.Nodes\&.TypeDefinitionNode\&.CodeBlockNode\fR [get]\fP"
+
+.PP
+Implements \fBLuthetus\&.TextEditor\&.RazorLib\&.CompilerServices\&.Syntax\&.Nodes\&.Interfaces\&.ICodeBlockOwner\fP\&.
+.PP
+Definition at line \fB71\fP of file \fBTypeDefinitionNode\&.cs\fP\&.
+.SS "string Luthetus\&.TextEditor\&.RazorLib\&.CompilerServices\&.Syntax\&.Nodes\&.TypeDefinitionNode\&.EncompassingNamespaceIdentifierString\fR [get]\fP, \fR [set]\fP"
+
+.PP
+Definition at line \fB84\fP of file \fBTypeDefinitionNode\&.cs\fP\&.
+.SS "GenericArgumentsListingNode? Luthetus\&.TextEditor\&.RazorLib\&.CompilerServices\&.Syntax\&.Nodes\&.TypeDefinitionNode\&.GenericArgumentsListingNode\fR [get]\fP"
+
+.PP
+Given: 'public struct Array<T> { /* struct definition here */ }'
+.br
+ Then: 'Array<T>' is the \fBTypeIdentifierToken\fP
+.br
+ And: '<T>' is the \fBGenericArgumentsListingNode\fP\&. 
+.PP
+Definition at line \fB58\fP of file \fBTypeDefinitionNode\&.cs\fP\&.
+.SS "bool Luthetus\&.TextEditor\&.RazorLib\&.CompilerServices\&.Syntax\&.Nodes\&.TypeDefinitionNode\&.HasPartialModifier\fR [get]\fP"
+
+.PP
+Definition at line \fB44\fP of file \fBTypeDefinitionNode\&.cs\fP\&.
+.SS "\fBTypeClauseNode\fP? Luthetus\&.TextEditor\&.RazorLib\&.CompilerServices\&.Syntax\&.Nodes\&.TypeDefinitionNode\&.InheritedTypeClauseNode\fR [get]\fP"
+
+.PP
+Given:
+.br
+ public class Person : IPerson { \&.\&.\&. }
+.br
+
+.br
+ Then: 'IPerson' is the \fBInheritedTypeClauseNode\fP\&. 
+.PP
+Definition at line \fB70\fP of file \fBTypeDefinitionNode\&.cs\fP\&.
+.SS "bool Luthetus\&.TextEditor\&.RazorLib\&.CompilerServices\&.Syntax\&.Nodes\&.TypeDefinitionNode\&.IsFabricated\fR [get]\fP"
+
+.PP
+\fBIsFabricated\fP refers to when the ParserSession expected a node to be valid, but it wasn't\&.
+.br
+
+.br
+For example, a function invocation on an undefined function will construct a BoundFunctionInvocationNode with \fBIsFabricated\fP set to true\&. 
+.PP
+Implements \fBLuthetus\&.TextEditor\&.RazorLib\&.CompilerServices\&.Syntax\&.ISyntax\fP\&.
+.PP
+Definition at line \fB81\fP of file \fBTypeDefinitionNode\&.cs\fP\&.
+.SS "bool Luthetus\&.TextEditor\&.RazorLib\&.CompilerServices\&.Syntax\&.Nodes\&.TypeDefinitionNode\&.IsInterface\fR [get]\fP"
+
+.PP
+Definition at line \fB72\fP of file \fBTypeDefinitionNode\&.cs\fP\&.
+.SS "bool Luthetus\&.TextEditor\&.RazorLib\&.CompilerServices\&.Syntax\&.Nodes\&.TypeDefinitionNode\&.IsSingleStatementBody\fR [get]\fP"
+
+.PP
+Implements \fBLuthetus\&.TextEditor\&.RazorLib\&.CompilerServices\&.Syntax\&.Nodes\&.Interfaces\&.ICodeBlockOwner\fP\&.
+.PP
+Definition at line \fB77\fP of file \fBTypeDefinitionNode\&.cs\fP\&.
+.SS "OpenBraceToken Luthetus\&.TextEditor\&.RazorLib\&.CompilerServices\&.Syntax\&.Nodes\&.TypeDefinitionNode\&.OpenBraceToken\fR [get]\fP"
+
+.PP
+The open brace for the body code block node\&. 
+.PP
+Implements \fBLuthetus\&.TextEditor\&.RazorLib\&.CompilerServices\&.Syntax\&.Nodes\&.Interfaces\&.ICodeBlockOwner\fP\&.
+.PP
+Definition at line \fB63\fP of file \fBTypeDefinitionNode\&.cs\fP\&.
+.SS "\fBFunctionArgumentsListingNode\fP? Luthetus\&.TextEditor\&.RazorLib\&.CompilerServices\&.Syntax\&.Nodes\&.TypeDefinitionNode\&.PrimaryConstructorFunctionArgumentsListingNode\fR [get]\fP"
+
+.PP
+Definition at line \fB59\fP of file \fBTypeDefinitionNode\&.cs\fP\&.
+.SS "\fBScopeDirectionKind\fP Luthetus\&.TextEditor\&.RazorLib\&.CompilerServices\&.Syntax\&.Nodes\&.TypeDefinitionNode\&.ScopeDirectionKind\fR [get]\fP"
+
+.PP
+Implements \fBLuthetus\&.TextEditor\&.RazorLib\&.CompilerServices\&.Syntax\&.Nodes\&.Interfaces\&.ICodeBlockOwner\fP\&.
+.PP
+Definition at line \fB79\fP of file \fBTypeDefinitionNode\&.cs\fP\&.
+.SS "StatementDelimiterToken Luthetus\&.TextEditor\&.RazorLib\&.CompilerServices\&.Syntax\&.Nodes\&.TypeDefinitionNode\&.StatementDelimiterToken\fR [get]\fP"
+
+.PP
+Implements \fBLuthetus\&.TextEditor\&.RazorLib\&.CompilerServices\&.Syntax\&.Nodes\&.Interfaces\&.ICodeBlockOwner\fP\&.
+.PP
+Definition at line \fB76\fP of file \fBTypeDefinitionNode\&.cs\fP\&.
+.SS "\fBStorageModifierKind\fP Luthetus\&.TextEditor\&.RazorLib\&.CompilerServices\&.Syntax\&.Nodes\&.TypeDefinitionNode\&.StorageModifierKind\fR [get]\fP"
+
+.PP
+Definition at line \fB45\fP of file \fBTypeDefinitionNode\&.cs\fP\&.
+.SS "\fBSyntaxKind\fP Luthetus\&.TextEditor\&.RazorLib\&.CompilerServices\&.Syntax\&.Nodes\&.TypeDefinitionNode\&.SyntaxKind\fR [get]\fP"
+
+.PP
+Implements \fBLuthetus\&.TextEditor\&.RazorLib\&.CompilerServices\&.Syntax\&.ISyntax\fP\&.
+.PP
+Definition at line \fB82\fP of file \fBTypeDefinitionNode\&.cs\fP\&.
+.SS "\fBIdentifierToken\fP Luthetus\&.TextEditor\&.RazorLib\&.CompilerServices\&.Syntax\&.Nodes\&.TypeDefinitionNode\&.TypeIdentifierToken\fR [get]\fP"
+
+.PP
+Given: 'public class Person { /* class definition here */ }'
+.br
+ Then: 'Person' is the \fBTypeIdentifierToken\fP
+.br
+ And: \fBGenericArgumentsListingNode\fP would be null\&. 
+.PP
+Definition at line \fB51\fP of file \fBTypeDefinitionNode\&.cs\fP\&.
+.SS "Type? Luthetus\&.TextEditor\&.RazorLib\&.CompilerServices\&.Syntax\&.Nodes\&.TypeDefinitionNode\&.ValueType\fR [get]\fP"
+
+.PP
+Definition at line \fB52\fP of file \fBTypeDefinitionNode\&.cs\fP\&.
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for Luthetus\&.Ide from the source code\&.

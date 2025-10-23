@@ -1,0 +1,4 @@
+var _dot_net_cli_command_formatter_tests_8cs =
+[
+    [ "Luthetus.Ide.Tests.Basis.CommandLines.Models.DotNetCliCommandFormatterTests", "class_luthetus_1_1_ide_1_1_tests_1_1_basis_1_1_command_lines_1_1_models_1_1_dot_net_cli_command_formatter_tests.html", "class_luthetus_1_1_ide_1_1_tests_1_1_basis_1_1_command_lines_1_1_models_1_1_dot_net_cli_command_formatter_tests" ]
+];

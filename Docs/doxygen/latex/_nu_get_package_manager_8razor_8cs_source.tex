@@ -1,0 +1,129 @@
+\doxysection{Nu\+Get\+Package\+Manager.\+razor.\+cs}
+\hypertarget{_nu_get_package_manager_8razor_8cs_source}{}\label{_nu_get_package_manager_8razor_8cs_source}\index{Source/Lib/Extensions/Extensions.DotNet/Nugets/Displays/NuGetPackageManager.razor.cs@{Source/Lib/Extensions/Extensions.DotNet/Nugets/Displays/NuGetPackageManager.razor.cs}}
+\mbox{\hyperlink{_nu_get_package_manager_8razor_8cs}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{_nu_get_package_manager_8razor_8cs_source_l00001}00001\ \textcolor{keyword}{using\ }Microsoft.AspNetCore.Components;}
+\DoxyCodeLine{\Hypertarget{_nu_get_package_manager_8razor_8cs_source_l00002}00002\ \textcolor{keyword}{using\ }Fluxor;}
+\DoxyCodeLine{\Hypertarget{_nu_get_package_manager_8razor_8cs_source_l00003}00003\ \textcolor{keyword}{using\ }Fluxor.Blazor.Web.Components;}
+\DoxyCodeLine{\Hypertarget{_nu_get_package_manager_8razor_8cs_source_l00004}00004\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_luthetus_1_1_common_1_1_razor_lib_1_1_background_tasks_1_1_models}{Luthetus.Common.RazorLib.BackgroundTasks.Models}};}
+\DoxyCodeLine{\Hypertarget{_nu_get_package_manager_8razor_8cs_source_l00005}00005\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_luthetus_1_1_common_1_1_razor_lib_1_1_keys_1_1_models}{Luthetus.Common.RazorLib.Keys.Models}};}
+\DoxyCodeLine{\Hypertarget{_nu_get_package_manager_8razor_8cs_source_l00006}00006\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_luthetus_1_1_common_1_1_razor_lib_1_1_options_1_1_models}{Luthetus.Common.RazorLib.Options.Models}};}
+\DoxyCodeLine{\Hypertarget{_nu_get_package_manager_8razor_8cs_source_l00007}00007\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_luthetus_1_1_common_1_1_razor_lib_1_1_options_1_1_states}{Luthetus.Common.RazorLib.Options.States}};}
+\DoxyCodeLine{\Hypertarget{_nu_get_package_manager_8razor_8cs_source_l00008}00008\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_luthetus_1_1_compiler_services_1_1_dot_net_solution_1_1_models_1_1_project}{Luthetus.CompilerServices.DotNetSolution.Models.Project}};}
+\DoxyCodeLine{\Hypertarget{_nu_get_package_manager_8razor_8cs_source_l00009}00009\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_luthetus_1_1_extensions_1_1_dot_net_1_1_dot_net_solutions_1_1_states}{Luthetus.Extensions.DotNet.DotNetSolutions.States}};}
+\DoxyCodeLine{\Hypertarget{_nu_get_package_manager_8razor_8cs_source_l00010}00010\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_luthetus_1_1_extensions_1_1_dot_net_1_1_nugets_1_1_states}{Luthetus.Extensions.DotNet.Nugets.States}};}
+\DoxyCodeLine{\Hypertarget{_nu_get_package_manager_8razor_8cs_source_l00011}00011\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_luthetus_1_1_extensions_1_1_dot_net_1_1_component_renderers_1_1_models}{Luthetus.Extensions.DotNet.ComponentRenderers.Models}};}
+\DoxyCodeLine{\Hypertarget{_nu_get_package_manager_8razor_8cs_source_l00012}00012\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_luthetus_1_1_extensions_1_1_dot_net_1_1_nugets_1_1_models}{Luthetus.Extensions.DotNet.Nugets.Models}};}
+\DoxyCodeLine{\Hypertarget{_nu_get_package_manager_8razor_8cs_source_l00013}00013\ }
+\DoxyCodeLine{\Hypertarget{_nu_get_package_manager_8razor_8cs_source_l00014}00014\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespace_luthetus_1_1_extensions_1_1_dot_net_1_1_nugets_1_1_displays}{Luthetus.Extensions.DotNet.Nugets.Displays}};}
+\DoxyCodeLine{\Hypertarget{_nu_get_package_manager_8razor_8cs_source_l00015}00015\ }
+\DoxyCodeLine{\Hypertarget{_nu_get_package_manager_8razor_8cs_source_l00016}\mbox{\hyperlink{class_luthetus_1_1_extensions_1_1_dot_net_1_1_nugets_1_1_displays_1_1_nu_get_package_manager}{00016}}\ \textcolor{keyword}{public}\ \textcolor{keyword}{partial\ class\ }\mbox{\hyperlink{class_luthetus_1_1_extensions_1_1_dot_net_1_1_nugets_1_1_displays_1_1_nu_get_package_manager}{NuGetPackageManager}}\ :\ FluxorComponent,\ \mbox{\hyperlink{interface_luthetus_1_1_extensions_1_1_dot_net_1_1_component_renderers_1_1_models_1_1_i_nu_get_package_manager_renderer_type}{INuGetPackageManagerRendererType}}}
+\DoxyCodeLine{\Hypertarget{_nu_get_package_manager_8razor_8cs_source_l00017}00017\ \{}
+\DoxyCodeLine{\Hypertarget{_nu_get_package_manager_8razor_8cs_source_l00018}00018\ \ \ \ \ [Inject]}
+\DoxyCodeLine{\Hypertarget{_nu_get_package_manager_8razor_8cs_source_l00019}00019\ \ \ \ \ \textcolor{keyword}{private}\ IState<NuGetPackageManagerState>\ NuGetPackageManagerStateWrap\ \{\ \textcolor{keyword}{get};\ \textcolor{keyword}{set};\ \}\ =\ \textcolor{keyword}{null}!;}
+\DoxyCodeLine{\Hypertarget{_nu_get_package_manager_8razor_8cs_source_l00020}00020\ \ \ \ \ [Inject]}
+\DoxyCodeLine{\Hypertarget{_nu_get_package_manager_8razor_8cs_source_l00021}00021\ \ \ \ \ \textcolor{keyword}{private}\ IState<DotNetSolutionState>\ DotNetSolutionStateWrap\ \{\ \textcolor{keyword}{get};\ \textcolor{keyword}{set};\ \}\ =\ \textcolor{keyword}{null}!;}
+\DoxyCodeLine{\Hypertarget{_nu_get_package_manager_8razor_8cs_source_l00022}00022\ \ \ \ \ [Inject]}
+\DoxyCodeLine{\Hypertarget{_nu_get_package_manager_8razor_8cs_source_l00023}00023\ \ \ \ \ \textcolor{keyword}{private}\ IState<AppOptionsState>\ AppOptionsStateWrap\ \{\ \textcolor{keyword}{get};\ \textcolor{keyword}{set};\ \}\ =\ \textcolor{keyword}{null}!;}
+\DoxyCodeLine{\Hypertarget{_nu_get_package_manager_8razor_8cs_source_l00024}00024\ \ \ \ \ [Inject]}
+\DoxyCodeLine{\Hypertarget{_nu_get_package_manager_8razor_8cs_source_l00025}00025\ \ \ \ \ \textcolor{keyword}{private}\ IDispatcher\ Dispatcher\ \{\ \textcolor{keyword}{get};\ \textcolor{keyword}{set};\ \}\ =\ \textcolor{keyword}{null}!;}
+\DoxyCodeLine{\Hypertarget{_nu_get_package_manager_8razor_8cs_source_l00026}00026\ \ \ \ \ [Inject]}
+\DoxyCodeLine{\Hypertarget{_nu_get_package_manager_8razor_8cs_source_l00027}00027\ \ \ \ \ \textcolor{keyword}{private}\ \mbox{\hyperlink{interface_luthetus_1_1_extensions_1_1_dot_net_1_1_nugets_1_1_models_1_1_i_nuget_package_manager_provider}{INugetPackageManagerProvider}}\ NugetPackageManagerProvider\ \{\ \textcolor{keyword}{get};\ \textcolor{keyword}{set};\ \}\ =\ \textcolor{keyword}{null}!;}
+\DoxyCodeLine{\Hypertarget{_nu_get_package_manager_8razor_8cs_source_l00028}00028\ \ \ \ \ [Inject]}
+\DoxyCodeLine{\Hypertarget{_nu_get_package_manager_8razor_8cs_source_l00029}00029\ \ \ \ \ \textcolor{keyword}{private}\ \mbox{\hyperlink{interface_luthetus_1_1_common_1_1_razor_lib_1_1_background_tasks_1_1_models_1_1_i_background_task_service}{IBackgroundTaskService}}\ BackgroundTaskService\ \{\ \textcolor{keyword}{get};\ \textcolor{keyword}{set};\ \}\ =\ \textcolor{keyword}{null}!;}
+\DoxyCodeLine{\Hypertarget{_nu_get_package_manager_8razor_8cs_source_l00030}00030\ \ \ \ \ [Inject]}
+\DoxyCodeLine{\Hypertarget{_nu_get_package_manager_8razor_8cs_source_l00031}00031\ \ \ \ \ \textcolor{keyword}{private}\ \mbox{\hyperlink{interface_luthetus_1_1_common_1_1_razor_lib_1_1_options_1_1_models_1_1_i_app_options_service}{IAppOptionsService}}\ AppOptionsService\ \{\ \textcolor{keyword}{get};\ \textcolor{keyword}{set};\ \}\ =\ \textcolor{keyword}{null}!;}
+\DoxyCodeLine{\Hypertarget{_nu_get_package_manager_8razor_8cs_source_l00032}00032\ }
+\DoxyCodeLine{\Hypertarget{_nu_get_package_manager_8razor_8cs_source_l00033}00033\ \ \ \ \ \textcolor{keyword}{private}\ \textcolor{keywordtype}{bool}\ \_performingNugetQuery;}
+\DoxyCodeLine{\Hypertarget{_nu_get_package_manager_8razor_8cs_source_l00034}00034\ \ \ \ \ \textcolor{keyword}{private}\ Exception?\ \_exceptionFromNugetQuery;}
+\DoxyCodeLine{\Hypertarget{_nu_get_package_manager_8razor_8cs_source_l00035}00035\ }
+\DoxyCodeLine{\Hypertarget{_nu_get_package_manager_8razor_8cs_source_l00036}\mbox{\hyperlink{class_luthetus_1_1_extensions_1_1_dot_net_1_1_nugets_1_1_displays_1_1_nu_get_package_manager_a2f54cc72245196440fc81e3f73548942}{00036}}\ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keywordtype}{string}\ \mbox{\hyperlink{class_luthetus_1_1_extensions_1_1_dot_net_1_1_nugets_1_1_displays_1_1_nu_get_package_manager_a2f54cc72245196440fc81e3f73548942}{NugetQuery}}}
+\DoxyCodeLine{\Hypertarget{_nu_get_package_manager_8razor_8cs_source_l00037}00037\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_nu_get_package_manager_8razor_8cs_source_l00038}00038\ \ \ \ \ \ \ \ \ \textcolor{keyword}{get}\ =>\ NuGetPackageManagerStateWrap.Value.NugetQuery;}
+\DoxyCodeLine{\Hypertarget{_nu_get_package_manager_8razor_8cs_source_l00039}00039\ \ \ \ \ \ \ \ \ \textcolor{keyword}{set}\ =>\ Dispatcher.Dispatch(\textcolor{keyword}{new}\ \mbox{\hyperlink{namespace_luthetus_1_1_extensions_1_1_dot_net_1_1_nugets_1_1_states_a1f711963f5751776e2b63b5c6b4c8aa8}{NuGetPackageManagerState}}.SetNugetQueryAction(value));}
+\DoxyCodeLine{\Hypertarget{_nu_get_package_manager_8razor_8cs_source_l00040}00040\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_nu_get_package_manager_8razor_8cs_source_l00041}00041\ }
+\DoxyCodeLine{\Hypertarget{_nu_get_package_manager_8razor_8cs_source_l00042}\mbox{\hyperlink{class_luthetus_1_1_extensions_1_1_dot_net_1_1_nugets_1_1_displays_1_1_nu_get_package_manager_ad257598b95f5c4e4c83d446bd80c5ff0}{00042}}\ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_luthetus_1_1_extensions_1_1_dot_net_1_1_nugets_1_1_displays_1_1_nu_get_package_manager_ad257598b95f5c4e4c83d446bd80c5ff0}{IncludePrerelease}}}
+\DoxyCodeLine{\Hypertarget{_nu_get_package_manager_8razor_8cs_source_l00043}00043\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_nu_get_package_manager_8razor_8cs_source_l00044}00044\ \ \ \ \ \ \ \ \ \textcolor{keyword}{get}\ =>\ NuGetPackageManagerStateWrap.Value.IncludePrerelease;}
+\DoxyCodeLine{\Hypertarget{_nu_get_package_manager_8razor_8cs_source_l00045}00045\ \ \ \ \ \ \ \ \ \textcolor{keyword}{set}\ =>\ Dispatcher.Dispatch(\textcolor{keyword}{new}\ \mbox{\hyperlink{namespace_luthetus_1_1_extensions_1_1_dot_net_1_1_nugets_1_1_states_a1f711963f5751776e2b63b5c6b4c8aa8}{NuGetPackageManagerState}}.SetIncludePrereleaseAction(value));}
+\DoxyCodeLine{\Hypertarget{_nu_get_package_manager_8razor_8cs_source_l00046}00046\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_nu_get_package_manager_8razor_8cs_source_l00047}00047\ }
+\DoxyCodeLine{\Hypertarget{_nu_get_package_manager_8razor_8cs_source_l00048}00048\ \ \ \ \ \textcolor{keyword}{private}\ \textcolor{keywordtype}{void}\ SelectedProjectToModifyChanged(ChangeEventArgs\ changeEventArgs,\ \mbox{\hyperlink{namespace_luthetus_1_1_extensions_1_1_dot_net_1_1_dot_net_solutions_1_1_states_abcdab314ca5db43568dead1ddd9958a5}{DotNetSolutionState}}\ dotNetSolutionState)}
+\DoxyCodeLine{\Hypertarget{_nu_get_package_manager_8razor_8cs_source_l00049}00049\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_nu_get_package_manager_8razor_8cs_source_l00050}00050\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (changeEventArgs.Value\ is\ \textcolor{keyword}{null}\ ||\ dotNetSolutionState.DotNetSolutionModel\ is\ \textcolor{keyword}{null})}
+\DoxyCodeLine{\Hypertarget{_nu_get_package_manager_8razor_8cs_source_l00051}00051\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return};}
+\DoxyCodeLine{\Hypertarget{_nu_get_package_manager_8razor_8cs_source_l00052}00052\ }
+\DoxyCodeLine{\Hypertarget{_nu_get_package_manager_8razor_8cs_source_l00053}00053\ \ \ \ \ \ \ \ \ var\ projectIdGuid\ =\ Guid.Parse((\textcolor{keywordtype}{string})changeEventArgs.Value);}
+\DoxyCodeLine{\Hypertarget{_nu_get_package_manager_8razor_8cs_source_l00054}00054\ }
+\DoxyCodeLine{\Hypertarget{_nu_get_package_manager_8razor_8cs_source_l00055}00055\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{interface_luthetus_1_1_compiler_services_1_1_dot_net_solution_1_1_models_1_1_project_1_1_i_dot_net_project}{IDotNetProject}}?\ selectedProject\ =\ \textcolor{keyword}{null};}
+\DoxyCodeLine{\Hypertarget{_nu_get_package_manager_8razor_8cs_source_l00056}00056\ }
+\DoxyCodeLine{\Hypertarget{_nu_get_package_manager_8razor_8cs_source_l00057}00057\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (projectIdGuid\ !=\ Guid.Empty)}
+\DoxyCodeLine{\Hypertarget{_nu_get_package_manager_8razor_8cs_source_l00058}00058\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_nu_get_package_manager_8razor_8cs_source_l00059}00059\ \ \ \ \ \ \ \ \ \ \ \ \ selectedProject\ =\ dotNetSolutionState.DotNetSolutionModel.DotNetProjectList}
+\DoxyCodeLine{\Hypertarget{_nu_get_package_manager_8razor_8cs_source_l00060}00060\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ .SingleOrDefault(x\ =>\ x.ProjectIdGuid\ ==\ projectIdGuid);}
+\DoxyCodeLine{\Hypertarget{_nu_get_package_manager_8razor_8cs_source_l00061}00061\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_nu_get_package_manager_8razor_8cs_source_l00062}00062\ }
+\DoxyCodeLine{\Hypertarget{_nu_get_package_manager_8razor_8cs_source_l00063}00063\ \ \ \ \ \ \ \ \ Dispatcher.Dispatch(\textcolor{keyword}{new}\ \mbox{\hyperlink{namespace_luthetus_1_1_extensions_1_1_dot_net_1_1_nugets_1_1_states_a1f711963f5751776e2b63b5c6b4c8aa8}{NuGetPackageManagerState}}.SetSelectedProjectToModifyAction(selectedProject));}
+\DoxyCodeLine{\Hypertarget{_nu_get_package_manager_8razor_8cs_source_l00064}00064\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_nu_get_package_manager_8razor_8cs_source_l00065}00065\ }
+\DoxyCodeLine{\Hypertarget{_nu_get_package_manager_8razor_8cs_source_l00066}00066\ \ \ \ \ \textcolor{keyword}{private}\ \textcolor{keywordtype}{bool}\ CheckIfProjectIsSelected(\mbox{\hyperlink{interface_luthetus_1_1_compiler_services_1_1_dot_net_solution_1_1_models_1_1_project_1_1_i_dot_net_project}{IDotNetProject}}\ dotNetProject,\ \mbox{\hyperlink{namespace_luthetus_1_1_extensions_1_1_dot_net_1_1_nugets_1_1_states_a1f711963f5751776e2b63b5c6b4c8aa8}{NuGetPackageManagerState}}\ nuGetPackageManagerState)}
+\DoxyCodeLine{\Hypertarget{_nu_get_package_manager_8razor_8cs_source_l00067}00067\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_nu_get_package_manager_8razor_8cs_source_l00068}00068\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (nuGetPackageManagerState.SelectedProjectToModify\ is\ \textcolor{keyword}{null})}
+\DoxyCodeLine{\Hypertarget{_nu_get_package_manager_8razor_8cs_source_l00069}00069\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};}
+\DoxyCodeLine{\Hypertarget{_nu_get_package_manager_8razor_8cs_source_l00070}00070\ }
+\DoxyCodeLine{\Hypertarget{_nu_get_package_manager_8razor_8cs_source_l00071}00071\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ nuGetPackageManagerState.SelectedProjectToModify.ProjectIdGuid\ ==\ dotNetProject.\mbox{\hyperlink{interface_luthetus_1_1_compiler_services_1_1_dot_net_solution_1_1_models_1_1_project_1_1_i_dot_net_project_a5328fc9cbbd6656e659123b681e5e7db}{ProjectIdGuid}};}
+\DoxyCodeLine{\Hypertarget{_nu_get_package_manager_8razor_8cs_source_l00072}00072\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_nu_get_package_manager_8razor_8cs_source_l00073}00073\ }
+\DoxyCodeLine{\Hypertarget{_nu_get_package_manager_8razor_8cs_source_l00074}00074\ \ \ \ \ \textcolor{keyword}{private}\ \textcolor{keywordtype}{bool}\ ValidateSolutionContainsSelectedProject(\mbox{\hyperlink{namespace_luthetus_1_1_extensions_1_1_dot_net_1_1_dot_net_solutions_1_1_states_abcdab314ca5db43568dead1ddd9958a5}{DotNetSolutionState}}\ dotNetSolutionState,\ \mbox{\hyperlink{namespace_luthetus_1_1_extensions_1_1_dot_net_1_1_nugets_1_1_states_a1f711963f5751776e2b63b5c6b4c8aa8}{NuGetPackageManagerState}}\ nuGetPackageManagerState)}
+\DoxyCodeLine{\Hypertarget{_nu_get_package_manager_8razor_8cs_source_l00075}00075\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_nu_get_package_manager_8razor_8cs_source_l00076}00076\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (dotNetSolutionState.DotNetSolutionModel\ is\ \textcolor{keyword}{null}\ ||\ nuGetPackageManagerState.SelectedProjectToModify\ is\ \textcolor{keyword}{null})}
+\DoxyCodeLine{\Hypertarget{_nu_get_package_manager_8razor_8cs_source_l00077}00077\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};}
+\DoxyCodeLine{\Hypertarget{_nu_get_package_manager_8razor_8cs_source_l00078}00078\ }
+\DoxyCodeLine{\Hypertarget{_nu_get_package_manager_8razor_8cs_source_l00079}00079\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ dotNetSolutionState.DotNetSolutionModel.DotNetProjectList.Any(}
+\DoxyCodeLine{\Hypertarget{_nu_get_package_manager_8razor_8cs_source_l00080}00080\ \ \ \ \ \ \ \ \ \ \ \ \ x\ =>\ x.ProjectIdGuid\ ==\ nuGetPackageManagerState.SelectedProjectToModify.ProjectIdGuid);}
+\DoxyCodeLine{\Hypertarget{_nu_get_package_manager_8razor_8cs_source_l00081}00081\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_nu_get_package_manager_8razor_8cs_source_l00082}00082\ }
+\DoxyCodeLine{\Hypertarget{_nu_get_package_manager_8razor_8cs_source_l00083}00083\ \ \ \ \ \textcolor{keyword}{private}\ async\ Task\ SubmitNuGetQueryOnClick()}
+\DoxyCodeLine{\Hypertarget{_nu_get_package_manager_8razor_8cs_source_l00084}00084\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_nu_get_package_manager_8razor_8cs_source_l00085}00085\ \ \ \ \ \ \ \ \ var\ query\ =\ NugetPackageManagerProvider.\mbox{\hyperlink{interface_luthetus_1_1_extensions_1_1_dot_net_1_1_nugets_1_1_models_1_1_i_nuget_package_manager_provider_acf80fc25ed6ac819e6ee8fd70c6a5477}{BuildQuery}}(\mbox{\hyperlink{class_luthetus_1_1_extensions_1_1_dot_net_1_1_nugets_1_1_displays_1_1_nu_get_package_manager_a2f54cc72245196440fc81e3f73548942}{NugetQuery}},\ \mbox{\hyperlink{class_luthetus_1_1_extensions_1_1_dot_net_1_1_nugets_1_1_displays_1_1_nu_get_package_manager_ad257598b95f5c4e4c83d446bd80c5ff0}{IncludePrerelease}});}
+\DoxyCodeLine{\Hypertarget{_nu_get_package_manager_8razor_8cs_source_l00086}00086\ }
+\DoxyCodeLine{\Hypertarget{_nu_get_package_manager_8razor_8cs_source_l00087}00087\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{try}}
+\DoxyCodeLine{\Hypertarget{_nu_get_package_manager_8razor_8cs_source_l00088}00088\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_nu_get_package_manager_8razor_8cs_source_l00089}00089\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ UI}}
+\DoxyCodeLine{\Hypertarget{_nu_get_package_manager_8razor_8cs_source_l00090}00090\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_nu_get_package_manager_8razor_8cs_source_l00091}00091\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \_exceptionFromNugetQuery\ =\ \textcolor{keyword}{null};}
+\DoxyCodeLine{\Hypertarget{_nu_get_package_manager_8razor_8cs_source_l00092}00092\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \_performingNugetQuery\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{\Hypertarget{_nu_get_package_manager_8razor_8cs_source_l00093}00093\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ await\ InvokeAsync(StateHasChanged);}
+\DoxyCodeLine{\Hypertarget{_nu_get_package_manager_8razor_8cs_source_l00094}00094\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_nu_get_package_manager_8razor_8cs_source_l00095}00095\ }
+\DoxyCodeLine{\Hypertarget{_nu_get_package_manager_8razor_8cs_source_l00096}00096\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_luthetus_1_1_common_1_1_razor_lib_1_1_background_tasks_1_1_models_1_1_background_task_service}{BackgroundTaskService}}.\mbox{\hyperlink{class_luthetus_1_1_common_1_1_razor_lib_1_1_background_tasks_1_1_models_1_1_background_task_service_a5f493c1ec5346580ba29627dcfbe3446}{Enqueue}}(}
+\DoxyCodeLine{\Hypertarget{_nu_get_package_manager_8razor_8cs_source_l00097}00097\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespace_luthetus_1_1_compiler_services_1_1_dot_net_solution_1_1_models_abe186660d90d900f43fc6fff2bfd9bb8}{Key<IBackgroundTask>}}.NewKey(),}
+\DoxyCodeLine{\Hypertarget{_nu_get_package_manager_8razor_8cs_source_l00098}00098\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_luthetus_1_1_common_1_1_razor_lib_1_1_background_tasks_1_1_models_1_1_continuous_background_task_worker}{ContinuousBackgroundTaskWorker}}.\mbox{\hyperlink{class_luthetus_1_1_common_1_1_razor_lib_1_1_background_tasks_1_1_models_1_1_continuous_background_task_worker_a2bbecf18336413ee1caff9d378acc256}{GetQueueKey}}(),}
+\DoxyCodeLine{\Hypertarget{_nu_get_package_manager_8razor_8cs_source_l00099}00099\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}Submit\ NuGet\ Query"{}},}
+\DoxyCodeLine{\Hypertarget{_nu_get_package_manager_8razor_8cs_source_l00100}00100\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ async\ ()\ =>}
+\DoxyCodeLine{\Hypertarget{_nu_get_package_manager_8razor_8cs_source_l00101}00101\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_nu_get_package_manager_8razor_8cs_source_l00102}00102\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ var\ localNugetResult\ =\ await\ NugetPackageManagerProvider}
+\DoxyCodeLine{\Hypertarget{_nu_get_package_manager_8razor_8cs_source_l00103}00103\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ .\mbox{\hyperlink{interface_luthetus_1_1_extensions_1_1_dot_net_1_1_nugets_1_1_models_1_1_i_nuget_package_manager_provider_a0c932aef5ceda045e878eb0e79acdc44}{QueryForNugetPackagesAsync}}(query)}
+\DoxyCodeLine{\Hypertarget{_nu_get_package_manager_8razor_8cs_source_l00104}00104\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ .ConfigureAwait(\textcolor{keyword}{false});}
+\DoxyCodeLine{\Hypertarget{_nu_get_package_manager_8razor_8cs_source_l00105}00105\ }
+\DoxyCodeLine{\Hypertarget{_nu_get_package_manager_8razor_8cs_source_l00106}00106\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ var\ setMostRecentQueryResultAction\ =}
+\DoxyCodeLine{\Hypertarget{_nu_get_package_manager_8razor_8cs_source_l00107}00107\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{new}\ \mbox{\hyperlink{namespace_luthetus_1_1_extensions_1_1_dot_net_1_1_nugets_1_1_states_a1f711963f5751776e2b63b5c6b4c8aa8}{NuGetPackageManagerState}}.SetMostRecentQueryResultAction(}
+\DoxyCodeLine{\Hypertarget{_nu_get_package_manager_8razor_8cs_source_l00108}00108\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ localNugetResult);}
+\DoxyCodeLine{\Hypertarget{_nu_get_package_manager_8razor_8cs_source_l00109}00109\ }
+\DoxyCodeLine{\Hypertarget{_nu_get_package_manager_8razor_8cs_source_l00110}00110\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Dispatcher.Dispatch(setMostRecentQueryResultAction);}
+\DoxyCodeLine{\Hypertarget{_nu_get_package_manager_8razor_8cs_source_l00111}00111\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \});}
+\DoxyCodeLine{\Hypertarget{_nu_get_package_manager_8razor_8cs_source_l00112}00112\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_nu_get_package_manager_8razor_8cs_source_l00113}00113\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{catch}\ (Exception\ e)}
+\DoxyCodeLine{\Hypertarget{_nu_get_package_manager_8razor_8cs_source_l00114}00114\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_nu_get_package_manager_8razor_8cs_source_l00115}00115\ \ \ \ \ \ \ \ \ \ \ \ \ \_exceptionFromNugetQuery\ =\ e;}
+\DoxyCodeLine{\Hypertarget{_nu_get_package_manager_8razor_8cs_source_l00116}00116\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_nu_get_package_manager_8razor_8cs_source_l00117}00117\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{finally}}
+\DoxyCodeLine{\Hypertarget{_nu_get_package_manager_8razor_8cs_source_l00118}00118\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_nu_get_package_manager_8razor_8cs_source_l00119}00119\ \ \ \ \ \ \ \ \ \ \ \ \ \_performingNugetQuery\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{\Hypertarget{_nu_get_package_manager_8razor_8cs_source_l00120}00120\ \ \ \ \ \ \ \ \ \ \ \ \ await\ InvokeAsync(StateHasChanged);}
+\DoxyCodeLine{\Hypertarget{_nu_get_package_manager_8razor_8cs_source_l00121}00121\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_nu_get_package_manager_8razor_8cs_source_l00122}00122\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_nu_get_package_manager_8razor_8cs_source_l00123}00123\ \}}
+
+\end{DoxyCode}

@@ -1,0 +1,137 @@
+.TH "Luthetus.TextEditor.RazorLib.CompilerServices.Implementations.Scope" 3 "Version 1.0.0" "Luthetus.Ide" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+Luthetus.TextEditor.RazorLib.CompilerServices.Implementations.Scope
+.SH SYNOPSIS
+.br
+.PP
+.PP
+Inherits \fBLuthetus\&.TextEditor\&.RazorLib\&.CompilerServices\&.Interfaces\&.IScope\fP\&.
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBScope\fP (\fBICodeBlockOwner\fP codeBlockOwner, int indexKey, int? parentIndexKey, int startingIndexInclusive, int? endingIndexExclusive)"
+.br
+.in -1c
+.SS "Properties"
+
+.in +1c
+.ti -1c
+.RI "\fBICodeBlockOwner\fP \fBCodeBlockOwner\fP\fR [get]\fP"
+.br
+.RI "This is believed to be far better than a \fBISyntaxNode\fP having a pointer to its parent\&. "
+.ti -1c
+.RI "int \fBIndexKey\fP\fR [get]\fP"
+.br
+.RI "All scopes in a file are stored in a flat list, grouped by the ResourceUri they were found in\&. Everytime a scope is instantiated, it gets an incrementing counter as its IndexKey (which is equal to the index it was inserted at\&.\&.\&. 'list\&.Count')\&. "
+.ti -1c
+.RI "int? \fBParentIndexKey\fP\fR [get]\fP"
+.br
+.ti -1c
+.RI "int \fBStartingIndexInclusive\fP\fR [get]\fP"
+.br
+.ti -1c
+.RI "int? \fBEndingIndexExclusive\fP\fR [get, set]\fP"
+.br
+.RI "Beware of this property's setter, as a hack to set the ending index later on in this type's lifecycle because it isn't immediately known\&. "
+.in -1c
+.SH "Detailed Description"
+.PP 
+Definition at line \fB8\fP of file \fBScope\&.cs\fP\&.
+.SH "Constructor & Destructor Documentation"
+.PP 
+.SS "Luthetus\&.TextEditor\&.RazorLib\&.CompilerServices\&.Implementations\&.Scope\&.Scope (\fBICodeBlockOwner\fP codeBlockOwner, int indexKey, int? parentIndexKey, int startingIndexInclusive, int? endingIndexExclusive)"
+
+.PP
+Definition at line \fB10\fP of file \fBScope\&.cs\fP\&.
+.SH "Property Documentation"
+.PP 
+.SS "\fBICodeBlockOwner\fP Luthetus\&.TextEditor\&.RazorLib\&.CompilerServices\&.Implementations\&.Scope\&.CodeBlockOwner\fR [get]\fP"
+
+.PP
+This is believed to be far better than a \fBISyntaxNode\fP having a pointer to its parent\&. (i\&.e\&.: with this the \fBNodes\fP can be left as a singly linked tree\&.)
+
+.PP
+Then, one can query the IBinder to determine what the active scope is given a positionIndex within a file, or etc\&.\&.\&.
+
+.PP
+This scope struct then acts as an index into the compilation unit's node tree\&.
+
+.PP
+If a scope contains 100 nodes, then 100 pointers would have previously been needed due to 1 per node\&.
+
+.PP
+By having the '\fBScope\fP' contain a pointer to a node, the same example only requires 1 pointer to the node that created the scope\&.
+
+.PP
+From there, traversal down the tree is done with \fBISyntaxNode\&.GetChildList()\fP;
+
+.PP
+Traversal up the tree is done by reading from the IBinderSession inside the IBinderSession\&.ScopeList at index \fBParentIndexKey\fP\&.
+
+.PP
+This tells you the node that owns the parent scope\&.
+
+.PP
+If it turns out that this is too cumbersome to use in practice then perhaps a different solution should be considered\&. 
+.PP
+Implements \fBLuthetus\&.TextEditor\&.RazorLib\&.CompilerServices\&.Interfaces\&.IScope\fP\&.
+.PP
+Definition at line \fB24\fP of file \fBScope\&.cs\fP\&.
+.SS "int? Luthetus\&.TextEditor\&.RazorLib\&.CompilerServices\&.Implementations\&.Scope\&.EndingIndexExclusive\fR [get]\fP, \fR [set]\fP"
+
+.PP
+Beware of this property's setter, as a hack to set the ending index later on in this type's lifecycle because it isn't immediately known\&. 
+.PP
+Implements \fBLuthetus\&.TextEditor\&.RazorLib\&.CompilerServices\&.Interfaces\&.IScope\fP\&.
+.PP
+Definition at line \fB28\fP of file \fBScope\&.cs\fP\&.
+.SS "int Luthetus\&.TextEditor\&.RazorLib\&.CompilerServices\&.Implementations\&.Scope\&.IndexKey\fR [get]\fP"
+
+.PP
+All scopes in a file are stored in a flat list, grouped by the ResourceUri they were found in\&. Everytime a scope is instantiated, it gets an incrementing counter as its IndexKey (which is equal to the index it was inserted at\&.\&.\&. 'list\&.Count')\&. Therefore, to go to the parent scope: 'var parentScope = list[ParentIndexKey]' To get "yourself": 'var selfScope = list[IndexKey]'
+
+.PP
+Every time the file is parsed the counter resets to 0\&.
+
+.PP
+In the future there should be optimizations that don't reparse the entire file, but instead only the scopes that need to be re-parsed given the change made\&.
+
+.PP
+This shouldn't be an issue beyond integer overflow\&. And to in the future solve the integer overflow, in the rare case that someone parses int\&.MaxValue number of scopes in a singular C# ResourceUri they likely don't actually have that many scopes in the file, but instead hit that number due to the future optimization that wasn't reseting the counter\&. Then that would trigger a counter reset to 0, and the entire file would have to be reparsed for that edge case\&.
+
+.PP
+If a file needs int\&.MaxValue number of scopes during a fresh parse with the counter starting at 0, then I presume this code will throw an exception\&.
+
+.PP
+But wouldn't it just the same do so with the previous code once the list of scopes hit a count > int\&.MaxValue?
+
+.PP
+If it turns out that int\&.MaxValue is an issue, the storage of scopes needs to be re-worked\&. But it isn't expected to be the case\&.
+
+.PP
+Side note: in order to avoid race conditions involving out dated data, should the list itself have an int associated with it, that the \fBIScope\&.cs\fP has as a property, so it can verify that the "batch id" is the same\&. 
+.PP
+Implements \fBLuthetus\&.TextEditor\&.RazorLib\&.CompilerServices\&.Interfaces\&.IScope\fP\&.
+.PP
+Definition at line \fB25\fP of file \fBScope\&.cs\fP\&.
+.SS "int? Luthetus\&.TextEditor\&.RazorLib\&.CompilerServices\&.Implementations\&.Scope\&.ParentIndexKey\fR [get]\fP"
+
+.PP
+
+.PP
+Implements \fBLuthetus\&.TextEditor\&.RazorLib\&.CompilerServices\&.Interfaces\&.IScope\fP\&.
+.PP
+Definition at line \fB26\fP of file \fBScope\&.cs\fP\&.
+.SS "int Luthetus\&.TextEditor\&.RazorLib\&.CompilerServices\&.Implementations\&.Scope\&.StartingIndexInclusive\fR [get]\fP"
+
+.PP
+Implements \fBLuthetus\&.TextEditor\&.RazorLib\&.CompilerServices\&.Interfaces\&.IScope\fP\&.
+.PP
+Definition at line \fB27\fP of file \fBScope\&.cs\fP\&.
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for Luthetus\&.Ide from the source code\&.

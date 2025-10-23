@@ -1,0 +1,4 @@
+var _solution_explorer_tree_view_keyboard_event_handler_tests_8cs =
+[
+    [ "Luthetus.Extensions.DotNet.Tests.Basis.DotNetSolutions.Models.SolutionExplorerTreeViewKeyboardEventHandlerTests", "class_luthetus_1_1_extensions_1_1_dot_net_1_1_tests_1_1_basis_1_1_dot_net_solutions_1_1_models_19de1e598280187f3f4d4be8d95022bdb.html", "class_luthetus_1_1_extensions_1_1_dot_net_1_1_tests_1_1_basis_1_1_dot_net_solutions_1_1_models_19de1e598280187f3f4d4be8d95022bdb" ]
+];

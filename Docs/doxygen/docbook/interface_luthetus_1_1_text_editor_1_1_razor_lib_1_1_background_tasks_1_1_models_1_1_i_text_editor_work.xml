@@ -1,0 +1,164 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_background_tasks_1_1_models_1_1_i_text_editor_work" xml:lang="en-US">
+<title>Luthetus.TextEditor.RazorLib.BackgroundTasks.Models.ITextEditorWork Interface Reference</title>
+<indexterm><primary>Luthetus.TextEditor.RazorLib.BackgroundTasks.Models.ITextEditorWork</primary></indexterm>
+Inheritance diagram for Luthetus.TextEditor.RazorLib.BackgroundTasks.Models.ITextEditorWork:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_background_tasks_1_1_models_1_1_i_text_editor_work__inherit__graph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+Collaboration diagram for Luthetus.TextEditor.RazorLib.BackgroundTasks.Models.ITextEditorWork:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_background_tasks_1_1_models_1_1_i_text_editor_work__coll__graph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+<simplesect>
+    <title>Properties    </title>
+        <itemizedlist>
+            <listitem><para><link linkend="_interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1_1_i_text_editor_edit_context">ITextEditorEditContext</link> <link linkend="_interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_background_tasks_1_1_models_1_1_i_text_editor_work_1a4cdd759a4930bd6066a84a86cac60450">EditContext</link><computeroutput> [get, set]</computeroutput>
+</para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+Properties inherited from <link linkend="_interface_luthetus_1_1_common_1_1_razor_lib_1_1_background_tasks_1_1_models_1_1_i_background_task">Luthetus.Common.RazorLib.BackgroundTasks.Models.IBackgroundTask</link>        <itemizedlist>
+            <listitem><para>Key&lt; <link linkend="_interface_luthetus_1_1_common_1_1_razor_lib_1_1_background_tasks_1_1_models_1_1_i_background_task">IBackgroundTask</link> &gt; <link linkend="_interface_luthetus_1_1_common_1_1_razor_lib_1_1_background_tasks_1_1_models_1_1_i_background_task_1a44fbf9cbedc72ba1587a5021720c015c">BackgroundTaskKey</link><computeroutput> [get]</computeroutput>
+</para>
+</listitem>
+            <listitem><para>Key&lt; <link linkend="_interface_luthetus_1_1_common_1_1_razor_lib_1_1_background_tasks_1_1_models_1_1_i_background_task_queue">IBackgroundTaskQueue</link> &gt; <link linkend="_interface_luthetus_1_1_common_1_1_razor_lib_1_1_background_tasks_1_1_models_1_1_i_background_task_1aa2f741e09d6826b4dcbe732fe052790d">QueueKey</link><computeroutput> [get]</computeroutput>
+</para>
+</listitem>
+            <listitem><para>string <link linkend="_interface_luthetus_1_1_common_1_1_razor_lib_1_1_background_tasks_1_1_models_1_1_i_background_task_1a0db9af59852fb1de9bbb759e4ec6d96a">Name</link><computeroutput> [get]</computeroutput>
+</para>
+</listitem>
+        </itemizedlist>
+<simplesect>
+    <title>Additional Inherited Members    </title>
+Public Member Functions inherited from <link linkend="_interface_luthetus_1_1_common_1_1_razor_lib_1_1_background_tasks_1_1_models_1_1_i_background_task">Luthetus.Common.RazorLib.BackgroundTasks.Models.IBackgroundTask</link>        <itemizedlist>
+            <listitem><para><link linkend="_interface_luthetus_1_1_common_1_1_razor_lib_1_1_background_tasks_1_1_models_1_1_i_background_task">IBackgroundTask</link>? <link linkend="_interface_luthetus_1_1_common_1_1_razor_lib_1_1_background_tasks_1_1_models_1_1_i_background_task_1a1297b3be631c1bb2c38c132674f61911">BatchOrDefault</link> (<link linkend="_interface_luthetus_1_1_common_1_1_razor_lib_1_1_background_tasks_1_1_models_1_1_i_background_task">IBackgroundTask</link> oldEvent)</para>
+
+<para>Before a throttle event is enqueued, this method is invoked. This allows for batching of &apos;this&apos; throttle event instance, and the last entry of the queue.<?linebreak?><?linebreak?>. </para>
+</listitem>
+            <listitem><para>Task <link linkend="_interface_luthetus_1_1_common_1_1_razor_lib_1_1_background_tasks_1_1_models_1_1_i_background_task_1a21b25df8bfd1ba84e61469ad757b5085">HandleEvent</link> (CancellationToken cancellationToken)</para>
+
+<para>This method is the actual work item that gets awaited in order to handle the event. </para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<section>
+<title>Detailed Description</title>
+<section xml:id="_interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_background_tasks_1_1_models_1_1_i_text_editor_work_1autotoc_md266">
+<title>On the topic of &quot;generic batching&quot;:</title>
+<para>I am leaving this comment here as a reminder to myself, of what I did to try and achieve &quot;generic batching&quot;, but the massive flaws that existed as a result. The goal being, if I ever revisit this topic, I don&apos;t just repeat the same mistake.</para>
+
+<para>Every <link linkend="_interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_background_tasks_1_1_models_1_1_i_text_editor_work">ITextEditorWork</link> when finished executing, will cause the text editor to render.</para>
+
+<para>So, I started writing code to permit batching of <link linkend="_interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_background_tasks_1_1_models_1_1_i_text_editor_work">ITextEditorWork</link>, in order to reduce the amount of rendering.</para>
+
+<para>I started by having specific implementations of <link linkend="_interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_background_tasks_1_1_models_1_1_i_text_editor_work">ITextEditorWork</link> be batchable amongst themselves.</para>
+
+<para>For example, if the user types into the text editor, this results in the construction of a <link linkend="_struct_luthetus_1_1_text_editor_1_1_razor_lib_1_1_events_1_1_models_1_1_on_key_down_late_batching">Events.Models.OnKeyDownLateBatching</link>.</para>
+
+<para>Therefore, upon enqueueing an instance of <link linkend="_struct_luthetus_1_1_text_editor_1_1_razor_lib_1_1_events_1_1_models_1_1_on_key_down_late_batching">Events.Models.OnKeyDownLateBatching</link>, it is found that the background task queue has in it a <link linkend="_struct_luthetus_1_1_text_editor_1_1_razor_lib_1_1_events_1_1_models_1_1_on_key_down_late_batching">Events.Models.OnKeyDownLateBatching</link>, which came immediately prior (they are contiguous), then combine them into a single <link linkend="_struct_luthetus_1_1_text_editor_1_1_razor_lib_1_1_events_1_1_models_1_1_on_key_down_late_batching">Events.Models.OnKeyDownLateBatching</link>.</para>
+
+<para>A more concrete example would be a user typing the letter &apos;q&apos;, then the letter &apos;w&apos;.</para>
+
+<para>Instead of: Insert(&quot;q&quot;); Render(); Insert(&quot;w&quot;); Render();</para>
+
+<para>It might be preferable to: Insert(&quot;qw&quot;); Render();</para>
+
+<para><link linkend="_struct_luthetus_1_1_text_editor_1_1_razor_lib_1_1_events_1_1_models_1_1_on_key_down_late_batching">Events.Models.OnKeyDownLateBatching</link> seems useful, but it seems to have an issue.</para>
+
+<para>Take the example of a user HOLDING down the letter &apos;q&apos;. Sometimes the enqueueing and dequeueing seem to only batch, and never get handled.</para>
+
+<para>Then once the user lets go, its discovered that &apos;q&apos; was batched 100 times (or however many times the keyboard event occurred while being held).</para>
+
+<para>I suppose I&apos;m looking for it to batch, but eventually just handle the event, and start the batch over again with the next event. Instead of eternally batching under high load.</para>
+
+<para>After I made an implementation of <link linkend="_interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_background_tasks_1_1_models_1_1_i_text_editor_work">ITextEditorWork</link> for each of the UI events, I thought I would create an implementation for general use.</para>
+
+<para>So that any task could batch, but instead of the batch optimizing the work (i.e.: 1 insert containing 2 characters instead of 2 inserts with each having 1 character) the batching was just a &apos;foreach&apos; loop, in order to avoid the render of the text editor.</para>
+
+<para>So instead of: Insert(&quot;q&quot;); Render(); Insert(&quot;w&quot;); Render();</para>
+
+<para>Do: Insert(&quot;q&quot;); Insert(&quot;w&quot;); Render();</para>
+
+<para>But, this created an issue relating to when an exception was thrown, by one of the tasks that were put into that foreach loop.</para>
+
+<para>If one threw an exception, then any following tasks would not run.</para>
+
+<para>Okay fine, I can put a &apos;try-catch&apos; inside the &apos;foreach&apos; loop, around every invocation of an individual task.</para>
+
+<para>But, the text editor is immutable. And in order to edit the text editor, one is given a edit context.</para>
+
+<para>In short the edit context is the exact same data as the immutable version, except it is allowed to be changed. That is, the immutable data gets copied into a mutable version of itself.</para>
+
+<para>Well, if an individual task threw an exception during the &apos;foreach-batching&apos;, is no longer as issue because of the &apos;try-catch&apos;?</para>
+
+<para>The outcome was that, the individual task likely was unable to make the edit, that it sought out to make.</para>
+
+<para>Maybe the task made part of their edit, prior to the exception.</para>
+
+<para>Well, the metadata of the text editor (i.e.: position indices of the line endings, and etc...) is calculated separately to that of the insertion of text.</para>
+
+<para>So, the insertion of a &apos;<?linebreak?>&apos; character, actually calculates the new line ending positions presuming it will be added without error, then lastly inserts the character.</para>
+
+<para>If an exception occurs after calculating the metadata, but before inserting the character, then the text editor will enter a &quot;corrupt&quot;/&quot;unrecoverable&quot; state.</para>
+
+<para>And yet, if we were to have batched that task which threw an exception, with other tasks following it. We go on to pass along the corrupt text editor state to the tasks that follow.</para>
+
+<para>So, generic batching can only be done with one further step. Somehow, if a task throws an exception, the edit context needs to be reset to the state it was in prior to the invocation of that task.</para>
+
+<para>This is a pain because it was previously mentioned that the text editor, after a batched task throws an exception, is likely in a &quot;corrupt&quot;/&quot;unrecoverable&quot; state.</para>
+
+<para>It seems the only way is to create a new edit context, foreach of the tasks that are being batched.</para>
+
+<para>This way, if a task throws an exception, then the edit context it was given can be discarded. Otherwise, take its edit context as the new edit context.</para>
+
+<para>And if there is is a task following, then copy over the edit context and repeat until all the tasks have ran.</para>
+
+<para>Then, write out the edit context that survives the ordeal and render.</para>
+
+<para>This way of foreach batching is essentially the same as my mistake, but with the recreating of the edit context every time a task is ran. So one can &quot;rollback&quot; if a &quot;transaction&quot; does not successfully complete.</para>
+
+<para>But, I wonder if this batching I just described, even if it worked, would it even be worthwhile?</para>
+
+<para>That is, am I looking at batching too much, when I really need to be optimizing the <link linkend="_interface_luthetus_1_1_common_1_1_razor_lib_1_1_background_tasks_1_1_models_1_1_i_background_task">IBackgroundTask</link>, such to remove the need to batch so much.</para>
+
+<para>Something I think of a lot, is how I wrote the throttling code. I used an &apos;await Task.Delay(...)&apos;.</para>
+
+<para>But in my mind, from a human perspective, starting a stopwatch, then stopping it at the 60 millisecond mark, over and over and over... this sounds like immense overhead.</para>
+
+<para>I mention &quot;from a human perspective&quot; because thats a way I think about tasks - that I&apos;m asking someone to do something for me.</para>
+
+<para>I don&apos;t know how to use the the &apos;Timer&apos; class. And sure, if I throttle at 60 milliseconds, the &apos;Timer&apos; is still starting and stopping every 60 milliseconds just the same.</para>
+
+<para>But the overhead of &quot;asking someone else&quot; to start and stop every 60 milliseconds disappears, in my head. I&apos;m not sure if the overhead I&apos;m imagining actually would disappear but it feels like there would be less &quot;middleman&quot; logic.</para>
+
+<para>In my head it feels as though a &apos;Timer&apos; class is if I were to start and stop every 60 milliseconds. As opposed to asking someone else to do it for me. </para>
+</section>
+<para>
+Definition at line <link linkend="__i_text_editor_work_8cs_source_1l00161">161</link> of file <link linkend="__i_text_editor_work_8cs_source">ITextEditorWork.cs</link>.</para>
+</section>
+<section>
+<title>Property Documentation</title>
+<anchor xml:id="_interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_background_tasks_1_1_models_1_1_i_text_editor_work_1a4cdd759a4930bd6066a84a86cac60450"/><section>
+    <title>EditContext</title>
+<indexterm><primary>EditContext</primary><secondary>Luthetus.TextEditor.RazorLib.BackgroundTasks.Models.ITextEditorWork</secondary></indexterm>
+<indexterm><primary>Luthetus.TextEditor.RazorLib.BackgroundTasks.Models.ITextEditorWork</primary><secondary>EditContext</secondary></indexterm>
+<para><computeroutput><link linkend="_interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1_1_i_text_editor_edit_context">ITextEditorEditContext</link> Luthetus.TextEditor.RazorLib.BackgroundTasks.Models.ITextEditorWork.EditContext<computeroutput>[get]</computeroutput>, <computeroutput>[set]</computeroutput></computeroutput></para><para>
+Implemented in <link linkend="_struct_luthetus_1_1_text_editor_1_1_razor_lib_1_1_background_tasks_1_1_models_1_1_redundant_text_editor_work_1ac8f218841f0c867d5519217354bd1812">Luthetus.TextEditor.RazorLib.BackgroundTasks.Models.RedundantTextEditorWork</link>, <link linkend="_struct_luthetus_1_1_text_editor_1_1_razor_lib_1_1_background_tasks_1_1_models_1_1_unique_text_editor_work_1a37fd05e3dc3baef7bc91b61036153344">Luthetus.TextEditor.RazorLib.BackgroundTasks.Models.UniqueTextEditorWork</link>, <link linkend="_struct_luthetus_1_1_text_editor_1_1_razor_lib_1_1_events_1_1_models_1_1_on_double_click_1ac9094d06da1d1609d8287be264a83bfd">Luthetus.TextEditor.RazorLib.Events.Models.OnDoubleClick</link>, <link linkend="_struct_luthetus_1_1_text_editor_1_1_razor_lib_1_1_events_1_1_models_1_1_on_key_down_late_batching_1a34419b652b68221a32f351b26584b260">Luthetus.TextEditor.RazorLib.Events.Models.OnKeyDownLateBatching</link>, <link linkend="_struct_luthetus_1_1_text_editor_1_1_razor_lib_1_1_events_1_1_models_1_1_on_mouse_down_1a429a8f7acbd2803b1dd54df7131efb85">Luthetus.TextEditor.RazorLib.Events.Models.OnMouseDown</link>, <link linkend="_struct_luthetus_1_1_text_editor_1_1_razor_lib_1_1_events_1_1_models_1_1_on_mouse_move_1ad7ab67db003b9f3b21e75ea528925263">Luthetus.TextEditor.RazorLib.Events.Models.OnMouseMove</link>, <link linkend="_struct_luthetus_1_1_text_editor_1_1_razor_lib_1_1_events_1_1_models_1_1_on_scroll_horizontal_1a5a6a01a54ef55ef37a94bcb0c3afa015">Luthetus.TextEditor.RazorLib.Events.Models.OnScrollHorizontal</link>, <link linkend="_struct_luthetus_1_1_text_editor_1_1_razor_lib_1_1_events_1_1_models_1_1_on_scroll_vertical_1a085b3addda8ca2a845d6a6224e0b9482">Luthetus.TextEditor.RazorLib.Events.Models.OnScrollVertical</link>, <link linkend="_struct_luthetus_1_1_text_editor_1_1_razor_lib_1_1_events_1_1_models_1_1_on_wheel_1a75f34b3d6dec1d78ebd6290e11461403">Luthetus.TextEditor.RazorLib.Events.Models.OnWheel</link>, and <link linkend="_struct_luthetus_1_1_text_editor_1_1_razor_lib_1_1_events_1_1_models_1_1_on_wheel_batch_1a046ce85d2e1029ce280e757fae4c1068">Luthetus.TextEditor.RazorLib.Events.Models.OnWheelBatch</link>.</para>
+<para>
+Definition at line <link linkend="__i_text_editor_work_8cs_source_1l00163">163</link> of file <link linkend="__i_text_editor_work_8cs_source">ITextEditorWork.cs</link>.</para>
+</section>
+<para>
+The documentation for this interface was generated from the following file:</para>
+Source/Lib/TextEditor/BackgroundTasks/Models/<link linkend="__i_text_editor_work_8cs">ITextEditorWork.cs</link></section>
+</section>

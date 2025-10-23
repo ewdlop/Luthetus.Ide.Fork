@@ -1,0 +1,4 @@
+var _text_editor_command_vim_facts_motions_tests_8cs =
+[
+    [ "Luthetus.TextEditor.Tests.Basis.Commands.Models.Vims.TextEditorCommandVimFactsMotionsTests", "class_luthetus_1_1_text_editor_1_1_tests_1_1_basis_1_1_commands_1_1_models_1_1_vims_1_1_text_edi454759a1933664545fad8797045baace.html", "class_luthetus_1_1_text_editor_1_1_tests_1_1_basis_1_1_commands_1_1_models_1_1_vims_1_1_text_edi454759a1933664545fad8797045baace" ]
+];

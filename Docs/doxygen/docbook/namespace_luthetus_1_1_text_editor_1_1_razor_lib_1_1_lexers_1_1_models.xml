@@ -1,0 +1,78 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_lexers_1_1_models" xml:lang="en-US">
+<title>Luthetus.TextEditor.RazorLib.Lexers.Models Namespace Reference</title>
+<indexterm><primary>Luthetus.TextEditor.RazorLib.Lexers.Models</primary></indexterm>
+<simplesect>
+    <title>Classes    </title>
+        <itemizedlist>
+            <listitem><para>class <link linkend="_class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_lexers_1_1_models_1_1_resource_uri_facts">ResourceUriFacts</link></para>
+</listitem>
+            <listitem><para>interface <link linkend="_interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_lexers_1_1_models_1_1_text_editor_lexer_result">TextEditorLexerResult</link></para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Functions    </title>
+        <itemizedlist>
+            <listitem><para>record struct <link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_lexers_1_1_models_1a26a1b63ad28ec7955b30bc6c91571eca">ResourceUri</link> (string Value)</para>
+</listitem>
+            <listitem><para>record struct <link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_lexers_1_1_models_1a1ffd1a7706dfd364560b76d47467812f">TextEditorTextSpan</link> (int StartingIndexInclusive, int EndingIndexExclusive, byte DecorationByte, <link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_lexers_1_1_models_1a26a1b63ad28ec7955b30bc6c91571eca">ResourceUri</link> <link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_lexers_1_1_models_1a26a1b63ad28ec7955b30bc6c91571eca">ResourceUri</link>, string SourceText)</para>
+
+<para>TODO: I have a suspicion that this type takes an absurd amount of memory... ... the initial way of implementing this type was to store the text at the time of constructing the text span. | But, it was thought that preferably one would only only create the substring when asked for it. | This means one has to store the entirety of the source text. Well, the source text is just a reference not a copy of the value. So this seemed fine enough. | But, because the text editor is immutable. The source text is constantly needing to be reconstructed as a string value. | As a result, the old string values that pertain to previous iterations of the text editor must be held in memory, because any TextEditorTextSpan that is not garbage collected, would have a reference to the old string value. | I&apos;m thinking of using Span&lt;char&gt; or something along the lines. But, wouldn&apos;t Span&lt;char&gt; still need to maintain the previous string in its entirety? | If Span&lt;T&gt; will somehow track what section of the previous string I have a reference to, and only free the resources pertaining to the sections of the string that don&apos;t have a Span&lt;T&gt; referencing them then that would be amazing. | But then again, why am I not just letting the text span capture the substring upon construction? | I also wonder, what about a Func&lt;string&gt;? Does this somehow hide the previous string values of the text editor and permit the resources to be free&apos;d? (2024-07-27). </para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<section>
+<title>Function Documentation</title>
+<anchor xml:id="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_lexers_1_1_models_1a26a1b63ad28ec7955b30bc6c91571eca"/><section>
+    <title>ResourceUri()</title>
+<indexterm><primary>ResourceUri</primary><secondary>Luthetus.TextEditor.RazorLib.Lexers.Models</secondary></indexterm>
+<indexterm><primary>Luthetus.TextEditor.RazorLib.Lexers.Models</primary><secondary>ResourceUri</secondary></indexterm>
+<para><computeroutput>record struct Luthetus.TextEditor.RazorLib.Lexers.Models.ResourceUri (string Value)</computeroutput></para><para>
+Definition at line <link linkend="__resource_uri_8cs_source_1l00003">3</link> of file <link linkend="__resource_uri_8cs_source">ResourceUri.cs</link>.</para>
+Here is the call graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_lexers_1_1_models_a26a1b63ad28ec7955b30bc6c91571eca_cgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+</section>
+<anchor xml:id="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_lexers_1_1_models_1a1ffd1a7706dfd364560b76d47467812f"/><section>
+    <title>TextEditorTextSpan()</title>
+<indexterm><primary>TextEditorTextSpan</primary><secondary>Luthetus.TextEditor.RazorLib.Lexers.Models</secondary></indexterm>
+<indexterm><primary>Luthetus.TextEditor.RazorLib.Lexers.Models</primary><secondary>TextEditorTextSpan</secondary></indexterm>
+<para><computeroutput>record struct Luthetus.TextEditor.RazorLib.Lexers.Models.TextEditorTextSpan (int StartingIndexInclusive, int EndingIndexExclusive, byte DecorationByte, <link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_lexers_1_1_models_1a26a1b63ad28ec7955b30bc6c91571eca">ResourceUri</link> ResourceUri, string SourceText)</computeroutput></para><para>
+
+<para>TODO: I have a suspicion that this type takes an absurd amount of memory... ... the initial way of implementing this type was to store the text at the time of constructing the text span. | But, it was thought that preferably one would only only create the substring when asked for it. | This means one has to store the entirety of the source text. Well, the source text is just a reference not a copy of the value. So this seemed fine enough. | But, because the text editor is immutable. The source text is constantly needing to be reconstructed as a string value. | As a result, the old string values that pertain to previous iterations of the text editor must be held in memory, because any TextEditorTextSpan that is not garbage collected, would have a reference to the old string value. | I&apos;m thinking of using Span&lt;char&gt; or something along the lines. But, wouldn&apos;t Span&lt;char&gt; still need to maintain the previous string in its entirety? | If Span&lt;T&gt; will somehow track what section of the previous string I have a reference to, and only free the resources pertaining to the sections of the string that don&apos;t have a Span&lt;T&gt; referencing them then that would be amazing. | But then again, why am I not just letting the text span capture the substring upon construction? | I also wonder, what about a Func&lt;string&gt;? Does this somehow hide the previous string values of the text editor and permit the resources to be free&apos;d? (2024-07-27). </para>
+</para>
+
+<para>Changed to a record-struct (was previously just a record) This type is not a 1 instance per file scenario. The type is instantiated many times for each file, and then again instantiated each time the file is re-parsed. So the instantiation/lifecycle of this type is lending it to being a struct. (2024-010-02) </para>
+
+<para>This constructor is used for text spans where their EndingIndexExclusive is the current position of a <link linkend="_class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_utility_1_1_string_walker">StringWalker</link>.</para>
+
+<para>This constructor is being used to experiment with not holding a reference to the SourceText (2024-07-27)</para>
+
+<para>It is a bit clumsy since I&apos;m still taking in the source text as an argument.</para>
+
+<para>But the source text and the &apos;getTextPrecalculatedResult&apos; share the same datatype and position in the constructor otherwise.</para>
+
+<para>When using the record &apos;with&apos; contextual keyword the _text might hold the cached value prior to the &apos;with&apos; result.</para>
+
+<para>Preferably one would never use FabricateTextSpan. This method is a hack, and a shortcut. <?linebreak?><?linebreak?> I&apos;m currently (2023-08-03) writing code to &apos;load&apos; the dotnet runtime assemblies into a CSharpBinder. This method is useful for now, and worth the technical debt, because I&apos;m unsure of how to handle the <link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_lexers_1_1_models_1a1ffd1a7706dfd364560b76d47467812f">TextEditorTextSpan</link> representation of the metadata I&apos;m reading. There is no file, so what do I do here? This method will be nice to track all the references to it, so later I can decide how to handle that.</para>
+<para>
+Definition at line <link linkend="__text_editor_text_span_8cs_source_1l00048">48</link> of file <link linkend="__text_editor_text_span_8cs_source">TextEditorTextSpan.cs</link>.</para>
+Here is the call graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_lexers_1_1_models_a1ffd1a7706dfd364560b76d47467812f_cgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+</section>
+</section>
+</section>

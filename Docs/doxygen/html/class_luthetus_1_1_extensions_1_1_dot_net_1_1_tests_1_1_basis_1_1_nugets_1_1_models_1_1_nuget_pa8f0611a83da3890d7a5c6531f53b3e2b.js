@@ -1,0 +1,8 @@
+var class_luthetus_1_1_extensions_1_1_dot_net_1_1_tests_1_1_basis_1_1_nugets_1_1_models_1_1_nuget_pa8f0611a83da3890d7a5c6531f53b3e2b =
+[
+    [ "BuildQuery", "class_luthetus_1_1_extensions_1_1_dot_net_1_1_tests_1_1_basis_1_1_nugets_1_1_models_1_1_nuget_pa8f0611a83da3890d7a5c6531f53b3e2b.html#a4517b56ab3c7fc193cafd48be772d210", null ],
+    [ "Constructor", "class_luthetus_1_1_extensions_1_1_dot_net_1_1_tests_1_1_basis_1_1_nugets_1_1_models_1_1_nuget_pa8f0611a83da3890d7a5c6531f53b3e2b.html#a166b9131bf9b1ec8620f216259f79bd2", null ],
+    [ "ProviderWebsiteUrlNoFormatting", "class_luthetus_1_1_extensions_1_1_dot_net_1_1_tests_1_1_basis_1_1_nugets_1_1_models_1_1_nuget_pa8f0611a83da3890d7a5c6531f53b3e2b.html#a1b2d143741c7f0a9096120befb333515", null ],
+    [ "QueryForNugetPackagesAsync_INugetPackageManagerQuery", "class_luthetus_1_1_extensions_1_1_dot_net_1_1_tests_1_1_basis_1_1_nugets_1_1_models_1_1_nuget_pa8f0611a83da3890d7a5c6531f53b3e2b.html#a099b10983e55e29c5b54e961ca6a975c", null ],
+    [ "QueryForNugetPackagesAsync_string_bool", "class_luthetus_1_1_extensions_1_1_dot_net_1_1_tests_1_1_basis_1_1_nugets_1_1_models_1_1_nuget_pa8f0611a83da3890d7a5c6531f53b3e2b.html#ae8607315dab249fe745c1b47aeba3733", null ]
+];

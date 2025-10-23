@@ -1,0 +1,170 @@
+.TH "Luthetus.TextEditor.RazorLib.Edits.Models" 3 "Version 1.0.0" "Luthetus.Ide" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+Luthetus.TextEditor.RazorLib.Edits.Models
+.SH SYNOPSIS
+.br
+.PP
+.SS "Classes"
+
+.in +1c
+.ti -1c
+.RI "interface \fBITextEditorEdit\fP"
+.br
+.ti -1c
+.RI "struct \fBTextEditorEditBackspace\fP"
+.br
+.ti -1c
+.RI "class \fBTextEditorEditBackspaceBatch\fP"
+.br
+.ti -1c
+.RI "struct \fBTextEditorEditConstructor\fP"
+.br
+.ti -1c
+.RI "struct \fBTextEditorEditDelete\fP"
+.br
+.ti -1c
+.RI "class \fBTextEditorEditDeleteBatch\fP"
+.br
+.ti -1c
+.RI "class \fBTextEditorEditExtensionMethods\fP"
+.br
+.ti -1c
+.RI "struct \fBTextEditorEditInsert\fP"
+.br
+.ti -1c
+.RI "class \fBTextEditorEditInsertBatch\fP"
+.br
+.ti -1c
+.RI "struct \fBTextEditorEditOther\fP"
+.br
+.in -1c
+.SS "Enumerations"
+
+.in +1c
+.ti -1c
+.RI "enum \fBCursorDisplacementKind\fP { \fBLeft\fP, \fBNone\fP, \fBRight\fP }"
+.br
+.RI "This enum describes which direction the cursor's column index moves based on the amount of text that was inserted, deleted, or some other form of editing\&. 
+.br
+
+.br
+\&. "
+.ti -1c
+.RI "enum \fBTextEditKind\fP { \fBNone\fP, \fBInitialState\fP, \fBOther\fP, \fBInsertion\fP, \fBDeletion\fP, \fBForcePersistEditBlock\fP }"
+.br
+.ti -1c
+.RI "enum \fBTextEditorEditKind\fP { \fBConstructor\fP, \fBInsert\fP, \fBInsertBatch\fP, \fBBackspace\fP, \fBBackspaceBatch\fP, \fBDelete\fP, \fBDeleteBatch\fP, \fBOther\fP }"
+.br
+.in -1c
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "record \fBEditBlock\fP (\fBTextEditKind\fP \fBTextEditKind\fP, string DisplayName, string ContentSnapshot, string? OtherTextEditKindIdentifier)"
+.br
+.in -1c
+.SH "Enumeration Type Documentation"
+.PP 
+.SS "enum \fBLuthetus\&.TextEditor\&.RazorLib\&.Edits\&.Models\&.CursorDisplacementKind\fP"
+
+.PP
+This enum describes which direction the cursor's column index moves based on the amount of text that was inserted, deleted, or some other form of editing\&. 
+.br
+
+.br
+\&. \fBCursorDisplacementKind\&.Left\fP is -1 * (amount of text that was inserted, or etc\&.\&.\&.) 
+.br
+
+.br
+ \fBCursorDisplacementKind\&.None\fP is 0 * (amount of text that was inserted, or etc\&.\&.\&.) 
+.br
+
+.br
+ \fBCursorDisplacementKind\&.Right\fP is 1 * (amount of text that was inserted, or etc\&.\&.\&.) 
+.br
+
+.br
+
+.PP
+.IP "\(bu" 2
+Given a 'delete' key edit\&. If one performs an 'undo' then the \fBCursorDisplacementKind\fP of the 'insert' edit will be \fBCursorDisplacementKind\&.None\fP\&. (in the previous example the 'insert' edit is made because it is the opposite action to a 'delete' edit\&. This therefore will satisfy the 'undo') 
+.br
+
+.br
+
+.IP "\(bu" 2
+Given a 'backspace' key edit\&. If one performs an 'undo' then the \fBCursorDisplacementKind\fP of the 'insert' edit will be \fBCursorDisplacementKind\&.Right\fP\&. 
+.br
+
+.br
+
+.IP "\(bu" 2
+Given an 'insert' edit\&. If one performs an 'undo' then the \fBCursorDisplacementKind\fP of the 'delete' edit will be \fBCursorDisplacementKind\&.Left\fP\&. 
+.br
+
+.br
+ 
+.PP
+
+.PP
+\fBEnumerator\fP
+.in +1c
+.TP
+\f(BILeft \fP
+.TP
+\f(BINone \fP
+.TP
+\f(BIRight \fP
+.PP
+Definition at line \fB26\fP of file \fBCursorDisplacementKind\&.cs\fP\&.
+.SS "enum \fBLuthetus\&.TextEditor\&.RazorLib\&.Edits\&.Models\&.TextEditKind\fP"
+
+.PP
+\fBEnumerator\fP
+.in +1c
+.TP
+\f(BINone \fP
+.TP
+\f(BIInitialState \fP
+.TP
+\f(BIOther \fP
+.TP
+\f(BIInsertion \fP
+.TP
+\f(BIDeletion \fP
+.TP
+\f(BIForcePersistEditBlock \fP
+.PP
+Definition at line \fB3\fP of file \fBTextEditKind\&.cs\fP\&.
+.SS "enum \fBLuthetus\&.TextEditor\&.RazorLib\&.Edits\&.Models\&.TextEditorEditKind\fP"
+
+.PP
+\fBEnumerator\fP
+.in +1c
+.TP
+\f(BIConstructor \fP
+.TP
+\f(BIInsert \fP
+.TP
+\f(BIInsertBatch \fP
+.TP
+\f(BIBackspace \fP
+.TP
+\f(BIBackspaceBatch \fP
+.TP
+\f(BIDelete \fP
+.TP
+\f(BIDeleteBatch \fP
+.TP
+\f(BIOther \fP
+.PP
+Definition at line \fB3\fP of file \fBTextEditorEditKind\&.cs\fP\&.
+.SH "Function Documentation"
+.PP 
+.SS "record Luthetus\&.TextEditor\&.RazorLib\&.Edits\&.Models\&.EditBlock (\fBTextEditKind\fP TextEditKind, string DisplayName, string ContentSnapshot, string? OtherTextEditKindIdentifier)"
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for Luthetus\&.Ide from the source code\&.

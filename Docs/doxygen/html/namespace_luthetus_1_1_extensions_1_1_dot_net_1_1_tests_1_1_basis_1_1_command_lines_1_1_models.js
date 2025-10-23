@@ -1,0 +1,4 @@
+var namespace_luthetus_1_1_extensions_1_1_dot_net_1_1_tests_1_1_basis_1_1_command_lines_1_1_models =
+[
+    [ "DotNetCliOutputParserTests", "class_luthetus_1_1_extensions_1_1_dot_net_1_1_tests_1_1_basis_1_1_command_lines_1_1_models_1_1_dot_net_cli_output_parser_tests.html", "class_luthetus_1_1_extensions_1_1_dot_net_1_1_tests_1_1_basis_1_1_command_lines_1_1_models_1_1_dot_net_cli_output_parser_tests" ]
+];

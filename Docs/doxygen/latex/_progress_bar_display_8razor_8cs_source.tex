@@ -1,0 +1,66 @@
+\doxysection{Progress\+Bar\+Display.\+razor.\+cs}
+\hypertarget{_progress_bar_display_8razor_8cs_source}{}\label{_progress_bar_display_8razor_8cs_source}\index{Source/Lib/Common/Reactives/Displays/ProgressBarDisplay.razor.cs@{Source/Lib/Common/Reactives/Displays/ProgressBarDisplay.razor.cs}}
+\mbox{\hyperlink{_progress_bar_display_8razor_8cs}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{_progress_bar_display_8razor_8cs_source_l00001}00001\ \textcolor{keyword}{using\ }Microsoft.AspNetCore.Components;}
+\DoxyCodeLine{\Hypertarget{_progress_bar_display_8razor_8cs_source_l00002}00002\ \textcolor{keyword}{using\ }Fluxor;}
+\DoxyCodeLine{\Hypertarget{_progress_bar_display_8razor_8cs_source_l00003}00003\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_luthetus_1_1_common_1_1_razor_lib_1_1_reactives_1_1_models}{Luthetus.Common.RazorLib.Reactives.Models}};}
+\DoxyCodeLine{\Hypertarget{_progress_bar_display_8razor_8cs_source_l00004}00004\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_luthetus_1_1_common_1_1_razor_lib_1_1_dynamics_1_1_models}{Luthetus.Common.RazorLib.Dynamics.Models}};}
+\DoxyCodeLine{\Hypertarget{_progress_bar_display_8razor_8cs_source_l00005}00005\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_luthetus_1_1_common_1_1_razor_lib_1_1_notifications_1_1_states}{Luthetus.Common.RazorLib.Notifications.States}};}
+\DoxyCodeLine{\Hypertarget{_progress_bar_display_8razor_8cs_source_l00006}00006\ }
+\DoxyCodeLine{\Hypertarget{_progress_bar_display_8razor_8cs_source_l00007}\mbox{\hyperlink{namespace_luthetus_1_1_common_1_1_razor_lib_1_1_reactives}{00007}}\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespace_luthetus_1_1_common_1_1_razor_lib_1_1_reactives_1_1_displays}{Luthetus.Common.RazorLib.Reactives.Displays}};}
+\DoxyCodeLine{\Hypertarget{_progress_bar_display_8razor_8cs_source_l00008}00008\ }
+\DoxyCodeLine{\Hypertarget{_progress_bar_display_8razor_8cs_source_l00009}\mbox{\hyperlink{class_luthetus_1_1_common_1_1_razor_lib_1_1_reactives_1_1_displays_1_1_progress_bar_display}{00009}}\ \textcolor{keyword}{public}\ \textcolor{keyword}{partial\ class\ }\mbox{\hyperlink{class_luthetus_1_1_common_1_1_razor_lib_1_1_reactives_1_1_displays_1_1_progress_bar_display}{ProgressBarDisplay}}\ :\ ComponentBase,\ IDisposable}
+\DoxyCodeLine{\Hypertarget{_progress_bar_display_8razor_8cs_source_l00010}00010\ \{}
+\DoxyCodeLine{\Hypertarget{_progress_bar_display_8razor_8cs_source_l00011}00011\ \ \ \ \ [Inject]}
+\DoxyCodeLine{\Hypertarget{_progress_bar_display_8razor_8cs_source_l00012}00012\ \ \ \ \ \textcolor{keyword}{private}\ IDispatcher\ Dispatcher\ \{\ \textcolor{keyword}{get};\ \textcolor{keyword}{set};\ \}\ =\ \textcolor{keyword}{null}!;}
+\DoxyCodeLine{\Hypertarget{_progress_bar_display_8razor_8cs_source_l00013}00013\ }
+\DoxyCodeLine{\Hypertarget{_progress_bar_display_8razor_8cs_source_l00014}00014\ \ \ \ \ [CascadingParameter]}
+\DoxyCodeLine{\Hypertarget{_progress_bar_display_8razor_8cs_source_l00015}\mbox{\hyperlink{class_luthetus_1_1_common_1_1_razor_lib_1_1_reactives_1_1_displays_1_1_progress_bar_display_a9e13d49e62bd654ccaade5cb0f086a7f}{00015}}\ \ \ \ \ \textcolor{keyword}{public}\ \mbox{\hyperlink{interface_luthetus_1_1_common_1_1_razor_lib_1_1_dynamics_1_1_models_1_1_i_notification}{INotification}}?\ \mbox{\hyperlink{class_luthetus_1_1_common_1_1_razor_lib_1_1_reactives_1_1_displays_1_1_progress_bar_display_a9e13d49e62bd654ccaade5cb0f086a7f}{Notification}}\ \{\ \textcolor{keyword}{get};\ \textcolor{keyword}{set};\ \}\ =\ \textcolor{keyword}{null}!;}
+\DoxyCodeLine{\Hypertarget{_progress_bar_display_8razor_8cs_source_l00016}00016\ }
+\DoxyCodeLine{\Hypertarget{_progress_bar_display_8razor_8cs_source_l00017}00017\ \ \ \ \ [Parameter,\ EditorRequired]}
+\DoxyCodeLine{\Hypertarget{_progress_bar_display_8razor_8cs_source_l00018}\mbox{\hyperlink{class_luthetus_1_1_common_1_1_razor_lib_1_1_reactives_1_1_displays_1_1_progress_bar_display_a4d95d92552bc744e6d1da7ce221ccb80}{00018}}\ \ \ \ \ \textcolor{keyword}{public}\ \mbox{\hyperlink{class_luthetus_1_1_common_1_1_razor_lib_1_1_reactives_1_1_displays_1_1_progress_bar_display_a4d95d92552bc744e6d1da7ce221ccb80}{ProgressBarModel}}\ \mbox{\hyperlink{class_luthetus_1_1_common_1_1_razor_lib_1_1_reactives_1_1_displays_1_1_progress_bar_display_a4d95d92552bc744e6d1da7ce221ccb80}{ProgressBarModel}}\ \{\ \textcolor{keyword}{get};\ \textcolor{keyword}{set};\ \}\ =\ \textcolor{keyword}{null}!;}
+\DoxyCodeLine{\Hypertarget{_progress_bar_display_8razor_8cs_source_l00019}00019\ }
+\DoxyCodeLine{\Hypertarget{_progress_bar_display_8razor_8cs_source_l00020}00020\ \ \ \ \ \textcolor{keyword}{private}\ \textcolor{keywordtype}{bool}\ \_hasSeenProgressModelIsDisposed\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{\Hypertarget{_progress_bar_display_8razor_8cs_source_l00021}00021\ }
+\DoxyCodeLine{\Hypertarget{_progress_bar_display_8razor_8cs_source_l00022}\mbox{\hyperlink{class_luthetus_1_1_common_1_1_razor_lib_1_1_reactives_1_1_displays_1_1_progress_bar_display_ad8bd016036f2d9fa4aa074dda972857e}{00022}}\ \ \ \ \ \textcolor{keyword}{protected}\ \textcolor{keyword}{override}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_luthetus_1_1_common_1_1_razor_lib_1_1_reactives_1_1_displays_1_1_progress_bar_display_ad8bd016036f2d9fa4aa074dda972857e}{OnInitialized}}()}
+\DoxyCodeLine{\Hypertarget{_progress_bar_display_8razor_8cs_source_l00023}00023\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_progress_bar_display_8razor_8cs_source_l00024}00024\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!\mbox{\hyperlink{class_luthetus_1_1_common_1_1_razor_lib_1_1_reactives_1_1_displays_1_1_progress_bar_display_a4d95d92552bc744e6d1da7ce221ccb80}{ProgressBarModel}}.IsDisposed)}
+\DoxyCodeLine{\Hypertarget{_progress_bar_display_8razor_8cs_source_l00025}00025\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_luthetus_1_1_common_1_1_razor_lib_1_1_reactives_1_1_models_1_1_progress_bar_model_a024eeccb08cdd90fb9c3834bd8e74b0f}{ProgressBarModel.ProgressChanged}}\ +=\ \mbox{\hyperlink{class_luthetus_1_1_common_1_1_razor_lib_1_1_reactives_1_1_displays_1_1_progress_bar_display_aa6936e6e96fbdd8b64fc2f6ea9dd9f5d}{OnProgressChanged}};}
+\DoxyCodeLine{\Hypertarget{_progress_bar_display_8razor_8cs_source_l00026}00026\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_progress_bar_display_8razor_8cs_source_l00027}00027\ }
+\DoxyCodeLine{\Hypertarget{_progress_bar_display_8razor_8cs_source_l00028}\mbox{\hyperlink{class_luthetus_1_1_common_1_1_razor_lib_1_1_reactives_1_1_displays_1_1_progress_bar_display_a72bd39c0a541033546b4a36b0055f52a}{00028}}\ \ \ \ \ \textcolor{keyword}{protected}\ \textcolor{keyword}{override}\ Task\ \mbox{\hyperlink{class_luthetus_1_1_common_1_1_razor_lib_1_1_reactives_1_1_displays_1_1_progress_bar_display_a72bd39c0a541033546b4a36b0055f52a}{OnAfterRenderAsync}}(\textcolor{keywordtype}{bool}\ firstRender)}
+\DoxyCodeLine{\Hypertarget{_progress_bar_display_8razor_8cs_source_l00029}00029\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_progress_bar_display_8razor_8cs_source_l00030}00030\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{class_luthetus_1_1_common_1_1_razor_lib_1_1_reactives_1_1_displays_1_1_progress_bar_display_a9e13d49e62bd654ccaade5cb0f086a7f}{Notification}}\ is\ not\ \textcolor{keyword}{null}\ \&\&\ !\_hasSeenProgressModelIsDisposed\ \&\&\ \mbox{\hyperlink{class_luthetus_1_1_common_1_1_razor_lib_1_1_reactives_1_1_displays_1_1_progress_bar_display_a4d95d92552bc744e6d1da7ce221ccb80}{ProgressBarModel}}.IsDisposed)}
+\DoxyCodeLine{\Hypertarget{_progress_bar_display_8razor_8cs_source_l00031}00031\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_progress_bar_display_8razor_8cs_source_l00032}00032\ \ \ \ \ \ \ \ \ \ \ \ \ \_hasSeenProgressModelIsDisposed\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{\Hypertarget{_progress_bar_display_8razor_8cs_source_l00033}00033\ }
+\DoxyCodeLine{\Hypertarget{_progress_bar_display_8razor_8cs_source_l00034}00034\ \ \ \ \ \ \ \ \ \ \ \ \ \_\ =\ Task.Run(async\ ()\ =>}
+\DoxyCodeLine{\Hypertarget{_progress_bar_display_8razor_8cs_source_l00035}00035\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_progress_bar_display_8razor_8cs_source_l00036}00036\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ await\ Task.Delay(4\_000);}
+\DoxyCodeLine{\Hypertarget{_progress_bar_display_8razor_8cs_source_l00037}00037\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_progress_bar_display_8razor_8cs_source_l00038}00038\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{class_luthetus_1_1_common_1_1_razor_lib_1_1_reactives_1_1_displays_1_1_progress_bar_display_a9e13d49e62bd654ccaade5cb0f086a7f}{Notification}}.DeleteNotificationAfterOverlayIsDismissed)}
+\DoxyCodeLine{\Hypertarget{_progress_bar_display_8razor_8cs_source_l00039}00039\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Dispatcher.Dispatch(\textcolor{keyword}{new}\ \mbox{\hyperlink{namespace_luthetus_1_1_common_1_1_razor_lib_1_1_notifications_1_1_states_a49a95cc8dd6ffc82466513f5bef2d2ad}{NotificationState}}.MakeDeletedAction(\mbox{\hyperlink{class_luthetus_1_1_common_1_1_razor_lib_1_1_reactives_1_1_displays_1_1_progress_bar_display_a9e13d49e62bd654ccaade5cb0f086a7f}{Notification}}.DynamicViewModelKey));}
+\DoxyCodeLine{\Hypertarget{_progress_bar_display_8razor_8cs_source_l00040}00040\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{\Hypertarget{_progress_bar_display_8razor_8cs_source_l00041}00041\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Dispatcher.Dispatch(\textcolor{keyword}{new}\ \mbox{\hyperlink{namespace_luthetus_1_1_common_1_1_razor_lib_1_1_notifications_1_1_states_a49a95cc8dd6ffc82466513f5bef2d2ad}{NotificationState}}.MakeReadAction(\mbox{\hyperlink{class_luthetus_1_1_common_1_1_razor_lib_1_1_reactives_1_1_displays_1_1_progress_bar_display_a9e13d49e62bd654ccaade5cb0f086a7f}{Notification}}.DynamicViewModelKey));}
+\DoxyCodeLine{\Hypertarget{_progress_bar_display_8razor_8cs_source_l00042}00042\ \ \ \ \ \ \ \ \ \ \ \ \ \});}
+\DoxyCodeLine{\Hypertarget{_progress_bar_display_8razor_8cs_source_l00043}00043\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_progress_bar_display_8razor_8cs_source_l00044}00044\ }
+\DoxyCodeLine{\Hypertarget{_progress_bar_display_8razor_8cs_source_l00045}00045\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ base.OnAfterRenderAsync(firstRender);}
+\DoxyCodeLine{\Hypertarget{_progress_bar_display_8razor_8cs_source_l00046}00046\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_progress_bar_display_8razor_8cs_source_l00047}00047\ }
+\DoxyCodeLine{\Hypertarget{_progress_bar_display_8razor_8cs_source_l00048}\mbox{\hyperlink{class_luthetus_1_1_common_1_1_razor_lib_1_1_reactives_1_1_displays_1_1_progress_bar_display_aa6936e6e96fbdd8b64fc2f6ea9dd9f5d}{00048}}\ \ \ \ \ \textcolor{keyword}{public}\ async\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_luthetus_1_1_common_1_1_razor_lib_1_1_reactives_1_1_displays_1_1_progress_bar_display_aa6936e6e96fbdd8b64fc2f6ea9dd9f5d}{OnProgressChanged}}(\textcolor{keywordtype}{bool}\ isDisposing)}
+\DoxyCodeLine{\Hypertarget{_progress_bar_display_8razor_8cs_source_l00049}00049\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_progress_bar_display_8razor_8cs_source_l00050}00050\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (isDisposing)}
+\DoxyCodeLine{\Hypertarget{_progress_bar_display_8razor_8cs_source_l00051}00051\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_luthetus_1_1_common_1_1_razor_lib_1_1_reactives_1_1_models_1_1_progress_bar_model_a024eeccb08cdd90fb9c3834bd8e74b0f}{ProgressBarModel.ProgressChanged}}\ -\/=\ \mbox{\hyperlink{class_luthetus_1_1_common_1_1_razor_lib_1_1_reactives_1_1_displays_1_1_progress_bar_display_aa6936e6e96fbdd8b64fc2f6ea9dd9f5d}{OnProgressChanged}};}
+\DoxyCodeLine{\Hypertarget{_progress_bar_display_8razor_8cs_source_l00052}00052\ }
+\DoxyCodeLine{\Hypertarget{_progress_bar_display_8razor_8cs_source_l00053}00053\ \ \ \ \ \ \ \ \ await\ InvokeAsync(StateHasChanged);}
+\DoxyCodeLine{\Hypertarget{_progress_bar_display_8razor_8cs_source_l00054}00054\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_progress_bar_display_8razor_8cs_source_l00055}00055\ }
+\DoxyCodeLine{\Hypertarget{_progress_bar_display_8razor_8cs_source_l00056}\mbox{\hyperlink{class_luthetus_1_1_common_1_1_razor_lib_1_1_reactives_1_1_displays_1_1_progress_bar_display_a3a0e46f614b79d1cc5d2b755a4534780}{00056}}\ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_luthetus_1_1_common_1_1_razor_lib_1_1_reactives_1_1_displays_1_1_progress_bar_display_a3a0e46f614b79d1cc5d2b755a4534780}{Dispose}}()}
+\DoxyCodeLine{\Hypertarget{_progress_bar_display_8razor_8cs_source_l00057}00057\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_progress_bar_display_8razor_8cs_source_l00058}00058\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_luthetus_1_1_common_1_1_razor_lib_1_1_reactives_1_1_models_1_1_progress_bar_model_a024eeccb08cdd90fb9c3834bd8e74b0f}{ProgressBarModel.ProgressChanged}}\ -\/=\ \mbox{\hyperlink{class_luthetus_1_1_common_1_1_razor_lib_1_1_reactives_1_1_displays_1_1_progress_bar_display_aa6936e6e96fbdd8b64fc2f6ea9dd9f5d}{OnProgressChanged}};}
+\DoxyCodeLine{\Hypertarget{_progress_bar_display_8razor_8cs_source_l00059}00059\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_progress_bar_display_8razor_8cs_source_l00060}00060\ \}}
+
+\end{DoxyCode}

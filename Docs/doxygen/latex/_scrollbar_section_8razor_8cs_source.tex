@@ -1,0 +1,344 @@
+\doxysection{Scrollbar\+Section.\+razor.\+cs}
+\hypertarget{_scrollbar_section_8razor_8cs_source}{}\label{_scrollbar_section_8razor_8cs_source}\index{Source/Lib/TextEditor/TextEditors/Displays/Internals/ScrollbarSection.razor.cs@{Source/Lib/TextEditor/TextEditors/Displays/Internals/ScrollbarSection.razor.cs}}
+\mbox{\hyperlink{_scrollbar_section_8razor_8cs}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{_scrollbar_section_8razor_8cs_source_l00001}00001\ \textcolor{keyword}{using\ }Microsoft.AspNetCore.Components;}
+\DoxyCodeLine{\Hypertarget{_scrollbar_section_8razor_8cs_source_l00002}00002\ \textcolor{keyword}{using\ }Microsoft.AspNetCore.Components.Web;}
+\DoxyCodeLine{\Hypertarget{_scrollbar_section_8razor_8cs_source_l00003}00003\ \textcolor{keyword}{using\ }Microsoft.JSInterop;}
+\DoxyCodeLine{\Hypertarget{_scrollbar_section_8razor_8cs_source_l00004}00004\ \textcolor{keyword}{using\ }Fluxor;}
+\DoxyCodeLine{\Hypertarget{_scrollbar_section_8razor_8cs_source_l00005}00005\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_luthetus_1_1_common_1_1_razor_lib_1_1_dimensions_1_1_models}{Luthetus.Common.RazorLib.Dimensions.Models}};}
+\DoxyCodeLine{\Hypertarget{_scrollbar_section_8razor_8cs_source_l00006}00006\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_luthetus_1_1_common_1_1_razor_lib_1_1_drags_1_1_displays}{Luthetus.Common.RazorLib.Drags.Displays}};}
+\DoxyCodeLine{\Hypertarget{_scrollbar_section_8razor_8cs_source_l00007}00007\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1_1_internals}{Luthetus.TextEditor.RazorLib.TextEditors.Models.Internals}};}
+\DoxyCodeLine{\Hypertarget{_scrollbar_section_8razor_8cs_source_l00008}00008\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_events_1_1_models}{Luthetus.TextEditor.RazorLib.Events.Models}};}
+\DoxyCodeLine{\Hypertarget{_scrollbar_section_8razor_8cs_source_l00009}00009\ }
+\DoxyCodeLine{\Hypertarget{_scrollbar_section_8razor_8cs_source_l00010}00010\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_displays_1_1_internals}{Luthetus.TextEditor.RazorLib.TextEditors.Displays.Internals}};}
+\DoxyCodeLine{\Hypertarget{_scrollbar_section_8razor_8cs_source_l00011}00011\ }
+\DoxyCodeLine{\Hypertarget{_scrollbar_section_8razor_8cs_source_l00012}\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_displays_1_1_internals_1_1_scrollbar_section}{00012}}\ \textcolor{keyword}{public}\ \textcolor{keyword}{partial\ class\ }\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_displays_1_1_internals_1_1_scrollbar_section}{ScrollbarSection}}\ :\ ComponentBase,\ IDisposable}
+\DoxyCodeLine{\Hypertarget{_scrollbar_section_8razor_8cs_source_l00013}00013\ \{}
+\DoxyCodeLine{\Hypertarget{_scrollbar_section_8razor_8cs_source_l00014}00014\ \ \ \ \ [Inject]}
+\DoxyCodeLine{\Hypertarget{_scrollbar_section_8razor_8cs_source_l00015}00015\ \ \ \ \ \textcolor{keyword}{private}\ IJSRuntime\ JsRuntime\ \{\ \textcolor{keyword}{get};\ \textcolor{keyword}{set};\ \}\ =\ \textcolor{keyword}{null}!;}
+\DoxyCodeLine{\Hypertarget{_scrollbar_section_8razor_8cs_source_l00016}00016\ \ \ \ \ [Inject]}
+\DoxyCodeLine{\Hypertarget{_scrollbar_section_8razor_8cs_source_l00017}00017\ \ \ \ \ \textcolor{keyword}{private}\ IState<DragState>\ DragStateWrap\ \{\ \textcolor{keyword}{get};\ \textcolor{keyword}{set};\ \}\ =\ \textcolor{keyword}{null}!;}
+\DoxyCodeLine{\Hypertarget{_scrollbar_section_8razor_8cs_source_l00018}00018\ \ \ \ \ [Inject]}
+\DoxyCodeLine{\Hypertarget{_scrollbar_section_8razor_8cs_source_l00019}00019\ \ \ \ \ \textcolor{keyword}{private}\ \mbox{\hyperlink{interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_i_text_editor_service}{ITextEditorService}}\ TextEditorService\ \{\ \textcolor{keyword}{get};\ \textcolor{keyword}{set};\ \}\ =\ \textcolor{keyword}{null}!;}
+\DoxyCodeLine{\Hypertarget{_scrollbar_section_8razor_8cs_source_l00020}00020\ \ \ \ \ [Inject]}
+\DoxyCodeLine{\Hypertarget{_scrollbar_section_8razor_8cs_source_l00021}00021\ \ \ \ \ \textcolor{keyword}{private}\ IDispatcher\ Dispatcher\ \{\ \textcolor{keyword}{get};\ \textcolor{keyword}{set};\ \}\ =\ \textcolor{keyword}{null}!;}
+\DoxyCodeLine{\Hypertarget{_scrollbar_section_8razor_8cs_source_l00022}00022\ }
+\DoxyCodeLine{\Hypertarget{_scrollbar_section_8razor_8cs_source_l00023}00023\ \ \ \ \ [Parameter,\ EditorRequired]}
+\DoxyCodeLine{\Hypertarget{_scrollbar_section_8razor_8cs_source_l00024}\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_displays_1_1_internals_1_1_scrollbar_section_a9dcf7edd40016890e965d56ce58ad46f}{00024}}\ \ \ \ \ \textcolor{keyword}{public}\ \mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1_1_internals_1_1_text_editor_render_batch_validated}{TextEditorRenderBatchValidated}}?\ \mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_displays_1_1_internals_1_1_scrollbar_section_a9dcf7edd40016890e965d56ce58ad46f}{RenderBatch}}\ \{\ \textcolor{keyword}{get};\ \textcolor{keyword}{set};\ \}}
+\DoxyCodeLine{\Hypertarget{_scrollbar_section_8razor_8cs_source_l00025}00025\ }
+\DoxyCodeLine{\Hypertarget{_scrollbar_section_8razor_8cs_source_l00029}00029\ \ \ \ \ \textcolor{keyword}{private}\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ DISTANCE\_TO\_RESET\_SCROLL\_POSITION\ =\ 300;}
+\DoxyCodeLine{\Hypertarget{_scrollbar_section_8razor_8cs_source_l00030}00030\ }
+\DoxyCodeLine{\Hypertarget{_scrollbar_section_8razor_8cs_source_l00031}00031\ \ \ \ \ \textcolor{keyword}{private}\ MouseEventArgs?\ \_mouseDownEventArgs;}
+\DoxyCodeLine{\Hypertarget{_scrollbar_section_8razor_8cs_source_l00032}00032\ }
+\DoxyCodeLine{\Hypertarget{_scrollbar_section_8razor_8cs_source_l00033}00033\ \ \ \ \ \textcolor{keyword}{private}\ readonly\ Guid\ VERTICAL\_scrollbarGuid\ =\ Guid.NewGuid();}
+\DoxyCodeLine{\Hypertarget{_scrollbar_section_8razor_8cs_source_l00034}00034\ \ \ \ \ \textcolor{keyword}{private}\ readonly\ Guid\ HORIZONTAL\_scrollbarGuid\ =\ Guid.NewGuid();}
+\DoxyCodeLine{\Hypertarget{_scrollbar_section_8razor_8cs_source_l00035}00035\ }
+\DoxyCodeLine{\Hypertarget{_scrollbar_section_8razor_8cs_source_l00036}00036\ \ \ \ \ \textcolor{keyword}{private}\ \textcolor{keywordtype}{bool}\ VERTICAL\_thinksLeftMouseButtonIsDown;}
+\DoxyCodeLine{\Hypertarget{_scrollbar_section_8razor_8cs_source_l00037}00037\ }
+\DoxyCodeLine{\Hypertarget{_scrollbar_section_8razor_8cs_source_l00038}00038\ \ \ \ \ \textcolor{keyword}{private}\ \textcolor{keywordtype}{double}\ VERTICAL\_clientXThresholdToResetScrollTopPosition;}
+\DoxyCodeLine{\Hypertarget{_scrollbar_section_8razor_8cs_source_l00039}00039\ \ \ \ \ \textcolor{keyword}{private}\ \textcolor{keywordtype}{double}\ VERTICAL\_scrollTopOnMouseDown;}
+\DoxyCodeLine{\Hypertarget{_scrollbar_section_8razor_8cs_source_l00040}00040\ }
+\DoxyCodeLine{\Hypertarget{_scrollbar_section_8razor_8cs_source_l00041}00041\ \ \ \ \ \textcolor{keyword}{private}\ \textcolor{keywordtype}{string}\ VERTICAL\_ScrollbarElementId\ =>\ \$\textcolor{stringliteral}{"{}luth\_te\_\{VERTICAL\_scrollbarGuid\}"{}};}
+\DoxyCodeLine{\Hypertarget{_scrollbar_section_8razor_8cs_source_l00042}00042\ \ \ \ \ \textcolor{keyword}{private}\ \textcolor{keywordtype}{string}\ VERTICAL\_ScrollbarSliderElementId\ =>\ \$\textcolor{stringliteral}{"{}luth\_te\_\{VERTICAL\_scrollbarGuid\}-\/slider"{}};}
+\DoxyCodeLine{\Hypertarget{_scrollbar_section_8razor_8cs_source_l00043}00043\ }
+\DoxyCodeLine{\Hypertarget{_scrollbar_section_8razor_8cs_source_l00044}00044\ \ \ \ \ \textcolor{keyword}{private}\ \textcolor{keywordtype}{bool}\ HORIZONTAL\_thinksLeftMouseButtonIsDown;}
+\DoxyCodeLine{\Hypertarget{_scrollbar_section_8razor_8cs_source_l00045}00045\ \ \ \ \ \textcolor{keyword}{private}\ \textcolor{keywordtype}{double}\ HORIZONTAL\_clientYThresholdToResetScrollLeftPosition;}
+\DoxyCodeLine{\Hypertarget{_scrollbar_section_8razor_8cs_source_l00046}00046\ \ \ \ \ \textcolor{keyword}{private}\ \textcolor{keywordtype}{double}\ HORIZONTAL\_scrollLeftOnMouseDown;}
+\DoxyCodeLine{\Hypertarget{_scrollbar_section_8razor_8cs_source_l00047}00047\ }
+\DoxyCodeLine{\Hypertarget{_scrollbar_section_8razor_8cs_source_l00048}00048\ \ \ \ \ \textcolor{keyword}{private}\ \textcolor{keywordtype}{string}\ HORIZONTAL\_ScrollbarElementId\ =>\ \$\textcolor{stringliteral}{"{}luth\_te\_\{HORIZONTAL\_scrollbarGuid\}"{}};}
+\DoxyCodeLine{\Hypertarget{_scrollbar_section_8razor_8cs_source_l00049}00049\ \ \ \ \ \textcolor{keyword}{private}\ \textcolor{keywordtype}{string}\ HORIZONTAL\_ScrollbarSliderElementId\ =>\ \$\textcolor{stringliteral}{"{}luth\_te\_\{HORIZONTAL\_scrollbarGuid\}-\/slider"{}};}
+\DoxyCodeLine{\Hypertarget{_scrollbar_section_8razor_8cs_source_l00050}00050\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_scrollbar_section_8razor_8cs_source_l00051}00051\ \ \ \ \ \textcolor{keyword}{private}\ Func<MouseEventArgs,\ MouseEventArgs,\ Task>?\ \_dragEventHandler\ =\ \textcolor{keyword}{null};}
+\DoxyCodeLine{\Hypertarget{_scrollbar_section_8razor_8cs_source_l00052}00052\ }
+\DoxyCodeLine{\Hypertarget{_scrollbar_section_8razor_8cs_source_l00053}\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_displays_1_1_internals_1_1_scrollbar_section_ac69d4b2bde4405104947833814dc088c}{00053}}\ \ \ \ \ \textcolor{keyword}{protected}\ \textcolor{keyword}{override}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_displays_1_1_internals_1_1_scrollbar_section_ac69d4b2bde4405104947833814dc088c}{OnInitialized}}()}
+\DoxyCodeLine{\Hypertarget{_scrollbar_section_8razor_8cs_source_l00054}00054\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_scrollbar_section_8razor_8cs_source_l00055}00055\ \ \ \ \ \ \ \ \ DragStateWrap.StateChanged\ +=\ DragStateWrapOnStateChanged;}
+\DoxyCodeLine{\Hypertarget{_scrollbar_section_8razor_8cs_source_l00056}00056\ \ \ \ \ \ \ \ \ base.OnInitialized();}
+\DoxyCodeLine{\Hypertarget{_scrollbar_section_8razor_8cs_source_l00057}00057\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_scrollbar_section_8razor_8cs_source_l00058}00058\ }
+\DoxyCodeLine{\Hypertarget{_scrollbar_section_8razor_8cs_source_l00059}00059\ \ \ \ \ \textcolor{keyword}{private}\ \textcolor{keywordtype}{string}\ HORIZONTAL\_GetScrollbarHorizontalStyleCss()}
+\DoxyCodeLine{\Hypertarget{_scrollbar_section_8razor_8cs_source_l00060}00060\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_scrollbar_section_8razor_8cs_source_l00061}00061\ \ \ \ \ \ \ \ \ var\ renderBatchLocal\ =\ RenderBatch;}
+\DoxyCodeLine{\Hypertarget{_scrollbar_section_8razor_8cs_source_l00062}00062\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (renderBatchLocal\ is\ \textcolor{keyword}{null})}
+\DoxyCodeLine{\Hypertarget{_scrollbar_section_8razor_8cs_source_l00063}00063\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keywordtype}{string}.Empty;}
+\DoxyCodeLine{\Hypertarget{_scrollbar_section_8razor_8cs_source_l00064}00064\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_scrollbar_section_8razor_8cs_source_l00065}00065\ \ \ \ \ \ \ \ \ var\ scrollbarWidthInPixels\ =\ renderBatchLocal.ViewModel.TextEditorDimensions.Width\ -\/}
+\DoxyCodeLine{\Hypertarget{_scrollbar_section_8razor_8cs_source_l00066}00066\ \ \ \ \ \ \ \ \ \ \ \ \ ScrollbarFacts.SCROLLBAR\_SIZE\_IN\_PIXELS;}
+\DoxyCodeLine{\Hypertarget{_scrollbar_section_8razor_8cs_source_l00067}00067\ }
+\DoxyCodeLine{\Hypertarget{_scrollbar_section_8razor_8cs_source_l00068}00068\ \ \ \ \ \ \ \ \ var\ scrollbarWidthInPixelsInvariantCulture\ =\ scrollbarWidthInPixels.ToCssValue();}
+\DoxyCodeLine{\Hypertarget{_scrollbar_section_8razor_8cs_source_l00069}00069\ \ \ \ \ \ \ \ \ var\ width\ =\ \$\textcolor{stringliteral}{"{}width:\ \{scrollbarWidthInPixelsInvariantCulture\}px;"{}};}
+\DoxyCodeLine{\Hypertarget{_scrollbar_section_8razor_8cs_source_l00070}00070\ }
+\DoxyCodeLine{\Hypertarget{_scrollbar_section_8razor_8cs_source_l00071}00071\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ width;}
+\DoxyCodeLine{\Hypertarget{_scrollbar_section_8razor_8cs_source_l00072}00072\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_scrollbar_section_8razor_8cs_source_l00073}00073\ }
+\DoxyCodeLine{\Hypertarget{_scrollbar_section_8razor_8cs_source_l00074}00074\ \ \ \ \ \textcolor{keyword}{private}\ \textcolor{keywordtype}{string}\ HORIZONTAL\_GetSliderHorizontalStyleCss()}
+\DoxyCodeLine{\Hypertarget{_scrollbar_section_8razor_8cs_source_l00075}00075\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_scrollbar_section_8razor_8cs_source_l00076}00076\ \ \ \ \ \ \ \ \ var\ renderBatchLocal\ =\ RenderBatch;}
+\DoxyCodeLine{\Hypertarget{_scrollbar_section_8razor_8cs_source_l00077}00077\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (renderBatchLocal\ is\ \textcolor{keyword}{null})}
+\DoxyCodeLine{\Hypertarget{_scrollbar_section_8razor_8cs_source_l00078}00078\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keywordtype}{string}.Empty;}
+\DoxyCodeLine{\Hypertarget{_scrollbar_section_8razor_8cs_source_l00079}00079\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_scrollbar_section_8razor_8cs_source_l00080}00080\ \ \ \ \ \ \ \ \ var\ scrollbarWidthInPixels\ =\ renderBatchLocal.ViewModel.TextEditorDimensions.Width\ -\/}
+\DoxyCodeLine{\Hypertarget{_scrollbar_section_8razor_8cs_source_l00081}00081\ \ \ \ \ \ \ \ \ \ \ \ \ ScrollbarFacts.SCROLLBAR\_SIZE\_IN\_PIXELS;}
+\DoxyCodeLine{\Hypertarget{_scrollbar_section_8razor_8cs_source_l00082}00082\ }
+\DoxyCodeLine{\Hypertarget{_scrollbar_section_8razor_8cs_source_l00083}00083\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Proportional\ Left}}
+\DoxyCodeLine{\Hypertarget{_scrollbar_section_8razor_8cs_source_l00084}00084\ \ \ \ \ \ \ \ \ var\ sliderProportionalLeftInPixels\ =\ renderBatchLocal.ViewModel.ScrollbarDimensions.ScrollLeft\ *}
+\DoxyCodeLine{\Hypertarget{_scrollbar_section_8razor_8cs_source_l00085}00085\ \ \ \ \ \ \ \ \ \ \ \ \ scrollbarWidthInPixels\ /}
+\DoxyCodeLine{\Hypertarget{_scrollbar_section_8razor_8cs_source_l00086}00086\ \ \ \ \ \ \ \ \ \ \ \ \ renderBatchLocal.\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1_1_internals_1_1_text_editor_render_batch_validated_a226564a134918a22e36bd4b6f417b717}{ViewModel}}.ScrollbarDimensions.ScrollWidth;}
+\DoxyCodeLine{\Hypertarget{_scrollbar_section_8razor_8cs_source_l00087}00087\ }
+\DoxyCodeLine{\Hypertarget{_scrollbar_section_8razor_8cs_source_l00088}00088\ \ \ \ \ \ \ \ \ var\ sliderProportionalLeftInPixelsInvariantCulture\ =\ sliderProportionalLeftInPixels.ToCssValue();}
+\DoxyCodeLine{\Hypertarget{_scrollbar_section_8razor_8cs_source_l00089}00089\ \ \ \ \ \ \ \ \ var\ left\ =\ \$\textcolor{stringliteral}{"{}left:\ \{sliderProportionalLeftInPixelsInvariantCulture\}px;"{}};}
+\DoxyCodeLine{\Hypertarget{_scrollbar_section_8razor_8cs_source_l00090}00090\ }
+\DoxyCodeLine{\Hypertarget{_scrollbar_section_8razor_8cs_source_l00091}00091\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Proportional\ Width}}
+\DoxyCodeLine{\Hypertarget{_scrollbar_section_8razor_8cs_source_l00092}00092\ \ \ \ \ \ \ \ \ var\ pageWidth\ =\ renderBatchLocal.ViewModel.TextEditorDimensions.Width;}
+\DoxyCodeLine{\Hypertarget{_scrollbar_section_8razor_8cs_source_l00093}00093\ }
+\DoxyCodeLine{\Hypertarget{_scrollbar_section_8razor_8cs_source_l00094}00094\ \ \ \ \ \ \ \ \ var\ sliderProportionalWidthInPixels\ =\ pageWidth\ *}
+\DoxyCodeLine{\Hypertarget{_scrollbar_section_8razor_8cs_source_l00095}00095\ \ \ \ \ \ \ \ \ \ \ \ \ scrollbarWidthInPixels\ /}
+\DoxyCodeLine{\Hypertarget{_scrollbar_section_8razor_8cs_source_l00096}00096\ \ \ \ \ \ \ \ \ \ \ \ \ renderBatchLocal.ViewModel.ScrollbarDimensions.ScrollWidth;}
+\DoxyCodeLine{\Hypertarget{_scrollbar_section_8razor_8cs_source_l00097}00097\ }
+\DoxyCodeLine{\Hypertarget{_scrollbar_section_8razor_8cs_source_l00098}00098\ \ \ \ \ \ \ \ \ var\ sliderProportionalWidthInPixelsInvariantCulture\ =\ sliderProportionalWidthInPixels.ToCssValue();}
+\DoxyCodeLine{\Hypertarget{_scrollbar_section_8razor_8cs_source_l00099}00099\ \ \ \ \ \ \ \ \ var\ width\ =\ \$\textcolor{stringliteral}{"{}width:\ \{sliderProportionalWidthInPixelsInvariantCulture\}px;"{}};}
+\DoxyCodeLine{\Hypertarget{_scrollbar_section_8razor_8cs_source_l00100}00100\ }
+\DoxyCodeLine{\Hypertarget{_scrollbar_section_8razor_8cs_source_l00101}00101\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \$\textcolor{stringliteral}{"{}\{left\}\ \{width\}"{}};}
+\DoxyCodeLine{\Hypertarget{_scrollbar_section_8razor_8cs_source_l00102}00102\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_scrollbar_section_8razor_8cs_source_l00103}00103\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_scrollbar_section_8razor_8cs_source_l00104}00104\ \ \ \ \ \textcolor{keyword}{private}\ \textcolor{keywordtype}{string}\ VERTICAL\_GetSliderVerticalStyleCss()}
+\DoxyCodeLine{\Hypertarget{_scrollbar_section_8razor_8cs_source_l00105}00105\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_scrollbar_section_8razor_8cs_source_l00106}00106\ \ \ \ \ \ \ \ \ var\ renderBatchLocal\ =\ RenderBatch;}
+\DoxyCodeLine{\Hypertarget{_scrollbar_section_8razor_8cs_source_l00107}00107\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (renderBatchLocal\ is\ \textcolor{keyword}{null})}
+\DoxyCodeLine{\Hypertarget{_scrollbar_section_8razor_8cs_source_l00108}00108\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keywordtype}{string}.Empty;}
+\DoxyCodeLine{\Hypertarget{_scrollbar_section_8razor_8cs_source_l00109}00109\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_scrollbar_section_8razor_8cs_source_l00110}00110\ \ \ \ \ \ \ \ \ var\ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_aa88b6eb61932a3f0562e94da59125234}{textEditorDimensions}}\ =\ renderBatchLocal.ViewModel.TextEditorDimensions;}
+\DoxyCodeLine{\Hypertarget{_scrollbar_section_8razor_8cs_source_l00111}00111\ \ \ \ \ \ \ \ \ var\ scrollBarDimensions\ =\ renderBatchLocal.ViewModel.ScrollbarDimensions;}
+\DoxyCodeLine{\Hypertarget{_scrollbar_section_8razor_8cs_source_l00112}00112\ }
+\DoxyCodeLine{\Hypertarget{_scrollbar_section_8razor_8cs_source_l00113}00113\ \ \ \ \ \ \ \ \ var\ scrollbarHeightInPixels\ =\ textEditorDimensions.Height\ -\/\ ScrollbarFacts.SCROLLBAR\_SIZE\_IN\_PIXELS;}
+\DoxyCodeLine{\Hypertarget{_scrollbar_section_8razor_8cs_source_l00114}00114\ }
+\DoxyCodeLine{\Hypertarget{_scrollbar_section_8razor_8cs_source_l00115}00115\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Proportional\ Top}}
+\DoxyCodeLine{\Hypertarget{_scrollbar_section_8razor_8cs_source_l00116}00116\ \ \ \ \ \ \ \ \ var\ sliderProportionalTopInPixels\ =\ scrollBarDimensions.ScrollTop\ *}
+\DoxyCodeLine{\Hypertarget{_scrollbar_section_8razor_8cs_source_l00117}00117\ \ \ \ \ \ \ \ \ \ \ \ \ scrollbarHeightInPixels\ /}
+\DoxyCodeLine{\Hypertarget{_scrollbar_section_8razor_8cs_source_l00118}00118\ \ \ \ \ \ \ \ \ \ \ \ \ scrollBarDimensions.ScrollHeight;}
+\DoxyCodeLine{\Hypertarget{_scrollbar_section_8razor_8cs_source_l00119}00119\ }
+\DoxyCodeLine{\Hypertarget{_scrollbar_section_8razor_8cs_source_l00120}00120\ \ \ \ \ \ \ \ \ var\ sliderProportionalTopInPixelsInvariantCulture\ =\ sliderProportionalTopInPixels.ToCssValue();}
+\DoxyCodeLine{\Hypertarget{_scrollbar_section_8razor_8cs_source_l00121}00121\ }
+\DoxyCodeLine{\Hypertarget{_scrollbar_section_8razor_8cs_source_l00122}00122\ \ \ \ \ \ \ \ \ var\ top\ =\ \$\textcolor{stringliteral}{"{}top:\ \{sliderProportionalTopInPixelsInvariantCulture\}px;"{}};}
+\DoxyCodeLine{\Hypertarget{_scrollbar_section_8razor_8cs_source_l00123}00123\ }
+\DoxyCodeLine{\Hypertarget{_scrollbar_section_8razor_8cs_source_l00124}00124\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Proportional\ Height}}
+\DoxyCodeLine{\Hypertarget{_scrollbar_section_8razor_8cs_source_l00125}00125\ \ \ \ \ \ \ \ \ var\ pageHeight\ =\ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_aa88b6eb61932a3f0562e94da59125234}{textEditorDimensions}}.Height;}
+\DoxyCodeLine{\Hypertarget{_scrollbar_section_8razor_8cs_source_l00126}00126\ }
+\DoxyCodeLine{\Hypertarget{_scrollbar_section_8razor_8cs_source_l00127}00127\ \ \ \ \ \ \ \ \ var\ sliderProportionalHeightInPixels\ =\ pageHeight\ *}
+\DoxyCodeLine{\Hypertarget{_scrollbar_section_8razor_8cs_source_l00128}00128\ \ \ \ \ \ \ \ \ \ \ \ \ scrollbarHeightInPixels\ /}
+\DoxyCodeLine{\Hypertarget{_scrollbar_section_8razor_8cs_source_l00129}00129\ \ \ \ \ \ \ \ \ \ \ \ \ scrollBarDimensions.ScrollHeight;}
+\DoxyCodeLine{\Hypertarget{_scrollbar_section_8razor_8cs_source_l00130}00130\ }
+\DoxyCodeLine{\Hypertarget{_scrollbar_section_8razor_8cs_source_l00131}00131\ \ \ \ \ \ \ \ \ var\ sliderProportionalHeightInPixelsInvariantCulture\ =\ sliderProportionalHeightInPixels.ToCssValue();}
+\DoxyCodeLine{\Hypertarget{_scrollbar_section_8razor_8cs_source_l00132}00132\ }
+\DoxyCodeLine{\Hypertarget{_scrollbar_section_8razor_8cs_source_l00133}00133\ \ \ \ \ \ \ \ \ var\ height\ =\ \$\textcolor{stringliteral}{"{}height:\ \{sliderProportionalHeightInPixelsInvariantCulture\}px;"{}};}
+\DoxyCodeLine{\Hypertarget{_scrollbar_section_8razor_8cs_source_l00134}00134\ }
+\DoxyCodeLine{\Hypertarget{_scrollbar_section_8razor_8cs_source_l00135}00135\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \$\textcolor{stringliteral}{"{}\{top\}\ \{height\}"{}};}
+\DoxyCodeLine{\Hypertarget{_scrollbar_section_8razor_8cs_source_l00136}00136\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_scrollbar_section_8razor_8cs_source_l00137}00137\ }
+\DoxyCodeLine{\Hypertarget{_scrollbar_section_8razor_8cs_source_l00138}00138\ \ \ \ \ \textcolor{keyword}{private}\ async\ Task\ HORIZONTAL\_HandleOnMouseDownAsync(MouseEventArgs\ mouseEventArgs)}
+\DoxyCodeLine{\Hypertarget{_scrollbar_section_8razor_8cs_source_l00139}00139\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_scrollbar_section_8razor_8cs_source_l00140}00140\ \ \ \ \ \ \ \ \ var\ renderBatchLocal\ =\ RenderBatch;}
+\DoxyCodeLine{\Hypertarget{_scrollbar_section_8razor_8cs_source_l00141}00141\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (renderBatchLocal\ is\ \textcolor{keyword}{null})}
+\DoxyCodeLine{\Hypertarget{_scrollbar_section_8razor_8cs_source_l00142}00142\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return};}
+\DoxyCodeLine{\Hypertarget{_scrollbar_section_8razor_8cs_source_l00143}00143\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_scrollbar_section_8razor_8cs_source_l00144}00144\ \ \ \ \ \ \ \ \ HORIZONTAL\_thinksLeftMouseButtonIsDown\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{\Hypertarget{_scrollbar_section_8razor_8cs_source_l00145}00145\ \ \ \ \ \ \ \ \ HORIZONTAL\_scrollLeftOnMouseDown\ =\ renderBatchLocal.\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1_1_internals_1_1_text_editor_render_batch_validated_a226564a134918a22e36bd4b6f417b717}{ViewModel}}.ScrollbarDimensions.ScrollLeft;}
+\DoxyCodeLine{\Hypertarget{_scrollbar_section_8razor_8cs_source_l00146}00146\ }
+\DoxyCodeLine{\Hypertarget{_scrollbar_section_8razor_8cs_source_l00147}00147\ \ \ \ \ \ \ \ \ var\ scrollbarBoundingClientRect\ =\ await\ \mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editor_service_a8868b2c9cf3bf7bd7e49abfa9ddef2c0}{TextEditorService.JsRuntimeCommonApi}}}
+\DoxyCodeLine{\Hypertarget{_scrollbar_section_8razor_8cs_source_l00148}00148\ \ \ \ \ \ \ \ \ \ \ \ \ .MeasureElementById(HORIZONTAL\_ScrollbarElementId)}
+\DoxyCodeLine{\Hypertarget{_scrollbar_section_8razor_8cs_source_l00149}00149\ \ \ \ \ \ \ \ \ \ \ \ \ .ConfigureAwait(\textcolor{keyword}{false});}
+\DoxyCodeLine{\Hypertarget{_scrollbar_section_8razor_8cs_source_l00150}00150\ }
+\DoxyCodeLine{\Hypertarget{_scrollbar_section_8razor_8cs_source_l00151}00151\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Drag\ far\ up\ to\ reset\ scroll\ to\ original}}
+\DoxyCodeLine{\Hypertarget{_scrollbar_section_8razor_8cs_source_l00152}00152\ \ \ \ \ \ \ \ \ var\ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_aa88b6eb61932a3f0562e94da59125234}{textEditorDimensions}}\ =\ renderBatchLocal.ViewModel.TextEditorDimensions;}
+\DoxyCodeLine{\Hypertarget{_scrollbar_section_8razor_8cs_source_l00153}00153\ \ \ \ \ \ \ \ \ var\ distanceBetweenTopEditorAndTopScrollbar\ =\ scrollbarBoundingClientRect.TopInPixels\ -\/\ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_aa88b6eb61932a3f0562e94da59125234}{textEditorDimensions}}.BoundingClientRectTop;}
+\DoxyCodeLine{\Hypertarget{_scrollbar_section_8razor_8cs_source_l00154}00154\ \ \ \ \ \ \ \ \ HORIZONTAL\_clientYThresholdToResetScrollLeftPosition\ =\ scrollbarBoundingClientRect.TopInPixels\ -\/\ DISTANCE\_TO\_RESET\_SCROLL\_POSITION;}
+\DoxyCodeLine{\Hypertarget{_scrollbar_section_8razor_8cs_source_l00155}00155\ }
+\DoxyCodeLine{\Hypertarget{_scrollbar_section_8razor_8cs_source_l00156}00156\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Subscribe\ to\ the\ drag\ events}}
+\DoxyCodeLine{\Hypertarget{_scrollbar_section_8razor_8cs_source_l00157}00157\ \ \ \ \ \ \ \ \ \textcolor{comment}{//}}
+\DoxyCodeLine{\Hypertarget{_scrollbar_section_8razor_8cs_source_l00158}00158\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ NOTE:\ '\_mouseDownEventArgs'\ being\ non-\/null\ is\ what\ indicates\ that\ the\ subscription\ is\ active.}}
+\DoxyCodeLine{\Hypertarget{_scrollbar_section_8razor_8cs_source_l00159}00159\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ So\ be\ wary\ if\ one\ intends\ to\ move\ its\ assignment\ elsewhere.}}
+\DoxyCodeLine{\Hypertarget{_scrollbar_section_8razor_8cs_source_l00160}00160\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_scrollbar_section_8razor_8cs_source_l00161}00161\ \ \ \ \ \ \ \ \ \ \ \ \ \_mouseDownEventArgs\ =\ mouseEventArgs;}
+\DoxyCodeLine{\Hypertarget{_scrollbar_section_8razor_8cs_source_l00162}00162\ \ \ \ \ \ \ \ \ \ \ \ \ \_dragEventHandler\ =\ HORIZONTAL\_DragEventHandlerScrollAsync;}
+\DoxyCodeLine{\Hypertarget{_scrollbar_section_8razor_8cs_source_l00163}00163\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_scrollbar_section_8razor_8cs_source_l00164}00164\ \ \ \ \ \ \ \ \ \ \ \ \ Dispatcher.Dispatch(\textcolor{keyword}{new}\ \mbox{\hyperlink{namespace_luthetus_1_1_common_1_1_razor_lib_1_1_drags_1_1_displays_a2158af3f35275731447356de1965b7cb}{DragState}}.ShouldDisplayAndMouseEventArgsSetAction(\textcolor{keyword}{true},\ \textcolor{keyword}{null}));}
+\DoxyCodeLine{\Hypertarget{_scrollbar_section_8razor_8cs_source_l00165}00165\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_scrollbar_section_8razor_8cs_source_l00166}00166\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_scrollbar_section_8razor_8cs_source_l00167}00167\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_scrollbar_section_8razor_8cs_source_l00168}00168\ \ \ \ \ \textcolor{keyword}{private}\ async\ Task\ VERTICAL\_HandleOnMouseDownAsync(MouseEventArgs\ mouseEventArgs)}
+\DoxyCodeLine{\Hypertarget{_scrollbar_section_8razor_8cs_source_l00169}00169\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_scrollbar_section_8razor_8cs_source_l00170}00170\ \ \ \ \ \ \ \ \ var\ renderBatchLocal\ =\ RenderBatch;}
+\DoxyCodeLine{\Hypertarget{_scrollbar_section_8razor_8cs_source_l00171}00171\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (renderBatchLocal\ is\ \textcolor{keyword}{null})}
+\DoxyCodeLine{\Hypertarget{_scrollbar_section_8razor_8cs_source_l00172}00172\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return};}
+\DoxyCodeLine{\Hypertarget{_scrollbar_section_8razor_8cs_source_l00173}00173\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_scrollbar_section_8razor_8cs_source_l00174}00174\ \ \ \ \ \ \ \ \ VERTICAL\_thinksLeftMouseButtonIsDown\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{\Hypertarget{_scrollbar_section_8razor_8cs_source_l00175}00175\ \ \ \ \ \ \ \ \ VERTICAL\_scrollTopOnMouseDown\ =\ renderBatchLocal.\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1_1_internals_1_1_text_editor_render_batch_validated_a226564a134918a22e36bd4b6f417b717}{ViewModel}}.ScrollbarDimensions.ScrollTop;}
+\DoxyCodeLine{\Hypertarget{_scrollbar_section_8razor_8cs_source_l00176}00176\ }
+\DoxyCodeLine{\Hypertarget{_scrollbar_section_8razor_8cs_source_l00177}00177\ \ \ \ \ \ \ \ \ var\ scrollbarBoundingClientRect\ =\ await\ \mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editor_service_a8868b2c9cf3bf7bd7e49abfa9ddef2c0}{TextEditorService.JsRuntimeCommonApi}}}
+\DoxyCodeLine{\Hypertarget{_scrollbar_section_8razor_8cs_source_l00178}00178\ \ \ \ \ \ \ \ \ \ \ \ \ .MeasureElementById(VERTICAL\_ScrollbarElementId)}
+\DoxyCodeLine{\Hypertarget{_scrollbar_section_8razor_8cs_source_l00179}00179\ \ \ \ \ \ \ \ \ \ \ \ \ .ConfigureAwait(\textcolor{keyword}{false});}
+\DoxyCodeLine{\Hypertarget{_scrollbar_section_8razor_8cs_source_l00180}00180\ }
+\DoxyCodeLine{\Hypertarget{_scrollbar_section_8razor_8cs_source_l00181}00181\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Drag\ far\ left\ to\ reset\ scroll\ to\ original}}
+\DoxyCodeLine{\Hypertarget{_scrollbar_section_8razor_8cs_source_l00182}00182\ \ \ \ \ \ \ \ \ var\ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_aa88b6eb61932a3f0562e94da59125234}{textEditorDimensions}}\ =\ renderBatchLocal.ViewModel.TextEditorDimensions;}
+\DoxyCodeLine{\Hypertarget{_scrollbar_section_8razor_8cs_source_l00183}00183\ \ \ \ \ \ \ \ \ var\ distanceBetweenLeftEditorAndLeftScrollbar\ =\ scrollbarBoundingClientRect.LeftInPixels\ -\/\ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_aa88b6eb61932a3f0562e94da59125234}{textEditorDimensions}}.BoundingClientRectLeft;}
+\DoxyCodeLine{\Hypertarget{_scrollbar_section_8razor_8cs_source_l00184}00184\ \ \ \ \ \ \ \ \ VERTICAL\_clientXThresholdToResetScrollTopPosition\ =\ scrollbarBoundingClientRect.LeftInPixels\ -\/\ DISTANCE\_TO\_RESET\_SCROLL\_POSITION;}
+\DoxyCodeLine{\Hypertarget{_scrollbar_section_8razor_8cs_source_l00185}00185\ }
+\DoxyCodeLine{\Hypertarget{_scrollbar_section_8razor_8cs_source_l00186}00186\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Subscribe\ to\ the\ drag\ events}}
+\DoxyCodeLine{\Hypertarget{_scrollbar_section_8razor_8cs_source_l00187}00187\ \ \ \ \ \ \ \ \ \textcolor{comment}{//}}
+\DoxyCodeLine{\Hypertarget{_scrollbar_section_8razor_8cs_source_l00188}00188\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ NOTE:\ '\_mouseDownEventArgs'\ being\ non-\/null\ is\ what\ indicates\ that\ the\ subscription\ is\ active.}}
+\DoxyCodeLine{\Hypertarget{_scrollbar_section_8razor_8cs_source_l00189}00189\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ So\ be\ wary\ if\ one\ intends\ to\ move\ its\ assignment\ elsewhere.}}
+\DoxyCodeLine{\Hypertarget{_scrollbar_section_8razor_8cs_source_l00190}00190\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_scrollbar_section_8razor_8cs_source_l00191}00191\ \ \ \ \ \ \ \ \ \ \ \ \ \_mouseDownEventArgs\ =\ mouseEventArgs;}
+\DoxyCodeLine{\Hypertarget{_scrollbar_section_8razor_8cs_source_l00192}00192\ \ \ \ \ \ \ \ \ \ \ \ \ \_dragEventHandler\ =\ VERTICAL\_DragEventHandlerScrollAsync;}
+\DoxyCodeLine{\Hypertarget{_scrollbar_section_8razor_8cs_source_l00193}00193\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_scrollbar_section_8razor_8cs_source_l00194}00194\ \ \ \ \ \ \ \ \ \ \ \ \ Dispatcher.Dispatch(\textcolor{keyword}{new}\ \mbox{\hyperlink{namespace_luthetus_1_1_common_1_1_razor_lib_1_1_drags_1_1_displays_a2158af3f35275731447356de1965b7cb}{DragState}}.ShouldDisplayAndMouseEventArgsSetAction(\textcolor{keyword}{true},\ \textcolor{keyword}{null}));}
+\DoxyCodeLine{\Hypertarget{_scrollbar_section_8razor_8cs_source_l00195}00195\ \ \ \ \ \ \ \ \ \}\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_scrollbar_section_8razor_8cs_source_l00196}00196\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_scrollbar_section_8razor_8cs_source_l00197}00197\ }
+\DoxyCodeLine{\Hypertarget{_scrollbar_section_8razor_8cs_source_l00198}00198\ \ \ \ \ \textcolor{keyword}{private}\ async\ \textcolor{keywordtype}{void}\ DragStateWrapOnStateChanged(\textcolor{keywordtype}{object}?\ sender,\ EventArgs\ e)}
+\DoxyCodeLine{\Hypertarget{_scrollbar_section_8razor_8cs_source_l00199}00199\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_scrollbar_section_8razor_8cs_source_l00200}00200\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!DragStateWrap.Value.ShouldDisplay)}
+\DoxyCodeLine{\Hypertarget{_scrollbar_section_8razor_8cs_source_l00201}00201\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_scrollbar_section_8razor_8cs_source_l00202}00202\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ NOTE:\ '\_mouseDownEventArgs'\ being\ non-\/null\ is\ what\ indicates\ that\ the\ subscription\ is\ active.}}
+\DoxyCodeLine{\Hypertarget{_scrollbar_section_8razor_8cs_source_l00203}00203\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ So\ be\ wary\ if\ one\ intends\ to\ move\ its\ assignment\ elsewhere.}}
+\DoxyCodeLine{\Hypertarget{_scrollbar_section_8razor_8cs_source_l00204}00204\ \ \ \ \ \ \ \ \ \ \ \ \ \_mouseDownEventArgs\ =\ \textcolor{keyword}{null};}
+\DoxyCodeLine{\Hypertarget{_scrollbar_section_8razor_8cs_source_l00205}00205\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_scrollbar_section_8razor_8cs_source_l00206}00206\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{\Hypertarget{_scrollbar_section_8razor_8cs_source_l00207}00207\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_scrollbar_section_8razor_8cs_source_l00208}00208\ \ \ \ \ \ \ \ \ \ \ \ \ var\ localMouseDownEventArgs\ =\ \_mouseDownEventArgs;}
+\DoxyCodeLine{\Hypertarget{_scrollbar_section_8razor_8cs_source_l00209}00209\ \ \ \ \ \ \ \ \ \ \ \ \ var\ dragEventArgs\ =\ DragStateWrap.Value.MouseEventArgs;}
+\DoxyCodeLine{\Hypertarget{_scrollbar_section_8razor_8cs_source_l00210}00210\ \ \ \ \ \ \ \ \ \ \ \ \ var\ localDragEventHandler\ =\ \_dragEventHandler;}
+\DoxyCodeLine{\Hypertarget{_scrollbar_section_8razor_8cs_source_l00211}00211\ }
+\DoxyCodeLine{\Hypertarget{_scrollbar_section_8razor_8cs_source_l00212}00212\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (localMouseDownEventArgs\ is\ not\ \textcolor{keyword}{null}\ \&\&\ dragEventArgs\ is\ not\ \textcolor{keyword}{null})}
+\DoxyCodeLine{\Hypertarget{_scrollbar_section_8razor_8cs_source_l00213}00213\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ await\ localDragEventHandler.Invoke(localMouseDownEventArgs,\ dragEventArgs).ConfigureAwait(\textcolor{keyword}{false});}
+\DoxyCodeLine{\Hypertarget{_scrollbar_section_8razor_8cs_source_l00214}00214\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_scrollbar_section_8razor_8cs_source_l00215}00215\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_scrollbar_section_8razor_8cs_source_l00216}00216\ }
+\DoxyCodeLine{\Hypertarget{_scrollbar_section_8razor_8cs_source_l00217}00217\ \ \ \ \ \textcolor{keyword}{private}\ Task\ HORIZONTAL\_DragEventHandlerScrollAsync(MouseEventArgs\ localMouseDownEventArgs,\ MouseEventArgs\ onDragMouseEventArgs)}
+\DoxyCodeLine{\Hypertarget{_scrollbar_section_8razor_8cs_source_l00218}00218\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_scrollbar_section_8razor_8cs_source_l00219}00219\ \ \ \ \ \ \ \ \ var\ renderBatchLocal\ =\ RenderBatch;}
+\DoxyCodeLine{\Hypertarget{_scrollbar_section_8razor_8cs_source_l00220}00220\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (renderBatchLocal\ is\ \textcolor{keyword}{null})}
+\DoxyCodeLine{\Hypertarget{_scrollbar_section_8razor_8cs_source_l00221}00221\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ Task.CompletedTask;}
+\DoxyCodeLine{\Hypertarget{_scrollbar_section_8razor_8cs_source_l00222}00222\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_scrollbar_section_8razor_8cs_source_l00223}00223\ \ \ \ \ \ \ \ \ var\ localThinksLeftMouseButtonIsDown\ =\ HORIZONTAL\_thinksLeftMouseButtonIsDown;}
+\DoxyCodeLine{\Hypertarget{_scrollbar_section_8razor_8cs_source_l00224}00224\ }
+\DoxyCodeLine{\Hypertarget{_scrollbar_section_8razor_8cs_source_l00225}00225\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!localThinksLeftMouseButtonIsDown)}
+\DoxyCodeLine{\Hypertarget{_scrollbar_section_8razor_8cs_source_l00226}00226\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ Task.CompletedTask;}
+\DoxyCodeLine{\Hypertarget{_scrollbar_section_8razor_8cs_source_l00227}00227\ }
+\DoxyCodeLine{\Hypertarget{_scrollbar_section_8razor_8cs_source_l00228}00228\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Buttons\ is\ a\ bit\ flag\ '\&\ 1'\ gets\ if\ left\ mouse\ button\ is\ held}}
+\DoxyCodeLine{\Hypertarget{_scrollbar_section_8razor_8cs_source_l00229}00229\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (localThinksLeftMouseButtonIsDown\ \&\&\ (onDragMouseEventArgs.Buttons\ \&\ 1)\ ==\ 1)}
+\DoxyCodeLine{\Hypertarget{_scrollbar_section_8razor_8cs_source_l00230}00230\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_scrollbar_section_8razor_8cs_source_l00231}00231\ \ \ \ \ \ \ \ \ \ \ \ \ var\ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_aa88b6eb61932a3f0562e94da59125234}{textEditorDimensions}}\ =\ renderBatchLocal.ViewModel.TextEditorDimensions;}
+\DoxyCodeLine{\Hypertarget{_scrollbar_section_8razor_8cs_source_l00232}00232\ \ \ \ \ \ \ \ \ \ \ \ \ var\ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_adff938f4a5c2b32938f2597d52525338}{scrollbarDimensions}}\ =\ renderBatchLocal.ViewModel.ScrollbarDimensions;}
+\DoxyCodeLine{\Hypertarget{_scrollbar_section_8razor_8cs_source_l00233}00233\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_scrollbar_section_8razor_8cs_source_l00234}00234\ \ \ \ \ \ \ \ \ \ \ \ \ OnScrollHorizontal\ onScrollHorizontal;}
+\DoxyCodeLine{\Hypertarget{_scrollbar_section_8razor_8cs_source_l00235}00235\ }
+\DoxyCodeLine{\Hypertarget{_scrollbar_section_8razor_8cs_source_l00236}00236\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (onDragMouseEventArgs.ClientY\ <\ HORIZONTAL\_clientYThresholdToResetScrollLeftPosition)}
+\DoxyCodeLine{\Hypertarget{_scrollbar_section_8razor_8cs_source_l00237}00237\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_scrollbar_section_8razor_8cs_source_l00238}00238\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Drag\ far\ left\ to\ reset\ scroll\ to\ original}}
+\DoxyCodeLine{\Hypertarget{_scrollbar_section_8razor_8cs_source_l00239}00239\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ onScrollHorizontal\ =\ \textcolor{keyword}{new}\ OnScrollHorizontal(}
+\DoxyCodeLine{\Hypertarget{_scrollbar_section_8razor_8cs_source_l00240}00240\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ HORIZONTAL\_scrollLeftOnMouseDown,}
+\DoxyCodeLine{\Hypertarget{_scrollbar_section_8razor_8cs_source_l00241}00241\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ renderBatchLocal.ComponentData,}
+\DoxyCodeLine{\Hypertarget{_scrollbar_section_8razor_8cs_source_l00242}00242\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ renderBatchLocal.ViewModel.ViewModelKey);}
+\DoxyCodeLine{\Hypertarget{_scrollbar_section_8razor_8cs_source_l00243}00243\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_scrollbar_section_8razor_8cs_source_l00244}00244\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{\Hypertarget{_scrollbar_section_8razor_8cs_source_l00245}00245\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_scrollbar_section_8razor_8cs_source_l00246}00246\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ var\ diffX\ =\ onDragMouseEventArgs.ClientX\ -\/\ localMouseDownEventArgs.ClientX;}
+\DoxyCodeLine{\Hypertarget{_scrollbar_section_8razor_8cs_source_l00247}00247\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_scrollbar_section_8razor_8cs_source_l00248}00248\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ var\ scrollbarWidthInPixels\ =\ textEditorDimensions.Width\ -\/\ ScrollbarFacts.SCROLLBAR\_SIZE\_IN\_PIXELS;}
+\DoxyCodeLine{\Hypertarget{_scrollbar_section_8razor_8cs_source_l00249}00249\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_scrollbar_section_8razor_8cs_source_l00250}00250\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ var\ scrollLeft\ =\ HORIZONTAL\_scrollLeftOnMouseDown\ +}
+\DoxyCodeLine{\Hypertarget{_scrollbar_section_8razor_8cs_source_l00251}00251\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ diffX\ *}
+\DoxyCodeLine{\Hypertarget{_scrollbar_section_8razor_8cs_source_l00252}00252\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ scrollbarDimensions.ScrollWidth\ /}
+\DoxyCodeLine{\Hypertarget{_scrollbar_section_8razor_8cs_source_l00253}00253\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ scrollbarWidthInPixels;}
+\DoxyCodeLine{\Hypertarget{_scrollbar_section_8razor_8cs_source_l00254}00254\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_scrollbar_section_8razor_8cs_source_l00255}00255\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (scrollLeft\ +\ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_aa88b6eb61932a3f0562e94da59125234}{textEditorDimensions}}.Width\ >\ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_adff938f4a5c2b32938f2597d52525338}{scrollbarDimensions}}.ScrollWidth)}
+\DoxyCodeLine{\Hypertarget{_scrollbar_section_8razor_8cs_source_l00256}00256\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ scrollLeft\ =\ scrollbarDimensions.ScrollWidth\ -\/\ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_aa88b6eb61932a3f0562e94da59125234}{textEditorDimensions}}.Width;}
+\DoxyCodeLine{\Hypertarget{_scrollbar_section_8razor_8cs_source_l00257}00257\ }
+\DoxyCodeLine{\Hypertarget{_scrollbar_section_8razor_8cs_source_l00258}00258\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (scrollLeft\ <\ 0)}
+\DoxyCodeLine{\Hypertarget{_scrollbar_section_8razor_8cs_source_l00259}00259\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ scrollLeft\ =\ 0;}
+\DoxyCodeLine{\Hypertarget{_scrollbar_section_8razor_8cs_source_l00260}00260\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_scrollbar_section_8razor_8cs_source_l00261}00261\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ onScrollHorizontal\ =\ \textcolor{keyword}{new}\ OnScrollHorizontal(}
+\DoxyCodeLine{\Hypertarget{_scrollbar_section_8razor_8cs_source_l00262}00262\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ scrollLeft,}
+\DoxyCodeLine{\Hypertarget{_scrollbar_section_8razor_8cs_source_l00263}00263\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ renderBatchLocal.ComponentData,}
+\DoxyCodeLine{\Hypertarget{_scrollbar_section_8razor_8cs_source_l00264}00264\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ renderBatchLocal.ViewModel.ViewModelKey);}
+\DoxyCodeLine{\Hypertarget{_scrollbar_section_8razor_8cs_source_l00265}00265\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_scrollbar_section_8razor_8cs_source_l00266}00266\ }
+\DoxyCodeLine{\Hypertarget{_scrollbar_section_8razor_8cs_source_l00267}00267\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_abe7fad0a7df96f414b675b6af70f260d}{TextEditorService}}.\mbox{\hyperlink{interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_i_text_editor_service_ac98ec2e6999586f8b270757fc15c26c7}{Post}}(onScrollHorizontal);}
+\DoxyCodeLine{\Hypertarget{_scrollbar_section_8razor_8cs_source_l00268}00268\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_scrollbar_section_8razor_8cs_source_l00269}00269\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{\Hypertarget{_scrollbar_section_8razor_8cs_source_l00270}00270\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_scrollbar_section_8razor_8cs_source_l00271}00271\ \ \ \ \ \ \ \ \ \ \ \ \ HORIZONTAL\_thinksLeftMouseButtonIsDown\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{\Hypertarget{_scrollbar_section_8razor_8cs_source_l00272}00272\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_scrollbar_section_8razor_8cs_source_l00273}00273\ }
+\DoxyCodeLine{\Hypertarget{_scrollbar_section_8razor_8cs_source_l00274}00274\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ Task.CompletedTask;}
+\DoxyCodeLine{\Hypertarget{_scrollbar_section_8razor_8cs_source_l00275}00275\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_scrollbar_section_8razor_8cs_source_l00276}00276\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_scrollbar_section_8razor_8cs_source_l00277}00277\ \ \ \ \ \textcolor{keyword}{private}\ Task\ VERTICAL\_DragEventHandlerScrollAsync(MouseEventArgs\ localMouseDownEventArgs,\ MouseEventArgs\ onDragMouseEventArgs)}
+\DoxyCodeLine{\Hypertarget{_scrollbar_section_8razor_8cs_source_l00278}00278\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_scrollbar_section_8razor_8cs_source_l00279}00279\ \ \ \ \ \ \ \ \ var\ renderBatchLocal\ =\ RenderBatch;}
+\DoxyCodeLine{\Hypertarget{_scrollbar_section_8razor_8cs_source_l00280}00280\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (renderBatchLocal\ is\ \textcolor{keyword}{null})}
+\DoxyCodeLine{\Hypertarget{_scrollbar_section_8razor_8cs_source_l00281}00281\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ Task.CompletedTask;}
+\DoxyCodeLine{\Hypertarget{_scrollbar_section_8razor_8cs_source_l00282}00282\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_scrollbar_section_8razor_8cs_source_l00283}00283\ \ \ \ \ \ \ \ \ var\ localThinksLeftMouseButtonIsDown\ =\ VERTICAL\_thinksLeftMouseButtonIsDown;}
+\DoxyCodeLine{\Hypertarget{_scrollbar_section_8razor_8cs_source_l00284}00284\ }
+\DoxyCodeLine{\Hypertarget{_scrollbar_section_8razor_8cs_source_l00285}00285\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!localThinksLeftMouseButtonIsDown)}
+\DoxyCodeLine{\Hypertarget{_scrollbar_section_8razor_8cs_source_l00286}00286\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ Task.CompletedTask;}
+\DoxyCodeLine{\Hypertarget{_scrollbar_section_8razor_8cs_source_l00287}00287\ }
+\DoxyCodeLine{\Hypertarget{_scrollbar_section_8razor_8cs_source_l00288}00288\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Buttons\ is\ a\ bit\ flag\ '\&\ 1'\ gets\ if\ left\ mouse\ button\ is\ held}}
+\DoxyCodeLine{\Hypertarget{_scrollbar_section_8razor_8cs_source_l00289}00289\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (localThinksLeftMouseButtonIsDown\ \&\&\ (onDragMouseEventArgs.Buttons\ \&\ 1)\ ==\ 1)}
+\DoxyCodeLine{\Hypertarget{_scrollbar_section_8razor_8cs_source_l00290}00290\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_scrollbar_section_8razor_8cs_source_l00291}00291\ \ \ \ \ \ \ \ \ \ \ \ \ var\ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_aa88b6eb61932a3f0562e94da59125234}{textEditorDimensions}}\ =\ renderBatchLocal.ViewModel.TextEditorDimensions;}
+\DoxyCodeLine{\Hypertarget{_scrollbar_section_8razor_8cs_source_l00292}00292\ \ \ \ \ \ \ \ \ \ \ \ \ var\ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_adff938f4a5c2b32938f2597d52525338}{scrollbarDimensions}}\ =\ renderBatchLocal.ViewModel.ScrollbarDimensions;}
+\DoxyCodeLine{\Hypertarget{_scrollbar_section_8razor_8cs_source_l00293}00293\ }
+\DoxyCodeLine{\Hypertarget{_scrollbar_section_8razor_8cs_source_l00294}00294\ \ \ \ \ \ \ \ \ \ \ \ \ OnScrollVertical\ onScrollVertical;}
+\DoxyCodeLine{\Hypertarget{_scrollbar_section_8razor_8cs_source_l00295}00295\ }
+\DoxyCodeLine{\Hypertarget{_scrollbar_section_8razor_8cs_source_l00296}00296\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (onDragMouseEventArgs.ClientX\ <\ VERTICAL\_clientXThresholdToResetScrollTopPosition)}
+\DoxyCodeLine{\Hypertarget{_scrollbar_section_8razor_8cs_source_l00297}00297\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_scrollbar_section_8razor_8cs_source_l00298}00298\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Drag\ far\ left\ to\ reset\ scroll\ to\ original}}
+\DoxyCodeLine{\Hypertarget{_scrollbar_section_8razor_8cs_source_l00299}00299\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ onScrollVertical\ =\ \textcolor{keyword}{new}\ OnScrollVertical(}
+\DoxyCodeLine{\Hypertarget{_scrollbar_section_8razor_8cs_source_l00300}00300\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ VERTICAL\_scrollTopOnMouseDown,}
+\DoxyCodeLine{\Hypertarget{_scrollbar_section_8razor_8cs_source_l00301}00301\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ renderBatchLocal.ComponentData,}
+\DoxyCodeLine{\Hypertarget{_scrollbar_section_8razor_8cs_source_l00302}00302\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ renderBatchLocal.ViewModel.ViewModelKey);}
+\DoxyCodeLine{\Hypertarget{_scrollbar_section_8razor_8cs_source_l00303}00303\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_scrollbar_section_8razor_8cs_source_l00304}00304\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{\Hypertarget{_scrollbar_section_8razor_8cs_source_l00305}00305\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_scrollbar_section_8razor_8cs_source_l00306}00306\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ var\ diffY\ =\ onDragMouseEventArgs.ClientY\ -\/\ localMouseDownEventArgs.ClientY;}
+\DoxyCodeLine{\Hypertarget{_scrollbar_section_8razor_8cs_source_l00307}00307\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_scrollbar_section_8razor_8cs_source_l00308}00308\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ var\ scrollbarHeightInPixels\ =\ textEditorDimensions.Height\ -\/\ ScrollbarFacts.SCROLLBAR\_SIZE\_IN\_PIXELS;}
+\DoxyCodeLine{\Hypertarget{_scrollbar_section_8razor_8cs_source_l00309}00309\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_scrollbar_section_8razor_8cs_source_l00310}00310\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ var\ scrollTop\ =\ VERTICAL\_scrollTopOnMouseDown\ +}
+\DoxyCodeLine{\Hypertarget{_scrollbar_section_8razor_8cs_source_l00311}00311\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ diffY\ *}
+\DoxyCodeLine{\Hypertarget{_scrollbar_section_8razor_8cs_source_l00312}00312\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ scrollbarDimensions.ScrollHeight\ /}
+\DoxyCodeLine{\Hypertarget{_scrollbar_section_8razor_8cs_source_l00313}00313\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ scrollbarHeightInPixels;}
+\DoxyCodeLine{\Hypertarget{_scrollbar_section_8razor_8cs_source_l00314}00314\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_scrollbar_section_8razor_8cs_source_l00315}00315\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (scrollTop\ +\ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_aa88b6eb61932a3f0562e94da59125234}{textEditorDimensions}}.Height\ >\ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_adff938f4a5c2b32938f2597d52525338}{scrollbarDimensions}}.ScrollHeight)}
+\DoxyCodeLine{\Hypertarget{_scrollbar_section_8razor_8cs_source_l00316}00316\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ scrollTop\ =\ scrollbarDimensions.ScrollHeight\ -\/\ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_aa88b6eb61932a3f0562e94da59125234}{textEditorDimensions}}.Height;}
+\DoxyCodeLine{\Hypertarget{_scrollbar_section_8razor_8cs_source_l00317}00317\ }
+\DoxyCodeLine{\Hypertarget{_scrollbar_section_8razor_8cs_source_l00318}00318\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (scrollTop\ <\ 0)}
+\DoxyCodeLine{\Hypertarget{_scrollbar_section_8razor_8cs_source_l00319}00319\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ scrollTop\ =\ 0;}
+\DoxyCodeLine{\Hypertarget{_scrollbar_section_8razor_8cs_source_l00320}00320\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_scrollbar_section_8razor_8cs_source_l00321}00321\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ onScrollVertical\ =\ \textcolor{keyword}{new}\ OnScrollVertical(}
+\DoxyCodeLine{\Hypertarget{_scrollbar_section_8razor_8cs_source_l00322}00322\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ scrollTop,}
+\DoxyCodeLine{\Hypertarget{_scrollbar_section_8razor_8cs_source_l00323}00323\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ renderBatchLocal.ComponentData,}
+\DoxyCodeLine{\Hypertarget{_scrollbar_section_8razor_8cs_source_l00324}00324\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ renderBatchLocal.ViewModel.ViewModelKey);}
+\DoxyCodeLine{\Hypertarget{_scrollbar_section_8razor_8cs_source_l00325}00325\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_scrollbar_section_8razor_8cs_source_l00326}00326\ }
+\DoxyCodeLine{\Hypertarget{_scrollbar_section_8razor_8cs_source_l00327}00327\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_abe7fad0a7df96f414b675b6af70f260d}{TextEditorService}}.\mbox{\hyperlink{interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_i_text_editor_service_ac98ec2e6999586f8b270757fc15c26c7}{Post}}(onScrollVertical);}
+\DoxyCodeLine{\Hypertarget{_scrollbar_section_8razor_8cs_source_l00328}00328\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_scrollbar_section_8razor_8cs_source_l00329}00329\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{\Hypertarget{_scrollbar_section_8razor_8cs_source_l00330}00330\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_scrollbar_section_8razor_8cs_source_l00331}00331\ \ \ \ \ \ \ \ \ \ \ \ \ VERTICAL\_thinksLeftMouseButtonIsDown\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{\Hypertarget{_scrollbar_section_8razor_8cs_source_l00332}00332\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_scrollbar_section_8razor_8cs_source_l00333}00333\ }
+\DoxyCodeLine{\Hypertarget{_scrollbar_section_8razor_8cs_source_l00334}00334\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ Task.CompletedTask;}
+\DoxyCodeLine{\Hypertarget{_scrollbar_section_8razor_8cs_source_l00335}00335\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_scrollbar_section_8razor_8cs_source_l00336}00336\ }
+\DoxyCodeLine{\Hypertarget{_scrollbar_section_8razor_8cs_source_l00337}\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_displays_1_1_internals_1_1_scrollbar_section_a73881d934e598dd27190a3d1496f3ffd}{00337}}\ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_displays_1_1_internals_1_1_scrollbar_section_a73881d934e598dd27190a3d1496f3ffd}{Dispose}}()}
+\DoxyCodeLine{\Hypertarget{_scrollbar_section_8razor_8cs_source_l00338}00338\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_scrollbar_section_8razor_8cs_source_l00339}00339\ \ \ \ \ \ \ \ \ DragStateWrap.StateChanged\ -\/=\ DragStateWrapOnStateChanged;}
+\DoxyCodeLine{\Hypertarget{_scrollbar_section_8razor_8cs_source_l00340}00340\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_scrollbar_section_8razor_8cs_source_l00341}00341\ \}}
+
+\end{DoxyCode}

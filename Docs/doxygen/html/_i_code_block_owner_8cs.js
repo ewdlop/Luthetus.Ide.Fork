@@ -1,0 +1,4 @@
+var _i_code_block_owner_8cs =
+[
+    [ "Luthetus.TextEditor.RazorLib.CompilerServices.Syntax.Nodes.Interfaces.ICodeBlockOwner", "interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_1_1_nodes_1_1_fbb89b74d57a0670c22846a0a2d85ed6.html", "interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_1_1_nodes_1_1_fbb89b74d57a0670c22846a0a2d85ed6" ]
+];

@@ -1,0 +1,4 @@
+var namespace_luthetus_1_1_common_1_1_tests_1_1_basis_1_1_installations_1_1_models =
+[
+    [ "ServiceCollectionExtensionsTests", "class_luthetus_1_1_common_1_1_tests_1_1_basis_1_1_installations_1_1_models_1_1_service_collection_extensions_tests.html", "class_luthetus_1_1_common_1_1_tests_1_1_basis_1_1_installations_1_1_models_1_1_service_collection_extensions_tests" ]
+];

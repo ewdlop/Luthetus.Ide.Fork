@@ -1,0 +1,191 @@
+\chapter{Blazor.\+Text.\+Editor (Some parts of this are outdated. I think this markdown file was made with v5.\+0.\+0 I will update this markdown file to v7.\+0.\+0 when I find time) }
+\hypertarget{md__docs_2_text_editor_2settings}{}\label{md__docs_2_text_editor_2settings}\index{Blazor.Text.Editor (Some parts of this are outdated. I think this markdown file was made with v5.0.0 I will update this markdown file to v7.0.0 when I find time)@{Blazor.Text.Editor (Some parts of this are outdated. I think this markdown file was made with v5.0.0 I will update this markdown file to v7.0.0 when I find time)}}
+\label{md__docs_2_text_editor_2settings_autotoc_md199}%
+\Hypertarget{md__docs_2_text_editor_2settings_autotoc_md199}%
+\hypertarget{md__docs_2_text_editor_2settings_autotoc_md200}{}\doxysection{\texorpdfstring{Settings}{Settings}}\label{md__docs_2_text_editor_2settings_autotoc_md200}
+\hypertarget{md__docs_2_text_editor_2settings_autotoc_md201}{}\doxysubsection{\texorpdfstring{Goal}{Goal}}\label{md__docs_2_text_editor_2settings_autotoc_md201}
+
+\begin{DoxyItemize}
+\item Render the optional static dialog containing all the settings available for change.
+\item Render the resizable and moveable version of the settings dialog.
+\item Render each setting individually where desired.
+\item Inform about optional automatic local storage integration for settings.
+\end{DoxyItemize}\hypertarget{md__docs_2_text_editor_2settings_autotoc_md202}{}\doxysubsection{\texorpdfstring{Steps}{Steps}}\label{md__docs_2_text_editor_2settings_autotoc_md202}
+
+\begin{DoxyItemize}
+\item I will assume you have seen the previous tutorials during this one.
+\item In Index.\+razor put an HTML button element with your styling of choice. I will put mine above where the {\ttfamily Text\+Editor\+Display} was put in previous tutorials. See the following code snippet.
+\end{DoxyItemize}
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{<button\ class="{}btn\ btn-\/primary"{}>}
+\DoxyCodeLine{\ \ \ \ }
+\DoxyCodeLine{</button>}
+\DoxyCodeLine{}
+\DoxyCodeLine{<TextEditorDisplay\ TextEditorKey="{}IndexTextEditorKey"{}/>}
+
+\end{DoxyCode}
+
+
+
+\begin{DoxyItemize}
+\item Give the button text of {\ttfamily "{}Text Editor Settings"{}}. As well an @onclick which invokes the unimplemented method {\ttfamily Open\+Text\+Editor\+Settings\+Dialog}. See the following code snippet.
+\end{DoxyItemize}
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{<button\ class="{}btn\ btn-\/primary"{}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ @onclick="{}OpenTextEditorSettingsDialog"{}>}
+\DoxyCodeLine{\ \ \ \ Text\ Editor\ Settings}
+\DoxyCodeLine{</button>}
+\DoxyCodeLine{}
+\DoxyCodeLine{<TextEditorDisplay\ TextEditorKey="{}IndexTextEditorKey"{}/>}
+
+\end{DoxyCode}
+
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{@code\ \{}
+\DoxyCodeLine{\ \ \ \ [Inject]}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{private}\ ITextEditorService\ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_abe7fad0a7df96f414b675b6af70f260d}{TextEditorService}}\ \{\ \textcolor{keyword}{get};\ \textcolor{keyword}{set};\ \}\ =\ \textcolor{keyword}{null}!;}
+\DoxyCodeLine{\ \ \ \ }
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{private}\ \textcolor{keyword}{static}\ readonly\ TextEditorKey\ IndexTextEditorKey\ =\ }
+\DoxyCodeLine{\ \ \ \ \ \ \ \ TextEditorKey.NewTextEditorKey();}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{protected}\ \textcolor{keyword}{override}\ \textcolor{keywordtype}{void}\ OnInitialized()}
+\DoxyCodeLine{\ \ \ \ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_abe7fad0a7df96f414b675b6af70f260d}{TextEditorService}}.RegisterCSharpTextEditor(}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ IndexTextEditorKey,}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{string}.Empty);}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\ \ \ \ \ \ \ \ base.OnInitialized();}
+\DoxyCodeLine{\ \ \ \ \}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{private}\ \textcolor{keywordtype}{void}\ OpenTextEditorSettingsDialog()}
+\DoxyCodeLine{\ \ \ \ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{keywordflow}{throw}\ \textcolor{keyword}{new}\ NotImplementedException();}
+\DoxyCodeLine{\ \ \ \ \}}
+\DoxyCodeLine{\}}
+
+\end{DoxyCode}
+
+
+
+\begin{DoxyItemize}
+\item Implement the method {\ttfamily Open\+Text\+Editor\+Settings\+Dialog} to contain {\ttfamily Text\+Editor\+Service.\+Show\+Settings\+Dialog();}. See the following code snippet
+\end{DoxyItemize}
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keyword}{private}\ \textcolor{keywordtype}{void}\ OpenTextEditorSettingsDialog()}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_abe7fad0a7df96f414b675b6af70f260d}{TextEditorService}}.ShowSettingsDialog();}
+\DoxyCodeLine{\}}
+
+\end{DoxyCode}
+
+
+
+\begin{DoxyItemize}
+\item Now run the program and click the button. You will see the static settings dialog as shown in this gif.
+\end{DoxyItemize}
+
+
+
+
+\begin{DoxyItemize}
+\item Modify the line {\ttfamily Text\+Editor\+Service.\+Show\+Settings\+Dialog();}. Pass in as an argument {\ttfamily true} for the optional parameter named {\ttfamily is\+Resizable}.
+\item Now run the program and click the button. You will see the resizable and moveable settings dialog as shown in this gif.
+\end{DoxyItemize}
+
+
+
+
+\begin{DoxyItemize}
+\item Add the following using statement to Index.\+razor if it is not already there.
+\end{DoxyItemize}
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{@using\ BlazorTextEditor.RazorLib.HelperComponents}
+
+\end{DoxyCode}
+
+
+
+\begin{DoxyItemize}
+\item Above where the button is to open the settings dialog. Render the razor components shown in the following markup.
+\end{DoxyItemize}
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{<TextEditorInputFontSize/>}
+\DoxyCodeLine{<TextEditorInputShowNewLines/>}
+\DoxyCodeLine{<TextEditorInputShowWhitespace/>}
+\DoxyCodeLine{<TextEditorInputTheme/>}
+
+\end{DoxyCode}
+
+
+
+\begin{DoxyItemize}
+\item Now run the program and you will find every settings input from the dialog will be on the page itself. {\ttfamily You can place these inputs wherever} you\textquotesingle{}d like as {\ttfamily everything is Dependency Injected}.
+\end{DoxyItemize}
+
+
+
+
+\begin{DoxyItemize}
+\item The nuget package by default will integrate with Java\+Script local storage. One can turn this off inorder to reference the Nu\+Get Package from a C\# Project which cannot dependency inject the IJSRuntime.
+\item Add an HTML button element, with styling of your choice, on the Index.\+razor page. Give the button text of {\ttfamily "{}Read Local Storage"{}} and an @onclick that invoke the unimplemented method\+: {\ttfamily async Task Read\+Local\+Storage()} see the following code snippets.
+\end{DoxyItemize}
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{<button\ class="{}btn\ btn-\/primary"{}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ @onclick="{}ReadLocalStorage"{}>}
+\DoxyCodeLine{\ \ \ \ Read\ Local\ Storage}
+\DoxyCodeLine{</button>}
+
+\end{DoxyCode}
+
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keyword}{private}\ async\ Task\ ReadLocalStorage()}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{\ \ \ \ }
+\DoxyCodeLine{\}}
+
+\end{DoxyCode}
+
+
+
+\begin{DoxyItemize}
+\item Implement {\ttfamily Read\+Local\+Storage()} to {\ttfamily await Text\+Editor\+Service.\+Set\+Text\+Editor\+Options\+From\+Local\+Storage\+Async();}. See the following code snippet.
+\end{DoxyItemize}
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keyword}{private}\ async\ Task\ ReadLocalStorage()}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{\ \ \ \ await\ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_abe7fad0a7df96f414b675b6af70f260d}{TextEditorService}}.SetTextEditorOptionsFromLocalStorageAsync();}
+\DoxyCodeLine{\}}
+
+\end{DoxyCode}
+
+
+
+\begin{DoxyItemize}
+\item Run the application and then modify your settings. I will set my theme to the light theme.
+\item Afterwards reload the webpage, but do not clear your cache. Once the webpage loads proceed to click the {\ttfamily Read Local Storage} button. Your theme should change to the light theme as the default was dark theme and your local storage had light theme stored.
+\item As of v5.\+0.\+0 of this Nuget\+Package the following are stored in local storage @onchange
+\item local storage\+: int? Font\+Size\+In\+Pixels
+\item local storage\+: Theme? Theme
+\item local storage\+: bool? Show\+Whitespace
+\item local storage\+: bool? Show\+Newlines
+\item As of writing this tutorial however, I am suddenly unable to get my theme from local storage. It just keeps being unrecognized and using the Unset theme.
+\item A good way to go about making use of the local storage local. Is to On\+After\+Render\+Async of a \textquotesingle{}top level component\textquotesingle{}. In the if(first\+Render) \{ await read\+Local\+Storage(); \} 
+\end{DoxyItemize}

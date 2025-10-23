@@ -1,0 +1,4 @@
+var _i_virtualization_result_without_type_mask_8cs =
+[
+    [ "Luthetus.TextEditor.RazorLib.Virtualizations.Models.IVirtualizationResultWithoutTypeMask", "interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_virtualizations_1_1_models_1_1_i_virtualization_result_without_type_mask.html", "interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_virtualizations_1_1_models_1_1_i_virtualization_result_without_type_mask" ]
+];

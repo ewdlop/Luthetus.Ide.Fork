@@ -1,0 +1,92 @@
+\doxysection{Razor\+Lexer.\+cs}
+\hypertarget{_razor_lexer_8cs_source}{}\label{_razor_lexer_8cs_source}\index{Source/Lib/CompilerServices/Razor/RazorLexer.cs@{Source/Lib/CompilerServices/Razor/RazorLexer.cs}}
+\mbox{\hyperlink{_razor_lexer_8cs}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{_razor_lexer_8cs_source_l00001}00001\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_luthetus_1_1_common_1_1_razor_lib_1_1_file_systems_1_1_models}{Luthetus.Common.RazorLib.FileSystems.Models}};}
+\DoxyCodeLine{\Hypertarget{_razor_lexer_8cs_source_l00002}00002\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services}{Luthetus.TextEditor.RazorLib.CompilerServices}};}
+\DoxyCodeLine{\Hypertarget{_razor_lexer_8cs_source_l00003}00003\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_implementations}{Luthetus.TextEditor.RazorLib.CompilerServices.Implementations}};}
+\DoxyCodeLine{\Hypertarget{_razor_lexer_8cs_source_l00004}00004\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax}{Luthetus.TextEditor.RazorLib.CompilerServices.Syntax}};}
+\DoxyCodeLine{\Hypertarget{_razor_lexer_8cs_source_l00005}00005\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_1_1_tokens}{Luthetus.TextEditor.RazorLib.CompilerServices.Syntax.Tokens}};}
+\DoxyCodeLine{\Hypertarget{_razor_lexer_8cs_source_l00006}00006\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_lexers_1_1_models}{Luthetus.TextEditor.RazorLib.Lexers.Models}};}
+\DoxyCodeLine{\Hypertarget{_razor_lexer_8cs_source_l00007}00007\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_luthetus_1_1_compiler_services_1_1_c_sharp_1_1_compiler_service_case}{Luthetus.CompilerServices.CSharp.CompilerServiceCase}};}
+\DoxyCodeLine{\Hypertarget{_razor_lexer_8cs_source_l00008}00008\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_luthetus_1_1_compiler_services_1_1_razor_1_1_compiler_service_case}{Luthetus.CompilerServices.Razor.CompilerServiceCase}};}
+\DoxyCodeLine{\Hypertarget{_razor_lexer_8cs_source_l00009}00009\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_luthetus_1_1_compiler_services_1_1_razor_1_1_facts}{Luthetus.CompilerServices.Razor.Facts}};}
+\DoxyCodeLine{\Hypertarget{_razor_lexer_8cs_source_l00010}00010\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_luthetus_1_1_compiler_services_1_1_xml_1_1_html_1_1_injected_language}{Luthetus.CompilerServices.Xml.Html.InjectedLanguage}};}
+\DoxyCodeLine{\Hypertarget{_razor_lexer_8cs_source_l00011}00011\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_luthetus_1_1_compiler_services_1_1_xml_1_1_html_1_1_syntax_actors}{Luthetus.CompilerServices.Xml.Html.SyntaxActors}};}
+\DoxyCodeLine{\Hypertarget{_razor_lexer_8cs_source_l00012}00012\ }
+\DoxyCodeLine{\Hypertarget{_razor_lexer_8cs_source_l00013}00013\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespace_luthetus_1_1_compiler_services_1_1_razor}{Luthetus.CompilerServices.Razor}};}
+\DoxyCodeLine{\Hypertarget{_razor_lexer_8cs_source_l00014}00014\ }
+\DoxyCodeLine{\Hypertarget{_razor_lexer_8cs_source_l00015}\mbox{\hyperlink{class_luthetus_1_1_compiler_services_1_1_razor_1_1_razor_lexer}{00015}}\ \textcolor{keyword}{public}\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_luthetus_1_1_compiler_services_1_1_razor_1_1_razor_lexer_a118ce435d12ad50913a4b359dd337840}{RazorLexer}}\ :\ \mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_implementations_1_1_lexer_aa19862f405a6deb416c40a006b1dd0bd}{Lexer}}}
+\DoxyCodeLine{\Hypertarget{_razor_lexer_8cs_source_l00016}00016\ \{}
+\DoxyCodeLine{\Hypertarget{_razor_lexer_8cs_source_l00017}00017\ \ \ \ \ \textcolor{keyword}{private}\ readonly\ \mbox{\hyperlink{class_luthetus_1_1_compiler_services_1_1_razor_1_1_compiler_service_case_1_1_razor_compiler_service}{RazorCompilerService}}\ \_razorCompilerService;}
+\DoxyCodeLine{\Hypertarget{_razor_lexer_8cs_source_l00018}00018\ \ \ \ \ \textcolor{keyword}{private}\ readonly\ \mbox{\hyperlink{class_luthetus_1_1_compiler_services_1_1_c_sharp_1_1_compiler_service_case_1_1_c_sharp_compiler_service}{CSharpCompilerService}}\ \_cSharpCompilerService;}
+\DoxyCodeLine{\Hypertarget{_razor_lexer_8cs_source_l00019}00019\ \ \ \ \ \textcolor{keyword}{private}\ readonly\ \mbox{\hyperlink{interface_luthetus_1_1_common_1_1_razor_lib_1_1_file_systems_1_1_models_1_1_i_environment_provider}{IEnvironmentProvider}}\ \_environmentProvider;}
+\DoxyCodeLine{\Hypertarget{_razor_lexer_8cs_source_l00020}00020\ }
+\DoxyCodeLine{\Hypertarget{_razor_lexer_8cs_source_l00021}\mbox{\hyperlink{class_luthetus_1_1_compiler_services_1_1_razor_1_1_razor_lexer_a118ce435d12ad50913a4b359dd337840}{00021}}\ \ \ \ \ \textcolor{keyword}{public}\ \mbox{\hyperlink{class_luthetus_1_1_compiler_services_1_1_razor_1_1_razor_lexer_a118ce435d12ad50913a4b359dd337840}{RazorLexer}}(}
+\DoxyCodeLine{\Hypertarget{_razor_lexer_8cs_source_l00022}00022\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_implementations_1_1_lexer_af909da612e3d5ff3ebec5d030292dfc6}{ResourceUri}}\ resourceUri,}
+\DoxyCodeLine{\Hypertarget{_razor_lexer_8cs_source_l00023}00023\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{string}\ sourceText,}
+\DoxyCodeLine{\Hypertarget{_razor_lexer_8cs_source_l00024}00024\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_luthetus_1_1_compiler_services_1_1_razor_1_1_compiler_service_case_1_1_razor_compiler_service}{RazorCompilerService}}\ razorCompilerService,}
+\DoxyCodeLine{\Hypertarget{_razor_lexer_8cs_source_l00025}00025\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_luthetus_1_1_compiler_services_1_1_c_sharp_1_1_compiler_service_case_1_1_c_sharp_compiler_service}{CSharpCompilerService}}\ cSharpCompilerService,}
+\DoxyCodeLine{\Hypertarget{_razor_lexer_8cs_source_l00026}00026\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{interface_luthetus_1_1_common_1_1_razor_lib_1_1_file_systems_1_1_models_1_1_i_environment_provider}{IEnvironmentProvider}}\ environmentProvider)}
+\DoxyCodeLine{\Hypertarget{_razor_lexer_8cs_source_l00027}00027\ \ \ \ \ \ \ \ \ :\ base(}
+\DoxyCodeLine{\Hypertarget{_razor_lexer_8cs_source_l00028}00028\ \ \ \ \ \ \ \ \ \ \ \ \ resourceUri,}
+\DoxyCodeLine{\Hypertarget{_razor_lexer_8cs_source_l00029}00029\ \ \ \ \ \ \ \ \ \ \ \ \ sourceText,}
+\DoxyCodeLine{\Hypertarget{_razor_lexer_8cs_source_l00030}00030\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_implementations_1_1_lexer_a8d22c0c5ef8d85eeb84d82f31f297e95}{LexerKeywords}}.Empty)}
+\DoxyCodeLine{\Hypertarget{_razor_lexer_8cs_source_l00031}00031\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_razor_lexer_8cs_source_l00032}00032\ \ \ \ \ \ \ \ \ \_environmentProvider\ =\ environmentProvider;}
+\DoxyCodeLine{\Hypertarget{_razor_lexer_8cs_source_l00033}00033\ \ \ \ \ \ \ \ \ \_razorCompilerService\ =\ razorCompilerService;}
+\DoxyCodeLine{\Hypertarget{_razor_lexer_8cs_source_l00034}00034\ \ \ \ \ \ \ \ \ \_cSharpCompilerService\ =\ cSharpCompilerService;}
+\DoxyCodeLine{\Hypertarget{_razor_lexer_8cs_source_l00035}00035\ }
+\DoxyCodeLine{\Hypertarget{_razor_lexer_8cs_source_l00036}00036\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_luthetus_1_1_compiler_services_1_1_razor_1_1_razor_lexer_a4b0acd24af32c0638a6535913a256a1f}{RazorSyntaxTree}}\ =\ \textcolor{keyword}{new}\ \mbox{\hyperlink{class_luthetus_1_1_compiler_services_1_1_razor_1_1_razor_lexer_a4b0acd24af32c0638a6535913a256a1f}{RazorSyntaxTree}}(\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_implementations_1_1_lexer_af909da612e3d5ff3ebec5d030292dfc6}{ResourceUri}},\ \_razorCompilerService,\ \_cSharpCompilerService,\ \_environmentProvider);}
+\DoxyCodeLine{\Hypertarget{_razor_lexer_8cs_source_l00037}00037\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_razor_lexer_8cs_source_l00038}00038\ }
+\DoxyCodeLine{\Hypertarget{_razor_lexer_8cs_source_l00039}\mbox{\hyperlink{class_luthetus_1_1_compiler_services_1_1_razor_1_1_razor_lexer_a4b0acd24af32c0638a6535913a256a1f}{00039}}\ \ \ \ \ \textcolor{keyword}{public}\ \mbox{\hyperlink{class_luthetus_1_1_compiler_services_1_1_razor_1_1_razor_lexer_a4b0acd24af32c0638a6535913a256a1f}{RazorSyntaxTree}}\ \mbox{\hyperlink{class_luthetus_1_1_compiler_services_1_1_razor_1_1_razor_lexer_a4b0acd24af32c0638a6535913a256a1f}{RazorSyntaxTree}}\ \{\ \textcolor{keyword}{get};\ \textcolor{keyword}{private}\ \textcolor{keyword}{set};\ \}}
+\DoxyCodeLine{\Hypertarget{_razor_lexer_8cs_source_l00040}00040\ }
+\DoxyCodeLine{\Hypertarget{_razor_lexer_8cs_source_l00041}\mbox{\hyperlink{class_luthetus_1_1_compiler_services_1_1_razor_1_1_razor_lexer_a52b6748c08f099ca5c529f7949d8ccd5}{00041}}\ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keyword}{override}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_luthetus_1_1_compiler_services_1_1_razor_1_1_razor_lexer_a52b6748c08f099ca5c529f7949d8ccd5}{Lex}}()}
+\DoxyCodeLine{\Hypertarget{_razor_lexer_8cs_source_l00042}00042\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_razor_lexer_8cs_source_l00043}00043\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_luthetus_1_1_compiler_services_1_1_razor_1_1_razor_lexer_a4b0acd24af32c0638a6535913a256a1f}{RazorSyntaxTree}}\ =\ \textcolor{keyword}{new}\ \mbox{\hyperlink{class_luthetus_1_1_compiler_services_1_1_razor_1_1_razor_lexer_a4b0acd24af32c0638a6535913a256a1f}{RazorSyntaxTree}}(\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_implementations_1_1_lexer_af909da612e3d5ff3ebec5d030292dfc6}{ResourceUri}},\ \_razorCompilerService,\ \_cSharpCompilerService,\ \_environmentProvider);}
+\DoxyCodeLine{\Hypertarget{_razor_lexer_8cs_source_l00044}00044\ }
+\DoxyCodeLine{\Hypertarget{_razor_lexer_8cs_source_l00045}00045\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_luthetus_1_1_compiler_services_1_1_xml_1_1_html_1_1_injected_language_1_1_injected_language_definition}{InjectedLanguageDefinition}}\ razorInjectedLanguageDefinition\ =\ \textcolor{keyword}{new}(}
+\DoxyCodeLine{\Hypertarget{_razor_lexer_8cs_source_l00046}00046\ \ \ \ \ \ \ \ \ \ \ \ \ RazorFacts.TRANSITION\_SUBSTRING,}
+\DoxyCodeLine{\Hypertarget{_razor_lexer_8cs_source_l00047}00047\ \ \ \ \ \ \ \ \ \ \ \ \ RazorFacts.TRANSITION\_SUBSTRING\_ESCAPED,}
+\DoxyCodeLine{\Hypertarget{_razor_lexer_8cs_source_l00048}00048\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_luthetus_1_1_compiler_services_1_1_razor_1_1_razor_lexer_a4b0acd24af32c0638a6535913a256a1f}{RazorSyntaxTree}}.ParseInjectedLanguageFragment,}
+\DoxyCodeLine{\Hypertarget{_razor_lexer_8cs_source_l00049}00049\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_luthetus_1_1_compiler_services_1_1_razor_1_1_razor_lexer_a4b0acd24af32c0638a6535913a256a1f}{RazorSyntaxTree}}.ParseTagName,}
+\DoxyCodeLine{\Hypertarget{_razor_lexer_8cs_source_l00050}00050\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_luthetus_1_1_compiler_services_1_1_razor_1_1_razor_lexer_a4b0acd24af32c0638a6535913a256a1f}{RazorSyntaxTree}}.ParseAttributeName,}
+\DoxyCodeLine{\Hypertarget{_razor_lexer_8cs_source_l00051}00051\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_luthetus_1_1_compiler_services_1_1_razor_1_1_razor_lexer_a4b0acd24af32c0638a6535913a256a1f}{RazorSyntaxTree}}.ParseAttributeValue);}
+\DoxyCodeLine{\Hypertarget{_razor_lexer_8cs_source_l00052}00052\ }
+\DoxyCodeLine{\Hypertarget{_razor_lexer_8cs_source_l00053}00053\ \ \ \ \ \ \ \ \ var\ htmlSyntaxUnit\ =\ HtmlSyntaxTree.ParseText(}
+\DoxyCodeLine{\Hypertarget{_razor_lexer_8cs_source_l00054}00054\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_implementations_1_1_lexer_af909da612e3d5ff3ebec5d030292dfc6}{ResourceUri}},}
+\DoxyCodeLine{\Hypertarget{_razor_lexer_8cs_source_l00055}00055\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_implementations_1_1_lexer_a3663eba597efe27ac2a88d05174ac3f8}{\_stringWalker}}.SourceText,}
+\DoxyCodeLine{\Hypertarget{_razor_lexer_8cs_source_l00056}00056\ \ \ \ \ \ \ \ \ \ \ \ \ razorInjectedLanguageDefinition);}
+\DoxyCodeLine{\Hypertarget{_razor_lexer_8cs_source_l00057}00057\ }
+\DoxyCodeLine{\Hypertarget{_razor_lexer_8cs_source_l00058}00058\ \ \ \ \ \ \ \ \ var\ syntaxNodeRoot\ =\ htmlSyntaxUnit.RootTagSyntax;}
+\DoxyCodeLine{\Hypertarget{_razor_lexer_8cs_source_l00059}00059\ }
+\DoxyCodeLine{\Hypertarget{_razor_lexer_8cs_source_l00060}00060\ \ \ \ \ \ \ \ \ var\ htmlSyntaxWalker\ =\ \textcolor{keyword}{new}\ \mbox{\hyperlink{class_luthetus_1_1_compiler_services_1_1_xml_1_1_html_1_1_syntax_actors_1_1_html_syntax_walker}{HtmlSyntaxWalker}}();}
+\DoxyCodeLine{\Hypertarget{_razor_lexer_8cs_source_l00061}00061\ }
+\DoxyCodeLine{\Hypertarget{_razor_lexer_8cs_source_l00062}00062\ \ \ \ \ \ \ \ \ htmlSyntaxWalker.Visit(syntaxNodeRoot);}
+\DoxyCodeLine{\Hypertarget{_razor_lexer_8cs_source_l00063}00063\ }
+\DoxyCodeLine{\Hypertarget{_razor_lexer_8cs_source_l00064}00064\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Tag\ Names}}
+\DoxyCodeLine{\Hypertarget{_razor_lexer_8cs_source_l00065}00065\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_implementations_1_1_lexer_a671a7858dc5c4074a43e56bd5e369990}{\_syntaxTokenList}}.AddRange(}
+\DoxyCodeLine{\Hypertarget{_razor_lexer_8cs_source_l00066}00066\ \ \ \ \ \ \ \ \ \ \ \ \ htmlSyntaxWalker.TagNameNodes.Select(tns\ =>\ (\mbox{\hyperlink{interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_1_1_i_syntax_token}{ISyntaxToken}})\textcolor{keyword}{new}\ \mbox{\hyperlink{struct_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_1_1_tokens_1_1_bad_token}{BadToken}}(tns.TextEditorTextSpan)));}
+\DoxyCodeLine{\Hypertarget{_razor_lexer_8cs_source_l00067}00067\ }
+\DoxyCodeLine{\Hypertarget{_razor_lexer_8cs_source_l00068}00068\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ InjectedLanguageFragmentSyntaxes}}
+\DoxyCodeLine{\Hypertarget{_razor_lexer_8cs_source_l00069}00069\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_implementations_1_1_lexer_a671a7858dc5c4074a43e56bd5e369990}{\_syntaxTokenList}}.AddRange(}
+\DoxyCodeLine{\Hypertarget{_razor_lexer_8cs_source_l00070}00070\ \ \ \ \ \ \ \ \ \ \ \ \ htmlSyntaxWalker.InjectedLanguageFragmentNodes.Select(ilfs\ =>\ (\mbox{\hyperlink{interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_1_1_i_syntax_token}{ISyntaxToken}})\textcolor{keyword}{new}\ \mbox{\hyperlink{struct_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_1_1_tokens_1_1_bad_token}{BadToken}}(ilfs.TextEditorTextSpan)));}
+\DoxyCodeLine{\Hypertarget{_razor_lexer_8cs_source_l00071}00071\ }
+\DoxyCodeLine{\Hypertarget{_razor_lexer_8cs_source_l00072}00072\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Attribute\ Names}}
+\DoxyCodeLine{\Hypertarget{_razor_lexer_8cs_source_l00073}00073\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_implementations_1_1_lexer_a671a7858dc5c4074a43e56bd5e369990}{\_syntaxTokenList}}.AddRange(}
+\DoxyCodeLine{\Hypertarget{_razor_lexer_8cs_source_l00074}00074\ \ \ \ \ \ \ \ \ \ \ \ \ htmlSyntaxWalker.AttributeNameNodes.Select(an\ =>\ (\mbox{\hyperlink{interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_1_1_i_syntax_token}{ISyntaxToken}})\textcolor{keyword}{new}\ \mbox{\hyperlink{struct_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_1_1_tokens_1_1_bad_token}{BadToken}}(an.TextEditorTextSpan)));}
+\DoxyCodeLine{\Hypertarget{_razor_lexer_8cs_source_l00075}00075\ }
+\DoxyCodeLine{\Hypertarget{_razor_lexer_8cs_source_l00076}00076\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Attribute\ Values}}
+\DoxyCodeLine{\Hypertarget{_razor_lexer_8cs_source_l00077}00077\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_implementations_1_1_lexer_a671a7858dc5c4074a43e56bd5e369990}{\_syntaxTokenList}}.AddRange(}
+\DoxyCodeLine{\Hypertarget{_razor_lexer_8cs_source_l00078}00078\ \ \ \ \ \ \ \ \ \ \ \ \ htmlSyntaxWalker.AttributeValueNodes.Select(av\ =>\ (\mbox{\hyperlink{interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_1_1_i_syntax_token}{ISyntaxToken}})\textcolor{keyword}{new}\ \mbox{\hyperlink{struct_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_1_1_tokens_1_1_bad_token}{BadToken}}(av.TextEditorTextSpan)));}
+\DoxyCodeLine{\Hypertarget{_razor_lexer_8cs_source_l00079}00079\ }
+\DoxyCodeLine{\Hypertarget{_razor_lexer_8cs_source_l00080}00080\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Comments}}
+\DoxyCodeLine{\Hypertarget{_razor_lexer_8cs_source_l00081}00081\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_implementations_1_1_lexer_a671a7858dc5c4074a43e56bd5e369990}{\_syntaxTokenList}}.AddRange(}
+\DoxyCodeLine{\Hypertarget{_razor_lexer_8cs_source_l00082}00082\ \ \ \ \ \ \ \ \ \ \ \ \ htmlSyntaxWalker.CommentNodes.Select(c\ =>\ (\mbox{\hyperlink{interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_1_1_i_syntax_token}{ISyntaxToken}})\textcolor{keyword}{new}\ \mbox{\hyperlink{struct_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_1_1_tokens_1_1_bad_token}{BadToken}}(c.TextEditorTextSpan)));}
+\DoxyCodeLine{\Hypertarget{_razor_lexer_8cs_source_l00083}00083\ }
+\DoxyCodeLine{\Hypertarget{_razor_lexer_8cs_source_l00084}00084\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_luthetus_1_1_compiler_services_1_1_razor_1_1_razor_lexer_a4b0acd24af32c0638a6535913a256a1f}{RazorSyntaxTree}}.ParseCodebehind();}
+\DoxyCodeLine{\Hypertarget{_razor_lexer_8cs_source_l00085}00085\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_razor_lexer_8cs_source_l00086}00086\ \}}
+
+\end{DoxyCode}

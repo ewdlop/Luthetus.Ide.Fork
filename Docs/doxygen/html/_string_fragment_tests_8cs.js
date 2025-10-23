@@ -1,0 +1,4 @@
+var _string_fragment_tests_8cs =
+[
+    [ "Luthetus.Extensions.DotNet.Tests.Basis.TestExplorers.Models.StringFragmentTests", "class_luthetus_1_1_extensions_1_1_dot_net_1_1_tests_1_1_basis_1_1_test_explorers_1_1_models_1_1_string_fragment_tests.html", "class_luthetus_1_1_extensions_1_1_dot_net_1_1_tests_1_1_basis_1_1_test_explorers_1_1_models_1_1_string_fragment_tests" ]
+];

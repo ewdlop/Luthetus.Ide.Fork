@@ -1,0 +1,8 @@
+var class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_1_1_nodes_1_1_inheritance_statement_node =
+[
+    [ "InheritanceStatementNode", "class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_1_1_nodes_1_1_inheritance_statement_node.html#a13214dbeaaf855606f255bce299ab780", null ],
+    [ "GetChildList", "class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_1_1_nodes_1_1_inheritance_statement_node.html#a0e2d26af268074388edba343a71ac101", null ],
+    [ "IsFabricated", "class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_1_1_nodes_1_1_inheritance_statement_node.html#a46e19e253755f152dd8456016ad45b53", null ],
+    [ "ParentTypeClauseNode", "class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_1_1_nodes_1_1_inheritance_statement_node.html#abcd82fb4ad102b54208ff658c347b193", null ],
+    [ "SyntaxKind", "class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_1_1_nodes_1_1_inheritance_statement_node.html#ad074e26a0836a0f9c844bdb3529d09cd", null ]
+];

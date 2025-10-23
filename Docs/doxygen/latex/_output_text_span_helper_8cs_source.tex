@@ -1,0 +1,78 @@
+\doxysection{Output\+Text\+Span\+Helper.\+cs}
+\hypertarget{_output_text_span_helper_8cs_source}{}\label{_output_text_span_helper_8cs_source}\index{Source/Lib/Extensions/Extensions.DotNet/Outputs/Models/OutputTextSpanHelper.cs@{Source/Lib/Extensions/Extensions.DotNet/Outputs/Models/OutputTextSpanHelper.cs}}
+\mbox{\hyperlink{_output_text_span_helper_8cs}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{_output_text_span_helper_8cs_source_l00001}00001\ \textcolor{keyword}{using\ }System.Text;}
+\DoxyCodeLine{\Hypertarget{_output_text_span_helper_8cs_source_l00002}00002\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_luthetus_1_1_common_1_1_razor_lib_1_1_keys_1_1_models}{Luthetus.Common.RazorLib.Keys.Models}};}
+\DoxyCodeLine{\Hypertarget{_output_text_span_helper_8cs_source_l00003}00003\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib}{Luthetus.TextEditor.RazorLib}};}
+\DoxyCodeLine{\Hypertarget{_output_text_span_helper_8cs_source_l00004}00004\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_lexers_1_1_models}{Luthetus.TextEditor.RazorLib.Lexers.Models}};}
+\DoxyCodeLine{\Hypertarget{_output_text_span_helper_8cs_source_l00005}00005\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models}{Luthetus.TextEditor.RazorLib.TextEditors.Models}};}
+\DoxyCodeLine{\Hypertarget{_output_text_span_helper_8cs_source_l00006}00006\ }
+\DoxyCodeLine{\Hypertarget{_output_text_span_helper_8cs_source_l00007}\mbox{\hyperlink{namespace_luthetus_1_1_extensions_1_1_dot_net_1_1_outputs_1_1_models}{00007}}\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespace_luthetus_1_1_extensions_1_1_dot_net_1_1_outputs_1_1_models}{Luthetus.Extensions.DotNet.Outputs.Models}};}
+\DoxyCodeLine{\Hypertarget{_output_text_span_helper_8cs_source_l00008}00008\ }
+\DoxyCodeLine{\Hypertarget{_output_text_span_helper_8cs_source_l00009}00009\ \textcolor{keyword}{public}\ \textcolor{keyword}{static}\ \textcolor{keyword}{class\ }OutputTextSpanHelper}
+\DoxyCodeLine{\Hypertarget{_output_text_span_helper_8cs_source_l00010}00010\ \{}
+\DoxyCodeLine{\Hypertarget{_output_text_span_helper_8cs_source_l00011}00011\ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keyword}{static}\ Task\ OpenInEditorOnClick(}
+\DoxyCodeLine{\Hypertarget{_output_text_span_helper_8cs_source_l00012}00012\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_luthetus_1_1_extensions_1_1_dot_net_1_1_outputs_1_1_models_1_1_tree_view_diagnostic_line}{TreeViewDiagnosticLine}}\ treeViewDiagnosticLine,}
+\DoxyCodeLine{\Hypertarget{_output_text_span_helper_8cs_source_l00013}00013\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ shouldSetFocusToEditor,}
+\DoxyCodeLine{\Hypertarget{_output_text_span_helper_8cs_source_l00014}00014\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_i_text_editor_service}{ITextEditorService}}\ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_aecfb76d19da117c025734259242d144d}{textEditorService}})}
+\DoxyCodeLine{\Hypertarget{_output_text_span_helper_8cs_source_l00015}00015\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_output_text_span_helper_8cs_source_l00016}00016\ \ \ \ \ \ \ \ \ var\ lineAndColumnIndicesString\ =\ treeViewDiagnosticLine.\mbox{\hyperlink{class_luthetus_1_1_common_1_1_razor_lib_1_1_tree_views_1_1_models_1_1_tree_view_with_type-1-g_a4f46d99a34756894b183f9ce601825bc}{Item}}.LineAndColumnIndicesTextSpan.Text;}
+\DoxyCodeLine{\Hypertarget{_output_text_span_helper_8cs_source_l00017}00017\ \ \ \ \ \ \ \ \ var\ position\ =\ 0;}
+\DoxyCodeLine{\Hypertarget{_output_text_span_helper_8cs_source_l00018}00018\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_output_text_span_helper_8cs_source_l00019}00019\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}?\ lineNumber\ =\ \textcolor{keyword}{null};}
+\DoxyCodeLine{\Hypertarget{_output_text_span_helper_8cs_source_l00020}00020\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}?\ columnNumber\ =\ \textcolor{keyword}{null};}
+\DoxyCodeLine{\Hypertarget{_output_text_span_helper_8cs_source_l00021}00021\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_output_text_span_helper_8cs_source_l00022}00022\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{while}\ (position\ <\ lineAndColumnIndicesString.Length)}
+\DoxyCodeLine{\Hypertarget{_output_text_span_helper_8cs_source_l00023}00023\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_output_text_span_helper_8cs_source_l00024}00024\ \ \ \ \ \ \ \ \ \ \ \ \ var\ character\ =\ lineAndColumnIndicesString[position];}
+\DoxyCodeLine{\Hypertarget{_output_text_span_helper_8cs_source_l00025}00025\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_output_text_span_helper_8cs_source_l00026}00026\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\textcolor{keywordtype}{char}.IsDigit(character))}
+\DoxyCodeLine{\Hypertarget{_output_text_span_helper_8cs_source_l00027}00027\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_output_text_span_helper_8cs_source_l00028}00028\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ var\ numberBuilder\ =\ \textcolor{keyword}{new}\ StringBuilder(character);}
+\DoxyCodeLine{\Hypertarget{_output_text_span_helper_8cs_source_l00029}00029\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_output_text_span_helper_8cs_source_l00030}00030\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{while}\ (position\ <\ lineAndColumnIndicesString.Length)}
+\DoxyCodeLine{\Hypertarget{_output_text_span_helper_8cs_source_l00031}00031\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_output_text_span_helper_8cs_source_l00032}00032\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ character\ =\ lineAndColumnIndicesString[position];}
+\DoxyCodeLine{\Hypertarget{_output_text_span_helper_8cs_source_l00033}00033\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_output_text_span_helper_8cs_source_l00034}00034\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\textcolor{keywordtype}{char}.IsDigit(character))}
+\DoxyCodeLine{\Hypertarget{_output_text_span_helper_8cs_source_l00035}00035\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ numberBuilder.Append(character);}
+\DoxyCodeLine{\Hypertarget{_output_text_span_helper_8cs_source_l00036}00036\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{\Hypertarget{_output_text_span_helper_8cs_source_l00037}00037\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{_output_text_span_helper_8cs_source_l00038}00038\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_output_text_span_helper_8cs_source_l00039}00039\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ position++;}
+\DoxyCodeLine{\Hypertarget{_output_text_span_helper_8cs_source_l00040}00040\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_output_text_span_helper_8cs_source_l00041}00041\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_output_text_span_helper_8cs_source_l00042}00042\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\textcolor{keywordtype}{int}.TryParse(numberBuilder.ToString(),\ out\ var\ number))}
+\DoxyCodeLine{\Hypertarget{_output_text_span_helper_8cs_source_l00043}00043\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_output_text_span_helper_8cs_source_l00044}00044\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (lineNumber\ is\ \textcolor{keyword}{null})}
+\DoxyCodeLine{\Hypertarget{_output_text_span_helper_8cs_source_l00045}00045\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ lineNumber\ =\ number;}
+\DoxyCodeLine{\Hypertarget{_output_text_span_helper_8cs_source_l00046}00046\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ (columnNumber\ is\ \textcolor{keyword}{null})}
+\DoxyCodeLine{\Hypertarget{_output_text_span_helper_8cs_source_l00047}00047\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ columnNumber\ =\ number;}
+\DoxyCodeLine{\Hypertarget{_output_text_span_helper_8cs_source_l00048}00048\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_output_text_span_helper_8cs_source_l00049}00049\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_output_text_span_helper_8cs_source_l00050}00050\ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_output_text_span_helper_8cs_source_l00051}00051\ \ \ \ \ \ \ \ \ \ \ \ \ position++;}
+\DoxyCodeLine{\Hypertarget{_output_text_span_helper_8cs_source_l00052}00052\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_output_text_span_helper_8cs_source_l00053}00053\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_output_text_span_helper_8cs_source_l00054}00054\ \ \ \ \ \ \ \ \ var\ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_af9efd84ac52036166b47cdc1ceb058f6}{category}}\ =\ \textcolor{keyword}{new}\ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_ab53dfba5ef40ddaeca4b8982ea420fd1}{Category}}(\textcolor{stringliteral}{"{}main"{}});}
+\DoxyCodeLine{\Hypertarget{_output_text_span_helper_8cs_source_l00055}00055\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_output_text_span_helper_8cs_source_l00056}00056\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}?\ lineIndex\ =\ (lineNumber\ ??\ 0)\ -\/\ 1;}
+\DoxyCodeLine{\Hypertarget{_output_text_span_helper_8cs_source_l00057}00057\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (lineIndex\ <\ 0)}
+\DoxyCodeLine{\Hypertarget{_output_text_span_helper_8cs_source_l00058}00058\ \ \ \ \ \ \ \ \ \ \ \ \ lineIndex\ =\ \textcolor{keyword}{null};}
+\DoxyCodeLine{\Hypertarget{_output_text_span_helper_8cs_source_l00059}00059\ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_output_text_span_helper_8cs_source_l00060}00060\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}?\ columnIndex\ =\ (columnNumber\ ??\ 0)\ -\/\ 1;}
+\DoxyCodeLine{\Hypertarget{_output_text_span_helper_8cs_source_l00061}00061\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (columnIndex\ <\ 0)}
+\DoxyCodeLine{\Hypertarget{_output_text_span_helper_8cs_source_l00062}00062\ \ \ \ \ \ \ \ \ \ \ \ \ columnIndex\ =\ \textcolor{keyword}{null};}
+\DoxyCodeLine{\Hypertarget{_output_text_span_helper_8cs_source_l00063}00063\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_output_text_span_helper_8cs_source_l00064}00064\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_aecfb76d19da117c025734259242d144d}{textEditorService}}.OpenInEditorAsync(}
+\DoxyCodeLine{\Hypertarget{_output_text_span_helper_8cs_source_l00065}00065\ \ \ \ \ \ \ \ \ \ \ \ \ treeViewDiagnosticLine.\mbox{\hyperlink{class_luthetus_1_1_common_1_1_razor_lib_1_1_tree_views_1_1_models_1_1_tree_view_with_type-1-g_a4f46d99a34756894b183f9ce601825bc}{Item}}.FilePathTextSpan.Text,}
+\DoxyCodeLine{\Hypertarget{_output_text_span_helper_8cs_source_l00066}00066\ \ \ \ \ \ \ \ \ \ \ \ \ shouldSetFocusToEditor,}
+\DoxyCodeLine{\Hypertarget{_output_text_span_helper_8cs_source_l00067}00067\ \ \ \ \ \ \ \ \ \ \ \ \ lineIndex,}
+\DoxyCodeLine{\Hypertarget{_output_text_span_helper_8cs_source_l00068}00068\ \ \ \ \ \ \ \ \ \ \ \ \ columnIndex,}
+\DoxyCodeLine{\Hypertarget{_output_text_span_helper_8cs_source_l00069}00069\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_af9efd84ac52036166b47cdc1ceb058f6}{category}},}
+\DoxyCodeLine{\Hypertarget{_output_text_span_helper_8cs_source_l00070}00070\ \ \ \ \ \ \ \ \ \ \ \ \ Key<TextEditorViewModel>.NewKey());}
+\DoxyCodeLine{\Hypertarget{_output_text_span_helper_8cs_source_l00071}00071\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_output_text_span_helper_8cs_source_l00072}00072\ \}}
+
+\end{DoxyCode}

@@ -1,0 +1,5 @@
+var class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_edits_1_1_displays_1_1_dirty_resource_uri_interactive_icon_display =
+[
+    [ "CssClassString", "class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_edits_1_1_displays_1_1_dirty_resource_uri_interactive_icon_display.html#a02b4e9f1afd236e3be0778dd7a3de431", null ],
+    [ "CssStyleString", "class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_edits_1_1_displays_1_1_dirty_resource_uri_interactive_icon_display.html#a15ebc379428f9ae604b7517fca209b4d", null ]
+];

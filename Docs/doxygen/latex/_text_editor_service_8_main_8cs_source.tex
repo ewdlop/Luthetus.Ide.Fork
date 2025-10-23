@@ -1,0 +1,605 @@
+\doxysection{Text\+Editor\+Service.\+Main.\+cs}
+\hypertarget{_text_editor_service_8_main_8cs_source}{}\label{_text_editor_service_8_main_8cs_source}\index{Source/Lib/TextEditor/TextEditorService.Main.cs@{Source/Lib/TextEditor/TextEditorService.Main.cs}}
+\mbox{\hyperlink{_text_editor_service_8_main_8cs}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00001}00001\ \textcolor{keyword}{using\ }System.Collections.Immutable;}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00002}00002\ \textcolor{keyword}{using\ }Microsoft.JSInterop;}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00003}00003\ \textcolor{keyword}{using\ }Fluxor;}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00004}00004\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_luthetus_1_1_common_1_1_razor_lib_1_1_themes_1_1_states}{Luthetus.Common.RazorLib.Themes.States}};}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00005}00005\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_luthetus_1_1_common_1_1_razor_lib_1_1_background_tasks_1_1_models}{Luthetus.Common.RazorLib.BackgroundTasks.Models}};}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00006}00006\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_luthetus_1_1_common_1_1_razor_lib_1_1_dialogs_1_1_models}{Luthetus.Common.RazorLib.Dialogs.Models}};}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00007}00007\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_luthetus_1_1_common_1_1_razor_lib_1_1_keys_1_1_models}{Luthetus.Common.RazorLib.Keys.Models}};}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00008}00008\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_luthetus_1_1_common_1_1_razor_lib_1_1_storages_1_1_models}{Luthetus.Common.RazorLib.Storages.Models}};}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00009}00009\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_luthetus_1_1_common_1_1_razor_lib_1_1_themes_1_1_models}{Luthetus.Common.RazorLib.Themes.Models}};}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00010}00010\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_luthetus_1_1_common_1_1_razor_lib_1_1_dimensions_1_1_states}{Luthetus.Common.RazorLib.Dimensions.States}};}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00011}00011\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_luthetus_1_1_common_1_1_razor_lib_1_1_js_runtimes_1_1_models}{Luthetus.Common.RazorLib.JsRuntimes.Models}};}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00012}00012\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_diffs_1_1_models}{Luthetus.TextEditor.RazorLib.Diffs.Models}};}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00013}00013\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_diffs_1_1_states}{Luthetus.TextEditor.RazorLib.Diffs.States}};}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00014}00014\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_find_alls_1_1_states}{Luthetus.TextEditor.RazorLib.FindAlls.States}};}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00015}00015\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_groups_1_1_models}{Luthetus.TextEditor.RazorLib.Groups.Models}};}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00016}00016\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_groups_1_1_states}{Luthetus.TextEditor.RazorLib.Groups.States}};}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00017}00017\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_options_1_1_models}{Luthetus.TextEditor.RazorLib.Options.Models}};}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00018}00018\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_options_1_1_states}{Luthetus.TextEditor.RazorLib.Options.States}};}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00019}00019\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models}{Luthetus.TextEditor.RazorLib.TextEditors.Models}};}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00020}00020\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_states}{Luthetus.TextEditor.RazorLib.TextEditors.States}};}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00021}00021\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_edits_1_1_states}{Luthetus.TextEditor.RazorLib.Edits.States}};}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00022}00022\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_decorations_1_1_models}{Luthetus.TextEditor.RazorLib.Decorations.Models}};}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00023}00023\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_installations_1_1_models}{Luthetus.TextEditor.RazorLib.Installations.Models}};}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00024}00024\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_lexers_1_1_models}{Luthetus.TextEditor.RazorLib.Lexers.Models}};}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00025}00025\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_js_runtimes_1_1_models}{Luthetus.TextEditor.RazorLib.JsRuntimes.Models}};}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00026}00026\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_background_tasks_1_1_models}{Luthetus.TextEditor.RazorLib.BackgroundTasks.Models}};}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00027}00027\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_autocompletes_1_1_models}{Luthetus.TextEditor.RazorLib.Autocompletes.Models}};}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00028}00028\ }
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00029}00029\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib}{Luthetus.TextEditor.RazorLib}};}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00030}00030\ }
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00031}00031\ \textcolor{keyword}{public}\ \textcolor{keyword}{partial\ class\ }\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editor_service}{TextEditorService}}\ :\ \mbox{\hyperlink{interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_i_text_editor_service}{ITextEditorService}}}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00032}00032\ \{}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00036}\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editor_service_ae0d26aafddb43ced1bf9db60a6301b8a}{00036}}\ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keyword}{static}\ readonly\ Key<TextEditorAuthenticatedAction>\ \mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editor_service_ab734191e9f88c71d3763f87bf382b014}{AuthenticatedActionKey}}\ =\ \textcolor{keyword}{new}(Guid.Parse(\textcolor{stringliteral}{"{}13831968-\/9b10-\/46d1-\/8d47-\/842b78238d6a"{}}));}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00037}00037\ }
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00038}00038\ \ \ \ \ \textcolor{keyword}{private}\ readonly\ \mbox{\hyperlink{interface_luthetus_1_1_common_1_1_razor_lib_1_1_background_tasks_1_1_models_1_1_i_background_task_service}{IBackgroundTaskService}}\ \_backgroundTaskService;}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00039}00039\ \ \ \ \ \textcolor{keyword}{private}\ readonly\ IDispatcher\ \_dispatcher;}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00040}00040\ \ \ \ \ \textcolor{keyword}{private}\ readonly\ \mbox{\hyperlink{interface_luthetus_1_1_common_1_1_razor_lib_1_1_dialogs_1_1_models_1_1_i_dialog_service}{IDialogService}}\ \_dialogService;}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00041}00041\ \ \ \ \ \textcolor{keyword}{private}\ readonly\ \mbox{\hyperlink{interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_decorations_1_1_models_1_1_i_text_editor_registry_wrap}{ITextEditorRegistryWrap}}\ \_textEditorRegistryWrap;}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00042}00042\ \ \ \ \ \textcolor{keyword}{private}\ readonly\ \mbox{\hyperlink{interface_luthetus_1_1_common_1_1_razor_lib_1_1_storages_1_1_models_1_1_i_storage_service}{IStorageService}}\ \_storageService;}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00043}00043\ \ \ \ \ \textcolor{comment}{//\ TODO:\ Perhaps\ do\ not\ reference\ IJSRuntime\ but\ instead\ wrap\ it\ in\ a\ 'IUiProvider'\ or\ something\ like\ that.\ The\ 'IUiProvider'\ would\ then\ expose\ methods\ that\ allow\ the\ TextEditorViewModel\ to\ adjust\ the\ scrollbars.\ }}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00044}00044\ \ \ \ \ \textcolor{keyword}{private}\ readonly\ IJSRuntime\ \_jsRuntime;}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00045}00045\ \ \ \ \ \textcolor{keyword}{private}\ readonly\ \mbox{\hyperlink{class_luthetus_1_1_common_1_1_razor_lib_1_1_background_tasks_1_1_models_1_1_common_background_task_api}{CommonBackgroundTaskApi}}\ \_commonBackgroundTaskApi;}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00046}00046\ \ \ \ \ \textcolor{keyword}{private}\ readonly\ IServiceProvider\ \_serviceProvider;}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00047}00047\ }
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00048}\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editor_service_af714358190852dd142bcca09b75aaa00}{00048}}\ \ \ \ \ \textcolor{keyword}{public}\ \mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editor_service_af714358190852dd142bcca09b75aaa00}{TextEditorService}}(}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00049}00049\ \ \ \ \ \ \ \ \ IState<TextEditorState>\ textEditorStateWrap,}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00050}00050\ \ \ \ \ \ \ \ \ IState<TextEditorGroupState>\ groupStateWrap,}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00051}00051\ \ \ \ \ \ \ \ \ IState<TextEditorDiffState>\ diffStateWrap,}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00052}00052\ \ \ \ \ \ \ \ \ IState<ThemeState>\ themeStateWrap,}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00053}00053\ \ \ \ \ \ \ \ \ IState<TextEditorOptionsState>\ optionsStateWrap,}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00054}00054\ \ \ \ \ \ \ \ \ IState<TextEditorFindAllState>\ findAllStateWrap,}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00055}00055\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{interface_luthetus_1_1_common_1_1_razor_lib_1_1_background_tasks_1_1_models_1_1_i_background_task_service}{IBackgroundTaskService}}\ backgroundTaskService,}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00056}00056\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_installations_1_1_models_a93aa7bee7cb16431b8752d669a0286dd}{LuthetusTextEditorConfig}}\ textEditorConfig,}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00057}00057\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_decorations_1_1_models_1_1_i_text_editor_registry_wrap}{ITextEditorRegistryWrap}}\ textEditorRegistryWrap,}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00058}00058\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{interface_luthetus_1_1_common_1_1_razor_lib_1_1_storages_1_1_models_1_1_i_storage_service}{IStorageService}}\ storageService,}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00059}00059\ \ \ \ \ \ \ \ \ IJSRuntime\ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_a9b516c6b689d02d1a5f28c73390ac908}{jsRuntime}},}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00060}00060\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_luthetus_1_1_common_1_1_razor_lib_1_1_background_tasks_1_1_models_1_1_common_background_task_api}{CommonBackgroundTaskApi}}\ commonBackgroundTaskApi,}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00061}00061\ \ \ \ \ \ \ \ \ IDispatcher\ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_a50f035982e1c206f234851523db5cbc8}{dispatcher}},}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00062}00062\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{interface_luthetus_1_1_common_1_1_razor_lib_1_1_dialogs_1_1_models_1_1_i_dialog_service}{IDialogService}}\ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_a41ef8059adde5ddfbf288ffddb30a7c0}{dialogService}},}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00063}00063\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_autocompletes_1_1_models_1_1_i_autocomplete_indexer}{IAutocompleteIndexer}}\ autocompleteIndexer,}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00064}00064\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_autocompletes_1_1_models_1_1_i_autocomplete_service}{IAutocompleteService}}\ autocompleteService,}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00065}00065\ \ \ \ \ \ \ \ \ IState<AppDimensionState>\ appDimensionStateWrap,}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00066}00066\ \ \ \ \ \ \ \ \ IServiceProvider\ serviceProvider)}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00067}00067\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00068}00068\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editor_service_a22e4a12c18bb600569faa5866397584d}{TextEditorStateWrap}}\ =\ textEditorStateWrap;}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00069}00069\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editor_service_a91bc1a26c7c43af1c3dd7ef749a07d8e}{GroupStateWrap}}\ =\ groupStateWrap;}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00070}00070\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editor_service_ad9ea33a92eb8b5650279b0b8a1124684}{DiffStateWrap}}\ =\ diffStateWrap;}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00071}00071\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editor_service_a412d34f6f199e3c8cddc2f7f9dbd6189}{ThemeStateWrap}}\ =\ themeStateWrap;}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00072}00072\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editor_service_af59be92638fdb051c2a3466fa8995893}{OptionsStateWrap}}\ =\ optionsStateWrap;}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00073}00073\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editor_service_af528b1fd34875c7921a39eb46885b5ea}{FindAllStateWrap}}\ =\ findAllStateWrap;}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00074}00074\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editor_service_abbac42dbb31a02de55ddbecee6a558cd}{AppDimensionStateWrap}}\ =\ appDimensionStateWrap;}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00075}00075\ \ \ \ \ \ \ \ \ \_serviceProvider\ =\ serviceProvider;}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00076}00076\ }
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00077}00077\ \ \ \ \ \ \ \ \ \_backgroundTaskService\ =\ backgroundTaskService;}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00078}00078\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editor_service_a6b0440c77cd1eb071be0bc63816e0f85}{TextEditorConfig}}\ =\ textEditorConfig;}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00079}00079\ \ \ \ \ \ \ \ \ \_textEditorRegistryWrap\ =\ textEditorRegistryWrap;}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00080}00080\ \ \ \ \ \ \ \ \ \_storageService\ =\ storageService;}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00081}00081\ \ \ \ \ \ \ \ \ \_jsRuntime\ =\ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_a9b516c6b689d02d1a5f28c73390ac908}{jsRuntime}};}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00082}00082\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editor_service_a1bb8d9202cf8845c6fdf33617155c53d}{JsRuntimeTextEditorApi}}\ =\ \_jsRuntime.GetLuthetusTextEditorApi();}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00083}00083\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editor_service_a8868b2c9cf3bf7bd7e49abfa9ddef2c0}{JsRuntimeCommonApi}}\ =\ \_jsRuntime.GetLuthetusCommonApi();}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00084}00084\ \ \ \ \ \ \ \ \ \_commonBackgroundTaskApi\ =\ commonBackgroundTaskApi;}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00085}00085\ \ \ \ \ \ \ \ \ \_dispatcher\ =\ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_a50f035982e1c206f234851523db5cbc8}{dispatcher}};}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00086}00086\ \ \ \ \ \ \ \ \ \_dialogService\ =\ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_a41ef8059adde5ddfbf288ffddb30a7c0}{dialogService}};}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00087}00087\ }
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00088}00088\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editor_service_a1ed89dfdefff1f8f391d943dd3c2e788}{AutocompleteIndexer}}\ =\ autocompleteIndexer;}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00089}00089\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editor_service_a078114546d55895ef8bfd68715b03fcf}{AutocompleteService}}\ =\ autocompleteService;}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00090}00090\ }
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00091}00091\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editor_service_a8066979b78e826ead9123e26a4b6a969}{ModelApi}}\ =\ \textcolor{keyword}{new}\ \mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1_1_text_editor_model_api}{TextEditorModelApi}}(\textcolor{keyword}{this},\ \_textEditorRegistryWrap.DecorationMapperRegistry,\ \_textEditorRegistryWrap.CompilerServiceRegistry,\ \_backgroundTaskService,\ \_dispatcher);}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00092}00092\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editor_service_a07e2a1f728a5620dae95c78c3c2d6be0}{ViewModelApi}}\ =\ \textcolor{keyword}{new}\ \mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1_1_text_editor_view_model_api}{TextEditorViewModelApi}}(\textcolor{keyword}{this},\ \_backgroundTaskService,\ \mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editor_service_a22e4a12c18bb600569faa5866397584d}{TextEditorStateWrap}},\ \_jsRuntime,\ \_dispatcher,\ \_dialogService);}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00093}00093\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editor_service_af2bc970e632ccc07ed48150decdc9659}{GroupApi}}\ =\ \textcolor{keyword}{new}\ \mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_groups_1_1_models_1_1_text_editor_group_api}{TextEditorGroupApi}}(\textcolor{keyword}{this},\ \_dispatcher,\ \_dialogService,\ \_jsRuntime);}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00094}00094\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editor_service_aa11f913b08b465f91cb1cc5a71eb87de}{DiffApi}}\ =\ \textcolor{keyword}{new}\ \mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_diffs_1_1_models_1_1_text_editor_diff_api}{TextEditorDiffApi}}(\textcolor{keyword}{this},\ \_dispatcher);}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00095}00095\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editor_service_a473757bcaab995dec765a9ac1cde21df}{OptionsApi}}\ =\ \textcolor{keyword}{new}\ \mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_options_1_1_models_1_1_text_editor_options_api}{TextEditorOptionsApi}}(\textcolor{keyword}{this},\ \mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editor_service_a6b0440c77cd1eb071be0bc63816e0f85}{TextEditorConfig}},\ \_storageService,\ \_commonBackgroundTaskApi,\ \_dispatcher);}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00096}00096\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00097}00097\ }
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00098}\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editor_service_a22e4a12c18bb600569faa5866397584d}{00098}}\ \ \ \ \ \textcolor{keyword}{public}\ IState<TextEditorState>\ \mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editor_service_a22e4a12c18bb600569faa5866397584d}{TextEditorStateWrap}}\ \{\ \textcolor{keyword}{get};\ \}}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00099}\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editor_service_a91bc1a26c7c43af1c3dd7ef749a07d8e}{00099}}\ \ \ \ \ \textcolor{keyword}{public}\ IState<TextEditorGroupState>\ \mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editor_service_a91bc1a26c7c43af1c3dd7ef749a07d8e}{GroupStateWrap}}\ \{\ \textcolor{keyword}{get};\ \}}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00100}\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editor_service_ad9ea33a92eb8b5650279b0b8a1124684}{00100}}\ \ \ \ \ \textcolor{keyword}{public}\ IState<TextEditorDiffState>\ \mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editor_service_ad9ea33a92eb8b5650279b0b8a1124684}{DiffStateWrap}}\ \{\ \textcolor{keyword}{get};\ \}}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00101}\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editor_service_a412d34f6f199e3c8cddc2f7f9dbd6189}{00101}}\ \ \ \ \ \textcolor{keyword}{public}\ IState<ThemeState>\ \mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editor_service_a412d34f6f199e3c8cddc2f7f9dbd6189}{ThemeStateWrap}}\ \{\ \textcolor{keyword}{get};\ \}}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00102}\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editor_service_af59be92638fdb051c2a3466fa8995893}{00102}}\ \ \ \ \ \textcolor{keyword}{public}\ IState<TextEditorOptionsState>\ \mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editor_service_af59be92638fdb051c2a3466fa8995893}{OptionsStateWrap}}\ \{\ \textcolor{keyword}{get};\ \}}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00103}\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editor_service_af528b1fd34875c7921a39eb46885b5ea}{00103}}\ \ \ \ \ \textcolor{keyword}{public}\ IState<TextEditorFindAllState>\ \mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editor_service_af528b1fd34875c7921a39eb46885b5ea}{FindAllStateWrap}}\ \{\ \textcolor{keyword}{get};\ \}}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00104}\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editor_service_abbac42dbb31a02de55ddbecee6a558cd}{00104}}\ \ \ \ \ \textcolor{keyword}{public}\ IState<AppDimensionState>\ \mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editor_service_abbac42dbb31a02de55ddbecee6a558cd}{AppDimensionStateWrap}}\ \{\ \textcolor{keyword}{get};\ \}}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00105}00105\ }
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00106}\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editor_service_a1bb8d9202cf8845c6fdf33617155c53d}{00106}}\ \ \ \ \ \textcolor{keyword}{public}\ \mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_js_runtimes_1_1_models_1_1_luthetus_text_editor_java_script_interop_api}{LuthetusTextEditorJavaScriptInteropApi}}\ \mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editor_service_a1bb8d9202cf8845c6fdf33617155c53d}{JsRuntimeTextEditorApi}}\ \{\ \textcolor{keyword}{get};\ \}}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00107}\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editor_service_a8868b2c9cf3bf7bd7e49abfa9ddef2c0}{00107}}\ \ \ \ \ \textcolor{keyword}{public}\ \mbox{\hyperlink{class_luthetus_1_1_common_1_1_razor_lib_1_1_js_runtimes_1_1_models_1_1_luthetus_common_java_script_interop_api}{LuthetusCommonJavaScriptInteropApi}}\ \mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editor_service_a8868b2c9cf3bf7bd7e49abfa9ddef2c0}{JsRuntimeCommonApi}}\ \{\ \textcolor{keyword}{get};\ \}}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00108}\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editor_service_a1ed89dfdefff1f8f391d943dd3c2e788}{00108}}\ \ \ \ \ \textcolor{keyword}{public}\ \mbox{\hyperlink{interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_autocompletes_1_1_models_1_1_i_autocomplete_indexer}{IAutocompleteIndexer}}\ \mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editor_service_a1ed89dfdefff1f8f391d943dd3c2e788}{AutocompleteIndexer}}\ \{\ \textcolor{keyword}{get};\ \}}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00109}\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editor_service_a078114546d55895ef8bfd68715b03fcf}{00109}}\ \ \ \ \ \textcolor{keyword}{public}\ \mbox{\hyperlink{interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_autocompletes_1_1_models_1_1_i_autocomplete_service}{IAutocompleteService}}\ \mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editor_service_a078114546d55895ef8bfd68715b03fcf}{AutocompleteService}}\ \{\ \textcolor{keyword}{get};\ \}}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00110}\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editor_service_a6b0440c77cd1eb071be0bc63816e0f85}{00110}}\ \ \ \ \ \textcolor{keyword}{public}\ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_installations_1_1_models_a93aa7bee7cb16431b8752d669a0286dd}{LuthetusTextEditorConfig}}\ \mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editor_service_a6b0440c77cd1eb071be0bc63816e0f85}{TextEditorConfig}}\ \{\ \textcolor{keyword}{get};\ \}}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00111}00111\ }
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00112}00112\ \textcolor{preprocessor}{\#if\ DEBUG}}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00113}00113\ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keywordtype}{string}\ \mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editor_service_a5ef2704e3fa85568be66e008876de8b9}{StorageKey}}\ =>\ \textcolor{stringliteral}{"{}luth\_te\_text-\/editor-\/options-\/debug"{}};}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00114}00114\ \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00115}\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editor_service_a5ef2704e3fa85568be66e008876de8b9}{00115}}\ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keywordtype}{string}\ \mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editor_service_a5ef2704e3fa85568be66e008876de8b9}{StorageKey}}\ =>\ \textcolor{stringliteral}{"{}luth\_te\_text-\/editor-\/options"{}};}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00116}00116\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00117}00117\ }
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00118}\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editor_service_a19cc5e2f4f9256ae9b2c8506b1f1f3a8}{00118}}\ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keywordtype}{string}\ \mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editor_service_a19cc5e2f4f9256ae9b2c8506b1f1f3a8}{ThemeCssClassString}}\ =>\ \mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editor_service_a412d34f6f199e3c8cddc2f7f9dbd6189}{ThemeStateWrap}}.Value.ThemeList.FirstOrDefault(}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00119}00119\ \ \ \ \ \ \ \ \ x\ =>\ x.Key\ ==\ \mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editor_service_af59be92638fdb051c2a3466fa8995893}{OptionsStateWrap}}.Value.Options.CommonOptions.ThemeKey)}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00120}00120\ \ \ \ \ \ \ \ \ ?.CssClassString}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00121}00121\ \ \ \ \ \ \ \ \ \ \ \ \ ??\ ThemeFacts.VisualStudioDarkThemeClone.CssClassString;}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00122}00122\ }
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00123}\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editor_service_a8066979b78e826ead9123e26a4b6a969}{00123}}\ \ \ \ \ \textcolor{keyword}{public}\ \mbox{\hyperlink{interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1_1_i_text_editor_model_api}{ITextEditorModelApi}}\ \mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editor_service_a8066979b78e826ead9123e26a4b6a969}{ModelApi}}\ \{\ \textcolor{keyword}{get};\ \}}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00124}\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editor_service_a07e2a1f728a5620dae95c78c3c2d6be0}{00124}}\ \ \ \ \ \textcolor{keyword}{public}\ \mbox{\hyperlink{interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1_1_i_text_editor_view_model_api}{ITextEditorViewModelApi}}\ \mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editor_service_a07e2a1f728a5620dae95c78c3c2d6be0}{ViewModelApi}}\ \{\ \textcolor{keyword}{get};\ \}}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00125}\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editor_service_af2bc970e632ccc07ed48150decdc9659}{00125}}\ \ \ \ \ \textcolor{keyword}{public}\ \mbox{\hyperlink{interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_groups_1_1_models_1_1_i_text_editor_group_api}{ITextEditorGroupApi}}\ \mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editor_service_af2bc970e632ccc07ed48150decdc9659}{GroupApi}}\ \{\ \textcolor{keyword}{get};\ \}}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00126}\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editor_service_aa11f913b08b465f91cb1cc5a71eb87de}{00126}}\ \ \ \ \ \textcolor{keyword}{public}\ \mbox{\hyperlink{interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_diffs_1_1_models_1_1_i_text_editor_diff_api}{ITextEditorDiffApi}}\ \mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editor_service_aa11f913b08b465f91cb1cc5a71eb87de}{DiffApi}}\ \{\ \textcolor{keyword}{get};\ \}}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00127}\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editor_service_a473757bcaab995dec765a9ac1cde21df}{00127}}\ \ \ \ \ \textcolor{keyword}{public}\ \mbox{\hyperlink{interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_options_1_1_models_1_1_i_text_editor_options_api}{ITextEditorOptionsApi}}\ \mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editor_service_a473757bcaab995dec765a9ac1cde21df}{OptionsApi}}\ \{\ \textcolor{keyword}{get};\ \}}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00128}00128\ }
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00129}\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editor_service_af6eeb43281d4743f6bb813d6b400e401}{00129}}\ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editor_service_af6eeb43281d4743f6bb813d6b400e401}{PostUnique}}(}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00130}00130\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{string}\ name,}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00131}00131\ \ \ \ \ \ \ \ \ Func<ITextEditorEditContext,\ Task>\ textEditorFunc)}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00132}00132\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00133}00133\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editor_service_a2eb0127689e3f77968b17aeb01d76168}{Post}}(\textcolor{keyword}{new}\ \mbox{\hyperlink{struct_luthetus_1_1_text_editor_1_1_razor_lib_1_1_background_tasks_1_1_models_1_1_unique_text_editor_work}{UniqueTextEditorWork}}(}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00134}00134\ \ \ \ \ \ \ \ \ \ \ \ \ name,}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00135}00135\ \ \ \ \ \ \ \ \ \ \ \ \ textEditorFunc));}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00136}00136\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00137}00137\ }
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00138}\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editor_service_ae61cbd701915ea41577a700235950667}{00138}}\ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editor_service_ae61cbd701915ea41577a700235950667}{PostRedundant}}(}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00139}00139\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{string}\ name,}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00140}00140\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_a435ccef09e2ba83022e8cf378fc0f690}{ResourceUri}}\ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_ae531f6ec8ec05e2493aabf8d17c23e4b}{resourceUri}},}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00141}00141\ \ \ \ \ \ \ \ \ Key<TextEditorViewModel>\ viewModelKey,}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00142}00142\ \ \ \ \ \ \ \ \ Func<ITextEditorEditContext,\ Task>\ textEditorFunc)}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00143}00143\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00144}00144\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editor_service_a2eb0127689e3f77968b17aeb01d76168}{Post}}(\textcolor{keyword}{new}\ \mbox{\hyperlink{struct_luthetus_1_1_text_editor_1_1_razor_lib_1_1_background_tasks_1_1_models_1_1_redundant_text_editor_work}{RedundantTextEditorWork}}(}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00145}00145\ \ \ \ \ \ \ \ \ \ \ \ \ name,}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00146}00146\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_ae531f6ec8ec05e2493aabf8d17c23e4b}{resourceUri}},}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00147}00147\ \ \ \ \ \ \ \ \ \ \ \ \ viewModelKey,}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00148}00148\ \ \ \ \ \ \ \ \ \ \ \ \ textEditorFunc));}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00149}00149\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00150}00150\ }
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00151}\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editor_service_a2eb0127689e3f77968b17aeb01d76168}{00151}}\ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editor_service_a2eb0127689e3f77968b17aeb01d76168}{Post}}(\mbox{\hyperlink{interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_background_tasks_1_1_models_1_1_i_text_editor_work}{ITextEditorWork}}\ work)}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00152}00152\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00153}00153\ \ \ \ \ \ \ \ \ work.EditContext\ =\ \textcolor{keyword}{new}\ TextEditorEditContext(}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00154}00154\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{this},}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00155}00155\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editor_service_ab734191e9f88c71d3763f87bf382b014}{AuthenticatedActionKey}});}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00156}00156\ }
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00157}00157\ \ \ \ \ \ \ \ \ \_backgroundTaskService.Enqueue(work);}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00158}00158\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00159}00159\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00160}\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editor_service_a256246d8e939bfb507e9d1e45123a920}{00160}}\ \ \ \ \ \textcolor{keyword}{public}\ Task\ \mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editor_service_a256246d8e939bfb507e9d1e45123a920}{PostAsync}}(\mbox{\hyperlink{interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_background_tasks_1_1_models_1_1_i_text_editor_work}{ITextEditorWork}}\ work)}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00161}00161\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00162}00162\ \ \ \ \ \ \ \ \ work.EditContext\ =\ \textcolor{keyword}{new}\ TextEditorEditContext(}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00163}00163\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{this},}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00164}00164\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editor_service_ab734191e9f88c71d3763f87bf382b014}{AuthenticatedActionKey}});}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00165}00165\ }
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00166}00166\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \_backgroundTaskService.EnqueueAsync(work);}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00167}00167\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00168}00168\ }
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00169}\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editor_service_ab6186cfc981c510d63406286d717b3b0}{00169}}\ \ \ \ \ \textcolor{keyword}{public}\ async\ Task\ \mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editor_service_ab6186cfc981c510d63406286d717b3b0}{FinalizePost}}(\mbox{\hyperlink{interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1_1_i_text_editor_edit_context}{ITextEditorEditContext}}\ editContext)}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00170}00170\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00171}00171\ \ \ \ \ \ \ \ \ var\ modelModifierNeedRenderList\ =\ \textcolor{keyword}{new}\ List<TextEditorModelModifier>();}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00172}00172\ \ \ \ \ \ \ \ \ var\ viewModelModifierNeedRenderList\ =\ \textcolor{keyword}{new}\ List<TextEditorViewModelModifier>();}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00173}00173\ }
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00174}00174\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{foreach}\ (var\ modelModifier\ \textcolor{keywordflow}{in}\ editContext.ModelCache.Values)}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00175}00175\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00176}00176\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (modelModifier\ is\ \textcolor{keyword}{null}\ ||\ !modelModifier.WasModified)}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00177}00177\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{continue};}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00178}00178\ }
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00179}00179\ \ \ \ \ \ \ \ \ \ \ \ \ modelModifierNeedRenderList.Add(modelModifier);}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00180}00180\ }
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00181}00181\ \ \ \ \ \ \ \ \ \ \ \ \ var\ viewModelBag\ =\ editContext.TextEditorService.ModelApi.GetViewModelsOrEmpty(modelModifier.ResourceUri);}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00182}00182\ }
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00183}00183\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{foreach}\ (var\ viewModel\ \textcolor{keywordflow}{in}\ viewModelBag)}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00184}00184\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00185}00185\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Invoking\ 'GetViewModelModifier'\ marks\ the\ view\ model\ to\ be\ updated.}}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00186}00186\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ var\ viewModelModifier\ =\ editContext.GetViewModelModifier(viewModel.ViewModelKey);}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00187}00187\ }
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00188}00188\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!viewModelModifier.ShouldReloadVirtualizationResult)}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00189}00189\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ viewModelModifier.ShouldReloadVirtualizationResult\ =\ modelModifier.ShouldReloadVirtualizationResult;}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00190}00190\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00191}00191\ }
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00192}00192\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (modelModifier.WasDirty\ !=\ modelModifier.IsDirty)}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00193}00193\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00194}00194\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (modelModifier.IsDirty)}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00195}00195\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \_dispatcher.Dispatch(\textcolor{keyword}{new}\ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_edits_1_1_states_a552e5dc3b4990040aac7b988ada096b4}{DirtyResourceUriState}}.AddDirtyResourceUriAction(modelModifier.ResourceUri));}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00196}00196\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00197}00197\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \_dispatcher.Dispatch(\textcolor{keyword}{new}\ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_edits_1_1_states_a552e5dc3b4990040aac7b988ada096b4}{DirtyResourceUriState}}.RemoveDirtyResourceUriAction(modelModifier.ResourceUri));}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00198}00198\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00199}00199\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00200}00200\ }
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00201}00201\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{foreach}\ (var\ viewModelModifier\ \textcolor{keywordflow}{in}\ editContext.ViewModelCache.Values)}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00202}00202\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00203}00203\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (viewModelModifier\ is\ \textcolor{keyword}{null}\ ||\ !viewModelModifier.WasModified)}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00204}00204\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return};}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00205}00205\ }
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00206}00206\ \ \ \ \ \ \ \ \ \ \ \ \ viewModelModifierNeedRenderList.Add(viewModelModifier);}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00207}00207\ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00208}00208\ \ \ \ \ \ \ \ \ \ \ \ \ var\ successCursorModifierBag\ =\ editContext.CursorModifierBagCache.TryGetValue(}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00209}00209\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ viewModelModifier.ViewModel.ViewModelKey,}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00210}00210\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ out\ var\ cursorModifierBag);}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00211}00211\ }
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00212}00212\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (successCursorModifierBag\ \&\&\ cursorModifierBag\ is\ not\ \textcolor{keyword}{null})}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00213}00213\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00214}00214\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ viewModelModifier.ViewModel\ =\ viewModelModifier.ViewModel\ with}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00215}00215\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00216}00216\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_a0630dc55b497d75dd30a034eb8652245}{CursorList}}\ =\ cursorModifierBag.List}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00217}00217\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ .Select(x\ =>\ x.ToCursor())}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00218}00218\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ .ToImmutableArray()}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00219}00219\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \};}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00220}00220\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00221}00221\ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00222}00222\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (viewModelModifier.ViewModel.UnsafeState.ShouldRevealCursor)}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00223}00223\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00224}00224\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ var\ modelModifier\ =\ editContext.GetModelModifier(viewModelModifier.ViewModel.ResourceUri);}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00225}00225\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ cursorModifierBag\ ??=\ editContext.GetCursorModifierBag(viewModelModifier.ViewModel);}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00226}00226\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ var\ cursorModifier\ =\ editContext.GetPrimaryCursorModifier(cursorModifierBag);}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00227}00227\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00228}00228\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (modelModifier\ is\ not\ \textcolor{keyword}{null})}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00229}00229\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00230}00230\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editor_service_a07e2a1f728a5620dae95c78c3c2d6be0}{ViewModelApi}}.RevealCursor(}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00231}00231\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ editContext,}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00232}00232\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ modelModifier,}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00233}00233\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ viewModelModifier,}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00234}00234\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ cursorModifierBag,}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00235}00235\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ cursorModifier);}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00236}00236\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00237}00237\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00238}00238\ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00239}00239\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ This\ if\ expression\ exists\ below,\ to\ check\ if\ 'CalculateVirtualizationResult(...)'\ should\ be\ invoked.}}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00240}00240\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//}}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00241}00241\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ But,\ note\ that\ these\ cannot\ be\ combined\ at\ the\ bottom,\ we\ need\ to\ check\ if\ an\ edit}}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00242}00242\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ reduced\ the\ scrollWidth\ or\ scrollHeight\ of\ the\ editor's\ content.}}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00243}00243\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ }}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00244}00244\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ This\ is\ done\ here,\ so\ that\ the\ 'ScrollWasModified'\ bool\ can\ be\ set,\ and\ downstream\ if\ statements\ will\ be\ entered,}}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00245}00245\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ which\ go\ on\ to\ scroll\ the\ editor.}}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00246}00246\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (viewModelModifier.ShouldReloadVirtualizationResult)}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00247}00247\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00248}00248\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editor_service_a93a157a31525a128e238e8f9c16a626c}{ValidateMaximumScrollLeftAndScrollTop}}(editContext,\ viewModelModifier,\ textEditorDimensionsChanged:\ \textcolor{keyword}{false});}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00249}00249\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00250}00250\ }
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00251}00251\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (viewModelModifier.ScrollWasModified)}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00252}00252\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00253}00253\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ TODO:\ If\ the\ API\ is\ self\ validating\ then\ this\ explicit\ final\ validation\ wouldn't\ be\ needed?}}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00254}00254\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*}}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00255}00255\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ var\ validateScrollbarDimensions\ =\ viewModelModifier.ViewModel.ScrollbarDimensions;}}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00256}00256\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ }}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00257}00257\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ validateScrollbarDimensions\ =\ viewModelModifier.ViewModel.ScrollbarDimensions.WithSetScrollLeft(}}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00258}00258\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (int)validateScrollbarDimensions.ScrollLeft,}}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00259}00259\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ viewModelModifier.ViewModel.TextEditorDimensions);}}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00260}00260\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00261}00261\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ validateScrollbarDimensions\ =\ validateScrollbarDimensions.WithSetScrollTop(}}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00262}00262\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (int)validateScrollbarDimensions.ScrollTop,}}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00263}00263\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ viewModelModifier.ViewModel.TextEditorDimensions);}}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00264}00264\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00265}00265\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ viewModelModifier.ViewModel\ =\ viewModelModifier.ViewModel\ with}}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00266}00266\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00267}00267\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ScrollbarDimensions\ =\ validateScrollbarDimensions}}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00268}00268\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \};}}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00269}00269\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00270}00270\ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00271}00271\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ await\ \mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editor_service_a1bb8d9202cf8845c6fdf33617155c53d}{JsRuntimeTextEditorApi}}}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00272}00272\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ .SetScrollPosition(}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00273}00273\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ viewModelModifier.ViewModel.BodyElementId,}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00274}00274\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ viewModelModifier.ViewModel.GutterElementId,}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00275}00275\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ viewModelModifier.ViewModel.ScrollbarDimensions.ScrollLeft,}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00276}00276\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ viewModelModifier.ViewModel.ScrollbarDimensions.ScrollTop)}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00277}00277\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ .ConfigureAwait(\textcolor{keyword}{false});}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00278}00278\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00279}00279\ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00280}00280\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!viewModelModifier.ShouldReloadVirtualizationResult\ \&\&}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00281}00281\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ viewModelModifier.ScrollWasModified)}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00282}00282\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00283}00283\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ If\ not\ already\ going\ to\ reload\ virtualization\ result,}}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00284}00284\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ then\ check\ if\ the\ virtualization\ needs\ to\ be\ refreshed\ due\ to\ a}}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00285}00285\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ change\ in\ scroll\ position.}}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00286}00286\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//}}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00287}00287\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ This\ code\ only\ needs\ to\ run\ if\ the\ scrollbar\ was\ modified.}}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00288}00288\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00289}00289\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (viewModelModifier.ViewModel.VirtualizationResult.EntryList.Length\ >\ 0)}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00290}00290\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00291}00291\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ var\ firstEntry\ =\ viewModelModifier.ViewModel.VirtualizationResult.EntryList.First();}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00292}00292\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ var\ firstEntryTop\ =\ firstEntry.Index\ *\ viewModelModifier.ViewModel.CharAndLineMeasurements.LineHeight;}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00293}00293\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00294}00294\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (viewModelModifier.ViewModel.ScrollbarDimensions.ScrollTop\ <\ firstEntryTop)}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00295}00295\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00296}00296\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ viewModelModifier.ShouldReloadVirtualizationResult\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00297}00297\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00298}00298\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00299}00299\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00300}00300\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ var\ bigTop\ =\ viewModelModifier.ViewModel.ScrollbarDimensions.ScrollTop\ +}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00301}00301\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ viewModelModifier.ViewModel.TextEditorDimensions.Height;}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00302}00302\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00303}00303\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ var\ imaginaryLastEntry\ =\ viewModelModifier.ViewModel.VirtualizationResult.EntryList.Last();}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00304}00304\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ var\ imaginaryLastEntryTop\ =\ (imaginaryLastEntry.Index\ +\ 1)\ *\ viewModelModifier.ViewModel.CharAndLineMeasurements.LineHeight;}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00305}00305\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00306}00306\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (bigTop\ >\ imaginaryLastEntryTop)}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00307}00307\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ viewModelModifier.ShouldReloadVirtualizationResult\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00308}00308\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00309}00309\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00310}00310\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00311}00311\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ A\ check\ for\ horizontal\ virtualization\ still\ needs\ to\ be\ done.}}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00312}00312\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//}}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00313}00313\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ If\ we\ didn't\ already\ determine\ the\ necessity\ of\ calculating\ the\ virtualization}}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00314}00314\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ result\ when\ checking\ the\ vertical\ virtualization,\ then\ we\ check\ horizontal.}}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00315}00315\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!viewModelModifier.ShouldReloadVirtualizationResult)}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00316}00316\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00317}00317\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ low\ end\ plus\ width\ of\ it}}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00318}00318\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00319}00319\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ var\ leftBoundary\ =\ viewModelModifier.ViewModel.VirtualizationResult.LeftVirtualizationBoundary;}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00320}00320\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ var\ scrollLeft\ =\ viewModelModifier.ViewModel.ScrollbarDimensions.ScrollLeft;}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00321}00321\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00322}00322\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (scrollLeft\ <\ (leftBoundary.LeftInPixels\ +\ leftBoundary.WidthInPixels))}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00323}00323\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00324}00324\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ viewModelModifier.ShouldReloadVirtualizationResult\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00325}00325\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00326}00326\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00327}00327\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00328}00328\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ var\ rightBoundary\ =\ viewModelModifier.ViewModel.VirtualizationResult.RightVirtualizationBoundary;}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00329}00329\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ var\ bigLeft\ =\ scrollLeft\ +\ viewModelModifier.ViewModel.TextEditorDimensions.Width;}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00330}00330\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00331}00331\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (bigLeft\ >\ rightBoundary.LeftInPixels)}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00332}00332\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00333}00333\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ viewModelModifier.ShouldReloadVirtualizationResult\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00334}00334\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00335}00335\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00336}00336\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00337}00337\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00338}00338\ }
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00339}00339\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (viewModelModifier.ShouldReloadVirtualizationResult)}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00340}00340\ \ \ \ \ \ \ \ \ \ \ \ \ \{\ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00341}00341\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ TODO:\ This\ 'CalculateVirtualizationResultFactory'\ invocation\ is\ horrible\ for\ performance.}}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00342}00342\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ editContext.TextEditorService.ViewModelApi.CalculateVirtualizationResult(}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00343}00343\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ editContext,}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00344}00344\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ editContext.GetModelModifier(viewModelModifier.ViewModel.ResourceUri),}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00345}00345\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ viewModelModifier,}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00346}00346\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ CancellationToken.None);}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00347}00347\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00348}00348\ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00349}00349\ \ \ \ \ \ \ \ \ \ \ \ \ \_dispatcher.Dispatch(\textcolor{keyword}{new}\ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_states_a2eb6cc3b53a56c5c46bd3b70f60ecc6f}{TextEditorState}}.SetModelAndViewModelRangeAction(}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00350}00350\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ editContext.AuthenticatedActionKey,}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00351}00351\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ editContext,}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00352}00352\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ modelModifierNeedRenderList,}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00353}00353\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ viewModelModifierNeedRenderList));}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00354}00354\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00355}00355\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00356}00356\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00379}\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editor_service_a93a157a31525a128e238e8f9c16a626c}{00379}}\ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editor_service_a93a157a31525a128e238e8f9c16a626c}{ValidateMaximumScrollLeftAndScrollTop}}(}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00380}00380\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1_1_i_text_editor_edit_context}{ITextEditorEditContext}}\ editContext,}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00381}00381\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1_1_text_editor_view_model_modifier}{TextEditorViewModelModifier}}\ viewModelModifier,}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00382}00382\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ textEditorDimensionsChanged)}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00383}00383\ \ \ \ \ \{\ \ \ }
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00384}00384\ \ \ \ \ \ \ \ \ var\ modelModifier\ =\ editContext.\mbox{\hyperlink{interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1_1_i_text_editor_edit_context_abbb3422d11e529e2b7cc76ebc2f77c4a}{GetModelModifier}}(viewModelModifier.\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1_1_text_editor_view_model_modifier_a507df71f9116845e02265208b721d513}{ViewModel}}.ResourceUri);}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00385}00385\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00386}00386\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (modelModifier\ is\ \textcolor{keyword}{null})}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00387}00387\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return};}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00388}00388\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00389}00389\ \ \ \ \ \ \ \ \ var\ originalScrollWidth\ =\ viewModelModifier.\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1_1_text_editor_view_model_modifier_a507df71f9116845e02265208b721d513}{ViewModel}}.ScrollbarDimensions.ScrollWidth;}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00390}00390\ \ \ \ \ \ \ \ \ var\ originalScrollHeight\ =\ viewModelModifier.\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1_1_text_editor_view_model_modifier_a507df71f9116845e02265208b721d513}{ViewModel}}.ScrollbarDimensions.ScrollHeight;}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00391}00391\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00392}00392\ \ \ \ \ \ \ \ \ var\ totalWidth\ =\ (int)Math.Ceiling(modelModifier.MostCharactersOnASingleLineTuple.lineLength\ *}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00393}00393\ \ \ \ \ \ \ \ \ \ \ \ \ viewModelModifier.\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1_1_text_editor_view_model_modifier_a507df71f9116845e02265208b721d513}{ViewModel}}.CharAndLineMeasurements.CharacterWidth);}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00394}00394\ }
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00395}00395\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Account\ for\ any\ tab\ characters\ on\ the\ 'MostCharactersOnASingleLineTuple'}}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00396}00396\ \ \ \ \ \ \ \ \ \textcolor{comment}{//}}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00397}00397\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ TODO:\ This\ code\ is\ not\ fully\ correct...}}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00398}00398\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ ...if\ the\ longest\ line\ is\ 50\ non-\/tab\ characters,}}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00399}00399\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ and\ the\ second\ longest\ line\ is\ 49\ tab\ characters,}}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00400}00400\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ this\ code\ will\ erroneously\ take\ the\ '50'\ non-\/tab\ characters}}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00401}00401\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ to\ be\ the\ longest\ line.}}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00402}00402\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00403}00403\ \ \ \ \ \ \ \ \ \ \ \ \ var\ lineIndex\ =\ modelModifier.MostCharactersOnASingleLineTuple.lineIndex;}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00404}00404\ \ \ \ \ \ \ \ \ \ \ \ \ var\ longestLineInformation\ =\ modelModifier.GetLineInformation(lineIndex);}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00405}00405\ }
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00406}00406\ \ \ \ \ \ \ \ \ \ \ \ \ var\ tabCountOnLongestLine\ =\ modelModifier.GetTabCountOnSameLineBeforeCursor(}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00407}00407\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ longestLineInformation.Index,}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00408}00408\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ longestLineInformation.LastValidColumnIndex);}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00409}00409\ }
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00410}00410\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ 1\ of\ the\ character\ width\ is\ already\ accounted\ for}}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00411}00411\ \ \ \ \ \ \ \ \ \ \ \ \ var\ extraWidthPerTabKey\ =\ \mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1_1_text_editor_model_a9a8d5b20587ad2939c867d66d0977bdd}{TextEditorModel.TAB\_WIDTH}}\ -\/\ 1;}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00412}00412\ }
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00413}00413\ \ \ \ \ \ \ \ \ \ \ \ \ totalWidth\ +=\ (int)Math.Ceiling(extraWidthPerTabKey\ *}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00414}00414\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ tabCountOnLongestLine\ *}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00415}00415\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ viewModelModifier.\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1_1_text_editor_view_model_modifier_a507df71f9116845e02265208b721d513}{ViewModel}}.CharAndLineMeasurements.CharacterWidth);}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00416}00416\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00417}00417\ }
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00418}00418\ \ \ \ \ \ \ \ \ var\ totalHeight\ =\ (int)Math.Ceiling(modelModifier.LineEndList.Count\ *}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00419}00419\ \ \ \ \ \ \ \ \ \ \ \ \ viewModelModifier.\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1_1_text_editor_view_model_modifier_a507df71f9116845e02265208b721d513}{ViewModel}}.CharAndLineMeasurements.LineHeight);}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00420}00420\ }
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00421}00421\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Add\ vertical\ margin\ so\ the\ user\ can\ scroll\ beyond\ the\ final\ line\ of\ content}}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00422}00422\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ marginScrollHeight;}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00423}00423\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00424}00424\ \ \ \ \ \ \ \ \ \ \ \ \ var\ percentOfMarginScrollHeightByPageUnit\ =\ 0.4;}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00425}00425\ }
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00426}00426\ \ \ \ \ \ \ \ \ \ \ \ \ marginScrollHeight\ =\ (int)Math.Ceiling(viewModelModifier.\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1_1_text_editor_view_model_modifier_a507df71f9116845e02265208b721d513}{ViewModel}}.TextEditorDimensions.Height\ *\ percentOfMarginScrollHeightByPageUnit);}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00427}00427\ \ \ \ \ \ \ \ \ \ \ \ \ totalHeight\ +=\ marginScrollHeight;}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00428}00428\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00429}00429\ }
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00430}00430\ \ \ \ \ \ \ \ \ viewModelModifier.ViewModel\ =\ viewModelModifier.ViewModel\ with}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00431}00431\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00432}00432\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_af95b7406fbb23b5589ae2f3a639b572b}{ScrollbarDimensions}}\ =\ viewModelModifier.ViewModel.ScrollbarDimensions\ with}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00433}00433\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00434}00434\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ScrollWidth\ =\ totalWidth,}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00435}00435\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ScrollHeight\ =\ totalHeight,}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00436}00436\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ MarginScrollHeight\ =\ marginScrollHeight}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00437}00437\ \ \ \ \ \ \ \ \ \ \ \ \ \},}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00438}00438\ \ \ \ \ \ \ \ \ \};}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00439}00439\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00440}00440\ \ \ \ \ \ \ \ \ var\ validateScrollbarDimensions\ =\ viewModelModifier.\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1_1_text_editor_view_model_modifier_a507df71f9116845e02265208b721d513}{ViewModel}}.ScrollbarDimensions;}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00441}00441\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00442}00442\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (originalScrollWidth\ >\ viewModelModifier.\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1_1_text_editor_view_model_modifier_a507df71f9116845e02265208b721d513}{ViewModel}}.ScrollbarDimensions.ScrollWidth\ ||}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00443}00443\ \ \ \ \ \ \ \ \ \ \ \ \ textEditorDimensionsChanged)}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00444}00444\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00445}00445\ \ \ \ \ \ \ \ \ \ \ \ \ validateScrollbarDimensions\ =\ viewModelModifier.\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1_1_text_editor_view_model_modifier_a507df71f9116845e02265208b721d513}{ViewModel}}.ScrollbarDimensions.WithSetScrollLeft(}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00446}00446\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (\textcolor{keywordtype}{int})validateScrollbarDimensions.ScrollLeft,}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00447}00447\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ viewModelModifier.\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1_1_text_editor_view_model_modifier_a507df71f9116845e02265208b721d513}{ViewModel}}.TextEditorDimensions);}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00448}00448\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00449}00449\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00450}00450\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (originalScrollHeight\ >\ viewModelModifier.\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1_1_text_editor_view_model_modifier_a507df71f9116845e02265208b721d513}{ViewModel}}.ScrollbarDimensions.ScrollHeight\ ||}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00451}00451\ \ \ \ \ \ \ \ \ \ \ \ \ textEditorDimensionsChanged)}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00452}00452\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00453}00453\ \ \ \ \ \ \ \ \ \ \ \ \ validateScrollbarDimensions\ =\ validateScrollbarDimensions.WithSetScrollTop(}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00454}00454\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (\textcolor{keywordtype}{int})validateScrollbarDimensions.ScrollTop,}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00455}00455\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ viewModelModifier.\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1_1_text_editor_view_model_modifier_a507df71f9116845e02265208b721d513}{ViewModel}}.TextEditorDimensions);}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00456}00456\ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00457}00457\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ The\ scrollLeft\ currently\ does\ not\ have\ any\ margin.\ Therefore\ subtracting\ the\ margin\ isn't\ needed.}}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00458}00458\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//}}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00459}00459\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ For\ scrollTop\ however,\ if\ one\ does\ not\ subtract\ the\ MarginScrollHeight\ in\ the\ case\ of}}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00460}00460\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ 'textEditorDimensionsChanged'}}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00461}00461\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//}}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00462}00462\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Then\ a\ "{}void"{}\ will\ render\ at\ the\ top\ portion\ of\ the\ text\ editor,\ seemingly\ the\ size}}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00463}00463\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ of\ the\ MarginScrollHeight.}}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00464}00464\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (textEditorDimensionsChanged\ \&\&}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00465}00465\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ viewModelModifier.\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1_1_text_editor_view_model_modifier_a507df71f9116845e02265208b721d513}{ViewModel}}.ScrollbarDimensions.ScrollTop\ !=\ validateScrollbarDimensions.ScrollTop)}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00466}00466\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00467}00467\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ validateScrollbarDimensions\ =\ validateScrollbarDimensions.WithSetScrollTop(}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00468}00468\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (\textcolor{keywordtype}{int})validateScrollbarDimensions.ScrollTop\ -\/\ (\textcolor{keywordtype}{int})validateScrollbarDimensions.MarginScrollHeight,}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00469}00469\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ viewModelModifier.\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1_1_text_editor_view_model_modifier_a507df71f9116845e02265208b721d513}{ViewModel}}.TextEditorDimensions);}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00470}00470\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00471}00471\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00472}00472\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00473}00473\ \ \ \ \ \ \ \ \ var\ changeOccurred\ =}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00474}00474\ \ \ \ \ \ \ \ \ \ \ \ \ viewModelModifier.ViewModel.ScrollbarDimensions.ScrollLeft\ !=\ validateScrollbarDimensions.ScrollLeft\ ||}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00475}00475\ \ \ \ \ \ \ \ \ \ \ \ \ viewModelModifier.ViewModel.ScrollbarDimensions.ScrollTop\ !=\ validateScrollbarDimensions.ScrollTop;}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00476}00476\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00477}00477\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (changeOccurred)}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00478}00478\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00479}00479\ \ \ \ \ \ \ \ \ \ \ \ \ viewModelModifier.ScrollWasModified\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00480}00480\ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00481}00481\ \ \ \ \ \ \ \ \ \ \ \ \ viewModelModifier.ViewModel\ =\ viewModelModifier.ViewModel\ with}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00482}00482\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00483}00483\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_af95b7406fbb23b5589ae2f3a639b572b}{ScrollbarDimensions}}\ =\ validateScrollbarDimensions}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00484}00484\ \ \ \ \ \ \ \ \ \ \ \ \ \};}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00485}00485\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00486}00486\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00487}00487\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00488}\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editor_service_a131a42f80299353625f9b785cf9106ea}{00488}}\ \ \ \ \ \textcolor{keyword}{public}\ async\ Task\ \mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editor_service_a131a42f80299353625f9b785cf9106ea}{OpenInEditorAsync}}(}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00489}00489\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{string}\ absolutePath,}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00490}00490\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ shouldSetFocusToEditor,}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00491}00491\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}?\ cursorPositionIndex,}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00492}00492\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_ab53dfba5ef40ddaeca4b8982ea420fd1}{Category}}\ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_af9efd84ac52036166b47cdc1ceb058f6}{category}},}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00493}00493\ \ \ \ \ \ \ \ \ Key<TextEditorViewModel>\ preferredViewModelKey)}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00494}00494\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00495}00495\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{try}}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00496}00496\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00497}00497\ \ \ \ \ \ \ \ \ \ \ \ \ var\ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_ae531f6ec8ec05e2493aabf8d17c23e4b}{resourceUri}}\ =\ \textcolor{keyword}{new}\ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_a435ccef09e2ba83022e8cf378fc0f690}{ResourceUri}}(absolutePath);}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00498}00498\ \ \ \ \ \ \ \ \ \ \ \ \ var\ actualViewModelKey\ =\ await\ CommonLogic\_OpenInEditorAsync(}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00499}00499\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_ae531f6ec8ec05e2493aabf8d17c23e4b}{resourceUri}},}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00500}00500\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ shouldSetFocusToEditor,}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00501}00501\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_af9efd84ac52036166b47cdc1ceb058f6}{category}},}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00502}00502\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ preferredViewModelKey);}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00503}00503\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00504}00504\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Move\ cursor}}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00505}00505\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (cursorPositionIndex\ is\ \textcolor{keyword}{null})}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00506}00506\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return};\ \textcolor{comment}{//\ Leave\ the\ cursor\ unchanged\ if\ the\ argument\ is\ null}}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00507}00507\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editor_service_af6eeb43281d4743f6bb813d6b400e401}{PostUnique}}(nameof(\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editor_service_a131a42f80299353625f9b785cf9106ea}{OpenInEditorAsync}}),\ editContext\ =>}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00508}00508\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00509}00509\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ var\ modelModifier\ =\ editContext.GetModelModifier(\mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_ae531f6ec8ec05e2493aabf8d17c23e4b}{resourceUri}});}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00510}00510\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ var\ viewModelModifier\ =\ editContext.GetViewModelModifier(actualViewModelKey);}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00511}00511\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ var\ cursorModifierBag\ =\ editContext.GetCursorModifierBag(viewModelModifier?.ViewModel);}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00512}00512\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ var\ primaryCursorModifier\ =\ editContext.GetPrimaryCursorModifier(cursorModifierBag);}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00513}00513\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00514}00514\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (modelModifier\ is\ \textcolor{keyword}{null}\ ||\ viewModelModifier\ is\ \textcolor{keyword}{null}\ ||\ cursorModifierBag\ is\ \textcolor{keyword}{null}\ ||\ primaryCursorModifier\ is\ \textcolor{keyword}{null})}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00515}00515\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ Task.CompletedTask;}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00516}00516\ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00517}00517\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ var\ lineAndColumnIndices\ =\ modelModifier.GetLineAndColumnIndicesFromPositionIndex(cursorPositionIndex.Value);}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00518}00518\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00519}00519\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ primaryCursorModifier.LineIndex\ =\ lineAndColumnIndices.lineIndex;}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00520}00520\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ primaryCursorModifier.ColumnIndex\ =\ lineAndColumnIndices.columnIndex;}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00521}00521\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00522}00522\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ viewModelModifier.ViewModel.UnsafeState.ShouldRevealCursor\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00523}00523\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ Task.CompletedTask;}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00524}00524\ \ \ \ \ \ \ \ \ \ \ \ \ \});}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00525}00525\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00526}00526\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{catch}\ (Exception\ e)}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00527}00527\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00528}00528\ \ \ \ \ \ \ \ \ \ \ \ \ Console.WriteLine(e);}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00529}00529\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ One\ would\ never\ want\ a\ failed\ attempt\ at\ opening\ a\ text\ file\ to\ cause\ a\ fatal\ exception.}}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00530}00530\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ TODO:\ Perhaps\ add\ a\ notification?\ Perhaps\ 'throw'\ then\ add\ handling\ in\ the\ callers?\ But\ again,\ this\ should\ never\ cause\ a\ fatal\ exception.}}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00531}00531\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00532}00532\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00533}00533\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00534}\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editor_service_af69787262e71e32a6abb3433dcaf7272}{00534}}\ \ \ \ \ \textcolor{keyword}{public}\ async\ Task\ \mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editor_service_af69787262e71e32a6abb3433dcaf7272}{OpenInEditorAsync}}(}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00535}00535\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{string}\ absolutePath,}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00536}00536\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ shouldSetFocusToEditor,}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00537}00537\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}?\ lineIndex,}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00538}00538\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}?\ columnIndex,}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00539}00539\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_ab53dfba5ef40ddaeca4b8982ea420fd1}{Category}}\ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_af9efd84ac52036166b47cdc1ceb058f6}{category}},}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00540}00540\ \ \ \ \ \ \ \ \ Key<TextEditorViewModel>\ preferredViewModelKey)}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00541}00541\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00542}00542\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{try}}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00543}00543\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00544}00544\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Standardize\ Resource\ Uri}}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00545}00545\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editor_service_a6b0440c77cd1eb071be0bc63816e0f85}{TextEditorConfig}}.AbsolutePathStandardizeFunc\ is\ \textcolor{keyword}{null})}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00546}00546\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return};}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00547}00547\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00548}00548\ \ \ \ \ \ \ \ \ \ \ \ \ var\ standardizedFilePathString\ =\ await\ TextEditorConfig.AbsolutePathStandardizeFunc}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00549}00549\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ .Invoke(absolutePath,\ \_serviceProvider)}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00550}00550\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ .ConfigureAwait(\textcolor{keyword}{false});}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00551}00551\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00552}00552\ \ \ \ \ \ \ \ \ \ \ \ \ var\ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_ae531f6ec8ec05e2493aabf8d17c23e4b}{resourceUri}}\ =\ \textcolor{keyword}{new}\ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_a435ccef09e2ba83022e8cf378fc0f690}{ResourceUri}}(standardizedFilePathString);}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00553}00553\ }
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00554}00554\ \ \ \ \ \ \ \ \ \ \ \ \ var\ actualViewModelKey\ =\ await\ CommonLogic\_OpenInEditorAsync(}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00555}00555\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_ae531f6ec8ec05e2493aabf8d17c23e4b}{resourceUri}},}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00556}00556\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ shouldSetFocusToEditor,}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00557}00557\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_af9efd84ac52036166b47cdc1ceb058f6}{category}},}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00558}00558\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ preferredViewModelKey);}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00559}00559\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00560}00560\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Move\ cursor}}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00561}00561\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (lineIndex\ is\ \textcolor{keyword}{null}\ \&\&\ columnIndex\ is\ \textcolor{keyword}{null})}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00562}00562\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return};\ \textcolor{comment}{//\ Leave\ the\ cursor\ unchanged\ if\ the\ argument\ is\ null}}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00563}00563\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editor_service_af6eeb43281d4743f6bb813d6b400e401}{PostUnique}}(nameof(\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editor_service_a131a42f80299353625f9b785cf9106ea}{OpenInEditorAsync}}),\ editContext\ =>}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00564}00564\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00565}00565\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ var\ modelModifier\ =\ editContext.GetModelModifier(\mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_ae531f6ec8ec05e2493aabf8d17c23e4b}{resourceUri}});}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00566}00566\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ var\ viewModelModifier\ =\ editContext.GetViewModelModifier(actualViewModelKey);}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00567}00567\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ var\ cursorModifierBag\ =\ editContext.GetCursorModifierBag(viewModelModifier?.ViewModel);}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00568}00568\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ var\ primaryCursorModifier\ =\ editContext.GetPrimaryCursorModifier(cursorModifierBag);}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00569}00569\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00570}00570\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (modelModifier\ is\ \textcolor{keyword}{null}\ ||\ viewModelModifier\ is\ \textcolor{keyword}{null}\ ||\ cursorModifierBag\ is\ \textcolor{keyword}{null}\ ||\ primaryCursorModifier\ is\ \textcolor{keyword}{null})}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00571}00571\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ Task.CompletedTask;}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00572}00572\ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00573}00573\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (lineIndex\ is\ not\ \textcolor{keyword}{null})}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00574}00574\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ primaryCursorModifier.LineIndex\ =\ lineIndex.Value;}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00575}00575\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (columnIndex\ is\ not\ \textcolor{keyword}{null})}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00576}00576\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ primaryCursorModifier.ColumnIndex\ =\ columnIndex.Value;}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00577}00577\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00578}00578\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (primaryCursorModifier.LineIndex\ >\ modelModifier.LineCount\ -\/\ 1)}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00579}00579\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ primaryCursorModifier.LineIndex\ =\ modelModifier.LineCount\ -\/\ 1;}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00580}00580\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00581}00581\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ var\ lineInformation\ =\ modelModifier.GetLineInformation(primaryCursorModifier.LineIndex);}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00582}00582\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00583}00583\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (primaryCursorModifier.ColumnIndex\ >\ lineInformation.LastValidColumnIndex)}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00584}00584\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ primaryCursorModifier.SetColumnIndexAndPreferred(lineInformation.LastValidColumnIndex);}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00585}00585\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00586}00586\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ viewModelModifier.ViewModel.UnsafeState.ShouldRevealCursor\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00587}00587\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00588}00588\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ Task.CompletedTask;}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00589}00589\ \ \ \ \ \ \ \ \ \ \ \ \ \});}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00590}00590\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00591}00591\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{catch}\ (Exception\ e)}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00592}00592\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00593}00593\ \ \ \ \ \ \ \ \ \ \ \ \ Console.WriteLine(e);}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00594}00594\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ One\ would\ never\ want\ a\ failed\ attempt\ at\ opening\ a\ text\ file\ to\ cause\ a\ fatal\ exception.}}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00595}00595\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ TODO:\ Perhaps\ add\ a\ notification?\ Perhaps\ 'throw'\ then\ add\ handling\ in\ the\ callers?\ But\ again,\ this\ should\ never\ cause\ a\ fatal\ exception.}}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00596}00596\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00597}00597\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00598}00598\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00603}00603\ \ \ \ \ \textcolor{keyword}{private}\ async\ Task<Key<TextEditorViewModel>>\ CommonLogic\_OpenInEditorAsync(}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00604}00604\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_a435ccef09e2ba83022e8cf378fc0f690}{ResourceUri}}\ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_ae531f6ec8ec05e2493aabf8d17c23e4b}{resourceUri}},}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00605}00605\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ shouldSetFocusToEditor,}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00606}00606\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_ab53dfba5ef40ddaeca4b8982ea420fd1}{Category}}\ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_af9efd84ac52036166b47cdc1ceb058f6}{category}},}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00607}00607\ \ \ \ \ \ \ \ \ Key<TextEditorViewModel>\ preferredViewModelKey)}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00608}00608\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00609}00609\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ RegisterModelFunc}}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00610}00610\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editor_service_a6b0440c77cd1eb071be0bc63816e0f85}{TextEditorConfig}}.RegisterModelFunc\ is\ \textcolor{keyword}{null})}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00611}00611\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ Key<TextEditorViewModel>.Empty;}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00612}00612\ \ \ \ \ \ \ \ \ await\ \mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editor_service_a6b0440c77cd1eb071be0bc63816e0f85}{TextEditorConfig}}.RegisterModelFunc.Invoke(\textcolor{keyword}{new}\ \mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_installations_1_1_models_1_1_register_model_args}{RegisterModelArgs}}(\mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_ae531f6ec8ec05e2493aabf8d17c23e4b}{resourceUri}},\ \_serviceProvider)).ConfigureAwait(\textcolor{keyword}{false});}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00613}00613\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00614}00614\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ TryRegisterViewModelFunc}}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00615}00615\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editor_service_a6b0440c77cd1eb071be0bc63816e0f85}{TextEditorConfig}}.TryRegisterViewModelFunc\ is\ \textcolor{keyword}{null})}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00616}00616\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ Key<TextEditorViewModel>.Empty;}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00617}00617\ \ \ \ \ \ \ \ \ var\ actualViewModelKey\ =\ await\ \mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editor_service_a6b0440c77cd1eb071be0bc63816e0f85}{TextEditorConfig}}.TryRegisterViewModelFunc.Invoke(\textcolor{keyword}{new}\ \mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_installations_1_1_models_1_1_try_register_view_model_args}{TryRegisterViewModelArgs}}(}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00618}00618\ \ \ \ \ \ \ \ \ \ \ \ \ preferredViewModelKey,\ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_ae531f6ec8ec05e2493aabf8d17c23e4b}{resourceUri}},\ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_af9efd84ac52036166b47cdc1ceb058f6}{category}},\ shouldSetFocusToEditor,\ \_serviceProvider)).ConfigureAwait(\textcolor{keyword}{false});}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00619}00619\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00620}00620\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ TryShowViewModelFunc}}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00621}00621\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (actualViewModelKey\ ==\ Key<TextEditorViewModel>.Empty\ ||\ \mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editor_service_a6b0440c77cd1eb071be0bc63816e0f85}{TextEditorConfig}}.TryShowViewModelFunc\ is\ \textcolor{keyword}{null})}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00622}00622\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ Key<TextEditorViewModel>.Empty;}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00623}00623\ \ \ \ \ \ \ \ \ await\ \mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editor_service_a6b0440c77cd1eb071be0bc63816e0f85}{TextEditorConfig}}.TryShowViewModelFunc.Invoke(\textcolor{keyword}{new}\ \mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_installations_1_1_models_1_1_try_show_view_model_args}{TryShowViewModelArgs}}(}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00624}00624\ \ \ \ \ \ \ \ \ \ \ \ \ actualViewModelKey,\ Key<TextEditorGroup>.Empty,\ shouldSetFocusToEditor,\ \_serviceProvider)).ConfigureAwait(\textcolor{keyword}{false});}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00625}00625\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00626}00626\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ actualViewModelKey;}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00627}00627\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_text_editor_service_8_main_8cs_source_l00628}00628\ \}}
+
+\end{DoxyCode}

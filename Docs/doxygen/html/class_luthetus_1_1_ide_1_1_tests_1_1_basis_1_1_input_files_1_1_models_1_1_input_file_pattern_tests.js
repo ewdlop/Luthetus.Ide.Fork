@@ -1,0 +1,4 @@
+var class_luthetus_1_1_ide_1_1_tests_1_1_basis_1_1_input_files_1_1_models_1_1_input_file_pattern_tests =
+[
+    [ "Constructor", "class_luthetus_1_1_ide_1_1_tests_1_1_basis_1_1_input_files_1_1_models_1_1_input_file_pattern_tests.html#a3ab3bb3b44dbce6d52aacaf50484e271", null ]
+];

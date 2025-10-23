@@ -1,0 +1,139 @@
+.TH "Luthetus.Ide.RazorLib.Terminals.Models.TerminalInteractive" 3 "Version 1.0.0" "Luthetus.Ide" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+Luthetus.Ide.RazorLib.Terminals.Models.TerminalInteractive
+.SH SYNOPSIS
+.br
+.PP
+.PP
+Inherits \fBLuthetus\&.Ide\&.RazorLib\&.Terminals\&.Models\&.ITerminalInteractive\fP\&.
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBTerminalInteractive\fP (\fBITerminal\fP terminal)"
+.br
+.ti -1c
+.RI "async Task< \fBTerminalCommandParsed\fP?> \fBTryHandleCommand\fP (\fBTerminalCommandRequest\fP terminalCommandRequest)"
+.br
+.RI "Some terminal commands will map to "interactive" commands that are meant to modify the shell session rather than to start a process\&. "
+.ti -1c
+.RI "void \fBSetWorkingDirectory\fP (string workingDirectory)"
+.br
+.ti -1c
+.RI "ImmutableList< \fBTerminalCommandRequest\fP > \fBGetTerminalCommandRequestHistory\fP ()"
+.br
+.ti -1c
+.RI "\fBTerminalCommandParsed\fP \fBParse\fP (\fBTerminalCommandRequest\fP terminalCommandRequest)"
+.br
+.ti -1c
+.RI "void \fBDispose\fP ()"
+.br
+.in -1c
+.SS "Static Public Attributes"
+
+.in +1c
+.ti -1c
+.RI "const string \fBRESERVED_TARGET_FILENAME_PREFIX\fP = 'Luthetus_'"
+.br
+.in -1c
+.SS "Properties"
+
+.in +1c
+.ti -1c
+.RI "string? \fBWorkingDirectory\fP\fR [get]\fP"
+.br
+.RI "This property is intended to be an absolute path in string form\&. "
+.in -1c
+.SS "Events"
+
+.in +1c
+.ti -1c
+.RI "Action? \fBWorkingDirectoryChanged\fP"
+.br
+.in -1c
+
+Events inherited from \fBLuthetus\&.Ide\&.RazorLib\&.Terminals\&.Models\&.ITerminalInteractive\fP
+.in +1c
+.ti -1c
+.RI "Action? \fBWorkingDirectoryChanged\fP"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+Definition at line \fB10\fP of file \fBTerminalInteractive\&.cs\fP\&.
+.SH "Constructor & Destructor Documentation"
+.PP 
+.SS "Luthetus\&.Ide\&.RazorLib\&.Terminals\&.Models\&.TerminalInteractive\&.TerminalInteractive (\fBITerminal\fP terminal)"
+
+.PP
+Definition at line \fB18\fP of file \fBTerminalInteractive\&.cs\fP\&.
+.SH "Member Function Documentation"
+.PP 
+.SS "void Luthetus\&.Ide\&.RazorLib\&.Terminals\&.Models\&.TerminalInteractive\&.Dispose ()"
+
+.PP
+Definition at line \fB140\fP of file \fBTerminalInteractive\&.cs\fP\&.
+.SS "ImmutableList< \fBTerminalCommandRequest\fP > Luthetus\&.Ide\&.RazorLib\&.Terminals\&.Models\&.TerminalInteractive\&.GetTerminalCommandRequestHistory ()"
+
+.PP
+Implements \fBLuthetus\&.Ide\&.RazorLib\&.Terminals\&.Models\&.ITerminalInteractive\fP\&.
+.PP
+Definition at line \fB91\fP of file \fBTerminalInteractive\&.cs\fP\&.
+.SS "\fBTerminalCommandParsed\fP Luthetus\&.Ide\&.RazorLib\&.Terminals\&.Models\&.TerminalInteractive\&.Parse (\fBTerminalCommandRequest\fP terminalCommandRequest)"
+
+.PP
+Definition at line \fB99\fP of file \fBTerminalInteractive\&.cs\fP\&.
+.SS "void Luthetus\&.Ide\&.RazorLib\&.Terminals\&.Models\&.TerminalInteractive\&.SetWorkingDirectory (string workingDirectory)"
+
+.PP
+Implements \fBLuthetus\&.Ide\&.RazorLib\&.Terminals\&.Models\&.ITerminalInteractive\fP\&.
+.PP
+Definition at line \fB82\fP of file \fBTerminalInteractive\&.cs\fP\&.
+.SS "async Task< \fBTerminalCommandParsed\fP?> Luthetus\&.Ide\&.RazorLib\&.Terminals\&.Models\&.TerminalInteractive\&.TryHandleCommand (\fBTerminalCommandRequest\fP terminalCommandRequest)"
+
+.PP
+Some terminal commands will map to "interactive" commands that are meant to modify the shell session rather than to start a process\&. Ex: 'cd \&.\&./\&.\&.' is an "interactive" command, where as 'dotnet run' will start a process\&.
+
+.PP
+This method gives the \fBITerminalInteractive\fP an opportunity to handle the command, before it is executed at a more general level\&.
+
+.PP
+Presumably, 'dotnet run \&.\&./MyProject\&.csproj' where there is a "\&.\&." in a path, would need to be taken by the \fBITerminalInteractive\fP, and then modified to replace "\&.\&./MyProject\&.csproj" with the result of traversing this relative path from the working directory path\&.
+
+.PP
+The final result would then be returned for the \fBITerminal\fP to execute, "dotnet run C:/User/MyProject/MyProject\&.cs" if the working directory were to be "C:/User/MyProject/wwwroot/"\&.
+
+.PP
+If null is returned, then the \fBITerminal\fP should return (do nothing more)\&. 
+.PP
+Implements \fBLuthetus\&.Ide\&.RazorLib\&.Terminals\&.Models\&.ITerminalInteractive\fP\&.
+.PP
+Definition at line \fB30\fP of file \fBTerminalInteractive\&.cs\fP\&.
+.SH "Member Data Documentation"
+.PP 
+.SS "const string Luthetus\&.Ide\&.RazorLib\&.Terminals\&.Models\&.TerminalInteractive\&.RESERVED_TARGET_FILENAME_PREFIX = 'Luthetus_'\fR [static]\fP"
+
+.PP
+Definition at line \fB12\fP of file \fBTerminalInteractive\&.cs\fP\&.
+.SH "Property Documentation"
+.PP 
+.SS "string? Luthetus\&.Ide\&.RazorLib\&.Terminals\&.Models\&.TerminalInteractive\&.WorkingDirectory\fR [get]\fP"
+
+.PP
+This property is intended to be an absolute path in string form\&. 
+.PP
+Implements \fBLuthetus\&.Ide\&.RazorLib\&.Terminals\&.Models\&.ITerminalInteractive\fP\&.
+.PP
+Definition at line \fB26\fP of file \fBTerminalInteractive\&.cs\fP\&.
+.SH "Event Documentation"
+.PP 
+.SS "Action? Luthetus\&.Ide\&.RazorLib\&.Terminals\&.Models\&.TerminalInteractive\&.WorkingDirectoryChanged"
+
+.PP
+Definition at line \fB28\fP of file \fBTerminalInteractive\&.cs\fP\&.
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for Luthetus\&.Ide from the source code\&.

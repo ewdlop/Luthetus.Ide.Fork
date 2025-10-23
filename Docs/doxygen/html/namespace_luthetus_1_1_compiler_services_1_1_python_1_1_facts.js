@@ -1,0 +1,4 @@
+var namespace_luthetus_1_1_compiler_services_1_1_python_1_1_facts =
+[
+    [ "PythonLanguageFacts", "class_luthetus_1_1_compiler_services_1_1_python_1_1_facts_1_1_python_language_facts.html", "class_luthetus_1_1_compiler_services_1_1_python_1_1_facts_1_1_python_language_facts" ]
+];

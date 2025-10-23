@@ -1,0 +1,59 @@
+\doxysection{Throttle\+Optimized.\+cs}
+\hypertarget{_throttle_optimized_8cs_source}{}\label{_throttle_optimized_8cs_source}\index{Source/Lib/Common/Reactives/Models/ThrottleOptimized.cs@{Source/Lib/Common/Reactives/Models/ThrottleOptimized.cs}}
+\mbox{\hyperlink{_throttle_optimized_8cs}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{_throttle_optimized_8cs_source_l00001}00001\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespace_luthetus_1_1_common_1_1_razor_lib_1_1_reactives_1_1_models}{Luthetus.Common.RazorLib.Reactives.Models}};}
+\DoxyCodeLine{\Hypertarget{_throttle_optimized_8cs_source_l00002}00002\ }
+\DoxyCodeLine{\Hypertarget{_throttle_optimized_8cs_source_l00036}\mbox{\hyperlink{class_luthetus_1_1_common_1_1_razor_lib_1_1_reactives_1_1_models_1_1_throttle_optimized-1-g}{00036}}\ \textcolor{keyword}{public}\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_luthetus_1_1_common_1_1_razor_lib_1_1_reactives_1_1_models_1_1_throttle_optimized-1-g_a7dd5a4e90b6c6be102d36a7febf1bdcc}{ThrottleOptimized}}<TArgs>}
+\DoxyCodeLine{\Hypertarget{_throttle_optimized_8cs_source_l00037}00037\ \{}
+\DoxyCodeLine{\Hypertarget{_throttle_optimized_8cs_source_l00038}00038\ \ \ \ \ \textcolor{keyword}{private}\ readonly\ \textcolor{keywordtype}{object}\ \_lockWorkItemArgs\ =\ \textcolor{keyword}{new}();}
+\DoxyCodeLine{\Hypertarget{_throttle_optimized_8cs_source_l00039}00039\ \ \ \ \ \textcolor{keyword}{private}\ readonly\ Func<TArgs,\ CancellationToken,\ Task>\ \_workItem;}
+\DoxyCodeLine{\Hypertarget{_throttle_optimized_8cs_source_l00040}00040\ }
+\DoxyCodeLine{\Hypertarget{_throttle_optimized_8cs_source_l00041}\mbox{\hyperlink{class_luthetus_1_1_common_1_1_razor_lib_1_1_reactives_1_1_models_1_1_throttle_optimized-1-g_a7dd5a4e90b6c6be102d36a7febf1bdcc}{00041}}\ \ \ \ \ \textcolor{keyword}{public}\ \mbox{\hyperlink{class_luthetus_1_1_common_1_1_razor_lib_1_1_reactives_1_1_models_1_1_throttle_optimized-1-g_a7dd5a4e90b6c6be102d36a7febf1bdcc}{ThrottleOptimized}}(TimeSpan\ throttleTimeSpan,\ Func<TArgs,\ CancellationToken,\ Task>\ workItem)}
+\DoxyCodeLine{\Hypertarget{_throttle_optimized_8cs_source_l00042}00042\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_throttle_optimized_8cs_source_l00043}00043\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_luthetus_1_1_common_1_1_razor_lib_1_1_reactives_1_1_models_1_1_throttle_optimized-1-g_a2bc947c6968b700782c65612d8457767}{ThrottleTimeSpan}}\ =\ throttleTimeSpan;}
+\DoxyCodeLine{\Hypertarget{_throttle_optimized_8cs_source_l00044}00044\ \ \ \ \ \ \ \ \ \_workItem\ =\ workItem;}
+\DoxyCodeLine{\Hypertarget{_throttle_optimized_8cs_source_l00045}00045\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_throttle_optimized_8cs_source_l00046}00046\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_throttle_optimized_8cs_source_l00047}00047\ \ \ \ \ \textcolor{keyword}{private}\ TArgs\ \_args;}
+\DoxyCodeLine{\Hypertarget{_throttle_optimized_8cs_source_l00048}00048\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_throttle_optimized_8cs_source_l00068}00068\ \ \ \ \ \textcolor{keyword}{private}\ \textcolor{keywordtype}{bool}\ \_intentToRun;}
+\DoxyCodeLine{\Hypertarget{_throttle_optimized_8cs_source_l00069}00069\ }
+\DoxyCodeLine{\Hypertarget{_throttle_optimized_8cs_source_l00070}\mbox{\hyperlink{class_luthetus_1_1_common_1_1_razor_lib_1_1_reactives_1_1_models_1_1_throttle_optimized-1-g_a33cdb6dd905fd0a351448487b98e47ca}{00070}}\ \ \ \ \ \textcolor{keyword}{public}\ Task\ \mbox{\hyperlink{class_luthetus_1_1_common_1_1_razor_lib_1_1_reactives_1_1_models_1_1_throttle_optimized-1-g_a33cdb6dd905fd0a351448487b98e47ca}{\_workItemTask}}\ =\ Task.CompletedTask;}
+\DoxyCodeLine{\Hypertarget{_throttle_optimized_8cs_source_l00071}00071\ }
+\DoxyCodeLine{\Hypertarget{_throttle_optimized_8cs_source_l00072}\mbox{\hyperlink{class_luthetus_1_1_common_1_1_razor_lib_1_1_reactives_1_1_models_1_1_throttle_optimized-1-g_a2bc947c6968b700782c65612d8457767}{00072}}\ \ \ \ \ \textcolor{keyword}{public}\ TimeSpan\ \mbox{\hyperlink{class_luthetus_1_1_common_1_1_razor_lib_1_1_reactives_1_1_models_1_1_throttle_optimized-1-g_a2bc947c6968b700782c65612d8457767}{ThrottleTimeSpan}}\ \{\ \textcolor{keyword}{get};\ \}}
+\DoxyCodeLine{\Hypertarget{_throttle_optimized_8cs_source_l00073}00073\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_throttle_optimized_8cs_source_l00074}\mbox{\hyperlink{class_luthetus_1_1_common_1_1_razor_lib_1_1_reactives_1_1_models_1_1_throttle_optimized-1-g_af3fb0c11e976fa6b0782460b97e094a4}{00074}}\ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_luthetus_1_1_common_1_1_razor_lib_1_1_reactives_1_1_models_1_1_throttle_optimized-1-g_af3fb0c11e976fa6b0782460b97e094a4}{Run}}(TArgs\ args)}
+\DoxyCodeLine{\Hypertarget{_throttle_optimized_8cs_source_l00075}00075\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_throttle_optimized_8cs_source_l00076}00076\ \ \ \ \ \ \ \ \ lock\ (\_lockWorkItemArgs)}
+\DoxyCodeLine{\Hypertarget{_throttle_optimized_8cs_source_l00077}00077\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_throttle_optimized_8cs_source_l00078}00078\ \ \ \ \ \ \ \ \ \ \ \ \ \_args\ =\ args;}
+\DoxyCodeLine{\Hypertarget{_throttle_optimized_8cs_source_l00079}00079\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\_intentToRun)}
+\DoxyCodeLine{\Hypertarget{_throttle_optimized_8cs_source_l00080}00080\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return};}
+\DoxyCodeLine{\Hypertarget{_throttle_optimized_8cs_source_l00081}00081\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_throttle_optimized_8cs_source_l00082}00082\ \ \ \ \ \ \ \ \ \ \ \ \ \_intentToRun\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{\Hypertarget{_throttle_optimized_8cs_source_l00083}00083\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_throttle_optimized_8cs_source_l00084}00084\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_throttle_optimized_8cs_source_l00085}00085\ \ \ \ \ \ \ \ \ var\ previousTask\ =\ \mbox{\hyperlink{class_luthetus_1_1_common_1_1_razor_lib_1_1_reactives_1_1_models_1_1_throttle_optimized-1-g_a33cdb6dd905fd0a351448487b98e47ca}{\_workItemTask}};}
+\DoxyCodeLine{\Hypertarget{_throttle_optimized_8cs_source_l00086}00086\ }
+\DoxyCodeLine{\Hypertarget{_throttle_optimized_8cs_source_l00087}00087\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_luthetus_1_1_common_1_1_razor_lib_1_1_reactives_1_1_models_1_1_throttle_optimized-1-g_a33cdb6dd905fd0a351448487b98e47ca}{\_workItemTask}}\ =\ Task.Run(async\ ()\ =>}
+\DoxyCodeLine{\Hypertarget{_throttle_optimized_8cs_source_l00088}00088\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_throttle_optimized_8cs_source_l00089}00089\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Await\ the\ previous\ work\ item\ task.}}
+\DoxyCodeLine{\Hypertarget{_throttle_optimized_8cs_source_l00090}00090\ \ \ \ \ \ \ \ \ \ \ \ \ await\ previousTask.ConfigureAwait(\textcolor{keyword}{false});}
+\DoxyCodeLine{\Hypertarget{_throttle_optimized_8cs_source_l00091}00091\ }
+\DoxyCodeLine{\Hypertarget{_throttle_optimized_8cs_source_l00092}00092\ \ \ \ \ \ \ \ \ \ \ \ \ TArgs\ argsCapture;}
+\DoxyCodeLine{\Hypertarget{_throttle_optimized_8cs_source_l00093}00093\ \ \ \ \ \ \ \ \ \ \ \ \ lock\ (\_lockWorkItemArgs)}
+\DoxyCodeLine{\Hypertarget{_throttle_optimized_8cs_source_l00094}00094\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_throttle_optimized_8cs_source_l00095}00095\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ argsCapture\ =\ \_args;}
+\DoxyCodeLine{\Hypertarget{_throttle_optimized_8cs_source_l00096}00096\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \_intentToRun\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{\Hypertarget{_throttle_optimized_8cs_source_l00097}00097\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_throttle_optimized_8cs_source_l00098}00098\ }
+\DoxyCodeLine{\Hypertarget{_throttle_optimized_8cs_source_l00099}00099\ \ \ \ \ \ \ \ \ \ \ \ \ await\ Task.WhenAll(}
+\DoxyCodeLine{\Hypertarget{_throttle_optimized_8cs_source_l00100}00100\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \_workItem.Invoke(argsCapture,\ CancellationToken.None),}
+\DoxyCodeLine{\Hypertarget{_throttle_optimized_8cs_source_l00101}00101\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Task.Delay(\mbox{\hyperlink{class_luthetus_1_1_common_1_1_razor_lib_1_1_reactives_1_1_models_1_1_throttle_optimized-1-g_a2bc947c6968b700782c65612d8457767}{ThrottleTimeSpan}}))}
+\DoxyCodeLine{\Hypertarget{_throttle_optimized_8cs_source_l00102}00102\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ .ConfigureAwait(\textcolor{keyword}{false});}
+\DoxyCodeLine{\Hypertarget{_throttle_optimized_8cs_source_l00103}00103\ \ \ \ \ \ \ \ \ \});}
+\DoxyCodeLine{\Hypertarget{_throttle_optimized_8cs_source_l00104}00104\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_throttle_optimized_8cs_source_l00105}00105\ \}}
+
+\end{DoxyCode}

@@ -1,0 +1,55 @@
+\doxysection{Throttle.\+cs}
+\hypertarget{_throttle_8cs_source}{}\label{_throttle_8cs_source}\index{Source/Lib/Common/Reactives/Models/Throttle.cs@{Source/Lib/Common/Reactives/Models/Throttle.cs}}
+\mbox{\hyperlink{_throttle_8cs}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{_throttle_8cs_source_l00001}00001\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespace_luthetus_1_1_common_1_1_razor_lib_1_1_reactives_1_1_models}{Luthetus.Common.RazorLib.Reactives.Models}};}
+\DoxyCodeLine{\Hypertarget{_throttle_8cs_source_l00002}00002\ }
+\DoxyCodeLine{\Hypertarget{_throttle_8cs_source_l00003}\mbox{\hyperlink{class_luthetus_1_1_common_1_1_razor_lib_1_1_reactives_1_1_models_1_1_throttle}{00003}}\ \textcolor{keyword}{public}\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_luthetus_1_1_common_1_1_razor_lib_1_1_reactives_1_1_models_1_1_throttle_a79d1a34596c9b316513ff6efa3431b3d}{Throttle}}}
+\DoxyCodeLine{\Hypertarget{_throttle_8cs_source_l00004}00004\ \{}
+\DoxyCodeLine{\Hypertarget{_throttle_8cs_source_l00005}00005\ \ \ \ \ \textcolor{keyword}{private}\ readonly\ \textcolor{keywordtype}{object}\ \_lockWorkItems\ =\ \textcolor{keyword}{new}();}
+\DoxyCodeLine{\Hypertarget{_throttle_8cs_source_l00006}00006\ \ \ \ \ \textcolor{keyword}{private}\ readonly\ Stack<Func<CancellationToken,\ Task>>\ \_workItemStack\ =\ \textcolor{keyword}{new}();}
+\DoxyCodeLine{\Hypertarget{_throttle_8cs_source_l00007}00007\ }
+\DoxyCodeLine{\Hypertarget{_throttle_8cs_source_l00008}\mbox{\hyperlink{class_luthetus_1_1_common_1_1_razor_lib_1_1_reactives_1_1_models_1_1_throttle_a79d1a34596c9b316513ff6efa3431b3d}{00008}}\ \ \ \ \ \textcolor{keyword}{public}\ \mbox{\hyperlink{class_luthetus_1_1_common_1_1_razor_lib_1_1_reactives_1_1_models_1_1_throttle_a79d1a34596c9b316513ff6efa3431b3d}{Throttle}}(TimeSpan\ throttleTimeSpan)}
+\DoxyCodeLine{\Hypertarget{_throttle_8cs_source_l00009}00009\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_throttle_8cs_source_l00010}00010\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_luthetus_1_1_common_1_1_razor_lib_1_1_reactives_1_1_models_1_1_throttle_a80bf021f3aac67745e00bc6dd722dd1a}{ThrottleTimeSpan}}\ =\ throttleTimeSpan;}
+\DoxyCodeLine{\Hypertarget{_throttle_8cs_source_l00011}00011\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_throttle_8cs_source_l00012}00012\ }
+\DoxyCodeLine{\Hypertarget{_throttle_8cs_source_l00013}\mbox{\hyperlink{class_luthetus_1_1_common_1_1_razor_lib_1_1_reactives_1_1_models_1_1_throttle_a9e265a2518027b7391c46a974a94c14d}{00013}}\ \ \ \ \ \textcolor{keyword}{public}\ Task\ \mbox{\hyperlink{class_luthetus_1_1_common_1_1_razor_lib_1_1_reactives_1_1_models_1_1_throttle_a9e265a2518027b7391c46a974a94c14d}{\_workItemTask}}\ =\ Task.CompletedTask;}
+\DoxyCodeLine{\Hypertarget{_throttle_8cs_source_l00014}00014\ }
+\DoxyCodeLine{\Hypertarget{_throttle_8cs_source_l00015}\mbox{\hyperlink{class_luthetus_1_1_common_1_1_razor_lib_1_1_reactives_1_1_models_1_1_throttle_a80bf021f3aac67745e00bc6dd722dd1a}{00015}}\ \ \ \ \ \textcolor{keyword}{public}\ TimeSpan\ \mbox{\hyperlink{class_luthetus_1_1_common_1_1_razor_lib_1_1_reactives_1_1_models_1_1_throttle_a80bf021f3aac67745e00bc6dd722dd1a}{ThrottleTimeSpan}}\ \{\ \textcolor{keyword}{get};\ \}}
+\DoxyCodeLine{\Hypertarget{_throttle_8cs_source_l00016}00016\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_throttle_8cs_source_l00017}\mbox{\hyperlink{class_luthetus_1_1_common_1_1_razor_lib_1_1_reactives_1_1_models_1_1_throttle_a7e136803a9f3f8bdb774828cd6401f40}{00017}}\ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_luthetus_1_1_common_1_1_razor_lib_1_1_reactives_1_1_models_1_1_throttle_a7e136803a9f3f8bdb774828cd6401f40}{Run}}(Func<CancellationToken,\ Task>\ workItem)}
+\DoxyCodeLine{\Hypertarget{_throttle_8cs_source_l00018}00018\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_throttle_8cs_source_l00019}00019\ \ \ \ \ \ \ \ \ lock\ (\_lockWorkItems)}
+\DoxyCodeLine{\Hypertarget{_throttle_8cs_source_l00020}00020\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_throttle_8cs_source_l00021}00021\ \ \ \ \ \ \ \ \ \ \ \ \ \_workItemStack.Push(workItem);}
+\DoxyCodeLine{\Hypertarget{_throttle_8cs_source_l00022}00022\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\_workItemStack.Count\ >\ 1)}
+\DoxyCodeLine{\Hypertarget{_throttle_8cs_source_l00023}00023\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return};}
+\DoxyCodeLine{\Hypertarget{_throttle_8cs_source_l00024}00024\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_throttle_8cs_source_l00025}00025\ }
+\DoxyCodeLine{\Hypertarget{_throttle_8cs_source_l00026}00026\ \ \ \ \ \ \ \ \ var\ previousTask\ =\ \mbox{\hyperlink{class_luthetus_1_1_common_1_1_razor_lib_1_1_reactives_1_1_models_1_1_throttle_a9e265a2518027b7391c46a974a94c14d}{\_workItemTask}};}
+\DoxyCodeLine{\Hypertarget{_throttle_8cs_source_l00027}00027\ }
+\DoxyCodeLine{\Hypertarget{_throttle_8cs_source_l00028}00028\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_luthetus_1_1_common_1_1_razor_lib_1_1_reactives_1_1_models_1_1_throttle_a9e265a2518027b7391c46a974a94c14d}{\_workItemTask}}\ =\ Task.Run(async\ ()\ =>}
+\DoxyCodeLine{\Hypertarget{_throttle_8cs_source_l00029}00029\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_throttle_8cs_source_l00030}00030\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Await\ the\ previous\ work\ item\ task.}}
+\DoxyCodeLine{\Hypertarget{_throttle_8cs_source_l00031}00031\ \ \ \ \ \ \ \ \ \ \ \ \ await\ previousTask.ConfigureAwait(\textcolor{keyword}{false});}
+\DoxyCodeLine{\Hypertarget{_throttle_8cs_source_l00032}00032\ }
+\DoxyCodeLine{\Hypertarget{_throttle_8cs_source_l00033}00033\ \ \ \ \ \ \ \ \ \ \ \ \ Func<CancellationToken,\ Task>\ popWorkItem;}
+\DoxyCodeLine{\Hypertarget{_throttle_8cs_source_l00034}00034\ \ \ \ \ \ \ \ \ \ \ \ \ lock\ (\_lockWorkItems)}
+\DoxyCodeLine{\Hypertarget{_throttle_8cs_source_l00035}00035\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_throttle_8cs_source_l00036}00036\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\_workItemStack.Count\ ==\ 0)}
+\DoxyCodeLine{\Hypertarget{_throttle_8cs_source_l00037}00037\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return};}
+\DoxyCodeLine{\Hypertarget{_throttle_8cs_source_l00038}00038\ }
+\DoxyCodeLine{\Hypertarget{_throttle_8cs_source_l00039}00039\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ popWorkItem\ =\ \_workItemStack.Pop();}
+\DoxyCodeLine{\Hypertarget{_throttle_8cs_source_l00040}00040\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \_workItemStack.Clear();}
+\DoxyCodeLine{\Hypertarget{_throttle_8cs_source_l00041}00041\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_throttle_8cs_source_l00042}00042\ }
+\DoxyCodeLine{\Hypertarget{_throttle_8cs_source_l00043}00043\ \ \ \ \ \ \ \ \ \ \ \ \ await\ Task.WhenAll(}
+\DoxyCodeLine{\Hypertarget{_throttle_8cs_source_l00044}00044\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ popWorkItem.Invoke(CancellationToken.None),}
+\DoxyCodeLine{\Hypertarget{_throttle_8cs_source_l00045}00045\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Task.Delay(\mbox{\hyperlink{class_luthetus_1_1_common_1_1_razor_lib_1_1_reactives_1_1_models_1_1_throttle_a80bf021f3aac67745e00bc6dd722dd1a}{ThrottleTimeSpan}}))}
+\DoxyCodeLine{\Hypertarget{_throttle_8cs_source_l00046}00046\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ .ConfigureAwait(\textcolor{keyword}{false});}
+\DoxyCodeLine{\Hypertarget{_throttle_8cs_source_l00047}00047\ \ \ \ \ \ \ \ \ \});}
+\DoxyCodeLine{\Hypertarget{_throttle_8cs_source_l00048}00048\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_throttle_8cs_source_l00049}00049\ \}}
+
+\end{DoxyCode}

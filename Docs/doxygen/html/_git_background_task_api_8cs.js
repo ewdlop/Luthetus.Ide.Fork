@@ -1,0 +1,4 @@
+var _git_background_task_api_8cs =
+[
+    [ "Luthetus.Extensions.Git.BackgroundTasks.Models.GitBackgroundTaskApi", "class_luthetus_1_1_extensions_1_1_git_1_1_background_tasks_1_1_models_1_1_git_background_task_api.html", "class_luthetus_1_1_extensions_1_1_git_1_1_background_tasks_1_1_models_1_1_git_background_task_api" ]
+];

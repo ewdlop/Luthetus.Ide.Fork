@@ -1,0 +1,310 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="__diagnostic_bag_8cs_source" xml:lang="en-US">
+<title>DiagnosticBag.cs</title>
+<indexterm><primary>Source/Lib/TextEditor/CompilerServices/DiagnosticBag.cs</primary></indexterm>
+Go to the documentation of this file.<programlisting linenumbering="unnumbered"><anchor xml:id="__diagnostic_bag_8cs_source_1l00001"/>00001 <emphasis role="keyword">using&#32;</emphasis>System.Collections;
+<anchor xml:id="__diagnostic_bag_8cs_source_1l00002"/>00002 <emphasis role="keyword">using&#32;</emphasis><link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_enums">Luthetus.TextEditor.RazorLib.CompilerServices.Enums</link>;
+<anchor xml:id="__diagnostic_bag_8cs_source_1l00003"/>00003 <emphasis role="keyword">using&#32;</emphasis><link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_lexers_1_1_models">Luthetus.TextEditor.RazorLib.Lexers.Models</link>;
+<anchor xml:id="__diagnostic_bag_8cs_source_1l00004"/>00004 
+<anchor xml:id="__diagnostic_bag_8cs_source_1l00005"/>00005 <emphasis role="keyword">namespace&#32;</emphasis><link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services">Luthetus.TextEditor.RazorLib.CompilerServices</link>;
+<anchor xml:id="__diagnostic_bag_8cs_source_1l00006"/>00006 
+<anchor xml:id="__diagnostic_bag_8cs_source_1l00007"/><link linkend="_class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_diagnostic_bag">00007</link> <emphasis role="keyword">public</emphasis>&#32;<emphasis role="keyword">class&#32;</emphasis><link linkend="_class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_diagnostic_bag">DiagnosticBag</link>&#32;:&#32;IEnumerable&lt;TextEditorDiagnostic&gt;
+<anchor xml:id="__diagnostic_bag_8cs_source_1l00008"/>00008 {
+<anchor xml:id="__diagnostic_bag_8cs_source_1l00009"/>00009 &#32;&#32;&#32;&#32;<emphasis role="keyword">private</emphasis>&#32;readonly&#32;List&lt;TextEditorDiagnostic&gt;&#32;_diagnosticsBag&#32;=&#32;<emphasis role="keyword">new</emphasis>();
+<anchor xml:id="__diagnostic_bag_8cs_source_1l00010"/>00010 
+<anchor xml:id="__diagnostic_bag_8cs_source_1l00011"/><link linkend="_class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_diagnostic_bag_1a96b01ec7e44e5d5c79e86cae9880a783">00011</link> &#32;&#32;&#32;&#32;<emphasis role="keyword">public</emphasis>&#32;IEnumerator&lt;TextEditorDiagnostic&gt;&#32;<link linkend="_class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_diagnostic_bag_1a96b01ec7e44e5d5c79e86cae9880a783">GetEnumerator</link>()
+<anchor xml:id="__diagnostic_bag_8cs_source_1l00012"/>00012 &#32;&#32;&#32;&#32;{
+<anchor xml:id="__diagnostic_bag_8cs_source_1l00013"/>00013 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;_diagnosticsBag.GetEnumerator();
+<anchor xml:id="__diagnostic_bag_8cs_source_1l00014"/>00014 &#32;&#32;&#32;&#32;}
+<anchor xml:id="__diagnostic_bag_8cs_source_1l00015"/>00015 
+<anchor xml:id="__diagnostic_bag_8cs_source_1l00016"/>00016 &#32;&#32;&#32;&#32;IEnumerator&#32;IEnumerable.GetEnumerator()
+<anchor xml:id="__diagnostic_bag_8cs_source_1l00017"/>00017 &#32;&#32;&#32;&#32;{
+<anchor xml:id="__diagnostic_bag_8cs_source_1l00018"/>00018 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;<link linkend="_class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_diagnostic_bag_1a96b01ec7e44e5d5c79e86cae9880a783">GetEnumerator</link>();
+<anchor xml:id="__diagnostic_bag_8cs_source_1l00019"/>00019 &#32;&#32;&#32;&#32;}
+<anchor xml:id="__diagnostic_bag_8cs_source_1l00020"/>00020 
+<anchor xml:id="__diagnostic_bag_8cs_source_1l00021"/><link linkend="_class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_diagnostic_bag_1a356b5e28089638e9367941a0bd9873ce">00021</link> &#32;&#32;&#32;&#32;<emphasis role="keyword">public</emphasis>&#32;<emphasis role="keywordtype">void</emphasis>&#32;<link linkend="_class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_diagnostic_bag_1a356b5e28089638e9367941a0bd9873ce">ReportEndOfFileUnexpected</link>(<link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_lexers_1_1_models_1a1ffd1a7706dfd364560b76d47467812f">TextEditorTextSpan</link>&#32;textSpan)
+<anchor xml:id="__diagnostic_bag_8cs_source_1l00022"/>00022 &#32;&#32;&#32;&#32;{
+<anchor xml:id="__diagnostic_bag_8cs_source_1l00023"/>00023 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;Report(
+<anchor xml:id="__diagnostic_bag_8cs_source_1l00024"/>00024 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_enums_1ad1d66dfc7718c1f9a6bd6852fe2eb9e9">TextEditorDiagnosticLevel</link>.Error,
+<anchor xml:id="__diagnostic_bag_8cs_source_1l00025"/>00025 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="stringliteral">&quot;&apos;End&#32;of&#32;file&apos;&#32;was&#32;unexpected.&quot;</emphasis>,
+<anchor xml:id="__diagnostic_bag_8cs_source_1l00026"/>00026 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;textSpan,
+<anchor xml:id="__diagnostic_bag_8cs_source_1l00027"/>00027 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;Guid.Parse(<emphasis role="stringliteral">&quot;37a0a353-cd10-4b9d-b7c1-ab820d1b2fee&quot;</emphasis>));
+<anchor xml:id="__diagnostic_bag_8cs_source_1l00028"/>00028 &#32;&#32;&#32;&#32;}
+<anchor xml:id="__diagnostic_bag_8cs_source_1l00029"/>00029 
+<anchor xml:id="__diagnostic_bag_8cs_source_1l00030"/><link linkend="_class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_diagnostic_bag_1a0e772a4401cdf7f57d18a2ea71ec48f3">00030</link> &#32;&#32;&#32;&#32;<emphasis role="keyword">public</emphasis>&#32;<emphasis role="keywordtype">void</emphasis>&#32;<link linkend="_class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_diagnostic_bag_1a0e772a4401cdf7f57d18a2ea71ec48f3">ReportUnexpectedToken</link>(
+<anchor xml:id="__diagnostic_bag_8cs_source_1l00031"/>00031 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_lexers_1_1_models_1a1ffd1a7706dfd364560b76d47467812f">TextEditorTextSpan</link>&#32;textSpan,
+<anchor xml:id="__diagnostic_bag_8cs_source_1l00032"/>00032 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordtype">string</emphasis>&#32;unexpectedToken,
+<anchor xml:id="__diagnostic_bag_8cs_source_1l00033"/>00033 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordtype">string</emphasis>&#32;expectedToken)
+<anchor xml:id="__diagnostic_bag_8cs_source_1l00034"/>00034 &#32;&#32;&#32;&#32;{
+<anchor xml:id="__diagnostic_bag_8cs_source_1l00035"/>00035 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;Report(
+<anchor xml:id="__diagnostic_bag_8cs_source_1l00036"/>00036 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_enums_1ad1d66dfc7718c1f9a6bd6852fe2eb9e9">TextEditorDiagnosticLevel</link>.Error,
+<anchor xml:id="__diagnostic_bag_8cs_source_1l00037"/>00037 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;$<emphasis role="stringliteral">&quot;Unexpected&#32;token:&#32;&apos;{unexpectedToken}&apos;&#32;|&#32;expected:&#32;&apos;{expectedToken}&apos;&quot;</emphasis>,
+<anchor xml:id="__diagnostic_bag_8cs_source_1l00038"/>00038 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;textSpan,
+<anchor xml:id="__diagnostic_bag_8cs_source_1l00039"/>00039 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;Guid.Parse(<emphasis role="stringliteral">&quot;94a34c1f-e490-4d22-8bd9-98a100ea7487&quot;</emphasis>));
+<anchor xml:id="__diagnostic_bag_8cs_source_1l00040"/>00040 &#32;&#32;&#32;&#32;}
+<anchor xml:id="__diagnostic_bag_8cs_source_1l00041"/>00041 
+<anchor xml:id="__diagnostic_bag_8cs_source_1l00042"/><link linkend="_class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_diagnostic_bag_1ae951086a68185dda906ed840cffcad07">00042</link> &#32;&#32;&#32;&#32;<emphasis role="keyword">public</emphasis>&#32;<emphasis role="keywordtype">void</emphasis>&#32;<link linkend="_class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_diagnostic_bag_1ae951086a68185dda906ed840cffcad07">ReportUnexpectedToken</link>(
+<anchor xml:id="__diagnostic_bag_8cs_source_1l00043"/>00043 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_lexers_1_1_models_1a1ffd1a7706dfd364560b76d47467812f">TextEditorTextSpan</link>&#32;textSpan,
+<anchor xml:id="__diagnostic_bag_8cs_source_1l00044"/>00044 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordtype">string</emphasis>&#32;unexpectedToken)
+<anchor xml:id="__diagnostic_bag_8cs_source_1l00045"/>00045 &#32;&#32;&#32;&#32;{
+<anchor xml:id="__diagnostic_bag_8cs_source_1l00046"/>00046 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;Report(
+<anchor xml:id="__diagnostic_bag_8cs_source_1l00047"/>00047 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_enums_1ad1d66dfc7718c1f9a6bd6852fe2eb9e9">TextEditorDiagnosticLevel</link>.Error,
+<anchor xml:id="__diagnostic_bag_8cs_source_1l00048"/>00048 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;$<emphasis role="stringliteral">&quot;Unexpected&#32;token:&#32;&apos;{unexpectedToken}&apos;&quot;</emphasis>,
+<anchor xml:id="__diagnostic_bag_8cs_source_1l00049"/>00049 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;textSpan,
+<anchor xml:id="__diagnostic_bag_8cs_source_1l00050"/>00050 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;Guid.Parse(<emphasis role="stringliteral">&quot;f3c26886-e1eb-4e63-82e6-33e5f6105b5d&quot;</emphasis>));
+<anchor xml:id="__diagnostic_bag_8cs_source_1l00051"/>00051 &#32;&#32;&#32;&#32;}
+<anchor xml:id="__diagnostic_bag_8cs_source_1l00052"/>00052 
+<anchor xml:id="__diagnostic_bag_8cs_source_1l00053"/><link linkend="_class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_diagnostic_bag_1acca6f4dcd209b816627cd9c87d0bca01">00053</link> &#32;&#32;&#32;&#32;<emphasis role="keyword">public</emphasis>&#32;<emphasis role="keywordtype">void</emphasis>&#32;<link linkend="_class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_diagnostic_bag_1acca6f4dcd209b816627cd9c87d0bca01">ReportUndefinedClass</link>(
+<anchor xml:id="__diagnostic_bag_8cs_source_1l00054"/>00054 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_lexers_1_1_models_1a1ffd1a7706dfd364560b76d47467812f">TextEditorTextSpan</link>&#32;textSpan,
+<anchor xml:id="__diagnostic_bag_8cs_source_1l00055"/>00055 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordtype">string</emphasis>&#32;undefinedClassIdentifier)
+<anchor xml:id="__diagnostic_bag_8cs_source_1l00056"/>00056 &#32;&#32;&#32;&#32;{
+<anchor xml:id="__diagnostic_bag_8cs_source_1l00057"/>00057 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;Report(
+<anchor xml:id="__diagnostic_bag_8cs_source_1l00058"/>00058 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_enums_1ad1d66dfc7718c1f9a6bd6852fe2eb9e9">TextEditorDiagnosticLevel</link>.Error,
+<anchor xml:id="__diagnostic_bag_8cs_source_1l00059"/>00059 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;$<emphasis role="stringliteral">&quot;Undefined&#32;class:&#32;&apos;{undefinedClassIdentifier}&apos;&quot;</emphasis>,
+<anchor xml:id="__diagnostic_bag_8cs_source_1l00060"/>00060 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;textSpan,
+<anchor xml:id="__diagnostic_bag_8cs_source_1l00061"/>00061 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;Guid.Parse(<emphasis role="stringliteral">&quot;4bf6a7f1-c344-4ca4-828c-a0a4f7f91341&quot;</emphasis>));
+<anchor xml:id="__diagnostic_bag_8cs_source_1l00062"/>00062 &#32;&#32;&#32;&#32;}
+<anchor xml:id="__diagnostic_bag_8cs_source_1l00063"/>00063 &#32;&#32;&#32;&#32;
+<anchor xml:id="__diagnostic_bag_8cs_source_1l00064"/><link linkend="_class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_diagnostic_bag_1ad81453fe51eecc10ef96981c12140347">00064</link> &#32;&#32;&#32;&#32;<emphasis role="keyword">public</emphasis>&#32;<emphasis role="keywordtype">void</emphasis>&#32;<link linkend="_class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_diagnostic_bag_1ad81453fe51eecc10ef96981c12140347">ReportImplicitlyTypedVariablesMustBeInitialized</link>(
+<anchor xml:id="__diagnostic_bag_8cs_source_1l00065"/>00065 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_lexers_1_1_models_1a1ffd1a7706dfd364560b76d47467812f">TextEditorTextSpan</link>&#32;textSpan)
+<anchor xml:id="__diagnostic_bag_8cs_source_1l00066"/>00066 &#32;&#32;&#32;&#32;{
+<anchor xml:id="__diagnostic_bag_8cs_source_1l00067"/>00067 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;Report(
+<anchor xml:id="__diagnostic_bag_8cs_source_1l00068"/>00068 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_enums_1ad1d66dfc7718c1f9a6bd6852fe2eb9e9">TextEditorDiagnosticLevel</link>.Error,
+<anchor xml:id="__diagnostic_bag_8cs_source_1l00069"/>00069 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;$<emphasis role="stringliteral">&quot;Implicitly-typed&#32;variables&#32;must&#32;be&#32;initialized&quot;</emphasis>,
+<anchor xml:id="__diagnostic_bag_8cs_source_1l00070"/>00070 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;textSpan,
+<anchor xml:id="__diagnostic_bag_8cs_source_1l00071"/>00071 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;Guid.Parse(<emphasis role="stringliteral">&quot;b087cb21-fa16-4ae1-bfd0-daeebe0c4b39&quot;</emphasis>));
+<anchor xml:id="__diagnostic_bag_8cs_source_1l00072"/>00072 &#32;&#32;&#32;&#32;}
+<anchor xml:id="__diagnostic_bag_8cs_source_1l00073"/>00073 
+<anchor xml:id="__diagnostic_bag_8cs_source_1l00074"/><link linkend="_class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_diagnostic_bag_1ab14a798771d97057c7611987d008e7a0">00074</link> &#32;&#32;&#32;&#32;<emphasis role="keyword">public</emphasis>&#32;<emphasis role="keywordtype">void</emphasis>&#32;<link linkend="_class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_diagnostic_bag_1ab14a798771d97057c7611987d008e7a0">ReportUndefinedTypeOrNamespace</link>(
+<anchor xml:id="__diagnostic_bag_8cs_source_1l00075"/>00075 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_lexers_1_1_models_1a1ffd1a7706dfd364560b76d47467812f">TextEditorTextSpan</link>&#32;textSpan,
+<anchor xml:id="__diagnostic_bag_8cs_source_1l00076"/>00076 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordtype">string</emphasis>&#32;undefinedTypeOrNamespaceIdentifier)
+<anchor xml:id="__diagnostic_bag_8cs_source_1l00077"/>00077 &#32;&#32;&#32;&#32;{
+<anchor xml:id="__diagnostic_bag_8cs_source_1l00078"/>00078 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;Report(
+<anchor xml:id="__diagnostic_bag_8cs_source_1l00079"/>00079 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_enums_1ad1d66dfc7718c1f9a6bd6852fe2eb9e9">TextEditorDiagnosticLevel</link>.Error,
+<anchor xml:id="__diagnostic_bag_8cs_source_1l00080"/>00080 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;$<emphasis role="stringliteral">&quot;Undefined&#32;type&#32;or&#32;namespace:&#32;&apos;{undefinedTypeOrNamespaceIdentifier}&apos;&quot;</emphasis>,
+<anchor xml:id="__diagnostic_bag_8cs_source_1l00081"/>00081 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;textSpan,
+<anchor xml:id="__diagnostic_bag_8cs_source_1l00082"/>00082 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;Guid.Parse(<emphasis role="stringliteral">&quot;856e27dc-2721-4645-821c-88dcb57a2516&quot;</emphasis>));
+<anchor xml:id="__diagnostic_bag_8cs_source_1l00083"/>00083 &#32;&#32;&#32;&#32;}
+<anchor xml:id="__diagnostic_bag_8cs_source_1l00084"/>00084 
+<anchor xml:id="__diagnostic_bag_8cs_source_1l00085"/><link linkend="_class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_diagnostic_bag_1a7c5cedb2b06a0fc583d6d7766d16bf0a">00085</link> &#32;&#32;&#32;&#32;<emphasis role="keyword">public</emphasis>&#32;<emphasis role="keywordtype">void</emphasis>&#32;<link linkend="_class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_diagnostic_bag_1a7c5cedb2b06a0fc583d6d7766d16bf0a">ReportAlreadyDefinedType</link>(
+<anchor xml:id="__diagnostic_bag_8cs_source_1l00086"/>00086 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_lexers_1_1_models_1a1ffd1a7706dfd364560b76d47467812f">TextEditorTextSpan</link>&#32;textSpan,
+<anchor xml:id="__diagnostic_bag_8cs_source_1l00087"/>00087 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordtype">string</emphasis>&#32;alreadyDefinedTypeIdentifier)
+<anchor xml:id="__diagnostic_bag_8cs_source_1l00088"/>00088 &#32;&#32;&#32;&#32;{
+<anchor xml:id="__diagnostic_bag_8cs_source_1l00089"/>00089 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;Report(
+<anchor xml:id="__diagnostic_bag_8cs_source_1l00090"/>00090 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_enums_1ad1d66dfc7718c1f9a6bd6852fe2eb9e9">TextEditorDiagnosticLevel</link>.Error,
+<anchor xml:id="__diagnostic_bag_8cs_source_1l00091"/>00091 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;$<emphasis role="stringliteral">&quot;Already&#32;defined&#32;type:&#32;&apos;{alreadyDefinedTypeIdentifier}&apos;&quot;</emphasis>,
+<anchor xml:id="__diagnostic_bag_8cs_source_1l00092"/>00092 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;textSpan,
+<anchor xml:id="__diagnostic_bag_8cs_source_1l00093"/>00093 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;Guid.Parse(<emphasis role="stringliteral">&quot;9987db65-1054-4b64-ba64-761b75c4e5da&quot;</emphasis>));
+<anchor xml:id="__diagnostic_bag_8cs_source_1l00094"/>00094 &#32;&#32;&#32;&#32;}
+<anchor xml:id="__diagnostic_bag_8cs_source_1l00095"/>00095 
+<anchor xml:id="__diagnostic_bag_8cs_source_1l00096"/><link linkend="_class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_diagnostic_bag_1a344a79b1d311c9745d0614ce160d07e9">00096</link> &#32;&#32;&#32;&#32;<emphasis role="keyword">public</emphasis>&#32;<emphasis role="keywordtype">void</emphasis>&#32;<link linkend="_class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_diagnostic_bag_1a344a79b1d311c9745d0614ce160d07e9">ReportUndefinedVariable</link>(
+<anchor xml:id="__diagnostic_bag_8cs_source_1l00097"/>00097 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_lexers_1_1_models_1a1ffd1a7706dfd364560b76d47467812f">TextEditorTextSpan</link>&#32;textSpan,
+<anchor xml:id="__diagnostic_bag_8cs_source_1l00098"/>00098 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordtype">string</emphasis>&#32;undefinedVariableIdentifier)
+<anchor xml:id="__diagnostic_bag_8cs_source_1l00099"/>00099 &#32;&#32;&#32;&#32;{
+<anchor xml:id="__diagnostic_bag_8cs_source_1l00100"/>00100 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;Report(
+<anchor xml:id="__diagnostic_bag_8cs_source_1l00101"/>00101 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_enums_1ad1d66dfc7718c1f9a6bd6852fe2eb9e9">TextEditorDiagnosticLevel</link>.Error,
+<anchor xml:id="__diagnostic_bag_8cs_source_1l00102"/>00102 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;$<emphasis role="stringliteral">&quot;Undefined&#32;variable:&#32;&apos;{undefinedVariableIdentifier}&apos;&quot;</emphasis>,
+<anchor xml:id="__diagnostic_bag_8cs_source_1l00103"/>00103 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;textSpan,
+<anchor xml:id="__diagnostic_bag_8cs_source_1l00104"/>00104 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;Guid.Parse(<emphasis role="stringliteral">&quot;a72619a5-a7f4-4084-acc8-2fb2c76cdac4&quot;</emphasis>));
+<anchor xml:id="__diagnostic_bag_8cs_source_1l00105"/>00105 &#32;&#32;&#32;&#32;}
+<anchor xml:id="__diagnostic_bag_8cs_source_1l00106"/>00106 
+<anchor xml:id="__diagnostic_bag_8cs_source_1l00107"/><link linkend="_class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_diagnostic_bag_1a45e69b625754797a2234a673b88f22a2">00107</link> &#32;&#32;&#32;&#32;<emphasis role="keyword">public</emphasis>&#32;<emphasis role="keywordtype">void</emphasis>&#32;<link linkend="_class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_diagnostic_bag_1a45e69b625754797a2234a673b88f22a2">ReportNotDefinedInContext</link>(
+<anchor xml:id="__diagnostic_bag_8cs_source_1l00108"/>00108 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_lexers_1_1_models_1a1ffd1a7706dfd364560b76d47467812f">TextEditorTextSpan</link>&#32;textSpan,
+<anchor xml:id="__diagnostic_bag_8cs_source_1l00109"/>00109 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordtype">string</emphasis>&#32;contextString)
+<anchor xml:id="__diagnostic_bag_8cs_source_1l00110"/>00110 &#32;&#32;&#32;&#32;{
+<anchor xml:id="__diagnostic_bag_8cs_source_1l00111"/>00111 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;Report(
+<anchor xml:id="__diagnostic_bag_8cs_source_1l00112"/>00112 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_enums_1ad1d66dfc7718c1f9a6bd6852fe2eb9e9">TextEditorDiagnosticLevel</link>.Error,
+<anchor xml:id="__diagnostic_bag_8cs_source_1l00113"/>00113 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;$<emphasis role="stringliteral">&quot;&apos;{textSpan.GetText()}&apos;&#32;is&#32;not&#32;defined&#32;in&#32;the&#32;context&#32;&apos;{contextString}&apos;&quot;</emphasis>,
+<anchor xml:id="__diagnostic_bag_8cs_source_1l00114"/>00114 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;textSpan,
+<anchor xml:id="__diagnostic_bag_8cs_source_1l00115"/>00115 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;Guid.Parse(<emphasis role="stringliteral">&quot;89b61fa8-541d-4154-9425-82c5667842a8&quot;</emphasis>));
+<anchor xml:id="__diagnostic_bag_8cs_source_1l00116"/>00116 &#32;&#32;&#32;&#32;}
+<anchor xml:id="__diagnostic_bag_8cs_source_1l00117"/>00117 
+<anchor xml:id="__diagnostic_bag_8cs_source_1l00118"/><link linkend="_class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_diagnostic_bag_1a797a5ce2ad35e8006bed07fbffa1df65">00118</link> &#32;&#32;&#32;&#32;<emphasis role="keyword">public</emphasis>&#32;<emphasis role="keywordtype">void</emphasis>&#32;<link linkend="_class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_diagnostic_bag_1a797a5ce2ad35e8006bed07fbffa1df65">TheNameDoesNotExistInTheCurrentContext</link>(
+<anchor xml:id="__diagnostic_bag_8cs_source_1l00119"/>00119 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_lexers_1_1_models_1a1ffd1a7706dfd364560b76d47467812f">TextEditorTextSpan</link>&#32;textSpan,
+<anchor xml:id="__diagnostic_bag_8cs_source_1l00120"/>00120 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordtype">string</emphasis>&#32;name)
+<anchor xml:id="__diagnostic_bag_8cs_source_1l00121"/>00121 &#32;&#32;&#32;&#32;{
+<anchor xml:id="__diagnostic_bag_8cs_source_1l00122"/>00122 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;Report(
+<anchor xml:id="__diagnostic_bag_8cs_source_1l00123"/>00123 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_enums_1ad1d66dfc7718c1f9a6bd6852fe2eb9e9">TextEditorDiagnosticLevel</link>.Error,
+<anchor xml:id="__diagnostic_bag_8cs_source_1l00124"/>00124 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;$<emphasis role="stringliteral">&quot;The&#32;name&#32;&apos;{name}&apos;&#32;does&#32;not&#32;exist&#32;in&#32;the&#32;current&#32;context&quot;</emphasis>,
+<anchor xml:id="__diagnostic_bag_8cs_source_1l00125"/>00125 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;textSpan,
+<anchor xml:id="__diagnostic_bag_8cs_source_1l00126"/>00126 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;Guid.Parse(<emphasis role="stringliteral">&quot;3c616af8-1c5d-41fa-962d-9836278ea570&quot;</emphasis>));
+<anchor xml:id="__diagnostic_bag_8cs_source_1l00127"/>00127 &#32;&#32;&#32;&#32;}
+<anchor xml:id="__diagnostic_bag_8cs_source_1l00128"/>00128 &#32;&#32;&#32;&#32;
+<anchor xml:id="__diagnostic_bag_8cs_source_1l00129"/><link linkend="_class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_diagnostic_bag_1a3630072830d8fea2baf216ceb05ddc4b">00129</link> &#32;&#32;&#32;&#32;<emphasis role="keyword">public</emphasis>&#32;<emphasis role="keywordtype">void</emphasis>&#32;<link linkend="_class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_diagnostic_bag_1a3630072830d8fea2baf216ceb05ddc4b">ReportAlreadyDefinedVariable</link>(
+<anchor xml:id="__diagnostic_bag_8cs_source_1l00130"/>00130 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_lexers_1_1_models_1a1ffd1a7706dfd364560b76d47467812f">TextEditorTextSpan</link>&#32;textSpan,
+<anchor xml:id="__diagnostic_bag_8cs_source_1l00131"/>00131 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordtype">string</emphasis>&#32;alreadyDefinedVariableIdentifier)
+<anchor xml:id="__diagnostic_bag_8cs_source_1l00132"/>00132 &#32;&#32;&#32;&#32;{
+<anchor xml:id="__diagnostic_bag_8cs_source_1l00133"/>00133 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;Report(
+<anchor xml:id="__diagnostic_bag_8cs_source_1l00134"/>00134 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_enums_1ad1d66dfc7718c1f9a6bd6852fe2eb9e9">TextEditorDiagnosticLevel</link>.Error,
+<anchor xml:id="__diagnostic_bag_8cs_source_1l00135"/>00135 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;$<emphasis role="stringliteral">&quot;Already&#32;defined&#32;variable:&#32;&apos;{alreadyDefinedVariableIdentifier}&apos;&quot;</emphasis>,
+<anchor xml:id="__diagnostic_bag_8cs_source_1l00136"/>00136 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;textSpan,
+<anchor xml:id="__diagnostic_bag_8cs_source_1l00137"/>00137 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;Guid.Parse(<emphasis role="stringliteral">&quot;89b61fa8-541d-4154-9425-82c5667842a8&quot;</emphasis>));
+<anchor xml:id="__diagnostic_bag_8cs_source_1l00138"/>00138 &#32;&#32;&#32;&#32;}
+<anchor xml:id="__diagnostic_bag_8cs_source_1l00139"/>00139 &#32;&#32;&#32;&#32;
+<anchor xml:id="__diagnostic_bag_8cs_source_1l00140"/><link linkend="_class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_diagnostic_bag_1a8614e625b3762a4bc6204a4e2cb23c5a">00140</link> &#32;&#32;&#32;&#32;<emphasis role="keyword">public</emphasis>&#32;<emphasis role="keywordtype">void</emphasis>&#32;<link linkend="_class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_diagnostic_bag_1a8614e625b3762a4bc6204a4e2cb23c5a">ReportAlreadyDefinedProperty</link>(
+<anchor xml:id="__diagnostic_bag_8cs_source_1l00141"/>00141 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_lexers_1_1_models_1a1ffd1a7706dfd364560b76d47467812f">TextEditorTextSpan</link>&#32;textSpan,
+<anchor xml:id="__diagnostic_bag_8cs_source_1l00142"/>00142 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordtype">string</emphasis>&#32;alreadyDefinedPropertyIdentifier)
+<anchor xml:id="__diagnostic_bag_8cs_source_1l00143"/>00143 &#32;&#32;&#32;&#32;{
+<anchor xml:id="__diagnostic_bag_8cs_source_1l00144"/>00144 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;Report(
+<anchor xml:id="__diagnostic_bag_8cs_source_1l00145"/>00145 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_enums_1ad1d66dfc7718c1f9a6bd6852fe2eb9e9">TextEditorDiagnosticLevel</link>.Error,
+<anchor xml:id="__diagnostic_bag_8cs_source_1l00146"/>00146 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;$<emphasis role="stringliteral">&quot;Already&#32;defined&#32;property:&#32;&apos;{alreadyDefinedPropertyIdentifier}&apos;&quot;</emphasis>,
+<anchor xml:id="__diagnostic_bag_8cs_source_1l00147"/>00147 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;textSpan,
+<anchor xml:id="__diagnostic_bag_8cs_source_1l00148"/>00148 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;Guid.Parse(<emphasis role="stringliteral">&quot;0f4681e2-abaa-46f6-9b05-56941a07dd98&quot;</emphasis>));
+<anchor xml:id="__diagnostic_bag_8cs_source_1l00149"/>00149 &#32;&#32;&#32;&#32;}
+<anchor xml:id="__diagnostic_bag_8cs_source_1l00150"/>00150 
+<anchor xml:id="__diagnostic_bag_8cs_source_1l00151"/><link linkend="_class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_diagnostic_bag_1ac62e55faba91cdbfc7d03c14e5d2bbfd">00151</link> &#32;&#32;&#32;&#32;<emphasis role="keyword">public</emphasis>&#32;<emphasis role="keywordtype">void</emphasis>&#32;<link linkend="_class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_diagnostic_bag_1ac62e55faba91cdbfc7d03c14e5d2bbfd">ReportUndefinedFunction</link>(
+<anchor xml:id="__diagnostic_bag_8cs_source_1l00152"/>00152 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_lexers_1_1_models_1a1ffd1a7706dfd364560b76d47467812f">TextEditorTextSpan</link>&#32;textSpan,
+<anchor xml:id="__diagnostic_bag_8cs_source_1l00153"/>00153 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordtype">string</emphasis>&#32;undefinedFunctionIdentifier)
+<anchor xml:id="__diagnostic_bag_8cs_source_1l00154"/>00154 &#32;&#32;&#32;&#32;{
+<anchor xml:id="__diagnostic_bag_8cs_source_1l00155"/>00155 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;Report(
+<anchor xml:id="__diagnostic_bag_8cs_source_1l00156"/>00156 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_enums_1ad1d66dfc7718c1f9a6bd6852fe2eb9e9">TextEditorDiagnosticLevel</link>.Error,
+<anchor xml:id="__diagnostic_bag_8cs_source_1l00157"/>00157 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;$<emphasis role="stringliteral">&quot;Undefined&#32;function:&#32;&apos;{undefinedFunctionIdentifier}&apos;&quot;</emphasis>,
+<anchor xml:id="__diagnostic_bag_8cs_source_1l00158"/>00158 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;textSpan,
+<anchor xml:id="__diagnostic_bag_8cs_source_1l00159"/>00159 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;Guid.Parse(<emphasis role="stringliteral">&quot;8703a2f9-fab3-46c2-8f50-05d8152a1510&quot;</emphasis>));
+<anchor xml:id="__diagnostic_bag_8cs_source_1l00160"/>00160 &#32;&#32;&#32;&#32;}
+<anchor xml:id="__diagnostic_bag_8cs_source_1l00161"/>00161 
+<anchor xml:id="__diagnostic_bag_8cs_source_1l00162"/><link linkend="_class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_diagnostic_bag_1a54c345680ffcf98ef3e8dba9ec11eee1">00162</link> &#32;&#32;&#32;&#32;<emphasis role="keyword">public</emphasis>&#32;<emphasis role="keywordtype">void</emphasis>&#32;<link linkend="_class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_diagnostic_bag_1a54c345680ffcf98ef3e8dba9ec11eee1">ReportAlreadyDefinedFunction</link>(
+<anchor xml:id="__diagnostic_bag_8cs_source_1l00163"/>00163 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_lexers_1_1_models_1a1ffd1a7706dfd364560b76d47467812f">TextEditorTextSpan</link>&#32;textSpan,
+<anchor xml:id="__diagnostic_bag_8cs_source_1l00164"/>00164 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordtype">string</emphasis>&#32;alreadyDefinedFunctionIdentifier)
+<anchor xml:id="__diagnostic_bag_8cs_source_1l00165"/>00165 &#32;&#32;&#32;&#32;{
+<anchor xml:id="__diagnostic_bag_8cs_source_1l00166"/>00166 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;Report(
+<anchor xml:id="__diagnostic_bag_8cs_source_1l00167"/>00167 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_enums_1ad1d66dfc7718c1f9a6bd6852fe2eb9e9">TextEditorDiagnosticLevel</link>.Error,
+<anchor xml:id="__diagnostic_bag_8cs_source_1l00168"/>00168 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;$<emphasis role="stringliteral">&quot;Already&#32;defined&#32;function:&#32;&apos;{alreadyDefinedFunctionIdentifier}&apos;&quot;</emphasis>,
+<anchor xml:id="__diagnostic_bag_8cs_source_1l00169"/>00169 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;textSpan,
+<anchor xml:id="__diagnostic_bag_8cs_source_1l00170"/>00170 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;Guid.Parse(<emphasis role="stringliteral">&quot;44193527-d94f-49bd-a588-cf75a18bc0f5&quot;</emphasis>));
+<anchor xml:id="__diagnostic_bag_8cs_source_1l00171"/>00171 &#32;&#32;&#32;&#32;}
+<anchor xml:id="__diagnostic_bag_8cs_source_1l00172"/>00172 
+<anchor xml:id="__diagnostic_bag_8cs_source_1l00173"/><link linkend="_class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_diagnostic_bag_1a3b09fc65cd46df5fe3849842cf728ed6">00173</link> &#32;&#32;&#32;&#32;<emphasis role="keyword">public</emphasis>&#32;<emphasis role="keywordtype">void</emphasis>&#32;<link linkend="_class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_diagnostic_bag_1a3b09fc65cd46df5fe3849842cf728ed6">ReportBadFunctionOptionalArgumentDueToMismatchInType</link>(
+<anchor xml:id="__diagnostic_bag_8cs_source_1l00174"/>00174 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_lexers_1_1_models_1a1ffd1a7706dfd364560b76d47467812f">TextEditorTextSpan</link>&#32;optionalArgumentTextSpan,
+<anchor xml:id="__diagnostic_bag_8cs_source_1l00175"/>00175 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordtype">string</emphasis>&#32;optionalArgumentVariableIdentifier,
+<anchor xml:id="__diagnostic_bag_8cs_source_1l00176"/>00176 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordtype">string</emphasis>&#32;typeExpectedIdentifierString,
+<anchor xml:id="__diagnostic_bag_8cs_source_1l00177"/>00177 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordtype">string</emphasis>&#32;typeActualIdentifierString)
+<anchor xml:id="__diagnostic_bag_8cs_source_1l00178"/>00178 &#32;&#32;&#32;&#32;{
+<anchor xml:id="__diagnostic_bag_8cs_source_1l00179"/>00179 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;Report(
+<anchor xml:id="__diagnostic_bag_8cs_source_1l00180"/>00180 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_enums_1ad1d66dfc7718c1f9a6bd6852fe2eb9e9">TextEditorDiagnosticLevel</link>.Error,
+<anchor xml:id="__diagnostic_bag_8cs_source_1l00181"/>00181 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;$<emphasis role="stringliteral">&quot;The&#32;optional&#32;argument:&#32;&apos;{optionalArgumentVariableIdentifier}&apos;&quot;</emphasis>&#32;+
+<anchor xml:id="__diagnostic_bag_8cs_source_1l00182"/>00182 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;$<emphasis role="stringliteral">&quot;&#32;expects&#32;the&#32;type:&#32;&apos;{typeExpectedIdentifierString}&apos;&quot;</emphasis>&#32;+
+<anchor xml:id="__diagnostic_bag_8cs_source_1l00183"/>00183 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;$<emphasis role="stringliteral">&quot;,&#32;but&#32;received&#32;the&#32;type:&#32;&apos;{typeActualIdentifierString}&apos;&quot;</emphasis>,
+<anchor xml:id="__diagnostic_bag_8cs_source_1l00184"/>00184 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;optionalArgumentTextSpan,
+<anchor xml:id="__diagnostic_bag_8cs_source_1l00185"/>00185 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;Guid.Parse(<emphasis role="stringliteral">&quot;ea78765d-13b6-4aef-87b8-838d94daa82a&quot;</emphasis>));
+<anchor xml:id="__diagnostic_bag_8cs_source_1l00186"/>00186 &#32;&#32;&#32;&#32;}
+<anchor xml:id="__diagnostic_bag_8cs_source_1l00187"/>00187 
+<anchor xml:id="__diagnostic_bag_8cs_source_1l00188"/><link linkend="_class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_diagnostic_bag_1a384a28076522f4f0cdbdef6b04e6b110">00188</link> &#32;&#32;&#32;&#32;<emphasis role="keyword">public</emphasis>&#32;<emphasis role="keywordtype">void</emphasis>&#32;<link linkend="_class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_diagnostic_bag_1a384a28076522f4f0cdbdef6b04e6b110">ReportReturnStatementsAreStillBeingImplemented</link>(<link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_lexers_1_1_models_1a1ffd1a7706dfd364560b76d47467812f">TextEditorTextSpan</link>&#32;textSpan)
+<anchor xml:id="__diagnostic_bag_8cs_source_1l00189"/>00189 &#32;&#32;&#32;&#32;{
+<anchor xml:id="__diagnostic_bag_8cs_source_1l00190"/>00190 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;Report(
+<anchor xml:id="__diagnostic_bag_8cs_source_1l00191"/>00191 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_enums_1ad1d66dfc7718c1f9a6bd6852fe2eb9e9">TextEditorDiagnosticLevel</link>.Hint,
+<anchor xml:id="__diagnostic_bag_8cs_source_1l00192"/>00192 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;$<emphasis role="stringliteral">&quot;Parsing&#32;of&#32;return&#32;statements&#32;is&#32;still&#32;being&#32;implemented.&quot;</emphasis>,
+<anchor xml:id="__diagnostic_bag_8cs_source_1l00193"/>00193 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;textSpan,
+<anchor xml:id="__diagnostic_bag_8cs_source_1l00194"/>00194 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;Guid.Parse(<emphasis role="stringliteral">&quot;3fb8071a-bd97-4bc5-97af-c7b147648e67&quot;</emphasis>));
+<anchor xml:id="__diagnostic_bag_8cs_source_1l00195"/>00195 &#32;&#32;&#32;&#32;}
+<anchor xml:id="__diagnostic_bag_8cs_source_1l00196"/>00196 
+<anchor xml:id="__diagnostic_bag_8cs_source_1l00197"/><link linkend="_class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_diagnostic_bag_1ac52af817a8462ab089c4e8fd1557bfc1">00197</link> &#32;&#32;&#32;&#32;<emphasis role="keyword">public</emphasis>&#32;<emphasis role="keywordtype">void</emphasis>&#32;<link linkend="_class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_diagnostic_bag_1ac52af817a8462ab089c4e8fd1557bfc1">ReportTagNameMissing</link>(<link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_lexers_1_1_models_1a1ffd1a7706dfd364560b76d47467812f">TextEditorTextSpan</link>&#32;textSpan)
+<anchor xml:id="__diagnostic_bag_8cs_source_1l00198"/>00198 &#32;&#32;&#32;&#32;{
+<anchor xml:id="__diagnostic_bag_8cs_source_1l00199"/>00199 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;Report(
+<anchor xml:id="__diagnostic_bag_8cs_source_1l00200"/>00200 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_enums_1ad1d66dfc7718c1f9a6bd6852fe2eb9e9">TextEditorDiagnosticLevel</link>.Error,
+<anchor xml:id="__diagnostic_bag_8cs_source_1l00201"/>00201 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="stringliteral">&quot;Missing&#32;tag&#32;name.&quot;</emphasis>,
+<anchor xml:id="__diagnostic_bag_8cs_source_1l00202"/>00202 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;textSpan,
+<anchor xml:id="__diagnostic_bag_8cs_source_1l00203"/>00203 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;Guid.Parse(<emphasis role="stringliteral">&quot;d567ff67-dfaa-41a4-8953-962e7d596d3c&quot;</emphasis>));
+<anchor xml:id="__diagnostic_bag_8cs_source_1l00204"/>00204 &#32;&#32;&#32;&#32;}
+<anchor xml:id="__diagnostic_bag_8cs_source_1l00205"/>00205 
+<anchor xml:id="__diagnostic_bag_8cs_source_1l00206"/><link linkend="_class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_diagnostic_bag_1a3f7a2a347758889507608043eb407f9c">00206</link> &#32;&#32;&#32;&#32;<emphasis role="keyword">public</emphasis>&#32;<emphasis role="keywordtype">void</emphasis>&#32;<link linkend="_class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_diagnostic_bag_1a3f7a2a347758889507608043eb407f9c">ReportOpenTagWithUnMatchedCloseTag</link>(
+<anchor xml:id="__diagnostic_bag_8cs_source_1l00207"/>00207 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordtype">string</emphasis>&#32;openTagName,
+<anchor xml:id="__diagnostic_bag_8cs_source_1l00208"/>00208 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordtype">string</emphasis>&#32;closeTagName,
+<anchor xml:id="__diagnostic_bag_8cs_source_1l00209"/>00209 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_lexers_1_1_models_1a1ffd1a7706dfd364560b76d47467812f">TextEditorTextSpan</link>&#32;textSpan)
+<anchor xml:id="__diagnostic_bag_8cs_source_1l00210"/>00210 &#32;&#32;&#32;&#32;{
+<anchor xml:id="__diagnostic_bag_8cs_source_1l00211"/>00211 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;Report(
+<anchor xml:id="__diagnostic_bag_8cs_source_1l00212"/>00212 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_enums_1ad1d66dfc7718c1f9a6bd6852fe2eb9e9">TextEditorDiagnosticLevel</link>.Error,
+<anchor xml:id="__diagnostic_bag_8cs_source_1l00213"/>00213 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;$<emphasis role="stringliteral">&quot;Open&#32;tag:&#32;&apos;{openTagName}&apos;&#32;has&#32;an&#32;unmatched&#32;close&#32;tag:&#32;{closeTagName}.&quot;</emphasis>,
+<anchor xml:id="__diagnostic_bag_8cs_source_1l00214"/>00214 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;textSpan,
+<anchor xml:id="__diagnostic_bag_8cs_source_1l00215"/>00215 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;Guid.Parse(<emphasis role="stringliteral">&quot;755ccccd-736c-4c72-b828-939ffa244c97&quot;</emphasis>));
+<anchor xml:id="__diagnostic_bag_8cs_source_1l00216"/>00216 &#32;&#32;&#32;&#32;}
+<anchor xml:id="__diagnostic_bag_8cs_source_1l00217"/>00217 
+<anchor xml:id="__diagnostic_bag_8cs_source_1l00218"/><link linkend="_class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_diagnostic_bag_1a30ae393fd90fbe0e47a03d4a43f30673">00218</link> &#32;&#32;&#32;&#32;<emphasis role="keyword">public</emphasis>&#32;<emphasis role="keywordtype">void</emphasis>&#32;<link linkend="_class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_diagnostic_bag_1a30ae393fd90fbe0e47a03d4a43f30673">ReportRazorExplicitExpressionPredicateWasExpected</link>(
+<anchor xml:id="__diagnostic_bag_8cs_source_1l00219"/>00219 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordtype">string</emphasis>&#32;transitionSubstring,
+<anchor xml:id="__diagnostic_bag_8cs_source_1l00220"/>00220 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordtype">string</emphasis>&#32;keywordText,
+<anchor xml:id="__diagnostic_bag_8cs_source_1l00221"/>00221 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_lexers_1_1_models_1a1ffd1a7706dfd364560b76d47467812f">TextEditorTextSpan</link>&#32;textSpan)
+<anchor xml:id="__diagnostic_bag_8cs_source_1l00222"/>00222 &#32;&#32;&#32;&#32;{
+<anchor xml:id="__diagnostic_bag_8cs_source_1l00223"/>00223 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;Report(
+<anchor xml:id="__diagnostic_bag_8cs_source_1l00224"/>00224 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_enums_1ad1d66dfc7718c1f9a6bd6852fe2eb9e9">TextEditorDiagnosticLevel</link>.Error,
+<anchor xml:id="__diagnostic_bag_8cs_source_1l00225"/>00225 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;$<emphasis role="stringliteral">&quot;An&#32;explicit&#32;expression&#32;predicate&#32;was&#32;expected&#32;to&#32;follow&#32;the&#32;{transitionSubstring}{keywordText}&#32;razor&#32;keyword.&quot;</emphasis>,
+<anchor xml:id="__diagnostic_bag_8cs_source_1l00226"/>00226 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;textSpan,
+<anchor xml:id="__diagnostic_bag_8cs_source_1l00227"/>00227 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;Guid.Parse(<emphasis role="stringliteral">&quot;44c42198-66fd-4b8b-b8e1-4a55ab2aa8c1&quot;</emphasis>));
+<anchor xml:id="__diagnostic_bag_8cs_source_1l00228"/>00228 &#32;&#32;&#32;&#32;}
+<anchor xml:id="__diagnostic_bag_8cs_source_1l00229"/>00229 
+<anchor xml:id="__diagnostic_bag_8cs_source_1l00230"/><link linkend="_class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_diagnostic_bag_1a51626cc11b12908cc581467ae8cb3e13">00230</link> &#32;&#32;&#32;&#32;<emphasis role="keyword">public</emphasis>&#32;<emphasis role="keywordtype">void</emphasis>&#32;<link linkend="_class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_diagnostic_bag_1a51626cc11b12908cc581467ae8cb3e13">ReportRazorCodeBlockWasExpectedToFollowRazorKeyword</link>(
+<anchor xml:id="__diagnostic_bag_8cs_source_1l00231"/>00231 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordtype">string</emphasis>&#32;transitionSubstring,
+<anchor xml:id="__diagnostic_bag_8cs_source_1l00232"/>00232 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordtype">string</emphasis>&#32;keywordText,
+<anchor xml:id="__diagnostic_bag_8cs_source_1l00233"/>00233 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_lexers_1_1_models_1a1ffd1a7706dfd364560b76d47467812f">TextEditorTextSpan</link>&#32;textSpan)
+<anchor xml:id="__diagnostic_bag_8cs_source_1l00234"/>00234 &#32;&#32;&#32;&#32;{
+<anchor xml:id="__diagnostic_bag_8cs_source_1l00235"/>00235 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;Report(
+<anchor xml:id="__diagnostic_bag_8cs_source_1l00236"/>00236 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_enums_1ad1d66dfc7718c1f9a6bd6852fe2eb9e9">TextEditorDiagnosticLevel</link>.Error,
+<anchor xml:id="__diagnostic_bag_8cs_source_1l00237"/>00237 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;$<emphasis role="stringliteral">&quot;A&#32;code&#32;block&#32;was&#32;expected&#32;to&#32;follow&#32;the&#32;{transitionSubstring}{keywordText}&#32;razor&#32;keyword.&quot;</emphasis>,
+<anchor xml:id="__diagnostic_bag_8cs_source_1l00238"/>00238 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;textSpan,
+<anchor xml:id="__diagnostic_bag_8cs_source_1l00239"/>00239 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;Guid.Parse(<emphasis role="stringliteral">&quot;0d5b940d-d993-4607-9c4c-0452e8f8914c&quot;</emphasis>));
+<anchor xml:id="__diagnostic_bag_8cs_source_1l00240"/>00240 &#32;&#32;&#32;&#32;}
+<anchor xml:id="__diagnostic_bag_8cs_source_1l00241"/>00241 
+<anchor xml:id="__diagnostic_bag_8cs_source_1l00242"/><link linkend="_class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_diagnostic_bag_1ae11ea9b28507844b55dad8dd8207cab8">00242</link> &#32;&#32;&#32;&#32;<emphasis role="keyword">public</emphasis>&#32;<emphasis role="keywordtype">void</emphasis>&#32;<link linkend="_class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_diagnostic_bag_1ae11ea9b28507844b55dad8dd8207cab8">ReportRazorWhitespaceImmediatelyFollowingTransitionCharacterIsUnexpected</link>(
+<anchor xml:id="__diagnostic_bag_8cs_source_1l00243"/>00243 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_lexers_1_1_models_1a1ffd1a7706dfd364560b76d47467812f">TextEditorTextSpan</link>&#32;textSpan)
+<anchor xml:id="__diagnostic_bag_8cs_source_1l00244"/>00244 &#32;&#32;&#32;&#32;{
+<anchor xml:id="__diagnostic_bag_8cs_source_1l00245"/>00245 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;Report(
+<anchor xml:id="__diagnostic_bag_8cs_source_1l00246"/>00246 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_enums_1ad1d66dfc7718c1f9a6bd6852fe2eb9e9">TextEditorDiagnosticLevel</link>.Error,
+<anchor xml:id="__diagnostic_bag_8cs_source_1l00247"/>00247 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="stringliteral">&quot;Whitespace&#32;immediately&#32;following&#32;the&#32;Razor&#32;transition&#32;character&#32;is&#32;unexpected.&quot;</emphasis>,
+<anchor xml:id="__diagnostic_bag_8cs_source_1l00248"/>00248 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;textSpan,
+<anchor xml:id="__diagnostic_bag_8cs_source_1l00249"/>00249 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;Guid.Parse(<emphasis role="stringliteral">&quot;20b5922a-2b25-49ce-baf7-132006de3401&quot;</emphasis>));
+<anchor xml:id="__diagnostic_bag_8cs_source_1l00250"/>00250 &#32;&#32;&#32;&#32;}
+<anchor xml:id="__diagnostic_bag_8cs_source_1l00251"/>00251 
+<anchor xml:id="__diagnostic_bag_8cs_source_1l00252"/><link linkend="_class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_diagnostic_bag_1ad62cbe52034512c4a922f57fbf384d15">00252</link> &#32;&#32;&#32;&#32;<emphasis role="keyword">public</emphasis>&#32;<emphasis role="keywordtype">void</emphasis>&#32;<link linkend="_class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_diagnostic_bag_1ad62cbe52034512c4a922f57fbf384d15">ReportConstructorsNeedToBeWithinTypeDefinition</link>(<link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_lexers_1_1_models_1a1ffd1a7706dfd364560b76d47467812f">TextEditorTextSpan</link>&#32;textSpan)
+<anchor xml:id="__diagnostic_bag_8cs_source_1l00253"/>00253 &#32;&#32;&#32;&#32;{
+<anchor xml:id="__diagnostic_bag_8cs_source_1l00254"/>00254 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;Report(
+<anchor xml:id="__diagnostic_bag_8cs_source_1l00255"/>00255 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_enums_1ad1d66dfc7718c1f9a6bd6852fe2eb9e9">TextEditorDiagnosticLevel</link>.Error,
+<anchor xml:id="__diagnostic_bag_8cs_source_1l00256"/>00256 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="stringliteral">&quot;Constructors&#32;need&#32;to&#32;be&#32;within&#32;a&#32;type&#32;definition.&quot;</emphasis>,
+<anchor xml:id="__diagnostic_bag_8cs_source_1l00257"/>00257 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;textSpan,
+<anchor xml:id="__diagnostic_bag_8cs_source_1l00258"/>00258 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;Guid.Parse(<emphasis role="stringliteral">&quot;7ba92f4f-9d7e-49f8-b377-8e754d6a5f53&quot;</emphasis>));
+<anchor xml:id="__diagnostic_bag_8cs_source_1l00259"/>00259 &#32;&#32;&#32;&#32;}
+<anchor xml:id="__diagnostic_bag_8cs_source_1l00260"/>00260 
+<anchor xml:id="__diagnostic_bag_8cs_source_1l00269"/><link linkend="_class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_diagnostic_bag_1ac5547548f2769c70e8cd25ac52442dfc">00269</link> &#32;&#32;&#32;&#32;<emphasis role="keyword">public</emphasis>&#32;<emphasis role="keywordtype">void</emphasis>&#32;<link linkend="_class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_diagnostic_bag_1ac5547548f2769c70e8cd25ac52442dfc">ReportTodoException</link>(<link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_lexers_1_1_models_1a1ffd1a7706dfd364560b76d47467812f">TextEditorTextSpan</link>&#32;textSpan,&#32;<emphasis role="keywordtype">string</emphasis>&#32;message)
+<anchor xml:id="__diagnostic_bag_8cs_source_1l00270"/>00270 &#32;&#32;&#32;&#32;{
+<anchor xml:id="__diagnostic_bag_8cs_source_1l00271"/>00271 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;Report(
+<anchor xml:id="__diagnostic_bag_8cs_source_1l00272"/>00272 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_enums_1ad1d66dfc7718c1f9a6bd6852fe2eb9e9">TextEditorDiagnosticLevel</link>.Hint,
+<anchor xml:id="__diagnostic_bag_8cs_source_1l00273"/>00273 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;$<emphasis role="stringliteral">&quot;TODO:&#32;{message}&quot;</emphasis>,
+<anchor xml:id="__diagnostic_bag_8cs_source_1l00274"/>00274 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;textSpan,
+<anchor xml:id="__diagnostic_bag_8cs_source_1l00275"/>00275 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;Guid.Parse(<emphasis role="stringliteral">&quot;a595d93d-e4c7-4d30-9373-1b246b2668bf&quot;</emphasis>));
+<anchor xml:id="__diagnostic_bag_8cs_source_1l00276"/>00276 &#32;&#32;&#32;&#32;}
+<anchor xml:id="__diagnostic_bag_8cs_source_1l00277"/>00277 
+<anchor xml:id="__diagnostic_bag_8cs_source_1l00278"/>00278 &#32;&#32;&#32;&#32;<emphasis role="keyword">private</emphasis>&#32;<emphasis role="keywordtype">void</emphasis>&#32;Report(
+<anchor xml:id="__diagnostic_bag_8cs_source_1l00279"/>00279 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_enums_1ad1d66dfc7718c1f9a6bd6852fe2eb9e9">TextEditorDiagnosticLevel</link>&#32;diagnosticLevel,
+<anchor xml:id="__diagnostic_bag_8cs_source_1l00280"/>00280 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordtype">string</emphasis>&#32;message,
+<anchor xml:id="__diagnostic_bag_8cs_source_1l00281"/>00281 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_lexers_1_1_models_1a1ffd1a7706dfd364560b76d47467812f">TextEditorTextSpan</link>&#32;textSpan,
+<anchor xml:id="__diagnostic_bag_8cs_source_1l00282"/>00282 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;Guid&#32;diagnosticId)
+<anchor xml:id="__diagnostic_bag_8cs_source_1l00283"/>00283 &#32;&#32;&#32;&#32;{
+<anchor xml:id="__diagnostic_bag_8cs_source_1l00284"/>00284 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;var&#32;compilerServiceDiagnosticDecorationKind&#32;=&#32;diagnosticLevel&#32;<emphasis role="keywordflow">switch</emphasis>
+<anchor xml:id="__diagnostic_bag_8cs_source_1l00285"/>00285 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;{
+<anchor xml:id="__diagnostic_bag_8cs_source_1l00286"/>00286 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_enums_1ad1d66dfc7718c1f9a6bd6852fe2eb9e9ad11c7e9c409c6ca80008c5dd01d44d1e">TextEditorDiagnosticLevel.Hint</link>&#32;=&gt;&#32;<link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_enums_1a37ea1c6c1dede680be7ef301530957ae">CompilerServiceDiagnosticDecorationKind</link>.DiagnosticHint,
+<anchor xml:id="__diagnostic_bag_8cs_source_1l00287"/>00287 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_enums_1ad1d66dfc7718c1f9a6bd6852fe2eb9e9a0f78b20318b5aef4dca6dbae5051960a">TextEditorDiagnosticLevel.Suggestion</link>&#32;=&gt;&#32;<link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_enums_1a37ea1c6c1dede680be7ef301530957ae">CompilerServiceDiagnosticDecorationKind</link>.DiagnosticSuggestion,
+<anchor xml:id="__diagnostic_bag_8cs_source_1l00288"/>00288 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_enums_1ad1d66dfc7718c1f9a6bd6852fe2eb9e9a0eaadb4fcb48a0a0ed7bc9868be9fbaa">TextEditorDiagnosticLevel.Warning</link>&#32;=&gt;&#32;<link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_enums_1a37ea1c6c1dede680be7ef301530957ae">CompilerServiceDiagnosticDecorationKind</link>.DiagnosticWarning,
+<anchor xml:id="__diagnostic_bag_8cs_source_1l00289"/>00289 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_enums_1ad1d66dfc7718c1f9a6bd6852fe2eb9e9a902b0d55fddef6f8d651fe1035b7d4bd">TextEditorDiagnosticLevel.Error</link>&#32;=&gt;&#32;<link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_enums_1a37ea1c6c1dede680be7ef301530957ae">CompilerServiceDiagnosticDecorationKind</link>.DiagnosticError,
+<anchor xml:id="__diagnostic_bag_8cs_source_1l00290"/>00290 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_enums_1ad1d66dfc7718c1f9a6bd6852fe2eb9e9a6311ae17c1ee52b36e68aaf4ad066387">TextEditorDiagnosticLevel.Other</link>&#32;=&gt;&#32;<link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_enums_1a37ea1c6c1dede680be7ef301530957ae">CompilerServiceDiagnosticDecorationKind</link>.DiagnosticOther,
+<anchor xml:id="__diagnostic_bag_8cs_source_1l00291"/>00291 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;_&#32;=&gt;&#32;<link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_enums_1a37ea1c6c1dede680be7ef301530957ae">CompilerServiceDiagnosticDecorationKind</link>.DiagnosticOther,
+<anchor xml:id="__diagnostic_bag_8cs_source_1l00292"/>00292 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;};
+<anchor xml:id="__diagnostic_bag_8cs_source_1l00293"/>00293 
+<anchor xml:id="__diagnostic_bag_8cs_source_1l00294"/>00294 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;textSpan&#32;=&#32;textSpan&#32;with
+<anchor xml:id="__diagnostic_bag_8cs_source_1l00295"/>00295 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;{
+<anchor xml:id="__diagnostic_bag_8cs_source_1l00296"/>00296 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;DecorationByte&#32;=&#32;(byte)compilerServiceDiagnosticDecorationKind
+<anchor xml:id="__diagnostic_bag_8cs_source_1l00297"/>00297 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;};
+<anchor xml:id="__diagnostic_bag_8cs_source_1l00298"/>00298 
+<anchor xml:id="__diagnostic_bag_8cs_source_1l00299"/>00299 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;_diagnosticsBag.Add(<emphasis role="keyword">new</emphasis>&#32;<link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1a9a73f4ac751a25cd91cce2523e9c166b">TextEditorDiagnostic</link>(
+<anchor xml:id="__diagnostic_bag_8cs_source_1l00300"/>00300 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;diagnosticLevel,
+<anchor xml:id="__diagnostic_bag_8cs_source_1l00301"/>00301 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;message,
+<anchor xml:id="__diagnostic_bag_8cs_source_1l00302"/>00302 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;textSpan,
+<anchor xml:id="__diagnostic_bag_8cs_source_1l00303"/>00303 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;diagnosticId));
+<anchor xml:id="__diagnostic_bag_8cs_source_1l00304"/>00304 &#32;&#32;&#32;&#32;}
+<anchor xml:id="__diagnostic_bag_8cs_source_1l00305"/>00305 
+<anchor xml:id="__diagnostic_bag_8cs_source_1l00306"/><link linkend="_class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_diagnostic_bag_1a758b02866241c9f6cf444b06aeef7252">00306</link> &#32;&#32;&#32;&#32;<emphasis role="keyword">public</emphasis>&#32;<emphasis role="keywordtype">void</emphasis>&#32;<link linkend="_class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_diagnostic_bag_1a758b02866241c9f6cf444b06aeef7252">ClearByResourceUri</link>(<link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_lexers_1_1_models_1a26a1b63ad28ec7955b30bc6c91571eca">ResourceUri</link>&#32;resourceUri)
+<anchor xml:id="__diagnostic_bag_8cs_source_1l00307"/>00307 &#32;&#32;&#32;&#32;{
+<anchor xml:id="__diagnostic_bag_8cs_source_1l00308"/>00308 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;var&#32;keep&#32;=&#32;_diagnosticsBag.Where(x&#32;=&gt;&#32;x.TextSpan.ResourceUri&#32;!=&#32;resourceUri);
+<anchor xml:id="__diagnostic_bag_8cs_source_1l00309"/>00309 
+<anchor xml:id="__diagnostic_bag_8cs_source_1l00310"/>00310 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;_diagnosticsBag.Clear();
+<anchor xml:id="__diagnostic_bag_8cs_source_1l00311"/>00311 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;_diagnosticsBag.AddRange(keep);
+<anchor xml:id="__diagnostic_bag_8cs_source_1l00312"/>00312 &#32;&#32;&#32;&#32;}
+<anchor xml:id="__diagnostic_bag_8cs_source_1l00313"/>00313 }
+</programlisting></section>

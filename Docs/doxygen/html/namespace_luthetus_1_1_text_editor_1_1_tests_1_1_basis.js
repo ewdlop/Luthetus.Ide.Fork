@@ -1,0 +1,27 @@
+var namespace_luthetus_1_1_text_editor_1_1_tests_1_1_basis =
+[
+    [ "Autocompletes", "namespace_luthetus_1_1_text_editor_1_1_tests_1_1_basis_1_1_autocompletes.html", "namespace_luthetus_1_1_text_editor_1_1_tests_1_1_basis_1_1_autocompletes" ],
+    [ "Characters", "namespace_luthetus_1_1_text_editor_1_1_tests_1_1_basis_1_1_characters.html", "namespace_luthetus_1_1_text_editor_1_1_tests_1_1_basis_1_1_characters" ],
+    [ "Commands", "namespace_luthetus_1_1_text_editor_1_1_tests_1_1_basis_1_1_commands.html", "namespace_luthetus_1_1_text_editor_1_1_tests_1_1_basis_1_1_commands" ],
+    [ "CompilerServices", "namespace_luthetus_1_1_text_editor_1_1_tests_1_1_basis_1_1_compiler_services.html", "namespace_luthetus_1_1_text_editor_1_1_tests_1_1_basis_1_1_compiler_services" ],
+    [ "ComponentRenderers", "namespace_luthetus_1_1_text_editor_1_1_tests_1_1_basis_1_1_component_renderers.html", "namespace_luthetus_1_1_text_editor_1_1_tests_1_1_basis_1_1_component_renderers" ],
+    [ "Cursors", "namespace_luthetus_1_1_text_editor_1_1_tests_1_1_basis_1_1_cursors.html", "namespace_luthetus_1_1_text_editor_1_1_tests_1_1_basis_1_1_cursors" ],
+    [ "Decorations", "namespace_luthetus_1_1_text_editor_1_1_tests_1_1_basis_1_1_decorations.html", "namespace_luthetus_1_1_text_editor_1_1_tests_1_1_basis_1_1_decorations" ],
+    [ "Diffs", "namespace_luthetus_1_1_text_editor_1_1_tests_1_1_basis_1_1_diffs.html", "namespace_luthetus_1_1_text_editor_1_1_tests_1_1_basis_1_1_diffs" ],
+    [ "Events", "namespace_luthetus_1_1_text_editor_1_1_tests_1_1_basis_1_1_events.html", "namespace_luthetus_1_1_text_editor_1_1_tests_1_1_basis_1_1_events" ],
+    [ "Groups", "namespace_luthetus_1_1_text_editor_1_1_tests_1_1_basis_1_1_groups.html", "namespace_luthetus_1_1_text_editor_1_1_tests_1_1_basis_1_1_groups" ],
+    [ "Htmls", "namespace_luthetus_1_1_text_editor_1_1_tests_1_1_basis_1_1_htmls.html", "namespace_luthetus_1_1_text_editor_1_1_tests_1_1_basis_1_1_htmls" ],
+    [ "Installations", "namespace_luthetus_1_1_text_editor_1_1_tests_1_1_basis_1_1_installations.html", "namespace_luthetus_1_1_text_editor_1_1_tests_1_1_basis_1_1_installations" ],
+    [ "JavaScriptObjects", "namespace_luthetus_1_1_text_editor_1_1_tests_1_1_basis_1_1_java_script_objects.html", "namespace_luthetus_1_1_text_editor_1_1_tests_1_1_basis_1_1_java_script_objects" ],
+    [ "Keymaps", "namespace_luthetus_1_1_text_editor_1_1_tests_1_1_basis_1_1_keymaps.html", "namespace_luthetus_1_1_text_editor_1_1_tests_1_1_basis_1_1_keymaps" ],
+    [ "Lexers", "namespace_luthetus_1_1_text_editor_1_1_tests_1_1_basis_1_1_lexers.html", "namespace_luthetus_1_1_text_editor_1_1_tests_1_1_basis_1_1_lexers" ],
+    [ "Lexes", "namespace_luthetus_1_1_text_editor_1_1_tests_1_1_basis_1_1_lexes.html", "namespace_luthetus_1_1_text_editor_1_1_tests_1_1_basis_1_1_lexes" ],
+    [ "Options", "namespace_luthetus_1_1_text_editor_1_1_tests_1_1_basis_1_1_options.html", "namespace_luthetus_1_1_text_editor_1_1_tests_1_1_basis_1_1_options" ],
+    [ "Rows", "namespace_luthetus_1_1_text_editor_1_1_tests_1_1_basis_1_1_rows.html", "namespace_luthetus_1_1_text_editor_1_1_tests_1_1_basis_1_1_rows" ],
+    [ "TextEditors", "namespace_luthetus_1_1_text_editor_1_1_tests_1_1_basis_1_1_text_editors.html", "namespace_luthetus_1_1_text_editor_1_1_tests_1_1_basis_1_1_text_editors" ],
+    [ "UnitTesting", "namespace_luthetus_1_1_text_editor_1_1_tests_1_1_basis_1_1_unit_testing.html", "namespace_luthetus_1_1_text_editor_1_1_tests_1_1_basis_1_1_unit_testing" ],
+    [ "Virtualizations", "namespace_luthetus_1_1_text_editor_1_1_tests_1_1_basis_1_1_virtualizations.html", "namespace_luthetus_1_1_text_editor_1_1_tests_1_1_basis_1_1_virtualizations" ],
+    [ "ServiceTests", "class_luthetus_1_1_text_editor_1_1_tests_1_1_basis_1_1_service_tests.html", "class_luthetus_1_1_text_editor_1_1_tests_1_1_basis_1_1_service_tests" ],
+    [ "TestsHelper", "class_luthetus_1_1_text_editor_1_1_tests_1_1_basis_1_1_tests_helper.html", null ],
+    [ "TextEditorTestBase", "class_luthetus_1_1_text_editor_1_1_tests_1_1_basis_1_1_text_editor_test_base.html", "class_luthetus_1_1_text_editor_1_1_tests_1_1_basis_1_1_text_editor_test_base" ]
+];

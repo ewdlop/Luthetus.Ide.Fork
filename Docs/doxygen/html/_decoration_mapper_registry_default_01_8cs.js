@@ -1,0 +1,4 @@
+var _decoration_mapper_registry_default_01_8cs =
+[
+    [ "Luthetus.TextEditor.RazorLib.Decorations.Models.DecorationMapperRegistryDefault", "class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_decorations_1_1_models_1_1_decoration_mapper_registry_default.html", "class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_decorations_1_1_models_1_1_decoration_mapper_registry_default" ]
+];

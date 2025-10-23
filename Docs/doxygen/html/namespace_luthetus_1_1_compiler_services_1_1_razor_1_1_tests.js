@@ -1,0 +1,4 @@
+var namespace_luthetus_1_1_compiler_services_1_1_razor_1_1_tests =
+[
+    [ "RazorCompilerServiceTestsBase", "class_luthetus_1_1_compiler_services_1_1_razor_1_1_tests_1_1_razor_compiler_service_tests_base.html", "class_luthetus_1_1_compiler_services_1_1_razor_1_1_tests_1_1_razor_compiler_service_tests_base" ]
+];

@@ -1,0 +1,4 @@
+var class_luthetus_1_1_common_1_1_tests_1_1_basis_1_1_menus_1_1_models_1_1_menu_option_callbacks_tests =
+[
+    [ "ConstructorAsync", "class_luthetus_1_1_common_1_1_tests_1_1_basis_1_1_menus_1_1_models_1_1_menu_option_callbacks_tests.html#afaad7b72474fbf8e5d843b5954223f29", null ]
+];

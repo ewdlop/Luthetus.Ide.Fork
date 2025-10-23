@@ -1,0 +1,4 @@
+var class_luthetus_1_1_extensions_1_1_dot_net_1_1_compiler_services_1_1_states_1_1_compiler_service_explorer_state_1_1_reducer =
+[
+    [ "ReduceNewAction", "class_luthetus_1_1_extensions_1_1_dot_net_1_1_compiler_services_1_1_states_1_1_compiler_service_explorer_state_1_1_reducer.html#a946dc2f8dd7ed1d483679a82aa82b3ff", null ]
+];

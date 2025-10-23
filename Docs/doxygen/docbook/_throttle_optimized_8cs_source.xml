@@ -1,0 +1,58 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="__throttle_optimized_8cs_source" xml:lang="en-US">
+<title>ThrottleOptimized.cs</title>
+<indexterm><primary>Source/Lib/Common/Reactives/Models/ThrottleOptimized.cs</primary></indexterm>
+Go to the documentation of this file.<programlisting linenumbering="unnumbered"><anchor xml:id="__throttle_optimized_8cs_source_1l00001"/>00001 <emphasis role="keyword">namespace&#32;</emphasis><link linkend="_namespace_luthetus_1_1_common_1_1_razor_lib_1_1_reactives_1_1_models">Luthetus.Common.RazorLib.Reactives.Models</link>;
+<anchor xml:id="__throttle_optimized_8cs_source_1l00002"/>00002 
+<anchor xml:id="__throttle_optimized_8cs_source_1l00036"/><link linkend="_class_luthetus_1_1_common_1_1_razor_lib_1_1_reactives_1_1_models_1_1_throttle_optimized-1-g">00036</link> <emphasis role="keyword">public</emphasis>&#32;<emphasis role="keyword">class&#32;</emphasis><link linkend="_class_luthetus_1_1_common_1_1_razor_lib_1_1_reactives_1_1_models_1_1_throttle_optimized-1-g_1a7dd5a4e90b6c6be102d36a7febf1bdcc">ThrottleOptimized</link>&lt;TArgs&gt;
+<anchor xml:id="__throttle_optimized_8cs_source_1l00037"/>00037 {
+<anchor xml:id="__throttle_optimized_8cs_source_1l00038"/>00038 &#32;&#32;&#32;&#32;<emphasis role="keyword">private</emphasis>&#32;readonly&#32;<emphasis role="keywordtype">object</emphasis>&#32;_lockWorkItemArgs&#32;=&#32;<emphasis role="keyword">new</emphasis>();
+<anchor xml:id="__throttle_optimized_8cs_source_1l00039"/>00039 &#32;&#32;&#32;&#32;<emphasis role="keyword">private</emphasis>&#32;readonly&#32;Func&lt;TArgs,&#32;CancellationToken,&#32;Task&gt;&#32;_workItem;
+<anchor xml:id="__throttle_optimized_8cs_source_1l00040"/>00040 
+<anchor xml:id="__throttle_optimized_8cs_source_1l00041"/><link linkend="_class_luthetus_1_1_common_1_1_razor_lib_1_1_reactives_1_1_models_1_1_throttle_optimized-1-g_1a7dd5a4e90b6c6be102d36a7febf1bdcc">00041</link> &#32;&#32;&#32;&#32;<emphasis role="keyword">public</emphasis>&#32;<link linkend="_class_luthetus_1_1_common_1_1_razor_lib_1_1_reactives_1_1_models_1_1_throttle_optimized-1-g_1a7dd5a4e90b6c6be102d36a7febf1bdcc">ThrottleOptimized</link>(TimeSpan&#32;throttleTimeSpan,&#32;Func&lt;TArgs,&#32;CancellationToken,&#32;Task&gt;&#32;workItem)
+<anchor xml:id="__throttle_optimized_8cs_source_1l00042"/>00042 &#32;&#32;&#32;&#32;{
+<anchor xml:id="__throttle_optimized_8cs_source_1l00043"/>00043 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<link linkend="_class_luthetus_1_1_common_1_1_razor_lib_1_1_reactives_1_1_models_1_1_throttle_optimized-1-g_1a2bc947c6968b700782c65612d8457767">ThrottleTimeSpan</link>&#32;=&#32;throttleTimeSpan;
+<anchor xml:id="__throttle_optimized_8cs_source_1l00044"/>00044 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;_workItem&#32;=&#32;workItem;
+<anchor xml:id="__throttle_optimized_8cs_source_1l00045"/>00045 &#32;&#32;&#32;&#32;}
+<anchor xml:id="__throttle_optimized_8cs_source_1l00046"/>00046 &#32;&#32;&#32;&#32;
+<anchor xml:id="__throttle_optimized_8cs_source_1l00047"/>00047 &#32;&#32;&#32;&#32;<emphasis role="keyword">private</emphasis>&#32;TArgs&#32;_args;
+<anchor xml:id="__throttle_optimized_8cs_source_1l00048"/>00048 &#32;&#32;&#32;&#32;
+<anchor xml:id="__throttle_optimized_8cs_source_1l00068"/>00068 &#32;&#32;&#32;&#32;<emphasis role="keyword">private</emphasis>&#32;<emphasis role="keywordtype">bool</emphasis>&#32;_intentToRun;
+<anchor xml:id="__throttle_optimized_8cs_source_1l00069"/>00069 
+<anchor xml:id="__throttle_optimized_8cs_source_1l00070"/><link linkend="_class_luthetus_1_1_common_1_1_razor_lib_1_1_reactives_1_1_models_1_1_throttle_optimized-1-g_1a33cdb6dd905fd0a351448487b98e47ca">00070</link> &#32;&#32;&#32;&#32;<emphasis role="keyword">public</emphasis>&#32;Task&#32;<link linkend="_class_luthetus_1_1_common_1_1_razor_lib_1_1_reactives_1_1_models_1_1_throttle_optimized-1-g_1a33cdb6dd905fd0a351448487b98e47ca">_workItemTask</link>&#32;=&#32;Task.CompletedTask;
+<anchor xml:id="__throttle_optimized_8cs_source_1l00071"/>00071 
+<anchor xml:id="__throttle_optimized_8cs_source_1l00072"/><link linkend="_class_luthetus_1_1_common_1_1_razor_lib_1_1_reactives_1_1_models_1_1_throttle_optimized-1-g_1a2bc947c6968b700782c65612d8457767">00072</link> &#32;&#32;&#32;&#32;<emphasis role="keyword">public</emphasis>&#32;TimeSpan&#32;<link linkend="_class_luthetus_1_1_common_1_1_razor_lib_1_1_reactives_1_1_models_1_1_throttle_optimized-1-g_1a2bc947c6968b700782c65612d8457767">ThrottleTimeSpan</link>&#32;{&#32;<emphasis role="keyword">get</emphasis>;&#32;}
+<anchor xml:id="__throttle_optimized_8cs_source_1l00073"/>00073 &#32;&#32;&#32;&#32;
+<anchor xml:id="__throttle_optimized_8cs_source_1l00074"/><link linkend="_class_luthetus_1_1_common_1_1_razor_lib_1_1_reactives_1_1_models_1_1_throttle_optimized-1-g_1af3fb0c11e976fa6b0782460b97e094a4">00074</link> &#32;&#32;&#32;&#32;<emphasis role="keyword">public</emphasis>&#32;<emphasis role="keywordtype">void</emphasis>&#32;<link linkend="_class_luthetus_1_1_common_1_1_razor_lib_1_1_reactives_1_1_models_1_1_throttle_optimized-1-g_1af3fb0c11e976fa6b0782460b97e094a4">Run</link>(TArgs&#32;args)
+<anchor xml:id="__throttle_optimized_8cs_source_1l00075"/>00075 &#32;&#32;&#32;&#32;{
+<anchor xml:id="__throttle_optimized_8cs_source_1l00076"/>00076 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;lock&#32;(_lockWorkItemArgs)
+<anchor xml:id="__throttle_optimized_8cs_source_1l00077"/>00077 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;{
+<anchor xml:id="__throttle_optimized_8cs_source_1l00078"/>00078 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;_args&#32;=&#32;args;
+<anchor xml:id="__throttle_optimized_8cs_source_1l00079"/>00079 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">if</emphasis>&#32;(_intentToRun)
+<anchor xml:id="__throttle_optimized_8cs_source_1l00080"/>00080 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>;
+<anchor xml:id="__throttle_optimized_8cs_source_1l00081"/>00081 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;
+<anchor xml:id="__throttle_optimized_8cs_source_1l00082"/>00082 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;_intentToRun&#32;=&#32;<emphasis role="keyword">true</emphasis>;
+<anchor xml:id="__throttle_optimized_8cs_source_1l00083"/>00083 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;}
+<anchor xml:id="__throttle_optimized_8cs_source_1l00084"/>00084 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;
+<anchor xml:id="__throttle_optimized_8cs_source_1l00085"/>00085 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;var&#32;previousTask&#32;=&#32;<link linkend="_class_luthetus_1_1_common_1_1_razor_lib_1_1_reactives_1_1_models_1_1_throttle_optimized-1-g_1a33cdb6dd905fd0a351448487b98e47ca">_workItemTask</link>;
+<anchor xml:id="__throttle_optimized_8cs_source_1l00086"/>00086 
+<anchor xml:id="__throttle_optimized_8cs_source_1l00087"/>00087 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<link linkend="_class_luthetus_1_1_common_1_1_razor_lib_1_1_reactives_1_1_models_1_1_throttle_optimized-1-g_1a33cdb6dd905fd0a351448487b98e47ca">_workItemTask</link>&#32;=&#32;Task.Run(async&#32;()&#32;=&gt;
+<anchor xml:id="__throttle_optimized_8cs_source_1l00088"/>00088 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;{
+<anchor xml:id="__throttle_optimized_8cs_source_1l00089"/>00089 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;Await&#32;the&#32;previous&#32;work&#32;item&#32;task.</emphasis>
+<anchor xml:id="__throttle_optimized_8cs_source_1l00090"/>00090 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;await&#32;previousTask.ConfigureAwait(<emphasis role="keyword">false</emphasis>);
+<anchor xml:id="__throttle_optimized_8cs_source_1l00091"/>00091 
+<anchor xml:id="__throttle_optimized_8cs_source_1l00092"/>00092 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;TArgs&#32;argsCapture;
+<anchor xml:id="__throttle_optimized_8cs_source_1l00093"/>00093 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;lock&#32;(_lockWorkItemArgs)
+<anchor xml:id="__throttle_optimized_8cs_source_1l00094"/>00094 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;{
+<anchor xml:id="__throttle_optimized_8cs_source_1l00095"/>00095 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;argsCapture&#32;=&#32;_args;
+<anchor xml:id="__throttle_optimized_8cs_source_1l00096"/>00096 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;_intentToRun&#32;=&#32;<emphasis role="keyword">false</emphasis>;
+<anchor xml:id="__throttle_optimized_8cs_source_1l00097"/>00097 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;}
+<anchor xml:id="__throttle_optimized_8cs_source_1l00098"/>00098 
+<anchor xml:id="__throttle_optimized_8cs_source_1l00099"/>00099 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;await&#32;Task.WhenAll(
+<anchor xml:id="__throttle_optimized_8cs_source_1l00100"/>00100 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;_workItem.Invoke(argsCapture,&#32;CancellationToken.None),
+<anchor xml:id="__throttle_optimized_8cs_source_1l00101"/>00101 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;Task.Delay(<link linkend="_class_luthetus_1_1_common_1_1_razor_lib_1_1_reactives_1_1_models_1_1_throttle_optimized-1-g_1a2bc947c6968b700782c65612d8457767">ThrottleTimeSpan</link>))
+<anchor xml:id="__throttle_optimized_8cs_source_1l00102"/>00102 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;.ConfigureAwait(<emphasis role="keyword">false</emphasis>);
+<anchor xml:id="__throttle_optimized_8cs_source_1l00103"/>00103 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;});
+<anchor xml:id="__throttle_optimized_8cs_source_1l00104"/>00104 &#32;&#32;&#32;&#32;}
+<anchor xml:id="__throttle_optimized_8cs_source_1l00105"/>00105 }
+</programlisting></section>

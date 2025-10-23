@@ -1,0 +1,71 @@
+\doxysection{Background\+Task\+Dialog\+Display.\+razor.\+cs}
+\hypertarget{_background_task_dialog_display_8razor_8cs_source}{}\label{_background_task_dialog_display_8razor_8cs_source}\index{Source/Lib/Ide/Ide.RazorLib/Shareds/Displays/Internals/BackgroundTaskDialogDisplay.razor.cs@{Source/Lib/Ide/Ide.RazorLib/Shareds/Displays/Internals/BackgroundTaskDialogDisplay.razor.cs}}
+\mbox{\hyperlink{_background_task_dialog_display_8razor_8cs}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{_background_task_dialog_display_8razor_8cs_source_l00001}00001\ \textcolor{keyword}{using\ }Microsoft.AspNetCore.Components;}
+\DoxyCodeLine{\Hypertarget{_background_task_dialog_display_8razor_8cs_source_l00002}00002\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_luthetus_1_1_common_1_1_razor_lib_1_1_background_tasks_1_1_models}{Luthetus.Common.RazorLib.BackgroundTasks.Models}};}
+\DoxyCodeLine{\Hypertarget{_background_task_dialog_display_8razor_8cs_source_l00003}00003\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_luthetus_1_1_common_1_1_razor_lib_1_1_reactives_1_1_models}{Luthetus.Common.RazorLib.Reactives.Models}};}
+\DoxyCodeLine{\Hypertarget{_background_task_dialog_display_8razor_8cs_source_l00004}00004\ }
+\DoxyCodeLine{\Hypertarget{_background_task_dialog_display_8razor_8cs_source_l00005}\mbox{\hyperlink{namespace_luthetus_1_1_ide_1_1_razor_lib_1_1_shareds_1_1_displays_1_1_internals}{00005}}\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespace_luthetus_1_1_ide_1_1_razor_lib_1_1_shareds_1_1_displays_1_1_internals}{Luthetus.Ide.RazorLib.Shareds.Displays.Internals}};}
+\DoxyCodeLine{\Hypertarget{_background_task_dialog_display_8razor_8cs_source_l00006}00006\ }
+\DoxyCodeLine{\Hypertarget{_background_task_dialog_display_8razor_8cs_source_l00007}\mbox{\hyperlink{class_luthetus_1_1_ide_1_1_razor_lib_1_1_shareds_1_1_displays_1_1_internals_1_1_background_task_dialog_display}{00007}}\ \textcolor{keyword}{public}\ \textcolor{keyword}{partial\ class\ }\mbox{\hyperlink{class_luthetus_1_1_ide_1_1_razor_lib_1_1_shareds_1_1_displays_1_1_internals_1_1_background_task_dialog_display}{BackgroundTaskDialogDisplay}}\ :\ ComponentBase,\ IDisposable}
+\DoxyCodeLine{\Hypertarget{_background_task_dialog_display_8razor_8cs_source_l00008}00008\ \{}
+\DoxyCodeLine{\Hypertarget{_background_task_dialog_display_8razor_8cs_source_l00009}00009\ \ \ \ \ [Inject]}
+\DoxyCodeLine{\Hypertarget{_background_task_dialog_display_8razor_8cs_source_l00010}\mbox{\hyperlink{class_luthetus_1_1_ide_1_1_razor_lib_1_1_shareds_1_1_displays_1_1_internals_1_1_background_task_dialog_display_a5e7bd8041ebe1980c85249f4805e53ad}{00010}}\ \ \ \ \ \textcolor{keyword}{public}\ \mbox{\hyperlink{interface_luthetus_1_1_common_1_1_razor_lib_1_1_background_tasks_1_1_models_1_1_i_background_task_service}{IBackgroundTaskService}}\ \mbox{\hyperlink{class_luthetus_1_1_ide_1_1_razor_lib_1_1_shareds_1_1_displays_1_1_internals_1_1_background_task_dialog_display_a5e7bd8041ebe1980c85249f4805e53ad}{BackgroundTaskService}}\ \{\ \textcolor{keyword}{get};\ \textcolor{keyword}{set};\ \}\ =\ \textcolor{keyword}{null}!;}
+\DoxyCodeLine{\Hypertarget{_background_task_dialog_display_8razor_8cs_source_l00011}00011\ }
+\DoxyCodeLine{\Hypertarget{_background_task_dialog_display_8razor_8cs_source_l00012}00012\ \ \ \ \ \textcolor{keyword}{private}\ readonly\ \mbox{\hyperlink{class_luthetus_1_1_common_1_1_razor_lib_1_1_reactives_1_1_models_1_1_throttle}{Throttle}}\ \_executingBackgroundTaskChangedThrottle\ =\ \textcolor{keyword}{new}(TimeSpan.FromMilliseconds(1000));}
+\DoxyCodeLine{\Hypertarget{_background_task_dialog_display_8razor_8cs_source_l00013}00013\ \ \ \ \ \textcolor{keyword}{private}\ readonly\ List<IBackgroundTask>\ \_seenBackgroundTasks\ =\ \textcolor{keyword}{new}\ List<IBackgroundTask>();}
+\DoxyCodeLine{\Hypertarget{_background_task_dialog_display_8razor_8cs_source_l00014}00014\ \ \ \ \ \textcolor{keyword}{private}\ readonly\ \textcolor{keywordtype}{object}\ \_seenBackgroundTasksLock\ =\ \textcolor{keyword}{new}();}
+\DoxyCodeLine{\Hypertarget{_background_task_dialog_display_8razor_8cs_source_l00015}00015\ }
+\DoxyCodeLine{\Hypertarget{_background_task_dialog_display_8razor_8cs_source_l00016}00016\ \ \ \ \ \textcolor{keyword}{private}\ \mbox{\hyperlink{class_luthetus_1_1_common_1_1_razor_lib_1_1_background_tasks_1_1_models_1_1_background_task_queue}{BackgroundTaskQueue}}\ \_continuousBackgroundTaskWorker\ =\ \textcolor{keyword}{null}!;}
+\DoxyCodeLine{\Hypertarget{_background_task_dialog_display_8razor_8cs_source_l00017}00017\ \ \ \ \ \textcolor{keyword}{private}\ \textcolor{keywordtype}{int}\ \_countTracked\ =\ 100;}
+\DoxyCodeLine{\Hypertarget{_background_task_dialog_display_8razor_8cs_source_l00018}00018\ \ \ \ \ \textcolor{keyword}{private}\ \textcolor{keywordtype}{int}\ \_clearTo\ =\ 15;}
+\DoxyCodeLine{\Hypertarget{_background_task_dialog_display_8razor_8cs_source_l00019}00019\ }
+\DoxyCodeLine{\Hypertarget{_background_task_dialog_display_8razor_8cs_source_l00020}\mbox{\hyperlink{class_luthetus_1_1_ide_1_1_razor_lib_1_1_shareds_1_1_displays_1_1_internals_1_1_background_task_dialog_display_a66bed98534b4310a16be66a5f2c86bc7}{00020}}\ \ \ \ \ \textcolor{keyword}{protected}\ \textcolor{keyword}{override}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_luthetus_1_1_ide_1_1_razor_lib_1_1_shareds_1_1_displays_1_1_internals_1_1_background_task_dialog_display_a66bed98534b4310a16be66a5f2c86bc7}{OnInitialized}}()}
+\DoxyCodeLine{\Hypertarget{_background_task_dialog_display_8razor_8cs_source_l00021}00021\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_background_task_dialog_display_8razor_8cs_source_l00022}00022\ \ \ \ \ \ \ \ \ \_continuousBackgroundTaskWorker\ =\ (\mbox{\hyperlink{class_luthetus_1_1_common_1_1_razor_lib_1_1_background_tasks_1_1_models_1_1_background_task_queue}{BackgroundTaskQueue}})\mbox{\hyperlink{class_luthetus_1_1_ide_1_1_razor_lib_1_1_shareds_1_1_displays_1_1_internals_1_1_background_task_dialog_display_a5e7bd8041ebe1980c85249f4805e53ad}{BackgroundTaskService}}.GetQueue(\mbox{\hyperlink{class_luthetus_1_1_common_1_1_razor_lib_1_1_background_tasks_1_1_models_1_1_continuous_background_task_worker}{ContinuousBackgroundTaskWorker}}.\mbox{\hyperlink{class_luthetus_1_1_common_1_1_razor_lib_1_1_background_tasks_1_1_models_1_1_continuous_background_task_worker_a2bbecf18336413ee1caff9d378acc256}{GetQueueKey}}());}
+\DoxyCodeLine{\Hypertarget{_background_task_dialog_display_8razor_8cs_source_l00023}00023\ \ \ \ \ \ \ \ \ \_continuousBackgroundTaskWorker.ExecutingBackgroundTaskChanged\ +=\ ContinuousBackgroundTaskWorker\_ExecutingBackgroundTaskChanged;}
+\DoxyCodeLine{\Hypertarget{_background_task_dialog_display_8razor_8cs_source_l00024}00024\ }
+\DoxyCodeLine{\Hypertarget{_background_task_dialog_display_8razor_8cs_source_l00025}00025\ \ \ \ \ \ \ \ \ base.OnInitialized();}
+\DoxyCodeLine{\Hypertarget{_background_task_dialog_display_8razor_8cs_source_l00026}00026\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_background_task_dialog_display_8razor_8cs_source_l00027}00027\ }
+\DoxyCodeLine{\Hypertarget{_background_task_dialog_display_8razor_8cs_source_l00028}00028\ \ \ \ \ \textcolor{keyword}{private}\ \textcolor{keywordtype}{void}\ ContinuousBackgroundTaskWorker\_ExecutingBackgroundTaskChanged()}
+\DoxyCodeLine{\Hypertarget{_background_task_dialog_display_8razor_8cs_source_l00029}00029\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_background_task_dialog_display_8razor_8cs_source_l00030}00030\ \ \ \ \ \ \ \ \ var\ executingBackgroundTask\ =\ \_continuousBackgroundTaskWorker.\mbox{\hyperlink{class_luthetus_1_1_common_1_1_razor_lib_1_1_background_tasks_1_1_models_1_1_background_task_queue_aabfa53a5b76d80bab65cc1250e14cc98}{ExecutingBackgroundTask}};}
+\DoxyCodeLine{\Hypertarget{_background_task_dialog_display_8razor_8cs_source_l00031}00031\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_background_task_dialog_display_8razor_8cs_source_l00032}00032\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (executingBackgroundTask\ is\ not\ \textcolor{keyword}{null})}
+\DoxyCodeLine{\Hypertarget{_background_task_dialog_display_8razor_8cs_source_l00033}00033\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_background_task_dialog_display_8razor_8cs_source_l00034}00034\ \ \ \ \ \ \ \ \ \ \ \ \ lock\ (\_seenBackgroundTasksLock)}
+\DoxyCodeLine{\Hypertarget{_background_task_dialog_display_8razor_8cs_source_l00035}00035\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_background_task_dialog_display_8razor_8cs_source_l00036}00036\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\_seenBackgroundTasks.Count\ >\ \_countTracked)}
+\DoxyCodeLine{\Hypertarget{_background_task_dialog_display_8razor_8cs_source_l00037}00037\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_background_task_dialog_display_8razor_8cs_source_l00038}00038\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ var\ lastFifty\ =\ \_seenBackgroundTasks.TakeLast(15).ToList();}
+\DoxyCodeLine{\Hypertarget{_background_task_dialog_display_8razor_8cs_source_l00039}00039\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \_seenBackgroundTasks.Clear();}
+\DoxyCodeLine{\Hypertarget{_background_task_dialog_display_8razor_8cs_source_l00040}00040\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \_seenBackgroundTasks.AddRange(lastFifty);}
+\DoxyCodeLine{\Hypertarget{_background_task_dialog_display_8razor_8cs_source_l00041}00041\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_background_task_dialog_display_8razor_8cs_source_l00042}00042\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_background_task_dialog_display_8razor_8cs_source_l00043}00043\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \_seenBackgroundTasks.Add(executingBackgroundTask);}
+\DoxyCodeLine{\Hypertarget{_background_task_dialog_display_8razor_8cs_source_l00044}00044\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_background_task_dialog_display_8razor_8cs_source_l00045}00045\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_background_task_dialog_display_8razor_8cs_source_l00046}00046\ }
+\DoxyCodeLine{\Hypertarget{_background_task_dialog_display_8razor_8cs_source_l00047}00047\ \ \ \ \ \ \ \ \ \_executingBackgroundTaskChangedThrottle.Run(async\ \_\ =>}
+\DoxyCodeLine{\Hypertarget{_background_task_dialog_display_8razor_8cs_source_l00048}00048\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_background_task_dialog_display_8razor_8cs_source_l00049}00049\ \ \ \ \ \ \ \ \ \ \ \ \ await\ InvokeAsync(StateHasChanged);}
+\DoxyCodeLine{\Hypertarget{_background_task_dialog_display_8razor_8cs_source_l00050}00050\ \ \ \ \ \ \ \ \ \});}
+\DoxyCodeLine{\Hypertarget{_background_task_dialog_display_8razor_8cs_source_l00051}00051\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_background_task_dialog_display_8razor_8cs_source_l00052}00052\ }
+\DoxyCodeLine{\Hypertarget{_background_task_dialog_display_8razor_8cs_source_l00053}00053\ \ \ \ \ \textcolor{keyword}{private}\ List<IBackgroundTask>\ GetThreadSafeCopyOfSeenBackgroundTasks()}
+\DoxyCodeLine{\Hypertarget{_background_task_dialog_display_8razor_8cs_source_l00054}00054\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_background_task_dialog_display_8razor_8cs_source_l00055}00055\ \ \ \ \ \ \ \ \ lock\ (\_seenBackgroundTasksLock)}
+\DoxyCodeLine{\Hypertarget{_background_task_dialog_display_8razor_8cs_source_l00056}00056\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_background_task_dialog_display_8razor_8cs_source_l00057}00057\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{new}\ List<IBackgroundTask>(\_seenBackgroundTasks);}
+\DoxyCodeLine{\Hypertarget{_background_task_dialog_display_8razor_8cs_source_l00058}00058\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_background_task_dialog_display_8razor_8cs_source_l00059}00059\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_background_task_dialog_display_8razor_8cs_source_l00060}00060\ }
+\DoxyCodeLine{\Hypertarget{_background_task_dialog_display_8razor_8cs_source_l00061}\mbox{\hyperlink{class_luthetus_1_1_ide_1_1_razor_lib_1_1_shareds_1_1_displays_1_1_internals_1_1_background_task_dialog_display_a1ae54a756c9ad5d0186adf5f059ebf3f}{00061}}\ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_luthetus_1_1_ide_1_1_razor_lib_1_1_shareds_1_1_displays_1_1_internals_1_1_background_task_dialog_display_a1ae54a756c9ad5d0186adf5f059ebf3f}{Dispose}}()}
+\DoxyCodeLine{\Hypertarget{_background_task_dialog_display_8razor_8cs_source_l00062}00062\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_background_task_dialog_display_8razor_8cs_source_l00063}00063\ \ \ \ \ \ \ \ \ \_continuousBackgroundTaskWorker.ExecutingBackgroundTaskChanged\ -\/=\ ContinuousBackgroundTaskWorker\_ExecutingBackgroundTaskChanged;}
+\DoxyCodeLine{\Hypertarget{_background_task_dialog_display_8razor_8cs_source_l00064}00064\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_background_task_dialog_display_8razor_8cs_source_l00065}00065\ \}}
+
+\end{DoxyCode}

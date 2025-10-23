@@ -1,0 +1,10 @@
+var interface_luthetus_1_1_ide_1_1_razor_lib_1_1_component_renderers_1_1_models_1_1_i_boolean_prompt_or_cancel_renderer_type =
+[
+    [ "AcceptOptionTextOverride", "interface_luthetus_1_1_ide_1_1_razor_lib_1_1_component_renderers_1_1_models_1_1_i_boolean_prompt_or_cancel_renderer_type.html#a715ff928cbd28960c6984ceb823dd2e9", null ],
+    [ "DeclineOptionTextOverride", "interface_luthetus_1_1_ide_1_1_razor_lib_1_1_component_renderers_1_1_models_1_1_i_boolean_prompt_or_cancel_renderer_type.html#ae192adc55e091f34c20cb977b31c4450", null ],
+    [ "IncludeCancelOption", "interface_luthetus_1_1_ide_1_1_razor_lib_1_1_component_renderers_1_1_models_1_1_i_boolean_prompt_or_cancel_renderer_type.html#ad91341b24013859a7e1c7294edb42abe", null ],
+    [ "Message", "interface_luthetus_1_1_ide_1_1_razor_lib_1_1_component_renderers_1_1_models_1_1_i_boolean_prompt_or_cancel_renderer_type.html#a189febb4e265157f9f68e9fa202a66c6", null ],
+    [ "OnAfterAcceptFunc", "interface_luthetus_1_1_ide_1_1_razor_lib_1_1_component_renderers_1_1_models_1_1_i_boolean_prompt_or_cancel_renderer_type.html#a828ca798566cda8db9473f82fd652d86", null ],
+    [ "OnAfterCancelFunc", "interface_luthetus_1_1_ide_1_1_razor_lib_1_1_component_renderers_1_1_models_1_1_i_boolean_prompt_or_cancel_renderer_type.html#a38c62f775330b3a76bfc2732df565d57", null ],
+    [ "OnAfterDeclineFunc", "interface_luthetus_1_1_ide_1_1_razor_lib_1_1_component_renderers_1_1_models_1_1_i_boolean_prompt_or_cancel_renderer_type.html#a53842333b400395784f7ec3b29e5c295", null ]
+];

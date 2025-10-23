@@ -1,0 +1,5 @@
+var interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_interfaces_1_1_i_compiler_service_registry =
+[
+    [ "GetCompilerService", "interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_interfaces_1_1_i_compiler_service_registry.html#a1682cc381e8bdb2a94cedcb62c90f075", null ],
+    [ "CompilerServiceList", "interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_interfaces_1_1_i_compiler_service_registry.html#ad2cf9aa76057da597655c3a923c27fc0", null ]
+];

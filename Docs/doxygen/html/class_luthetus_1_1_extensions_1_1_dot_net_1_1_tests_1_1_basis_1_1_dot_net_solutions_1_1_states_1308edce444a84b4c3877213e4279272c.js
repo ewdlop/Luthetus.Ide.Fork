@@ -1,0 +1,6 @@
+var class_luthetus_1_1_extensions_1_1_dot_net_1_1_tests_1_1_basis_1_1_dot_net_solutions_1_1_states_1308edce444a84b4c3877213e4279272c =
+[
+    [ "ReduceDisposeAction", "class_luthetus_1_1_extensions_1_1_dot_net_1_1_tests_1_1_basis_1_1_dot_net_solutions_1_1_states_1308edce444a84b4c3877213e4279272c.html#aa9aeed0afea914b37c41319972f34638", null ],
+    [ "ReduceRegisterAction", "class_luthetus_1_1_extensions_1_1_dot_net_1_1_tests_1_1_basis_1_1_dot_net_solutions_1_1_states_1308edce444a84b4c3877213e4279272c.html#a143cdb51c3bcc010165b2dbe83dec669", null ],
+    [ "ReduceWithAction", "class_luthetus_1_1_extensions_1_1_dot_net_1_1_tests_1_1_basis_1_1_dot_net_solutions_1_1_states_1308edce444a84b4c3877213e4279272c.html#a5226632b154ec077bdfcd1e48da04c35", null ]
+];

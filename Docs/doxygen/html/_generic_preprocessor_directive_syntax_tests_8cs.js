@@ -1,0 +1,4 @@
+var _generic_preprocessor_directive_syntax_tests_8cs =
+[
+    [ "Luthetus.TextEditor.Tests.Basis.CompilerServices.GenericLexer.SyntaxObjects.GenericPreprocessorDirectiveSyntaxTests", "class_luthetus_1_1_text_editor_1_1_tests_1_1_basis_1_1_compiler_services_1_1_generic_lexer_1_1_s7f62e5eedcfd1ff82c5be4952e923fb5.html", "class_luthetus_1_1_text_editor_1_1_tests_1_1_basis_1_1_compiler_services_1_1_generic_lexer_1_1_s7f62e5eedcfd1ff82c5be4952e923fb5" ]
+];

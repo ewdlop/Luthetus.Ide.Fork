@@ -1,0 +1,4 @@
+var _generic_keyword_syntax_8cs =
+[
+    [ "Luthetus.TextEditor.RazorLib.CompilerServices.GenericLexer.SyntaxObjects.GenericKeywordSyntax", "class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_generic_lexer_1_1_syntax_37b8743f21f7ae513b2e43cbc33e7150.html", "class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_generic_lexer_1_1_syntax_37b8743f21f7ae513b2e43cbc33e7150" ]
+];

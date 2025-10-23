@@ -1,0 +1,11 @@
+var namespace_luthetus_1_1_extensions_1_1_dot_net_1_1_tests_1_1_basis =
+[
+    [ "CommandLines", "namespace_luthetus_1_1_extensions_1_1_dot_net_1_1_tests_1_1_basis_1_1_command_lines.html", "namespace_luthetus_1_1_extensions_1_1_dot_net_1_1_tests_1_1_basis_1_1_command_lines" ],
+    [ "CompilerServices", "namespace_luthetus_1_1_extensions_1_1_dot_net_1_1_tests_1_1_basis_1_1_compiler_services.html", "namespace_luthetus_1_1_extensions_1_1_dot_net_1_1_tests_1_1_basis_1_1_compiler_services" ],
+    [ "CSharpProjectForms", "namespace_luthetus_1_1_extensions_1_1_dot_net_1_1_tests_1_1_basis_1_1_c_sharp_project_forms.html", "namespace_luthetus_1_1_extensions_1_1_dot_net_1_1_tests_1_1_basis_1_1_c_sharp_project_forms" ],
+    [ "DotNetSolutions", "namespace_luthetus_1_1_extensions_1_1_dot_net_1_1_tests_1_1_basis_1_1_dot_net_solutions.html", "namespace_luthetus_1_1_extensions_1_1_dot_net_1_1_tests_1_1_basis_1_1_dot_net_solutions" ],
+    [ "Nugets", "namespace_luthetus_1_1_extensions_1_1_dot_net_1_1_tests_1_1_basis_1_1_nugets.html", "namespace_luthetus_1_1_extensions_1_1_dot_net_1_1_tests_1_1_basis_1_1_nugets" ],
+    [ "TestExplorers", "namespace_luthetus_1_1_extensions_1_1_dot_net_1_1_tests_1_1_basis_1_1_test_explorers.html", "namespace_luthetus_1_1_extensions_1_1_dot_net_1_1_tests_1_1_basis_1_1_test_explorers" ],
+    [ "TreeViewImplementations", "namespace_luthetus_1_1_extensions_1_1_dot_net_1_1_tests_1_1_basis_1_1_tree_view_implementations.html", "namespace_luthetus_1_1_extensions_1_1_dot_net_1_1_tests_1_1_basis_1_1_tree_view_implementations" ],
+    [ "ExtensionsDotNetTestBase", "class_luthetus_1_1_extensions_1_1_dot_net_1_1_tests_1_1_basis_1_1_extensions_dot_net_test_base.html", "class_luthetus_1_1_extensions_1_1_dot_net_1_1_tests_1_1_basis_1_1_extensions_dot_net_test_base" ]
+];

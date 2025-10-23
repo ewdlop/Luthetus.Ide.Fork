@@ -1,0 +1,6 @@
+var namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_diffs_1_1_displays =
+[
+    [ "Internals", "namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_diffs_1_1_displays_1_1_internals.html", "namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_diffs_1_1_displays_1_1_internals" ],
+    [ "DiffDetailsDisplay", "class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_diffs_1_1_displays_1_1_diff_details_display.html", "class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_diffs_1_1_displays_1_1_diff_details_display" ],
+    [ "TextEditorDiffDisplay", "class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_diffs_1_1_displays_1_1_text_editor_diff_display.html", "class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_diffs_1_1_displays_1_1_text_editor_diff_display" ]
+];

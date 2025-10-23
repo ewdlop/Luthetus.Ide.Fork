@@ -1,0 +1,4 @@
+var _i_solution_visualization_drawing_line_8cs =
+[
+    [ "Luthetus.Extensions.DotNet.DotNetSolutions.Models.Internals.ISolutionVisualizationDrawingLine", "interface_luthetus_1_1_extensions_1_1_dot_net_1_1_dot_net_solutions_1_1_models_1_1_internals_1_11576b67939c644663d3d1c72de6197fa.html", "interface_luthetus_1_1_extensions_1_1_dot_net_1_1_dot_net_solutions_1_1_models_1_1_internals_1_11576b67939c644663d3d1c72de6197fa" ]
+];

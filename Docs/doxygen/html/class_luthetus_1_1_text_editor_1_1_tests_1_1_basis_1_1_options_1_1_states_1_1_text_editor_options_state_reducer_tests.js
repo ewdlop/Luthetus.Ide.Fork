@@ -1,0 +1,13 @@
+var class_luthetus_1_1_text_editor_1_1_tests_1_1_basis_1_1_options_1_1_states_1_1_text_editor_options_state_reducer_tests =
+[
+    [ "ReduceSetCursorWidthAction", "class_luthetus_1_1_text_editor_1_1_tests_1_1_basis_1_1_options_1_1_states_1_1_text_editor_options_state_reducer_tests.html#a73bb78e9fe024bf3ba35c2d23afbc61a", null ],
+    [ "ReduceSetFontFamilyAction", "class_luthetus_1_1_text_editor_1_1_tests_1_1_basis_1_1_options_1_1_states_1_1_text_editor_options_state_reducer_tests.html#af92b170b9e8570d9dc4e9d91115a58cd", null ],
+    [ "ReduceSetFontSizeAction", "class_luthetus_1_1_text_editor_1_1_tests_1_1_basis_1_1_options_1_1_states_1_1_text_editor_options_state_reducer_tests.html#a737ef9f0785a708c516e73f7b815848b", null ],
+    [ "ReduceSetHeightAction", "class_luthetus_1_1_text_editor_1_1_tests_1_1_basis_1_1_options_1_1_states_1_1_text_editor_options_state_reducer_tests.html#aacb357bc900fd4bfc68f454fbcff8774", null ],
+    [ "ReduceSetKeymapAction", "class_luthetus_1_1_text_editor_1_1_tests_1_1_basis_1_1_options_1_1_states_1_1_text_editor_options_state_reducer_tests.html#a265ed4355450cfc692f5763b3a369ed9", null ],
+    [ "ReduceSetRenderStateKeyAction", "class_luthetus_1_1_text_editor_1_1_tests_1_1_basis_1_1_options_1_1_states_1_1_text_editor_options_state_reducer_tests.html#aa332b21af12b51256320e6b10df5f77c", null ],
+    [ "ReduceSetShowNewlinesAction", "class_luthetus_1_1_text_editor_1_1_tests_1_1_basis_1_1_options_1_1_states_1_1_text_editor_options_state_reducer_tests.html#a9eb06170c4413cd0e7b4e95364d8bbfc", null ],
+    [ "ReduceSetShowWhitespaceAction", "class_luthetus_1_1_text_editor_1_1_tests_1_1_basis_1_1_options_1_1_states_1_1_text_editor_options_state_reducer_tests.html#ae3d928ae5386a75701bce0e9383d244a", null ],
+    [ "ReduceSetThemeAction", "class_luthetus_1_1_text_editor_1_1_tests_1_1_basis_1_1_options_1_1_states_1_1_text_editor_options_state_reducer_tests.html#a4282a9b12116b64282e49c5dcebd7702", null ],
+    [ "ReduceSetUseMonospaceOptimizationsAction", "class_luthetus_1_1_text_editor_1_1_tests_1_1_basis_1_1_options_1_1_states_1_1_text_editor_options_state_reducer_tests.html#ae1501d4d64736a09830d14d3c9de0ba3", null ]
+];

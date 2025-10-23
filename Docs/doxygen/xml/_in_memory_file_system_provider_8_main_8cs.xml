@@ -1,0 +1,57 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
+  <compounddef id="_in_memory_file_system_provider_8_main_8cs" kind="file" language="C#">
+    <compoundname>InMemoryFileSystemProvider.Main.cs</compoundname>
+    <innerclass refid="class_luthetus_1_1_common_1_1_razor_lib_1_1_file_systems_1_1_models_1_1_in_memory_file_system_provider" prot="public">Luthetus::Common::RazorLib::FileSystems::Models::InMemoryFileSystemProvider</innerclass>
+    <innernamespace refid="namespace_luthetus">Luthetus</innernamespace>
+    <innernamespace refid="namespace_luthetus_1_1_common">Luthetus::Common</innernamespace>
+    <innernamespace refid="namespace_luthetus_1_1_common_1_1_razor_lib">Luthetus::Common::RazorLib</innernamespace>
+    <innernamespace refid="namespace_luthetus_1_1_common_1_1_razor_lib_1_1_file_systems">Luthetus::Common::RazorLib::FileSystems</innernamespace>
+    <innernamespace refid="namespace_luthetus_1_1_common_1_1_razor_lib_1_1_file_systems_1_1_models">Luthetus::Common::RazorLib::FileSystems::Models</innernamespace>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="keyword">using<sp/></highlight><highlight class="normal">System.Collections.Immutable;</highlight></codeline>
+<codeline lineno="2"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">Fluxor;</highlight></codeline>
+<codeline lineno="3"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="namespace_luthetus_1_1_common_1_1_razor_lib_1_1_component_renderers_1_1_models" kindref="compound">Luthetus.Common.RazorLib.ComponentRenderers.Models</ref>;</highlight></codeline>
+<codeline lineno="4"><highlight class="normal"></highlight></codeline>
+<codeline lineno="5"><highlight class="normal"></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal"><ref refid="namespace_luthetus_1_1_common_1_1_razor_lib_1_1_file_systems_1_1_models" kindref="compound">Luthetus.Common.RazorLib.FileSystems.Models</ref>;</highlight></codeline>
+<codeline lineno="6"><highlight class="normal"></highlight></codeline>
+<codeline lineno="7"><highlight class="normal"></highlight><highlight class="keyword">public</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">partial<sp/>class<sp/></highlight><highlight class="normal">InMemoryFileSystemProvider<sp/>:<sp/>IFileSystemProvider</highlight></codeline>
+<codeline lineno="8"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="9"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">private</highlight><highlight class="normal"><sp/>readonly<sp/>IEnvironmentProvider<sp/>_environmentProvider;</highlight></codeline>
+<codeline lineno="10"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">private</highlight><highlight class="normal"><sp/>readonly<sp/>List&lt;InMemoryFile&gt;<sp/>_files<sp/>=<sp/></highlight><highlight class="keyword">new</highlight><highlight class="normal">();</highlight></codeline>
+<codeline lineno="11"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">private</highlight><highlight class="normal"><sp/>readonly<sp/>SemaphoreSlim<sp/>_modificationSemaphore<sp/>=<sp/></highlight><highlight class="keyword">new</highlight><highlight class="normal">(1,<sp/>1);</highlight></codeline>
+<codeline lineno="12"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">private</highlight><highlight class="normal"><sp/>readonly<sp/>InMemoryFileHandler<sp/>_file;</highlight></codeline>
+<codeline lineno="13"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">private</highlight><highlight class="normal"><sp/>readonly<sp/>InMemoryDirectoryHandler<sp/>_directory;</highlight></codeline>
+<codeline lineno="14"><highlight class="normal"></highlight></codeline>
+<codeline lineno="15" refid="class_luthetus_1_1_common_1_1_razor_lib_1_1_file_systems_1_1_models_1_1_in_memory_file_system_provider_1a3817840a9dd445e5234c225cb06d71a5" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal"><sp/><ref refid="class_luthetus_1_1_common_1_1_razor_lib_1_1_file_systems_1_1_models_1_1_in_memory_file_system_provider_1a3817840a9dd445e5234c225cb06d71a5" kindref="member">InMemoryFileSystemProvider</ref>(</highlight></codeline>
+<codeline lineno="16"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="interface_luthetus_1_1_common_1_1_razor_lib_1_1_file_systems_1_1_models_1_1_i_environment_provider" kindref="compound">IEnvironmentProvider</ref><sp/>environmentProvider,</highlight></codeline>
+<codeline lineno="17"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="interface_luthetus_1_1_common_1_1_razor_lib_1_1_component_renderers_1_1_models_1_1_i_common_component_renderers" kindref="compound">ICommonComponentRenderers</ref><sp/>commonComponentRenderers,</highlight></codeline>
+<codeline lineno="18"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>IDispatcher<sp/>dispatcher)</highlight></codeline>
+<codeline lineno="19"><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="20"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>_environmentProvider<sp/>=<sp/>environmentProvider;</highlight></codeline>
+<codeline lineno="21"><highlight class="normal"></highlight></codeline>
+<codeline lineno="22"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>_file<sp/>=<sp/></highlight><highlight class="keyword">new</highlight><highlight class="normal"><sp/><ref refid="class_luthetus_1_1_common_1_1_razor_lib_1_1_file_systems_1_1_models_1_1_in_memory_file_system_pr6a97163461279b9ae048c493d1647589" kindref="compound">InMemoryFileHandler</ref>(</highlight><highlight class="keyword">this</highlight><highlight class="normal">,<sp/>_environmentProvider,<sp/>commonComponentRenderers,<sp/>dispatcher);</highlight></codeline>
+<codeline lineno="23"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>_directory<sp/>=<sp/></highlight><highlight class="keyword">new</highlight><highlight class="normal"><sp/><ref refid="class_luthetus_1_1_common_1_1_razor_lib_1_1_file_systems_1_1_models_1_1_in_memory_file_system_pr216732e0861cf8e4f9271cba28da8459" kindref="compound">InMemoryDirectoryHandler</ref>(</highlight><highlight class="keyword">this</highlight><highlight class="normal">,<sp/>_environmentProvider,<sp/>commonComponentRenderers,<sp/>dispatcher);</highlight></codeline>
+<codeline lineno="24"><highlight class="normal"></highlight></codeline>
+<codeline lineno="25"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="class_luthetus_1_1_common_1_1_razor_lib_1_1_file_systems_1_1_models_1_1_in_memory_file_system_provider_1a3e7ce2a324fa3a407b0d0b78e19a27a3" kindref="member">Directory</ref></highlight></codeline>
+<codeline lineno="26"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>.CreateDirectoryAsync(_environmentProvider.RootDirectoryAbsolutePath.Value)</highlight></codeline>
+<codeline lineno="27"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>.Wait();</highlight></codeline>
+<codeline lineno="28"><highlight class="normal"></highlight></codeline>
+<codeline lineno="29"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="class_luthetus_1_1_common_1_1_razor_lib_1_1_file_systems_1_1_models_1_1_in_memory_file_system_provider_1a3e7ce2a324fa3a407b0d0b78e19a27a3" kindref="member">Directory</ref></highlight></codeline>
+<codeline lineno="30"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>.CreateDirectoryAsync(_environmentProvider.HomeDirectoryAbsolutePath.Value)</highlight></codeline>
+<codeline lineno="31"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>.Wait();</highlight></codeline>
+<codeline lineno="32"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="33"><highlight class="normal"></highlight></codeline>
+<codeline lineno="34" refid="class_luthetus_1_1_common_1_1_razor_lib_1_1_file_systems_1_1_models_1_1_in_memory_file_system_provider_1a20d8c9c15b6940baa6f1829e1f73a699" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal"><sp/>ImmutableArray&lt;InMemoryFile&gt;<sp/><ref refid="class_luthetus_1_1_common_1_1_razor_lib_1_1_file_systems_1_1_models_1_1_in_memory_file_system_provider_1a20d8c9c15b6940baa6f1829e1f73a699" kindref="member">Files</ref><sp/>=&gt;<sp/>_files.ToImmutableArray();</highlight></codeline>
+<codeline lineno="35"><highlight class="normal"></highlight></codeline>
+<codeline lineno="36" refid="class_luthetus_1_1_common_1_1_razor_lib_1_1_file_systems_1_1_models_1_1_in_memory_file_system_provider_1a80228f35630d6a71648772665e101a1a" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal"><sp/><ref refid="interface_luthetus_1_1_common_1_1_razor_lib_1_1_file_systems_1_1_models_1_1_i_file_handler" kindref="compound">IFileHandler</ref><sp/><ref refid="class_luthetus_1_1_common_1_1_razor_lib_1_1_file_systems_1_1_models_1_1_in_memory_file_system_provider_1a80228f35630d6a71648772665e101a1a" kindref="member">File</ref><sp/>=&gt;<sp/>_file;</highlight></codeline>
+<codeline lineno="37" refid="class_luthetus_1_1_common_1_1_razor_lib_1_1_file_systems_1_1_models_1_1_in_memory_file_system_provider_1a3e7ce2a324fa3a407b0d0b78e19a27a3" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal"><sp/><ref refid="interface_luthetus_1_1_common_1_1_razor_lib_1_1_file_systems_1_1_models_1_1_i_directory_handler" kindref="compound">IDirectoryHandler</ref><sp/><ref refid="class_luthetus_1_1_common_1_1_razor_lib_1_1_file_systems_1_1_models_1_1_in_memory_file_system_provider_1a3e7ce2a324fa3a407b0d0b78e19a27a3" kindref="member">Directory</ref><sp/>=&gt;<sp/>_directory;</highlight></codeline>
+<codeline lineno="38"><highlight class="normal">}</highlight></codeline>
+    </programlisting>
+    <location file="Source/Lib/Common/FileSystems/Models/InMemoryFileSystemProvider.Main.cs"/>
+  </compounddef>
+</doxygen>

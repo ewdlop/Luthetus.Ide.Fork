@@ -1,0 +1,19 @@
+var class_luthetus_1_1_ide_1_1_tests_1_1_basis_1_1_command_lines_1_1_models_1_1_dot_net_cli_command_formatter_tests =
+[
+    [ "DOT_NET_CLI_TARGET_FILE_NAME", "class_luthetus_1_1_ide_1_1_tests_1_1_basis_1_1_command_lines_1_1_models_1_1_dot_net_cli_command_formatter_tests.html#a5cccc62c497efa36144efe1e4b3d166c", null ],
+    [ "FormatAddExistingProjectToSolution", "class_luthetus_1_1_ide_1_1_tests_1_1_basis_1_1_command_lines_1_1_models_1_1_dot_net_cli_command_formatter_tests.html#abc9df0393a5feb55febf1a343a620c12", null ],
+    [ "FormatAddNugetPackageReferenceToProject", "class_luthetus_1_1_ide_1_1_tests_1_1_basis_1_1_command_lines_1_1_models_1_1_dot_net_cli_command_formatter_tests.html#a61a4f063465648a4396441bd66fce1fb", null ],
+    [ "FormatAddProjectToProjectReference", "class_luthetus_1_1_ide_1_1_tests_1_1_basis_1_1_command_lines_1_1_models_1_1_dot_net_cli_command_formatter_tests.html#a16b5901e3633350bde53e9403e54f3ad", null ],
+    [ "FormatDotnetNewCSharpProject", "class_luthetus_1_1_ide_1_1_tests_1_1_basis_1_1_command_lines_1_1_models_1_1_dot_net_cli_command_formatter_tests.html#a6e31f79125081ad169a6cd0cb12bf679", null ],
+    [ "FormatDotnetNewList", "class_luthetus_1_1_ide_1_1_tests_1_1_basis_1_1_command_lines_1_1_models_1_1_dot_net_cli_command_formatter_tests.html#a47800d402739cdf0fd70e2c697bc7822", null ],
+    [ "FormatDotnetNewListDeprecated", "class_luthetus_1_1_ide_1_1_tests_1_1_basis_1_1_command_lines_1_1_models_1_1_dot_net_cli_command_formatter_tests.html#a284928dc29887340bb99929ff19d3646", null ],
+    [ "FormatDotnetNewSln", "class_luthetus_1_1_ide_1_1_tests_1_1_basis_1_1_command_lines_1_1_models_1_1_dot_net_cli_command_formatter_tests.html#a858fd467add7e2cfeed8e52b718e5b56", null ],
+    [ "FormatDotNetTestByFullyQualifiedName", "class_luthetus_1_1_ide_1_1_tests_1_1_basis_1_1_command_lines_1_1_models_1_1_dot_net_cli_command_formatter_tests.html#af86f63e2d29bbedbd9ea43e8ab864fa6", null ],
+    [ "FormatDotNetTestListTests", "class_luthetus_1_1_ide_1_1_tests_1_1_basis_1_1_command_lines_1_1_models_1_1_dot_net_cli_command_formatter_tests.html#a6830198a714f0831a30caf154b616fad", null ],
+    [ "FormatMoveProjectToSolutionFolder", "class_luthetus_1_1_ide_1_1_tests_1_1_basis_1_1_command_lines_1_1_models_1_1_dot_net_cli_command_formatter_tests.html#ae525ced1c88c0094d9621344183b3956", null ],
+    [ "FormatRemoveCSharpProjectReferenceFromSolutionAction", "class_luthetus_1_1_ide_1_1_tests_1_1_basis_1_1_command_lines_1_1_models_1_1_dot_net_cli_command_formatter_tests.html#a353e8c5ccd017b761b186bde9710da42", null ],
+    [ "FormatRemoveNugetPackageReferenceFromProject", "class_luthetus_1_1_ide_1_1_tests_1_1_basis_1_1_command_lines_1_1_models_1_1_dot_net_cli_command_formatter_tests.html#ad0be769e5b8338c5957e4d81995dc417", null ],
+    [ "FormatRemoveProjectToProjectReference", "class_luthetus_1_1_ide_1_1_tests_1_1_basis_1_1_command_lines_1_1_models_1_1_dot_net_cli_command_formatter_tests.html#ace8b946769f3a02c54c398591aa0bfa9", null ],
+    [ "FormatStartProjectWithoutDebugging_IAbsolutePath", "class_luthetus_1_1_ide_1_1_tests_1_1_basis_1_1_command_lines_1_1_models_1_1_dot_net_cli_command_formatter_tests.html#a986612f43b197238d92679e2111605ea", null ],
+    [ "FormatStartProjectWithoutDebugging_string", "class_luthetus_1_1_ide_1_1_tests_1_1_basis_1_1_command_lines_1_1_models_1_1_dot_net_cli_command_formatter_tests.html#a41d4dd357aed7c3c7b7128d691f5be7b", null ]
+];

@@ -1,0 +1,125 @@
+\doxysection{Parse\+Variables.\+cs}
+\hypertarget{_parse_variables_8cs_source}{}\label{_parse_variables_8cs_source}\index{Source/Lib/CompilerServices/CSharp/ParserCase/Internals/ParseVariables.cs@{Source/Lib/CompilerServices/CSharp/ParserCase/Internals/ParseVariables.cs}}
+\mbox{\hyperlink{_parse_variables_8cs}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{_parse_variables_8cs_source_l00001}00001\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_interfaces}{Luthetus.TextEditor.RazorLib.CompilerServices.Interfaces}};}
+\DoxyCodeLine{\Hypertarget{_parse_variables_8cs_source_l00002}00002\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax}{Luthetus.TextEditor.RazorLib.CompilerServices.Syntax}};}
+\DoxyCodeLine{\Hypertarget{_parse_variables_8cs_source_l00003}00003\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_1_1_nodes}{Luthetus.TextEditor.RazorLib.CompilerServices.Syntax.Nodes}};}
+\DoxyCodeLine{\Hypertarget{_parse_variables_8cs_source_l00004}00004\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_1_1_nodes_1_1_enums}{Luthetus.TextEditor.RazorLib.CompilerServices.Syntax.Nodes.Enums}};}
+\DoxyCodeLine{\Hypertarget{_parse_variables_8cs_source_l00005}00005\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_1_1_nodes_1_1_interfaces}{Luthetus.TextEditor.RazorLib.CompilerServices.Syntax.Nodes.Interfaces}};}
+\DoxyCodeLine{\Hypertarget{_parse_variables_8cs_source_l00006}00006\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_1_1_tokens}{Luthetus.TextEditor.RazorLib.CompilerServices.Syntax.Tokens}};}
+\DoxyCodeLine{\Hypertarget{_parse_variables_8cs_source_l00007}00007\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_luthetus_1_1_compiler_services_1_1_c_sharp_1_1_facts}{Luthetus.CompilerServices.CSharp.Facts}};}
+\DoxyCodeLine{\Hypertarget{_parse_variables_8cs_source_l00008}00008\ }
+\DoxyCodeLine{\Hypertarget{_parse_variables_8cs_source_l00009}00009\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespace_luthetus_1_1_compiler_services_1_1_c_sharp_1_1_parser_case_1_1_internals}{Luthetus.CompilerServices.CSharp.ParserCase.Internals}};}
+\DoxyCodeLine{\Hypertarget{_parse_variables_8cs_source_l00010}00010\ }
+\DoxyCodeLine{\Hypertarget{_parse_variables_8cs_source_l00011}00011\ \textcolor{keyword}{public}\ \textcolor{keyword}{static}\ \textcolor{keyword}{class\ }ParseVariables}
+\DoxyCodeLine{\Hypertarget{_parse_variables_8cs_source_l00012}00012\ \{}
+\DoxyCodeLine{\Hypertarget{_parse_variables_8cs_source_l00013}00013\ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ HandleVariableReference(}
+\DoxyCodeLine{\Hypertarget{_parse_variables_8cs_source_l00014}00014\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_ae4bcfe414c318a050bbef43ec92f921ba5560a6da7097326a85005e45e838c4cd}{IdentifierToken}}\ consumedIdentifierToken,}
+\DoxyCodeLine{\Hypertarget{_parse_variables_8cs_source_l00015}00015\ \ \ \ \ \ \ \ \ CSharpParserModel\ model)}
+\DoxyCodeLine{\Hypertarget{_parse_variables_8cs_source_l00016}00016\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_parse_variables_8cs_source_l00017}00017\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_parse_variables_8cs_source_l00018}00018\ }
+\DoxyCodeLine{\Hypertarget{_parse_variables_8cs_source_l00020}00020\ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keyword}{static}\ IVariableDeclarationNode?\ HandleVariableDeclarationExpression(}
+\DoxyCodeLine{\Hypertarget{_parse_variables_8cs_source_l00021}00021\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_ae4bcfe414c318a050bbef43ec92f921babf7aa5a37bddb2ef0ea312257a3fa216}{TypeClauseNode}}\ consumedTypeClauseNode,}
+\DoxyCodeLine{\Hypertarget{_parse_variables_8cs_source_l00022}00022\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_ae4bcfe414c318a050bbef43ec92f921ba5560a6da7097326a85005e45e838c4cd}{IdentifierToken}}\ consumedIdentifierToken,}
+\DoxyCodeLine{\Hypertarget{_parse_variables_8cs_source_l00023}00023\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_1_1_nodes_1_1_enums_a4cbcf68aea676ee33001aa4912ffbc7e}{VariableKind}}\ variableKind,}
+\DoxyCodeLine{\Hypertarget{_parse_variables_8cs_source_l00024}00024\ \ \ \ \ \ \ \ \ IParserModel\ model)}
+\DoxyCodeLine{\Hypertarget{_parse_variables_8cs_source_l00025}00025\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_parse_variables_8cs_source_l00026}00026\ \ \ \ \ \ \ \ \ IVariableDeclarationNode\ variableDeclarationNode;}
+\DoxyCodeLine{\Hypertarget{_parse_variables_8cs_source_l00027}00027\ }
+\DoxyCodeLine{\Hypertarget{_parse_variables_8cs_source_l00028}00028\ \ \ \ \ \ \ \ \ variableDeclarationNode\ =\ \textcolor{keyword}{new}\ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_ae4bcfe414c318a050bbef43ec92f921baabbbbd712592a3fd0ed5fb0eb3962238}{VariableDeclarationNode}}(}
+\DoxyCodeLine{\Hypertarget{_parse_variables_8cs_source_l00029}00029\ \ \ \ \ \ \ \ \ \ \ \ \ consumedTypeClauseNode,}
+\DoxyCodeLine{\Hypertarget{_parse_variables_8cs_source_l00030}00030\ \ \ \ \ \ \ \ \ \ \ \ \ consumedIdentifierToken,}
+\DoxyCodeLine{\Hypertarget{_parse_variables_8cs_source_l00031}00031\ \ \ \ \ \ \ \ \ \ \ \ \ variableKind,}
+\DoxyCodeLine{\Hypertarget{_parse_variables_8cs_source_l00032}00032\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{false});}
+\DoxyCodeLine{\Hypertarget{_parse_variables_8cs_source_l00033}00033\ }
+\DoxyCodeLine{\Hypertarget{_parse_variables_8cs_source_l00034}00034\ \ \ \ \ \ \ \ \ model.\mbox{\hyperlink{interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_interfaces_1_1_i_parser_model_a460eb8cee7a48f5ca4e3739e0f460bb7}{Binder}}.\mbox{\hyperlink{interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_interfaces_1_1_i_binder_ac698b838db68a8b255b23bfdfcfaf7a0}{BindVariableDeclarationNode}}(variableDeclarationNode,\ model);}
+\DoxyCodeLine{\Hypertarget{_parse_variables_8cs_source_l00035}00035\ \ \ \ \ \ \ \ \ model.\mbox{\hyperlink{interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_interfaces_1_1_i_parser_model_a0c3e2c086f8cad3a7ef5cb036f909a82}{CurrentCodeBlockBuilder}}.ChildList.Add(variableDeclarationNode);}
+\DoxyCodeLine{\Hypertarget{_parse_variables_8cs_source_l00036}00036\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ variableDeclarationNode;}
+\DoxyCodeLine{\Hypertarget{_parse_variables_8cs_source_l00037}00037\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_parse_variables_8cs_source_l00038}00038\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_parse_variables_8cs_source_l00042}00042\ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ HandleVariableDeclarationStatement(}
+\DoxyCodeLine{\Hypertarget{_parse_variables_8cs_source_l00043}00043\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_ae4bcfe414c318a050bbef43ec92f921babf7aa5a37bddb2ef0ea312257a3fa216}{TypeClauseNode}}\ consumedTypeClauseNode,}
+\DoxyCodeLine{\Hypertarget{_parse_variables_8cs_source_l00044}00044\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_ae4bcfe414c318a050bbef43ec92f921ba5560a6da7097326a85005e45e838c4cd}{IdentifierToken}}\ consumedIdentifierToken,}
+\DoxyCodeLine{\Hypertarget{_parse_variables_8cs_source_l00045}00045\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_1_1_nodes_1_1_enums_a4cbcf68aea676ee33001aa4912ffbc7e}{VariableKind}}\ variableKind,}
+\DoxyCodeLine{\Hypertarget{_parse_variables_8cs_source_l00046}00046\ \ \ \ \ \ \ \ \ IParserModel\ model)}
+\DoxyCodeLine{\Hypertarget{_parse_variables_8cs_source_l00047}00047\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_parse_variables_8cs_source_l00048}00048\ \ \ \ \ \ \ \ \ var\ variableDeclarationNode\ =\ HandleVariableDeclarationExpression(}
+\DoxyCodeLine{\Hypertarget{_parse_variables_8cs_source_l00049}00049\ \ \ \ \ \ \ \ \ \ \ \ \ consumedTypeClauseNode,}
+\DoxyCodeLine{\Hypertarget{_parse_variables_8cs_source_l00050}00050\ \ \ \ \ \ \ \ \ \ \ \ \ consumedIdentifierToken,}
+\DoxyCodeLine{\Hypertarget{_parse_variables_8cs_source_l00051}00051\ \ \ \ \ \ \ \ \ \ \ \ \ variableKind,}
+\DoxyCodeLine{\Hypertarget{_parse_variables_8cs_source_l00052}00052\ \ \ \ \ \ \ \ \ \ \ \ \ model);}
+\DoxyCodeLine{\Hypertarget{_parse_variables_8cs_source_l00053}00053\ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_parse_variables_8cs_source_l00054}00054\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (variableDeclarationNode\ is\ \textcolor{keyword}{null})}
+\DoxyCodeLine{\Hypertarget{_parse_variables_8cs_source_l00055}00055\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return};}
+\DoxyCodeLine{\Hypertarget{_parse_variables_8cs_source_l00056}00056\ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_parse_variables_8cs_source_l00057}00057\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ if\ (variableKind\ ==\ VariableKind.Local\ ||\ variableKind\ ==\ VariableKind.Closure)}}
+\DoxyCodeLine{\Hypertarget{_parse_variables_8cs_source_l00058}00058\ }
+\DoxyCodeLine{\Hypertarget{_parse_variables_8cs_source_l00059}00059\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (model.\mbox{\hyperlink{interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_interfaces_1_1_i_parser_model_a38ce92822f0b900d2f2c8da6b8ff3cb0}{TokenWalker}}.Current.SyntaxKind\ ==\ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_ae4bcfe414c318a050bbef43ec92f921b}{SyntaxKind}}.EqualsToken)}
+\DoxyCodeLine{\Hypertarget{_parse_variables_8cs_source_l00060}00060\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_parse_variables_8cs_source_l00061}00061\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (model.\mbox{\hyperlink{interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_interfaces_1_1_i_parser_model_a38ce92822f0b900d2f2c8da6b8ff3cb0}{TokenWalker}}.Peek(1).SyntaxKind\ ==\ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_ae4bcfe414c318a050bbef43ec92f921b}{SyntaxKind}}.CloseAngleBracketToken)}
+\DoxyCodeLine{\Hypertarget{_parse_variables_8cs_source_l00062}00062\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_parse_variables_8cs_source_l00063}00063\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ HandlePropertyExpression(}
+\DoxyCodeLine{\Hypertarget{_parse_variables_8cs_source_l00064}00064\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ variableDeclarationNode,}
+\DoxyCodeLine{\Hypertarget{_parse_variables_8cs_source_l00065}00065\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (\mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_ae4bcfe414c318a050bbef43ec92f921baf00cc77d03e2da77acdbcdc040c56b66}{EqualsToken}})model.\mbox{\hyperlink{interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_interfaces_1_1_i_parser_model_a38ce92822f0b900d2f2c8da6b8ff3cb0}{TokenWalker}}.Consume(),}
+\DoxyCodeLine{\Hypertarget{_parse_variables_8cs_source_l00066}00066\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (\mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_ae4bcfe414c318a050bbef43ec92f921ba2616fae732947c9a7f0dc61749aa9aaf}{CloseAngleBracketToken}})model.\mbox{\hyperlink{interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_interfaces_1_1_i_parser_model_a38ce92822f0b900d2f2c8da6b8ff3cb0}{TokenWalker}}.Consume(),}
+\DoxyCodeLine{\Hypertarget{_parse_variables_8cs_source_l00067}00067\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (CSharpParserModel)model);}
+\DoxyCodeLine{\Hypertarget{_parse_variables_8cs_source_l00068}00068\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_parse_variables_8cs_source_l00069}00069\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{\Hypertarget{_parse_variables_8cs_source_l00070}00070\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_parse_variables_8cs_source_l00071}00071\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Variable\ initialization\ occurs\ here.}}
+\DoxyCodeLine{\Hypertarget{_parse_variables_8cs_source_l00072}00072\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ HandleVariableAssignment(}
+\DoxyCodeLine{\Hypertarget{_parse_variables_8cs_source_l00073}00073\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ consumedIdentifierToken,}
+\DoxyCodeLine{\Hypertarget{_parse_variables_8cs_source_l00074}00074\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (\mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_ae4bcfe414c318a050bbef43ec92f921baf00cc77d03e2da77acdbcdc040c56b66}{EqualsToken}})model.\mbox{\hyperlink{interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_interfaces_1_1_i_parser_model_a38ce92822f0b900d2f2c8da6b8ff3cb0}{TokenWalker}}.Consume(),}
+\DoxyCodeLine{\Hypertarget{_parse_variables_8cs_source_l00075}00075\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (CSharpParserModel)model);}
+\DoxyCodeLine{\Hypertarget{_parse_variables_8cs_source_l00076}00076\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_parse_variables_8cs_source_l00077}00077\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_parse_variables_8cs_source_l00078}00078\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{\Hypertarget{_parse_variables_8cs_source_l00079}00079\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_parse_variables_8cs_source_l00080}00080\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (variableDeclarationNode.TypeClauseNode.TypeIdentifierToken.SyntaxKind\ ==}
+\DoxyCodeLine{\Hypertarget{_parse_variables_8cs_source_l00081}00081\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_ae4bcfe414c318a050bbef43ec92f921b}{SyntaxKind}}.VarTokenContextualKeyword)}
+\DoxyCodeLine{\Hypertarget{_parse_variables_8cs_source_l00082}00082\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_parse_variables_8cs_source_l00083}00083\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ model.\mbox{\hyperlink{interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_interfaces_1_1_i_parser_model_a453ae9bec33e0a50885dbb4b77a0aece}{DiagnosticBag}}.\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_diagnostic_bag_ad81453fe51eecc10ef96981c12140347}{ReportImplicitlyTypedVariablesMustBeInitialized}}(}
+\DoxyCodeLine{\Hypertarget{_parse_variables_8cs_source_l00084}00084\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ consumedIdentifierToken.\mbox{\hyperlink{struct_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_1_1_tokens_1_1_identifier_token_a5354114d61ce88efb3f6d9ef06141d2a}{TextSpan}});}
+\DoxyCodeLine{\Hypertarget{_parse_variables_8cs_source_l00085}00085\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_parse_variables_8cs_source_l00086}00086\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_parse_variables_8cs_source_l00087}00087\ }
+\DoxyCodeLine{\Hypertarget{_parse_variables_8cs_source_l00088}00088\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (variableKind\ ==\ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_1_1_nodes_1_1_enums_a4cbcf68aea676ee33001aa4912ffbc7e}{VariableKind}}.Property\ \&\&}
+\DoxyCodeLine{\Hypertarget{_parse_variables_8cs_source_l00089}00089\ \ \ \ \ \ \ \ \ \ \ \ \ model.\mbox{\hyperlink{interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_interfaces_1_1_i_parser_model_a38ce92822f0b900d2f2c8da6b8ff3cb0}{TokenWalker}}.Current.SyntaxKind\ ==\ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_ae4bcfe414c318a050bbef43ec92f921b}{SyntaxKind}}.OpenBraceToken)}
+\DoxyCodeLine{\Hypertarget{_parse_variables_8cs_source_l00090}00090\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_parse_variables_8cs_source_l00091}00091\ \ \ \ \ \ \ \ \ \ \ \ \ HandlePropertyDeclaration(}
+\DoxyCodeLine{\Hypertarget{_parse_variables_8cs_source_l00092}00092\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ variableDeclarationNode,}
+\DoxyCodeLine{\Hypertarget{_parse_variables_8cs_source_l00093}00093\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (\mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_ae4bcfe414c318a050bbef43ec92f921ba183e5291ffb38b02fad8aecbad442a85}{OpenBraceToken}})model.\mbox{\hyperlink{interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_interfaces_1_1_i_parser_model_a38ce92822f0b900d2f2c8da6b8ff3cb0}{TokenWalker}}.Consume(),}
+\DoxyCodeLine{\Hypertarget{_parse_variables_8cs_source_l00094}00094\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (CSharpParserModel)model);}
+\DoxyCodeLine{\Hypertarget{_parse_variables_8cs_source_l00095}00095\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_parse_variables_8cs_source_l00096}00096\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{\Hypertarget{_parse_variables_8cs_source_l00097}00097\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_parse_variables_8cs_source_l00098}00098\ \ \ \ \ \ \ \ \ \ \ \ \ \_\ =\ model.\mbox{\hyperlink{interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_interfaces_1_1_i_parser_model_a38ce92822f0b900d2f2c8da6b8ff3cb0}{TokenWalker}}.Match(\mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_ae4bcfe414c318a050bbef43ec92f921b}{SyntaxKind}}.StatementDelimiterToken);}
+\DoxyCodeLine{\Hypertarget{_parse_variables_8cs_source_l00099}00099\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_parse_variables_8cs_source_l00100}00100\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_parse_variables_8cs_source_l00101}00101\ }
+\DoxyCodeLine{\Hypertarget{_parse_variables_8cs_source_l00102}00102\ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ HandlePropertyDeclaration(}
+\DoxyCodeLine{\Hypertarget{_parse_variables_8cs_source_l00103}00103\ \ \ \ \ \ \ \ \ IVariableDeclarationNode\ consumedVariableDeclarationNode,}
+\DoxyCodeLine{\Hypertarget{_parse_variables_8cs_source_l00104}00104\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_ae4bcfe414c318a050bbef43ec92f921ba183e5291ffb38b02fad8aecbad442a85}{OpenBraceToken}}\ consumedOpenBraceToken,}
+\DoxyCodeLine{\Hypertarget{_parse_variables_8cs_source_l00105}00105\ \ \ \ \ \ \ \ \ CSharpParserModel\ model)}
+\DoxyCodeLine{\Hypertarget{_parse_variables_8cs_source_l00106}00106\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_parse_variables_8cs_source_l00107}00107\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_parse_variables_8cs_source_l00108}00108\ }
+\DoxyCodeLine{\Hypertarget{_parse_variables_8cs_source_l00109}00109\ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ HandlePropertyExpression(}
+\DoxyCodeLine{\Hypertarget{_parse_variables_8cs_source_l00110}00110\ \ \ \ \ \ \ \ \ IVariableDeclarationNode\ consumedVariableDeclarationNode,}
+\DoxyCodeLine{\Hypertarget{_parse_variables_8cs_source_l00111}00111\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_ae4bcfe414c318a050bbef43ec92f921baf00cc77d03e2da77acdbcdc040c56b66}{EqualsToken}}\ consumedEqualsToken,}
+\DoxyCodeLine{\Hypertarget{_parse_variables_8cs_source_l00112}00112\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_ae4bcfe414c318a050bbef43ec92f921ba2616fae732947c9a7f0dc61749aa9aaf}{CloseAngleBracketToken}}\ consumedCloseAngleBracketToken,}
+\DoxyCodeLine{\Hypertarget{_parse_variables_8cs_source_l00113}00113\ \ \ \ \ \ \ \ \ CSharpParserModel\ model)}
+\DoxyCodeLine{\Hypertarget{_parse_variables_8cs_source_l00114}00114\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_parse_variables_8cs_source_l00115}00115\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_parse_variables_8cs_source_l00116}00116\ }
+\DoxyCodeLine{\Hypertarget{_parse_variables_8cs_source_l00117}00117\ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ HandleVariableAssignment(}
+\DoxyCodeLine{\Hypertarget{_parse_variables_8cs_source_l00118}00118\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_ae4bcfe414c318a050bbef43ec92f921ba5560a6da7097326a85005e45e838c4cd}{IdentifierToken}}\ consumedIdentifierToken,}
+\DoxyCodeLine{\Hypertarget{_parse_variables_8cs_source_l00119}00119\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_ae4bcfe414c318a050bbef43ec92f921baf00cc77d03e2da77acdbcdc040c56b66}{EqualsToken}}\ consumedEqualsToken,}
+\DoxyCodeLine{\Hypertarget{_parse_variables_8cs_source_l00120}00120\ \ \ \ \ \ \ \ \ CSharpParserModel\ model)}
+\DoxyCodeLine{\Hypertarget{_parse_variables_8cs_source_l00121}00121\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_parse_variables_8cs_source_l00122}00122\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_parse_variables_8cs_source_l00123}00123\ \}}
+
+\end{DoxyCode}

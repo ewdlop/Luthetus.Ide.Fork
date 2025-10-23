@@ -1,0 +1,5 @@
+var class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_decorations_1_1_models_1_1_text_editor_registry_wrap =
+[
+    [ "CompilerServiceRegistry", "class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_decorations_1_1_models_1_1_text_editor_registry_wrap.html#a52c83814e1ee2530e8468d7c98d0cab4", null ],
+    [ "DecorationMapperRegistry", "class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_decorations_1_1_models_1_1_text_editor_registry_wrap.html#a2d41fbf3fe18f75d0521bc1fc71bc0b2", null ]
+];

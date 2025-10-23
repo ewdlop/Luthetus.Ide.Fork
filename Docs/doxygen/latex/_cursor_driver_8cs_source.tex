@@ -1,0 +1,282 @@
+\doxysection{Cursor\+Driver.\+cs}
+\hypertarget{_cursor_driver_8cs_source}{}\label{_cursor_driver_8cs_source}\index{Source/Lib/TextEditor/TextEditors/Displays/Internals/CursorDriver.cs@{Source/Lib/TextEditor/TextEditors/Displays/Internals/CursorDriver.cs}}
+\mbox{\hyperlink{_cursor_driver_8cs}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{_cursor_driver_8cs_source_l00001}00001\ \textcolor{keyword}{using\ }Microsoft.AspNetCore.Components;}
+\DoxyCodeLine{\Hypertarget{_cursor_driver_8cs_source_l00002}00002\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_luthetus_1_1_common_1_1_razor_lib_1_1_dimensions_1_1_models}{Luthetus.Common.RazorLib.Dimensions.Models}};}
+\DoxyCodeLine{\Hypertarget{_cursor_driver_8cs_source_l00003}00003\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_luthetus_1_1_common_1_1_razor_lib_1_1_reactives_1_1_models}{Luthetus.Common.RazorLib.Reactives.Models}};}
+\DoxyCodeLine{\Hypertarget{_cursor_driver_8cs_source_l00004}00004\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_keymaps_1_1_models}{Luthetus.TextEditor.RazorLib.Keymaps.Models}};}
+\DoxyCodeLine{\Hypertarget{_cursor_driver_8cs_source_l00005}00005\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1_1_internals}{Luthetus.TextEditor.RazorLib.TextEditors.Models.Internals}};}
+\DoxyCodeLine{\Hypertarget{_cursor_driver_8cs_source_l00006}00006\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models}{Luthetus.TextEditor.RazorLib.TextEditors.Models}};}
+\DoxyCodeLine{\Hypertarget{_cursor_driver_8cs_source_l00007}00007\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_exceptions}{Luthetus.TextEditor.RazorLib.Exceptions}};}
+\DoxyCodeLine{\Hypertarget{_cursor_driver_8cs_source_l00008}00008\ }
+\DoxyCodeLine{\Hypertarget{_cursor_driver_8cs_source_l00009}00009\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_displays_1_1_internals}{Luthetus.TextEditor.RazorLib.TextEditors.Displays.Internals}};}
+\DoxyCodeLine{\Hypertarget{_cursor_driver_8cs_source_l00010}00010\ }
+\DoxyCodeLine{\Hypertarget{_cursor_driver_8cs_source_l00011}\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_displays_1_1_internals_1_1_cursor_driver}{00011}}\ \textcolor{keyword}{public}\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_displays_1_1_internals_1_1_cursor_driver_afb3bd35b07ccc3947e476ae7bd3a4bb2}{CursorDriver}}}
+\DoxyCodeLine{\Hypertarget{_cursor_driver_8cs_source_l00012}00012\ \{}
+\DoxyCodeLine{\Hypertarget{_cursor_driver_8cs_source_l00013}00013\ \ \ \ \ \textcolor{keyword}{private}\ readonly\ \mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_displays_1_1_text_editor_view_model_display}{TextEditorViewModelDisplay}}\ \_root;}
+\DoxyCodeLine{\Hypertarget{_cursor_driver_8cs_source_l00014}00014\ }
+\DoxyCodeLine{\Hypertarget{_cursor_driver_8cs_source_l00015}\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_displays_1_1_internals_1_1_cursor_driver_afb3bd35b07ccc3947e476ae7bd3a4bb2}{00015}}\ \ \ \ \ \textcolor{keyword}{public}\ \mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_displays_1_1_internals_1_1_cursor_driver_afb3bd35b07ccc3947e476ae7bd3a4bb2}{CursorDriver}}(\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_displays_1_1_text_editor_view_model_display}{TextEditorViewModelDisplay}}\ textEditorViewModelDisplay)}
+\DoxyCodeLine{\Hypertarget{_cursor_driver_8cs_source_l00016}00016\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_cursor_driver_8cs_source_l00017}00017\ \ \ \ \ \ \ \ \ \_root\ =\ textEditorViewModelDisplay;}
+\DoxyCodeLine{\Hypertarget{_cursor_driver_8cs_source_l00018}00018\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_cursor_driver_8cs_source_l00019}00019\ }
+\DoxyCodeLine{\Hypertarget{_cursor_driver_8cs_source_l00020}00020\ \ \ \ \ \textcolor{comment}{//\ Odd\ public\ but\ am\ middle\ of\ thinking}}
+\DoxyCodeLine{\Hypertarget{_cursor_driver_8cs_source_l00021}\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_displays_1_1_internals_1_1_cursor_driver_ad6b38ae0153235ba65e9d036a79c7c84}{00021}}\ \ \ \ \ \textcolor{keyword}{public}\ \mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1_1_internals_1_1_text_editor_render_batch_validated}{TextEditorRenderBatchValidated}}\ \mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_displays_1_1_internals_1_1_cursor_driver_ad6b38ae0153235ba65e9d036a79c7c84}{\_renderBatch}};}
+\DoxyCodeLine{\Hypertarget{_cursor_driver_8cs_source_l00022}00022\ }
+\DoxyCodeLine{\Hypertarget{_cursor_driver_8cs_source_l00023}\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_displays_1_1_internals_1_1_cursor_driver_a1db80ee02e608804f7cb8d0d925a6b5f}{00023}}\ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_displays_1_1_internals_1_1_cursor_driver_a1db80ee02e608804f7cb8d0d925a6b5f}{GetRenderFragment}}(\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1_1_internals_1_1_text_editor_render_batch_validated}{TextEditorRenderBatchValidated}}\ renderBatch)}
+\DoxyCodeLine{\Hypertarget{_cursor_driver_8cs_source_l00024}00024\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_cursor_driver_8cs_source_l00025}00025\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Dangerous\ state\ can\ change\ mid\ run\ possible?}}
+\DoxyCodeLine{\Hypertarget{_cursor_driver_8cs_source_l00026}00026\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_displays_1_1_internals_1_1_cursor_driver_ad6b38ae0153235ba65e9d036a79c7c84}{\_renderBatch}}\ =\ renderBatch;}
+\DoxyCodeLine{\Hypertarget{_cursor_driver_8cs_source_l00027}00027\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ return\ CursorStaticRenderFragments.GetRenderFragment(this);}}
+\DoxyCodeLine{\Hypertarget{_cursor_driver_8cs_source_l00028}00028\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_cursor_driver_8cs_source_l00029}00029\ }
+\DoxyCodeLine{\Hypertarget{_cursor_driver_8cs_source_l00031}\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_displays_1_1_internals_1_1_cursor_driver_a3e66eb328834e175467aaa1315a2319a}{00031}}\ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_displays_1_1_internals_1_1_cursor_driver_a3e66eb328834e175467aaa1315a2319a}{IsFocusTarget}}\ =>\ \textcolor{keyword}{true};}
+\DoxyCodeLine{\Hypertarget{_cursor_driver_8cs_source_l00032}00032\ }
+\DoxyCodeLine{\Hypertarget{_cursor_driver_8cs_source_l00033}\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_displays_1_1_internals_1_1_cursor_driver_a825c95311852abfdca6f6a623523b4bf}{00033}}\ \ \ \ \ \textcolor{keyword}{public}\ readonly\ Guid\ \mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_displays_1_1_internals_1_1_cursor_driver_a825c95311852abfdca6f6a623523b4bf}{\_intersectionObserverMapKey}}\ =\ Guid.NewGuid();}
+\DoxyCodeLine{\Hypertarget{_cursor_driver_8cs_source_l00034}\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_displays_1_1_internals_1_1_cursor_driver_a512725d771d9e979a99ef79a9afbe19c}{00034}}\ \ \ \ \ \textcolor{keyword}{public}\ readonly\ \mbox{\hyperlink{class_luthetus_1_1_common_1_1_razor_lib_1_1_reactives_1_1_models_1_1_throttle}{Throttle}}\ \mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_displays_1_1_internals_1_1_cursor_driver_a512725d771d9e979a99ef79a9afbe19c}{\_throttleShouldRevealCursor}}\ =\ \textcolor{keyword}{new}(TimeSpan.FromMilliseconds(333));}
+\DoxyCodeLine{\Hypertarget{_cursor_driver_8cs_source_l00035}00035\ }
+\DoxyCodeLine{\Hypertarget{_cursor_driver_8cs_source_l00036}\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_displays_1_1_internals_1_1_cursor_driver_a189c754ffbbe176e4012667574561e00}{00036}}\ \ \ \ \ \textcolor{keyword}{public}\ ElementReference?\ \mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_displays_1_1_internals_1_1_cursor_driver_a189c754ffbbe176e4012667574561e00}{\_cursorDisplayElementReference}};}
+\DoxyCodeLine{\Hypertarget{_cursor_driver_8cs_source_l00037}\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_displays_1_1_internals_1_1_cursor_driver_a5ca43c8f0839e5397d97f95fd556c95f}{00037}}\ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_displays_1_1_internals_1_1_cursor_driver_a5ca43c8f0839e5397d97f95fd556c95f}{\_menuShouldGetFocusRequestCount}};}
+\DoxyCodeLine{\Hypertarget{_cursor_driver_8cs_source_l00038}\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_displays_1_1_internals_1_1_cursor_driver_a3b741d9bf6c130c0056250f6f8ae8858}{00038}}\ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keywordtype}{string}\ \mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_displays_1_1_internals_1_1_cursor_driver_a3b741d9bf6c130c0056250f6f8ae8858}{\_previousGetCursorStyleCss}}\ =\ \textcolor{keywordtype}{string}.Empty;}
+\DoxyCodeLine{\Hypertarget{_cursor_driver_8cs_source_l00039}\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_displays_1_1_internals_1_1_cursor_driver_acd1c60ffaa61ebd1d7e570ababf6655d}{00039}}\ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keywordtype}{string}\ \mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_displays_1_1_internals_1_1_cursor_driver_acd1c60ffaa61ebd1d7e570ababf6655d}{\_previousGetCaretRowStyleCss}}\ =\ \textcolor{keywordtype}{string}.Empty;}
+\DoxyCodeLine{\Hypertarget{_cursor_driver_8cs_source_l00040}\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_displays_1_1_internals_1_1_cursor_driver_ac78912d563bca042280da92190f44e13}{00040}}\ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keywordtype}{string}\ \mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_displays_1_1_internals_1_1_cursor_driver_ac78912d563bca042280da92190f44e13}{\_previousGetMenuStyleCss}}\ =\ \textcolor{keywordtype}{string}.Empty;}
+\DoxyCodeLine{\Hypertarget{_cursor_driver_8cs_source_l00041}00041\ }
+\DoxyCodeLine{\Hypertarget{_cursor_driver_8cs_source_l00042}\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_displays_1_1_internals_1_1_cursor_driver_ad64993ffcf5a30e747b4836c78a95fa9}{00042}}\ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keywordtype}{string}\ \mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_displays_1_1_internals_1_1_cursor_driver_ad64993ffcf5a30e747b4836c78a95fa9}{\_previouslyObservedCursorDisplayId}}\ =\ \textcolor{keywordtype}{string}.Empty;}
+\DoxyCodeLine{\Hypertarget{_cursor_driver_8cs_source_l00043}\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_displays_1_1_internals_1_1_cursor_driver_a6e79cf8528d14bdc2052cd27dab52f3f}{00043}}\ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_displays_1_1_internals_1_1_cursor_driver_a6e79cf8528d14bdc2052cd27dab52f3f}{\_leftRelativeToParentInPixels}};}
+\DoxyCodeLine{\Hypertarget{_cursor_driver_8cs_source_l00044}00044\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_cursor_driver_8cs_source_l00045}\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_displays_1_1_internals_1_1_cursor_driver_ab6171881b806160996175e02b98c8c4b}{00045}}\ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_displays_1_1_internals_1_1_cursor_driver_ab6171881b806160996175e02b98c8c4b}{GetIncludeContextMenuHelperComponent}}(\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1_1_internals_1_1_text_editor_render_batch_validated}{TextEditorRenderBatchValidated}}\ renderBatchLocal)}
+\DoxyCodeLine{\Hypertarget{_cursor_driver_8cs_source_l00046}00046\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_cursor_driver_8cs_source_l00047}00047\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ renderBatchLocal.\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1_1_internals_1_1_text_editor_render_batch_validated_a904b399cb1dd1c8813a85a656db1094c}{ViewModelDisplayOptions}}.\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1_1_internals_1_1_view_model_display_options_a61bd54c5bba76485ef6ca36fb14cb083}{IncludeContextMenuHelperComponent}};}
+\DoxyCodeLine{\Hypertarget{_cursor_driver_8cs_source_l00048}00048\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_cursor_driver_8cs_source_l00049}00049\ }
+\DoxyCodeLine{\Hypertarget{_cursor_driver_8cs_source_l00050}\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_displays_1_1_internals_1_1_cursor_driver_ab076b8bd5ec5104124fac372e4556eb2}{00050}}\ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keywordtype}{string}\ \mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_displays_1_1_internals_1_1_cursor_driver_ab076b8bd5ec5104124fac372e4556eb2}{GetScrollableContainerId}}(\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1_1_internals_1_1_text_editor_render_batch_validated}{TextEditorRenderBatchValidated}}\ renderBatchLocal)}
+\DoxyCodeLine{\Hypertarget{_cursor_driver_8cs_source_l00051}00051\ \ \ \ \ \{\ }
+\DoxyCodeLine{\Hypertarget{_cursor_driver_8cs_source_l00052}00052\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ renderBatchLocal.\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1_1_internals_1_1_text_editor_render_batch_validated_a226564a134918a22e36bd4b6f417b717}{ViewModel}}.BodyElementId;}
+\DoxyCodeLine{\Hypertarget{_cursor_driver_8cs_source_l00053}00053\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_cursor_driver_8cs_source_l00054}00054\ }
+\DoxyCodeLine{\Hypertarget{_cursor_driver_8cs_source_l00055}\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_displays_1_1_internals_1_1_cursor_driver_a61bb90ffa939fe95e1b85bc89a1d2995}{00055}}\ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keywordtype}{string}\ \mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_displays_1_1_internals_1_1_cursor_driver_a61bb90ffa939fe95e1b85bc89a1d2995}{GetCursorDisplayId}}(\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1_1_internals_1_1_text_editor_render_batch_validated}{TextEditorRenderBatchValidated}}\ renderBatchLocal)}
+\DoxyCodeLine{\Hypertarget{_cursor_driver_8cs_source_l00056}00056\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_cursor_driver_8cs_source_l00057}00057\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ renderBatchLocal.ViewModel.PrimaryCursor.IsPrimaryCursor}
+\DoxyCodeLine{\Hypertarget{_cursor_driver_8cs_source_l00058}00058\ \ \ \ \ \ \ \ \ \ \ \ \ ?\ renderBatchLocal?.\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1_1_internals_1_1_text_editor_render_batch_validated_a226564a134918a22e36bd4b6f417b717}{ViewModel}}?.PrimaryCursorContentId\ ??\ string.Empty}
+\DoxyCodeLine{\Hypertarget{_cursor_driver_8cs_source_l00059}00059\ \ \ \ \ \ \ \ \ \ \ \ \ :\ \textcolor{keywordtype}{string}.Empty;}
+\DoxyCodeLine{\Hypertarget{_cursor_driver_8cs_source_l00060}00060\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_cursor_driver_8cs_source_l00061}00061\ }
+\DoxyCodeLine{\Hypertarget{_cursor_driver_8cs_source_l00062}\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_displays_1_1_internals_1_1_cursor_driver_a3fc6224aaa07f4f540ff0a6bf32a8769}{00062}}\ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keywordtype}{string}\ \mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_displays_1_1_internals_1_1_cursor_driver_a3fc6224aaa07f4f540ff0a6bf32a8769}{BlinkAnimationCssClass}}\ =>\ \_root.TextEditorService.ViewModelApi.CursorShouldBlink}
+\DoxyCodeLine{\Hypertarget{_cursor_driver_8cs_source_l00063}00063\ \ \ \ \ \ \ \ \ ?\ \textcolor{stringliteral}{"{}luth\_te\_blink"{}}}
+\DoxyCodeLine{\Hypertarget{_cursor_driver_8cs_source_l00064}00064\ \ \ \ \ \ \ \ \ :\ \textcolor{keywordtype}{string}.Empty;}
+\DoxyCodeLine{\Hypertarget{_cursor_driver_8cs_source_l00065}00065\ }
+\DoxyCodeLine{\Hypertarget{_cursor_driver_8cs_source_l00066}\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_displays_1_1_internals_1_1_cursor_driver_aa5950c136ffece06015c48927b17bf19}{00066}}\ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keywordtype}{string}\ \mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_displays_1_1_internals_1_1_cursor_driver_aa5950c136ffece06015c48927b17bf19}{GetCursorStyleCss}}()}
+\DoxyCodeLine{\Hypertarget{_cursor_driver_8cs_source_l00067}00067\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_cursor_driver_8cs_source_l00068}00068\ \ \ \ \ \ \ \ \ var\ renderBatchLocal\ =\ \mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_displays_1_1_internals_1_1_cursor_driver_ad6b38ae0153235ba65e9d036a79c7c84}{\_renderBatch}};}
+\DoxyCodeLine{\Hypertarget{_cursor_driver_8cs_source_l00069}00069\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (renderBatchLocal\ is\ \textcolor{keyword}{null})}
+\DoxyCodeLine{\Hypertarget{_cursor_driver_8cs_source_l00070}00070\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keywordtype}{string}.Empty;}
+\DoxyCodeLine{\Hypertarget{_cursor_driver_8cs_source_l00071}00071\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_cursor_driver_8cs_source_l00072}00072\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{try}}
+\DoxyCodeLine{\Hypertarget{_cursor_driver_8cs_source_l00073}00073\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_cursor_driver_8cs_source_l00074}00074\ \ \ \ \ \ \ \ \ \ \ \ \ var\ measurements\ =\ renderBatchLocal.ViewModel.CharAndLineMeasurements;}
+\DoxyCodeLine{\Hypertarget{_cursor_driver_8cs_source_l00075}00075\ }
+\DoxyCodeLine{\Hypertarget{_cursor_driver_8cs_source_l00076}00076\ \ \ \ \ \ \ \ \ \ \ \ \ var\ leftInPixels\ =\ 0d;}
+\DoxyCodeLine{\Hypertarget{_cursor_driver_8cs_source_l00077}00077\ }
+\DoxyCodeLine{\Hypertarget{_cursor_driver_8cs_source_l00078}00078\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Tab\ key\ column\ offset}}
+\DoxyCodeLine{\Hypertarget{_cursor_driver_8cs_source_l00079}00079\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_cursor_driver_8cs_source_l00080}00080\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ var\ tabsOnSameRowBeforeCursor\ =\ renderBatchLocal.Model.GetTabCountOnSameLineBeforeCursor(}
+\DoxyCodeLine{\Hypertarget{_cursor_driver_8cs_source_l00081}00081\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ renderBatchLocal.ViewModel.PrimaryCursor.LineIndex,}
+\DoxyCodeLine{\Hypertarget{_cursor_driver_8cs_source_l00082}00082\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ renderBatchLocal.ViewModel.PrimaryCursor.ColumnIndex);}
+\DoxyCodeLine{\Hypertarget{_cursor_driver_8cs_source_l00083}00083\ }
+\DoxyCodeLine{\Hypertarget{_cursor_driver_8cs_source_l00084}00084\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ 1\ of\ the\ character\ width\ is\ already\ accounted\ for}}
+\DoxyCodeLine{\Hypertarget{_cursor_driver_8cs_source_l00085}00085\ }
+\DoxyCodeLine{\Hypertarget{_cursor_driver_8cs_source_l00086}00086\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ var\ extraWidthPerTabKey\ =\ \mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1_1_text_editor_model_a9a8d5b20587ad2939c867d66d0977bdd}{TextEditorModel.TAB\_WIDTH}}\ -\/\ 1;}
+\DoxyCodeLine{\Hypertarget{_cursor_driver_8cs_source_l00087}00087\ }
+\DoxyCodeLine{\Hypertarget{_cursor_driver_8cs_source_l00088}00088\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ leftInPixels\ +=\ extraWidthPerTabKey\ *}
+\DoxyCodeLine{\Hypertarget{_cursor_driver_8cs_source_l00089}00089\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ tabsOnSameRowBeforeCursor\ *}
+\DoxyCodeLine{\Hypertarget{_cursor_driver_8cs_source_l00090}00090\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ measurements.CharacterWidth;}
+\DoxyCodeLine{\Hypertarget{_cursor_driver_8cs_source_l00091}00091\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_cursor_driver_8cs_source_l00092}00092\ }
+\DoxyCodeLine{\Hypertarget{_cursor_driver_8cs_source_l00093}00093\ \ \ \ \ \ \ \ \ \ \ \ \ leftInPixels\ +=\ measurements.CharacterWidth\ *\ renderBatchLocal.ViewModel.PrimaryCursor.ColumnIndex;}
+\DoxyCodeLine{\Hypertarget{_cursor_driver_8cs_source_l00094}00094\ }
+\DoxyCodeLine{\Hypertarget{_cursor_driver_8cs_source_l00095}00095\ \ \ \ \ \ \ \ \ \ \ \ \ var\ leftInPixelsInvariantCulture\ =\ leftInPixels.ToCssValue();}
+\DoxyCodeLine{\Hypertarget{_cursor_driver_8cs_source_l00096}00096\ \ \ \ \ \ \ \ \ \ \ \ \ var\ left\ =\ \$\textcolor{stringliteral}{"{}left:\ \{leftInPixelsInvariantCulture\}px;"{}};}
+\DoxyCodeLine{\Hypertarget{_cursor_driver_8cs_source_l00097}00097\ }
+\DoxyCodeLine{\Hypertarget{_cursor_driver_8cs_source_l00098}00098\ \ \ \ \ \ \ \ \ \ \ \ \ var\ topInPixelsInvariantCulture\ =\ (measurements.LineHeight\ *\ renderBatchLocal.ViewModel.PrimaryCursor.LineIndex)}
+\DoxyCodeLine{\Hypertarget{_cursor_driver_8cs_source_l00099}00099\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ .ToCssValue();}
+\DoxyCodeLine{\Hypertarget{_cursor_driver_8cs_source_l00100}00100\ }
+\DoxyCodeLine{\Hypertarget{_cursor_driver_8cs_source_l00101}00101\ \ \ \ \ \ \ \ \ \ \ \ \ var\ top\ =\ \$\textcolor{stringliteral}{"{}top:\ \{topInPixelsInvariantCulture\}px;"{}};}
+\DoxyCodeLine{\Hypertarget{_cursor_driver_8cs_source_l00102}00102\ }
+\DoxyCodeLine{\Hypertarget{_cursor_driver_8cs_source_l00103}00103\ \ \ \ \ \ \ \ \ \ \ \ \ var\ heightInPixelsInvariantCulture\ =\ measurements.LineHeight.ToCssValue();}
+\DoxyCodeLine{\Hypertarget{_cursor_driver_8cs_source_l00104}00104\ \ \ \ \ \ \ \ \ \ \ \ \ var\ height\ =\ \$\textcolor{stringliteral}{"{}height:\ \{heightInPixelsInvariantCulture\}px;"{}};}
+\DoxyCodeLine{\Hypertarget{_cursor_driver_8cs_source_l00105}00105\ }
+\DoxyCodeLine{\Hypertarget{_cursor_driver_8cs_source_l00106}00106\ \ \ \ \ \ \ \ \ \ \ \ \ var\ widthInPixelsInvariantCulture\ =\ renderBatchLocal.Options.CursorWidthInPixels.ToCssValue();}
+\DoxyCodeLine{\Hypertarget{_cursor_driver_8cs_source_l00107}00107\ \ \ \ \ \ \ \ \ \ \ \ \ var\ width\ =\ \$\textcolor{stringliteral}{"{}width:\ \{widthInPixelsInvariantCulture\}px;"{}};}
+\DoxyCodeLine{\Hypertarget{_cursor_driver_8cs_source_l00108}00108\ }
+\DoxyCodeLine{\Hypertarget{_cursor_driver_8cs_source_l00109}00109\ \ \ \ \ \ \ \ \ \ \ \ \ var\ keymapStyling\ =\ ((\mbox{\hyperlink{interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_keymaps_1_1_models_1_1_i_text_editor_keymap}{ITextEditorKeymap}})renderBatchLocal.Options.Keymap).GetCursorCssStyleString(}
+\DoxyCodeLine{\Hypertarget{_cursor_driver_8cs_source_l00110}00110\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ renderBatchLocal.Model,}
+\DoxyCodeLine{\Hypertarget{_cursor_driver_8cs_source_l00111}00111\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ renderBatchLocal.ViewModel,}
+\DoxyCodeLine{\Hypertarget{_cursor_driver_8cs_source_l00112}00112\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ renderBatchLocal.Options);}
+\DoxyCodeLine{\Hypertarget{_cursor_driver_8cs_source_l00113}00113\ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_cursor_driver_8cs_source_l00114}00114\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ This\ feels\ a\ bit\ hacky,\ exceptions\ are\ happening\ because\ the\ UI\ isn't\ accessing}}
+\DoxyCodeLine{\Hypertarget{_cursor_driver_8cs_source_l00115}00115\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ the\ text\ editor\ in\ a\ thread\ safe\ way.}}
+\DoxyCodeLine{\Hypertarget{_cursor_driver_8cs_source_l00116}00116\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//}}
+\DoxyCodeLine{\Hypertarget{_cursor_driver_8cs_source_l00117}00117\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ When\ an\ exception\ does\ occur\ though,\ the\ cursor\ should\ receive\ a\ 'text\ editor\ changed'}}
+\DoxyCodeLine{\Hypertarget{_cursor_driver_8cs_source_l00118}00118\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ event\ and\ re-\/render\ anyhow\ however.}}
+\DoxyCodeLine{\Hypertarget{_cursor_driver_8cs_source_l00119}00119\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ }}
+\DoxyCodeLine{\Hypertarget{_cursor_driver_8cs_source_l00120}00120\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ So\ store\ the\ result\ of\ this\ method\ incase\ an\ exception\ occurs\ in\ future\ invocations,}}
+\DoxyCodeLine{\Hypertarget{_cursor_driver_8cs_source_l00121}00121\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ to\ keep\ the\ cursor\ on\ screen\ while\ the\ state\ works\ itself\ out.}}
+\DoxyCodeLine{\Hypertarget{_cursor_driver_8cs_source_l00122}00122\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_displays_1_1_internals_1_1_cursor_driver_a3b741d9bf6c130c0056250f6f8ae8858}{\_previousGetCursorStyleCss}}\ =\ \$\textcolor{stringliteral}{"{}\{left\}\ \{top\}\ \{height\}\ \{width\}\ \{keymapStyling\}"{}};}
+\DoxyCodeLine{\Hypertarget{_cursor_driver_8cs_source_l00123}00123\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_cursor_driver_8cs_source_l00124}00124\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{catch}\ (\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_exceptions_1_1_luthetus_text_editor_exception}{LuthetusTextEditorException}})}
+\DoxyCodeLine{\Hypertarget{_cursor_driver_8cs_source_l00125}00125\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_cursor_driver_8cs_source_l00126}00126\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_displays_1_1_internals_1_1_cursor_driver_a3b741d9bf6c130c0056250f6f8ae8858}{\_previousGetCursorStyleCss}};}
+\DoxyCodeLine{\Hypertarget{_cursor_driver_8cs_source_l00127}00127\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_cursor_driver_8cs_source_l00128}00128\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_cursor_driver_8cs_source_l00129}00129\ }
+\DoxyCodeLine{\Hypertarget{_cursor_driver_8cs_source_l00130}\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_displays_1_1_internals_1_1_cursor_driver_a2a8fb17d9120c8e0135227598ca2d22f}{00130}}\ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keywordtype}{string}\ \mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_displays_1_1_internals_1_1_cursor_driver_a2a8fb17d9120c8e0135227598ca2d22f}{GetCaretRowStyleCss}}()}
+\DoxyCodeLine{\Hypertarget{_cursor_driver_8cs_source_l00131}00131\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_cursor_driver_8cs_source_l00132}00132\ \ \ \ \ \ \ \ \ var\ renderBatchLocal\ =\ \mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_displays_1_1_internals_1_1_cursor_driver_ad6b38ae0153235ba65e9d036a79c7c84}{\_renderBatch}};}
+\DoxyCodeLine{\Hypertarget{_cursor_driver_8cs_source_l00133}00133\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (renderBatchLocal\ is\ \textcolor{keyword}{null})}
+\DoxyCodeLine{\Hypertarget{_cursor_driver_8cs_source_l00134}00134\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keywordtype}{string}.Empty;}
+\DoxyCodeLine{\Hypertarget{_cursor_driver_8cs_source_l00135}00135\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_cursor_driver_8cs_source_l00136}00136\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{try}}
+\DoxyCodeLine{\Hypertarget{_cursor_driver_8cs_source_l00137}00137\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_cursor_driver_8cs_source_l00138}00138\ \ \ \ \ \ \ \ \ \ \ \ \ var\ measurements\ =\ renderBatchLocal.ViewModel.CharAndLineMeasurements;}
+\DoxyCodeLine{\Hypertarget{_cursor_driver_8cs_source_l00139}00139\ }
+\DoxyCodeLine{\Hypertarget{_cursor_driver_8cs_source_l00140}00140\ \ \ \ \ \ \ \ \ \ \ \ \ var\ topInPixelsInvariantCulture\ =\ (measurements.LineHeight\ *\ renderBatchLocal.ViewModel.PrimaryCursor.LineIndex)}
+\DoxyCodeLine{\Hypertarget{_cursor_driver_8cs_source_l00141}00141\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ .ToCssValue();}
+\DoxyCodeLine{\Hypertarget{_cursor_driver_8cs_source_l00142}00142\ }
+\DoxyCodeLine{\Hypertarget{_cursor_driver_8cs_source_l00143}00143\ \ \ \ \ \ \ \ \ \ \ \ \ var\ top\ =\ \$\textcolor{stringliteral}{"{}top:\ \{topInPixelsInvariantCulture\}px;"{}};}
+\DoxyCodeLine{\Hypertarget{_cursor_driver_8cs_source_l00144}00144\ }
+\DoxyCodeLine{\Hypertarget{_cursor_driver_8cs_source_l00145}00145\ \ \ \ \ \ \ \ \ \ \ \ \ var\ heightInPixelsInvariantCulture\ =\ measurements.LineHeight.ToCssValue();}
+\DoxyCodeLine{\Hypertarget{_cursor_driver_8cs_source_l00146}00146\ \ \ \ \ \ \ \ \ \ \ \ \ var\ height\ =\ \$\textcolor{stringliteral}{"{}height:\ \{heightInPixelsInvariantCulture\}px;"{}};}
+\DoxyCodeLine{\Hypertarget{_cursor_driver_8cs_source_l00147}00147\ }
+\DoxyCodeLine{\Hypertarget{_cursor_driver_8cs_source_l00148}00148\ \ \ \ \ \ \ \ \ \ \ \ \ var\ widthOfBodyInPixelsInvariantCulture\ =}
+\DoxyCodeLine{\Hypertarget{_cursor_driver_8cs_source_l00149}00149\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (renderBatchLocal.Model.MostCharactersOnASingleLineTuple.lineLength\ *\ measurements.CharacterWidth)}
+\DoxyCodeLine{\Hypertarget{_cursor_driver_8cs_source_l00150}00150\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ .ToCssValue();}
+\DoxyCodeLine{\Hypertarget{_cursor_driver_8cs_source_l00151}00151\ }
+\DoxyCodeLine{\Hypertarget{_cursor_driver_8cs_source_l00152}00152\ \ \ \ \ \ \ \ \ \ \ \ \ var\ width\ =\ \$\textcolor{stringliteral}{"{}width:\ \{widthOfBodyInPixelsInvariantCulture\}px;"{}};}
+\DoxyCodeLine{\Hypertarget{_cursor_driver_8cs_source_l00153}00153\ }
+\DoxyCodeLine{\Hypertarget{_cursor_driver_8cs_source_l00154}00154\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ This\ feels\ a\ bit\ hacky,\ exceptions\ are\ happening\ because\ the\ UI\ isn't\ accessing}}
+\DoxyCodeLine{\Hypertarget{_cursor_driver_8cs_source_l00155}00155\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ the\ text\ editor\ in\ a\ thread\ safe\ way.}}
+\DoxyCodeLine{\Hypertarget{_cursor_driver_8cs_source_l00156}00156\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//}}
+\DoxyCodeLine{\Hypertarget{_cursor_driver_8cs_source_l00157}00157\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ When\ an\ exception\ does\ occur\ though,\ the\ cursor\ should\ receive\ a\ 'text\ editor\ changed'}}
+\DoxyCodeLine{\Hypertarget{_cursor_driver_8cs_source_l00158}00158\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ event\ and\ re-\/render\ anyhow\ however.}}
+\DoxyCodeLine{\Hypertarget{_cursor_driver_8cs_source_l00159}00159\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ }}
+\DoxyCodeLine{\Hypertarget{_cursor_driver_8cs_source_l00160}00160\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ So\ store\ the\ result\ of\ this\ method\ incase\ an\ exception\ occurs\ in\ future\ invocations,}}
+\DoxyCodeLine{\Hypertarget{_cursor_driver_8cs_source_l00161}00161\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ to\ keep\ the\ cursor\ on\ screen\ while\ the\ state\ works\ itself\ out.}}
+\DoxyCodeLine{\Hypertarget{_cursor_driver_8cs_source_l00162}00162\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_displays_1_1_internals_1_1_cursor_driver_acd1c60ffaa61ebd1d7e570ababf6655d}{\_previousGetCaretRowStyleCss}}\ =\ \$\textcolor{stringliteral}{"{}\{top\}\ \{width\}\ \{height\}"{}};}
+\DoxyCodeLine{\Hypertarget{_cursor_driver_8cs_source_l00163}00163\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_cursor_driver_8cs_source_l00164}00164\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{catch}\ (\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_exceptions_1_1_luthetus_text_editor_exception}{LuthetusTextEditorException}})}
+\DoxyCodeLine{\Hypertarget{_cursor_driver_8cs_source_l00165}00165\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_cursor_driver_8cs_source_l00166}00166\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_displays_1_1_internals_1_1_cursor_driver_acd1c60ffaa61ebd1d7e570ababf6655d}{\_previousGetCaretRowStyleCss}};}
+\DoxyCodeLine{\Hypertarget{_cursor_driver_8cs_source_l00167}00167\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_cursor_driver_8cs_source_l00168}00168\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_cursor_driver_8cs_source_l00169}00169\ }
+\DoxyCodeLine{\Hypertarget{_cursor_driver_8cs_source_l00170}\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_displays_1_1_internals_1_1_cursor_driver_a5554cdcff23445828056fe398e47f64d}{00170}}\ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keywordtype}{string}\ \mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_displays_1_1_internals_1_1_cursor_driver_a5554cdcff23445828056fe398e47f64d}{GetMenuStyleCss}}()}
+\DoxyCodeLine{\Hypertarget{_cursor_driver_8cs_source_l00171}00171\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_cursor_driver_8cs_source_l00172}00172\ \ \ \ \ \ \ \ \ var\ renderBatchLocal\ =\ \mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_displays_1_1_internals_1_1_cursor_driver_ad6b38ae0153235ba65e9d036a79c7c84}{\_renderBatch}};}
+\DoxyCodeLine{\Hypertarget{_cursor_driver_8cs_source_l00173}00173\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (renderBatchLocal\ is\ \textcolor{keyword}{null})}
+\DoxyCodeLine{\Hypertarget{_cursor_driver_8cs_source_l00174}00174\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keywordtype}{string}.Empty;}
+\DoxyCodeLine{\Hypertarget{_cursor_driver_8cs_source_l00175}00175\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_cursor_driver_8cs_source_l00176}00176\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{try}}
+\DoxyCodeLine{\Hypertarget{_cursor_driver_8cs_source_l00177}00177\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_cursor_driver_8cs_source_l00178}00178\ \ \ \ \ \ \ \ \ \ \ \ \ var\ measurements\ =\ renderBatchLocal.ViewModel.CharAndLineMeasurements;}
+\DoxyCodeLine{\Hypertarget{_cursor_driver_8cs_source_l00179}00179\ }
+\DoxyCodeLine{\Hypertarget{_cursor_driver_8cs_source_l00180}00180\ \ \ \ \ \ \ \ \ \ \ \ \ var\ leftInPixels\ =\ 0d;}
+\DoxyCodeLine{\Hypertarget{_cursor_driver_8cs_source_l00181}00181\ }
+\DoxyCodeLine{\Hypertarget{_cursor_driver_8cs_source_l00182}00182\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Tab\ key\ column\ offset}}
+\DoxyCodeLine{\Hypertarget{_cursor_driver_8cs_source_l00183}00183\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_cursor_driver_8cs_source_l00184}00184\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ var\ tabsOnSameRowBeforeCursor\ =\ renderBatchLocal.Model.GetTabCountOnSameLineBeforeCursor(}
+\DoxyCodeLine{\Hypertarget{_cursor_driver_8cs_source_l00185}00185\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ renderBatchLocal.ViewModel.PrimaryCursor.LineIndex,}
+\DoxyCodeLine{\Hypertarget{_cursor_driver_8cs_source_l00186}00186\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ renderBatchLocal.ViewModel.PrimaryCursor.ColumnIndex);}
+\DoxyCodeLine{\Hypertarget{_cursor_driver_8cs_source_l00187}00187\ }
+\DoxyCodeLine{\Hypertarget{_cursor_driver_8cs_source_l00188}00188\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ 1\ of\ the\ character\ width\ is\ already\ accounted\ for}}
+\DoxyCodeLine{\Hypertarget{_cursor_driver_8cs_source_l00189}00189\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ var\ extraWidthPerTabKey\ =\ \mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1_1_text_editor_model_a9a8d5b20587ad2939c867d66d0977bdd}{TextEditorModel.TAB\_WIDTH}}\ -\/\ 1;}
+\DoxyCodeLine{\Hypertarget{_cursor_driver_8cs_source_l00190}00190\ }
+\DoxyCodeLine{\Hypertarget{_cursor_driver_8cs_source_l00191}00191\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ leftInPixels\ +=\ extraWidthPerTabKey\ *\ tabsOnSameRowBeforeCursor\ *}
+\DoxyCodeLine{\Hypertarget{_cursor_driver_8cs_source_l00192}00192\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ measurements.CharacterWidth;}
+\DoxyCodeLine{\Hypertarget{_cursor_driver_8cs_source_l00193}00193\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_cursor_driver_8cs_source_l00194}00194\ }
+\DoxyCodeLine{\Hypertarget{_cursor_driver_8cs_source_l00195}00195\ \ \ \ \ \ \ \ \ \ \ \ \ leftInPixels\ +=\ measurements.CharacterWidth\ *\ renderBatchLocal.ViewModel.PrimaryCursor.ColumnIndex;}
+\DoxyCodeLine{\Hypertarget{_cursor_driver_8cs_source_l00196}00196\ }
+\DoxyCodeLine{\Hypertarget{_cursor_driver_8cs_source_l00197}00197\ \ \ \ \ \ \ \ \ \ \ \ \ var\ leftInPixelsInvariantCulture\ =\ leftInPixels.ToCssValue();}
+\DoxyCodeLine{\Hypertarget{_cursor_driver_8cs_source_l00198}00198\ \ \ \ \ \ \ \ \ \ \ \ \ var\ left\ =\ \$\textcolor{stringliteral}{"{}left:\ \{leftInPixelsInvariantCulture\}px;"{}};}
+\DoxyCodeLine{\Hypertarget{_cursor_driver_8cs_source_l00199}00199\ }
+\DoxyCodeLine{\Hypertarget{_cursor_driver_8cs_source_l00200}00200\ \ \ \ \ \ \ \ \ \ \ \ \ var\ topInPixelsInvariantCulture\ =\ (measurements.LineHeight\ *\ (renderBatchLocal.ViewModel.PrimaryCursor.LineIndex\ +\ 1))}
+\DoxyCodeLine{\Hypertarget{_cursor_driver_8cs_source_l00201}00201\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ .ToCssValue();}
+\DoxyCodeLine{\Hypertarget{_cursor_driver_8cs_source_l00202}00202\ }
+\DoxyCodeLine{\Hypertarget{_cursor_driver_8cs_source_l00203}00203\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Top\ is\ 1\ row\ further\ than\ the\ cursor\ so\ it\ does\ not\ cover\ text\ at\ cursor\ position.}}
+\DoxyCodeLine{\Hypertarget{_cursor_driver_8cs_source_l00204}00204\ \ \ \ \ \ \ \ \ \ \ \ \ var\ top\ =\ \$\textcolor{stringliteral}{"{}top:\ \{topInPixelsInvariantCulture\}px;"{}};}
+\DoxyCodeLine{\Hypertarget{_cursor_driver_8cs_source_l00205}00205\ }
+\DoxyCodeLine{\Hypertarget{_cursor_driver_8cs_source_l00206}00206\ \ \ \ \ \ \ \ \ \ \ \ \ var\ minWidthInPixelsInvariantCulture\ =\ (measurements.CharacterWidth\ *\ 16).ToCssValue();}
+\DoxyCodeLine{\Hypertarget{_cursor_driver_8cs_source_l00207}00207\ \ \ \ \ \ \ \ \ \ \ \ \ var\ minWidth\ =\ \$\textcolor{stringliteral}{"{}min-\/Width:\ \{minWidthInPixelsInvariantCulture\}px;"{}};}
+\DoxyCodeLine{\Hypertarget{_cursor_driver_8cs_source_l00208}00208\ }
+\DoxyCodeLine{\Hypertarget{_cursor_driver_8cs_source_l00209}00209\ \ \ \ \ \ \ \ \ \ \ \ \ var\ minHeightInPixelsInvariantCulture\ =\ (measurements.LineHeight\ *\ 4).ToCssValue();}
+\DoxyCodeLine{\Hypertarget{_cursor_driver_8cs_source_l00210}00210\ \ \ \ \ \ \ \ \ \ \ \ \ var\ minHeight\ =\ \$\textcolor{stringliteral}{"{}min-\/height:\ \{minHeightInPixelsInvariantCulture\}px;"{}};}
+\DoxyCodeLine{\Hypertarget{_cursor_driver_8cs_source_l00211}00211\ }
+\DoxyCodeLine{\Hypertarget{_cursor_driver_8cs_source_l00212}00212\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ This\ feels\ a\ bit\ hacky,\ exceptions\ are\ happening\ because\ the\ UI\ isn't\ accessing}}
+\DoxyCodeLine{\Hypertarget{_cursor_driver_8cs_source_l00213}00213\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ the\ text\ editor\ in\ a\ thread\ safe\ way.}}
+\DoxyCodeLine{\Hypertarget{_cursor_driver_8cs_source_l00214}00214\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//}}
+\DoxyCodeLine{\Hypertarget{_cursor_driver_8cs_source_l00215}00215\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ When\ an\ exception\ does\ occur\ though,\ the\ cursor\ should\ receive\ a\ 'text\ editor\ changed'}}
+\DoxyCodeLine{\Hypertarget{_cursor_driver_8cs_source_l00216}00216\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ event\ and\ re-\/render\ anyhow\ however.}}
+\DoxyCodeLine{\Hypertarget{_cursor_driver_8cs_source_l00217}00217\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ }}
+\DoxyCodeLine{\Hypertarget{_cursor_driver_8cs_source_l00218}00218\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ So\ store\ the\ result\ of\ this\ method\ incase\ an\ exception\ occurs\ in\ future\ invocations,}}
+\DoxyCodeLine{\Hypertarget{_cursor_driver_8cs_source_l00219}00219\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ to\ keep\ the\ cursor\ on\ screen\ while\ the\ state\ works\ itself\ out.}}
+\DoxyCodeLine{\Hypertarget{_cursor_driver_8cs_source_l00220}00220\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_displays_1_1_internals_1_1_cursor_driver_ac78912d563bca042280da92190f44e13}{\_previousGetMenuStyleCss}}\ =\ \$\textcolor{stringliteral}{"{}\{left\}\ \{top\}\ \{minWidth\}\ \{minHeight\}"{}};}
+\DoxyCodeLine{\Hypertarget{_cursor_driver_8cs_source_l00221}00221\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_cursor_driver_8cs_source_l00222}00222\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{catch}\ (\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_exceptions_1_1_luthetus_text_editor_exception}{LuthetusTextEditorException}})}
+\DoxyCodeLine{\Hypertarget{_cursor_driver_8cs_source_l00223}00223\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_cursor_driver_8cs_source_l00224}00224\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_displays_1_1_internals_1_1_cursor_driver_ac78912d563bca042280da92190f44e13}{\_previousGetMenuStyleCss}};}
+\DoxyCodeLine{\Hypertarget{_cursor_driver_8cs_source_l00225}00225\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_cursor_driver_8cs_source_l00226}00226\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_cursor_driver_8cs_source_l00227}00227\ }
+\DoxyCodeLine{\Hypertarget{_cursor_driver_8cs_source_l00228}\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_displays_1_1_internals_1_1_cursor_driver_a5631f68c4f9fe4cefd310a7a22f93bbd}{00228}}\ \ \ \ \ \textcolor{keyword}{public}\ async\ Task\ \mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_displays_1_1_internals_1_1_cursor_driver_a5631f68c4f9fe4cefd310a7a22f93bbd}{FocusAsync}}()}
+\DoxyCodeLine{\Hypertarget{_cursor_driver_8cs_source_l00229}00229\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_cursor_driver_8cs_source_l00230}00230\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{try}}
+\DoxyCodeLine{\Hypertarget{_cursor_driver_8cs_source_l00231}00231\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_cursor_driver_8cs_source_l00232}00232\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_displays_1_1_internals_1_1_cursor_driver_a189c754ffbbe176e4012667574561e00}{\_cursorDisplayElementReference}}\ is\ not\ \textcolor{keyword}{null})}
+\DoxyCodeLine{\Hypertarget{_cursor_driver_8cs_source_l00233}00233\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_cursor_driver_8cs_source_l00234}00234\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ await\ \_cursorDisplayElementReference.Value}
+\DoxyCodeLine{\Hypertarget{_cursor_driver_8cs_source_l00235}00235\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ .FocusAsync(preventScroll:\ \textcolor{keyword}{true})}
+\DoxyCodeLine{\Hypertarget{_cursor_driver_8cs_source_l00236}00236\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ .ConfigureAwait(\textcolor{keyword}{false});}
+\DoxyCodeLine{\Hypertarget{_cursor_driver_8cs_source_l00237}00237\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_cursor_driver_8cs_source_l00238}00238\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_cursor_driver_8cs_source_l00239}00239\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{catch}\ (Exception)}
+\DoxyCodeLine{\Hypertarget{_cursor_driver_8cs_source_l00240}00240\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_cursor_driver_8cs_source_l00241}00241\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ 2023-\/04-\/18:\ The\ app\ has\ had\ a\ bug\ where\ it\ "{}freezes"{}\ and\ must\ be\ restarted.}}
+\DoxyCodeLine{\Hypertarget{_cursor_driver_8cs_source_l00242}00242\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ \ \ \ \ This\ bug\ is\ seemingly\ happening\ randomly.\ I\ have\ a\ suspicion}}
+\DoxyCodeLine{\Hypertarget{_cursor_driver_8cs_source_l00243}00243\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ \ \ \ \ that\ there\ are\ race-\/condition\ exceptions\ occurring\ with\ "{}FocusAsync"{}}}
+\DoxyCodeLine{\Hypertarget{_cursor_driver_8cs_source_l00244}00244\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ \ \ \ \ on\ an\ ElementReference.}}
+\DoxyCodeLine{\Hypertarget{_cursor_driver_8cs_source_l00245}00245\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_cursor_driver_8cs_source_l00246}00246\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_cursor_driver_8cs_source_l00247}00247\ }
+\DoxyCodeLine{\Hypertarget{_cursor_driver_8cs_source_l00248}\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_displays_1_1_internals_1_1_cursor_driver_a53b953d47c53b56f1bc95f30ec99eae0}{00248}}\ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_displays_1_1_internals_1_1_cursor_driver_a53b953d47c53b56f1bc95f30ec99eae0}{HandleOnKeyDown}}()}
+\DoxyCodeLine{\Hypertarget{_cursor_driver_8cs_source_l00249}00249\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_cursor_driver_8cs_source_l00250}00250\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ \_root.TextEditorService.ViewModelApi.SetCursorShouldBlink(false);}}
+\DoxyCodeLine{\Hypertarget{_cursor_driver_8cs_source_l00251}00251\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_cursor_driver_8cs_source_l00252}00252\ }
+\DoxyCodeLine{\Hypertarget{_cursor_driver_8cs_source_l00253}\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_displays_1_1_internals_1_1_cursor_driver_aa2b278508bef5cee30366912ed16c2fe}{00253}}\ \ \ \ \ \textcolor{keyword}{public}\ async\ Task\ \mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_displays_1_1_internals_1_1_cursor_driver_aa2b278508bef5cee30366912ed16c2fe}{SetFocusToActiveMenuAsync}}()}
+\DoxyCodeLine{\Hypertarget{_cursor_driver_8cs_source_l00254}00254\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_cursor_driver_8cs_source_l00255}00255\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_displays_1_1_internals_1_1_cursor_driver_a5ca43c8f0839e5397d97f95fd556c95f}{\_menuShouldGetFocusRequestCount}}++;}
+\DoxyCodeLine{\Hypertarget{_cursor_driver_8cs_source_l00256}00256\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ await\ InvokeAsync(StateHasChanged);}}
+\DoxyCodeLine{\Hypertarget{_cursor_driver_8cs_source_l00257}00257\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_cursor_driver_8cs_source_l00258}00258\ }
+\DoxyCodeLine{\Hypertarget{_cursor_driver_8cs_source_l00259}\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_displays_1_1_internals_1_1_cursor_driver_ab28ea88d621871e13f5eaae53ca522c9}{00259}}\ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_displays_1_1_internals_1_1_cursor_driver_ab28ea88d621871e13f5eaae53ca522c9}{TextEditorMenuShouldTakeFocus}}()}
+\DoxyCodeLine{\Hypertarget{_cursor_driver_8cs_source_l00260}00260\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_cursor_driver_8cs_source_l00261}00261\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_displays_1_1_internals_1_1_cursor_driver_a5ca43c8f0839e5397d97f95fd556c95f}{\_menuShouldGetFocusRequestCount}}\ >\ 0)}
+\DoxyCodeLine{\Hypertarget{_cursor_driver_8cs_source_l00262}00262\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_cursor_driver_8cs_source_l00263}00263\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_displays_1_1_internals_1_1_cursor_driver_a5ca43c8f0839e5397d97f95fd556c95f}{\_menuShouldGetFocusRequestCount}}\ =\ 0;}
+\DoxyCodeLine{\Hypertarget{_cursor_driver_8cs_source_l00264}00264\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{true};}
+\DoxyCodeLine{\Hypertarget{_cursor_driver_8cs_source_l00265}00265\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_cursor_driver_8cs_source_l00266}00266\ }
+\DoxyCodeLine{\Hypertarget{_cursor_driver_8cs_source_l00267}00267\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};}
+\DoxyCodeLine{\Hypertarget{_cursor_driver_8cs_source_l00268}00268\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_cursor_driver_8cs_source_l00269}00269\ }
+\DoxyCodeLine{\Hypertarget{_cursor_driver_8cs_source_l00270}\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_displays_1_1_internals_1_1_cursor_driver_a73f74f4b028fba3a1ce37ead7abed92f}{00270}}\ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_displays_1_1_internals_1_1_cursor_driver_a73f74f4b028fba3a1ce37ead7abed92f}{GetTabIndex}}(\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1_1_internals_1_1_text_editor_render_batch_validated}{TextEditorRenderBatchValidated}}\ renderBatchLocal)}
+\DoxyCodeLine{\Hypertarget{_cursor_driver_8cs_source_l00271}00271\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_cursor_driver_8cs_source_l00272}00272\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_displays_1_1_internals_1_1_cursor_driver_a3e66eb328834e175467aaa1315a2319a}{IsFocusTarget}})}
+\DoxyCodeLine{\Hypertarget{_cursor_driver_8cs_source_l00273}00273\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ -\/1;}
+\DoxyCodeLine{\Hypertarget{_cursor_driver_8cs_source_l00274}00274\ }
+\DoxyCodeLine{\Hypertarget{_cursor_driver_8cs_source_l00275}00275\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ renderBatchLocal.\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1_1_internals_1_1_text_editor_render_batch_validated_a904b399cb1dd1c8813a85a656db1094c}{ViewModelDisplayOptions}}.\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1_1_internals_1_1_view_model_display_options_a1ba3a20e874f3b7eb8bcaf995cf13b2a}{TabIndex}};;}
+\DoxyCodeLine{\Hypertarget{_cursor_driver_8cs_source_l00276}00276\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_cursor_driver_8cs_source_l00277}00277\ \}}
+
+\end{DoxyCode}

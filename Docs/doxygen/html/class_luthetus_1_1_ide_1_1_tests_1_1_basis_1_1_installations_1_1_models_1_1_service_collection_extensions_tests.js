@@ -1,0 +1,4 @@
+var class_luthetus_1_1_ide_1_1_tests_1_1_basis_1_1_installations_1_1_models_1_1_service_collection_extensions_tests =
+[
+    [ "AddLuthetusIdeRazorLibServices", "class_luthetus_1_1_ide_1_1_tests_1_1_basis_1_1_installations_1_1_models_1_1_service_collection_extensions_tests.html#a14bbae8362657cbd4822994a451016bd", null ]
+];

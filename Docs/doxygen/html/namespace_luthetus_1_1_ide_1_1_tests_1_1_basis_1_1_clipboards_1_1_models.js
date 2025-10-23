@@ -1,0 +1,5 @@
+var namespace_luthetus_1_1_ide_1_1_tests_1_1_basis_1_1_clipboards_1_1_models =
+[
+    [ "ClipboardFactsTests", "class_luthetus_1_1_ide_1_1_tests_1_1_basis_1_1_clipboards_1_1_models_1_1_clipboard_facts_tests.html", "class_luthetus_1_1_ide_1_1_tests_1_1_basis_1_1_clipboards_1_1_models_1_1_clipboard_facts_tests" ],
+    [ "ClipboardPhraseTests", "class_luthetus_1_1_ide_1_1_tests_1_1_basis_1_1_clipboards_1_1_models_1_1_clipboard_phrase_tests.html", "class_luthetus_1_1_ide_1_1_tests_1_1_basis_1_1_clipboards_1_1_models_1_1_clipboard_phrase_tests" ]
+];

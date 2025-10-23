@@ -1,0 +1,133 @@
+\doxysection{Program.\+cs}
+\hypertarget{_lib_2_ide_2_host_8_photino_2_program_8cs_source}{}\label{_lib_2_ide_2_host_8_photino_2_program_8cs_source}\index{Source/Lib/Ide/Host.Photino/Program.cs@{Source/Lib/Ide/Host.Photino/Program.cs}}
+\mbox{\hyperlink{_lib_2_ide_2_host_8_photino_2_program_8cs}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{_lib_2_ide_2_host_8_photino_2_program_8cs_source_l00001}00001\ \textcolor{keyword}{using\ }System;}
+\DoxyCodeLine{\Hypertarget{_lib_2_ide_2_host_8_photino_2_program_8cs_source_l00002}00002\ \textcolor{keyword}{using\ }Microsoft.Extensions.DependencyInjection;}
+\DoxyCodeLine{\Hypertarget{_lib_2_ide_2_host_8_photino_2_program_8cs_source_l00003}00003\ \textcolor{keyword}{using\ }Fluxor;}
+\DoxyCodeLine{\Hypertarget{_lib_2_ide_2_host_8_photino_2_program_8cs_source_l00004}00004\ \textcolor{keyword}{using\ }Photino.Blazor;}
+\DoxyCodeLine{\Hypertarget{_lib_2_ide_2_host_8_photino_2_program_8cs_source_l00005}00005\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_luthetus_1_1_common_1_1_razor_lib_1_1_background_tasks_1_1_models}{Luthetus.Common.RazorLib.BackgroundTasks.Models}};}
+\DoxyCodeLine{\Hypertarget{_lib_2_ide_2_host_8_photino_2_program_8cs_source_l00006}00006\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_luthetus_1_1_common_1_1_razor_lib_1_1_installations_1_1_models}{Luthetus.Common.RazorLib.Installations.Models}};}
+\DoxyCodeLine{\Hypertarget{_lib_2_ide_2_host_8_photino_2_program_8cs_source_l00007}00007\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_luthetus_1_1_common_1_1_razor_lib_1_1_dimensions_1_1_states}{Luthetus.Common.RazorLib.Dimensions.States}};}
+\DoxyCodeLine{\Hypertarget{_lib_2_ide_2_host_8_photino_2_program_8cs_source_l00008}00008\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_installations_1_1_models}{Luthetus.TextEditor.RazorLib.Installations.Models}};}
+\DoxyCodeLine{\Hypertarget{_lib_2_ide_2_host_8_photino_2_program_8cs_source_l00009}00009\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_luthetus_1_1_ide_1_1_razor_lib_1_1_installations_1_1_models}{Luthetus.Ide.RazorLib.Installations.Models}};}
+\DoxyCodeLine{\Hypertarget{_lib_2_ide_2_host_8_photino_2_program_8cs_source_l00010}00010\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_luthetus_1_1_extensions_1_1_config_1_1_installations_1_1_models}{Luthetus.Extensions.Config.Installations.Models}};}
+\DoxyCodeLine{\Hypertarget{_lib_2_ide_2_host_8_photino_2_program_8cs_source_l00011}00011\ }
+\DoxyCodeLine{\Hypertarget{_lib_2_ide_2_host_8_photino_2_program_8cs_source_l00012}\mbox{\hyperlink{namespace_luthetus_1_1_ide_1_1_photino}{00012}}\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespace_luthetus_1_1_ide_1_1_photino}{Luthetus.Ide.Photino}};}
+\DoxyCodeLine{\Hypertarget{_lib_2_ide_2_host_8_photino_2_program_8cs_source_l00013}00013\ }
+\DoxyCodeLine{\Hypertarget{_lib_2_ide_2_host_8_photino_2_program_8cs_source_l00014}\mbox{\hyperlink{class_luthetus_1_1_ide_1_1_photino_1_1_program}{00014}}\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_luthetus_1_1_ide_1_1_photino_1_1_program}{Program}}}
+\DoxyCodeLine{\Hypertarget{_lib_2_ide_2_host_8_photino_2_program_8cs_source_l00015}00015\ \{}
+\DoxyCodeLine{\Hypertarget{_lib_2_ide_2_host_8_photino_2_program_8cs_source_l00016}00016\ \ \ \ \ [STAThread]}
+\DoxyCodeLine{\Hypertarget{_lib_2_ide_2_host_8_photino_2_program_8cs_source_l00017}00017\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ Main(\textcolor{keywordtype}{string}[]\ args)}
+\DoxyCodeLine{\Hypertarget{_lib_2_ide_2_host_8_photino_2_program_8cs_source_l00018}00018\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_lib_2_ide_2_host_8_photino_2_program_8cs_source_l00019}00019\ \ \ \ \ \ \ \ \ var\ appBuilder\ =\ PhotinoBlazorAppBuilder.CreateDefault(args);}
+\DoxyCodeLine{\Hypertarget{_lib_2_ide_2_host_8_photino_2_program_8cs_source_l00020}00020\ }
+\DoxyCodeLine{\Hypertarget{_lib_2_ide_2_host_8_photino_2_program_8cs_source_l00021}00021\ \ \ \ \ \ \ \ \ appBuilder.Services.AddLogging();}
+\DoxyCodeLine{\Hypertarget{_lib_2_ide_2_host_8_photino_2_program_8cs_source_l00022}00022\ }
+\DoxyCodeLine{\Hypertarget{_lib_2_ide_2_host_8_photino_2_program_8cs_source_l00023}00023\ \ \ \ \ \ \ \ \ var\ \mbox{\hyperlink{_lib_2_ide_2_host_8_blazor_server_side_2_program_8cs_aeee0b60aab9a620e5403b5af0d821d4c}{hostingInformation}}\ =\ \textcolor{keyword}{new}\ \mbox{\hyperlink{namespace_luthetus_1_1_common_1_1_razor_lib_1_1_installations_1_1_models_a761f9bfb52cfd9ffaa1a4bbdddf1aebb}{LuthetusHostingInformation}}(}
+\DoxyCodeLine{\Hypertarget{_lib_2_ide_2_host_8_photino_2_program_8cs_source_l00024}00024\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespace_luthetus_1_1_common_1_1_razor_lib_1_1_installations_1_1_models_a6fa014b5a7072b6304fd9fe595cc2a60}{LuthetusHostingKind}}.Photino,}
+\DoxyCodeLine{\Hypertarget{_lib_2_ide_2_host_8_photino_2_program_8cs_source_l00025}00025\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespace_luthetus_1_1_common_1_1_razor_lib_1_1_installations_1_1_models_a6de164b4b02fa971f5eddc7f274686a6}{LuthetusPurposeKind}}.Ide,}
+\DoxyCodeLine{\Hypertarget{_lib_2_ide_2_host_8_photino_2_program_8cs_source_l00026}00026\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{new}\ \mbox{\hyperlink{class_luthetus_1_1_common_1_1_razor_lib_1_1_background_tasks_1_1_models_1_1_background_task_service}{BackgroundTaskService}}());}
+\DoxyCodeLine{\Hypertarget{_lib_2_ide_2_host_8_photino_2_program_8cs_source_l00027}00027\ }
+\DoxyCodeLine{\Hypertarget{_lib_2_ide_2_host_8_photino_2_program_8cs_source_l00028}00028\ \ \ \ \ \ \ \ \ appBuilder.Services.AddLuthetusIdeRazorLibServices(\mbox{\hyperlink{_lib_2_ide_2_host_8_blazor_server_side_2_program_8cs_aeee0b60aab9a620e5403b5af0d821d4c}{hostingInformation}});}
+\DoxyCodeLine{\Hypertarget{_lib_2_ide_2_host_8_photino_2_program_8cs_source_l00029}00029\ \ \ \ \ \ \ \ \ appBuilder.Services.AddLuthetusConfigServices(\mbox{\hyperlink{_lib_2_ide_2_host_8_blazor_server_side_2_program_8cs_aeee0b60aab9a620e5403b5af0d821d4c}{hostingInformation}});}
+\DoxyCodeLine{\Hypertarget{_lib_2_ide_2_host_8_photino_2_program_8cs_source_l00030}00030\ }
+\DoxyCodeLine{\Hypertarget{_lib_2_ide_2_host_8_photino_2_program_8cs_source_l00031}00031\ \ \ \ \ \ \ \ \ appBuilder.Services.AddFluxor(options\ =>\ options.ScanAssemblies(}
+\DoxyCodeLine{\Hypertarget{_lib_2_ide_2_host_8_photino_2_program_8cs_source_l00032}00032\ \ \ \ \ \ \ \ \ \ \ \ \ typeof(\mbox{\hyperlink{namespace_luthetus_1_1_common_1_1_razor_lib_1_1_installations_1_1_models_a9c0f5abeb1edd8801378900423cf1f40}{LuthetusCommonConfig}}).Assembly,}
+\DoxyCodeLine{\Hypertarget{_lib_2_ide_2_host_8_photino_2_program_8cs_source_l00033}00033\ \ \ \ \ \ \ \ \ \ \ \ \ typeof(\mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_installations_1_1_models_a93aa7bee7cb16431b8752d669a0286dd}{LuthetusTextEditorConfig}}).Assembly,}
+\DoxyCodeLine{\Hypertarget{_lib_2_ide_2_host_8_photino_2_program_8cs_source_l00034}00034\ \ \ \ \ \ \ \ \ \ \ \ \ typeof(\mbox{\hyperlink{namespace_luthetus_1_1_ide_1_1_razor_lib_1_1_installations_1_1_models_ad58fc11d21392100f35d2c1a4ef0aebb}{LuthetusIdeConfig}}).Assembly,}
+\DoxyCodeLine{\Hypertarget{_lib_2_ide_2_host_8_photino_2_program_8cs_source_l00035}00035\ \ \ \ \ \ \ \ \ \ \ \ \ typeof(\mbox{\hyperlink{namespace_luthetus}{Luthetus}}.\mbox{\hyperlink{namespace_luthetus_1_1_extensions}{Extensions}}.\mbox{\hyperlink{namespace_luthetus_1_1_extensions_1_1_dot_net}{DotNet}}.\mbox{\hyperlink{namespace_luthetus_1_1_extensions_1_1_dot_net_1_1_installations}{Installations}}.\mbox{\hyperlink{namespace_luthetus_1_1_extensions_1_1_dot_net_1_1_installations_1_1_models}{Models}}.\mbox{\hyperlink{class_luthetus_1_1_extensions_1_1_dot_net_1_1_installations_1_1_models_1_1_service_collection_extensions}{ServiceCollectionExtensions}}).Assembly,}
+\DoxyCodeLine{\Hypertarget{_lib_2_ide_2_host_8_photino_2_program_8cs_source_l00036}00036\ \ \ \ \ \ \ \ \ \ \ \ \ typeof(\mbox{\hyperlink{namespace_luthetus}{Luthetus}}.\mbox{\hyperlink{namespace_luthetus_1_1_extensions}{Extensions}}.\mbox{\hyperlink{namespace_luthetus_1_1_extensions_1_1_git}{Git}}.\mbox{\hyperlink{namespace_luthetus_1_1_extensions_1_1_git_1_1_installations}{Installations}}.\mbox{\hyperlink{namespace_luthetus_1_1_extensions_1_1_git_1_1_installations_1_1_models}{Models}}.\mbox{\hyperlink{class_luthetus_1_1_extensions_1_1_git_1_1_installations_1_1_models_1_1_service_collection_extensions}{ServiceCollectionExtensions}}).Assembly));}
+\DoxyCodeLine{\Hypertarget{_lib_2_ide_2_host_8_photino_2_program_8cs_source_l00037}00037\ }
+\DoxyCodeLine{\Hypertarget{_lib_2_ide_2_host_8_photino_2_program_8cs_source_l00038}00038\ \ \ \ \ \ \ \ \ appBuilder.RootComponents.Add<App>(\textcolor{stringliteral}{"{}app"{}});}
+\DoxyCodeLine{\Hypertarget{_lib_2_ide_2_host_8_photino_2_program_8cs_source_l00039}00039\ }
+\DoxyCodeLine{\Hypertarget{_lib_2_ide_2_host_8_photino_2_program_8cs_source_l00040}00040\ \ \ \ \ \ \ \ \ var\ \mbox{\hyperlink{_lib_2_ide_2_host_8_blazor_server_side_2_program_8cs_a7b225fcb720e4d5ed2bbf60e28a25e6d}{app}}\ =\ appBuilder.Build();}
+\DoxyCodeLine{\Hypertarget{_lib_2_ide_2_host_8_photino_2_program_8cs_source_l00041}00041\ }
+\DoxyCodeLine{\Hypertarget{_lib_2_ide_2_host_8_photino_2_program_8cs_source_l00042}00042\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ customize\ window}}
+\DoxyCodeLine{\Hypertarget{_lib_2_ide_2_host_8_photino_2_program_8cs_source_l00043}00043\ \ \ \ \ \ \ \ \ app.MainWindow}
+\DoxyCodeLine{\Hypertarget{_lib_2_ide_2_host_8_photino_2_program_8cs_source_l00044}00044\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Am\ doing\ development\ with\ a\ locally\ published\ version\ of\ the\ IDE}}
+\DoxyCodeLine{\Hypertarget{_lib_2_ide_2_host_8_photino_2_program_8cs_source_l00045}00045\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ on\ Ubuntu.\ The\ text\ editor\ isn't\ fully\ optimized,}}
+\DoxyCodeLine{\Hypertarget{_lib_2_ide_2_host_8_photino_2_program_8cs_source_l00046}00046\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ and\ the\ default\ Log\ for\ Photino\ is\ the\ console.}}
+\DoxyCodeLine{\Hypertarget{_lib_2_ide_2_host_8_photino_2_program_8cs_source_l00047}00047\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ So,\ to\ help\ the\ integrated\ terminal\ I'm}}
+\DoxyCodeLine{\Hypertarget{_lib_2_ide_2_host_8_photino_2_program_8cs_source_l00048}00048\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ setting\ verbosity\ to\ 0\ (which\ turns\ off\ logging)\ for\ now\ (2024-\/05-\/14).}}
+\DoxyCodeLine{\Hypertarget{_lib_2_ide_2_host_8_photino_2_program_8cs_source_l00049}00049\ \ \ \ \ \ \ \ \ \ \ \ \ .SetLogVerbosity(0)}
+\DoxyCodeLine{\Hypertarget{_lib_2_ide_2_host_8_photino_2_program_8cs_source_l00050}00050\ \ \ \ \ \ \ \ \ \ \ \ \ .SetIconFile(\textcolor{stringliteral}{"{}favicon.ico"{}})}
+\DoxyCodeLine{\Hypertarget{_lib_2_ide_2_host_8_photino_2_program_8cs_source_l00051}00051\ \ \ \ \ \ \ \ \ \ \ \ \ .SetTitle(\textcolor{stringliteral}{"{}Luthetus\ IDE"{}})}
+\DoxyCodeLine{\Hypertarget{_lib_2_ide_2_host_8_photino_2_program_8cs_source_l00052}00052\ \ \ \ \ \ \ \ \ \ \ \ \ .SetDevToolsEnabled(\textcolor{keyword}{true})}
+\DoxyCodeLine{\Hypertarget{_lib_2_ide_2_host_8_photino_2_program_8cs_source_l00053}00053\ \ \ \ \ \ \ \ \ \ \ \ \ .SetContextMenuEnabled(\textcolor{keyword}{true})}
+\DoxyCodeLine{\Hypertarget{_lib_2_ide_2_host_8_photino_2_program_8cs_source_l00054}00054\ \ \ \ \ \ \ \ \ \ \ \ \ .SetUseOsDefaultSize(\textcolor{keyword}{false})}
+\DoxyCodeLine{\Hypertarget{_lib_2_ide_2_host_8_photino_2_program_8cs_source_l00055}00055\ \ \ \ \ \ \ \ \ \ \ \ \ .SetSize(2470,\ 2000)}
+\DoxyCodeLine{\Hypertarget{_lib_2_ide_2_host_8_photino_2_program_8cs_source_l00056}00056\ \ \ \ \ \ \ \ \ \ \ \ \ .SetLeft(50)}
+\DoxyCodeLine{\Hypertarget{_lib_2_ide_2_host_8_photino_2_program_8cs_source_l00057}00057\ \ \ \ \ \ \ \ \ \ \ \ \ .SetTop(50)}
+\DoxyCodeLine{\Hypertarget{_lib_2_ide_2_host_8_photino_2_program_8cs_source_l00058}00058\ \ \ \ \ \ \ \ \ \ \ \ \ .RegisterSizeChangedHandler((\_,\ size)\ =>\ }
+\DoxyCodeLine{\Hypertarget{_lib_2_ide_2_host_8_photino_2_program_8cs_source_l00059}00059\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_lib_2_ide_2_host_8_photino_2_program_8cs_source_l00060}00060\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ var\ store\ =\ \mbox{\hyperlink{_lib_2_ide_2_host_8_blazor_server_side_2_program_8cs_a7b225fcb720e4d5ed2bbf60e28a25e6d}{app}}.Services.GetRequiredService<IStore>();}
+\DoxyCodeLine{\Hypertarget{_lib_2_ide_2_host_8_photino_2_program_8cs_source_l00061}00061\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!store.Initialized.IsCompleted)}
+\DoxyCodeLine{\Hypertarget{_lib_2_ide_2_host_8_photino_2_program_8cs_source_l00062}00062\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return};}
+\DoxyCodeLine{\Hypertarget{_lib_2_ide_2_host_8_photino_2_program_8cs_source_l00063}00063\ }
+\DoxyCodeLine{\Hypertarget{_lib_2_ide_2_host_8_photino_2_program_8cs_source_l00064}00064\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ var\ dispatcher\ =\ \mbox{\hyperlink{_lib_2_ide_2_host_8_blazor_server_side_2_program_8cs_a7b225fcb720e4d5ed2bbf60e28a25e6d}{app}}.Services.GetRequiredService<IDispatcher>();}
+\DoxyCodeLine{\Hypertarget{_lib_2_ide_2_host_8_photino_2_program_8cs_source_l00065}00065\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ dispatcher.Dispatch(\textcolor{keyword}{new}\ \mbox{\hyperlink{namespace_luthetus_1_1_common_1_1_razor_lib_1_1_dimensions_1_1_states_a1dc2ed8953002aa28562e5317bf885f4}{AppDimensionState}}.SetAppDimensionStateAction(inState\ =>\ inState\ with}
+\DoxyCodeLine{\Hypertarget{_lib_2_ide_2_host_8_photino_2_program_8cs_source_l00066}00066\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_lib_2_ide_2_host_8_photino_2_program_8cs_source_l00067}00067\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Width\ =\ size.Width,}
+\DoxyCodeLine{\Hypertarget{_lib_2_ide_2_host_8_photino_2_program_8cs_source_l00068}00068\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Height\ =\ size.Height}
+\DoxyCodeLine{\Hypertarget{_lib_2_ide_2_host_8_photino_2_program_8cs_source_l00069}00069\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}));}
+\DoxyCodeLine{\Hypertarget{_lib_2_ide_2_host_8_photino_2_program_8cs_source_l00070}00070\ \ \ \ \ \ \ \ \ \ \ \ \ \})}
+\DoxyCodeLine{\Hypertarget{_lib_2_ide_2_host_8_photino_2_program_8cs_source_l00071}00071\ \ \ \ \ \ \ \ \ \ \ \ \ .RegisterMaximizedHandler((\_,\ \_)\ =>}
+\DoxyCodeLine{\Hypertarget{_lib_2_ide_2_host_8_photino_2_program_8cs_source_l00072}00072\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_lib_2_ide_2_host_8_photino_2_program_8cs_source_l00073}00073\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ The\ 'RegisterSizeChangedHandler'\ will\ update\ the\ width\ and\ height\ appropriately,}}
+\DoxyCodeLine{\Hypertarget{_lib_2_ide_2_host_8_photino_2_program_8cs_source_l00074}00074\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ when\ there\ is\ a\ 'maximized'\ event.\ But\ there\ seems\ to\ be\ a\ timing\ issue?}}
+\DoxyCodeLine{\Hypertarget{_lib_2_ide_2_host_8_photino_2_program_8cs_source_l00075}00075\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Adding\ this\ did\ NOT\ fix\ the\ issue.}}
+\DoxyCodeLine{\Hypertarget{_lib_2_ide_2_host_8_photino_2_program_8cs_source_l00076}00076\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ var\ store\ =\ \mbox{\hyperlink{_lib_2_ide_2_host_8_blazor_server_side_2_program_8cs_a7b225fcb720e4d5ed2bbf60e28a25e6d}{app}}.Services.GetRequiredService<IStore>();}
+\DoxyCodeLine{\Hypertarget{_lib_2_ide_2_host_8_photino_2_program_8cs_source_l00077}00077\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!store.Initialized.IsCompleted)}
+\DoxyCodeLine{\Hypertarget{_lib_2_ide_2_host_8_photino_2_program_8cs_source_l00078}00078\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return};}
+\DoxyCodeLine{\Hypertarget{_lib_2_ide_2_host_8_photino_2_program_8cs_source_l00079}00079\ }
+\DoxyCodeLine{\Hypertarget{_lib_2_ide_2_host_8_photino_2_program_8cs_source_l00080}00080\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ var\ dispatcher\ =\ \mbox{\hyperlink{_lib_2_ide_2_host_8_blazor_server_side_2_program_8cs_a7b225fcb720e4d5ed2bbf60e28a25e6d}{app}}.Services.GetRequiredService<IDispatcher>();}
+\DoxyCodeLine{\Hypertarget{_lib_2_ide_2_host_8_photino_2_program_8cs_source_l00081}00081\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ dispatcher.Dispatch(\textcolor{keyword}{new}\ \mbox{\hyperlink{namespace_luthetus_1_1_common_1_1_razor_lib_1_1_dimensions_1_1_states_a1dc2ed8953002aa28562e5317bf885f4}{AppDimensionState}}.NotifyIntraAppResizeAction());}
+\DoxyCodeLine{\Hypertarget{_lib_2_ide_2_host_8_photino_2_program_8cs_source_l00082}00082\ \ \ \ \ \ \ \ \ \ \ \ \ \})}
+\DoxyCodeLine{\Hypertarget{_lib_2_ide_2_host_8_photino_2_program_8cs_source_l00083}00083\ \ \ \ \ \ \ \ \ \ \ \ \ .RegisterRestoredHandler((\_,\ \_)\ =>}
+\DoxyCodeLine{\Hypertarget{_lib_2_ide_2_host_8_photino_2_program_8cs_source_l00084}00084\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_lib_2_ide_2_host_8_photino_2_program_8cs_source_l00085}00085\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ The\ 'RegisterSizeChangedHandler'\ will\ update\ the\ width\ and\ height\ appropriately,}}
+\DoxyCodeLine{\Hypertarget{_lib_2_ide_2_host_8_photino_2_program_8cs_source_l00086}00086\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ when\ there\ is\ a\ 'restored'\ event.\ But\ there\ seems\ to\ be\ a\ timing\ issue?}}
+\DoxyCodeLine{\Hypertarget{_lib_2_ide_2_host_8_photino_2_program_8cs_source_l00087}00087\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Adding\ this\ did\ NOT\ fix\ the\ issue.}}
+\DoxyCodeLine{\Hypertarget{_lib_2_ide_2_host_8_photino_2_program_8cs_source_l00088}00088\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ var\ store\ =\ \mbox{\hyperlink{_lib_2_ide_2_host_8_blazor_server_side_2_program_8cs_a7b225fcb720e4d5ed2bbf60e28a25e6d}{app}}.Services.GetRequiredService<IStore>();}
+\DoxyCodeLine{\Hypertarget{_lib_2_ide_2_host_8_photino_2_program_8cs_source_l00089}00089\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!store.Initialized.IsCompleted)}
+\DoxyCodeLine{\Hypertarget{_lib_2_ide_2_host_8_photino_2_program_8cs_source_l00090}00090\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return};}
+\DoxyCodeLine{\Hypertarget{_lib_2_ide_2_host_8_photino_2_program_8cs_source_l00091}00091\ }
+\DoxyCodeLine{\Hypertarget{_lib_2_ide_2_host_8_photino_2_program_8cs_source_l00092}00092\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ var\ dispatcher\ =\ \mbox{\hyperlink{_lib_2_ide_2_host_8_blazor_server_side_2_program_8cs_a7b225fcb720e4d5ed2bbf60e28a25e6d}{app}}.Services.GetRequiredService<IDispatcher>();}
+\DoxyCodeLine{\Hypertarget{_lib_2_ide_2_host_8_photino_2_program_8cs_source_l00093}00093\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ dispatcher.Dispatch(\textcolor{keyword}{new}\ \mbox{\hyperlink{namespace_luthetus_1_1_common_1_1_razor_lib_1_1_dimensions_1_1_states_a1dc2ed8953002aa28562e5317bf885f4}{AppDimensionState}}.NotifyIntraAppResizeAction());}
+\DoxyCodeLine{\Hypertarget{_lib_2_ide_2_host_8_photino_2_program_8cs_source_l00094}00094\ \ \ \ \ \ \ \ \ \ \ \ \ \});}
+\DoxyCodeLine{\Hypertarget{_lib_2_ide_2_host_8_photino_2_program_8cs_source_l00095}00095\ }
+\DoxyCodeLine{\Hypertarget{_lib_2_ide_2_host_8_photino_2_program_8cs_source_l00096}00096\ \ \ \ \ \ \ \ \ hostingInformation.GetMainWindowScreenDpiFunc\ =\ ()\ =>}
+\DoxyCodeLine{\Hypertarget{_lib_2_ide_2_host_8_photino_2_program_8cs_source_l00097}00097\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_lib_2_ide_2_host_8_photino_2_program_8cs_source_l00098}00098\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{try}}
+\DoxyCodeLine{\Hypertarget{_lib_2_ide_2_host_8_photino_2_program_8cs_source_l00099}00099\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_lib_2_ide_2_host_8_photino_2_program_8cs_source_l00100}00100\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{_lib_2_ide_2_host_8_blazor_server_side_2_program_8cs_a7b225fcb720e4d5ed2bbf60e28a25e6d}{app}}.MainWindow.ScreenDpi;}
+\DoxyCodeLine{\Hypertarget{_lib_2_ide_2_host_8_photino_2_program_8cs_source_l00101}00101\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_lib_2_ide_2_host_8_photino_2_program_8cs_source_l00102}00102\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{catch}\ (Exception\ e)}
+\DoxyCodeLine{\Hypertarget{_lib_2_ide_2_host_8_photino_2_program_8cs_source_l00103}00103\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_lib_2_ide_2_host_8_photino_2_program_8cs_source_l00104}00104\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Eat\ this\ exception}}
+\DoxyCodeLine{\Hypertarget{_lib_2_ide_2_host_8_photino_2_program_8cs_source_l00105}00105\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ 0;}
+\DoxyCodeLine{\Hypertarget{_lib_2_ide_2_host_8_photino_2_program_8cs_source_l00106}00106\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_lib_2_ide_2_host_8_photino_2_program_8cs_source_l00107}00107\ \ \ \ \ \ \ \ \ \};}
+\DoxyCodeLine{\Hypertarget{_lib_2_ide_2_host_8_photino_2_program_8cs_source_l00108}00108\ }
+\DoxyCodeLine{\Hypertarget{_lib_2_ide_2_host_8_photino_2_program_8cs_source_l00109}00109\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Personal\ settings\ to\ have\ closing\ and\ reopening\ the\ IDE\ be\ exactly\ where\ I\ want\ while\ developing.}}
+\DoxyCodeLine{\Hypertarget{_lib_2_ide_2_host_8_photino_2_program_8cs_source_l00110}00110\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_lib_2_ide_2_host_8_photino_2_program_8cs_source_l00111}00111\ \ \ \ \ \ \ \ \ \ \ \ \ var\ specialFolderUserProfile\ =\ Environment.GetFolderPath(Environment.SpecialFolder.UserProfile);}
+\DoxyCodeLine{\Hypertarget{_lib_2_ide_2_host_8_photino_2_program_8cs_source_l00112}00112\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (specialFolderUserProfile\ ==\ \textcolor{stringliteral}{"{}C:\(\backslash\)\(\backslash\)Users\(\backslash\)\(\backslash\)hunte"{}})}
+\DoxyCodeLine{\Hypertarget{_lib_2_ide_2_host_8_photino_2_program_8cs_source_l00113}00113\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{_lib_2_ide_2_host_8_blazor_server_side_2_program_8cs_a7b225fcb720e4d5ed2bbf60e28a25e6d}{app}}.MainWindow.SetLeft(1\_355);}
+\DoxyCodeLine{\Hypertarget{_lib_2_ide_2_host_8_photino_2_program_8cs_source_l00114}00114\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ (specialFolderUserProfile\ ==\ \textcolor{stringliteral}{"{}/home/hunter"{}})}
+\DoxyCodeLine{\Hypertarget{_lib_2_ide_2_host_8_photino_2_program_8cs_source_l00115}00115\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{_lib_2_ide_2_host_8_blazor_server_side_2_program_8cs_a7b225fcb720e4d5ed2bbf60e28a25e6d}{app}}.MainWindow.SetLeft(1\_200).SetTop(100).SetHeight(1900);}
+\DoxyCodeLine{\Hypertarget{_lib_2_ide_2_host_8_photino_2_program_8cs_source_l00116}00116\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_lib_2_ide_2_host_8_photino_2_program_8cs_source_l00117}00117\ }
+\DoxyCodeLine{\Hypertarget{_lib_2_ide_2_host_8_photino_2_program_8cs_source_l00118}00118\ \ \ \ \ \ \ \ \ AppDomain.CurrentDomain.UnhandledException\ +=\ (sender,\ error)\ =>}
+\DoxyCodeLine{\Hypertarget{_lib_2_ide_2_host_8_photino_2_program_8cs_source_l00119}00119\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_lib_2_ide_2_host_8_photino_2_program_8cs_source_l00120}00120\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{_lib_2_ide_2_host_8_blazor_server_side_2_program_8cs_a7b225fcb720e4d5ed2bbf60e28a25e6d}{app}}.MainWindow.ShowMessage(\textcolor{stringliteral}{"{}Fatal\ exception"{}},\ error.ExceptionObject.ToString());}
+\DoxyCodeLine{\Hypertarget{_lib_2_ide_2_host_8_photino_2_program_8cs_source_l00121}00121\ \ \ \ \ \ \ \ \ \};}
+\DoxyCodeLine{\Hypertarget{_lib_2_ide_2_host_8_photino_2_program_8cs_source_l00122}00122\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_lib_2_ide_2_host_8_photino_2_program_8cs_source_l00123}00123\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{_lib_2_ide_2_host_8_blazor_server_side_2_program_8cs_aeee0b60aab9a620e5403b5af0d821d4c}{hostingInformation}}.StartBackgroundTaskWorkers(\mbox{\hyperlink{_lib_2_ide_2_host_8_blazor_server_side_2_program_8cs_a7b225fcb720e4d5ed2bbf60e28a25e6d}{app}}.Services);}
+\DoxyCodeLine{\Hypertarget{_lib_2_ide_2_host_8_photino_2_program_8cs_source_l00124}00124\ }
+\DoxyCodeLine{\Hypertarget{_lib_2_ide_2_host_8_photino_2_program_8cs_source_l00125}00125\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{_lib_2_ide_2_host_8_blazor_server_side_2_program_8cs_a7b225fcb720e4d5ed2bbf60e28a25e6d}{app}}.Run();}
+\DoxyCodeLine{\Hypertarget{_lib_2_ide_2_host_8_photino_2_program_8cs_source_l00126}00126\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_lib_2_ide_2_host_8_photino_2_program_8cs_source_l00127}00127\ \}}
+
+\end{DoxyCode}

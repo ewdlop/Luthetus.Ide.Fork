@@ -1,0 +1,4 @@
+var _compiler_service_registry_tests_8cs =
+[
+    [ "Luthetus.Extensions.DotNet.Tests.Basis.CompilerServices.Models.CompilerServiceRegistryTests", "class_luthetus_1_1_extensions_1_1_dot_net_1_1_tests_1_1_basis_1_1_compiler_services_1_1_models_1b9c27127770458a79cd9fc5a417119e4.html", "class_luthetus_1_1_extensions_1_1_dot_net_1_1_tests_1_1_basis_1_1_compiler_services_1_1_models_1b9c27127770458a79cd9fc5a417119e4" ]
+];

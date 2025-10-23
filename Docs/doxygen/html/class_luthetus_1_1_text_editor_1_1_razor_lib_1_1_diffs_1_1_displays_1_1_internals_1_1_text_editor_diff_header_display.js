@@ -1,0 +1,6 @@
+var class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_diffs_1_1_displays_1_1_internals_1_1_text_editor_diff_header_display =
+[
+    [ "Dispose", "class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_diffs_1_1_displays_1_1_internals_1_1_text_editor_diff_header_display.html#aad3c02cc61f5e355273162ecf841f24b", null ],
+    [ "OnInitialized", "class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_diffs_1_1_displays_1_1_internals_1_1_text_editor_diff_header_display.html#a21b59a406f1d87c9bb0361306182786f", null ],
+    [ "TextEditorViewModelDisplay", "class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_diffs_1_1_displays_1_1_internals_1_1_text_editor_diff_header_display.html#aef816a7e19bad45de32df46ebf5a3e29", null ]
+];

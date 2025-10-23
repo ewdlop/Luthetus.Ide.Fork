@@ -1,0 +1,7 @@
+var interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_virtualizations_1_1_models_1_1_i_virtualization_result_without_type_mask =
+[
+    [ "BottomVirtualizationBoundary", "interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_virtualizations_1_1_models_1_1_i_virtualization_result_without_type_mask.html#a14851a35d00db492e4c02269a2dde085", null ],
+    [ "LeftVirtualizationBoundary", "interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_virtualizations_1_1_models_1_1_i_virtualization_result_without_type_mask.html#a4079c413959236481f361e1ffed14dc1", null ],
+    [ "RightVirtualizationBoundary", "interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_virtualizations_1_1_models_1_1_i_virtualization_result_without_type_mask.html#a039282c2a80bf552a33fed094c35fc80", null ],
+    [ "TopVirtualizationBoundary", "interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_virtualizations_1_1_models_1_1_i_virtualization_result_without_type_mask.html#a0908d616686e5ea109bcc5cf1ccffe0d", null ]
+];

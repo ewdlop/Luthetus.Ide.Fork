@@ -1,0 +1,194 @@
+\doxysection{Text\+Editor\+Command\+Vim\+Facts.\+Verbs.\+Functions.\+cs}
+\hypertarget{_text_editor_command_vim_facts_8_verbs_8_functions_8cs_source}{}\label{_text_editor_command_vim_facts_8_verbs_8_functions_8cs_source}\index{Source/Lib/TextEditor/Commands/Models/Vims/TextEditorCommandVimFacts.Verbs.Functions.cs@{Source/Lib/TextEditor/Commands/Models/Vims/TextEditorCommandVimFacts.Verbs.Functions.cs}}
+\mbox{\hyperlink{_text_editor_command_vim_facts_8_verbs_8_functions_8cs}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{_text_editor_command_vim_facts_8_verbs_8_functions_8cs_source_l00001}00001\ \textcolor{keyword}{using\ }Microsoft.Extensions.DependencyInjection;}
+\DoxyCodeLine{\Hypertarget{_text_editor_command_vim_facts_8_verbs_8_functions_8cs_source_l00002}00002\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_luthetus_1_1_common_1_1_razor_lib_1_1_keys_1_1_models}{Luthetus.Common.RazorLib.Keys.Models}};}
+\DoxyCodeLine{\Hypertarget{_text_editor_command_vim_facts_8_verbs_8_functions_8cs_source_l00003}00003\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_luthetus_1_1_common_1_1_razor_lib_1_1_clipboards_1_1_models}{Luthetus.Common.RazorLib.Clipboards.Models}};}
+\DoxyCodeLine{\Hypertarget{_text_editor_command_vim_facts_8_verbs_8_functions_8cs_source_l00004}00004\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_commands_1_1_models_1_1_defaults}{Luthetus.TextEditor.RazorLib.Commands.Models.Defaults}};}
+\DoxyCodeLine{\Hypertarget{_text_editor_command_vim_facts_8_verbs_8_functions_8cs_source_l00005}00005\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_cursors_1_1_models}{Luthetus.TextEditor.RazorLib.Cursors.Models}};}
+\DoxyCodeLine{\Hypertarget{_text_editor_command_vim_facts_8_verbs_8_functions_8cs_source_l00006}00006\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_keymaps_1_1_models}{Luthetus.TextEditor.RazorLib.Keymaps.Models}};}
+\DoxyCodeLine{\Hypertarget{_text_editor_command_vim_facts_8_verbs_8_functions_8cs_source_l00007}00007\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_keymaps_1_1_models_1_1_vims}{Luthetus.TextEditor.RazorLib.Keymaps.Models.Vims}};}
+\DoxyCodeLine{\Hypertarget{_text_editor_command_vim_facts_8_verbs_8_functions_8cs_source_l00008}00008\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models}{Luthetus.TextEditor.RazorLib.TextEditors.Models}};}
+\DoxyCodeLine{\Hypertarget{_text_editor_command_vim_facts_8_verbs_8_functions_8cs_source_l00009}00009\ }
+\DoxyCodeLine{\Hypertarget{_text_editor_command_vim_facts_8_verbs_8_functions_8cs_source_l00010}00010\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_commands_1_1_models_1_1_vims}{Luthetus.TextEditor.RazorLib.Commands.Models.Vims}};}
+\DoxyCodeLine{\Hypertarget{_text_editor_command_vim_facts_8_verbs_8_functions_8cs_source_l00011}00011\ }
+\DoxyCodeLine{\Hypertarget{_text_editor_command_vim_facts_8_verbs_8_functions_8cs_source_l00012}00012\ \textcolor{keyword}{public}\ \textcolor{keyword}{static}\ \textcolor{keyword}{partial\ class\ }TextEditorCommandVimFacts}
+\DoxyCodeLine{\Hypertarget{_text_editor_command_vim_facts_8_verbs_8_functions_8cs_source_l00013}00013\ \{}
+\DoxyCodeLine{\Hypertarget{_text_editor_command_vim_facts_8_verbs_8_functions_8cs_source_l00014}00014\ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keyword}{static}\ \textcolor{keyword}{partial\ class\ }Verbs}
+\DoxyCodeLine{\Hypertarget{_text_editor_command_vim_facts_8_verbs_8_functions_8cs_source_l00015}00015\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_text_editor_command_vim_facts_8_verbs_8_functions_8cs_source_l00016}00016\ \ \ \ \ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keyword}{static}\ Task\ DeleteLine(}
+\DoxyCodeLine{\Hypertarget{_text_editor_command_vim_facts_8_verbs_8_functions_8cs_source_l00017}00017\ \ \ \ \ \ \ \ \ \ \ \ \ ITextEditorEditContext\ editContext,}
+\DoxyCodeLine{\Hypertarget{_text_editor_command_vim_facts_8_verbs_8_functions_8cs_source_l00018}00018\ \ \ \ \ \ \ \ \ \ \ \ \ TextEditorModelModifier\ modelModifier,}
+\DoxyCodeLine{\Hypertarget{_text_editor_command_vim_facts_8_verbs_8_functions_8cs_source_l00019}00019\ \ \ \ \ \ \ \ \ \ \ \ \ TextEditorViewModelModifier\ viewModelModifier,}
+\DoxyCodeLine{\Hypertarget{_text_editor_command_vim_facts_8_verbs_8_functions_8cs_source_l00020}00020\ \ \ \ \ \ \ \ \ \ \ \ \ CursorModifierBagTextEditor\ cursorModifierBag,}
+\DoxyCodeLine{\Hypertarget{_text_editor_command_vim_facts_8_verbs_8_functions_8cs_source_l00021}00021\ \ \ \ \ \ \ \ \ \ \ \ \ TextEditorCommandArgs\ commandArgs)}
+\DoxyCodeLine{\Hypertarget{_text_editor_command_vim_facts_8_verbs_8_functions_8cs_source_l00022}00022\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_text_editor_command_vim_facts_8_verbs_8_functions_8cs_source_l00023}00023\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ TextEditorCommandDefaultFunctions.CutAsync(}
+\DoxyCodeLine{\Hypertarget{_text_editor_command_vim_facts_8_verbs_8_functions_8cs_source_l00024}00024\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ editContext,}
+\DoxyCodeLine{\Hypertarget{_text_editor_command_vim_facts_8_verbs_8_functions_8cs_source_l00025}00025\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ modelModifier,}
+\DoxyCodeLine{\Hypertarget{_text_editor_command_vim_facts_8_verbs_8_functions_8cs_source_l00026}00026\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ viewModelModifier,}
+\DoxyCodeLine{\Hypertarget{_text_editor_command_vim_facts_8_verbs_8_functions_8cs_source_l00027}00027\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ cursorModifierBag,}
+\DoxyCodeLine{\Hypertarget{_text_editor_command_vim_facts_8_verbs_8_functions_8cs_source_l00028}00028\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ commandArgs.\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_commands_1_1_models_1_1_text_editor_command_args_ae694d876b7fdf1360e28e737476b5286}{ServiceProvider}}.GetRequiredService<IClipboardService>());}
+\DoxyCodeLine{\Hypertarget{_text_editor_command_vim_facts_8_verbs_8_functions_8cs_source_l00029}00029\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_text_editor_command_vim_facts_8_verbs_8_functions_8cs_source_l00030}00030\ }
+\DoxyCodeLine{\Hypertarget{_text_editor_command_vim_facts_8_verbs_8_functions_8cs_source_l00031}00031\ \ \ \ \ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keyword}{static}\ async\ Task\ ChangeLine(}
+\DoxyCodeLine{\Hypertarget{_text_editor_command_vim_facts_8_verbs_8_functions_8cs_source_l00032}00032\ \ \ \ \ \ \ \ \ \ \ \ \ ITextEditorEditContext\ editContext,}
+\DoxyCodeLine{\Hypertarget{_text_editor_command_vim_facts_8_verbs_8_functions_8cs_source_l00033}00033\ \ \ \ \ \ \ \ \ \ \ \ \ TextEditorModelModifier\ modelModifier,}
+\DoxyCodeLine{\Hypertarget{_text_editor_command_vim_facts_8_verbs_8_functions_8cs_source_l00034}00034\ \ \ \ \ \ \ \ \ \ \ \ \ TextEditorViewModelModifier\ viewModelModifier,}
+\DoxyCodeLine{\Hypertarget{_text_editor_command_vim_facts_8_verbs_8_functions_8cs_source_l00035}00035\ \ \ \ \ \ \ \ \ \ \ \ \ CursorModifierBagTextEditor\ cursorModifierBag,}
+\DoxyCodeLine{\Hypertarget{_text_editor_command_vim_facts_8_verbs_8_functions_8cs_source_l00036}00036\ \ \ \ \ \ \ \ \ \ \ \ \ TextEditorCommandArgs\ commandArgs)}
+\DoxyCodeLine{\Hypertarget{_text_editor_command_vim_facts_8_verbs_8_functions_8cs_source_l00037}00037\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_text_editor_command_vim_facts_8_verbs_8_functions_8cs_source_l00038}00038\ \ \ \ \ \ \ \ \ \ \ \ \ var\ activeKeymap\ =\ commandArgs.ComponentData.Options.Keymap\ ??\ TextEditorKeymapFacts.DefaultKeymap;}
+\DoxyCodeLine{\Hypertarget{_text_editor_command_vim_facts_8_verbs_8_functions_8cs_source_l00039}00039\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (activeKeymap\ is\ not\ TextEditorKeymapVim\ keymapVim)}
+\DoxyCodeLine{\Hypertarget{_text_editor_command_vim_facts_8_verbs_8_functions_8cs_source_l00040}00040\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return};}
+\DoxyCodeLine{\Hypertarget{_text_editor_command_vim_facts_8_verbs_8_functions_8cs_source_l00041}00041\ }
+\DoxyCodeLine{\Hypertarget{_text_editor_command_vim_facts_8_verbs_8_functions_8cs_source_l00042}00042\ \ \ \ \ \ \ \ \ \ \ \ \ await\ TextEditorCommandDefaultFunctions.CutAsync(}
+\DoxyCodeLine{\Hypertarget{_text_editor_command_vim_facts_8_verbs_8_functions_8cs_source_l00043}00043\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ editContext,}
+\DoxyCodeLine{\Hypertarget{_text_editor_command_vim_facts_8_verbs_8_functions_8cs_source_l00044}00044\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ modelModifier,}
+\DoxyCodeLine{\Hypertarget{_text_editor_command_vim_facts_8_verbs_8_functions_8cs_source_l00045}00045\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ viewModelModifier,}
+\DoxyCodeLine{\Hypertarget{_text_editor_command_vim_facts_8_verbs_8_functions_8cs_source_l00046}00046\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ cursorModifierBag,}
+\DoxyCodeLine{\Hypertarget{_text_editor_command_vim_facts_8_verbs_8_functions_8cs_source_l00047}00047\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ commandArgs.\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_commands_1_1_models_1_1_text_editor_command_args_ae694d876b7fdf1360e28e737476b5286}{ServiceProvider}}.GetRequiredService<IClipboardService>())}
+\DoxyCodeLine{\Hypertarget{_text_editor_command_vim_facts_8_verbs_8_functions_8cs_source_l00048}00048\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ .ConfigureAwait(\textcolor{keyword}{false});}
+\DoxyCodeLine{\Hypertarget{_text_editor_command_vim_facts_8_verbs_8_functions_8cs_source_l00049}00049\ }
+\DoxyCodeLine{\Hypertarget{_text_editor_command_vim_facts_8_verbs_8_functions_8cs_source_l00050}00050\ \ \ \ \ \ \ \ \ \ \ \ \ keymapVim.ActiveVimMode\ =\ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_keymaps_1_1_models_1_1_vims_ac88af8149d254447dc2dcc2b8d17125a}{VimMode}}.Insert;}
+\DoxyCodeLine{\Hypertarget{_text_editor_command_vim_facts_8_verbs_8_functions_8cs_source_l00051}00051\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_text_editor_command_vim_facts_8_verbs_8_functions_8cs_source_l00052}00052\ }
+\DoxyCodeLine{\Hypertarget{_text_editor_command_vim_facts_8_verbs_8_functions_8cs_source_l00053}00053\ \ \ \ \ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keyword}{static}\ async\ Task\ DeleteMotion(}
+\DoxyCodeLine{\Hypertarget{_text_editor_command_vim_facts_8_verbs_8_functions_8cs_source_l00054}00054\ \ \ \ \ \ \ \ \ \ \ \ \ ITextEditorEditContext\ editContext,}
+\DoxyCodeLine{\Hypertarget{_text_editor_command_vim_facts_8_verbs_8_functions_8cs_source_l00055}00055\ \ \ \ \ \ \ \ \ \ \ \ \ TextEditorModelModifier\ modelModifier,}
+\DoxyCodeLine{\Hypertarget{_text_editor_command_vim_facts_8_verbs_8_functions_8cs_source_l00056}00056\ \ \ \ \ \ \ \ \ \ \ \ \ TextEditorViewModelModifier\ viewModelModifier,}
+\DoxyCodeLine{\Hypertarget{_text_editor_command_vim_facts_8_verbs_8_functions_8cs_source_l00057}00057\ \ \ \ \ \ \ \ \ \ \ \ \ CursorModifierBagTextEditor\ cursorModifierBag,}
+\DoxyCodeLine{\Hypertarget{_text_editor_command_vim_facts_8_verbs_8_functions_8cs_source_l00058}00058\ \ \ \ \ \ \ \ \ \ \ \ \ TextEditorCommandArgs\ commandArgs)}
+\DoxyCodeLine{\Hypertarget{_text_editor_command_vim_facts_8_verbs_8_functions_8cs_source_l00059}00059\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_text_editor_command_vim_facts_8_verbs_8_functions_8cs_source_l00060}00060\ \ \ \ \ \ \ \ \ \ \ \ \ var\ textEditorCommandArgsForMotion\ =\ \textcolor{keyword}{new}\ TextEditorCommandArgs(}
+\DoxyCodeLine{\Hypertarget{_text_editor_command_vim_facts_8_verbs_8_functions_8cs_source_l00061}00061\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ modelModifier.\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1_1_text_editor_model_modifier_a6465f59aaf55b1526ce93857fd144619}{ResourceUri}},}
+\DoxyCodeLine{\Hypertarget{_text_editor_command_vim_facts_8_verbs_8_functions_8cs_source_l00062}00062\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ viewModelModifier.\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1_1_text_editor_view_model_modifier_a507df71f9116845e02265208b721d513}{ViewModel}}.ViewModelKey,}
+\DoxyCodeLine{\Hypertarget{_text_editor_command_vim_facts_8_verbs_8_functions_8cs_source_l00063}00063\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ commandArgs.\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_commands_1_1_models_1_1_text_editor_command_args_afd26d26a9ff55123964f56c6eae69f29}{ComponentData}},}
+\DoxyCodeLine{\Hypertarget{_text_editor_command_vim_facts_8_verbs_8_functions_8cs_source_l00064}00064\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ commandArgs.\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_commands_1_1_models_1_1_text_editor_command_args_ab1e61b94157a860afb4fa4990e4bec0b}{TextEditorService}},}
+\DoxyCodeLine{\Hypertarget{_text_editor_command_vim_facts_8_verbs_8_functions_8cs_source_l00065}00065\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ commandArgs.\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_commands_1_1_models_1_1_text_editor_command_args_ae694d876b7fdf1360e28e737476b5286}{ServiceProvider}},}
+\DoxyCodeLine{\Hypertarget{_text_editor_command_vim_facts_8_verbs_8_functions_8cs_source_l00066}00066\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ editContext);}
+\DoxyCodeLine{\Hypertarget{_text_editor_command_vim_facts_8_verbs_8_functions_8cs_source_l00067}00067\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_text_editor_command_vim_facts_8_verbs_8_functions_8cs_source_l00068}00068\ \ \ \ \ \ \ \ \ \ \ \ \ var\ primaryCursorModifier\ =\ editContext.\mbox{\hyperlink{interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1_1_i_text_editor_edit_context_a354a51269d220c10592c6cf330f0ddf4}{GetPrimaryCursorModifier}}(cursorModifierBag);}
+\DoxyCodeLine{\Hypertarget{_text_editor_command_vim_facts_8_verbs_8_functions_8cs_source_l00069}00069\ }
+\DoxyCodeLine{\Hypertarget{_text_editor_command_vim_facts_8_verbs_8_functions_8cs_source_l00070}00070\ \ \ \ \ \ \ \ \ \ \ \ \ var\ inCursor\ =\ primaryCursorModifier.\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_cursors_1_1_models_1_1_text_editor_cursor_modifier_a8591fab5601be80853d9b7bb9365708f}{ToCursor}}();}
+\DoxyCodeLine{\Hypertarget{_text_editor_command_vim_facts_8_verbs_8_functions_8cs_source_l00071}00071\ }
+\DoxyCodeLine{\Hypertarget{_text_editor_command_vim_facts_8_verbs_8_functions_8cs_source_l00072}00072\ \ \ \ \ \ \ \ \ \ \ \ \ var\ motionResult\ =\ await\ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_keymaps_1_1_models_1_1_vims_ad9f611caa7bde0ceb56604725d019a87}{VimMotionResult}}.GetResultAsync(}
+\DoxyCodeLine{\Hypertarget{_text_editor_command_vim_facts_8_verbs_8_functions_8cs_source_l00073}00073\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ modelModifier,}
+\DoxyCodeLine{\Hypertarget{_text_editor_command_vim_facts_8_verbs_8_functions_8cs_source_l00074}00074\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ primaryCursorModifier,}
+\DoxyCodeLine{\Hypertarget{_text_editor_command_vim_facts_8_verbs_8_functions_8cs_source_l00075}00075\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ async\ ()\ =>\ }
+\DoxyCodeLine{\Hypertarget{_text_editor_command_vim_facts_8_verbs_8_functions_8cs_source_l00076}00076\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_text_editor_command_vim_facts_8_verbs_8_functions_8cs_source_l00077}00077\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ await\ commandArgs.InnerCommand.CommandFunc}
+\DoxyCodeLine{\Hypertarget{_text_editor_command_vim_facts_8_verbs_8_functions_8cs_source_l00078}00078\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ .Invoke(textEditorCommandArgsForMotion)}
+\DoxyCodeLine{\Hypertarget{_text_editor_command_vim_facts_8_verbs_8_functions_8cs_source_l00079}00079\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ .ConfigureAwait(\textcolor{keyword}{false});}
+\DoxyCodeLine{\Hypertarget{_text_editor_command_vim_facts_8_verbs_8_functions_8cs_source_l00080}00080\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}).ConfigureAwait(\textcolor{keyword}{false});}
+\DoxyCodeLine{\Hypertarget{_text_editor_command_vim_facts_8_verbs_8_functions_8cs_source_l00081}00081\ }
+\DoxyCodeLine{\Hypertarget{_text_editor_command_vim_facts_8_verbs_8_functions_8cs_source_l00082}00082\ \ \ \ \ \ \ \ \ \ \ \ \ primaryCursorModifier.LineIndex\ =\ inCursor.LineIndex;}
+\DoxyCodeLine{\Hypertarget{_text_editor_command_vim_facts_8_verbs_8_functions_8cs_source_l00083}00083\ \ \ \ \ \ \ \ \ \ \ \ \ primaryCursorModifier.ColumnIndex\ =\ inCursor.ColumnIndex;}
+\DoxyCodeLine{\Hypertarget{_text_editor_command_vim_facts_8_verbs_8_functions_8cs_source_l00084}00084\ \ \ \ \ \ \ \ \ \ \ \ \ primaryCursorModifier.PreferredColumnIndex\ =\ inCursor.ColumnIndex;}
+\DoxyCodeLine{\Hypertarget{_text_editor_command_vim_facts_8_verbs_8_functions_8cs_source_l00085}00085\ }
+\DoxyCodeLine{\Hypertarget{_text_editor_command_vim_facts_8_verbs_8_functions_8cs_source_l00086}00086\ \ \ \ \ \ \ \ \ \ \ \ \ var\ cursorForDeletion\ =\ \textcolor{keyword}{new}\ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_cursors_1_1_models_a8373e854ca1ddf152a3b5372ea18c20b}{TextEditorCursor}}(}
+\DoxyCodeLine{\Hypertarget{_text_editor_command_vim_facts_8_verbs_8_functions_8cs_source_l00087}00087\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ motionResult.LowerPositionIndexCursor.LineIndex,}
+\DoxyCodeLine{\Hypertarget{_text_editor_command_vim_facts_8_verbs_8_functions_8cs_source_l00088}00088\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ motionResult.LowerPositionIndexCursor.ColumnIndex,}
+\DoxyCodeLine{\Hypertarget{_text_editor_command_vim_facts_8_verbs_8_functions_8cs_source_l00089}00089\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{true});}
+\DoxyCodeLine{\Hypertarget{_text_editor_command_vim_facts_8_verbs_8_functions_8cs_source_l00090}00090\ }
+\DoxyCodeLine{\Hypertarget{_text_editor_command_vim_facts_8_verbs_8_functions_8cs_source_l00091}00091\ \ \ \ \ \ \ \ \ \ \ \ \ var\ cursorModifierBagForDeletion\ =\ \textcolor{keyword}{new}\ CursorModifierBagTextEditor(}
+\DoxyCodeLine{\Hypertarget{_text_editor_command_vim_facts_8_verbs_8_functions_8cs_source_l00092}00092\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Key<TextEditorViewModel>.Empty,}
+\DoxyCodeLine{\Hypertarget{_text_editor_command_vim_facts_8_verbs_8_functions_8cs_source_l00093}00093\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{new}\ List<TextEditorCursorModifier>\ \{\ \textcolor{keyword}{new}(cursorForDeletion)\ \});}
+\DoxyCodeLine{\Hypertarget{_text_editor_command_vim_facts_8_verbs_8_functions_8cs_source_l00094}00094\ }
+\DoxyCodeLine{\Hypertarget{_text_editor_command_vim_facts_8_verbs_8_functions_8cs_source_l00095}00095\ \ \ \ \ \ \ \ \ \ \ \ \ editContext.\mbox{\hyperlink{interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1_1_i_text_editor_edit_context_a88ea6b9c0a12d44730e133c864e28ac2}{TextEditorService}}.\mbox{\hyperlink{interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_i_text_editor_service_ae3a0dbf71e296019f79700cb636fdf7e}{ModelApi}}.\mbox{\hyperlink{interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1_1_i_text_editor_model_api_a2e8abeb8876c6eee74a35813b6fd2a8a}{DeleteTextByRangeUnsafe}}(}
+\DoxyCodeLine{\Hypertarget{_text_editor_command_vim_facts_8_verbs_8_functions_8cs_source_l00096}00096\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ editContext,}
+\DoxyCodeLine{\Hypertarget{_text_editor_command_vim_facts_8_verbs_8_functions_8cs_source_l00097}00097\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ modelModifier,}
+\DoxyCodeLine{\Hypertarget{_text_editor_command_vim_facts_8_verbs_8_functions_8cs_source_l00098}00098\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ cursorModifierBagForDeletion,}
+\DoxyCodeLine{\Hypertarget{_text_editor_command_vim_facts_8_verbs_8_functions_8cs_source_l00099}00099\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ motionResult.PositionIndexDisplacement,}
+\DoxyCodeLine{\Hypertarget{_text_editor_command_vim_facts_8_verbs_8_functions_8cs_source_l00100}00100\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ CancellationToken.None);}
+\DoxyCodeLine{\Hypertarget{_text_editor_command_vim_facts_8_verbs_8_functions_8cs_source_l00101}00101\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_text_editor_command_vim_facts_8_verbs_8_functions_8cs_source_l00102}00102\ }
+\DoxyCodeLine{\Hypertarget{_text_editor_command_vim_facts_8_verbs_8_functions_8cs_source_l00103}00103\ \ \ \ \ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keyword}{static}\ async\ Task\ ChangeMotion(}
+\DoxyCodeLine{\Hypertarget{_text_editor_command_vim_facts_8_verbs_8_functions_8cs_source_l00104}00104\ \ \ \ \ \ \ \ \ \ \ \ \ ITextEditorEditContext\ editContext,}
+\DoxyCodeLine{\Hypertarget{_text_editor_command_vim_facts_8_verbs_8_functions_8cs_source_l00105}00105\ \ \ \ \ \ \ \ \ \ \ \ \ TextEditorModelModifier\ modelModifier,}
+\DoxyCodeLine{\Hypertarget{_text_editor_command_vim_facts_8_verbs_8_functions_8cs_source_l00106}00106\ \ \ \ \ \ \ \ \ \ \ \ \ TextEditorViewModelModifier\ viewModelModifier,}
+\DoxyCodeLine{\Hypertarget{_text_editor_command_vim_facts_8_verbs_8_functions_8cs_source_l00107}00107\ \ \ \ \ \ \ \ \ \ \ \ \ CursorModifierBagTextEditor\ cursorModifierBag,}
+\DoxyCodeLine{\Hypertarget{_text_editor_command_vim_facts_8_verbs_8_functions_8cs_source_l00108}00108\ \ \ \ \ \ \ \ \ \ \ \ \ TextEditorCommandArgs\ commandArgs)}
+\DoxyCodeLine{\Hypertarget{_text_editor_command_vim_facts_8_verbs_8_functions_8cs_source_l00109}00109\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_text_editor_command_vim_facts_8_verbs_8_functions_8cs_source_l00110}00110\ \ \ \ \ \ \ \ \ \ \ \ \ var\ activeKeymap\ =\ commandArgs.ComponentData.Options.Keymap\ ??\ TextEditorKeymapFacts.DefaultKeymap;}
+\DoxyCodeLine{\Hypertarget{_text_editor_command_vim_facts_8_verbs_8_functions_8cs_source_l00111}00111\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (activeKeymap\ is\ not\ TextEditorKeymapVim\ keymapVim)}
+\DoxyCodeLine{\Hypertarget{_text_editor_command_vim_facts_8_verbs_8_functions_8cs_source_l00112}00112\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return};}
+\DoxyCodeLine{\Hypertarget{_text_editor_command_vim_facts_8_verbs_8_functions_8cs_source_l00113}00113\ }
+\DoxyCodeLine{\Hypertarget{_text_editor_command_vim_facts_8_verbs_8_functions_8cs_source_l00114}00114\ \ \ \ \ \ \ \ \ \ \ \ \ var\ deleteMotion\ =\ DeleteMotionCommandConstructor(commandArgs.\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_commands_1_1_models_1_1_text_editor_command_args_ab2d070d6ca73b4d073a605dd783a0985}{InnerCommand}});}
+\DoxyCodeLine{\Hypertarget{_text_editor_command_vim_facts_8_verbs_8_functions_8cs_source_l00115}00115\ }
+\DoxyCodeLine{\Hypertarget{_text_editor_command_vim_facts_8_verbs_8_functions_8cs_source_l00116}00116\ \ \ \ \ \ \ \ \ \ \ \ \ await\ deleteMotion.CommandFunc.Invoke(commandArgs).ConfigureAwait(\textcolor{keyword}{false});}
+\DoxyCodeLine{\Hypertarget{_text_editor_command_vim_facts_8_verbs_8_functions_8cs_source_l00117}00117\ \ \ \ \ \ \ \ \ \ \ \ \ keymapVim.ActiveVimMode\ =\ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_keymaps_1_1_models_1_1_vims_ac88af8149d254447dc2dcc2b8d17125a}{VimMode}}.Insert;}
+\DoxyCodeLine{\Hypertarget{_text_editor_command_vim_facts_8_verbs_8_functions_8cs_source_l00118}00118\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_text_editor_command_vim_facts_8_verbs_8_functions_8cs_source_l00119}00119\ }
+\DoxyCodeLine{\Hypertarget{_text_editor_command_vim_facts_8_verbs_8_functions_8cs_source_l00120}00120\ \ \ \ \ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keyword}{static}\ async\ Task\ ChangeSelection(}
+\DoxyCodeLine{\Hypertarget{_text_editor_command_vim_facts_8_verbs_8_functions_8cs_source_l00121}00121\ \ \ \ \ \ \ \ \ \ \ \ \ ITextEditorEditContext\ editContext,}
+\DoxyCodeLine{\Hypertarget{_text_editor_command_vim_facts_8_verbs_8_functions_8cs_source_l00122}00122\ \ \ \ \ \ \ \ \ \ \ \ \ TextEditorModelModifier\ modelModifier,}
+\DoxyCodeLine{\Hypertarget{_text_editor_command_vim_facts_8_verbs_8_functions_8cs_source_l00123}00123\ \ \ \ \ \ \ \ \ \ \ \ \ TextEditorViewModelModifier\ viewModelModifier,}
+\DoxyCodeLine{\Hypertarget{_text_editor_command_vim_facts_8_verbs_8_functions_8cs_source_l00124}00124\ \ \ \ \ \ \ \ \ \ \ \ \ CursorModifierBagTextEditor\ cursorModifierBag,}
+\DoxyCodeLine{\Hypertarget{_text_editor_command_vim_facts_8_verbs_8_functions_8cs_source_l00125}00125\ \ \ \ \ \ \ \ \ \ \ \ \ TextEditorCommandArgs\ commandArgs)}
+\DoxyCodeLine{\Hypertarget{_text_editor_command_vim_facts_8_verbs_8_functions_8cs_source_l00126}00126\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_text_editor_command_vim_facts_8_verbs_8_functions_8cs_source_l00127}00127\ \ \ \ \ \ \ \ \ \ \ \ \ var\ activeKeymap\ =\ commandArgs.ComponentData.Options.Keymap\ ??\ TextEditorKeymapFacts.DefaultKeymap;}
+\DoxyCodeLine{\Hypertarget{_text_editor_command_vim_facts_8_verbs_8_functions_8cs_source_l00128}00128\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (activeKeymap\ is\ not\ TextEditorKeymapVim\ keymapVim)}
+\DoxyCodeLine{\Hypertarget{_text_editor_command_vim_facts_8_verbs_8_functions_8cs_source_l00129}00129\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return};}
+\DoxyCodeLine{\Hypertarget{_text_editor_command_vim_facts_8_verbs_8_functions_8cs_source_l00130}00130\ }
+\DoxyCodeLine{\Hypertarget{_text_editor_command_vim_facts_8_verbs_8_functions_8cs_source_l00131}00131\ \ \ \ \ \ \ \ \ \ \ \ \ await\ TextEditorCommandDefaultFacts.Cut.CommandFunc.Invoke(commandArgs).ConfigureAwait(\textcolor{keyword}{false});}
+\DoxyCodeLine{\Hypertarget{_text_editor_command_vim_facts_8_verbs_8_functions_8cs_source_l00132}00132\ \ \ \ \ \ \ \ \ \ \ \ \ keymapVim.ActiveVimMode\ =\ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_keymaps_1_1_models_1_1_vims_ac88af8149d254447dc2dcc2b8d17125a}{VimMode}}.Insert;}
+\DoxyCodeLine{\Hypertarget{_text_editor_command_vim_facts_8_verbs_8_functions_8cs_source_l00133}00133\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_text_editor_command_vim_facts_8_verbs_8_functions_8cs_source_l00134}00134\ }
+\DoxyCodeLine{\Hypertarget{_text_editor_command_vim_facts_8_verbs_8_functions_8cs_source_l00135}00135\ \ \ \ \ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keyword}{static}\ async\ Task\ YankAsync(}
+\DoxyCodeLine{\Hypertarget{_text_editor_command_vim_facts_8_verbs_8_functions_8cs_source_l00136}00136\ \ \ \ \ \ \ \ \ \ \ \ \ ITextEditorEditContext\ editContext,}
+\DoxyCodeLine{\Hypertarget{_text_editor_command_vim_facts_8_verbs_8_functions_8cs_source_l00137}00137\ \ \ \ \ \ \ \ \ \ \ \ \ TextEditorModelModifier\ modelModifier,}
+\DoxyCodeLine{\Hypertarget{_text_editor_command_vim_facts_8_verbs_8_functions_8cs_source_l00138}00138\ \ \ \ \ \ \ \ \ \ \ \ \ TextEditorViewModelModifier\ viewModelModifier,}
+\DoxyCodeLine{\Hypertarget{_text_editor_command_vim_facts_8_verbs_8_functions_8cs_source_l00139}00139\ \ \ \ \ \ \ \ \ \ \ \ \ CursorModifierBagTextEditor\ cursorModifierBag,}
+\DoxyCodeLine{\Hypertarget{_text_editor_command_vim_facts_8_verbs_8_functions_8cs_source_l00140}00140\ \ \ \ \ \ \ \ \ \ \ \ \ TextEditorCommandArgs\ commandArgs)}
+\DoxyCodeLine{\Hypertarget{_text_editor_command_vim_facts_8_verbs_8_functions_8cs_source_l00141}00141\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_text_editor_command_vim_facts_8_verbs_8_functions_8cs_source_l00142}00142\ \ \ \ \ \ \ \ \ \ \ \ \ await\ TextEditorCommandDefaultFacts.Copy.CommandFunc.Invoke(commandArgs).ConfigureAwait(\textcolor{keyword}{false});}
+\DoxyCodeLine{\Hypertarget{_text_editor_command_vim_facts_8_verbs_8_functions_8cs_source_l00143}00143\ \ \ \ \ \ \ \ \ \ \ \ \ await\ TextEditorCommandDefaultFacts.ClearTextSelection.CommandFunc.Invoke(commandArgs).ConfigureAwait(\textcolor{keyword}{false});}
+\DoxyCodeLine{\Hypertarget{_text_editor_command_vim_facts_8_verbs_8_functions_8cs_source_l00144}00144\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_text_editor_command_vim_facts_8_verbs_8_functions_8cs_source_l00145}00145\ }
+\DoxyCodeLine{\Hypertarget{_text_editor_command_vim_facts_8_verbs_8_functions_8cs_source_l00146}00146\ \ \ \ \ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ NewLineBelow(}
+\DoxyCodeLine{\Hypertarget{_text_editor_command_vim_facts_8_verbs_8_functions_8cs_source_l00147}00147\ \ \ \ \ \ \ \ \ \ \ \ \ ITextEditorEditContext\ editContext,}
+\DoxyCodeLine{\Hypertarget{_text_editor_command_vim_facts_8_verbs_8_functions_8cs_source_l00148}00148\ \ \ \ \ \ \ \ \ \ \ \ \ TextEditorModelModifier\ modelModifier,}
+\DoxyCodeLine{\Hypertarget{_text_editor_command_vim_facts_8_verbs_8_functions_8cs_source_l00149}00149\ \ \ \ \ \ \ \ \ \ \ \ \ TextEditorViewModelModifier\ viewModelModifier,}
+\DoxyCodeLine{\Hypertarget{_text_editor_command_vim_facts_8_verbs_8_functions_8cs_source_l00150}00150\ \ \ \ \ \ \ \ \ \ \ \ \ CursorModifierBagTextEditor\ cursorModifierBag,}
+\DoxyCodeLine{\Hypertarget{_text_editor_command_vim_facts_8_verbs_8_functions_8cs_source_l00151}00151\ \ \ \ \ \ \ \ \ \ \ \ \ TextEditorCommandArgs\ commandArgs)}
+\DoxyCodeLine{\Hypertarget{_text_editor_command_vim_facts_8_verbs_8_functions_8cs_source_l00152}00152\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_text_editor_command_vim_facts_8_verbs_8_functions_8cs_source_l00153}00153\ \ \ \ \ \ \ \ \ \ \ \ \ var\ activeKeymap\ =\ commandArgs.ComponentData.Options.Keymap\ ??\ TextEditorKeymapFacts.DefaultKeymap;}
+\DoxyCodeLine{\Hypertarget{_text_editor_command_vim_facts_8_verbs_8_functions_8cs_source_l00154}00154\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (activeKeymap\ is\ not\ TextEditorKeymapVim\ keymapVim)}
+\DoxyCodeLine{\Hypertarget{_text_editor_command_vim_facts_8_verbs_8_functions_8cs_source_l00155}00155\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return};}
+\DoxyCodeLine{\Hypertarget{_text_editor_command_vim_facts_8_verbs_8_functions_8cs_source_l00156}00156\ }
+\DoxyCodeLine{\Hypertarget{_text_editor_command_vim_facts_8_verbs_8_functions_8cs_source_l00157}00157\ \ \ \ \ \ \ \ \ \ \ \ \ TextEditorCommandDefaultFunctions.NewLineBelow(}
+\DoxyCodeLine{\Hypertarget{_text_editor_command_vim_facts_8_verbs_8_functions_8cs_source_l00158}00158\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ editContext,}
+\DoxyCodeLine{\Hypertarget{_text_editor_command_vim_facts_8_verbs_8_functions_8cs_source_l00159}00159\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ modelModifier,}
+\DoxyCodeLine{\Hypertarget{_text_editor_command_vim_facts_8_verbs_8_functions_8cs_source_l00160}00160\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ viewModelModifier,}
+\DoxyCodeLine{\Hypertarget{_text_editor_command_vim_facts_8_verbs_8_functions_8cs_source_l00161}00161\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ cursorModifierBag,}
+\DoxyCodeLine{\Hypertarget{_text_editor_command_vim_facts_8_verbs_8_functions_8cs_source_l00162}00162\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ commandArgs);}
+\DoxyCodeLine{\Hypertarget{_text_editor_command_vim_facts_8_verbs_8_functions_8cs_source_l00163}00163\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_text_editor_command_vim_facts_8_verbs_8_functions_8cs_source_l00164}00164\ \ \ \ \ \ \ \ \ \ \ \ \ keymapVim.ActiveVimMode\ =\ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_keymaps_1_1_models_1_1_vims_ac88af8149d254447dc2dcc2b8d17125a}{VimMode}}.Insert;}
+\DoxyCodeLine{\Hypertarget{_text_editor_command_vim_facts_8_verbs_8_functions_8cs_source_l00165}00165\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_text_editor_command_vim_facts_8_verbs_8_functions_8cs_source_l00166}00166\ }
+\DoxyCodeLine{\Hypertarget{_text_editor_command_vim_facts_8_verbs_8_functions_8cs_source_l00167}00167\ \ \ \ \ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ NewLineAbove(}
+\DoxyCodeLine{\Hypertarget{_text_editor_command_vim_facts_8_verbs_8_functions_8cs_source_l00168}00168\ \ \ \ \ \ \ \ \ \ \ \ \ ITextEditorEditContext\ editContext,}
+\DoxyCodeLine{\Hypertarget{_text_editor_command_vim_facts_8_verbs_8_functions_8cs_source_l00169}00169\ \ \ \ \ \ \ \ \ \ \ \ \ TextEditorModelModifier\ modelModifier,}
+\DoxyCodeLine{\Hypertarget{_text_editor_command_vim_facts_8_verbs_8_functions_8cs_source_l00170}00170\ \ \ \ \ \ \ \ \ \ \ \ \ TextEditorViewModelModifier\ viewModelModifier,}
+\DoxyCodeLine{\Hypertarget{_text_editor_command_vim_facts_8_verbs_8_functions_8cs_source_l00171}00171\ \ \ \ \ \ \ \ \ \ \ \ \ CursorModifierBagTextEditor\ cursorModifierBag,}
+\DoxyCodeLine{\Hypertarget{_text_editor_command_vim_facts_8_verbs_8_functions_8cs_source_l00172}00172\ \ \ \ \ \ \ \ \ \ \ \ \ TextEditorCommandArgs\ commandArgs)}
+\DoxyCodeLine{\Hypertarget{_text_editor_command_vim_facts_8_verbs_8_functions_8cs_source_l00173}00173\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_text_editor_command_vim_facts_8_verbs_8_functions_8cs_source_l00174}00174\ \ \ \ \ \ \ \ \ \ \ \ \ var\ activeKeymap\ =\ commandArgs.ComponentData.Options.Keymap\ ??\ TextEditorKeymapFacts.DefaultKeymap;}
+\DoxyCodeLine{\Hypertarget{_text_editor_command_vim_facts_8_verbs_8_functions_8cs_source_l00175}00175\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (activeKeymap\ is\ not\ TextEditorKeymapVim\ keymapVim)}
+\DoxyCodeLine{\Hypertarget{_text_editor_command_vim_facts_8_verbs_8_functions_8cs_source_l00176}00176\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return};}
+\DoxyCodeLine{\Hypertarget{_text_editor_command_vim_facts_8_verbs_8_functions_8cs_source_l00177}00177\ }
+\DoxyCodeLine{\Hypertarget{_text_editor_command_vim_facts_8_verbs_8_functions_8cs_source_l00178}00178\ \ \ \ \ \ \ \ \ \ \ \ \ TextEditorCommandDefaultFunctions.NewLineAbove(}
+\DoxyCodeLine{\Hypertarget{_text_editor_command_vim_facts_8_verbs_8_functions_8cs_source_l00179}00179\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ editContext,}
+\DoxyCodeLine{\Hypertarget{_text_editor_command_vim_facts_8_verbs_8_functions_8cs_source_l00180}00180\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ modelModifier,}
+\DoxyCodeLine{\Hypertarget{_text_editor_command_vim_facts_8_verbs_8_functions_8cs_source_l00181}00181\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ viewModelModifier,}
+\DoxyCodeLine{\Hypertarget{_text_editor_command_vim_facts_8_verbs_8_functions_8cs_source_l00182}00182\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ cursorModifierBag,}
+\DoxyCodeLine{\Hypertarget{_text_editor_command_vim_facts_8_verbs_8_functions_8cs_source_l00183}00183\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ commandArgs);}
+\DoxyCodeLine{\Hypertarget{_text_editor_command_vim_facts_8_verbs_8_functions_8cs_source_l00184}00184\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_text_editor_command_vim_facts_8_verbs_8_functions_8cs_source_l00185}00185\ \ \ \ \ \ \ \ \ \ \ \ \ keymapVim.ActiveVimMode\ =\ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_keymaps_1_1_models_1_1_vims_ac88af8149d254447dc2dcc2b8d17125a}{VimMode}}.Insert;}
+\DoxyCodeLine{\Hypertarget{_text_editor_command_vim_facts_8_verbs_8_functions_8cs_source_l00186}00186\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_text_editor_command_vim_facts_8_verbs_8_functions_8cs_source_l00187}00187\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_text_editor_command_vim_facts_8_verbs_8_functions_8cs_source_l00188}00188\ \}}
+
+\end{DoxyCode}

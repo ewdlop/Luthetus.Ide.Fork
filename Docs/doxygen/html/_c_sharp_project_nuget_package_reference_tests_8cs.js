@@ -1,0 +1,4 @@
+var _c_sharp_project_nuget_package_reference_tests_8cs =
+[
+    [ "Luthetus.Extensions.DotNet.Tests.Basis.Nugets.Models.CSharpProjectNugetPackageReferenceTests", "class_luthetus_1_1_extensions_1_1_dot_net_1_1_tests_1_1_basis_1_1_nugets_1_1_models_1_1_c_sharp_a48ac32bbcfb8cef37f58444aef272c6.html", "class_luthetus_1_1_extensions_1_1_dot_net_1_1_tests_1_1_basis_1_1_nugets_1_1_models_1_1_c_sharp_a48ac32bbcfb8cef37f58444aef272c6" ]
+];

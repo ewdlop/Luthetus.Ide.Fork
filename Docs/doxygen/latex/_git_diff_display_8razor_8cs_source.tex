@@ -1,0 +1,388 @@
+\doxysection{Git\+Diff\+Display.\+razor.\+cs}
+\hypertarget{_git_diff_display_8razor_8cs_source}{}\label{_git_diff_display_8razor_8cs_source}\index{Source/Lib/Extensions/Extensions.Git/Displays/GitDiffDisplay.razor.cs@{Source/Lib/Extensions/Extensions.Git/Displays/GitDiffDisplay.razor.cs}}
+\mbox{\hyperlink{_git_diff_display_8razor_8cs}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{_git_diff_display_8razor_8cs_source_l00001}00001\ \textcolor{keyword}{using\ }System.Collections.Immutable;}
+\DoxyCodeLine{\Hypertarget{_git_diff_display_8razor_8cs_source_l00002}00002\ \textcolor{keyword}{using\ }Microsoft.AspNetCore.Components;}
+\DoxyCodeLine{\Hypertarget{_git_diff_display_8razor_8cs_source_l00003}00003\ \textcolor{keyword}{using\ }Microsoft.JSInterop;}
+\DoxyCodeLine{\Hypertarget{_git_diff_display_8razor_8cs_source_l00004}00004\ \textcolor{keyword}{using\ }Fluxor;}
+\DoxyCodeLine{\Hypertarget{_git_diff_display_8razor_8cs_source_l00005}00005\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_luthetus_1_1_common_1_1_razor_lib_1_1_component_renderers_1_1_models}{Luthetus.Common.RazorLib.ComponentRenderers.Models}};}
+\DoxyCodeLine{\Hypertarget{_git_diff_display_8razor_8cs_source_l00006}00006\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_luthetus_1_1_common_1_1_razor_lib_1_1_file_systems_1_1_models}{Luthetus.Common.RazorLib.FileSystems.Models}};}
+\DoxyCodeLine{\Hypertarget{_git_diff_display_8razor_8cs_source_l00007}00007\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_luthetus_1_1_common_1_1_razor_lib_1_1_keys_1_1_models}{Luthetus.Common.RazorLib.Keys.Models}};}
+\DoxyCodeLine{\Hypertarget{_git_diff_display_8razor_8cs_source_l00008}00008\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_luthetus_1_1_common_1_1_razor_lib_1_1_notifications_1_1_models}{Luthetus.Common.RazorLib.Notifications.Models}};}
+\DoxyCodeLine{\Hypertarget{_git_diff_display_8razor_8cs_source_l00009}00009\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_luthetus_1_1_common_1_1_razor_lib_1_1_reactives_1_1_models}{Luthetus.Common.RazorLib.Reactives.Models}};}
+\DoxyCodeLine{\Hypertarget{_git_diff_display_8razor_8cs_source_l00010}00010\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_luthetus_1_1_common_1_1_razor_lib_1_1_dialogs_1_1_models}{Luthetus.Common.RazorLib.Dialogs.Models}};}
+\DoxyCodeLine{\Hypertarget{_git_diff_display_8razor_8cs_source_l00011}00011\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib}{Luthetus.TextEditor.RazorLib}};}
+\DoxyCodeLine{\Hypertarget{_git_diff_display_8razor_8cs_source_l00012}00012\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_decorations_1_1_models}{Luthetus.TextEditor.RazorLib.Decorations.Models}};}
+\DoxyCodeLine{\Hypertarget{_git_diff_display_8razor_8cs_source_l00013}00013\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_interfaces}{Luthetus.TextEditor.RazorLib.CompilerServices.Interfaces}};}
+\DoxyCodeLine{\Hypertarget{_git_diff_display_8razor_8cs_source_l00014}00014\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_characters_1_1_models}{Luthetus.TextEditor.RazorLib.Characters.Models}};}
+\DoxyCodeLine{\Hypertarget{_git_diff_display_8razor_8cs_source_l00015}00015\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_facts}{Luthetus.TextEditor.RazorLib.CompilerServices.Facts}};}
+\DoxyCodeLine{\Hypertarget{_git_diff_display_8razor_8cs_source_l00016}00016\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_diffs_1_1_models}{Luthetus.TextEditor.RazorLib.Diffs.Models}};}
+\DoxyCodeLine{\Hypertarget{_git_diff_display_8razor_8cs_source_l00017}00017\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_installations_1_1_models}{Luthetus.TextEditor.RazorLib.Installations.Models}};}
+\DoxyCodeLine{\Hypertarget{_git_diff_display_8razor_8cs_source_l00018}00018\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_lexers_1_1_models}{Luthetus.TextEditor.RazorLib.Lexers.Models}};}
+\DoxyCodeLine{\Hypertarget{_git_diff_display_8razor_8cs_source_l00019}00019\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models}{Luthetus.TextEditor.RazorLib.TextEditors.Models}};}
+\DoxyCodeLine{\Hypertarget{_git_diff_display_8razor_8cs_source_l00020}00020\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1_1_internals}{Luthetus.TextEditor.RazorLib.TextEditors.Models.Internals}};}
+\DoxyCodeLine{\Hypertarget{_git_diff_display_8razor_8cs_source_l00021}00021\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_virtualizations_1_1_models}{Luthetus.TextEditor.RazorLib.Virtualizations.Models}};}
+\DoxyCodeLine{\Hypertarget{_git_diff_display_8razor_8cs_source_l00022}00022\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_java_script_objects_1_1_models}{Luthetus.TextEditor.RazorLib.JavaScriptObjects.Models}};}
+\DoxyCodeLine{\Hypertarget{_git_diff_display_8razor_8cs_source_l00023}00023\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_luthetus_1_1_ide_1_1_razor_lib_1_1_background_tasks_1_1_models}{Luthetus.Ide.RazorLib.BackgroundTasks.Models}};}
+\DoxyCodeLine{\Hypertarget{_git_diff_display_8razor_8cs_source_l00024}00024\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_luthetus_1_1_ide_1_1_razor_lib_1_1_terminals_1_1_models}{Luthetus.Ide.RazorLib.Terminals.Models}};}
+\DoxyCodeLine{\Hypertarget{_git_diff_display_8razor_8cs_source_l00025}00025\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_luthetus_1_1_extensions_1_1_git_1_1_models}{Luthetus.Extensions.Git.Models}};}
+\DoxyCodeLine{\Hypertarget{_git_diff_display_8razor_8cs_source_l00026}00026\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_luthetus_1_1_extensions_1_1_git_1_1_states}{Luthetus.Extensions.Git.States}};}
+\DoxyCodeLine{\Hypertarget{_git_diff_display_8razor_8cs_source_l00027}00027\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_luthetus_1_1_extensions_1_1_git_1_1_background_tasks_1_1_models}{Luthetus.Extensions.Git.BackgroundTasks.Models}};}
+\DoxyCodeLine{\Hypertarget{_git_diff_display_8razor_8cs_source_l00028}00028\ }
+\DoxyCodeLine{\Hypertarget{_git_diff_display_8razor_8cs_source_l00029}00029\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespace_luthetus_1_1_extensions_1_1_git_1_1_displays}{Luthetus.Extensions.Git.Displays}};}
+\DoxyCodeLine{\Hypertarget{_git_diff_display_8razor_8cs_source_l00030}00030\ }
+\DoxyCodeLine{\Hypertarget{_git_diff_display_8razor_8cs_source_l00031}\mbox{\hyperlink{class_luthetus_1_1_extensions_1_1_git_1_1_displays_1_1_git_diff_display}{00031}}\ \textcolor{keyword}{public}\ \textcolor{keyword}{partial\ class\ }\mbox{\hyperlink{class_luthetus_1_1_extensions_1_1_git_1_1_displays_1_1_git_diff_display}{GitDiffDisplay}}\ :\ ComponentBase}
+\DoxyCodeLine{\Hypertarget{_git_diff_display_8razor_8cs_source_l00032}00032\ \{}
+\DoxyCodeLine{\Hypertarget{_git_diff_display_8razor_8cs_source_l00033}00033\ \ \ \ \ [Inject]}
+\DoxyCodeLine{\Hypertarget{_git_diff_display_8razor_8cs_source_l00034}00034\ \ \ \ \ \textcolor{keyword}{private}\ IState<GitState>\ GitStateWrap\ \{\ \textcolor{keyword}{get};\ \textcolor{keyword}{set};\ \}\ =\ \textcolor{keyword}{null}!;}
+\DoxyCodeLine{\Hypertarget{_git_diff_display_8razor_8cs_source_l00035}00035\ \ \ \ \ [Inject]}
+\DoxyCodeLine{\Hypertarget{_git_diff_display_8razor_8cs_source_l00036}00036\ \ \ \ \ \textcolor{keyword}{private}\ \mbox{\hyperlink{interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_i_text_editor_service}{ITextEditorService}}\ TextEditorService\ \{\ \textcolor{keyword}{get};\ \textcolor{keyword}{set};\ \}\ =\ \textcolor{keyword}{null}!;}
+\DoxyCodeLine{\Hypertarget{_git_diff_display_8razor_8cs_source_l00037}00037\ \ \ \ \ [Inject]}
+\DoxyCodeLine{\Hypertarget{_git_diff_display_8razor_8cs_source_l00038}00038\ \ \ \ \ \textcolor{keyword}{private}\ \mbox{\hyperlink{interface_luthetus_1_1_common_1_1_razor_lib_1_1_dialogs_1_1_models_1_1_i_dialog_service}{IDialogService}}\ DialogService\ \{\ \textcolor{keyword}{get};\ \textcolor{keyword}{set};\ \}\ =\ \textcolor{keyword}{null}!;}
+\DoxyCodeLine{\Hypertarget{_git_diff_display_8razor_8cs_source_l00039}00039\ \ \ \ \ [Inject]}
+\DoxyCodeLine{\Hypertarget{_git_diff_display_8razor_8cs_source_l00040}00040\ \ \ \ \ \textcolor{keyword}{private}\ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_installations_1_1_models_a93aa7bee7cb16431b8752d669a0286dd}{LuthetusTextEditorConfig}}\ TextEditorConfig\ \{\ \textcolor{keyword}{get};\ \textcolor{keyword}{set};\ \}\ =\ \textcolor{keyword}{null}!;}
+\DoxyCodeLine{\Hypertarget{_git_diff_display_8razor_8cs_source_l00041}00041\ \ \ \ \ [Inject]}
+\DoxyCodeLine{\Hypertarget{_git_diff_display_8razor_8cs_source_l00042}00042\ \ \ \ \ \textcolor{keyword}{private}\ GitBackgroundTaskApi\ GitBackgroundTaskApi\ \{\ \textcolor{keyword}{get};\ \textcolor{keyword}{set};\ \}\ =\ \textcolor{keyword}{null}!;}
+\DoxyCodeLine{\Hypertarget{_git_diff_display_8razor_8cs_source_l00043}00043\ \ \ \ \ [Inject]}
+\DoxyCodeLine{\Hypertarget{_git_diff_display_8razor_8cs_source_l00044}00044\ \ \ \ \ \textcolor{keyword}{private}\ \mbox{\hyperlink{interface_luthetus_1_1_common_1_1_razor_lib_1_1_file_systems_1_1_models_1_1_i_environment_provider}{IEnvironmentProvider}}\ EnvironmentProvider\ \{\ \textcolor{keyword}{get};\ \textcolor{keyword}{set};\ \}\ =\ \textcolor{keyword}{null}!;}
+\DoxyCodeLine{\Hypertarget{_git_diff_display_8razor_8cs_source_l00045}00045\ \ \ \ \ [Inject]}
+\DoxyCodeLine{\Hypertarget{_git_diff_display_8razor_8cs_source_l00046}00046\ \ \ \ \ \textcolor{keyword}{private}\ \mbox{\hyperlink{interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_decorations_1_1_models_1_1_i_decoration_mapper_registry}{IDecorationMapperRegistry}}\ DecorationMapperRegistry\ \{\ \textcolor{keyword}{get};\ \textcolor{keyword}{set};\ \}\ =\ \textcolor{keyword}{null}!;}
+\DoxyCodeLine{\Hypertarget{_git_diff_display_8razor_8cs_source_l00047}00047\ \ \ \ \ [Inject]}
+\DoxyCodeLine{\Hypertarget{_git_diff_display_8razor_8cs_source_l00048}00048\ \ \ \ \ \textcolor{keyword}{private}\ \mbox{\hyperlink{interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_interfaces_1_1_i_compiler_service_registry}{ICompilerServiceRegistry}}\ CompilerServiceRegistry\ \{\ \textcolor{keyword}{get};\ \textcolor{keyword}{set};\ \}\ =\ \textcolor{keyword}{null}!;}
+\DoxyCodeLine{\Hypertarget{_git_diff_display_8razor_8cs_source_l00049}00049\ \ \ \ \ [Inject]}
+\DoxyCodeLine{\Hypertarget{_git_diff_display_8razor_8cs_source_l00050}00050\ \ \ \ \ \textcolor{keyword}{private}\ \mbox{\hyperlink{interface_luthetus_1_1_common_1_1_razor_lib_1_1_component_renderers_1_1_models_1_1_i_common_component_renderers}{ICommonComponentRenderers}}\ CommonComponentRenderers\ \{\ \textcolor{keyword}{get};\ \textcolor{keyword}{set};\ \}\ =\ \textcolor{keyword}{null}!;}
+\DoxyCodeLine{\Hypertarget{_git_diff_display_8razor_8cs_source_l00051}00051\ \ \ \ \ [Inject]}
+\DoxyCodeLine{\Hypertarget{_git_diff_display_8razor_8cs_source_l00052}00052\ \ \ \ \ \textcolor{keyword}{private}\ IDispatcher\ Dispatcher\ \{\ \textcolor{keyword}{get};\ \textcolor{keyword}{set};\ \}\ =\ \textcolor{keyword}{null}!;}
+\DoxyCodeLine{\Hypertarget{_git_diff_display_8razor_8cs_source_l00053}00053\ \ \ \ \ [Inject]}
+\DoxyCodeLine{\Hypertarget{_git_diff_display_8razor_8cs_source_l00054}00054\ \ \ \ \ \textcolor{keyword}{private}\ IJSRuntime\ JsRuntime\ \{\ \textcolor{keyword}{get};\ \textcolor{keyword}{set};\ \}\ =\ \textcolor{keyword}{null}!;}
+\DoxyCodeLine{\Hypertarget{_git_diff_display_8razor_8cs_source_l00055}00055\ \ \ \ \ [Inject]}
+\DoxyCodeLine{\Hypertarget{_git_diff_display_8razor_8cs_source_l00056}00056\ \ \ \ \ \textcolor{keyword}{private}\ IServiceProvider\ ServiceProvider\ \{\ \textcolor{keyword}{get};\ \textcolor{keyword}{set};\ \}\ =\ \textcolor{keyword}{null}!;}
+\DoxyCodeLine{\Hypertarget{_git_diff_display_8razor_8cs_source_l00057}00057\ }
+\DoxyCodeLine{\Hypertarget{_git_diff_display_8razor_8cs_source_l00058}00058\ \ \ \ \ [Parameter,\ EditorRequired]}
+\DoxyCodeLine{\Hypertarget{_git_diff_display_8razor_8cs_source_l00059}\mbox{\hyperlink{class_luthetus_1_1_extensions_1_1_git_1_1_displays_1_1_git_diff_display_ad11feb3b009ac52ed02af2db9dda2623}{00059}}\ \ \ \ \ \textcolor{keyword}{public}\ \mbox{\hyperlink{class_luthetus_1_1_extensions_1_1_git_1_1_displays_1_1_git_diff_display_ad11feb3b009ac52ed02af2db9dda2623}{GitFile}}\ \mbox{\hyperlink{class_luthetus_1_1_extensions_1_1_git_1_1_displays_1_1_git_diff_display_ad11feb3b009ac52ed02af2db9dda2623}{GitFile}}\ \{\ \textcolor{keyword}{get};\ \textcolor{keyword}{set};\ \}\ =\ \textcolor{keyword}{null}!;}
+\DoxyCodeLine{\Hypertarget{_git_diff_display_8razor_8cs_source_l00060}00060\ }
+\DoxyCodeLine{\Hypertarget{_git_diff_display_8razor_8cs_source_l00061}\mbox{\hyperlink{class_luthetus_1_1_extensions_1_1_git_1_1_displays_1_1_git_diff_display_a0ef528b3a5c3d101a10ecc8154db4d33}{00061}}\ \ \ \ \ \textcolor{keyword}{public}\ Key<TerminalCommandRequest>\ \mbox{\hyperlink{class_luthetus_1_1_extensions_1_1_git_1_1_displays_1_1_git_diff_display_a0ef528b3a5c3d101a10ecc8154db4d33}{GitLogTerminalCommandRequestKey}}\ \{\ \textcolor{keyword}{get};\ \}\ =\ Key<TerminalCommandRequest>.NewKey();}
+\DoxyCodeLine{\Hypertarget{_git_diff_display_8razor_8cs_source_l00062}00062\ }
+\DoxyCodeLine{\Hypertarget{_git_diff_display_8razor_8cs_source_l00063}00063\ \ \ \ \ \textcolor{keyword}{private}\ Key<TextEditorDiffModel>\ \_textEditorDiffModelKey\ =\ Key<TextEditorDiffModel>.NewKey();}
+\DoxyCodeLine{\Hypertarget{_git_diff_display_8razor_8cs_source_l00064}00064\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_git_diff_display_8razor_8cs_source_l00065}\mbox{\hyperlink{class_luthetus_1_1_extensions_1_1_git_1_1_displays_1_1_git_diff_display_a028de4b02b057967187878dae3f8af12}{00065}}\ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keyword}{static}\ Key<TextEditorViewModel>\ \mbox{\hyperlink{class_luthetus_1_1_extensions_1_1_git_1_1_displays_1_1_git_diff_display_a028de4b02b057967187878dae3f8af12}{InViewModelKey}}\ \{\ \textcolor{keyword}{get};\ \}\ =\ Key<TextEditorViewModel>.NewKey();}
+\DoxyCodeLine{\Hypertarget{_git_diff_display_8razor_8cs_source_l00066}\mbox{\hyperlink{class_luthetus_1_1_extensions_1_1_git_1_1_displays_1_1_git_diff_display_a3a91deb5d43b5d4993a16fd38740b640}{00066}}\ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keyword}{static}\ Key<TextEditorViewModel>\ \mbox{\hyperlink{class_luthetus_1_1_extensions_1_1_git_1_1_displays_1_1_git_diff_display_a3a91deb5d43b5d4993a16fd38740b640}{OutViewModelKey}}\ \{\ \textcolor{keyword}{get};\ \}\ =\ Key<TextEditorViewModel>.NewKey();}
+\DoxyCodeLine{\Hypertarget{_git_diff_display_8razor_8cs_source_l00067}00067\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_git_diff_display_8razor_8cs_source_l00069}\mbox{\hyperlink{class_luthetus_1_1_extensions_1_1_git_1_1_displays_1_1_git_diff_display_a8998ee8bf79d560bcbde90d6af30841b}{00069}}\ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keyword}{static}\ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_a435ccef09e2ba83022e8cf378fc0f690}{ResourceUri}}?\ \mbox{\hyperlink{class_luthetus_1_1_extensions_1_1_git_1_1_displays_1_1_git_diff_display_a8998ee8bf79d560bcbde90d6af30841b}{InResourceUri}}\ \{\ \textcolor{keyword}{get};\ \textcolor{keyword}{set};\ \}}
+\DoxyCodeLine{\Hypertarget{_git_diff_display_8razor_8cs_source_l00070}00070\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_git_diff_display_8razor_8cs_source_l00071}00071\ \ \ \ \ \textcolor{keyword}{private}\ \textcolor{keywordtype}{string}?\ \_logFileContent;}
+\DoxyCodeLine{\Hypertarget{_git_diff_display_8razor_8cs_source_l00072}00072\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_git_diff_display_8razor_8cs_source_l00073}00073\ \ \ \ \ \textcolor{keyword}{private}\ readonly\ \mbox{\hyperlink{class_luthetus_1_1_common_1_1_razor_lib_1_1_reactives_1_1_models_1_1_throttle}{Throttle}}\ \_createEditorsThrottle\ =\ \textcolor{keyword}{new}\ \mbox{\hyperlink{class_luthetus_1_1_common_1_1_razor_lib_1_1_reactives_1_1_models_1_1_throttle}{Throttle}}(TimeSpan.FromMilliseconds(500));}
+\DoxyCodeLine{\Hypertarget{_git_diff_display_8razor_8cs_source_l00074}00074\ }
+\DoxyCodeLine{\Hypertarget{_git_diff_display_8razor_8cs_source_l00075}\mbox{\hyperlink{class_luthetus_1_1_extensions_1_1_git_1_1_displays_1_1_git_diff_display_a14066c8f3c38e3ec26aeb2a41f388d39}{00075}}\ \ \ \ \ \textcolor{keyword}{protected}\ \textcolor{keyword}{override}\ Task\ \mbox{\hyperlink{class_luthetus_1_1_extensions_1_1_git_1_1_displays_1_1_git_diff_display_a14066c8f3c38e3ec26aeb2a41f388d39}{OnAfterRenderAsync}}(\textcolor{keywordtype}{bool}\ firstRender)}
+\DoxyCodeLine{\Hypertarget{_git_diff_display_8razor_8cs_source_l00076}00076\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_git_diff_display_8razor_8cs_source_l00077}00077\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (firstRender)}
+\DoxyCodeLine{\Hypertarget{_git_diff_display_8razor_8cs_source_l00078}00078\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_git_diff_display_8razor_8cs_source_l00079}00079\ \ \ \ \ \ \ \ \ \ \ \ \ ShowOriginalFromGitOnClick(}
+\DoxyCodeLine{\Hypertarget{_git_diff_display_8razor_8cs_source_l00080}00080\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ GitStateWrap.Value,}
+\DoxyCodeLine{\Hypertarget{_git_diff_display_8razor_8cs_source_l00081}00081\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_luthetus_1_1_extensions_1_1_git_1_1_displays_1_1_git_diff_display_ad11feb3b009ac52ed02af2db9dda2623}{GitFile}});}
+\DoxyCodeLine{\Hypertarget{_git_diff_display_8razor_8cs_source_l00082}00082\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_git_diff_display_8razor_8cs_source_l00083}00083\ }
+\DoxyCodeLine{\Hypertarget{_git_diff_display_8razor_8cs_source_l00084}00084\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ base.OnAfterRenderAsync(firstRender);}
+\DoxyCodeLine{\Hypertarget{_git_diff_display_8razor_8cs_source_l00085}00085\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_git_diff_display_8razor_8cs_source_l00086}00086\ }
+\DoxyCodeLine{\Hypertarget{_git_diff_display_8razor_8cs_source_l00087}00087\ \ \ \ \ \textcolor{keyword}{private}\ \textcolor{keywordtype}{void}\ ShowOriginalFromGitOnClick(\mbox{\hyperlink{namespace_luthetus_1_1_extensions_1_1_git_1_1_states_aca241d2376f4dc9e1660c6f740334159}{GitState}}\ localGitState,\ \mbox{\hyperlink{namespace_luthetus_1_1_extensions_1_1_git_1_1_models_af97c6023d3ec7c91bae37bd8f785c885}{GitFile}}\ localGitFile)}
+\DoxyCodeLine{\Hypertarget{_git_diff_display_8razor_8cs_source_l00088}00088\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_git_diff_display_8razor_8cs_source_l00089}00089\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (localGitState.Repo\ is\ \textcolor{keyword}{null})}
+\DoxyCodeLine{\Hypertarget{_git_diff_display_8razor_8cs_source_l00090}00090\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return};}
+\DoxyCodeLine{\Hypertarget{_git_diff_display_8razor_8cs_source_l00091}00091\ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_git_diff_display_8razor_8cs_source_l00092}00092\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_luthetus_1_1_extensions_1_1_git_1_1_background_tasks_1_1_models_1_1_git_background_task_api}{GitBackgroundTaskApi}}.\mbox{\hyperlink{class_luthetus_1_1_extensions_1_1_git_1_1_background_tasks_1_1_models_1_1_git_background_task_api_a2c059afb23ea38591a882933b9972492}{Git}}.\mbox{\hyperlink{class_luthetus_1_1_extensions_1_1_git_1_1_models_1_1_git_ide_api_a8e602b5bae59e997072993729eb2d629}{ShowFileEnqueue}}(}
+\DoxyCodeLine{\Hypertarget{_git_diff_display_8razor_8cs_source_l00093}00093\ \ \ \ \ \ \ \ \ \ \ \ \ localGitState.Repo,}
+\DoxyCodeLine{\Hypertarget{_git_diff_display_8razor_8cs_source_l00094}00094\ \ \ \ \ \ \ \ \ \ \ \ \ localGitFile.RelativePathString,}
+\DoxyCodeLine{\Hypertarget{_git_diff_display_8razor_8cs_source_l00095}00095\ \ \ \ \ \ \ \ \ \ \ \ \ (gitCliOutputParser,\ logFileContent)\ =>}
+\DoxyCodeLine{\Hypertarget{_git_diff_display_8razor_8cs_source_l00096}00096\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_git_diff_display_8razor_8cs_source_l00097}00097\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \_createEditorsThrottle.Run(\_\ =>\ \{\ CreateEditorFromLog(gitCliOutputParser,\ localGitState,\ localGitFile,\ logFileContent);\ return\ Task.CompletedTask;\ \});}
+\DoxyCodeLine{\Hypertarget{_git_diff_display_8razor_8cs_source_l00098}00098\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ Task.CompletedTask;}
+\DoxyCodeLine{\Hypertarget{_git_diff_display_8razor_8cs_source_l00099}00099\ \ \ \ \ \ \ \ \ \ \ \ \ \});}
+\DoxyCodeLine{\Hypertarget{_git_diff_display_8razor_8cs_source_l00100}00100\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_git_diff_display_8razor_8cs_source_l00101}00101\ }
+\DoxyCodeLine{\Hypertarget{_git_diff_display_8razor_8cs_source_l00102}00102\ \ \ \ \ \textcolor{keyword}{private}\ async\ Task<bool>\ TryCreateEditorIn(\textcolor{keywordtype}{string}\ logFileContent,\ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_a435ccef09e2ba83022e8cf378fc0f690}{ResourceUri}}\ originalResourceUri)}
+\DoxyCodeLine{\Hypertarget{_git_diff_display_8razor_8cs_source_l00103}00103\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_git_diff_display_8razor_8cs_source_l00104}00104\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Dispose\ any\ previously\ created\ state\ for\ the\ editor\ in\ model}}
+\DoxyCodeLine{\Hypertarget{_git_diff_display_8razor_8cs_source_l00105}00105\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (InResourceUri\ is\ not\ \textcolor{keyword}{null})}
+\DoxyCodeLine{\Hypertarget{_git_diff_display_8razor_8cs_source_l00106}00106\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_git_diff_display_8razor_8cs_source_l00107}00107\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editor_service}{TextEditorService}}.\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editor_service_a8066979b78e826ead9123e26a4b6a969}{ModelApi}}.\mbox{\hyperlink{interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1_1_i_text_editor_model_api_ad2401a25593f0bcc5f131dc26480d32e}{Dispose}}(InResourceUri.Value);}
+\DoxyCodeLine{\Hypertarget{_git_diff_display_8razor_8cs_source_l00108}00108\ \ \ \ \ \ \ \ \ \ \ \ \ InResourceUri\ =\ \textcolor{keyword}{null};}
+\DoxyCodeLine{\Hypertarget{_git_diff_display_8razor_8cs_source_l00109}00109\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_git_diff_display_8razor_8cs_source_l00110}00110\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_git_diff_display_8razor_8cs_source_l00111}00111\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Create\ Model}}
+\DoxyCodeLine{\Hypertarget{_git_diff_display_8razor_8cs_source_l00112}00112\ \ \ \ \ \ \ \ \ var\ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_ae531f6ec8ec05e2493aabf8d17c23e4b}{resourceUri}}\ =\ \textcolor{keyword}{new}\ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_a435ccef09e2ba83022e8cf378fc0f690}{ResourceUri}}(\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_lexers_1_1_models_1_1_resource_uri_facts}{ResourceUriFacts}}.\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_lexers_1_1_models_1_1_resource_uri_facts_a30f962891d8b094e0e4082eb28b02026}{Diff\_ReservedResourceUri\_Prefix}}\ +\ originalResourceUri.Value);}
+\DoxyCodeLine{\Hypertarget{_git_diff_display_8razor_8cs_source_l00113}00113\ \ \ \ \ \ \ \ InResourceUri\ =\ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_ae531f6ec8ec05e2493aabf8d17c23e4b}{resourceUri}};}
+\DoxyCodeLine{\Hypertarget{_git_diff_display_8razor_8cs_source_l00114}00114\ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_git_diff_display_8razor_8cs_source_l00115}00115\ \ \ \ \ \ \ \ \ var\ fileLastWriteTime\ =\ DateTime.UtcNow;}
+\DoxyCodeLine{\Hypertarget{_git_diff_display_8razor_8cs_source_l00116}00116\ \ \ \ \ \ \ \ \ var\ content\ =\ logFileContent;}
+\DoxyCodeLine{\Hypertarget{_git_diff_display_8razor_8cs_source_l00117}00117\ }
+\DoxyCodeLine{\Hypertarget{_git_diff_display_8razor_8cs_source_l00118}00118\ \ \ \ \ \ \ \ \ var\ absolutePath\ =\ EnvironmentProvider.\mbox{\hyperlink{interface_luthetus_1_1_common_1_1_razor_lib_1_1_file_systems_1_1_models_1_1_i_environment_provider_a7f5dc68df8f18d2c72019cdabe3cc290}{AbsolutePathFactory}}(\mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_ae531f6ec8ec05e2493aabf8d17c23e4b}{resourceUri}}.Value,\ \textcolor{keyword}{false});}
+\DoxyCodeLine{\Hypertarget{_git_diff_display_8razor_8cs_source_l00119}00119\ \ \ \ \ \ \ \ \ var\ decorationMapper\ =\ DecorationMapperRegistry.\mbox{\hyperlink{interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_decorations_1_1_models_1_1_i_decoration_mapper_registry_a000cd34558000251f2c3959104d80a8e}{GetDecorationMapper}}(absolutePath.ExtensionNoPeriod);}
+\DoxyCodeLine{\Hypertarget{_git_diff_display_8razor_8cs_source_l00120}00120\ \ \ \ \ \ \ \ \ var\ compilerService\ =\ CompilerServiceRegistry.\mbox{\hyperlink{interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_interfaces_1_1_i_compiler_service_registry_a1682cc381e8bdb2a94cedcb62c90f075}{GetCompilerService}}(absolutePath.ExtensionNoPeriod);}
+\DoxyCodeLine{\Hypertarget{_git_diff_display_8razor_8cs_source_l00121}00121\ }
+\DoxyCodeLine{\Hypertarget{_git_diff_display_8razor_8cs_source_l00122}00122\ \ \ \ \ \ \ \ \ var\ model\ =\ \textcolor{keyword}{new}\ \mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1_1_text_editor_model}{TextEditorModel}}(}
+\DoxyCodeLine{\Hypertarget{_git_diff_display_8razor_8cs_source_l00123}00123\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_ae531f6ec8ec05e2493aabf8d17c23e4b}{resourceUri}},}
+\DoxyCodeLine{\Hypertarget{_git_diff_display_8razor_8cs_source_l00124}00124\ \ \ \ \ \ \ \ \ \ \ \ \ fileLastWriteTime,}
+\DoxyCodeLine{\Hypertarget{_git_diff_display_8razor_8cs_source_l00125}00125\ \ \ \ \ \ \ \ \ \ \ \ \ absolutePath.ExtensionNoPeriod,}
+\DoxyCodeLine{\Hypertarget{_git_diff_display_8razor_8cs_source_l00126}00126\ \ \ \ \ \ \ \ \ \ \ \ \ content,}
+\DoxyCodeLine{\Hypertarget{_git_diff_display_8razor_8cs_source_l00127}00127\ \ \ \ \ \ \ \ \ \ \ \ \ decorationMapper,}
+\DoxyCodeLine{\Hypertarget{_git_diff_display_8razor_8cs_source_l00128}00128\ \ \ \ \ \ \ \ \ \ \ \ \ compilerService);}
+\DoxyCodeLine{\Hypertarget{_git_diff_display_8razor_8cs_source_l00129}00129\ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_git_diff_display_8razor_8cs_source_l00130}00130\ \ \ \ \ \ \ \ \ var\ modelModifier\ =\ \textcolor{keyword}{new}\ \mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1_1_text_editor_model_modifier}{TextEditorModelModifier}}(model);}
+\DoxyCodeLine{\Hypertarget{_git_diff_display_8razor_8cs_source_l00131}00131\ \ \ \ \ \ \ \ \ modelModifier.PerformRegisterPresentationModelAction(CompilerServiceDiagnosticPresentationFacts.EmptyPresentationModel);}
+\DoxyCodeLine{\Hypertarget{_git_diff_display_8razor_8cs_source_l00132}00132\ \ \ \ \ \ \ \ \ modelModifier.PerformRegisterPresentationModelAction(FindOverlayPresentationFacts.EmptyPresentationModel);}
+\DoxyCodeLine{\Hypertarget{_git_diff_display_8razor_8cs_source_l00133}00133\ \ \ \ \ \ \ \ \ modelModifier.PerformRegisterPresentationModelAction(DiffPresentationFacts.EmptyInPresentationModel);}
+\DoxyCodeLine{\Hypertarget{_git_diff_display_8razor_8cs_source_l00134}00134\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_git_diff_display_8razor_8cs_source_l00135}00135\ \ \ \ \ \ \ \ \ model\ =\ modelModifier.ToModel();}
+\DoxyCodeLine{\Hypertarget{_git_diff_display_8razor_8cs_source_l00136}00136\ }
+\DoxyCodeLine{\Hypertarget{_git_diff_display_8razor_8cs_source_l00137}00137\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editor_service}{TextEditorService}}.\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editor_service_a8066979b78e826ead9123e26a4b6a969}{ModelApi}}.\mbox{\hyperlink{interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1_1_i_text_editor_model_api_ab75438d274438eda5afb0a4471fe1390}{RegisterCustom}}(model);}
+\DoxyCodeLine{\Hypertarget{_git_diff_display_8razor_8cs_source_l00138}00138\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_git_diff_display_8razor_8cs_source_l00139}00139\ \ \ \ \ \ \ \ \ model.CompilerService.RegisterResource(}
+\DoxyCodeLine{\Hypertarget{_git_diff_display_8razor_8cs_source_l00140}00140\ \ \ \ \ \ \ \ \ \ \ \ \ model.ResourceUri,}
+\DoxyCodeLine{\Hypertarget{_git_diff_display_8razor_8cs_source_l00141}00141\ \ \ \ \ \ \ \ \ \ \ \ \ shouldTriggerResourceWasModified:\ \textcolor{keyword}{true});}
+\DoxyCodeLine{\Hypertarget{_git_diff_display_8razor_8cs_source_l00142}00142\ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_git_diff_display_8razor_8cs_source_l00143}00143\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Create\ ViewModel}}
+\DoxyCodeLine{\Hypertarget{_git_diff_display_8razor_8cs_source_l00144}00144\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{try}}
+\DoxyCodeLine{\Hypertarget{_git_diff_display_8razor_8cs_source_l00145}00145\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_git_diff_display_8razor_8cs_source_l00146}00146\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Dispose\ any\ previously\ created\ state\ for\ the\ editor\ in\ view\ model}}
+\DoxyCodeLine{\Hypertarget{_git_diff_display_8razor_8cs_source_l00147}00147\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editor_service}{TextEditorService}}.\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editor_service_a07e2a1f728a5620dae95c78c3c2d6be0}{ViewModelApi}}.\mbox{\hyperlink{interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1_1_i_text_editor_view_model_api_aeded7a7f056c24394240c72ee610eb50}{Dispose}}(InViewModelKey);}
+\DoxyCodeLine{\Hypertarget{_git_diff_display_8razor_8cs_source_l00148}00148\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_git_diff_display_8razor_8cs_source_l00149}00149\ \ \ \ \ \ \ \ \ \ \ \ \ var\ viewModelKey\ =\ InViewModelKey;}
+\DoxyCodeLine{\Hypertarget{_git_diff_display_8razor_8cs_source_l00150}00150\ \ \ \ \ \ \ \ \ \ \ \ \ var\ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_af9efd84ac52036166b47cdc1ceb058f6}{category}}\ =\ \textcolor{keyword}{new}\ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_ab53dfba5ef40ddaeca4b8982ea420fd1}{Category}}(\textcolor{stringliteral}{"{}diff-\/in"{}});}
+\DoxyCodeLine{\Hypertarget{_git_diff_display_8razor_8cs_source_l00151}00151\ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_git_diff_display_8razor_8cs_source_l00152}00152\ \ \ \ \ \ \ \ \ \ \ \ \ var\ viewModel\ =\ \textcolor{keyword}{new}\ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_aa2a2da032900659e3cf98e4b28fc476d}{TextEditorViewModel}}(}
+\DoxyCodeLine{\Hypertarget{_git_diff_display_8razor_8cs_source_l00153}00153\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ viewModelKey,}
+\DoxyCodeLine{\Hypertarget{_git_diff_display_8razor_8cs_source_l00154}00154\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_ae531f6ec8ec05e2493aabf8d17c23e4b}{resourceUri}},}
+\DoxyCodeLine{\Hypertarget{_git_diff_display_8razor_8cs_source_l00155}00155\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editor_service}{TextEditorService}},}
+\DoxyCodeLine{\Hypertarget{_git_diff_display_8razor_8cs_source_l00156}00156\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Dispatcher,}
+\DoxyCodeLine{\Hypertarget{_git_diff_display_8razor_8cs_source_l00157}00157\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_luthetus_1_1_common_1_1_razor_lib_1_1_dialogs_1_1_models_1_1_dialog_service}{DialogService}},}
+\DoxyCodeLine{\Hypertarget{_git_diff_display_8razor_8cs_source_l00158}00158\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ JsRuntime,}
+\DoxyCodeLine{\Hypertarget{_git_diff_display_8razor_8cs_source_l00159}00159\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_a479abb7968c44629c9ee977673af1973}{VirtualizationResult}}<List<RichCharacter>>.GetEmptyRichCharacters(),}
+\DoxyCodeLine{\Hypertarget{_git_diff_display_8razor_8cs_source_l00160}00160\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{new}\ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_af1eb54dcb15fe9154a163055233460ec}{TextEditorDimensions}}(0,\ 0,\ 0,\ 0),}
+\DoxyCodeLine{\Hypertarget{_git_diff_display_8razor_8cs_source_l00161}00161\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{new}\ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_af95b7406fbb23b5589ae2f3a639b572b}{ScrollbarDimensions}}(0,\ 0,\ 0,\ 0,\ 0),}
+\DoxyCodeLine{\Hypertarget{_git_diff_display_8razor_8cs_source_l00162}00162\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{new}\ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_a7bb77f18da211cc58be24a6bcf54ecc3}{CharAndLineMeasurements}}(0,\ 0),}
+\DoxyCodeLine{\Hypertarget{_git_diff_display_8razor_8cs_source_l00163}00163\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{false},}
+\DoxyCodeLine{\Hypertarget{_git_diff_display_8razor_8cs_source_l00164}00164\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_af9efd84ac52036166b47cdc1ceb058f6}{category}});}
+\DoxyCodeLine{\Hypertarget{_git_diff_display_8razor_8cs_source_l00165}00165\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_git_diff_display_8razor_8cs_source_l00166}00166\ \ \ \ \ \ \ \ \ \ \ \ \ var\ firstPresentationLayerKeys\ =\ \textcolor{keyword}{new}[]}
+\DoxyCodeLine{\Hypertarget{_git_diff_display_8razor_8cs_source_l00167}00167\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_git_diff_display_8razor_8cs_source_l00168}00168\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ CompilerServiceDiagnosticPresentationFacts.PresentationKey,}
+\DoxyCodeLine{\Hypertarget{_git_diff_display_8razor_8cs_source_l00169}00169\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ FindOverlayPresentationFacts.PresentationKey,}
+\DoxyCodeLine{\Hypertarget{_git_diff_display_8razor_8cs_source_l00170}00170\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ DiffPresentationFacts.InPresentationKey,}
+\DoxyCodeLine{\Hypertarget{_git_diff_display_8razor_8cs_source_l00171}00171\ \ \ \ \ \ \ \ \ \ \ \ \ \}.ToImmutableArray();}
+\DoxyCodeLine{\Hypertarget{_git_diff_display_8razor_8cs_source_l00172}00172\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_git_diff_display_8razor_8cs_source_l00173}00173\ \ \ \ \ \ \ \ \ \ \ \ \ viewModel.UnsafeState.ShouldSetFocusAfterNextRender\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{\Hypertarget{_git_diff_display_8razor_8cs_source_l00174}00174\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_git_diff_display_8razor_8cs_source_l00175}00175\ \ \ \ \ \ \ \ \ \ \ \ \ viewModel\ =\ viewModel\ with}
+\DoxyCodeLine{\Hypertarget{_git_diff_display_8razor_8cs_source_l00176}00176\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_git_diff_display_8razor_8cs_source_l00177}00177\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_a2c34ae81d2341469b7604ce680cd4f43}{GetTabDisplayNameFunc}}\ =\ \_\ =>\ absolutePath.NameWithExtension,}
+\DoxyCodeLine{\Hypertarget{_git_diff_display_8razor_8cs_source_l00178}00178\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_a3a9efc5ea91c8c212daa9151a59ba3f1}{FirstPresentationLayerKeysList}}\ =\ firstPresentationLayerKeys.ToImmutableList()}
+\DoxyCodeLine{\Hypertarget{_git_diff_display_8razor_8cs_source_l00179}00179\ \ \ \ \ \ \ \ \ \ \ \ \ \};}
+\DoxyCodeLine{\Hypertarget{_git_diff_display_8razor_8cs_source_l00180}00180\ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_git_diff_display_8razor_8cs_source_l00181}00181\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_abe7fad0a7df96f414b675b6af70f260d}{TextEditorService}}.\mbox{\hyperlink{interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_i_text_editor_service_a7f1a64364e1d4be381e7ec6b7c6df127}{ViewModelApi}}.\mbox{\hyperlink{interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1_1_i_text_editor_view_model_api_acbbe8ce8503e7f4ef05c5539f461a947}{Register}}(viewModel);}
+\DoxyCodeLine{\Hypertarget{_git_diff_display_8razor_8cs_source_l00182}00182\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_git_diff_display_8razor_8cs_source_l00183}00183\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{catch}\ (Exception\ e)}
+\DoxyCodeLine{\Hypertarget{_git_diff_display_8razor_8cs_source_l00184}00184\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_git_diff_display_8razor_8cs_source_l00185}00185\ \ \ \ \ \ \ \ \ \ \ \ \ NotificationHelper.DispatchError(}
+\DoxyCodeLine{\Hypertarget{_git_diff_display_8razor_8cs_source_l00186}00186\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ nameof(TryCreateEditorIn),}
+\DoxyCodeLine{\Hypertarget{_git_diff_display_8razor_8cs_source_l00187}00187\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ e.ToString(),}
+\DoxyCodeLine{\Hypertarget{_git_diff_display_8razor_8cs_source_l00188}00188\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ CommonComponentRenderers,}
+\DoxyCodeLine{\Hypertarget{_git_diff_display_8razor_8cs_source_l00189}00189\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Dispatcher,}
+\DoxyCodeLine{\Hypertarget{_git_diff_display_8razor_8cs_source_l00190}00190\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ TimeSpan.FromSeconds(6));}
+\DoxyCodeLine{\Hypertarget{_git_diff_display_8razor_8cs_source_l00191}00191\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_git_diff_display_8razor_8cs_source_l00192}00192\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};\ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_git_diff_display_8razor_8cs_source_l00193}00193\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_git_diff_display_8razor_8cs_source_l00194}00194\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_git_diff_display_8razor_8cs_source_l00195}00195\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{true};}
+\DoxyCodeLine{\Hypertarget{_git_diff_display_8razor_8cs_source_l00196}00196\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_git_diff_display_8razor_8cs_source_l00197}00197\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_git_diff_display_8razor_8cs_source_l00198}00198\ \ \ \ \ \textcolor{keyword}{private}\ async\ Task<bool>\ TryCreateEditorOut(\mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_a435ccef09e2ba83022e8cf378fc0f690}{ResourceUri}}\ originalResourceUri,\ IAbsolutePath\ originalAbsolutePath)}
+\DoxyCodeLine{\Hypertarget{_git_diff_display_8razor_8cs_source_l00199}00199\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_git_diff_display_8razor_8cs_source_l00200}00200\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Create\ Model}}
+\DoxyCodeLine{\Hypertarget{_git_diff_display_8razor_8cs_source_l00201}00201\ \ \ \ \ \ \ \ \ var\ originalModel\ =\ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_abe7fad0a7df96f414b675b6af70f260d}{TextEditorService}}.\mbox{\hyperlink{interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_i_text_editor_service_ae3a0dbf71e296019f79700cb636fdf7e}{ModelApi}}.\mbox{\hyperlink{interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1_1_i_text_editor_model_api_a684cbb08092854b34789a36ee62ebce1}{GetOrDefault}}(originalResourceUri);}
+\DoxyCodeLine{\Hypertarget{_git_diff_display_8razor_8cs_source_l00202}00202\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (originalModel\ is\ \textcolor{keyword}{null})}
+\DoxyCodeLine{\Hypertarget{_git_diff_display_8razor_8cs_source_l00203}00203\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_git_diff_display_8razor_8cs_source_l00204}00204\ \ \ \ \ \ \ \ \ \ \ \ \ var\ registerModelArgs\ =\ \textcolor{keyword}{new}\ RegisterModelArgs(originalResourceUri,\ ServiceProvider);}
+\DoxyCodeLine{\Hypertarget{_git_diff_display_8razor_8cs_source_l00205}00205\ }
+\DoxyCodeLine{\Hypertarget{_git_diff_display_8razor_8cs_source_l00206}00206\ \ \ \ \ \ \ \ \ \ \ \ \ await\ TextEditorService.TextEditorConfig.RegisterModelFunc}
+\DoxyCodeLine{\Hypertarget{_git_diff_display_8razor_8cs_source_l00207}00207\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ .Invoke(registerModelArgs).ConfigureAwait(\textcolor{keyword}{false});}
+\DoxyCodeLine{\Hypertarget{_git_diff_display_8razor_8cs_source_l00208}00208\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_git_diff_display_8razor_8cs_source_l00209}00209\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_git_diff_display_8razor_8cs_source_l00210}00210\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Create\ ViewModel}}
+\DoxyCodeLine{\Hypertarget{_git_diff_display_8razor_8cs_source_l00211}00211\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{try}}
+\DoxyCodeLine{\Hypertarget{_git_diff_display_8razor_8cs_source_l00212}00212\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_git_diff_display_8razor_8cs_source_l00213}00213\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Dispose\ any\ previously\ created\ state\ for\ the\ editor\ out\ view\ model}}
+\DoxyCodeLine{\Hypertarget{_git_diff_display_8razor_8cs_source_l00214}00214\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_abe7fad0a7df96f414b675b6af70f260d}{TextEditorService}}.\mbox{\hyperlink{interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_i_text_editor_service_a7f1a64364e1d4be381e7ec6b7c6df127}{ViewModelApi}}.\mbox{\hyperlink{interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1_1_i_text_editor_view_model_api_aeded7a7f056c24394240c72ee610eb50}{Dispose}}(OutViewModelKey);}
+\DoxyCodeLine{\Hypertarget{_git_diff_display_8razor_8cs_source_l00215}00215\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_git_diff_display_8razor_8cs_source_l00216}00216\ \ \ \ \ \ \ \ \ \ \ \ \ var\ viewModelKey\ =\ OutViewModelKey;}
+\DoxyCodeLine{\Hypertarget{_git_diff_display_8razor_8cs_source_l00217}00217\ \ \ \ \ \ \ \ \ \ \ \ \ var\ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_af9efd84ac52036166b47cdc1ceb058f6}{category}}\ =\ \textcolor{keyword}{new}\ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_ab53dfba5ef40ddaeca4b8982ea420fd1}{Category}}(\textcolor{stringliteral}{"{}diff-\/out"{}});}
+\DoxyCodeLine{\Hypertarget{_git_diff_display_8razor_8cs_source_l00218}00218\ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_git_diff_display_8razor_8cs_source_l00219}00219\ \ \ \ \ \ \ \ \ \ \ \ \ var\ viewModel\ =\ \textcolor{keyword}{new}\ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_aa2a2da032900659e3cf98e4b28fc476d}{TextEditorViewModel}}(}
+\DoxyCodeLine{\Hypertarget{_git_diff_display_8razor_8cs_source_l00220}00220\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ viewModelKey,}
+\DoxyCodeLine{\Hypertarget{_git_diff_display_8razor_8cs_source_l00221}00221\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ originalResourceUri,}
+\DoxyCodeLine{\Hypertarget{_git_diff_display_8razor_8cs_source_l00222}00222\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_abe7fad0a7df96f414b675b6af70f260d}{TextEditorService}},}
+\DoxyCodeLine{\Hypertarget{_git_diff_display_8razor_8cs_source_l00223}00223\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Dispatcher,}
+\DoxyCodeLine{\Hypertarget{_git_diff_display_8razor_8cs_source_l00224}00224\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ DialogService,}
+\DoxyCodeLine{\Hypertarget{_git_diff_display_8razor_8cs_source_l00225}00225\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ JsRuntime,}
+\DoxyCodeLine{\Hypertarget{_git_diff_display_8razor_8cs_source_l00226}00226\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_a479abb7968c44629c9ee977673af1973}{VirtualizationResult}}<List<RichCharacter>>.GetEmptyRichCharacters(),}
+\DoxyCodeLine{\Hypertarget{_git_diff_display_8razor_8cs_source_l00227}00227\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{new}\ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_af1eb54dcb15fe9154a163055233460ec}{TextEditorDimensions}}(0,\ 0,\ 0,\ 0),}
+\DoxyCodeLine{\Hypertarget{_git_diff_display_8razor_8cs_source_l00228}00228\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{new}\ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_af95b7406fbb23b5589ae2f3a639b572b}{ScrollbarDimensions}}(0,\ 0,\ 0,\ 0,\ 0),}
+\DoxyCodeLine{\Hypertarget{_git_diff_display_8razor_8cs_source_l00229}00229\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{new}\ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_a7bb77f18da211cc58be24a6bcf54ecc3}{CharAndLineMeasurements}}(0,\ 0),}
+\DoxyCodeLine{\Hypertarget{_git_diff_display_8razor_8cs_source_l00230}00230\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{false},}
+\DoxyCodeLine{\Hypertarget{_git_diff_display_8razor_8cs_source_l00231}00231\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_af9efd84ac52036166b47cdc1ceb058f6}{category}});}
+\DoxyCodeLine{\Hypertarget{_git_diff_display_8razor_8cs_source_l00232}00232\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_git_diff_display_8razor_8cs_source_l00233}00233\ \ \ \ \ \ \ \ \ \ \ \ \ var\ firstPresentationLayerKeys\ =\ \textcolor{keyword}{new}[]}
+\DoxyCodeLine{\Hypertarget{_git_diff_display_8razor_8cs_source_l00234}00234\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_git_diff_display_8razor_8cs_source_l00235}00235\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ CompilerServiceDiagnosticPresentationFacts.PresentationKey,}
+\DoxyCodeLine{\Hypertarget{_git_diff_display_8razor_8cs_source_l00236}00236\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ FindOverlayPresentationFacts.PresentationKey,}
+\DoxyCodeLine{\Hypertarget{_git_diff_display_8razor_8cs_source_l00237}00237\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ DiffPresentationFacts.OutPresentationKey,}
+\DoxyCodeLine{\Hypertarget{_git_diff_display_8razor_8cs_source_l00238}00238\ \ \ \ \ \ \ \ \ \ \ \ \ \}.ToImmutableArray();}
+\DoxyCodeLine{\Hypertarget{_git_diff_display_8razor_8cs_source_l00239}00239\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_git_diff_display_8razor_8cs_source_l00240}00240\ \ \ \ \ \ \ \ \ \ \ \ \ viewModel.UnsafeState.ShouldSetFocusAfterNextRender\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{\Hypertarget{_git_diff_display_8razor_8cs_source_l00241}00241\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_git_diff_display_8razor_8cs_source_l00242}00242\ \ \ \ \ \ \ \ \ \ \ \ \ viewModel\ =\ viewModel\ with}
+\DoxyCodeLine{\Hypertarget{_git_diff_display_8razor_8cs_source_l00243}00243\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_git_diff_display_8razor_8cs_source_l00244}00244\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_a2c34ae81d2341469b7604ce680cd4f43}{GetTabDisplayNameFunc}}\ =\ \_\ =>\ originalAbsolutePath.\mbox{\hyperlink{interface_luthetus_1_1_common_1_1_razor_lib_1_1_file_systems_1_1_models_1_1_i_path_acad5bdc7e6cd108d93a9feeb26427658}{NameWithExtension}},}
+\DoxyCodeLine{\Hypertarget{_git_diff_display_8razor_8cs_source_l00245}00245\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_a3a9efc5ea91c8c212daa9151a59ba3f1}{FirstPresentationLayerKeysList}}\ =\ firstPresentationLayerKeys.ToImmutableList()}
+\DoxyCodeLine{\Hypertarget{_git_diff_display_8razor_8cs_source_l00246}00246\ \ \ \ \ \ \ \ \ \ \ \ \ \};}
+\DoxyCodeLine{\Hypertarget{_git_diff_display_8razor_8cs_source_l00247}00247\ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_git_diff_display_8razor_8cs_source_l00248}00248\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_abe7fad0a7df96f414b675b6af70f260d}{TextEditorService}}.\mbox{\hyperlink{interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_i_text_editor_service_a7f1a64364e1d4be381e7ec6b7c6df127}{ViewModelApi}}.\mbox{\hyperlink{interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1_1_i_text_editor_view_model_api_acbbe8ce8503e7f4ef05c5539f461a947}{Register}}(viewModel);}
+\DoxyCodeLine{\Hypertarget{_git_diff_display_8razor_8cs_source_l00249}00249\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_git_diff_display_8razor_8cs_source_l00250}00250\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{catch}\ (Exception\ e)}
+\DoxyCodeLine{\Hypertarget{_git_diff_display_8razor_8cs_source_l00251}00251\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_git_diff_display_8razor_8cs_source_l00252}00252\ \ \ \ \ \ \ \ \ \ \ \ \ NotificationHelper.DispatchError(}
+\DoxyCodeLine{\Hypertarget{_git_diff_display_8razor_8cs_source_l00253}00253\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ nameof(TryCreateEditorOut),}
+\DoxyCodeLine{\Hypertarget{_git_diff_display_8razor_8cs_source_l00254}00254\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ e.ToString(),}
+\DoxyCodeLine{\Hypertarget{_git_diff_display_8razor_8cs_source_l00255}00255\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ CommonComponentRenderers,}
+\DoxyCodeLine{\Hypertarget{_git_diff_display_8razor_8cs_source_l00256}00256\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Dispatcher,}
+\DoxyCodeLine{\Hypertarget{_git_diff_display_8razor_8cs_source_l00257}00257\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ TimeSpan.FromSeconds(6));}
+\DoxyCodeLine{\Hypertarget{_git_diff_display_8razor_8cs_source_l00258}00258\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_git_diff_display_8razor_8cs_source_l00259}00259\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};\ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_git_diff_display_8razor_8cs_source_l00260}00260\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_git_diff_display_8razor_8cs_source_l00261}00261\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_git_diff_display_8razor_8cs_source_l00262}00262\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{true};}
+\DoxyCodeLine{\Hypertarget{_git_diff_display_8razor_8cs_source_l00263}00263\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_git_diff_display_8razor_8cs_source_l00264}00264\ }
+\DoxyCodeLine{\Hypertarget{_git_diff_display_8razor_8cs_source_l00265}00265\ \ \ \ \ \textcolor{keyword}{private}\ async\ Task\ CreateEditorFromLog(}
+\DoxyCodeLine{\Hypertarget{_git_diff_display_8razor_8cs_source_l00266}00266\ \ \ \ \ \ \ \ \ GitCliOutputParser\ gitCliOutputParser,}
+\DoxyCodeLine{\Hypertarget{_git_diff_display_8razor_8cs_source_l00267}00267\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespace_luthetus_1_1_extensions_1_1_git_1_1_states_aca241d2376f4dc9e1660c6f740334159}{GitState}}\ localGitState,}
+\DoxyCodeLine{\Hypertarget{_git_diff_display_8razor_8cs_source_l00268}00268\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespace_luthetus_1_1_extensions_1_1_git_1_1_models_af97c6023d3ec7c91bae37bd8f785c885}{GitFile}}\ localGitFile,}
+\DoxyCodeLine{\Hypertarget{_git_diff_display_8razor_8cs_source_l00269}00269\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{string}\ logFileContent)}
+\DoxyCodeLine{\Hypertarget{_git_diff_display_8razor_8cs_source_l00270}00270\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_git_diff_display_8razor_8cs_source_l00271}00271\ \ \ \ \ \ \ \ \ \textcolor{comment}{/*}}
+\DoxyCodeLine{\Hypertarget{_git_diff_display_8razor_8cs_source_l00272}00272\ \textcolor{comment}{\ \ \ \ \ \ \ \ Goal:\ Diff\ Editor\ (2024-\/08-\/26)}}
+\DoxyCodeLine{\Hypertarget{_git_diff_display_8razor_8cs_source_l00273}00273\ \textcolor{comment}{\ \ \ \ \ \ \ \ ==============================}}
+\DoxyCodeLine{\Hypertarget{_git_diff_display_8razor_8cs_source_l00274}00274\ \textcolor{comment}{\ \ \ \ \ \ \ \ Log\ -\/>\ string}}
+\DoxyCodeLine{\Hypertarget{_git_diff_display_8razor_8cs_source_l00275}00275\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ -\/>\ Model\ (caching?)}}
+\DoxyCodeLine{\Hypertarget{_git_diff_display_8razor_8cs_source_l00276}00276\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ -\/>\ new\ ResourceUri(ResourceUriFacts.Diff\ +\ originalResourceUri)}}
+\DoxyCodeLine{\Hypertarget{_git_diff_display_8razor_8cs_source_l00277}00277\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ -\/>\ ViewModel\ (caching?)}}
+\DoxyCodeLine{\Hypertarget{_git_diff_display_8razor_8cs_source_l00278}00278\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ -\/>\ new\ Category("{}diff-\/in"{})}}
+\DoxyCodeLine{\Hypertarget{_git_diff_display_8razor_8cs_source_l00279}00279\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ -\/>\ Add(DiffPresentationLayer)}}
+\DoxyCodeLine{\Hypertarget{_git_diff_display_8razor_8cs_source_l00280}00280\ \textcolor{comment}{\ \ \ \ \ \ \ \ Actual\ -\/>\ string}}
+\DoxyCodeLine{\Hypertarget{_git_diff_display_8razor_8cs_source_l00281}00281\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ -\/>\ Model\ (more\ likely\ to\ already\ exist\ than\ the\ log's\ model?)}}
+\DoxyCodeLine{\Hypertarget{_git_diff_display_8razor_8cs_source_l00282}00282\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ -\/>\ ViewModel\ (caching?)}}
+\DoxyCodeLine{\Hypertarget{_git_diff_display_8razor_8cs_source_l00283}00283\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ -\/>\ new\ Category("{}diff-\/out"{})}}
+\DoxyCodeLine{\Hypertarget{_git_diff_display_8razor_8cs_source_l00284}00284\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ -\/>\ Add(DiffPresentationLayer)}}
+\DoxyCodeLine{\Hypertarget{_git_diff_display_8razor_8cs_source_l00285}00285\ \textcolor{comment}{\ \ \ \ \ \ \ \ }}
+\DoxyCodeLine{\Hypertarget{_git_diff_display_8razor_8cs_source_l00286}00286\ \textcolor{comment}{\ \ \ \ \ \ \ \ Previously\ I\ had\ been\ adding\ the\ diff\ presentation\ layer\ to\ the\ ViewModels\ of\ the\ category:\ "{}main"{}.}}
+\DoxyCodeLine{\Hypertarget{_git_diff_display_8razor_8cs_source_l00287}00287\ \textcolor{comment}{\ \ \ \ \ \ \ \ I\ think\ this\ diff\ presentation\ layer\ can\ and\ should\ be\ removed\ from\ ViewModels\ of\ the\ category:\ "{}main"{}.\ }}
+\DoxyCodeLine{\Hypertarget{_git_diff_display_8razor_8cs_source_l00288}00288\ \textcolor{comment}{\ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{_git_diff_display_8razor_8cs_source_l00289}00289\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_git_diff_display_8razor_8cs_source_l00290}00290\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_abe7fad0a7df96f414b675b6af70f260d}{TextEditorService}}.\mbox{\hyperlink{interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_i_text_editor_service_a93d5766adcd83dc1738ca96e34fed145}{DiffApi}}.\mbox{\hyperlink{interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_diffs_1_1_models_1_1_i_text_editor_diff_api_a8ffb3f382231091f6f2d185a8aad1c32}{Register}}(}
+\DoxyCodeLine{\Hypertarget{_git_diff_display_8razor_8cs_source_l00291}00291\ \ \ \ \ \ \ \ \ \ \ \ \ \_textEditorDiffModelKey,}
+\DoxyCodeLine{\Hypertarget{_git_diff_display_8razor_8cs_source_l00292}00292\ \ \ \ \ \ \ \ \ \ \ \ \ InViewModelKey,}
+\DoxyCodeLine{\Hypertarget{_git_diff_display_8razor_8cs_source_l00293}00293\ \ \ \ \ \ \ \ \ \ \ \ \ OutViewModelKey);}
+\DoxyCodeLine{\Hypertarget{_git_diff_display_8razor_8cs_source_l00294}00294\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_git_diff_display_8razor_8cs_source_l00295}00295\ \ \ \ \ \ \ \ \ \_logFileContent\ =\ logFileContent;}
+\DoxyCodeLine{\Hypertarget{_git_diff_display_8razor_8cs_source_l00296}00296\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\_logFileContent\ is\ \textcolor{keyword}{null})}
+\DoxyCodeLine{\Hypertarget{_git_diff_display_8razor_8cs_source_l00297}00297\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return};}
+\DoxyCodeLine{\Hypertarget{_git_diff_display_8razor_8cs_source_l00298}00298\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_git_diff_display_8razor_8cs_source_l00299}00299\ \ \ \ \ \ \ \ \ var\ absolutePathStringStandardized\ =\ await\ TextEditorConfig.AbsolutePathStandardizeFunc.Invoke(}
+\DoxyCodeLine{\Hypertarget{_git_diff_display_8razor_8cs_source_l00300}00300\ \ \ \ \ \ \ \ \ \ \ \ \ localGitFile.AbsolutePath.Value,}
+\DoxyCodeLine{\Hypertarget{_git_diff_display_8razor_8cs_source_l00301}00301\ \ \ \ \ \ \ \ \ \ \ \ \ ServiceProvider);}
+\DoxyCodeLine{\Hypertarget{_git_diff_display_8razor_8cs_source_l00302}00302\ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_git_diff_display_8razor_8cs_source_l00303}00303\ \ \ \ \ \ \ \ \ var\ originalResourceUri\ =\ \textcolor{keyword}{new}\ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_a435ccef09e2ba83022e8cf378fc0f690}{ResourceUri}}(absolutePathStringStandardized);}
+\DoxyCodeLine{\Hypertarget{_git_diff_display_8razor_8cs_source_l00304}00304\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_git_diff_display_8razor_8cs_source_l00305}00305\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!(await\ TryCreateEditorIn(logFileContent,\ originalResourceUri)))}
+\DoxyCodeLine{\Hypertarget{_git_diff_display_8razor_8cs_source_l00306}00306\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return};}
+\DoxyCodeLine{\Hypertarget{_git_diff_display_8razor_8cs_source_l00307}00307\ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_git_diff_display_8razor_8cs_source_l00308}00308\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!(await\ TryCreateEditorOut(originalResourceUri,\ localGitFile.AbsolutePath)))}
+\DoxyCodeLine{\Hypertarget{_git_diff_display_8razor_8cs_source_l00309}00309\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return};}
+\DoxyCodeLine{\Hypertarget{_git_diff_display_8razor_8cs_source_l00310}00310\ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_git_diff_display_8razor_8cs_source_l00311}00311\ \ \ \ \ \ \ \ \ GitBackgroundTaskApi.\mbox{\hyperlink{class_luthetus_1_1_extensions_1_1_git_1_1_background_tasks_1_1_models_1_1_git_background_task_api_a2c059afb23ea38591a882933b9972492}{Git}}.\mbox{\hyperlink{class_luthetus_1_1_extensions_1_1_git_1_1_models_1_1_git_ide_api_a42264c1741bc2a754cf02ff61f7bdc45}{DiffFileEnqueue}}(}
+\DoxyCodeLine{\Hypertarget{_git_diff_display_8razor_8cs_source_l00312}00312\ \ \ \ \ \ \ \ \ \ \ \ \ localGitState.Repo,}
+\DoxyCodeLine{\Hypertarget{_git_diff_display_8razor_8cs_source_l00313}00313\ \ \ \ \ \ \ \ \ \ \ \ \ localGitFile.RelativePathString,}
+\DoxyCodeLine{\Hypertarget{_git_diff_display_8razor_8cs_source_l00314}00314\ \ \ \ \ \ \ \ \ \ \ \ \ (gitCliOutputParser,\ logFileContent,\ plusMarkedLineIndexList)\ =>}
+\DoxyCodeLine{\Hypertarget{_git_diff_display_8razor_8cs_source_l00315}00315\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_git_diff_display_8razor_8cs_source_l00316}00316\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Console.WriteLine(\textcolor{stringliteral}{"{}DiffFileEnqueue"{}});}
+\DoxyCodeLine{\Hypertarget{_git_diff_display_8razor_8cs_source_l00317}00317\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_git_diff_display_8razor_8cs_source_l00318}00318\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ TextEditorService.PostUnique(}
+\DoxyCodeLine{\Hypertarget{_git_diff_display_8razor_8cs_source_l00319}00319\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ nameof(plusMarkedLineIndexList),}
+\DoxyCodeLine{\Hypertarget{_git_diff_display_8razor_8cs_source_l00320}00320\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ editContext\ =>}
+\DoxyCodeLine{\Hypertarget{_git_diff_display_8razor_8cs_source_l00321}00321\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_git_diff_display_8razor_8cs_source_l00322}00322\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Console.WriteLine(\textcolor{stringliteral}{"{}plusMarkedLineIndexList"{}});}
+\DoxyCodeLine{\Hypertarget{_git_diff_display_8razor_8cs_source_l00323}00323\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_git_diff_display_8razor_8cs_source_l00324}00324\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ var\ originalResourceUri\ =\ new\ ResourceUri(localGitFile.AbsolutePath.Value);}
+\DoxyCodeLine{\Hypertarget{_git_diff_display_8razor_8cs_source_l00325}00325\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_git_diff_display_8razor_8cs_source_l00326}00326\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ var\ modelModifier\ =\ editContext.GetModelModifier(originalResourceUri);}
+\DoxyCodeLine{\Hypertarget{_git_diff_display_8razor_8cs_source_l00327}00327\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ var\ viewModelModifier\ =\ editContext.GetViewModelModifier(OutViewModelKey);}
+\DoxyCodeLine{\Hypertarget{_git_diff_display_8razor_8cs_source_l00328}00328\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_git_diff_display_8razor_8cs_source_l00329}00329\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ if\ (modelModifier\ is\ null\ ||\ viewModelModifier\ is\ null)}
+\DoxyCodeLine{\Hypertarget{_git_diff_display_8razor_8cs_source_l00330}00330\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_git_diff_display_8razor_8cs_source_l00331}00331\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Console.WriteLine(\textcolor{stringliteral}{"{}modelModifier\ is\ null\ ||\ viewModelModifier\ is\ null"{}});}
+\DoxyCodeLine{\Hypertarget{_git_diff_display_8razor_8cs_source_l00332}00332\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ return\ Task.CompletedTask;}
+\DoxyCodeLine{\Hypertarget{_git_diff_display_8razor_8cs_source_l00333}00333\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_git_diff_display_8razor_8cs_source_l00334}00334\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_git_diff_display_8razor_8cs_source_l00335}00335\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ editContext.TextEditorService.ModelApi.StartPendingCalculatePresentationModel(}
+\DoxyCodeLine{\Hypertarget{_git_diff_display_8razor_8cs_source_l00336}00336\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ editContext,}
+\DoxyCodeLine{\Hypertarget{_git_diff_display_8razor_8cs_source_l00337}00337\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ modelModifier,}
+\DoxyCodeLine{\Hypertarget{_git_diff_display_8razor_8cs_source_l00338}00338\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ DiffPresentationFacts.OutPresentationKey,}
+\DoxyCodeLine{\Hypertarget{_git_diff_display_8razor_8cs_source_l00339}00339\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ DiffPresentationFacts.EmptyOutPresentationModel);}
+\DoxyCodeLine{\Hypertarget{_git_diff_display_8razor_8cs_source_l00340}00340\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_git_diff_display_8razor_8cs_source_l00341}00341\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ var\ outPresentationModel\ =\ modelModifier.PresentationModelList.First(}
+\DoxyCodeLine{\Hypertarget{_git_diff_display_8razor_8cs_source_l00342}00342\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ x\ =>\ x.TextEditorPresentationKey\ ==\ DiffPresentationFacts.OutPresentationKey);}
+\DoxyCodeLine{\Hypertarget{_git_diff_display_8razor_8cs_source_l00343}00343\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_git_diff_display_8razor_8cs_source_l00344}00344\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ if\ (outPresentationModel.PendingCalculation\ is\ null)}
+\DoxyCodeLine{\Hypertarget{_git_diff_display_8razor_8cs_source_l00345}00345\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_git_diff_display_8razor_8cs_source_l00346}00346\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Console.WriteLine(\textcolor{stringliteral}{"{}outPresentationModel.PendingCalculation\ is\ null"{}});}
+\DoxyCodeLine{\Hypertarget{_git_diff_display_8razor_8cs_source_l00347}00347\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ return\ Task.CompletedTask;}
+\DoxyCodeLine{\Hypertarget{_git_diff_display_8razor_8cs_source_l00348}00348\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_git_diff_display_8razor_8cs_source_l00349}00349\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_git_diff_display_8razor_8cs_source_l00350}00350\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ var\ outText\ =\ outPresentationModel.PendingCalculation.ContentAtRequest;}
+\DoxyCodeLine{\Hypertarget{_git_diff_display_8razor_8cs_source_l00351}00351\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_git_diff_display_8razor_8cs_source_l00352}00352\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ var\ outResultTextSpanList\ =\ new\ List<TextEditorTextSpan>();}
+\DoxyCodeLine{\Hypertarget{_git_diff_display_8razor_8cs_source_l00353}00353\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_git_diff_display_8razor_8cs_source_l00354}00354\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ foreach\ (var\ lineIndex\ in\ plusMarkedLineIndexList)}
+\DoxyCodeLine{\Hypertarget{_git_diff_display_8razor_8cs_source_l00355}00355\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_git_diff_display_8razor_8cs_source_l00356}00356\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_git_diff_display_8razor_8cs_source_l00357}00357\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ var\ lineInformation\ =\ modelModifier.GetLineInformation(lineIndex);}
+\DoxyCodeLine{\Hypertarget{_git_diff_display_8razor_8cs_source_l00358}00358\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_git_diff_display_8razor_8cs_source_l00359}00359\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Console.WriteLine(\$\textcolor{stringliteral}{"{}lineIndex:\ \{lineIndex\}\ |\ (\{lineInformation.StartPositionIndexInclusive\}\ to\ \{lineInformation.UpperLineEnd.StartPositionIndexInclusive\})"{}});}
+\DoxyCodeLine{\Hypertarget{_git_diff_display_8razor_8cs_source_l00360}00360\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_git_diff_display_8razor_8cs_source_l00361}00361\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ outResultTextSpanList.Add(new\ TextEditorTextSpan(}
+\DoxyCodeLine{\Hypertarget{_git_diff_display_8razor_8cs_source_l00362}00362\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ lineInformation.StartPositionIndexInclusive,}
+\DoxyCodeLine{\Hypertarget{_git_diff_display_8razor_8cs_source_l00363}00363\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ lineInformation.UpperLineEnd.StartPositionIndexInclusive,}
+\DoxyCodeLine{\Hypertarget{_git_diff_display_8razor_8cs_source_l00364}00364\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (byte)TextEditorDiffDecorationKind.InsertionLine,}
+\DoxyCodeLine{\Hypertarget{_git_diff_display_8razor_8cs_source_l00365}00365\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ originalResourceUri,}
+\DoxyCodeLine{\Hypertarget{_git_diff_display_8razor_8cs_source_l00366}00366\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ outPresentationModel.PendingCalculation.ContentAtRequest));}
+\DoxyCodeLine{\Hypertarget{_git_diff_display_8razor_8cs_source_l00367}00367\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_git_diff_display_8razor_8cs_source_l00368}00368\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_git_diff_display_8razor_8cs_source_l00369}00369\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ modelModifier.CompletePendingCalculatePresentationModel(}
+\DoxyCodeLine{\Hypertarget{_git_diff_display_8razor_8cs_source_l00370}00370\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ DiffPresentationFacts.OutPresentationKey,}
+\DoxyCodeLine{\Hypertarget{_git_diff_display_8razor_8cs_source_l00371}00371\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ DiffPresentationFacts.EmptyOutPresentationModel,}
+\DoxyCodeLine{\Hypertarget{_git_diff_display_8razor_8cs_source_l00372}00372\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ outResultTextSpanList.ToImmutableArray());}
+\DoxyCodeLine{\Hypertarget{_git_diff_display_8razor_8cs_source_l00373}00373\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Console.WriteLine(\textcolor{stringliteral}{"{}modelModifier.CompletePendingCalculatePresentationModel"{}});}
+\DoxyCodeLine{\Hypertarget{_git_diff_display_8razor_8cs_source_l00374}00374\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_git_diff_display_8razor_8cs_source_l00375}00375\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ return\ Task.CompletedTask;}
+\DoxyCodeLine{\Hypertarget{_git_diff_display_8razor_8cs_source_l00376}00376\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \});}
+\DoxyCodeLine{\Hypertarget{_git_diff_display_8razor_8cs_source_l00377}00377\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_git_diff_display_8razor_8cs_source_l00378}00378\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ Task.CompletedTask;}
+\DoxyCodeLine{\Hypertarget{_git_diff_display_8razor_8cs_source_l00379}00379\ \ \ \ \ \ \ \ \ \ \ \ \ \});}
+\DoxyCodeLine{\Hypertarget{_git_diff_display_8razor_8cs_source_l00380}00380\ }
+\DoxyCodeLine{\Hypertarget{_git_diff_display_8razor_8cs_source_l00381}00381\ \ \ \ \ \ \ \ \ await\ InvokeAsync(StateHasChanged);}
+\DoxyCodeLine{\Hypertarget{_git_diff_display_8razor_8cs_source_l00382}00382\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_git_diff_display_8razor_8cs_source_l00383}00383\ \}}
+
+\end{DoxyCode}

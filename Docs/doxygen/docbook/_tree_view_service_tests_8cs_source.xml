@@ -1,0 +1,157 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="__tree_view_service_tests_8cs_source" xml:lang="en-US">
+<title>TreeViewServiceTests.cs</title>
+<indexterm><primary>Source/Tests/Common/Basis/TreeViews/Models/TreeViewServiceTests.cs</primary></indexterm>
+Go to the documentation of this file.<programlisting linenumbering="unnumbered"><anchor xml:id="__tree_view_service_tests_8cs_source_1l00001"/>00001 <emphasis role="keyword">using&#32;</emphasis>Fluxor;
+<anchor xml:id="__tree_view_service_tests_8cs_source_1l00002"/>00002 <emphasis role="keyword">using&#32;</emphasis><link linkend="_namespace_luthetus_1_1_common_1_1_razor_lib_1_1_background_tasks_1_1_models">Luthetus.Common.RazorLib.BackgroundTasks.Models</link>;
+<anchor xml:id="__tree_view_service_tests_8cs_source_1l00003"/>00003 <emphasis role="keyword">using&#32;</emphasis><link linkend="_namespace_luthetus_1_1_common_1_1_razor_lib_1_1_tree_views_1_1_models">Luthetus.Common.RazorLib.TreeViews.Models</link>;
+<anchor xml:id="__tree_view_service_tests_8cs_source_1l00004"/>00004 <emphasis role="keyword">using&#32;</emphasis><link linkend="_namespace_luthetus_1_1_common_1_1_razor_lib_1_1_tree_views_1_1_states">Luthetus.Common.RazorLib.TreeViews.States</link>;
+<anchor xml:id="__tree_view_service_tests_8cs_source_1l00005"/>00005 <emphasis role="keyword">using&#32;</emphasis><link linkend="_namespace_luthetus_1_1_common_1_1_razor_lib_1_1_keys_1_1_models">Luthetus.Common.RazorLib.Keys.Models</link>;
+<anchor xml:id="__tree_view_service_tests_8cs_source_1l00006"/>00006 <emphasis role="keyword">using&#32;</emphasis>Microsoft.Extensions.DependencyInjection;
+<anchor xml:id="__tree_view_service_tests_8cs_source_1l00007"/>00007 
+<anchor xml:id="__tree_view_service_tests_8cs_source_1l00008"/>00008 <emphasis role="keyword">namespace&#32;</emphasis><link linkend="_namespace_luthetus_1_1_common_1_1_tests_1_1_basis_1_1_tree_views_1_1_models">Luthetus.Common.Tests.Basis.TreeViews.Models</link>;
+<anchor xml:id="__tree_view_service_tests_8cs_source_1l00009"/>00009 
+<anchor xml:id="__tree_view_service_tests_8cs_source_1l00013"/><link linkend="_class_luthetus_1_1_common_1_1_tests_1_1_basis_1_1_tree_views_1_1_models_1_1_tree_view_service_tests">00013</link> <emphasis role="keyword">public</emphasis>&#32;<emphasis role="keyword">class&#32;</emphasis><link linkend="_class_luthetus_1_1_common_1_1_tests_1_1_basis_1_1_tree_views_1_1_models_1_1_tree_view_service_tests">TreeViewServiceTests</link>
+<anchor xml:id="__tree_view_service_tests_8cs_source_1l00014"/>00014 {
+<anchor xml:id="__tree_view_service_tests_8cs_source_1l00020"/>00020 &#32;&#32;&#32;&#32;[Fact]
+<anchor xml:id="__tree_view_service_tests_8cs_source_1l00021"/><link linkend="_class_luthetus_1_1_common_1_1_tests_1_1_basis_1_1_tree_views_1_1_models_1_1_tree_view_service_tests_1a3f138920a1eeb4092f24d38d077f47a6">00021</link> &#32;&#32;&#32;&#32;<emphasis role="keyword">public</emphasis>&#32;<emphasis role="keywordtype">void</emphasis>&#32;<link linkend="_class_luthetus_1_1_common_1_1_tests_1_1_basis_1_1_tree_views_1_1_models_1_1_tree_view_service_tests_1a3f138920a1eeb4092f24d38d077f47a6">Constructor</link>()
+<anchor xml:id="__tree_view_service_tests_8cs_source_1l00022"/>00022 &#32;&#32;&#32;&#32;{
+<anchor xml:id="__tree_view_service_tests_8cs_source_1l00023"/>00023 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;InitializeTreeViewServiceTests(out&#32;var&#32;treeViewService,&#32;out&#32;var&#32;backgroundTaskService);
+<anchor xml:id="__tree_view_service_tests_8cs_source_1l00024"/>00024 
+<anchor xml:id="__tree_view_service_tests_8cs_source_1l00025"/>00025 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;Assert.NotNull(treeViewService);
+<anchor xml:id="__tree_view_service_tests_8cs_source_1l00026"/>00026 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;Assert.NotNull(treeViewService.TreeViewStateWrap);
+<anchor xml:id="__tree_view_service_tests_8cs_source_1l00027"/>00027 &#32;&#32;&#32;&#32;}
+<anchor xml:id="__tree_view_service_tests_8cs_source_1l00028"/>00028 
+<anchor xml:id="__tree_view_service_tests_8cs_source_1l00032"/>00032 &#32;&#32;&#32;&#32;[Fact]
+<anchor xml:id="__tree_view_service_tests_8cs_source_1l00033"/><link linkend="_class_luthetus_1_1_common_1_1_tests_1_1_basis_1_1_tree_views_1_1_models_1_1_tree_view_service_tests_1a19912777fb1946719d8f6eaa772a55a5">00033</link> &#32;&#32;&#32;&#32;<emphasis role="keyword">public</emphasis>&#32;<emphasis role="keywordtype">void</emphasis>&#32;<link linkend="_class_luthetus_1_1_common_1_1_tests_1_1_basis_1_1_tree_views_1_1_models_1_1_tree_view_service_tests_1a19912777fb1946719d8f6eaa772a55a5">RegisterTreeViewState</link>()
+<anchor xml:id="__tree_view_service_tests_8cs_source_1l00034"/>00034 &#32;&#32;&#32;&#32;{
+<anchor xml:id="__tree_view_service_tests_8cs_source_1l00035"/>00035 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">throw</emphasis>&#32;<emphasis role="keyword">new</emphasis>&#32;NotImplementedException();
+<anchor xml:id="__tree_view_service_tests_8cs_source_1l00036"/>00036 &#32;&#32;&#32;&#32;}
+<anchor xml:id="__tree_view_service_tests_8cs_source_1l00037"/>00037 
+<anchor xml:id="__tree_view_service_tests_8cs_source_1l00041"/>00041 &#32;&#32;&#32;&#32;[Fact]
+<anchor xml:id="__tree_view_service_tests_8cs_source_1l00042"/><link linkend="_class_luthetus_1_1_common_1_1_tests_1_1_basis_1_1_tree_views_1_1_models_1_1_tree_view_service_tests_1a0c7f8be4c844a50ea70e1c043e90fc87">00042</link> &#32;&#32;&#32;&#32;<emphasis role="keyword">public</emphasis>&#32;<emphasis role="keywordtype">void</emphasis>&#32;<link linkend="_class_luthetus_1_1_common_1_1_tests_1_1_basis_1_1_tree_views_1_1_models_1_1_tree_view_service_tests_1a0c7f8be4c844a50ea70e1c043e90fc87">DisposeTreeViewState</link>()
+<anchor xml:id="__tree_view_service_tests_8cs_source_1l00043"/>00043 &#32;&#32;&#32;&#32;{
+<anchor xml:id="__tree_view_service_tests_8cs_source_1l00044"/>00044 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">throw</emphasis>&#32;<emphasis role="keyword">new</emphasis>&#32;NotImplementedException();
+<anchor xml:id="__tree_view_service_tests_8cs_source_1l00045"/>00045 &#32;&#32;&#32;&#32;}
+<anchor xml:id="__tree_view_service_tests_8cs_source_1l00046"/>00046 
+<anchor xml:id="__tree_view_service_tests_8cs_source_1l00050"/>00050 &#32;&#32;&#32;&#32;[Fact]
+<anchor xml:id="__tree_view_service_tests_8cs_source_1l00051"/><link linkend="_class_luthetus_1_1_common_1_1_tests_1_1_basis_1_1_tree_views_1_1_models_1_1_tree_view_service_tests_1a836bd7d058b94ec7321c017a874f1632">00051</link> &#32;&#32;&#32;&#32;<emphasis role="keyword">public</emphasis>&#32;<emphasis role="keywordtype">void</emphasis>&#32;<link linkend="_class_luthetus_1_1_common_1_1_tests_1_1_basis_1_1_tree_views_1_1_models_1_1_tree_view_service_tests_1a836bd7d058b94ec7321c017a874f1632">ReplaceTreeViewState</link>()
+<anchor xml:id="__tree_view_service_tests_8cs_source_1l00052"/>00052 &#32;&#32;&#32;&#32;{
+<anchor xml:id="__tree_view_service_tests_8cs_source_1l00053"/>00053 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">throw</emphasis>&#32;<emphasis role="keyword">new</emphasis>&#32;NotImplementedException();
+<anchor xml:id="__tree_view_service_tests_8cs_source_1l00054"/>00054 &#32;&#32;&#32;&#32;}
+<anchor xml:id="__tree_view_service_tests_8cs_source_1l00055"/>00055 
+<anchor xml:id="__tree_view_service_tests_8cs_source_1l00059"/>00059 &#32;&#32;&#32;&#32;[Fact]
+<anchor xml:id="__tree_view_service_tests_8cs_source_1l00060"/><link linkend="_class_luthetus_1_1_common_1_1_tests_1_1_basis_1_1_tree_views_1_1_models_1_1_tree_view_service_tests_1a7e812758cc152feafcee4bad6ad4f437">00060</link> &#32;&#32;&#32;&#32;<emphasis role="keyword">public</emphasis>&#32;<emphasis role="keywordtype">void</emphasis>&#32;<link linkend="_class_luthetus_1_1_common_1_1_tests_1_1_basis_1_1_tree_views_1_1_models_1_1_tree_view_service_tests_1a7e812758cc152feafcee4bad6ad4f437">SetRoot</link>()
+<anchor xml:id="__tree_view_service_tests_8cs_source_1l00061"/>00061 &#32;&#32;&#32;&#32;{
+<anchor xml:id="__tree_view_service_tests_8cs_source_1l00062"/>00062 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">throw</emphasis>&#32;<emphasis role="keyword">new</emphasis>&#32;NotImplementedException();
+<anchor xml:id="__tree_view_service_tests_8cs_source_1l00063"/>00063 &#32;&#32;&#32;&#32;}
+<anchor xml:id="__tree_view_service_tests_8cs_source_1l00064"/>00064 
+<anchor xml:id="__tree_view_service_tests_8cs_source_1l00068"/>00068 &#32;&#32;&#32;&#32;[Fact]
+<anchor xml:id="__tree_view_service_tests_8cs_source_1l00069"/><link linkend="_class_luthetus_1_1_common_1_1_tests_1_1_basis_1_1_tree_views_1_1_models_1_1_tree_view_service_tests_1afb9714f196601250d2176927e2fe8323">00069</link> &#32;&#32;&#32;&#32;<emphasis role="keyword">public</emphasis>&#32;<emphasis role="keywordtype">void</emphasis>&#32;<link linkend="_class_luthetus_1_1_common_1_1_tests_1_1_basis_1_1_tree_views_1_1_models_1_1_tree_view_service_tests_1afb9714f196601250d2176927e2fe8323">TryGetTreeViewState</link>()
+<anchor xml:id="__tree_view_service_tests_8cs_source_1l00070"/>00070 &#32;&#32;&#32;&#32;{
+<anchor xml:id="__tree_view_service_tests_8cs_source_1l00071"/>00071 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">throw</emphasis>&#32;<emphasis role="keyword">new</emphasis>&#32;NotImplementedException();
+<anchor xml:id="__tree_view_service_tests_8cs_source_1l00072"/>00072 &#32;&#32;&#32;&#32;}
+<anchor xml:id="__tree_view_service_tests_8cs_source_1l00073"/>00073 
+<anchor xml:id="__tree_view_service_tests_8cs_source_1l00077"/>00077 &#32;&#32;&#32;&#32;[Fact]
+<anchor xml:id="__tree_view_service_tests_8cs_source_1l00078"/><link linkend="_class_luthetus_1_1_common_1_1_tests_1_1_basis_1_1_tree_views_1_1_models_1_1_tree_view_service_tests_1a3d69b6744726cae626411e194386fd08">00078</link> &#32;&#32;&#32;&#32;<emphasis role="keyword">public</emphasis>&#32;<emphasis role="keywordtype">void</emphasis>&#32;<link linkend="_class_luthetus_1_1_common_1_1_tests_1_1_basis_1_1_tree_views_1_1_models_1_1_tree_view_service_tests_1a3d69b6744726cae626411e194386fd08">ReRenderNode</link>()
+<anchor xml:id="__tree_view_service_tests_8cs_source_1l00079"/>00079 &#32;&#32;&#32;&#32;{
+<anchor xml:id="__tree_view_service_tests_8cs_source_1l00080"/>00080 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">throw</emphasis>&#32;<emphasis role="keyword">new</emphasis>&#32;NotImplementedException();
+<anchor xml:id="__tree_view_service_tests_8cs_source_1l00081"/>00081 &#32;&#32;&#32;&#32;}
+<anchor xml:id="__tree_view_service_tests_8cs_source_1l00082"/>00082 
+<anchor xml:id="__tree_view_service_tests_8cs_source_1l00086"/>00086 &#32;&#32;&#32;&#32;[Fact]
+<anchor xml:id="__tree_view_service_tests_8cs_source_1l00087"/><link linkend="_class_luthetus_1_1_common_1_1_tests_1_1_basis_1_1_tree_views_1_1_models_1_1_tree_view_service_tests_1a47f018dbc82c1353c749be0923eada84">00087</link> &#32;&#32;&#32;&#32;<emphasis role="keyword">public</emphasis>&#32;<emphasis role="keywordtype">void</emphasis>&#32;<link linkend="_class_luthetus_1_1_common_1_1_tests_1_1_basis_1_1_tree_views_1_1_models_1_1_tree_view_service_tests_1a47f018dbc82c1353c749be0923eada84">AddChildNode</link>()
+<anchor xml:id="__tree_view_service_tests_8cs_source_1l00088"/>00088 &#32;&#32;&#32;&#32;{
+<anchor xml:id="__tree_view_service_tests_8cs_source_1l00089"/>00089 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">throw</emphasis>&#32;<emphasis role="keyword">new</emphasis>&#32;NotImplementedException();
+<anchor xml:id="__tree_view_service_tests_8cs_source_1l00090"/>00090 &#32;&#32;&#32;&#32;}
+<anchor xml:id="__tree_view_service_tests_8cs_source_1l00091"/>00091 
+<anchor xml:id="__tree_view_service_tests_8cs_source_1l00095"/>00095 &#32;&#32;&#32;&#32;[Fact]
+<anchor xml:id="__tree_view_service_tests_8cs_source_1l00096"/><link linkend="_class_luthetus_1_1_common_1_1_tests_1_1_basis_1_1_tree_views_1_1_models_1_1_tree_view_service_tests_1af95a649f9ee43cf3b7cbc8b1193e73ad">00096</link> &#32;&#32;&#32;&#32;<emphasis role="keyword">public</emphasis>&#32;<emphasis role="keywordtype">void</emphasis>&#32;<link linkend="_class_luthetus_1_1_common_1_1_tests_1_1_basis_1_1_tree_views_1_1_models_1_1_tree_view_service_tests_1af95a649f9ee43cf3b7cbc8b1193e73ad">SetActiveNode</link>()
+<anchor xml:id="__tree_view_service_tests_8cs_source_1l00097"/>00097 &#32;&#32;&#32;&#32;{
+<anchor xml:id="__tree_view_service_tests_8cs_source_1l00098"/>00098 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">throw</emphasis>&#32;<emphasis role="keyword">new</emphasis>&#32;NotImplementedException();
+<anchor xml:id="__tree_view_service_tests_8cs_source_1l00099"/>00099 &#32;&#32;&#32;&#32;}
+<anchor xml:id="__tree_view_service_tests_8cs_source_1l00100"/>00100 
+<anchor xml:id="__tree_view_service_tests_8cs_source_1l00104"/>00104 &#32;&#32;&#32;&#32;[Fact]
+<anchor xml:id="__tree_view_service_tests_8cs_source_1l00105"/><link linkend="_class_luthetus_1_1_common_1_1_tests_1_1_basis_1_1_tree_views_1_1_models_1_1_tree_view_service_tests_1a5bad2970efa6b87fbce61da526d48435">00105</link> &#32;&#32;&#32;&#32;<emphasis role="keyword">public</emphasis>&#32;<emphasis role="keywordtype">void</emphasis>&#32;<link linkend="_class_luthetus_1_1_common_1_1_tests_1_1_basis_1_1_tree_views_1_1_models_1_1_tree_view_service_tests_1a5bad2970efa6b87fbce61da526d48435">AddSelectedNode</link>()
+<anchor xml:id="__tree_view_service_tests_8cs_source_1l00106"/>00106 &#32;&#32;&#32;&#32;{
+<anchor xml:id="__tree_view_service_tests_8cs_source_1l00107"/>00107 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">throw</emphasis>&#32;<emphasis role="keyword">new</emphasis>&#32;NotImplementedException();
+<anchor xml:id="__tree_view_service_tests_8cs_source_1l00108"/>00108 &#32;&#32;&#32;&#32;}
+<anchor xml:id="__tree_view_service_tests_8cs_source_1l00109"/>00109 
+<anchor xml:id="__tree_view_service_tests_8cs_source_1l00113"/>00113 &#32;&#32;&#32;&#32;[Fact]
+<anchor xml:id="__tree_view_service_tests_8cs_source_1l00114"/><link linkend="_class_luthetus_1_1_common_1_1_tests_1_1_basis_1_1_tree_views_1_1_models_1_1_tree_view_service_tests_1abe57540eb67c97042b68f0ea461eddb5">00114</link> &#32;&#32;&#32;&#32;<emphasis role="keyword">public</emphasis>&#32;<emphasis role="keywordtype">void</emphasis>&#32;<link linkend="_class_luthetus_1_1_common_1_1_tests_1_1_basis_1_1_tree_views_1_1_models_1_1_tree_view_service_tests_1abe57540eb67c97042b68f0ea461eddb5">RemoveSelectedNode</link>()
+<anchor xml:id="__tree_view_service_tests_8cs_source_1l00115"/>00115 &#32;&#32;&#32;&#32;{
+<anchor xml:id="__tree_view_service_tests_8cs_source_1l00116"/>00116 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">throw</emphasis>&#32;<emphasis role="keyword">new</emphasis>&#32;NotImplementedException();
+<anchor xml:id="__tree_view_service_tests_8cs_source_1l00117"/>00117 &#32;&#32;&#32;&#32;}
+<anchor xml:id="__tree_view_service_tests_8cs_source_1l00118"/>00118 
+<anchor xml:id="__tree_view_service_tests_8cs_source_1l00122"/>00122 &#32;&#32;&#32;&#32;[Fact]
+<anchor xml:id="__tree_view_service_tests_8cs_source_1l00123"/><link linkend="_class_luthetus_1_1_common_1_1_tests_1_1_basis_1_1_tree_views_1_1_models_1_1_tree_view_service_tests_1a8efd26023d0a8d0d090652cc8063e1f5">00123</link> &#32;&#32;&#32;&#32;<emphasis role="keyword">public</emphasis>&#32;<emphasis role="keywordtype">void</emphasis>&#32;<link linkend="_class_luthetus_1_1_common_1_1_tests_1_1_basis_1_1_tree_views_1_1_models_1_1_tree_view_service_tests_1a8efd26023d0a8d0d090652cc8063e1f5">ClearSelectedNodes</link>()
+<anchor xml:id="__tree_view_service_tests_8cs_source_1l00124"/>00124 &#32;&#32;&#32;&#32;{
+<anchor xml:id="__tree_view_service_tests_8cs_source_1l00125"/>00125 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">throw</emphasis>&#32;<emphasis role="keyword">new</emphasis>&#32;NotImplementedException();
+<anchor xml:id="__tree_view_service_tests_8cs_source_1l00126"/>00126 &#32;&#32;&#32;&#32;}
+<anchor xml:id="__tree_view_service_tests_8cs_source_1l00127"/>00127 
+<anchor xml:id="__tree_view_service_tests_8cs_source_1l00131"/>00131 &#32;&#32;&#32;&#32;[Fact]
+<anchor xml:id="__tree_view_service_tests_8cs_source_1l00132"/><link linkend="_class_luthetus_1_1_common_1_1_tests_1_1_basis_1_1_tree_views_1_1_models_1_1_tree_view_service_tests_1abea8eb46b534eded682f31ddb1c68e56">00132</link> &#32;&#32;&#32;&#32;<emphasis role="keyword">public</emphasis>&#32;<emphasis role="keywordtype">void</emphasis>&#32;<link linkend="_class_luthetus_1_1_common_1_1_tests_1_1_basis_1_1_tree_views_1_1_models_1_1_tree_view_service_tests_1abea8eb46b534eded682f31ddb1c68e56">MoveLeft</link>()
+<anchor xml:id="__tree_view_service_tests_8cs_source_1l00133"/>00133 &#32;&#32;&#32;&#32;{
+<anchor xml:id="__tree_view_service_tests_8cs_source_1l00134"/>00134 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">throw</emphasis>&#32;<emphasis role="keyword">new</emphasis>&#32;NotImplementedException();
+<anchor xml:id="__tree_view_service_tests_8cs_source_1l00135"/>00135 &#32;&#32;&#32;&#32;}
+<anchor xml:id="__tree_view_service_tests_8cs_source_1l00136"/>00136 
+<anchor xml:id="__tree_view_service_tests_8cs_source_1l00140"/>00140 &#32;&#32;&#32;&#32;[Fact]
+<anchor xml:id="__tree_view_service_tests_8cs_source_1l00141"/><link linkend="_class_luthetus_1_1_common_1_1_tests_1_1_basis_1_1_tree_views_1_1_models_1_1_tree_view_service_tests_1aee75f31018bedb4c7c397d50b96b4680">00141</link> &#32;&#32;&#32;&#32;<emphasis role="keyword">public</emphasis>&#32;<emphasis role="keywordtype">void</emphasis>&#32;<link linkend="_class_luthetus_1_1_common_1_1_tests_1_1_basis_1_1_tree_views_1_1_models_1_1_tree_view_service_tests_1aee75f31018bedb4c7c397d50b96b4680">MoveDown</link>()
+<anchor xml:id="__tree_view_service_tests_8cs_source_1l00142"/>00142 &#32;&#32;&#32;&#32;{
+<anchor xml:id="__tree_view_service_tests_8cs_source_1l00143"/>00143 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">throw</emphasis>&#32;<emphasis role="keyword">new</emphasis>&#32;NotImplementedException();
+<anchor xml:id="__tree_view_service_tests_8cs_source_1l00144"/>00144 &#32;&#32;&#32;&#32;}
+<anchor xml:id="__tree_view_service_tests_8cs_source_1l00145"/>00145 
+<anchor xml:id="__tree_view_service_tests_8cs_source_1l00149"/>00149 &#32;&#32;&#32;&#32;[Fact]
+<anchor xml:id="__tree_view_service_tests_8cs_source_1l00150"/><link linkend="_class_luthetus_1_1_common_1_1_tests_1_1_basis_1_1_tree_views_1_1_models_1_1_tree_view_service_tests_1a25dd35e8db5aea497184f32b35a9d0e2">00150</link> &#32;&#32;&#32;&#32;<emphasis role="keyword">public</emphasis>&#32;<emphasis role="keywordtype">void</emphasis>&#32;<link linkend="_class_luthetus_1_1_common_1_1_tests_1_1_basis_1_1_tree_views_1_1_models_1_1_tree_view_service_tests_1a25dd35e8db5aea497184f32b35a9d0e2">MoveUp</link>()
+<anchor xml:id="__tree_view_service_tests_8cs_source_1l00151"/>00151 &#32;&#32;&#32;&#32;{
+<anchor xml:id="__tree_view_service_tests_8cs_source_1l00152"/>00152 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">throw</emphasis>&#32;<emphasis role="keyword">new</emphasis>&#32;NotImplementedException();
+<anchor xml:id="__tree_view_service_tests_8cs_source_1l00153"/>00153 &#32;&#32;&#32;&#32;}
+<anchor xml:id="__tree_view_service_tests_8cs_source_1l00154"/>00154 
+<anchor xml:id="__tree_view_service_tests_8cs_source_1l00158"/>00158 &#32;&#32;&#32;&#32;[Fact]
+<anchor xml:id="__tree_view_service_tests_8cs_source_1l00159"/><link linkend="_class_luthetus_1_1_common_1_1_tests_1_1_basis_1_1_tree_views_1_1_models_1_1_tree_view_service_tests_1a0ec762835fe8ed25030ed8ba7d2a9930">00159</link> &#32;&#32;&#32;&#32;<emphasis role="keyword">public</emphasis>&#32;<emphasis role="keywordtype">void</emphasis>&#32;<link linkend="_class_luthetus_1_1_common_1_1_tests_1_1_basis_1_1_tree_views_1_1_models_1_1_tree_view_service_tests_1a0ec762835fe8ed25030ed8ba7d2a9930">MoveRight</link>()
+<anchor xml:id="__tree_view_service_tests_8cs_source_1l00160"/>00160 &#32;&#32;&#32;&#32;{
+<anchor xml:id="__tree_view_service_tests_8cs_source_1l00161"/>00161 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">throw</emphasis>&#32;<emphasis role="keyword">new</emphasis>&#32;NotImplementedException();
+<anchor xml:id="__tree_view_service_tests_8cs_source_1l00162"/>00162 &#32;&#32;&#32;&#32;}
+<anchor xml:id="__tree_view_service_tests_8cs_source_1l00163"/>00163 
+<anchor xml:id="__tree_view_service_tests_8cs_source_1l00167"/>00167 &#32;&#32;&#32;&#32;[Fact]
+<anchor xml:id="__tree_view_service_tests_8cs_source_1l00168"/><link linkend="_class_luthetus_1_1_common_1_1_tests_1_1_basis_1_1_tree_views_1_1_models_1_1_tree_view_service_tests_1ae274f7ffb045ab45a7475892cbcb3569">00168</link> &#32;&#32;&#32;&#32;<emphasis role="keyword">public</emphasis>&#32;<emphasis role="keywordtype">void</emphasis>&#32;<link linkend="_class_luthetus_1_1_common_1_1_tests_1_1_basis_1_1_tree_views_1_1_models_1_1_tree_view_service_tests_1ae274f7ffb045ab45a7475892cbcb3569">MoveHome</link>()
+<anchor xml:id="__tree_view_service_tests_8cs_source_1l00169"/>00169 &#32;&#32;&#32;&#32;{
+<anchor xml:id="__tree_view_service_tests_8cs_source_1l00170"/>00170 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">throw</emphasis>&#32;<emphasis role="keyword">new</emphasis>&#32;NotImplementedException();
+<anchor xml:id="__tree_view_service_tests_8cs_source_1l00171"/>00171 &#32;&#32;&#32;&#32;}
+<anchor xml:id="__tree_view_service_tests_8cs_source_1l00172"/>00172 
+<anchor xml:id="__tree_view_service_tests_8cs_source_1l00176"/>00176 &#32;&#32;&#32;&#32;[Fact]
+<anchor xml:id="__tree_view_service_tests_8cs_source_1l00177"/><link linkend="_class_luthetus_1_1_common_1_1_tests_1_1_basis_1_1_tree_views_1_1_models_1_1_tree_view_service_tests_1a9d590f3302c35b508147da045255361d">00177</link> &#32;&#32;&#32;&#32;<emphasis role="keyword">public</emphasis>&#32;<emphasis role="keywordtype">void</emphasis>&#32;<link linkend="_class_luthetus_1_1_common_1_1_tests_1_1_basis_1_1_tree_views_1_1_models_1_1_tree_view_service_tests_1a9d590f3302c35b508147da045255361d">MoveEnd</link>()
+<anchor xml:id="__tree_view_service_tests_8cs_source_1l00178"/>00178 &#32;&#32;&#32;&#32;{
+<anchor xml:id="__tree_view_service_tests_8cs_source_1l00179"/>00179 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">throw</emphasis>&#32;<emphasis role="keyword">new</emphasis>&#32;NotImplementedException();
+<anchor xml:id="__tree_view_service_tests_8cs_source_1l00180"/>00180 &#32;&#32;&#32;&#32;}
+<anchor xml:id="__tree_view_service_tests_8cs_source_1l00181"/>00181 
+<anchor xml:id="__tree_view_service_tests_8cs_source_1l00185"/>00185 &#32;&#32;&#32;&#32;[Fact]
+<anchor xml:id="__tree_view_service_tests_8cs_source_1l00186"/><link linkend="_class_luthetus_1_1_common_1_1_tests_1_1_basis_1_1_tree_views_1_1_models_1_1_tree_view_service_tests_1aaf88e18ff026918f2be83461e3b67393">00186</link> &#32;&#32;&#32;&#32;<emphasis role="keyword">public</emphasis>&#32;<emphasis role="keywordtype">void</emphasis>&#32;<link linkend="_class_luthetus_1_1_common_1_1_tests_1_1_basis_1_1_tree_views_1_1_models_1_1_tree_view_service_tests_1aaf88e18ff026918f2be83461e3b67393">GetNodeElementId</link>()
+<anchor xml:id="__tree_view_service_tests_8cs_source_1l00187"/>00187 &#32;&#32;&#32;&#32;{
+<anchor xml:id="__tree_view_service_tests_8cs_source_1l00188"/>00188 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">throw</emphasis>&#32;<emphasis role="keyword">new</emphasis>&#32;NotImplementedException();
+<anchor xml:id="__tree_view_service_tests_8cs_source_1l00189"/>00189 &#32;&#32;&#32;&#32;}
+<anchor xml:id="__tree_view_service_tests_8cs_source_1l00190"/>00190 
+<anchor xml:id="__tree_view_service_tests_8cs_source_1l00194"/>00194 &#32;&#32;&#32;&#32;[Fact]
+<anchor xml:id="__tree_view_service_tests_8cs_source_1l00195"/><link linkend="_class_luthetus_1_1_common_1_1_tests_1_1_basis_1_1_tree_views_1_1_models_1_1_tree_view_service_tests_1a95f35d59975bfcd3b94dea6e6a8ae0e7">00195</link> &#32;&#32;&#32;&#32;<emphasis role="keyword">public</emphasis>&#32;<emphasis role="keywordtype">void</emphasis>&#32;<link linkend="_class_luthetus_1_1_common_1_1_tests_1_1_basis_1_1_tree_views_1_1_models_1_1_tree_view_service_tests_1a95f35d59975bfcd3b94dea6e6a8ae0e7">GetTreeContainerElementId</link>()
+<anchor xml:id="__tree_view_service_tests_8cs_source_1l00196"/>00196 &#32;&#32;&#32;&#32;{
+<anchor xml:id="__tree_view_service_tests_8cs_source_1l00197"/>00197 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">throw</emphasis>&#32;<emphasis role="keyword">new</emphasis>&#32;NotImplementedException();
+<anchor xml:id="__tree_view_service_tests_8cs_source_1l00198"/>00198 &#32;&#32;&#32;&#32;}
+<anchor xml:id="__tree_view_service_tests_8cs_source_1l00199"/>00199 
+<anchor xml:id="__tree_view_service_tests_8cs_source_1l00200"/>00200 &#32;&#32;&#32;&#32;<emphasis role="keyword">private</emphasis>&#32;<emphasis role="keywordtype">void</emphasis>&#32;InitializeTreeViewServiceTests(
+<anchor xml:id="__tree_view_service_tests_8cs_source_1l00201"/>00201 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;out&#32;<link linkend="_interface_luthetus_1_1_common_1_1_razor_lib_1_1_tree_views_1_1_models_1_1_i_tree_view_service">ITreeViewService</link>&#32;treeViewService,
+<anchor xml:id="__tree_view_service_tests_8cs_source_1l00202"/>00202 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;out&#32;<link linkend="_interface_luthetus_1_1_common_1_1_razor_lib_1_1_background_tasks_1_1_models_1_1_i_background_task_service">IBackgroundTaskService</link>&#32;backgroundTaskService)
+<anchor xml:id="__tree_view_service_tests_8cs_source_1l00203"/>00203 &#32;&#32;&#32;&#32;{
+<anchor xml:id="__tree_view_service_tests_8cs_source_1l00204"/>00204 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;var&#32;services&#32;=&#32;<emphasis role="keyword">new</emphasis>&#32;ServiceCollection()
+<anchor xml:id="__tree_view_service_tests_8cs_source_1l00205"/>00205 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;.AddScoped&lt;<link linkend="_interface_luthetus_1_1_common_1_1_razor_lib_1_1_tree_views_1_1_models_1_1_i_tree_view_service">ITreeViewService</link>,&#32;<link linkend="_class_luthetus_1_1_common_1_1_razor_lib_1_1_tree_views_1_1_models_1_1_tree_view_service">TreeViewService</link>&gt;()
+<anchor xml:id="__tree_view_service_tests_8cs_source_1l00206"/>00206 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;.<link linkend="__lib_2_ide_2_host_8_blazor_web_assembly_2_program_8cs_1ad23e038402085511bf6d150f155199f9">AddScoped&lt;IBackgroundTaskService&gt;</link>(sp&#32;=&gt;&#32;<emphasis role="keyword">new</emphasis>&#32;<link linkend="_class_luthetus_1_1_common_1_1_razor_lib_1_1_background_tasks_1_1_models_1_1_background_task_service_synchronous">BackgroundTaskServiceSynchronous</link>())
+<anchor xml:id="__tree_view_service_tests_8cs_source_1l00207"/>00207 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;.AddFluxor(options&#32;=&gt;&#32;options.ScanAssemblies(typeof(TreeViewState).Assembly));
+<anchor xml:id="__tree_view_service_tests_8cs_source_1l00208"/>00208 
+<anchor xml:id="__tree_view_service_tests_8cs_source_1l00209"/>00209 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;var&#32;serviceProvider&#32;=&#32;services.BuildServiceProvider();
+<anchor xml:id="__tree_view_service_tests_8cs_source_1l00210"/>00210 
+<anchor xml:id="__tree_view_service_tests_8cs_source_1l00211"/>00211 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;var&#32;store&#32;=&#32;serviceProvider.GetRequiredService&lt;IStore&gt;();
+<anchor xml:id="__tree_view_service_tests_8cs_source_1l00212"/>00212 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;store.InitializeAsync().Wait();
+<anchor xml:id="__tree_view_service_tests_8cs_source_1l00213"/>00213 
+<anchor xml:id="__tree_view_service_tests_8cs_source_1l00214"/>00214 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;treeViewService&#32;=&#32;serviceProvider.GetRequiredService&lt;<link linkend="_interface_luthetus_1_1_common_1_1_razor_lib_1_1_tree_views_1_1_models_1_1_i_tree_view_service">ITreeViewService</link>&gt;();
+<anchor xml:id="__tree_view_service_tests_8cs_source_1l00215"/>00215 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;backgroundTaskService&#32;=&#32;serviceProvider.GetRequiredService&lt;<link linkend="_interface_luthetus_1_1_common_1_1_razor_lib_1_1_background_tasks_1_1_models_1_1_i_background_task_service">IBackgroundTaskService</link>&gt;();
+<anchor xml:id="__tree_view_service_tests_8cs_source_1l00216"/>00216 &#32;&#32;&#32;&#32;}
+<anchor xml:id="__tree_view_service_tests_8cs_source_1l00217"/>00217 }
+</programlisting></section>

@@ -1,0 +1,4 @@
+var class_luthetus_1_1_text_editor_1_1_tests_1_1_basis_1_1_characters_1_1_models_1_1_rich_character_extensions_tests =
+[
+    [ "GetCharacterKind", "class_luthetus_1_1_text_editor_1_1_tests_1_1_basis_1_1_characters_1_1_models_1_1_rich_character_extensions_tests.html#a22fc7c96800529fe234fbc59576a87cb", null ]
+];

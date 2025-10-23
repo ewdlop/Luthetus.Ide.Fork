@@ -1,0 +1,4 @@
+var _luthetus_extensions_dot_net_initializer_8cs =
+[
+    [ "Luthetus.Extensions.DotNet.Installations.Displays.LuthetusExtensionsDotNetInitializer", "class_luthetus_1_1_extensions_1_1_dot_net_1_1_installations_1_1_displays_1_1_luthetus_extensions_dot_net_initializer.html", "class_luthetus_1_1_extensions_1_1_dot_net_1_1_installations_1_1_displays_1_1_luthetus_extensions_dot_net_initializer" ]
+];

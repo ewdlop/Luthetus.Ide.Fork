@@ -1,0 +1,47 @@
+\doxysection{Symbol\+Reference\+Tests.\+cs}
+\hypertarget{_symbol_reference_tests_8cs_source}{}\label{_symbol_reference_tests_8cs_source}\index{Source/Tests/TextEditor/Basis/CompilerServices/Syntax/Symbols/SymbolReferenceTests.cs@{Source/Tests/TextEditor/Basis/CompilerServices/Syntax/Symbols/SymbolReferenceTests.cs}}
+\mbox{\hyperlink{_symbol_reference_tests_8cs}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{_symbol_reference_tests_8cs_source_l00001}00001\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_1_1_symbols}{Luthetus.TextEditor.RazorLib.CompilerServices.Syntax.Symbols}};}
+\DoxyCodeLine{\Hypertarget{_symbol_reference_tests_8cs_source_l00002}00002\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax}{Luthetus.TextEditor.RazorLib.CompilerServices.Syntax}};}
+\DoxyCodeLine{\Hypertarget{_symbol_reference_tests_8cs_source_l00003}00003\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_lexers_1_1_models}{Luthetus.TextEditor.RazorLib.Lexers.Models}};}
+\DoxyCodeLine{\Hypertarget{_symbol_reference_tests_8cs_source_l00004}00004\ }
+\DoxyCodeLine{\Hypertarget{_symbol_reference_tests_8cs_source_l00005}00005\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_tests_1_1_basis_1_1_compiler_services_1_1_syntax_1_1_symbols}{Luthetus.TextEditor.Tests.Basis.CompilerServices.Syntax.Symbols}};}
+\DoxyCodeLine{\Hypertarget{_symbol_reference_tests_8cs_source_l00006}00006\ }
+\DoxyCodeLine{\Hypertarget{_symbol_reference_tests_8cs_source_l00010}\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_tests_1_1_basis_1_1_compiler_services_1_1_syntax_1_1_symbols_1_1_symbol_reference_tests}{00010}}\ \textcolor{keyword}{public}\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_tests_1_1_basis_1_1_compiler_services_1_1_syntax_1_1_symbols_1_1_symbol_reference_tests}{SymbolReferenceTests}}}
+\DoxyCodeLine{\Hypertarget{_symbol_reference_tests_8cs_source_l00011}00011\ \{}
+\DoxyCodeLine{\Hypertarget{_symbol_reference_tests_8cs_source_l00018}00018\ \ \ \ \ [Fact]}
+\DoxyCodeLine{\Hypertarget{_symbol_reference_tests_8cs_source_l00019}\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_tests_1_1_basis_1_1_compiler_services_1_1_syntax_1_1_symbols_1_1_symbol_reference_tests_ab0309d4fee2aa394c229010f4303df00}{00019}}\ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_tests_1_1_basis_1_1_compiler_services_1_1_syntax_1_1_symbols_1_1_symbol_reference_tests_ab0309d4fee2aa394c229010f4303df00}{Constructor}}()}
+\DoxyCodeLine{\Hypertarget{_symbol_reference_tests_8cs_source_l00020}00020\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_symbol_reference_tests_8cs_source_l00021}00021\ \ \ \ \ \ \ \ \ var\ type\ =\ \textcolor{stringliteral}{"{}int"{}};}
+\DoxyCodeLine{\Hypertarget{_symbol_reference_tests_8cs_source_l00022}00022\ \ \ \ \ \ \ \ \ var\ name\ =\ \textcolor{stringliteral}{"{}myVariable"{}};}
+\DoxyCodeLine{\Hypertarget{_symbol_reference_tests_8cs_source_l00023}00023\ \ \ \ \ \ \ \ \ var\ sourceText\ =\ \textcolor{stringliteral}{\$@"{}\{type\}\ \{name\}\ =\ 2;}}
+\DoxyCodeLine{\Hypertarget{_symbol_reference_tests_8cs_source_l00024}00024\ \textcolor{stringliteral}{\{name\}\ =\ 7;"{}};}
+\DoxyCodeLine{\Hypertarget{_symbol_reference_tests_8cs_source_l00025}00025\ }
+\DoxyCodeLine{\Hypertarget{_symbol_reference_tests_8cs_source_l00026}00026\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ The\ first\ occurrence\ of\ 'name'\ variable\ will\ be\ returned,\ thus\ we\ get\ the\ definition\ considering\ the\ hardcoded\ 'sourceText'}}
+\DoxyCodeLine{\Hypertarget{_symbol_reference_tests_8cs_source_l00027}00027\ \ \ \ \ \ \ \ \ var\ startingIndexOfSymbolDefinitionInclusive\ =\ sourceText.IndexOf(name);}
+\DoxyCodeLine{\Hypertarget{_symbol_reference_tests_8cs_source_l00028}00028\ \ \ \ \ \ \ \ \ var\ endingIndexOfSymbolDefinitionExclusive\ =\ startingIndexOfSymbolDefinitionInclusive\ +\ name.Length;}
+\DoxyCodeLine{\Hypertarget{_symbol_reference_tests_8cs_source_l00029}00029\ }
+\DoxyCodeLine{\Hypertarget{_symbol_reference_tests_8cs_source_l00030}00030\ \ \ \ \ \ \ \ \ var\ boundScopeKey\ =\ BoundScopeKey.NewKey();}
+\DoxyCodeLine{\Hypertarget{_symbol_reference_tests_8cs_source_l00031}00031\ \ \ \ \ \ \ \ \ var\ resourceUri\ =\ \textcolor{keyword}{new}\ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_lexers_1_1_models_a26a1b63ad28ec7955b30bc6c91571eca}{ResourceUri}}(\textcolor{stringliteral}{"{}/unitTesting.txt"{}});}
+\DoxyCodeLine{\Hypertarget{_symbol_reference_tests_8cs_source_l00032}00032\ }
+\DoxyCodeLine{\Hypertarget{_symbol_reference_tests_8cs_source_l00033}00033\ \ \ \ \ \ \ \ \ var\ remainingSourceText\ =\ sourceText[endingIndexOfSymbolDefinitionExclusive..];}
+\DoxyCodeLine{\Hypertarget{_symbol_reference_tests_8cs_source_l00034}00034\ }
+\DoxyCodeLine{\Hypertarget{_symbol_reference_tests_8cs_source_l00035}00035\ \ \ \ \ \ \ \ \ var\ startingIndexOfSymbolReferenceInclusive\ =\ remainingSourceText.IndexOf(name);}
+\DoxyCodeLine{\Hypertarget{_symbol_reference_tests_8cs_source_l00036}00036\ \ \ \ \ \ \ \ \ var\ endingIndexOfSymbolReferenceExclusive\ =\ startingIndexOfSymbolReferenceInclusive\ +\ name.Length;}
+\DoxyCodeLine{\Hypertarget{_symbol_reference_tests_8cs_source_l00037}00037\ }
+\DoxyCodeLine{\Hypertarget{_symbol_reference_tests_8cs_source_l00038}00038\ \ \ \ \ \ \ \ \ var\ variableSymbolReference\ =\ \textcolor{keyword}{new}\ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_ae4bcfe414c318a050bbef43ec92f921ba91167905120f5eb8ff8a6e3737c231ff}{VariableSymbol}}(\textcolor{keyword}{new}\ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_lexers_1_1_models_a1ffd1a7706dfd364560b76d47467812f}{TextEditorTextSpan}}(}
+\DoxyCodeLine{\Hypertarget{_symbol_reference_tests_8cs_source_l00039}00039\ \ \ \ \ \ \ \ \ \ \ \ \ startingIndexOfSymbolReferenceInclusive,}
+\DoxyCodeLine{\Hypertarget{_symbol_reference_tests_8cs_source_l00040}00040\ \ \ \ \ \ \ \ \ \ \ \ \ endingIndexOfSymbolReferenceExclusive,}
+\DoxyCodeLine{\Hypertarget{_symbol_reference_tests_8cs_source_l00041}00041\ \ \ \ \ \ \ \ \ \ \ \ \ 0,}
+\DoxyCodeLine{\Hypertarget{_symbol_reference_tests_8cs_source_l00042}00042\ \ \ \ \ \ \ \ \ \ \ \ \ resourceUri,}
+\DoxyCodeLine{\Hypertarget{_symbol_reference_tests_8cs_source_l00043}00043\ \ \ \ \ \ \ \ \ \ \ \ \ sourceText));}
+\DoxyCodeLine{\Hypertarget{_symbol_reference_tests_8cs_source_l00044}00044\ }
+\DoxyCodeLine{\Hypertarget{_symbol_reference_tests_8cs_source_l00045}00045\ \ \ \ \ \ \ \ \ var\ symbolReference\ =\ \textcolor{keyword}{new}\ \mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_1_1_symbols_1_1_symbol_reference}{SymbolReference}}(variableSymbolReference,\ boundScopeKey);}
+\DoxyCodeLine{\Hypertarget{_symbol_reference_tests_8cs_source_l00046}00046\ }
+\DoxyCodeLine{\Hypertarget{_symbol_reference_tests_8cs_source_l00047}00047\ \ \ \ \ \ \ \ \ Assert.Equal(boundScopeKey,\ symbolReference.BoundScopeKey);}
+\DoxyCodeLine{\Hypertarget{_symbol_reference_tests_8cs_source_l00048}00048\ \ \ \ \ \ \ \ \ Assert.Equal(variableSymbolReference,\ symbolReference.Symbol);}
+\DoxyCodeLine{\Hypertarget{_symbol_reference_tests_8cs_source_l00049}00049\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_symbol_reference_tests_8cs_source_l00050}00050\ \}}
+
+\end{DoxyCode}

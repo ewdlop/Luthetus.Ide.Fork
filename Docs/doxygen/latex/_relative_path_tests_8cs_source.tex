@@ -1,0 +1,117 @@
+\doxysection{Relative\+Path\+Tests.\+cs}
+\hypertarget{_relative_path_tests_8cs_source}{}\label{_relative_path_tests_8cs_source}\index{Source/Tests/Common/Basis/FileSystems/Models/RelativePathTests.cs@{Source/Tests/Common/Basis/FileSystems/Models/RelativePathTests.cs}}
+\mbox{\hyperlink{_relative_path_tests_8cs}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{_relative_path_tests_8cs_source_l00001}00001\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_luthetus_1_1_common_1_1_razor_lib_1_1_file_systems_1_1_models}{Luthetus.Common.RazorLib.FileSystems.Models}};}
+\DoxyCodeLine{\Hypertarget{_relative_path_tests_8cs_source_l00002}00002\ \textcolor{keyword}{using\ }Microsoft.Extensions.DependencyInjection;}
+\DoxyCodeLine{\Hypertarget{_relative_path_tests_8cs_source_l00003}00003\ \textcolor{keyword}{using\ }static\ \mbox{\hyperlink{namespace_luthetus}{Luthetus}}.\mbox{\hyperlink{namespace_luthetus_1_1_common}{Common}}.\mbox{\hyperlink{namespace_luthetus_1_1_common_1_1_tests}{Tests}}.\mbox{\hyperlink{namespace_luthetus_1_1_common_1_1_tests_1_1_basis}{Basis}}.\mbox{\hyperlink{namespace_luthetus_1_1_common_1_1_tests_1_1_basis_1_1_file_systems}{FileSystems}}.\mbox{\hyperlink{class_luthetus_1_1_common_1_1_tests_1_1_basis_1_1_file_systems_1_1_file_systems_tests_helper}{FileSystemsTestsHelper}};}
+\DoxyCodeLine{\Hypertarget{_relative_path_tests_8cs_source_l00004}00004\ }
+\DoxyCodeLine{\Hypertarget{_relative_path_tests_8cs_source_l00005}00005\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespace_luthetus_1_1_common_1_1_tests_1_1_basis_1_1_file_systems_1_1_models}{Luthetus.Common.Tests.Basis.FileSystems.Models}};}
+\DoxyCodeLine{\Hypertarget{_relative_path_tests_8cs_source_l00006}00006\ }
+\DoxyCodeLine{\Hypertarget{_relative_path_tests_8cs_source_l00010}\mbox{\hyperlink{class_luthetus_1_1_common_1_1_tests_1_1_basis_1_1_file_systems_1_1_models_1_1_relative_path_tests}{00010}}\ \textcolor{keyword}{public}\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_luthetus_1_1_common_1_1_tests_1_1_basis_1_1_file_systems_1_1_models_1_1_relative_path_tests}{RelativePathTests}}}
+\DoxyCodeLine{\Hypertarget{_relative_path_tests_8cs_source_l00011}00011\ \{}
+\DoxyCodeLine{\Hypertarget{_relative_path_tests_8cs_source_l00025}00025\ \ \ \ \ [Fact]}
+\DoxyCodeLine{\Hypertarget{_relative_path_tests_8cs_source_l00026}\mbox{\hyperlink{class_luthetus_1_1_common_1_1_tests_1_1_basis_1_1_file_systems_1_1_models_1_1_relative_path_tests_a6387c68d67db261e70ef8f78ae9da0b8}{00026}}\ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_luthetus_1_1_common_1_1_tests_1_1_basis_1_1_file_systems_1_1_models_1_1_relative_path_tests_a6387c68d67db261e70ef8f78ae9da0b8}{Constructor}}()}
+\DoxyCodeLine{\Hypertarget{_relative_path_tests_8cs_source_l00027}00027\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_relative_path_tests_8cs_source_l00028}00028\ \ \ \ \ \ \ \ \ InitializeFileSystemsTests(}
+\DoxyCodeLine{\Hypertarget{_relative_path_tests_8cs_source_l00029}00029\ \ \ \ \ \ \ \ \ \ \ \ \ out\ \mbox{\hyperlink{class_luthetus_1_1_common_1_1_razor_lib_1_1_file_systems_1_1_models_1_1_in_memory_environment_provider}{InMemoryEnvironmentProvider}}\ environmentProvider,}
+\DoxyCodeLine{\Hypertarget{_relative_path_tests_8cs_source_l00030}00030\ \ \ \ \ \ \ \ \ \ \ \ \ out\ \mbox{\hyperlink{class_luthetus_1_1_common_1_1_razor_lib_1_1_file_systems_1_1_models_1_1_in_memory_file_system_provider}{InMemoryFileSystemProvider}}\ fileSystemProvider,}
+\DoxyCodeLine{\Hypertarget{_relative_path_tests_8cs_source_l00031}00031\ \ \ \ \ \ \ \ \ \ \ \ \ out\ ServiceProvider\ serviceProvider);}
+\DoxyCodeLine{\Hypertarget{_relative_path_tests_8cs_source_l00032}00032\ }
+\DoxyCodeLine{\Hypertarget{_relative_path_tests_8cs_source_l00033}00033\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_relative_path_tests_8cs_source_l00034}00034\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ This\ path\ is\ silly\ because\ it\ currently\ is\ going\ one\ UpDir\ directive\ too\ many}}
+\DoxyCodeLine{\Hypertarget{_relative_path_tests_8cs_source_l00035}00035\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ just\ to\ arive\ at\ the\ same\ ending\ location.}}
+\DoxyCodeLine{\Hypertarget{_relative_path_tests_8cs_source_l00036}00036\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//}}
+\DoxyCodeLine{\Hypertarget{_relative_path_tests_8cs_source_l00037}00037\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ That\ being\ said,\ I\ need\ to\ parse\ more\ than\ one\ UpDir\ directive,\ and}}
+\DoxyCodeLine{\Hypertarget{_relative_path_tests_8cs_source_l00038}00038\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ am\ using\ this\ for\ that\ purpose.}}
+\DoxyCodeLine{\Hypertarget{_relative_path_tests_8cs_source_l00039}00039\ \ \ \ \ \ \ \ \ \ \ \ \ var\ relativePathString\ =\ \textcolor{stringliteral}{"{}../../Homework/Math/"{}};}
+\DoxyCodeLine{\Hypertarget{_relative_path_tests_8cs_source_l00040}00040\ \ \ \ \ \ \ \ \ \ \ \ \ var\ relativePath\ =\ environmentProvider.RelativePathFactory(relativePathString,\ \textcolor{keyword}{true});}
+\DoxyCodeLine{\Hypertarget{_relative_path_tests_8cs_source_l00041}00041\ }
+\DoxyCodeLine{\Hypertarget{_relative_path_tests_8cs_source_l00042}00042\ \ \ \ \ \ \ \ \ \ \ \ \ Assert.Equal(\mbox{\hyperlink{namespace_luthetus_1_1_common_1_1_razor_lib_1_1_file_systems_1_1_models_a46fe58b8ad5b8f17a5f867864b8015e3}{PathType}}.RelativePath,\ relativePath.PathType);}
+\DoxyCodeLine{\Hypertarget{_relative_path_tests_8cs_source_l00043}00043\ \ \ \ \ \ \ \ \ \ \ \ \ Assert.True(relativePath.IsDirectory);}
+\DoxyCodeLine{\Hypertarget{_relative_path_tests_8cs_source_l00044}00044\ \ \ \ \ \ \ \ \ \ \ \ \ Assert.Equal(environmentProvider,\ relativePath.EnvironmentProvider);}
+\DoxyCodeLine{\Hypertarget{_relative_path_tests_8cs_source_l00045}00045\ \ \ \ \ \ \ \ \ \ \ \ \ Assert.Equal(\textcolor{stringliteral}{"{}Math"{}},\ relativePath.NameNoExtension);}
+\DoxyCodeLine{\Hypertarget{_relative_path_tests_8cs_source_l00046}00046\ \ \ \ \ \ \ \ \ \ \ \ \ Assert.Equal(\textcolor{stringliteral}{"{}/"{}},\ relativePath.ExtensionNoPeriod);}
+\DoxyCodeLine{\Hypertarget{_relative_path_tests_8cs_source_l00047}00047\ \ \ \ \ \ \ \ \ \ \ \ \ Assert.Equal(2,\ relativePath.UpDirDirectiveCount);}
+\DoxyCodeLine{\Hypertarget{_relative_path_tests_8cs_source_l00048}00048\ \ \ \ \ \ \ \ \ \ \ \ \ Assert.Equal(relativePathString,\ relativePath.ExactInput);}
+\DoxyCodeLine{\Hypertarget{_relative_path_tests_8cs_source_l00049}00049\ \ \ \ \ \ \ \ \ \ \ \ \ Assert.Equal(relativePathString,\ relativePath.Value);}
+\DoxyCodeLine{\Hypertarget{_relative_path_tests_8cs_source_l00050}00050\ \ \ \ \ \ \ \ \ \ \ \ \ Assert.Equal(\textcolor{stringliteral}{"{}Math/"{}},\ relativePath.NameWithExtension);}
+\DoxyCodeLine{\Hypertarget{_relative_path_tests_8cs_source_l00051}00051\ }
+\DoxyCodeLine{\Hypertarget{_relative_path_tests_8cs_source_l00052}00052\ \ \ \ \ \ \ \ \ \ \ \ \ var\ homeworkDirectory\ =\ relativePath.AncestorDirectoryList[0];}
+\DoxyCodeLine{\Hypertarget{_relative_path_tests_8cs_source_l00053}00053\ \ \ \ \ \ \ \ \ \ \ \ \ var\ homeworkDirectoryRelativePath\ =\ environmentProvider.RelativePathFactory(homeworkDirectory.Value,\ \textcolor{keyword}{true});}
+\DoxyCodeLine{\Hypertarget{_relative_path_tests_8cs_source_l00054}00054\ \ \ \ \ \ \ \ \ \ \ \ \ Assert.Equal(\textcolor{stringliteral}{"{}Homework"{}},\ homeworkDirectoryRelativePath.NameNoExtension);}
+\DoxyCodeLine{\Hypertarget{_relative_path_tests_8cs_source_l00055}00055\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_relative_path_tests_8cs_source_l00056}00056\ }
+\DoxyCodeLine{\Hypertarget{_relative_path_tests_8cs_source_l00057}00057\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_relative_path_tests_8cs_source_l00058}00058\ \ \ \ \ \ \ \ \ \ \ \ \ var\ relativePathString\ =\ \textcolor{stringliteral}{"{}../Math/addition.txt"{}};}
+\DoxyCodeLine{\Hypertarget{_relative_path_tests_8cs_source_l00059}00059\ \ \ \ \ \ \ \ \ \ \ \ \ var\ relativePath\ =\ environmentProvider.RelativePathFactory(relativePathString,\ \textcolor{keyword}{false});}
+\DoxyCodeLine{\Hypertarget{_relative_path_tests_8cs_source_l00060}00060\ }
+\DoxyCodeLine{\Hypertarget{_relative_path_tests_8cs_source_l00061}00061\ \ \ \ \ \ \ \ \ \ \ \ \ Assert.Equal(\mbox{\hyperlink{namespace_luthetus_1_1_common_1_1_razor_lib_1_1_file_systems_1_1_models_a46fe58b8ad5b8f17a5f867864b8015e3}{PathType}}.RelativePath,\ relativePath.PathType);}
+\DoxyCodeLine{\Hypertarget{_relative_path_tests_8cs_source_l00062}00062\ \ \ \ \ \ \ \ \ \ \ \ \ Assert.False(relativePath.IsDirectory);}
+\DoxyCodeLine{\Hypertarget{_relative_path_tests_8cs_source_l00063}00063\ \ \ \ \ \ \ \ \ \ \ \ \ Assert.Equal(environmentProvider,\ relativePath.EnvironmentProvider);}
+\DoxyCodeLine{\Hypertarget{_relative_path_tests_8cs_source_l00064}00064\ \ \ \ \ \ \ \ \ \ \ \ \ Assert.Equal(\textcolor{stringliteral}{"{}addition"{}},\ relativePath.NameNoExtension);}
+\DoxyCodeLine{\Hypertarget{_relative_path_tests_8cs_source_l00065}00065\ \ \ \ \ \ \ \ \ \ \ \ \ Assert.Equal(\textcolor{stringliteral}{"{}txt"{}},\ relativePath.ExtensionNoPeriod);}
+\DoxyCodeLine{\Hypertarget{_relative_path_tests_8cs_source_l00066}00066\ \ \ \ \ \ \ \ \ \ \ \ \ Assert.Equal(1,\ relativePath.UpDirDirectiveCount);}
+\DoxyCodeLine{\Hypertarget{_relative_path_tests_8cs_source_l00067}00067\ \ \ \ \ \ \ \ \ \ \ \ \ Assert.Equal(relativePathString,\ relativePath.ExactInput);}
+\DoxyCodeLine{\Hypertarget{_relative_path_tests_8cs_source_l00068}00068\ \ \ \ \ \ \ \ \ \ \ \ \ Assert.Equal(relativePathString,\ relativePath.Value);}
+\DoxyCodeLine{\Hypertarget{_relative_path_tests_8cs_source_l00069}00069\ \ \ \ \ \ \ \ \ \ \ \ \ Assert.Equal(\textcolor{stringliteral}{"{}addition.txt"{}},\ relativePath.NameWithExtension);}
+\DoxyCodeLine{\Hypertarget{_relative_path_tests_8cs_source_l00070}00070\ }
+\DoxyCodeLine{\Hypertarget{_relative_path_tests_8cs_source_l00071}00071\ \ \ \ \ \ \ \ \ \ \ \ \ var\ mathDirectory\ =\ relativePath.AncestorDirectoryList[0];}
+\DoxyCodeLine{\Hypertarget{_relative_path_tests_8cs_source_l00072}00072\ \ \ \ \ \ \ \ \ \ \ \ \ var\ mathDirectoryRelativePath\ =\ environmentProvider.RelativePathFactory(mathDirectory.Value,\ \textcolor{keyword}{true});}
+\DoxyCodeLine{\Hypertarget{_relative_path_tests_8cs_source_l00073}00073\ \ \ \ \ \ \ \ \ \ \ \ \ Assert.Equal(\textcolor{stringliteral}{"{}Math"{}},\ mathDirectoryRelativePath.NameNoExtension);}
+\DoxyCodeLine{\Hypertarget{_relative_path_tests_8cs_source_l00074}00074\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_relative_path_tests_8cs_source_l00075}00075\ }
+\DoxyCodeLine{\Hypertarget{_relative_path_tests_8cs_source_l00076}00076\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_relative_path_tests_8cs_source_l00077}00077\ \ \ \ \ \ \ \ \ \ \ \ \ var\ relativePathString\ =\ \textcolor{stringliteral}{"{}./skeletalSystem.txt"{}};}
+\DoxyCodeLine{\Hypertarget{_relative_path_tests_8cs_source_l00078}00078\ \ \ \ \ \ \ \ \ \ \ \ \ var\ relativePath\ =\ environmentProvider.RelativePathFactory(relativePathString,\ \textcolor{keyword}{false});}
+\DoxyCodeLine{\Hypertarget{_relative_path_tests_8cs_source_l00079}00079\ }
+\DoxyCodeLine{\Hypertarget{_relative_path_tests_8cs_source_l00080}00080\ \ \ \ \ \ \ \ \ \ \ \ \ Assert.Equal(\mbox{\hyperlink{namespace_luthetus_1_1_common_1_1_razor_lib_1_1_file_systems_1_1_models_a46fe58b8ad5b8f17a5f867864b8015e3}{PathType}}.RelativePath,\ relativePath.PathType);}
+\DoxyCodeLine{\Hypertarget{_relative_path_tests_8cs_source_l00081}00081\ \ \ \ \ \ \ \ \ \ \ \ \ Assert.False(relativePath.IsDirectory);}
+\DoxyCodeLine{\Hypertarget{_relative_path_tests_8cs_source_l00082}00082\ \ \ \ \ \ \ \ \ \ \ \ \ Assert.Equal(environmentProvider,\ relativePath.EnvironmentProvider);}
+\DoxyCodeLine{\Hypertarget{_relative_path_tests_8cs_source_l00083}00083\ \ \ \ \ \ \ \ \ \ \ \ \ Assert.Equal(\textcolor{stringliteral}{"{}skeletalSystem"{}},\ relativePath.NameNoExtension);}
+\DoxyCodeLine{\Hypertarget{_relative_path_tests_8cs_source_l00084}00084\ \ \ \ \ \ \ \ \ \ \ \ \ Assert.Equal(\textcolor{stringliteral}{"{}txt"{}},\ relativePath.ExtensionNoPeriod);}
+\DoxyCodeLine{\Hypertarget{_relative_path_tests_8cs_source_l00085}00085\ \ \ \ \ \ \ \ \ \ \ \ \ Assert.Equal(0,\ relativePath.UpDirDirectiveCount);}
+\DoxyCodeLine{\Hypertarget{_relative_path_tests_8cs_source_l00086}00086\ \ \ \ \ \ \ \ \ \ \ \ \ Assert.Equal(relativePathString,\ relativePath.ExactInput);}
+\DoxyCodeLine{\Hypertarget{_relative_path_tests_8cs_source_l00087}00087\ \ \ \ \ \ \ \ \ \ \ \ \ Assert.Equal(relativePathString,\ relativePath.Value);}
+\DoxyCodeLine{\Hypertarget{_relative_path_tests_8cs_source_l00088}00088\ \ \ \ \ \ \ \ \ \ \ \ \ Assert.Equal(\textcolor{stringliteral}{"{}skeletalSystem.txt"{}},\ relativePath.NameWithExtension);}
+\DoxyCodeLine{\Hypertarget{_relative_path_tests_8cs_source_l00089}00089\ }
+\DoxyCodeLine{\Hypertarget{_relative_path_tests_8cs_source_l00090}00090\ \ \ \ \ \ \ \ \ \ \ \ \ Assert.Empty(relativePath.AncestorDirectoryList);}
+\DoxyCodeLine{\Hypertarget{_relative_path_tests_8cs_source_l00091}00091\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_relative_path_tests_8cs_source_l00092}00092\ }
+\DoxyCodeLine{\Hypertarget{_relative_path_tests_8cs_source_l00093}00093\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_relative_path_tests_8cs_source_l00094}00094\ \ \ \ \ \ \ \ \ \ \ \ \ var\ relativePathString\ =\ \textcolor{stringliteral}{"{}../"{}};}
+\DoxyCodeLine{\Hypertarget{_relative_path_tests_8cs_source_l00095}00095\ \ \ \ \ \ \ \ \ \ \ \ \ var\ relativePath\ =\ environmentProvider.RelativePathFactory(relativePathString,\ \textcolor{keyword}{true});}
+\DoxyCodeLine{\Hypertarget{_relative_path_tests_8cs_source_l00096}00096\ }
+\DoxyCodeLine{\Hypertarget{_relative_path_tests_8cs_source_l00097}00097\ \ \ \ \ \ \ \ \ \ \ \ \ Assert.Equal(\mbox{\hyperlink{namespace_luthetus_1_1_common_1_1_razor_lib_1_1_file_systems_1_1_models_a46fe58b8ad5b8f17a5f867864b8015e3}{PathType}}.RelativePath,\ relativePath.PathType);}
+\DoxyCodeLine{\Hypertarget{_relative_path_tests_8cs_source_l00098}00098\ \ \ \ \ \ \ \ \ \ \ \ \ Assert.True(relativePath.IsDirectory);}
+\DoxyCodeLine{\Hypertarget{_relative_path_tests_8cs_source_l00099}00099\ \ \ \ \ \ \ \ \ \ \ \ \ Assert.Equal(environmentProvider,\ relativePath.EnvironmentProvider);}
+\DoxyCodeLine{\Hypertarget{_relative_path_tests_8cs_source_l00100}00100\ \ \ \ \ \ \ \ \ \ \ \ \ Assert.Equal(\textcolor{keywordtype}{string}.Empty,\ relativePath.NameNoExtension);}
+\DoxyCodeLine{\Hypertarget{_relative_path_tests_8cs_source_l00101}00101\ \ \ \ \ \ \ \ \ \ \ \ \ Assert.Equal(\textcolor{stringliteral}{"{}/"{}},\ relativePath.ExtensionNoPeriod);}
+\DoxyCodeLine{\Hypertarget{_relative_path_tests_8cs_source_l00102}00102\ \ \ \ \ \ \ \ \ \ \ \ \ Assert.Equal(1,\ relativePath.UpDirDirectiveCount);}
+\DoxyCodeLine{\Hypertarget{_relative_path_tests_8cs_source_l00103}00103\ \ \ \ \ \ \ \ \ \ \ \ \ Assert.Equal(relativePathString,\ relativePath.ExactInput);}
+\DoxyCodeLine{\Hypertarget{_relative_path_tests_8cs_source_l00104}00104\ \ \ \ \ \ \ \ \ \ \ \ \ Assert.Equal(relativePathString,\ relativePath.Value);}
+\DoxyCodeLine{\Hypertarget{_relative_path_tests_8cs_source_l00105}00105\ \ \ \ \ \ \ \ \ \ \ \ \ Assert.Equal(\textcolor{stringliteral}{"{}/"{}},\ relativePath.NameWithExtension);}
+\DoxyCodeLine{\Hypertarget{_relative_path_tests_8cs_source_l00106}00106\ }
+\DoxyCodeLine{\Hypertarget{_relative_path_tests_8cs_source_l00107}00107\ \ \ \ \ \ \ \ \ \ \ \ \ Assert.Empty(relativePath.AncestorDirectoryList);}
+\DoxyCodeLine{\Hypertarget{_relative_path_tests_8cs_source_l00108}00108\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_relative_path_tests_8cs_source_l00109}00109\ }
+\DoxyCodeLine{\Hypertarget{_relative_path_tests_8cs_source_l00110}00110\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_relative_path_tests_8cs_source_l00111}00111\ \ \ \ \ \ \ \ \ \ \ \ \ var\ relativePathString\ =\ \textcolor{stringliteral}{"{}../"{}};}
+\DoxyCodeLine{\Hypertarget{_relative_path_tests_8cs_source_l00112}00112\ \ \ \ \ \ \ \ \ \ \ \ \ var\ relativePath\ =\ environmentProvider.RelativePathFactory(relativePathString,\ \textcolor{keyword}{true});}
+\DoxyCodeLine{\Hypertarget{_relative_path_tests_8cs_source_l00113}00113\ }
+\DoxyCodeLine{\Hypertarget{_relative_path_tests_8cs_source_l00114}00114\ \ \ \ \ \ \ \ \ \ \ \ \ Assert.Equal(\mbox{\hyperlink{namespace_luthetus_1_1_common_1_1_razor_lib_1_1_file_systems_1_1_models_a46fe58b8ad5b8f17a5f867864b8015e3}{PathType}}.RelativePath,\ relativePath.PathType);}
+\DoxyCodeLine{\Hypertarget{_relative_path_tests_8cs_source_l00115}00115\ \ \ \ \ \ \ \ \ \ \ \ \ Assert.True(relativePath.IsDirectory);}
+\DoxyCodeLine{\Hypertarget{_relative_path_tests_8cs_source_l00116}00116\ \ \ \ \ \ \ \ \ \ \ \ \ Assert.Equal(environmentProvider,\ relativePath.EnvironmentProvider);}
+\DoxyCodeLine{\Hypertarget{_relative_path_tests_8cs_source_l00117}00117\ \ \ \ \ \ \ \ \ \ \ \ \ Assert.Equal(\textcolor{keywordtype}{string}.Empty,\ relativePath.NameNoExtension);}
+\DoxyCodeLine{\Hypertarget{_relative_path_tests_8cs_source_l00118}00118\ \ \ \ \ \ \ \ \ \ \ \ \ Assert.Equal(\textcolor{stringliteral}{"{}/"{}},\ relativePath.ExtensionNoPeriod);}
+\DoxyCodeLine{\Hypertarget{_relative_path_tests_8cs_source_l00119}00119\ \ \ \ \ \ \ \ \ \ \ \ \ Assert.Equal(1,\ relativePath.UpDirDirectiveCount);}
+\DoxyCodeLine{\Hypertarget{_relative_path_tests_8cs_source_l00120}00120\ \ \ \ \ \ \ \ \ \ \ \ \ Assert.Equal(relativePathString,\ relativePath.ExactInput);}
+\DoxyCodeLine{\Hypertarget{_relative_path_tests_8cs_source_l00121}00121\ \ \ \ \ \ \ \ \ \ \ \ \ Assert.Equal(relativePathString,\ relativePath.Value);}
+\DoxyCodeLine{\Hypertarget{_relative_path_tests_8cs_source_l00122}00122\ \ \ \ \ \ \ \ \ \ \ \ \ Assert.Equal(\textcolor{stringliteral}{"{}/"{}},\ relativePath.NameWithExtension);}
+\DoxyCodeLine{\Hypertarget{_relative_path_tests_8cs_source_l00123}00123\ }
+\DoxyCodeLine{\Hypertarget{_relative_path_tests_8cs_source_l00124}00124\ \ \ \ \ \ \ \ \ \ \ \ \ Assert.Empty(relativePath.AncestorDirectoryList);}
+\DoxyCodeLine{\Hypertarget{_relative_path_tests_8cs_source_l00125}00125\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_relative_path_tests_8cs_source_l00126}00126\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_relative_path_tests_8cs_source_l00127}00127\ \}}
+
+\end{DoxyCode}

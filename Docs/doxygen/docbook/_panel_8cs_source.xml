@@ -1,0 +1,327 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="__panel_8cs_source" xml:lang="en-US">
+<title>Panel.cs</title>
+<indexterm><primary>Source/Lib/Common/Panels/Models/Panel.cs</primary></indexterm>
+Go to the documentation of this file.<programlisting linenumbering="unnumbered"><anchor xml:id="__panel_8cs_source_1l00001"/>00001 <emphasis role="keyword">using&#32;</emphasis>System.Collections.Immutable;
+<anchor xml:id="__panel_8cs_source_1l00002"/>00002 <emphasis role="keyword">using&#32;</emphasis>Microsoft.JSInterop;
+<anchor xml:id="__panel_8cs_source_1l00003"/>00003 <emphasis role="keyword">using&#32;</emphasis>Microsoft.AspNetCore.Components.Web;
+<anchor xml:id="__panel_8cs_source_1l00004"/>00004 <emphasis role="keyword">using&#32;</emphasis>Fluxor;
+<anchor xml:id="__panel_8cs_source_1l00005"/>00005 <emphasis role="keyword">using&#32;</emphasis><link linkend="_namespace_luthetus_1_1_common_1_1_razor_lib_1_1_contexts_1_1_models">Luthetus.Common.RazorLib.Contexts.Models</link>;
+<anchor xml:id="__panel_8cs_source_1l00006"/>00006 <emphasis role="keyword">using&#32;</emphasis><link linkend="_namespace_luthetus_1_1_common_1_1_razor_lib_1_1_dimensions_1_1_models">Luthetus.Common.RazorLib.Dimensions.Models</link>;
+<anchor xml:id="__panel_8cs_source_1l00007"/>00007 <emphasis role="keyword">using&#32;</emphasis><link linkend="_namespace_luthetus_1_1_common_1_1_razor_lib_1_1_keys_1_1_models">Luthetus.Common.RazorLib.Keys.Models</link>;
+<anchor xml:id="__panel_8cs_source_1l00008"/>00008 <emphasis role="keyword">using&#32;</emphasis><link linkend="_namespace_luthetus_1_1_common_1_1_razor_lib_1_1_dialogs_1_1_models">Luthetus.Common.RazorLib.Dialogs.Models</link>;
+<anchor xml:id="__panel_8cs_source_1l00009"/>00009 <emphasis role="keyword">using&#32;</emphasis><link linkend="_namespace_luthetus_1_1_common_1_1_razor_lib_1_1_java_script_objects_1_1_models">Luthetus.Common.RazorLib.JavaScriptObjects.Models</link>;
+<anchor xml:id="__panel_8cs_source_1l00010"/>00010 <emphasis role="keyword">using&#32;</emphasis><link linkend="_namespace_luthetus_1_1_common_1_1_razor_lib_1_1_panels_1_1_states">Luthetus.Common.RazorLib.Panels.States</link>;
+<anchor xml:id="__panel_8cs_source_1l00011"/>00011 <emphasis role="keyword">using&#32;</emphasis><link linkend="_namespace_luthetus_1_1_common_1_1_razor_lib_1_1_dynamics_1_1_models">Luthetus.Common.RazorLib.Dynamics.Models</link>;
+<anchor xml:id="__panel_8cs_source_1l00012"/>00012 <emphasis role="keyword">using&#32;</emphasis><link linkend="_namespace_luthetus_1_1_common_1_1_razor_lib_1_1_tabs_1_1_displays">Luthetus.Common.RazorLib.Tabs.Displays</link>;
+<anchor xml:id="__panel_8cs_source_1l00013"/>00013 <emphasis role="keyword">using&#32;</emphasis><link linkend="_namespace_luthetus_1_1_common_1_1_razor_lib_1_1_js_runtimes_1_1_models">Luthetus.Common.RazorLib.JsRuntimes.Models</link>;
+<anchor xml:id="__panel_8cs_source_1l00014"/>00014 
+<anchor xml:id="__panel_8cs_source_1l00015"/>00015 <emphasis role="keyword">namespace&#32;</emphasis><link linkend="_namespace_luthetus_1_1_common_1_1_razor_lib_1_1_panels_1_1_models">Luthetus.Common.RazorLib.Panels.Models</link>;
+<anchor xml:id="__panel_8cs_source_1l00016"/>00016 
+<anchor xml:id="__panel_8cs_source_1l00017"/><link linkend="_namespace_luthetus_1_1_common_1_1_razor_lib_1_1_panels_1_1_models_1a4cda90de1465c4aa1eb64b93539e69fc">00017</link> <emphasis role="keyword">public</emphasis>&#32;record&#32;<link linkend="_namespace_luthetus_1_1_common_1_1_razor_lib_1_1_panels_1_1_models_1a7d7bfac20e261a4775279a1ce23fb6f8">Panel</link>&#32;:&#32;<link linkend="_interface_luthetus_1_1_common_1_1_razor_lib_1_1_panels_1_1_models_1_1_i_panel_tab">IPanelTab</link>,&#32;<link linkend="_namespace_luthetus_1_1_common_1_1_razor_lib_1_1_panels_1_1_models_1a4cda90de1465c4aa1eb64b93539e69fc">IDialog</link>,&#32;<link linkend="_namespace_luthetus_1_1_common_1_1_razor_lib_1_1_panels_1_1_models_1ae72f844ed2124eda717607572405f5d4">IDrag</link>
+<anchor xml:id="__panel_8cs_source_1l00018"/>00018 {
+<anchor xml:id="__panel_8cs_source_1l00019"/>00019 &#32;&#32;&#32;&#32;<emphasis role="keyword">private</emphasis>&#32;readonly&#32;Type&#32;_dragTabComponentType;
+<anchor xml:id="__panel_8cs_source_1l00020"/>00020 &#32;&#32;&#32;&#32;<emphasis role="keyword">private</emphasis>&#32;readonly&#32;Dictionary&lt;string,&#32;object?&gt;?&#32;_dragTabComponentParameterMap;
+<anchor xml:id="__panel_8cs_source_1l00021"/>00021 
+<anchor xml:id="__panel_8cs_source_1l00022"/>00022 &#32;&#32;&#32;&#32;<emphasis role="keyword">private</emphasis>&#32;readonly&#32;Type?&#32;_dragDialogComponentType&#32;=&#32;<emphasis role="keyword">null</emphasis>;
+<anchor xml:id="__panel_8cs_source_1l00023"/>00023 &#32;&#32;&#32;&#32;<emphasis role="keyword">private</emphasis>&#32;readonly&#32;Dictionary&lt;string,&#32;object?&gt;?&#32;_dragDialogComponentParameterMap&#32;=&#32;<emphasis role="keyword">null</emphasis>;
+<anchor xml:id="__panel_8cs_source_1l00024"/>00024 
+<anchor xml:id="__panel_8cs_source_1l00025"/>00025 &#32;&#32;&#32;&#32;<emphasis role="keyword">public</emphasis>&#32;<link linkend="_namespace_luthetus_1_1_common_1_1_razor_lib_1_1_panels_1_1_models_1a7d7bfac20e261a4775279a1ce23fb6f8">Panel</link>(
+<anchor xml:id="__panel_8cs_source_1l00026"/>00026 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordtype">string</emphasis>&#32;<link linkend="_namespace_luthetus_1_1_common_1_1_razor_lib_1_1_dialogs_1_1_models_1a201dc83c1d73039654cb10ae7e205b67">title</link>,
+<anchor xml:id="__panel_8cs_source_1l00027"/>00027 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;Key&lt;Panel&gt;&#32;key,
+<anchor xml:id="__panel_8cs_source_1l00028"/>00028 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;Key&lt;IDynamicViewModel&gt;&#32;dynamicViewModelKey,
+<anchor xml:id="__panel_8cs_source_1l00029"/>00029 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;Key&lt;ContextRecord&gt;&#32;contextRecordKey,
+<anchor xml:id="__panel_8cs_source_1l00030"/>00030 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;Type&#32;<link linkend="_namespace_luthetus_1_1_common_1_1_razor_lib_1_1_dialogs_1_1_models_1a8693b131ffcf6803bca0701c120e57c3">componentType</link>,
+<anchor xml:id="__panel_8cs_source_1l00031"/>00031 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;Dictionary&lt;string,&#32;object?&gt;?&#32;<link linkend="_namespace_luthetus_1_1_common_1_1_razor_lib_1_1_dialogs_1_1_models_1a6021218e15a700f258832bc3705d08e1">componentParameterMap</link>,
+<anchor xml:id="__panel_8cs_source_1l00032"/>00032 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;IDispatcher&#32;dispatcher,
+<anchor xml:id="__panel_8cs_source_1l00033"/>00033 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<link linkend="_interface_luthetus_1_1_common_1_1_razor_lib_1_1_dialogs_1_1_models_1_1_i_dialog_service">IDialogService</link>&#32;dialogService,
+<anchor xml:id="__panel_8cs_source_1l00034"/>00034 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;IJSRuntime&#32;jsRuntime)
+<anchor xml:id="__panel_8cs_source_1l00035"/>00035 &#32;&#32;&#32;&#32;{
+<anchor xml:id="__panel_8cs_source_1l00036"/>00036 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<link linkend="_namespace_luthetus_1_1_common_1_1_razor_lib_1_1_dialogs_1_1_models_1ac94da4b7c6a1e2a1dd498ce830d300f1">Title</link>&#32;=&#32;<link linkend="_namespace_luthetus_1_1_common_1_1_razor_lib_1_1_dialogs_1_1_models_1a201dc83c1d73039654cb10ae7e205b67">title</link>;
+<anchor xml:id="__panel_8cs_source_1l00037"/>00037 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;Key&#32;=&#32;key;
+<anchor xml:id="__panel_8cs_source_1l00038"/>00038 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<link linkend="_namespace_luthetus_1_1_common_1_1_razor_lib_1_1_dialogs_1_1_models_1a7b6b7e401ac513c746af3a19e426016d">DynamicViewModelKey</link>&#32;=&#32;dynamicViewModelKey;
+<anchor xml:id="__panel_8cs_source_1l00039"/>00039 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;ContextRecordKey&#32;=&#32;contextRecordKey;
+<anchor xml:id="__panel_8cs_source_1l00040"/>00040 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<link linkend="_namespace_luthetus_1_1_common_1_1_razor_lib_1_1_dialogs_1_1_models_1aaa2b6842308d5b3e8ff10a8d830cdc43">ComponentType</link>&#32;=&#32;<link linkend="_namespace_luthetus_1_1_common_1_1_razor_lib_1_1_dialogs_1_1_models_1a8693b131ffcf6803bca0701c120e57c3">componentType</link>;
+<anchor xml:id="__panel_8cs_source_1l00041"/>00041 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<link linkend="_namespace_luthetus_1_1_common_1_1_razor_lib_1_1_dialogs_1_1_models_1a1b662c0d3f2a3857df2d71eba6b8eb6d">ComponentParameterMap</link>&#32;=&#32;<link linkend="_namespace_luthetus_1_1_common_1_1_razor_lib_1_1_dialogs_1_1_models_1a6021218e15a700f258832bc3705d08e1">componentParameterMap</link>;
+<anchor xml:id="__panel_8cs_source_1l00042"/>00042 
+<anchor xml:id="__panel_8cs_source_1l00043"/>00043 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;Dispatcher&#32;=&#32;dispatcher;
+<anchor xml:id="__panel_8cs_source_1l00044"/>00044 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<link linkend="_class_luthetus_1_1_common_1_1_razor_lib_1_1_dialogs_1_1_models_1_1_dialog_service">DialogService</link>&#32;=&#32;dialogService;
+<anchor xml:id="__panel_8cs_source_1l00045"/>00045 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;JsRuntime&#32;=&#32;jsRuntime;
+<anchor xml:id="__panel_8cs_source_1l00046"/>00046 
+<anchor xml:id="__panel_8cs_source_1l00047"/>00047 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;_dragTabComponentType&#32;=&#32;typeof(<link linkend="_class_luthetus_1_1_common_1_1_razor_lib_1_1_tabs_1_1_displays_1_1_tab_display">TabDisplay</link>);
+<anchor xml:id="__panel_8cs_source_1l00048"/>00048 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;_dragTabComponentParameterMap&#32;=&#32;<emphasis role="keyword">new</emphasis>()
+<anchor xml:id="__panel_8cs_source_1l00049"/>00049 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;{
+<anchor xml:id="__panel_8cs_source_1l00050"/>00050 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;{&#32;nameof(<link linkend="_class_luthetus_1_1_common_1_1_razor_lib_1_1_tabs_1_1_displays_1_1_tab_display">TabDisplay</link>.<link linkend="_class_luthetus_1_1_common_1_1_razor_lib_1_1_tabs_1_1_displays_1_1_tab_display_1a073b814801d1f91f18b24cbba6213e41">Tab</link>),&#32;<emphasis role="keyword">this</emphasis>&#32;},
+<anchor xml:id="__panel_8cs_source_1l00051"/>00051 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;{&#32;nameof(<link linkend="_class_luthetus_1_1_common_1_1_razor_lib_1_1_tabs_1_1_displays_1_1_tab_display">TabDisplay</link>.<link linkend="_class_luthetus_1_1_common_1_1_razor_lib_1_1_tabs_1_1_displays_1_1_tab_display_1ae97f12854f570ac82bdb2fa76f84bc68">IsBeingDragged</link>),&#32;<emphasis role="keyword">true</emphasis>&#32;}
+<anchor xml:id="__panel_8cs_source_1l00052"/>00052 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;};
+<anchor xml:id="__panel_8cs_source_1l00053"/>00053 
+<anchor xml:id="__panel_8cs_source_1l00054"/>00054 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<link linkend="_namespace_luthetus_1_1_common_1_1_razor_lib_1_1_dialogs_1_1_models_1afd8cabe7053d831fc1750a5dc467c330">DialogFocusPointHtmlElementId</link>&#32;=&#32;$<emphasis role="stringliteral">&quot;luth_dialog-focus-point_{DynamicViewModelKey.Guid}&quot;</emphasis>;
+<anchor xml:id="__panel_8cs_source_1l00055"/>00055 &#32;&#32;&#32;&#32;}
+<anchor xml:id="__panel_8cs_source_1l00056"/>00056 
+<anchor xml:id="__panel_8cs_source_1l00057"/>00057 &#32;&#32;&#32;&#32;<emphasis role="keyword">public</emphasis>&#32;<emphasis role="keywordtype">string</emphasis>&#32;<link linkend="_namespace_luthetus_1_1_common_1_1_razor_lib_1_1_dialogs_1_1_models_1ac94da4b7c6a1e2a1dd498ce830d300f1">Title</link>&#32;{&#32;<emphasis role="keyword">get</emphasis>;&#32;}
+<anchor xml:id="__panel_8cs_source_1l00058"/>00058 &#32;&#32;&#32;&#32;<emphasis role="keyword">public</emphasis>&#32;<emphasis role="keywordtype">string</emphasis>&#32;<link linkend="_namespace_luthetus_1_1_common_1_1_razor_lib_1_1_dialogs_1_1_models_1a2ad4d709f86e4b4774a4cde9f18db7a4">TitleVerbose</link>&#32;=&gt;&#32;<link linkend="_namespace_luthetus_1_1_common_1_1_razor_lib_1_1_dialogs_1_1_models_1ac94da4b7c6a1e2a1dd498ce830d300f1">Title</link>;
+<anchor xml:id="__panel_8cs_source_1l00059"/>00059 &#32;&#32;&#32;&#32;<emphasis role="keyword">public</emphasis>&#32;Key&lt;Panel&gt;&#32;Key&#32;{&#32;<emphasis role="keyword">get</emphasis>;&#32;}
+<anchor xml:id="__panel_8cs_source_1l00060"/>00060 &#32;&#32;&#32;&#32;<emphasis role="keyword">public</emphasis>&#32;Key&lt;IDynamicViewModel&gt;&#32;<link linkend="_namespace_luthetus_1_1_common_1_1_razor_lib_1_1_dialogs_1_1_models_1a7b6b7e401ac513c746af3a19e426016d">DynamicViewModelKey</link>&#32;{&#32;<emphasis role="keyword">get</emphasis>;&#32;}
+<anchor xml:id="__panel_8cs_source_1l00061"/>00061 &#32;&#32;&#32;&#32;<emphasis role="keyword">public</emphasis>&#32;Key&lt;ContextRecord&gt;&#32;ContextRecordKey&#32;{&#32;<emphasis role="keyword">get</emphasis>;&#32;}
+<anchor xml:id="__panel_8cs_source_1l00062"/>00062 &#32;&#32;&#32;&#32;<emphasis role="keyword">public</emphasis>&#32;IDispatcher&#32;Dispatcher&#32;{&#32;<emphasis role="keyword">get</emphasis>;}
+<anchor xml:id="__panel_8cs_source_1l00063"/>00063 &#32;&#32;&#32;&#32;<emphasis role="keyword">public</emphasis>&#32;<link linkend="_interface_luthetus_1_1_common_1_1_razor_lib_1_1_dialogs_1_1_models_1_1_i_dialog_service">IDialogService</link>&#32;<link linkend="_class_luthetus_1_1_common_1_1_razor_lib_1_1_dialogs_1_1_models_1_1_dialog_service">DialogService</link>&#32;{&#32;<emphasis role="keyword">get</emphasis>;}
+<anchor xml:id="__panel_8cs_source_1l00064"/>00064 &#32;&#32;&#32;&#32;<emphasis role="keyword">public</emphasis>&#32;IJSRuntime&#32;JsRuntime&#32;{&#32;<emphasis role="keyword">get</emphasis>;}
+<anchor xml:id="__panel_8cs_source_1l00065"/>00065 &#32;&#32;&#32;&#32;<emphasis role="keyword">public</emphasis>&#32;Type&#32;<link linkend="_namespace_luthetus_1_1_common_1_1_razor_lib_1_1_dialogs_1_1_models_1aaa2b6842308d5b3e8ff10a8d830cdc43">ComponentType</link>&#32;{&#32;<emphasis role="keyword">get</emphasis>;&#32;}
+<anchor xml:id="__panel_8cs_source_1l00066"/>00066 &#32;&#32;&#32;&#32;<emphasis role="keyword">public</emphasis>&#32;Dictionary&lt;string,&#32;object?&gt;?&#32;<link linkend="_namespace_luthetus_1_1_common_1_1_razor_lib_1_1_dialogs_1_1_models_1a1b662c0d3f2a3857df2d71eba6b8eb6d">ComponentParameterMap</link>&#32;{&#32;<emphasis role="keyword">get</emphasis>;&#32;<emphasis role="keyword">set</emphasis>;&#32;}
+<anchor xml:id="__panel_8cs_source_1l00067"/>00067 &#32;&#32;&#32;&#32;<emphasis role="keyword">public</emphasis>&#32;<emphasis role="keywordtype">string</emphasis>?&#32;<link linkend="_namespace_luthetus_1_1_common_1_1_razor_lib_1_1_dialogs_1_1_models_1a675995855ea2a46df8fbe7c57837f1d6">DialogCssClass</link>&#32;{&#32;<emphasis role="keyword">get</emphasis>;&#32;<emphasis role="keyword">set</emphasis>;&#32;}
+<anchor xml:id="__panel_8cs_source_1l00068"/>00068 &#32;&#32;&#32;&#32;<emphasis role="keyword">public</emphasis>&#32;<emphasis role="keywordtype">string</emphasis>?&#32;<link linkend="_namespace_luthetus_1_1_common_1_1_razor_lib_1_1_dialogs_1_1_models_1ae69b6ce9c574d17a4658d1b57a6e1b73">DialogCssStyle</link>&#32;{&#32;<emphasis role="keyword">get</emphasis>;&#32;<emphasis role="keyword">set</emphasis>;&#32;}
+<anchor xml:id="__panel_8cs_source_1l00069"/>00069 &#32;&#32;&#32;&#32;<emphasis role="keyword">public</emphasis>&#32;<link linkend="_interface_luthetus_1_1_common_1_1_razor_lib_1_1_dynamics_1_1_models_1_1_i_tab_group">ITabGroup</link>?&#32;TabGroup&#32;{&#32;<emphasis role="keyword">get</emphasis>;&#32;<emphasis role="keyword">set</emphasis>;&#32;}
+<anchor xml:id="__panel_8cs_source_1l00070"/>00070 
+<anchor xml:id="__panel_8cs_source_1l00071"/>00071 &#32;&#32;&#32;&#32;<emphasis role="keyword">public</emphasis>&#32;<emphasis role="keywordtype">bool</emphasis>&#32;<link linkend="_namespace_luthetus_1_1_common_1_1_razor_lib_1_1_dialogs_1_1_models_1a05e9c66f44165018f9ffb7c28f67e88c">DialogIsMinimized</link>&#32;{&#32;<emphasis role="keyword">get</emphasis>;&#32;<emphasis role="keyword">set</emphasis>;&#32;}
+<anchor xml:id="__panel_8cs_source_1l00072"/>00072 &#32;&#32;&#32;&#32;<emphasis role="keyword">public</emphasis>&#32;<emphasis role="keywordtype">bool</emphasis>&#32;<link linkend="_namespace_luthetus_1_1_common_1_1_razor_lib_1_1_dialogs_1_1_models_1af63895fd8038684457cca06455b735ab">DialogIsMaximized</link>&#32;{&#32;<emphasis role="keyword">get</emphasis>;&#32;<emphasis role="keyword">set</emphasis>;&#32;}
+<anchor xml:id="__panel_8cs_source_1l00073"/>00073 &#32;&#32;&#32;&#32;<emphasis role="keyword">public</emphasis>&#32;<emphasis role="keywordtype">bool</emphasis>&#32;<link linkend="_namespace_luthetus_1_1_common_1_1_razor_lib_1_1_dialogs_1_1_models_1a0a6d37668c7766083e900d3c35e26130">DialogIsResizable</link>&#32;{&#32;<emphasis role="keyword">get</emphasis>;&#32;<emphasis role="keyword">set</emphasis>;&#32;}&#32;=&#32;<emphasis role="keyword">true</emphasis>;
+<anchor xml:id="__panel_8cs_source_1l00074"/>00074 &#32;&#32;&#32;&#32;<emphasis role="keyword">public</emphasis>&#32;<emphasis role="keywordtype">string</emphasis>?&#32;<link linkend="_namespace_luthetus_1_1_common_1_1_razor_lib_1_1_dialogs_1_1_models_1a9df8bcbfa763345508e01ecf6b227627">SetFocusOnCloseElementId</link>&#32;{&#32;<emphasis role="keyword">get</emphasis>;&#32;<emphasis role="keyword">set</emphasis>;&#32;}
+<anchor xml:id="__panel_8cs_source_1l00075"/>00075 &#32;&#32;&#32;&#32;<emphasis role="keyword">public</emphasis>&#32;<emphasis role="keywordtype">string</emphasis>&#32;<link linkend="_namespace_luthetus_1_1_common_1_1_razor_lib_1_1_dialogs_1_1_models_1afd8cabe7053d831fc1750a5dc467c330">DialogFocusPointHtmlElementId</link>&#32;{&#32;<emphasis role="keyword">get</emphasis>;&#32;init;&#32;}
+<anchor xml:id="__panel_8cs_source_1l00076"/>00076 &#32;&#32;&#32;&#32;<emphasis role="keyword">public</emphasis>&#32;<link linkend="_class_luthetus_1_1_common_1_1_razor_lib_1_1_dimensions_1_1_models_1_1_element_dimensions">ElementDimensions</link>&#32;<link linkend="_namespace_luthetus_1_1_common_1_1_razor_lib_1_1_dialogs_1_1_models_1ae9edcc66f25c3a5f8ac3e8cfa3ce5c9a">DialogElementDimensions</link>&#32;{&#32;<emphasis role="keyword">get</emphasis>;&#32;<emphasis role="keyword">set</emphasis>;&#32;}&#32;=&#32;DialogHelper.ConstructDefaultElementDimensions();
+<anchor xml:id="__panel_8cs_source_1l00077"/>00077 
+<anchor xml:id="__panel_8cs_source_1l00078"/>00078 &#32;&#32;&#32;&#32;<emphasis role="keyword">public</emphasis>&#32;ImmutableArray&lt;IDropzone&gt;&#32;DropzoneList&#32;{&#32;<emphasis role="keyword">get</emphasis>;&#32;<emphasis role="keyword">set</emphasis>;&#32;}&#32;=&#32;<emphasis role="keyword">new</emphasis>();
+<anchor xml:id="__panel_8cs_source_1l00079"/>00079 
+<anchor xml:id="__panel_8cs_source_1l00080"/>00080 &#32;&#32;&#32;&#32;<emphasis role="keyword">public</emphasis>&#32;<link linkend="_class_luthetus_1_1_common_1_1_razor_lib_1_1_dimensions_1_1_models_1_1_element_dimensions">ElementDimensions</link>&#32;DragElementDimensions&#32;{&#32;<emphasis role="keyword">get</emphasis>;&#32;<emphasis role="keyword">set</emphasis>;&#32;}&#32;=&#32;DialogHelper.ConstructDefaultElementDimensions();
+<anchor xml:id="__panel_8cs_source_1l00081"/>00081 &#32;&#32;&#32;&#32;
+<anchor xml:id="__panel_8cs_source_1l00082"/>00082 &#32;&#32;&#32;&#32;<emphasis role="keyword">public</emphasis>&#32;Type&#32;DragComponentType&#32;=&gt;&#32;TabGroup&#32;is&#32;<emphasis role="keyword">null</emphasis>
+<anchor xml:id="__panel_8cs_source_1l00083"/>00083 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;?&#32;_dragDialogComponentType
+<anchor xml:id="__panel_8cs_source_1l00084"/>00084 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;:&#32;_dragTabComponentType;
+<anchor xml:id="__panel_8cs_source_1l00085"/>00085 
+<anchor xml:id="__panel_8cs_source_1l00086"/>00086 &#32;&#32;&#32;&#32;<emphasis role="keyword">public</emphasis>&#32;Dictionary&lt;string,&#32;object?&gt;?&#32;DragComponentParameterMap&#32;=&gt;&#32;TabGroup&#32;is&#32;<emphasis role="keyword">null</emphasis>
+<anchor xml:id="__panel_8cs_source_1l00087"/>00087 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;?&#32;_dragDialogComponentParameterMap
+<anchor xml:id="__panel_8cs_source_1l00088"/>00088 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;:&#32;_dragTabComponentParameterMap;
+<anchor xml:id="__panel_8cs_source_1l00089"/>00089 
+<anchor xml:id="__panel_8cs_source_1l00090"/>00090 &#32;&#32;&#32;&#32;<emphasis role="keyword">public</emphasis>&#32;<emphasis role="keywordtype">string</emphasis>?&#32;DragCssClass&#32;{&#32;<emphasis role="keyword">get</emphasis>;&#32;<emphasis role="keyword">set</emphasis>;&#32;}
+<anchor xml:id="__panel_8cs_source_1l00091"/>00091 &#32;&#32;&#32;&#32;<emphasis role="keyword">public</emphasis>&#32;<emphasis role="keywordtype">string</emphasis>?&#32;DragCssStyle&#32;{&#32;<emphasis role="keyword">get</emphasis>;&#32;<emphasis role="keyword">set</emphasis>;&#32;}
+<anchor xml:id="__panel_8cs_source_1l00092"/>00092 
+<anchor xml:id="__panel_8cs_source_1l00093"/>00093 &#32;&#32;&#32;&#32;<emphasis role="keyword">public</emphasis>&#32;<link linkend="_namespace_luthetus_1_1_common_1_1_razor_lib_1_1_panels_1_1_models_1a4cda90de1465c4aa1eb64b93539e69fc">IDialog</link>&#32;<link linkend="_namespace_luthetus_1_1_common_1_1_razor_lib_1_1_dialogs_1_1_models_1acb0493ec09c8e1ecc294a52779649a41">SetDialogIsMaximized</link>(<emphasis role="keywordtype">bool</emphasis>&#32;isMaximized)
+<anchor xml:id="__panel_8cs_source_1l00094"/>00094 &#32;&#32;&#32;&#32;{
+<anchor xml:id="__panel_8cs_source_1l00095"/>00095 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<link linkend="_namespace_luthetus_1_1_common_1_1_razor_lib_1_1_dialogs_1_1_models_1af63895fd8038684457cca06455b735ab">DialogIsMaximized</link>&#32;=&#32;isMaximized;
+<anchor xml:id="__panel_8cs_source_1l00096"/>00096 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;<emphasis role="keyword">this</emphasis>;
+<anchor xml:id="__panel_8cs_source_1l00097"/>00097 &#32;&#32;&#32;&#32;}
+<anchor xml:id="__panel_8cs_source_1l00098"/>00098 
+<anchor xml:id="__panel_8cs_source_1l00099"/>00099 &#32;&#32;&#32;&#32;<emphasis role="keyword">public</emphasis>&#32;async&#32;Task&#32;OnDragStartAsync()
+<anchor xml:id="__panel_8cs_source_1l00100"/>00100 &#32;&#32;&#32;&#32;{
+<anchor xml:id="__panel_8cs_source_1l00101"/>00101 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;var&#32;dropzoneList&#32;=&#32;<emphasis role="keyword">new</emphasis>&#32;List&lt;IDropzone&gt;();
+<anchor xml:id="__panel_8cs_source_1l00102"/>00102 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;AddFallbackDropzone(dropzoneList);
+<anchor xml:id="__panel_8cs_source_1l00103"/>00103 
+<anchor xml:id="__panel_8cs_source_1l00104"/>00104 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;var&#32;panelGroupHtmlIdTupleList&#32;=&#32;<emphasis role="keyword">new</emphasis>&#32;(Key&lt;PanelGroup&gt;&#32;PanelGroupKey,&#32;<emphasis role="keywordtype">string</emphasis>&#32;HtmlElementId)[]
+<anchor xml:id="__panel_8cs_source_1l00105"/>00105 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;{
+<anchor xml:id="__panel_8cs_source_1l00106"/>00106 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;(PanelFacts.LeftPanelGroupKey,&#32;<emphasis role="stringliteral">&quot;luth_ide_panel_left_tabs&quot;</emphasis>),
+<anchor xml:id="__panel_8cs_source_1l00107"/>00107 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;(PanelFacts.RightPanelGroupKey,&#32;<emphasis role="stringliteral">&quot;luth_ide_panel_right_tabs&quot;</emphasis>),
+<anchor xml:id="__panel_8cs_source_1l00108"/>00108 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;(PanelFacts.BottomPanelGroupKey,&#32;<emphasis role="stringliteral">&quot;luth_ide_panel_bottom_tabs&quot;</emphasis>),
+<anchor xml:id="__panel_8cs_source_1l00109"/>00109 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;};
+<anchor xml:id="__panel_8cs_source_1l00110"/>00110 
+<anchor xml:id="__panel_8cs_source_1l00111"/>00111 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">foreach</emphasis>&#32;(var&#32;panelGroupHtmlIdTuple&#32;<emphasis role="keywordflow">in</emphasis>&#32;panelGroupHtmlIdTupleList)
+<anchor xml:id="__panel_8cs_source_1l00112"/>00112 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;{
+<anchor xml:id="__panel_8cs_source_1l00113"/>00113 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;var&#32;measuredHtmlElementDimensions&#32;=&#32;await&#32;JsRuntime.GetLuthetusCommonApi()
+<anchor xml:id="__panel_8cs_source_1l00114"/>00114 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;.MeasureElementById(panelGroupHtmlIdTuple.HtmlElementId)
+<anchor xml:id="__panel_8cs_source_1l00115"/>00115 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;.ConfigureAwait(<emphasis role="keyword">false</emphasis>);
+<anchor xml:id="__panel_8cs_source_1l00116"/>00116 
+<anchor xml:id="__panel_8cs_source_1l00117"/>00117 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;measuredHtmlElementDimensions&#32;=&#32;measuredHtmlElementDimensions&#32;with
+<anchor xml:id="__panel_8cs_source_1l00118"/>00118 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;{
+<anchor xml:id="__panel_8cs_source_1l00119"/>00119 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;ZIndex&#32;=&#32;1,
+<anchor xml:id="__panel_8cs_source_1l00120"/>00120 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;};
+<anchor xml:id="__panel_8cs_source_1l00121"/>00121 
+<anchor xml:id="__panel_8cs_source_1l00122"/>00122 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;var&#32;elementDimensions&#32;=&#32;<emphasis role="keyword">new</emphasis>&#32;<link linkend="_class_luthetus_1_1_common_1_1_razor_lib_1_1_dimensions_1_1_models_1_1_element_dimensions">ElementDimensions</link>();
+<anchor xml:id="__panel_8cs_source_1l00123"/>00123 
+<anchor xml:id="__panel_8cs_source_1l00124"/>00124 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;elementDimensions.ElementPositionKind&#32;=&#32;<link linkend="_namespace_luthetus_1_1_common_1_1_razor_lib_1_1_dimensions_1_1_models_1a798732978998352df76bdb091f17d2b7">ElementPositionKind</link>.Fixed;
+<anchor xml:id="__panel_8cs_source_1l00125"/>00125 
+<anchor xml:id="__panel_8cs_source_1l00126"/>00126 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;Width</emphasis>
+<anchor xml:id="__panel_8cs_source_1l00127"/>00127 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;{
+<anchor xml:id="__panel_8cs_source_1l00128"/>00128 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;var&#32;widthDimensionAttribute&#32;=&#32;elementDimensions.DimensionAttributeList.First(
+<anchor xml:id="__panel_8cs_source_1l00129"/>00129 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;x&#32;=&gt;&#32;x.DimensionAttributeKind&#32;==&#32;<link linkend="_namespace_luthetus_1_1_common_1_1_razor_lib_1_1_dimensions_1_1_models_1ab42cbfab74a6a286a2eb53313a9e37f0">DimensionAttributeKind</link>.Width);
+<anchor xml:id="__panel_8cs_source_1l00130"/>00130 
+<anchor xml:id="__panel_8cs_source_1l00131"/>00131 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;widthDimensionAttribute.DimensionUnitList.Clear();
+<anchor xml:id="__panel_8cs_source_1l00132"/>00132 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;widthDimensionAttribute.DimensionUnitList.Add(<emphasis role="keyword">new</emphasis>&#32;<link linkend="_class_luthetus_1_1_common_1_1_razor_lib_1_1_dimensions_1_1_models_1_1_dimension_unit">DimensionUnit</link>
+<anchor xml:id="__panel_8cs_source_1l00133"/>00133 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;{
+<anchor xml:id="__panel_8cs_source_1l00134"/>00134 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;Value&#32;=&#32;measuredHtmlElementDimensions.WidthInPixels,
+<anchor xml:id="__panel_8cs_source_1l00135"/>00135 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<link linkend="_namespace_luthetus_1_1_common_1_1_razor_lib_1_1_dimensions_1_1_models_1ac011df04cfd59ccb7947a4ced86ba4f6">DimensionUnitKind</link>&#32;=&#32;<link linkend="_namespace_luthetus_1_1_common_1_1_razor_lib_1_1_dimensions_1_1_models_1ac011df04cfd59ccb7947a4ced86ba4f6ac3d2f5d37334dc978fd8b17fc77408a1">DimensionUnitKind.Pixels</link>
+<anchor xml:id="__panel_8cs_source_1l00136"/>00136 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;});
+<anchor xml:id="__panel_8cs_source_1l00137"/>00137 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;}
+<anchor xml:id="__panel_8cs_source_1l00138"/>00138 
+<anchor xml:id="__panel_8cs_source_1l00139"/>00139 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;Height</emphasis>
+<anchor xml:id="__panel_8cs_source_1l00140"/>00140 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;{
+<anchor xml:id="__panel_8cs_source_1l00141"/>00141 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;var&#32;heightDimensionAttribute&#32;=&#32;elementDimensions.DimensionAttributeList.First(
+<anchor xml:id="__panel_8cs_source_1l00142"/>00142 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;x&#32;=&gt;&#32;x.DimensionAttributeKind&#32;==&#32;<link linkend="_namespace_luthetus_1_1_common_1_1_razor_lib_1_1_dimensions_1_1_models_1ab42cbfab74a6a286a2eb53313a9e37f0">DimensionAttributeKind</link>.Height);
+<anchor xml:id="__panel_8cs_source_1l00143"/>00143 
+<anchor xml:id="__panel_8cs_source_1l00144"/>00144 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;heightDimensionAttribute.DimensionUnitList.Clear();
+<anchor xml:id="__panel_8cs_source_1l00145"/>00145 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;heightDimensionAttribute.DimensionUnitList.Add(<emphasis role="keyword">new</emphasis>&#32;<link linkend="_class_luthetus_1_1_common_1_1_razor_lib_1_1_dimensions_1_1_models_1_1_dimension_unit">DimensionUnit</link>
+<anchor xml:id="__panel_8cs_source_1l00146"/>00146 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;{
+<anchor xml:id="__panel_8cs_source_1l00147"/>00147 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;Value&#32;=&#32;measuredHtmlElementDimensions.HeightInPixels,
+<anchor xml:id="__panel_8cs_source_1l00148"/>00148 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<link linkend="_namespace_luthetus_1_1_common_1_1_razor_lib_1_1_dimensions_1_1_models_1ac011df04cfd59ccb7947a4ced86ba4f6">DimensionUnitKind</link>&#32;=&#32;<link linkend="_namespace_luthetus_1_1_common_1_1_razor_lib_1_1_dimensions_1_1_models_1ac011df04cfd59ccb7947a4ced86ba4f6ac3d2f5d37334dc978fd8b17fc77408a1">DimensionUnitKind.Pixels</link>
+<anchor xml:id="__panel_8cs_source_1l00149"/>00149 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;});
+<anchor xml:id="__panel_8cs_source_1l00150"/>00150 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;}
+<anchor xml:id="__panel_8cs_source_1l00151"/>00151 
+<anchor xml:id="__panel_8cs_source_1l00152"/>00152 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;Left</emphasis>
+<anchor xml:id="__panel_8cs_source_1l00153"/>00153 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;{
+<anchor xml:id="__panel_8cs_source_1l00154"/>00154 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;var&#32;leftDimensionAttribute&#32;=&#32;elementDimensions.DimensionAttributeList.First(
+<anchor xml:id="__panel_8cs_source_1l00155"/>00155 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;x&#32;=&gt;&#32;x.DimensionAttributeKind&#32;==&#32;<link linkend="_namespace_luthetus_1_1_common_1_1_razor_lib_1_1_dimensions_1_1_models_1ab42cbfab74a6a286a2eb53313a9e37f0">DimensionAttributeKind</link>.Left);
+<anchor xml:id="__panel_8cs_source_1l00156"/>00156 
+<anchor xml:id="__panel_8cs_source_1l00157"/>00157 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;leftDimensionAttribute.DimensionUnitList.Clear();
+<anchor xml:id="__panel_8cs_source_1l00158"/>00158 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;leftDimensionAttribute.DimensionUnitList.Add(<emphasis role="keyword">new</emphasis>&#32;<link linkend="_class_luthetus_1_1_common_1_1_razor_lib_1_1_dimensions_1_1_models_1_1_dimension_unit">DimensionUnit</link>
+<anchor xml:id="__panel_8cs_source_1l00159"/>00159 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;{
+<anchor xml:id="__panel_8cs_source_1l00160"/>00160 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;Value&#32;=&#32;measuredHtmlElementDimensions.LeftInPixels,
+<anchor xml:id="__panel_8cs_source_1l00161"/>00161 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<link linkend="_namespace_luthetus_1_1_common_1_1_razor_lib_1_1_dimensions_1_1_models_1ac011df04cfd59ccb7947a4ced86ba4f6">DimensionUnitKind</link>&#32;=&#32;<link linkend="_namespace_luthetus_1_1_common_1_1_razor_lib_1_1_dimensions_1_1_models_1ac011df04cfd59ccb7947a4ced86ba4f6ac3d2f5d37334dc978fd8b17fc77408a1">DimensionUnitKind.Pixels</link>
+<anchor xml:id="__panel_8cs_source_1l00162"/>00162 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;});
+<anchor xml:id="__panel_8cs_source_1l00163"/>00163 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;}
+<anchor xml:id="__panel_8cs_source_1l00164"/>00164 
+<anchor xml:id="__panel_8cs_source_1l00165"/>00165 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;Top</emphasis>
+<anchor xml:id="__panel_8cs_source_1l00166"/>00166 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;{
+<anchor xml:id="__panel_8cs_source_1l00167"/>00167 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;var&#32;topDimensionAttribute&#32;=&#32;elementDimensions.DimensionAttributeList.First(
+<anchor xml:id="__panel_8cs_source_1l00168"/>00168 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;x&#32;=&gt;&#32;x.DimensionAttributeKind&#32;==&#32;<link linkend="_namespace_luthetus_1_1_common_1_1_razor_lib_1_1_dimensions_1_1_models_1ab42cbfab74a6a286a2eb53313a9e37f0">DimensionAttributeKind</link>.Top);
+<anchor xml:id="__panel_8cs_source_1l00169"/>00169 
+<anchor xml:id="__panel_8cs_source_1l00170"/>00170 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;topDimensionAttribute.DimensionUnitList.Clear();
+<anchor xml:id="__panel_8cs_source_1l00171"/>00171 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;topDimensionAttribute.DimensionUnitList.Add(<emphasis role="keyword">new</emphasis>&#32;<link linkend="_class_luthetus_1_1_common_1_1_razor_lib_1_1_dimensions_1_1_models_1_1_dimension_unit">DimensionUnit</link>
+<anchor xml:id="__panel_8cs_source_1l00172"/>00172 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;{
+<anchor xml:id="__panel_8cs_source_1l00173"/>00173 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;Value&#32;=&#32;measuredHtmlElementDimensions.TopInPixels,
+<anchor xml:id="__panel_8cs_source_1l00174"/>00174 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<link linkend="_namespace_luthetus_1_1_common_1_1_razor_lib_1_1_dimensions_1_1_models_1ac011df04cfd59ccb7947a4ced86ba4f6">DimensionUnitKind</link>&#32;=&#32;<link linkend="_namespace_luthetus_1_1_common_1_1_razor_lib_1_1_dimensions_1_1_models_1ac011df04cfd59ccb7947a4ced86ba4f6ac3d2f5d37334dc978fd8b17fc77408a1">DimensionUnitKind.Pixels</link>
+<anchor xml:id="__panel_8cs_source_1l00175"/>00175 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;});
+<anchor xml:id="__panel_8cs_source_1l00176"/>00176 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;}
+<anchor xml:id="__panel_8cs_source_1l00177"/>00177 
+<anchor xml:id="__panel_8cs_source_1l00178"/>00178 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;dropzoneList.Add(<emphasis role="keyword">new</emphasis>&#32;PanelGroupDropzone(
+<anchor xml:id="__panel_8cs_source_1l00179"/>00179 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;measuredHtmlElementDimensions,
+<anchor xml:id="__panel_8cs_source_1l00180"/>00180 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;panelGroupHtmlIdTuple.PanelGroupKey,
+<anchor xml:id="__panel_8cs_source_1l00181"/>00181 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;elementDimensions,
+<anchor xml:id="__panel_8cs_source_1l00182"/>00182 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;Key&lt;IDropzone&gt;.NewKey(),
+<anchor xml:id="__panel_8cs_source_1l00183"/>00183 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keyword">null</emphasis>,
+<anchor xml:id="__panel_8cs_source_1l00184"/>00184 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keyword">null</emphasis>));
+<anchor xml:id="__panel_8cs_source_1l00185"/>00185 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;}
+<anchor xml:id="__panel_8cs_source_1l00186"/>00186 
+<anchor xml:id="__panel_8cs_source_1l00187"/>00187 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;DropzoneList&#32;=&#32;dropzoneList.ToImmutableArray();
+<anchor xml:id="__panel_8cs_source_1l00188"/>00188 &#32;&#32;&#32;&#32;}
+<anchor xml:id="__panel_8cs_source_1l00189"/>00189 
+<anchor xml:id="__panel_8cs_source_1l00190"/>00190 &#32;&#32;&#32;&#32;<emphasis role="keyword">public</emphasis>&#32;Task&#32;OnDragEndAsync(MouseEventArgs&#32;mouseEventArgs,&#32;<link linkend="_interface_luthetus_1_1_common_1_1_razor_lib_1_1_dynamics_1_1_models_1_1_i_dropzone">IDropzone</link>?&#32;dropzone)
+<anchor xml:id="__panel_8cs_source_1l00191"/>00191 &#32;&#32;&#32;&#32;{
+<anchor xml:id="__panel_8cs_source_1l00192"/>00192 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;var&#32;panelGroup&#32;=&#32;TabGroup&#32;as&#32;PanelGroup;
+<anchor xml:id="__panel_8cs_source_1l00193"/>00193 
+<anchor xml:id="__panel_8cs_source_1l00194"/>00194 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">if</emphasis>&#32;(dropzone&#32;is&#32;not&#32;PanelGroupDropzone&#32;panelGroupDropzone)
+<anchor xml:id="__panel_8cs_source_1l00195"/>00195 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;Task.CompletedTask;
+<anchor xml:id="__panel_8cs_source_1l00196"/>00196 
+<anchor xml:id="__panel_8cs_source_1l00197"/>00197 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;Create&#32;Dialog</emphasis>
+<anchor xml:id="__panel_8cs_source_1l00198"/>00198 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">if</emphasis>&#32;(panelGroupDropzone.PanelGroupKey&#32;==&#32;Key&lt;PanelGroup&gt;.Empty)
+<anchor xml:id="__panel_8cs_source_1l00199"/>00199 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;{
+<anchor xml:id="__panel_8cs_source_1l00200"/>00200 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;Delete&#32;current&#32;UI</emphasis>
+<anchor xml:id="__panel_8cs_source_1l00201"/>00201 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;{
+<anchor xml:id="__panel_8cs_source_1l00202"/>00202 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">if</emphasis>&#32;(panelGroup&#32;is&#32;not&#32;<emphasis role="keyword">null</emphasis>)
+<anchor xml:id="__panel_8cs_source_1l00203"/>00203 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;{
+<anchor xml:id="__panel_8cs_source_1l00204"/>00204 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;Dispatcher.Dispatch(<emphasis role="keyword">new</emphasis>&#32;<link linkend="_namespace_luthetus_1_1_common_1_1_razor_lib_1_1_panels_1_1_states_1a3e69a06f395780138ff06e862f45ee3c">PanelState</link>.DisposePanelTabAction(
+<anchor xml:id="__panel_8cs_source_1l00205"/>00205 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;panelGroup.Key,
+<anchor xml:id="__panel_8cs_source_1l00206"/>00206 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;Key));
+<anchor xml:id="__panel_8cs_source_1l00207"/>00207 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;}
+<anchor xml:id="__panel_8cs_source_1l00208"/>00208 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">else</emphasis>
+<anchor xml:id="__panel_8cs_source_1l00209"/>00209 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;{
+<anchor xml:id="__panel_8cs_source_1l00210"/>00210 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;Is&#32;a&#32;dialog</emphasis>
+<anchor xml:id="__panel_8cs_source_1l00211"/>00211 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="comment">//</emphasis>
+<anchor xml:id="__panel_8cs_source_1l00212"/>00212 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;Already&#32;a&#32;dialog,&#32;so&#32;nothing&#32;needs&#32;to&#32;be&#32;done</emphasis>
+<anchor xml:id="__panel_8cs_source_1l00213"/>00213 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;Task.CompletedTask;
+<anchor xml:id="__panel_8cs_source_1l00214"/>00214 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;}
+<anchor xml:id="__panel_8cs_source_1l00215"/>00215 
+<anchor xml:id="__panel_8cs_source_1l00216"/>00216 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;TabGroup&#32;=&#32;<emphasis role="keyword">null</emphasis>;
+<anchor xml:id="__panel_8cs_source_1l00217"/>00217 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;}
+<anchor xml:id="__panel_8cs_source_1l00218"/>00218 
+<anchor xml:id="__panel_8cs_source_1l00219"/>00219 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<link linkend="_class_luthetus_1_1_common_1_1_razor_lib_1_1_dialogs_1_1_models_1_1_dialog_service">DialogService</link>.<link linkend="_class_luthetus_1_1_common_1_1_razor_lib_1_1_dialogs_1_1_models_1_1_dialog_service_1a3a8b4405a02bf848afc2e89e9d07f083">RegisterDialogRecord</link>(<emphasis role="keyword">this</emphasis>);
+<anchor xml:id="__panel_8cs_source_1l00220"/>00220 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;}
+<anchor xml:id="__panel_8cs_source_1l00221"/>00221 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;
+<anchor xml:id="__panel_8cs_source_1l00222"/>00222 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;Create&#32;Panel&#32;Tab</emphasis>
+<anchor xml:id="__panel_8cs_source_1l00223"/>00223 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;{
+<anchor xml:id="__panel_8cs_source_1l00224"/>00224 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;Delete&#32;current&#32;UI</emphasis>
+<anchor xml:id="__panel_8cs_source_1l00225"/>00225 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;{
+<anchor xml:id="__panel_8cs_source_1l00226"/>00226 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">if</emphasis>&#32;(panelGroup&#32;is&#32;not&#32;<emphasis role="keyword">null</emphasis>)
+<anchor xml:id="__panel_8cs_source_1l00227"/>00227 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;{
+<anchor xml:id="__panel_8cs_source_1l00228"/>00228 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;Dispatcher.Dispatch(<emphasis role="keyword">new</emphasis>&#32;<link linkend="_namespace_luthetus_1_1_common_1_1_razor_lib_1_1_panels_1_1_states_1a3e69a06f395780138ff06e862f45ee3c">PanelState</link>.DisposePanelTabAction(
+<anchor xml:id="__panel_8cs_source_1l00229"/>00229 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;panelGroup.Key,
+<anchor xml:id="__panel_8cs_source_1l00230"/>00230 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;Key));
+<anchor xml:id="__panel_8cs_source_1l00231"/>00231 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;}
+<anchor xml:id="__panel_8cs_source_1l00232"/>00232 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">else</emphasis>
+<anchor xml:id="__panel_8cs_source_1l00233"/>00233 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;{
+<anchor xml:id="__panel_8cs_source_1l00234"/>00234 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<link linkend="_class_luthetus_1_1_common_1_1_razor_lib_1_1_dialogs_1_1_models_1_1_dialog_service">DialogService</link>.<link linkend="_class_luthetus_1_1_common_1_1_razor_lib_1_1_dialogs_1_1_models_1_1_dialog_service_1a6ad30a53ede20be67e95b168a6323e15">DisposeDialogRecord</link>(<link linkend="_namespace_luthetus_1_1_common_1_1_razor_lib_1_1_dialogs_1_1_models_1a7b6b7e401ac513c746af3a19e426016d">DynamicViewModelKey</link>);
+<anchor xml:id="__panel_8cs_source_1l00235"/>00235 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;}
+<anchor xml:id="__panel_8cs_source_1l00236"/>00236 
+<anchor xml:id="__panel_8cs_source_1l00237"/>00237 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;TabGroup&#32;=&#32;<emphasis role="keyword">null</emphasis>;
+<anchor xml:id="__panel_8cs_source_1l00238"/>00238 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;}
+<anchor xml:id="__panel_8cs_source_1l00239"/>00239 
+<anchor xml:id="__panel_8cs_source_1l00240"/>00240 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;var&#32;verticalHalfwayPoint&#32;=&#32;dropzone.MeasuredHtmlElementDimensions.TopInPixels&#32;+
+<anchor xml:id="__panel_8cs_source_1l00241"/>00241 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;(dropzone.MeasuredHtmlElementDimensions.HeightInPixels&#32;/&#32;2);
+<anchor xml:id="__panel_8cs_source_1l00242"/>00242 
+<anchor xml:id="__panel_8cs_source_1l00243"/>00243 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;var&#32;insertAtIndexZero&#32;=&#32;mouseEventArgs.ClientY&#32;&lt;&#32;verticalHalfwayPoint
+<anchor xml:id="__panel_8cs_source_1l00244"/>00244 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;?&#32;true
+<anchor xml:id="__panel_8cs_source_1l00245"/>00245 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;:&#32;<emphasis role="keyword">false</emphasis>;
+<anchor xml:id="__panel_8cs_source_1l00246"/>00246 
+<anchor xml:id="__panel_8cs_source_1l00247"/>00247 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;Dispatcher.Dispatch(<emphasis role="keyword">new</emphasis>&#32;<link linkend="_namespace_luthetus_1_1_common_1_1_razor_lib_1_1_panels_1_1_states_1a3e69a06f395780138ff06e862f45ee3c">PanelState</link>.RegisterPanelTabAction(
+<anchor xml:id="__panel_8cs_source_1l00248"/>00248 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;panelGroupDropzone.PanelGroupKey,
+<anchor xml:id="__panel_8cs_source_1l00249"/>00249 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keyword">this</emphasis>,
+<anchor xml:id="__panel_8cs_source_1l00250"/>00250 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;insertAtIndexZero));
+<anchor xml:id="__panel_8cs_source_1l00251"/>00251 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;}
+<anchor xml:id="__panel_8cs_source_1l00252"/>00252 
+<anchor xml:id="__panel_8cs_source_1l00253"/>00253 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;Task.CompletedTask;
+<anchor xml:id="__panel_8cs_source_1l00254"/>00254 &#32;&#32;&#32;&#32;}
+<anchor xml:id="__panel_8cs_source_1l00255"/>00255 
+<anchor xml:id="__panel_8cs_source_1l00256"/>00256 &#32;&#32;&#32;&#32;<emphasis role="keyword">private</emphasis>&#32;<emphasis role="keywordtype">void</emphasis>&#32;AddFallbackDropzone(List&lt;IDropzone&gt;&#32;dropzoneList)
+<anchor xml:id="__panel_8cs_source_1l00257"/>00257 &#32;&#32;&#32;&#32;{
+<anchor xml:id="__panel_8cs_source_1l00258"/>00258 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;var&#32;fallbackElementDimensions&#32;=&#32;<emphasis role="keyword">new</emphasis>&#32;<link linkend="_class_luthetus_1_1_common_1_1_razor_lib_1_1_dimensions_1_1_models_1_1_element_dimensions">ElementDimensions</link>();
+<anchor xml:id="__panel_8cs_source_1l00259"/>00259 
+<anchor xml:id="__panel_8cs_source_1l00260"/>00260 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;fallbackElementDimensions.ElementPositionKind&#32;=&#32;<link linkend="_namespace_luthetus_1_1_common_1_1_razor_lib_1_1_dimensions_1_1_models_1a798732978998352df76bdb091f17d2b7">ElementPositionKind</link>.Fixed;
+<anchor xml:id="__panel_8cs_source_1l00261"/>00261 
+<anchor xml:id="__panel_8cs_source_1l00262"/>00262 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;Width</emphasis>
+<anchor xml:id="__panel_8cs_source_1l00263"/>00263 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;{
+<anchor xml:id="__panel_8cs_source_1l00264"/>00264 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;var&#32;widthDimensionAttribute&#32;=&#32;fallbackElementDimensions.DimensionAttributeList.First(
+<anchor xml:id="__panel_8cs_source_1l00265"/>00265 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;x&#32;=&gt;&#32;x.DimensionAttributeKind&#32;==&#32;<link linkend="_namespace_luthetus_1_1_common_1_1_razor_lib_1_1_dimensions_1_1_models_1ab42cbfab74a6a286a2eb53313a9e37f0">DimensionAttributeKind</link>.Width);
+<anchor xml:id="__panel_8cs_source_1l00266"/>00266 
+<anchor xml:id="__panel_8cs_source_1l00267"/>00267 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;widthDimensionAttribute.DimensionUnitList.Clear();
+<anchor xml:id="__panel_8cs_source_1l00268"/>00268 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;widthDimensionAttribute.DimensionUnitList.Add(<emphasis role="keyword">new</emphasis>&#32;<link linkend="_class_luthetus_1_1_common_1_1_razor_lib_1_1_dimensions_1_1_models_1_1_dimension_unit">DimensionUnit</link>
+<anchor xml:id="__panel_8cs_source_1l00269"/>00269 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;{
+<anchor xml:id="__panel_8cs_source_1l00270"/>00270 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;Value&#32;=&#32;100,
+<anchor xml:id="__panel_8cs_source_1l00271"/>00271 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<link linkend="_namespace_luthetus_1_1_common_1_1_razor_lib_1_1_dimensions_1_1_models_1ac011df04cfd59ccb7947a4ced86ba4f6">DimensionUnitKind</link>&#32;=&#32;<link linkend="_namespace_luthetus_1_1_common_1_1_razor_lib_1_1_dimensions_1_1_models_1ac011df04cfd59ccb7947a4ced86ba4f6a67bbbcb8c3f0869b19682f3dd5f27893">DimensionUnitKind.ViewportWidth</link>
+<anchor xml:id="__panel_8cs_source_1l00272"/>00272 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;});
+<anchor xml:id="__panel_8cs_source_1l00273"/>00273 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;}
+<anchor xml:id="__panel_8cs_source_1l00274"/>00274 
+<anchor xml:id="__panel_8cs_source_1l00275"/>00275 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;Height</emphasis>
+<anchor xml:id="__panel_8cs_source_1l00276"/>00276 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;{
+<anchor xml:id="__panel_8cs_source_1l00277"/>00277 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;var&#32;heightDimensionAttribute&#32;=&#32;fallbackElementDimensions.DimensionAttributeList.First(
+<anchor xml:id="__panel_8cs_source_1l00278"/>00278 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;x&#32;=&gt;&#32;x.DimensionAttributeKind&#32;==&#32;<link linkend="_namespace_luthetus_1_1_common_1_1_razor_lib_1_1_dimensions_1_1_models_1ab42cbfab74a6a286a2eb53313a9e37f0">DimensionAttributeKind</link>.Height);
+<anchor xml:id="__panel_8cs_source_1l00279"/>00279 
+<anchor xml:id="__panel_8cs_source_1l00280"/>00280 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;heightDimensionAttribute.DimensionUnitList.Clear();
+<anchor xml:id="__panel_8cs_source_1l00281"/>00281 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;heightDimensionAttribute.DimensionUnitList.Add(<emphasis role="keyword">new</emphasis>&#32;<link linkend="_class_luthetus_1_1_common_1_1_razor_lib_1_1_dimensions_1_1_models_1_1_dimension_unit">DimensionUnit</link>
+<anchor xml:id="__panel_8cs_source_1l00282"/>00282 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;{
+<anchor xml:id="__panel_8cs_source_1l00283"/>00283 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;Value&#32;=&#32;100,
+<anchor xml:id="__panel_8cs_source_1l00284"/>00284 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<link linkend="_namespace_luthetus_1_1_common_1_1_razor_lib_1_1_dimensions_1_1_models_1ac011df04cfd59ccb7947a4ced86ba4f6">DimensionUnitKind</link>&#32;=&#32;<link linkend="_namespace_luthetus_1_1_common_1_1_razor_lib_1_1_dimensions_1_1_models_1ac011df04cfd59ccb7947a4ced86ba4f6a1cc83e088aae799b9acb909c10c3d8b2">DimensionUnitKind.ViewportHeight</link>
+<anchor xml:id="__panel_8cs_source_1l00285"/>00285 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;});
+<anchor xml:id="__panel_8cs_source_1l00286"/>00286 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;}
+<anchor xml:id="__panel_8cs_source_1l00287"/>00287 
+<anchor xml:id="__panel_8cs_source_1l00288"/>00288 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;Left</emphasis>
+<anchor xml:id="__panel_8cs_source_1l00289"/>00289 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;{
+<anchor xml:id="__panel_8cs_source_1l00290"/>00290 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;var&#32;leftDimensionAttribute&#32;=&#32;fallbackElementDimensions.DimensionAttributeList.First(
+<anchor xml:id="__panel_8cs_source_1l00291"/>00291 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;x&#32;=&gt;&#32;x.DimensionAttributeKind&#32;==&#32;<link linkend="_namespace_luthetus_1_1_common_1_1_razor_lib_1_1_dimensions_1_1_models_1ab42cbfab74a6a286a2eb53313a9e37f0">DimensionAttributeKind</link>.Left);
+<anchor xml:id="__panel_8cs_source_1l00292"/>00292 
+<anchor xml:id="__panel_8cs_source_1l00293"/>00293 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;leftDimensionAttribute.DimensionUnitList.Clear();
+<anchor xml:id="__panel_8cs_source_1l00294"/>00294 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;leftDimensionAttribute.DimensionUnitList.Add(<emphasis role="keyword">new</emphasis>&#32;<link linkend="_class_luthetus_1_1_common_1_1_razor_lib_1_1_dimensions_1_1_models_1_1_dimension_unit">DimensionUnit</link>
+<anchor xml:id="__panel_8cs_source_1l00295"/>00295 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;{
+<anchor xml:id="__panel_8cs_source_1l00296"/>00296 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;Value&#32;=&#32;0,
+<anchor xml:id="__panel_8cs_source_1l00297"/>00297 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<link linkend="_namespace_luthetus_1_1_common_1_1_razor_lib_1_1_dimensions_1_1_models_1ac011df04cfd59ccb7947a4ced86ba4f6">DimensionUnitKind</link>&#32;=&#32;<link linkend="_namespace_luthetus_1_1_common_1_1_razor_lib_1_1_dimensions_1_1_models_1ac011df04cfd59ccb7947a4ced86ba4f6ac3d2f5d37334dc978fd8b17fc77408a1">DimensionUnitKind.Pixels</link>
+<anchor xml:id="__panel_8cs_source_1l00298"/>00298 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;});
+<anchor xml:id="__panel_8cs_source_1l00299"/>00299 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;}
+<anchor xml:id="__panel_8cs_source_1l00300"/>00300 
+<anchor xml:id="__panel_8cs_source_1l00301"/>00301 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;Top</emphasis>
+<anchor xml:id="__panel_8cs_source_1l00302"/>00302 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;{
+<anchor xml:id="__panel_8cs_source_1l00303"/>00303 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;var&#32;topDimensionAttribute&#32;=&#32;fallbackElementDimensions.DimensionAttributeList.First(
+<anchor xml:id="__panel_8cs_source_1l00304"/>00304 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;x&#32;=&gt;&#32;x.DimensionAttributeKind&#32;==&#32;<link linkend="_namespace_luthetus_1_1_common_1_1_razor_lib_1_1_dimensions_1_1_models_1ab42cbfab74a6a286a2eb53313a9e37f0">DimensionAttributeKind</link>.Top);
+<anchor xml:id="__panel_8cs_source_1l00305"/>00305 
+<anchor xml:id="__panel_8cs_source_1l00306"/>00306 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;topDimensionAttribute.DimensionUnitList.Clear();
+<anchor xml:id="__panel_8cs_source_1l00307"/>00307 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;topDimensionAttribute.DimensionUnitList.Add(<emphasis role="keyword">new</emphasis>&#32;<link linkend="_class_luthetus_1_1_common_1_1_razor_lib_1_1_dimensions_1_1_models_1_1_dimension_unit">DimensionUnit</link>
+<anchor xml:id="__panel_8cs_source_1l00308"/>00308 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;{
+<anchor xml:id="__panel_8cs_source_1l00309"/>00309 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;Value&#32;=&#32;0,
+<anchor xml:id="__panel_8cs_source_1l00310"/>00310 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<link linkend="_namespace_luthetus_1_1_common_1_1_razor_lib_1_1_dimensions_1_1_models_1ac011df04cfd59ccb7947a4ced86ba4f6">DimensionUnitKind</link>&#32;=&#32;<link linkend="_namespace_luthetus_1_1_common_1_1_razor_lib_1_1_dimensions_1_1_models_1ac011df04cfd59ccb7947a4ced86ba4f6ac3d2f5d37334dc978fd8b17fc77408a1">DimensionUnitKind.Pixels</link>
+<anchor xml:id="__panel_8cs_source_1l00311"/>00311 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;});
+<anchor xml:id="__panel_8cs_source_1l00312"/>00312 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;}
+<anchor xml:id="__panel_8cs_source_1l00313"/>00313 
+<anchor xml:id="__panel_8cs_source_1l00314"/>00314 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;dropzoneList.Add(<emphasis role="keyword">new</emphasis>&#32;PanelGroupDropzone(
+<anchor xml:id="__panel_8cs_source_1l00315"/>00315 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keyword">new</emphasis>&#32;<link linkend="_namespace_luthetus_1_1_common_1_1_razor_lib_1_1_java_script_objects_1_1_models_1af7cb4b0846c5ea3330de0b00ae2d4407">MeasuredHtmlElementDimensions</link>(0,&#32;0,&#32;0,&#32;0,&#32;0),
+<anchor xml:id="__panel_8cs_source_1l00316"/>00316 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;Key&lt;PanelGroup&gt;.Empty,
+<anchor xml:id="__panel_8cs_source_1l00317"/>00317 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;fallbackElementDimensions,
+<anchor xml:id="__panel_8cs_source_1l00318"/>00318 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;Key&lt;IDropzone&gt;.NewKey(),
+<anchor xml:id="__panel_8cs_source_1l00319"/>00319 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="stringliteral">&quot;luth_dropzone-fallback&quot;</emphasis>,
+<anchor xml:id="__panel_8cs_source_1l00320"/>00320 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keyword">null</emphasis>));
+<anchor xml:id="__panel_8cs_source_1l00321"/>00321 &#32;&#32;&#32;&#32;}
+<anchor xml:id="__panel_8cs_source_1l00322"/>00322 }
+</programlisting></section>

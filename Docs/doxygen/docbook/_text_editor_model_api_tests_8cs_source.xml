@@ -1,0 +1,699 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="__text_editor_model_api_tests_8cs_source" xml:lang="en-US">
+<title>TextEditorModelApiTests.cs</title>
+<indexterm><primary>Source/Tests/TextEditor/Basis/TextEditors/Models/TextEditorModelApiTests.cs</primary></indexterm>
+Go to the documentation of this file.<programlisting linenumbering="unnumbered"><anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00001"/>00001 <emphasis role="keyword">using&#32;</emphasis>Fluxor;
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00002"/>00002 <emphasis role="keyword">using&#32;</emphasis>Microsoft.AspNetCore.Components.Web;
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00003"/>00003 <emphasis role="keyword">using&#32;</emphasis>Microsoft.Extensions.DependencyInjection;
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00004"/>00004 <emphasis role="keyword">using&#32;</emphasis>Microsoft.JSInterop;
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00005"/>00005 <emphasis role="keyword">using&#32;</emphasis><link linkend="_namespace_luthetus_1_1_common_1_1_razor_lib_1_1_keys_1_1_models">Luthetus.Common.RazorLib.Keys.Models</link>;
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00006"/>00006 <emphasis role="keyword">using&#32;</emphasis><link linkend="_namespace_luthetus_1_1_common_1_1_razor_lib_1_1_background_tasks_1_1_models">Luthetus.Common.RazorLib.BackgroundTasks.Models</link>;
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00007"/>00007 <emphasis role="keyword">using&#32;</emphasis><link linkend="_namespace_luthetus_1_1_common_1_1_razor_lib_1_1_installations_1_1_models">Luthetus.Common.RazorLib.Installations.Models</link>;
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00008"/>00008 <emphasis role="keyword">using&#32;</emphasis><link linkend="_namespace_luthetus_1_1_common_1_1_razor_lib_1_1_misc">Luthetus.Common.RazorLib.Misc</link>;
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00009"/>00009 <emphasis role="keyword">using&#32;</emphasis><link linkend="_namespace_luthetus_1_1_common_1_1_razor_lib_1_1_keyboards_1_1_models">Luthetus.Common.RazorLib.Keyboards.Models</link>;
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00010"/>00010 <emphasis role="keyword">using&#32;</emphasis><link linkend="_namespace_luthetus_1_1_common_1_1_razor_lib_1_1_keymaps_1_1_models">Luthetus.Common.RazorLib.Keymaps.Models</link>;
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00011"/>00011 <emphasis role="keyword">using&#32;</emphasis><link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_cursors_1_1_models">Luthetus.TextEditor.RazorLib.Cursors.Models</link>;
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00012"/>00012 <emphasis role="keyword">using&#32;</emphasis><link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_diffs_1_1_models">Luthetus.TextEditor.RazorLib.Diffs.Models</link>;
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00013"/>00013 <emphasis role="keyword">using&#32;</emphasis><link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_rows_1_1_models">Luthetus.TextEditor.RazorLib.Rows.Models</link>;
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00014"/>00014 <emphasis role="keyword">using&#32;</emphasis><link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models">Luthetus.TextEditor.RazorLib.TextEditors.Models</link>;
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00015"/>00015 <emphasis role="keyword">using&#32;</emphasis><link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib">Luthetus.TextEditor.RazorLib</link>;
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00016"/>00016 <emphasis role="keyword">using&#32;</emphasis><link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_decorations_1_1_models">Luthetus.TextEditor.RazorLib.Decorations.Models</link>;
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00017"/>00017 <emphasis role="keyword">using&#32;</emphasis><link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_interfaces">Luthetus.TextEditor.RazorLib.CompilerServices.Interfaces</link>;
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00018"/>00018 <emphasis role="keyword">using&#32;</emphasis><link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_lexers_1_1_models">Luthetus.TextEditor.RazorLib.Lexers.Models</link>;
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00019"/>00019 <emphasis role="keyword">using&#32;</emphasis><link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_installations_1_1_models">Luthetus.TextEditor.RazorLib.Installations.Models</link>;
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00020"/>00020 <emphasis role="keyword">using&#32;</emphasis><link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_options_1_1_states">Luthetus.TextEditor.RazorLib.Options.States</link>;
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00021"/>00021 
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00022"/>00022 <emphasis role="keyword">namespace&#32;</emphasis><link linkend="_namespace_luthetus_1_1_text_editor_1_1_tests_1_1_basis_1_1_text_editors_1_1_models">Luthetus.TextEditor.Tests.Basis.TextEditors.Models</link>;
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00023"/>00023 
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00027"/><link linkend="_class_luthetus_1_1_text_editor_1_1_tests_1_1_basis_1_1_text_editors_1_1_models_1_1_text_editor_model_api_tests">00027</link> <emphasis role="keyword">public</emphasis>&#32;<emphasis role="keyword">class&#32;</emphasis><link linkend="_class_luthetus_1_1_text_editor_1_1_tests_1_1_basis_1_1_text_editors_1_1_models_1_1_text_editor_model_api_tests">TextEditorModelApiTests</link>
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00028"/>00028 {
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00032"/>00032 &#32;&#32;&#32;&#32;[Fact]
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00033"/><link linkend="_class_luthetus_1_1_text_editor_1_1_tests_1_1_basis_1_1_text_editors_1_1_models_1_1_text_editor_model_api_tests_1a0de191905632c0854230625f6ae452dd">00033</link> &#32;&#32;&#32;&#32;<emphasis role="keyword">public</emphasis>&#32;<emphasis role="keywordtype">void</emphasis>&#32;<link linkend="_class_luthetus_1_1_text_editor_1_1_tests_1_1_basis_1_1_text_editors_1_1_models_1_1_text_editor_model_api_tests_1a0de191905632c0854230625f6ae452dd">Constructor</link>()
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00034"/>00034 &#32;&#32;&#32;&#32;{
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00035"/>00035 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;InitializeTextEditorModelApiTests(
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00036"/>00036 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;out&#32;var&#32;inModel,
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00037"/>00037 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;out&#32;var&#32;inViewModel,
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00038"/>00038 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;out&#32;var&#32;<link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1aecfb76d19da117c025734259242d144d">textEditorService</link>,
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00039"/>00039 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;out&#32;var&#32;textEditorOptionsStateWrap,
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00040"/>00040 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;out&#32;var&#32;<link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1a50f035982e1c206f234851523db5cbc8">dispatcher</link>,
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00041"/>00041 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;out&#32;var&#32;serviceProvider);
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00042"/>00042 
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00043"/>00043 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;Assert.NotNull(<link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1aecfb76d19da117c025734259242d144d">textEditorService</link>.ModelApi);
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00044"/>00044 &#32;&#32;&#32;&#32;}
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00045"/>00045 
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00049"/>00049 &#32;&#32;&#32;&#32;[Fact]
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00050"/><link linkend="_class_luthetus_1_1_text_editor_1_1_tests_1_1_basis_1_1_text_editors_1_1_models_1_1_text_editor_model_api_tests_1a6836ac72484f108659d178c498e9eced">00050</link> &#32;&#32;&#32;&#32;<emphasis role="keyword">public</emphasis>&#32;<emphasis role="keywordtype">void</emphasis>&#32;<link linkend="_class_luthetus_1_1_text_editor_1_1_tests_1_1_basis_1_1_text_editors_1_1_models_1_1_text_editor_model_api_tests_1a6836ac72484f108659d178c498e9eced">UndoEdit</link>()
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00051"/>00051 &#32;&#32;&#32;&#32;{
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00052"/>00052 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;InitializeTextEditorModelApiTests(
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00053"/>00053 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;out&#32;var&#32;inModel,
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00054"/>00054 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;out&#32;var&#32;inViewModel,
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00055"/>00055 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;out&#32;var&#32;<link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1aecfb76d19da117c025734259242d144d">textEditorService</link>,
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00056"/>00056 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;out&#32;var&#32;textEditorOptionsStateWrap,
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00057"/>00057 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;out&#32;var&#32;<link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1a50f035982e1c206f234851523db5cbc8">dispatcher</link>,
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00058"/>00058 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;out&#32;var&#32;serviceProvider);
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00059"/>00059 
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00060"/>00060 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;var&#32;cursor&#32;=&#32;<emphasis role="keyword">new</emphasis>&#32;<link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_cursors_1_1_models_1a8373e854ca1ddf152a3b5372ea18c20b">TextEditorCursor</link>(0,&#32;0,&#32;0,&#32;<emphasis role="keyword">true</emphasis>,&#32;<link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_cursors_1_1_models_1af6774c2315b7021a1a883d4db6510068">TextEditorSelection</link>.Empty);
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00061"/>00061 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;var&#32;cursorList&#32;=&#32;<emphasis role="keyword">new</emphasis>[]&#32;{&#32;<emphasis role="keyword">new</emphasis>&#32;<link linkend="_class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_cursors_1_1_models_1_1_text_editor_cursor_modifier">TextEditorCursorModifier</link>(cursor)&#32;}.ToList();
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00062"/>00062 
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00063"/>00063 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;var&#32;insertedText&#32;=&#32;<emphasis role="stringliteral">&quot;I&#32;have&#32;something&#32;to&#32;say:&#32;&quot;</emphasis>;
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00064"/>00064 
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00065"/>00065 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;var&#32;cursorModifierBag&#32;=&#32;<emphasis role="keyword">new</emphasis>&#32;<link linkend="_class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1_1_cursor_modifier_bag_text_editor">CursorModifierBagTextEditor</link>(Key&lt;TextEditorViewModel&gt;.Empty,&#32;cursorList);
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00066"/>00066 
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00067"/>00067 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1aecfb76d19da117c025734259242d144d">textEditorService</link>.PostUnique(
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00068"/>00068 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;nameof(<link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1aecfb76d19da117c025734259242d144d">textEditorService</link>.ModelApi.InsertTextUnsafe),
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00069"/>00069 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;editContext&#32;=&gt;
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00070"/>00070 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;{
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00071"/>00071 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;var&#32;modelModifier&#32;=&#32;editContext.GetModelModifier(inModel.ResourceUri);
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00072"/>00072 
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00073"/>00073 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;if&#32;(modelModifier&#32;is&#32;null)
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00074"/>00074 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;return&#32;Task.CompletedTask;
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00075"/>00075 
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00076"/>00076 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;textEditorService.ModelApi.InsertTextUnsafe(
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00077"/>00077 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;editContext,
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00078"/>00078 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;modelModifier,
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00079"/>00079 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;cursorModifierBag,
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00080"/>00080 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;insertedText,
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00081"/>00081 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;CancellationToken.None);
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00082"/>00082 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;return&#32;Task.CompletedTask;
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00083"/>00083 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;});
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00084"/>00084 
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00085"/>00085 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;var&#32;outModel&#32;=&#32;<link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1aecfb76d19da117c025734259242d144d">textEditorService</link>.ModelApi.GetOrDefault(inModel.ResourceUri);
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00086"/>00086 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;Assert.Equal(
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00087"/>00087 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;insertedText&#32;+&#32;inModel.GetAllText(),
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00088"/>00088 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;outModel.GetAllText());
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00089"/>00089 
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00090"/>00090 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1aecfb76d19da117c025734259242d144d">textEditorService</link>.PostUnique(
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00091"/>00091 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;nameof(<link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1aecfb76d19da117c025734259242d144d">textEditorService</link>.ModelApi.UndoEdit),
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00092"/>00092 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;editContext&#32;=&gt;
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00093"/>00093 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;{
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00094"/>00094 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;var&#32;modelModifier&#32;=&#32;editContext.GetModelModifier(inModel.ResourceUri);
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00095"/>00095 
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00096"/>00096 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;if&#32;(modelModifier&#32;is&#32;null)
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00097"/>00097 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;return&#32;Task.CompletedTask;
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00098"/>00098 
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00099"/>00099 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;textEditorService.ModelApi.UndoEdit(
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00100"/>00100 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;editContext,
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00101"/>00101 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;modelModifier);
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00102"/>00102 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;return&#32;Task.CompletedTask;
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00103"/>00103 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;});
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00104"/>00104 
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00105"/>00105 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;outModel&#32;=&#32;<link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1aecfb76d19da117c025734259242d144d">textEditorService</link>.ModelApi.GetOrDefault(inModel.ResourceUri);
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00106"/>00106 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;Assert.Equal(inModel.GetAllText(),&#32;outModel.GetAllText());
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00107"/>00107 
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00108"/>00108 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">throw</emphasis>&#32;<emphasis role="keyword">new</emphasis>&#32;NotImplementedException(<emphasis role="stringliteral">&quot;Test&#32;was&#32;broken&#32;on&#32;(2024-04-08)&quot;</emphasis>);
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00109"/>00109 &#32;&#32;&#32;&#32;}
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00110"/>00110 
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00114"/>00114 &#32;&#32;&#32;&#32;[Fact]
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00115"/><link linkend="_class_luthetus_1_1_text_editor_1_1_tests_1_1_basis_1_1_text_editors_1_1_models_1_1_text_editor_model_api_tests_1a16a744110a9a17365a2fa7c4fe697f1d">00115</link> &#32;&#32;&#32;&#32;<emphasis role="keyword">public</emphasis>&#32;<emphasis role="keywordtype">void</emphasis>&#32;<link linkend="_class_luthetus_1_1_text_editor_1_1_tests_1_1_basis_1_1_text_editors_1_1_models_1_1_text_editor_model_api_tests_1a16a744110a9a17365a2fa7c4fe697f1d">SetUsingRowEndingKind</link>()
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00116"/>00116 &#32;&#32;&#32;&#32;{
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00117"/>00117 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;InitializeTextEditorModelApiTests(
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00118"/>00118 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;out&#32;var&#32;inModel,
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00119"/>00119 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;out&#32;var&#32;inViewModel,
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00120"/>00120 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;out&#32;var&#32;<link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1aecfb76d19da117c025734259242d144d">textEditorService</link>,
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00121"/>00121 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;out&#32;var&#32;textEditorOptionsStateWrap,
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00122"/>00122 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;out&#32;var&#32;<link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1a50f035982e1c206f234851523db5cbc8">dispatcher</link>,
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00123"/>00123 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;out&#32;var&#32;serviceProvider);
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00124"/>00124 
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00125"/>00125 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;var&#32;rowEndingKind&#32;=&#32;<link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_rows_1_1_models_1a83f8dd16ec7d401a6e808ca0e480e803">LineEndKind</link>.CarriageReturn;
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00126"/>00126 
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00127"/>00127 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;Assert&#32;the&#32;current&#32;values&#32;are&#32;different&#32;from&#32;that&#32;which&#32;will&#32;be&#32;set.</emphasis>
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00128"/>00128 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;Assert.NotEqual(rowEndingKind,&#32;inModel.LineEndKindPreference);
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00129"/>00129 
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00130"/>00130 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1aecfb76d19da117c025734259242d144d">textEditorService</link>.PostUnique(
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00131"/>00131 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;nameof(<link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1aecfb76d19da117c025734259242d144d">textEditorService</link>.ModelApi.SetUsingLineEndKind),
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00132"/>00132 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;editContext&#32;=&gt;
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00133"/>00133 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;{
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00134"/>00134 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;var&#32;modelModifier&#32;=&#32;editContext.GetModelModifier(inModel.ResourceUri);
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00135"/>00135 
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00136"/>00136 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;if&#32;(modelModifier&#32;is&#32;null)
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00137"/>00137 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;return&#32;Task.CompletedTask;
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00138"/>00138 
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00139"/>00139 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;textEditorService.ModelApi.SetUsingLineEndKind(
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00140"/>00140 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;editContext,
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00141"/>00141 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;modelModifier,
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00142"/>00142 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;rowEndingKind);
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00143"/>00143 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;return&#32;Task.CompletedTask;
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00144"/>00144 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;});
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00145"/>00145 
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00146"/>00146 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;var&#32;outModel&#32;=&#32;<link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1aecfb76d19da117c025734259242d144d">textEditorService</link>.ModelApi.GetOrDefault(inModel.ResourceUri);
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00147"/>00147 
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00148"/>00148 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;Assert&#32;the&#32;value&#32;is&#32;now&#32;set</emphasis>
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00149"/>00149 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;Assert.Equal(rowEndingKind,&#32;outModel!.LineEndKindPreference);
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00150"/>00150 &#32;&#32;&#32;&#32;}
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00151"/>00151 
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00155"/>00155 &#32;&#32;&#32;&#32;[Fact]
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00156"/><link linkend="_class_luthetus_1_1_text_editor_1_1_tests_1_1_basis_1_1_text_editors_1_1_models_1_1_text_editor_model_api_tests_1a5815ed86a64088c993e8a8fe6beaf38b">00156</link> &#32;&#32;&#32;&#32;<emphasis role="keyword">public</emphasis>&#32;<emphasis role="keywordtype">void</emphasis>&#32;<link linkend="_class_luthetus_1_1_text_editor_1_1_tests_1_1_basis_1_1_text_editors_1_1_models_1_1_text_editor_model_api_tests_1a5815ed86a64088c993e8a8fe6beaf38b">SetResourceData</link>()
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00157"/>00157 &#32;&#32;&#32;&#32;{
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00158"/>00158 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;InitializeTextEditorModelApiTests(
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00159"/>00159 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;out&#32;var&#32;inModel,
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00160"/>00160 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;out&#32;var&#32;inViewModel,
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00161"/>00161 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;out&#32;var&#32;<link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1aecfb76d19da117c025734259242d144d">textEditorService</link>,
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00162"/>00162 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;out&#32;var&#32;textEditorOptionsStateWrap,
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00163"/>00163 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;out&#32;var&#32;<link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1a50f035982e1c206f234851523db5cbc8">dispatcher</link>,
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00164"/>00164 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;out&#32;var&#32;serviceProvider);
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00165"/>00165 
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00166"/>00166 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;var&#32;newResourceLastWriteTime&#32;=&#32;inModel.ResourceLastWriteTime.AddDays(1);
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00167"/>00167 
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00168"/>00168 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;Assert&#32;the&#32;current&#32;values&#32;are&#32;different&#32;from&#32;that&#32;which&#32;will&#32;be&#32;set.</emphasis>
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00169"/>00169 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;Assert.NotEqual(newResourceLastWriteTime,&#32;inModel.ResourceLastWriteTime);
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00170"/>00170 
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00171"/>00171 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1aecfb76d19da117c025734259242d144d">textEditorService</link>.PostUnique(
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00172"/>00172 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;nameof(<link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1aecfb76d19da117c025734259242d144d">textEditorService</link>.ModelApi.SetResourceData),
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00173"/>00173 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;editContext&#32;=&gt;
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00174"/>00174 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;{
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00175"/>00175 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;var&#32;modelModifier&#32;=&#32;editContext.GetModelModifier(inModel.ResourceUri);
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00176"/>00176 
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00177"/>00177 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;if&#32;(modelModifier&#32;is&#32;null)
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00178"/>00178 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;return&#32;Task.CompletedTask;
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00179"/>00179 
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00180"/>00180 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;textEditorService.ModelApi.SetResourceData(
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00181"/>00181 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;editContext,
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00182"/>00182 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;modelModifier,
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00183"/>00183 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;newResourceLastWriteTime);
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00184"/>00184 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;return&#32;Task.CompletedTask;
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00185"/>00185 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;});
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00186"/>00186 
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00187"/>00187 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;var&#32;outModel&#32;=&#32;<link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1aecfb76d19da117c025734259242d144d">textEditorService</link>.ModelApi.GetOrDefault(inModel.ResourceUri);
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00188"/>00188 
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00189"/>00189 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;Assert&#32;the&#32;values&#32;are&#32;now&#32;set</emphasis>
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00190"/>00190 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;Assert.Equal(newResourceLastWriteTime,&#32;outModel!.ResourceLastWriteTime);
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00191"/>00191 &#32;&#32;&#32;&#32;}
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00192"/>00192 
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00196"/>00196 &#32;&#32;&#32;&#32;[Fact]
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00197"/><link linkend="_class_luthetus_1_1_text_editor_1_1_tests_1_1_basis_1_1_text_editors_1_1_models_1_1_text_editor_model_api_tests_1a744a6efe61e722e56bed3b09a57660ab">00197</link> &#32;&#32;&#32;&#32;<emphasis role="keyword">public</emphasis>&#32;<emphasis role="keywordtype">void</emphasis>&#32;<link linkend="_class_luthetus_1_1_text_editor_1_1_tests_1_1_basis_1_1_text_editors_1_1_models_1_1_text_editor_model_api_tests_1a744a6efe61e722e56bed3b09a57660ab">Reload</link>()
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00198"/>00198 &#32;&#32;&#32;&#32;{
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00199"/>00199 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;InitializeTextEditorModelApiTests(
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00200"/>00200 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;out&#32;var&#32;inModel,
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00201"/>00201 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;out&#32;var&#32;inViewModel,
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00202"/>00202 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;out&#32;var&#32;<link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1aecfb76d19da117c025734259242d144d">textEditorService</link>,
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00203"/>00203 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;out&#32;var&#32;textEditorOptionsStateWrap,
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00204"/>00204 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;out&#32;var&#32;<link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1a50f035982e1c206f234851523db5cbc8">dispatcher</link>,
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00205"/>00205 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;out&#32;var&#32;serviceProvider);
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00206"/>00206 
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00207"/>00207 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;var&#32;newContent&#32;=&#32;<emphasis role="stringliteral">&quot;Alphabet&#32;Soup&quot;</emphasis>;
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00208"/>00208 
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00209"/>00209 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;Assert&#32;the&#32;current&#32;values&#32;are&#32;different&#32;from&#32;that&#32;which&#32;will&#32;be&#32;set.</emphasis>
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00210"/>00210 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;Assert.NotEqual(newContent,&#32;inModel.GetAllText());
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00211"/>00211 
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00212"/>00212 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1aecfb76d19da117c025734259242d144d">textEditorService</link>.PostUnique(
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00213"/>00213 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;nameof(<link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1aecfb76d19da117c025734259242d144d">textEditorService</link>.ModelApi.Reload),
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00214"/>00214 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;editContext&#32;=&gt;
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00215"/>00215 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;{
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00216"/>00216 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;var&#32;modelModifier&#32;=&#32;editContext.GetModelModifier(inModel.ResourceUri);
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00217"/>00217 
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00218"/>00218 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;if&#32;(modelModifier&#32;is&#32;null)
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00219"/>00219 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;return&#32;Task.CompletedTask;
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00220"/>00220 
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00221"/>00221 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;textEditorService.ModelApi.Reload(
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00222"/>00222 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;editContext,
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00223"/>00223 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;modelModifier,
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00224"/>00224 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;newContent,
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00225"/>00225 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;DateTime.UtcNow);
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00226"/>00226 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;return&#32;Task.CompletedTask;
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00227"/>00227 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;});
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00228"/>00228 
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00229"/>00229 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;var&#32;outModel&#32;=&#32;<link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1aecfb76d19da117c025734259242d144d">textEditorService</link>.ModelApi.GetOrDefault(inModel.ResourceUri);
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00230"/>00230 
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00231"/>00231 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;Assert&#32;the&#32;values&#32;are&#32;now&#32;set</emphasis>
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00232"/>00232 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;Assert.Equal(newContent,&#32;outModel!.<link linkend="_class_luthetus_1_1_text_editor_1_1_tests_1_1_basis_1_1_text_editors_1_1_models_1_1_text_editor_model_api_tests_1a12984213c3529926adf79e69e12d3bdd">GetAllText</link>());
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00233"/>00233 &#32;&#32;&#32;&#32;}
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00234"/>00234 
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00238"/>00238 &#32;&#32;&#32;&#32;[Fact]
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00239"/><link linkend="_class_luthetus_1_1_text_editor_1_1_tests_1_1_basis_1_1_text_editors_1_1_models_1_1_text_editor_model_api_tests_1ae001d024ff56cf246191304277b504d9">00239</link> &#32;&#32;&#32;&#32;<emphasis role="keyword">public</emphasis>&#32;<emphasis role="keywordtype">void</emphasis>&#32;<link linkend="_class_luthetus_1_1_text_editor_1_1_tests_1_1_basis_1_1_text_editors_1_1_models_1_1_text_editor_model_api_tests_1ae001d024ff56cf246191304277b504d9">RegisterCustom</link>()
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00240"/>00240 &#32;&#32;&#32;&#32;{
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00241"/>00241 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;InitializeTextEditorModelApiTests(
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00242"/>00242 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;out&#32;_,
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00243"/>00243 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;out&#32;var&#32;inViewModel,
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00244"/>00244 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;out&#32;var&#32;<link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1aecfb76d19da117c025734259242d144d">textEditorService</link>,
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00245"/>00245 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;out&#32;var&#32;textEditorOptionsStateWrap,
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00246"/>00246 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;out&#32;var&#32;<link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1a50f035982e1c206f234851523db5cbc8">dispatcher</link>,
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00247"/>00247 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;out&#32;var&#32;serviceProvider);
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00248"/>00248 
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00249"/>00249 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;var&#32;fileExtension&#32;=&#32;ExtensionNoPeriodFacts.TXT;
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00250"/>00250 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;var&#32;<link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1ae531f6ec8ec05e2493aabf8d17c23e4b">resourceUri</link>&#32;=&#32;<emphasis role="keyword">new</emphasis>&#32;<link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1a435ccef09e2ba83022e8cf378fc0f690">ResourceUri</link>(<emphasis role="stringliteral">&quot;/unitTesting.txt&quot;</emphasis>);
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00251"/>00251 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;var&#32;resourceLastWriteTime&#32;=&#32;DateTime.UtcNow;
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00252"/>00252 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;var&#32;initialContent&#32;=&#32;<emphasis role="stringliteral">&quot;Hello&#32;World!&quot;</emphasis>;
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00253"/>00253 
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00254"/>00254 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;var&#32;decorationMapperRegistry&#32;=&#32;serviceProvider.GetRequiredService&lt;<link linkend="_interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_decorations_1_1_models_1_1_i_decoration_mapper_registry">IDecorationMapperRegistry</link>&gt;();
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00255"/>00255 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;var&#32;compilerServiceRegistry&#32;=&#32;serviceProvider.GetRequiredService&lt;<link linkend="_interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_interfaces_1_1_i_compiler_service_registry">ICompilerServiceRegistry</link>&gt;();
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00256"/>00256 
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00257"/>00257 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;var&#32;decorationMapper&#32;=&#32;decorationMapperRegistry.GetDecorationMapper(fileExtension);
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00258"/>00258 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;var&#32;compilerService&#32;=&#32;compilerServiceRegistry.<link linkend="_interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_interfaces_1_1_i_compiler_service_registry_1a1682cc381e8bdb2a94cedcb62c90f075">GetCompilerService</link>(fileExtension);
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00259"/>00259 
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00260"/>00260 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;var&#32;model&#32;=&#32;<emphasis role="keyword">new</emphasis>&#32;<link linkend="_class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1_1_text_editor_model">TextEditorModel</link>(
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00261"/>00261 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1ae531f6ec8ec05e2493aabf8d17c23e4b">resourceUri</link>,
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00262"/>00262 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;resourceLastWriteTime,
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00263"/>00263 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;fileExtension,
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00264"/>00264 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;initialContent,
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00265"/>00265 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;decorationMapper,
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00266"/>00266 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;compilerService);
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00267"/>00267 
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00268"/>00268 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1aecfb76d19da117c025734259242d144d">textEditorService</link>.ModelApi.RegisterCustom(model);
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00269"/>00269 
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00270"/>00270 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;var&#32;existingModel&#32;=&#32;<link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1aecfb76d19da117c025734259242d144d">textEditorService</link>.ModelApi.GetOrDefault(model.ResourceUri);
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00271"/>00271 
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00272"/>00272 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;Assert.Equal(<link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1ae531f6ec8ec05e2493aabf8d17c23e4b">resourceUri</link>,&#32;existingModel.ResourceUri);
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00273"/>00273 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;Assert.Equal(resourceLastWriteTime,&#32;existingModel.ResourceLastWriteTime);
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00274"/>00274 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;Assert.Equal(initialContent,&#32;existingModel.GetAllText());
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00275"/>00275 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;Assert.Equal(fileExtension,&#32;existingModel.FileExtension);
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00276"/>00276 &#32;&#32;&#32;&#32;}
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00277"/>00277 
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00281"/>00281 &#32;&#32;&#32;&#32;[Fact]
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00282"/><link linkend="_class_luthetus_1_1_text_editor_1_1_tests_1_1_basis_1_1_text_editors_1_1_models_1_1_text_editor_model_api_tests_1aa4898de14ba9aa2ff1383829ebedc5d6">00282</link> &#32;&#32;&#32;&#32;<emphasis role="keyword">public</emphasis>&#32;<emphasis role="keywordtype">void</emphasis>&#32;<link linkend="_class_luthetus_1_1_text_editor_1_1_tests_1_1_basis_1_1_text_editors_1_1_models_1_1_text_editor_model_api_tests_1aa4898de14ba9aa2ff1383829ebedc5d6">RegisterTemplated</link>()
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00283"/>00283 &#32;&#32;&#32;&#32;{
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00284"/>00284 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;InitializeTextEditorModelApiTests(
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00285"/>00285 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;out&#32;_,
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00286"/>00286 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;out&#32;var&#32;inViewModel,
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00287"/>00287 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;out&#32;var&#32;<link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1aecfb76d19da117c025734259242d144d">textEditorService</link>,
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00288"/>00288 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;out&#32;var&#32;textEditorOptionsStateWrap,
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00289"/>00289 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;out&#32;var&#32;<link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1a50f035982e1c206f234851523db5cbc8">dispatcher</link>,
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00290"/>00290 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;out&#32;var&#32;serviceProvider);
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00291"/>00291 
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00292"/>00292 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;Assert.Empty(<link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1aecfb76d19da117c025734259242d144d">textEditorService</link>.ModelApi.GetModels());
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00293"/>00293 
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00294"/>00294 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;var&#32;fileExtension&#32;=&#32;ExtensionNoPeriodFacts.TXT;
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00295"/>00295 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;var&#32;<link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1ae531f6ec8ec05e2493aabf8d17c23e4b">resourceUri</link>&#32;=&#32;<emphasis role="keyword">new</emphasis>&#32;<link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1a435ccef09e2ba83022e8cf378fc0f690">ResourceUri</link>(<emphasis role="stringliteral">&quot;/unitTesting.txt&quot;</emphasis>);
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00296"/>00296 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;var&#32;resourceLastWriteTime&#32;=&#32;DateTime.UtcNow;
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00297"/>00297 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;var&#32;initialContent&#32;=&#32;<emphasis role="stringliteral">&quot;Hello&#32;World!&quot;</emphasis>;
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00298"/>00298 
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00299"/>00299 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1aecfb76d19da117c025734259242d144d">textEditorService</link>.ModelApi.RegisterTemplated(
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00300"/>00300 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;fileExtension,
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00301"/>00301 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1ae531f6ec8ec05e2493aabf8d17c23e4b">resourceUri</link>,
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00302"/>00302 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;resourceLastWriteTime,
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00303"/>00303 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;initialContent);
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00304"/>00304 
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00305"/>00305 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;var&#32;model&#32;=&#32;<link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1aecfb76d19da117c025734259242d144d">textEditorService</link>.ModelApi.GetOrDefault(<link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1ae531f6ec8ec05e2493aabf8d17c23e4b">resourceUri</link>);
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00306"/>00306 
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00307"/>00307 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;Assert.Equal(<link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1ae531f6ec8ec05e2493aabf8d17c23e4b">resourceUri</link>,&#32;model.ResourceUri);
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00308"/>00308 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;Assert.Equal(resourceLastWriteTime,&#32;model.ResourceLastWriteTime);
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00309"/>00309 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;Assert.Equal(initialContent,&#32;model.GetAllText());
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00310"/>00310 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;Assert.Equal(fileExtension,&#32;model.FileExtension);
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00311"/>00311 &#32;&#32;&#32;&#32;}
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00312"/>00312 
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00316"/>00316 &#32;&#32;&#32;&#32;[Fact]
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00317"/><link linkend="_class_luthetus_1_1_text_editor_1_1_tests_1_1_basis_1_1_text_editors_1_1_models_1_1_text_editor_model_api_tests_1ac6bf5a823bcdacfc40dce91087466a75">00317</link> &#32;&#32;&#32;&#32;<emphasis role="keyword">public</emphasis>&#32;<emphasis role="keywordtype">void</emphasis>&#32;<link linkend="_class_luthetus_1_1_text_editor_1_1_tests_1_1_basis_1_1_text_editors_1_1_models_1_1_text_editor_model_api_tests_1ac6bf5a823bcdacfc40dce91087466a75">RedoEditEnqueue</link>()
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00318"/>00318 &#32;&#32;&#32;&#32;{
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00319"/>00319 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;InitializeTextEditorModelApiTests(
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00320"/>00320 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;out&#32;var&#32;inModel,
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00321"/>00321 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;out&#32;var&#32;inViewModel,
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00322"/>00322 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;out&#32;var&#32;<link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1aecfb76d19da117c025734259242d144d">textEditorService</link>,
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00323"/>00323 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;out&#32;var&#32;textEditorOptionsStateWrap,
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00324"/>00324 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;out&#32;var&#32;<link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1a50f035982e1c206f234851523db5cbc8">dispatcher</link>,
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00325"/>00325 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;out&#32;var&#32;serviceProvider);
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00326"/>00326 
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00327"/>00327 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;var&#32;cursor&#32;=&#32;<emphasis role="keyword">new</emphasis>&#32;<link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_cursors_1_1_models_1a8373e854ca1ddf152a3b5372ea18c20b">TextEditorCursor</link>(0,&#32;0,&#32;0,&#32;<emphasis role="keyword">true</emphasis>,&#32;<link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_cursors_1_1_models_1af6774c2315b7021a1a883d4db6510068">TextEditorSelection</link>.Empty);
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00328"/>00328 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;var&#32;cursorList&#32;=&#32;<emphasis role="keyword">new</emphasis>[]&#32;{&#32;<emphasis role="keyword">new</emphasis>&#32;<link linkend="_class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_cursors_1_1_models_1_1_text_editor_cursor_modifier">TextEditorCursorModifier</link>(cursor)&#32;}.ToList();
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00329"/>00329 
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00330"/>00330 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;var&#32;insertedText&#32;=&#32;<emphasis role="stringliteral">&quot;I&#32;have&#32;something&#32;to&#32;say:&#32;&quot;</emphasis>;
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00331"/>00331 
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00332"/>00332 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;var&#32;cursorModifierBag&#32;=&#32;<emphasis role="keyword">new</emphasis>&#32;<link linkend="_class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1_1_cursor_modifier_bag_text_editor">CursorModifierBagTextEditor</link>(Key&lt;TextEditorViewModel&gt;.Empty,&#32;cursorList);
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00333"/>00333 
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00334"/>00334 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1aecfb76d19da117c025734259242d144d">textEditorService</link>.PostUnique(
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00335"/>00335 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;nameof(<link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1aecfb76d19da117c025734259242d144d">textEditorService</link>.ModelApi.InsertTextUnsafe),
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00336"/>00336 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;editContext&#32;=&gt;
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00337"/>00337 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;{
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00338"/>00338 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;var&#32;modelModifier&#32;=&#32;editContext.GetModelModifier(inModel.ResourceUri);
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00339"/>00339 
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00340"/>00340 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;if&#32;(modelModifier&#32;is&#32;null)
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00341"/>00341 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;return&#32;Task.CompletedTask;
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00342"/>00342 
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00343"/>00343 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;textEditorService.ModelApi.InsertTextUnsafe(
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00344"/>00344 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;editContext,
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00345"/>00345 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;modelModifier,
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00346"/>00346 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;cursorModifierBag,
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00347"/>00347 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;insertedText,
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00348"/>00348 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;CancellationToken.None);
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00349"/>00349 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;return&#32;Task.CompletedTask;
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00350"/>00350 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;});
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00351"/>00351 
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00352"/>00352 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;var&#32;outModel&#32;=&#32;<link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1aecfb76d19da117c025734259242d144d">textEditorService</link>.ModelApi.GetOrDefault(inModel.ResourceUri);
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00353"/>00353 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;Assert.Equal(insertedText&#32;+&#32;inModel.GetAllText(),&#32;outModel.GetAllText());
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00354"/>00354 
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00355"/>00355 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1aecfb76d19da117c025734259242d144d">textEditorService</link>.PostUnique(
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00356"/>00356 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;nameof(<link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1aecfb76d19da117c025734259242d144d">textEditorService</link>.ModelApi.UndoEdit),
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00357"/>00357 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;editContext&#32;=&gt;
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00358"/>00358 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;{
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00359"/>00359 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;var&#32;modelModifier&#32;=&#32;editContext.GetModelModifier(inModel.ResourceUri);
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00360"/>00360 
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00361"/>00361 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;if&#32;(modelModifier&#32;is&#32;null)
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00362"/>00362 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;return&#32;Task.CompletedTask;
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00363"/>00363 
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00364"/>00364 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;textEditorService.ModelApi.UndoEdit(
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00365"/>00365 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;editContext,
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00366"/>00366 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;modelModifier);
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00367"/>00367 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;return&#32;Task.CompletedTask;
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00368"/>00368 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;});
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00369"/>00369 
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00370"/>00370 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;outModel&#32;=&#32;<link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1aecfb76d19da117c025734259242d144d">textEditorService</link>.ModelApi.GetOrDefault(inModel.ResourceUri);
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00371"/>00371 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;Assert.Equal(inModel.GetAllText(),&#32;outModel.GetAllText());
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00372"/>00372 
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00373"/>00373 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1aecfb76d19da117c025734259242d144d">textEditorService</link>.PostUnique(
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00374"/>00374 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;nameof(<link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1aecfb76d19da117c025734259242d144d">textEditorService</link>.ModelApi.RedoEdit),
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00375"/>00375 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;editContext&#32;=&gt;
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00376"/>00376 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;{
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00377"/>00377 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;var&#32;modelModifier&#32;=&#32;editContext.GetModelModifier(inModel.ResourceUri);
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00378"/>00378 
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00379"/>00379 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;if&#32;(modelModifier&#32;is&#32;null)
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00380"/>00380 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;return&#32;Task.CompletedTask;
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00381"/>00381 
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00382"/>00382 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;textEditorService.ModelApi.RedoEdit(
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00383"/>00383 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;editContext,
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00384"/>00384 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;modelModifier);
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00385"/>00385 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;return&#32;Task.CompletedTask;
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00386"/>00386 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;});
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00387"/>00387 
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00388"/>00388 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;outModel&#32;=&#32;<link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1aecfb76d19da117c025734259242d144d">textEditorService</link>.ModelApi.GetOrDefault(inModel.ResourceUri);
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00389"/>00389 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;Assert.Equal(insertedText&#32;+&#32;inModel.GetAllText(),&#32;outModel.GetAllText());
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00390"/>00390 &#32;&#32;&#32;&#32;}
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00391"/>00391 
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00395"/>00395 &#32;&#32;&#32;&#32;[Fact]
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00396"/><link linkend="_class_luthetus_1_1_text_editor_1_1_tests_1_1_basis_1_1_text_editors_1_1_models_1_1_text_editor_model_api_tests_1a9385ea2cd581feea5e2c579f40caacbf">00396</link> &#32;&#32;&#32;&#32;<emphasis role="keyword">public</emphasis>&#32;<emphasis role="keywordtype">void</emphasis>&#32;<link linkend="_class_luthetus_1_1_text_editor_1_1_tests_1_1_basis_1_1_text_editors_1_1_models_1_1_text_editor_model_api_tests_1a9385ea2cd581feea5e2c579f40caacbf">InsertTextEnqueue</link>()
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00397"/>00397 &#32;&#32;&#32;&#32;{
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00398"/>00398 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;InitializeTextEditorModelApiTests(
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00399"/>00399 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;out&#32;var&#32;inModel,
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00400"/>00400 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;out&#32;var&#32;inViewModel,
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00401"/>00401 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;out&#32;var&#32;<link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1aecfb76d19da117c025734259242d144d">textEditorService</link>,
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00402"/>00402 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;out&#32;var&#32;textEditorOptionsStateWrap,
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00403"/>00403 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;out&#32;var&#32;<link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1a50f035982e1c206f234851523db5cbc8">dispatcher</link>,
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00404"/>00404 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;out&#32;var&#32;serviceProvider);
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00405"/>00405 
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00406"/>00406 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;var&#32;cursor&#32;=&#32;<emphasis role="keyword">new</emphasis>&#32;<link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_cursors_1_1_models_1a8373e854ca1ddf152a3b5372ea18c20b">TextEditorCursor</link>(0,&#32;0,&#32;0,&#32;<emphasis role="keyword">true</emphasis>,&#32;<link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_cursors_1_1_models_1af6774c2315b7021a1a883d4db6510068">TextEditorSelection</link>.Empty);
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00407"/>00407 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;var&#32;cursorList&#32;=&#32;<emphasis role="keyword">new</emphasis>[]&#32;{&#32;<emphasis role="keyword">new</emphasis>&#32;<link linkend="_class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_cursors_1_1_models_1_1_text_editor_cursor_modifier">TextEditorCursorModifier</link>(cursor)&#32;}.ToList();
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00408"/>00408 
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00409"/>00409 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;var&#32;insertedText&#32;=&#32;<emphasis role="stringliteral">&quot;I&#32;have&#32;something&#32;to&#32;say:&#32;&quot;</emphasis>;
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00410"/>00410 
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00411"/>00411 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;var&#32;cursorModifierBag&#32;=&#32;<emphasis role="keyword">new</emphasis>&#32;<link linkend="_class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1_1_cursor_modifier_bag_text_editor">CursorModifierBagTextEditor</link>(Key&lt;TextEditorViewModel&gt;.Empty,&#32;cursorList);
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00412"/>00412 
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00413"/>00413 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1aecfb76d19da117c025734259242d144d">textEditorService</link>.PostUnique(
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00414"/>00414 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;nameof(<link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1aecfb76d19da117c025734259242d144d">textEditorService</link>.ModelApi.InsertTextUnsafe),
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00415"/>00415 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;editContext&#32;=&gt;
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00416"/>00416 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;{
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00417"/>00417 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;var&#32;modelModifier&#32;=&#32;editContext.GetModelModifier(inModel.ResourceUri);
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00418"/>00418 
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00419"/>00419 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;if&#32;(modelModifier&#32;is&#32;null)
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00420"/>00420 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;return&#32;Task.CompletedTask;
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00421"/>00421 
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00422"/>00422 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;textEditorService.ModelApi.InsertTextUnsafe(
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00423"/>00423 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;editContext,
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00424"/>00424 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;modelModifier,
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00425"/>00425 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;cursorModifierBag,
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00426"/>00426 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;insertedText,
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00427"/>00427 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;CancellationToken.None);
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00428"/>00428 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;return&#32;Task.CompletedTask;
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00429"/>00429 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;});
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00430"/>00430 
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00431"/>00431 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;var&#32;outModel&#32;=&#32;<link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1aecfb76d19da117c025734259242d144d">textEditorService</link>.ModelApi.GetOrDefault(inModel.ResourceUri);
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00432"/>00432 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;Assert.Equal(insertedText&#32;+&#32;inModel.GetAllText(),&#32;outModel.GetAllText());
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00433"/>00433 &#32;&#32;&#32;&#32;}
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00434"/>00434 
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00438"/>00438 &#32;&#32;&#32;&#32;[Fact]
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00439"/><link linkend="_class_luthetus_1_1_text_editor_1_1_tests_1_1_basis_1_1_text_editors_1_1_models_1_1_text_editor_model_api_tests_1ab164053e0957c166f701d9f0b4721585">00439</link> &#32;&#32;&#32;&#32;<emphasis role="keyword">public</emphasis>&#32;<emphasis role="keywordtype">void</emphasis>&#32;<link linkend="_class_luthetus_1_1_text_editor_1_1_tests_1_1_basis_1_1_text_editors_1_1_models_1_1_text_editor_model_api_tests_1ab164053e0957c166f701d9f0b4721585">HandleKeyboardEventEnqueue</link>()
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00440"/>00440 &#32;&#32;&#32;&#32;{
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00441"/>00441 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;InitializeTextEditorModelApiTests(
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00442"/>00442 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;out&#32;var&#32;inModel,
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00443"/>00443 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;out&#32;var&#32;inViewModel,
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00444"/>00444 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;out&#32;var&#32;<link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1aecfb76d19da117c025734259242d144d">textEditorService</link>,
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00445"/>00445 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;out&#32;var&#32;textEditorOptionsStateWrap,
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00446"/>00446 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;out&#32;var&#32;<link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1a50f035982e1c206f234851523db5cbc8">dispatcher</link>,
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00447"/>00447 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;out&#32;var&#32;serviceProvider);
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00448"/>00448 
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00449"/>00449 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;var&#32;cursor&#32;=&#32;<emphasis role="keyword">new</emphasis>&#32;<link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_cursors_1_1_models_1a8373e854ca1ddf152a3b5372ea18c20b">TextEditorCursor</link>(0,&#32;0,&#32;0,&#32;<emphasis role="keyword">true</emphasis>,&#32;<link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_cursors_1_1_models_1af6774c2315b7021a1a883d4db6510068">TextEditorSelection</link>.Empty);
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00450"/>00450 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;var&#32;cursorList&#32;=&#32;<emphasis role="keyword">new</emphasis>[]&#32;{&#32;<emphasis role="keyword">new</emphasis>&#32;<link linkend="_class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_cursors_1_1_models_1_1_text_editor_cursor_modifier">TextEditorCursorModifier</link>(cursor)&#32;}.ToList();
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00451"/>00451 
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00452"/>00452 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;var&#32;key&#32;=&#32;<emphasis role="stringliteral">&quot;a&quot;</emphasis>;
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00453"/>00453 
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00454"/>00454 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;var&#32;keymapArgs&#32;=&#32;<emphasis role="keyword">new</emphasis>&#32;<link linkend="_struct_luthetus_1_1_common_1_1_razor_lib_1_1_keymaps_1_1_models_1_1_keymap_args">KeymapArgs</link>
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00455"/>00455 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;{
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00456"/>00456 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;Key&#32;=&#32;key
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00457"/>00457 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;};
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00458"/>00458 
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00459"/>00459 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;var&#32;cursorModifierBag&#32;=&#32;<emphasis role="keyword">new</emphasis>&#32;<link linkend="_class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1_1_cursor_modifier_bag_text_editor">CursorModifierBagTextEditor</link>(Key&lt;TextEditorViewModel&gt;.Empty,&#32;cursorList);
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00460"/>00460 
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00461"/>00461 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1aecfb76d19da117c025734259242d144d">textEditorService</link>.PostUnique(
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00462"/>00462 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;nameof(<link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1aecfb76d19da117c025734259242d144d">textEditorService</link>.ModelApi.HandleKeyboardEventUnsafe),
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00463"/>00463 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;editContext&#32;=&gt;
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00464"/>00464 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;{
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00465"/>00465 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;var&#32;modelModifier&#32;=&#32;editContext.GetModelModifier(inModel.ResourceUri);
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00466"/>00466 
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00467"/>00467 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;if&#32;(modelModifier&#32;is&#32;null)
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00468"/>00468 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;return&#32;Task.CompletedTask;
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00469"/>00469 
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00470"/>00470 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;textEditorService.ModelApi.HandleKeyboardEventUnsafe(
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00471"/>00471 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;editContext,
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00472"/>00472 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;modelModifier,
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00473"/>00473 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;cursorModifierBag,
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00474"/>00474 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;keymapArgs,
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00475"/>00475 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;CancellationToken.None);
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00476"/>00476 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;return&#32;Task.CompletedTask;
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00477"/>00477 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;});
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00478"/>00478 
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00479"/>00479 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;var&#32;outModel&#32;=&#32;<link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1aecfb76d19da117c025734259242d144d">textEditorService</link>.ModelApi.GetOrDefault(inModel.ResourceUri);
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00480"/>00480 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;Assert.Equal(key&#32;+&#32;inModel.GetAllText(),&#32;outModel.GetAllText());
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00481"/>00481 &#32;&#32;&#32;&#32;}
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00482"/>00482 
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00486"/>00486 &#32;&#32;&#32;&#32;[Fact]
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00487"/><link linkend="_class_luthetus_1_1_text_editor_1_1_tests_1_1_basis_1_1_text_editors_1_1_models_1_1_text_editor_model_api_tests_1abf62a62acc07024cdfd3ea1d34920110">00487</link> &#32;&#32;&#32;&#32;<emphasis role="keyword">public</emphasis>&#32;<emphasis role="keywordtype">void</emphasis>&#32;<link linkend="_class_luthetus_1_1_text_editor_1_1_tests_1_1_basis_1_1_text_editors_1_1_models_1_1_text_editor_model_api_tests_1abf62a62acc07024cdfd3ea1d34920110">GetViewModelsOrEmpty</link>()
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00488"/>00488 &#32;&#32;&#32;&#32;{
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00489"/>00489 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;InitializeTextEditorModelApiTests(
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00490"/>00490 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;out&#32;var&#32;inModel,
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00491"/>00491 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;out&#32;var&#32;inViewModel,
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00492"/>00492 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;out&#32;var&#32;<link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1aecfb76d19da117c025734259242d144d">textEditorService</link>,
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00493"/>00493 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;out&#32;var&#32;textEditorOptionsStateWrap,
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00494"/>00494 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;out&#32;var&#32;<link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1a50f035982e1c206f234851523db5cbc8">dispatcher</link>,
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00495"/>00495 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;out&#32;var&#32;serviceProvider);
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00496"/>00496 
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00497"/>00497 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;Assert.Empty(<link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1aecfb76d19da117c025734259242d144d">textEditorService</link>.ModelApi.GetViewModelsOrEmpty(inModel.ResourceUri));
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00498"/>00498 
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00499"/>00499 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1aecfb76d19da117c025734259242d144d">textEditorService</link>.ViewModelApi.Register(
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00500"/>00500 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;Key&lt;TextEditorViewModel&gt;.NewKey(),
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00501"/>00501 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;inModel.ResourceUri,
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00502"/>00502 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keyword">new</emphasis>&#32;<link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1ab53dfba5ef40ddaeca4b8982ea420fd1">Category</link>(<emphasis role="stringliteral">&quot;UnitTesting&quot;</emphasis>));
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00503"/>00503 
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00504"/>00504 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;Assert.Single(<link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1aecfb76d19da117c025734259242d144d">textEditorService</link>.ModelApi.GetViewModelsOrEmpty(inModel.ResourceUri));
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00505"/>00505 &#32;&#32;&#32;&#32;}
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00506"/>00506 
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00510"/>00510 &#32;&#32;&#32;&#32;[Fact]
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00511"/><link linkend="_class_luthetus_1_1_text_editor_1_1_tests_1_1_basis_1_1_text_editors_1_1_models_1_1_text_editor_model_api_tests_1a12984213c3529926adf79e69e12d3bdd">00511</link> &#32;&#32;&#32;&#32;<emphasis role="keyword">public</emphasis>&#32;<emphasis role="keywordtype">void</emphasis>&#32;<link linkend="_class_luthetus_1_1_text_editor_1_1_tests_1_1_basis_1_1_text_editors_1_1_models_1_1_text_editor_model_api_tests_1a12984213c3529926adf79e69e12d3bdd">GetAllText</link>()
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00512"/>00512 &#32;&#32;&#32;&#32;{
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00513"/>00513 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;InitializeTextEditorModelApiTests(
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00514"/>00514 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;out&#32;var&#32;inModel,
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00515"/>00515 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;out&#32;var&#32;inViewModel,
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00516"/>00516 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;out&#32;var&#32;<link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1aecfb76d19da117c025734259242d144d">textEditorService</link>,
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00517"/>00517 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;out&#32;var&#32;textEditorOptionsStateWrap,
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00518"/>00518 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;out&#32;var&#32;<link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1a50f035982e1c206f234851523db5cbc8">dispatcher</link>,
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00519"/>00519 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;out&#32;var&#32;serviceProvider);
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00520"/>00520 
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00521"/>00521 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;var&#32;fileExtension&#32;=&#32;ExtensionNoPeriodFacts.TXT;
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00522"/>00522 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;var&#32;<link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1ae531f6ec8ec05e2493aabf8d17c23e4b">resourceUri</link>&#32;=&#32;<emphasis role="keyword">new</emphasis>&#32;<link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1a435ccef09e2ba83022e8cf378fc0f690">ResourceUri</link>(<emphasis role="stringliteral">&quot;/unitTesting.txt&quot;</emphasis>);
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00523"/>00523 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;var&#32;resourceLastWriteTime&#32;=&#32;DateTime.UtcNow;
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00524"/>00524 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;var&#32;initialContent&#32;=&#32;<emphasis role="stringliteral">&quot;Hello&#32;World!&quot;</emphasis>;
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00525"/>00525 
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00526"/>00526 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1aecfb76d19da117c025734259242d144d">textEditorService</link>.ModelApi.RegisterTemplated(
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00527"/>00527 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;fileExtension,
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00528"/>00528 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1ae531f6ec8ec05e2493aabf8d17c23e4b">resourceUri</link>,
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00529"/>00529 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;resourceLastWriteTime,
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00530"/>00530 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;initialContent);
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00531"/>00531 
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00532"/>00532 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;var&#32;model&#32;=&#32;<link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1aecfb76d19da117c025734259242d144d">textEditorService</link>.ModelApi.GetOrDefault(<link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1ae531f6ec8ec05e2493aabf8d17c23e4b">resourceUri</link>);
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00533"/>00533 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;Assert.Equal(initialContent,&#32;model.GetAllText());
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00534"/>00534 &#32;&#32;&#32;&#32;}
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00535"/>00535 
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00539"/>00539 &#32;&#32;&#32;&#32;[Fact]
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00540"/><link linkend="_class_luthetus_1_1_text_editor_1_1_tests_1_1_basis_1_1_text_editors_1_1_models_1_1_text_editor_model_api_tests_1a150ae05801fd7257a96c07663f0f38be">00540</link> &#32;&#32;&#32;&#32;<emphasis role="keyword">public</emphasis>&#32;<emphasis role="keywordtype">void</emphasis>&#32;<link linkend="_class_luthetus_1_1_text_editor_1_1_tests_1_1_basis_1_1_text_editors_1_1_models_1_1_text_editor_model_api_tests_1a150ae05801fd7257a96c07663f0f38be">GetOrDefault</link>()
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00541"/>00541 &#32;&#32;&#32;&#32;{
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00542"/>00542 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<link linkend="_class_luthetus_1_1_text_editor_1_1_tests_1_1_basis_1_1_tests_helper">TestsHelper</link>.<link linkend="_class_luthetus_1_1_text_editor_1_1_tests_1_1_basis_1_1_tests_helper_1a83add7dc7aa570c389053b12e9584e62">InitializeTextEditorServicesTestsHelper</link>(
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00543"/>00543 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;out&#32;var&#32;<link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1aecfb76d19da117c025734259242d144d">textEditorService</link>,
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00544"/>00544 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;out&#32;var&#32;inModel,
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00545"/>00545 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;out&#32;var&#32;inViewModel,
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00546"/>00546 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;out&#32;var&#32;serviceProvider);
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00547"/>00547 
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00548"/>00548 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;var&#32;outModel&#32;=&#32;<link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1aecfb76d19da117c025734259242d144d">textEditorService</link>.ModelApi.GetOrDefault(inModel.ResourceUri);
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00549"/>00549 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;Assert.NotNull(outModel);
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00550"/>00550 &#32;&#32;&#32;&#32;}
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00551"/>00551 
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00555"/>00555 &#32;&#32;&#32;&#32;[Fact]
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00556"/><link linkend="_class_luthetus_1_1_text_editor_1_1_tests_1_1_basis_1_1_text_editors_1_1_models_1_1_text_editor_model_api_tests_1adbab07631aaedae910ec031cac45c170">00556</link> &#32;&#32;&#32;&#32;<emphasis role="keyword">public</emphasis>&#32;<emphasis role="keywordtype">void</emphasis>&#32;<link linkend="_class_luthetus_1_1_text_editor_1_1_tests_1_1_basis_1_1_text_editors_1_1_models_1_1_text_editor_model_api_tests_1adbab07631aaedae910ec031cac45c170">Dispose</link>()
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00557"/>00557 &#32;&#32;&#32;&#32;{
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00558"/>00558 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<link linkend="_class_luthetus_1_1_text_editor_1_1_tests_1_1_basis_1_1_tests_helper">TestsHelper</link>.<link linkend="_class_luthetus_1_1_text_editor_1_1_tests_1_1_basis_1_1_tests_helper_1a83add7dc7aa570c389053b12e9584e62">InitializeTextEditorServicesTestsHelper</link>(
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00559"/>00559 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;out&#32;var&#32;<link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1aecfb76d19da117c025734259242d144d">textEditorService</link>,
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00560"/>00560 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;out&#32;var&#32;model,
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00561"/>00561 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;out&#32;var&#32;inViewModel,
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00562"/>00562 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;out&#32;var&#32;serviceProvider);
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00563"/>00563 
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00564"/>00564 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;Assert.Single(<link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1aecfb76d19da117c025734259242d144d">textEditorService</link>.ModelApi.GetModels());
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00565"/>00565 
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00566"/>00566 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1aecfb76d19da117c025734259242d144d">textEditorService</link>.ModelApi.Dispose(model.ResourceUri);
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00567"/>00567 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;Assert.Empty(<link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1aecfb76d19da117c025734259242d144d">textEditorService</link>.ModelApi.GetModels());
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00568"/>00568 &#32;&#32;&#32;&#32;}
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00569"/>00569 
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00573"/>00573 &#32;&#32;&#32;&#32;[Fact]
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00574"/><link linkend="_class_luthetus_1_1_text_editor_1_1_tests_1_1_basis_1_1_text_editors_1_1_models_1_1_text_editor_model_api_tests_1a854c4bd3b7e91872aabca780ccb8f93d">00574</link> &#32;&#32;&#32;&#32;<emphasis role="keyword">public</emphasis>&#32;<emphasis role="keywordtype">void</emphasis>&#32;<link linkend="_class_luthetus_1_1_text_editor_1_1_tests_1_1_basis_1_1_text_editors_1_1_models_1_1_text_editor_model_api_tests_1a854c4bd3b7e91872aabca780ccb8f93d">DeleteTextByRangeEnqueue</link>()
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00575"/>00575 &#32;&#32;&#32;&#32;{
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00576"/>00576 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<link linkend="_class_luthetus_1_1_text_editor_1_1_tests_1_1_basis_1_1_tests_helper">TestsHelper</link>.<link linkend="_class_luthetus_1_1_text_editor_1_1_tests_1_1_basis_1_1_tests_helper_1a83add7dc7aa570c389053b12e9584e62">InitializeTextEditorServicesTestsHelper</link>(
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00577"/>00577 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;out&#32;var&#32;<link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1aecfb76d19da117c025734259242d144d">textEditorService</link>,
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00578"/>00578 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;out&#32;var&#32;inModel,
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00579"/>00579 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;out&#32;var&#32;inViewModel,
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00580"/>00580 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;out&#32;var&#32;serviceProvider);
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00581"/>00581 
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00582"/>00582 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;var&#32;textToDelete&#32;=&#32;<emphasis role="stringliteral">&quot;&#32;World!&quot;</emphasis>;
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00583"/>00583 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;var&#32;expectedContent&#32;=&#32;inModel.GetAllText().Replace(textToDelete,&#32;<emphasis role="keywordtype">string</emphasis>.Empty);
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00584"/>00584 
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00585"/>00585 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;var&#32;columnIndex&#32;=&#32;inModel.GetAllText().IndexOf(textToDelete);
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00586"/>00586 
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00587"/>00587 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;var&#32;cursor&#32;=&#32;<emphasis role="keyword">new</emphasis>&#32;<link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_cursors_1_1_models_1a8373e854ca1ddf152a3b5372ea18c20b">TextEditorCursor</link>(0,&#32;columnIndex,&#32;columnIndex,&#32;<emphasis role="keyword">true</emphasis>,&#32;<link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_cursors_1_1_models_1af6774c2315b7021a1a883d4db6510068">TextEditorSelection</link>.Empty);
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00588"/>00588 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;var&#32;cursorList&#32;=&#32;<emphasis role="keyword">new</emphasis>[]&#32;{&#32;<emphasis role="keyword">new</emphasis>&#32;<link linkend="_class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_cursors_1_1_models_1_1_text_editor_cursor_modifier">TextEditorCursorModifier</link>(cursor)&#32;}.ToList();
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00589"/>00589 
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00590"/>00590 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;var&#32;cursorModifierBag&#32;=&#32;<emphasis role="keyword">new</emphasis>&#32;<link linkend="_class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1_1_cursor_modifier_bag_text_editor">CursorModifierBagTextEditor</link>(Key&lt;TextEditorViewModel&gt;.Empty,&#32;cursorList);
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00591"/>00591 
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00592"/>00592 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1aecfb76d19da117c025734259242d144d">textEditorService</link>.PostUnique(
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00593"/>00593 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;nameof(<link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1aecfb76d19da117c025734259242d144d">textEditorService</link>.ModelApi.DeleteTextByRangeUnsafe),
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00594"/>00594 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;editContext&#32;=&gt;
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00595"/>00595 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;{
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00596"/>00596 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;var&#32;modelModifier&#32;=&#32;editContext.GetModelModifier(inModel.ResourceUri);
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00597"/>00597 
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00598"/>00598 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;if&#32;(modelModifier&#32;is&#32;null)
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00599"/>00599 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;return&#32;Task.CompletedTask;
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00600"/>00600 
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00601"/>00601 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;textEditorService.ModelApi.DeleteTextByRangeUnsafe(
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00602"/>00602 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;editContext,
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00603"/>00603 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;modelModifier,
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00604"/>00604 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;cursorModifierBag,
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00605"/>00605 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;textToDelete.Length,
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00606"/>00606 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;CancellationToken.None);
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00607"/>00607 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;return&#32;Task.CompletedTask;
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00608"/>00608 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;});
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00609"/>00609 
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00610"/>00610 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;var&#32;outModel&#32;=&#32;<link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1aecfb76d19da117c025734259242d144d">textEditorService</link>.ModelApi.GetOrDefault(inModel.ResourceUri);
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00611"/>00611 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;Assert.Equal(expectedContent,&#32;outModel!.<link linkend="_class_luthetus_1_1_text_editor_1_1_tests_1_1_basis_1_1_text_editors_1_1_models_1_1_text_editor_model_api_tests_1a12984213c3529926adf79e69e12d3bdd">GetAllText</link>());
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00612"/>00612 &#32;&#32;&#32;&#32;}
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00613"/>00613 
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00617"/>00617 &#32;&#32;&#32;&#32;[Fact]
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00618"/><link linkend="_class_luthetus_1_1_text_editor_1_1_tests_1_1_basis_1_1_text_editors_1_1_models_1_1_text_editor_model_api_tests_1a4c99801b4b03c1f3ea5e1660c611d3e9">00618</link> &#32;&#32;&#32;&#32;<emphasis role="keyword">public</emphasis>&#32;<emphasis role="keywordtype">void</emphasis>&#32;<link linkend="_class_luthetus_1_1_text_editor_1_1_tests_1_1_basis_1_1_text_editors_1_1_models_1_1_text_editor_model_api_tests_1a4c99801b4b03c1f3ea5e1660c611d3e9">DeleteTextByMotionEnqueue_Backspace</link>()
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00619"/>00619 &#32;&#32;&#32;&#32;{
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00620"/>00620 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<link linkend="_class_luthetus_1_1_text_editor_1_1_tests_1_1_basis_1_1_tests_helper">TestsHelper</link>.<link linkend="_class_luthetus_1_1_text_editor_1_1_tests_1_1_basis_1_1_tests_helper_1a83add7dc7aa570c389053b12e9584e62">InitializeTextEditorServicesTestsHelper</link>(
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00621"/>00621 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;out&#32;var&#32;<link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1aecfb76d19da117c025734259242d144d">textEditorService</link>,
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00622"/>00622 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;out&#32;var&#32;inModel,
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00623"/>00623 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;out&#32;var&#32;inViewModel,
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00624"/>00624 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;out&#32;var&#32;serviceProvider);
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00625"/>00625 
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00626"/>00626 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;&quot;Hello&#32;World&quot;&#32;-&gt;&#32;&quot;HelloWorld&quot;&#32;is&#32;the&#32;expected&#32;output</emphasis>
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00627"/>00627 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;var&#32;wordToJoin&#32;=&#32;<emphasis role="stringliteral">&quot;World!&quot;</emphasis>;
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00628"/>00628 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;var&#32;expectedContent&#32;=&#32;<emphasis role="stringliteral">&quot;HelloWorld!&quot;</emphasis>;
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00629"/>00629 
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00630"/>00630 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;var&#32;columnIndex&#32;=&#32;inModel.GetAllText().IndexOf(wordToJoin);
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00631"/>00631 
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00632"/>00632 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;var&#32;cursor&#32;=&#32;<emphasis role="keyword">new</emphasis>&#32;<link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_cursors_1_1_models_1a8373e854ca1ddf152a3b5372ea18c20b">TextEditorCursor</link>(0,&#32;columnIndex,&#32;columnIndex,&#32;<emphasis role="keyword">true</emphasis>,&#32;<link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_cursors_1_1_models_1af6774c2315b7021a1a883d4db6510068">TextEditorSelection</link>.Empty);
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00633"/>00633 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;var&#32;cursorList&#32;=&#32;<emphasis role="keyword">new</emphasis>[]&#32;{&#32;<emphasis role="keyword">new</emphasis>&#32;<link linkend="_class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_cursors_1_1_models_1_1_text_editor_cursor_modifier">TextEditorCursorModifier</link>(cursor)&#32;}.ToList();
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00634"/>00634 
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00635"/>00635 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;var&#32;cursorModifierBag&#32;=&#32;<emphasis role="keyword">new</emphasis>&#32;<link linkend="_class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1_1_cursor_modifier_bag_text_editor">CursorModifierBagTextEditor</link>(Key&lt;TextEditorViewModel&gt;.Empty,&#32;cursorList);
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00636"/>00636 
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00637"/>00637 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1aecfb76d19da117c025734259242d144d">textEditorService</link>.PostUnique(
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00638"/>00638 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;nameof(<link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1aecfb76d19da117c025734259242d144d">textEditorService</link>.ModelApi.DeleteTextByMotionUnsafe),
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00639"/>00639 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;editContext&#32;=&gt;
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00640"/>00640 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;{
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00641"/>00641 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;var&#32;modelModifier&#32;=&#32;editContext.GetModelModifier(inModel.ResourceUri);
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00642"/>00642 
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00643"/>00643 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;if&#32;(modelModifier&#32;is&#32;null)
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00644"/>00644 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;return&#32;Task.CompletedTask;
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00645"/>00645 
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00646"/>00646 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;textEditorService.ModelApi.DeleteTextByMotionUnsafe(
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00647"/>00647 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;editContext,
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00648"/>00648 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;modelModifier,
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00649"/>00649 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;cursorModifierBag,
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00650"/>00650 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;MotionKind.Backspace,
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00651"/>00651 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;CancellationToken.None);
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00652"/>00652 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;return&#32;Task.CompletedTask;
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00653"/>00653 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;});
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00654"/>00654 
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00655"/>00655 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;var&#32;outModel&#32;=&#32;<link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1aecfb76d19da117c025734259242d144d">textEditorService</link>.ModelApi.GetOrDefault(inModel.ResourceUri);
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00656"/>00656 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;Assert.Equal(expectedContent,&#32;outModel!.<link linkend="_class_luthetus_1_1_text_editor_1_1_tests_1_1_basis_1_1_text_editors_1_1_models_1_1_text_editor_model_api_tests_1a12984213c3529926adf79e69e12d3bdd">GetAllText</link>());
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00657"/>00657 &#32;&#32;&#32;&#32;}
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00658"/>00658 
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00662"/>00662 &#32;&#32;&#32;&#32;[Fact]
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00663"/><link linkend="_class_luthetus_1_1_text_editor_1_1_tests_1_1_basis_1_1_text_editors_1_1_models_1_1_text_editor_model_api_tests_1a081c0b69d2b296cafd76d619d42bfe69">00663</link> &#32;&#32;&#32;&#32;<emphasis role="keyword">public</emphasis>&#32;<emphasis role="keywordtype">void</emphasis>&#32;<link linkend="_class_luthetus_1_1_text_editor_1_1_tests_1_1_basis_1_1_text_editors_1_1_models_1_1_text_editor_model_api_tests_1a081c0b69d2b296cafd76d619d42bfe69">RegisterPresentationModel</link>()
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00664"/>00664 &#32;&#32;&#32;&#32;{
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00665"/>00665 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<link linkend="_class_luthetus_1_1_text_editor_1_1_tests_1_1_basis_1_1_tests_helper">TestsHelper</link>.<link linkend="_class_luthetus_1_1_text_editor_1_1_tests_1_1_basis_1_1_tests_helper_1a83add7dc7aa570c389053b12e9584e62">InitializeTextEditorServicesTestsHelper</link>(
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00666"/>00666 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;out&#32;var&#32;<link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1aecfb76d19da117c025734259242d144d">textEditorService</link>,
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00667"/>00667 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;out&#32;var&#32;inModel,
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00668"/>00668 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;out&#32;var&#32;inViewModel,
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00669"/>00669 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;out&#32;var&#32;serviceProvider);
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00670"/>00670 
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00671"/>00671 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;Assert.Empty(inModel!.PresentationModelList);
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00672"/>00672 
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00673"/>00673 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1aecfb76d19da117c025734259242d144d">textEditorService</link>.PostUnique(
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00674"/>00674 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;nameof(<link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1aecfb76d19da117c025734259242d144d">textEditorService</link>.ModelApi.AddPresentationModel),
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00675"/>00675 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;editContext&#32;=&gt;
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00676"/>00676 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;{
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00677"/>00677 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;var&#32;modelModifier&#32;=&#32;editContext.GetModelModifier(inModel.ResourceUri);
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00678"/>00678 
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00679"/>00679 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;if&#32;(modelModifier&#32;is&#32;null)
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00680"/>00680 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;return&#32;Task.CompletedTask;
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00681"/>00681 
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00682"/>00682 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;textEditorService.ModelApi.AddPresentationModel(
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00683"/>00683 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;editContext,
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00684"/>00684 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;modelModifier,
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00685"/>00685 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;DiffPresentationFacts.EmptyOutPresentationModel);
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00686"/>00686 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;return&#32;Task.CompletedTask;
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00687"/>00687 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;});
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00688"/>00688 
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00689"/>00689 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;var&#32;outModel&#32;=&#32;<link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1aecfb76d19da117c025734259242d144d">textEditorService</link>.ModelApi.GetOrDefault(inModel.ResourceUri);
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00690"/>00690 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;Assert.NotEmpty(outModel!.PresentationModelList);
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00691"/>00691 &#32;&#32;&#32;&#32;}
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00692"/>00692 
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00693"/>00693 &#32;&#32;&#32;&#32;<emphasis role="keyword">private</emphasis>&#32;<emphasis role="keywordtype">void</emphasis>&#32;InitializeTextEditorModelApiTests(
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00694"/>00694 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;out&#32;<link linkend="_class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1_1_text_editor_model">TextEditorModel</link>&#32;model,
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00695"/>00695 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;out&#32;<link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1aa2a2da032900659e3cf98e4b28fc476d">TextEditorViewModel</link>&#32;viewModel,
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00696"/>00696 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;out&#32;<link linkend="_interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_i_text_editor_service">ITextEditorService</link>&#32;<link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1aecfb76d19da117c025734259242d144d">textEditorService</link>,
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00697"/>00697 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;out&#32;IState&lt;TextEditorOptionsState&gt;&#32;textEditorOptionsState,
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00698"/>00698 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;out&#32;IDispatcher&#32;<link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1a50f035982e1c206f234851523db5cbc8">dispatcher</link>,
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00699"/>00699 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;out&#32;ServiceProvider&#32;serviceProvider)
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00700"/>00700 &#32;&#32;&#32;&#32;{
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00701"/>00701 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;var&#32;backgroundTaskService&#32;=&#32;<emphasis role="keyword">new</emphasis>&#32;<link linkend="_class_luthetus_1_1_common_1_1_razor_lib_1_1_background_tasks_1_1_models_1_1_background_task_service_synchronous">BackgroundTaskServiceSynchronous</link>();
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00702"/>00702 
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00703"/>00703 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;var&#32;serviceCollection&#32;=&#32;<emphasis role="keyword">new</emphasis>&#32;ServiceCollection()
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00704"/>00704 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;.AddScoped&lt;IJSRuntime,&#32;<link linkend="_class_luthetus_1_1_common_1_1_razor_lib_1_1_misc_1_1_do_nothing_js_runtime">DoNothingJsRuntime</link>&gt;()
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00705"/>00705 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;.AddLuthetusTextEditor(<emphasis role="keyword">new</emphasis>&#32;<link linkend="_namespace_luthetus_1_1_common_1_1_razor_lib_1_1_installations_1_1_models_1a761f9bfb52cfd9ffaa1a4bbdddf1aebb">LuthetusHostingInformation</link>(
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00706"/>00706 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<link linkend="_namespace_luthetus_1_1_common_1_1_razor_lib_1_1_installations_1_1_models_1a6fa014b5a7072b6304fd9fe595cc2a60">LuthetusHostingKind</link>.UnitTestingSynchronous,
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00707"/>00707 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<link linkend="_namespace_luthetus_1_1_common_1_1_razor_lib_1_1_installations_1_1_models_1a6de164b4b02fa971f5eddc7f274686a6">LuthetusPurposeKind</link>.TextEditor,
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00708"/>00708 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;backgroundTaskService))
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00709"/>00709 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;.AddFluxor(options&#32;=&gt;&#32;options.ScanAssemblies(
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00710"/>00710 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;typeof(<link linkend="_namespace_luthetus_1_1_common_1_1_razor_lib_1_1_installations_1_1_models_1a9c0f5abeb1edd8801378900423cf1f40">LuthetusCommonConfig</link>).Assembly,
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00711"/>00711 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;typeof(<link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_installations_1_1_models_1a93aa7bee7cb16431b8752d669a0286dd">LuthetusTextEditorConfig</link>).Assembly));
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00712"/>00712 
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00713"/>00713 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;serviceProvider&#32;=&#32;serviceCollection.BuildServiceProvider();
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00714"/>00714 
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00715"/>00715 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;var&#32;store&#32;=&#32;serviceProvider.GetRequiredService&lt;IStore&gt;();
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00716"/>00716 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;store.InitializeAsync().Wait();
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00717"/>00717 
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00718"/>00718 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1a50f035982e1c206f234851523db5cbc8">dispatcher</link>&#32;=&#32;serviceProvider.GetRequiredService&lt;IDispatcher&gt;();
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00719"/>00719 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1aecfb76d19da117c025734259242d144d">textEditorService</link>&#32;=&#32;serviceProvider.GetRequiredService&lt;<link linkend="_interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_i_text_editor_service">ITextEditorService</link>&gt;();
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00720"/>00720 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;textEditorOptionsState&#32;=&#32;serviceProvider.GetRequiredService&lt;IState&lt;TextEditorOptionsState&gt;&gt;();
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00721"/>00721 
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00722"/>00722 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;var&#32;fileExtension&#32;=&#32;ExtensionNoPeriodFacts.TXT;
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00723"/>00723 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;var&#32;<link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1ae531f6ec8ec05e2493aabf8d17c23e4b">resourceUri</link>&#32;=&#32;<emphasis role="keyword">new</emphasis>&#32;<link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1a435ccef09e2ba83022e8cf378fc0f690">ResourceUri</link>(<emphasis role="stringliteral">&quot;/unitTesting.txt&quot;</emphasis>);
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00724"/>00724 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;var&#32;resourceLastWriteTime&#32;=&#32;DateTime.UtcNow;
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00725"/>00725 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;var&#32;content&#32;=&#32;<emphasis role="stringliteral">&quot;Hello&#32;World!&quot;</emphasis>;
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00726"/>00726 
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00727"/>00727 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;model&#32;=&#32;<emphasis role="keyword">new</emphasis>&#32;<link linkend="_class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1_1_text_editor_model">TextEditorModel</link>(
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00728"/>00728 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1ae531f6ec8ec05e2493aabf8d17c23e4b">resourceUri</link>,
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00729"/>00729 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;resourceLastWriteTime,
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00730"/>00730 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;fileExtension,
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00731"/>00731 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;content,
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00732"/>00732 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keyword">null</emphasis>,
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00733"/>00733 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keyword">null</emphasis>,
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00734"/>00734 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;4096);
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00735"/>00735 
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00736"/>00736 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1aecfb76d19da117c025734259242d144d">textEditorService</link>.ModelApi.RegisterCustom(model);
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00737"/>00737 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00738"/>00738 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;var&#32;viewModelKey&#32;=&#32;Key&lt;TextEditorViewModel&gt;.NewKey();
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00739"/>00739 
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00740"/>00740 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1aecfb76d19da117c025734259242d144d">textEditorService</link>.ViewModelApi.Register(
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00741"/>00741 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;viewModelKey,
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00742"/>00742 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1ae531f6ec8ec05e2493aabf8d17c23e4b">resourceUri</link>,
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00743"/>00743 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keyword">new</emphasis>&#32;<link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1ab53dfba5ef40ddaeca4b8982ea420fd1">Category</link>(<emphasis role="stringliteral">&quot;UnitTesting&quot;</emphasis>));
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00744"/>00744 
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00745"/>00745 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;viewModel&#32;=&#32;<link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1aecfb76d19da117c025734259242d144d">textEditorService</link>.ViewModelApi.GetOrDefault(viewModelKey)
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00746"/>00746 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;??&#32;<emphasis role="keywordflow">throw</emphasis>&#32;<emphasis role="keyword">new</emphasis>&#32;ArgumentNullException();
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00747"/>00747 &#32;&#32;&#32;&#32;}
+<anchor xml:id="__text_editor_model_api_tests_8cs_source_1l00748"/>00748 }
+</programlisting></section>

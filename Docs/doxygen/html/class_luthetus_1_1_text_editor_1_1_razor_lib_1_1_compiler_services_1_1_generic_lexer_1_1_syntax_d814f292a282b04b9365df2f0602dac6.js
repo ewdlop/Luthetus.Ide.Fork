@@ -1,0 +1,11 @@
+var class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_generic_lexer_1_1_syntax_d814f292a282b04b9365df2f0602dac6 =
+[
+    [ "Visit", "class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_generic_lexer_1_1_syntax_d814f292a282b04b9365df2f0602dac6.html#ae5447e5e8f957adba02c795bd7efedc5", null ],
+    [ "CommentMultiLineSyntaxList", "class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_generic_lexer_1_1_syntax_d814f292a282b04b9365df2f0602dac6.html#a25a3e86c0a51d6ada433071ea1ce7177", null ],
+    [ "CommentSingleLineSyntaxList", "class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_generic_lexer_1_1_syntax_d814f292a282b04b9365df2f0602dac6.html#a6a0ca771203cc38c6c671231247507b8", null ],
+    [ "DeliminationExtendedSyntaxList", "class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_generic_lexer_1_1_syntax_d814f292a282b04b9365df2f0602dac6.html#ae6fcd659b237faf7432e76c3d72fc0ea", null ],
+    [ "FunctionSyntaxList", "class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_generic_lexer_1_1_syntax_d814f292a282b04b9365df2f0602dac6.html#ac1693315328a32e3bd2dfa9c2c6289fc", null ],
+    [ "KeywordSyntaxList", "class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_generic_lexer_1_1_syntax_d814f292a282b04b9365df2f0602dac6.html#a0ff6059fdae58f6c6679bcb1d547c3cd", null ],
+    [ "PreprocessorDirectiveSyntaxList", "class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_generic_lexer_1_1_syntax_d814f292a282b04b9365df2f0602dac6.html#a31efbd384aab03b03cfa30ac048303d1", null ],
+    [ "StringSyntaxList", "class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_generic_lexer_1_1_syntax_d814f292a282b04b9365df2f0602dac6.html#a28cbdbacc19b7fea1bd61d6471d3661a", null ]
+];

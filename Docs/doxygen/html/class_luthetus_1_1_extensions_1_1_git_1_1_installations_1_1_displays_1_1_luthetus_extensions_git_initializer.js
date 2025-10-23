@@ -1,0 +1,4 @@
+var class_luthetus_1_1_extensions_1_1_git_1_1_installations_1_1_displays_1_1_luthetus_extensions_git_initializer =
+[
+    [ "OnInitialized", "class_luthetus_1_1_extensions_1_1_git_1_1_installations_1_1_displays_1_1_luthetus_extensions_git_initializer.html#a8bd5c47be51190405230a82b93d49050", null ]
+];

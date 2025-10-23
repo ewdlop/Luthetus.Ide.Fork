@@ -1,0 +1,156 @@
+.TH "Luthetus.CompilerServices.Xml.XmlCompilerService" 3 "Version 1.0.0" "Luthetus.Ide" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+Luthetus.CompilerServices.Xml.XmlCompilerService
+.SH SYNOPSIS
+.br
+.PP
+.PP
+Inherits \fBLuthetus\&.TextEditor\&.RazorLib\&.CompilerServices\&.Implementations\&.CompilerService\fP\&.
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBXmlCompilerService\fP (\fBITextEditorService\fP textEditorService)"
+.br
+.in -1c
+
+Public Member Functions inherited from \fBLuthetus\&.TextEditor\&.RazorLib\&.CompilerServices\&.Implementations\&.CompilerService\fP
+.in +1c
+.ti -1c
+.RI "\fBCompilerService\fP (\fBITextEditorService\fP \fBtextEditorService\fP)"
+.br
+.RI "
+.PP
+\fBParameters\fP
+.RS 4
+\fIgetLexerFunc\fP Takes as arguments the resource uri and the source text\&.
+.RE
+.PP
+"
+.ti -1c
+.RI "virtual void \fBRegisterResource\fP (\fBResourceUri\fP \fBresourceUri\fP, bool shouldTriggerResourceWasModified)"
+.br
+.RI "Expected to be concurrency safe with \fBDisposeResource\fP\&. "
+.ti -1c
+.RI "virtual ? \fBICompilerServiceResource\fP \fBGetCompilerServiceResourceFor\fP (\fBResourceUri\fP \fBresourceUri\fP)"
+.br
+.ti -1c
+.RI "virtual ImmutableArray< \fBTextEditorTextSpan\fP > \fBGetTokenTextSpansFor\fP (\fBResourceUri\fP \fBresourceUri\fP)"
+.br
+.RI "Provides syntax highlighting from the lexing result\&. This method is invoked, and applied, before \fBGetSymbolsFor\fP\&. "
+.ti -1c
+.RI "virtual ImmutableArray< \fBITextEditorSymbol\fP > \fBGetSymbolsFor\fP (\fBResourceUri\fP \fBresourceUri\fP)"
+.br
+.RI "Provides syntax highlighting that cannot be determined by lexing alone\&. This method is invoked, and applied, after \fBGetTokenTextSpansFor\fP\&. "
+.ti -1c
+.RI "virtual ImmutableArray< \fBTextEditorDiagnostic\fP > \fBGetDiagnosticsFor\fP (\fBResourceUri\fP \fBresourceUri\fP)"
+.br
+.RI "Provides 'squigglies' which when hovered over display a message, along with a serverity level\&. "
+.ti -1c
+.RI "virtual void \fBResourceWasModified\fP (\fBResourceUri\fP \fBresourceUri\fP, ImmutableArray< \fBTextEditorTextSpan\fP > editTextSpansList)"
+.br
+.RI "Expected to be an Microsoft\&.Extensions\&.Hosting\&.IHostedService (or anything which performs background task work)\&. "
+.ti -1c
+.RI "virtual void \fBCursorWasModified\fP (\fBResourceUri\fP \fBresourceUri\fP, \fBTextEditorCursor\fP cursor)"
+.br
+.RI "(2024-01-28) Goal: track the cursor's position within the compilation unit as it moves\&. "
+.ti -1c
+.RI "virtual ImmutableArray< \fBAutocompleteEntry\fP > \fBGetAutocompleteEntries\fP (string word, \fBTextEditorTextSpan\fP textSpan)"
+.br
+.RI "When a user types a period ('\&.') or hits the keybind: { 'Ctrl' + 'Space' } this method is invoked to populate the autocomplete menu\&. "
+.ti -1c
+.RI "virtual Task \fBParseAsync\fP (\fBITextEditorEditContext\fP editContext, \fBTextEditorModelModifier\fP modelModifier)"
+.br
+.ti -1c
+.RI "virtual void \fBDisposeResource\fP (\fBResourceUri\fP \fBresourceUri\fP)"
+.br
+.RI "Expected to be concurrency safe with \fBRegisterResource\fP\&. "
+.in -1c
+.SS "Additional Inherited Members"
+
+
+Protected Member Functions inherited from \fBLuthetus\&.TextEditor\&.RazorLib\&.CompilerServices\&.Implementations\&.CompilerService\fP
+.in +1c
+.ti -1c
+.RI "virtual void \fBOnResourceRegistered\fP ()"
+.br
+.RI "A method wrapper for \fBResourceRegistered\fP as to allow dervied types to invoke the event\&. "
+.ti -1c
+.RI "virtual void \fBOnResourceParsed\fP ()"
+.br
+.RI "A method wrapper for \fBResourceParsed\fP as to allow dervied types to invoke the event\&. "
+.ti -1c
+.RI "virtual void \fBOnResourceDisposed\fP ()"
+.br
+.RI "A method wrapper for \fBResourceDisposed\fP as to allow derived types to invoke the event\&. "
+.in -1c
+
+Protected Attributes inherited from \fBLuthetus\&.TextEditor\&.RazorLib\&.CompilerServices\&.Implementations\&.CompilerService\fP
+.in +1c
+.ti -1c
+.RI "readonly Dictionary< \fBResourceUri\fP, \fBICompilerServiceResource\fP > \fB_resourceMap\fP = new()"
+.br
+.ti -1c
+.RI "readonly object \fB_resourceMapLock\fP = new()"
+.br
+.ti -1c
+.RI "readonly \fBITextEditorService\fP \fB_textEditorService\fP"
+.br
+.ti -1c
+.RI "\fBCompilerServiceOptions\fP \fB_compilerServiceOptions\fP = new()"
+.br
+.in -1c
+
+Properties inherited from \fBLuthetus\&.TextEditor\&.RazorLib\&.CompilerServices\&.Implementations\&.CompilerService\fP
+.in +1c
+.ti -1c
+.RI "virtual \fBIBinder\fP \fBBinder\fP = new Binder()\fR [get, protected set]\fP"
+.br
+.ti -1c
+.RI "virtual ImmutableArray< \fBICompilerServiceResource\fP > \fBCompilerServiceResources\fP\fR [get]\fP"
+.br
+.in -1c
+
+Events inherited from \fBLuthetus\&.TextEditor\&.RazorLib\&.CompilerServices\&.Implementations\&.CompilerService\fP
+.in +1c
+.ti -1c
+.RI "Action? \fBResourceRegistered\fP"
+.br
+.RI "Derived types can invoke \fBOnResourceRegistered\fP to fire this event\&. "
+.ti -1c
+.RI "Action? \fBResourceParsed\fP"
+.br
+.RI "Derived types can invoke \fBOnResourceParsed\fP to fire this event\&. "
+.ti -1c
+.RI "Action? \fBResourceDisposed\fP"
+.br
+.RI "Derived types can invoke \fBOnResourceDisposed\fP to fire this event\&. "
+.in -1c
+
+Events inherited from \fBLuthetus\&.TextEditor\&.RazorLib\&.CompilerServices\&.Interfaces\&.ICompilerService\fP
+.in +1c
+.ti -1c
+.RI "Action? \fBResourceRegistered\fP"
+.br
+.ti -1c
+.RI "Action? \fBResourceParsed\fP"
+.br
+.ti -1c
+.RI "Action? \fBResourceDisposed\fP"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+Definition at line \fB8\fP of file \fBXmlCompilerService\&.cs\fP\&.
+.SH "Constructor & Destructor Documentation"
+.PP 
+.SS "Luthetus\&.CompilerServices\&.Xml\&.XmlCompilerService\&.XmlCompilerService (\fBITextEditorService\fP textEditorService)"
+
+.PP
+Definition at line \fB10\fP of file \fBXmlCompilerService\&.cs\fP\&.
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for Luthetus\&.Ide from the source code\&.

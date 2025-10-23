@@ -1,0 +1,157 @@
+\chapter{Luthetus.\+Common (v1.\+4.\+0) }
+\hypertarget{md__docs_2_common_2installation}{}\label{md__docs_2_common_2installation}\index{Luthetus.Common (v1.4.0)@{Luthetus.Common (v1.4.0)}}
+\label{md__docs_2_common_2installation_autotoc_md20}%
+\Hypertarget{md__docs_2_common_2installation_autotoc_md20}%
+\hypertarget{md__docs_2_common_2installation_autotoc_md21}{}\doxysection{\texorpdfstring{Installation}{Installation}}\label{md__docs_2_common_2installation_autotoc_md21}
+\hypertarget{md__docs_2_common_2installation_autotoc_md22}{}\doxysubsection{\texorpdfstring{Source Code}{Source Code}}\label{md__docs_2_common_2installation_autotoc_md22}
+The .NET Solution\+: \href{../../Source/Tutorials/Common/Luthetus.Common.Usage.sln}{\texttt{Luthetus.\+Common.\+Usage.\+sln}}, was made by following steps described here. So, the completed result can be found there.\hypertarget{md__docs_2_common_2installation_autotoc_md23}{}\doxysubsection{\texorpdfstring{Goal}{Goal}}\label{md__docs_2_common_2installation_autotoc_md23}
+
+\begin{DoxyItemize}
+\item Reference the {\ttfamily \doxylink{namespace_luthetus_1_1_common}{Luthetus.\+Common}} Nuget Package
+\item Register the {\ttfamily Services}
+\item Reference the {\ttfamily CSS}
+\item Reference the {\ttfamily Java\+Script}
+\item In {\ttfamily App.\+razor} render the {\ttfamily \texorpdfstring{$<$}{<}Fluxor.\+Blazor.\+Web.\+Store\+Initializer/\texorpdfstring{$>$}{>}}
+\item In {\ttfamily Main\+Layout.\+razor} render the {\ttfamily \texorpdfstring{$<$}{<}\doxylink{class_luthetus_1_1_common_1_1_razor_lib_1_1_installations_1_1_displays_1_1_luthetus_common_initializer}{Luthetus.\+Common.\+Razor\+Lib.\+Installations.\+Displays.\+Luthetus\+Common\+Initializer}/\texorpdfstring{$>$}{>}} Blazor component
+\end{DoxyItemize}\hypertarget{md__docs_2_common_2installation_autotoc_md24}{}\doxysubsection{\texorpdfstring{Steps}{Steps}}\label{md__docs_2_common_2installation_autotoc_md24}
+
+\begin{DoxyItemize}
+\item Reference the {\ttfamily \doxylink{namespace_luthetus_1_1_common}{Luthetus.\+Common}} Nu\+Get Package
+\end{DoxyItemize}
+
+Use your preferred way to install Nu\+Get Packages to install {\ttfamily \doxylink{namespace_luthetus_1_1_common}{Luthetus.\+Common}}.
+
+The nuget.\+org link to the Nu\+Get Package is here\+: \href{https://www.nuget.org/packages/Luthetus.Common}{\texttt{https\+://www.\+nuget.\+org/packages/\+Luthetus.\+Common}}
+
+
+\begin{DoxyItemize}
+\item Register the {\ttfamily Services}
+\end{DoxyItemize}
+
+Go to the file that you register your services and add the following lines of C\# code.
+
+\begin{quote}
+{\itshape NOTE\+:} In many C\# Project templates, the services are registered in {\ttfamily Program.\+cs}. \end{quote}
+
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{comment}{//\ using\ Luthetus.Common.RazorLib.Installations.Models;}}
+\DoxyCodeLine{\textcolor{comment}{//\ using\ Fluxor;}}
+\DoxyCodeLine{}
+\DoxyCodeLine{var\ luthetusHostingInformation\ =\ \textcolor{keyword}{new}\ \mbox{\hyperlink{namespace_luthetus_1_1_common_1_1_razor_lib_1_1_installations_1_1_models_a761f9bfb52cfd9ffaa1a4bbdddf1aebb}{LuthetusHostingInformation}}(}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//LuthetusHostingKind.Wasm,}}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ OR}}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ LuthetusHostingKind.ServerSide,}}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{new}\ BackgroundTaskService());}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keywordflow}{return}\ services}
+\DoxyCodeLine{\ \ \ \ .AddLuthetusCommonServices(luthetusHostingInformation)\ \textcolor{comment}{//\ }}
+\DoxyCodeLine{\ \ \ \ .AddFluxor(options\ =>\ options.ScanAssemblies(}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ typeof(LuthetusCommonOptions).Assembly));}
+
+\end{DoxyCode}
+
+
+
+\begin{DoxyItemize}
+\item Reference the {\ttfamily CSS}
+\end{DoxyItemize}
+
+Go to the file that you reference CSS files from and add the following CSS reference.
+
+\begin{quote}
+{\itshape NOTE\+:} In many Blazor Server\+Side apps this file would be {\ttfamily Pages/\+\_\+\+Layout.\+cshtml}. As for Blazor WASM apps, this file tends to be {\ttfamily wwwroot/index.\+html} \end{quote}
+
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{<link\ href="{}\_content/Luthetus.Common/luthetusCommon.css"{}\ rel="{}stylesheet"{}\ />}
+
+\end{DoxyCode}
+
+
+
+\begin{DoxyItemize}
+\item Reference the {\ttfamily Java\+Script}
+\end{DoxyItemize}
+
+Go to the file that you reference Java\+Script files from and add the following Java\+Script reference below the Blazor framework Java\+Script reference
+
+\begin{quote}
+{\itshape NOTE\+:} In many Blazor Server\+Side apps this file would be {\ttfamily Pages/\+\_\+\+Layout.\+cshtml}. As for Blazor WASM apps, this file tends to be {\ttfamily wwwroot/index.\+html} \end{quote}
+
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{<script\ src="{}\_content/Luthetus.Common/luthetusCommon.js"{}></script>}
+
+\end{DoxyCode}
+
+
+
+\begin{DoxyItemize}
+\item In {\ttfamily App.\+razor} render the {\ttfamily \texorpdfstring{$<$}{<}Fluxor.\+Blazor.\+Web.\+Store\+Initializer/\texorpdfstring{$>$}{>}} Blazor component
+\end{DoxyItemize}
+
+\begin{quote}
+{\itshape NOTE\+:} \doxylink{namespace_luthetus}{Luthetus} repositories use the state management library named {\ttfamily Fluxor} (\href{https://github.com/mrpmorris/Fluxor}{\texttt{github link}}). \end{quote}
+
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{<!-\/-\/\ App.razor\ -\/-\/>}
+\DoxyCodeLine{}
+\DoxyCodeLine{<Fluxor.Blazor.Web.StoreInitializer/>}
+\DoxyCodeLine{}
+\DoxyCodeLine{<Router\ AppAssembly="{}@typeof(App).Assembly"{}\ AdditionalAssemblies="{}new\ []\ \{\ typeof(MainLayout).Assembly\ \}"{}>}
+\DoxyCodeLine{\ \ \ \ <Found\ Context="{}routeData"{}>}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ <RouteView\ RouteData="{}@routeData"{}\ DefaultLayout="{}@typeof(MainLayout)"{}/>}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ <FocusOnNavigate\ RouteData="{}@routeData"{}\ Selector="{}h1"{}/>}
+\DoxyCodeLine{\ \ \ \ </Found>}
+\DoxyCodeLine{\ \ \ \ <NotFound>}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ <PageTitle>Not\ found</PageTitle>}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ <LayoutView\ Layout="{}@typeof(MainLayout)"{}>}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ <p\ role="{}alert"{}>Sorry,\ there's\ nothing\ at\ this\ address.</p>}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ </LayoutView>}
+\DoxyCodeLine{\ \ \ \ </NotFound>}
+\DoxyCodeLine{</Router>}
+
+\end{DoxyCode}
+
+
+
+\begin{DoxyItemize}
+\item In {\ttfamily Main\+Layout.\+razor} render the {\ttfamily \texorpdfstring{$<$}{<}\doxylink{class_luthetus_1_1_common_1_1_razor_lib_1_1_installations_1_1_displays_1_1_luthetus_common_initializer}{Luthetus.\+Common.\+Razor\+Lib.\+Installations.\+Displays.\+Luthetus\+Common\+Initializer} /\texorpdfstring{$>$}{>}} Blazor component
+\end{DoxyItemize}
+
+\begin{quote}
+{\itshape NOTE\+:} The placement of the {\ttfamily \texorpdfstring{$<$}{<}\doxylink{class_luthetus_1_1_common_1_1_razor_lib_1_1_installations_1_1_displays_1_1_luthetus_common_initializer}{Luthetus.\+Common.\+Razor\+Lib.\+Installations.\+Displays.\+Luthetus\+Common\+Initializer}/\texorpdfstring{$>$}{>}} Blazor component should be wrapped in an encompassing div. This allows one to cascade css. A later tutorial is intended to show this, as to keep the installation tutorial more to the point. \end{quote}
+
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{@inherits\ LayoutComponentBase}
+\DoxyCodeLine{}
+\DoxyCodeLine{<PageTitle>Luthetus.Common.Installation.ServerSide</PageTitle>}
+\DoxyCodeLine{}
+\DoxyCodeLine{<Luthetus.Common.RazorLib.Installations.Displays.LuthetusCommonInitializer/>}
+\DoxyCodeLine{}
+\DoxyCodeLine{<div\ class="{}page"{}>}
+\DoxyCodeLine{\ \ \ \ <div\ class="{}sidebar"{}>}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ <NavMenu\ />}
+\DoxyCodeLine{\ \ \ \ </div>}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ <main>}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ <div\ class="{}top-\/row\ px-\/4"{}>}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ <a\ href="{}https://docs.microsoft.com/aspnet/"{}\ target="{}\_blank"{}>About</a>}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ </div>}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ <article\ class="{}content\ px-\/4"{}>}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ @Body}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ </article>}
+\DoxyCodeLine{\ \ \ \ </main>}
+\DoxyCodeLine{</div>}
+
+\end{DoxyCode}
+\hypertarget{md__docs_2_common_2installation_autotoc_md25}{}\doxysection{\texorpdfstring{Next tutorial\+: \protect\doxysectlink{md__docs_2_common_2usage}{usage.md}{0}}{Next tutorial\+: {usage.md}}}\label{md__docs_2_common_2installation_autotoc_md25}

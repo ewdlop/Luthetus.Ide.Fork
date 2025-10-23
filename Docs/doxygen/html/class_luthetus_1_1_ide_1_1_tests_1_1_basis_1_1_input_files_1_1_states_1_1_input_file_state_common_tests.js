@@ -1,0 +1,6 @@
+var class_luthetus_1_1_ide_1_1_tests_1_1_basis_1_1_input_files_1_1_states_1_1_input_file_state_common_tests =
+[
+    [ "CanMoveBackwardsInHistory", "class_luthetus_1_1_ide_1_1_tests_1_1_basis_1_1_input_files_1_1_states_1_1_input_file_state_common_tests.html#a50370723b04e5e17dd59592e0b12e668", null ],
+    [ "CanMoveForwardsInHistory", "class_luthetus_1_1_ide_1_1_tests_1_1_basis_1_1_input_files_1_1_states_1_1_input_file_state_common_tests.html#a80f084e0d2435153a0c9a53aa7f9ed34", null ],
+    [ "GetOpenedTreeView", "class_luthetus_1_1_ide_1_1_tests_1_1_basis_1_1_input_files_1_1_states_1_1_input_file_state_common_tests.html#a6caf42364df7282fcf0a24456f0ff82a", null ]
+];

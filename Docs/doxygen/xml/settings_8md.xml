@@ -1,0 +1,151 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
+  <compounddef id="settings_8md" kind="file" language="Markdown">
+    <compoundname>settings.md</compoundname>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline><highlight class="normal">#<sp/>Blazor.Text.Editor<sp/>(Some<sp/>parts<sp/>of<sp/>this<sp/>are<sp/>outdated.<sp/>I<sp/>think<sp/>this<sp/>markdown<sp/>file<sp/>was<sp/>made<sp/>with<sp/>v5.0.0<sp/>I<sp/>will<sp/>update<sp/>this<sp/>markdown<sp/>file<sp/>to<sp/>v7.0.0<sp/>when<sp/>I<sp/>find<sp/>time)</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">##<sp/>Settings</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">###<sp/>Goal</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">-<sp/>Render<sp/>the<sp/>optional<sp/>static<sp/>dialog<sp/>containing<sp/>all<sp/>the<sp/>settings<sp/>available<sp/>for<sp/>change.</highlight></codeline>
+<codeline><highlight class="normal">-<sp/>Render<sp/>the<sp/>resizable<sp/>and<sp/>moveable<sp/>version<sp/>of<sp/>the<sp/>settings<sp/>dialog.</highlight></codeline>
+<codeline><highlight class="normal">-<sp/>Render<sp/>each<sp/>setting<sp/>individually<sp/>where<sp/>desired.</highlight></codeline>
+<codeline><highlight class="normal">-<sp/>Inform<sp/>about<sp/>optional<sp/>automatic<sp/>local<sp/>storage<sp/>integration<sp/>for<sp/>settings.</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">###<sp/>Steps</highlight></codeline>
+<codeline><highlight class="normal">-<sp/>I<sp/>will<sp/>assume<sp/>you<sp/>have<sp/>seen<sp/>the<sp/>previous<sp/>tutorials<sp/>during<sp/>this<sp/>one.</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">-<sp/>In<sp/>Index.razor<sp/>put<sp/>an<sp/>HTML<sp/>button<sp/>element<sp/>with<sp/>your<sp/>styling<sp/>of<sp/>choice.<sp/>I<sp/>will<sp/>put<sp/>mine<sp/>above<sp/>where<sp/>the<sp/>`TextEditorDisplay`<sp/>was<sp/>put<sp/>in<sp/>previous<sp/>tutorials.<sp/>See<sp/>the<sp/>following<sp/>code<sp/>snippet.</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">```html</highlight></codeline>
+<codeline><highlight class="normal">&lt;button<sp/>class=&quot;btn<sp/>btn-primary&quot;&gt;</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline><highlight class="normal">&lt;/button&gt;</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">&lt;TextEditorDisplay<sp/>TextEditorKey=&quot;IndexTextEditorKey&quot;/&gt;</highlight></codeline>
+<codeline><highlight class="normal">```</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">-<sp/>Give<sp/>the<sp/>button<sp/>text<sp/>of<sp/>`&quot;Text<sp/>Editor<sp/>Settings&quot;`.<sp/>As<sp/>well<sp/>an<sp/>@onclick<sp/>which<sp/>invokes<sp/>the<sp/>unimplemented<sp/>method<sp/>`OpenTextEditorSettingsDialog`.<sp/>See<sp/>the<sp/>following<sp/>code<sp/>snippet.</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">```html</highlight></codeline>
+<codeline><highlight class="normal">&lt;button<sp/>class=&quot;btn<sp/>btn-primary&quot;</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>@onclick=&quot;OpenTextEditorSettingsDialog&quot;&gt;</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>Text<sp/>Editor<sp/>Settings</highlight></codeline>
+<codeline><highlight class="normal">&lt;/button&gt;</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">&lt;TextEditorDisplay<sp/>TextEditorKey=&quot;IndexTextEditorKey&quot;/&gt;</highlight></codeline>
+<codeline><highlight class="normal">```</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">```csharp</highlight></codeline>
+<codeline><highlight class="normal">@code<sp/>{</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>[Inject]</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>private<sp/>ITextEditorService<sp/>TextEditorService<sp/>{<sp/>get;<sp/>set;<sp/>}<sp/>=<sp/>null!;</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>private<sp/>static<sp/>readonly<sp/>TextEditorKey<sp/>IndexTextEditorKey<sp/>=<sp/></highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>TextEditorKey.NewTextEditorKey();</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>protected<sp/>override<sp/>void<sp/>OnInitialized()</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>TextEditorService.RegisterCSharpTextEditor(</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>IndexTextEditorKey,</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>string.Empty);</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>base.OnInitialized();</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>private<sp/>void<sp/>OpenTextEditorSettingsDialog()</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>throw<sp/>new<sp/>NotImplementedException();</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline><highlight class="normal">}</highlight></codeline>
+<codeline><highlight class="normal">```</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">-<sp/>Implement<sp/>the<sp/>method<sp/>`OpenTextEditorSettingsDialog`<sp/>to<sp/>contain<sp/>`TextEditorService.ShowSettingsDialog();`.<sp/>See<sp/>the<sp/>following<sp/>code<sp/>snippet</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">```csharp</highlight></codeline>
+<codeline><highlight class="normal">private<sp/>void<sp/>OpenTextEditorSettingsDialog()</highlight></codeline>
+<codeline><highlight class="normal">{</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>TextEditorService.ShowSettingsDialog();</highlight></codeline>
+<codeline><highlight class="normal">}</highlight></codeline>
+<codeline><highlight class="normal">```</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">-<sp/>Now<sp/>run<sp/>the<sp/>program<sp/>and<sp/>click<sp/>the<sp/>button.<sp/>You<sp/>will<sp/>see<sp/>the<sp/>static<sp/>settings<sp/>dialog<sp/>as<sp/>shown<sp/>in<sp/>this<sp/>gif.</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">![Static<sp/>settings<sp/>dialog](/Images/Gifs/20_static-dialog.gif)</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">-<sp/>Modify<sp/>the<sp/>line<sp/>`TextEditorService.ShowSettingsDialog();`.<sp/>Pass<sp/>in<sp/>as<sp/>an<sp/>argument<sp/>`true`<sp/>for<sp/>the<sp/>optional<sp/>parameter<sp/>named<sp/>`isResizable`.</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">-<sp/>Now<sp/>run<sp/>the<sp/>program<sp/>and<sp/>click<sp/>the<sp/>button.<sp/>You<sp/>will<sp/>see<sp/>the<sp/>resizable<sp/>and<sp/>moveable<sp/>settings<sp/>dialog<sp/>as<sp/>shown<sp/>in<sp/>this<sp/>gif.</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">![Dynamic<sp/>settings<sp/>dialog](/Images/Gifs/20_dynamic-dialog.gif)</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">-<sp/>Add<sp/>the<sp/>following<sp/>using<sp/>statement<sp/>to<sp/>Index.razor<sp/>if<sp/>it<sp/>is<sp/>not<sp/>already<sp/>there.</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">```html</highlight></codeline>
+<codeline><highlight class="normal">@using<sp/>BlazorTextEditor.RazorLib.HelperComponents</highlight></codeline>
+<codeline><highlight class="normal">```</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">-<sp/>Above<sp/>where<sp/>the<sp/>button<sp/>is<sp/>to<sp/>open<sp/>the<sp/>settings<sp/>dialog.<sp/>Render<sp/>the<sp/>razor<sp/>components<sp/>shown<sp/>in<sp/>the<sp/>following<sp/>markup.</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">```html</highlight></codeline>
+<codeline><highlight class="normal">&lt;TextEditorInputFontSize/&gt;</highlight></codeline>
+<codeline><highlight class="normal">&lt;TextEditorInputShowNewLines/&gt;</highlight></codeline>
+<codeline><highlight class="normal">&lt;TextEditorInputShowWhitespace/&gt;</highlight></codeline>
+<codeline><highlight class="normal">&lt;TextEditorInputTheme/&gt;</highlight></codeline>
+<codeline><highlight class="normal">```</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">-<sp/>Now<sp/>run<sp/>the<sp/>program<sp/>and<sp/>you<sp/>will<sp/>find<sp/>every<sp/>settings<sp/>input<sp/>from<sp/>the<sp/>dialog<sp/>will<sp/>be<sp/>on<sp/>the<sp/>page<sp/>itself.<sp/>`You<sp/>can<sp/>place<sp/>these<sp/>inputs<sp/>wherever`<sp/>you&apos;d<sp/>like<sp/>as<sp/>`everything<sp/>is<sp/>Dependency<sp/>Injected`.</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">![Inline<sp/>settings<sp/>dialog](/Images/Gifs/20_inline-settings.gif)</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">-<sp/>The<sp/>nuget<sp/>package<sp/>by<sp/>default<sp/>will<sp/>integrate<sp/>with<sp/>JavaScript<sp/>local<sp/>storage.<sp/>One<sp/>can<sp/>turn<sp/>this<sp/>off<sp/>inorder<sp/>to<sp/>reference<sp/>the<sp/>NuGet<sp/>Package<sp/>from<sp/>a<sp/>C#<sp/>Project<sp/>which<sp/>cannot<sp/>dependency<sp/>inject<sp/>the<sp/>IJSRuntime.</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">-<sp/>Add<sp/>an<sp/>HTML<sp/>button<sp/>element,<sp/>with<sp/>styling<sp/>of<sp/>your<sp/>choice,<sp/>on<sp/>the<sp/>Index.razor<sp/>page.<sp/>Give<sp/>the<sp/>button<sp/>text<sp/>of<sp/>`&quot;Read<sp/>Local<sp/>Storage&quot;`<sp/>and<sp/>an<sp/>@onclick<sp/>that<sp/>invoke<sp/>the<sp/>unimplemented<sp/>method:<sp/>`async<sp/>Task<sp/>ReadLocalStorage()`<sp/>see<sp/>the<sp/>following<sp/>code<sp/>snippets.</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">```html</highlight></codeline>
+<codeline><highlight class="normal">&lt;button<sp/>class=&quot;btn<sp/>btn-primary&quot;</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>@onclick=&quot;ReadLocalStorage&quot;&gt;</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>Read<sp/>Local<sp/>Storage</highlight></codeline>
+<codeline><highlight class="normal">&lt;/button&gt;</highlight></codeline>
+<codeline><highlight class="normal">```</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">```csharp</highlight></codeline>
+<codeline><highlight class="normal">private<sp/>async<sp/>Task<sp/>ReadLocalStorage()</highlight></codeline>
+<codeline><highlight class="normal">{</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline><highlight class="normal">}</highlight></codeline>
+<codeline><highlight class="normal">```</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">-<sp/>Implement<sp/>`ReadLocalStorage()`<sp/>to<sp/>`await<sp/>TextEditorService.SetTextEditorOptionsFromLocalStorageAsync();`.<sp/>See<sp/>the<sp/>following<sp/>code<sp/>snippet.</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">```csharp</highlight></codeline>
+<codeline><highlight class="normal">private<sp/>async<sp/>Task<sp/>ReadLocalStorage()</highlight></codeline>
+<codeline><highlight class="normal">{</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>await<sp/>TextEditorService.SetTextEditorOptionsFromLocalStorageAsync();</highlight></codeline>
+<codeline><highlight class="normal">}</highlight></codeline>
+<codeline><highlight class="normal">```</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">-<sp/>Run<sp/>the<sp/>application<sp/>and<sp/>then<sp/>modify<sp/>your<sp/>settings.<sp/>I<sp/>will<sp/>set<sp/>my<sp/>theme<sp/>to<sp/>the<sp/>light<sp/>theme.<sp/></highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">-<sp/>Afterwards<sp/>reload<sp/>the<sp/>webpage,<sp/>but<sp/>do<sp/>not<sp/>clear<sp/>your<sp/>cache.<sp/>Once<sp/>the<sp/>webpage<sp/>loads<sp/>proceed<sp/>to<sp/>click<sp/>the<sp/>`Read<sp/>Local<sp/>Storage`<sp/>button.<sp/>Your<sp/>theme<sp/>should<sp/>change<sp/>to<sp/>the<sp/>light<sp/>theme<sp/>as<sp/>the<sp/>default<sp/>was<sp/>dark<sp/>theme<sp/>and<sp/>your<sp/>local<sp/>storage<sp/>had<sp/>light<sp/>theme<sp/>stored.</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">-<sp/>As<sp/>of<sp/>v5.0.0<sp/>of<sp/>this<sp/>NugetPackage<sp/>the<sp/>following<sp/>are<sp/>stored<sp/>in<sp/>local<sp/>storage<sp/>@onchange</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">-<sp/>local<sp/>storage:<sp/>int?<sp/>FontSizeInPixels</highlight></codeline>
+<codeline><highlight class="normal">-<sp/>local<sp/>storage:<sp/>Theme?<sp/>Theme</highlight></codeline>
+<codeline><highlight class="normal">-<sp/>local<sp/>storage:<sp/>bool?<sp/>ShowWhitespace</highlight></codeline>
+<codeline><highlight class="normal">-<sp/>local<sp/>storage:<sp/>bool?<sp/>ShowNewlines</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">-<sp/>As<sp/>of<sp/>writing<sp/>this<sp/>tutorial<sp/>however,<sp/>I<sp/>am<sp/>suddenly<sp/>unable<sp/>to<sp/>get<sp/>my<sp/>theme<sp/>from<sp/>local<sp/>storage.<sp/>It<sp/>just<sp/>keeps<sp/>being<sp/>unrecognized<sp/>and<sp/>using<sp/>the<sp/>Unset<sp/>theme.</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">-<sp/>A<sp/>good<sp/>way<sp/>to<sp/>go<sp/>about<sp/>making<sp/>use<sp/>of<sp/>the<sp/>local<sp/>storage<sp/>local.<sp/>Is<sp/>to<sp/>OnAfterRenderAsync<sp/>of<sp/>a<sp/>&apos;top<sp/>level<sp/>component&apos;.<sp/>In<sp/>the<sp/>if(firstRender)<sp/>{<sp/>await<sp/>readLocalStorage();<sp/>}</highlight></codeline>
+    </programlisting>
+    <location file="Docs/TextEditor/settings.md"/>
+  </compounddef>
+</doxygen>

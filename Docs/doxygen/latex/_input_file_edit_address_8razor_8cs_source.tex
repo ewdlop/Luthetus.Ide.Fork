@@ -1,0 +1,80 @@
+\doxysection{Input\+File\+Edit\+Address.\+razor.\+cs}
+\hypertarget{_input_file_edit_address_8razor_8cs_source}{}\label{_input_file_edit_address_8razor_8cs_source}\index{Source/Lib/Ide/Ide.RazorLib/InputFiles/Displays/InputFileEditAddress.razor.cs@{Source/Lib/Ide/Ide.RazorLib/InputFiles/Displays/InputFileEditAddress.razor.cs}}
+\mbox{\hyperlink{_input_file_edit_address_8razor_8cs}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{_input_file_edit_address_8razor_8cs_source_l00001}00001\ \textcolor{keyword}{using\ }Microsoft.AspNetCore.Components;}
+\DoxyCodeLine{\Hypertarget{_input_file_edit_address_8razor_8cs_source_l00002}00002\ \textcolor{keyword}{using\ }Microsoft.AspNetCore.Components.Web;}
+\DoxyCodeLine{\Hypertarget{_input_file_edit_address_8razor_8cs_source_l00003}00003\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_luthetus_1_1_common_1_1_razor_lib_1_1_keyboards_1_1_models}{Luthetus.Common.RazorLib.Keyboards.Models}};}
+\DoxyCodeLine{\Hypertarget{_input_file_edit_address_8razor_8cs_source_l00004}00004\ }
+\DoxyCodeLine{\Hypertarget{_input_file_edit_address_8razor_8cs_source_l00005}00005\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespace_luthetus_1_1_ide_1_1_razor_lib_1_1_input_files_1_1_displays}{Luthetus.Ide.RazorLib.InputFiles.Displays}};}
+\DoxyCodeLine{\Hypertarget{_input_file_edit_address_8razor_8cs_source_l00006}00006\ }
+\DoxyCodeLine{\Hypertarget{_input_file_edit_address_8razor_8cs_source_l00007}\mbox{\hyperlink{class_luthetus_1_1_ide_1_1_razor_lib_1_1_input_files_1_1_displays_1_1_input_file_edit_address}{00007}}\ \textcolor{keyword}{public}\ \textcolor{keyword}{partial\ class\ }\mbox{\hyperlink{class_luthetus_1_1_ide_1_1_razor_lib_1_1_input_files_1_1_displays_1_1_input_file_edit_address}{InputFileEditAddress}}\ :\ ComponentBase}
+\DoxyCodeLine{\Hypertarget{_input_file_edit_address_8razor_8cs_source_l00008}00008\ \{}
+\DoxyCodeLine{\Hypertarget{_input_file_edit_address_8razor_8cs_source_l00009}00009\ \ \ \ \ [Parameter,\ EditorRequired]}
+\DoxyCodeLine{\Hypertarget{_input_file_edit_address_8razor_8cs_source_l00010}\mbox{\hyperlink{class_luthetus_1_1_ide_1_1_razor_lib_1_1_input_files_1_1_displays_1_1_input_file_edit_address_adfec67b4bd6955ac0645fb904f8bdc73}{00010}}\ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keywordtype}{string}\ \mbox{\hyperlink{class_luthetus_1_1_ide_1_1_razor_lib_1_1_input_files_1_1_displays_1_1_input_file_edit_address_adfec67b4bd6955ac0645fb904f8bdc73}{InitialInputValue}}\ \{\ \textcolor{keyword}{get};\ \textcolor{keyword}{set};\ \}\ =\ \textcolor{keyword}{null}!;}
+\DoxyCodeLine{\Hypertarget{_input_file_edit_address_8razor_8cs_source_l00011}00011\ \ \ \ \ [Parameter,\ EditorRequired]}
+\DoxyCodeLine{\Hypertarget{_input_file_edit_address_8razor_8cs_source_l00012}\mbox{\hyperlink{class_luthetus_1_1_ide_1_1_razor_lib_1_1_input_files_1_1_displays_1_1_input_file_edit_address_aa86b1193f2967784c1fb566170814467}{00012}}\ \ \ \ \ \textcolor{keyword}{public}\ Func<string,\ Task>\ \mbox{\hyperlink{class_luthetus_1_1_ide_1_1_razor_lib_1_1_input_files_1_1_displays_1_1_input_file_edit_address_aa86b1193f2967784c1fb566170814467}{OnFocusOutCallbackAsync}}\ \{\ \textcolor{keyword}{get};\ \textcolor{keyword}{set};\ \}\ =\ \textcolor{keyword}{null}!;}
+\DoxyCodeLine{\Hypertarget{_input_file_edit_address_8razor_8cs_source_l00013}00013\ \ \ \ \ [Parameter,\ EditorRequired]}
+\DoxyCodeLine{\Hypertarget{_input_file_edit_address_8razor_8cs_source_l00014}\mbox{\hyperlink{class_luthetus_1_1_ide_1_1_razor_lib_1_1_input_files_1_1_displays_1_1_input_file_edit_address_a4f568dc8581d7ba4792fc35525223d74}{00014}}\ \ \ \ \ \textcolor{keyword}{public}\ Func<Task>\ \mbox{\hyperlink{class_luthetus_1_1_ide_1_1_razor_lib_1_1_input_files_1_1_displays_1_1_input_file_edit_address_a4f568dc8581d7ba4792fc35525223d74}{OnEscapeKeyDownCallbackAsync}}\ \{\ \textcolor{keyword}{get};\ \textcolor{keyword}{set};\ \}\ =\ \textcolor{keyword}{null}!;}
+\DoxyCodeLine{\Hypertarget{_input_file_edit_address_8razor_8cs_source_l00015}00015\ }
+\DoxyCodeLine{\Hypertarget{_input_file_edit_address_8razor_8cs_source_l00016}00016\ \ \ \ \ \textcolor{keyword}{private}\ \textcolor{keywordtype}{string}\ \_editForAddressValue\ =\ \textcolor{keywordtype}{string}.Empty;}
+\DoxyCodeLine{\Hypertarget{_input_file_edit_address_8razor_8cs_source_l00017}00017\ \ \ \ \ \textcolor{keyword}{private}\ ElementReference?\ \_inputTextEditForAddressElementReference;}
+\DoxyCodeLine{\Hypertarget{_input_file_edit_address_8razor_8cs_source_l00018}00018\ \ \ \ \ \textcolor{keyword}{private}\ \textcolor{keywordtype}{bool}\ \_isCancelled;}
+\DoxyCodeLine{\Hypertarget{_input_file_edit_address_8razor_8cs_source_l00019}00019\ }
+\DoxyCodeLine{\Hypertarget{_input_file_edit_address_8razor_8cs_source_l00020}\mbox{\hyperlink{class_luthetus_1_1_ide_1_1_razor_lib_1_1_input_files_1_1_displays_1_1_input_file_edit_address_a77acd91c2204ef19d276e50dc097fb85}{00020}}\ \ \ \ \ \textcolor{keyword}{protected}\ \textcolor{keyword}{override}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_luthetus_1_1_ide_1_1_razor_lib_1_1_input_files_1_1_displays_1_1_input_file_edit_address_a77acd91c2204ef19d276e50dc097fb85}{OnInitialized}}()}
+\DoxyCodeLine{\Hypertarget{_input_file_edit_address_8razor_8cs_source_l00021}00021\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_input_file_edit_address_8razor_8cs_source_l00022}00022\ \ \ \ \ \ \ \ \ \_editForAddressValue\ =\ \mbox{\hyperlink{class_luthetus_1_1_ide_1_1_razor_lib_1_1_input_files_1_1_displays_1_1_input_file_edit_address_adfec67b4bd6955ac0645fb904f8bdc73}{InitialInputValue}};}
+\DoxyCodeLine{\Hypertarget{_input_file_edit_address_8razor_8cs_source_l00023}00023\ }
+\DoxyCodeLine{\Hypertarget{_input_file_edit_address_8razor_8cs_source_l00024}00024\ \ \ \ \ \ \ \ \ base.OnInitialized();}
+\DoxyCodeLine{\Hypertarget{_input_file_edit_address_8razor_8cs_source_l00025}00025\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_input_file_edit_address_8razor_8cs_source_l00026}00026\ }
+\DoxyCodeLine{\Hypertarget{_input_file_edit_address_8razor_8cs_source_l00027}\mbox{\hyperlink{class_luthetus_1_1_ide_1_1_razor_lib_1_1_input_files_1_1_displays_1_1_input_file_edit_address_accf227d3045c22843d93ee1a21dff49d}{00027}}\ \ \ \ \ \textcolor{keyword}{protected}\ \textcolor{keyword}{override}\ async\ Task\ \mbox{\hyperlink{class_luthetus_1_1_ide_1_1_razor_lib_1_1_input_files_1_1_displays_1_1_input_file_edit_address_accf227d3045c22843d93ee1a21dff49d}{OnAfterRenderAsync}}(\textcolor{keywordtype}{bool}\ firstRender)}
+\DoxyCodeLine{\Hypertarget{_input_file_edit_address_8razor_8cs_source_l00028}00028\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_input_file_edit_address_8razor_8cs_source_l00029}00029\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (firstRender)}
+\DoxyCodeLine{\Hypertarget{_input_file_edit_address_8razor_8cs_source_l00030}00030\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_input_file_edit_address_8razor_8cs_source_l00031}00031\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{try}}
+\DoxyCodeLine{\Hypertarget{_input_file_edit_address_8razor_8cs_source_l00032}00032\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_input_file_edit_address_8razor_8cs_source_l00033}00033\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\_inputTextEditForAddressElementReference\ is\ not\ \textcolor{keyword}{null})}
+\DoxyCodeLine{\Hypertarget{_input_file_edit_address_8razor_8cs_source_l00034}00034\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_input_file_edit_address_8razor_8cs_source_l00035}00035\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ await\ \_inputTextEditForAddressElementReference.Value}
+\DoxyCodeLine{\Hypertarget{_input_file_edit_address_8razor_8cs_source_l00036}00036\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ .FocusAsync()}
+\DoxyCodeLine{\Hypertarget{_input_file_edit_address_8razor_8cs_source_l00037}00037\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ .ConfigureAwait(\textcolor{keyword}{false});}
+\DoxyCodeLine{\Hypertarget{_input_file_edit_address_8razor_8cs_source_l00038}00038\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_input_file_edit_address_8razor_8cs_source_l00039}00039\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_input_file_edit_address_8razor_8cs_source_l00040}00040\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{catch}\ (Exception)}
+\DoxyCodeLine{\Hypertarget{_input_file_edit_address_8razor_8cs_source_l00041}00041\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_input_file_edit_address_8razor_8cs_source_l00042}00042\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ 2023-\/04-\/18:\ The\ app\ has\ had\ a\ bug\ where\ it\ "{}freezes"{}\ and\ must\ be\ restarted.}}
+\DoxyCodeLine{\Hypertarget{_input_file_edit_address_8razor_8cs_source_l00043}00043\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ \ \ \ \ This\ bug\ is\ seemingly\ happening\ randomly.\ I\ have\ a\ suspicion}}
+\DoxyCodeLine{\Hypertarget{_input_file_edit_address_8razor_8cs_source_l00044}00044\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ \ \ \ \ that\ there\ are\ race-\/condition\ exceptions\ occurring\ with\ "{}FocusAsync"{}}}
+\DoxyCodeLine{\Hypertarget{_input_file_edit_address_8razor_8cs_source_l00045}00045\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ \ \ \ \ on\ an\ ElementReference.}}
+\DoxyCodeLine{\Hypertarget{_input_file_edit_address_8razor_8cs_source_l00046}00046\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_input_file_edit_address_8razor_8cs_source_l00047}00047\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_input_file_edit_address_8razor_8cs_source_l00048}00048\ }
+\DoxyCodeLine{\Hypertarget{_input_file_edit_address_8razor_8cs_source_l00049}00049\ \ \ \ \ \ \ \ \ await\ base.OnAfterRenderAsync(firstRender);}
+\DoxyCodeLine{\Hypertarget{_input_file_edit_address_8razor_8cs_source_l00050}00050\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_input_file_edit_address_8razor_8cs_source_l00051}00051\ }
+\DoxyCodeLine{\Hypertarget{_input_file_edit_address_8razor_8cs_source_l00052}00052\ \ \ \ \ \textcolor{keyword}{private}\ async\ Task\ InputTextEditForAddressOnFocusOutAsync()}
+\DoxyCodeLine{\Hypertarget{_input_file_edit_address_8razor_8cs_source_l00053}00053\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_input_file_edit_address_8razor_8cs_source_l00054}00054\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!\_isCancelled)}
+\DoxyCodeLine{\Hypertarget{_input_file_edit_address_8razor_8cs_source_l00055}00055\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_input_file_edit_address_8razor_8cs_source_l00056}00056\ \ \ \ \ \ \ \ \ \ \ \ \ await\ \mbox{\hyperlink{class_luthetus_1_1_ide_1_1_razor_lib_1_1_input_files_1_1_displays_1_1_input_file_edit_address_aa86b1193f2967784c1fb566170814467}{OnFocusOutCallbackAsync}}}
+\DoxyCodeLine{\Hypertarget{_input_file_edit_address_8razor_8cs_source_l00057}00057\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ .Invoke(\_editForAddressValue)}
+\DoxyCodeLine{\Hypertarget{_input_file_edit_address_8razor_8cs_source_l00058}00058\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ .ConfigureAwait(\textcolor{keyword}{false});}
+\DoxyCodeLine{\Hypertarget{_input_file_edit_address_8razor_8cs_source_l00059}00059\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_input_file_edit_address_8razor_8cs_source_l00060}00060\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_input_file_edit_address_8razor_8cs_source_l00061}00061\ }
+\DoxyCodeLine{\Hypertarget{_input_file_edit_address_8razor_8cs_source_l00062}00062\ \ \ \ \ \textcolor{keyword}{private}\ async\ Task\ InputTextEditForAddressOnKeyDownAsync(KeyboardEventArgs\ keyboardEventArgs)}
+\DoxyCodeLine{\Hypertarget{_input_file_edit_address_8razor_8cs_source_l00063}00063\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_input_file_edit_address_8razor_8cs_source_l00064}00064\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (keyboardEventArgs.Key\ ==\ KeyboardKeyFacts.MetaKeys.ESCAPE)}
+\DoxyCodeLine{\Hypertarget{_input_file_edit_address_8razor_8cs_source_l00065}00065\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_input_file_edit_address_8razor_8cs_source_l00066}00066\ \ \ \ \ \ \ \ \ \ \ \ \ \_isCancelled\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{\Hypertarget{_input_file_edit_address_8razor_8cs_source_l00067}00067\ \ \ \ \ \ \ \ \ \ \ \ \ await\ \mbox{\hyperlink{class_luthetus_1_1_ide_1_1_razor_lib_1_1_input_files_1_1_displays_1_1_input_file_edit_address_a4f568dc8581d7ba4792fc35525223d74}{OnEscapeKeyDownCallbackAsync}}.Invoke().ConfigureAwait(\textcolor{keyword}{false});}
+\DoxyCodeLine{\Hypertarget{_input_file_edit_address_8razor_8cs_source_l00068}00068\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_input_file_edit_address_8razor_8cs_source_l00069}00069\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ (keyboardEventArgs.Code\ ==\ KeyboardKeyFacts.WhitespaceCodes.ENTER\_CODE)}
+\DoxyCodeLine{\Hypertarget{_input_file_edit_address_8razor_8cs_source_l00070}00070\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_input_file_edit_address_8razor_8cs_source_l00071}00071\ \ \ \ \ \ \ \ \ \ \ \ \ await\ InputTextEditForAddressOnFocusOutAsync().ConfigureAwait(\textcolor{keyword}{false});}
+\DoxyCodeLine{\Hypertarget{_input_file_edit_address_8razor_8cs_source_l00072}00072\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_input_file_edit_address_8razor_8cs_source_l00073}00073\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_input_file_edit_address_8razor_8cs_source_l00074}00074\ \}}
+
+\end{DoxyCode}

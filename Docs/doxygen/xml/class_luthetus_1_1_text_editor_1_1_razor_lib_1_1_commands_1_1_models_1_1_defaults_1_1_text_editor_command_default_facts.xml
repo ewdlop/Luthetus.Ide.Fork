@@ -1,0 +1,1272 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
+  <compounddef id="class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_commands_1_1_models_1_1_defaults_1_1_text_editor_command_default_facts" kind="class" language="C#" prot="public">
+    <compoundname>Luthetus::TextEditor::RazorLib::Commands::Models::Defaults::TextEditorCommandDefaultFacts</compoundname>
+    <sectiondef kind="public-static-attrib">
+      <memberdef kind="variable" id="class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_commands_1_1_models_1_1_defaults_1_1_text_editor_command_default_facts_1a5ab202b6201b0c1430350c5bba04069b" prot="public" static="yes" mutable="no">
+        <type>readonly <ref refid="class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_commands_1_1_models_1_1_text_editor_command" kindref="compound">TextEditorCommand</ref></type>
+        <definition>readonly TextEditorCommand Luthetus.TextEditor.RazorLib.Commands.Models.Defaults.TextEditorCommandDefaultFacts.DoNothingDiscard</definition>
+        <argsstring></argsstring>
+        <name>DoNothingDiscard</name>
+        <qualifiedname>Luthetus.TextEditor.RazorLib.Commands.Models.Defaults.TextEditorCommandDefaultFacts.DoNothingDiscard</qualifiedname>
+        <initializer>= new(
+        &quot;DoNothingDiscard&quot;, &quot;defaults_do-nothing-discard&quot;, false, false, TextEditKind.None, null,
+        interfaceCommandArgs =&gt; Task.CompletedTask)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Lib/TextEditor/Commands/Models/Defaults/TextEditorCommandDefaultFacts.cs" line="15" column="46" bodyfile="Source/Lib/TextEditor/Commands/Models/Defaults/TextEditorCommandDefaultFacts.cs" bodystart="15" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_commands_1_1_models_1_1_defaults_1_1_text_editor_command_default_facts_1a9e4c42345f5b4e3706b10f75ed4161ab" prot="public" static="yes" mutable="no">
+        <type>readonly <ref refid="class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_commands_1_1_models_1_1_text_editor_command" kindref="compound">TextEditorCommand</ref></type>
+        <definition>readonly TextEditorCommand Luthetus.TextEditor.RazorLib.Commands.Models.Defaults.TextEditorCommandDefaultFacts.Copy</definition>
+        <argsstring></argsstring>
+        <name>Copy</name>
+        <qualifiedname>Luthetus.TextEditor.RazorLib.Commands.Models.Defaults.TextEditorCommandDefaultFacts.Copy</qualifiedname>
+        <initializer>= new(
+        &quot;Copy&quot;, &quot;defaults_copy&quot;, false, false, TextEditKind.None, null,
+        interfaceCommandArgs =&gt;
+        {
+            var commandArgs = (<ref refid="class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_commands_1_1_models_1_1_text_editor_command_args" kindref="compound">TextEditorCommandArgs</ref>)interfaceCommandArgs;
+            
+            var modelModifier = commandArgs.EditContext.GetModelModifier(commandArgs.ModelResourceUri);
+            var viewModelModifier = commandArgs.EditContext.GetViewModelModifier(commandArgs.ViewModelKey);
+            var cursorModifierBag = commandArgs.EditContext.GetCursorModifierBag(viewModelModifier?.ViewModel);
+            var primaryCursorModifier = commandArgs.EditContext.GetPrimaryCursorModifier(cursorModifierBag);
+
+            <ref refid="_lib_2_ide_2_host_8_blazor_server_side_2_program_8cs_1af2d0c02efe3fbc2d94e5b6e316777c4d" kindref="member">if</ref> (modelModifier is null || viewModelModifier is null || cursorModifierBag is null || primaryCursorModifier is null)
+                return Task.CompletedTask;
+                
+            return <ref refid="class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_commands_1_1_models_1_1_defaults_1_1_text_editor_command_default_functions_1a47048002b2ba615f82e55c8622780c40" kindref="member">TextEditorCommandDefaultFunctions.CopyAsync</ref>(
+                commandArgs.EditContext,
+                modelModifier,
+                viewModelModifier,
+                cursorModifierBag,
+                commandArgs.ServiceProvider.GetRequiredService&lt;<ref refid="interface_luthetus_1_1_common_1_1_razor_lib_1_1_clipboards_1_1_models_1_1_i_clipboard_service" kindref="compound">IClipboardService</ref>&gt;());
+        })</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Lib/TextEditor/Commands/Models/Defaults/TextEditorCommandDefaultFacts.cs" line="19" column="46" bodyfile="Source/Lib/TextEditor/Commands/Models/Defaults/TextEditorCommandDefaultFacts.cs" bodystart="19" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_commands_1_1_models_1_1_defaults_1_1_text_editor_command_default_facts_1a67545fc18879848b3cf34cd8121f8d60" prot="public" static="yes" mutable="no">
+        <type>readonly <ref refid="class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_commands_1_1_models_1_1_text_editor_command" kindref="compound">TextEditorCommand</ref></type>
+        <definition>readonly TextEditorCommand Luthetus.TextEditor.RazorLib.Commands.Models.Defaults.TextEditorCommandDefaultFacts.Cut</definition>
+        <argsstring></argsstring>
+        <name>Cut</name>
+        <qualifiedname>Luthetus.TextEditor.RazorLib.Commands.Models.Defaults.TextEditorCommandDefaultFacts.Cut</qualifiedname>
+        <initializer>= new(
+        &quot;Cut&quot;, &quot;defaults_cut&quot;, false, true, TextEditKind.None, null,
+        interfaceCommandArgs =&gt;
+        {
+            var commandArgs = (<ref refid="class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_commands_1_1_models_1_1_text_editor_command_args" kindref="compound">TextEditorCommandArgs</ref>)interfaceCommandArgs;
+            
+            var modelModifier = commandArgs.EditContext.GetModelModifier(commandArgs.ModelResourceUri);
+            var viewModelModifier = commandArgs.EditContext.GetViewModelModifier(commandArgs.ViewModelKey);
+            var cursorModifierBag = commandArgs.EditContext.GetCursorModifierBag(viewModelModifier?.ViewModel);
+            var primaryCursorModifier = commandArgs.EditContext.GetPrimaryCursorModifier(cursorModifierBag);
+
+            <ref refid="_lib_2_ide_2_host_8_blazor_server_side_2_program_8cs_1af2d0c02efe3fbc2d94e5b6e316777c4d" kindref="member">if</ref> (modelModifier is null || viewModelModifier is null || cursorModifierBag is null || primaryCursorModifier is null)
+                return Task.CompletedTask;
+                
+            return <ref refid="class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_commands_1_1_models_1_1_defaults_1_1_text_editor_command_default_functions_1a7f483c015c3109f40c2605d9842c15ee" kindref="member">TextEditorCommandDefaultFunctions.CutAsync</ref>(
+                commandArgs.EditContext,
+                modelModifier,
+                viewModelModifier,
+                cursorModifierBag,
+                commandArgs.ServiceProvider.GetRequiredService&lt;<ref refid="interface_luthetus_1_1_common_1_1_razor_lib_1_1_clipboards_1_1_models_1_1_i_clipboard_service" kindref="compound">IClipboardService</ref>&gt;());
+        })</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Lib/TextEditor/Commands/Models/Defaults/TextEditorCommandDefaultFacts.cs" line="41" column="46" bodyfile="Source/Lib/TextEditor/Commands/Models/Defaults/TextEditorCommandDefaultFacts.cs" bodystart="41" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_commands_1_1_models_1_1_defaults_1_1_text_editor_command_default_facts_1ac03bdff6a4b3cf94d1e6f045f6b49d09" prot="public" static="yes" mutable="no">
+        <type>readonly <ref refid="class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_commands_1_1_models_1_1_text_editor_command" kindref="compound">TextEditorCommand</ref></type>
+        <definition>readonly TextEditorCommand Luthetus.TextEditor.RazorLib.Commands.Models.Defaults.TextEditorCommandDefaultFacts.PasteCommand</definition>
+        <argsstring></argsstring>
+        <name>PasteCommand</name>
+        <qualifiedname>Luthetus.TextEditor.RazorLib.Commands.Models.Defaults.TextEditorCommandDefaultFacts.PasteCommand</qualifiedname>
+        <initializer>= new(
+        &quot;Paste&quot;, &quot;defaults_paste&quot;, false, true, TextEditKind.Other, &quot;defaults_paste&quot;,
+        interfaceCommandArgs =&gt;
+        {
+            var commandArgs = (<ref refid="class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_commands_1_1_models_1_1_text_editor_command_args" kindref="compound">TextEditorCommandArgs</ref>)interfaceCommandArgs;
+            
+            var modelModifier = commandArgs.EditContext.GetModelModifier(commandArgs.ModelResourceUri);
+            var viewModelModifier = commandArgs.EditContext.GetViewModelModifier(commandArgs.ViewModelKey);
+            var cursorModifierBag = commandArgs.EditContext.GetCursorModifierBag(viewModelModifier?.ViewModel);
+            var primaryCursorModifier = commandArgs.EditContext.GetPrimaryCursorModifier(cursorModifierBag);
+
+            <ref refid="_lib_2_ide_2_host_8_blazor_server_side_2_program_8cs_1af2d0c02efe3fbc2d94e5b6e316777c4d" kindref="member">if</ref> (modelModifier is null || viewModelModifier is null || cursorModifierBag is null || primaryCursorModifier is null)
+                return Task.CompletedTask;
+                
+            return <ref refid="class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_commands_1_1_models_1_1_defaults_1_1_text_editor_command_default_functions_1a1be03a0683012e4b80bca32f15397fab" kindref="member">TextEditorCommandDefaultFunctions.PasteAsync</ref>(
+                commandArgs.EditContext,
+                modelModifier,
+                viewModelModifier,
+                cursorModifierBag,
+                commandArgs.ServiceProvider.GetRequiredService&lt;<ref refid="interface_luthetus_1_1_common_1_1_razor_lib_1_1_clipboards_1_1_models_1_1_i_clipboard_service" kindref="compound">IClipboardService</ref>&gt;());
+        })</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Lib/TextEditor/Commands/Models/Defaults/TextEditorCommandDefaultFacts.cs" line="63" column="46" bodyfile="Source/Lib/TextEditor/Commands/Models/Defaults/TextEditorCommandDefaultFacts.cs" bodystart="63" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_commands_1_1_models_1_1_defaults_1_1_text_editor_command_default_facts_1a4ea6feb6b9ad1ae43645ad1f63ff92d9" prot="public" static="yes" mutable="no">
+        <type>readonly <ref refid="class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_commands_1_1_models_1_1_text_editor_command" kindref="compound">TextEditorCommand</ref></type>
+        <definition>readonly TextEditorCommand Luthetus.TextEditor.RazorLib.Commands.Models.Defaults.TextEditorCommandDefaultFacts.TriggerSave</definition>
+        <argsstring></argsstring>
+        <name>TriggerSave</name>
+        <qualifiedname>Luthetus.TextEditor.RazorLib.Commands.Models.Defaults.TextEditorCommandDefaultFacts.TriggerSave</qualifiedname>
+        <initializer>= new(
+        &quot;Save&quot;, &quot;defaults_save&quot;, false, false, TextEditKind.None, null,
+        interfaceCommandArgs =&gt;
+        {
+            var commandArgs = (<ref refid="class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_commands_1_1_models_1_1_text_editor_command_args" kindref="compound">TextEditorCommandArgs</ref>)interfaceCommandArgs;
+            
+            var modelModifier = commandArgs.EditContext.GetModelModifier(commandArgs.ModelResourceUri);
+            var viewModelModifier = commandArgs.EditContext.GetViewModelModifier(commandArgs.ViewModelKey);
+            var cursorModifierBag = commandArgs.EditContext.GetCursorModifierBag(viewModelModifier?.ViewModel);
+            var primaryCursorModifier = commandArgs.EditContext.GetPrimaryCursorModifier(cursorModifierBag);
+
+            <ref refid="_lib_2_ide_2_host_8_blazor_server_side_2_program_8cs_1af2d0c02efe3fbc2d94e5b6e316777c4d" kindref="member">if</ref> (modelModifier is null || viewModelModifier is null || cursorModifierBag is null || primaryCursorModifier is null)
+                return Task.CompletedTask;
+                
+            <ref refid="class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_commands_1_1_models_1_1_defaults_1_1_text_editor_command_default_functions_1aea001f6a41cfa32c20d198a190f49788" kindref="member">TextEditorCommandDefaultFunctions.TriggerSave</ref>(
+                commandArgs.EditContext,
+                modelModifier,
+                viewModelModifier,
+                cursorModifierBag,
+                commandArgs);
+            return Task.CompletedTask;
+        })</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Lib/TextEditor/Commands/Models/Defaults/TextEditorCommandDefaultFacts.cs" line="85" column="46" bodyfile="Source/Lib/TextEditor/Commands/Models/Defaults/TextEditorCommandDefaultFacts.cs" bodystart="85" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_commands_1_1_models_1_1_defaults_1_1_text_editor_command_default_facts_1a8a5d662bcd0014aa46598ee46616aab9" prot="public" static="yes" mutable="no">
+        <type>readonly <ref refid="class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_commands_1_1_models_1_1_text_editor_command" kindref="compound">TextEditorCommand</ref></type>
+        <definition>readonly TextEditorCommand Luthetus.TextEditor.RazorLib.Commands.Models.Defaults.TextEditorCommandDefaultFacts.SelectAll</definition>
+        <argsstring></argsstring>
+        <name>SelectAll</name>
+        <qualifiedname>Luthetus.TextEditor.RazorLib.Commands.Models.Defaults.TextEditorCommandDefaultFacts.SelectAll</qualifiedname>
+        <initializer>= new(
+        &quot;Select All&quot;, &quot;defaults_select-all&quot;, false, false, TextEditKind.None, null,
+        interfaceCommandArgs =&gt;
+        {
+            var commandArgs = (<ref refid="class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_commands_1_1_models_1_1_text_editor_command_args" kindref="compound">TextEditorCommandArgs</ref>)interfaceCommandArgs;
+            
+            var modelModifier = commandArgs.EditContext.GetModelModifier(commandArgs.ModelResourceUri);
+            var viewModelModifier = commandArgs.EditContext.GetViewModelModifier(commandArgs.ViewModelKey);
+            var cursorModifierBag = commandArgs.EditContext.GetCursorModifierBag(viewModelModifier?.ViewModel);
+            var primaryCursorModifier = commandArgs.EditContext.GetPrimaryCursorModifier(cursorModifierBag);
+
+            <ref refid="_lib_2_ide_2_host_8_blazor_server_side_2_program_8cs_1af2d0c02efe3fbc2d94e5b6e316777c4d" kindref="member">if</ref> (modelModifier is null || viewModelModifier is null || cursorModifierBag is null || primaryCursorModifier is null)
+                return Task.CompletedTask;
+                
+            <ref refid="class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_commands_1_1_models_1_1_defaults_1_1_text_editor_command_default_functions_1ad05981d2f18231c3c0cb480ac28973bf" kindref="member">TextEditorCommandDefaultFunctions.SelectAll</ref>(
+                commandArgs.EditContext,
+                modelModifier,
+                viewModelModifier,
+                cursorModifierBag,
+                commandArgs);
+            return Task.CompletedTask;
+        })</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Lib/TextEditor/Commands/Models/Defaults/TextEditorCommandDefaultFacts.cs" line="108" column="46" bodyfile="Source/Lib/TextEditor/Commands/Models/Defaults/TextEditorCommandDefaultFacts.cs" bodystart="108" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_commands_1_1_models_1_1_defaults_1_1_text_editor_command_default_facts_1aba50c9ee7c6611dba2474efa61f202da" prot="public" static="yes" mutable="no">
+        <type>readonly <ref refid="class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_commands_1_1_models_1_1_text_editor_command" kindref="compound">TextEditorCommand</ref></type>
+        <definition>readonly TextEditorCommand Luthetus.TextEditor.RazorLib.Commands.Models.Defaults.TextEditorCommandDefaultFacts.Undo</definition>
+        <argsstring></argsstring>
+        <name>Undo</name>
+        <qualifiedname>Luthetus.TextEditor.RazorLib.Commands.Models.Defaults.TextEditorCommandDefaultFacts.Undo</qualifiedname>
+        <initializer>= new(
+        &quot;Undo&quot;, &quot;defaults_undo&quot;, false, true, TextEditKind.None, null,
+        interfaceCommandArgs =&gt;
+        {
+            var commandArgs = (<ref refid="class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_commands_1_1_models_1_1_text_editor_command_args" kindref="compound">TextEditorCommandArgs</ref>)interfaceCommandArgs;
+            
+            var modelModifier = commandArgs.EditContext.GetModelModifier(commandArgs.ModelResourceUri);
+            var viewModelModifier = commandArgs.EditContext.GetViewModelModifier(commandArgs.ViewModelKey);
+            var cursorModifierBag = commandArgs.EditContext.GetCursorModifierBag(viewModelModifier?.ViewModel);
+            var primaryCursorModifier = commandArgs.EditContext.GetPrimaryCursorModifier(cursorModifierBag);
+
+            <ref refid="_lib_2_ide_2_host_8_blazor_server_side_2_program_8cs_1af2d0c02efe3fbc2d94e5b6e316777c4d" kindref="member">if</ref> (modelModifier is null || viewModelModifier is null || cursorModifierBag is null || primaryCursorModifier is null)
+                return Task.CompletedTask;
+                
+            <ref refid="class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_commands_1_1_models_1_1_defaults_1_1_text_editor_command_default_functions_1a4abcc5523373aa78fe9232b221e921a8" kindref="member">TextEditorCommandDefaultFunctions.Undo</ref>(
+                commandArgs.EditContext,
+                modelModifier,
+                viewModelModifier,
+                cursorModifierBag,
+                commandArgs);
+            return Task.CompletedTask;
+        })</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Lib/TextEditor/Commands/Models/Defaults/TextEditorCommandDefaultFacts.cs" line="131" column="46" bodyfile="Source/Lib/TextEditor/Commands/Models/Defaults/TextEditorCommandDefaultFacts.cs" bodystart="131" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_commands_1_1_models_1_1_defaults_1_1_text_editor_command_default_facts_1a13a9a598c6b2e487646998c608726098" prot="public" static="yes" mutable="no">
+        <type>readonly <ref refid="class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_commands_1_1_models_1_1_text_editor_command" kindref="compound">TextEditorCommand</ref></type>
+        <definition>readonly TextEditorCommand Luthetus.TextEditor.RazorLib.Commands.Models.Defaults.TextEditorCommandDefaultFacts.Redo</definition>
+        <argsstring></argsstring>
+        <name>Redo</name>
+        <qualifiedname>Luthetus.TextEditor.RazorLib.Commands.Models.Defaults.TextEditorCommandDefaultFacts.Redo</qualifiedname>
+        <initializer>= new(
+        &quot;Redo&quot;, &quot;defaults_redo&quot;, false, true, TextEditKind.None, null,
+        interfaceCommandArgs =&gt;
+        {
+            var commandArgs = (<ref refid="class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_commands_1_1_models_1_1_text_editor_command_args" kindref="compound">TextEditorCommandArgs</ref>)interfaceCommandArgs;
+            
+            var modelModifier = commandArgs.EditContext.GetModelModifier(commandArgs.ModelResourceUri);
+            var viewModelModifier = commandArgs.EditContext.GetViewModelModifier(commandArgs.ViewModelKey);
+            var cursorModifierBag = commandArgs.EditContext.GetCursorModifierBag(viewModelModifier?.ViewModel);
+            var primaryCursorModifier = commandArgs.EditContext.GetPrimaryCursorModifier(cursorModifierBag);
+
+            <ref refid="_lib_2_ide_2_host_8_blazor_server_side_2_program_8cs_1af2d0c02efe3fbc2d94e5b6e316777c4d" kindref="member">if</ref> (modelModifier is null || viewModelModifier is null || cursorModifierBag is null || primaryCursorModifier is null)
+                return Task.CompletedTask;
+                
+            <ref refid="class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_commands_1_1_models_1_1_defaults_1_1_text_editor_command_default_functions_1a5bf3580f710fc4429dfcd5d5b12d8b47" kindref="member">TextEditorCommandDefaultFunctions.Redo</ref>(
+                commandArgs.EditContext,
+                modelModifier,
+                viewModelModifier,
+                cursorModifierBag,
+                commandArgs);
+            return Task.CompletedTask;
+        })</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Lib/TextEditor/Commands/Models/Defaults/TextEditorCommandDefaultFacts.cs" line="154" column="46" bodyfile="Source/Lib/TextEditor/Commands/Models/Defaults/TextEditorCommandDefaultFacts.cs" bodystart="154" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_commands_1_1_models_1_1_defaults_1_1_text_editor_command_default_facts_1ab272dbf6cb17b06cd5def0560096ad7c" prot="public" static="yes" mutable="no">
+        <type>readonly <ref refid="class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_commands_1_1_models_1_1_text_editor_command" kindref="compound">TextEditorCommand</ref></type>
+        <definition>readonly TextEditorCommand Luthetus.TextEditor.RazorLib.Commands.Models.Defaults.TextEditorCommandDefaultFacts.Remeasure</definition>
+        <argsstring></argsstring>
+        <name>Remeasure</name>
+        <qualifiedname>Luthetus.TextEditor.RazorLib.Commands.Models.Defaults.TextEditorCommandDefaultFacts.Remeasure</qualifiedname>
+        <initializer>= new(
+        &quot;Remeasure&quot;, &quot;defaults_remeasure&quot;, false, false, TextEditKind.None, null,
+        interfaceCommandArgs =&gt;
+        {
+            var commandArgs = (<ref refid="class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_commands_1_1_models_1_1_text_editor_command_args" kindref="compound">TextEditorCommandArgs</ref>)interfaceCommandArgs;
+            
+            var modelModifier = commandArgs.EditContext.GetModelModifier(commandArgs.ModelResourceUri);
+            var viewModelModifier = commandArgs.EditContext.GetViewModelModifier(commandArgs.ViewModelKey);
+            var cursorModifierBag = commandArgs.EditContext.GetCursorModifierBag(viewModelModifier?.ViewModel);
+            var primaryCursorModifier = commandArgs.EditContext.GetPrimaryCursorModifier(cursorModifierBag);
+
+            <ref refid="_lib_2_ide_2_host_8_blazor_server_side_2_program_8cs_1af2d0c02efe3fbc2d94e5b6e316777c4d" kindref="member">if</ref> (modelModifier is null || viewModelModifier is null || cursorModifierBag is null || primaryCursorModifier is null)
+                return Task.CompletedTask;
+                
+            <ref refid="class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_commands_1_1_models_1_1_defaults_1_1_text_editor_command_default_functions_1ab00d3c0c9377faeb6ee10c3af3856b04" kindref="member">TextEditorCommandDefaultFunctions.TriggerRemeasure</ref>(
+                commandArgs.EditContext,
+                viewModelModifier,
+                commandArgs);
+            return Task.CompletedTask;
+        })</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Lib/TextEditor/Commands/Models/Defaults/TextEditorCommandDefaultFacts.cs" line="177" column="46" bodyfile="Source/Lib/TextEditor/Commands/Models/Defaults/TextEditorCommandDefaultFacts.cs" bodystart="177" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_commands_1_1_models_1_1_defaults_1_1_text_editor_command_default_facts_1ace5e494828c430753d76916bfa576840" prot="public" static="yes" mutable="no">
+        <type>readonly <ref refid="class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_commands_1_1_models_1_1_text_editor_command" kindref="compound">TextEditorCommand</ref></type>
+        <definition>readonly TextEditorCommand Luthetus.TextEditor.RazorLib.Commands.Models.Defaults.TextEditorCommandDefaultFacts.RefreshSyntaxHighlighting</definition>
+        <argsstring></argsstring>
+        <name>RefreshSyntaxHighlighting</name>
+        <qualifiedname>Luthetus.TextEditor.RazorLib.Commands.Models.Defaults.TextEditorCommandDefaultFacts.RefreshSyntaxHighlighting</qualifiedname>
+        <initializer>= new(
+        &quot;Refresh Syntax Highlighting&quot;, &quot;defaults_refresh_syntax_highlighting&quot;, false, false, TextEditKind.None, null,
+        interfaceCommandArgs =&gt;
+        {
+            var commandArgs = (<ref refid="class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_commands_1_1_models_1_1_text_editor_command_args" kindref="compound">TextEditorCommandArgs</ref>)interfaceCommandArgs;
+            
+            var modelModifier = commandArgs.EditContext.GetModelModifier(commandArgs.ModelResourceUri);
+            var viewModelModifier = commandArgs.EditContext.GetViewModelModifier(commandArgs.ViewModelKey);
+            var cursorModifierBag = commandArgs.EditContext.GetCursorModifierBag(viewModelModifier?.ViewModel);
+            var primaryCursorModifier = commandArgs.EditContext.GetPrimaryCursorModifier(cursorModifierBag);
+
+            <ref refid="_lib_2_ide_2_host_8_blazor_server_side_2_program_8cs_1af2d0c02efe3fbc2d94e5b6e316777c4d" kindref="member">if</ref> (modelModifier is null || viewModelModifier is null || cursorModifierBag is null || primaryCursorModifier is null)
+                return Task.CompletedTask;
+                
+            modelModifier.CompilerService.ResourceWasModified(
+                modelModifier.ResourceUri,
+                ImmutableArray&lt;<ref refid="namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_lexers_1_1_models_1a1ffd1a7706dfd364560b76d47467812f" kindref="member">TextEditorTextSpan</ref>&gt;.Empty);
+            return Task.CompletedTask;
+        })</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Lib/TextEditor/Commands/Models/Defaults/TextEditorCommandDefaultFacts.cs" line="198" column="46" bodyfile="Source/Lib/TextEditor/Commands/Models/Defaults/TextEditorCommandDefaultFacts.cs" bodystart="198" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_commands_1_1_models_1_1_defaults_1_1_text_editor_command_default_facts_1a67dbfa46752e2a9005c1e415dfedfcaa" prot="public" static="yes" mutable="no">
+        <type>readonly <ref refid="class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_commands_1_1_models_1_1_text_editor_command" kindref="compound">TextEditorCommand</ref></type>
+        <definition>readonly TextEditorCommand Luthetus.TextEditor.RazorLib.Commands.Models.Defaults.TextEditorCommandDefaultFacts.ScrollLineDown</definition>
+        <argsstring></argsstring>
+        <name>ScrollLineDown</name>
+        <qualifiedname>Luthetus.TextEditor.RazorLib.Commands.Models.Defaults.TextEditorCommandDefaultFacts.ScrollLineDown</qualifiedname>
+        <initializer>= new(
+        &quot;Scroll Line Down&quot;, &quot;defaults_scroll-line-down&quot;, false, false, TextEditKind.None, null,
+        interfaceCommandArgs =&gt;
+        {
+            var commandArgs = (<ref refid="class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_commands_1_1_models_1_1_text_editor_command_args" kindref="compound">TextEditorCommandArgs</ref>)interfaceCommandArgs;
+            
+            var modelModifier = commandArgs.EditContext.GetModelModifier(commandArgs.ModelResourceUri);
+            var viewModelModifier = commandArgs.EditContext.GetViewModelModifier(commandArgs.ViewModelKey);
+            var cursorModifierBag = commandArgs.EditContext.GetCursorModifierBag(viewModelModifier?.ViewModel);
+            var primaryCursorModifier = commandArgs.EditContext.GetPrimaryCursorModifier(cursorModifierBag);
+
+            <ref refid="_lib_2_ide_2_host_8_blazor_server_side_2_program_8cs_1af2d0c02efe3fbc2d94e5b6e316777c4d" kindref="member">if</ref> (modelModifier is null || viewModelModifier is null || cursorModifierBag is null || primaryCursorModifier is null)
+                return Task.CompletedTask;
+                
+            <ref refid="class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_commands_1_1_models_1_1_defaults_1_1_text_editor_command_default_functions_1a507c6beb1b0105777fa8103705026901" kindref="member">TextEditorCommandDefaultFunctions.ScrollLineDown</ref>(
+                commandArgs.EditContext,
+                modelModifier,
+                viewModelModifier,
+                cursorModifierBag,
+                commandArgs);
+            return Task.CompletedTask;
+        })</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Lib/TextEditor/Commands/Models/Defaults/TextEditorCommandDefaultFacts.cs" line="218" column="46" bodyfile="Source/Lib/TextEditor/Commands/Models/Defaults/TextEditorCommandDefaultFacts.cs" bodystart="218" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_commands_1_1_models_1_1_defaults_1_1_text_editor_command_default_facts_1af5a0f94c50cefb5a5fb36df11399ad7e" prot="public" static="yes" mutable="no">
+        <type>readonly <ref refid="class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_commands_1_1_models_1_1_text_editor_command" kindref="compound">TextEditorCommand</ref></type>
+        <definition>readonly TextEditorCommand Luthetus.TextEditor.RazorLib.Commands.Models.Defaults.TextEditorCommandDefaultFacts.ScrollLineUp</definition>
+        <argsstring></argsstring>
+        <name>ScrollLineUp</name>
+        <qualifiedname>Luthetus.TextEditor.RazorLib.Commands.Models.Defaults.TextEditorCommandDefaultFacts.ScrollLineUp</qualifiedname>
+        <initializer>= new(
+        &quot;Scroll Line Up&quot;, &quot;defaults_scroll-line-up&quot;, false, false, TextEditKind.None, null,
+        interfaceCommandArgs =&gt;
+        {
+            var commandArgs = (<ref refid="class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_commands_1_1_models_1_1_text_editor_command_args" kindref="compound">TextEditorCommandArgs</ref>)interfaceCommandArgs;
+            
+            var modelModifier = commandArgs.EditContext.GetModelModifier(commandArgs.ModelResourceUri);
+            var viewModelModifier = commandArgs.EditContext.GetViewModelModifier(commandArgs.ViewModelKey);
+            var cursorModifierBag = commandArgs.EditContext.GetCursorModifierBag(viewModelModifier?.ViewModel);
+            var primaryCursorModifier = commandArgs.EditContext.GetPrimaryCursorModifier(cursorModifierBag);
+
+            <ref refid="_lib_2_ide_2_host_8_blazor_server_side_2_program_8cs_1af2d0c02efe3fbc2d94e5b6e316777c4d" kindref="member">if</ref> (modelModifier is null || viewModelModifier is null || cursorModifierBag is null || primaryCursorModifier is null)
+                return Task.CompletedTask;
+                
+            <ref refid="class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_commands_1_1_models_1_1_defaults_1_1_text_editor_command_default_functions_1a60dd7d45924b30df80d39c3629675f1b" kindref="member">TextEditorCommandDefaultFunctions.ScrollLineUp</ref>(
+                commandArgs.EditContext,
+                modelModifier,
+                viewModelModifier,
+                cursorModifierBag,
+                commandArgs);
+            return Task.CompletedTask;
+        })</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Lib/TextEditor/Commands/Models/Defaults/TextEditorCommandDefaultFacts.cs" line="241" column="46" bodyfile="Source/Lib/TextEditor/Commands/Models/Defaults/TextEditorCommandDefaultFacts.cs" bodystart="241" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_commands_1_1_models_1_1_defaults_1_1_text_editor_command_default_facts_1a8e9470d20d1f6a8320c7d9a786753f62" prot="public" static="yes" mutable="no">
+        <type>readonly <ref refid="class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_commands_1_1_models_1_1_text_editor_command" kindref="compound">TextEditorCommand</ref></type>
+        <definition>readonly TextEditorCommand Luthetus.TextEditor.RazorLib.Commands.Models.Defaults.TextEditorCommandDefaultFacts.ScrollPageDown</definition>
+        <argsstring></argsstring>
+        <name>ScrollPageDown</name>
+        <qualifiedname>Luthetus.TextEditor.RazorLib.Commands.Models.Defaults.TextEditorCommandDefaultFacts.ScrollPageDown</qualifiedname>
+        <initializer>= new(
+        &quot;Scroll Page Down&quot;, &quot;defaults_scroll-page-down&quot;, false, false, TextEditKind.None, null,
+        interfaceCommandArgs =&gt;
+        {
+            var commandArgs = (<ref refid="class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_commands_1_1_models_1_1_text_editor_command_args" kindref="compound">TextEditorCommandArgs</ref>)interfaceCommandArgs;
+            
+            var modelModifier = commandArgs.EditContext.GetModelModifier(commandArgs.ModelResourceUri);
+            var viewModelModifier = commandArgs.EditContext.GetViewModelModifier(commandArgs.ViewModelKey);
+            var cursorModifierBag = commandArgs.EditContext.GetCursorModifierBag(viewModelModifier?.ViewModel);
+            var primaryCursorModifier = commandArgs.EditContext.GetPrimaryCursorModifier(cursorModifierBag);
+
+            <ref refid="_lib_2_ide_2_host_8_blazor_server_side_2_program_8cs_1af2d0c02efe3fbc2d94e5b6e316777c4d" kindref="member">if</ref> (modelModifier is null || viewModelModifier is null || cursorModifierBag is null || primaryCursorModifier is null)
+                return Task.CompletedTask;
+                
+            <ref refid="class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_commands_1_1_models_1_1_defaults_1_1_text_editor_command_default_functions_1a687fd320577c5c8db02229f50b26afb9" kindref="member">TextEditorCommandDefaultFunctions.ScrollPageDown</ref>(
+                commandArgs.EditContext,
+                modelModifier,
+                viewModelModifier,
+                cursorModifierBag,
+                commandArgs);
+            return Task.CompletedTask;
+        })</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Lib/TextEditor/Commands/Models/Defaults/TextEditorCommandDefaultFacts.cs" line="264" column="46" bodyfile="Source/Lib/TextEditor/Commands/Models/Defaults/TextEditorCommandDefaultFacts.cs" bodystart="264" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_commands_1_1_models_1_1_defaults_1_1_text_editor_command_default_facts_1a4b984be509303e71e9fdba1f3e6ca5f3" prot="public" static="yes" mutable="no">
+        <type>readonly <ref refid="class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_commands_1_1_models_1_1_text_editor_command" kindref="compound">TextEditorCommand</ref></type>
+        <definition>readonly TextEditorCommand Luthetus.TextEditor.RazorLib.Commands.Models.Defaults.TextEditorCommandDefaultFacts.ScrollPageUp</definition>
+        <argsstring></argsstring>
+        <name>ScrollPageUp</name>
+        <qualifiedname>Luthetus.TextEditor.RazorLib.Commands.Models.Defaults.TextEditorCommandDefaultFacts.ScrollPageUp</qualifiedname>
+        <initializer>= new(
+        &quot;Scroll Page Up&quot;, &quot;defaults_scroll-page-up&quot;, false, false, TextEditKind.None, null,
+        interfaceCommandArgs =&gt;
+        {
+            var commandArgs = (<ref refid="class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_commands_1_1_models_1_1_text_editor_command_args" kindref="compound">TextEditorCommandArgs</ref>)interfaceCommandArgs;
+            
+            var modelModifier = commandArgs.EditContext.GetModelModifier(commandArgs.ModelResourceUri);
+            var viewModelModifier = commandArgs.EditContext.GetViewModelModifier(commandArgs.ViewModelKey);
+            var cursorModifierBag = commandArgs.EditContext.GetCursorModifierBag(viewModelModifier?.ViewModel);
+            var primaryCursorModifier = commandArgs.EditContext.GetPrimaryCursorModifier(cursorModifierBag);
+
+            <ref refid="_lib_2_ide_2_host_8_blazor_server_side_2_program_8cs_1af2d0c02efe3fbc2d94e5b6e316777c4d" kindref="member">if</ref> (modelModifier is null || viewModelModifier is null || cursorModifierBag is null || primaryCursorModifier is null)
+                return Task.CompletedTask;
+                
+            <ref refid="class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_commands_1_1_models_1_1_defaults_1_1_text_editor_command_default_functions_1ae78df0b19a657c76ef36ec484bfec793" kindref="member">TextEditorCommandDefaultFunctions.ScrollPageUp</ref>(
+                commandArgs.EditContext,
+                modelModifier,
+                viewModelModifier,
+                cursorModifierBag,
+                commandArgs);
+            return Task.CompletedTask;
+        })</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Lib/TextEditor/Commands/Models/Defaults/TextEditorCommandDefaultFacts.cs" line="287" column="46" bodyfile="Source/Lib/TextEditor/Commands/Models/Defaults/TextEditorCommandDefaultFacts.cs" bodystart="287" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_commands_1_1_models_1_1_defaults_1_1_text_editor_command_default_facts_1a67f53eb57a0645cad451f960b4bf07c5" prot="public" static="yes" mutable="no">
+        <type>readonly <ref refid="class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_commands_1_1_models_1_1_text_editor_command" kindref="compound">TextEditorCommand</ref></type>
+        <definition>readonly TextEditorCommand Luthetus.TextEditor.RazorLib.Commands.Models.Defaults.TextEditorCommandDefaultFacts.CursorMovePageBottom</definition>
+        <argsstring></argsstring>
+        <name>CursorMovePageBottom</name>
+        <qualifiedname>Luthetus.TextEditor.RazorLib.Commands.Models.Defaults.TextEditorCommandDefaultFacts.CursorMovePageBottom</qualifiedname>
+        <initializer>= new(
+        &quot;Move Cursor to Bottom of the Page&quot;, &quot;defaults_cursor-move-page-bottom&quot;, false, false, TextEditKind.None, null,
+        interfaceCommandArgs =&gt;
+        {
+            var commandArgs = (<ref refid="class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_commands_1_1_models_1_1_text_editor_command_args" kindref="compound">TextEditorCommandArgs</ref>)interfaceCommandArgs;
+            
+            var modelModifier = commandArgs.EditContext.GetModelModifier(commandArgs.ModelResourceUri);
+            var viewModelModifier = commandArgs.EditContext.GetViewModelModifier(commandArgs.ViewModelKey);
+            var cursorModifierBag = commandArgs.EditContext.GetCursorModifierBag(viewModelModifier?.ViewModel);
+            var primaryCursorModifier = commandArgs.EditContext.GetPrimaryCursorModifier(cursorModifierBag);
+
+            <ref refid="_lib_2_ide_2_host_8_blazor_server_side_2_program_8cs_1af2d0c02efe3fbc2d94e5b6e316777c4d" kindref="member">if</ref> (modelModifier is null || viewModelModifier is null || cursorModifierBag is null || primaryCursorModifier is null)
+                return Task.CompletedTask;
+                
+            <ref refid="class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_commands_1_1_models_1_1_defaults_1_1_text_editor_command_default_functions_1ac0393b59a9824c2b59485efcbacc8322" kindref="member">TextEditorCommandDefaultFunctions.CursorMovePageBottom</ref>(
+                commandArgs.EditContext,
+                modelModifier,
+                viewModelModifier,
+                cursorModifierBag,
+                commandArgs);
+            return Task.CompletedTask;
+        })</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Lib/TextEditor/Commands/Models/Defaults/TextEditorCommandDefaultFacts.cs" line="310" column="46" bodyfile="Source/Lib/TextEditor/Commands/Models/Defaults/TextEditorCommandDefaultFacts.cs" bodystart="310" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_commands_1_1_models_1_1_defaults_1_1_text_editor_command_default_facts_1ab5b8d8f2a636a1f75f597c348c73f0a4" prot="public" static="yes" mutable="no">
+        <type>readonly <ref refid="class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_commands_1_1_models_1_1_text_editor_command" kindref="compound">TextEditorCommand</ref></type>
+        <definition>readonly TextEditorCommand Luthetus.TextEditor.RazorLib.Commands.Models.Defaults.TextEditorCommandDefaultFacts.CursorMovePageTop</definition>
+        <argsstring></argsstring>
+        <name>CursorMovePageTop</name>
+        <qualifiedname>Luthetus.TextEditor.RazorLib.Commands.Models.Defaults.TextEditorCommandDefaultFacts.CursorMovePageTop</qualifiedname>
+        <initializer>= new(
+        &quot;Move Cursor to Top of the Page&quot;, &quot;defaults_cursor-move-page-top&quot;, false, false, TextEditKind.None, null,
+        interfaceCommandArgs =&gt;
+        {
+            var commandArgs = (<ref refid="class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_commands_1_1_models_1_1_text_editor_command_args" kindref="compound">TextEditorCommandArgs</ref>)interfaceCommandArgs;
+            
+            var modelModifier = commandArgs.EditContext.GetModelModifier(commandArgs.ModelResourceUri);
+            var viewModelModifier = commandArgs.EditContext.GetViewModelModifier(commandArgs.ViewModelKey);
+            var cursorModifierBag = commandArgs.EditContext.GetCursorModifierBag(viewModelModifier?.ViewModel);
+            var primaryCursorModifier = commandArgs.EditContext.GetPrimaryCursorModifier(cursorModifierBag);
+
+            <ref refid="_lib_2_ide_2_host_8_blazor_server_side_2_program_8cs_1af2d0c02efe3fbc2d94e5b6e316777c4d" kindref="member">if</ref> (modelModifier is null || viewModelModifier is null || cursorModifierBag is null || primaryCursorModifier is null)
+                return Task.CompletedTask;
+                
+            <ref refid="class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_commands_1_1_models_1_1_defaults_1_1_text_editor_command_default_functions_1a9dd40f828f609a7e13001f783357df39" kindref="member">TextEditorCommandDefaultFunctions.CursorMovePageTop</ref>(
+                commandArgs.EditContext,
+                modelModifier,
+                viewModelModifier,
+                cursorModifierBag,
+                commandArgs);
+            return Task.CompletedTask;
+        })</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Lib/TextEditor/Commands/Models/Defaults/TextEditorCommandDefaultFacts.cs" line="333" column="46" bodyfile="Source/Lib/TextEditor/Commands/Models/Defaults/TextEditorCommandDefaultFacts.cs" bodystart="333" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_commands_1_1_models_1_1_defaults_1_1_text_editor_command_default_facts_1aabd0bbfef3f7f3fc17d780ed87a0e6d8" prot="public" static="yes" mutable="no">
+        <type>readonly <ref refid="class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_commands_1_1_models_1_1_text_editor_command" kindref="compound">TextEditorCommand</ref></type>
+        <definition>readonly TextEditorCommand Luthetus.TextEditor.RazorLib.Commands.Models.Defaults.TextEditorCommandDefaultFacts.Duplicate</definition>
+        <argsstring></argsstring>
+        <name>Duplicate</name>
+        <qualifiedname>Luthetus.TextEditor.RazorLib.Commands.Models.Defaults.TextEditorCommandDefaultFacts.Duplicate</qualifiedname>
+        <initializer>= new(
+        &quot;Duplicate&quot;, &quot;defaults_duplicate&quot;, false, false, TextEditKind.None, null,
+        interfaceCommandArgs =&gt;
+        {
+            var commandArgs = (<ref refid="class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_commands_1_1_models_1_1_text_editor_command_args" kindref="compound">TextEditorCommandArgs</ref>)interfaceCommandArgs;
+            
+            var modelModifier = commandArgs.EditContext.GetModelModifier(commandArgs.ModelResourceUri);
+            var viewModelModifier = commandArgs.EditContext.GetViewModelModifier(commandArgs.ViewModelKey);
+            var cursorModifierBag = commandArgs.EditContext.GetCursorModifierBag(viewModelModifier?.ViewModel);
+            var primaryCursorModifier = commandArgs.EditContext.GetPrimaryCursorModifier(cursorModifierBag);
+
+            <ref refid="_lib_2_ide_2_host_8_blazor_server_side_2_program_8cs_1af2d0c02efe3fbc2d94e5b6e316777c4d" kindref="member">if</ref> (modelModifier is null || viewModelModifier is null || cursorModifierBag is null || primaryCursorModifier is null)
+                return Task.CompletedTask;
+                
+            <ref refid="class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_commands_1_1_models_1_1_defaults_1_1_text_editor_command_default_functions_1aa2dc310e716cf0751db6f2e077883f7d" kindref="member">TextEditorCommandDefaultFunctions.Duplicate</ref>(
+                commandArgs.EditContext,
+                modelModifier,
+                viewModelModifier,
+                cursorModifierBag,
+                commandArgs);
+            return Task.CompletedTask;
+        })</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Lib/TextEditor/Commands/Models/Defaults/TextEditorCommandDefaultFacts.cs" line="356" column="46" bodyfile="Source/Lib/TextEditor/Commands/Models/Defaults/TextEditorCommandDefaultFacts.cs" bodystart="356" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_commands_1_1_models_1_1_defaults_1_1_text_editor_command_default_facts_1a390594903801f0004e1ecc55ccbb6688" prot="public" static="yes" mutable="no">
+        <type>readonly <ref refid="class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_commands_1_1_models_1_1_text_editor_command" kindref="compound">TextEditorCommand</ref></type>
+        <definition>readonly TextEditorCommand Luthetus.TextEditor.RazorLib.Commands.Models.Defaults.TextEditorCommandDefaultFacts.IndentMore</definition>
+        <argsstring></argsstring>
+        <name>IndentMore</name>
+        <qualifiedname>Luthetus.TextEditor.RazorLib.Commands.Models.Defaults.TextEditorCommandDefaultFacts.IndentMore</qualifiedname>
+        <initializer>= new(
+        &quot;Indent More&quot;, &quot;defaults_indent-more&quot;, false, false, TextEditKind.None, null,
+        interfaceCommandArgs =&gt;
+        {
+            var commandArgs = (<ref refid="class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_commands_1_1_models_1_1_text_editor_command_args" kindref="compound">TextEditorCommandArgs</ref>)interfaceCommandArgs;
+            
+            var modelModifier = commandArgs.EditContext.GetModelModifier(commandArgs.ModelResourceUri);
+            var viewModelModifier = commandArgs.EditContext.GetViewModelModifier(commandArgs.ViewModelKey);
+            var cursorModifierBag = commandArgs.EditContext.GetCursorModifierBag(viewModelModifier?.ViewModel);
+            var primaryCursorModifier = commandArgs.EditContext.GetPrimaryCursorModifier(cursorModifierBag);
+
+            <ref refid="_lib_2_ide_2_host_8_blazor_server_side_2_program_8cs_1af2d0c02efe3fbc2d94e5b6e316777c4d" kindref="member">if</ref> (modelModifier is null || viewModelModifier is null || cursorModifierBag is null || primaryCursorModifier is null)
+                return Task.CompletedTask;
+                
+            <ref refid="class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_commands_1_1_models_1_1_defaults_1_1_text_editor_command_default_functions_1a4012755de51898fe3a8b87c187412984" kindref="member">TextEditorCommandDefaultFunctions.IndentMore</ref>(
+                commandArgs.EditContext,
+                modelModifier,
+                viewModelModifier,
+                cursorModifierBag,
+                commandArgs);
+            return Task.CompletedTask;
+        })</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Lib/TextEditor/Commands/Models/Defaults/TextEditorCommandDefaultFacts.cs" line="379" column="46" bodyfile="Source/Lib/TextEditor/Commands/Models/Defaults/TextEditorCommandDefaultFacts.cs" bodystart="379" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_commands_1_1_models_1_1_defaults_1_1_text_editor_command_default_facts_1a42ee6ac216978b1f76400605622d3f94" prot="public" static="yes" mutable="no">
+        <type>readonly <ref refid="class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_commands_1_1_models_1_1_text_editor_command" kindref="compound">TextEditorCommand</ref></type>
+        <definition>readonly TextEditorCommand Luthetus.TextEditor.RazorLib.Commands.Models.Defaults.TextEditorCommandDefaultFacts.IndentLess</definition>
+        <argsstring></argsstring>
+        <name>IndentLess</name>
+        <qualifiedname>Luthetus.TextEditor.RazorLib.Commands.Models.Defaults.TextEditorCommandDefaultFacts.IndentLess</qualifiedname>
+        <initializer>= new(
+        &quot;Indent Less&quot;, &quot;defaults_indent-less&quot;, false, false, TextEditKind.None, null,
+        interfaceCommandArgs =&gt;
+        {
+            var commandArgs = (<ref refid="class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_commands_1_1_models_1_1_text_editor_command_args" kindref="compound">TextEditorCommandArgs</ref>)interfaceCommandArgs;
+            
+            var modelModifier = commandArgs.EditContext.GetModelModifier(commandArgs.ModelResourceUri);
+            var viewModelModifier = commandArgs.EditContext.GetViewModelModifier(commandArgs.ViewModelKey);
+            var cursorModifierBag = commandArgs.EditContext.GetCursorModifierBag(viewModelModifier?.ViewModel);
+            var primaryCursorModifier = commandArgs.EditContext.GetPrimaryCursorModifier(cursorModifierBag);
+
+            <ref refid="_lib_2_ide_2_host_8_blazor_server_side_2_program_8cs_1af2d0c02efe3fbc2d94e5b6e316777c4d" kindref="member">if</ref> (modelModifier is null || viewModelModifier is null || cursorModifierBag is null || primaryCursorModifier is null)
+                return Task.CompletedTask;
+                
+            <ref refid="class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_commands_1_1_models_1_1_defaults_1_1_text_editor_command_default_functions_1a5f11fca57a532f4417997562529ae204" kindref="member">TextEditorCommandDefaultFunctions.IndentLess</ref>(
+                commandArgs.EditContext,
+                modelModifier,
+                viewModelModifier,
+                cursorModifierBag,
+                commandArgs);
+            return Task.CompletedTask;
+        })</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Lib/TextEditor/Commands/Models/Defaults/TextEditorCommandDefaultFacts.cs" line="402" column="46" bodyfile="Source/Lib/TextEditor/Commands/Models/Defaults/TextEditorCommandDefaultFacts.cs" bodystart="402" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_commands_1_1_models_1_1_defaults_1_1_text_editor_command_default_facts_1a63ba5fcefcb1e22db2e0e25d58c19ab6" prot="public" static="yes" mutable="no">
+        <type>readonly <ref refid="class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_commands_1_1_models_1_1_text_editor_command" kindref="compound">TextEditorCommand</ref></type>
+        <definition>readonly TextEditorCommand Luthetus.TextEditor.RazorLib.Commands.Models.Defaults.TextEditorCommandDefaultFacts.ClearTextSelection</definition>
+        <argsstring></argsstring>
+        <name>ClearTextSelection</name>
+        <qualifiedname>Luthetus.TextEditor.RazorLib.Commands.Models.Defaults.TextEditorCommandDefaultFacts.ClearTextSelection</qualifiedname>
+        <initializer>= new(
+        &quot;ClearTextSelection&quot;, &quot;defaults_clear-text-selection&quot;, false, false, TextEditKind.None, null,
+        interfaceCommandArgs =&gt;
+        {
+            var commandArgs = (<ref refid="class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_commands_1_1_models_1_1_text_editor_command_args" kindref="compound">TextEditorCommandArgs</ref>)interfaceCommandArgs;
+            
+            var modelModifier = commandArgs.EditContext.GetModelModifier(commandArgs.ModelResourceUri);
+            var viewModelModifier = commandArgs.EditContext.GetViewModelModifier(commandArgs.ViewModelKey);
+            var cursorModifierBag = commandArgs.EditContext.GetCursorModifierBag(viewModelModifier?.ViewModel);
+            var primaryCursorModifier = commandArgs.EditContext.GetPrimaryCursorModifier(cursorModifierBag);
+
+            <ref refid="_lib_2_ide_2_host_8_blazor_server_side_2_program_8cs_1af2d0c02efe3fbc2d94e5b6e316777c4d" kindref="member">if</ref> (modelModifier is null || viewModelModifier is null || cursorModifierBag is null || primaryCursorModifier is null)
+                return Task.CompletedTask;
+                
+            <ref refid="class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_commands_1_1_models_1_1_defaults_1_1_text_editor_command_default_functions_1a3e81d22b32c3d8eea531872f04007de4" kindref="member">TextEditorCommandDefaultFunctions.ClearTextSelection</ref>(
+                commandArgs.EditContext,
+                modelModifier,
+                viewModelModifier,
+                cursorModifierBag,
+                commandArgs);
+            return Task.CompletedTask;
+        })</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Lib/TextEditor/Commands/Models/Defaults/TextEditorCommandDefaultFacts.cs" line="425" column="46" bodyfile="Source/Lib/TextEditor/Commands/Models/Defaults/TextEditorCommandDefaultFacts.cs" bodystart="425" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_commands_1_1_models_1_1_defaults_1_1_text_editor_command_default_facts_1a3fdcc06d831775f9e4badfe4871b482f" prot="public" static="yes" mutable="no">
+        <type>readonly <ref refid="class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_commands_1_1_models_1_1_text_editor_command" kindref="compound">TextEditorCommand</ref></type>
+        <definition>readonly TextEditorCommand Luthetus.TextEditor.RazorLib.Commands.Models.Defaults.TextEditorCommandDefaultFacts.NewLineBelow</definition>
+        <argsstring></argsstring>
+        <name>NewLineBelow</name>
+        <qualifiedname>Luthetus.TextEditor.RazorLib.Commands.Models.Defaults.TextEditorCommandDefaultFacts.NewLineBelow</qualifiedname>
+        <initializer>= new(
+        &quot;NewLineBelow&quot;, &quot;defaults_new-line-below&quot;, false, false, TextEditKind.None, null,
+        interfaceCommandArgs =&gt;
+        {
+            var commandArgs = (<ref refid="class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_commands_1_1_models_1_1_text_editor_command_args" kindref="compound">TextEditorCommandArgs</ref>)interfaceCommandArgs;
+            
+            var modelModifier = commandArgs.EditContext.GetModelModifier(commandArgs.ModelResourceUri);
+            var viewModelModifier = commandArgs.EditContext.GetViewModelModifier(commandArgs.ViewModelKey);
+            var cursorModifierBag = commandArgs.EditContext.GetCursorModifierBag(viewModelModifier?.ViewModel);
+            var primaryCursorModifier = commandArgs.EditContext.GetPrimaryCursorModifier(cursorModifierBag);
+
+            <ref refid="_lib_2_ide_2_host_8_blazor_server_side_2_program_8cs_1af2d0c02efe3fbc2d94e5b6e316777c4d" kindref="member">if</ref> (modelModifier is null || viewModelModifier is null || cursorModifierBag is null || primaryCursorModifier is null)
+                return Task.CompletedTask;
+                
+            <ref refid="class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_commands_1_1_models_1_1_defaults_1_1_text_editor_command_default_functions_1a470fd507fcd90dea82e946fd09a03887" kindref="member">TextEditorCommandDefaultFunctions.NewLineBelow</ref>(
+                commandArgs.EditContext,
+                modelModifier,
+                viewModelModifier,
+                cursorModifierBag,
+                commandArgs);
+            return Task.CompletedTask;
+        })</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Lib/TextEditor/Commands/Models/Defaults/TextEditorCommandDefaultFacts.cs" line="448" column="46" bodyfile="Source/Lib/TextEditor/Commands/Models/Defaults/TextEditorCommandDefaultFacts.cs" bodystart="448" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_commands_1_1_models_1_1_defaults_1_1_text_editor_command_default_facts_1a1d3040837533fcbf5ff3a45f6139e59c" prot="public" static="yes" mutable="no">
+        <type>readonly <ref refid="class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_commands_1_1_models_1_1_text_editor_command" kindref="compound">TextEditorCommand</ref></type>
+        <definition>readonly TextEditorCommand Luthetus.TextEditor.RazorLib.Commands.Models.Defaults.TextEditorCommandDefaultFacts.NewLineAbove</definition>
+        <argsstring></argsstring>
+        <name>NewLineAbove</name>
+        <qualifiedname>Luthetus.TextEditor.RazorLib.Commands.Models.Defaults.TextEditorCommandDefaultFacts.NewLineAbove</qualifiedname>
+        <initializer>= new(
+        &quot;NewLineAbove&quot;, &quot;defaults_new-line-above&quot;, false, false, TextEditKind.None, null,
+        interfaceCommandArgs =&gt;
+        {
+            var commandArgs = (<ref refid="class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_commands_1_1_models_1_1_text_editor_command_args" kindref="compound">TextEditorCommandArgs</ref>)interfaceCommandArgs;
+            
+            var modelModifier = commandArgs.EditContext.GetModelModifier(commandArgs.ModelResourceUri);
+            var viewModelModifier = commandArgs.EditContext.GetViewModelModifier(commandArgs.ViewModelKey);
+            var cursorModifierBag = commandArgs.EditContext.GetCursorModifierBag(viewModelModifier?.ViewModel);
+            var primaryCursorModifier = commandArgs.EditContext.GetPrimaryCursorModifier(cursorModifierBag);
+
+            <ref refid="_lib_2_ide_2_host_8_blazor_server_side_2_program_8cs_1af2d0c02efe3fbc2d94e5b6e316777c4d" kindref="member">if</ref> (modelModifier is null || viewModelModifier is null || cursorModifierBag is null || primaryCursorModifier is null)
+                return Task.CompletedTask;
+                
+            <ref refid="class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_commands_1_1_models_1_1_defaults_1_1_text_editor_command_default_functions_1a12ec6b6a3a9dd14f677a2f1d18bae475" kindref="member">TextEditorCommandDefaultFunctions.NewLineAbove</ref>(
+                commandArgs.EditContext,
+                modelModifier,
+                viewModelModifier,
+                cursorModifierBag,
+                commandArgs);
+            return Task.CompletedTask;
+        })</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Lib/TextEditor/Commands/Models/Defaults/TextEditorCommandDefaultFacts.cs" line="471" column="46" bodyfile="Source/Lib/TextEditor/Commands/Models/Defaults/TextEditorCommandDefaultFacts.cs" bodystart="471" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_commands_1_1_models_1_1_defaults_1_1_text_editor_command_default_facts_1aed8e137e35dbb8eeb84b825557f6634a" prot="public" static="yes" mutable="no">
+        <type>readonly <ref refid="class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_commands_1_1_models_1_1_text_editor_command" kindref="compound">TextEditorCommand</ref></type>
+        <definition>readonly TextEditorCommand Luthetus.TextEditor.RazorLib.Commands.Models.Defaults.TextEditorCommandDefaultFacts.MoveLineDown</definition>
+        <argsstring></argsstring>
+        <name>MoveLineDown</name>
+        <qualifiedname>Luthetus.TextEditor.RazorLib.Commands.Models.Defaults.TextEditorCommandDefaultFacts.MoveLineDown</qualifiedname>
+        <initializer>= new(
+        &quot;MoveLineDown&quot;, &quot;defaults_move-line-down&quot;, false, false, TextEditKind.None, null,
+        interfaceCommandArgs =&gt;
+        {
+            var commandArgs = (<ref refid="class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_commands_1_1_models_1_1_text_editor_command_args" kindref="compound">TextEditorCommandArgs</ref>)interfaceCommandArgs;
+            
+            var modelModifier = commandArgs.EditContext.GetModelModifier(commandArgs.ModelResourceUri);
+            var viewModelModifier = commandArgs.EditContext.GetViewModelModifier(commandArgs.ViewModelKey);
+            var cursorModifierBag = commandArgs.EditContext.GetCursorModifierBag(viewModelModifier?.ViewModel);
+            var primaryCursorModifier = commandArgs.EditContext.GetPrimaryCursorModifier(cursorModifierBag);
+
+            <ref refid="_lib_2_ide_2_host_8_blazor_server_side_2_program_8cs_1af2d0c02efe3fbc2d94e5b6e316777c4d" kindref="member">if</ref> (modelModifier is null || viewModelModifier is null || cursorModifierBag is null || primaryCursorModifier is null)
+                return Task.CompletedTask;
+                
+            <ref refid="class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_commands_1_1_models_1_1_defaults_1_1_text_editor_command_default_functions_1a9794dd9607e984d40ca23b2035047ba2" kindref="member">TextEditorCommandDefaultFunctions.MoveLineDown</ref>(
+                commandArgs.EditContext,
+                modelModifier,
+                viewModelModifier,
+                cursorModifierBag,
+                commandArgs);
+            return Task.CompletedTask;
+        })</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Lib/TextEditor/Commands/Models/Defaults/TextEditorCommandDefaultFacts.cs" line="494" column="46" bodyfile="Source/Lib/TextEditor/Commands/Models/Defaults/TextEditorCommandDefaultFacts.cs" bodystart="494" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_commands_1_1_models_1_1_defaults_1_1_text_editor_command_default_facts_1a57e68a8eca8c58dd72fdfe895987c5cb" prot="public" static="yes" mutable="no">
+        <type>readonly <ref refid="class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_commands_1_1_models_1_1_text_editor_command" kindref="compound">TextEditorCommand</ref></type>
+        <definition>readonly TextEditorCommand Luthetus.TextEditor.RazorLib.Commands.Models.Defaults.TextEditorCommandDefaultFacts.MoveLineUp</definition>
+        <argsstring></argsstring>
+        <name>MoveLineUp</name>
+        <qualifiedname>Luthetus.TextEditor.RazorLib.Commands.Models.Defaults.TextEditorCommandDefaultFacts.MoveLineUp</qualifiedname>
+        <initializer>= new(
+        &quot;MoveLineUp&quot;, &quot;defaults_move-line-up&quot;, false, false, TextEditKind.None, null,
+        interfaceCommandArgs =&gt;
+        {
+            var commandArgs = (<ref refid="class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_commands_1_1_models_1_1_text_editor_command_args" kindref="compound">TextEditorCommandArgs</ref>)interfaceCommandArgs;
+            
+            var modelModifier = commandArgs.EditContext.GetModelModifier(commandArgs.ModelResourceUri);
+            var viewModelModifier = commandArgs.EditContext.GetViewModelModifier(commandArgs.ViewModelKey);
+            var cursorModifierBag = commandArgs.EditContext.GetCursorModifierBag(viewModelModifier?.ViewModel);
+            var primaryCursorModifier = commandArgs.EditContext.GetPrimaryCursorModifier(cursorModifierBag);
+
+            <ref refid="_lib_2_ide_2_host_8_blazor_server_side_2_program_8cs_1af2d0c02efe3fbc2d94e5b6e316777c4d" kindref="member">if</ref> (modelModifier is null || viewModelModifier is null || cursorModifierBag is null || primaryCursorModifier is null)
+                return Task.CompletedTask;
+                
+            <ref refid="class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_commands_1_1_models_1_1_defaults_1_1_text_editor_command_default_functions_1a293e3600dd66d7c677a9de15152e684d" kindref="member">TextEditorCommandDefaultFunctions.MoveLineUp</ref>(
+                commandArgs.EditContext,
+                modelModifier,
+                viewModelModifier,
+                cursorModifierBag,
+                commandArgs);
+            return Task.CompletedTask;
+        })</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Lib/TextEditor/Commands/Models/Defaults/TextEditorCommandDefaultFacts.cs" line="517" column="46" bodyfile="Source/Lib/TextEditor/Commands/Models/Defaults/TextEditorCommandDefaultFacts.cs" bodystart="517" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_commands_1_1_models_1_1_defaults_1_1_text_editor_command_default_facts_1a5e8edf3a32688aeee438ab4850ce539c" prot="public" static="yes" mutable="no">
+        <type>readonly <ref refid="class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_commands_1_1_models_1_1_text_editor_command" kindref="compound">TextEditorCommand</ref></type>
+        <definition>readonly TextEditorCommand Luthetus.TextEditor.RazorLib.Commands.Models.Defaults.TextEditorCommandDefaultFacts.RelatedFilesQuickPick</definition>
+        <argsstring></argsstring>
+        <name>RelatedFilesQuickPick</name>
+        <qualifiedname>Luthetus.TextEditor.RazorLib.Commands.Models.Defaults.TextEditorCommandDefaultFacts.RelatedFilesQuickPick</qualifiedname>
+        <initializer>= new(
+        &quot;RelatedFilesQuickPick&quot;, &quot;defaults_related-files-quick-pick&quot;, false, true, TextEditKind.None, null,
+        interfaceCommandArgs =&gt;
+        {
+            var commandArgs = (<ref refid="class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_commands_1_1_models_1_1_text_editor_command_args" kindref="compound">TextEditorCommandArgs</ref>)interfaceCommandArgs;
+            
+            var modelModifier = commandArgs.EditContext.GetModelModifier(commandArgs.ModelResourceUri);
+            var viewModelModifier = commandArgs.EditContext.GetViewModelModifier(commandArgs.ViewModelKey);
+            var cursorModifierBag = commandArgs.EditContext.GetCursorModifierBag(viewModelModifier?.ViewModel);
+            var primaryCursorModifier = commandArgs.EditContext.GetPrimaryCursorModifier(cursorModifierBag);
+
+            <ref refid="_lib_2_ide_2_host_8_blazor_server_side_2_program_8cs_1af2d0c02efe3fbc2d94e5b6e316777c4d" kindref="member">if</ref> (modelModifier is null || viewModelModifier is null || cursorModifierBag is null || primaryCursorModifier is null)
+                return Task.CompletedTask;
+                
+            return <ref refid="class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_commands_1_1_models_1_1_defaults_1_1_text_editor_command_default_functions_1a11d8291d73801eae5ac0b7d69216243b" kindref="member">TextEditorCommandDefaultFunctions.RelatedFilesQuickPick</ref>(
+                commandArgs.EditContext,
+                modelModifier,
+                viewModelModifier,
+                cursorModifierBag,
+                commandArgs);
+        })</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Lib/TextEditor/Commands/Models/Defaults/TextEditorCommandDefaultFacts.cs" line="564" column="46" bodyfile="Source/Lib/TextEditor/Commands/Models/Defaults/TextEditorCommandDefaultFacts.cs" bodystart="564" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_commands_1_1_models_1_1_defaults_1_1_text_editor_command_default_facts_1ae445df7913d739785b177a55e6038091" prot="public" static="yes" mutable="no">
+        <type>readonly <ref refid="class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_commands_1_1_models_1_1_text_editor_command" kindref="compound">TextEditorCommand</ref></type>
+        <definition>readonly TextEditorCommand Luthetus.TextEditor.RazorLib.Commands.Models.Defaults.TextEditorCommandDefaultFacts.QuickActionsSlashRefactor</definition>
+        <argsstring></argsstring>
+        <name>QuickActionsSlashRefactor</name>
+        <qualifiedname>Luthetus.TextEditor.RazorLib.Commands.Models.Defaults.TextEditorCommandDefaultFacts.QuickActionsSlashRefactor</qualifiedname>
+        <initializer>= new(
+        &quot;QuickActionsSlashRefactor&quot;, &quot;defaults_quick-actions-slash-refactor&quot;, false, true, TextEditKind.None, null,
+        interfaceCommandArgs =&gt;
+        {
+            var commandArgs = (<ref refid="class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_commands_1_1_models_1_1_text_editor_command_args" kindref="compound">TextEditorCommandArgs</ref>)interfaceCommandArgs;
+            
+            var modelModifier = commandArgs.EditContext.GetModelModifier(commandArgs.ModelResourceUri);
+            var viewModelModifier = commandArgs.EditContext.GetViewModelModifier(commandArgs.ViewModelKey);
+            var cursorModifierBag = commandArgs.EditContext.GetCursorModifierBag(viewModelModifier?.ViewModel);
+            var primaryCursorModifier = commandArgs.EditContext.GetPrimaryCursorModifier(cursorModifierBag);
+
+            <ref refid="_lib_2_ide_2_host_8_blazor_server_side_2_program_8cs_1af2d0c02efe3fbc2d94e5b6e316777c4d" kindref="member">if</ref> (modelModifier is null || viewModelModifier is null || cursorModifierBag is null || primaryCursorModifier is null)
+                return Task.CompletedTask;
+                
+            return <ref refid="class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_commands_1_1_models_1_1_defaults_1_1_text_editor_command_default_functions_1aa8347517b1b0ff29dc6a4e006959be8f" kindref="member">TextEditorCommandDefaultFunctions.QuickActionsSlashRefactor</ref>(
+                commandArgs.EditContext,
+                modelModifier,
+                viewModelModifier,
+                cursorModifierBag,
+                commandArgs);
+        })</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Lib/TextEditor/Commands/Models/Defaults/TextEditorCommandDefaultFacts.cs" line="586" column="46" bodyfile="Source/Lib/TextEditor/Commands/Models/Defaults/TextEditorCommandDefaultFacts.cs" bodystart="586" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_commands_1_1_models_1_1_defaults_1_1_text_editor_command_default_facts_1a14e7f083543866232841e22e4c1eb9ae" prot="public" static="yes" mutable="no">
+        <type>readonly <ref refid="class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_commands_1_1_models_1_1_text_editor_command" kindref="compound">TextEditorCommand</ref></type>
+        <definition>readonly TextEditorCommand Luthetus.TextEditor.RazorLib.Commands.Models.Defaults.TextEditorCommandDefaultFacts.ShowAutocompleteMenu</definition>
+        <argsstring></argsstring>
+        <name>ShowAutocompleteMenu</name>
+        <qualifiedname>Luthetus.TextEditor.RazorLib.Commands.Models.Defaults.TextEditorCommandDefaultFacts.ShowAutocompleteMenu</qualifiedname>
+        <initializer>= new(
+        &quot;ShowAutocompleteMenu&quot;, &quot;defaults_show-autocomplete-menu&quot;, false, true, TextEditKind.None, null,
+        interfaceCommandArgs =&gt;
+        {
+            var commandArgs = (<ref refid="class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_commands_1_1_models_1_1_text_editor_command_args" kindref="compound">TextEditorCommandArgs</ref>)interfaceCommandArgs;
+            
+            var modelModifier = commandArgs.EditContext.GetModelModifier(commandArgs.ModelResourceUri);
+            var viewModelModifier = commandArgs.EditContext.GetViewModelModifier(commandArgs.ViewModelKey);
+            var cursorModifierBag = commandArgs.EditContext.GetCursorModifierBag(viewModelModifier?.ViewModel);
+            var primaryCursorModifier = commandArgs.EditContext.GetPrimaryCursorModifier(cursorModifierBag);
+
+            <ref refid="_lib_2_ide_2_host_8_blazor_server_side_2_program_8cs_1af2d0c02efe3fbc2d94e5b6e316777c4d" kindref="member">if</ref> (modelModifier is null || viewModelModifier is null || cursorModifierBag is null || primaryCursorModifier is null)
+                return Task.CompletedTask;
+            
+            <ref refid="class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_commands_1_1_models_1_1_defaults_1_1_text_editor_command_default_functions_1aa77977ef194d11e3d058fed5a1045f72" kindref="member">TextEditorCommandDefaultFunctions.ShowAutocompleteMenu</ref>(
+                commandArgs.EditContext,
+                modelModifier,
+                viewModelModifier,
+                cursorModifierBag,
+                primaryCursorModifier,
+                commandArgs.ComponentData.Dispatcher,
+                commandArgs.ComponentData);
+            
+            return Task.CompletedTask;
+        })</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Lib/TextEditor/Commands/Models/Defaults/TextEditorCommandDefaultFacts.cs" line="608" column="46" bodyfile="Source/Lib/TextEditor/Commands/Models/Defaults/TextEditorCommandDefaultFacts.cs" bodystart="608" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_commands_1_1_models_1_1_defaults_1_1_text_editor_command_default_facts_1a118a74d5214fd09e05308bfcf1832b80" prot="public" static="yes" mutable="no">
+        <type>readonly <ref refid="class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_commands_1_1_models_1_1_text_editor_command" kindref="compound">TextEditorCommand</ref></type>
+        <definition>readonly TextEditorCommand Luthetus.TextEditor.RazorLib.Commands.Models.Defaults.TextEditorCommandDefaultFacts.GoToDefinition</definition>
+        <argsstring></argsstring>
+        <name>GoToDefinition</name>
+        <qualifiedname>Luthetus.TextEditor.RazorLib.Commands.Models.Defaults.TextEditorCommandDefaultFacts.GoToDefinition</qualifiedname>
+        <initializer>= new(
+        &quot;GoToDefinition&quot;, &quot;defaults_go-to-definition&quot;, false, true, TextEditKind.None, null,
+        interfaceCommandArgs =&gt;
+        {
+            var commandArgs = (<ref refid="class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_commands_1_1_models_1_1_text_editor_command_args" kindref="compound">TextEditorCommandArgs</ref>)interfaceCommandArgs;
+            
+            var modelModifier = commandArgs.EditContext.GetModelModifier(commandArgs.ModelResourceUri);
+            var viewModelModifier = commandArgs.EditContext.GetViewModelModifier(commandArgs.ViewModelKey);
+            var cursorModifierBag = commandArgs.EditContext.GetCursorModifierBag(viewModelModifier?.ViewModel);
+            var primaryCursorModifier = commandArgs.EditContext.GetPrimaryCursorModifier(cursorModifierBag);
+
+            <ref refid="_lib_2_ide_2_host_8_blazor_server_side_2_program_8cs_1af2d0c02efe3fbc2d94e5b6e316777c4d" kindref="member">if</ref> (modelModifier is null || viewModelModifier is null || cursorModifierBag is null || primaryCursorModifier is null)
+                return Task.CompletedTask;
+                
+            <ref refid="class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_commands_1_1_models_1_1_defaults_1_1_text_editor_command_default_functions_1a9fcd57c0bd81d77d73b907c1f2483530" kindref="member">TextEditorCommandDefaultFunctions.GoToDefinition</ref>(
+                commandArgs.EditContext,
+                modelModifier,
+                viewModelModifier,
+                cursorModifierBag,
+                commandArgs);
+            return Task.CompletedTask;
+        })</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Lib/TextEditor/Commands/Models/Defaults/TextEditorCommandDefaultFacts.cs" line="634" column="46" bodyfile="Source/Lib/TextEditor/Commands/Models/Defaults/TextEditorCommandDefaultFacts.cs" bodystart="634" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_commands_1_1_models_1_1_defaults_1_1_text_editor_command_default_facts_1aa3eef9df162e15ca94e4ea0f46bc2154" prot="public" static="yes" mutable="no">
+        <type>readonly <ref refid="class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_commands_1_1_models_1_1_text_editor_command" kindref="compound">TextEditorCommand</ref></type>
+        <definition>readonly TextEditorCommand Luthetus.TextEditor.RazorLib.Commands.Models.Defaults.TextEditorCommandDefaultFacts.ShowFindAllDialog</definition>
+        <argsstring></argsstring>
+        <name>ShowFindAllDialog</name>
+        <qualifiedname>Luthetus.TextEditor.RazorLib.Commands.Models.Defaults.TextEditorCommandDefaultFacts.ShowFindAllDialog</qualifiedname>
+        <initializer>= new(
+        &quot;OpenFindDialog&quot;, &quot;defaults_open-find-dialog&quot;, false, false, TextEditKind.None, null,
+        interfaceCommandArgs =&gt;
+        {
+            var commandArgs = (<ref refid="class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_commands_1_1_models_1_1_text_editor_command_args" kindref="compound">TextEditorCommandArgs</ref>)interfaceCommandArgs;
+            
+            var modelModifier = commandArgs.EditContext.GetModelModifier(commandArgs.ModelResourceUri);
+            var viewModelModifier = commandArgs.EditContext.GetViewModelModifier(commandArgs.ViewModelKey);
+            var cursorModifierBag = commandArgs.EditContext.GetCursorModifierBag(viewModelModifier?.ViewModel);
+            var primaryCursorModifier = commandArgs.EditContext.GetPrimaryCursorModifier(cursorModifierBag);
+
+            <ref refid="_lib_2_ide_2_host_8_blazor_server_side_2_program_8cs_1af2d0c02efe3fbc2d94e5b6e316777c4d" kindref="member">if</ref> (modelModifier is null || viewModelModifier is null || cursorModifierBag is null || primaryCursorModifier is null)
+                return Task.CompletedTask;
+                
+            <ref refid="class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_commands_1_1_models_1_1_defaults_1_1_text_editor_command_default_functions_1a2973300a816b5608a7b2430e867dd667" kindref="member">TextEditorCommandDefaultFunctions.ShowFindAllDialog</ref>(
+                commandArgs.EditContext,
+                modelModifier,
+                viewModelModifier,
+                cursorModifierBag,
+                commandArgs);
+            return Task.CompletedTask;
+        })</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Lib/TextEditor/Commands/Models/Defaults/TextEditorCommandDefaultFacts.cs" line="657" column="46" bodyfile="Source/Lib/TextEditor/Commands/Models/Defaults/TextEditorCommandDefaultFacts.cs" bodystart="657" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_commands_1_1_models_1_1_defaults_1_1_text_editor_command_default_facts_1af59235881b131c9bc4a8188c986b3cc2" prot="public" static="yes" mutable="no">
+        <type>readonly <ref refid="class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_commands_1_1_models_1_1_text_editor_command" kindref="compound">TextEditorCommand</ref></type>
+        <definition>readonly TextEditorCommand Luthetus.TextEditor.RazorLib.Commands.Models.Defaults.TextEditorCommandDefaultFacts.ShowTooltipByCursorPosition</definition>
+        <argsstring></argsstring>
+        <name>ShowTooltipByCursorPosition</name>
+        <qualifiedname>Luthetus.TextEditor.RazorLib.Commands.Models.Defaults.TextEditorCommandDefaultFacts.ShowTooltipByCursorPosition</qualifiedname>
+        <initializer>= new(
+        &quot;ShowTooltipByCursorPosition&quot;, &quot;defaults_show-tooltip-by-cursor-position&quot;, false, true, TextEditKind.None, null,
+        interfaceCommandArgs =&gt;
+        {
+            var commandArgs = (<ref refid="class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_commands_1_1_models_1_1_text_editor_command_args" kindref="compound">TextEditorCommandArgs</ref>)interfaceCommandArgs;
+            
+            var modelModifier = commandArgs.EditContext.GetModelModifier(commandArgs.ModelResourceUri);
+            var viewModelModifier = commandArgs.EditContext.GetViewModelModifier(commandArgs.ViewModelKey);
+            var cursorModifierBag = commandArgs.EditContext.GetCursorModifierBag(viewModelModifier?.ViewModel);
+            var primaryCursorModifier = commandArgs.EditContext.GetPrimaryCursorModifier(cursorModifierBag);
+
+            <ref refid="_lib_2_ide_2_host_8_blazor_server_side_2_program_8cs_1af2d0c02efe3fbc2d94e5b6e316777c4d" kindref="member">if</ref> (modelModifier is null || viewModelModifier is null || cursorModifierBag is null || primaryCursorModifier is null)
+                return Task.CompletedTask;
+                
+            return <ref refid="class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_commands_1_1_models_1_1_defaults_1_1_text_editor_command_default_functions_1ad5bdfc42eafafafd97de759e96448067" kindref="member">TextEditorCommandDefaultFunctions.ShowTooltipByCursorPositionAsync</ref>(
+                commandArgs.EditContext,
+                modelModifier,
+                viewModelModifier,
+                cursorModifierBag,
+                commandArgs);
+        })</initializer>
+        <briefdescription>
+<para>ShowTooltipByCursorPosition is to fire the @onmouseover event so to speak. Such that a tooltip appears if one were to have moused over a symbol or etc... </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Lib/TextEditor/Commands/Models/Defaults/TextEditorCommandDefaultFacts.cs" line="684" column="46" bodyfile="Source/Lib/TextEditor/Commands/Models/Defaults/TextEditorCommandDefaultFacts.cs" bodystart="684" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_commands_1_1_models_1_1_defaults_1_1_text_editor_command_default_facts_1ae91ffd77b81829898b2d41420e6deb88" prot="public" static="yes" mutable="no">
+        <type>readonly <ref refid="class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_commands_1_1_models_1_1_text_editor_command" kindref="compound">TextEditorCommand</ref></type>
+        <definition>readonly TextEditorCommand Luthetus.TextEditor.RazorLib.Commands.Models.Defaults.TextEditorCommandDefaultFacts.ShowFindOverlay</definition>
+        <argsstring></argsstring>
+        <name>ShowFindOverlay</name>
+        <qualifiedname>Luthetus.TextEditor.RazorLib.Commands.Models.Defaults.TextEditorCommandDefaultFacts.ShowFindOverlay</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Lib/TextEditor/Commands/Models/Defaults/TextEditorCommandDefaultFacts.cs" line="706" column="46" bodyfile="Source/Lib/TextEditor/Commands/Models/Defaults/TextEditorCommandDefaultFacts.cs" bodystart="706" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_commands_1_1_models_1_1_defaults_1_1_text_editor_command_default_facts_1a1f23643caf0a3b522760e164fcca51fd" prot="public" static="yes" mutable="no">
+        <type>readonly <ref refid="class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_commands_1_1_models_1_1_text_editor_command" kindref="compound">TextEditorCommand</ref></type>
+        <definition>readonly TextEditorCommand Luthetus.TextEditor.RazorLib.Commands.Models.Defaults.TextEditorCommandDefaultFacts.DEBUG_BreakLineEndings_ORIGINAL</definition>
+        <argsstring></argsstring>
+        <name>DEBUG_BreakLineEndings_ORIGINAL</name>
+        <qualifiedname>Luthetus.TextEditor.RazorLib.Commands.Models.Defaults.TextEditorCommandDefaultFacts.DEBUG_BreakLineEndings_ORIGINAL</qualifiedname>
+        <initializer>= new(
+        &quot;DEBUG_BreakLineEndings&quot;, &quot;defaults_DEBUG_BreakLineEndings&quot;, false, true, TextEditKind.None, null,
+        interfaceCommandArgs =&gt;
+        {
+            var commandArgs = (<ref refid="class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_commands_1_1_models_1_1_text_editor_command_args" kindref="compound">TextEditorCommandArgs</ref>)interfaceCommandArgs;
+            
+            var modelModifier = commandArgs.EditContext.GetModelModifier(commandArgs.ModelResourceUri);
+            var viewModelModifier = commandArgs.EditContext.GetViewModelModifier(commandArgs.ViewModelKey);
+            var cursorModifierBag = commandArgs.EditContext.GetCursorModifierBag(viewModelModifier?.ViewModel);
+            var primaryCursorModifier = commandArgs.EditContext.GetPrimaryCursorModifier(cursorModifierBag);
+
+            <ref refid="_lib_2_ide_2_host_8_blazor_server_side_2_program_8cs_1af2d0c02efe3fbc2d94e5b6e316777c4d" kindref="member">if</ref> (modelModifier is null || viewModelModifier is null || cursorModifierBag is null || primaryCursorModifier is null)
+                return Task.CompletedTask;
+                
+            modelModifier.Insert(
+                &quot;\n&quot;,
+                cursorModifierBag);
+                
+            throw new <ref refid="class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_exceptions_1_1_luthetus_text_editor_exception" kindref="compound">LuthetusTextEditorException</ref>(nameof(DEBUG_BreakLineEndings));
+                
+            return Task.CompletedTask;
+        })</initializer>
+        <briefdescription>
+<para>It is thought that: </para>
+        </briefdescription>
+        <detaileddescription>
+<para>The line endings break when an edit is made to a partition, but an exception is thrown which results in the text editor model&apos;s state reverting to the original state.</para>
+<para>Yet somehow the partition is still changed?</para>
+<para><hruler/>
+</para>
+<sect1 id="class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_commands_1_1_models_1_1_defaults_1_1_text_editor_command_default_facts_1autotoc_md268_1s1"><sect2 id="class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_commands_1_1_models_1_1_defaults_1_1_text_editor_command_default_facts_1autotoc_md268">
+<title>The bug has been reproduced.</title><para><itemizedlist>
+<listitem><para>File has CRLF line endings.</para>
+</listitem><listitem><para>Post to the <ref refid="interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_i_text_editor_service" kindref="compound">ITextEditorService</ref><itemizedlist>
+<listitem><para>Insert &apos;<linebreak/>
+&apos; with line end preference.</para>
+</listitem><listitem><para>Throw an exception</para>
+</listitem></itemizedlist>
+</para>
+</listitem><listitem><para>Make a second Post to the <ref refid="interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_i_text_editor_service" kindref="compound">ITextEditorService</ref><itemizedlist>
+<listitem><para>Insert the letter &apos;j&apos;</para>
+</listitem></itemizedlist>
+</para>
+</listitem></itemizedlist>
+</para>
+<para>Need to continue looking in to the bug to determine the more general steps to reproduce it.</para>
+<para>For example, its thought that inserting specifically letter &apos;j&apos; on the final step is irrelevant, just that one needs to insert any text.</para>
+<para><hruler/>
+</para>
+<para>It was discovered that, the final step which describes an insertion is only necessary because it triggers the virtualization result to be re-calculated.</para>
+<para>As a result, any action by the user which would re-calculate the virtualization result can be performed at that step.</para>
+<para>For example, the keybind: { Ctrl + ArrowUp }, will cause the editor to think it has been scrolled (whether the scrollTop actually changes is not currently checked). This goes on to then re-calculate the virtualization result. </para>
+</sect2></sect1>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Lib/TextEditor/Commands/Models/Defaults/TextEditorCommandDefaultFacts.cs" line="791" column="46" bodyfile="Source/Lib/TextEditor/Commands/Models/Defaults/TextEditorCommandDefaultFacts.cs" bodystart="791" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_commands_1_1_models_1_1_defaults_1_1_text_editor_command_default_facts_1a70dc8016a8d2e816a1113840d31a54b2" prot="public" static="yes" mutable="no">
+        <type>readonly <ref refid="class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_commands_1_1_models_1_1_text_editor_command" kindref="compound">TextEditorCommand</ref></type>
+        <definition>readonly TextEditorCommand Luthetus.TextEditor.RazorLib.Commands.Models.Defaults.TextEditorCommandDefaultFacts.DEBUG_BreakLineEndings</definition>
+        <argsstring></argsstring>
+        <name>DEBUG_BreakLineEndings</name>
+        <qualifiedname>Luthetus.TextEditor.RazorLib.Commands.Models.Defaults.TextEditorCommandDefaultFacts.DEBUG_BreakLineEndings</qualifiedname>
+        <initializer>= new(
+        &quot;DEBUG_BreakLineEndings&quot;, &quot;defaults_DEBUG_BreakLineEndings&quot;, false, true, TextEditKind.None, null,
+        interfaceCommandArgs =&gt;
+        {
+            var commandArgs = (<ref refid="class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_commands_1_1_models_1_1_text_editor_command_args" kindref="compound">TextEditorCommandArgs</ref>)interfaceCommandArgs;
+            
+            var modelModifier = commandArgs.EditContext.GetModelModifier(commandArgs.ModelResourceUri);
+            var viewModelModifier = commandArgs.EditContext.GetViewModelModifier(commandArgs.ViewModelKey);
+            var cursorModifierBag = commandArgs.EditContext.GetCursorModifierBag(viewModelModifier?.ViewModel);
+            var primaryCursorModifier = commandArgs.EditContext.GetPrimaryCursorModifier(cursorModifierBag);
+
+            <ref refid="_lib_2_ide_2_host_8_blazor_server_side_2_program_8cs_1af2d0c02efe3fbc2d94e5b6e316777c4d" kindref="member">if</ref> (modelModifier is null || viewModelModifier is null || cursorModifierBag is null || primaryCursorModifier is null)
+                return Task.CompletedTask;
+                
+            modelModifier.Insert(
+                &quot;\r\n&quot;,
+                cursorModifierBag,
+                useLineEndKindPreference: false);
+                
+            throw new <ref refid="class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_exceptions_1_1_luthetus_text_editor_exception" kindref="compound">LuthetusTextEditorException</ref>(nameof(DEBUG_BreakLineEndings));
+                
+            return Task.CompletedTask;
+        })</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Lib/TextEditor/Commands/Models/Defaults/TextEditorCommandDefaultFacts.cs" line="814" column="46" bodyfile="Source/Lib/TextEditor/Commands/Models/Defaults/TextEditorCommandDefaultFacts.cs" bodystart="814" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-static-func">
+      <memberdef kind="function" id="class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_commands_1_1_models_1_1_defaults_1_1_text_editor_command_default_facts_1a04cba29b0f63e8b95952ee0e3d206ff6" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_commands_1_1_models_1_1_text_editor_command" kindref="compound">TextEditorCommand</ref></type>
+        <definition>static TextEditorCommand Luthetus.TextEditor.RazorLib.Commands.Models.Defaults.TextEditorCommandDefaultFacts.GoToMatchingCharacterFactory</definition>
+        <argsstring>(bool shouldSelectText)</argsstring>
+        <name>GoToMatchingCharacterFactory</name>
+        <qualifiedname>Luthetus.TextEditor.RazorLib.Commands.Models.Defaults.TextEditorCommandDefaultFacts.GoToMatchingCharacterFactory</qualifiedname>
+        <param>
+          <type>bool</type>
+          <declname>shouldSelectText</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Lib/TextEditor/Commands/Models/Defaults/TextEditorCommandDefaultFacts.cs" line="540" column="37"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <collaborationgraph>
+      <node id="1">
+        <label>Luthetus.TextEditor.RazorLib.Commands.Models.Defaults.TextEditorCommandDefaultFacts</label>
+        <childnode refid="2" relation="usage">
+          <edgelabel>ClearTextSelection</edgelabel>
+          <edgelabel>Copy</edgelabel>
+          <edgelabel>CursorMovePageBottom</edgelabel>
+          <edgelabel>CursorMovePageTop</edgelabel>
+          <edgelabel>Cut</edgelabel>
+          <edgelabel>DEBUG_BreakLineEndings</edgelabel>
+          <edgelabel>DEBUG_BreakLineEndings_ORIGINAL</edgelabel>
+          <edgelabel>DoNothingDiscard</edgelabel>
+          <edgelabel>Duplicate</edgelabel>
+          <edgelabel>GoToDefinition</edgelabel>
+          <edgelabel>  ...</edgelabel>
+        </childnode>
+      </node>
+      <node id="4">
+        <label>Luthetus.Common.RazorLib.Commands.Models.CommandNoType</label>
+        <link refid="class_luthetus_1_1_common_1_1_razor_lib_1_1_commands_1_1_models_1_1_command_no_type"/>
+      </node>
+      <node id="3">
+        <label>Luthetus.Common.RazorLib.Commands.Models.CommandWithType&lt; T &gt;</label>
+        <link refid="class_luthetus_1_1_common_1_1_razor_lib_1_1_commands_1_1_models_1_1_command_with_type-1-g"/>
+        <childnode refid="4" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>Luthetus.TextEditor.RazorLib.Commands.Models.TextEditorCommand</label>
+        <link refid="class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_commands_1_1_models_1_1_text_editor_command"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="Source/Lib/TextEditor/Commands/Models/Defaults/TextEditorCommandDefaultFacts.cs" line="13" column="15" bodyfile="Source/Lib/TextEditor/Commands/Models/Defaults/TextEditorCommandDefaultFacts.cs" bodystart="14" bodyend="837"/>
+    <listofallmembers>
+      <member refid="class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_commands_1_1_models_1_1_defaults_1_1_text_editor_command_default_facts_1a63ba5fcefcb1e22db2e0e25d58c19ab6" prot="public" virt="non-virtual"><scope>Luthetus::TextEditor::RazorLib::Commands::Models::Defaults::TextEditorCommandDefaultFacts</scope><name>ClearTextSelection</name></member>
+      <member refid="class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_commands_1_1_models_1_1_defaults_1_1_text_editor_command_default_facts_1a9e4c42345f5b4e3706b10f75ed4161ab" prot="public" virt="non-virtual"><scope>Luthetus::TextEditor::RazorLib::Commands::Models::Defaults::TextEditorCommandDefaultFacts</scope><name>Copy</name></member>
+      <member refid="class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_commands_1_1_models_1_1_defaults_1_1_text_editor_command_default_facts_1a67f53eb57a0645cad451f960b4bf07c5" prot="public" virt="non-virtual"><scope>Luthetus::TextEditor::RazorLib::Commands::Models::Defaults::TextEditorCommandDefaultFacts</scope><name>CursorMovePageBottom</name></member>
+      <member refid="class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_commands_1_1_models_1_1_defaults_1_1_text_editor_command_default_facts_1ab5b8d8f2a636a1f75f597c348c73f0a4" prot="public" virt="non-virtual"><scope>Luthetus::TextEditor::RazorLib::Commands::Models::Defaults::TextEditorCommandDefaultFacts</scope><name>CursorMovePageTop</name></member>
+      <member refid="class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_commands_1_1_models_1_1_defaults_1_1_text_editor_command_default_facts_1a67545fc18879848b3cf34cd8121f8d60" prot="public" virt="non-virtual"><scope>Luthetus::TextEditor::RazorLib::Commands::Models::Defaults::TextEditorCommandDefaultFacts</scope><name>Cut</name></member>
+      <member refid="class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_commands_1_1_models_1_1_defaults_1_1_text_editor_command_default_facts_1a70dc8016a8d2e816a1113840d31a54b2" prot="public" virt="non-virtual"><scope>Luthetus::TextEditor::RazorLib::Commands::Models::Defaults::TextEditorCommandDefaultFacts</scope><name>DEBUG_BreakLineEndings</name></member>
+      <member refid="class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_commands_1_1_models_1_1_defaults_1_1_text_editor_command_default_facts_1a1f23643caf0a3b522760e164fcca51fd" prot="public" virt="non-virtual"><scope>Luthetus::TextEditor::RazorLib::Commands::Models::Defaults::TextEditorCommandDefaultFacts</scope><name>DEBUG_BreakLineEndings_ORIGINAL</name></member>
+      <member refid="class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_commands_1_1_models_1_1_defaults_1_1_text_editor_command_default_facts_1a5ab202b6201b0c1430350c5bba04069b" prot="public" virt="non-virtual"><scope>Luthetus::TextEditor::RazorLib::Commands::Models::Defaults::TextEditorCommandDefaultFacts</scope><name>DoNothingDiscard</name></member>
+      <member refid="class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_commands_1_1_models_1_1_defaults_1_1_text_editor_command_default_facts_1aabd0bbfef3f7f3fc17d780ed87a0e6d8" prot="public" virt="non-virtual"><scope>Luthetus::TextEditor::RazorLib::Commands::Models::Defaults::TextEditorCommandDefaultFacts</scope><name>Duplicate</name></member>
+      <member refid="class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_commands_1_1_models_1_1_defaults_1_1_text_editor_command_default_facts_1a118a74d5214fd09e05308bfcf1832b80" prot="public" virt="non-virtual"><scope>Luthetus::TextEditor::RazorLib::Commands::Models::Defaults::TextEditorCommandDefaultFacts</scope><name>GoToDefinition</name></member>
+      <member refid="class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_commands_1_1_models_1_1_defaults_1_1_text_editor_command_default_facts_1a04cba29b0f63e8b95952ee0e3d206ff6" prot="public" virt="non-virtual"><scope>Luthetus::TextEditor::RazorLib::Commands::Models::Defaults::TextEditorCommandDefaultFacts</scope><name>GoToMatchingCharacterFactory</name></member>
+      <member refid="class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_commands_1_1_models_1_1_defaults_1_1_text_editor_command_default_facts_1a42ee6ac216978b1f76400605622d3f94" prot="public" virt="non-virtual"><scope>Luthetus::TextEditor::RazorLib::Commands::Models::Defaults::TextEditorCommandDefaultFacts</scope><name>IndentLess</name></member>
+      <member refid="class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_commands_1_1_models_1_1_defaults_1_1_text_editor_command_default_facts_1a390594903801f0004e1ecc55ccbb6688" prot="public" virt="non-virtual"><scope>Luthetus::TextEditor::RazorLib::Commands::Models::Defaults::TextEditorCommandDefaultFacts</scope><name>IndentMore</name></member>
+      <member refid="class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_commands_1_1_models_1_1_defaults_1_1_text_editor_command_default_facts_1aed8e137e35dbb8eeb84b825557f6634a" prot="public" virt="non-virtual"><scope>Luthetus::TextEditor::RazorLib::Commands::Models::Defaults::TextEditorCommandDefaultFacts</scope><name>MoveLineDown</name></member>
+      <member refid="class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_commands_1_1_models_1_1_defaults_1_1_text_editor_command_default_facts_1a57e68a8eca8c58dd72fdfe895987c5cb" prot="public" virt="non-virtual"><scope>Luthetus::TextEditor::RazorLib::Commands::Models::Defaults::TextEditorCommandDefaultFacts</scope><name>MoveLineUp</name></member>
+      <member refid="class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_commands_1_1_models_1_1_defaults_1_1_text_editor_command_default_facts_1a1d3040837533fcbf5ff3a45f6139e59c" prot="public" virt="non-virtual"><scope>Luthetus::TextEditor::RazorLib::Commands::Models::Defaults::TextEditorCommandDefaultFacts</scope><name>NewLineAbove</name></member>
+      <member refid="class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_commands_1_1_models_1_1_defaults_1_1_text_editor_command_default_facts_1a3fdcc06d831775f9e4badfe4871b482f" prot="public" virt="non-virtual"><scope>Luthetus::TextEditor::RazorLib::Commands::Models::Defaults::TextEditorCommandDefaultFacts</scope><name>NewLineBelow</name></member>
+      <member refid="class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_commands_1_1_models_1_1_defaults_1_1_text_editor_command_default_facts_1ac03bdff6a4b3cf94d1e6f045f6b49d09" prot="public" virt="non-virtual"><scope>Luthetus::TextEditor::RazorLib::Commands::Models::Defaults::TextEditorCommandDefaultFacts</scope><name>PasteCommand</name></member>
+      <member refid="class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_commands_1_1_models_1_1_defaults_1_1_text_editor_command_default_facts_1ae445df7913d739785b177a55e6038091" prot="public" virt="non-virtual"><scope>Luthetus::TextEditor::RazorLib::Commands::Models::Defaults::TextEditorCommandDefaultFacts</scope><name>QuickActionsSlashRefactor</name></member>
+      <member refid="class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_commands_1_1_models_1_1_defaults_1_1_text_editor_command_default_facts_1a13a9a598c6b2e487646998c608726098" prot="public" virt="non-virtual"><scope>Luthetus::TextEditor::RazorLib::Commands::Models::Defaults::TextEditorCommandDefaultFacts</scope><name>Redo</name></member>
+      <member refid="class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_commands_1_1_models_1_1_defaults_1_1_text_editor_command_default_facts_1ace5e494828c430753d76916bfa576840" prot="public" virt="non-virtual"><scope>Luthetus::TextEditor::RazorLib::Commands::Models::Defaults::TextEditorCommandDefaultFacts</scope><name>RefreshSyntaxHighlighting</name></member>
+      <member refid="class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_commands_1_1_models_1_1_defaults_1_1_text_editor_command_default_facts_1a5e8edf3a32688aeee438ab4850ce539c" prot="public" virt="non-virtual"><scope>Luthetus::TextEditor::RazorLib::Commands::Models::Defaults::TextEditorCommandDefaultFacts</scope><name>RelatedFilesQuickPick</name></member>
+      <member refid="class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_commands_1_1_models_1_1_defaults_1_1_text_editor_command_default_facts_1ab272dbf6cb17b06cd5def0560096ad7c" prot="public" virt="non-virtual"><scope>Luthetus::TextEditor::RazorLib::Commands::Models::Defaults::TextEditorCommandDefaultFacts</scope><name>Remeasure</name></member>
+      <member refid="class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_commands_1_1_models_1_1_defaults_1_1_text_editor_command_default_facts_1a67dbfa46752e2a9005c1e415dfedfcaa" prot="public" virt="non-virtual"><scope>Luthetus::TextEditor::RazorLib::Commands::Models::Defaults::TextEditorCommandDefaultFacts</scope><name>ScrollLineDown</name></member>
+      <member refid="class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_commands_1_1_models_1_1_defaults_1_1_text_editor_command_default_facts_1af5a0f94c50cefb5a5fb36df11399ad7e" prot="public" virt="non-virtual"><scope>Luthetus::TextEditor::RazorLib::Commands::Models::Defaults::TextEditorCommandDefaultFacts</scope><name>ScrollLineUp</name></member>
+      <member refid="class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_commands_1_1_models_1_1_defaults_1_1_text_editor_command_default_facts_1a8e9470d20d1f6a8320c7d9a786753f62" prot="public" virt="non-virtual"><scope>Luthetus::TextEditor::RazorLib::Commands::Models::Defaults::TextEditorCommandDefaultFacts</scope><name>ScrollPageDown</name></member>
+      <member refid="class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_commands_1_1_models_1_1_defaults_1_1_text_editor_command_default_facts_1a4b984be509303e71e9fdba1f3e6ca5f3" prot="public" virt="non-virtual"><scope>Luthetus::TextEditor::RazorLib::Commands::Models::Defaults::TextEditorCommandDefaultFacts</scope><name>ScrollPageUp</name></member>
+      <member refid="class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_commands_1_1_models_1_1_defaults_1_1_text_editor_command_default_facts_1a8a5d662bcd0014aa46598ee46616aab9" prot="public" virt="non-virtual"><scope>Luthetus::TextEditor::RazorLib::Commands::Models::Defaults::TextEditorCommandDefaultFacts</scope><name>SelectAll</name></member>
+      <member refid="class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_commands_1_1_models_1_1_defaults_1_1_text_editor_command_default_facts_1a14e7f083543866232841e22e4c1eb9ae" prot="public" virt="non-virtual"><scope>Luthetus::TextEditor::RazorLib::Commands::Models::Defaults::TextEditorCommandDefaultFacts</scope><name>ShowAutocompleteMenu</name></member>
+      <member refid="class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_commands_1_1_models_1_1_defaults_1_1_text_editor_command_default_facts_1aa3eef9df162e15ca94e4ea0f46bc2154" prot="public" virt="non-virtual"><scope>Luthetus::TextEditor::RazorLib::Commands::Models::Defaults::TextEditorCommandDefaultFacts</scope><name>ShowFindAllDialog</name></member>
+      <member refid="class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_commands_1_1_models_1_1_defaults_1_1_text_editor_command_default_facts_1ae91ffd77b81829898b2d41420e6deb88" prot="public" virt="non-virtual"><scope>Luthetus::TextEditor::RazorLib::Commands::Models::Defaults::TextEditorCommandDefaultFacts</scope><name>ShowFindOverlay</name></member>
+      <member refid="class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_commands_1_1_models_1_1_defaults_1_1_text_editor_command_default_facts_1af59235881b131c9bc4a8188c986b3cc2" prot="public" virt="non-virtual"><scope>Luthetus::TextEditor::RazorLib::Commands::Models::Defaults::TextEditorCommandDefaultFacts</scope><name>ShowTooltipByCursorPosition</name></member>
+      <member refid="class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_commands_1_1_models_1_1_defaults_1_1_text_editor_command_default_facts_1a4ea6feb6b9ad1ae43645ad1f63ff92d9" prot="public" virt="non-virtual"><scope>Luthetus::TextEditor::RazorLib::Commands::Models::Defaults::TextEditorCommandDefaultFacts</scope><name>TriggerSave</name></member>
+      <member refid="class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_commands_1_1_models_1_1_defaults_1_1_text_editor_command_default_facts_1aba50c9ee7c6611dba2474efa61f202da" prot="public" virt="non-virtual"><scope>Luthetus::TextEditor::RazorLib::Commands::Models::Defaults::TextEditorCommandDefaultFacts</scope><name>Undo</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

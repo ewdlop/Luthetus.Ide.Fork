@@ -1,0 +1,4 @@
+var _generic_arguments_listing_node_tests_8cs =
+[
+    [ "Luthetus.TextEditor.Tests.Basis.CompilerServices.Syntax.SyntaxNodes.GenericArgumentsListingNodeTests", "class_luthetus_1_1_text_editor_1_1_tests_1_1_basis_1_1_compiler_services_1_1_syntax_1_1_syntax_nb052358dcde8a2b86535601c1c48fde3.html", "class_luthetus_1_1_text_editor_1_1_tests_1_1_basis_1_1_compiler_services_1_1_syntax_1_1_syntax_nb052358dcde8a2b86535601c1c48fde3" ]
+];

@@ -1,0 +1,29 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="__text_editor_text_span_8cs" xml:lang="en-US">
+<title>Source/Lib/TextEditor/Lexers/Models/TextEditorTextSpan.cs File Reference</title>
+<indexterm><primary>Source/Lib/TextEditor/Lexers/Models/TextEditorTextSpan.cs</primary></indexterm>
+<simplesect>
+    <title>Namespaces    </title>
+        <itemizedlist>
+            <listitem><para>namespace <link linkend="_namespace_luthetus">Luthetus</link></para>
+</listitem>
+            <listitem><para>namespace <link linkend="_namespace_luthetus_1_1_text_editor">Luthetus.TextEditor</link></para>
+</listitem>
+            <listitem><para>namespace <link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib">Luthetus.TextEditor.RazorLib</link></para>
+</listitem>
+            <listitem><para>namespace <link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_lexers">Luthetus.TextEditor.RazorLib.Lexers</link></para>
+</listitem>
+            <listitem><para>namespace <link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_lexers_1_1_models">Luthetus.TextEditor.RazorLib.Lexers.Models</link></para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Functions    </title>
+        <itemizedlist>
+            <listitem><para>record struct <link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_lexers_1_1_models_1a1ffd1a7706dfd364560b76d47467812f">Luthetus.TextEditor.RazorLib.Lexers.Models.TextEditorTextSpan</link> (int StartingIndexInclusive, int EndingIndexExclusive, byte DecorationByte, <link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_lexers_1_1_models_1a26a1b63ad28ec7955b30bc6c91571eca">ResourceUri</link> <link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_lexers_1_1_models_1a26a1b63ad28ec7955b30bc6c91571eca">ResourceUri</link>, string SourceText)</para>
+
+<para>TODO: I have a suspicion that this type takes an absurd amount of memory... ... the initial way of implementing this type was to store the text at the time of constructing the text span. | But, it was thought that preferably one would only only create the substring when asked for it. | This means one has to store the entirety of the source text. Well, the source text is just a reference not a copy of the value. So this seemed fine enough. | But, because the text editor is immutable. The source text is constantly needing to be reconstructed as a string value. | As a result, the old string values that pertain to previous iterations of the text editor must be held in memory, because any TextEditorTextSpan that is not garbage collected, would have a reference to the old string value. | I&apos;m thinking of using Span&lt;char&gt; or something along the lines. But, wouldn&apos;t Span&lt;char&gt; still need to maintain the previous string in its entirety? | If Span&lt;T&gt; will somehow track what section of the previous string I have a reference to, and only free the resources pertaining to the sections of the string that don&apos;t have a Span&lt;T&gt; referencing them then that would be amazing. | But then again, why am I not just letting the text span capture the substring upon construction? | I also wonder, what about a Func&lt;string&gt;? Does this somehow hide the previous string values of the text editor and permit the resources to be free&apos;d? (2024-07-27). </para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+</section>

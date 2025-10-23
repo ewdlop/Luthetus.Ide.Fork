@@ -1,0 +1,4 @@
+var _string_interpolation_symbol_tests_8cs =
+[
+    [ "Luthetus.TextEditor.Tests.Basis.CompilerServices.Syntax.Symbols.StringInterpolationSymbolTests", "class_luthetus_1_1_text_editor_1_1_tests_1_1_basis_1_1_compiler_services_1_1_syntax_1_1_symbols_c14d0b19e9195e5d9ab6fac553570ae7.html", "class_luthetus_1_1_text_editor_1_1_tests_1_1_basis_1_1_compiler_services_1_1_syntax_1_1_symbols_c14d0b19e9195e5d9ab6fac553570ae7" ]
+];

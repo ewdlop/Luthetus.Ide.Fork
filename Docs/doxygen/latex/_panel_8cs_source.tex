@@ -1,0 +1,328 @@
+\doxysection{Panel.\+cs}
+\hypertarget{_panel_8cs_source}{}\label{_panel_8cs_source}\index{Source/Lib/Common/Panels/Models/Panel.cs@{Source/Lib/Common/Panels/Models/Panel.cs}}
+\mbox{\hyperlink{_panel_8cs}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{_panel_8cs_source_l00001}00001\ \textcolor{keyword}{using\ }System.Collections.Immutable;}
+\DoxyCodeLine{\Hypertarget{_panel_8cs_source_l00002}00002\ \textcolor{keyword}{using\ }Microsoft.JSInterop;}
+\DoxyCodeLine{\Hypertarget{_panel_8cs_source_l00003}00003\ \textcolor{keyword}{using\ }Microsoft.AspNetCore.Components.Web;}
+\DoxyCodeLine{\Hypertarget{_panel_8cs_source_l00004}00004\ \textcolor{keyword}{using\ }Fluxor;}
+\DoxyCodeLine{\Hypertarget{_panel_8cs_source_l00005}00005\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_luthetus_1_1_common_1_1_razor_lib_1_1_contexts_1_1_models}{Luthetus.Common.RazorLib.Contexts.Models}};}
+\DoxyCodeLine{\Hypertarget{_panel_8cs_source_l00006}00006\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_luthetus_1_1_common_1_1_razor_lib_1_1_dimensions_1_1_models}{Luthetus.Common.RazorLib.Dimensions.Models}};}
+\DoxyCodeLine{\Hypertarget{_panel_8cs_source_l00007}00007\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_luthetus_1_1_common_1_1_razor_lib_1_1_keys_1_1_models}{Luthetus.Common.RazorLib.Keys.Models}};}
+\DoxyCodeLine{\Hypertarget{_panel_8cs_source_l00008}00008\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_luthetus_1_1_common_1_1_razor_lib_1_1_dialogs_1_1_models}{Luthetus.Common.RazorLib.Dialogs.Models}};}
+\DoxyCodeLine{\Hypertarget{_panel_8cs_source_l00009}00009\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_luthetus_1_1_common_1_1_razor_lib_1_1_java_script_objects_1_1_models}{Luthetus.Common.RazorLib.JavaScriptObjects.Models}};}
+\DoxyCodeLine{\Hypertarget{_panel_8cs_source_l00010}00010\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_luthetus_1_1_common_1_1_razor_lib_1_1_panels_1_1_states}{Luthetus.Common.RazorLib.Panels.States}};}
+\DoxyCodeLine{\Hypertarget{_panel_8cs_source_l00011}00011\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_luthetus_1_1_common_1_1_razor_lib_1_1_dynamics_1_1_models}{Luthetus.Common.RazorLib.Dynamics.Models}};}
+\DoxyCodeLine{\Hypertarget{_panel_8cs_source_l00012}00012\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_luthetus_1_1_common_1_1_razor_lib_1_1_tabs_1_1_displays}{Luthetus.Common.RazorLib.Tabs.Displays}};}
+\DoxyCodeLine{\Hypertarget{_panel_8cs_source_l00013}00013\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_luthetus_1_1_common_1_1_razor_lib_1_1_js_runtimes_1_1_models}{Luthetus.Common.RazorLib.JsRuntimes.Models}};}
+\DoxyCodeLine{\Hypertarget{_panel_8cs_source_l00014}00014\ }
+\DoxyCodeLine{\Hypertarget{_panel_8cs_source_l00015}00015\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespace_luthetus_1_1_common_1_1_razor_lib_1_1_panels_1_1_models}{Luthetus.Common.RazorLib.Panels.Models}};}
+\DoxyCodeLine{\Hypertarget{_panel_8cs_source_l00016}00016\ }
+\DoxyCodeLine{\Hypertarget{_panel_8cs_source_l00017}\mbox{\hyperlink{namespace_luthetus_1_1_common_1_1_razor_lib_1_1_panels_1_1_models_a4cda90de1465c4aa1eb64b93539e69fc}{00017}}\ \textcolor{keyword}{public}\ record\ \mbox{\hyperlink{namespace_luthetus_1_1_common_1_1_razor_lib_1_1_panels_1_1_models_a7d7bfac20e261a4775279a1ce23fb6f8}{Panel}}\ :\ \mbox{\hyperlink{interface_luthetus_1_1_common_1_1_razor_lib_1_1_panels_1_1_models_1_1_i_panel_tab}{IPanelTab}},\ \mbox{\hyperlink{namespace_luthetus_1_1_common_1_1_razor_lib_1_1_panels_1_1_models_a4cda90de1465c4aa1eb64b93539e69fc}{IDialog}},\ \mbox{\hyperlink{namespace_luthetus_1_1_common_1_1_razor_lib_1_1_panels_1_1_models_ae72f844ed2124eda717607572405f5d4}{IDrag}}}
+\DoxyCodeLine{\Hypertarget{_panel_8cs_source_l00018}00018\ \{}
+\DoxyCodeLine{\Hypertarget{_panel_8cs_source_l00019}00019\ \ \ \ \ \textcolor{keyword}{private}\ readonly\ Type\ \_dragTabComponentType;}
+\DoxyCodeLine{\Hypertarget{_panel_8cs_source_l00020}00020\ \ \ \ \ \textcolor{keyword}{private}\ readonly\ Dictionary<string,\ object?>?\ \_dragTabComponentParameterMap;}
+\DoxyCodeLine{\Hypertarget{_panel_8cs_source_l00021}00021\ }
+\DoxyCodeLine{\Hypertarget{_panel_8cs_source_l00022}00022\ \ \ \ \ \textcolor{keyword}{private}\ readonly\ Type?\ \_dragDialogComponentType\ =\ \textcolor{keyword}{null};}
+\DoxyCodeLine{\Hypertarget{_panel_8cs_source_l00023}00023\ \ \ \ \ \textcolor{keyword}{private}\ readonly\ Dictionary<string,\ object?>?\ \_dragDialogComponentParameterMap\ =\ \textcolor{keyword}{null};}
+\DoxyCodeLine{\Hypertarget{_panel_8cs_source_l00024}00024\ }
+\DoxyCodeLine{\Hypertarget{_panel_8cs_source_l00025}00025\ \ \ \ \ \textcolor{keyword}{public}\ \mbox{\hyperlink{namespace_luthetus_1_1_common_1_1_razor_lib_1_1_panels_1_1_models_a7d7bfac20e261a4775279a1ce23fb6f8}{Panel}}(}
+\DoxyCodeLine{\Hypertarget{_panel_8cs_source_l00026}00026\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{string}\ \mbox{\hyperlink{namespace_luthetus_1_1_common_1_1_razor_lib_1_1_dialogs_1_1_models_a201dc83c1d73039654cb10ae7e205b67}{title}},}
+\DoxyCodeLine{\Hypertarget{_panel_8cs_source_l00027}00027\ \ \ \ \ \ \ \ \ Key<Panel>\ key,}
+\DoxyCodeLine{\Hypertarget{_panel_8cs_source_l00028}00028\ \ \ \ \ \ \ \ \ Key<IDynamicViewModel>\ dynamicViewModelKey,}
+\DoxyCodeLine{\Hypertarget{_panel_8cs_source_l00029}00029\ \ \ \ \ \ \ \ \ Key<ContextRecord>\ contextRecordKey,}
+\DoxyCodeLine{\Hypertarget{_panel_8cs_source_l00030}00030\ \ \ \ \ \ \ \ \ Type\ \mbox{\hyperlink{namespace_luthetus_1_1_common_1_1_razor_lib_1_1_dialogs_1_1_models_a8693b131ffcf6803bca0701c120e57c3}{componentType}},}
+\DoxyCodeLine{\Hypertarget{_panel_8cs_source_l00031}00031\ \ \ \ \ \ \ \ \ Dictionary<string,\ object?>?\ \mbox{\hyperlink{namespace_luthetus_1_1_common_1_1_razor_lib_1_1_dialogs_1_1_models_a6021218e15a700f258832bc3705d08e1}{componentParameterMap}},}
+\DoxyCodeLine{\Hypertarget{_panel_8cs_source_l00032}00032\ \ \ \ \ \ \ \ \ IDispatcher\ dispatcher,}
+\DoxyCodeLine{\Hypertarget{_panel_8cs_source_l00033}00033\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{interface_luthetus_1_1_common_1_1_razor_lib_1_1_dialogs_1_1_models_1_1_i_dialog_service}{IDialogService}}\ dialogService,}
+\DoxyCodeLine{\Hypertarget{_panel_8cs_source_l00034}00034\ \ \ \ \ \ \ \ \ IJSRuntime\ jsRuntime)}
+\DoxyCodeLine{\Hypertarget{_panel_8cs_source_l00035}00035\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_panel_8cs_source_l00036}00036\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespace_luthetus_1_1_common_1_1_razor_lib_1_1_dialogs_1_1_models_ac94da4b7c6a1e2a1dd498ce830d300f1}{Title}}\ =\ \mbox{\hyperlink{namespace_luthetus_1_1_common_1_1_razor_lib_1_1_dialogs_1_1_models_a201dc83c1d73039654cb10ae7e205b67}{title}};}
+\DoxyCodeLine{\Hypertarget{_panel_8cs_source_l00037}00037\ \ \ \ \ \ \ \ \ Key\ =\ key;}
+\DoxyCodeLine{\Hypertarget{_panel_8cs_source_l00038}00038\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespace_luthetus_1_1_common_1_1_razor_lib_1_1_dialogs_1_1_models_a7b6b7e401ac513c746af3a19e426016d}{DynamicViewModelKey}}\ =\ dynamicViewModelKey;}
+\DoxyCodeLine{\Hypertarget{_panel_8cs_source_l00039}00039\ \ \ \ \ \ \ \ \ ContextRecordKey\ =\ contextRecordKey;}
+\DoxyCodeLine{\Hypertarget{_panel_8cs_source_l00040}00040\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespace_luthetus_1_1_common_1_1_razor_lib_1_1_dialogs_1_1_models_aaa2b6842308d5b3e8ff10a8d830cdc43}{ComponentType}}\ =\ \mbox{\hyperlink{namespace_luthetus_1_1_common_1_1_razor_lib_1_1_dialogs_1_1_models_a8693b131ffcf6803bca0701c120e57c3}{componentType}};}
+\DoxyCodeLine{\Hypertarget{_panel_8cs_source_l00041}00041\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespace_luthetus_1_1_common_1_1_razor_lib_1_1_dialogs_1_1_models_a1b662c0d3f2a3857df2d71eba6b8eb6d}{ComponentParameterMap}}\ =\ \mbox{\hyperlink{namespace_luthetus_1_1_common_1_1_razor_lib_1_1_dialogs_1_1_models_a6021218e15a700f258832bc3705d08e1}{componentParameterMap}};}
+\DoxyCodeLine{\Hypertarget{_panel_8cs_source_l00042}00042\ }
+\DoxyCodeLine{\Hypertarget{_panel_8cs_source_l00043}00043\ \ \ \ \ \ \ \ \ Dispatcher\ =\ dispatcher;}
+\DoxyCodeLine{\Hypertarget{_panel_8cs_source_l00044}00044\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_luthetus_1_1_common_1_1_razor_lib_1_1_dialogs_1_1_models_1_1_dialog_service}{DialogService}}\ =\ dialogService;}
+\DoxyCodeLine{\Hypertarget{_panel_8cs_source_l00045}00045\ \ \ \ \ \ \ \ \ JsRuntime\ =\ jsRuntime;}
+\DoxyCodeLine{\Hypertarget{_panel_8cs_source_l00046}00046\ }
+\DoxyCodeLine{\Hypertarget{_panel_8cs_source_l00047}00047\ \ \ \ \ \ \ \ \ \_dragTabComponentType\ =\ typeof(\mbox{\hyperlink{class_luthetus_1_1_common_1_1_razor_lib_1_1_tabs_1_1_displays_1_1_tab_display}{TabDisplay}});}
+\DoxyCodeLine{\Hypertarget{_panel_8cs_source_l00048}00048\ \ \ \ \ \ \ \ \ \_dragTabComponentParameterMap\ =\ \textcolor{keyword}{new}()}
+\DoxyCodeLine{\Hypertarget{_panel_8cs_source_l00049}00049\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_panel_8cs_source_l00050}00050\ \ \ \ \ \ \ \ \ \ \ \ \ \{\ nameof(\mbox{\hyperlink{class_luthetus_1_1_common_1_1_razor_lib_1_1_tabs_1_1_displays_1_1_tab_display}{TabDisplay}}.\mbox{\hyperlink{class_luthetus_1_1_common_1_1_razor_lib_1_1_tabs_1_1_displays_1_1_tab_display_a073b814801d1f91f18b24cbba6213e41}{Tab}}),\ \textcolor{keyword}{this}\ \},}
+\DoxyCodeLine{\Hypertarget{_panel_8cs_source_l00051}00051\ \ \ \ \ \ \ \ \ \ \ \ \ \{\ nameof(\mbox{\hyperlink{class_luthetus_1_1_common_1_1_razor_lib_1_1_tabs_1_1_displays_1_1_tab_display}{TabDisplay}}.\mbox{\hyperlink{class_luthetus_1_1_common_1_1_razor_lib_1_1_tabs_1_1_displays_1_1_tab_display_ae97f12854f570ac82bdb2fa76f84bc68}{IsBeingDragged}}),\ \textcolor{keyword}{true}\ \}}
+\DoxyCodeLine{\Hypertarget{_panel_8cs_source_l00052}00052\ \ \ \ \ \ \ \ \ \};}
+\DoxyCodeLine{\Hypertarget{_panel_8cs_source_l00053}00053\ }
+\DoxyCodeLine{\Hypertarget{_panel_8cs_source_l00054}00054\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespace_luthetus_1_1_common_1_1_razor_lib_1_1_dialogs_1_1_models_afd8cabe7053d831fc1750a5dc467c330}{DialogFocusPointHtmlElementId}}\ =\ \$\textcolor{stringliteral}{"{}luth\_dialog-\/focus-\/point\_\{DynamicViewModelKey.Guid\}"{}};}
+\DoxyCodeLine{\Hypertarget{_panel_8cs_source_l00055}00055\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_panel_8cs_source_l00056}00056\ }
+\DoxyCodeLine{\Hypertarget{_panel_8cs_source_l00057}00057\ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keywordtype}{string}\ \mbox{\hyperlink{namespace_luthetus_1_1_common_1_1_razor_lib_1_1_dialogs_1_1_models_ac94da4b7c6a1e2a1dd498ce830d300f1}{Title}}\ \{\ \textcolor{keyword}{get};\ \}}
+\DoxyCodeLine{\Hypertarget{_panel_8cs_source_l00058}00058\ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keywordtype}{string}\ \mbox{\hyperlink{namespace_luthetus_1_1_common_1_1_razor_lib_1_1_dialogs_1_1_models_a2ad4d709f86e4b4774a4cde9f18db7a4}{TitleVerbose}}\ =>\ \mbox{\hyperlink{namespace_luthetus_1_1_common_1_1_razor_lib_1_1_dialogs_1_1_models_ac94da4b7c6a1e2a1dd498ce830d300f1}{Title}};}
+\DoxyCodeLine{\Hypertarget{_panel_8cs_source_l00059}00059\ \ \ \ \ \textcolor{keyword}{public}\ Key<Panel>\ Key\ \{\ \textcolor{keyword}{get};\ \}}
+\DoxyCodeLine{\Hypertarget{_panel_8cs_source_l00060}00060\ \ \ \ \ \textcolor{keyword}{public}\ Key<IDynamicViewModel>\ \mbox{\hyperlink{namespace_luthetus_1_1_common_1_1_razor_lib_1_1_dialogs_1_1_models_a7b6b7e401ac513c746af3a19e426016d}{DynamicViewModelKey}}\ \{\ \textcolor{keyword}{get};\ \}}
+\DoxyCodeLine{\Hypertarget{_panel_8cs_source_l00061}00061\ \ \ \ \ \textcolor{keyword}{public}\ Key<ContextRecord>\ ContextRecordKey\ \{\ \textcolor{keyword}{get};\ \}}
+\DoxyCodeLine{\Hypertarget{_panel_8cs_source_l00062}00062\ \ \ \ \ \textcolor{keyword}{public}\ IDispatcher\ Dispatcher\ \{\ \textcolor{keyword}{get};\}}
+\DoxyCodeLine{\Hypertarget{_panel_8cs_source_l00063}00063\ \ \ \ \ \textcolor{keyword}{public}\ \mbox{\hyperlink{interface_luthetus_1_1_common_1_1_razor_lib_1_1_dialogs_1_1_models_1_1_i_dialog_service}{IDialogService}}\ \mbox{\hyperlink{class_luthetus_1_1_common_1_1_razor_lib_1_1_dialogs_1_1_models_1_1_dialog_service}{DialogService}}\ \{\ \textcolor{keyword}{get};\}}
+\DoxyCodeLine{\Hypertarget{_panel_8cs_source_l00064}00064\ \ \ \ \ \textcolor{keyword}{public}\ IJSRuntime\ JsRuntime\ \{\ \textcolor{keyword}{get};\}}
+\DoxyCodeLine{\Hypertarget{_panel_8cs_source_l00065}00065\ \ \ \ \ \textcolor{keyword}{public}\ Type\ \mbox{\hyperlink{namespace_luthetus_1_1_common_1_1_razor_lib_1_1_dialogs_1_1_models_aaa2b6842308d5b3e8ff10a8d830cdc43}{ComponentType}}\ \{\ \textcolor{keyword}{get};\ \}}
+\DoxyCodeLine{\Hypertarget{_panel_8cs_source_l00066}00066\ \ \ \ \ \textcolor{keyword}{public}\ Dictionary<string,\ object?>?\ \mbox{\hyperlink{namespace_luthetus_1_1_common_1_1_razor_lib_1_1_dialogs_1_1_models_a1b662c0d3f2a3857df2d71eba6b8eb6d}{ComponentParameterMap}}\ \{\ \textcolor{keyword}{get};\ \textcolor{keyword}{set};\ \}}
+\DoxyCodeLine{\Hypertarget{_panel_8cs_source_l00067}00067\ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keywordtype}{string}?\ \mbox{\hyperlink{namespace_luthetus_1_1_common_1_1_razor_lib_1_1_dialogs_1_1_models_a675995855ea2a46df8fbe7c57837f1d6}{DialogCssClass}}\ \{\ \textcolor{keyword}{get};\ \textcolor{keyword}{set};\ \}}
+\DoxyCodeLine{\Hypertarget{_panel_8cs_source_l00068}00068\ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keywordtype}{string}?\ \mbox{\hyperlink{namespace_luthetus_1_1_common_1_1_razor_lib_1_1_dialogs_1_1_models_ae69b6ce9c574d17a4658d1b57a6e1b73}{DialogCssStyle}}\ \{\ \textcolor{keyword}{get};\ \textcolor{keyword}{set};\ \}}
+\DoxyCodeLine{\Hypertarget{_panel_8cs_source_l00069}00069\ \ \ \ \ \textcolor{keyword}{public}\ \mbox{\hyperlink{interface_luthetus_1_1_common_1_1_razor_lib_1_1_dynamics_1_1_models_1_1_i_tab_group}{ITabGroup}}?\ TabGroup\ \{\ \textcolor{keyword}{get};\ \textcolor{keyword}{set};\ \}}
+\DoxyCodeLine{\Hypertarget{_panel_8cs_source_l00070}00070\ }
+\DoxyCodeLine{\Hypertarget{_panel_8cs_source_l00071}00071\ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{namespace_luthetus_1_1_common_1_1_razor_lib_1_1_dialogs_1_1_models_a05e9c66f44165018f9ffb7c28f67e88c}{DialogIsMinimized}}\ \{\ \textcolor{keyword}{get};\ \textcolor{keyword}{set};\ \}}
+\DoxyCodeLine{\Hypertarget{_panel_8cs_source_l00072}00072\ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{namespace_luthetus_1_1_common_1_1_razor_lib_1_1_dialogs_1_1_models_af63895fd8038684457cca06455b735ab}{DialogIsMaximized}}\ \{\ \textcolor{keyword}{get};\ \textcolor{keyword}{set};\ \}}
+\DoxyCodeLine{\Hypertarget{_panel_8cs_source_l00073}00073\ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{namespace_luthetus_1_1_common_1_1_razor_lib_1_1_dialogs_1_1_models_a0a6d37668c7766083e900d3c35e26130}{DialogIsResizable}}\ \{\ \textcolor{keyword}{get};\ \textcolor{keyword}{set};\ \}\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{\Hypertarget{_panel_8cs_source_l00074}00074\ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keywordtype}{string}?\ \mbox{\hyperlink{namespace_luthetus_1_1_common_1_1_razor_lib_1_1_dialogs_1_1_models_a9df8bcbfa763345508e01ecf6b227627}{SetFocusOnCloseElementId}}\ \{\ \textcolor{keyword}{get};\ \textcolor{keyword}{set};\ \}}
+\DoxyCodeLine{\Hypertarget{_panel_8cs_source_l00075}00075\ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keywordtype}{string}\ \mbox{\hyperlink{namespace_luthetus_1_1_common_1_1_razor_lib_1_1_dialogs_1_1_models_afd8cabe7053d831fc1750a5dc467c330}{DialogFocusPointHtmlElementId}}\ \{\ \textcolor{keyword}{get};\ init;\ \}}
+\DoxyCodeLine{\Hypertarget{_panel_8cs_source_l00076}00076\ \ \ \ \ \textcolor{keyword}{public}\ \mbox{\hyperlink{class_luthetus_1_1_common_1_1_razor_lib_1_1_dimensions_1_1_models_1_1_element_dimensions}{ElementDimensions}}\ \mbox{\hyperlink{namespace_luthetus_1_1_common_1_1_razor_lib_1_1_dialogs_1_1_models_ae9edcc66f25c3a5f8ac3e8cfa3ce5c9a}{DialogElementDimensions}}\ \{\ \textcolor{keyword}{get};\ \textcolor{keyword}{set};\ \}\ =\ DialogHelper.ConstructDefaultElementDimensions();}
+\DoxyCodeLine{\Hypertarget{_panel_8cs_source_l00077}00077\ }
+\DoxyCodeLine{\Hypertarget{_panel_8cs_source_l00078}00078\ \ \ \ \ \textcolor{keyword}{public}\ ImmutableArray<IDropzone>\ DropzoneList\ \{\ \textcolor{keyword}{get};\ \textcolor{keyword}{set};\ \}\ =\ \textcolor{keyword}{new}();}
+\DoxyCodeLine{\Hypertarget{_panel_8cs_source_l00079}00079\ }
+\DoxyCodeLine{\Hypertarget{_panel_8cs_source_l00080}00080\ \ \ \ \ \textcolor{keyword}{public}\ \mbox{\hyperlink{class_luthetus_1_1_common_1_1_razor_lib_1_1_dimensions_1_1_models_1_1_element_dimensions}{ElementDimensions}}\ DragElementDimensions\ \{\ \textcolor{keyword}{get};\ \textcolor{keyword}{set};\ \}\ =\ DialogHelper.ConstructDefaultElementDimensions();}
+\DoxyCodeLine{\Hypertarget{_panel_8cs_source_l00081}00081\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_panel_8cs_source_l00082}00082\ \ \ \ \ \textcolor{keyword}{public}\ Type\ DragComponentType\ =>\ TabGroup\ is\ \textcolor{keyword}{null}}
+\DoxyCodeLine{\Hypertarget{_panel_8cs_source_l00083}00083\ \ \ \ \ \ \ \ \ ?\ \_dragDialogComponentType}
+\DoxyCodeLine{\Hypertarget{_panel_8cs_source_l00084}00084\ \ \ \ \ \ \ \ \ :\ \_dragTabComponentType;}
+\DoxyCodeLine{\Hypertarget{_panel_8cs_source_l00085}00085\ }
+\DoxyCodeLine{\Hypertarget{_panel_8cs_source_l00086}00086\ \ \ \ \ \textcolor{keyword}{public}\ Dictionary<string,\ object?>?\ DragComponentParameterMap\ =>\ TabGroup\ is\ \textcolor{keyword}{null}}
+\DoxyCodeLine{\Hypertarget{_panel_8cs_source_l00087}00087\ \ \ \ \ \ \ \ \ ?\ \_dragDialogComponentParameterMap}
+\DoxyCodeLine{\Hypertarget{_panel_8cs_source_l00088}00088\ \ \ \ \ \ \ \ \ :\ \_dragTabComponentParameterMap;}
+\DoxyCodeLine{\Hypertarget{_panel_8cs_source_l00089}00089\ }
+\DoxyCodeLine{\Hypertarget{_panel_8cs_source_l00090}00090\ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keywordtype}{string}?\ DragCssClass\ \{\ \textcolor{keyword}{get};\ \textcolor{keyword}{set};\ \}}
+\DoxyCodeLine{\Hypertarget{_panel_8cs_source_l00091}00091\ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keywordtype}{string}?\ DragCssStyle\ \{\ \textcolor{keyword}{get};\ \textcolor{keyword}{set};\ \}}
+\DoxyCodeLine{\Hypertarget{_panel_8cs_source_l00092}00092\ }
+\DoxyCodeLine{\Hypertarget{_panel_8cs_source_l00093}00093\ \ \ \ \ \textcolor{keyword}{public}\ \mbox{\hyperlink{namespace_luthetus_1_1_common_1_1_razor_lib_1_1_panels_1_1_models_a4cda90de1465c4aa1eb64b93539e69fc}{IDialog}}\ \mbox{\hyperlink{namespace_luthetus_1_1_common_1_1_razor_lib_1_1_dialogs_1_1_models_acb0493ec09c8e1ecc294a52779649a41}{SetDialogIsMaximized}}(\textcolor{keywordtype}{bool}\ isMaximized)}
+\DoxyCodeLine{\Hypertarget{_panel_8cs_source_l00094}00094\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_panel_8cs_source_l00095}00095\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespace_luthetus_1_1_common_1_1_razor_lib_1_1_dialogs_1_1_models_af63895fd8038684457cca06455b735ab}{DialogIsMaximized}}\ =\ isMaximized;}
+\DoxyCodeLine{\Hypertarget{_panel_8cs_source_l00096}00096\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{this};}
+\DoxyCodeLine{\Hypertarget{_panel_8cs_source_l00097}00097\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_panel_8cs_source_l00098}00098\ }
+\DoxyCodeLine{\Hypertarget{_panel_8cs_source_l00099}00099\ \ \ \ \ \textcolor{keyword}{public}\ async\ Task\ OnDragStartAsync()}
+\DoxyCodeLine{\Hypertarget{_panel_8cs_source_l00100}00100\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_panel_8cs_source_l00101}00101\ \ \ \ \ \ \ \ \ var\ dropzoneList\ =\ \textcolor{keyword}{new}\ List<IDropzone>();}
+\DoxyCodeLine{\Hypertarget{_panel_8cs_source_l00102}00102\ \ \ \ \ \ \ \ \ AddFallbackDropzone(dropzoneList);}
+\DoxyCodeLine{\Hypertarget{_panel_8cs_source_l00103}00103\ }
+\DoxyCodeLine{\Hypertarget{_panel_8cs_source_l00104}00104\ \ \ \ \ \ \ \ \ var\ panelGroupHtmlIdTupleList\ =\ \textcolor{keyword}{new}\ (Key<PanelGroup>\ PanelGroupKey,\ \textcolor{keywordtype}{string}\ HtmlElementId)[]}
+\DoxyCodeLine{\Hypertarget{_panel_8cs_source_l00105}00105\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_panel_8cs_source_l00106}00106\ \ \ \ \ \ \ \ \ \ \ \ \ (PanelFacts.LeftPanelGroupKey,\ \textcolor{stringliteral}{"{}luth\_ide\_panel\_left\_tabs"{}}),}
+\DoxyCodeLine{\Hypertarget{_panel_8cs_source_l00107}00107\ \ \ \ \ \ \ \ \ \ \ \ \ (PanelFacts.RightPanelGroupKey,\ \textcolor{stringliteral}{"{}luth\_ide\_panel\_right\_tabs"{}}),}
+\DoxyCodeLine{\Hypertarget{_panel_8cs_source_l00108}00108\ \ \ \ \ \ \ \ \ \ \ \ \ (PanelFacts.BottomPanelGroupKey,\ \textcolor{stringliteral}{"{}luth\_ide\_panel\_bottom\_tabs"{}}),}
+\DoxyCodeLine{\Hypertarget{_panel_8cs_source_l00109}00109\ \ \ \ \ \ \ \ \ \};}
+\DoxyCodeLine{\Hypertarget{_panel_8cs_source_l00110}00110\ }
+\DoxyCodeLine{\Hypertarget{_panel_8cs_source_l00111}00111\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{foreach}\ (var\ panelGroupHtmlIdTuple\ \textcolor{keywordflow}{in}\ panelGroupHtmlIdTupleList)}
+\DoxyCodeLine{\Hypertarget{_panel_8cs_source_l00112}00112\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_panel_8cs_source_l00113}00113\ \ \ \ \ \ \ \ \ \ \ \ \ var\ measuredHtmlElementDimensions\ =\ await\ JsRuntime.GetLuthetusCommonApi()}
+\DoxyCodeLine{\Hypertarget{_panel_8cs_source_l00114}00114\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ .MeasureElementById(panelGroupHtmlIdTuple.HtmlElementId)}
+\DoxyCodeLine{\Hypertarget{_panel_8cs_source_l00115}00115\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ .ConfigureAwait(\textcolor{keyword}{false});}
+\DoxyCodeLine{\Hypertarget{_panel_8cs_source_l00116}00116\ }
+\DoxyCodeLine{\Hypertarget{_panel_8cs_source_l00117}00117\ \ \ \ \ \ \ \ \ \ \ \ \ measuredHtmlElementDimensions\ =\ measuredHtmlElementDimensions\ with}
+\DoxyCodeLine{\Hypertarget{_panel_8cs_source_l00118}00118\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_panel_8cs_source_l00119}00119\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ZIndex\ =\ 1,}
+\DoxyCodeLine{\Hypertarget{_panel_8cs_source_l00120}00120\ \ \ \ \ \ \ \ \ \ \ \ \ \};}
+\DoxyCodeLine{\Hypertarget{_panel_8cs_source_l00121}00121\ }
+\DoxyCodeLine{\Hypertarget{_panel_8cs_source_l00122}00122\ \ \ \ \ \ \ \ \ \ \ \ \ var\ elementDimensions\ =\ \textcolor{keyword}{new}\ \mbox{\hyperlink{class_luthetus_1_1_common_1_1_razor_lib_1_1_dimensions_1_1_models_1_1_element_dimensions}{ElementDimensions}}();}
+\DoxyCodeLine{\Hypertarget{_panel_8cs_source_l00123}00123\ }
+\DoxyCodeLine{\Hypertarget{_panel_8cs_source_l00124}00124\ \ \ \ \ \ \ \ \ \ \ \ \ elementDimensions.ElementPositionKind\ =\ \mbox{\hyperlink{namespace_luthetus_1_1_common_1_1_razor_lib_1_1_dimensions_1_1_models_a798732978998352df76bdb091f17d2b7}{ElementPositionKind}}.Fixed;}
+\DoxyCodeLine{\Hypertarget{_panel_8cs_source_l00125}00125\ }
+\DoxyCodeLine{\Hypertarget{_panel_8cs_source_l00126}00126\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Width}}
+\DoxyCodeLine{\Hypertarget{_panel_8cs_source_l00127}00127\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_panel_8cs_source_l00128}00128\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ var\ widthDimensionAttribute\ =\ elementDimensions.DimensionAttributeList.First(}
+\DoxyCodeLine{\Hypertarget{_panel_8cs_source_l00129}00129\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ x\ =>\ x.DimensionAttributeKind\ ==\ \mbox{\hyperlink{namespace_luthetus_1_1_common_1_1_razor_lib_1_1_dimensions_1_1_models_ab42cbfab74a6a286a2eb53313a9e37f0}{DimensionAttributeKind}}.Width);}
+\DoxyCodeLine{\Hypertarget{_panel_8cs_source_l00130}00130\ }
+\DoxyCodeLine{\Hypertarget{_panel_8cs_source_l00131}00131\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ widthDimensionAttribute.DimensionUnitList.Clear();}
+\DoxyCodeLine{\Hypertarget{_panel_8cs_source_l00132}00132\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ widthDimensionAttribute.DimensionUnitList.Add(\textcolor{keyword}{new}\ \mbox{\hyperlink{class_luthetus_1_1_common_1_1_razor_lib_1_1_dimensions_1_1_models_1_1_dimension_unit}{DimensionUnit}}}
+\DoxyCodeLine{\Hypertarget{_panel_8cs_source_l00133}00133\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_panel_8cs_source_l00134}00134\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Value\ =\ measuredHtmlElementDimensions.WidthInPixels,}
+\DoxyCodeLine{\Hypertarget{_panel_8cs_source_l00135}00135\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespace_luthetus_1_1_common_1_1_razor_lib_1_1_dimensions_1_1_models_ac011df04cfd59ccb7947a4ced86ba4f6}{DimensionUnitKind}}\ =\ \mbox{\hyperlink{namespace_luthetus_1_1_common_1_1_razor_lib_1_1_dimensions_1_1_models_ac011df04cfd59ccb7947a4ced86ba4f6ac3d2f5d37334dc978fd8b17fc77408a1}{DimensionUnitKind.Pixels}}}
+\DoxyCodeLine{\Hypertarget{_panel_8cs_source_l00136}00136\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \});}
+\DoxyCodeLine{\Hypertarget{_panel_8cs_source_l00137}00137\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_panel_8cs_source_l00138}00138\ }
+\DoxyCodeLine{\Hypertarget{_panel_8cs_source_l00139}00139\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Height}}
+\DoxyCodeLine{\Hypertarget{_panel_8cs_source_l00140}00140\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_panel_8cs_source_l00141}00141\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ var\ heightDimensionAttribute\ =\ elementDimensions.DimensionAttributeList.First(}
+\DoxyCodeLine{\Hypertarget{_panel_8cs_source_l00142}00142\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ x\ =>\ x.DimensionAttributeKind\ ==\ \mbox{\hyperlink{namespace_luthetus_1_1_common_1_1_razor_lib_1_1_dimensions_1_1_models_ab42cbfab74a6a286a2eb53313a9e37f0}{DimensionAttributeKind}}.Height);}
+\DoxyCodeLine{\Hypertarget{_panel_8cs_source_l00143}00143\ }
+\DoxyCodeLine{\Hypertarget{_panel_8cs_source_l00144}00144\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ heightDimensionAttribute.DimensionUnitList.Clear();}
+\DoxyCodeLine{\Hypertarget{_panel_8cs_source_l00145}00145\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ heightDimensionAttribute.DimensionUnitList.Add(\textcolor{keyword}{new}\ \mbox{\hyperlink{class_luthetus_1_1_common_1_1_razor_lib_1_1_dimensions_1_1_models_1_1_dimension_unit}{DimensionUnit}}}
+\DoxyCodeLine{\Hypertarget{_panel_8cs_source_l00146}00146\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_panel_8cs_source_l00147}00147\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Value\ =\ measuredHtmlElementDimensions.HeightInPixels,}
+\DoxyCodeLine{\Hypertarget{_panel_8cs_source_l00148}00148\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespace_luthetus_1_1_common_1_1_razor_lib_1_1_dimensions_1_1_models_ac011df04cfd59ccb7947a4ced86ba4f6}{DimensionUnitKind}}\ =\ \mbox{\hyperlink{namespace_luthetus_1_1_common_1_1_razor_lib_1_1_dimensions_1_1_models_ac011df04cfd59ccb7947a4ced86ba4f6ac3d2f5d37334dc978fd8b17fc77408a1}{DimensionUnitKind.Pixels}}}
+\DoxyCodeLine{\Hypertarget{_panel_8cs_source_l00149}00149\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \});}
+\DoxyCodeLine{\Hypertarget{_panel_8cs_source_l00150}00150\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_panel_8cs_source_l00151}00151\ }
+\DoxyCodeLine{\Hypertarget{_panel_8cs_source_l00152}00152\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Left}}
+\DoxyCodeLine{\Hypertarget{_panel_8cs_source_l00153}00153\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_panel_8cs_source_l00154}00154\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ var\ leftDimensionAttribute\ =\ elementDimensions.DimensionAttributeList.First(}
+\DoxyCodeLine{\Hypertarget{_panel_8cs_source_l00155}00155\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ x\ =>\ x.DimensionAttributeKind\ ==\ \mbox{\hyperlink{namespace_luthetus_1_1_common_1_1_razor_lib_1_1_dimensions_1_1_models_ab42cbfab74a6a286a2eb53313a9e37f0}{DimensionAttributeKind}}.Left);}
+\DoxyCodeLine{\Hypertarget{_panel_8cs_source_l00156}00156\ }
+\DoxyCodeLine{\Hypertarget{_panel_8cs_source_l00157}00157\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ leftDimensionAttribute.DimensionUnitList.Clear();}
+\DoxyCodeLine{\Hypertarget{_panel_8cs_source_l00158}00158\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ leftDimensionAttribute.DimensionUnitList.Add(\textcolor{keyword}{new}\ \mbox{\hyperlink{class_luthetus_1_1_common_1_1_razor_lib_1_1_dimensions_1_1_models_1_1_dimension_unit}{DimensionUnit}}}
+\DoxyCodeLine{\Hypertarget{_panel_8cs_source_l00159}00159\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_panel_8cs_source_l00160}00160\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Value\ =\ measuredHtmlElementDimensions.LeftInPixels,}
+\DoxyCodeLine{\Hypertarget{_panel_8cs_source_l00161}00161\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespace_luthetus_1_1_common_1_1_razor_lib_1_1_dimensions_1_1_models_ac011df04cfd59ccb7947a4ced86ba4f6}{DimensionUnitKind}}\ =\ \mbox{\hyperlink{namespace_luthetus_1_1_common_1_1_razor_lib_1_1_dimensions_1_1_models_ac011df04cfd59ccb7947a4ced86ba4f6ac3d2f5d37334dc978fd8b17fc77408a1}{DimensionUnitKind.Pixels}}}
+\DoxyCodeLine{\Hypertarget{_panel_8cs_source_l00162}00162\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \});}
+\DoxyCodeLine{\Hypertarget{_panel_8cs_source_l00163}00163\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_panel_8cs_source_l00164}00164\ }
+\DoxyCodeLine{\Hypertarget{_panel_8cs_source_l00165}00165\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Top}}
+\DoxyCodeLine{\Hypertarget{_panel_8cs_source_l00166}00166\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_panel_8cs_source_l00167}00167\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ var\ topDimensionAttribute\ =\ elementDimensions.DimensionAttributeList.First(}
+\DoxyCodeLine{\Hypertarget{_panel_8cs_source_l00168}00168\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ x\ =>\ x.DimensionAttributeKind\ ==\ \mbox{\hyperlink{namespace_luthetus_1_1_common_1_1_razor_lib_1_1_dimensions_1_1_models_ab42cbfab74a6a286a2eb53313a9e37f0}{DimensionAttributeKind}}.Top);}
+\DoxyCodeLine{\Hypertarget{_panel_8cs_source_l00169}00169\ }
+\DoxyCodeLine{\Hypertarget{_panel_8cs_source_l00170}00170\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ topDimensionAttribute.DimensionUnitList.Clear();}
+\DoxyCodeLine{\Hypertarget{_panel_8cs_source_l00171}00171\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ topDimensionAttribute.DimensionUnitList.Add(\textcolor{keyword}{new}\ \mbox{\hyperlink{class_luthetus_1_1_common_1_1_razor_lib_1_1_dimensions_1_1_models_1_1_dimension_unit}{DimensionUnit}}}
+\DoxyCodeLine{\Hypertarget{_panel_8cs_source_l00172}00172\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_panel_8cs_source_l00173}00173\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Value\ =\ measuredHtmlElementDimensions.TopInPixels,}
+\DoxyCodeLine{\Hypertarget{_panel_8cs_source_l00174}00174\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespace_luthetus_1_1_common_1_1_razor_lib_1_1_dimensions_1_1_models_ac011df04cfd59ccb7947a4ced86ba4f6}{DimensionUnitKind}}\ =\ \mbox{\hyperlink{namespace_luthetus_1_1_common_1_1_razor_lib_1_1_dimensions_1_1_models_ac011df04cfd59ccb7947a4ced86ba4f6ac3d2f5d37334dc978fd8b17fc77408a1}{DimensionUnitKind.Pixels}}}
+\DoxyCodeLine{\Hypertarget{_panel_8cs_source_l00175}00175\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \});}
+\DoxyCodeLine{\Hypertarget{_panel_8cs_source_l00176}00176\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_panel_8cs_source_l00177}00177\ }
+\DoxyCodeLine{\Hypertarget{_panel_8cs_source_l00178}00178\ \ \ \ \ \ \ \ \ \ \ \ \ dropzoneList.Add(\textcolor{keyword}{new}\ PanelGroupDropzone(}
+\DoxyCodeLine{\Hypertarget{_panel_8cs_source_l00179}00179\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ measuredHtmlElementDimensions,}
+\DoxyCodeLine{\Hypertarget{_panel_8cs_source_l00180}00180\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ panelGroupHtmlIdTuple.PanelGroupKey,}
+\DoxyCodeLine{\Hypertarget{_panel_8cs_source_l00181}00181\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ elementDimensions,}
+\DoxyCodeLine{\Hypertarget{_panel_8cs_source_l00182}00182\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Key<IDropzone>.NewKey(),}
+\DoxyCodeLine{\Hypertarget{_panel_8cs_source_l00183}00183\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{null},}
+\DoxyCodeLine{\Hypertarget{_panel_8cs_source_l00184}00184\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{null}));}
+\DoxyCodeLine{\Hypertarget{_panel_8cs_source_l00185}00185\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_panel_8cs_source_l00186}00186\ }
+\DoxyCodeLine{\Hypertarget{_panel_8cs_source_l00187}00187\ \ \ \ \ \ \ \ \ DropzoneList\ =\ dropzoneList.ToImmutableArray();}
+\DoxyCodeLine{\Hypertarget{_panel_8cs_source_l00188}00188\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_panel_8cs_source_l00189}00189\ }
+\DoxyCodeLine{\Hypertarget{_panel_8cs_source_l00190}00190\ \ \ \ \ \textcolor{keyword}{public}\ Task\ OnDragEndAsync(MouseEventArgs\ mouseEventArgs,\ \mbox{\hyperlink{interface_luthetus_1_1_common_1_1_razor_lib_1_1_dynamics_1_1_models_1_1_i_dropzone}{IDropzone}}?\ dropzone)}
+\DoxyCodeLine{\Hypertarget{_panel_8cs_source_l00191}00191\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_panel_8cs_source_l00192}00192\ \ \ \ \ \ \ \ \ var\ panelGroup\ =\ TabGroup\ as\ PanelGroup;}
+\DoxyCodeLine{\Hypertarget{_panel_8cs_source_l00193}00193\ }
+\DoxyCodeLine{\Hypertarget{_panel_8cs_source_l00194}00194\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (dropzone\ is\ not\ PanelGroupDropzone\ panelGroupDropzone)}
+\DoxyCodeLine{\Hypertarget{_panel_8cs_source_l00195}00195\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ Task.CompletedTask;}
+\DoxyCodeLine{\Hypertarget{_panel_8cs_source_l00196}00196\ }
+\DoxyCodeLine{\Hypertarget{_panel_8cs_source_l00197}00197\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Create\ Dialog}}
+\DoxyCodeLine{\Hypertarget{_panel_8cs_source_l00198}00198\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (panelGroupDropzone.PanelGroupKey\ ==\ Key<PanelGroup>.Empty)}
+\DoxyCodeLine{\Hypertarget{_panel_8cs_source_l00199}00199\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_panel_8cs_source_l00200}00200\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Delete\ current\ UI}}
+\DoxyCodeLine{\Hypertarget{_panel_8cs_source_l00201}00201\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_panel_8cs_source_l00202}00202\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (panelGroup\ is\ not\ \textcolor{keyword}{null})}
+\DoxyCodeLine{\Hypertarget{_panel_8cs_source_l00203}00203\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_panel_8cs_source_l00204}00204\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Dispatcher.Dispatch(\textcolor{keyword}{new}\ \mbox{\hyperlink{namespace_luthetus_1_1_common_1_1_razor_lib_1_1_panels_1_1_states_a3e69a06f395780138ff06e862f45ee3c}{PanelState}}.DisposePanelTabAction(}
+\DoxyCodeLine{\Hypertarget{_panel_8cs_source_l00205}00205\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ panelGroup.Key,}
+\DoxyCodeLine{\Hypertarget{_panel_8cs_source_l00206}00206\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Key));}
+\DoxyCodeLine{\Hypertarget{_panel_8cs_source_l00207}00207\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_panel_8cs_source_l00208}00208\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{\Hypertarget{_panel_8cs_source_l00209}00209\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_panel_8cs_source_l00210}00210\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Is\ a\ dialog}}
+\DoxyCodeLine{\Hypertarget{_panel_8cs_source_l00211}00211\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//}}
+\DoxyCodeLine{\Hypertarget{_panel_8cs_source_l00212}00212\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Already\ a\ dialog,\ so\ nothing\ needs\ to\ be\ done}}
+\DoxyCodeLine{\Hypertarget{_panel_8cs_source_l00213}00213\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ Task.CompletedTask;}
+\DoxyCodeLine{\Hypertarget{_panel_8cs_source_l00214}00214\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_panel_8cs_source_l00215}00215\ }
+\DoxyCodeLine{\Hypertarget{_panel_8cs_source_l00216}00216\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ TabGroup\ =\ \textcolor{keyword}{null};}
+\DoxyCodeLine{\Hypertarget{_panel_8cs_source_l00217}00217\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_panel_8cs_source_l00218}00218\ }
+\DoxyCodeLine{\Hypertarget{_panel_8cs_source_l00219}00219\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_luthetus_1_1_common_1_1_razor_lib_1_1_dialogs_1_1_models_1_1_dialog_service}{DialogService}}.\mbox{\hyperlink{class_luthetus_1_1_common_1_1_razor_lib_1_1_dialogs_1_1_models_1_1_dialog_service_a3a8b4405a02bf848afc2e89e9d07f083}{RegisterDialogRecord}}(\textcolor{keyword}{this});}
+\DoxyCodeLine{\Hypertarget{_panel_8cs_source_l00220}00220\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_panel_8cs_source_l00221}00221\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_panel_8cs_source_l00222}00222\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Create\ Panel\ Tab}}
+\DoxyCodeLine{\Hypertarget{_panel_8cs_source_l00223}00223\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_panel_8cs_source_l00224}00224\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Delete\ current\ UI}}
+\DoxyCodeLine{\Hypertarget{_panel_8cs_source_l00225}00225\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_panel_8cs_source_l00226}00226\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (panelGroup\ is\ not\ \textcolor{keyword}{null})}
+\DoxyCodeLine{\Hypertarget{_panel_8cs_source_l00227}00227\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_panel_8cs_source_l00228}00228\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Dispatcher.Dispatch(\textcolor{keyword}{new}\ \mbox{\hyperlink{namespace_luthetus_1_1_common_1_1_razor_lib_1_1_panels_1_1_states_a3e69a06f395780138ff06e862f45ee3c}{PanelState}}.DisposePanelTabAction(}
+\DoxyCodeLine{\Hypertarget{_panel_8cs_source_l00229}00229\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ panelGroup.Key,}
+\DoxyCodeLine{\Hypertarget{_panel_8cs_source_l00230}00230\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Key));}
+\DoxyCodeLine{\Hypertarget{_panel_8cs_source_l00231}00231\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_panel_8cs_source_l00232}00232\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{\Hypertarget{_panel_8cs_source_l00233}00233\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_panel_8cs_source_l00234}00234\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_luthetus_1_1_common_1_1_razor_lib_1_1_dialogs_1_1_models_1_1_dialog_service}{DialogService}}.\mbox{\hyperlink{class_luthetus_1_1_common_1_1_razor_lib_1_1_dialogs_1_1_models_1_1_dialog_service_a6ad30a53ede20be67e95b168a6323e15}{DisposeDialogRecord}}(\mbox{\hyperlink{namespace_luthetus_1_1_common_1_1_razor_lib_1_1_dialogs_1_1_models_a7b6b7e401ac513c746af3a19e426016d}{DynamicViewModelKey}});}
+\DoxyCodeLine{\Hypertarget{_panel_8cs_source_l00235}00235\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_panel_8cs_source_l00236}00236\ }
+\DoxyCodeLine{\Hypertarget{_panel_8cs_source_l00237}00237\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ TabGroup\ =\ \textcolor{keyword}{null};}
+\DoxyCodeLine{\Hypertarget{_panel_8cs_source_l00238}00238\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_panel_8cs_source_l00239}00239\ }
+\DoxyCodeLine{\Hypertarget{_panel_8cs_source_l00240}00240\ \ \ \ \ \ \ \ \ \ \ \ \ var\ verticalHalfwayPoint\ =\ dropzone.MeasuredHtmlElementDimensions.TopInPixels\ +}
+\DoxyCodeLine{\Hypertarget{_panel_8cs_source_l00241}00241\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (dropzone.MeasuredHtmlElementDimensions.HeightInPixels\ /\ 2);}
+\DoxyCodeLine{\Hypertarget{_panel_8cs_source_l00242}00242\ }
+\DoxyCodeLine{\Hypertarget{_panel_8cs_source_l00243}00243\ \ \ \ \ \ \ \ \ \ \ \ \ var\ insertAtIndexZero\ =\ mouseEventArgs.ClientY\ <\ verticalHalfwayPoint}
+\DoxyCodeLine{\Hypertarget{_panel_8cs_source_l00244}00244\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ?\ true}
+\DoxyCodeLine{\Hypertarget{_panel_8cs_source_l00245}00245\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ :\ \textcolor{keyword}{false};}
+\DoxyCodeLine{\Hypertarget{_panel_8cs_source_l00246}00246\ }
+\DoxyCodeLine{\Hypertarget{_panel_8cs_source_l00247}00247\ \ \ \ \ \ \ \ \ \ \ \ \ Dispatcher.Dispatch(\textcolor{keyword}{new}\ \mbox{\hyperlink{namespace_luthetus_1_1_common_1_1_razor_lib_1_1_panels_1_1_states_a3e69a06f395780138ff06e862f45ee3c}{PanelState}}.RegisterPanelTabAction(}
+\DoxyCodeLine{\Hypertarget{_panel_8cs_source_l00248}00248\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ panelGroupDropzone.PanelGroupKey,}
+\DoxyCodeLine{\Hypertarget{_panel_8cs_source_l00249}00249\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{this},}
+\DoxyCodeLine{\Hypertarget{_panel_8cs_source_l00250}00250\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ insertAtIndexZero));}
+\DoxyCodeLine{\Hypertarget{_panel_8cs_source_l00251}00251\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_panel_8cs_source_l00252}00252\ }
+\DoxyCodeLine{\Hypertarget{_panel_8cs_source_l00253}00253\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ Task.CompletedTask;}
+\DoxyCodeLine{\Hypertarget{_panel_8cs_source_l00254}00254\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_panel_8cs_source_l00255}00255\ }
+\DoxyCodeLine{\Hypertarget{_panel_8cs_source_l00256}00256\ \ \ \ \ \textcolor{keyword}{private}\ \textcolor{keywordtype}{void}\ AddFallbackDropzone(List<IDropzone>\ dropzoneList)}
+\DoxyCodeLine{\Hypertarget{_panel_8cs_source_l00257}00257\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_panel_8cs_source_l00258}00258\ \ \ \ \ \ \ \ \ var\ fallbackElementDimensions\ =\ \textcolor{keyword}{new}\ \mbox{\hyperlink{class_luthetus_1_1_common_1_1_razor_lib_1_1_dimensions_1_1_models_1_1_element_dimensions}{ElementDimensions}}();}
+\DoxyCodeLine{\Hypertarget{_panel_8cs_source_l00259}00259\ }
+\DoxyCodeLine{\Hypertarget{_panel_8cs_source_l00260}00260\ \ \ \ \ \ \ \ \ fallbackElementDimensions.ElementPositionKind\ =\ \mbox{\hyperlink{namespace_luthetus_1_1_common_1_1_razor_lib_1_1_dimensions_1_1_models_a798732978998352df76bdb091f17d2b7}{ElementPositionKind}}.Fixed;}
+\DoxyCodeLine{\Hypertarget{_panel_8cs_source_l00261}00261\ }
+\DoxyCodeLine{\Hypertarget{_panel_8cs_source_l00262}00262\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Width}}
+\DoxyCodeLine{\Hypertarget{_panel_8cs_source_l00263}00263\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_panel_8cs_source_l00264}00264\ \ \ \ \ \ \ \ \ \ \ \ \ var\ widthDimensionAttribute\ =\ fallbackElementDimensions.DimensionAttributeList.First(}
+\DoxyCodeLine{\Hypertarget{_panel_8cs_source_l00265}00265\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ x\ =>\ x.DimensionAttributeKind\ ==\ \mbox{\hyperlink{namespace_luthetus_1_1_common_1_1_razor_lib_1_1_dimensions_1_1_models_ab42cbfab74a6a286a2eb53313a9e37f0}{DimensionAttributeKind}}.Width);}
+\DoxyCodeLine{\Hypertarget{_panel_8cs_source_l00266}00266\ }
+\DoxyCodeLine{\Hypertarget{_panel_8cs_source_l00267}00267\ \ \ \ \ \ \ \ \ \ \ \ \ widthDimensionAttribute.DimensionUnitList.Clear();}
+\DoxyCodeLine{\Hypertarget{_panel_8cs_source_l00268}00268\ \ \ \ \ \ \ \ \ \ \ \ \ widthDimensionAttribute.DimensionUnitList.Add(\textcolor{keyword}{new}\ \mbox{\hyperlink{class_luthetus_1_1_common_1_1_razor_lib_1_1_dimensions_1_1_models_1_1_dimension_unit}{DimensionUnit}}}
+\DoxyCodeLine{\Hypertarget{_panel_8cs_source_l00269}00269\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_panel_8cs_source_l00270}00270\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Value\ =\ 100,}
+\DoxyCodeLine{\Hypertarget{_panel_8cs_source_l00271}00271\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespace_luthetus_1_1_common_1_1_razor_lib_1_1_dimensions_1_1_models_ac011df04cfd59ccb7947a4ced86ba4f6}{DimensionUnitKind}}\ =\ \mbox{\hyperlink{namespace_luthetus_1_1_common_1_1_razor_lib_1_1_dimensions_1_1_models_ac011df04cfd59ccb7947a4ced86ba4f6a67bbbcb8c3f0869b19682f3dd5f27893}{DimensionUnitKind.ViewportWidth}}}
+\DoxyCodeLine{\Hypertarget{_panel_8cs_source_l00272}00272\ \ \ \ \ \ \ \ \ \ \ \ \ \});}
+\DoxyCodeLine{\Hypertarget{_panel_8cs_source_l00273}00273\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_panel_8cs_source_l00274}00274\ }
+\DoxyCodeLine{\Hypertarget{_panel_8cs_source_l00275}00275\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Height}}
+\DoxyCodeLine{\Hypertarget{_panel_8cs_source_l00276}00276\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_panel_8cs_source_l00277}00277\ \ \ \ \ \ \ \ \ \ \ \ \ var\ heightDimensionAttribute\ =\ fallbackElementDimensions.DimensionAttributeList.First(}
+\DoxyCodeLine{\Hypertarget{_panel_8cs_source_l00278}00278\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ x\ =>\ x.DimensionAttributeKind\ ==\ \mbox{\hyperlink{namespace_luthetus_1_1_common_1_1_razor_lib_1_1_dimensions_1_1_models_ab42cbfab74a6a286a2eb53313a9e37f0}{DimensionAttributeKind}}.Height);}
+\DoxyCodeLine{\Hypertarget{_panel_8cs_source_l00279}00279\ }
+\DoxyCodeLine{\Hypertarget{_panel_8cs_source_l00280}00280\ \ \ \ \ \ \ \ \ \ \ \ \ heightDimensionAttribute.DimensionUnitList.Clear();}
+\DoxyCodeLine{\Hypertarget{_panel_8cs_source_l00281}00281\ \ \ \ \ \ \ \ \ \ \ \ \ heightDimensionAttribute.DimensionUnitList.Add(\textcolor{keyword}{new}\ \mbox{\hyperlink{class_luthetus_1_1_common_1_1_razor_lib_1_1_dimensions_1_1_models_1_1_dimension_unit}{DimensionUnit}}}
+\DoxyCodeLine{\Hypertarget{_panel_8cs_source_l00282}00282\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_panel_8cs_source_l00283}00283\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Value\ =\ 100,}
+\DoxyCodeLine{\Hypertarget{_panel_8cs_source_l00284}00284\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespace_luthetus_1_1_common_1_1_razor_lib_1_1_dimensions_1_1_models_ac011df04cfd59ccb7947a4ced86ba4f6}{DimensionUnitKind}}\ =\ \mbox{\hyperlink{namespace_luthetus_1_1_common_1_1_razor_lib_1_1_dimensions_1_1_models_ac011df04cfd59ccb7947a4ced86ba4f6a1cc83e088aae799b9acb909c10c3d8b2}{DimensionUnitKind.ViewportHeight}}}
+\DoxyCodeLine{\Hypertarget{_panel_8cs_source_l00285}00285\ \ \ \ \ \ \ \ \ \ \ \ \ \});}
+\DoxyCodeLine{\Hypertarget{_panel_8cs_source_l00286}00286\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_panel_8cs_source_l00287}00287\ }
+\DoxyCodeLine{\Hypertarget{_panel_8cs_source_l00288}00288\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Left}}
+\DoxyCodeLine{\Hypertarget{_panel_8cs_source_l00289}00289\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_panel_8cs_source_l00290}00290\ \ \ \ \ \ \ \ \ \ \ \ \ var\ leftDimensionAttribute\ =\ fallbackElementDimensions.DimensionAttributeList.First(}
+\DoxyCodeLine{\Hypertarget{_panel_8cs_source_l00291}00291\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ x\ =>\ x.DimensionAttributeKind\ ==\ \mbox{\hyperlink{namespace_luthetus_1_1_common_1_1_razor_lib_1_1_dimensions_1_1_models_ab42cbfab74a6a286a2eb53313a9e37f0}{DimensionAttributeKind}}.Left);}
+\DoxyCodeLine{\Hypertarget{_panel_8cs_source_l00292}00292\ }
+\DoxyCodeLine{\Hypertarget{_panel_8cs_source_l00293}00293\ \ \ \ \ \ \ \ \ \ \ \ \ leftDimensionAttribute.DimensionUnitList.Clear();}
+\DoxyCodeLine{\Hypertarget{_panel_8cs_source_l00294}00294\ \ \ \ \ \ \ \ \ \ \ \ \ leftDimensionAttribute.DimensionUnitList.Add(\textcolor{keyword}{new}\ \mbox{\hyperlink{class_luthetus_1_1_common_1_1_razor_lib_1_1_dimensions_1_1_models_1_1_dimension_unit}{DimensionUnit}}}
+\DoxyCodeLine{\Hypertarget{_panel_8cs_source_l00295}00295\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_panel_8cs_source_l00296}00296\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Value\ =\ 0,}
+\DoxyCodeLine{\Hypertarget{_panel_8cs_source_l00297}00297\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespace_luthetus_1_1_common_1_1_razor_lib_1_1_dimensions_1_1_models_ac011df04cfd59ccb7947a4ced86ba4f6}{DimensionUnitKind}}\ =\ \mbox{\hyperlink{namespace_luthetus_1_1_common_1_1_razor_lib_1_1_dimensions_1_1_models_ac011df04cfd59ccb7947a4ced86ba4f6ac3d2f5d37334dc978fd8b17fc77408a1}{DimensionUnitKind.Pixels}}}
+\DoxyCodeLine{\Hypertarget{_panel_8cs_source_l00298}00298\ \ \ \ \ \ \ \ \ \ \ \ \ \});}
+\DoxyCodeLine{\Hypertarget{_panel_8cs_source_l00299}00299\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_panel_8cs_source_l00300}00300\ }
+\DoxyCodeLine{\Hypertarget{_panel_8cs_source_l00301}00301\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Top}}
+\DoxyCodeLine{\Hypertarget{_panel_8cs_source_l00302}00302\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_panel_8cs_source_l00303}00303\ \ \ \ \ \ \ \ \ \ \ \ \ var\ topDimensionAttribute\ =\ fallbackElementDimensions.DimensionAttributeList.First(}
+\DoxyCodeLine{\Hypertarget{_panel_8cs_source_l00304}00304\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ x\ =>\ x.DimensionAttributeKind\ ==\ \mbox{\hyperlink{namespace_luthetus_1_1_common_1_1_razor_lib_1_1_dimensions_1_1_models_ab42cbfab74a6a286a2eb53313a9e37f0}{DimensionAttributeKind}}.Top);}
+\DoxyCodeLine{\Hypertarget{_panel_8cs_source_l00305}00305\ }
+\DoxyCodeLine{\Hypertarget{_panel_8cs_source_l00306}00306\ \ \ \ \ \ \ \ \ \ \ \ \ topDimensionAttribute.DimensionUnitList.Clear();}
+\DoxyCodeLine{\Hypertarget{_panel_8cs_source_l00307}00307\ \ \ \ \ \ \ \ \ \ \ \ \ topDimensionAttribute.DimensionUnitList.Add(\textcolor{keyword}{new}\ \mbox{\hyperlink{class_luthetus_1_1_common_1_1_razor_lib_1_1_dimensions_1_1_models_1_1_dimension_unit}{DimensionUnit}}}
+\DoxyCodeLine{\Hypertarget{_panel_8cs_source_l00308}00308\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_panel_8cs_source_l00309}00309\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Value\ =\ 0,}
+\DoxyCodeLine{\Hypertarget{_panel_8cs_source_l00310}00310\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespace_luthetus_1_1_common_1_1_razor_lib_1_1_dimensions_1_1_models_ac011df04cfd59ccb7947a4ced86ba4f6}{DimensionUnitKind}}\ =\ \mbox{\hyperlink{namespace_luthetus_1_1_common_1_1_razor_lib_1_1_dimensions_1_1_models_ac011df04cfd59ccb7947a4ced86ba4f6ac3d2f5d37334dc978fd8b17fc77408a1}{DimensionUnitKind.Pixels}}}
+\DoxyCodeLine{\Hypertarget{_panel_8cs_source_l00311}00311\ \ \ \ \ \ \ \ \ \ \ \ \ \});}
+\DoxyCodeLine{\Hypertarget{_panel_8cs_source_l00312}00312\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_panel_8cs_source_l00313}00313\ }
+\DoxyCodeLine{\Hypertarget{_panel_8cs_source_l00314}00314\ \ \ \ \ \ \ \ \ dropzoneList.Add(\textcolor{keyword}{new}\ PanelGroupDropzone(}
+\DoxyCodeLine{\Hypertarget{_panel_8cs_source_l00315}00315\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{new}\ \mbox{\hyperlink{namespace_luthetus_1_1_common_1_1_razor_lib_1_1_java_script_objects_1_1_models_af7cb4b0846c5ea3330de0b00ae2d4407}{MeasuredHtmlElementDimensions}}(0,\ 0,\ 0,\ 0,\ 0),}
+\DoxyCodeLine{\Hypertarget{_panel_8cs_source_l00316}00316\ \ \ \ \ \ \ \ \ \ \ \ \ Key<PanelGroup>.Empty,}
+\DoxyCodeLine{\Hypertarget{_panel_8cs_source_l00317}00317\ \ \ \ \ \ \ \ \ \ \ \ \ fallbackElementDimensions,}
+\DoxyCodeLine{\Hypertarget{_panel_8cs_source_l00318}00318\ \ \ \ \ \ \ \ \ \ \ \ \ Key<IDropzone>.NewKey(),}
+\DoxyCodeLine{\Hypertarget{_panel_8cs_source_l00319}00319\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}luth\_dropzone-\/fallback"{}},}
+\DoxyCodeLine{\Hypertarget{_panel_8cs_source_l00320}00320\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{null}));}
+\DoxyCodeLine{\Hypertarget{_panel_8cs_source_l00321}00321\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_panel_8cs_source_l00322}00322\ \}}
+
+\end{DoxyCode}

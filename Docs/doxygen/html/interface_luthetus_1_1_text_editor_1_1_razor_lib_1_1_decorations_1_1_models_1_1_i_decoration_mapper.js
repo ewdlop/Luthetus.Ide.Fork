@@ -1,0 +1,4 @@
+var interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_decorations_1_1_models_1_1_i_decoration_mapper =
+[
+    [ "Map", "interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_decorations_1_1_models_1_1_i_decoration_mapper.html#a9d3ab50d8da1de064c588b8e10b09943", null ]
+];

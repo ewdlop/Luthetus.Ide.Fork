@@ -1,0 +1,4 @@
+var _i_compiler_service_background_task_display_renderer_type_8cs =
+[
+    [ "Luthetus.TextEditor.RazorLib.ComponentRenderers.Models.ICompilerServiceBackgroundTaskDisplayRendererType", "interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_component_renderers_1_1_models_1_1_i_compild388996a3f51621b844b52528e1bdb04.html", "interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_component_renderers_1_1_models_1_1_i_compild388996a3f51621b844b52528e1bdb04" ]
+];

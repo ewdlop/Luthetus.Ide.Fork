@@ -1,0 +1,4 @@
+var _i_nuget_package_manager_provider_8cs =
+[
+    [ "Luthetus.Extensions.DotNet.Nugets.Models.INugetPackageManagerProvider", "interface_luthetus_1_1_extensions_1_1_dot_net_1_1_nugets_1_1_models_1_1_i_nuget_package_manager_provider.html", "interface_luthetus_1_1_extensions_1_1_dot_net_1_1_nugets_1_1_models_1_1_i_nuget_package_manager_provider" ]
+];

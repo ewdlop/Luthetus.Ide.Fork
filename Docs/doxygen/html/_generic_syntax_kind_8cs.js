@@ -1,0 +1,13 @@
+var _generic_syntax_kind_8cs =
+[
+    [ "Luthetus.TextEditor.RazorLib.CompilerServices.GenericLexer.SyntaxEnums.GenericSyntaxKind", "namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_generic_lexer_1_1_syntax_enums.html#aaf0da3a33ac9209b3d542a3d9493f70e", [
+      [ "Luthetus.TextEditor.RazorLib.CompilerServices.GenericLexer.SyntaxEnums.GenericSyntaxKind.CommentSingleLine", "namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_generic_lexer_1_1_syntax_enums.html#aaf0da3a33ac9209b3d542a3d9493f70eac33dd721e22ea980fd9e181cebfaf886", null ],
+      [ "Luthetus.TextEditor.RazorLib.CompilerServices.GenericLexer.SyntaxEnums.GenericSyntaxKind.CommentMultiLine", "namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_generic_lexer_1_1_syntax_enums.html#aaf0da3a33ac9209b3d542a3d9493f70ea77d7de40b19a34193ad32b84193acade", null ],
+      [ "Luthetus.TextEditor.RazorLib.CompilerServices.GenericLexer.SyntaxEnums.GenericSyntaxKind.StringLiteral", "namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_generic_lexer_1_1_syntax_enums.html#aaf0da3a33ac9209b3d542a3d9493f70ea7029cff17180550e1214f19dba74a32a", null ],
+      [ "Luthetus.TextEditor.RazorLib.CompilerServices.GenericLexer.SyntaxEnums.GenericSyntaxKind.Keyword", "namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_generic_lexer_1_1_syntax_enums.html#aaf0da3a33ac9209b3d542a3d9493f70ea220f3d3750583b9db48568a0b5b9a5f1", null ],
+      [ "Luthetus.TextEditor.RazorLib.CompilerServices.GenericLexer.SyntaxEnums.GenericSyntaxKind.Function", "namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_generic_lexer_1_1_syntax_enums.html#aaf0da3a33ac9209b3d542a3d9493f70ea86408593c34af77fdd90df932f8b5261", null ],
+      [ "Luthetus.TextEditor.RazorLib.CompilerServices.GenericLexer.SyntaxEnums.GenericSyntaxKind.Document", "namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_generic_lexer_1_1_syntax_enums.html#aaf0da3a33ac9209b3d542a3d9493f70ea0945359809dad1fbf3dea1c95a0da951", null ],
+      [ "Luthetus.TextEditor.RazorLib.CompilerServices.GenericLexer.SyntaxEnums.GenericSyntaxKind.PreprocessorDirective", "namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_generic_lexer_1_1_syntax_enums.html#aaf0da3a33ac9209b3d542a3d9493f70eaf350e402e58369fdaa9bf1e876500676", null ],
+      [ "Luthetus.TextEditor.RazorLib.CompilerServices.GenericLexer.SyntaxEnums.GenericSyntaxKind.DeliminationExtended", "namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_generic_lexer_1_1_syntax_enums.html#aaf0da3a33ac9209b3d542a3d9493f70ea8d29e933a01e57aac228716ff8b581e6", null ]
+    ] ]
+];

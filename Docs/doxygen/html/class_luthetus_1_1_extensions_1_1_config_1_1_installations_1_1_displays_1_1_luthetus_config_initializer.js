@@ -1,0 +1,5 @@
+var class_luthetus_1_1_extensions_1_1_config_1_1_installations_1_1_displays_1_1_luthetus_config_initializer =
+[
+    [ "OnAfterRenderAsync", "class_luthetus_1_1_extensions_1_1_config_1_1_installations_1_1_displays_1_1_luthetus_config_initializer.html#a141ec2255fd3d7e32690d4d046cdb4f8", null ],
+    [ "OnInitialized", "class_luthetus_1_1_extensions_1_1_config_1_1_installations_1_1_displays_1_1_luthetus_config_initializer.html#aea350cd06140026c6d5a0563517e4481", null ]
+];

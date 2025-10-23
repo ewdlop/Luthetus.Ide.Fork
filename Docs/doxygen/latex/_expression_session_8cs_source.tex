@@ -1,0 +1,67 @@
+\doxysection{Expression\+Session.\+cs}
+\hypertarget{_expression_session_8cs_source}{}\label{_expression_session_8cs_source}\index{Source/Lib/CompilerServices/CSharp/ParserCase/ExpressionSession.cs@{Source/Lib/CompilerServices/CSharp/ParserCase/ExpressionSession.cs}}
+\mbox{\hyperlink{_expression_session_8cs}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{_expression_session_8cs_source_l00001}00001\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_lexers_1_1_models}{Luthetus.TextEditor.RazorLib.Lexers.Models}};}
+\DoxyCodeLine{\Hypertarget{_expression_session_8cs_source_l00002}00002\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax}{Luthetus.TextEditor.RazorLib.CompilerServices.Syntax}};}
+\DoxyCodeLine{\Hypertarget{_expression_session_8cs_source_l00003}00003\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_1_1_tokens}{Luthetus.TextEditor.RazorLib.CompilerServices.Syntax.Tokens}};}
+\DoxyCodeLine{\Hypertarget{_expression_session_8cs_source_l00004}00004\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_1_1_nodes}{Luthetus.TextEditor.RazorLib.CompilerServices.Syntax.Nodes}};}
+\DoxyCodeLine{\Hypertarget{_expression_session_8cs_source_l00005}00005\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_1_1_nodes_1_1_interfaces}{Luthetus.TextEditor.RazorLib.CompilerServices.Syntax.Nodes.Interfaces}};}
+\DoxyCodeLine{\Hypertarget{_expression_session_8cs_source_l00006}00006\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_luthetus_1_1_compiler_services_1_1_c_sharp_1_1_lexer_case}{Luthetus.CompilerServices.CSharp.LexerCase}};}
+\DoxyCodeLine{\Hypertarget{_expression_session_8cs_source_l00007}00007\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_luthetus_1_1_compiler_services_1_1_c_sharp_1_1_parser_case}{Luthetus.CompilerServices.CSharp.ParserCase}};}
+\DoxyCodeLine{\Hypertarget{_expression_session_8cs_source_l00008}00008\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_luthetus_1_1_compiler_services_1_1_c_sharp_1_1_parser_case_1_1_internals}{Luthetus.CompilerServices.CSharp.ParserCase.Internals}};}
+\DoxyCodeLine{\Hypertarget{_expression_session_8cs_source_l00009}00009\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_luthetus_1_1_compiler_services_1_1_c_sharp_1_1_facts}{Luthetus.CompilerServices.CSharp.Facts}};}
+\DoxyCodeLine{\Hypertarget{_expression_session_8cs_source_l00010}00010\ }
+\DoxyCodeLine{\Hypertarget{_expression_session_8cs_source_l00011}00011\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespace_luthetus_1_1_compiler_services_1_1_c_sharp_1_1_parser_case}{Luthetus.CompilerServices.CSharp.ParserCase}};}
+\DoxyCodeLine{\Hypertarget{_expression_session_8cs_source_l00012}00012\ }
+\DoxyCodeLine{\Hypertarget{_expression_session_8cs_source_l00013}\mbox{\hyperlink{class_luthetus_1_1_compiler_services_1_1_c_sharp_1_1_parser_case_1_1_expression_session}{00013}}\ \textcolor{keyword}{public}\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_luthetus_1_1_compiler_services_1_1_c_sharp_1_1_parser_case_1_1_expression_session_a8ecd48f27e8dbe736999138dc84d9a6a}{ExpressionSession}}}
+\DoxyCodeLine{\Hypertarget{_expression_session_8cs_source_l00014}00014\ \{}
+\DoxyCodeLine{\Hypertarget{_expression_session_8cs_source_l00015}00015\ \ \ \ \ \textcolor{keyword}{private}\ readonly\ List<(\mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_ae4bcfe414c318a050bbef43ec92f921b}{SyntaxKind}}\ DelimiterSyntaxKind,\ \mbox{\hyperlink{interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_1_1_nodes_1_1_97d7489c2c3077ac339153787f61d38f}{IExpressionNode}}\ ExpressionNode)>\ \_shortCircuitList\ =\ \textcolor{keyword}{new}();}
+\DoxyCodeLine{\Hypertarget{_expression_session_8cs_source_l00016}00016\ }
+\DoxyCodeLine{\Hypertarget{_expression_session_8cs_source_l00017}\mbox{\hyperlink{class_luthetus_1_1_compiler_services_1_1_c_sharp_1_1_parser_case_1_1_expression_session_a8ecd48f27e8dbe736999138dc84d9a6a}{00017}}\ \ \ \ \ \textcolor{keyword}{public}\ \mbox{\hyperlink{class_luthetus_1_1_compiler_services_1_1_c_sharp_1_1_parser_case_1_1_expression_session_a8ecd48f27e8dbe736999138dc84d9a6a}{ExpressionSession}}(}
+\DoxyCodeLine{\Hypertarget{_expression_session_8cs_source_l00018}00018\ \ \ \ \ \ \ \ \ List<ISyntaxToken>\ tokenList,}
+\DoxyCodeLine{\Hypertarget{_expression_session_8cs_source_l00019}00019\ \ \ \ \ \ \ \ \ Stack<ISyntax>\ expressionStack)}
+\DoxyCodeLine{\Hypertarget{_expression_session_8cs_source_l00020}00020\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_expression_session_8cs_source_l00021}00021\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_luthetus_1_1_compiler_services_1_1_c_sharp_1_1_parser_case_1_1_expression_session_a7223f108fcc4c23179faa95578165382}{TokenList}}\ =\ tokenList;}
+\DoxyCodeLine{\Hypertarget{_expression_session_8cs_source_l00022}00022\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_luthetus_1_1_compiler_services_1_1_c_sharp_1_1_parser_case_1_1_expression_session_a81d12b314f245fc105e48c149df296d0}{ExpressionStack}}\ =\ expressionStack;}
+\DoxyCodeLine{\Hypertarget{_expression_session_8cs_source_l00023}00023\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_expression_session_8cs_source_l00024}00024\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_expression_session_8cs_source_l00025}00025\ \ \ \ \ \textcolor{keyword}{private}\ \textcolor{keywordtype}{string}\ \_shortCircuitListStringified\ =\ \textcolor{keywordtype}{string}.Empty;}
+\DoxyCodeLine{\Hypertarget{_expression_session_8cs_source_l00026}00026\ \ \ \ \ \textcolor{keyword}{private}\ \textcolor{keywordtype}{bool}\ \_shortCircuitListStringifiedIsDirty;}
+\DoxyCodeLine{\Hypertarget{_expression_session_8cs_source_l00027}00027\ }
+\DoxyCodeLine{\Hypertarget{_expression_session_8cs_source_l00028}\mbox{\hyperlink{class_luthetus_1_1_compiler_services_1_1_c_sharp_1_1_parser_case_1_1_expression_session_affff45ee641d9ceb24d7c3982974c99b}{00028}}\ \ \ \ \ \textcolor{keyword}{public}\ IReadOnlyList<(\mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_ae4bcfe414c318a050bbef43ec92f921b}{SyntaxKind}}\ DelimiterSyntaxKind,\ \mbox{\hyperlink{interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_1_1_nodes_1_1_97d7489c2c3077ac339153787f61d38f}{IExpressionNode}}\ ExpressionNode)>\ \mbox{\hyperlink{class_luthetus_1_1_compiler_services_1_1_c_sharp_1_1_parser_case_1_1_expression_session_affff45ee641d9ceb24d7c3982974c99b}{ShortCircuitList}}\ =>\ \_shortCircuitList;}
+\DoxyCodeLine{\Hypertarget{_expression_session_8cs_source_l00029}00029\ }
+\DoxyCodeLine{\Hypertarget{_expression_session_8cs_source_l00030}\mbox{\hyperlink{class_luthetus_1_1_compiler_services_1_1_c_sharp_1_1_parser_case_1_1_expression_session_a7223f108fcc4c23179faa95578165382}{00030}}\ \ \ \ \ \textcolor{keyword}{public}\ List<ISyntaxToken>\ \mbox{\hyperlink{class_luthetus_1_1_compiler_services_1_1_c_sharp_1_1_parser_case_1_1_expression_session_a7223f108fcc4c23179faa95578165382}{TokenList}}\ \{\ \textcolor{keyword}{get};\ \}}
+\DoxyCodeLine{\Hypertarget{_expression_session_8cs_source_l00031}\mbox{\hyperlink{class_luthetus_1_1_compiler_services_1_1_c_sharp_1_1_parser_case_1_1_expression_session_a81d12b314f245fc105e48c149df296d0}{00031}}\ \ \ \ \ \textcolor{keyword}{public}\ Stack<ISyntax>\ \mbox{\hyperlink{class_luthetus_1_1_compiler_services_1_1_c_sharp_1_1_parser_case_1_1_expression_session_a81d12b314f245fc105e48c149df296d0}{ExpressionStack}}\ \{\ \textcolor{keyword}{get};\ \}}
+\DoxyCodeLine{\Hypertarget{_expression_session_8cs_source_l00032}\mbox{\hyperlink{class_luthetus_1_1_compiler_services_1_1_c_sharp_1_1_parser_case_1_1_expression_session_a69f7cbd36711f2be7e75521d8336f31a}{00032}}\ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{class_luthetus_1_1_compiler_services_1_1_c_sharp_1_1_parser_case_1_1_expression_session_a69f7cbd36711f2be7e75521d8336f31a}{Position}}\ \{\ \textcolor{keyword}{get};\ \textcolor{keyword}{set};\ \}}
+\DoxyCodeLine{\Hypertarget{_expression_session_8cs_source_l00033}00033\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_expression_session_8cs_source_l00034}\mbox{\hyperlink{class_luthetus_1_1_compiler_services_1_1_c_sharp_1_1_parser_case_1_1_expression_session_a05d4e116a1d28e7fff34dbb8c6406cf9}{00034}}\ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keywordtype}{string}\ \mbox{\hyperlink{class_luthetus_1_1_compiler_services_1_1_c_sharp_1_1_parser_case_1_1_expression_session_a05d4e116a1d28e7fff34dbb8c6406cf9}{ShortCircuitListStringified}}}
+\DoxyCodeLine{\Hypertarget{_expression_session_8cs_source_l00035}00035\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_expression_session_8cs_source_l00036}00036\ \ \ \ \ \ \ \ \ \textcolor{keyword}{get}}
+\DoxyCodeLine{\Hypertarget{_expression_session_8cs_source_l00037}00037\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_expression_session_8cs_source_l00038}00038\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\_shortCircuitListStringifiedIsDirty)}
+\DoxyCodeLine{\Hypertarget{_expression_session_8cs_source_l00039}00039\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_expression_session_8cs_source_l00040}00040\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \_shortCircuitListStringifiedIsDirty\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{\Hypertarget{_expression_session_8cs_source_l00041}00041\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \_shortCircuitListStringified\ =\ \textcolor{keywordtype}{string}.Join(\textcolor{charliteral}{','},\ \mbox{\hyperlink{class_luthetus_1_1_compiler_services_1_1_c_sharp_1_1_parser_case_1_1_expression_session_affff45ee641d9ceb24d7c3982974c99b}{ShortCircuitList}}.Select(x\ =>\ x.DelimiterSyntaxKind));}
+\DoxyCodeLine{\Hypertarget{_expression_session_8cs_source_l00042}00042\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_expression_session_8cs_source_l00043}00043\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_expression_session_8cs_source_l00044}00044\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \_shortCircuitListStringified;}
+\DoxyCodeLine{\Hypertarget{_expression_session_8cs_source_l00045}00045\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_expression_session_8cs_source_l00046}00046\ \ \ \ \ \ \ \ \ \textcolor{keyword}{private}\ \textcolor{keyword}{set}\ =>\ \_shortCircuitListStringified\ =\ value;}
+\DoxyCodeLine{\Hypertarget{_expression_session_8cs_source_l00047}00047\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_expression_session_8cs_source_l00048}00048\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_expression_session_8cs_source_l00049}\mbox{\hyperlink{class_luthetus_1_1_compiler_services_1_1_c_sharp_1_1_parser_case_1_1_expression_session_aa964b54feb7efd20ae7fae5ce1120092}{00049}}\ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_luthetus_1_1_compiler_services_1_1_c_sharp_1_1_parser_case_1_1_expression_session_aa964b54feb7efd20ae7fae5ce1120092}{AddShortCircuit}}((\mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_ae4bcfe414c318a050bbef43ec92f921b}{SyntaxKind}}\ DelimiterSyntaxKind,\ \mbox{\hyperlink{interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_1_1_nodes_1_1_97d7489c2c3077ac339153787f61d38f}{IExpressionNode}}\ ExpressionNode)\ shortCircuit)}
+\DoxyCodeLine{\Hypertarget{_expression_session_8cs_source_l00050}00050\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_expression_session_8cs_source_l00051}00051\ \ \ \ \ \ \ \ \ \_shortCircuitList.Add(shortCircuit);}
+\DoxyCodeLine{\Hypertarget{_expression_session_8cs_source_l00052}00052\ \ \ \ \ \ \ \ \ \_shortCircuitListStringifiedIsDirty\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{\Hypertarget{_expression_session_8cs_source_l00053}00053\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_expression_session_8cs_source_l00054}00054\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_expression_session_8cs_source_l00055}\mbox{\hyperlink{class_luthetus_1_1_compiler_services_1_1_c_sharp_1_1_parser_case_1_1_expression_session_a1855c33ec90e4782c756fd3d7c7159c8}{00055}}\ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_luthetus_1_1_compiler_services_1_1_c_sharp_1_1_parser_case_1_1_expression_session_a1855c33ec90e4782c756fd3d7c7159c8}{RemoveRangeShortCircuit}}(\textcolor{keywordtype}{int}\ index,\ \textcolor{keywordtype}{int}\ count)}
+\DoxyCodeLine{\Hypertarget{_expression_session_8cs_source_l00056}00056\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_expression_session_8cs_source_l00057}00057\ \ \ \ \ \ \ \ \ \_shortCircuitList.RemoveRange(index,\ count);}
+\DoxyCodeLine{\Hypertarget{_expression_session_8cs_source_l00058}00058\ \ \ \ \ \ \ \ \ \_shortCircuitListStringifiedIsDirty\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{\Hypertarget{_expression_session_8cs_source_l00059}00059\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_expression_session_8cs_source_l00060}00060\ \}}
+\DoxyCodeLine{\Hypertarget{_expression_session_8cs_source_l00061}00061\ }
+
+\end{DoxyCode}

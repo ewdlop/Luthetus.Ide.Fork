@@ -1,0 +1,292 @@
+\doxysection{Autocomplete\+Menu.\+razor.\+cs}
+\hypertarget{_autocomplete_menu_8razor_8cs_source}{}\label{_autocomplete_menu_8razor_8cs_source}\index{Source/Lib/TextEditor/TextEditors/Displays/Internals/AutocompleteMenu.razor.cs@{Source/Lib/TextEditor/TextEditors/Displays/Internals/AutocompleteMenu.razor.cs}}
+\mbox{\hyperlink{_autocomplete_menu_8razor_8cs}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{_autocomplete_menu_8razor_8cs_source_l00001}00001\ \textcolor{keyword}{using\ }System.Collections.Immutable;}
+\DoxyCodeLine{\Hypertarget{_autocomplete_menu_8razor_8cs_source_l00002}00002\ \textcolor{keyword}{using\ }Microsoft.AspNetCore.Components;}
+\DoxyCodeLine{\Hypertarget{_autocomplete_menu_8razor_8cs_source_l00003}00003\ \textcolor{keyword}{using\ }Microsoft.AspNetCore.Components.Web;}
+\DoxyCodeLine{\Hypertarget{_autocomplete_menu_8razor_8cs_source_l00004}00004\ \textcolor{keyword}{using\ }Fluxor;}
+\DoxyCodeLine{\Hypertarget{_autocomplete_menu_8razor_8cs_source_l00005}00005\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_luthetus_1_1_common_1_1_razor_lib_1_1_menus_1_1_models}{Luthetus.Common.RazorLib.Menus.Models}};}
+\DoxyCodeLine{\Hypertarget{_autocomplete_menu_8razor_8cs_source_l00006}00006\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_luthetus_1_1_common_1_1_razor_lib_1_1_keyboards_1_1_models}{Luthetus.Common.RazorLib.Keyboards.Models}};}
+\DoxyCodeLine{\Hypertarget{_autocomplete_menu_8razor_8cs_source_l00007}00007\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_luthetus_1_1_common_1_1_razor_lib_1_1_menus_1_1_displays}{Luthetus.Common.RazorLib.Menus.Displays}};}
+\DoxyCodeLine{\Hypertarget{_autocomplete_menu_8razor_8cs_source_l00008}00008\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_luthetus_1_1_common_1_1_razor_lib_1_1_options_1_1_states}{Luthetus.Common.RazorLib.Options.States}};}
+\DoxyCodeLine{\Hypertarget{_autocomplete_menu_8razor_8cs_source_l00009}00009\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_autocompletes_1_1_models}{Luthetus.TextEditor.RazorLib.Autocompletes.Models}};}
+\DoxyCodeLine{\Hypertarget{_autocomplete_menu_8razor_8cs_source_l00010}00010\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models}{Luthetus.TextEditor.RazorLib.TextEditors.Models}};}
+\DoxyCodeLine{\Hypertarget{_autocomplete_menu_8razor_8cs_source_l00011}00011\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_cursors_1_1_models}{Luthetus.TextEditor.RazorLib.Cursors.Models}};}
+\DoxyCodeLine{\Hypertarget{_autocomplete_menu_8razor_8cs_source_l00012}00012\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1_1_internals}{Luthetus.TextEditor.RazorLib.TextEditors.Models.Internals}};}
+\DoxyCodeLine{\Hypertarget{_autocomplete_menu_8razor_8cs_source_l00013}00013\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_lexers_1_1_models}{Luthetus.TextEditor.RazorLib.Lexers.Models}};}
+\DoxyCodeLine{\Hypertarget{_autocomplete_menu_8razor_8cs_source_l00014}00014\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_exceptions}{Luthetus.TextEditor.RazorLib.Exceptions}};}
+\DoxyCodeLine{\Hypertarget{_autocomplete_menu_8razor_8cs_source_l00015}00015\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_commands_1_1_models_1_1_defaults}{Luthetus.TextEditor.RazorLib.Commands.Models.Defaults}};}
+\DoxyCodeLine{\Hypertarget{_autocomplete_menu_8razor_8cs_source_l00016}00016\ }
+\DoxyCodeLine{\Hypertarget{_autocomplete_menu_8razor_8cs_source_l00017}\mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors}{00017}}\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_displays_1_1_internals}{Luthetus.TextEditor.RazorLib.TextEditors.Displays.Internals}};}
+\DoxyCodeLine{\Hypertarget{_autocomplete_menu_8razor_8cs_source_l00018}00018\ }
+\DoxyCodeLine{\Hypertarget{_autocomplete_menu_8razor_8cs_source_l00019}\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_displays_1_1_internals_1_1_autocomplete_menu}{00019}}\ \textcolor{keyword}{public}\ \textcolor{keyword}{partial\ class\ }\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_displays_1_1_internals_1_1_autocomplete_menu}{AutocompleteMenu}}\ :\ ComponentBase,\ \mbox{\hyperlink{interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1_1_i_text_editor_dependent_component}{ITextEditorDependentComponent}}}
+\DoxyCodeLine{\Hypertarget{_autocomplete_menu_8razor_8cs_source_l00020}00020\ \{}
+\DoxyCodeLine{\Hypertarget{_autocomplete_menu_8razor_8cs_source_l00021}00021\ \ \ \ \ [Inject]}
+\DoxyCodeLine{\Hypertarget{_autocomplete_menu_8razor_8cs_source_l00022}00022\ \ \ \ \ \textcolor{keyword}{private}\ \mbox{\hyperlink{interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_i_text_editor_service}{ITextEditorService}}\ TextEditorService\ \{\ \textcolor{keyword}{get};\ \textcolor{keyword}{set};\ \}\ =\ \textcolor{keyword}{null}!;}
+\DoxyCodeLine{\Hypertarget{_autocomplete_menu_8razor_8cs_source_l00023}00023\ \ \ \ \ [Inject]}
+\DoxyCodeLine{\Hypertarget{_autocomplete_menu_8razor_8cs_source_l00024}00024\ \ \ \ \ \textcolor{keyword}{private}\ \mbox{\hyperlink{interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_autocompletes_1_1_models_1_1_i_autocomplete_service}{IAutocompleteService}}\ AutocompleteService\ \{\ \textcolor{keyword}{get};\ \textcolor{keyword}{set};\ \}\ =\ \textcolor{keyword}{null}!;}
+\DoxyCodeLine{\Hypertarget{_autocomplete_menu_8razor_8cs_source_l00025}00025\ \ \ \ \ [Inject]}
+\DoxyCodeLine{\Hypertarget{_autocomplete_menu_8razor_8cs_source_l00026}00026\ \ \ \ \ \textcolor{keyword}{private}\ IState<AppOptionsState>\ AppOptionsStateWrap\ \{\ \textcolor{keyword}{get};\ \textcolor{keyword}{set};\ \}\ =\ \textcolor{keyword}{null}!;}
+\DoxyCodeLine{\Hypertarget{_autocomplete_menu_8razor_8cs_source_l00027}00027\ \ \ \ \ [Inject]}
+\DoxyCodeLine{\Hypertarget{_autocomplete_menu_8razor_8cs_source_l00028}00028\ \ \ \ \ \textcolor{keyword}{private}\ IDispatcher\ Dispatcher\ \{\ \textcolor{keyword}{get};\ \textcolor{keyword}{set};\ \}\ =\ \textcolor{keyword}{null}!;}
+\DoxyCodeLine{\Hypertarget{_autocomplete_menu_8razor_8cs_source_l00029}00029\ }
+\DoxyCodeLine{\Hypertarget{_autocomplete_menu_8razor_8cs_source_l00030}00030\ \ \ \ \ [Parameter,\ EditorRequired]}
+\DoxyCodeLine{\Hypertarget{_autocomplete_menu_8razor_8cs_source_l00031}\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_displays_1_1_internals_1_1_autocomplete_menu_ac444329cc83e3ff417de4778109e0629}{00031}}\ \ \ \ \ \textcolor{keyword}{public}\ \mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_displays_1_1_internals_1_1_autocomplete_menu_ac444329cc83e3ff417de4778109e0629}{TextEditorViewModelDisplay}}\ \mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_displays_1_1_internals_1_1_autocomplete_menu_ac444329cc83e3ff417de4778109e0629}{TextEditorViewModelDisplay}}\ \{\ \textcolor{keyword}{get};\ \textcolor{keyword}{set};\ \}\ =\ \textcolor{keyword}{null}!;}
+\DoxyCodeLine{\Hypertarget{_autocomplete_menu_8razor_8cs_source_l00032}00032\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_autocomplete_menu_8razor_8cs_source_l00033}\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_displays_1_1_internals_1_1_autocomplete_menu_ad0627c67afd3ad9da35e612029f5399b}{00033}}\ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{string}\ \mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_displays_1_1_internals_1_1_autocomplete_menu_ad0627c67afd3ad9da35e612029f5399b}{HTML\_ELEMENT\_ID}}\ =\ \textcolor{stringliteral}{"{}luth\_te\_autocomplete-\/menu-\/id"{}};}
+\DoxyCodeLine{\Hypertarget{_autocomplete_menu_8razor_8cs_source_l00034}00034\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_autocomplete_menu_8razor_8cs_source_l00035}00035\ \ \ \ \ \textcolor{comment}{/*public\ static\ string\ GetHtmlElementId(Key<TextEditorViewModel>\ viewModelKey)}}
+\DoxyCodeLine{\Hypertarget{_autocomplete_menu_8razor_8cs_source_l00036}00036\ \textcolor{comment}{\ \ \ \ \{}}
+\DoxyCodeLine{\Hypertarget{_autocomplete_menu_8razor_8cs_source_l00037}00037\ \textcolor{comment}{\ \ \ \ \ \ \ \ return\ \$"{}luth\_te\_autocomplete-\/menu\_\{viewModelKey.Guid\}"{};}}
+\DoxyCodeLine{\Hypertarget{_autocomplete_menu_8razor_8cs_source_l00038}00038\ \textcolor{comment}{\ \ \ \ \}*/}}
+\DoxyCodeLine{\Hypertarget{_autocomplete_menu_8razor_8cs_source_l00039}00039\ }
+\DoxyCodeLine{\Hypertarget{_autocomplete_menu_8razor_8cs_source_l00040}00040\ \ \ \ \ \textcolor{keyword}{private}\ \textcolor{keyword}{static}\ readonly\ \mbox{\hyperlink{namespace_luthetus_1_1_common_1_1_razor_lib_1_1_menus_1_1_models_af436982429af54c4ebdea144108f1672}{MenuRecord}}\ NoResultsMenuRecord\ =\ \textcolor{keyword}{new}(}
+\DoxyCodeLine{\Hypertarget{_autocomplete_menu_8razor_8cs_source_l00041}00041\ \ \ \ \ \ \ \ \ \textcolor{keyword}{new}\ \mbox{\hyperlink{namespace_luthetus_1_1_common_1_1_razor_lib_1_1_menus_1_1_models_a2d6c930d5bf3cf0cf06f574bf193cf6f}{MenuOptionRecord}}[]}
+\DoxyCodeLine{\Hypertarget{_autocomplete_menu_8razor_8cs_source_l00042}00042\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_autocomplete_menu_8razor_8cs_source_l00043}00043\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{new}(\textcolor{stringliteral}{"{}No\ results"{}},\ \mbox{\hyperlink{namespace_luthetus_1_1_common_1_1_razor_lib_1_1_menus_1_1_models_a9d33500a676dda12265b167a400f3df1}{MenuOptionKind}}.Other)}
+\DoxyCodeLine{\Hypertarget{_autocomplete_menu_8razor_8cs_source_l00044}00044\ \ \ \ \ \ \ \ \ \}.ToImmutableArray());}
+\DoxyCodeLine{\Hypertarget{_autocomplete_menu_8razor_8cs_source_l00045}00045\ }
+\DoxyCodeLine{\Hypertarget{_autocomplete_menu_8razor_8cs_source_l00046}00046\ \ \ \ \ \textcolor{keyword}{private}\ ElementReference?\ \_autocompleteMenuElementReference;}
+\DoxyCodeLine{\Hypertarget{_autocomplete_menu_8razor_8cs_source_l00047}00047\ \ \ \ \ \textcolor{keyword}{private}\ \mbox{\hyperlink{class_luthetus_1_1_common_1_1_razor_lib_1_1_menus_1_1_displays_1_1_menu_display}{MenuDisplay}}?\ \_autocompleteMenuComponent;}
+\DoxyCodeLine{\Hypertarget{_autocomplete_menu_8razor_8cs_source_l00048}00048\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_autocomplete_menu_8razor_8cs_source_l00049}\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_displays_1_1_internals_1_1_autocomplete_menu_afb4e258e32366d4c594c21f14619f203}{00049}}\ \ \ \ \ \textcolor{keyword}{protected}\ \textcolor{keyword}{override}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_displays_1_1_internals_1_1_autocomplete_menu_afb4e258e32366d4c594c21f14619f203}{OnInitialized}}()}
+\DoxyCodeLine{\Hypertarget{_autocomplete_menu_8razor_8cs_source_l00050}00050\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_autocomplete_menu_8razor_8cs_source_l00051}00051\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_displays_1_1_text_editor_view_model_display_adadf9a7691d195fafa0cad6e83047e41}{TextEditorViewModelDisplay.RenderBatchChanged}}\ +=\ OnRenderBatchChanged;\ }
+\DoxyCodeLine{\Hypertarget{_autocomplete_menu_8razor_8cs_source_l00052}00052\ \ \ \ \ \ \ \ \ base.OnInitialized();}
+\DoxyCodeLine{\Hypertarget{_autocomplete_menu_8razor_8cs_source_l00053}00053\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_autocomplete_menu_8razor_8cs_source_l00054}00054\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_autocomplete_menu_8razor_8cs_source_l00055}\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_displays_1_1_internals_1_1_autocomplete_menu_a0d503237a2970cbbbc33bf73e2da9d71}{00055}}\ \ \ \ \ \textcolor{keyword}{protected}\ \textcolor{keyword}{override}\ async\ Task\ \mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_displays_1_1_internals_1_1_autocomplete_menu_a0d503237a2970cbbbc33bf73e2da9d71}{OnAfterRenderAsync}}(\textcolor{keywordtype}{bool}\ firstRender)}
+\DoxyCodeLine{\Hypertarget{_autocomplete_menu_8razor_8cs_source_l00056}00056\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_autocomplete_menu_8razor_8cs_source_l00057}00057\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_displays_1_1_internals_1_1_autocomplete_menu_ac444329cc83e3ff417de4778109e0629}{TextEditorViewModelDisplay}}.ComponentData.MenuShouldTakeFocus)}
+\DoxyCodeLine{\Hypertarget{_autocomplete_menu_8razor_8cs_source_l00058}00058\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_autocomplete_menu_8razor_8cs_source_l00059}00059\ \ \ \ \ \ \ \ \ \ \ \ \ TextEditorViewModelDisplay.ComponentData.MenuShouldTakeFocus\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{\Hypertarget{_autocomplete_menu_8razor_8cs_source_l00060}00060\ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_autocomplete_menu_8razor_8cs_source_l00061}00061\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*await\ TextEditorService.JsRuntimeCommonApi.FocusHtmlElementById(}}
+\DoxyCodeLine{\Hypertarget{_autocomplete_menu_8razor_8cs_source_l00062}00062\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ HTML\_ELEMENT\_ID,}}
+\DoxyCodeLine{\Hypertarget{_autocomplete_menu_8razor_8cs_source_l00063}00063\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ preventScroll:\ true);*/}}
+\DoxyCodeLine{\Hypertarget{_autocomplete_menu_8razor_8cs_source_l00064}00064\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_autocomplete_menu_8razor_8cs_source_l00065}00065\ \ \ \ \ \ \ \ \ \ \ \ \ await\ \_autocompleteMenuComponent.SetFocusToFirstOptionInMenuAsync();}
+\DoxyCodeLine{\Hypertarget{_autocomplete_menu_8razor_8cs_source_l00066}00066\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_autocomplete_menu_8razor_8cs_source_l00067}00067\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_autocomplete_menu_8razor_8cs_source_l00068}00068\ \ \ \ \ \ \ \ \ await\ base.OnAfterRenderAsync(firstRender);}
+\DoxyCodeLine{\Hypertarget{_autocomplete_menu_8razor_8cs_source_l00069}00069\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_autocomplete_menu_8razor_8cs_source_l00070}00070\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_autocomplete_menu_8razor_8cs_source_l00071}00071\ \ \ \ \ \textcolor{keyword}{private}\ async\ \textcolor{keywordtype}{void}\ OnRenderBatchChanged()}
+\DoxyCodeLine{\Hypertarget{_autocomplete_menu_8razor_8cs_source_l00072}00072\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_autocomplete_menu_8razor_8cs_source_l00073}00073\ \ \ \ \ \ \ \ \ await\ InvokeAsync(StateHasChanged).ConfigureAwait(\textcolor{keyword}{false});}
+\DoxyCodeLine{\Hypertarget{_autocomplete_menu_8razor_8cs_source_l00074}00074\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_autocomplete_menu_8razor_8cs_source_l00075}00075\ }
+\DoxyCodeLine{\Hypertarget{_autocomplete_menu_8razor_8cs_source_l00076}00076\ \ \ \ \ \textcolor{keyword}{private}\ Task\ HandleOnKeyDown(KeyboardEventArgs\ keyboardEventArgs)}
+\DoxyCodeLine{\Hypertarget{_autocomplete_menu_8razor_8cs_source_l00077}00077\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_autocomplete_menu_8razor_8cs_source_l00078}00078\ \ \ \ \ \ \ \ \ var\ renderBatch\ =\ \mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_displays_1_1_text_editor_view_model_display}{TextEditorViewModelDisplay}}.\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_displays_1_1_text_editor_view_model_display_ac9fc3f1534aaa1599209c2c8133c479e}{\_storedRenderBatchTuple}}.Validated;}
+\DoxyCodeLine{\Hypertarget{_autocomplete_menu_8razor_8cs_source_l00079}00079\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (renderBatch\ is\ \textcolor{keyword}{null})}
+\DoxyCodeLine{\Hypertarget{_autocomplete_menu_8razor_8cs_source_l00080}00080\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ Task.CompletedTask;}
+\DoxyCodeLine{\Hypertarget{_autocomplete_menu_8razor_8cs_source_l00081}00081\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_autocomplete_menu_8razor_8cs_source_l00082}00082\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (KeyboardKeyFacts.MetaKeys.ESCAPE\ ==\ keyboardEventArgs.Key)}
+\DoxyCodeLine{\Hypertarget{_autocomplete_menu_8razor_8cs_source_l00083}00083\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ ReturnFocusToThisAsync();}
+\DoxyCodeLine{\Hypertarget{_autocomplete_menu_8razor_8cs_source_l00084}00084\ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_autocomplete_menu_8razor_8cs_source_l00085}00085\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ Task.CompletedTask;}
+\DoxyCodeLine{\Hypertarget{_autocomplete_menu_8razor_8cs_source_l00086}00086\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_autocomplete_menu_8razor_8cs_source_l00087}00087\ }
+\DoxyCodeLine{\Hypertarget{_autocomplete_menu_8razor_8cs_source_l00088}00088\ \ \ \ \ \textcolor{keyword}{private}\ Task\ ReturnFocusToThisAsync()}
+\DoxyCodeLine{\Hypertarget{_autocomplete_menu_8razor_8cs_source_l00089}00089\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_autocomplete_menu_8razor_8cs_source_l00090}00090\ \ \ \ \ \ \ \ \ var\ renderBatch\ =\ TextEditorViewModelDisplay.\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_displays_1_1_text_editor_view_model_display_ac9fc3f1534aaa1599209c2c8133c479e}{\_storedRenderBatchTuple}}.Validated;}
+\DoxyCodeLine{\Hypertarget{_autocomplete_menu_8razor_8cs_source_l00091}00091\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (renderBatch\ is\ \textcolor{keyword}{null})}
+\DoxyCodeLine{\Hypertarget{_autocomplete_menu_8razor_8cs_source_l00092}00092\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ Task.CompletedTask;}
+\DoxyCodeLine{\Hypertarget{_autocomplete_menu_8razor_8cs_source_l00093}00093\ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_autocomplete_menu_8razor_8cs_source_l00094}00094\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{try}}
+\DoxyCodeLine{\Hypertarget{_autocomplete_menu_8razor_8cs_source_l00095}00095\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_autocomplete_menu_8razor_8cs_source_l00096}00096\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editor_service}{TextEditorService}}.\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editor_service_af6eeb43281d4743f6bb813d6b400e401}{PostUnique}}(}
+\DoxyCodeLine{\Hypertarget{_autocomplete_menu_8razor_8cs_source_l00097}00097\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ nameof(AutocompleteMenu),}
+\DoxyCodeLine{\Hypertarget{_autocomplete_menu_8razor_8cs_source_l00098}00098\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ editContext\ =>}
+\DoxyCodeLine{\Hypertarget{_autocomplete_menu_8razor_8cs_source_l00099}00099\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_autocomplete_menu_8razor_8cs_source_l00100}00100\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ var\ viewModelModifier\ =\ editContext.GetViewModelModifier(renderBatch.ViewModel.ViewModelKey);}
+\DoxyCodeLine{\Hypertarget{_autocomplete_menu_8razor_8cs_source_l00101}00101\ }
+\DoxyCodeLine{\Hypertarget{_autocomplete_menu_8razor_8cs_source_l00102}00102\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (viewModelModifier.ViewModel.MenuKind\ !=\ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1_1_internals_a27c667fdae3ee1a6426c7d969ca3e09b}{MenuKind}}.None)}
+\DoxyCodeLine{\Hypertarget{_autocomplete_menu_8razor_8cs_source_l00103}00103\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_autocomplete_menu_8razor_8cs_source_l00104}00104\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_commands_1_1_models_1_1_defaults_1_1_text_editor_command_default_functions}{TextEditorCommandDefaultFunctions}}.\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_commands_1_1_models_1_1_defaults_1_1_text_editor_command_default_functions_a56cc2a3b44b7946721bd59148ae22e45}{RemoveDropdown}}(}
+\DoxyCodeLine{\Hypertarget{_autocomplete_menu_8razor_8cs_source_l00105}00105\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ editContext,}
+\DoxyCodeLine{\Hypertarget{_autocomplete_menu_8razor_8cs_source_l00106}00106\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ viewModelModifier,}
+\DoxyCodeLine{\Hypertarget{_autocomplete_menu_8razor_8cs_source_l00107}00107\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Dispatcher);}
+\DoxyCodeLine{\Hypertarget{_autocomplete_menu_8razor_8cs_source_l00108}00108\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_autocomplete_menu_8razor_8cs_source_l00109}00109\ }
+\DoxyCodeLine{\Hypertarget{_autocomplete_menu_8razor_8cs_source_l00110}00110\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ Task.CompletedTask;}
+\DoxyCodeLine{\Hypertarget{_autocomplete_menu_8razor_8cs_source_l00111}00111\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \});}
+\DoxyCodeLine{\Hypertarget{_autocomplete_menu_8razor_8cs_source_l00112}00112\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_autocomplete_menu_8razor_8cs_source_l00113}00113\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ renderBatch.ViewModel.FocusAsync();}
+\DoxyCodeLine{\Hypertarget{_autocomplete_menu_8razor_8cs_source_l00114}00114\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_autocomplete_menu_8razor_8cs_source_l00115}00115\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{catch}\ (Exception\ e)}
+\DoxyCodeLine{\Hypertarget{_autocomplete_menu_8razor_8cs_source_l00116}00116\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_autocomplete_menu_8razor_8cs_source_l00117}00117\ \ \ \ \ \ \ \ \ \ \ \ \ Console.WriteLine(e);}
+\DoxyCodeLine{\Hypertarget{_autocomplete_menu_8razor_8cs_source_l00118}00118\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{throw};}
+\DoxyCodeLine{\Hypertarget{_autocomplete_menu_8razor_8cs_source_l00119}00119\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_autocomplete_menu_8razor_8cs_source_l00120}00120\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_autocomplete_menu_8razor_8cs_source_l00121}00121\ }
+\DoxyCodeLine{\Hypertarget{_autocomplete_menu_8razor_8cs_source_l00122}00122\ \ \ \ \ \textcolor{keyword}{private}\ \mbox{\hyperlink{namespace_luthetus_1_1_common_1_1_razor_lib_1_1_menus_1_1_models_af436982429af54c4ebdea144108f1672}{MenuRecord}}\ GetMenuRecord()}
+\DoxyCodeLine{\Hypertarget{_autocomplete_menu_8razor_8cs_source_l00123}00123\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_autocomplete_menu_8razor_8cs_source_l00124}00124\ \ \ \ \ \ \ \ \ var\ renderBatch\ =\ TextEditorViewModelDisplay.\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_displays_1_1_text_editor_view_model_display_ac9fc3f1534aaa1599209c2c8133c479e}{\_storedRenderBatchTuple}}.Validated;}
+\DoxyCodeLine{\Hypertarget{_autocomplete_menu_8razor_8cs_source_l00125}00125\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (renderBatch\ is\ \textcolor{keyword}{null})}
+\DoxyCodeLine{\Hypertarget{_autocomplete_menu_8razor_8cs_source_l00126}00126\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ NoResultsMenuRecord;}
+\DoxyCodeLine{\Hypertarget{_autocomplete_menu_8razor_8cs_source_l00127}00127\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_autocomplete_menu_8razor_8cs_source_l00128}00128\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{try}}
+\DoxyCodeLine{\Hypertarget{_autocomplete_menu_8razor_8cs_source_l00129}00129\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_autocomplete_menu_8razor_8cs_source_l00130}00130\ \ \ \ \ \ \ \ \ \ \ \ \ var\ cursorList\ =\ \textcolor{keyword}{new}\ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_cursors_1_1_models_a8373e854ca1ddf152a3b5372ea18c20b}{TextEditorCursor}}[]\ \{\ renderBatch.ViewModel.PrimaryCursor\ \}.ToImmutableArray();}
+\DoxyCodeLine{\Hypertarget{_autocomplete_menu_8razor_8cs_source_l00131}00131\ }
+\DoxyCodeLine{\Hypertarget{_autocomplete_menu_8razor_8cs_source_l00132}00132\ \ \ \ \ \ \ \ \ \ \ \ \ var\ primaryCursor\ =\ cursorList.First(x\ =>\ x.IsPrimaryCursor);}
+\DoxyCodeLine{\Hypertarget{_autocomplete_menu_8razor_8cs_source_l00133}00133\ }
+\DoxyCodeLine{\Hypertarget{_autocomplete_menu_8razor_8cs_source_l00134}00134\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (primaryCursor.ColumnIndex\ >\ 0)}
+\DoxyCodeLine{\Hypertarget{_autocomplete_menu_8razor_8cs_source_l00135}00135\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_autocomplete_menu_8razor_8cs_source_l00136}00136\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ var\ word\ =\ renderBatch.Model.ReadPreviousWordOrDefault(}
+\DoxyCodeLine{\Hypertarget{_autocomplete_menu_8razor_8cs_source_l00137}00137\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ primaryCursor.LineIndex,}
+\DoxyCodeLine{\Hypertarget{_autocomplete_menu_8razor_8cs_source_l00138}00138\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ primaryCursor.ColumnIndex);}
+\DoxyCodeLine{\Hypertarget{_autocomplete_menu_8razor_8cs_source_l00139}00139\ }
+\DoxyCodeLine{\Hypertarget{_autocomplete_menu_8razor_8cs_source_l00140}00140\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ List<MenuOptionRecord>\ menuOptionRecordsList\ =\ \textcolor{keyword}{new}();}
+\DoxyCodeLine{\Hypertarget{_autocomplete_menu_8razor_8cs_source_l00141}00141\ }
+\DoxyCodeLine{\Hypertarget{_autocomplete_menu_8razor_8cs_source_l00142}00142\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (word\ is\ not\ \textcolor{keyword}{null})}
+\DoxyCodeLine{\Hypertarget{_autocomplete_menu_8razor_8cs_source_l00143}00143\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_autocomplete_menu_8razor_8cs_source_l00144}00144\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ var\ autocompleteWordsList\ =\ AutocompleteService.\mbox{\hyperlink{interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_autocompletes_1_1_models_1_1_i_autocomplete_service_a04b00786ebfdcfecc778092117074a12}{GetAutocompleteOptions}}(word);}
+\DoxyCodeLine{\Hypertarget{_autocomplete_menu_8razor_8cs_source_l00145}00145\ }
+\DoxyCodeLine{\Hypertarget{_autocomplete_menu_8razor_8cs_source_l00146}00146\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ var\ autocompleteEntryList\ =\ autocompleteWordsList}
+\DoxyCodeLine{\Hypertarget{_autocomplete_menu_8razor_8cs_source_l00147}00147\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ .Select(aw\ =>\ \textcolor{keyword}{new}\ AutocompleteEntry(aw,\ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_autocompletes_1_1_models_a1b110edc9b8fb96b60eb301daedef318}{AutocompleteEntryKind}}.Word,\ \textcolor{keyword}{null}))}
+\DoxyCodeLine{\Hypertarget{_autocomplete_menu_8razor_8cs_source_l00148}00148\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ .ToArray();}
+\DoxyCodeLine{\Hypertarget{_autocomplete_menu_8razor_8cs_source_l00149}00149\ }
+\DoxyCodeLine{\Hypertarget{_autocomplete_menu_8razor_8cs_source_l00150}00150\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ (2023-\/08-\/09)\ Looking\ into\ using\ an\ ICompilerService\ for\ autocompletion.}}
+\DoxyCodeLine{\Hypertarget{_autocomplete_menu_8razor_8cs_source_l00151}00151\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_autocomplete_menu_8razor_8cs_source_l00152}00152\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ var\ positionIndex\ =\ renderBatch.Model.GetPositionIndex(primaryCursor);}
+\DoxyCodeLine{\Hypertarget{_autocomplete_menu_8razor_8cs_source_l00153}00153\ }
+\DoxyCodeLine{\Hypertarget{_autocomplete_menu_8razor_8cs_source_l00154}00154\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ var\ textSpan\ =\ \textcolor{keyword}{new}\ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_lexers_1_1_models_a1ffd1a7706dfd364560b76d47467812f}{TextEditorTextSpan}}(}
+\DoxyCodeLine{\Hypertarget{_autocomplete_menu_8razor_8cs_source_l00155}00155\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ positionIndex,}
+\DoxyCodeLine{\Hypertarget{_autocomplete_menu_8razor_8cs_source_l00156}00156\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ positionIndex\ +\ 1,}
+\DoxyCodeLine{\Hypertarget{_autocomplete_menu_8razor_8cs_source_l00157}00157\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 0,}
+\DoxyCodeLine{\Hypertarget{_autocomplete_menu_8razor_8cs_source_l00158}00158\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ renderBatch.Model.ResourceUri,}
+\DoxyCodeLine{\Hypertarget{_autocomplete_menu_8razor_8cs_source_l00159}00159\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ TODO:\ renderBatch.Model.GetAllText()\ probably\ isn't\ needed\ here.\ Maybe\ a\ useful\ optimization\ is\ to\ remove\ it\ somehow?}}
+\DoxyCodeLine{\Hypertarget{_autocomplete_menu_8razor_8cs_source_l00160}00160\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ renderBatch.Model.GetAllText());}
+\DoxyCodeLine{\Hypertarget{_autocomplete_menu_8razor_8cs_source_l00161}00161\ }
+\DoxyCodeLine{\Hypertarget{_autocomplete_menu_8razor_8cs_source_l00162}00162\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ var\ compilerServiceAutocompleteEntryList\ =\ renderBatch.Model.CompilerService.GetAutocompleteEntries(}
+\DoxyCodeLine{\Hypertarget{_autocomplete_menu_8razor_8cs_source_l00163}00163\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ word,}
+\DoxyCodeLine{\Hypertarget{_autocomplete_menu_8razor_8cs_source_l00164}00164\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ textSpan);}
+\DoxyCodeLine{\Hypertarget{_autocomplete_menu_8razor_8cs_source_l00165}00165\ }
+\DoxyCodeLine{\Hypertarget{_autocomplete_menu_8razor_8cs_source_l00166}00166\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (compilerServiceAutocompleteEntryList.Any())}
+\DoxyCodeLine{\Hypertarget{_autocomplete_menu_8razor_8cs_source_l00167}00167\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_autocomplete_menu_8razor_8cs_source_l00168}00168\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ autocompleteEntryList\ =\ compilerServiceAutocompleteEntryList}
+\DoxyCodeLine{\Hypertarget{_autocomplete_menu_8razor_8cs_source_l00169}00169\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ .AddRange(autocompleteEntryList)}
+\DoxyCodeLine{\Hypertarget{_autocomplete_menu_8razor_8cs_source_l00170}00170\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ .ToArray();}
+\DoxyCodeLine{\Hypertarget{_autocomplete_menu_8razor_8cs_source_l00171}00171\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_autocomplete_menu_8razor_8cs_source_l00172}00172\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_autocomplete_menu_8razor_8cs_source_l00173}00173\ }
+\DoxyCodeLine{\Hypertarget{_autocomplete_menu_8razor_8cs_source_l00174}00174\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ menuOptionRecordsList\ =\ autocompleteEntryList.Select(entry\ =>\ \textcolor{keyword}{new}\ \mbox{\hyperlink{namespace_luthetus_1_1_common_1_1_razor_lib_1_1_menus_1_1_models_a2d6c930d5bf3cf0cf06f574bf193cf6f}{MenuOptionRecord}}(}
+\DoxyCodeLine{\Hypertarget{_autocomplete_menu_8razor_8cs_source_l00175}00175\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ entry.DisplayName,}
+\DoxyCodeLine{\Hypertarget{_autocomplete_menu_8razor_8cs_source_l00176}00176\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespace_luthetus_1_1_common_1_1_razor_lib_1_1_menus_1_1_models_a9d33500a676dda12265b167a400f3df1}{MenuOptionKind}}.Other,}
+\DoxyCodeLine{\Hypertarget{_autocomplete_menu_8razor_8cs_source_l00177}00177\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ()\ =>\ SelectMenuOption(()\ =>}
+\DoxyCodeLine{\Hypertarget{_autocomplete_menu_8razor_8cs_source_l00178}00178\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_autocomplete_menu_8razor_8cs_source_l00179}00179\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (entry.AutocompleteEntryKind\ !=\ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_autocompletes_1_1_models_a1b110edc9b8fb96b60eb301daedef318}{AutocompleteEntryKind}}.Snippet)}
+\DoxyCodeLine{\Hypertarget{_autocomplete_menu_8razor_8cs_source_l00180}00180\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ InsertAutocompleteMenuOption(word,\ entry,\ renderBatch.ViewModel);}
+\DoxyCodeLine{\Hypertarget{_autocomplete_menu_8razor_8cs_source_l00181}00181\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_autocomplete_menu_8razor_8cs_source_l00182}00182\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ entry.SideEffectFunc?.Invoke();}
+\DoxyCodeLine{\Hypertarget{_autocomplete_menu_8razor_8cs_source_l00183}00183\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}),}
+\DoxyCodeLine{\Hypertarget{_autocomplete_menu_8razor_8cs_source_l00184}00184\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ WidgetParameterMap:\ \textcolor{keyword}{new}\ Dictionary<string,\ object?>}
+\DoxyCodeLine{\Hypertarget{_autocomplete_menu_8razor_8cs_source_l00185}00185\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_autocomplete_menu_8razor_8cs_source_l00186}00186\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_autocomplete_menu_8razor_8cs_source_l00187}00187\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ nameof(AutocompleteEntry),}
+\DoxyCodeLine{\Hypertarget{_autocomplete_menu_8razor_8cs_source_l00188}00188\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ entry}
+\DoxyCodeLine{\Hypertarget{_autocomplete_menu_8razor_8cs_source_l00189}00189\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_autocomplete_menu_8razor_8cs_source_l00190}00190\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}))}
+\DoxyCodeLine{\Hypertarget{_autocomplete_menu_8razor_8cs_source_l00191}00191\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ .ToList();}
+\DoxyCodeLine{\Hypertarget{_autocomplete_menu_8razor_8cs_source_l00192}00192\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_autocomplete_menu_8razor_8cs_source_l00193}00193\ }
+\DoxyCodeLine{\Hypertarget{_autocomplete_menu_8razor_8cs_source_l00194}00194\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!menuOptionRecordsList.Any())}
+\DoxyCodeLine{\Hypertarget{_autocomplete_menu_8razor_8cs_source_l00195}00195\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ menuOptionRecordsList.Add(\textcolor{keyword}{new}\ \mbox{\hyperlink{namespace_luthetus_1_1_common_1_1_razor_lib_1_1_menus_1_1_models_a2d6c930d5bf3cf0cf06f574bf193cf6f}{MenuOptionRecord}}(\textcolor{stringliteral}{"{}No\ results"{}},\ \mbox{\hyperlink{namespace_luthetus_1_1_common_1_1_razor_lib_1_1_menus_1_1_models_a9d33500a676dda12265b167a400f3df1}{MenuOptionKind}}.Other));}
+\DoxyCodeLine{\Hypertarget{_autocomplete_menu_8razor_8cs_source_l00196}00196\ }
+\DoxyCodeLine{\Hypertarget{_autocomplete_menu_8razor_8cs_source_l00197}00197\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{new}\ \mbox{\hyperlink{namespace_luthetus_1_1_common_1_1_razor_lib_1_1_menus_1_1_models_af436982429af54c4ebdea144108f1672}{MenuRecord}}(menuOptionRecordsList.ToImmutableArray());}
+\DoxyCodeLine{\Hypertarget{_autocomplete_menu_8razor_8cs_source_l00198}00198\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_autocomplete_menu_8razor_8cs_source_l00199}00199\ }
+\DoxyCodeLine{\Hypertarget{_autocomplete_menu_8razor_8cs_source_l00200}00200\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ NoResultsMenuRecord;}
+\DoxyCodeLine{\Hypertarget{_autocomplete_menu_8razor_8cs_source_l00201}00201\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_autocomplete_menu_8razor_8cs_source_l00202}00202\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Catching\ 'InvalidOperationException'\ is\ for\ the\ currently\ occurring\ case:\ "{}Collection\ was\ modified;\ enumeration\ operation\ may\ not\ execute."{}}}
+\DoxyCodeLine{\Hypertarget{_autocomplete_menu_8razor_8cs_source_l00203}00203\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{catch}\ (Exception\ e)\ when\ (e\ is\ LuthetusTextEditorException\ ||\ e\ is\ InvalidOperationException)}
+\DoxyCodeLine{\Hypertarget{_autocomplete_menu_8razor_8cs_source_l00204}00204\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_autocomplete_menu_8razor_8cs_source_l00205}00205\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ NoResultsMenuRecord;}
+\DoxyCodeLine{\Hypertarget{_autocomplete_menu_8razor_8cs_source_l00206}00206\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_autocomplete_menu_8razor_8cs_source_l00207}00207\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_autocomplete_menu_8razor_8cs_source_l00208}00208\ }
+\DoxyCodeLine{\Hypertarget{_autocomplete_menu_8razor_8cs_source_l00209}00209\ \ \ \ \ \textcolor{keyword}{private}\ Task\ SelectMenuOption(Func<Task>\ menuOptionAction)}
+\DoxyCodeLine{\Hypertarget{_autocomplete_menu_8razor_8cs_source_l00210}00210\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_autocomplete_menu_8razor_8cs_source_l00211}00211\ \ \ \ \ \ \ \ \ var\ renderBatch\ =\ TextEditorViewModelDisplay.\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_displays_1_1_text_editor_view_model_display_ac9fc3f1534aaa1599209c2c8133c479e}{\_storedRenderBatchTuple}}.Validated;}
+\DoxyCodeLine{\Hypertarget{_autocomplete_menu_8razor_8cs_source_l00212}00212\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (renderBatch\ is\ \textcolor{keyword}{null})}
+\DoxyCodeLine{\Hypertarget{_autocomplete_menu_8razor_8cs_source_l00213}00213\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ Task.CompletedTask;}
+\DoxyCodeLine{\Hypertarget{_autocomplete_menu_8razor_8cs_source_l00214}00214\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_autocomplete_menu_8razor_8cs_source_l00215}00215\ \ \ \ \ \ \ \ \ \_\ =\ Task.Run(async\ ()\ =>}
+\DoxyCodeLine{\Hypertarget{_autocomplete_menu_8razor_8cs_source_l00216}00216\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_autocomplete_menu_8razor_8cs_source_l00217}00217\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{try}}
+\DoxyCodeLine{\Hypertarget{_autocomplete_menu_8razor_8cs_source_l00218}00218\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_autocomplete_menu_8razor_8cs_source_l00219}00219\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_abe7fad0a7df96f414b675b6af70f260d}{TextEditorService}}.\mbox{\hyperlink{interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_i_text_editor_service_a6c66ba283b193829ccb3f9bddc250748}{PostUnique}}(}
+\DoxyCodeLine{\Hypertarget{_autocomplete_menu_8razor_8cs_source_l00220}00220\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ nameof(AutocompleteMenu),}
+\DoxyCodeLine{\Hypertarget{_autocomplete_menu_8razor_8cs_source_l00221}00221\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ editContext\ =>}
+\DoxyCodeLine{\Hypertarget{_autocomplete_menu_8razor_8cs_source_l00222}00222\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_autocomplete_menu_8razor_8cs_source_l00223}00223\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ var\ viewModelModifier\ =\ editContext.GetViewModelModifier(renderBatch.ViewModel.ViewModelKey);}
+\DoxyCodeLine{\Hypertarget{_autocomplete_menu_8razor_8cs_source_l00224}00224\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_autocomplete_menu_8razor_8cs_source_l00225}00225\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (viewModelModifier.ViewModel.MenuKind\ !=\ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1_1_internals_a27c667fdae3ee1a6426c7d969ca3e09b}{MenuKind}}.None)}
+\DoxyCodeLine{\Hypertarget{_autocomplete_menu_8razor_8cs_source_l00226}00226\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_autocomplete_menu_8razor_8cs_source_l00227}00227\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ TextEditorCommandDefaultFunctions.RemoveDropdown(}
+\DoxyCodeLine{\Hypertarget{_autocomplete_menu_8razor_8cs_source_l00228}00228\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ editContext,}
+\DoxyCodeLine{\Hypertarget{_autocomplete_menu_8razor_8cs_source_l00229}00229\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ viewModelModifier,}
+\DoxyCodeLine{\Hypertarget{_autocomplete_menu_8razor_8cs_source_l00230}00230\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Dispatcher);}
+\DoxyCodeLine{\Hypertarget{_autocomplete_menu_8razor_8cs_source_l00231}00231\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_autocomplete_menu_8razor_8cs_source_l00232}00232\ }
+\DoxyCodeLine{\Hypertarget{_autocomplete_menu_8razor_8cs_source_l00233}00233\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ renderBatch.ViewModel.FocusAsync();}
+\DoxyCodeLine{\Hypertarget{_autocomplete_menu_8razor_8cs_source_l00234}00234\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \});}
+\DoxyCodeLine{\Hypertarget{_autocomplete_menu_8razor_8cs_source_l00235}00235\ }
+\DoxyCodeLine{\Hypertarget{_autocomplete_menu_8razor_8cs_source_l00236}00236\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ await\ menuOptionAction.Invoke().ConfigureAwait(\textcolor{keyword}{false});}
+\DoxyCodeLine{\Hypertarget{_autocomplete_menu_8razor_8cs_source_l00237}00237\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_autocomplete_menu_8razor_8cs_source_l00238}00238\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{catch}\ (Exception\ e)}
+\DoxyCodeLine{\Hypertarget{_autocomplete_menu_8razor_8cs_source_l00239}00239\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_autocomplete_menu_8razor_8cs_source_l00240}00240\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Console.WriteLine(e);}
+\DoxyCodeLine{\Hypertarget{_autocomplete_menu_8razor_8cs_source_l00241}00241\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{throw};}
+\DoxyCodeLine{\Hypertarget{_autocomplete_menu_8razor_8cs_source_l00242}00242\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_autocomplete_menu_8razor_8cs_source_l00243}00243\ \ \ \ \ \ \ \ \ \},\ CancellationToken.None);}
+\DoxyCodeLine{\Hypertarget{_autocomplete_menu_8razor_8cs_source_l00244}00244\ }
+\DoxyCodeLine{\Hypertarget{_autocomplete_menu_8razor_8cs_source_l00245}00245\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ renderBatch.\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1_1_internals_1_1_text_editor_render_batch_validated_a226564a134918a22e36bd4b6f417b717}{ViewModel}}.FocusAsync();}
+\DoxyCodeLine{\Hypertarget{_autocomplete_menu_8razor_8cs_source_l00246}00246\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_autocomplete_menu_8razor_8cs_source_l00247}00247\ }
+\DoxyCodeLine{\Hypertarget{_autocomplete_menu_8razor_8cs_source_l00248}00248\ \ \ \ \ \textcolor{keyword}{private}\ Task\ InsertAutocompleteMenuOption(}
+\DoxyCodeLine{\Hypertarget{_autocomplete_menu_8razor_8cs_source_l00249}00249\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{string}\ word,}
+\DoxyCodeLine{\Hypertarget{_autocomplete_menu_8razor_8cs_source_l00250}00250\ \ \ \ \ \ \ \ \ AutocompleteEntry\ autocompleteEntry,}
+\DoxyCodeLine{\Hypertarget{_autocomplete_menu_8razor_8cs_source_l00251}00251\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_aa2a2da032900659e3cf98e4b28fc476d}{TextEditorViewModel}}\ viewModel)}
+\DoxyCodeLine{\Hypertarget{_autocomplete_menu_8razor_8cs_source_l00252}00252\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_autocomplete_menu_8razor_8cs_source_l00253}00253\ \ \ \ \ \ \ \ \ var\ renderBatch\ =\ TextEditorViewModelDisplay.\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_displays_1_1_text_editor_view_model_display_ac9fc3f1534aaa1599209c2c8133c479e}{\_storedRenderBatchTuple}}.Validated;}
+\DoxyCodeLine{\Hypertarget{_autocomplete_menu_8razor_8cs_source_l00254}00254\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (renderBatch\ is\ \textcolor{keyword}{null})}
+\DoxyCodeLine{\Hypertarget{_autocomplete_menu_8razor_8cs_source_l00255}00255\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ Task.CompletedTask;}
+\DoxyCodeLine{\Hypertarget{_autocomplete_menu_8razor_8cs_source_l00256}00256\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_autocomplete_menu_8razor_8cs_source_l00257}00257\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_abe7fad0a7df96f414b675b6af70f260d}{TextEditorService}}.\mbox{\hyperlink{interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_i_text_editor_service_a6c66ba283b193829ccb3f9bddc250748}{PostUnique}}(}
+\DoxyCodeLine{\Hypertarget{_autocomplete_menu_8razor_8cs_source_l00258}00258\ \ \ \ \ \ \ \ \ \ \ \ \ nameof(InsertAutocompleteMenuOption),}
+\DoxyCodeLine{\Hypertarget{_autocomplete_menu_8razor_8cs_source_l00259}00259\ \ \ \ \ \ \ \ \ \ \ \ \ editContext\ =>}
+\DoxyCodeLine{\Hypertarget{_autocomplete_menu_8razor_8cs_source_l00260}00260\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_autocomplete_menu_8razor_8cs_source_l00261}00261\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ var\ modelModifier\ =\ editContext.GetModelModifier(viewModel.ResourceUri);}
+\DoxyCodeLine{\Hypertarget{_autocomplete_menu_8razor_8cs_source_l00262}00262\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ var\ viewModelModifier\ =\ editContext.GetViewModelModifier(viewModel.ViewModelKey);}
+\DoxyCodeLine{\Hypertarget{_autocomplete_menu_8razor_8cs_source_l00263}00263\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ var\ cursorModifierBag\ =\ editContext.GetCursorModifierBag(viewModelModifier?.ViewModel);}
+\DoxyCodeLine{\Hypertarget{_autocomplete_menu_8razor_8cs_source_l00264}00264\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ var\ primaryCursorModifier\ =\ editContext.GetPrimaryCursorModifier(cursorModifierBag);}
+\DoxyCodeLine{\Hypertarget{_autocomplete_menu_8razor_8cs_source_l00265}00265\ }
+\DoxyCodeLine{\Hypertarget{_autocomplete_menu_8razor_8cs_source_l00266}00266\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (modelModifier\ is\ \textcolor{keyword}{null}\ ||\ viewModelModifier\ is\ \textcolor{keyword}{null}\ ||\ cursorModifierBag\ is\ \textcolor{keyword}{null}\ ||\ primaryCursorModifier\ is\ \textcolor{keyword}{null})}
+\DoxyCodeLine{\Hypertarget{_autocomplete_menu_8razor_8cs_source_l00267}00267\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ Task.CompletedTask;}
+\DoxyCodeLine{\Hypertarget{_autocomplete_menu_8razor_8cs_source_l00268}00268\ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_autocomplete_menu_8razor_8cs_source_l00269}00269\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_abe7fad0a7df96f414b675b6af70f260d}{TextEditorService}}.\mbox{\hyperlink{interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_i_text_editor_service_ae3a0dbf71e296019f79700cb636fdf7e}{ModelApi}}.\mbox{\hyperlink{interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1_1_i_text_editor_model_api_a48db14c223e867aff1818da22115bae0}{InsertText}}(}
+\DoxyCodeLine{\Hypertarget{_autocomplete_menu_8razor_8cs_source_l00270}00270\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ editContext,}
+\DoxyCodeLine{\Hypertarget{_autocomplete_menu_8razor_8cs_source_l00271}00271\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ modelModifier,}
+\DoxyCodeLine{\Hypertarget{_autocomplete_menu_8razor_8cs_source_l00272}00272\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ cursorModifierBag,}
+\DoxyCodeLine{\Hypertarget{_autocomplete_menu_8razor_8cs_source_l00273}00273\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ autocompleteEntry.\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_autocompletes_1_1_models_1_1_autocomplete_entry_aae1b60335864fa57bceabbf919d92366}{DisplayName}}.Substring(word.Length),}
+\DoxyCodeLine{\Hypertarget{_autocomplete_menu_8razor_8cs_source_l00274}00274\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ CancellationToken.None);}
+\DoxyCodeLine{\Hypertarget{_autocomplete_menu_8razor_8cs_source_l00275}00275\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_autocomplete_menu_8razor_8cs_source_l00276}00276\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ renderBatch.ViewModel.FocusAsync();}
+\DoxyCodeLine{\Hypertarget{_autocomplete_menu_8razor_8cs_source_l00277}00277\ \ \ \ \ \ \ \ \ \ \ \ \ \});}
+\DoxyCodeLine{\Hypertarget{_autocomplete_menu_8razor_8cs_source_l00278}00278\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_autocomplete_menu_8razor_8cs_source_l00279}00279\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ renderBatch.ViewModel.FocusAsync();}
+\DoxyCodeLine{\Hypertarget{_autocomplete_menu_8razor_8cs_source_l00280}00280\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_autocomplete_menu_8razor_8cs_source_l00281}00281\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_autocomplete_menu_8razor_8cs_source_l00282}\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_displays_1_1_internals_1_1_autocomplete_menu_ad800f43f96a19b97d6a469b646cfdb2d}{00282}}\ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_displays_1_1_internals_1_1_autocomplete_menu_ad800f43f96a19b97d6a469b646cfdb2d}{Dispose}}()}
+\DoxyCodeLine{\Hypertarget{_autocomplete_menu_8razor_8cs_source_l00283}00283\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_autocomplete_menu_8razor_8cs_source_l00284}00284\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_displays_1_1_text_editor_view_model_display_adadf9a7691d195fafa0cad6e83047e41}{TextEditorViewModelDisplay.RenderBatchChanged}}\ -\/=\ OnRenderBatchChanged;}
+\DoxyCodeLine{\Hypertarget{_autocomplete_menu_8razor_8cs_source_l00285}00285\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_autocomplete_menu_8razor_8cs_source_l00286}00286\ \}}
+
+\end{DoxyCode}

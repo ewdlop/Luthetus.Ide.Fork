@@ -1,0 +1,4 @@
+var interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_1_1_nodes_1_1_97d7489c2c3077ac339153787f61d38f =
+[
+    [ "ResultTypeClauseNode", "interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_1_1_nodes_1_1_97d7489c2c3077ac339153787f61d38f.html#ad58624daaf0743bf6e44c7ce8c8cc011", null ]
+];

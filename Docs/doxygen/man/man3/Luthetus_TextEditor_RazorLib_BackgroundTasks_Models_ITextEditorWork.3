@@ -1,0 +1,201 @@
+.TH "Luthetus.TextEditor.RazorLib.BackgroundTasks.Models.ITextEditorWork" 3 "Version 1.0.0" "Luthetus.Ide" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+Luthetus.TextEditor.RazorLib.BackgroundTasks.Models.ITextEditorWork
+.SH SYNOPSIS
+.br
+.PP
+.PP
+Inherits \fBLuthetus\&.Common\&.RazorLib\&.BackgroundTasks\&.Models\&.IBackgroundTask\fP\&.
+.PP
+Inherited by \fBLuthetus\&.TextEditor\&.RazorLib\&.BackgroundTasks\&.Models\&.RedundantTextEditorWork\fP, \fBLuthetus\&.TextEditor\&.RazorLib\&.BackgroundTasks\&.Models\&.UniqueTextEditorWork\fP, \fBLuthetus\&.TextEditor\&.RazorLib\&.Events\&.Models\&.OnDoubleClick\fP, \fBLuthetus\&.TextEditor\&.RazorLib\&.Events\&.Models\&.OnKeyDownLateBatching\fP, \fBLuthetus\&.TextEditor\&.RazorLib\&.Events\&.Models\&.OnMouseDown\fP, \fBLuthetus\&.TextEditor\&.RazorLib\&.Events\&.Models\&.OnMouseMove\fP, \fBLuthetus\&.TextEditor\&.RazorLib\&.Events\&.Models\&.OnScrollHorizontal\fP, \fBLuthetus\&.TextEditor\&.RazorLib\&.Events\&.Models\&.OnScrollVertical\fP, \fBLuthetus\&.TextEditor\&.RazorLib\&.Events\&.Models\&.OnWheel\fP, and \fBLuthetus\&.TextEditor\&.RazorLib\&.Events\&.Models\&.OnWheelBatch\fP\&.
+.SS "Properties"
+
+.in +1c
+.ti -1c
+.RI "\fBITextEditorEditContext\fP \fBEditContext\fP\fR [get, set]\fP"
+.br
+.in -1c
+
+Properties inherited from \fBLuthetus\&.Common\&.RazorLib\&.BackgroundTasks\&.Models\&.IBackgroundTask\fP
+.in +1c
+.ti -1c
+.RI "Key< \fBIBackgroundTask\fP > \fBBackgroundTaskKey\fP\fR [get]\fP"
+.br
+.ti -1c
+.RI "Key< \fBIBackgroundTaskQueue\fP > \fBQueueKey\fP\fR [get]\fP"
+.br
+.ti -1c
+.RI "string \fBName\fP\fR [get]\fP"
+.br
+.in -1c
+.SS "Additional Inherited Members"
+
+
+Public Member Functions inherited from \fBLuthetus\&.Common\&.RazorLib\&.BackgroundTasks\&.Models\&.IBackgroundTask\fP
+.in +1c
+.ti -1c
+.RI "\fBIBackgroundTask\fP? \fBBatchOrDefault\fP (\fBIBackgroundTask\fP oldEvent)"
+.br
+.RI "Before a throttle event is enqueued, this method is invoked\&. This allows for batching of 'this' throttle event instance, and the last entry of the queue\&.
+.br
+
+.br
+\&. "
+.ti -1c
+.RI "Task \fBHandleEvent\fP (CancellationToken cancellationToken)"
+.br
+.RI "This method is the actual work item that gets awaited in order to handle the event\&. "
+.in -1c
+.SH "Detailed Description"
+.PP 
+
+.SH "On the topic of "generic batching":"
+.PP
+I am leaving this comment here as a reminder to myself, of what I did to try and achieve "generic batching", but the massive flaws that existed as a result\&. The goal being, if I ever revisit this topic, I don't just repeat the same mistake\&.
+
+.PP
+Every \fBITextEditorWork\fP when finished executing, will cause the text editor to render\&.
+
+.PP
+So, I started writing code to permit batching of \fBITextEditorWork\fP, in order to reduce the amount of rendering\&.
+
+.PP
+I started by having specific implementations of \fBITextEditorWork\fP be batchable amongst themselves\&.
+
+.PP
+For example, if the user types into the text editor, this results in the construction of a \fBEvents\&.Models\&.OnKeyDownLateBatching\fP\&.
+
+.PP
+Therefore, upon enqueueing an instance of \fBEvents\&.Models\&.OnKeyDownLateBatching\fP, it is found that the background task queue has in it a \fBEvents\&.Models\&.OnKeyDownLateBatching\fP, which came immediately prior (they are contiguous), then combine them into a single \fBEvents\&.Models\&.OnKeyDownLateBatching\fP\&.
+
+.PP
+A more concrete example would be a user typing the letter 'q', then the letter 'w'\&.
+
+.PP
+Instead of: Insert("q"); Render(); Insert("w"); Render();
+
+.PP
+It might be preferable to: Insert("qw"); Render();
+
+.PP
+\fBEvents\&.Models\&.OnKeyDownLateBatching\fP seems useful, but it seems to have an issue\&.
+
+.PP
+Take the example of a user HOLDING down the letter 'q'\&. Sometimes the enqueueing and dequeueing seem to only batch, and never get handled\&.
+
+.PP
+Then once the user lets go, its discovered that 'q' was batched 100 times (or however many times the keyboard event occurred while being held)\&.
+
+.PP
+I suppose I'm looking for it to batch, but eventually just handle the event, and start the batch over again with the next event\&. Instead of eternally batching under high load\&.
+
+.PP
+After I made an implementation of \fBITextEditorWork\fP for each of the UI events, I thought I would create an implementation for general use\&.
+
+.PP
+So that any task could batch, but instead of the batch optimizing the work (i\&.e\&.: 1 insert containing 2 characters instead of 2 inserts with each having 1 character) the batching was just a 'foreach' loop, in order to avoid the render of the text editor\&.
+
+.PP
+So instead of: Insert("q"); Render(); Insert("w"); Render();
+
+.PP
+Do: Insert("q"); Insert("w"); Render();
+
+.PP
+But, this created an issue relating to when an exception was thrown, by one of the tasks that were put into that foreach loop\&.
+
+.PP
+If one threw an exception, then any following tasks would not run\&.
+
+.PP
+Okay fine, I can put a 'try-catch' inside the 'foreach' loop, around every invocation of an individual task\&.
+
+.PP
+But, the text editor is immutable\&. And in order to edit the text editor, one is given a edit context\&.
+
+.PP
+In short the edit context is the exact same data as the immutable version, except it is allowed to be changed\&. That is, the immutable data gets copied into a mutable version of itself\&.
+
+.PP
+Well, if an individual task threw an exception during the 'foreach-batching', is no longer as issue because of the 'try-catch'?
+
+.PP
+The outcome was that, the individual task likely was unable to make the edit, that it sought out to make\&.
+
+.PP
+Maybe the task made part of their edit, prior to the exception\&.
+
+.PP
+Well, the metadata of the text editor (i\&.e\&.: position indices of the line endings, and etc\&.\&.\&.) is calculated separately to that of the insertion of text\&.
+
+.PP
+So, the insertion of a '
+.br
+' character, actually calculates the new line ending positions presuming it will be added without error, then lastly inserts the character\&.
+
+.PP
+If an exception occurs after calculating the metadata, but before inserting the character, then the text editor will enter a "corrupt"/"unrecoverable" state\&.
+
+.PP
+And yet, if we were to have batched that task which threw an exception, with other tasks following it\&. We go on to pass along the corrupt text editor state to the tasks that follow\&.
+
+.PP
+So, generic batching can only be done with one further step\&. Somehow, if a task throws an exception, the edit context needs to be reset to the state it was in prior to the invocation of that task\&.
+
+.PP
+This is a pain because it was previously mentioned that the text editor, after a batched task throws an exception, is likely in a "corrupt"/"unrecoverable" state\&.
+
+.PP
+It seems the only way is to create a new edit context, foreach of the tasks that are being batched\&.
+
+.PP
+This way, if a task throws an exception, then the edit context it was given can be discarded\&. Otherwise, take its edit context as the new edit context\&.
+
+.PP
+And if there is is a task following, then copy over the edit context and repeat until all the tasks have ran\&.
+
+.PP
+Then, write out the edit context that survives the ordeal and render\&.
+
+.PP
+This way of foreach batching is essentially the same as my mistake, but with the recreating of the edit context every time a task is ran\&. So one can "rollback" if a "transaction" does not successfully complete\&.
+
+.PP
+But, I wonder if this batching I just described, even if it worked, would it even be worthwhile?
+
+.PP
+That is, am I looking at batching too much, when I really need to be optimizing the \fBIBackgroundTask\fP, such to remove the need to batch so much\&.
+
+.PP
+Something I think of a lot, is how I wrote the throttling code\&. I used an 'await Task\&.Delay(\&.\&.\&.)'\&.
+
+.PP
+But in my mind, from a human perspective, starting a stopwatch, then stopping it at the 60 millisecond mark, over and over and over\&.\&.\&. this sounds like immense overhead\&.
+
+.PP
+I mention "from a human perspective" because thats a way I think about tasks - that I'm asking someone to do something for me\&.
+
+.PP
+I don't know how to use the the 'Timer' class\&. And sure, if I throttle at 60 milliseconds, the 'Timer' is still starting and stopping every 60 milliseconds just the same\&.
+
+.PP
+But the overhead of "asking someone else" to start and stop every 60 milliseconds disappears, in my head\&. I'm not sure if the overhead I'm imagining actually would disappear but it feels like there would be less "middleman" logic\&.
+
+.PP
+In my head it feels as though a 'Timer' class is if I were to start and stop every 60 milliseconds\&. As opposed to asking someone else to do it for me\&. 
+.PP
+Definition at line \fB161\fP of file \fBITextEditorWork\&.cs\fP\&.
+.SH "Property Documentation"
+.PP 
+.SS "\fBITextEditorEditContext\fP Luthetus\&.TextEditor\&.RazorLib\&.BackgroundTasks\&.Models\&.ITextEditorWork\&.EditContext\fR [get]\fP, \fR [set]\fP"
+
+.PP
+Implemented in \fBLuthetus\&.TextEditor\&.RazorLib\&.BackgroundTasks\&.Models\&.RedundantTextEditorWork\fP, \fBLuthetus\&.TextEditor\&.RazorLib\&.BackgroundTasks\&.Models\&.UniqueTextEditorWork\fP, \fBLuthetus\&.TextEditor\&.RazorLib\&.Events\&.Models\&.OnDoubleClick\fP, \fBLuthetus\&.TextEditor\&.RazorLib\&.Events\&.Models\&.OnKeyDownLateBatching\fP, \fBLuthetus\&.TextEditor\&.RazorLib\&.Events\&.Models\&.OnMouseDown\fP, \fBLuthetus\&.TextEditor\&.RazorLib\&.Events\&.Models\&.OnMouseMove\fP, \fBLuthetus\&.TextEditor\&.RazorLib\&.Events\&.Models\&.OnScrollHorizontal\fP, \fBLuthetus\&.TextEditor\&.RazorLib\&.Events\&.Models\&.OnScrollVertical\fP, \fBLuthetus\&.TextEditor\&.RazorLib\&.Events\&.Models\&.OnWheel\fP, and \fBLuthetus\&.TextEditor\&.RazorLib\&.Events\&.Models\&.OnWheelBatch\fP\&.
+.PP
+Definition at line \fB163\fP of file \fBITextEditorWork\&.cs\fP\&.
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for Luthetus\&.Ide from the source code\&.

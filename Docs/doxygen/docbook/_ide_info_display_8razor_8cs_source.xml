@@ -1,0 +1,199 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="__ide_info_display_8razor_8cs_source" xml:lang="en-US">
+<title>IdeInfoDisplay.razor.cs</title>
+<indexterm><primary>Source/Lib/Ide/Ide.RazorLib/Shareds/Displays/Internals/IdeInfoDisplay.razor.cs</primary></indexterm>
+Go to the documentation of this file.<programlisting linenumbering="unnumbered"><anchor xml:id="__ide_info_display_8razor_8cs_source_1l00001"/>00001 <emphasis role="keyword">using&#32;</emphasis>System.Diagnostics;
+<anchor xml:id="__ide_info_display_8razor_8cs_source_1l00002"/>00002 <emphasis role="keyword">using&#32;</emphasis>System.Reflection;
+<anchor xml:id="__ide_info_display_8razor_8cs_source_1l00003"/>00003 <emphasis role="keyword">using&#32;</emphasis>Microsoft.AspNetCore.Components;
+<anchor xml:id="__ide_info_display_8razor_8cs_source_1l00004"/>00004 <emphasis role="keyword">using&#32;</emphasis><link linkend="_namespace_luthetus_1_1_common_1_1_razor_lib_1_1_background_tasks_1_1_models">Luthetus.Common.RazorLib.BackgroundTasks.Models</link>;
+<anchor xml:id="__ide_info_display_8razor_8cs_source_1l00005"/>00005 <emphasis role="keyword">using&#32;</emphasis><link linkend="_namespace_luthetus_1_1_common_1_1_razor_lib_1_1_installations_1_1_models">Luthetus.Common.RazorLib.Installations.Models</link>;
+<anchor xml:id="__ide_info_display_8razor_8cs_source_1l00006"/>00006 
+<anchor xml:id="__ide_info_display_8razor_8cs_source_1l00007"/>00007 <emphasis role="keyword">namespace&#32;</emphasis><link linkend="_namespace_luthetus_1_1_ide_1_1_razor_lib_1_1_shareds_1_1_displays_1_1_internals">Luthetus.Ide.RazorLib.Shareds.Displays.Internals</link>;
+<anchor xml:id="__ide_info_display_8razor_8cs_source_1l00008"/>00008 
+<anchor xml:id="__ide_info_display_8razor_8cs_source_1l00009"/><link linkend="_class_luthetus_1_1_ide_1_1_razor_lib_1_1_shareds_1_1_displays_1_1_internals_1_1_ide_info_display">00009</link> <emphasis role="keyword">public</emphasis>&#32;<emphasis role="keyword">partial&#32;class&#32;</emphasis><link linkend="_class_luthetus_1_1_ide_1_1_razor_lib_1_1_shareds_1_1_displays_1_1_internals_1_1_ide_info_display">IdeInfoDisplay</link>&#32;:&#32;ComponentBase
+<anchor xml:id="__ide_info_display_8razor_8cs_source_1l00010"/>00010 {
+<anchor xml:id="__ide_info_display_8razor_8cs_source_1l00011"/>00011 &#32;&#32;&#32;&#32;[Inject]
+<anchor xml:id="__ide_info_display_8razor_8cs_source_1l00012"/>00012 &#32;&#32;&#32;&#32;<emphasis role="keyword">private</emphasis>&#32;ContinuousBackgroundTaskWorker&#32;ContinuousBackgroundTaskWorker&#32;{&#32;<emphasis role="keyword">get</emphasis>;&#32;<emphasis role="keyword">set</emphasis>;&#32;}&#32;=&#32;<emphasis role="keyword">null</emphasis>!;
+<anchor xml:id="__ide_info_display_8razor_8cs_source_1l00013"/>00013 &#32;&#32;&#32;&#32;[Inject]
+<anchor xml:id="__ide_info_display_8razor_8cs_source_1l00014"/>00014 &#32;&#32;&#32;&#32;<emphasis role="keyword">private</emphasis>&#32;BlockingBackgroundTaskWorker&#32;BlockingBackgroundTaskWorker&#32;{&#32;<emphasis role="keyword">get</emphasis>;&#32;<emphasis role="keyword">set</emphasis>;&#32;}&#32;=&#32;<emphasis role="keyword">null</emphasis>!;
+<anchor xml:id="__ide_info_display_8razor_8cs_source_1l00015"/>00015 &#32;&#32;&#32;&#32;[Inject]
+<anchor xml:id="__ide_info_display_8razor_8cs_source_1l00016"/>00016 &#32;&#32;&#32;&#32;<emphasis role="keyword">private</emphasis>&#32;LuthetusHostingInformation&#32;LuthetusHostingInformation&#32;{&#32;<emphasis role="keyword">get</emphasis>;&#32;<emphasis role="keyword">set</emphasis>;&#32;}&#32;=&#32;<emphasis role="keyword">null</emphasis>!;
+<anchor xml:id="__ide_info_display_8razor_8cs_source_1l00017"/>00017 
+<anchor xml:id="__ide_info_display_8razor_8cs_source_1l00018"/>00018 <emphasis role="preprocessor">#region</emphasis>
+<anchor xml:id="__ide_info_display_8razor_8cs_source_1l00019"/>00019 &#32;&#32;&#32;&#32;[Conditional(<emphasis role="stringliteral">&quot;DEBUG&quot;</emphasis>)]
+<anchor xml:id="__ide_info_display_8razor_8cs_source_1l00020"/>00020 &#32;&#32;&#32;&#32;<emphasis role="keyword">private</emphasis>&#32;<emphasis role="keywordtype">void</emphasis>&#32;IsDebugCheck(ref&#32;<emphasis role="keywordtype">bool</emphasis>&#32;isDebug)
+<anchor xml:id="__ide_info_display_8razor_8cs_source_1l00021"/>00021 &#32;&#32;&#32;&#32;{
+<anchor xml:id="__ide_info_display_8razor_8cs_source_1l00022"/>00022 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;isDebug&#32;=&#32;<emphasis role="keyword">true</emphasis>;
+<anchor xml:id="__ide_info_display_8razor_8cs_source_1l00023"/>00023 &#32;&#32;&#32;&#32;}
+<anchor xml:id="__ide_info_display_8razor_8cs_source_1l00024"/>00024 &#32;&#32;&#32;&#32;&#32;
+<anchor xml:id="__ide_info_display_8razor_8cs_source_1l00025"/><link linkend="_class_luthetus_1_1_ide_1_1_razor_lib_1_1_shareds_1_1_displays_1_1_internals_1_1_ide_info_display_1a8137d3fb5f608f4682dcc70b630abba1">00025</link> &#32;&#32;&#32;&#32;<emphasis role="keyword">public</emphasis>&#32;<emphasis role="keywordtype">bool</emphasis>&#32;<link linkend="_class_luthetus_1_1_ide_1_1_razor_lib_1_1_shareds_1_1_displays_1_1_internals_1_1_ide_info_display_1a8137d3fb5f608f4682dcc70b630abba1">MethodConditionalAttributeIsDebug</link>()
+<anchor xml:id="__ide_info_display_8razor_8cs_source_1l00026"/>00026 &#32;&#32;&#32;&#32;{&#32;
+<anchor xml:id="__ide_info_display_8razor_8cs_source_1l00027"/>00027 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordtype">bool</emphasis>&#32;isDebug&#32;=&#32;<emphasis role="keyword">false</emphasis>;
+<anchor xml:id="__ide_info_display_8razor_8cs_source_1l00028"/>00028 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;IsDebugCheck(ref&#32;isDebug);
+<anchor xml:id="__ide_info_display_8razor_8cs_source_1l00029"/>00029 &#32;&#32;&#32;&#32;
+<anchor xml:id="__ide_info_display_8razor_8cs_source_1l00030"/>00030 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;isDebug;
+<anchor xml:id="__ide_info_display_8razor_8cs_source_1l00031"/>00031 &#32;&#32;&#32;&#32;}
+<anchor xml:id="__ide_info_display_8razor_8cs_source_1l00032"/>00032 <emphasis role="preprocessor">#endregion</emphasis>
+<anchor xml:id="__ide_info_display_8razor_8cs_source_1l00033"/>00033 
+<anchor xml:id="__ide_info_display_8razor_8cs_source_1l00034"/>00034 <emphasis role="preprocessor">#region</emphasis>
+<anchor xml:id="__ide_info_display_8razor_8cs_source_1l00035"/>00035 &#32;&#32;&#32;&#32;<emphasis role="keyword">static</emphasis>&#32;<emphasis role="keywordtype">bool</emphasis>&#32;AssemblyCustomAttributeIsDebug(Assembly&#32;assembly)
+<anchor xml:id="__ide_info_display_8razor_8cs_source_1l00036"/>00036 &#32;&#32;&#32;&#32;{
+<anchor xml:id="__ide_info_display_8razor_8cs_source_1l00037"/>00037 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;var&#32;debugAttr&#32;=&#32;assembly.GetCustomAttribute&lt;DebuggableAttribute&gt;();
+<anchor xml:id="__ide_info_display_8razor_8cs_source_1l00038"/>00038 &#32;&#32;&#32;&#32;
+<anchor xml:id="__ide_info_display_8razor_8cs_source_1l00039"/>00039 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">if</emphasis>&#32;(debugAttr&#32;is&#32;<emphasis role="keyword">null</emphasis>)
+<anchor xml:id="__ide_info_display_8razor_8cs_source_1l00040"/>00040 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;{
+<anchor xml:id="__ide_info_display_8razor_8cs_source_1l00041"/>00041 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;<emphasis role="keyword">false</emphasis>;
+<anchor xml:id="__ide_info_display_8razor_8cs_source_1l00042"/>00042 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;}
+<anchor xml:id="__ide_info_display_8razor_8cs_source_1l00043"/>00043 &#32;&#32;&#32;&#32;
+<anchor xml:id="__ide_info_display_8razor_8cs_source_1l00044"/>00044 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;(debugAttr.DebuggingFlags&#32;&amp;&#32;DebuggableAttribute.DebuggingModes.Default)&#32;!=&#32;0;
+<anchor xml:id="__ide_info_display_8razor_8cs_source_1l00045"/>00045 &#32;&#32;&#32;&#32;}
+<anchor xml:id="__ide_info_display_8razor_8cs_source_1l00046"/>00046 <emphasis role="preprocessor">#endregion</emphasis>
+<anchor xml:id="__ide_info_display_8razor_8cs_source_1l00047"/>00047 
+<anchor xml:id="__ide_info_display_8razor_8cs_source_1l00048"/>00048 <emphasis role="preprocessor">#region</emphasis>
+<anchor xml:id="__ide_info_display_8razor_8cs_source_1l00049"/><link linkend="_class_luthetus_1_1_ide_1_1_razor_lib_1_1_shareds_1_1_displays_1_1_internals_1_1_ide_info_display_1a5066d72d8be20b242820c7abf48fbfb8">00049</link> &#32;&#32;&#32;&#32;<emphasis role="keyword">public</emphasis>&#32;<emphasis role="keyword">static</emphasis>&#32;<emphasis role="keywordtype">bool</emphasis>&#32;<link linkend="_class_luthetus_1_1_ide_1_1_razor_lib_1_1_shareds_1_1_displays_1_1_internals_1_1_ide_info_display_1a5066d72d8be20b242820c7abf48fbfb8">PreprocessorIsDebug</link>()
+<anchor xml:id="__ide_info_display_8razor_8cs_source_1l00050"/>00050 &#32;&#32;&#32;&#32;{
+<anchor xml:id="__ide_info_display_8razor_8cs_source_1l00051"/>00051 <emphasis role="preprocessor">#if&#32;DEBUG</emphasis>
+<anchor xml:id="__ide_info_display_8razor_8cs_source_1l00052"/>00052 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;<emphasis role="keyword">true</emphasis>;
+<anchor xml:id="__ide_info_display_8razor_8cs_source_1l00053"/>00053 <emphasis role="preprocessor">#else</emphasis>
+<anchor xml:id="__ide_info_display_8razor_8cs_source_1l00054"/>00054 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;<emphasis role="keyword">false</emphasis>;
+<anchor xml:id="__ide_info_display_8razor_8cs_source_1l00055"/>00055 <emphasis role="preprocessor">#endif</emphasis>
+<anchor xml:id="__ide_info_display_8razor_8cs_source_1l00056"/>00056 &#32;&#32;&#32;&#32;}
+<anchor xml:id="__ide_info_display_8razor_8cs_source_1l00057"/>00057 <emphasis role="preprocessor">#endregion</emphasis>
+<anchor xml:id="__ide_info_display_8razor_8cs_source_1l00058"/>00058 }
+<anchor xml:id="__ide_info_display_8razor_8cs_source_1l00059"/>00059 
+<anchor xml:id="__ide_info_display_8razor_8cs_source_1l00060"/>00060 <emphasis role="comment">//&#32;https://stackoverflow.com/questions/1611410/how-to-check-if-a-app-is-in-debug-or-release</emphasis>
+<anchor xml:id="__ide_info_display_8razor_8cs_source_1l00061"/>00061 <emphasis role="comment">//</emphasis>
+<anchor xml:id="__ide_info_display_8razor_8cs_source_1l00062"/>00062 <emphasis role="comment">//&#32;Goal&#32;here&#32;is&#32;to&#32;display&#32;at&#32;runtime&#32;whether&#32;the&#32;IDE&#32;is&#32;being&#32;ran&#32;with&#32;code&#32;compiled</emphasis>
+<anchor xml:id="__ide_info_display_8razor_8cs_source_1l00063"/>00063 <emphasis role="comment">//&#32;with&#32;&quot;DEBUG&quot;&#32;mode&#32;or&#32;&quot;RELEASE&quot;&#32;mode.</emphasis>
+<anchor xml:id="__ide_info_display_8razor_8cs_source_1l00064"/>00064 <emphasis role="comment">//</emphasis>
+<anchor xml:id="__ide_info_display_8razor_8cs_source_1l00065"/>00065 <emphasis role="comment">//&#32;The&#32;importance&#32;of&#32;this&#32;comes&#32;from&#32;the&#32;IDE&#32;not&#32;having&#32;an&#32;installer,</emphasis>
+<anchor xml:id="__ide_info_display_8razor_8cs_source_1l00066"/>00066 <emphasis role="comment">//&#32;but&#32;instead&#32;one&#32;clones&#32;the&#32;source&#32;code&#32;and&#32;builds&#32;it&#32;themselves.</emphasis>
+<anchor xml:id="__ide_info_display_8razor_8cs_source_1l00067"/>00067 <emphasis role="comment">//</emphasis>
+<anchor xml:id="__ide_info_display_8razor_8cs_source_1l00068"/>00068 <emphasis role="comment">//&#32;There&#32;appear&#32;to&#32;be&#32;3&#32;ways&#32;to&#32;determine&#32;the&#32;mode&#32;under&#32;which&#32;an&#32;assembly&#32;was&#32;compiled.</emphasis>
+<anchor xml:id="__ide_info_display_8razor_8cs_source_1l00069"/>00069 <emphasis role="comment">//</emphasis>
+<anchor xml:id="__ide_info_display_8razor_8cs_source_1l00070"/>00070 <emphasis role="comment">//&#32;-&#32;Use&#32;preprocessor&#32;commands&#32;at&#32;compile&#32;time</emphasis>
+<anchor xml:id="__ide_info_display_8razor_8cs_source_1l00071"/>00071 <emphasis role="comment">//&#32;&#32;&#32;&#32;&#32;&#32;&#32;-&#32;Compile&#32;time&#32;has&#32;the&#32;issue&#32;where&#32;the&#32;specific&#32;block&#32;of&#32;code&#32;was&#32;part&#32;of</emphasis>
+<anchor xml:id="__ide_info_display_8razor_8cs_source_1l00072"/>00072 <emphasis role="comment">//&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;a&#32;separate&#32;assembly,&#32;which&#32;was&#32;compiled&#32;separately&#32;with&#32;a&#32;different&#32;mode.</emphasis>
+<anchor xml:id="__ide_info_display_8razor_8cs_source_1l00073"/>00073 <emphasis role="comment">//&#32;&#32;&#32;&#32;&#32;&#32;&#32;-&#32;Thus,&#32;it&#32;matters&#32;where&#32;I&#32;put&#32;the&#32;preprocessor&#32;command.&#32;If&#32;that&#32;preprocessor&#32;command</emphasis>
+<anchor xml:id="__ide_info_display_8razor_8cs_source_1l00074"/>00074 <emphasis role="comment">//&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;exists&#32;in&#32;the&#32;code&#32;behind&#32;of&#32;this&#32;component,&#32;then&#32;I&#32;don&apos;t&#32;see&#32;any&#32;issue</emphasis>
+<anchor xml:id="__ide_info_display_8razor_8cs_source_1l00075"/>00075 <emphasis role="comment">//&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;with&#32;this&#32;approach.</emphasis>
+<anchor xml:id="__ide_info_display_8razor_8cs_source_1l00076"/>00076 <emphasis role="comment">//&#32;-&#32;Use&#32;the&#32;&apos;ConditionalAttribute&apos;&#32;on&#32;the&#32;method,&#32;and&#32;pass&#32;&quot;DEBUG&quot;&#32;or&#32;&quot;RELEASE&quot;</emphasis>
+<anchor xml:id="__ide_info_display_8razor_8cs_source_1l00077"/>00077 <emphasis role="comment">//&#32;&#32;&#32;&#32;&#32;&#32;&#32;-&#32;Run&#32;time&#32;checking&#32;&quot;feels&quot;&#32;more&#32;accurate.</emphasis>
+<anchor xml:id="__ide_info_display_8razor_8cs_source_1l00078"/>00078 <emphasis role="comment">//&#32;&#32;&#32;&#32;&#32;&#32;&#32;-&#32;But,&#32;I&apos;m&#32;not&#32;entirely&#32;sure&#32;if&#32;I&#32;understand&#32;what&#32;this&#32;way&#32;is&#32;doing.</emphasis>
+<anchor xml:id="__ide_info_display_8razor_8cs_source_1l00079"/>00079 <emphasis role="comment">//&#32;&#32;&#32;&#32;&#32;&#32;&#32;-&#32;Is&#32;it&#32;saying,&#32;the&#32;initial&#32;thread&#32;when&#32;invoking&#32;the&#32;program&apos;s&#32;entry&#32;point</emphasis>
+<anchor xml:id="__ide_info_display_8razor_8cs_source_1l00080"/>00080 <emphasis role="comment">//&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;was&#32;tagged&#32;as&#32;&quot;DEBUG&quot;&#32;or&#32;&quot;RELEASE&quot;?</emphasis>
+<anchor xml:id="__ide_info_display_8razor_8cs_source_1l00081"/>00081 <emphasis role="comment">//&#32;&#32;&#32;&#32;&#32;&#32;&#32;-&#32;I&apos;m&#32;not&#32;quite&#32;sure&#32;but&#32;this&#32;sounds&#32;like&#32;the&#32;preferable&#32;option.</emphasis>
+<anchor xml:id="__ide_info_display_8razor_8cs_source_1l00082"/>00082 <emphasis role="comment">//&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;I&apos;m&#32;thinking&#32;that&#32;when&#32;publishing&#32;the&#32;Luthetus.Ide.Photino.csproj,</emphasis>
+<anchor xml:id="__ide_info_display_8razor_8cs_source_1l00083"/>00083 <emphasis role="comment">//&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;at&#32;that&#32;moment,&#32;one&#32;might&#32;be&#32;able&#32;to&#32;provide&#32;a&#32;&quot;DEBUG&quot;&#32;or&#32;&quot;RELEASE&quot;&#32;flag,</emphasis>
+<anchor xml:id="__ide_info_display_8razor_8cs_source_1l00084"/>00084 <emphasis role="comment">//&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;and&#32;that&#32;this&#32;approach&#32;would&#32;display&#32;accurately,&#32;the&#32;exact&#32;&quot;DEBUG&quot;&#32;or&#32;&quot;RELEASE&quot;</emphasis>
+<anchor xml:id="__ide_info_display_8razor_8cs_source_1l00085"/>00085 <emphasis role="comment">//&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;flag&#32;that&#32;was&#32;used&#32;to&#32;publish&#32;the&#32;&apos;Luthetus.Ide.Photino.csproj&apos;&#32;project&#32;itself.</emphasis>
+<anchor xml:id="__ide_info_display_8razor_8cs_source_1l00086"/>00086 <emphasis role="comment">//&#32;-&#32;Get&#32;a&#32;reference&#32;to&#32;an&#32;&apos;Assembly&apos;&#32;object&#32;in&#32;C#&#32;then&#32;&apos;assembly.GetCustomAttribute&lt;DebuggableAttribute&gt;()&apos;;</emphasis>
+<anchor xml:id="__ide_info_display_8razor_8cs_source_1l00087"/>00087 <emphasis role="comment">//&#32;&#32;&#32;&#32;&#32;&#32;&#32;-&#32;I&apos;m&#32;not&#32;quite&#32;keen&#32;on&#32;what&#32;an&#32;&apos;Assembly&apos;&#32;is.</emphasis>
+<anchor xml:id="__ide_info_display_8razor_8cs_source_1l00088"/>00088 <emphasis role="comment">//&#32;&#32;&#32;&#32;&#32;&#32;&#32;-&#32;I&#32;presume&#32;this&#32;approach&#32;on&#32;the&#32;executing&#32;assembly&#32;would&#32;be&#32;equivalent</emphasis>
+<anchor xml:id="__ide_info_display_8razor_8cs_source_1l00089"/>00089 <emphasis role="comment">//&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;to&#32;the&#32;&apos;ConditionalAttribute&apos;&#32;run&#32;time&#32;approach.</emphasis>
+<anchor xml:id="__ide_info_display_8razor_8cs_source_1l00090"/>00090 <emphasis role="comment">//&#32;&#32;&#32;&#32;&#32;&#32;&#32;-&#32;If&#32;my&#32;aim&#32;is&#32;to&#32;only&#32;check&#32;the&#32;executing&#32;assembly,&#32;I&#32;don&apos;t&#32;feel</emphasis>
+<anchor xml:id="__ide_info_display_8razor_8cs_source_1l00091"/>00091 <emphasis role="comment">//&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;an&#32;entire&#32;helper&#32;method&#32;would&#32;indicate&#32;my&#32;intentions&#32;as&#32;well.&#32;</emphasis>
+<anchor xml:id="__ide_info_display_8razor_8cs_source_1l00092"/>00092 <emphasis role="comment">//</emphasis>
+<anchor xml:id="__ide_info_display_8razor_8cs_source_1l00093"/>00093 <emphasis role="comment">//&#32;==========================================================================================================</emphasis>
+<anchor xml:id="__ide_info_display_8razor_8cs_source_1l00094"/>00094 <emphasis role="comment">//</emphasis>
+<anchor xml:id="__ide_info_display_8razor_8cs_source_1l00095"/>00095 <emphasis role="comment">//&#32;I&#32;ran&#32;the&#32;&apos;Luthetus.Ide.Photino.csproj&apos;&#32;various&#32;ways&#32;while&#32;using&#32;the</emphasis>
+<anchor xml:id="__ide_info_display_8razor_8cs_source_1l00096"/>00096 <emphasis role="comment">//&#32;&quot;&apos;ConditionalAttribute&apos;&#32;on&#32;the&#32;method&quot;&#32;approach.</emphasis>
+<anchor xml:id="__ide_info_display_8razor_8cs_source_1l00097"/>00097 <emphasis role="comment">//</emphasis>
+<anchor xml:id="__ide_info_display_8razor_8cs_source_1l00098"/>00098 <emphasis role="comment">//&#32;----------------------------------------------------------------</emphasis>
+<anchor xml:id="__ide_info_display_8razor_8cs_source_1l00099"/>00099 <emphasis role="comment">//&#32;From&#32;the&#32;terminal&#32;running:</emphasis>
+<anchor xml:id="__ide_info_display_8razor_8cs_source_1l00100"/>00100 <emphasis role="comment">//</emphasis>
+<anchor xml:id="__ide_info_display_8razor_8cs_source_1l00101"/>00101 <emphasis role="comment">//&#32;-&#32;&quot;dotnet&#32;publish&quot;,</emphasis>
+<anchor xml:id="__ide_info_display_8razor_8cs_source_1l00102"/>00102 <emphasis role="comment">//&#32;-&#32;&quot;cd&#32;.\bin\Debug\net6.0\publish\&quot;</emphasis>
+<anchor xml:id="__ide_info_display_8razor_8cs_source_1l00103"/>00103 <emphasis role="comment">//&#32;-&#32;&quot;dotnet&#32;.\Luthetus.Ide.Photino.dll&quot;</emphasis>
+<anchor xml:id="__ide_info_display_8razor_8cs_source_1l00104"/>00104 <emphasis role="comment">//</emphasis>
+<anchor xml:id="__ide_info_display_8razor_8cs_source_1l00105"/>00105 <emphasis role="comment">//&#32;Results&#32;in&#32;&quot;IsDebug:&#32;True&quot;.</emphasis>
+<anchor xml:id="__ide_info_display_8razor_8cs_source_1l00106"/>00106 <emphasis role="comment">//</emphasis>
+<anchor xml:id="__ide_info_display_8razor_8cs_source_1l00107"/>00107 <emphasis role="comment">//&#32;This&#32;seems&#32;sensible&#32;since&#32;I&apos;m&#32;going&#32;into&#32;the&#32;&quot;Debug&quot;&#32;directory.</emphasis>
+<anchor xml:id="__ide_info_display_8razor_8cs_source_1l00108"/>00108 <emphasis role="comment">//</emphasis>
+<anchor xml:id="__ide_info_display_8razor_8cs_source_1l00109"/>00109 <emphasis role="comment">//&#32;My&#32;intention&#32;with&#32;these&#32;terminal&#32;commands&#32;however,&#32;is&#32;to&#32;publish</emphasis>
+<anchor xml:id="__ide_info_display_8razor_8cs_source_1l00110"/>00110 <emphasis role="comment">//&#32;a&#32;release&#32;version.</emphasis>
+<anchor xml:id="__ide_info_display_8razor_8cs_source_1l00111"/>00111 <emphasis role="comment">//</emphasis>
+<anchor xml:id="__ide_info_display_8razor_8cs_source_1l00112"/>00112 <emphasis role="comment">//&#32;It&#32;therefore&#32;seems&#32;asinine&#32;that&#32;I&apos;m&#32;knowingly&#32;going&#32;into&#32;the</emphasis>
+<anchor xml:id="__ide_info_display_8razor_8cs_source_1l00113"/>00113 <emphasis role="comment">//&#32;&quot;Debug&quot;&#32;directory.</emphasis>
+<anchor xml:id="__ide_info_display_8razor_8cs_source_1l00114"/>00114 <emphasis role="comment">//</emphasis>
+<anchor xml:id="__ide_info_display_8razor_8cs_source_1l00115"/>00115 <emphasis role="comment">//&#32;The&#32;reason&#32;for&#32;this,&#32;is&#32;that&#32;while&#32;I&#32;was&#32;on&#32;Linux&#32;I&#32;checked&#32;the</emphasis>
+<anchor xml:id="__ide_info_display_8razor_8cs_source_1l00116"/>00116 <emphasis role="comment">//&#32;&quot;Release&quot;&#32;directory,&#32;and&#32;there&#32;was&#32;nothing&#32;in&#32;it&#32;(in&#32;fact</emphasis>
+<anchor xml:id="__ide_info_display_8razor_8cs_source_1l00117"/>00117 <emphasis role="comment">//&#32;it&#32;might&#32;not&#32;have&#32;existed&#32;at&#32;all.&#32;I&#32;can&apos;t&#32;remember&#32;exactly).</emphasis>
+<anchor xml:id="__ide_info_display_8razor_8cs_source_1l00118"/>00118 <emphasis role="comment">//&#32;i.e.:&#32;my&#32;only&#32;option&#32;was&#32;the&#32;&quot;Debug&quot;&#32;directory.</emphasis>
+<anchor xml:id="__ide_info_display_8razor_8cs_source_1l00119"/>00119 <emphasis role="comment">//</emphasis>
+<anchor xml:id="__ide_info_display_8razor_8cs_source_1l00120"/>00120 <emphasis role="comment">//&#32;I&apos;m&#32;on&#32;windows&#32;at&#32;the&#32;moment&#32;so&#32;I&#32;should&#32;see&#32;what&#32;is&#32;in&#32;the</emphasis>
+<anchor xml:id="__ide_info_display_8razor_8cs_source_1l00121"/>00121 <emphasis role="comment">//&#32;&quot;Release&quot;&#32;directory.</emphasis>
+<anchor xml:id="__ide_info_display_8razor_8cs_source_1l00122"/>00122 <emphasis role="comment">//</emphasis>
+<anchor xml:id="__ide_info_display_8razor_8cs_source_1l00123"/>00123 <emphasis role="comment">//&#32;The&#32;&quot;Release&quot;&#32;directory&#32;contains&#32;what&#32;appears&#32;to&#32;be&#32;the</emphasis>
+<anchor xml:id="__ide_info_display_8razor_8cs_source_1l00124"/>00124 <emphasis role="comment">//&#32;published&#32;code.&#32;It&#32;has&#32;a&#32;&quot;.exe&quot;&#32;in&#32;it&#32;as&#32;well.</emphasis>
+<anchor xml:id="__ide_info_display_8razor_8cs_source_1l00125"/>00125 <emphasis role="comment">//</emphasis>
+<anchor xml:id="__ide_info_display_8razor_8cs_source_1l00126"/>00126 <emphasis role="comment">//&#32;The&#32;files&#32;look&#32;recent,&#32;but&#32;I&apos;ll&#32;delete&#32;the&#32;&quot;Release&quot;&#32;folder,</emphasis>
+<anchor xml:id="__ide_info_display_8razor_8cs_source_1l00127"/>00127 <emphasis role="comment">//&#32;then&#32;re-run&#32;the&#32;terminal&#32;commands.&#32;This&#32;will&#32;show&#32;if&#32;the&#32;folder</emphasis>
+<anchor xml:id="__ide_info_display_8razor_8cs_source_1l00128"/>00128 <emphasis role="comment">//&#32;comes&#32;back&#32;or&#32;not.</emphasis>
+<anchor xml:id="__ide_info_display_8razor_8cs_source_1l00129"/>00129 <emphasis role="comment">//</emphasis>
+<anchor xml:id="__ide_info_display_8razor_8cs_source_1l00130"/>00130 <emphasis role="comment">//&#32;Now&#32;that&#32;I&apos;m&#32;doing&#32;this,&#32;what&#32;happens&#32;if&#32;I&#32;republish&#32;the&#32;code</emphasis>
+<anchor xml:id="__ide_info_display_8razor_8cs_source_1l00131"/>00131 <emphasis role="comment">//&#32;from&#32;the&#32;command&#32;line,&#32;while&#32;I&#32;have&#32;the&#32;published&#32;&quot;Debug&quot;</emphasis>
+<anchor xml:id="__ide_info_display_8razor_8cs_source_1l00132"/>00132 <emphasis role="comment">//&#32;code&#32;running&#32;at&#32;this&#32;very&#32;moment?</emphasis>
+<anchor xml:id="__ide_info_display_8razor_8cs_source_1l00133"/>00133 <emphasis role="comment">//</emphasis>
+<anchor xml:id="__ide_info_display_8razor_8cs_source_1l00134"/>00134 <emphasis role="comment">//&#32;I&#32;want&#32;to&#32;focus&#32;on&#32;one&#32;problem&#32;at&#32;a&#32;time&#32;though,&#32;so</emphasis>
+<anchor xml:id="__ide_info_display_8razor_8cs_source_1l00135"/>00135 <emphasis role="comment">//&#32;to&#32;be&#32;safe&#32;and&#32;not&#32;clobber&#32;the&#32;results&#32;im&#32;going&#32;to&#32;close&#32;this</emphasis>
+<anchor xml:id="__ide_info_display_8razor_8cs_source_1l00136"/>00136 <emphasis role="comment">//&#32;running&#32;instance&#32;first.</emphasis>
+<anchor xml:id="__ide_info_display_8razor_8cs_source_1l00137"/>00137 <emphasis role="comment">//</emphasis>
+<anchor xml:id="__ide_info_display_8razor_8cs_source_1l00138"/>00138 <emphasis role="comment">//&#32;Okay,&#32;there&#32;is&#32;no&#32;&quot;Release&quot;&#32;folder.&#32;So&#32;the&#32;folder&#32;isn&apos;t</emphasis>
+<anchor xml:id="__ide_info_display_8razor_8cs_source_1l00139"/>00139 <emphasis role="comment">//&#32;made&#32;by&#32;running&#32;&quot;dotnet&#32;publish&quot;&#32;alone</emphasis>
+<anchor xml:id="__ide_info_display_8razor_8cs_source_1l00140"/>00140 <emphasis role="comment">//&#32;(or&#32;without&#32;certain&#32;options).</emphasis>
+<anchor xml:id="__ide_info_display_8razor_8cs_source_1l00141"/>00141 <emphasis role="comment">//</emphasis>
+<anchor xml:id="__ide_info_display_8razor_8cs_source_1l00142"/>00142 <emphasis role="comment">//&#32;The&#32;&quot;Release&quot;&#32;folder&#32;must&#32;have&#32;came&#32;from&#32;me&#32;publishing</emphasis>
+<anchor xml:id="__ide_info_display_8razor_8cs_source_1l00143"/>00143 <emphasis role="comment">//&#32;with&#32;Visual&#32;Studio.&#32;I&apos;m&#32;going&#32;through&#32;various&#32;means</emphasis>
+<anchor xml:id="__ide_info_display_8razor_8cs_source_1l00144"/>00144 <emphasis role="comment">//&#32;of&#32;publishing&#32;the&#32;code&#32;to&#32;see&#32;what&#32;differs.</emphasis>
+<anchor xml:id="__ide_info_display_8razor_8cs_source_1l00145"/>00145 <emphasis role="comment">//</emphasis>
+<anchor xml:id="__ide_info_display_8razor_8cs_source_1l00146"/>00146 <emphasis role="comment">//&#32;So&#32;how&#32;do&#32;I&#32;publish&#32;with&#32;release&#32;mode&#32;from&#32;the&#32;terminal?</emphasis>
+<anchor xml:id="__ide_info_display_8razor_8cs_source_1l00147"/>00147 <emphasis role="comment">//&#32;&quot;dotnet&#32;publish&#32;-c&#32;Release&quot;</emphasis>
+<anchor xml:id="__ide_info_display_8razor_8cs_source_1l00148"/>00148 <emphasis role="comment">//&#32;seems&#32;to&#32;be&#32;the&#32;way&#32;to&#32;do&#32;it.</emphasis>
+<anchor xml:id="__ide_info_display_8razor_8cs_source_1l00149"/>00149 <emphasis role="comment">//</emphasis>
+<anchor xml:id="__ide_info_display_8razor_8cs_source_1l00150"/>00150 <emphasis role="comment">//&#32;And&#32;that&#32;prior&#32;to&#32;.NET&#32;8&#32;this&#32;was&#32;a&#32;common&#32;confusion</emphasis>
+<anchor xml:id="__ide_info_display_8razor_8cs_source_1l00151"/>00151 <emphasis role="comment">//&#32;(that&#32;Release&#32;wasn&apos;t&#32;the&#32;default&#32;value)</emphasis>
+<anchor xml:id="__ide_info_display_8razor_8cs_source_1l00152"/>00152 <emphasis role="comment">//&#32;https://github.com/dotnet/sdk/issues/23551</emphasis>
+<anchor xml:id="__ide_info_display_8razor_8cs_source_1l00153"/>00153 <emphasis role="comment">//</emphasis>
+<anchor xml:id="__ide_info_display_8razor_8cs_source_1l00154"/>00154 <emphasis role="comment">//&#32;I&#32;worry&#32;however,&#32;because&#32;I&apos;m&#32;not&#32;using&#32;.NET&#32;8,</emphasis>
+<anchor xml:id="__ide_info_display_8razor_8cs_source_1l00155"/>00155 <emphasis role="comment">//&#32;that&#32;the&#32;&quot;dotnet&#32;publish&#32;-c&#32;Release&quot;&#32;solution&#32;could</emphasis>
+<anchor xml:id="__ide_info_display_8razor_8cs_source_1l00156"/>00156 <emphasis role="comment">//&#32;possibly&#32;publish&#32;some&#32;of&#32;projects&#32;as&#32;&apos;Release&apos;&#32;and&#32;others</emphasis>
+<anchor xml:id="__ide_info_display_8razor_8cs_source_1l00157"/>00157 <emphasis role="comment">//&#32;as&#32;&apos;Debug&apos;.&#32;(i.e.:&#32;that&#32;the&#32;&quot;-c&#32;Release&quot;&#32;only&#32;affects</emphasis>
+<anchor xml:id="__ide_info_display_8razor_8cs_source_1l00158"/>00158 <emphasis role="comment">//&#32;the&#32;project&#32;that&#32;I&apos;m&#32;publishing&#32;and&#32;not&#32;its&#32;dependencies).</emphasis>
+<anchor xml:id="__ide_info_display_8razor_8cs_source_1l00159"/>00159 <emphasis role="comment">//</emphasis>
+<anchor xml:id="__ide_info_display_8razor_8cs_source_1l00160"/>00160 <emphasis role="comment">//&#32;I&apos;m&#32;going&#32;to&#32;probably&#32;use&#32;every&#32;way&#32;of&#32;determining</emphasis>
+<anchor xml:id="__ide_info_display_8razor_8cs_source_1l00161"/>00161 <emphasis role="comment">//&#32;if&#32;the&#32;code&#32;is&#32;in&#32;&apos;RELEASE&apos;&#32;or&#32;&apos;DEBUG&apos;&#32;mode.</emphasis>
+<anchor xml:id="__ide_info_display_8razor_8cs_source_1l00162"/>00162 <emphasis role="comment">//</emphasis>
+<anchor xml:id="__ide_info_display_8razor_8cs_source_1l00163"/>00163 <emphasis role="comment">//&#32;I&#32;can&#32;iterate&#32;over&#32;every&#32;&quot;assembly/project&quot;&#32;that&#32;starts&#32;with</emphasis>
+<anchor xml:id="__ide_info_display_8razor_8cs_source_1l00164"/>00164 <emphasis role="comment">//&#32;&quot;Luthetus&quot;,&#32;and&#32;write&#32;out&#32;if&#32;that&#32;specific&#32;assembly&#32;has</emphasis>
+<anchor xml:id="__ide_info_display_8razor_8cs_source_1l00165"/>00165 <emphasis role="comment">//&#32;the&#32;debug&#32;attribute.</emphasis>
+<anchor xml:id="__ide_info_display_8razor_8cs_source_1l00166"/>00166 <emphasis role="comment">//&#32;</emphasis>
+<anchor xml:id="__ide_info_display_8razor_8cs_source_1l00167"/>00167 <emphasis role="comment">//&#32;I&#32;can&#32;do&#32;the&#32;same&#32;with&#32;any&#32;external&#32;source&#32;code&#32;that&#32;I&#32;have.</emphasis>
+<anchor xml:id="__ide_info_display_8razor_8cs_source_1l00168"/>00168 <emphasis role="comment">//&#32;Although,&#32;in&#32;regards&#32;to&#32;the&#32;external&#32;source&#32;code:&#32;I&#32;preferably,</emphasis>
+<anchor xml:id="__ide_info_display_8razor_8cs_source_1l00169"/>00169 <emphasis role="comment">//&#32;would&#32;reference&#32;a&#32;NuGet&#32;package.</emphasis>
+<anchor xml:id="__ide_info_display_8razor_8cs_source_1l00170"/>00170 <emphasis role="comment">//&#32;I&#32;have&#32;the&#32;source&#32;code&#32;referenced&#32;directly&#32;for&#32;some&#32;external</emphasis>
+<anchor xml:id="__ide_info_display_8razor_8cs_source_1l00171"/>00171 <emphasis role="comment">//&#32;things&#32;as&#32;to&#32;allow&#32;me&#32;to&#32;look&#32;through&#32;the&#32;code&#32;easily.</emphasis>
+<anchor xml:id="__ide_info_display_8razor_8cs_source_1l00172"/>00172 <emphasis role="comment">//&#32;----------------------------------------------------------------</emphasis>
+<anchor xml:id="__ide_info_display_8razor_8cs_source_1l00173"/>00173 <emphasis role="comment">//&#32;SIDE&#32;NOTE:&#32;I&apos;m&#32;pre-emptively&#32;typing&#32;this&#32;before&#32;I&#32;forget.</emphasis>
+<anchor xml:id="__ide_info_display_8razor_8cs_source_1l00174"/>00174 <emphasis role="comment">//</emphasis>
+<anchor xml:id="__ide_info_display_8razor_8cs_source_1l00175"/>00175 <emphasis role="comment">//&#32;When&#32;I&#32;published&#32;with&#32;Visual&#32;Studio,&#32;if&#32;I&#32;published&#32;to&#32;an</emphasis>
+<anchor xml:id="__ide_info_display_8razor_8cs_source_1l00176"/>00176 <emphasis role="comment">//&#32;empty&#32;folder&#32;with&#32;&quot;DEBUG&quot;&#32;mode,&#32;then&#32;the&#32;UI&#32;displayed:</emphasis>
+<anchor xml:id="__ide_info_display_8razor_8cs_source_1l00177"/>00177 <emphasis role="comment">//&#32;&quot;IsDebug:&#32;True&quot;.</emphasis>
+<anchor xml:id="__ide_info_display_8razor_8cs_source_1l00178"/>00178 <emphasis role="comment">//</emphasis>
+<anchor xml:id="__ide_info_display_8razor_8cs_source_1l00179"/>00179 <emphasis role="comment">//&#32;If&#32;I&#32;published&#32;to&#32;an&#32;empty&#32;folder&#32;with&#32;&quot;RELEASE&quot;&#32;mode,&#32;then</emphasis>
+<anchor xml:id="__ide_info_display_8razor_8cs_source_1l00180"/>00180 <emphasis role="comment">//&#32;UI&#32;displayed:</emphasis>
+<anchor xml:id="__ide_info_display_8razor_8cs_source_1l00181"/>00181 <emphasis role="comment">//&#32;&quot;IsDebug:&#32;False&quot;.</emphasis>
+<anchor xml:id="__ide_info_display_8razor_8cs_source_1l00182"/>00182 <emphasis role="comment">//</emphasis>
+<anchor xml:id="__ide_info_display_8razor_8cs_source_1l00183"/>00183 <emphasis role="comment">//&#32;WEIRD:&#32;If&#32;I&#32;published&#32;over&#32;an&#32;existing&#32;&quot;DEBUG&quot;&#32;publish&#32;result,</emphasis>
+<anchor xml:id="__ide_info_display_8razor_8cs_source_1l00184"/>00184 <emphasis role="comment">//&#32;with&#32;the&#32;&quot;RELEASE&quot;&#32;mode,&#32;the&#32;UI&#32;still&#32;displayed:</emphasis>
+<anchor xml:id="__ide_info_display_8razor_8cs_source_1l00185"/>00185 <emphasis role="comment">//&#32;&quot;IsDebug:&#32;True&quot;.</emphasis>
+<anchor xml:id="__ide_info_display_8razor_8cs_source_1l00186"/>00186 <emphasis role="comment">//</emphasis>
+<anchor xml:id="__ide_info_display_8razor_8cs_source_1l00187"/>00187 <emphasis role="comment">//&#32;WEIRD:&#32;If&#32;I&#32;published&#32;over&#32;an&#32;existing&#32;&quot;RELEASE&quot;&#32;publish&#32;result,</emphasis>
+<anchor xml:id="__ide_info_display_8razor_8cs_source_1l00188"/>00188 <emphasis role="comment">//&#32;with&#32;the&#32;&quot;DEBUG&quot;&#32;mode,&#32;the&#32;UI&#32;still&#32;displayed:</emphasis>
+<anchor xml:id="__ide_info_display_8razor_8cs_source_1l00189"/>00189 <emphasis role="comment">//&#32;&quot;IsDebug:&#32;False&quot;.</emphasis>
+<anchor xml:id="__ide_info_display_8razor_8cs_source_1l00190"/>00190 <emphasis role="comment">//</emphasis>
+<anchor xml:id="__ide_info_display_8razor_8cs_source_1l00191"/>00191 <emphasis role="comment">//&#32;WEIRD:&#32;In&#32;order&#32;to&#32;change&#32;the&#32;UI&#32;output,&#32;I&#32;had&#32;to&#32;delete&#32;the</emphasis>
+<anchor xml:id="__ide_info_display_8razor_8cs_source_1l00192"/>00192 <emphasis role="comment">//&#32;contents&#32;of&#32;the&#32;folder,&#32;and&#32;then&#32;publish&#32;to&#32;the&#32;empty&#32;folder,</emphasis>
+<anchor xml:id="__ide_info_display_8razor_8cs_source_1l00193"/>00193 <emphasis role="comment">//&#32;rather&#32;than&#32;overwriting&#32;an&#32;existing&#32;publish.</emphasis>
+<anchor xml:id="__ide_info_display_8razor_8cs_source_1l00194"/>00194 <emphasis role="comment">//&#32;----------------------------------------------------------------</emphasis>
+</programlisting></section>

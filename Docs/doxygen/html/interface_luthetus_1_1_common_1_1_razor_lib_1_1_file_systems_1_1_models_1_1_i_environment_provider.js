@@ -1,0 +1,26 @@
+var interface_luthetus_1_1_common_1_1_razor_lib_1_1_file_systems_1_1_models_1_1_i_environment_provider =
+[
+    [ "AbsolutePath", "class_luthetus_1_1_common_1_1_razor_lib_1_1_file_systems_1_1_models_1_1_i_environment_provider_1_1_absolute_path.html", "class_luthetus_1_1_common_1_1_razor_lib_1_1_file_systems_1_1_models_1_1_i_environment_provider_1_1_absolute_path" ],
+    [ "RelativePath", "class_luthetus_1_1_common_1_1_razor_lib_1_1_file_systems_1_1_models_1_1_i_environment_provider_1_1_relative_path.html", "class_luthetus_1_1_common_1_1_razor_lib_1_1_file_systems_1_1_models_1_1_i_environment_provider_1_1_relative_path" ],
+    [ "AbsolutePathFactory", "interface_luthetus_1_1_common_1_1_razor_lib_1_1_file_systems_1_1_models_1_1_i_environment_provider.html#a7f5dc68df8f18d2c72019cdabe3cc290", null ],
+    [ "AssertDeletionPermitted", "interface_luthetus_1_1_common_1_1_razor_lib_1_1_file_systems_1_1_models_1_1_i_environment_provider.html#a972e9a24642a0b0cc88b38021dd56bf1", null ],
+    [ "DeletionPermittedDispose", "interface_luthetus_1_1_common_1_1_razor_lib_1_1_file_systems_1_1_models_1_1_i_environment_provider.html#a1d85994ce311dc3309846b10c1d6bdf5", null ],
+    [ "DeletionPermittedRegister", "interface_luthetus_1_1_common_1_1_razor_lib_1_1_file_systems_1_1_models_1_1_i_environment_provider.html#ab3b8b66b03bc3289899dafd9b6b126e6", null ],
+    [ "GetRandomFileName", "interface_luthetus_1_1_common_1_1_razor_lib_1_1_file_systems_1_1_models_1_1_i_environment_provider.html#a7d04c41eccb2fe66f6ec50de81ad6ac2", null ],
+    [ "IsDirectorySeparator", "interface_luthetus_1_1_common_1_1_razor_lib_1_1_file_systems_1_1_models_1_1_i_environment_provider.html#ad0df85762c64868c2c2f682e51292334", null ],
+    [ "JoinPaths", "interface_luthetus_1_1_common_1_1_razor_lib_1_1_file_systems_1_1_models_1_1_i_environment_provider.html#a8daf49a0215efd6c78d1c20f6cc6fa73", null ],
+    [ "ProtectedPathsDispose", "interface_luthetus_1_1_common_1_1_razor_lib_1_1_file_systems_1_1_models_1_1_i_environment_provider.html#a9aef252b45fae0a0bb53fb29154a178e", null ],
+    [ "ProtectedPathsRegister", "interface_luthetus_1_1_common_1_1_razor_lib_1_1_file_systems_1_1_models_1_1_i_environment_provider.html#a95a1344df2730491513fd652bf83bf44", null ],
+    [ "RelativePathFactory", "interface_luthetus_1_1_common_1_1_razor_lib_1_1_file_systems_1_1_models_1_1_i_environment_provider.html#a1028b7be77f6c6f1ecb364f5c74ea548", null ],
+    [ "ActualLocalApplicationDataDirectoryAbsolutePath", "interface_luthetus_1_1_common_1_1_razor_lib_1_1_file_systems_1_1_models_1_1_i_environment_provider.html#acc5014bf08dd38a81949d54f2a915615", null ],
+    [ "ActualRoamingApplicationDataDirectoryAbsolutePath", "interface_luthetus_1_1_common_1_1_razor_lib_1_1_file_systems_1_1_models_1_1_i_environment_provider.html#a10710c3f45afc17dd4f8e81c4c986404", null ],
+    [ "AltDirectorySeparatorChar", "interface_luthetus_1_1_common_1_1_razor_lib_1_1_file_systems_1_1_models_1_1_i_environment_provider.html#a5f3cd6b1aee0bf10be2564400565db19", null ],
+    [ "DeletionPermittedPathList", "interface_luthetus_1_1_common_1_1_razor_lib_1_1_file_systems_1_1_models_1_1_i_environment_provider.html#a50f45d017511046bbf74a2f6f89f7a9a", null ],
+    [ "DirectorySeparatorChar", "interface_luthetus_1_1_common_1_1_razor_lib_1_1_file_systems_1_1_models_1_1_i_environment_provider.html#a06cd3615312ecdac270607473fe92ab8", null ],
+    [ "DriveExecutingFromNoDirectorySeparator", "interface_luthetus_1_1_common_1_1_razor_lib_1_1_file_systems_1_1_models_1_1_i_environment_provider.html#ac348049a165172ce6cd91221b9134758", null ],
+    [ "HomeDirectoryAbsolutePath", "interface_luthetus_1_1_common_1_1_razor_lib_1_1_file_systems_1_1_models_1_1_i_environment_provider.html#a9927916b5630b04a390c16b48aebb4cd", null ],
+    [ "ProtectedPathList", "interface_luthetus_1_1_common_1_1_razor_lib_1_1_file_systems_1_1_models_1_1_i_environment_provider.html#ad8314fbe233a1d6a5f9378e5d5618afc", null ],
+    [ "RootDirectoryAbsolutePath", "interface_luthetus_1_1_common_1_1_razor_lib_1_1_file_systems_1_1_models_1_1_i_environment_provider.html#a22273b181c4ad142599dbd0a827960b0", null ],
+    [ "SafeLocalApplicationDataDirectoryAbsolutePath", "interface_luthetus_1_1_common_1_1_razor_lib_1_1_file_systems_1_1_models_1_1_i_environment_provider.html#a3ce887dfec88d0206890d7abc9b71a2b", null ],
+    [ "SafeRoamingApplicationDataDirectoryAbsolutePath", "interface_luthetus_1_1_common_1_1_razor_lib_1_1_file_systems_1_1_models_1_1_i_environment_provider.html#a94e815aecb3eafc7941789197846a44b", null ]
+];

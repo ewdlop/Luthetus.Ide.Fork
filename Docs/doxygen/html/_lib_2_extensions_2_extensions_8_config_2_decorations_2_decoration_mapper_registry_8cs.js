@@ -1,0 +1,4 @@
+var _lib_2_extensions_2_extensions_8_config_2_decorations_2_decoration_mapper_registry_8cs =
+[
+    [ "Luthetus.Extensions.Config.Decorations.DecorationMapperRegistry", "class_luthetus_1_1_extensions_1_1_config_1_1_decorations_1_1_decoration_mapper_registry.html", "class_luthetus_1_1_extensions_1_1_config_1_1_decorations_1_1_decoration_mapper_registry" ]
+];

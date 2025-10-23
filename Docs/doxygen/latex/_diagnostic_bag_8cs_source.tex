@@ -1,0 +1,311 @@
+\doxysection{Diagnostic\+Bag.\+cs}
+\hypertarget{_diagnostic_bag_8cs_source}{}\label{_diagnostic_bag_8cs_source}\index{Source/Lib/TextEditor/CompilerServices/DiagnosticBag.cs@{Source/Lib/TextEditor/CompilerServices/DiagnosticBag.cs}}
+\mbox{\hyperlink{_diagnostic_bag_8cs}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{_diagnostic_bag_8cs_source_l00001}00001\ \textcolor{keyword}{using\ }System.Collections;}
+\DoxyCodeLine{\Hypertarget{_diagnostic_bag_8cs_source_l00002}00002\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_enums}{Luthetus.TextEditor.RazorLib.CompilerServices.Enums}};}
+\DoxyCodeLine{\Hypertarget{_diagnostic_bag_8cs_source_l00003}00003\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_lexers_1_1_models}{Luthetus.TextEditor.RazorLib.Lexers.Models}};}
+\DoxyCodeLine{\Hypertarget{_diagnostic_bag_8cs_source_l00004}00004\ }
+\DoxyCodeLine{\Hypertarget{_diagnostic_bag_8cs_source_l00005}00005\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services}{Luthetus.TextEditor.RazorLib.CompilerServices}};}
+\DoxyCodeLine{\Hypertarget{_diagnostic_bag_8cs_source_l00006}00006\ }
+\DoxyCodeLine{\Hypertarget{_diagnostic_bag_8cs_source_l00007}\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_diagnostic_bag}{00007}}\ \textcolor{keyword}{public}\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_diagnostic_bag}{DiagnosticBag}}\ :\ IEnumerable<TextEditorDiagnostic>}
+\DoxyCodeLine{\Hypertarget{_diagnostic_bag_8cs_source_l00008}00008\ \{}
+\DoxyCodeLine{\Hypertarget{_diagnostic_bag_8cs_source_l00009}00009\ \ \ \ \ \textcolor{keyword}{private}\ readonly\ List<TextEditorDiagnostic>\ \_diagnosticsBag\ =\ \textcolor{keyword}{new}();}
+\DoxyCodeLine{\Hypertarget{_diagnostic_bag_8cs_source_l00010}00010\ }
+\DoxyCodeLine{\Hypertarget{_diagnostic_bag_8cs_source_l00011}\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_diagnostic_bag_a96b01ec7e44e5d5c79e86cae9880a783}{00011}}\ \ \ \ \ \textcolor{keyword}{public}\ IEnumerator<TextEditorDiagnostic>\ \mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_diagnostic_bag_a96b01ec7e44e5d5c79e86cae9880a783}{GetEnumerator}}()}
+\DoxyCodeLine{\Hypertarget{_diagnostic_bag_8cs_source_l00012}00012\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_diagnostic_bag_8cs_source_l00013}00013\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \_diagnosticsBag.GetEnumerator();}
+\DoxyCodeLine{\Hypertarget{_diagnostic_bag_8cs_source_l00014}00014\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_diagnostic_bag_8cs_source_l00015}00015\ }
+\DoxyCodeLine{\Hypertarget{_diagnostic_bag_8cs_source_l00016}00016\ \ \ \ \ IEnumerator\ IEnumerable.GetEnumerator()}
+\DoxyCodeLine{\Hypertarget{_diagnostic_bag_8cs_source_l00017}00017\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_diagnostic_bag_8cs_source_l00018}00018\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_diagnostic_bag_a96b01ec7e44e5d5c79e86cae9880a783}{GetEnumerator}}();}
+\DoxyCodeLine{\Hypertarget{_diagnostic_bag_8cs_source_l00019}00019\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_diagnostic_bag_8cs_source_l00020}00020\ }
+\DoxyCodeLine{\Hypertarget{_diagnostic_bag_8cs_source_l00021}\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_diagnostic_bag_a356b5e28089638e9367941a0bd9873ce}{00021}}\ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_diagnostic_bag_a356b5e28089638e9367941a0bd9873ce}{ReportEndOfFileUnexpected}}(\mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_lexers_1_1_models_a1ffd1a7706dfd364560b76d47467812f}{TextEditorTextSpan}}\ textSpan)}
+\DoxyCodeLine{\Hypertarget{_diagnostic_bag_8cs_source_l00022}00022\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_diagnostic_bag_8cs_source_l00023}00023\ \ \ \ \ \ \ \ \ Report(}
+\DoxyCodeLine{\Hypertarget{_diagnostic_bag_8cs_source_l00024}00024\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_enums_ad1d66dfc7718c1f9a6bd6852fe2eb9e9}{TextEditorDiagnosticLevel}}.Error,}
+\DoxyCodeLine{\Hypertarget{_diagnostic_bag_8cs_source_l00025}00025\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}'End\ of\ file'\ was\ unexpected."{}},}
+\DoxyCodeLine{\Hypertarget{_diagnostic_bag_8cs_source_l00026}00026\ \ \ \ \ \ \ \ \ \ \ \ \ textSpan,}
+\DoxyCodeLine{\Hypertarget{_diagnostic_bag_8cs_source_l00027}00027\ \ \ \ \ \ \ \ \ \ \ \ \ Guid.Parse(\textcolor{stringliteral}{"{}37a0a353-\/cd10-\/4b9d-\/b7c1-\/ab820d1b2fee"{}}));}
+\DoxyCodeLine{\Hypertarget{_diagnostic_bag_8cs_source_l00028}00028\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_diagnostic_bag_8cs_source_l00029}00029\ }
+\DoxyCodeLine{\Hypertarget{_diagnostic_bag_8cs_source_l00030}\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_diagnostic_bag_a0e772a4401cdf7f57d18a2ea71ec48f3}{00030}}\ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_diagnostic_bag_a0e772a4401cdf7f57d18a2ea71ec48f3}{ReportUnexpectedToken}}(}
+\DoxyCodeLine{\Hypertarget{_diagnostic_bag_8cs_source_l00031}00031\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_lexers_1_1_models_a1ffd1a7706dfd364560b76d47467812f}{TextEditorTextSpan}}\ textSpan,}
+\DoxyCodeLine{\Hypertarget{_diagnostic_bag_8cs_source_l00032}00032\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{string}\ unexpectedToken,}
+\DoxyCodeLine{\Hypertarget{_diagnostic_bag_8cs_source_l00033}00033\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{string}\ expectedToken)}
+\DoxyCodeLine{\Hypertarget{_diagnostic_bag_8cs_source_l00034}00034\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_diagnostic_bag_8cs_source_l00035}00035\ \ \ \ \ \ \ \ \ Report(}
+\DoxyCodeLine{\Hypertarget{_diagnostic_bag_8cs_source_l00036}00036\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_enums_ad1d66dfc7718c1f9a6bd6852fe2eb9e9}{TextEditorDiagnosticLevel}}.Error,}
+\DoxyCodeLine{\Hypertarget{_diagnostic_bag_8cs_source_l00037}00037\ \ \ \ \ \ \ \ \ \ \ \ \ \$\textcolor{stringliteral}{"{}Unexpected\ token:\ '\{unexpectedToken\}'\ |\ expected:\ '\{expectedToken\}'"{}},}
+\DoxyCodeLine{\Hypertarget{_diagnostic_bag_8cs_source_l00038}00038\ \ \ \ \ \ \ \ \ \ \ \ \ textSpan,}
+\DoxyCodeLine{\Hypertarget{_diagnostic_bag_8cs_source_l00039}00039\ \ \ \ \ \ \ \ \ \ \ \ \ Guid.Parse(\textcolor{stringliteral}{"{}94a34c1f-\/e490-\/4d22-\/8bd9-\/98a100ea7487"{}}));}
+\DoxyCodeLine{\Hypertarget{_diagnostic_bag_8cs_source_l00040}00040\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_diagnostic_bag_8cs_source_l00041}00041\ }
+\DoxyCodeLine{\Hypertarget{_diagnostic_bag_8cs_source_l00042}\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_diagnostic_bag_ae951086a68185dda906ed840cffcad07}{00042}}\ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_diagnostic_bag_ae951086a68185dda906ed840cffcad07}{ReportUnexpectedToken}}(}
+\DoxyCodeLine{\Hypertarget{_diagnostic_bag_8cs_source_l00043}00043\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_lexers_1_1_models_a1ffd1a7706dfd364560b76d47467812f}{TextEditorTextSpan}}\ textSpan,}
+\DoxyCodeLine{\Hypertarget{_diagnostic_bag_8cs_source_l00044}00044\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{string}\ unexpectedToken)}
+\DoxyCodeLine{\Hypertarget{_diagnostic_bag_8cs_source_l00045}00045\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_diagnostic_bag_8cs_source_l00046}00046\ \ \ \ \ \ \ \ \ Report(}
+\DoxyCodeLine{\Hypertarget{_diagnostic_bag_8cs_source_l00047}00047\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_enums_ad1d66dfc7718c1f9a6bd6852fe2eb9e9}{TextEditorDiagnosticLevel}}.Error,}
+\DoxyCodeLine{\Hypertarget{_diagnostic_bag_8cs_source_l00048}00048\ \ \ \ \ \ \ \ \ \ \ \ \ \$\textcolor{stringliteral}{"{}Unexpected\ token:\ '\{unexpectedToken\}'"{}},}
+\DoxyCodeLine{\Hypertarget{_diagnostic_bag_8cs_source_l00049}00049\ \ \ \ \ \ \ \ \ \ \ \ \ textSpan,}
+\DoxyCodeLine{\Hypertarget{_diagnostic_bag_8cs_source_l00050}00050\ \ \ \ \ \ \ \ \ \ \ \ \ Guid.Parse(\textcolor{stringliteral}{"{}f3c26886-\/e1eb-\/4e63-\/82e6-\/33e5f6105b5d"{}}));}
+\DoxyCodeLine{\Hypertarget{_diagnostic_bag_8cs_source_l00051}00051\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_diagnostic_bag_8cs_source_l00052}00052\ }
+\DoxyCodeLine{\Hypertarget{_diagnostic_bag_8cs_source_l00053}\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_diagnostic_bag_acca6f4dcd209b816627cd9c87d0bca01}{00053}}\ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_diagnostic_bag_acca6f4dcd209b816627cd9c87d0bca01}{ReportUndefinedClass}}(}
+\DoxyCodeLine{\Hypertarget{_diagnostic_bag_8cs_source_l00054}00054\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_lexers_1_1_models_a1ffd1a7706dfd364560b76d47467812f}{TextEditorTextSpan}}\ textSpan,}
+\DoxyCodeLine{\Hypertarget{_diagnostic_bag_8cs_source_l00055}00055\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{string}\ undefinedClassIdentifier)}
+\DoxyCodeLine{\Hypertarget{_diagnostic_bag_8cs_source_l00056}00056\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_diagnostic_bag_8cs_source_l00057}00057\ \ \ \ \ \ \ \ \ Report(}
+\DoxyCodeLine{\Hypertarget{_diagnostic_bag_8cs_source_l00058}00058\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_enums_ad1d66dfc7718c1f9a6bd6852fe2eb9e9}{TextEditorDiagnosticLevel}}.Error,}
+\DoxyCodeLine{\Hypertarget{_diagnostic_bag_8cs_source_l00059}00059\ \ \ \ \ \ \ \ \ \ \ \ \ \$\textcolor{stringliteral}{"{}Undefined\ class:\ '\{undefinedClassIdentifier\}'"{}},}
+\DoxyCodeLine{\Hypertarget{_diagnostic_bag_8cs_source_l00060}00060\ \ \ \ \ \ \ \ \ \ \ \ \ textSpan,}
+\DoxyCodeLine{\Hypertarget{_diagnostic_bag_8cs_source_l00061}00061\ \ \ \ \ \ \ \ \ \ \ \ \ Guid.Parse(\textcolor{stringliteral}{"{}4bf6a7f1-\/c344-\/4ca4-\/828c-\/a0a4f7f91341"{}}));}
+\DoxyCodeLine{\Hypertarget{_diagnostic_bag_8cs_source_l00062}00062\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_diagnostic_bag_8cs_source_l00063}00063\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_diagnostic_bag_8cs_source_l00064}\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_diagnostic_bag_ad81453fe51eecc10ef96981c12140347}{00064}}\ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_diagnostic_bag_ad81453fe51eecc10ef96981c12140347}{ReportImplicitlyTypedVariablesMustBeInitialized}}(}
+\DoxyCodeLine{\Hypertarget{_diagnostic_bag_8cs_source_l00065}00065\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_lexers_1_1_models_a1ffd1a7706dfd364560b76d47467812f}{TextEditorTextSpan}}\ textSpan)}
+\DoxyCodeLine{\Hypertarget{_diagnostic_bag_8cs_source_l00066}00066\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_diagnostic_bag_8cs_source_l00067}00067\ \ \ \ \ \ \ \ \ Report(}
+\DoxyCodeLine{\Hypertarget{_diagnostic_bag_8cs_source_l00068}00068\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_enums_ad1d66dfc7718c1f9a6bd6852fe2eb9e9}{TextEditorDiagnosticLevel}}.Error,}
+\DoxyCodeLine{\Hypertarget{_diagnostic_bag_8cs_source_l00069}00069\ \ \ \ \ \ \ \ \ \ \ \ \ \$\textcolor{stringliteral}{"{}Implicitly-\/typed\ variables\ must\ be\ initialized"{}},}
+\DoxyCodeLine{\Hypertarget{_diagnostic_bag_8cs_source_l00070}00070\ \ \ \ \ \ \ \ \ \ \ \ \ textSpan,}
+\DoxyCodeLine{\Hypertarget{_diagnostic_bag_8cs_source_l00071}00071\ \ \ \ \ \ \ \ \ \ \ \ \ Guid.Parse(\textcolor{stringliteral}{"{}b087cb21-\/fa16-\/4ae1-\/bfd0-\/daeebe0c4b39"{}}));}
+\DoxyCodeLine{\Hypertarget{_diagnostic_bag_8cs_source_l00072}00072\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_diagnostic_bag_8cs_source_l00073}00073\ }
+\DoxyCodeLine{\Hypertarget{_diagnostic_bag_8cs_source_l00074}\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_diagnostic_bag_ab14a798771d97057c7611987d008e7a0}{00074}}\ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_diagnostic_bag_ab14a798771d97057c7611987d008e7a0}{ReportUndefinedTypeOrNamespace}}(}
+\DoxyCodeLine{\Hypertarget{_diagnostic_bag_8cs_source_l00075}00075\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_lexers_1_1_models_a1ffd1a7706dfd364560b76d47467812f}{TextEditorTextSpan}}\ textSpan,}
+\DoxyCodeLine{\Hypertarget{_diagnostic_bag_8cs_source_l00076}00076\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{string}\ undefinedTypeOrNamespaceIdentifier)}
+\DoxyCodeLine{\Hypertarget{_diagnostic_bag_8cs_source_l00077}00077\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_diagnostic_bag_8cs_source_l00078}00078\ \ \ \ \ \ \ \ \ Report(}
+\DoxyCodeLine{\Hypertarget{_diagnostic_bag_8cs_source_l00079}00079\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_enums_ad1d66dfc7718c1f9a6bd6852fe2eb9e9}{TextEditorDiagnosticLevel}}.Error,}
+\DoxyCodeLine{\Hypertarget{_diagnostic_bag_8cs_source_l00080}00080\ \ \ \ \ \ \ \ \ \ \ \ \ \$\textcolor{stringliteral}{"{}Undefined\ type\ or\ namespace:\ '\{undefinedTypeOrNamespaceIdentifier\}'"{}},}
+\DoxyCodeLine{\Hypertarget{_diagnostic_bag_8cs_source_l00081}00081\ \ \ \ \ \ \ \ \ \ \ \ \ textSpan,}
+\DoxyCodeLine{\Hypertarget{_diagnostic_bag_8cs_source_l00082}00082\ \ \ \ \ \ \ \ \ \ \ \ \ Guid.Parse(\textcolor{stringliteral}{"{}856e27dc-\/2721-\/4645-\/821c-\/88dcb57a2516"{}}));}
+\DoxyCodeLine{\Hypertarget{_diagnostic_bag_8cs_source_l00083}00083\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_diagnostic_bag_8cs_source_l00084}00084\ }
+\DoxyCodeLine{\Hypertarget{_diagnostic_bag_8cs_source_l00085}\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_diagnostic_bag_a7c5cedb2b06a0fc583d6d7766d16bf0a}{00085}}\ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_diagnostic_bag_a7c5cedb2b06a0fc583d6d7766d16bf0a}{ReportAlreadyDefinedType}}(}
+\DoxyCodeLine{\Hypertarget{_diagnostic_bag_8cs_source_l00086}00086\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_lexers_1_1_models_a1ffd1a7706dfd364560b76d47467812f}{TextEditorTextSpan}}\ textSpan,}
+\DoxyCodeLine{\Hypertarget{_diagnostic_bag_8cs_source_l00087}00087\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{string}\ alreadyDefinedTypeIdentifier)}
+\DoxyCodeLine{\Hypertarget{_diagnostic_bag_8cs_source_l00088}00088\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_diagnostic_bag_8cs_source_l00089}00089\ \ \ \ \ \ \ \ \ Report(}
+\DoxyCodeLine{\Hypertarget{_diagnostic_bag_8cs_source_l00090}00090\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_enums_ad1d66dfc7718c1f9a6bd6852fe2eb9e9}{TextEditorDiagnosticLevel}}.Error,}
+\DoxyCodeLine{\Hypertarget{_diagnostic_bag_8cs_source_l00091}00091\ \ \ \ \ \ \ \ \ \ \ \ \ \$\textcolor{stringliteral}{"{}Already\ defined\ type:\ '\{alreadyDefinedTypeIdentifier\}'"{}},}
+\DoxyCodeLine{\Hypertarget{_diagnostic_bag_8cs_source_l00092}00092\ \ \ \ \ \ \ \ \ \ \ \ \ textSpan,}
+\DoxyCodeLine{\Hypertarget{_diagnostic_bag_8cs_source_l00093}00093\ \ \ \ \ \ \ \ \ \ \ \ \ Guid.Parse(\textcolor{stringliteral}{"{}9987db65-\/1054-\/4b64-\/ba64-\/761b75c4e5da"{}}));}
+\DoxyCodeLine{\Hypertarget{_diagnostic_bag_8cs_source_l00094}00094\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_diagnostic_bag_8cs_source_l00095}00095\ }
+\DoxyCodeLine{\Hypertarget{_diagnostic_bag_8cs_source_l00096}\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_diagnostic_bag_a344a79b1d311c9745d0614ce160d07e9}{00096}}\ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_diagnostic_bag_a344a79b1d311c9745d0614ce160d07e9}{ReportUndefinedVariable}}(}
+\DoxyCodeLine{\Hypertarget{_diagnostic_bag_8cs_source_l00097}00097\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_lexers_1_1_models_a1ffd1a7706dfd364560b76d47467812f}{TextEditorTextSpan}}\ textSpan,}
+\DoxyCodeLine{\Hypertarget{_diagnostic_bag_8cs_source_l00098}00098\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{string}\ undefinedVariableIdentifier)}
+\DoxyCodeLine{\Hypertarget{_diagnostic_bag_8cs_source_l00099}00099\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_diagnostic_bag_8cs_source_l00100}00100\ \ \ \ \ \ \ \ \ Report(}
+\DoxyCodeLine{\Hypertarget{_diagnostic_bag_8cs_source_l00101}00101\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_enums_ad1d66dfc7718c1f9a6bd6852fe2eb9e9}{TextEditorDiagnosticLevel}}.Error,}
+\DoxyCodeLine{\Hypertarget{_diagnostic_bag_8cs_source_l00102}00102\ \ \ \ \ \ \ \ \ \ \ \ \ \$\textcolor{stringliteral}{"{}Undefined\ variable:\ '\{undefinedVariableIdentifier\}'"{}},}
+\DoxyCodeLine{\Hypertarget{_diagnostic_bag_8cs_source_l00103}00103\ \ \ \ \ \ \ \ \ \ \ \ \ textSpan,}
+\DoxyCodeLine{\Hypertarget{_diagnostic_bag_8cs_source_l00104}00104\ \ \ \ \ \ \ \ \ \ \ \ \ Guid.Parse(\textcolor{stringliteral}{"{}a72619a5-\/a7f4-\/4084-\/acc8-\/2fb2c76cdac4"{}}));}
+\DoxyCodeLine{\Hypertarget{_diagnostic_bag_8cs_source_l00105}00105\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_diagnostic_bag_8cs_source_l00106}00106\ }
+\DoxyCodeLine{\Hypertarget{_diagnostic_bag_8cs_source_l00107}\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_diagnostic_bag_a45e69b625754797a2234a673b88f22a2}{00107}}\ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_diagnostic_bag_a45e69b625754797a2234a673b88f22a2}{ReportNotDefinedInContext}}(}
+\DoxyCodeLine{\Hypertarget{_diagnostic_bag_8cs_source_l00108}00108\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_lexers_1_1_models_a1ffd1a7706dfd364560b76d47467812f}{TextEditorTextSpan}}\ textSpan,}
+\DoxyCodeLine{\Hypertarget{_diagnostic_bag_8cs_source_l00109}00109\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{string}\ contextString)}
+\DoxyCodeLine{\Hypertarget{_diagnostic_bag_8cs_source_l00110}00110\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_diagnostic_bag_8cs_source_l00111}00111\ \ \ \ \ \ \ \ \ Report(}
+\DoxyCodeLine{\Hypertarget{_diagnostic_bag_8cs_source_l00112}00112\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_enums_ad1d66dfc7718c1f9a6bd6852fe2eb9e9}{TextEditorDiagnosticLevel}}.Error,}
+\DoxyCodeLine{\Hypertarget{_diagnostic_bag_8cs_source_l00113}00113\ \ \ \ \ \ \ \ \ \ \ \ \ \$\textcolor{stringliteral}{"{}'\{textSpan.GetText()\}'\ is\ not\ defined\ in\ the\ context\ '\{contextString\}'"{}},}
+\DoxyCodeLine{\Hypertarget{_diagnostic_bag_8cs_source_l00114}00114\ \ \ \ \ \ \ \ \ \ \ \ \ textSpan,}
+\DoxyCodeLine{\Hypertarget{_diagnostic_bag_8cs_source_l00115}00115\ \ \ \ \ \ \ \ \ \ \ \ \ Guid.Parse(\textcolor{stringliteral}{"{}89b61fa8-\/541d-\/4154-\/9425-\/82c5667842a8"{}}));}
+\DoxyCodeLine{\Hypertarget{_diagnostic_bag_8cs_source_l00116}00116\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_diagnostic_bag_8cs_source_l00117}00117\ }
+\DoxyCodeLine{\Hypertarget{_diagnostic_bag_8cs_source_l00118}\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_diagnostic_bag_a797a5ce2ad35e8006bed07fbffa1df65}{00118}}\ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_diagnostic_bag_a797a5ce2ad35e8006bed07fbffa1df65}{TheNameDoesNotExistInTheCurrentContext}}(}
+\DoxyCodeLine{\Hypertarget{_diagnostic_bag_8cs_source_l00119}00119\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_lexers_1_1_models_a1ffd1a7706dfd364560b76d47467812f}{TextEditorTextSpan}}\ textSpan,}
+\DoxyCodeLine{\Hypertarget{_diagnostic_bag_8cs_source_l00120}00120\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{string}\ name)}
+\DoxyCodeLine{\Hypertarget{_diagnostic_bag_8cs_source_l00121}00121\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_diagnostic_bag_8cs_source_l00122}00122\ \ \ \ \ \ \ \ \ Report(}
+\DoxyCodeLine{\Hypertarget{_diagnostic_bag_8cs_source_l00123}00123\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_enums_ad1d66dfc7718c1f9a6bd6852fe2eb9e9}{TextEditorDiagnosticLevel}}.Error,}
+\DoxyCodeLine{\Hypertarget{_diagnostic_bag_8cs_source_l00124}00124\ \ \ \ \ \ \ \ \ \ \ \ \ \$\textcolor{stringliteral}{"{}The\ name\ '\{name\}'\ does\ not\ exist\ in\ the\ current\ context"{}},}
+\DoxyCodeLine{\Hypertarget{_diagnostic_bag_8cs_source_l00125}00125\ \ \ \ \ \ \ \ \ \ \ \ \ textSpan,}
+\DoxyCodeLine{\Hypertarget{_diagnostic_bag_8cs_source_l00126}00126\ \ \ \ \ \ \ \ \ \ \ \ \ Guid.Parse(\textcolor{stringliteral}{"{}3c616af8-\/1c5d-\/41fa-\/962d-\/9836278ea570"{}}));}
+\DoxyCodeLine{\Hypertarget{_diagnostic_bag_8cs_source_l00127}00127\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_diagnostic_bag_8cs_source_l00128}00128\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_diagnostic_bag_8cs_source_l00129}\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_diagnostic_bag_a3630072830d8fea2baf216ceb05ddc4b}{00129}}\ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_diagnostic_bag_a3630072830d8fea2baf216ceb05ddc4b}{ReportAlreadyDefinedVariable}}(}
+\DoxyCodeLine{\Hypertarget{_diagnostic_bag_8cs_source_l00130}00130\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_lexers_1_1_models_a1ffd1a7706dfd364560b76d47467812f}{TextEditorTextSpan}}\ textSpan,}
+\DoxyCodeLine{\Hypertarget{_diagnostic_bag_8cs_source_l00131}00131\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{string}\ alreadyDefinedVariableIdentifier)}
+\DoxyCodeLine{\Hypertarget{_diagnostic_bag_8cs_source_l00132}00132\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_diagnostic_bag_8cs_source_l00133}00133\ \ \ \ \ \ \ \ \ Report(}
+\DoxyCodeLine{\Hypertarget{_diagnostic_bag_8cs_source_l00134}00134\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_enums_ad1d66dfc7718c1f9a6bd6852fe2eb9e9}{TextEditorDiagnosticLevel}}.Error,}
+\DoxyCodeLine{\Hypertarget{_diagnostic_bag_8cs_source_l00135}00135\ \ \ \ \ \ \ \ \ \ \ \ \ \$\textcolor{stringliteral}{"{}Already\ defined\ variable:\ '\{alreadyDefinedVariableIdentifier\}'"{}},}
+\DoxyCodeLine{\Hypertarget{_diagnostic_bag_8cs_source_l00136}00136\ \ \ \ \ \ \ \ \ \ \ \ \ textSpan,}
+\DoxyCodeLine{\Hypertarget{_diagnostic_bag_8cs_source_l00137}00137\ \ \ \ \ \ \ \ \ \ \ \ \ Guid.Parse(\textcolor{stringliteral}{"{}89b61fa8-\/541d-\/4154-\/9425-\/82c5667842a8"{}}));}
+\DoxyCodeLine{\Hypertarget{_diagnostic_bag_8cs_source_l00138}00138\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_diagnostic_bag_8cs_source_l00139}00139\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_diagnostic_bag_8cs_source_l00140}\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_diagnostic_bag_a8614e625b3762a4bc6204a4e2cb23c5a}{00140}}\ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_diagnostic_bag_a8614e625b3762a4bc6204a4e2cb23c5a}{ReportAlreadyDefinedProperty}}(}
+\DoxyCodeLine{\Hypertarget{_diagnostic_bag_8cs_source_l00141}00141\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_lexers_1_1_models_a1ffd1a7706dfd364560b76d47467812f}{TextEditorTextSpan}}\ textSpan,}
+\DoxyCodeLine{\Hypertarget{_diagnostic_bag_8cs_source_l00142}00142\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{string}\ alreadyDefinedPropertyIdentifier)}
+\DoxyCodeLine{\Hypertarget{_diagnostic_bag_8cs_source_l00143}00143\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_diagnostic_bag_8cs_source_l00144}00144\ \ \ \ \ \ \ \ \ Report(}
+\DoxyCodeLine{\Hypertarget{_diagnostic_bag_8cs_source_l00145}00145\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_enums_ad1d66dfc7718c1f9a6bd6852fe2eb9e9}{TextEditorDiagnosticLevel}}.Error,}
+\DoxyCodeLine{\Hypertarget{_diagnostic_bag_8cs_source_l00146}00146\ \ \ \ \ \ \ \ \ \ \ \ \ \$\textcolor{stringliteral}{"{}Already\ defined\ property:\ '\{alreadyDefinedPropertyIdentifier\}'"{}},}
+\DoxyCodeLine{\Hypertarget{_diagnostic_bag_8cs_source_l00147}00147\ \ \ \ \ \ \ \ \ \ \ \ \ textSpan,}
+\DoxyCodeLine{\Hypertarget{_diagnostic_bag_8cs_source_l00148}00148\ \ \ \ \ \ \ \ \ \ \ \ \ Guid.Parse(\textcolor{stringliteral}{"{}0f4681e2-\/abaa-\/46f6-\/9b05-\/56941a07dd98"{}}));}
+\DoxyCodeLine{\Hypertarget{_diagnostic_bag_8cs_source_l00149}00149\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_diagnostic_bag_8cs_source_l00150}00150\ }
+\DoxyCodeLine{\Hypertarget{_diagnostic_bag_8cs_source_l00151}\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_diagnostic_bag_ac62e55faba91cdbfc7d03c14e5d2bbfd}{00151}}\ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_diagnostic_bag_ac62e55faba91cdbfc7d03c14e5d2bbfd}{ReportUndefinedFunction}}(}
+\DoxyCodeLine{\Hypertarget{_diagnostic_bag_8cs_source_l00152}00152\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_lexers_1_1_models_a1ffd1a7706dfd364560b76d47467812f}{TextEditorTextSpan}}\ textSpan,}
+\DoxyCodeLine{\Hypertarget{_diagnostic_bag_8cs_source_l00153}00153\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{string}\ undefinedFunctionIdentifier)}
+\DoxyCodeLine{\Hypertarget{_diagnostic_bag_8cs_source_l00154}00154\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_diagnostic_bag_8cs_source_l00155}00155\ \ \ \ \ \ \ \ \ Report(}
+\DoxyCodeLine{\Hypertarget{_diagnostic_bag_8cs_source_l00156}00156\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_enums_ad1d66dfc7718c1f9a6bd6852fe2eb9e9}{TextEditorDiagnosticLevel}}.Error,}
+\DoxyCodeLine{\Hypertarget{_diagnostic_bag_8cs_source_l00157}00157\ \ \ \ \ \ \ \ \ \ \ \ \ \$\textcolor{stringliteral}{"{}Undefined\ function:\ '\{undefinedFunctionIdentifier\}'"{}},}
+\DoxyCodeLine{\Hypertarget{_diagnostic_bag_8cs_source_l00158}00158\ \ \ \ \ \ \ \ \ \ \ \ \ textSpan,}
+\DoxyCodeLine{\Hypertarget{_diagnostic_bag_8cs_source_l00159}00159\ \ \ \ \ \ \ \ \ \ \ \ \ Guid.Parse(\textcolor{stringliteral}{"{}8703a2f9-\/fab3-\/46c2-\/8f50-\/05d8152a1510"{}}));}
+\DoxyCodeLine{\Hypertarget{_diagnostic_bag_8cs_source_l00160}00160\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_diagnostic_bag_8cs_source_l00161}00161\ }
+\DoxyCodeLine{\Hypertarget{_diagnostic_bag_8cs_source_l00162}\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_diagnostic_bag_a54c345680ffcf98ef3e8dba9ec11eee1}{00162}}\ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_diagnostic_bag_a54c345680ffcf98ef3e8dba9ec11eee1}{ReportAlreadyDefinedFunction}}(}
+\DoxyCodeLine{\Hypertarget{_diagnostic_bag_8cs_source_l00163}00163\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_lexers_1_1_models_a1ffd1a7706dfd364560b76d47467812f}{TextEditorTextSpan}}\ textSpan,}
+\DoxyCodeLine{\Hypertarget{_diagnostic_bag_8cs_source_l00164}00164\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{string}\ alreadyDefinedFunctionIdentifier)}
+\DoxyCodeLine{\Hypertarget{_diagnostic_bag_8cs_source_l00165}00165\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_diagnostic_bag_8cs_source_l00166}00166\ \ \ \ \ \ \ \ \ Report(}
+\DoxyCodeLine{\Hypertarget{_diagnostic_bag_8cs_source_l00167}00167\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_enums_ad1d66dfc7718c1f9a6bd6852fe2eb9e9}{TextEditorDiagnosticLevel}}.Error,}
+\DoxyCodeLine{\Hypertarget{_diagnostic_bag_8cs_source_l00168}00168\ \ \ \ \ \ \ \ \ \ \ \ \ \$\textcolor{stringliteral}{"{}Already\ defined\ function:\ '\{alreadyDefinedFunctionIdentifier\}'"{}},}
+\DoxyCodeLine{\Hypertarget{_diagnostic_bag_8cs_source_l00169}00169\ \ \ \ \ \ \ \ \ \ \ \ \ textSpan,}
+\DoxyCodeLine{\Hypertarget{_diagnostic_bag_8cs_source_l00170}00170\ \ \ \ \ \ \ \ \ \ \ \ \ Guid.Parse(\textcolor{stringliteral}{"{}44193527-\/d94f-\/49bd-\/a588-\/cf75a18bc0f5"{}}));}
+\DoxyCodeLine{\Hypertarget{_diagnostic_bag_8cs_source_l00171}00171\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_diagnostic_bag_8cs_source_l00172}00172\ }
+\DoxyCodeLine{\Hypertarget{_diagnostic_bag_8cs_source_l00173}\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_diagnostic_bag_a3b09fc65cd46df5fe3849842cf728ed6}{00173}}\ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_diagnostic_bag_a3b09fc65cd46df5fe3849842cf728ed6}{ReportBadFunctionOptionalArgumentDueToMismatchInType}}(}
+\DoxyCodeLine{\Hypertarget{_diagnostic_bag_8cs_source_l00174}00174\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_lexers_1_1_models_a1ffd1a7706dfd364560b76d47467812f}{TextEditorTextSpan}}\ optionalArgumentTextSpan,}
+\DoxyCodeLine{\Hypertarget{_diagnostic_bag_8cs_source_l00175}00175\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{string}\ optionalArgumentVariableIdentifier,}
+\DoxyCodeLine{\Hypertarget{_diagnostic_bag_8cs_source_l00176}00176\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{string}\ typeExpectedIdentifierString,}
+\DoxyCodeLine{\Hypertarget{_diagnostic_bag_8cs_source_l00177}00177\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{string}\ typeActualIdentifierString)}
+\DoxyCodeLine{\Hypertarget{_diagnostic_bag_8cs_source_l00178}00178\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_diagnostic_bag_8cs_source_l00179}00179\ \ \ \ \ \ \ \ \ Report(}
+\DoxyCodeLine{\Hypertarget{_diagnostic_bag_8cs_source_l00180}00180\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_enums_ad1d66dfc7718c1f9a6bd6852fe2eb9e9}{TextEditorDiagnosticLevel}}.Error,}
+\DoxyCodeLine{\Hypertarget{_diagnostic_bag_8cs_source_l00181}00181\ \ \ \ \ \ \ \ \ \ \ \ \ \$\textcolor{stringliteral}{"{}The\ optional\ argument:\ '\{optionalArgumentVariableIdentifier\}'"{}}\ +}
+\DoxyCodeLine{\Hypertarget{_diagnostic_bag_8cs_source_l00182}00182\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \$\textcolor{stringliteral}{"{}\ expects\ the\ type:\ '\{typeExpectedIdentifierString\}'"{}}\ +}
+\DoxyCodeLine{\Hypertarget{_diagnostic_bag_8cs_source_l00183}00183\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \$\textcolor{stringliteral}{"{},\ but\ received\ the\ type:\ '\{typeActualIdentifierString\}'"{}},}
+\DoxyCodeLine{\Hypertarget{_diagnostic_bag_8cs_source_l00184}00184\ \ \ \ \ \ \ \ \ \ \ \ \ optionalArgumentTextSpan,}
+\DoxyCodeLine{\Hypertarget{_diagnostic_bag_8cs_source_l00185}00185\ \ \ \ \ \ \ \ \ \ \ \ \ Guid.Parse(\textcolor{stringliteral}{"{}ea78765d-\/13b6-\/4aef-\/87b8-\/838d94daa82a"{}}));}
+\DoxyCodeLine{\Hypertarget{_diagnostic_bag_8cs_source_l00186}00186\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_diagnostic_bag_8cs_source_l00187}00187\ }
+\DoxyCodeLine{\Hypertarget{_diagnostic_bag_8cs_source_l00188}\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_diagnostic_bag_a384a28076522f4f0cdbdef6b04e6b110}{00188}}\ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_diagnostic_bag_a384a28076522f4f0cdbdef6b04e6b110}{ReportReturnStatementsAreStillBeingImplemented}}(\mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_lexers_1_1_models_a1ffd1a7706dfd364560b76d47467812f}{TextEditorTextSpan}}\ textSpan)}
+\DoxyCodeLine{\Hypertarget{_diagnostic_bag_8cs_source_l00189}00189\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_diagnostic_bag_8cs_source_l00190}00190\ \ \ \ \ \ \ \ \ Report(}
+\DoxyCodeLine{\Hypertarget{_diagnostic_bag_8cs_source_l00191}00191\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_enums_ad1d66dfc7718c1f9a6bd6852fe2eb9e9}{TextEditorDiagnosticLevel}}.Hint,}
+\DoxyCodeLine{\Hypertarget{_diagnostic_bag_8cs_source_l00192}00192\ \ \ \ \ \ \ \ \ \ \ \ \ \$\textcolor{stringliteral}{"{}Parsing\ of\ return\ statements\ is\ still\ being\ implemented."{}},}
+\DoxyCodeLine{\Hypertarget{_diagnostic_bag_8cs_source_l00193}00193\ \ \ \ \ \ \ \ \ \ \ \ \ textSpan,}
+\DoxyCodeLine{\Hypertarget{_diagnostic_bag_8cs_source_l00194}00194\ \ \ \ \ \ \ \ \ \ \ \ \ Guid.Parse(\textcolor{stringliteral}{"{}3fb8071a-\/bd97-\/4bc5-\/97af-\/c7b147648e67"{}}));}
+\DoxyCodeLine{\Hypertarget{_diagnostic_bag_8cs_source_l00195}00195\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_diagnostic_bag_8cs_source_l00196}00196\ }
+\DoxyCodeLine{\Hypertarget{_diagnostic_bag_8cs_source_l00197}\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_diagnostic_bag_ac52af817a8462ab089c4e8fd1557bfc1}{00197}}\ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_diagnostic_bag_ac52af817a8462ab089c4e8fd1557bfc1}{ReportTagNameMissing}}(\mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_lexers_1_1_models_a1ffd1a7706dfd364560b76d47467812f}{TextEditorTextSpan}}\ textSpan)}
+\DoxyCodeLine{\Hypertarget{_diagnostic_bag_8cs_source_l00198}00198\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_diagnostic_bag_8cs_source_l00199}00199\ \ \ \ \ \ \ \ \ Report(}
+\DoxyCodeLine{\Hypertarget{_diagnostic_bag_8cs_source_l00200}00200\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_enums_ad1d66dfc7718c1f9a6bd6852fe2eb9e9}{TextEditorDiagnosticLevel}}.Error,}
+\DoxyCodeLine{\Hypertarget{_diagnostic_bag_8cs_source_l00201}00201\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}Missing\ tag\ name."{}},}
+\DoxyCodeLine{\Hypertarget{_diagnostic_bag_8cs_source_l00202}00202\ \ \ \ \ \ \ \ \ \ \ \ \ textSpan,}
+\DoxyCodeLine{\Hypertarget{_diagnostic_bag_8cs_source_l00203}00203\ \ \ \ \ \ \ \ \ \ \ \ \ Guid.Parse(\textcolor{stringliteral}{"{}d567ff67-\/dfaa-\/41a4-\/8953-\/962e7d596d3c"{}}));}
+\DoxyCodeLine{\Hypertarget{_diagnostic_bag_8cs_source_l00204}00204\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_diagnostic_bag_8cs_source_l00205}00205\ }
+\DoxyCodeLine{\Hypertarget{_diagnostic_bag_8cs_source_l00206}\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_diagnostic_bag_a3f7a2a347758889507608043eb407f9c}{00206}}\ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_diagnostic_bag_a3f7a2a347758889507608043eb407f9c}{ReportOpenTagWithUnMatchedCloseTag}}(}
+\DoxyCodeLine{\Hypertarget{_diagnostic_bag_8cs_source_l00207}00207\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{string}\ openTagName,}
+\DoxyCodeLine{\Hypertarget{_diagnostic_bag_8cs_source_l00208}00208\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{string}\ closeTagName,}
+\DoxyCodeLine{\Hypertarget{_diagnostic_bag_8cs_source_l00209}00209\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_lexers_1_1_models_a1ffd1a7706dfd364560b76d47467812f}{TextEditorTextSpan}}\ textSpan)}
+\DoxyCodeLine{\Hypertarget{_diagnostic_bag_8cs_source_l00210}00210\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_diagnostic_bag_8cs_source_l00211}00211\ \ \ \ \ \ \ \ \ Report(}
+\DoxyCodeLine{\Hypertarget{_diagnostic_bag_8cs_source_l00212}00212\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_enums_ad1d66dfc7718c1f9a6bd6852fe2eb9e9}{TextEditorDiagnosticLevel}}.Error,}
+\DoxyCodeLine{\Hypertarget{_diagnostic_bag_8cs_source_l00213}00213\ \ \ \ \ \ \ \ \ \ \ \ \ \$\textcolor{stringliteral}{"{}Open\ tag:\ '\{openTagName\}'\ has\ an\ unmatched\ close\ tag:\ \{closeTagName\}."{}},}
+\DoxyCodeLine{\Hypertarget{_diagnostic_bag_8cs_source_l00214}00214\ \ \ \ \ \ \ \ \ \ \ \ \ textSpan,}
+\DoxyCodeLine{\Hypertarget{_diagnostic_bag_8cs_source_l00215}00215\ \ \ \ \ \ \ \ \ \ \ \ \ Guid.Parse(\textcolor{stringliteral}{"{}755ccccd-\/736c-\/4c72-\/b828-\/939ffa244c97"{}}));}
+\DoxyCodeLine{\Hypertarget{_diagnostic_bag_8cs_source_l00216}00216\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_diagnostic_bag_8cs_source_l00217}00217\ }
+\DoxyCodeLine{\Hypertarget{_diagnostic_bag_8cs_source_l00218}\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_diagnostic_bag_a30ae393fd90fbe0e47a03d4a43f30673}{00218}}\ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_diagnostic_bag_a30ae393fd90fbe0e47a03d4a43f30673}{ReportRazorExplicitExpressionPredicateWasExpected}}(}
+\DoxyCodeLine{\Hypertarget{_diagnostic_bag_8cs_source_l00219}00219\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{string}\ transitionSubstring,}
+\DoxyCodeLine{\Hypertarget{_diagnostic_bag_8cs_source_l00220}00220\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{string}\ keywordText,}
+\DoxyCodeLine{\Hypertarget{_diagnostic_bag_8cs_source_l00221}00221\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_lexers_1_1_models_a1ffd1a7706dfd364560b76d47467812f}{TextEditorTextSpan}}\ textSpan)}
+\DoxyCodeLine{\Hypertarget{_diagnostic_bag_8cs_source_l00222}00222\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_diagnostic_bag_8cs_source_l00223}00223\ \ \ \ \ \ \ \ \ Report(}
+\DoxyCodeLine{\Hypertarget{_diagnostic_bag_8cs_source_l00224}00224\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_enums_ad1d66dfc7718c1f9a6bd6852fe2eb9e9}{TextEditorDiagnosticLevel}}.Error,}
+\DoxyCodeLine{\Hypertarget{_diagnostic_bag_8cs_source_l00225}00225\ \ \ \ \ \ \ \ \ \ \ \ \ \$\textcolor{stringliteral}{"{}An\ explicit\ expression\ predicate\ was\ expected\ to\ follow\ the\ \{transitionSubstring\}\{keywordText\}\ razor\ keyword."{}},}
+\DoxyCodeLine{\Hypertarget{_diagnostic_bag_8cs_source_l00226}00226\ \ \ \ \ \ \ \ \ \ \ \ \ textSpan,}
+\DoxyCodeLine{\Hypertarget{_diagnostic_bag_8cs_source_l00227}00227\ \ \ \ \ \ \ \ \ \ \ \ \ Guid.Parse(\textcolor{stringliteral}{"{}44c42198-\/66fd-\/4b8b-\/b8e1-\/4a55ab2aa8c1"{}}));}
+\DoxyCodeLine{\Hypertarget{_diagnostic_bag_8cs_source_l00228}00228\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_diagnostic_bag_8cs_source_l00229}00229\ }
+\DoxyCodeLine{\Hypertarget{_diagnostic_bag_8cs_source_l00230}\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_diagnostic_bag_a51626cc11b12908cc581467ae8cb3e13}{00230}}\ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_diagnostic_bag_a51626cc11b12908cc581467ae8cb3e13}{ReportRazorCodeBlockWasExpectedToFollowRazorKeyword}}(}
+\DoxyCodeLine{\Hypertarget{_diagnostic_bag_8cs_source_l00231}00231\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{string}\ transitionSubstring,}
+\DoxyCodeLine{\Hypertarget{_diagnostic_bag_8cs_source_l00232}00232\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{string}\ keywordText,}
+\DoxyCodeLine{\Hypertarget{_diagnostic_bag_8cs_source_l00233}00233\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_lexers_1_1_models_a1ffd1a7706dfd364560b76d47467812f}{TextEditorTextSpan}}\ textSpan)}
+\DoxyCodeLine{\Hypertarget{_diagnostic_bag_8cs_source_l00234}00234\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_diagnostic_bag_8cs_source_l00235}00235\ \ \ \ \ \ \ \ \ Report(}
+\DoxyCodeLine{\Hypertarget{_diagnostic_bag_8cs_source_l00236}00236\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_enums_ad1d66dfc7718c1f9a6bd6852fe2eb9e9}{TextEditorDiagnosticLevel}}.Error,}
+\DoxyCodeLine{\Hypertarget{_diagnostic_bag_8cs_source_l00237}00237\ \ \ \ \ \ \ \ \ \ \ \ \ \$\textcolor{stringliteral}{"{}A\ code\ block\ was\ expected\ to\ follow\ the\ \{transitionSubstring\}\{keywordText\}\ razor\ keyword."{}},}
+\DoxyCodeLine{\Hypertarget{_diagnostic_bag_8cs_source_l00238}00238\ \ \ \ \ \ \ \ \ \ \ \ \ textSpan,}
+\DoxyCodeLine{\Hypertarget{_diagnostic_bag_8cs_source_l00239}00239\ \ \ \ \ \ \ \ \ \ \ \ \ Guid.Parse(\textcolor{stringliteral}{"{}0d5b940d-\/d993-\/4607-\/9c4c-\/0452e8f8914c"{}}));}
+\DoxyCodeLine{\Hypertarget{_diagnostic_bag_8cs_source_l00240}00240\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_diagnostic_bag_8cs_source_l00241}00241\ }
+\DoxyCodeLine{\Hypertarget{_diagnostic_bag_8cs_source_l00242}\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_diagnostic_bag_ae11ea9b28507844b55dad8dd8207cab8}{00242}}\ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_diagnostic_bag_ae11ea9b28507844b55dad8dd8207cab8}{ReportRazorWhitespaceImmediatelyFollowingTransitionCharacterIsUnexpected}}(}
+\DoxyCodeLine{\Hypertarget{_diagnostic_bag_8cs_source_l00243}00243\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_lexers_1_1_models_a1ffd1a7706dfd364560b76d47467812f}{TextEditorTextSpan}}\ textSpan)}
+\DoxyCodeLine{\Hypertarget{_diagnostic_bag_8cs_source_l00244}00244\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_diagnostic_bag_8cs_source_l00245}00245\ \ \ \ \ \ \ \ \ Report(}
+\DoxyCodeLine{\Hypertarget{_diagnostic_bag_8cs_source_l00246}00246\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_enums_ad1d66dfc7718c1f9a6bd6852fe2eb9e9}{TextEditorDiagnosticLevel}}.Error,}
+\DoxyCodeLine{\Hypertarget{_diagnostic_bag_8cs_source_l00247}00247\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}Whitespace\ immediately\ following\ the\ Razor\ transition\ character\ is\ unexpected."{}},}
+\DoxyCodeLine{\Hypertarget{_diagnostic_bag_8cs_source_l00248}00248\ \ \ \ \ \ \ \ \ \ \ \ \ textSpan,}
+\DoxyCodeLine{\Hypertarget{_diagnostic_bag_8cs_source_l00249}00249\ \ \ \ \ \ \ \ \ \ \ \ \ Guid.Parse(\textcolor{stringliteral}{"{}20b5922a-\/2b25-\/49ce-\/baf7-\/132006de3401"{}}));}
+\DoxyCodeLine{\Hypertarget{_diagnostic_bag_8cs_source_l00250}00250\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_diagnostic_bag_8cs_source_l00251}00251\ }
+\DoxyCodeLine{\Hypertarget{_diagnostic_bag_8cs_source_l00252}\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_diagnostic_bag_ad62cbe52034512c4a922f57fbf384d15}{00252}}\ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_diagnostic_bag_ad62cbe52034512c4a922f57fbf384d15}{ReportConstructorsNeedToBeWithinTypeDefinition}}(\mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_lexers_1_1_models_a1ffd1a7706dfd364560b76d47467812f}{TextEditorTextSpan}}\ textSpan)}
+\DoxyCodeLine{\Hypertarget{_diagnostic_bag_8cs_source_l00253}00253\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_diagnostic_bag_8cs_source_l00254}00254\ \ \ \ \ \ \ \ \ Report(}
+\DoxyCodeLine{\Hypertarget{_diagnostic_bag_8cs_source_l00255}00255\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_enums_ad1d66dfc7718c1f9a6bd6852fe2eb9e9}{TextEditorDiagnosticLevel}}.Error,}
+\DoxyCodeLine{\Hypertarget{_diagnostic_bag_8cs_source_l00256}00256\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}Constructors\ need\ to\ be\ within\ a\ type\ definition."{}},}
+\DoxyCodeLine{\Hypertarget{_diagnostic_bag_8cs_source_l00257}00257\ \ \ \ \ \ \ \ \ \ \ \ \ textSpan,}
+\DoxyCodeLine{\Hypertarget{_diagnostic_bag_8cs_source_l00258}00258\ \ \ \ \ \ \ \ \ \ \ \ \ Guid.Parse(\textcolor{stringliteral}{"{}7ba92f4f-\/9d7e-\/49f8-\/b377-\/8e754d6a5f53"{}}));}
+\DoxyCodeLine{\Hypertarget{_diagnostic_bag_8cs_source_l00259}00259\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_diagnostic_bag_8cs_source_l00260}00260\ }
+\DoxyCodeLine{\Hypertarget{_diagnostic_bag_8cs_source_l00269}\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_diagnostic_bag_ac5547548f2769c70e8cd25ac52442dfc}{00269}}\ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_diagnostic_bag_ac5547548f2769c70e8cd25ac52442dfc}{ReportTodoException}}(\mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_lexers_1_1_models_a1ffd1a7706dfd364560b76d47467812f}{TextEditorTextSpan}}\ textSpan,\ \textcolor{keywordtype}{string}\ message)}
+\DoxyCodeLine{\Hypertarget{_diagnostic_bag_8cs_source_l00270}00270\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_diagnostic_bag_8cs_source_l00271}00271\ \ \ \ \ \ \ \ \ Report(}
+\DoxyCodeLine{\Hypertarget{_diagnostic_bag_8cs_source_l00272}00272\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_enums_ad1d66dfc7718c1f9a6bd6852fe2eb9e9}{TextEditorDiagnosticLevel}}.Hint,}
+\DoxyCodeLine{\Hypertarget{_diagnostic_bag_8cs_source_l00273}00273\ \ \ \ \ \ \ \ \ \ \ \ \ \$\textcolor{stringliteral}{"{}TODO:\ \{message\}"{}},}
+\DoxyCodeLine{\Hypertarget{_diagnostic_bag_8cs_source_l00274}00274\ \ \ \ \ \ \ \ \ \ \ \ \ textSpan,}
+\DoxyCodeLine{\Hypertarget{_diagnostic_bag_8cs_source_l00275}00275\ \ \ \ \ \ \ \ \ \ \ \ \ Guid.Parse(\textcolor{stringliteral}{"{}a595d93d-\/e4c7-\/4d30-\/9373-\/1b246b2668bf"{}}));}
+\DoxyCodeLine{\Hypertarget{_diagnostic_bag_8cs_source_l00276}00276\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_diagnostic_bag_8cs_source_l00277}00277\ }
+\DoxyCodeLine{\Hypertarget{_diagnostic_bag_8cs_source_l00278}00278\ \ \ \ \ \textcolor{keyword}{private}\ \textcolor{keywordtype}{void}\ Report(}
+\DoxyCodeLine{\Hypertarget{_diagnostic_bag_8cs_source_l00279}00279\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_enums_ad1d66dfc7718c1f9a6bd6852fe2eb9e9}{TextEditorDiagnosticLevel}}\ diagnosticLevel,}
+\DoxyCodeLine{\Hypertarget{_diagnostic_bag_8cs_source_l00280}00280\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{string}\ message,}
+\DoxyCodeLine{\Hypertarget{_diagnostic_bag_8cs_source_l00281}00281\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_lexers_1_1_models_a1ffd1a7706dfd364560b76d47467812f}{TextEditorTextSpan}}\ textSpan,}
+\DoxyCodeLine{\Hypertarget{_diagnostic_bag_8cs_source_l00282}00282\ \ \ \ \ \ \ \ \ Guid\ diagnosticId)}
+\DoxyCodeLine{\Hypertarget{_diagnostic_bag_8cs_source_l00283}00283\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_diagnostic_bag_8cs_source_l00284}00284\ \ \ \ \ \ \ \ \ var\ compilerServiceDiagnosticDecorationKind\ =\ diagnosticLevel\ \textcolor{keywordflow}{switch}}
+\DoxyCodeLine{\Hypertarget{_diagnostic_bag_8cs_source_l00285}00285\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_diagnostic_bag_8cs_source_l00286}00286\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_enums_ad1d66dfc7718c1f9a6bd6852fe2eb9e9ad11c7e9c409c6ca80008c5dd01d44d1e}{TextEditorDiagnosticLevel.Hint}}\ =>\ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_enums_a37ea1c6c1dede680be7ef301530957ae}{CompilerServiceDiagnosticDecorationKind}}.DiagnosticHint,}
+\DoxyCodeLine{\Hypertarget{_diagnostic_bag_8cs_source_l00287}00287\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_enums_ad1d66dfc7718c1f9a6bd6852fe2eb9e9a0f78b20318b5aef4dca6dbae5051960a}{TextEditorDiagnosticLevel.Suggestion}}\ =>\ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_enums_a37ea1c6c1dede680be7ef301530957ae}{CompilerServiceDiagnosticDecorationKind}}.DiagnosticSuggestion,}
+\DoxyCodeLine{\Hypertarget{_diagnostic_bag_8cs_source_l00288}00288\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_enums_ad1d66dfc7718c1f9a6bd6852fe2eb9e9a0eaadb4fcb48a0a0ed7bc9868be9fbaa}{TextEditorDiagnosticLevel.Warning}}\ =>\ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_enums_a37ea1c6c1dede680be7ef301530957ae}{CompilerServiceDiagnosticDecorationKind}}.DiagnosticWarning,}
+\DoxyCodeLine{\Hypertarget{_diagnostic_bag_8cs_source_l00289}00289\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_enums_ad1d66dfc7718c1f9a6bd6852fe2eb9e9a902b0d55fddef6f8d651fe1035b7d4bd}{TextEditorDiagnosticLevel.Error}}\ =>\ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_enums_a37ea1c6c1dede680be7ef301530957ae}{CompilerServiceDiagnosticDecorationKind}}.DiagnosticError,}
+\DoxyCodeLine{\Hypertarget{_diagnostic_bag_8cs_source_l00290}00290\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_enums_ad1d66dfc7718c1f9a6bd6852fe2eb9e9a6311ae17c1ee52b36e68aaf4ad066387}{TextEditorDiagnosticLevel.Other}}\ =>\ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_enums_a37ea1c6c1dede680be7ef301530957ae}{CompilerServiceDiagnosticDecorationKind}}.DiagnosticOther,}
+\DoxyCodeLine{\Hypertarget{_diagnostic_bag_8cs_source_l00291}00291\ \ \ \ \ \ \ \ \ \ \ \ \ \_\ =>\ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_enums_a37ea1c6c1dede680be7ef301530957ae}{CompilerServiceDiagnosticDecorationKind}}.DiagnosticOther,}
+\DoxyCodeLine{\Hypertarget{_diagnostic_bag_8cs_source_l00292}00292\ \ \ \ \ \ \ \ \ \};}
+\DoxyCodeLine{\Hypertarget{_diagnostic_bag_8cs_source_l00293}00293\ }
+\DoxyCodeLine{\Hypertarget{_diagnostic_bag_8cs_source_l00294}00294\ \ \ \ \ \ \ \ \ textSpan\ =\ textSpan\ with}
+\DoxyCodeLine{\Hypertarget{_diagnostic_bag_8cs_source_l00295}00295\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_diagnostic_bag_8cs_source_l00296}00296\ \ \ \ \ \ \ \ \ \ \ \ \ DecorationByte\ =\ (byte)compilerServiceDiagnosticDecorationKind}
+\DoxyCodeLine{\Hypertarget{_diagnostic_bag_8cs_source_l00297}00297\ \ \ \ \ \ \ \ \ \};}
+\DoxyCodeLine{\Hypertarget{_diagnostic_bag_8cs_source_l00298}00298\ }
+\DoxyCodeLine{\Hypertarget{_diagnostic_bag_8cs_source_l00299}00299\ \ \ \ \ \ \ \ \ \_diagnosticsBag.Add(\textcolor{keyword}{new}\ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_a9a73f4ac751a25cd91cce2523e9c166b}{TextEditorDiagnostic}}(}
+\DoxyCodeLine{\Hypertarget{_diagnostic_bag_8cs_source_l00300}00300\ \ \ \ \ \ \ \ \ \ \ \ \ diagnosticLevel,}
+\DoxyCodeLine{\Hypertarget{_diagnostic_bag_8cs_source_l00301}00301\ \ \ \ \ \ \ \ \ \ \ \ \ message,}
+\DoxyCodeLine{\Hypertarget{_diagnostic_bag_8cs_source_l00302}00302\ \ \ \ \ \ \ \ \ \ \ \ \ textSpan,}
+\DoxyCodeLine{\Hypertarget{_diagnostic_bag_8cs_source_l00303}00303\ \ \ \ \ \ \ \ \ \ \ \ \ diagnosticId));}
+\DoxyCodeLine{\Hypertarget{_diagnostic_bag_8cs_source_l00304}00304\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_diagnostic_bag_8cs_source_l00305}00305\ }
+\DoxyCodeLine{\Hypertarget{_diagnostic_bag_8cs_source_l00306}\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_diagnostic_bag_a758b02866241c9f6cf444b06aeef7252}{00306}}\ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_diagnostic_bag_a758b02866241c9f6cf444b06aeef7252}{ClearByResourceUri}}(\mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_lexers_1_1_models_a26a1b63ad28ec7955b30bc6c91571eca}{ResourceUri}}\ resourceUri)}
+\DoxyCodeLine{\Hypertarget{_diagnostic_bag_8cs_source_l00307}00307\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_diagnostic_bag_8cs_source_l00308}00308\ \ \ \ \ \ \ \ \ var\ keep\ =\ \_diagnosticsBag.Where(x\ =>\ x.TextSpan.ResourceUri\ !=\ resourceUri);}
+\DoxyCodeLine{\Hypertarget{_diagnostic_bag_8cs_source_l00309}00309\ }
+\DoxyCodeLine{\Hypertarget{_diagnostic_bag_8cs_source_l00310}00310\ \ \ \ \ \ \ \ \ \_diagnosticsBag.Clear();}
+\DoxyCodeLine{\Hypertarget{_diagnostic_bag_8cs_source_l00311}00311\ \ \ \ \ \ \ \ \ \_diagnosticsBag.AddRange(keep);}
+\DoxyCodeLine{\Hypertarget{_diagnostic_bag_8cs_source_l00312}00312\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_diagnostic_bag_8cs_source_l00313}00313\ \}}
+
+\end{DoxyCode}

@@ -1,0 +1,7 @@
+var namespace_luthetus_1_1_ide_1_1_tests_1_1_basis_1_1_file_systems_1_1_models =
+[
+    [ "FileTemplateParameterTests", "class_luthetus_1_1_ide_1_1_tests_1_1_basis_1_1_file_systems_1_1_models_1_1_file_template_parameter_tests.html", "class_luthetus_1_1_ide_1_1_tests_1_1_basis_1_1_file_systems_1_1_models_1_1_file_template_parameter_tests" ],
+    [ "FileTemplateProviderTests", "class_luthetus_1_1_ide_1_1_tests_1_1_basis_1_1_file_systems_1_1_models_1_1_file_template_provider_tests.html", "class_luthetus_1_1_ide_1_1_tests_1_1_basis_1_1_file_systems_1_1_models_1_1_file_template_provider_tests" ],
+    [ "FileTemplateResultTests", "class_luthetus_1_1_ide_1_1_tests_1_1_basis_1_1_file_systems_1_1_models_1_1_file_template_result_tests.html", "class_luthetus_1_1_ide_1_1_tests_1_1_basis_1_1_file_systems_1_1_models_1_1_file_template_result_tests" ],
+    [ "FileTemplateTests", "class_luthetus_1_1_ide_1_1_tests_1_1_basis_1_1_file_systems_1_1_models_1_1_file_template_tests.html", "class_luthetus_1_1_ide_1_1_tests_1_1_basis_1_1_file_systems_1_1_models_1_1_file_template_tests" ]
+];

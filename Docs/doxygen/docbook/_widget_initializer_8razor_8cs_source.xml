@@ -1,0 +1,54 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="__widget_initializer_8razor_8cs_source" xml:lang="en-US">
+<title>WidgetInitializer.razor.cs</title>
+<indexterm><primary>Source/Lib/Common/Widgets/Displays/WidgetInitializer.razor.cs</primary></indexterm>
+Go to the documentation of this file.<programlisting linenumbering="unnumbered"><anchor xml:id="__widget_initializer_8razor_8cs_source_1l00001"/>00001 <emphasis role="keyword">using&#32;</emphasis>Fluxor;
+<anchor xml:id="__widget_initializer_8razor_8cs_source_1l00002"/>00002 <emphasis role="keyword">using&#32;</emphasis>Fluxor.Blazor.Web.Components;
+<anchor xml:id="__widget_initializer_8razor_8cs_source_1l00003"/>00003 <emphasis role="keyword">using&#32;</emphasis>Microsoft.AspNetCore.Components;
+<anchor xml:id="__widget_initializer_8razor_8cs_source_1l00004"/>00004 <emphasis role="keyword">using&#32;</emphasis><link linkend="_namespace_luthetus_1_1_common_1_1_razor_lib_1_1_widgets_1_1_models">Luthetus.Common.RazorLib.Widgets.Models</link>;
+<anchor xml:id="__widget_initializer_8razor_8cs_source_1l00005"/>00005 <emphasis role="keyword">using&#32;</emphasis><link linkend="_namespace_luthetus_1_1_common_1_1_razor_lib_1_1_widgets_1_1_states">Luthetus.Common.RazorLib.Widgets.States</link>;
+<anchor xml:id="__widget_initializer_8razor_8cs_source_1l00006"/>00006 <emphasis role="keyword">using&#32;</emphasis><link linkend="_namespace_luthetus_1_1_common_1_1_razor_lib_1_1_contexts_1_1_displays">Luthetus.Common.RazorLib.Contexts.Displays</link>;
+<anchor xml:id="__widget_initializer_8razor_8cs_source_1l00007"/>00007 
+<anchor xml:id="__widget_initializer_8razor_8cs_source_1l00008"/>00008 <emphasis role="keyword">namespace&#32;</emphasis><link linkend="_namespace_luthetus_1_1_common_1_1_razor_lib_1_1_widgets_1_1_displays">Luthetus.Common.RazorLib.Widgets.Displays</link>;
+<anchor xml:id="__widget_initializer_8razor_8cs_source_1l00009"/>00009 
+<anchor xml:id="__widget_initializer_8razor_8cs_source_1l00010"/><link linkend="_class_luthetus_1_1_common_1_1_razor_lib_1_1_widgets_1_1_displays_1_1_widget_initializer">00010</link> <emphasis role="keyword">public</emphasis>&#32;<emphasis role="keyword">partial&#32;class&#32;</emphasis><link linkend="_class_luthetus_1_1_common_1_1_razor_lib_1_1_widgets_1_1_displays_1_1_widget_initializer">WidgetInitializer</link>&#32;:&#32;FluxorComponent
+<anchor xml:id="__widget_initializer_8razor_8cs_source_1l00011"/>00011 {
+<anchor xml:id="__widget_initializer_8razor_8cs_source_1l00012"/>00012 &#32;&#32;&#32;&#32;[Inject]
+<anchor xml:id="__widget_initializer_8razor_8cs_source_1l00013"/>00013 &#32;&#32;&#32;&#32;<emphasis role="keyword">private</emphasis>&#32;IState&lt;WidgetState&gt;&#32;WidgetStateWrap&#32;{&#32;<emphasis role="keyword">get</emphasis>;&#32;<emphasis role="keyword">set</emphasis>;&#32;}&#32;=&#32;<emphasis role="keyword">null</emphasis>!;
+<anchor xml:id="__widget_initializer_8razor_8cs_source_1l00014"/>00014 &#32;&#32;&#32;&#32;[Inject]
+<anchor xml:id="__widget_initializer_8razor_8cs_source_1l00015"/>00015 &#32;&#32;&#32;&#32;<emphasis role="keyword">private</emphasis>&#32;IDispatcher&#32;Dispatcher&#32;{&#32;<emphasis role="keyword">get</emphasis>;&#32;<emphasis role="keyword">set</emphasis>;&#32;}&#32;=&#32;<emphasis role="keyword">null</emphasis>!;
+<anchor xml:id="__widget_initializer_8razor_8cs_source_1l00016"/>00016 &#32;&#32;&#32;&#32;
+<anchor xml:id="__widget_initializer_8razor_8cs_source_1l00017"/>00017 &#32;&#32;&#32;&#32;<emphasis role="keyword">private</emphasis>&#32;<link linkend="_class_luthetus_1_1_common_1_1_razor_lib_1_1_contexts_1_1_displays_1_1_context_boundary">ContextBoundary</link>?&#32;_widgetContextBoundary;
+<anchor xml:id="__widget_initializer_8razor_8cs_source_1l00018"/>00018 &#32;&#32;&#32;&#32;
+<anchor xml:id="__widget_initializer_8razor_8cs_source_1l00019"/>00019 &#32;&#32;&#32;&#32;<emphasis role="keyword">private</emphasis>&#32;Task&#32;HandleOnFocusIn(<link linkend="_class_luthetus_1_1_common_1_1_razor_lib_1_1_widgets_1_1_models_1_1_widget_model">WidgetModel</link>&#32;widget)
+<anchor xml:id="__widget_initializer_8razor_8cs_source_1l00020"/>00020 &#32;&#32;&#32;&#32;{
+<anchor xml:id="__widget_initializer_8razor_8cs_source_1l00021"/>00021 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;var&#32;localWidgetContextBoundary&#32;=&#32;_widgetContextBoundary;
+<anchor xml:id="__widget_initializer_8razor_8cs_source_1l00022"/>00022 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;
+<anchor xml:id="__widget_initializer_8razor_8cs_source_1l00023"/>00023 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">if</emphasis>&#32;(localWidgetContextBoundary&#32;is&#32;not&#32;<emphasis role="keyword">null</emphasis>)
+<anchor xml:id="__widget_initializer_8razor_8cs_source_1l00024"/>00024 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;localWidgetContextBoundary.<link linkend="_class_luthetus_1_1_common_1_1_razor_lib_1_1_contexts_1_1_displays_1_1_context_boundary_1a467a1e23484a300a881ac0d6dd9e6736">HandleOnFocusIn</link>();
+<anchor xml:id="__widget_initializer_8razor_8cs_source_1l00025"/>00025 &#32;&#32;&#32;&#32;
+<anchor xml:id="__widget_initializer_8razor_8cs_source_1l00026"/>00026 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;Task.CompletedTask;
+<anchor xml:id="__widget_initializer_8razor_8cs_source_1l00027"/>00027 &#32;&#32;&#32;&#32;}
+<anchor xml:id="__widget_initializer_8razor_8cs_source_1l00028"/>00028 &#32;&#32;&#32;&#32;
+<anchor xml:id="__widget_initializer_8razor_8cs_source_1l00029"/>00029 &#32;&#32;&#32;&#32;<emphasis role="keyword">private</emphasis>&#32;Task&#32;HandleOnFocusOut(<link linkend="_class_luthetus_1_1_common_1_1_razor_lib_1_1_widgets_1_1_models_1_1_widget_model">WidgetModel</link>&#32;widget)
+<anchor xml:id="__widget_initializer_8razor_8cs_source_1l00030"/>00030 &#32;&#32;&#32;&#32;{
+<anchor xml:id="__widget_initializer_8razor_8cs_source_1l00031"/>00031 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;TODO:&#32;neither&#32;onfocusout&#32;or&#32;onblur&#32;fit&#32;the&#32;use&#32;case.</emphasis>
+<anchor xml:id="__widget_initializer_8razor_8cs_source_1l00032"/>00032 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;&#32;&#32;&#32;&#32;&#32;&#32;I&#32;need&#32;to&#32;detect&#32;when&#32;focus&#32;leaves&#32;either&#32;the&#32;widget&#32;itself</emphasis>
+<anchor xml:id="__widget_initializer_8razor_8cs_source_1l00033"/>00033 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;&#32;&#32;&#32;&#32;&#32;&#32;or&#32;leaves&#32;its&#32;descendents&#32;(this&#32;part&#32;sounds&#32;like&#32;onfocusout).</emphasis>
+<anchor xml:id="__widget_initializer_8razor_8cs_source_1l00034"/>00034 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;&#32;&#32;&#32;&#32;&#32;&#32;|</emphasis>
+<anchor xml:id="__widget_initializer_8razor_8cs_source_1l00035"/>00035 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;&#32;&#32;&#32;&#32;&#32;&#32;BUT</emphasis>
+<anchor xml:id="__widget_initializer_8razor_8cs_source_1l00036"/>00036 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;&#32;&#32;&#32;&#32;&#32;&#32;|</emphasis>
+<anchor xml:id="__widget_initializer_8razor_8cs_source_1l00037"/>00037 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;&#32;&#32;&#32;&#32;&#32;&#32;I&#32;furthermore,&#32;ONLY&#32;want&#32;to&#32;have&#32;this&#32;fire&#32;if&#32;the&#32;newly&#32;focused</emphasis>
+<anchor xml:id="__widget_initializer_8razor_8cs_source_1l00038"/>00038 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;&#32;&#32;&#32;&#32;&#32;&#32;HTML&#32;element&#32;is&#32;neither&#32;the&#32;widget&#32;itself&#32;or&#32;one&#32;of&#32;its&#32;descendents.</emphasis>
+<anchor xml:id="__widget_initializer_8razor_8cs_source_1l00039"/>00039 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;&#32;&#32;&#32;&#32;&#32;&#32;|</emphasis>
+<anchor xml:id="__widget_initializer_8razor_8cs_source_1l00040"/>00040 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;&#32;&#32;&#32;&#32;&#32;&#32;When&#32;this&#32;event&#32;occurs,&#32;the&#32;widget&#32;should&#32;no&#32;longer&#32;render.</emphasis>
+<anchor xml:id="__widget_initializer_8razor_8cs_source_1l00041"/>00041 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;Task.CompletedTask;
+<anchor xml:id="__widget_initializer_8razor_8cs_source_1l00042"/>00042 &#32;&#32;&#32;&#32;}
+<anchor xml:id="__widget_initializer_8razor_8cs_source_1l00043"/>00043 &#32;&#32;&#32;&#32;
+<anchor xml:id="__widget_initializer_8razor_8cs_source_1l00044"/>00044 &#32;&#32;&#32;&#32;<emphasis role="keyword">private</emphasis>&#32;Task&#32;RemoveWidget()
+<anchor xml:id="__widget_initializer_8razor_8cs_source_1l00045"/>00045 &#32;&#32;&#32;&#32;{
+<anchor xml:id="__widget_initializer_8razor_8cs_source_1l00046"/>00046 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;Dispatcher.Dispatch(<emphasis role="keyword">new</emphasis>&#32;<link linkend="_namespace_luthetus_1_1_common_1_1_razor_lib_1_1_widgets_1_1_states_1ae409c20006757ee1f7bd424a0ad46b05">WidgetState</link>.SetWidgetAction(<emphasis role="keyword">null</emphasis>));
+<anchor xml:id="__widget_initializer_8razor_8cs_source_1l00047"/>00047 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;Task.CompletedTask;
+<anchor xml:id="__widget_initializer_8razor_8cs_source_1l00048"/>00048 &#32;&#32;&#32;&#32;}
+<anchor xml:id="__widget_initializer_8razor_8cs_source_1l00049"/>00049 }
+</programlisting></section>

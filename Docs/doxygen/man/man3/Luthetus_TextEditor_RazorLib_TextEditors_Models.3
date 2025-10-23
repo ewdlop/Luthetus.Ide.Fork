@@ -1,0 +1,343 @@
+.TH "Luthetus.TextEditor.RazorLib.TextEditors.Models" 3 "Version 1.0.0" "Luthetus.Ide" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+Luthetus.TextEditor.RazorLib.TextEditors.Models
+.SH SYNOPSIS
+.br
+.PP
+.SS "Namespaces"
+
+.in +1c
+.ti -1c
+.RI "namespace \fBInternals\fP"
+.br
+.in -1c
+.SS "Classes"
+
+.in +1c
+.ti -1c
+.RI "class \fBCursorModifierBagTextEditor\fP"
+.br
+.ti -1c
+.RI "class \fBDynamicViewModelAdapterTextEditor\fP"
+.br
+.RI "This type contains all data, and logic, necessary to render a text editor from within a dialog, a panel tab, or a text editor group tab\&. "
+.ti -1c
+.RI "class \fBExtensionNoPeriodFacts\fP"
+.br
+.RI "The constants do not start with a period\&. "
+.ti -1c
+.RI "interface \fBITabTextEditor\fP"
+.br
+.ti -1c
+.RI "interface \fBITextEditorDependentComponent\fP"
+.br
+.ti -1c
+.RI "interface \fBITextEditorEditContext\fP"
+.br
+.RI "If one invokes, "_ = editContext\&.GetViewModelModifier(viewModelKey);"\&.
+.br
+ Then a side effect occurs where the view model with the provided viewModelKey, will be marked as a having been modified\&.
+.br
+ After a Post is finished, the text editor service iterates over all 'modified' view models and re-renders them\&.
+.br
+ This behavior is a bit hacky since it requires some amount of 'hidden knowledge'\&.
+.br
+ To get a view model without marking it as modified, use the optional parameter, 'isReadonly' and set it to 'true'\&.
+.br
+ The main reason for making this comment, is that I sometimes assign the result of 'GetViewModelModifier' to discard\&.
+.br
+ When I do this it feels especially hacky, so I want to leave a paper trail of what I mean by that statement\&.
+.br
+\&. "
+.ti -1c
+.RI "interface \fBITextEditorModel\fP"
+.br
+.RI "Stores the \fBRichCharacter\fP class instances that represent the text\&.
+.br
+
+.br
+ Each \fBTextEditorModel\fP has a unique underlying resource uri\&.
+.br
+
+.br
+ Therefore, if one has a text file named "myHomework\&.txt", then only one \fBTextEditorModel\fP can exist with the resource uri of "myHomework\&.txt"\&.
+.br
+
+.br
+\&. "
+.ti -1c
+.RI "interface \fBITextEditorModelApi\fP"
+.br
+.ti -1c
+.RI "interface \fBITextEditorViewModelApi\fP"
+.br
+.ti -1c
+.RI "class \fBTextEditorModel\fP"
+.br
+.ti -1c
+.RI "class \fBTextEditorModelApi\fP"
+.br
+.ti -1c
+.RI "class \fBTextEditorModelExtensionMethods\fP"
+.br
+.ti -1c
+.RI "class \fBTextEditorModelModifier\fP"
+.br
+.RI "(2024-06-08) I belive there are too many ways to edit a text editor\&. There should only be 'Insert(\&.\&.\&.)' and 'Remove(\&.\&.\&.)' methods\&. Any code I currently have in 'TextEditorModelModifier\&.cs' that I deem as technical debt or a bad idea will be put in this file\&. Then, once organized I hope to make sense of what the "lean" solution is\&. "
+.ti -1c
+.RI "class \fBTextEditorPartition\fP"
+.br
+.ti -1c
+.RI "class \fBTextEditorViewModelApi\fP"
+.br
+.ti -1c
+.RI "class \fBTextEditorViewModelModifier\fP"
+.br
+.in -1c
+.SS "Enumerations"
+
+.in +1c
+.ti -1c
+.RI "enum \fBMotionKind\fP { \fBBackspace\fP, \fBDelete\fP }"
+.br
+.in -1c
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "record \fBCategory\fP (string Value)"
+.br
+.RI "An optional distinction between many \fBTextEditorViewModel\fP(s) which display the same \fBTextEditorModel\fP\&. 
+.br
+ Example: one might have a 'main' text editor\&. Perhaps this category is named "main"\&. Furthermore one might have a 'peek' window\&. Perhaps this category is named "peek"\&. This results in one being able to have two separate view models, which display the same underlying model, and distinguish between them\&. "
+.ti -1c
+.RI "record \fBScrollbarDimensions\fP (double ScrollLeft, double ScrollTop, double ScrollWidth, double ScrollHeight, double MarginScrollHeight)"
+.br
+.RI "The unit of measurement is Pixels (px) C# controls the scrollbar dimensions\&. "
+.ti -1c
+.RI "record \fBTextEditorDimensions\fP (double Width, double Height, double BoundingClientRectLeft, double BoundingClientRectTop)"
+.br
+.RI "The unit of measurement is Pixels (px) JavaScript/Html controls the text editor dimensions\&. "
+.ti -1c
+.RI "Task \fBFocusAsync\fP ()"
+.br
+.ti -1c
+.RI "void \fBDispose\fP ()"
+.br
+.ti -1c
+.RI "record \fBWidgetBlock\fP (Key< WidgetBlock > Key, string Title, string HtmlElementId, int LineIndex, Type ComponentType, Dictionary< string, object?>? ComponentParameterMap)"
+.br
+.RI "This type takes up 100% of the width of a text editor row, and therefore shifts the top position of any rows that follow\&. "
+.ti -1c
+.RI "record \fBWidgetInline\fP (Key< WidgetInline > Key, string Title, string HtmlElementId, Type ComponentType, Dictionary< string, object?>? ComponentParameterMap)"
+.br
+.RI "This type takes up some amount of width of a text editor row, and therefore shifts any the left position of any columns that follow\&. "
+.ti -1c
+.RI "record \fBWidgetOverlay\fP (Key< WidgetOverlay > Key, string Title, string HtmlElementId, Type ComponentType, Dictionary< string, object?>? ComponentParameterMap)"
+.br
+.RI "This type is rendered 'on-top' of with respect to "z-index" the content\&. "
+.in -1c
+.SS "Variables"
+
+.in +1c
+.ti -1c
+.RI "record \fBTextEditorViewModel\fP"
+.br
+.RI "Stores the state of the user interface\&. For example, the user's \fBTextEditorCursor\fP instances are stored here\&.
+.br
+
+.br
+\&. "
+.ti -1c
+.RI "record \fBResourceUri\fP \fBresourceUri\fP"
+.br
+.ti -1c
+.RI "record \fBResourceUri\fP \fBITextEditorService\fP \fBtextEditorService\fP"
+.br
+.ti -1c
+.RI "record \fBResourceUri\fP \fBITextEditorService\fP IDispatcher \fBdispatcher\fP"
+.br
+.ti -1c
+.RI "record \fBResourceUri\fP \fBITextEditorService\fP IDispatcher \fBIDialogService\fP \fBdialogService\fP"
+.br
+.ti -1c
+.RI "record \fBResourceUri\fP \fBITextEditorService\fP IDispatcher \fBIDialogService\fP IJSRuntime \fBjsRuntime\fP"
+.br
+.ti -1c
+.RI "record \fBResourceUri\fP \fBITextEditorService\fP IDispatcher \fBIDialogService\fP IJSRuntime \fBVirtualizationResult\fP< \fBRichCharacter\fP[]> \fBvirtualizationResult\fP"
+.br
+.ti -1c
+.RI "record \fBResourceUri\fP \fBITextEditorService\fP IDispatcher \fBIDialogService\fP IJSRuntime \fBVirtualizationResult\fP< \fBRichCharacter\fP[]> \fBTextEditorDimensions\fP \fBtextEditorDimensions\fP"
+.br
+.ti -1c
+.RI "record \fBResourceUri\fP \fBITextEditorService\fP IDispatcher \fBIDialogService\fP IJSRuntime \fBVirtualizationResult\fP< \fBRichCharacter\fP[]> \fBTextEditorDimensions\fP \fBScrollbarDimensions\fP \fBscrollbarDimensions\fP"
+.br
+.ti -1c
+.RI "record \fBResourceUri\fP \fBITextEditorService\fP IDispatcher \fBIDialogService\fP IJSRuntime \fBVirtualizationResult\fP< \fBRichCharacter\fP[]> \fBTextEditorDimensions\fP \fBScrollbarDimensions\fP \fBCharAndLineMeasurements\fP \fBcharAndLineMeasurements\fP"
+.br
+.ti -1c
+.RI "record \fBResourceUri\fP \fBITextEditorService\fP IDispatcher \fBIDialogService\fP IJSRuntime \fBVirtualizationResult\fP< \fBRichCharacter\fP[]> \fBTextEditorDimensions\fP \fBScrollbarDimensions\fP \fBCharAndLineMeasurements\fP bool \fBdisplayCommandBar\fP"
+.br
+.in -1c
+.SH "Enumeration Type Documentation"
+.PP 
+.SS "enum \fBLuthetus\&.TextEditor\&.RazorLib\&.TextEditors\&.Models\&.MotionKind\fP"
+
+.PP
+\fBEnumerator\fP
+.in +1c
+.TP
+\f(BIBackspace \fP
+.TP
+\f(BIDelete \fP
+.PP
+Definition at line \fB3\fP of file \fBMotionKind\&.cs\fP\&.
+.SH "Function Documentation"
+.PP 
+.SS "record Luthetus\&.TextEditor\&.RazorLib\&.TextEditors\&.Models\&.Category (string Value)"
+
+.PP
+An optional distinction between many \fBTextEditorViewModel\fP(s) which display the same \fBTextEditorModel\fP\&. 
+.br
+ Example: one might have a 'main' text editor\&. Perhaps this category is named "main"\&. Furthermore one might have a 'peek' window\&. Perhaps this category is named "peek"\&. This results in one being able to have two separate view models, which display the same underlying model, and distinguish between them\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIValue\fP The category string value itself\&. 
+.RE
+.PP
+
+.SS "void Luthetus\&.TextEditor\&.RazorLib\&.TextEditors\&.Models\&.Dispose ()"
+
+.PP
+Definition at line \fB199\fP of file \fBTextEditorViewModel\&.cs\fP\&.
+.SS "Task Luthetus\&.TextEditor\&.RazorLib\&.TextEditors\&.Models\&.FocusAsync ()"
+
+.PP
+Definition at line \fB194\fP of file \fBTextEditorViewModel\&.cs\fP\&.
+.SS "record Luthetus\&.TextEditor\&.RazorLib\&.TextEditors\&.Models\&.ScrollbarDimensions (double ScrollLeft, double ScrollTop, double ScrollWidth, double ScrollHeight, double MarginScrollHeight)"
+
+.PP
+The unit of measurement is Pixels (px) C# controls the scrollbar dimensions\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIScrollLeft\fP The unit of measurement is Pixels (px)
+.br
+\fIScrollTop\fP The unit of measurement is Pixels (px)
+.br
+\fIScrollWidth\fP The unit of measurement is Pixels (px)
+.br
+\fIScrollHeight\fP The unit of measurement is Pixels (px)
+.br
+\fIMarginScrollHeight\fP The unit of measurement is Pixels (px)
+.RE
+.PP
+
+.PP
+Definition at line \fB12\fP of file \fBScrollbarDimensions\&.cs\fP\&.
+.SS "record Luthetus\&.TextEditor\&.RazorLib\&.TextEditors\&.Models\&.TextEditorDimensions (double Width, double Height, double BoundingClientRectLeft, double BoundingClientRectTop)"
+
+.PP
+The unit of measurement is Pixels (px) JavaScript/Html controls the text editor dimensions\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIWidth\fP The unit of measurement is Pixels (px)
+.br
+\fIHeight\fP The unit of measurement is Pixels (px)
+.br
+\fIBoundingClientRectLeft\fP The unit of measurement is Pixels (px)
+.br
+\fIBoundingClientRectTop\fP The unit of measurement is Pixels (px)
+.RE
+.PP
+
+.SS "record Luthetus\&.TextEditor\&.RazorLib\&.TextEditors\&.Models\&.WidgetBlock (Key< WidgetBlock > Key, string Title, string HtmlElementId, int LineIndex, Type ComponentType, Dictionary< string, object?>? ComponentParameterMap)"
+
+.PP
+This type takes up 100% of the width of a text editor row, and therefore shifts the top position of any rows that follow\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fILineIndex\fP When the text editor renders this line, it will then render where the line is, the corresponding widget\&.
+.RE
+.PP
+So, the widget block-wise takes the UI row that the line was occupying, and the line content is moved down by the height of the widget\&.
+
+.PP
+An index greater than or equal to the count of lines is permitted, to have the widget render at the bottom of the text editor\&.
+
+.PP
+If the index is greater than the count of lines, then the index is taken to be the count of lines instead\&. 
+.SS "record Luthetus\&.TextEditor\&.RazorLib\&.TextEditors\&.Models\&.WidgetInline (Key< WidgetInline > Key, string Title, string HtmlElementId, Type ComponentType, Dictionary< string, object?>? ComponentParameterMap)"
+
+.PP
+This type takes up some amount of width of a text editor row, and therefore shifts any the left position of any columns that follow\&. 
+.SS "record Luthetus\&.TextEditor\&.RazorLib\&.TextEditors\&.Models\&.WidgetOverlay (Key< WidgetOverlay > Key, string Title, string HtmlElementId, Type ComponentType, Dictionary< string, object?>? ComponentParameterMap)"
+
+.PP
+This type is rendered 'on-top' of with respect to "z-index" the content\&. 
+.SH "Variable Documentation"
+.PP 
+.SS "record \fBResourceUri\fP \fBITextEditorService\fP IDispatcher \fBIDialogService\fP IJSRuntime \fBVirtualizationResult\fP<\fBRichCharacter\fP[]> \fBTextEditorDimensions\fP \fBScrollbarDimensions\fP \fBCharAndLineMeasurements\fP Luthetus\&.TextEditor\&.RazorLib\&.TextEditors\&.Models\&.charAndLineMeasurements"
+
+.PP
+Definition at line \fB40\fP of file \fBTextEditorViewModel\&.cs\fP\&.
+.SS "record \fBResourceUri\fP \fBITextEditorService\fP IDispatcher \fBIDialogService\fP Luthetus\&.TextEditor\&.RazorLib\&.TextEditors\&.Models\&.dialogService"
+
+.PP
+Definition at line \fB35\fP of file \fBTextEditorViewModel\&.cs\fP\&.
+.SS "record \fBResourceUri\fP \fBITextEditorService\fP IDispatcher Luthetus\&.TextEditor\&.RazorLib\&.TextEditors\&.Models\&.dispatcher"
+
+.PP
+Definition at line \fB34\fP of file \fBTextEditorViewModel\&.cs\fP\&.
+.SS "record \fBResourceUri\fP \fBITextEditorService\fP IDispatcher \fBIDialogService\fP IJSRuntime \fBVirtualizationResult\fP<\fBRichCharacter\fP[]> \fBTextEditorDimensions\fP \fBScrollbarDimensions\fP \fBCharAndLineMeasurements\fP bool Luthetus\&.TextEditor\&.RazorLib\&.TextEditors\&.Models\&.displayCommandBar"
+
+.PP
+Definition at line \fB41\fP of file \fBTextEditorViewModel\&.cs\fP\&.
+.SS "record \fBResourceUri\fP \fBITextEditorService\fP IDispatcher \fBIDialogService\fP IJSRuntime Luthetus\&.TextEditor\&.RazorLib\&.TextEditors\&.Models\&.jsRuntime"
+
+.PP
+Definition at line \fB36\fP of file \fBTextEditorViewModel\&.cs\fP\&.
+.SS "record \fBResourceUri\fP Luthetus\&.TextEditor\&.RazorLib\&.TextEditors\&.Models\&.resourceUri"
+
+.PP
+Definition at line \fB32\fP of file \fBTextEditorViewModel\&.cs\fP\&.
+.SS "record \fBResourceUri\fP \fBITextEditorService\fP IDispatcher \fBIDialogService\fP IJSRuntime \fBVirtualizationResult\fP<\fBRichCharacter\fP[]> \fBTextEditorDimensions\fP \fBScrollbarDimensions\fP Luthetus\&.TextEditor\&.RazorLib\&.TextEditors\&.Models\&.scrollbarDimensions"
+
+.PP
+Definition at line \fB39\fP of file \fBTextEditorViewModel\&.cs\fP\&.
+.SS "record \fBResourceUri\fP \fBITextEditorService\fP IDispatcher \fBIDialogService\fP IJSRuntime \fBVirtualizationResult\fP<\fBRichCharacter\fP[]> \fBTextEditorDimensions\fP Luthetus\&.TextEditor\&.RazorLib\&.TextEditors\&.Models\&.textEditorDimensions"
+
+.PP
+Definition at line \fB38\fP of file \fBTextEditorViewModel\&.cs\fP\&.
+.SS "record \fBResourceUri\fP \fBITextEditorService\fP Luthetus\&.TextEditor\&.RazorLib\&.TextEditors\&.Models\&.textEditorService"
+
+.PP
+Definition at line \fB33\fP of file \fBTextEditorViewModel\&.cs\fP\&.
+.SS "record Luthetus\&.TextEditor\&.RazorLib\&.TextEditors\&.Models\&.TextEditorViewModel\fR [sealed]\fP"
+
+.PP
+Stores the state of the user interface\&. For example, the user's \fBTextEditorCursor\fP instances are stored here\&.
+.br
+
+.br
+\&. Each \fBTextEditorViewModel\fP has a unique underlying \fBTextEditorModel\fP\&. Therefore, if one has a \fBTextEditorModel\fP of a text file named "myHomework\&.txt", then arbitrary amount of \fBTextEditorViewModel\fP(s) can reference that \fBTextEditorModel\fP\&.
+.br
+
+.br
+
+.PP
+For example, maybe one has a main text editor, but also a peek window open of the same underlying \fBTextEditorModel\fP\&. The main text editor is one \fBTextEditorViewModel\fP and the peek window is a separate \fBTextEditorViewModel\fP\&. Both of those \fBTextEditorViewModel\fP(s) are referencing the same \fBTextEditorModel\fP\&. Therefore typing into the peek window will also result in the main text editor re-rendering with the updated text and vice versa\&. 
+.PP
+Definition at line \fB28\fP of file \fBTextEditorViewModel\&.cs\fP\&.
+.SS "record \fBResourceUri\fP \fBITextEditorService\fP IDispatcher \fBIDialogService\fP IJSRuntime \fBVirtualizationResult\fP<\fBRichCharacter\fP[]> Luthetus\&.TextEditor\&.RazorLib\&.TextEditors\&.Models\&.virtualizationResult"
+
+.PP
+Definition at line \fB37\fP of file \fBTextEditorViewModel\&.cs\fP\&.
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for Luthetus\&.Ide from the source code\&.

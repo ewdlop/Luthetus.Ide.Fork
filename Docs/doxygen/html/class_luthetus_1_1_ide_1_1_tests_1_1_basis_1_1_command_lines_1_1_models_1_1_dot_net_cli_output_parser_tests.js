@@ -1,0 +1,5 @@
+var class_luthetus_1_1_ide_1_1_tests_1_1_basis_1_1_command_lines_1_1_models_1_1_dot_net_cli_output_parser_tests =
+[
+    [ "ParseDotNetNewListTerminalOutput", "class_luthetus_1_1_ide_1_1_tests_1_1_basis_1_1_command_lines_1_1_models_1_1_dot_net_cli_output_parser_tests.html#a9be508b715b60fa27d5ea71fb89247a1", null ],
+    [ "ParseDotNetTestListTestsTerminalOutput", "class_luthetus_1_1_ide_1_1_tests_1_1_basis_1_1_command_lines_1_1_models_1_1_dot_net_cli_output_parser_tests.html#aca29865c0799d63f06d36ca170577e7f", null ]
+];

@@ -1,0 +1,4 @@
+var namespace_luthetus_1_1_ide_1_1_tests_1_1_basis_1_1_shareds_1_1_models =
+[
+    [ "BackgroundTaskDialogModelTests", "class_luthetus_1_1_ide_1_1_tests_1_1_basis_1_1_shareds_1_1_models_1_1_background_task_dialog_model_tests.html", "class_luthetus_1_1_ide_1_1_tests_1_1_basis_1_1_shareds_1_1_models_1_1_background_task_dialog_model_tests" ]
+];

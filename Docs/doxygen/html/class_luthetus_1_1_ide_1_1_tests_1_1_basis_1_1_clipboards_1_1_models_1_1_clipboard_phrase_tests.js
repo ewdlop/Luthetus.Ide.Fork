@@ -1,0 +1,4 @@
+var class_luthetus_1_1_ide_1_1_tests_1_1_basis_1_1_clipboards_1_1_models_1_1_clipboard_phrase_tests =
+[
+    [ "Constructor", "class_luthetus_1_1_ide_1_1_tests_1_1_basis_1_1_clipboards_1_1_models_1_1_clipboard_phrase_tests.html#a42971c4b53ce0005641ca99dbe2a7a56", null ]
+];

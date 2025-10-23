@@ -1,0 +1,4 @@
+var _generic_preprocessor_directive_syntax_8cs =
+[
+    [ "Luthetus.TextEditor.RazorLib.CompilerServices.GenericLexer.SyntaxObjects.GenericPreprocessorDirectiveSyntax", "class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_generic_lexer_1_1_syntax_7b18fb5d130161031f00f928a4542dd8.html", "class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_generic_lexer_1_1_syntax_7b18fb5d130161031f00f928a4542dd8" ]
+];

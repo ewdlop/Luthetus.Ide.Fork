@@ -1,0 +1,4 @@
+var _dot_net_solution_resource_8cs =
+[
+    [ "Luthetus.CompilerServices.DotNetSolution.CompilerServiceCase.DotNetSolutionResource", "class_luthetus_1_1_compiler_services_1_1_dot_net_solution_1_1_compiler_service_case_1_1_dot_net_solution_resource.html", "class_luthetus_1_1_compiler_services_1_1_dot_net_solution_1_1_compiler_service_case_1_1_dot_net_solution_resource" ]
+];

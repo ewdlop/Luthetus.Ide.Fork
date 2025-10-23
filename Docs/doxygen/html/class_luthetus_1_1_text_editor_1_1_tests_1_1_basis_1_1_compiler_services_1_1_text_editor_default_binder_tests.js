@@ -1,0 +1,4 @@
+var class_luthetus_1_1_text_editor_1_1_tests_1_1_basis_1_1_compiler_services_1_1_text_editor_default_binder_tests =
+[
+    [ "DiagnosticsList", "class_luthetus_1_1_text_editor_1_1_tests_1_1_basis_1_1_compiler_services_1_1_text_editor_default_binder_tests.html#a1da9a51ddf3d804bf4f64c93e7d675a9", null ]
+];

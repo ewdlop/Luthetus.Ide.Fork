@@ -1,0 +1,4 @@
+var class_luthetus_1_1_extensions_1_1_dot_net_1_1_dot_net_solutions_1_1_displays_1_1_tree_view_solution_folder_display =
+[
+    [ "DotNetSolutionFolder", "class_luthetus_1_1_extensions_1_1_dot_net_1_1_dot_net_solutions_1_1_displays_1_1_tree_view_solution_folder_display.html#ac299be5631eddfd22252d430a4b44f50", null ]
+];

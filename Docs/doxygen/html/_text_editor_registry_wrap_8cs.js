@@ -1,0 +1,4 @@
+var _text_editor_registry_wrap_8cs =
+[
+    [ "Luthetus.TextEditor.RazorLib.Decorations.Models.TextEditorRegistryWrap", "class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_decorations_1_1_models_1_1_text_editor_registry_wrap.html", "class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_decorations_1_1_models_1_1_text_editor_registry_wrap" ]
+];

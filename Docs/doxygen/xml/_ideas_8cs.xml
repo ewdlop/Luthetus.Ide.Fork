@@ -1,0 +1,88 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
+  <compounddef id="_ideas_8cs" kind="file" language="C#">
+    <compoundname>Ideas.cs</compoundname>
+    <innerclass refid="class_luthetus_1_1_b_unit_1_1_tests_1_1_text_editors_1_1_mutable_virtualization_result_1_1_ideas" prot="public">Luthetus::BUnit::Tests::TextEditors::MutableVirtualizationResult::Ideas</innerclass>
+    <innernamespace refid="namespace_luthetus">Luthetus</innernamespace>
+    <innernamespace refid="namespace_luthetus_1_1_b_unit">Luthetus::BUnit</innernamespace>
+    <innernamespace refid="namespace_luthetus_1_1_b_unit_1_1_tests">Luthetus::BUnit::Tests</innernamespace>
+    <innernamespace refid="namespace_luthetus_1_1_b_unit_1_1_tests_1_1_text_editors">Luthetus::BUnit::Tests::TextEditors</innernamespace>
+    <innernamespace refid="namespace_luthetus_1_1_b_unit_1_1_tests_1_1_text_editors_1_1_mutable_virtualization_result">Luthetus::BUnit::Tests::TextEditors::MutableVirtualizationResult</innernamespace>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1" refid="namespace_luthetus_1_1_b_unit_1_1_tests_1_1_text_editors_1_1_mutable_virtualization_result" refkind="compound"><highlight class="keyword">namespace<sp/></highlight><highlight class="normal"><ref refid="namespace_luthetus_1_1_b_unit_1_1_tests_1_1_text_editors_1_1_mutable_virtualization_result" kindref="compound">Luthetus.BUnit.Tests.TextEditors.MutableVirtualizationResult</ref>;</highlight></codeline>
+<codeline lineno="2"><highlight class="normal"></highlight></codeline>
+<codeline lineno="3"><highlight class="normal"></highlight><highlight class="comment">/*</highlight></codeline>
+<codeline lineno="4"><highlight class="comment">Virtualization<sp/>is<sp/>part<sp/>of<sp/>the<sp/>text<sp/>editor<sp/>UI.</highlight></codeline>
+<codeline lineno="5"><highlight class="comment">This<sp/>way,<sp/>only<sp/>the<sp/>text<sp/>the<sp/>user<sp/>can<sp/>fit<sp/>in<sp/>their<sp/>view<sp/>(this<sp/>description<sp/>is<sp/>simple<sp/>and<sp/>inaccurate),<sp/>is<sp/>given<sp/>to<sp/>the<sp/>UI</highlight></codeline>
+<codeline lineno="6"><highlight class="comment">in<sp/>order<sp/>to<sp/>be<sp/>displayed.</highlight></codeline>
+<codeline lineno="7"><highlight class="comment"></highlight></codeline>
+<codeline lineno="8"><highlight class="comment">The<sp/>code<sp/>that<sp/>goes<sp/>into<sp/>calculating<sp/>the<sp/>virtualization<sp/>result,<sp/>is<sp/>seemingly<sp/>CPU<sp/>intensive<sp/>enough,</highlight></codeline>
+<codeline lineno="9"><highlight class="comment">to<sp/>warrant<sp/>that<sp/>insertion<sp/>of<sp/>text<sp/>by<sp/>a<sp/>user<sp/>should<sp/>not<sp/>re-calculate<sp/>the<sp/>virtualization<sp/>result.</highlight></codeline>
+<codeline lineno="10"><highlight class="comment"></highlight></codeline>
+<codeline lineno="11"><highlight class="comment">A<sp/>further<sp/>detail<sp/>here,<sp/>moving<sp/>the<sp/>scroll<sp/>position<sp/>should<sp/>continue<sp/>resulting<sp/>in<sp/>the<sp/>re-calculation</highlight></codeline>
+<codeline lineno="12"><highlight class="comment">of<sp/>the<sp/>virtualization<sp/>result,<sp/>this<sp/>isn&apos;t<sp/>seen<sp/>as<sp/>a<sp/>problem.<sp/>(albeit<sp/>the<sp/>current<sp/>method<sp/>of<sp/>re-calculation</highlight></codeline>
+<codeline lineno="13"><highlight class="comment">could<sp/>be<sp/>optimized).</highlight></codeline>
+<codeline lineno="14"><highlight class="comment"></highlight></codeline>
+<codeline lineno="15"><highlight class="comment">A<sp/>headache<sp/>inducing<sp/>thought<sp/>is<sp/>dealing<sp/>with<sp/>&quot;random<sp/>access<sp/>insertion&quot;<sp/>so<sp/>to<sp/>speak.</highlight></codeline>
+<codeline lineno="16"><highlight class="comment">If<sp/>it<sp/>is<sp/>presumed<sp/>a<sp/>user<sp/>through<sp/>the<sp/>UI<sp/>and<sp/>by<sp/>typing<sp/>on<sp/>their<sp/>keyboard<sp/>can<sp/>only<sp/>edit<sp/>their<sp/>virtualization<sp/>result</highlight></codeline>
+<codeline lineno="17"><highlight class="comment"><sp/><sp/><sp/><sp/>(because<sp/>anywhere<sp/>the<sp/>cursor<sp/>goes<sp/>the<sp/>scroll<sp/>position<sp/>will<sp/>move<sp/>to,<sp/>thus<sp/>making<sp/>it<sp/>the<sp/>new<sp/>virtualization<sp/>result).</highlight></codeline>
+<codeline lineno="18"><highlight class="comment">Then<sp/>how<sp/>does<sp/>one<sp/>handle<sp/>refactoring,<sp/>which<sp/>inserts<sp/>text<sp/>above<sp/>the<sp/>current<sp/>virtualization<sp/>result.</highlight></codeline>
+<codeline lineno="19"><highlight class="comment"><sp/><sp/><sp/><sp/>Because,<sp/>this<sp/>would<sp/>then<sp/>move<sp/>the<sp/>scrollbar,<sp/>but<sp/>in<sp/>a<sp/>way<sp/>that<sp/>could<sp/>push<sp/>the<sp/>existing<sp/>virtualization<sp/>result</highlight></codeline>
+<codeline lineno="20"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>out<sp/>of<sp/>bounds,<sp/>and<sp/>result<sp/>in<sp/>re-calculation<sp/>of<sp/>the<sp/>virtualization<sp/>being<sp/>necessary.</highlight></codeline>
+<codeline lineno="21"><highlight class="comment"></highlight></codeline>
+<codeline lineno="22"><highlight class="comment">In<sp/>short,<sp/>it<sp/>seems<sp/>&quot;easy<sp/>enough&quot;<sp/>to<sp/>predict<sp/>what<sp/>the<sp/>virtualization<sp/>result<sp/>will<sp/>be<sp/>after<sp/>the<sp/>user<sp/>types</highlight></codeline>
+<codeline lineno="23"><highlight class="comment">the<sp/>letter<sp/>&apos;a&apos;<sp/>within<sp/>the<sp/>bounds<sp/>of<sp/>an<sp/>existing<sp/>virtualization<sp/>result.</highlight></codeline>
+<codeline lineno="24"><highlight class="comment"></highlight></codeline>
+<codeline lineno="25"><highlight class="comment">But,<sp/>edits<sp/>outside<sp/>of<sp/>the<sp/>virtualization<sp/>result<sp/>might<sp/>be<sp/>a<sp/>bit<sp/>more<sp/>complicated.</highlight></codeline>
+<codeline lineno="26"><highlight class="comment"></highlight></codeline>
+<codeline lineno="27"><highlight class="comment">Therefore,<sp/>it<sp/>is<sp/>recommended<sp/>that<sp/>the<sp/>&quot;within<sp/>bounds<sp/>of<sp/>an<sp/>existing<sp/>virtualization<sp/>result&quot;</highlight></codeline>
+<codeline lineno="28"><highlight class="comment">case<sp/>is<sp/>handled<sp/>firstly.</highlight></codeline>
+<codeline lineno="29"><highlight class="comment"></highlight></codeline>
+<codeline lineno="30"><highlight class="comment">And<sp/>that<sp/>any<sp/>edit<sp/>outside<sp/>of<sp/>an<sp/>existing<sp/>virtualization<sp/>result<sp/>would<sp/>continue<sp/>to<sp/>re-trigger<sp/>the</highlight></codeline>
+<codeline lineno="31"><highlight class="comment">virtualization<sp/>calculation<sp/>for<sp/>now.</highlight></codeline>
+<codeline lineno="32"><highlight class="comment"></highlight></codeline>
+<codeline lineno="33"><highlight class="comment">A<sp/>concern<sp/>with<sp/>this<sp/>idea<sp/>is<sp/>that,<sp/>if<sp/>incorrectly<sp/>implemented<sp/>there<sp/>could<sp/>be<sp/>&apos;desync&apos;<sp/>between</highlight></codeline>
+<codeline lineno="34"><highlight class="comment">what<sp/>the<sp/>user<sp/>sees<sp/>in<sp/>the<sp/>text<sp/>editor,<sp/>and<sp/>the<sp/>actual<sp/>text<sp/>value<sp/>behind<sp/>the<sp/>scenes.</highlight></codeline>
+<codeline lineno="35"><highlight class="comment"></highlight></codeline>
+<codeline lineno="36"><highlight class="comment">It<sp/>is<sp/>vital<sp/>that<sp/>there<sp/>never<sp/>be<sp/>any<sp/>&apos;desync&apos;.</highlight></codeline>
+<codeline lineno="37"><highlight class="comment"></highlight></codeline>
+<codeline lineno="38"><highlight class="comment">Considering<sp/>that<sp/>there<sp/>exists<sp/>code<sp/>to<sp/>track<sp/>the<sp/>&apos;EditList&apos;.</highlight></codeline>
+<codeline lineno="39"><highlight class="comment"></highlight></codeline>
+<codeline lineno="40"><highlight class="comment">Perhaps<sp/>one<sp/>could<sp/>track<sp/>the<sp/>starting<sp/>EditIndex,<sp/>and<sp/>the<sp/>ending<sp/>EditIndex,</highlight></codeline>
+<codeline lineno="41"><highlight class="comment">when<sp/>finalizing<sp/>an<sp/>ITextEditorEditContext.</highlight></codeline>
+<codeline lineno="42"><highlight class="comment"></highlight></codeline>
+<codeline lineno="43"><highlight class="comment">Then,<sp/>if<sp/>the<sp/>&apos;EditList&apos;<sp/>entries<sp/>are<sp/>seen<sp/>to<sp/>be<sp/>in<sp/>bounds<sp/>of<sp/>the</highlight></codeline>
+<codeline lineno="44"><highlight class="comment">&apos;virtualization<sp/>result&apos;<sp/>then<sp/>just<sp/>insert<sp/>directly<sp/>to<sp/>the<sp/>&apos;virtualization<sp/>result&apos;<sp/>those<sp/>edits<sp/>too.</highlight></codeline>
+<codeline lineno="45"><highlight class="comment"></highlight></codeline>
+<codeline lineno="46"><highlight class="comment">Else,<sp/>one<sp/>could<sp/>re-calculate<sp/>the<sp/>entire<sp/>virtualization<sp/>result.</highlight></codeline>
+<codeline lineno="47"><highlight class="comment"></highlight></codeline>
+<codeline lineno="48"><highlight class="comment">Holding<sp/>down<sp/>any<sp/>key<sp/>on<sp/>the<sp/>keyboard,<sp/>which<sp/>inserts<sp/>a<sp/>character,<sp/>demonstrates<sp/>the<sp/>current<sp/>issue<sp/>with</highlight></codeline>
+<codeline lineno="49"><highlight class="comment">re-calculating<sp/>the<sp/>virtualization<sp/>result<sp/>on<sp/>every<sp/>insertion.</highlight></codeline>
+<codeline lineno="50"><highlight class="comment"></highlight></codeline>
+<codeline lineno="51"><highlight class="comment">In<sp/>a<sp/>small<sp/>enough<sp/>file,<sp/>there<sp/>isn&apos;t<sp/>much<sp/>performance<sp/>issues.</highlight></codeline>
+<codeline lineno="52"><highlight class="comment">But,<sp/>after<sp/>about<sp/>10,000<sp/>characters<sp/>it<sp/>seems<sp/>to<sp/>be<sp/>getting<sp/>exponentially<sp/>performing<sp/>worse<sp/>and<sp/>worse</highlight></codeline>
+<codeline lineno="53"><highlight class="comment">for<sp/>every<sp/>character<sp/>that<sp/>is<sp/>within<sp/>a<sp/>file.</highlight></codeline>
+<codeline lineno="54"><highlight class="comment"></highlight></codeline>
+<codeline lineno="55"><highlight class="comment">If<sp/>I<sp/>write<sp/>a<sp/>unit<sp/>test<sp/>which<sp/>provides<sp/>the<sp/>initial<sp/>virtualization<sp/>result,<sp/>then<sp/>I<sp/>can<sp/>insert<sp/>text<sp/>within<sp/>the<sp/>bounds</highlight></codeline>
+<codeline lineno="56"><highlight class="comment">of<sp/>said<sp/>virtualization<sp/>result<sp/>with<sp/>this<sp/>idea<sp/>being<sp/>described.</highlight></codeline>
+<codeline lineno="57"><highlight class="comment"></highlight></codeline>
+<codeline lineno="58"><highlight class="comment">Afterwards,<sp/>I<sp/>can<sp/>assert<sp/>that<sp/>the<sp/>&quot;modified<sp/>virtualization<sp/>result&quot;<sp/>equals<sp/>what<sp/>would<sp/>have</highlight></codeline>
+<codeline lineno="59"><highlight class="comment">been<sp/>calculated<sp/>had<sp/>I<sp/>re-invoked<sp/>the<sp/>calculate<sp/>virtualization<sp/>result<sp/>method.</highlight></codeline>
+<codeline lineno="60"><highlight class="comment"></highlight></codeline>
+<codeline lineno="61"><highlight class="comment">======================================================</highlight></codeline>
+<codeline lineno="62"><highlight class="comment"></highlight></codeline>
+<codeline lineno="63"><highlight class="comment">Deletion<sp/>of<sp/>text<sp/>might<sp/>bring<sp/>downstream<sp/>unloaded<sp/>text<sp/>into<sp/>view.</highlight></codeline>
+<codeline lineno="64"><highlight class="comment">*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="65"><highlight class="normal"></highlight></codeline>
+<codeline lineno="67" refid="class_luthetus_1_1_b_unit_1_1_tests_1_1_text_editors_1_1_mutable_virtualization_result_1_1_ideas" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">public</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="class_luthetus_1_1_b_unit_1_1_tests_1_1_text_editors_1_1_mutable_virtualization_result_1_1_ideas" kindref="compound">Ideas</ref></highlight></codeline>
+<codeline lineno="68"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="69"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="70"><highlight class="normal">}</highlight></codeline>
+    </programlisting>
+    <location file="Source/Tests/BUnit/Luthetus.BUnit.Tests/TextEditors/MutableVirtualizationResult/Ideas.cs"/>
+  </compounddef>
+</doxygen>

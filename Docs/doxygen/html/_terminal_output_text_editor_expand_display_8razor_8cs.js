@@ -1,0 +1,4 @@
+var _terminal_output_text_editor_expand_display_8razor_8cs =
+[
+    [ "Luthetus.Ide.RazorLib.Terminals.Displays.TerminalOutputTextEditorExpandDisplay", "class_luthetus_1_1_ide_1_1_razor_lib_1_1_terminals_1_1_displays_1_1_terminal_output_text_editor_expand_display.html", "class_luthetus_1_1_ide_1_1_razor_lib_1_1_terminals_1_1_displays_1_1_terminal_output_text_editor_expand_display" ]
+];

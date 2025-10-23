@@ -1,0 +1,158 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_dir_79032446e782a0a94031d37ce5494fdc" xml:lang="en-US">
+<title>Source/Lib/TextEditor/TextEditors/Displays/Internals Directory Reference</title>
+<indexterm><primary>Source/Lib/TextEditor/TextEditors/Displays/Internals Directory Reference</primary></indexterm>
+Directory dependency graph for Internals:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="dir_79032446e782a0a94031d37ce5494fdc_dep.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+<simplesect>
+    <title>Files    </title>
+        <itemizedlist>
+            <listitem><para>file <link linkend="__autocomplete_menu_8razor_8cs">AutocompleteMenu.razor.cs</link></para>
+</listitem>
+            <listitem><para>file <link linkend="__body_driver_8cs">BodyDriver.cs</link></para>
+</listitem>
+            <listitem><para>file <link linkend="__text_editor_2_text_editors_2_displays_2_internals_2_command_bar_display_8razor_8cs">CommandBarDisplay.razor.cs</link></para>
+</listitem>
+            <listitem><para>file <link linkend="__context_menu_8razor_8cs">ContextMenu.razor.cs</link></para>
+</listitem>
+            <listitem><para>file <link linkend="__cursor_driver_8cs">CursorDriver.cs</link></para>
+</listitem>
+            <listitem><para>file <link linkend="__diagnostic_display_8razor_8cs">DiagnosticDisplay.razor.cs</link></para>
+</listitem>
+            <listitem><para>file <link linkend="__find_overlay_display_8razor_8cs">FindOverlayDisplay.razor.cs</link></para>
+</listitem>
+            <listitem><para>file <link linkend="__footer_driver_8cs">FooterDriver.cs</link></para>
+</listitem>
+            <listitem><para>file <link linkend="__gutter_driver_8cs">GutterDriver.cs</link></para>
+</listitem>
+            <listitem><para>file <link linkend="__header_driver_8cs">HeaderDriver.cs</link></para>
+</listitem>
+            <listitem><para>file <link linkend="__label_widget_inline_display_8razor_8cs">LabelWidgetInlineDisplay.razor.cs</link></para>
+</listitem>
+            <listitem><para>file <link linkend="__presentation_and_selection_driver_8cs">PresentationAndSelectionDriver.cs</link></para>
+</listitem>
+            <listitem><para>file <link linkend="__scrollbar_section_8razor_8cs">ScrollbarSection.razor.cs</link></para>
+</listitem>
+            <listitem><para>file <link linkend="__symbol_display_8razor_8cs">SymbolDisplay.razor.cs</link></para>
+</listitem>
+            <listitem><para>file <link linkend="__text_editor_default_footer_display_8razor_8cs">TextEditorDefaultFooterDisplay.razor.cs</link></para>
+</listitem>
+            <listitem><para>file <link linkend="__text_editor_default_header_display_8razor_8cs">TextEditorDefaultHeaderDisplay.razor.cs</link></para>
+</listitem>
+            <listitem><para>file <link linkend="__text_editor_dev_tools_anchor_display_8razor_8cs">TextEditorDevToolsAnchorDisplay.razor.cs</link></para>
+</listitem>
+            <listitem><para>file <link linkend="__text_editor_dev_tools_display_8razor_8cs">TextEditorDevToolsDisplay.razor.cs</link></para>
+</listitem>
+            <listitem><para>file <link linkend="__tooltip_display_8razor_8cs">TooltipDisplay.razor.cs</link></para>
+</listitem>
+            <listitem><para>file <link linkend="__virtualization_driver_8cs">VirtualizationDriver.cs</link></para>
+</listitem>
+            <listitem><para>file <link linkend="__widget_layer_display_8razor_8cs">WidgetLayerDisplay.razor.cs</link></para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<section>
+<title>Detailed Description</title>
+
+<para>ICONS SHOULD BE STATIC RENDERFRAGMENTS</para>
+
+<para>Firstly I want to summarize the &quot;ASP.NET Core Blazor performance best practices&quot; for .NET 8</para>
+
+<para><link xlink:href="https://learn.microsoft.com/en-us/aspnet/core/blazor/performance?view=aspnetcore-8.0">https://learn.microsoft.com/en-us/aspnet/core/blazor/performance?view=aspnetcore-8.0</link><itemizedlist>
+<listitem>
+<para>Avoid unnecessary rendering of component subtrees</para>
+</listitem><listitem>
+<para>Virtualization</para>
+</listitem><listitem>
+<para>Create lightweight, optimized components</para>
+</listitem><listitem>
+<para>Avoid thousands of component instances</para>
+</listitem><listitem>
+<para>Inline child components into their parents</para>
+</listitem><listitem>
+<para>Define reusable RenderFragments in code</para>
+</listitem><listitem>
+<para>Don&apos;t receive too many parameters</para>
+</listitem><listitem>
+<para>Ensure cascading parameters are fixed</para>
+</listitem><listitem>
+<para>Avoid attribute splatting with CaptureUnmatchedValues</para>
+</listitem><listitem>
+<para>Implement SetParametersAsync manually</para>
+</listitem><listitem>
+<para>Don&apos;t trigger events too rapidly</para>
+</listitem><listitem>
+<para>Avoid rerendering after handling events without state changes</para>
+</listitem><listitem>
+<para>Avoid recreating delegates for many repeated elements or components</para>
+</listitem><listitem>
+<para>Optimize JavaScript interop speed<itemizedlist>
+<listitem>
+<para>Avoid excessively fine-grained calls</para>
+</listitem><listitem>
+<para>Consider the use of synchronous calls<itemizedlist>
+<listitem>
+<para>Call JavaScript from .NET (This section only applies to client-side components.)</para>
+</listitem><listitem>
+<para>Call .NET from JavaScript (This section only applies to client-side components.)</para>
+</listitem></itemizedlist>
+</para>
+</listitem><listitem>
+<para>Use JavaScript [JSImport]/[JSExport] interop</para>
+</listitem></itemizedlist>
+</para>
+</listitem><listitem>
+<para>Ahead-of-time (AOT) compilation</para>
+</listitem><listitem>
+<para>Minimize app download size</para>
+</listitem><listitem>
+<para>Runtime relinking</para>
+</listitem><listitem>
+<para>Use System.Text.Json</para>
+</listitem><listitem>
+<para>Intermediate Language (IL) trimming</para>
+</listitem><listitem>
+<para>Lazy load assemblies</para>
+</listitem><listitem>
+<para>Compression</para>
+</listitem><listitem>
+<para>Disable unused features</para>
+</listitem></itemizedlist>
+</para>
+
+<para>I have an idea but its not fully thought out.</para>
+
+<para>I&apos;m imagining that I could turn a Blazor component into a C# class that returns a RenderFragment.</para>
+
+<para>And that the reason for this would be to avoid the overhead of rendering a Blazor component, when all I want is to compartmentalize my code a bit.</para>
+
+<para>There is the inline renderfragment template, but I feel that the text editor has an extreme amount of code/markup, and I don&apos;t want it all in the same file.</para>
+
+<para>But... I don&apos;t want to incur the overhead of a Blazor component just to compartmentalize my text editor logic.</para>
+
+<para>So instead of &apos;BodySection.razor&apos; I wonder if &apos;BodySectionDriver.cs&apos; could be made such that the class just returns a renderfragment rather than....</para>
+
+<para>Idea I have me idea</para>
+
+<para>What if I make &apos;BodySectionDriver.razor&apos;. And it being .razor permits me to easily write the renderfragment templates with the &lt;div&gt; syntax.</para>
+
+<para>Then each renderfragment is static. And it takes as parameters the text editor RenderBatch.</para>
+
+<para>Would this then be equivalent to the existing code without the component overhead? Because &apos;BodySectionDriver.razor&apos; would never be rendered itself. Instead you just invoke the static functions that it has to generate the render fragment.</para>
+
+<para>I&apos;m also not doing the JavaScript interop the new way which they described as more efficient I need to change it</para>
+
+<para>I consistently have been making optimizations to the text editor UI logic. And I presume I&apos;m getting less and less benefit from continuing to optimize it rather than looking elsewhere. But given how frequently the text editor renders, I consider it a &quot;performance critical&quot; UI piece otherwise I wouldn&apos;t be as worried about optimizing the UI logic.</para>
+
+<para>So, since I&apos;ve consistently been making the optimizations though, I might not make the change I just described yet.</para>
+
+<para>But having it written down for the future as a possible UI optimization I think is good. </para>
+</section>
+</section>

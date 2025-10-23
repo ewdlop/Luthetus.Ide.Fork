@@ -1,0 +1,160 @@
+.TH "Luthetus.Common.RazorLib.TreeViews.Models.TreeViewNoType" 3 "Version 1.0.0" "Luthetus.Ide" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+Luthetus.Common.RazorLib.TreeViews.Models.TreeViewNoType \- Without this datatype one cannot for example hold all their \fBTreeViewWithType<T>\fP in a List<T> unless all implementation instances share the same generic argument type\&.  
+
+.SH SYNOPSIS
+.br
+.PP
+.PP
+Inherited by \fBLuthetus\&.Common\&.RazorLib\&.TreeViews\&.Models\&.TreeViewWithType< T >\fP\&.
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBTreeViewRenderer\fP \fBGetTreeViewRenderer\fP ()"
+.br
+.ti -1c
+.RI "Task \fBLoadChildListAsync\fP ()"
+.br
+.ti -1c
+.RI "virtual void \fBLinkChildren\fP (List< \fBTreeViewNoType\fP > previousChildList, List< \fBTreeViewNoType\fP > nextChildList)"
+.br
+.RI "Sets foreach child: child\&.Parent = this; As well it sets the child\&.IndexAmongSiblings, and maintains expanded state\&. "
+.ti -1c
+.RI "virtual void \fBRemoveRelatedFilesFromParent\fP (List< \fBTreeViewNoType\fP > siblingsAndSelfTreeViews)"
+.br
+.RI "RemoveRelatedFilesFromParent is used for showing codebehinds such that a file on the filesystem can be displayed as having children in the TreeView\&.
+.br
+
+.br
+ In the case of a directory loading its children\&. After the directory loads all its children it will loop through the children invoking RemoveRelatedFilesFromParent on each of the children\&.
+.br
+
+.br
+ For example: if a directory has the children { 'Component\&.razor', 'Component\&.razor\&.cs' } then 'Component\&.razor' will remove 'Component\&.razor\&.cs' from the parent directories children and mark itself as expandable as it saw a related file in its parent\&. "
+.in -1c
+.SS "Properties"
+
+.in +1c
+.ti -1c
+.RI "object \fBUntypedItem\fP\fR [get]\fP"
+.br
+.ti -1c
+.RI "Type \fBItemType\fP\fR [get]\fP"
+.br
+.ti -1c
+.RI "\fBTreeViewNoType\fP? \fBParent\fP\fR [get, set]\fP"
+.br
+.ti -1c
+.RI "List< \fBTreeViewNoType\fP > \fBChildList\fP = new()\fR [get, set]\fP"
+.br
+.ti -1c
+.RI "int \fBIndexAmongSiblings\fP\fR [get, set]\fP"
+.br
+.RI "IndexAmongSiblings refers to the index which this \fBTreeViewNoType\fP is found at within their Parent's ChildList "
+.ti -1c
+.RI "bool \fBIsRoot\fP\fR [get, set]\fP"
+.br
+.ti -1c
+.RI "bool \fBIsHidden\fP\fR [get, set]\fP"
+.br
+.ti -1c
+.RI "bool \fBIsExpandable\fP\fR [get, set]\fP"
+.br
+.ti -1c
+.RI "bool \fBIsExpanded\fP\fR [get, set]\fP"
+.br
+.ti -1c
+.RI "\fBKey\fP< \fBTreeViewChanged\fP > \fBTreeViewChangedKey\fP = \fBKey\fP<\fBTreeViewChanged\fP>\&.NewKey()\fR [get, set]\fP"
+.br
+.ti -1c
+.RI "Key< \fBTreeViewNoType\fP > \fBKey\fP = Key<\fBTreeViewNoType\fP>\&.NewKey()\fR [get, set]\fP"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+Without this datatype one cannot for example hold all their \fBTreeViewWithType<T>\fP in a List<T> unless all implementation instances share the same generic argument type\&. 
+.PP
+Definition at line \fB9\fP of file \fBTreeViewNoType\&.cs\fP\&.
+.SH "Member Function Documentation"
+.PP 
+.SS "\fBTreeViewRenderer\fP Luthetus\&.Common\&.RazorLib\&.TreeViews\&.Models\&.TreeViewNoType\&.GetTreeViewRenderer ()\fR [abstract]\fP"
+
+.SS "virtual void Luthetus\&.Common\&.RazorLib\&.TreeViews\&.Models\&.TreeViewNoType\&.LinkChildren (List< \fBTreeViewNoType\fP > previousChildList, List< \fBTreeViewNoType\fP > nextChildList)\fR [virtual]\fP"
+
+.PP
+Sets foreach child: child\&.Parent = this; As well it sets the child\&.IndexAmongSiblings, and maintains expanded state\&. 
+.PP
+Definition at line \fB36\fP of file \fBTreeViewNoType\&.cs\fP\&.
+.SS "Task Luthetus\&.Common\&.RazorLib\&.TreeViews\&.Models\&.TreeViewNoType\&.LoadChildListAsync ()\fR [abstract]\fP"
+
+.SS "virtual void Luthetus\&.Common\&.RazorLib\&.TreeViews\&.Models\&.TreeViewNoType\&.RemoveRelatedFilesFromParent (List< \fBTreeViewNoType\fP > siblingsAndSelfTreeViews)\fR [virtual]\fP"
+
+.PP
+RemoveRelatedFilesFromParent is used for showing codebehinds such that a file on the filesystem can be displayed as having children in the TreeView\&.
+.br
+
+.br
+ In the case of a directory loading its children\&. After the directory loads all its children it will loop through the children invoking RemoveRelatedFilesFromParent on each of the children\&.
+.br
+
+.br
+ For example: if a directory has the children { 'Component\&.razor', 'Component\&.razor\&.cs' } then 'Component\&.razor' will remove 'Component\&.razor\&.cs' from the parent directories children and mark itself as expandable as it saw a related file in its parent\&. 
+.PP
+Reimplemented in \fBLuthetus\&.Common\&.RazorLib\&.TreeViews\&.Models\&.TreeViewAdhoc\fP, \fBLuthetus\&.Common\&.RazorLib\&.TreeViews\&.Models\&.Utils\&.TreeViewGroup\fP, \fBLuthetus\&.Common\&.RazorLib\&.TreeViews\&.Models\&.Utils\&.TreeViewMarkupString\fP, \fBLuthetus\&.Common\&.RazorLib\&.TreeViews\&.Models\&.Utils\&.TreeViewSpinner\fP, \fBLuthetus\&.Extensions\&.DotNet\&.CSharpProjects\&.Models\&.TreeViewCSharpProjectDependencies\fP, \fBLuthetus\&.Extensions\&.DotNet\&.CSharpProjects\&.Models\&.TreeViewCSharpProjectNugetPackageReference\fP, \fBLuthetus\&.Extensions\&.DotNet\&.CSharpProjects\&.Models\&.TreeViewCSharpProjectNugetPackageReferences\fP, \fBLuthetus\&.Extensions\&.DotNet\&.CSharpProjects\&.Models\&.TreeViewCSharpProjectToProjectReference\fP, \fBLuthetus\&.Extensions\&.DotNet\&.CSharpProjects\&.Models\&.TreeViewCSharpProjectToProjectReferences\fP, \fBLuthetus\&.Extensions\&.DotNet\&.DotNetSolutions\&.Models\&.TreeViewSolution\fP, \fBLuthetus\&.Extensions\&.DotNet\&.DotNetSolutions\&.Models\&.TreeViewSolutionFolder\fP, \fBLuthetus\&.Extensions\&.DotNet\&.Namespaces\&.Models\&.TreeViewNamespacePath\fP, \fBLuthetus\&.Extensions\&.DotNet\&.Outputs\&.Models\&.TreeViewDiagnosticLine\fP, \fBLuthetus\&.Extensions\&.DotNet\&.TestExplorers\&.Models\&.TreeViewProjectTestModel\fP, \fBLuthetus\&.Extensions\&.DotNet\&.TestExplorers\&.Models\&.TreeViewStringFragment\fP, and \fBLuthetus\&.Ide\&.RazorLib\&.FileSystems\&.Models\&.TreeViewAbsolutePath\fP\&.
+.PP
+Definition at line \fB75\fP of file \fBTreeViewNoType\&.cs\fP\&.
+.SH "Property Documentation"
+.PP 
+.SS "List<\fBTreeViewNoType\fP> Luthetus\&.Common\&.RazorLib\&.TreeViews\&.Models\&.TreeViewNoType\&.ChildList = new()\fR [get]\fP, \fR [set]\fP"
+
+.PP
+Definition at line \fB15\fP of file \fBTreeViewNoType\&.cs\fP\&.
+.SS "int Luthetus\&.Common\&.RazorLib\&.TreeViews\&.Models\&.TreeViewNoType\&.IndexAmongSiblings\fR [get]\fP, \fR [set]\fP"
+
+.PP
+IndexAmongSiblings refers to the index which this \fBTreeViewNoType\fP is found at within their Parent's ChildList 
+.PP
+Definition at line \fB21\fP of file \fBTreeViewNoType\&.cs\fP\&.
+.SS "bool Luthetus\&.Common\&.RazorLib\&.TreeViews\&.Models\&.TreeViewNoType\&.IsExpandable\fR [get]\fP, \fR [set]\fP"
+
+.PP
+Definition at line \fB24\fP of file \fBTreeViewNoType\&.cs\fP\&.
+.SS "bool Luthetus\&.Common\&.RazorLib\&.TreeViews\&.Models\&.TreeViewNoType\&.IsExpanded\fR [get]\fP, \fR [set]\fP"
+
+.PP
+Definition at line \fB25\fP of file \fBTreeViewNoType\&.cs\fP\&.
+.SS "bool Luthetus\&.Common\&.RazorLib\&.TreeViews\&.Models\&.TreeViewNoType\&.IsHidden\fR [get]\fP, \fR [set]\fP"
+
+.PP
+Definition at line \fB23\fP of file \fBTreeViewNoType\&.cs\fP\&.
+.SS "bool Luthetus\&.Common\&.RazorLib\&.TreeViews\&.Models\&.TreeViewNoType\&.IsRoot\fR [get]\fP, \fR [set]\fP"
+
+.PP
+Definition at line \fB22\fP of file \fBTreeViewNoType\&.cs\fP\&.
+.SS "Type Luthetus\&.Common\&.RazorLib\&.TreeViews\&.Models\&.TreeViewNoType\&.ItemType\fR [get]\fP, \fR [abstract]\fP"
+
+.PP
+Definition at line \fB12\fP of file \fBTreeViewNoType\&.cs\fP\&.
+.SS "Key<\fBTreeViewNoType\fP> Luthetus\&.Common\&.RazorLib\&.TreeViews\&.Models\&.TreeViewNoType\&.Key = Key<\fBTreeViewNoType\fP>\&.NewKey()\fR [get]\fP, \fR [set]\fP"
+
+.PP
+Definition at line \fB27\fP of file \fBTreeViewNoType\&.cs\fP\&.
+.SS "\fBTreeViewNoType\fP? Luthetus\&.Common\&.RazorLib\&.TreeViews\&.Models\&.TreeViewNoType\&.Parent\fR [get]\fP, \fR [set]\fP"
+
+.PP
+Definition at line \fB14\fP of file \fBTreeViewNoType\&.cs\fP\&.
+.SS "\fBKey\fP<\fBTreeViewChanged\fP> Luthetus\&.Common\&.RazorLib\&.TreeViews\&.Models\&.TreeViewNoType\&.TreeViewChangedKey = \fBKey\fP<\fBTreeViewChanged\fP>\&.NewKey()\fR [get]\fP, \fR [set]\fP"
+
+.PP
+Definition at line \fB26\fP of file \fBTreeViewNoType\&.cs\fP\&.
+.SS "object Luthetus\&.Common\&.RazorLib\&.TreeViews\&.Models\&.TreeViewNoType\&.UntypedItem\fR [get]\fP, \fR [abstract]\fP"
+
+.PP
+Definition at line \fB11\fP of file \fBTreeViewNoType\&.cs\fP\&.
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for Luthetus\&.Ide from the source code\&.

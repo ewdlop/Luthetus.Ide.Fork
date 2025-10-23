@@ -1,0 +1,4 @@
+var _injected_language_definition_8cs =
+[
+    [ "Luthetus.CompilerServices.Xml.Html.InjectedLanguage.InjectedLanguageDefinition", "class_luthetus_1_1_compiler_services_1_1_xml_1_1_html_1_1_injected_language_1_1_injected_language_definition.html", "class_luthetus_1_1_compiler_services_1_1_xml_1_1_html_1_1_injected_language_1_1_injected_language_definition" ]
+];

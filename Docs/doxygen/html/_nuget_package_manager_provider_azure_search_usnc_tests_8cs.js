@@ -1,0 +1,4 @@
+var _nuget_package_manager_provider_azure_search_usnc_tests_8cs =
+[
+    [ "Luthetus.Extensions.DotNet.Tests.Basis.Nugets.Models.NugetPackageManagerProviderAzureSearchUsncTests", "class_luthetus_1_1_extensions_1_1_dot_net_1_1_tests_1_1_basis_1_1_nugets_1_1_models_1_1_nuget_pa8f0611a83da3890d7a5c6531f53b3e2b.html", "class_luthetus_1_1_extensions_1_1_dot_net_1_1_tests_1_1_basis_1_1_nugets_1_1_models_1_1_nuget_pa8f0611a83da3890d7a5c6531f53b3e2b" ]
+];

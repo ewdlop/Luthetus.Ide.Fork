@@ -1,0 +1,149 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
+  <compounddef id="md__docs_2_text_editor_2settings" kind="page">
+    <compoundname>md__docs_2_text_editor_2settings</compoundname>
+    <title>Blazor.Text.Editor (Some parts of this are outdated. I think this markdown file was made with v5.0.0 I will update this markdown file to v7.0.0 when I find time)</title>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+<para><anchor id="md__docs_2_text_editor_2settings_1autotoc_md199"/></para>
+<sect1 id="md__docs_2_text_editor_2settings_1autotoc_md200">
+<title>Settings</title><sect2 id="md__docs_2_text_editor_2settings_1autotoc_md201">
+<title>Goal</title><para><itemizedlist>
+<listitem><para>Render the optional static dialog containing all the settings available for change.</para>
+</listitem><listitem><para>Render the resizable and moveable version of the settings dialog.</para>
+</listitem><listitem><para>Render each setting individually where desired.</para>
+</listitem><listitem><para>Inform about optional automatic local storage integration for settings.</para>
+</listitem></itemizedlist>
+</para>
+</sect2>
+<sect2 id="md__docs_2_text_editor_2settings_1autotoc_md202">
+<title>Steps</title><para><itemizedlist>
+<listitem><para>I will assume you have seen the previous tutorials during this one.</para>
+</listitem><listitem><para>In Index.razor put an HTML button element with your styling of choice. I will put mine above where the <computeroutput>TextEditorDisplay</computeroutput> was put in previous tutorials. See the following code snippet.</para>
+</listitem></itemizedlist>
+</para>
+<para><programlisting filename=".html"><codeline><highlight class="normal">&lt;button<sp/>class=&quot;btn<sp/>btn-primary&quot;&gt;</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline><highlight class="normal">&lt;/button&gt;</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">&lt;TextEditorDisplay<sp/>TextEditorKey=&quot;IndexTextEditorKey&quot;/&gt;</highlight></codeline>
+</programlisting></para>
+<para><itemizedlist>
+<listitem><para>Give the button text of <computeroutput>"Text Editor Settings"</computeroutput>. As well an @onclick which invokes the unimplemented method <computeroutput>OpenTextEditorSettingsDialog</computeroutput>. See the following code snippet.</para>
+</listitem></itemizedlist>
+</para>
+<para><programlisting filename=".html"><codeline><highlight class="normal">&lt;button<sp/>class=&quot;btn<sp/>btn-primary&quot;</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>@onclick=&quot;OpenTextEditorSettingsDialog&quot;&gt;</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>Text<sp/>Editor<sp/>Settings</highlight></codeline>
+<codeline><highlight class="normal">&lt;/button&gt;</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">&lt;TextEditorDisplay<sp/>TextEditorKey=&quot;IndexTextEditorKey&quot;/&gt;</highlight></codeline>
+</programlisting></para>
+<para><programlisting filename=".cs"><codeline><highlight class="normal">@code<sp/>{</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>[Inject]</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">private</highlight><highlight class="normal"><sp/>ITextEditorService<sp/><ref refid="namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1abe7fad0a7df96f414b675b6af70f260d" kindref="member">TextEditorService</ref><sp/>{<sp/></highlight><highlight class="keyword">get</highlight><highlight class="normal">;<sp/></highlight><highlight class="keyword">set</highlight><highlight class="normal">;<sp/>}<sp/>=<sp/></highlight><highlight class="keyword">null</highlight><highlight class="normal">!;</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">private</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/>readonly<sp/>TextEditorKey<sp/>IndexTextEditorKey<sp/>=<sp/></highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>TextEditorKey.NewTextEditorKey();</highlight></codeline>
+<codeline><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">protected</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">override</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>OnInitialized()</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1abe7fad0a7df96f414b675b6af70f260d" kindref="member">TextEditorService</ref>.RegisterCSharpTextEditor(</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>IndexTextEditorKey,</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">string</highlight><highlight class="normal">.Empty);</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>base.OnInitialized();</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">private</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>OpenTextEditorSettingsDialog()</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">throw</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">new</highlight><highlight class="normal"><sp/>NotImplementedException();</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline><highlight class="normal">}</highlight></codeline>
+</programlisting></para>
+<para><itemizedlist>
+<listitem><para>Implement the method <computeroutput>OpenTextEditorSettingsDialog</computeroutput> to contain <computeroutput>TextEditorService.ShowSettingsDialog();</computeroutput>. See the following code snippet</para>
+</listitem></itemizedlist>
+</para>
+<para><programlisting filename=".cs"><codeline><highlight class="keyword">private</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>OpenTextEditorSettingsDialog()</highlight></codeline>
+<codeline><highlight class="normal">{</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1abe7fad0a7df96f414b675b6af70f260d" kindref="member">TextEditorService</ref>.ShowSettingsDialog();</highlight></codeline>
+<codeline><highlight class="normal">}</highlight></codeline>
+</programlisting></para>
+<para><itemizedlist>
+<listitem><para>Now run the program and click the button. You will see the static settings dialog as shown in this gif.</para>
+</listitem></itemizedlist>
+</para>
+<para><image type="html" name="/Images/Gifs/20_static-dialog.gif" alt="Static settings dialog" inline="yes"></image>
+</para>
+<para><itemizedlist>
+<listitem><para>Modify the line <computeroutput>TextEditorService.ShowSettingsDialog();</computeroutput>. Pass in as an argument <computeroutput>true</computeroutput> for the optional parameter named <computeroutput>isResizable</computeroutput>.</para>
+</listitem><listitem><para>Now run the program and click the button. You will see the resizable and moveable settings dialog as shown in this gif.</para>
+</listitem></itemizedlist>
+</para>
+<para><image type="html" name="/Images/Gifs/20_dynamic-dialog.gif" alt="Dynamic settings dialog" inline="yes"></image>
+</para>
+<para><itemizedlist>
+<listitem><para>Add the following using statement to Index.razor if it is not already there.</para>
+</listitem></itemizedlist>
+</para>
+<para><programlisting filename=".html"><codeline><highlight class="normal">@using<sp/>BlazorTextEditor.RazorLib.HelperComponents</highlight></codeline>
+</programlisting></para>
+<para><itemizedlist>
+<listitem><para>Above where the button is to open the settings dialog. Render the razor components shown in the following markup.</para>
+</listitem></itemizedlist>
+</para>
+<para><programlisting filename=".html"><codeline><highlight class="normal">&lt;TextEditorInputFontSize/&gt;</highlight></codeline>
+<codeline><highlight class="normal">&lt;TextEditorInputShowNewLines/&gt;</highlight></codeline>
+<codeline><highlight class="normal">&lt;TextEditorInputShowWhitespace/&gt;</highlight></codeline>
+<codeline><highlight class="normal">&lt;TextEditorInputTheme/&gt;</highlight></codeline>
+</programlisting></para>
+<para><itemizedlist>
+<listitem><para>Now run the program and you will find every settings input from the dialog will be on the page itself. <computeroutput>You can place these inputs wherever</computeroutput> you&apos;d like as <computeroutput>everything is Dependency Injected</computeroutput>.</para>
+</listitem></itemizedlist>
+</para>
+<para><image type="html" name="/Images/Gifs/20_inline-settings.gif" alt="Inline settings dialog" inline="yes"></image>
+</para>
+<para><itemizedlist>
+<listitem><para>The nuget package by default will integrate with JavaScript local storage. One can turn this off inorder to reference the NuGet Package from a C# Project which cannot dependency inject the IJSRuntime.</para>
+</listitem><listitem><para>Add an HTML button element, with styling of your choice, on the Index.razor page. Give the button text of <computeroutput>"Read Local Storage"</computeroutput> and an @onclick that invoke the unimplemented method: <computeroutput>async Task ReadLocalStorage()</computeroutput> see the following code snippets.</para>
+</listitem></itemizedlist>
+</para>
+<para><programlisting filename=".html"><codeline><highlight class="normal">&lt;button<sp/>class=&quot;btn<sp/>btn-primary&quot;</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>@onclick=&quot;ReadLocalStorage&quot;&gt;</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>Read<sp/>Local<sp/>Storage</highlight></codeline>
+<codeline><highlight class="normal">&lt;/button&gt;</highlight></codeline>
+</programlisting></para>
+<para><programlisting filename=".cs"><codeline><highlight class="keyword">private</highlight><highlight class="normal"><sp/>async<sp/>Task<sp/>ReadLocalStorage()</highlight></codeline>
+<codeline><highlight class="normal">{</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline><highlight class="normal">}</highlight></codeline>
+</programlisting></para>
+<para><itemizedlist>
+<listitem><para>Implement <computeroutput>ReadLocalStorage()</computeroutput> to <computeroutput>await TextEditorService.SetTextEditorOptionsFromLocalStorageAsync();</computeroutput>. See the following code snippet.</para>
+</listitem></itemizedlist>
+</para>
+<para><programlisting filename=".cs"><codeline><highlight class="keyword">private</highlight><highlight class="normal"><sp/>async<sp/>Task<sp/>ReadLocalStorage()</highlight></codeline>
+<codeline><highlight class="normal">{</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>await<sp/><ref refid="namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1abe7fad0a7df96f414b675b6af70f260d" kindref="member">TextEditorService</ref>.SetTextEditorOptionsFromLocalStorageAsync();</highlight></codeline>
+<codeline><highlight class="normal">}</highlight></codeline>
+</programlisting></para>
+<para><itemizedlist>
+<listitem><para>Run the application and then modify your settings. I will set my theme to the light theme.</para>
+</listitem><listitem><para>Afterwards reload the webpage, but do not clear your cache. Once the webpage loads proceed to click the <computeroutput>Read Local Storage</computeroutput> button. Your theme should change to the light theme as the default was dark theme and your local storage had light theme stored.</para>
+</listitem><listitem><para>As of v5.0.0 of this NugetPackage the following are stored in local storage @onchange</para>
+</listitem><listitem><para>local storage: int? FontSizeInPixels</para>
+</listitem><listitem><para>local storage: Theme? Theme</para>
+</listitem><listitem><para>local storage: bool? ShowWhitespace</para>
+</listitem><listitem><para>local storage: bool? ShowNewlines</para>
+</listitem><listitem><para>As of writing this tutorial however, I am suddenly unable to get my theme from local storage. It just keeps being unrecognized and using the Unset theme.</para>
+</listitem><listitem><para>A good way to go about making use of the local storage local. Is to OnAfterRenderAsync of a &apos;top level component&apos;. In the if(firstRender) { await readLocalStorage(); } </para>
+</listitem></itemizedlist>
+</para>
+</sect2>
+</sect1>
+    </detaileddescription>
+    <location file="Docs/TextEditor/settings.md"/>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,7 @@
+var class_luthetus_1_1_compiler_services_1_1_dot_net_solution_1_1_models_1_1_dot_net_solution_global_section_builder =
+[
+    [ "Build", "class_luthetus_1_1_compiler_services_1_1_dot_net_solution_1_1_models_1_1_dot_net_solution_global_section_builder.html#ad9e50f4c7c0885642743586d1a2f3f0a", null ],
+    [ "AssociatedEntryGroup", "class_luthetus_1_1_compiler_services_1_1_dot_net_solution_1_1_models_1_1_dot_net_solution_global_section_builder.html#a3a97ab287de46281da34423711b26092", null ],
+    [ "GlobalSectionArgument", "class_luthetus_1_1_compiler_services_1_1_dot_net_solution_1_1_models_1_1_dot_net_solution_global_section_builder.html#a2b09642ccf09a0c9d7d5ae32b80b6c68", null ],
+    [ "GlobalSectionOrder", "class_luthetus_1_1_compiler_services_1_1_dot_net_solution_1_1_models_1_1_dot_net_solution_global_section_builder.html#a6ffdf020d0f08508dbdaf5f5be9c7f0b", null ]
+];

@@ -1,0 +1,4 @@
+var _terminal_was_modified_state_actions_tests_8cs =
+[
+    [ "Luthetus.Ide.Tests.Basis.Terminals.States.TerminalWasModifiedStateActionsTests", "class_luthetus_1_1_ide_1_1_tests_1_1_basis_1_1_terminals_1_1_states_1_1_terminal_was_modified_state_actions_tests.html", "class_luthetus_1_1_ide_1_1_tests_1_1_basis_1_1_terminals_1_1_states_1_1_terminal_was_modified_state_actions_tests" ]
+];

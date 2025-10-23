@@ -1,0 +1,160 @@
+.TH "Luthetus.TextEditor.RazorLib.TextEditors.Models.Internals" 3 "Version 1.0.0" "Luthetus.Ide" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+Luthetus.TextEditor.RazorLib.TextEditors.Models.Internals
+.SH SYNOPSIS
+.br
+.PP
+.SS "Classes"
+
+.in +1c
+.ti -1c
+.RI "class \fBDisplayTracker\fP"
+.br
+.RI "One must track whether the ViewModel is currently being rendered\&.
+.br
+
+.br
+\&. "
+.ti -1c
+.RI "class \fBFindOverlayDecorationMapper\fP"
+.br
+.RI "TODO: I copy and pasted \fBDiffs\&.Models\&.TextEditorDiffDecorationMapper\fP\&.\&.\&. \&.\&.\&.to make this class\&. The decorations need to be made\&. I only implemented the highlighting itself for now, and pick the colors later\&.(2024-02-01)\&. "
+.ti -1c
+.RI "class \fBFindOverlayPresentationFacts\fP"
+.br
+.ti -1c
+.RI "interface \fBITextEditorRenderBatch\fP"
+.br
+.ti -1c
+.RI "class \fBSaveFileHelper\fP"
+.br
+.RI "TODO: (2023-06-09) This class is a hacky way to track a cancellation token source per each text editor model\&. As of this comment, \fBTextEditorModel\fP is a class which is frequently re-constructed with new()\&. A CancellationTokenSource as a property would therefore not work\&. One would Cancel() then new() up another CancellationTokenSource and update the property\&. Yet its possible that instance of \fBTextEditorModel\fP isn't even being used anymore by that point\&. So a readonly object wrapper which then contains the CancellationTokenSource ensures it doesn't get lost\&. "
+.ti -1c
+.RI "class \fBScrollbarFacts\fP"
+.br
+.ti -1c
+.RI "class \fBTextEditorComponentData\fP"
+.br
+.RI "Everytime one renders a unique \fBLuthetus\&.TextEditor\&.RazorLib\&.TextEditors\&.Displays\&.TextEditorViewModelDisplay\fP, a unique identifier for the HTML elements is created\&. "
+.ti -1c
+.RI "class \fBTextEditorDevToolsDecorationMapper\fP"
+.br
+.ti -1c
+.RI "class \fBTextEditorDevToolsPresentationFacts\fP"
+.br
+.ti -1c
+.RI "class \fBTextEditorRenderBatchValidated\fP"
+.br
+.ti -1c
+.RI "class \fBViewModelDisplayOptions\fP"
+.br
+.ti -1c
+.RI "class \fBViewModelUnsafeState\fP"
+.br
+.RI "This class is a hack and was made on (2024-03-09)\&.
+.br
+
+.br
+\&. "
+.in -1c
+.SS "Enumerations"
+
+.in +1c
+.ti -1c
+.RI "enum \fBFindOverlayDecorationKind\fP { \fBNone\fP, \fBLongestCommonSubsequence\fP, \fBInsertion\fP, \fBDeletion\fP, \fBModification\fP }"
+.br
+.RI "TODO: I copy and pasted Diffs\&.Models\&.TextEditorDiffDecorationKind\&.\&.\&. \&.\&.\&.to make this class\&. The decorations need to be made\&. I only implemented the highlighting itself for now, and pick the colors later\&.(2024-02-01)\&. "
+.ti -1c
+.RI "enum \fBHeaderButtonKind\fP { \fBUndo\fP, \fBRedo\fP, \fBCut\fP, \fBCopy\fP, \fBPaste\fP, \fBSave\fP, \fBSelectAll\fP, \fBPeekWindowDisplay\fP }"
+.br
+.ti -1c
+.RI "enum \fBMenuKind\fP { \fBNone\fP, \fBContextMenu\fP, \fBAutoCompleteMenu\fP }"
+.br
+.ti -1c
+.RI "enum \fBTextEditorDevToolsDecorationKind\fP { \fBNone\fP, \fBScope\fP }"
+.br
+.in -1c
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "record \fBTooltipViewModel\fP (Type RendererType, Dictionary< string, object?>? ParameterMap, \fBRelativeCoordinates\fP \fBRelativeCoordinates\fP, string? CssClassString, Func< Task > OnMouseOver)"
+.br
+.in -1c
+.SH "Enumeration Type Documentation"
+.PP 
+.SS "enum \fBLuthetus\&.TextEditor\&.RazorLib\&.TextEditors\&.Models\&.Internals\&.FindOverlayDecorationKind\fP"
+
+.PP
+TODO: I copy and pasted \fBDiffs\&.Models\&.TextEditorDiffDecorationKind\fP\&.\&.\&. \&.\&.\&.to make this class\&. The decorations need to be made\&. I only implemented the highlighting itself for now, and pick the colors later\&.(2024-02-01)\&. 
+.PP
+\fBEnumerator\fP
+.in +1c
+.TP
+\f(BINone \fP
+.TP
+\f(BILongestCommonSubsequence \fP
+.TP
+\f(BIInsertion \fP
+.TP
+\f(BIDeletion \fP
+.TP
+\f(BIModification \fP
+.PP
+Definition at line \fB8\fP of file \fBFindOverlayDecorationKind\&.cs\fP\&.
+.SS "enum \fBLuthetus\&.TextEditor\&.RazorLib\&.TextEditors\&.Models\&.Internals\&.HeaderButtonKind\fP"
+
+.PP
+\fBEnumerator\fP
+.in +1c
+.TP
+\f(BIUndo \fP
+.TP
+\f(BIRedo \fP
+.TP
+\f(BICut \fP
+.TP
+\f(BICopy \fP
+.TP
+\f(BIPaste \fP
+.TP
+\f(BISave \fP
+.TP
+\f(BISelectAll \fP
+.TP
+\f(BIPeekWindowDisplay \fP
+.PP
+Definition at line \fB3\fP of file \fBHeaderButtonKind\&.cs\fP\&.
+.SS "enum \fBLuthetus\&.TextEditor\&.RazorLib\&.TextEditors\&.Models\&.Internals\&.MenuKind\fP"
+
+.PP
+\fBEnumerator\fP
+.in +1c
+.TP
+\f(BINone \fP
+.TP
+\f(BIContextMenu \fP
+.TP
+\f(BIAutoCompleteMenu \fP
+.PP
+Definition at line \fB3\fP of file \fBMenuKind\&.cs\fP\&.
+.SS "enum \fBLuthetus\&.TextEditor\&.RazorLib\&.TextEditors\&.Models\&.Internals\&.TextEditorDevToolsDecorationKind\fP"
+
+.PP
+\fBEnumerator\fP
+.in +1c
+.TP
+\f(BINone \fP
+.TP
+\f(BIScope \fP
+.PP
+Definition at line \fB3\fP of file \fBTextEditorDevToolsDecorationKind\&.cs\fP\&.
+.SH "Function Documentation"
+.PP 
+.SS "record Luthetus\&.TextEditor\&.RazorLib\&.TextEditors\&.Models\&.Internals\&.TooltipViewModel (Type RendererType, Dictionary< string, object?>? ParameterMap, \fBRelativeCoordinates\fP RelativeCoordinates, string? CssClassString, Func< Task > OnMouseOver)"
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for Luthetus\&.Ide from the source code\&.

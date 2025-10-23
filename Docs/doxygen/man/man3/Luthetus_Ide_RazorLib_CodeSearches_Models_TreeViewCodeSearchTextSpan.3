@@ -1,0 +1,174 @@
+.TH "Luthetus.Ide.RazorLib.CodeSearches.Models.TreeViewCodeSearchTextSpan" 3 "Version 1.0.0" "Luthetus.Ide" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+Luthetus.Ide.RazorLib.CodeSearches.Models.TreeViewCodeSearchTextSpan
+.SH SYNOPSIS
+.br
+.PP
+.PP
+Inherits \fBLuthetus\&.Common\&.RazorLib\&.TreeViews\&.Models\&.TreeViewWithType< T >\fP\&.
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBTreeViewCodeSearchTextSpan\fP (\fBTextEditorTextSpan\fP textSpan, \fBIEnvironmentProvider\fP environmentProvider, \fBIFileSystemProvider\fP fileSystemProvider, bool isExpandable, bool isExpanded)"
+.br
+.ti -1c
+.RI "override bool \fBEquals\fP (object? obj)"
+.br
+.ti -1c
+.RI "override int \fBGetHashCode\fP ()"
+.br
+.ti -1c
+.RI "override \fBTreeViewRenderer\fP \fBGetTreeViewRenderer\fP ()"
+.br
+.ti -1c
+.RI "override Task \fBLoadChildListAsync\fP ()"
+.br
+.in -1c
+
+Public Member Functions inherited from \fBLuthetus\&.Common\&.RazorLib\&.TreeViews\&.Models\&.TreeViewWithType< T >\fP
+.in +1c
+.ti -1c
+.RI "\fBTreeViewWithType\fP (T item, bool isExpandable, bool isExpanded)"
+.br
+.in -1c
+
+Public Member Functions inherited from \fBLuthetus\&.Common\&.RazorLib\&.TreeViews\&.Models\&.TreeViewNoType\fP
+.in +1c
+.ti -1c
+.RI "\fBTreeViewRenderer\fP \fBGetTreeViewRenderer\fP ()"
+.br
+.ti -1c
+.RI "Task \fBLoadChildListAsync\fP ()"
+.br
+.ti -1c
+.RI "virtual void \fBLinkChildren\fP (List< \fBTreeViewNoType\fP > previousChildList, List< \fBTreeViewNoType\fP > nextChildList)"
+.br
+.RI "Sets foreach child: child\&.Parent = this; As well it sets the child\&.IndexAmongSiblings, and maintains expanded state\&. "
+.ti -1c
+.RI "virtual void \fBRemoveRelatedFilesFromParent\fP (List< \fBTreeViewNoType\fP > siblingsAndSelfTreeViews)"
+.br
+.RI "RemoveRelatedFilesFromParent is used for showing codebehinds such that a file on the filesystem can be displayed as having children in the TreeView\&.
+.br
+
+.br
+ In the case of a directory loading its children\&. After the directory loads all its children it will loop through the children invoking RemoveRelatedFilesFromParent on each of the children\&.
+.br
+
+.br
+ For example: if a directory has the children { 'Component\&.razor', 'Component\&.razor\&.cs' } then 'Component\&.razor' will remove 'Component\&.razor\&.cs' from the parent directories children and mark itself as expandable as it saw a related file in its parent\&. "
+.in -1c
+.SS "Properties"
+
+.in +1c
+.ti -1c
+.RI "\fBIEnvironmentProvider\fP \fBEnvironmentProvider\fP\fR [get]\fP"
+.br
+.ti -1c
+.RI "\fBIFileSystemProvider\fP \fBFileSystemProvider\fP\fR [get]\fP"
+.br
+.ti -1c
+.RI "\fBIAbsolutePath\fP \fBAbsolutePath\fP\fR [get]\fP"
+.br
+.in -1c
+
+Properties inherited from \fBLuthetus\&.Common\&.RazorLib\&.TreeViews\&.Models\&.TreeViewWithType< T >\fP
+.in +1c
+.ti -1c
+.RI "T \fBItem\fP\fR [get]\fP"
+.br
+.RI "Do not allow \fBItem\fP to be null\&.
+.br
+
+.br
+ If one wishes to have a 'null' concept as a TreeViewNode, then make a datatype that acts as a psuedo null\&. "
+.ti -1c
+.RI "override object \fBUntypedItem\fP\fR [get]\fP"
+.br
+.ti -1c
+.RI "override Type \fBItemType\fP\fR [get]\fP"
+.br
+.in -1c
+
+Properties inherited from \fBLuthetus\&.Common\&.RazorLib\&.TreeViews\&.Models\&.TreeViewNoType\fP
+.in +1c
+.ti -1c
+.RI "object \fBUntypedItem\fP\fR [get]\fP"
+.br
+.ti -1c
+.RI "Type \fBItemType\fP\fR [get]\fP"
+.br
+.ti -1c
+.RI "\fBTreeViewNoType\fP? \fBParent\fP\fR [get, set]\fP"
+.br
+.ti -1c
+.RI "List< \fBTreeViewNoType\fP > \fBChildList\fP = new()\fR [get, set]\fP"
+.br
+.ti -1c
+.RI "int \fBIndexAmongSiblings\fP\fR [get, set]\fP"
+.br
+.RI "IndexAmongSiblings refers to the index which this \fBTreeViewNoType\fP is found at within their Parent's ChildList "
+.ti -1c
+.RI "bool \fBIsRoot\fP\fR [get, set]\fP"
+.br
+.ti -1c
+.RI "bool \fBIsHidden\fP\fR [get, set]\fP"
+.br
+.ti -1c
+.RI "bool \fBIsExpandable\fP\fR [get, set]\fP"
+.br
+.ti -1c
+.RI "bool \fBIsExpanded\fP\fR [get, set]\fP"
+.br
+.ti -1c
+.RI "\fBKey\fP< \fBTreeViewChanged\fP > \fBTreeViewChangedKey\fP = \fBKey\fP<\fBTreeViewChanged\fP>\&.NewKey()\fR [get, set]\fP"
+.br
+.ti -1c
+.RI "Key< \fBTreeViewNoType\fP > \fBKey\fP = Key<\fBTreeViewNoType\fP>\&.NewKey()\fR [get, set]\fP"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+Definition at line \fB8\fP of file \fBTreeViewCodeSearchTextSpan\&.cs\fP\&.
+.SH "Constructor & Destructor Documentation"
+.PP 
+.SS "Luthetus\&.Ide\&.RazorLib\&.CodeSearches\&.Models\&.TreeViewCodeSearchTextSpan\&.TreeViewCodeSearchTextSpan (\fBTextEditorTextSpan\fP textSpan, \fBIEnvironmentProvider\fP environmentProvider, \fBIFileSystemProvider\fP fileSystemProvider, bool isExpandable, bool isExpanded)"
+
+.PP
+Definition at line \fB10\fP of file \fBTreeViewCodeSearchTextSpan\&.cs\fP\&.
+.SH "Member Function Documentation"
+.PP 
+.SS "override bool Luthetus\&.Ide\&.RazorLib\&.CodeSearches\&.Models\&.TreeViewCodeSearchTextSpan\&.Equals (object? obj)"
+
+.PP
+Definition at line \fB27\fP of file \fBTreeViewCodeSearchTextSpan\&.cs\fP\&.
+.SS "override int Luthetus\&.Ide\&.RazorLib\&.CodeSearches\&.Models\&.TreeViewCodeSearchTextSpan\&.GetHashCode ()"
+
+.SS "override \fBTreeViewRenderer\fP Luthetus\&.Ide\&.RazorLib\&.CodeSearches\&.Models\&.TreeViewCodeSearchTextSpan\&.GetTreeViewRenderer ()"
+
+.PP
+Definition at line \fB37\fP of file \fBTreeViewCodeSearchTextSpan\&.cs\fP\&.
+.SS "override Task Luthetus\&.Ide\&.RazorLib\&.CodeSearches\&.Models\&.TreeViewCodeSearchTextSpan\&.LoadChildListAsync ()"
+
+.PP
+Definition at line \fB50\fP of file \fBTreeViewCodeSearchTextSpan\&.cs\fP\&.
+.SH "Property Documentation"
+.PP 
+.SS "\fBIAbsolutePath\fP Luthetus\&.Ide\&.RazorLib\&.CodeSearches\&.Models\&.TreeViewCodeSearchTextSpan\&.AbsolutePath\fR [get]\fP"
+
+.PP
+Definition at line \fB25\fP of file \fBTreeViewCodeSearchTextSpan\&.cs\fP\&.
+.SS "\fBIEnvironmentProvider\fP Luthetus\&.Ide\&.RazorLib\&.CodeSearches\&.Models\&.TreeViewCodeSearchTextSpan\&.EnvironmentProvider\fR [get]\fP"
+
+.PP
+Definition at line \fB23\fP of file \fBTreeViewCodeSearchTextSpan\&.cs\fP\&.
+.SS "\fBIFileSystemProvider\fP Luthetus\&.Ide\&.RazorLib\&.CodeSearches\&.Models\&.TreeViewCodeSearchTextSpan\&.FileSystemProvider\fR [get]\fP"
+
+.PP
+Definition at line \fB24\fP of file \fBTreeViewCodeSearchTextSpan\&.cs\fP\&.
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for Luthetus\&.Ide from the source code\&.

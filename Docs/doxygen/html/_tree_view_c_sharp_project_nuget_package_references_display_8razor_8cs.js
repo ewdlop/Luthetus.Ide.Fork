@@ -1,0 +1,4 @@
+var _tree_view_c_sharp_project_nuget_package_references_display_8razor_8cs =
+[
+    [ "Luthetus.Extensions.DotNet.CSharpProjects.Displays.TreeViewCSharpProjectNugetPackageReferencesDisplay", "class_luthetus_1_1_extensions_1_1_dot_net_1_1_c_sharp_projects_1_1_displays_1_1_tree_view_c_shar07b6d99955b39127e7dbff7278cf12c6.html", null ]
+];

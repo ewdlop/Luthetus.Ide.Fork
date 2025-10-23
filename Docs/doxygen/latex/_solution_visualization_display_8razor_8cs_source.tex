@@ -1,0 +1,201 @@
+\doxysection{Solution\+Visualization\+Display.\+razor.\+cs}
+\hypertarget{_solution_visualization_display_8razor_8cs_source}{}\label{_solution_visualization_display_8razor_8cs_source}\index{Source/Lib/Extensions/Extensions.DotNet/DotNetSolutions/Displays/SolutionVisualizationDisplay.razor.cs@{Source/Lib/Extensions/Extensions.DotNet/DotNetSolutions/Displays/SolutionVisualizationDisplay.razor.cs}}
+\mbox{\hyperlink{_solution_visualization_display_8razor_8cs}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{_solution_visualization_display_8razor_8cs_source_l00001}00001\ \textcolor{keyword}{using\ }Microsoft.AspNetCore.Components;}
+\DoxyCodeLine{\Hypertarget{_solution_visualization_display_8razor_8cs_source_l00002}00002\ \textcolor{keyword}{using\ }Microsoft.AspNetCore.Components.Web;}
+\DoxyCodeLine{\Hypertarget{_solution_visualization_display_8razor_8cs_source_l00003}00003\ \textcolor{keyword}{using\ }Microsoft.JSInterop;}
+\DoxyCodeLine{\Hypertarget{_solution_visualization_display_8razor_8cs_source_l00004}00004\ \textcolor{keyword}{using\ }Fluxor;}
+\DoxyCodeLine{\Hypertarget{_solution_visualization_display_8razor_8cs_source_l00005}00005\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_luthetus_1_1_common_1_1_razor_lib_1_1_dropdowns_1_1_states}{Luthetus.Common.RazorLib.Dropdowns.States}};}
+\DoxyCodeLine{\Hypertarget{_solution_visualization_display_8razor_8cs_source_l00006}00006\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_luthetus_1_1_common_1_1_razor_lib_1_1_dropdowns_1_1_models}{Luthetus.Common.RazorLib.Dropdowns.Models}};}
+\DoxyCodeLine{\Hypertarget{_solution_visualization_display_8razor_8cs_source_l00007}00007\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_luthetus_1_1_common_1_1_razor_lib_1_1_dynamics_1_1_models}{Luthetus.Common.RazorLib.Dynamics.Models}};}
+\DoxyCodeLine{\Hypertarget{_solution_visualization_display_8razor_8cs_source_l00008}00008\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_luthetus_1_1_common_1_1_razor_lib_1_1_reactives_1_1_models}{Luthetus.Common.RazorLib.Reactives.Models}};}
+\DoxyCodeLine{\Hypertarget{_solution_visualization_display_8razor_8cs_source_l00009}00009\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_luthetus_1_1_common_1_1_razor_lib_1_1_dimensions_1_1_states}{Luthetus.Common.RazorLib.Dimensions.States}};}
+\DoxyCodeLine{\Hypertarget{_solution_visualization_display_8razor_8cs_source_l00010}00010\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_luthetus_1_1_common_1_1_razor_lib_1_1_js_runtimes_1_1_models}{Luthetus.Common.RazorLib.JsRuntimes.Models}};}
+\DoxyCodeLine{\Hypertarget{_solution_visualization_display_8razor_8cs_source_l00011}00011\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_interfaces}{Luthetus.TextEditor.RazorLib.CompilerServices.Interfaces}};}
+\DoxyCodeLine{\Hypertarget{_solution_visualization_display_8razor_8cs_source_l00012}00012\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_luthetus_1_1_compiler_services_1_1_c_sharp_1_1_compiler_service_case}{Luthetus.CompilerServices.CSharp.CompilerServiceCase}};}
+\DoxyCodeLine{\Hypertarget{_solution_visualization_display_8razor_8cs_source_l00013}00013\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_luthetus_1_1_compiler_services_1_1_dot_net_solution_1_1_compiler_service_case}{Luthetus.CompilerServices.DotNetSolution.CompilerServiceCase}};}
+\DoxyCodeLine{\Hypertarget{_solution_visualization_display_8razor_8cs_source_l00014}00014\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_luthetus_1_1_compiler_services_1_1_c_sharp_project_1_1_compiler_service_case}{Luthetus.CompilerServices.CSharpProject.CompilerServiceCase}};}
+\DoxyCodeLine{\Hypertarget{_solution_visualization_display_8razor_8cs_source_l00015}00015\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_luthetus_1_1_extensions_1_1_dot_net_1_1_dot_net_solutions_1_1_states}{Luthetus.Extensions.DotNet.DotNetSolutions.States}};}
+\DoxyCodeLine{\Hypertarget{_solution_visualization_display_8razor_8cs_source_l00016}00016\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_luthetus_1_1_extensions_1_1_dot_net_1_1_dot_net_solutions_1_1_models_1_1_internals}{Luthetus.Extensions.DotNet.DotNetSolutions.Models.Internals}};}
+\DoxyCodeLine{\Hypertarget{_solution_visualization_display_8razor_8cs_source_l00017}00017\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_luthetus_1_1_extensions_1_1_dot_net_1_1_dot_net_solutions_1_1_displays_1_1_internals}{Luthetus.Extensions.DotNet.DotNetSolutions.Displays.Internals}};}
+\DoxyCodeLine{\Hypertarget{_solution_visualization_display_8razor_8cs_source_l00018}00018\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models}{Luthetus.TextEditor.RazorLib.TextEditors.Models}};}
+\DoxyCodeLine{\Hypertarget{_solution_visualization_display_8razor_8cs_source_l00019}00019\ }
+\DoxyCodeLine{\Hypertarget{_solution_visualization_display_8razor_8cs_source_l00020}00020\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespace_luthetus_1_1_extensions_1_1_dot_net_1_1_dot_net_solutions_1_1_displays}{Luthetus.Extensions.DotNet.DotNetSolutions.Displays}};}
+\DoxyCodeLine{\Hypertarget{_solution_visualization_display_8razor_8cs_source_l00021}00021\ }
+\DoxyCodeLine{\Hypertarget{_solution_visualization_display_8razor_8cs_source_l00022}\mbox{\hyperlink{class_luthetus_1_1_extensions_1_1_dot_net_1_1_dot_net_solutions_1_1_displays_1_1_solution_visualization_display}{00022}}\ \textcolor{keyword}{public}\ \textcolor{keyword}{partial\ class\ }\mbox{\hyperlink{class_luthetus_1_1_extensions_1_1_dot_net_1_1_dot_net_solutions_1_1_displays_1_1_solution_visualization_display}{SolutionVisualizationDisplay}}\ :\ ComponentBase,\ IDisposable}
+\DoxyCodeLine{\Hypertarget{_solution_visualization_display_8razor_8cs_source_l00023}00023\ \{}
+\DoxyCodeLine{\Hypertarget{_solution_visualization_display_8razor_8cs_source_l00024}00024\ \ \ \ \ [Inject]}
+\DoxyCodeLine{\Hypertarget{_solution_visualization_display_8razor_8cs_source_l00025}00025\ \ \ \ \ \textcolor{keyword}{private}\ \mbox{\hyperlink{interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_interfaces_1_1_i_compiler_service_registry}{ICompilerServiceRegistry}}\ CompilerServiceRegistry\ \{\ \textcolor{keyword}{get};\ \textcolor{keyword}{set};\ \}\ =\ \textcolor{keyword}{null}!;}
+\DoxyCodeLine{\Hypertarget{_solution_visualization_display_8razor_8cs_source_l00026}00026\ \ \ \ \ [Inject]}
+\DoxyCodeLine{\Hypertarget{_solution_visualization_display_8razor_8cs_source_l00027}00027\ \ \ \ \ \textcolor{keyword}{private}\ IState<AppDimensionState>\ AppDimensionStateWrap\ \{\ \textcolor{keyword}{get};\ \textcolor{keyword}{set};\ \}\ =\ \textcolor{keyword}{null}!;}
+\DoxyCodeLine{\Hypertarget{_solution_visualization_display_8razor_8cs_source_l00028}00028\ \ \ \ \ [Inject]}
+\DoxyCodeLine{\Hypertarget{_solution_visualization_display_8razor_8cs_source_l00029}00029\ \ \ \ \ \textcolor{keyword}{private}\ IState<DotNetSolutionState>\ DotNetSolutionStateWrap\ \{\ \textcolor{keyword}{get};\ \textcolor{keyword}{set};\ \}\ =\ \textcolor{keyword}{null}!;}
+\DoxyCodeLine{\Hypertarget{_solution_visualization_display_8razor_8cs_source_l00030}00030\ \ \ \ \ [Inject]}
+\DoxyCodeLine{\Hypertarget{_solution_visualization_display_8razor_8cs_source_l00031}00031\ \ \ \ \ \textcolor{keyword}{private}\ IDispatcher\ Dispatcher\ \{\ \textcolor{keyword}{get};\ \textcolor{keyword}{set};\ \}\ =\ \textcolor{keyword}{null}!;}
+\DoxyCodeLine{\Hypertarget{_solution_visualization_display_8razor_8cs_source_l00032}00032\ \ \ \ \ [Inject]}
+\DoxyCodeLine{\Hypertarget{_solution_visualization_display_8razor_8cs_source_l00033}00033\ \ \ \ \ \textcolor{keyword}{private}\ IJSRuntime\ JsRuntime\ \{\ \textcolor{keyword}{get};\ \textcolor{keyword}{set};\ \}\ =\ \textcolor{keyword}{null}!;}
+\DoxyCodeLine{\Hypertarget{_solution_visualization_display_8razor_8cs_source_l00034}00034\ }
+\DoxyCodeLine{\Hypertarget{_solution_visualization_display_8razor_8cs_source_l00035}00035\ \ \ \ \ [CascadingParameter]}
+\DoxyCodeLine{\Hypertarget{_solution_visualization_display_8razor_8cs_source_l00036}\mbox{\hyperlink{class_luthetus_1_1_extensions_1_1_dot_net_1_1_dot_net_solutions_1_1_displays_1_1_solution_visualization_display_a61fdf2451b779167991e9bfbda101c1a}{00036}}\ \ \ \ \ \textcolor{keyword}{public}\ \mbox{\hyperlink{interface_luthetus_1_1_common_1_1_razor_lib_1_1_dynamics_1_1_models_1_1_i_dialog}{IDialog}}\ \mbox{\hyperlink{class_luthetus_1_1_extensions_1_1_dot_net_1_1_dot_net_solutions_1_1_displays_1_1_solution_visualization_display_a61fdf2451b779167991e9bfbda101c1a}{Dialog}}\ \{\ \textcolor{keyword}{get};\ \textcolor{keyword}{set};\ \}}
+\DoxyCodeLine{\Hypertarget{_solution_visualization_display_8razor_8cs_source_l00037}00037\ }
+\DoxyCodeLine{\Hypertarget{_solution_visualization_display_8razor_8cs_source_l00038}00038\ \ \ \ \ \textcolor{keyword}{private}\ readonly\ \mbox{\hyperlink{class_luthetus_1_1_common_1_1_razor_lib_1_1_reactives_1_1_models_1_1_throttle}{Throttle}}\ \_stateChangedThrottle\ =\ \textcolor{keyword}{new}(ThrottleFacts.TwentyFour\_Frames\_Per\_Second);}
+\DoxyCodeLine{\Hypertarget{_solution_visualization_display_8razor_8cs_source_l00039}00039\ }
+\DoxyCodeLine{\Hypertarget{_solution_visualization_display_8razor_8cs_source_l00040}00040\ \ \ \ \ \textcolor{keyword}{private}\ \mbox{\hyperlink{class_luthetus_1_1_extensions_1_1_dot_net_1_1_dot_net_solutions_1_1_models_1_1_internals_1_1_solution_visualization_model}{SolutionVisualizationModel}}\ \_solutionVisualizationModel;}
+\DoxyCodeLine{\Hypertarget{_solution_visualization_display_8razor_8cs_source_l00041}00041\ \ \ \ \ \textcolor{keyword}{private}\ \mbox{\hyperlink{class_luthetus_1_1_compiler_services_1_1_dot_net_solution_1_1_compiler_service_case_1_1_dot_net_solution_compiler_service}{DotNetSolutionCompilerService}}\ \_dotNetSolutionCompilerService;}
+\DoxyCodeLine{\Hypertarget{_solution_visualization_display_8razor_8cs_source_l00042}00042\ \ \ \ \ \textcolor{keyword}{private}\ \mbox{\hyperlink{class_luthetus_1_1_compiler_services_1_1_c_sharp_project_1_1_compiler_service_case_1_1_c_sharp_project_compiler_service}{CSharpProjectCompilerService}}\ \_cSharpProjectCompilerService;}
+\DoxyCodeLine{\Hypertarget{_solution_visualization_display_8razor_8cs_source_l00043}00043\ \ \ \ \ \textcolor{keyword}{private}\ \mbox{\hyperlink{class_luthetus_1_1_compiler_services_1_1_c_sharp_1_1_compiler_service_case_1_1_c_sharp_compiler_service}{CSharpCompilerService}}\ \_cSharpCompilerService;}
+\DoxyCodeLine{\Hypertarget{_solution_visualization_display_8razor_8cs_source_l00044}00044\ \ \ \ \ \textcolor{keyword}{private}\ \mbox{\hyperlink{class_luthetus_1_1_common_1_1_razor_lib_1_1_js_runtimes_1_1_models_1_1_luthetus_common_java_script_interop_api}{LuthetusCommonJavaScriptInteropApi}}?\ \_commonJavaScriptInteropApi;}
+\DoxyCodeLine{\Hypertarget{_solution_visualization_display_8razor_8cs_source_l00045}00045\ \ \ \ \ \textcolor{keyword}{private}\ \textcolor{keywordtype}{string}\ \_divHtmlElementId;}
+\DoxyCodeLine{\Hypertarget{_solution_visualization_display_8razor_8cs_source_l00046}00046\ \ \ \ \ \textcolor{keyword}{private}\ \textcolor{keywordtype}{string}\ \_svgHtmlElementId;}
+\DoxyCodeLine{\Hypertarget{_solution_visualization_display_8razor_8cs_source_l00047}00047\ }
+\DoxyCodeLine{\Hypertarget{_solution_visualization_display_8razor_8cs_source_l00048}\mbox{\hyperlink{class_luthetus_1_1_extensions_1_1_dot_net_1_1_dot_net_solutions_1_1_displays_1_1_solution_visualization_display_a707d8c06be7ef2c08852374aab3157bf}{00048}}\ \ \ \ \ \textcolor{keyword}{public}\ Guid\ \mbox{\hyperlink{class_luthetus_1_1_extensions_1_1_dot_net_1_1_dot_net_solutions_1_1_displays_1_1_solution_visualization_display_a707d8c06be7ef2c08852374aab3157bf}{IdSalt}}\ \{\ \textcolor{keyword}{get};\ \}\ =\ Guid.NewGuid();}
+\DoxyCodeLine{\Hypertarget{_solution_visualization_display_8razor_8cs_source_l00049}00049\ }
+\DoxyCodeLine{\Hypertarget{_solution_visualization_display_8razor_8cs_source_l00050}\mbox{\hyperlink{class_luthetus_1_1_extensions_1_1_dot_net_1_1_dot_net_solutions_1_1_displays_1_1_solution_visualization_display_a3378bc8e5b3f3ca96767f9299af8d3c4}{00050}}\ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keywordtype}{string}\ \mbox{\hyperlink{class_luthetus_1_1_extensions_1_1_dot_net_1_1_dot_net_solutions_1_1_displays_1_1_solution_visualization_display_a3378bc8e5b3f3ca96767f9299af8d3c4}{DivHtmlElementId}}\ =>\ \_divHtmlElementId\ ??=\ \$\textcolor{stringliteral}{"{}luth\_ide\_solution-\/visualization-\/div\_\{IdSalt\}"{}};}
+\DoxyCodeLine{\Hypertarget{_solution_visualization_display_8razor_8cs_source_l00051}\mbox{\hyperlink{class_luthetus_1_1_extensions_1_1_dot_net_1_1_dot_net_solutions_1_1_displays_1_1_solution_visualization_display_a1737e0ccedd3b66d56be0e2b5c9f6ad8}{00051}}\ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keywordtype}{string}\ \mbox{\hyperlink{class_luthetus_1_1_extensions_1_1_dot_net_1_1_dot_net_solutions_1_1_displays_1_1_solution_visualization_display_a1737e0ccedd3b66d56be0e2b5c9f6ad8}{SvgHtmlElementId}}\ =>\ \_svgHtmlElementId\ ??=\ \$\textcolor{stringliteral}{"{}luth\_ide\_solution-\/visualization-\/svg\_\{IdSalt\}"{}};}
+\DoxyCodeLine{\Hypertarget{_solution_visualization_display_8razor_8cs_source_l00052}00052\ \ \ \ \ \textcolor{keyword}{private}\ \mbox{\hyperlink{class_luthetus_1_1_common_1_1_razor_lib_1_1_js_runtimes_1_1_models_1_1_luthetus_common_java_script_interop_api}{LuthetusCommonJavaScriptInteropApi}}\ CommonJavaScriptInteropApi\ =>\ \_commonJavaScriptInteropApi\ ??=\ JsRuntime.GetLuthetusCommonApi();}
+\DoxyCodeLine{\Hypertarget{_solution_visualization_display_8razor_8cs_source_l00053}00053\ }
+\DoxyCodeLine{\Hypertarget{_solution_visualization_display_8razor_8cs_source_l00054}\mbox{\hyperlink{class_luthetus_1_1_extensions_1_1_dot_net_1_1_dot_net_solutions_1_1_displays_1_1_solution_visualization_display_a59b37f488c5d59d00760c842f32c1c48}{00054}}\ \ \ \ \ \textcolor{keyword}{protected}\ \textcolor{keyword}{override}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_luthetus_1_1_extensions_1_1_dot_net_1_1_dot_net_solutions_1_1_displays_1_1_solution_visualization_display_a59b37f488c5d59d00760c842f32c1c48}{OnInitialized}}()}
+\DoxyCodeLine{\Hypertarget{_solution_visualization_display_8razor_8cs_source_l00055}00055\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_solution_visualization_display_8razor_8cs_source_l00056}00056\ \ \ \ \ \ \ \ \ \_solutionVisualizationModel\ =\ \textcolor{keyword}{new}(\textcolor{keyword}{null},\ OnCompilerServiceChanged);}
+\DoxyCodeLine{\Hypertarget{_solution_visualization_display_8razor_8cs_source_l00057}00057\ }
+\DoxyCodeLine{\Hypertarget{_solution_visualization_display_8razor_8cs_source_l00058}00058\ \ \ \ \ \ \ \ \ AppDimensionStateWrap.StateChanged\ +=\ OnAppDimensionStateWrapChanged;}
+\DoxyCodeLine{\Hypertarget{_solution_visualization_display_8razor_8cs_source_l00059}00059\ \ \ \ \ \ \ \ \ DotNetSolutionStateWrap.StateChanged\ +=\ OnDotNetSolutionStateWrapChanged;}
+\DoxyCodeLine{\Hypertarget{_solution_visualization_display_8razor_8cs_source_l00060}00060\ }
+\DoxyCodeLine{\Hypertarget{_solution_visualization_display_8razor_8cs_source_l00061}00061\ \ \ \ \ \ \ \ \ SubscribeTo\_DotNetSolutionCompilerService();}
+\DoxyCodeLine{\Hypertarget{_solution_visualization_display_8razor_8cs_source_l00062}00062\ \ \ \ \ \ \ \ \ SubscribeTo\_CSharpProjectCompilerService();}
+\DoxyCodeLine{\Hypertarget{_solution_visualization_display_8razor_8cs_source_l00063}00063\ \ \ \ \ \ \ \ \ SubscribeTo\_CSharpCompilerService();}
+\DoxyCodeLine{\Hypertarget{_solution_visualization_display_8razor_8cs_source_l00064}00064\ }
+\DoxyCodeLine{\Hypertarget{_solution_visualization_display_8razor_8cs_source_l00065}00065\ \ \ \ \ \ \ \ \ base.OnInitialized();}
+\DoxyCodeLine{\Hypertarget{_solution_visualization_display_8razor_8cs_source_l00066}00066\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_solution_visualization_display_8razor_8cs_source_l00067}00067\ }
+\DoxyCodeLine{\Hypertarget{_solution_visualization_display_8razor_8cs_source_l00068}\mbox{\hyperlink{class_luthetus_1_1_extensions_1_1_dot_net_1_1_dot_net_solutions_1_1_displays_1_1_solution_visualization_display_accccbdf406c9d54b849d84151ebcd4d8}{00068}}\ \ \ \ \ \textcolor{keyword}{protected}\ \textcolor{keyword}{override}\ async\ Task\ \mbox{\hyperlink{class_luthetus_1_1_extensions_1_1_dot_net_1_1_dot_net_solutions_1_1_displays_1_1_solution_visualization_display_accccbdf406c9d54b849d84151ebcd4d8}{OnAfterRenderAsync}}(\textcolor{keywordtype}{bool}\ firstRender)}
+\DoxyCodeLine{\Hypertarget{_solution_visualization_display_8razor_8cs_source_l00069}00069\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_solution_visualization_display_8razor_8cs_source_l00070}00070\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (firstRender)}
+\DoxyCodeLine{\Hypertarget{_solution_visualization_display_8razor_8cs_source_l00071}00071\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_solution_visualization_display_8razor_8cs_source_l00072}00072\ \ \ \ \ \ \ \ \ \ \ \ \ OnAppDimensionStateWrapChanged(\textcolor{keyword}{null},\ EventArgs.Empty);}
+\DoxyCodeLine{\Hypertarget{_solution_visualization_display_8razor_8cs_source_l00073}00073\ \ \ \ \ \ \ \ \ \ \ \ \ OnDotNetSolutionStateWrapChanged(\textcolor{keyword}{null},\ EventArgs.Empty);}
+\DoxyCodeLine{\Hypertarget{_solution_visualization_display_8razor_8cs_source_l00074}00074\ \ \ \ \ \ \ \ \ \ \ \ \ OnCompilerServiceChanged();}
+\DoxyCodeLine{\Hypertarget{_solution_visualization_display_8razor_8cs_source_l00075}00075\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_solution_visualization_display_8razor_8cs_source_l00076}00076\ }
+\DoxyCodeLine{\Hypertarget{_solution_visualization_display_8razor_8cs_source_l00077}00077\ \ \ \ \ \ \ \ \ await\ base.OnAfterRenderAsync(firstRender);}
+\DoxyCodeLine{\Hypertarget{_solution_visualization_display_8razor_8cs_source_l00078}00078\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_solution_visualization_display_8razor_8cs_source_l00079}00079\ }
+\DoxyCodeLine{\Hypertarget{_solution_visualization_display_8razor_8cs_source_l00080}00080\ \ \ \ \ \textcolor{keyword}{private}\ async\ \textcolor{keywordtype}{void}\ OnAppDimensionStateWrapChanged(\textcolor{keywordtype}{object}\ sender,\ EventArgs\ e)}
+\DoxyCodeLine{\Hypertarget{_solution_visualization_display_8razor_8cs_source_l00081}00081\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_solution_visualization_display_8razor_8cs_source_l00082}00082\ \ \ \ \ \ \ \ \ \_solutionVisualizationModel.Dimensions.DivBoundingClientRect\ =\ await\ CommonJavaScriptInteropApi}
+\DoxyCodeLine{\Hypertarget{_solution_visualization_display_8razor_8cs_source_l00083}00083\ \ \ \ \ \ \ \ \ \ \ \ \ .\mbox{\hyperlink{class_luthetus_1_1_common_1_1_razor_lib_1_1_js_runtimes_1_1_models_1_1_luthetus_common_java_script_interop_api_ac2933d821bcb59a166465d7f8120aa15}{MeasureElementById}}(\mbox{\hyperlink{class_luthetus_1_1_extensions_1_1_dot_net_1_1_dot_net_solutions_1_1_displays_1_1_solution_visualization_display_a3378bc8e5b3f3ca96767f9299af8d3c4}{DivHtmlElementId}})}
+\DoxyCodeLine{\Hypertarget{_solution_visualization_display_8razor_8cs_source_l00084}00084\ \ \ \ \ \ \ \ \ \ \ \ \ .ConfigureAwait(\textcolor{keyword}{false});}
+\DoxyCodeLine{\Hypertarget{_solution_visualization_display_8razor_8cs_source_l00085}00085\ }
+\DoxyCodeLine{\Hypertarget{_solution_visualization_display_8razor_8cs_source_l00086}00086\ \ \ \ \ \ \ \ \ \_solutionVisualizationModel.Dimensions.SvgBoundingClientRect\ =\ await\ CommonJavaScriptInteropApi}
+\DoxyCodeLine{\Hypertarget{_solution_visualization_display_8razor_8cs_source_l00087}00087\ \ \ \ \ \ \ \ \ \ \ \ \ .\mbox{\hyperlink{class_luthetus_1_1_common_1_1_razor_lib_1_1_js_runtimes_1_1_models_1_1_luthetus_common_java_script_interop_api_ac2933d821bcb59a166465d7f8120aa15}{MeasureElementById}}(\mbox{\hyperlink{class_luthetus_1_1_extensions_1_1_dot_net_1_1_dot_net_solutions_1_1_displays_1_1_solution_visualization_display_a1737e0ccedd3b66d56be0e2b5c9f6ad8}{SvgHtmlElementId}})}
+\DoxyCodeLine{\Hypertarget{_solution_visualization_display_8razor_8cs_source_l00088}00088\ \ \ \ \ \ \ \ \ \ \ \ \ .ConfigureAwait(\textcolor{keyword}{false});}
+\DoxyCodeLine{\Hypertarget{_solution_visualization_display_8razor_8cs_source_l00089}00089\ }
+\DoxyCodeLine{\Hypertarget{_solution_visualization_display_8razor_8cs_source_l00090}00090\ \ \ \ \ \ \ \ \ OnCompilerServiceChanged();}
+\DoxyCodeLine{\Hypertarget{_solution_visualization_display_8razor_8cs_source_l00091}00091\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_solution_visualization_display_8razor_8cs_source_l00092}00092\ }
+\DoxyCodeLine{\Hypertarget{_solution_visualization_display_8razor_8cs_source_l00093}00093\ \ \ \ \ \textcolor{keyword}{private}\ \textcolor{keywordtype}{void}\ OnDotNetSolutionStateWrapChanged(\textcolor{keywordtype}{object}\ sender,\ EventArgs\ e)}
+\DoxyCodeLine{\Hypertarget{_solution_visualization_display_8razor_8cs_source_l00094}00094\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_solution_visualization_display_8razor_8cs_source_l00095}00095\ \ \ \ \ \ \ \ \ \_solutionVisualizationModel\ =\ \textcolor{keyword}{new}(DotNetSolutionStateWrap.Value.DotNetSolutionModel?.AbsolutePath,\ OnCompilerServiceChanged);}
+\DoxyCodeLine{\Hypertarget{_solution_visualization_display_8razor_8cs_source_l00096}00096\ \ \ \ \ \ \ \ \ OnAppDimensionStateWrapChanged(sender,\ e);}
+\DoxyCodeLine{\Hypertarget{_solution_visualization_display_8razor_8cs_source_l00097}00097\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_solution_visualization_display_8razor_8cs_source_l00098}00098\ }
+\DoxyCodeLine{\Hypertarget{_solution_visualization_display_8razor_8cs_source_l00099}00099\ \ \ \ \ \textcolor{keyword}{private}\ \textcolor{keywordtype}{void}\ OnCompilerServiceChanged()}
+\DoxyCodeLine{\Hypertarget{_solution_visualization_display_8razor_8cs_source_l00100}00100\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_solution_visualization_display_8razor_8cs_source_l00101}00101\ \ \ \ \ \ \ \ \ \_stateChangedThrottle.Run(\_\ =>}
+\DoxyCodeLine{\Hypertarget{_solution_visualization_display_8razor_8cs_source_l00102}00102\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_solution_visualization_display_8razor_8cs_source_l00103}00103\ \ \ \ \ \ \ \ \ \ \ \ \ \_solutionVisualizationModel\ =\ \_solutionVisualizationModel.\mbox{\hyperlink{class_luthetus_1_1_extensions_1_1_dot_net_1_1_dot_net_solutions_1_1_models_1_1_internals_1_1_solution_visualization_model_a3598fdf27eec3b252062368c4bde2137}{MakeDrawing}}(}
+\DoxyCodeLine{\Hypertarget{_solution_visualization_display_8razor_8cs_source_l00104}00104\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \_dotNetSolutionCompilerService,}
+\DoxyCodeLine{\Hypertarget{_solution_visualization_display_8razor_8cs_source_l00105}00105\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \_cSharpProjectCompilerService,}
+\DoxyCodeLine{\Hypertarget{_solution_visualization_display_8razor_8cs_source_l00106}00106\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \_cSharpCompilerService);}
+\DoxyCodeLine{\Hypertarget{_solution_visualization_display_8razor_8cs_source_l00107}00107\ }
+\DoxyCodeLine{\Hypertarget{_solution_visualization_display_8razor_8cs_source_l00108}00108\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ InvokeAsync(StateHasChanged);}
+\DoxyCodeLine{\Hypertarget{_solution_visualization_display_8razor_8cs_source_l00109}00109\ \ \ \ \ \ \ \ \ \});}
+\DoxyCodeLine{\Hypertarget{_solution_visualization_display_8razor_8cs_source_l00110}00110\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_solution_visualization_display_8razor_8cs_source_l00111}00111\ }
+\DoxyCodeLine{\Hypertarget{_solution_visualization_display_8razor_8cs_source_l00112}00112\ \ \ \ \ \textcolor{keyword}{private}\ \textcolor{keywordtype}{void}\ HandleOnContextMenu(MouseEventArgs\ mouseEventArgs)}
+\DoxyCodeLine{\Hypertarget{_solution_visualization_display_8razor_8cs_source_l00113}00113\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_solution_visualization_display_8razor_8cs_source_l00114}00114\ \ \ \ \ \ \ \ \ var\ dropdownRecord\ =\ \textcolor{keyword}{new}\ \mbox{\hyperlink{namespace_luthetus_1_1_common_1_1_razor_lib_1_1_dropdowns_1_1_models_a60385d8cd877b93f064b1da738c5ced9}{DropdownRecord}}(}
+\DoxyCodeLine{\Hypertarget{_solution_visualization_display_8razor_8cs_source_l00115}00115\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_luthetus_1_1_extensions_1_1_dot_net_1_1_dot_net_solutions_1_1_displays_1_1_internals_1_1_se0929251828114b1048d73daa0abec1d}{SolutionVisualizationContextMenu}}.\mbox{\hyperlink{class_luthetus_1_1_extensions_1_1_dot_net_1_1_dot_net_solutions_1_1_displays_1_1_internals_1_1_se0929251828114b1048d73daa0abec1d_aa26aaf5b095819f17b77929fa948f5eb}{ContextMenuEventDropdownKey}},}
+\DoxyCodeLine{\Hypertarget{_solution_visualization_display_8razor_8cs_source_l00116}00116\ \ \ \ \ \ \ \ \ \ \ \ \ mouseEventArgs.ClientX,}
+\DoxyCodeLine{\Hypertarget{_solution_visualization_display_8razor_8cs_source_l00117}00117\ \ \ \ \ \ \ \ \ \ \ \ \ mouseEventArgs.ClientY,}
+\DoxyCodeLine{\Hypertarget{_solution_visualization_display_8razor_8cs_source_l00118}00118\ \ \ \ \ \ \ \ \ \ \ \ \ typeof(\mbox{\hyperlink{class_luthetus_1_1_extensions_1_1_dot_net_1_1_dot_net_solutions_1_1_displays_1_1_internals_1_1_se0929251828114b1048d73daa0abec1d}{SolutionVisualizationContextMenu}}),}
+\DoxyCodeLine{\Hypertarget{_solution_visualization_display_8razor_8cs_source_l00119}00119\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{new}\ Dictionary<string,\ object?>}
+\DoxyCodeLine{\Hypertarget{_solution_visualization_display_8razor_8cs_source_l00120}00120\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_solution_visualization_display_8razor_8cs_source_l00121}00121\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_solution_visualization_display_8razor_8cs_source_l00122}00122\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ nameof(\mbox{\hyperlink{class_luthetus_1_1_extensions_1_1_dot_net_1_1_dot_net_solutions_1_1_displays_1_1_internals_1_1_se0929251828114b1048d73daa0abec1d}{SolutionVisualizationContextMenu}}.\mbox{\hyperlink{class_luthetus_1_1_extensions_1_1_dot_net_1_1_dot_net_solutions_1_1_displays_1_1_internals_1_1_se0929251828114b1048d73daa0abec1d_ad43bd3a73270a9f9dc7891f0906210cc}{MouseEventArgs}}),}
+\DoxyCodeLine{\Hypertarget{_solution_visualization_display_8razor_8cs_source_l00123}00123\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ mouseEventArgs}
+\DoxyCodeLine{\Hypertarget{_solution_visualization_display_8razor_8cs_source_l00124}00124\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \},}
+\DoxyCodeLine{\Hypertarget{_solution_visualization_display_8razor_8cs_source_l00125}00125\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_solution_visualization_display_8razor_8cs_source_l00126}00126\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ nameof(\mbox{\hyperlink{class_luthetus_1_1_extensions_1_1_dot_net_1_1_dot_net_solutions_1_1_displays_1_1_internals_1_1_se0929251828114b1048d73daa0abec1d}{SolutionVisualizationContextMenu}}.\mbox{\hyperlink{class_luthetus_1_1_extensions_1_1_dot_net_1_1_dot_net_solutions_1_1_displays_1_1_internals_1_1_se0929251828114b1048d73daa0abec1d_af844c53c250499343f8cabe85f315c8c}{SolutionVisualizationModel}}),}
+\DoxyCodeLine{\Hypertarget{_solution_visualization_display_8razor_8cs_source_l00127}00127\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \_solutionVisualizationModel}
+\DoxyCodeLine{\Hypertarget{_solution_visualization_display_8razor_8cs_source_l00128}00128\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_solution_visualization_display_8razor_8cs_source_l00129}00129\ \ \ \ \ \ \ \ \ \ \ \ \ \},}
+\DoxyCodeLine{\Hypertarget{_solution_visualization_display_8razor_8cs_source_l00130}00130\ \ \ \ \ \ \ \ \ \ \ \ \ restoreFocusOnClose:\ \textcolor{keyword}{null});}
+\DoxyCodeLine{\Hypertarget{_solution_visualization_display_8razor_8cs_source_l00131}00131\ }
+\DoxyCodeLine{\Hypertarget{_solution_visualization_display_8razor_8cs_source_l00132}00132\ \ \ \ \ \ \ \ \ Dispatcher.Dispatch(\textcolor{keyword}{new}\ \mbox{\hyperlink{namespace_luthetus_1_1_common_1_1_razor_lib_1_1_dropdowns_1_1_states_a6062aa8409aa0032c0334dc5b634498e}{DropdownState}}.RegisterAction(dropdownRecord));}
+\DoxyCodeLine{\Hypertarget{_solution_visualization_display_8razor_8cs_source_l00133}00133\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_solution_visualization_display_8razor_8cs_source_l00134}00134\ }
+\DoxyCodeLine{\Hypertarget{_solution_visualization_display_8razor_8cs_source_l00135}00135\ \ \ \ \ \textcolor{keyword}{private}\ \textcolor{keywordtype}{void}\ SubscribeTo\_DotNetSolutionCompilerService()}
+\DoxyCodeLine{\Hypertarget{_solution_visualization_display_8razor_8cs_source_l00136}00136\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_solution_visualization_display_8razor_8cs_source_l00137}00137\ \ \ \ \ \ \ \ \ \_dotNetSolutionCompilerService\ =\ (DotNetSolutionCompilerService)CompilerServiceRegistry}
+\DoxyCodeLine{\Hypertarget{_solution_visualization_display_8razor_8cs_source_l00138}00138\ \ \ \ \ \ \ \ \ \ \ \ \ .GetCompilerService(ExtensionNoPeriodFacts.DOT\_NET\_SOLUTION);}
+\DoxyCodeLine{\Hypertarget{_solution_visualization_display_8razor_8cs_source_l00139}00139\ }
+\DoxyCodeLine{\Hypertarget{_solution_visualization_display_8razor_8cs_source_l00140}00140\ \ \ \ \ \ \ \ \ \_dotNetSolutionCompilerService.ResourceRegistered\ +=\ OnCompilerServiceChanged;}
+\DoxyCodeLine{\Hypertarget{_solution_visualization_display_8razor_8cs_source_l00141}00141\ \ \ \ \ \ \ \ \ \_dotNetSolutionCompilerService.ResourceParsed\ +=\ OnCompilerServiceChanged;}
+\DoxyCodeLine{\Hypertarget{_solution_visualization_display_8razor_8cs_source_l00142}00142\ \ \ \ \ \ \ \ \ \_dotNetSolutionCompilerService.ResourceDisposed\ +=\ OnCompilerServiceChanged;}
+\DoxyCodeLine{\Hypertarget{_solution_visualization_display_8razor_8cs_source_l00143}00143\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_solution_visualization_display_8razor_8cs_source_l00144}00144\ }
+\DoxyCodeLine{\Hypertarget{_solution_visualization_display_8razor_8cs_source_l00145}00145\ \ \ \ \ \textcolor{keyword}{private}\ \textcolor{keywordtype}{void}\ DisposeFrom\_DotNetSolutionCompilerService()}
+\DoxyCodeLine{\Hypertarget{_solution_visualization_display_8razor_8cs_source_l00146}00146\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_solution_visualization_display_8razor_8cs_source_l00147}00147\ \ \ \ \ \ \ \ \ \_dotNetSolutionCompilerService.ResourceRegistered\ -\/=\ OnCompilerServiceChanged;}
+\DoxyCodeLine{\Hypertarget{_solution_visualization_display_8razor_8cs_source_l00148}00148\ \ \ \ \ \ \ \ \ \_dotNetSolutionCompilerService.ResourceParsed\ -\/=\ OnCompilerServiceChanged;}
+\DoxyCodeLine{\Hypertarget{_solution_visualization_display_8razor_8cs_source_l00149}00149\ \ \ \ \ \ \ \ \ \_dotNetSolutionCompilerService.ResourceDisposed\ -\/=\ OnCompilerServiceChanged;}
+\DoxyCodeLine{\Hypertarget{_solution_visualization_display_8razor_8cs_source_l00150}00150\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_solution_visualization_display_8razor_8cs_source_l00151}00151\ }
+\DoxyCodeLine{\Hypertarget{_solution_visualization_display_8razor_8cs_source_l00152}00152\ \ \ \ \ \textcolor{keyword}{private}\ \textcolor{keywordtype}{void}\ SubscribeTo\_CSharpProjectCompilerService()}
+\DoxyCodeLine{\Hypertarget{_solution_visualization_display_8razor_8cs_source_l00153}00153\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_solution_visualization_display_8razor_8cs_source_l00154}00154\ \ \ \ \ \ \ \ \ \_cSharpProjectCompilerService\ =\ (CSharpProjectCompilerService)CompilerServiceRegistry}
+\DoxyCodeLine{\Hypertarget{_solution_visualization_display_8razor_8cs_source_l00155}00155\ \ \ \ \ \ \ \ \ \ \ \ \ .GetCompilerService(ExtensionNoPeriodFacts.C\_SHARP\_PROJECT);}
+\DoxyCodeLine{\Hypertarget{_solution_visualization_display_8razor_8cs_source_l00156}00156\ }
+\DoxyCodeLine{\Hypertarget{_solution_visualization_display_8razor_8cs_source_l00157}00157\ \ \ \ \ \ \ \ \ \_cSharpProjectCompilerService.ResourceRegistered\ +=\ OnCompilerServiceChanged;}
+\DoxyCodeLine{\Hypertarget{_solution_visualization_display_8razor_8cs_source_l00158}00158\ \ \ \ \ \ \ \ \ \_cSharpProjectCompilerService.ResourceParsed\ +=\ OnCompilerServiceChanged;}
+\DoxyCodeLine{\Hypertarget{_solution_visualization_display_8razor_8cs_source_l00159}00159\ \ \ \ \ \ \ \ \ \_cSharpProjectCompilerService.ResourceDisposed\ +=\ OnCompilerServiceChanged;}
+\DoxyCodeLine{\Hypertarget{_solution_visualization_display_8razor_8cs_source_l00160}00160\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_solution_visualization_display_8razor_8cs_source_l00161}00161\ }
+\DoxyCodeLine{\Hypertarget{_solution_visualization_display_8razor_8cs_source_l00162}00162\ \ \ \ \ \textcolor{keyword}{private}\ \textcolor{keywordtype}{void}\ DisposeFrom\_CSharpProjectCompilerService()}
+\DoxyCodeLine{\Hypertarget{_solution_visualization_display_8razor_8cs_source_l00163}00163\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_solution_visualization_display_8razor_8cs_source_l00164}00164\ \ \ \ \ \ \ \ \ \_cSharpProjectCompilerService.ResourceRegistered\ -\/=\ OnCompilerServiceChanged;}
+\DoxyCodeLine{\Hypertarget{_solution_visualization_display_8razor_8cs_source_l00165}00165\ \ \ \ \ \ \ \ \ \_cSharpProjectCompilerService.ResourceParsed\ -\/=\ OnCompilerServiceChanged;}
+\DoxyCodeLine{\Hypertarget{_solution_visualization_display_8razor_8cs_source_l00166}00166\ \ \ \ \ \ \ \ \ \_cSharpProjectCompilerService.ResourceDisposed\ -\/=\ OnCompilerServiceChanged;}
+\DoxyCodeLine{\Hypertarget{_solution_visualization_display_8razor_8cs_source_l00167}00167\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_solution_visualization_display_8razor_8cs_source_l00168}00168\ }
+\DoxyCodeLine{\Hypertarget{_solution_visualization_display_8razor_8cs_source_l00169}00169\ \ \ \ \ \textcolor{keyword}{private}\ \textcolor{keywordtype}{void}\ SubscribeTo\_CSharpCompilerService()}
+\DoxyCodeLine{\Hypertarget{_solution_visualization_display_8razor_8cs_source_l00170}00170\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_solution_visualization_display_8razor_8cs_source_l00171}00171\ \ \ \ \ \ \ \ \ \_cSharpCompilerService\ =\ (CSharpCompilerService)CompilerServiceRegistry}
+\DoxyCodeLine{\Hypertarget{_solution_visualization_display_8razor_8cs_source_l00172}00172\ \ \ \ \ \ \ \ \ \ \ \ \ .GetCompilerService(ExtensionNoPeriodFacts.C\_SHARP\_CLASS);}
+\DoxyCodeLine{\Hypertarget{_solution_visualization_display_8razor_8cs_source_l00173}00173\ }
+\DoxyCodeLine{\Hypertarget{_solution_visualization_display_8razor_8cs_source_l00174}00174\ \ \ \ \ \ \ \ \ \_cSharpCompilerService.ResourceRegistered\ +=\ OnCompilerServiceChanged;}
+\DoxyCodeLine{\Hypertarget{_solution_visualization_display_8razor_8cs_source_l00175}00175\ \ \ \ \ \ \ \ \ \_cSharpCompilerService.ResourceParsed\ +=\ OnCompilerServiceChanged;}
+\DoxyCodeLine{\Hypertarget{_solution_visualization_display_8razor_8cs_source_l00176}00176\ \ \ \ \ \ \ \ \ \_cSharpCompilerService.ResourceDisposed\ +=\ OnCompilerServiceChanged;}
+\DoxyCodeLine{\Hypertarget{_solution_visualization_display_8razor_8cs_source_l00177}00177\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_solution_visualization_display_8razor_8cs_source_l00178}00178\ }
+\DoxyCodeLine{\Hypertarget{_solution_visualization_display_8razor_8cs_source_l00179}00179\ \ \ \ \ \textcolor{keyword}{private}\ \textcolor{keywordtype}{void}\ DisposeFrom\_CSharpCompilerService()}
+\DoxyCodeLine{\Hypertarget{_solution_visualization_display_8razor_8cs_source_l00180}00180\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_solution_visualization_display_8razor_8cs_source_l00181}00181\ \ \ \ \ \ \ \ \ \_cSharpCompilerService.ResourceRegistered\ -\/=\ OnCompilerServiceChanged;}
+\DoxyCodeLine{\Hypertarget{_solution_visualization_display_8razor_8cs_source_l00182}00182\ \ \ \ \ \ \ \ \ \_cSharpCompilerService.ResourceParsed\ -\/=\ OnCompilerServiceChanged;}
+\DoxyCodeLine{\Hypertarget{_solution_visualization_display_8razor_8cs_source_l00183}00183\ \ \ \ \ \ \ \ \ \_cSharpCompilerService.ResourceDisposed\ -\/=\ OnCompilerServiceChanged;}
+\DoxyCodeLine{\Hypertarget{_solution_visualization_display_8razor_8cs_source_l00184}00184\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_solution_visualization_display_8razor_8cs_source_l00185}00185\ }
+\DoxyCodeLine{\Hypertarget{_solution_visualization_display_8razor_8cs_source_l00186}\mbox{\hyperlink{class_luthetus_1_1_extensions_1_1_dot_net_1_1_dot_net_solutions_1_1_displays_1_1_solution_visualization_display_a18bf4a5326eafff1efcd7fa33da99f04}{00186}}\ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_luthetus_1_1_extensions_1_1_dot_net_1_1_dot_net_solutions_1_1_displays_1_1_solution_visualization_display_a18bf4a5326eafff1efcd7fa33da99f04}{Dispose}}()}
+\DoxyCodeLine{\Hypertarget{_solution_visualization_display_8razor_8cs_source_l00187}00187\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_solution_visualization_display_8razor_8cs_source_l00188}00188\ \ \ \ \ \ \ \ \ DisposeFrom\_DotNetSolutionCompilerService();}
+\DoxyCodeLine{\Hypertarget{_solution_visualization_display_8razor_8cs_source_l00189}00189\ \ \ \ \ \ \ \ \ DisposeFrom\_CSharpProjectCompilerService();}
+\DoxyCodeLine{\Hypertarget{_solution_visualization_display_8razor_8cs_source_l00190}00190\ \ \ \ \ \ \ \ \ DisposeFrom\_CSharpCompilerService();}
+\DoxyCodeLine{\Hypertarget{_solution_visualization_display_8razor_8cs_source_l00191}00191\ }
+\DoxyCodeLine{\Hypertarget{_solution_visualization_display_8razor_8cs_source_l00192}00192\ \ \ \ \ \ \ \ \ AppDimensionStateWrap.StateChanged\ -\/=\ OnAppDimensionStateWrapChanged;}
+\DoxyCodeLine{\Hypertarget{_solution_visualization_display_8razor_8cs_source_l00193}00193\ \ \ \ \ \ \ \ \ DotNetSolutionStateWrap.StateChanged\ -\/=\ OnDotNetSolutionStateWrapChanged;}
+\DoxyCodeLine{\Hypertarget{_solution_visualization_display_8razor_8cs_source_l00194}00194\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_solution_visualization_display_8razor_8cs_source_l00195}00195\ \}}
+
+\end{DoxyCode}

@@ -1,0 +1,362 @@
+.TH "Luthetus.Common.RazorLib.FileSystems.Models.LocalEnvironmentProvider" 3 "Version 1.0.0" "Luthetus.Ide" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+Luthetus.Common.RazorLib.FileSystems.Models.LocalEnvironmentProvider
+.SH SYNOPSIS
+.br
+.PP
+.PP
+Inherits \fBLuthetus\&.Common\&.RazorLib\&.FileSystems\&.Models\&.IEnvironmentProvider\fP\&.
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBLocalEnvironmentProvider\fP ()"
+.br
+.ti -1c
+.RI "bool \fBIsDirectorySeparator\fP (char character)"
+.br
+.ti -1c
+.RI "string \fBGetRandomFileName\fP ()"
+.br
+.ti -1c
+.RI "string \fBJoinPaths\fP (string pathOne, string pathTwo)"
+.br
+.RI "Takes two absolute file path strings and makes one singular string with the \fBDirectorySeparatorChar\fP between the two\&. "
+.ti -1c
+.RI "void \fBAssertDeletionPermitted\fP (string path, bool isDirectory)"
+.br
+.ti -1c
+.RI "void \fBDeletionPermittedRegister\fP (\fBSimplePath\fP simplePath)"
+.br
+.RI "The parameters to this method are deliberately \fBSimplePath\fP, whereas the parameters to \fBAssertDeletionPermitted(string, bool)\fP are string, and bool\&. 
+.br
+
+.br
+ This method uses the wording 'Register' in its name instead of a more natural 'Add' wording deliberately\&. 
+.br
+
+.br
+ These steps were taken in order to reduce the chance that one accidentally uses one method, when meant the other\&. "
+.ti -1c
+.RI "void \fBDeletionPermittedDispose\fP (\fBSimplePath\fP simplePath)"
+.br
+.ti -1c
+.RI "void \fBProtectedPathsRegister\fP (\fBSimplePath\fP simplePath)"
+.br
+.ti -1c
+.RI "void \fBProtectedPathsDispose\fP (\fBSimplePath\fP simplePath)"
+.br
+.ti -1c
+.RI "\fBIAbsolutePath\fP \fBAbsolutePathFactory\fP (string path, bool isDirectory)"
+.br
+.ti -1c
+.RI "\fBIRelativePath\fP \fBRelativePathFactory\fP (string path, bool isDirectory)"
+.br
+.in -1c
+.SS "Static Public Attributes"
+
+.in +1c
+.ti -1c
+.RI "const string \fBSafeRelativeDirectory\fP = 'Luthetus/Release/'"
+.br
+.in -1c
+.SS "Properties"
+
+.in +1c
+.ti -1c
+.RI "\fBIAbsolutePath\fP \fBRootDirectoryAbsolutePath\fP\fR [get]\fP"
+.br
+.ti -1c
+.RI "\fBIAbsolutePath\fP \fBHomeDirectoryAbsolutePath\fP\fR [get]\fP"
+.br
+.ti -1c
+.RI "\fBIAbsolutePath\fP \fBSafeRoamingApplicationDataDirectoryAbsolutePath\fP\fR [get]\fP"
+.br
+.RI "The \fBActualRoamingApplicationDataDirectoryAbsolutePath\fP but with "/Luthetus/" appended\&. "
+.ti -1c
+.RI "\fBIAbsolutePath\fP \fBSafeLocalApplicationDataDirectoryAbsolutePath\fP\fR [get]\fP"
+.br
+.RI "The \fBActualLocalApplicationDataDirectoryAbsolutePath\fP but with "/Luthetus/" appended\&. "
+.ti -1c
+.RI "\fBIAbsolutePath\fP \fBActualRoamingApplicationDataDirectoryAbsolutePath\fP\fR [get]\fP"
+.br
+.ti -1c
+.RI "\fBIAbsolutePath\fP \fBActualLocalApplicationDataDirectoryAbsolutePath\fP\fR [get]\fP"
+.br
+.ti -1c
+.RI "string \fBDriveExecutingFromNoDirectorySeparator\fP\fR [get]\fP"
+.br
+.RI "If one is executing the program from the absolute path "C:\\Programs\\\&.\&.\&." then this is "C:"\&. This property is needed in order to disambiguate when given:
+.br
+ "\\Homework\\math\&.txt"
+.br
+ versus
+.br
+ "C:\\Homework\\math\&.txt"\&.
+.br
+
+.br
+\&. "
+.ti -1c
+.RI "char \fBDirectorySeparatorChar\fP\fR [get]\fP"
+.br
+.ti -1c
+.RI "char \fBAltDirectorySeparatorChar\fP\fR [get]\fP"
+.br
+.ti -1c
+.RI "ImmutableHashSet< \fBSimplePath\fP > \fBDeletionPermittedPathList\fP = ImmutableHashSet<\fBSimplePath\fP>\&.Empty\fR [get]\fP"
+.br
+.RI "Any operation which would delete a file system entry, is to first check these paths for if that file is allowed to be deleted\&. 
+.br
+
+.br
+ This will be done via the \fBIFileSystemProvider\fP, \fBIFileHandler\fP, and \fBIDirectoryHandler\fP\&. 
+.br
+
+.br
+ Limitations of this approach: the \&.NET API for deleting a directory could be invoked instead of \fBIDirectoryHandler\&.DeleteAsync(string, bool, CancellationToken)\fP\&. In this case, the interface cannot check if the path is allowed to be deleted, since a different API entirely was used\&. 
+.br
+
+.br
+ Another limitiation is that the implementor of a given \fBIFileSystemProvider\fP, \fBIFileHandler\fP, or \fBIDirectoryHandler\fP can do as they'd like with the given implementation details\&. If an interface can be swapped at runtime, could this a security concern of some sort? 
+.br
+
+.br
+ Requirements for all to go as planned: only vetted interface implementation should be permitted\&. TODO: how can one ensure the vetted interface implementation isn't at runtime swapped for an unsafe one? 
+.br
+
+.br
+ Remark: I intend for these paths to be simple\&. I don't want to try and be 'smart' and interpret what your path means\&. That is to say, these are just strings\&. I intent to do a simple '==' check or, a '\&.StartsWith()' of sorts\&. 
+.br
+
+.br
+ If a directory is provided, then that directory, and any sub filesystem-entries are permitted for deletion\&. 
+.br
+
+.br
+ If a file is provided, then that file only becomes permitted for deletion\&. 
+.br
+
+.br
+ Should one open a solution, I plan to implement that, the folder which encompasses that solution file becomes permitted for deletion\&. 
+.br
+
+.br
+ Even this though I wonder, might one want to open a solution 'read-only'? "
+.ti -1c
+.RI "ImmutableHashSet< \fBSimplePath\fP > \fBProtectedPathList\fP = ImmutableHashSet<\fBSimplePath\fP>\&.Empty\fR [get]\fP"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+Definition at line \fB6\fP of file \fBLocalEnvironmentProvider\&.cs\fP\&.
+.SH "Constructor & Destructor Documentation"
+.PP 
+.SS "Luthetus\&.Common\&.RazorLib\&.FileSystems\&.Models\&.LocalEnvironmentProvider\&.LocalEnvironmentProvider ()"
+
+.PP
+Definition at line \fB17\fP of file \fBLocalEnvironmentProvider\&.cs\fP\&.
+.SH "Member Function Documentation"
+.PP 
+.SS "\fBIAbsolutePath\fP Luthetus\&.Common\&.RazorLib\&.FileSystems\&.Models\&.LocalEnvironmentProvider\&.AbsolutePathFactory (string path, bool isDirectory)"
+
+.PP
+Implements \fBLuthetus\&.Common\&.RazorLib\&.FileSystems\&.Models\&.IEnvironmentProvider\fP\&.
+.PP
+Definition at line \fB197\fP of file \fBLocalEnvironmentProvider\&.cs\fP\&.
+.SS "void Luthetus\&.Common\&.RazorLib\&.FileSystems\&.Models\&.LocalEnvironmentProvider\&.AssertDeletionPermitted (string path, bool isDirectory)"
+
+.PP
+Implements \fBLuthetus\&.Common\&.RazorLib\&.FileSystems\&.Models\&.IEnvironmentProvider\fP\&.
+.PP
+Definition at line \fB144\fP of file \fBLocalEnvironmentProvider\&.cs\fP\&.
+.SS "void Luthetus\&.Common\&.RazorLib\&.FileSystems\&.Models\&.LocalEnvironmentProvider\&.DeletionPermittedDispose (\fBSimplePath\fP simplePath)"
+
+.PP
+Implements \fBLuthetus\&.Common\&.RazorLib\&.FileSystems\&.Models\&.IEnvironmentProvider\fP\&.
+.PP
+Definition at line \fB165\fP of file \fBLocalEnvironmentProvider\&.cs\fP\&.
+.SS "void Luthetus\&.Common\&.RazorLib\&.FileSystems\&.Models\&.LocalEnvironmentProvider\&.DeletionPermittedRegister (\fBSimplePath\fP simplePath)"
+
+.PP
+The parameters to this method are deliberately \fBSimplePath\fP, whereas the parameters to \fBAssertDeletionPermitted(string, bool)\fP are string, and bool\&. 
+.br
+
+.br
+ This method uses the wording 'Register' in its name instead of a more natural 'Add' wording deliberately\&. 
+.br
+
+.br
+ These steps were taken in order to reduce the chance that one accidentally uses one method, when meant the other\&. 
+.PP
+Implements \fBLuthetus\&.Common\&.RazorLib\&.FileSystems\&.Models\&.IEnvironmentProvider\fP\&.
+.PP
+Definition at line \fB149\fP of file \fBLocalEnvironmentProvider\&.cs\fP\&.
+.SS "string Luthetus\&.Common\&.RazorLib\&.FileSystems\&.Models\&.LocalEnvironmentProvider\&.GetRandomFileName ()"
+
+.PP
+Implements \fBLuthetus\&.Common\&.RazorLib\&.FileSystems\&.Models\&.IEnvironmentProvider\fP\&.
+.SS "bool Luthetus\&.Common\&.RazorLib\&.FileSystems\&.Models\&.LocalEnvironmentProvider\&.IsDirectorySeparator (char character)"
+
+.PP
+Implements \fBLuthetus\&.Common\&.RazorLib\&.FileSystems\&.Models\&.IEnvironmentProvider\fP\&.
+.SS "string Luthetus\&.Common\&.RazorLib\&.FileSystems\&.Models\&.LocalEnvironmentProvider\&.JoinPaths (string pathOne, string pathTwo)"
+
+.PP
+Takes two absolute file path strings and makes one singular string with the \fBDirectorySeparatorChar\fP between the two\&. 
+.PP
+Implements \fBLuthetus\&.Common\&.RazorLib\&.FileSystems\&.Models\&.IEnvironmentProvider\fP\&.
+.PP
+Definition at line \fB136\fP of file \fBLocalEnvironmentProvider\&.cs\fP\&.
+.SS "void Luthetus\&.Common\&.RazorLib\&.FileSystems\&.Models\&.LocalEnvironmentProvider\&.ProtectedPathsDispose (\fBSimplePath\fP simplePath)"
+
+.PP
+Implements \fBLuthetus\&.Common\&.RazorLib\&.FileSystems\&.Models\&.IEnvironmentProvider\fP\&.
+.PP
+Definition at line \fB181\fP of file \fBLocalEnvironmentProvider\&.cs\fP\&.
+.SS "void Luthetus\&.Common\&.RazorLib\&.FileSystems\&.Models\&.LocalEnvironmentProvider\&.ProtectedPathsRegister (\fBSimplePath\fP simplePath)"
+
+.PP
+Implements \fBLuthetus\&.Common\&.RazorLib\&.FileSystems\&.Models\&.IEnvironmentProvider\fP\&.
+.PP
+Definition at line \fB173\fP of file \fBLocalEnvironmentProvider\&.cs\fP\&.
+.SS "\fBIRelativePath\fP Luthetus\&.Common\&.RazorLib\&.FileSystems\&.Models\&.LocalEnvironmentProvider\&.RelativePathFactory (string path, bool isDirectory)"
+
+.PP
+Implements \fBLuthetus\&.Common\&.RazorLib\&.FileSystems\&.Models\&.IEnvironmentProvider\fP\&.
+.PP
+Definition at line \fB202\fP of file \fBLocalEnvironmentProvider\&.cs\fP\&.
+.SH "Member Data Documentation"
+.PP 
+.SS "const string Luthetus\&.Common\&.RazorLib\&.FileSystems\&.Models\&.LocalEnvironmentProvider\&.SafeRelativeDirectory = 'Luthetus/Release/'\fR [static]\fP"
+
+.PP
+Definition at line \fB11\fP of file \fBLocalEnvironmentProvider\&.cs\fP\&.
+.SH "Property Documentation"
+.PP 
+.SS "\fBIAbsolutePath\fP Luthetus\&.Common\&.RazorLib\&.FileSystems\&.Models\&.LocalEnvironmentProvider\&.ActualLocalApplicationDataDirectoryAbsolutePath\fR [get]\fP"
+
+.PP
+Implements \fBLuthetus\&.Common\&.RazorLib\&.FileSystems\&.Models\&.IEnvironmentProvider\fP\&.
+.PP
+Definition at line \fB122\fP of file \fBLocalEnvironmentProvider\&.cs\fP\&.
+.SS "\fBIAbsolutePath\fP Luthetus\&.Common\&.RazorLib\&.FileSystems\&.Models\&.LocalEnvironmentProvider\&.ActualRoamingApplicationDataDirectoryAbsolutePath\fR [get]\fP"
+
+.PP
+Implements \fBLuthetus\&.Common\&.RazorLib\&.FileSystems\&.Models\&.IEnvironmentProvider\fP\&.
+.PP
+Definition at line \fB121\fP of file \fBLocalEnvironmentProvider\&.cs\fP\&.
+.SS "char Luthetus\&.Common\&.RazorLib\&.FileSystems\&.Models\&.LocalEnvironmentProvider\&.AltDirectorySeparatorChar\fR [get]\fP"
+
+.PP
+Implements \fBLuthetus\&.Common\&.RazorLib\&.FileSystems\&.Models\&.IEnvironmentProvider\fP\&.
+.PP
+Definition at line \fB127\fP of file \fBLocalEnvironmentProvider\&.cs\fP\&.
+.SS "ImmutableHashSet<\fBSimplePath\fP> Luthetus\&.Common\&.RazorLib\&.FileSystems\&.Models\&.LocalEnvironmentProvider\&.DeletionPermittedPathList = ImmutableHashSet<\fBSimplePath\fP>\&.Empty\fR [get]\fP"
+
+.PP
+Any operation which would delete a file system entry, is to first check these paths for if that file is allowed to be deleted\&. 
+.br
+
+.br
+ This will be done via the \fBIFileSystemProvider\fP, \fBIFileHandler\fP, and \fBIDirectoryHandler\fP\&. 
+.br
+
+.br
+ Limitations of this approach: the \&.NET API for deleting a directory could be invoked instead of \fBIDirectoryHandler\&.DeleteAsync(string, bool, CancellationToken)\fP\&. In this case, the interface cannot check if the path is allowed to be deleted, since a different API entirely was used\&. 
+.br
+
+.br
+ Another limitiation is that the implementor of a given \fBIFileSystemProvider\fP, \fBIFileHandler\fP, or \fBIDirectoryHandler\fP can do as they'd like with the given implementation details\&. If an interface can be swapped at runtime, could this a security concern of some sort? 
+.br
+
+.br
+ Requirements for all to go as planned: only vetted interface implementation should be permitted\&. TODO: how can one ensure the vetted interface implementation isn't at runtime swapped for an unsafe one? 
+.br
+
+.br
+ Remark: I intend for these paths to be simple\&. I don't want to try and be 'smart' and interpret what your path means\&. That is to say, these are just strings\&. I intent to do a simple '==' check or, a '\&.StartsWith()' of sorts\&. 
+.br
+
+.br
+ If a directory is provided, then that directory, and any sub filesystem-entries are permitted for deletion\&. 
+.br
+
+.br
+ If a file is provided, then that file only becomes permitted for deletion\&. 
+.br
+
+.br
+ Should one open a solution, I plan to implement that, the folder which encompasses that solution file becomes permitted for deletion\&. 
+.br
+
+.br
+ Even this though I wonder, might one want to open a solution 'read-only'? 
+.PP
+Implements \fBLuthetus\&.Common\&.RazorLib\&.FileSystems\&.Models\&.IEnvironmentProvider\fP\&.
+.PP
+Definition at line \fB128\fP of file \fBLocalEnvironmentProvider\&.cs\fP\&.
+.SS "char Luthetus\&.Common\&.RazorLib\&.FileSystems\&.Models\&.LocalEnvironmentProvider\&.DirectorySeparatorChar\fR [get]\fP"
+
+.PP
+Implements \fBLuthetus\&.Common\&.RazorLib\&.FileSystems\&.Models\&.IEnvironmentProvider\fP\&.
+.PP
+Definition at line \fB126\fP of file \fBLocalEnvironmentProvider\&.cs\fP\&.
+.SS "string Luthetus\&.Common\&.RazorLib\&.FileSystems\&.Models\&.LocalEnvironmentProvider\&.DriveExecutingFromNoDirectorySeparator\fR [get]\fP"
+
+.PP
+If one is executing the program from the absolute path "C:\\Programs\\\&.\&.\&." then this is "C:"\&. This property is needed in order to disambiguate when given:
+.br
+ "\\Homework\\math\&.txt"
+.br
+ versus
+.br
+ "C:\\Homework\\math\&.txt"\&.
+.br
+
+.br
+\&. Consider the creation of a text editor model\&. This property allows the previous example of ambiguous paths to map to the same TextEditorModel\&. 
+.PP
+Implements \fBLuthetus\&.Common\&.RazorLib\&.FileSystems\&.Models\&.IEnvironmentProvider\fP\&.
+.PP
+Definition at line \fB124\fP of file \fBLocalEnvironmentProvider\&.cs\fP\&.
+.SS "\fBIAbsolutePath\fP Luthetus\&.Common\&.RazorLib\&.FileSystems\&.Models\&.LocalEnvironmentProvider\&.HomeDirectoryAbsolutePath\fR [get]\fP"
+
+.PP
+Implements \fBLuthetus\&.Common\&.RazorLib\&.FileSystems\&.Models\&.IEnvironmentProvider\fP\&.
+.PP
+Definition at line \fB118\fP of file \fBLocalEnvironmentProvider\&.cs\fP\&.
+.SS "ImmutableHashSet<\fBSimplePath\fP> Luthetus\&.Common\&.RazorLib\&.FileSystems\&.Models\&.LocalEnvironmentProvider\&.ProtectedPathList = ImmutableHashSet<\fBSimplePath\fP>\&.Empty\fR [get]\fP"
+
+.PP
+Implements \fBLuthetus\&.Common\&.RazorLib\&.FileSystems\&.Models\&.IEnvironmentProvider\fP\&.
+.PP
+Definition at line \fB129\fP of file \fBLocalEnvironmentProvider\&.cs\fP\&.
+.SS "\fBIAbsolutePath\fP Luthetus\&.Common\&.RazorLib\&.FileSystems\&.Models\&.LocalEnvironmentProvider\&.RootDirectoryAbsolutePath\fR [get]\fP"
+
+.PP
+Implements \fBLuthetus\&.Common\&.RazorLib\&.FileSystems\&.Models\&.IEnvironmentProvider\fP\&.
+.PP
+Definition at line \fB117\fP of file \fBLocalEnvironmentProvider\&.cs\fP\&.
+.SS "\fBIAbsolutePath\fP Luthetus\&.Common\&.RazorLib\&.FileSystems\&.Models\&.LocalEnvironmentProvider\&.SafeLocalApplicationDataDirectoryAbsolutePath\fR [get]\fP"
+
+.PP
+The \fBActualLocalApplicationDataDirectoryAbsolutePath\fP but with "/Luthetus/" appended\&. 
+.PP
+Implements \fBLuthetus\&.Common\&.RazorLib\&.FileSystems\&.Models\&.IEnvironmentProvider\fP\&.
+.PP
+Definition at line \fB120\fP of file \fBLocalEnvironmentProvider\&.cs\fP\&.
+.SS "\fBIAbsolutePath\fP Luthetus\&.Common\&.RazorLib\&.FileSystems\&.Models\&.LocalEnvironmentProvider\&.SafeRoamingApplicationDataDirectoryAbsolutePath\fR [get]\fP"
+
+.PP
+The \fBActualRoamingApplicationDataDirectoryAbsolutePath\fP but with "/Luthetus/" appended\&. 
+.PP
+Implements \fBLuthetus\&.Common\&.RazorLib\&.FileSystems\&.Models\&.IEnvironmentProvider\fP\&.
+.PP
+Definition at line \fB119\fP of file \fBLocalEnvironmentProvider\&.cs\fP\&.
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for Luthetus\&.Ide from the source code\&.

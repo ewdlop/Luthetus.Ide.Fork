@@ -1,0 +1,16 @@
+var class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_displays_1_1_internals_1_1_presentation_and_selection_driver =
+[
+    [ "PresentationAndSelectionDriver", "class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_displays_1_1_internals_1_1_presentation_and_selection_driver.html#a74cb86cf382694e423a3623f64b119b1", null ],
+    [ "GetRenderFragment", "class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_displays_1_1_internals_1_1_presentation_and_selection_driver.html#a93d120d6abc80f502e79783ae31bad06", null ],
+    [ "GetSelectionBoundsInRowIndexUnits", "class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_displays_1_1_internals_1_1_presentation_and_selection_driver.html#ac62d433a58ac1cafa579da8fed7cc772", null ],
+    [ "GetTextEditorPresentationModels", "class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_displays_1_1_internals_1_1_presentation_and_selection_driver.html#a1737ca7bbc9f7264315dbaa3b3d1dd7e", null ],
+    [ "GetTextSelectionStyleCss", "class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_displays_1_1_internals_1_1_presentation_and_selection_driver.html#a31fd90c928b39dfe8af8cafe7c7d5bcc", null ],
+    [ "PresentationGetBoundsInRowIndexUnits", "class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_displays_1_1_internals_1_1_presentation_and_selection_driver.html#a4d543082492a6bd9688f9462a1f8a14e", null ],
+    [ "PresentationGetCssClass", "class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_displays_1_1_internals_1_1_presentation_and_selection_driver.html#ad1af4dcb2f3c731069d9a36d0eb6c1a5", null ],
+    [ "PresentationGetCssStyleString", "class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_displays_1_1_internals_1_1_presentation_and_selection_driver.html#a725c8be2e5386ee7fb8d97f367537ff6", null ],
+    [ "PresentationVirtualizeAndShiftTextSpans", "class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_displays_1_1_internals_1_1_presentation_and_selection_driver.html#abbe12d76e9c845e873ad77def9060ac2", null ],
+    [ "_renderBatch", "class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_displays_1_1_internals_1_1_presentation_and_selection_driver.html#afbf26f3abd2a0cbd82eaf2e2afded555", null ],
+    [ "_root", "class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_displays_1_1_internals_1_1_presentation_and_selection_driver.html#a7b9092321541d0c147c2d5dc6a275a35", null ],
+    [ "FirstRowToSelectDataInclusive", "class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_displays_1_1_internals_1_1_presentation_and_selection_driver.html#a4c6c5217410d0ac8ad5cafa409afc048", null ],
+    [ "lowerRowIndexInclusive", "class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_displays_1_1_internals_1_1_presentation_and_selection_driver.html#a67fad8ba3fd0af39ed59993d205ce234", null ]
+];

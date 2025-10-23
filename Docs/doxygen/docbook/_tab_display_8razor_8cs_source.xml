@@ -1,0 +1,325 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="__tab_display_8razor_8cs_source" xml:lang="en-US">
+<title>TabDisplay.razor.cs</title>
+<indexterm><primary>Source/Lib/Common/Tabs/Displays/TabDisplay.razor.cs</primary></indexterm>
+Go to the documentation of this file.<programlisting linenumbering="unnumbered"><anchor xml:id="__tab_display_8razor_8cs_source_1l00001"/>00001 <emphasis role="keyword">using&#32;</emphasis>Microsoft.AspNetCore.Components;
+<anchor xml:id="__tab_display_8razor_8cs_source_1l00002"/>00002 <emphasis role="keyword">using&#32;</emphasis>Microsoft.AspNetCore.Components.Web;
+<anchor xml:id="__tab_display_8razor_8cs_source_1l00003"/>00003 <emphasis role="keyword">using&#32;</emphasis>Microsoft.JSInterop;
+<anchor xml:id="__tab_display_8razor_8cs_source_1l00004"/>00004 <emphasis role="keyword">using&#32;</emphasis>Fluxor;
+<anchor xml:id="__tab_display_8razor_8cs_source_1l00005"/>00005 <emphasis role="keyword">using&#32;</emphasis><link linkend="_namespace_luthetus_1_1_common_1_1_razor_lib_1_1_dimensions_1_1_models">Luthetus.Common.RazorLib.Dimensions.Models</link>;
+<anchor xml:id="__tab_display_8razor_8cs_source_1l00006"/>00006 <emphasis role="keyword">using&#32;</emphasis><link linkend="_namespace_luthetus_1_1_common_1_1_razor_lib_1_1_drags_1_1_displays">Luthetus.Common.RazorLib.Drags.Displays</link>;
+<anchor xml:id="__tab_display_8razor_8cs_source_1l00007"/>00007 <emphasis role="keyword">using&#32;</emphasis><link linkend="_namespace_luthetus_1_1_common_1_1_razor_lib_1_1_resizes_1_1_models">Luthetus.Common.RazorLib.Resizes.Models</link>;
+<anchor xml:id="__tab_display_8razor_8cs_source_1l00008"/>00008 <emphasis role="keyword">using&#32;</emphasis><link linkend="_namespace_luthetus_1_1_common_1_1_razor_lib_1_1_dynamics_1_1_models">Luthetus.Common.RazorLib.Dynamics.Models</link>;
+<anchor xml:id="__tab_display_8razor_8cs_source_1l00009"/>00009 <emphasis role="keyword">using&#32;</emphasis><link linkend="_namespace_luthetus_1_1_common_1_1_razor_lib_1_1_background_tasks_1_1_models">Luthetus.Common.RazorLib.BackgroundTasks.Models</link>;
+<anchor xml:id="__tab_display_8razor_8cs_source_1l00010"/>00010 <emphasis role="keyword">using&#32;</emphasis><link linkend="_namespace_luthetus_1_1_common_1_1_razor_lib_1_1_keys_1_1_models">Luthetus.Common.RazorLib.Keys.Models</link>;
+<anchor xml:id="__tab_display_8razor_8cs_source_1l00011"/>00011 <emphasis role="keyword">using&#32;</emphasis><link linkend="_namespace_luthetus_1_1_common_1_1_razor_lib_1_1_tabs_1_1_models">Luthetus.Common.RazorLib.Tabs.Models</link>;
+<anchor xml:id="__tab_display_8razor_8cs_source_1l00012"/>00012 <emphasis role="keyword">using&#32;</emphasis><link linkend="_namespace_luthetus_1_1_common_1_1_razor_lib_1_1_js_runtimes_1_1_models">Luthetus.Common.RazorLib.JsRuntimes.Models</link>;
+<anchor xml:id="__tab_display_8razor_8cs_source_1l00013"/>00013 <emphasis role="keyword">using&#32;</emphasis><link linkend="_namespace_luthetus_1_1_common_1_1_razor_lib_1_1_options_1_1_states">Luthetus.Common.RazorLib.Options.States</link>;
+<anchor xml:id="__tab_display_8razor_8cs_source_1l00014"/>00014 <emphasis role="keyword">using&#32;</emphasis><link linkend="_namespace_luthetus_1_1_common_1_1_razor_lib_1_1_component_renderers_1_1_models">Luthetus.Common.RazorLib.ComponentRenderers.Models</link>;
+<anchor xml:id="__tab_display_8razor_8cs_source_1l00015"/>00015 
+<anchor xml:id="__tab_display_8razor_8cs_source_1l00016"/>00016 <emphasis role="keyword">namespace&#32;</emphasis><link linkend="_namespace_luthetus_1_1_common_1_1_razor_lib_1_1_tabs_1_1_displays">Luthetus.Common.RazorLib.Tabs.Displays</link>;
+<anchor xml:id="__tab_display_8razor_8cs_source_1l00017"/>00017 
+<anchor xml:id="__tab_display_8razor_8cs_source_1l00018"/><link linkend="_class_luthetus_1_1_common_1_1_razor_lib_1_1_tabs_1_1_displays_1_1_tab_display">00018</link> <emphasis role="keyword">public</emphasis>&#32;<emphasis role="keyword">partial&#32;class&#32;</emphasis><link linkend="_class_luthetus_1_1_common_1_1_razor_lib_1_1_tabs_1_1_displays_1_1_tab_display">TabDisplay</link>&#32;:&#32;ComponentBase,&#32;IDisposable
+<anchor xml:id="__tab_display_8razor_8cs_source_1l00019"/>00019 {
+<anchor xml:id="__tab_display_8razor_8cs_source_1l00020"/>00020 &#32;&#32;&#32;&#32;[Inject]
+<anchor xml:id="__tab_display_8razor_8cs_source_1l00021"/>00021 &#32;&#32;&#32;&#32;<emphasis role="keyword">private</emphasis>&#32;IState&lt;DragState&gt;&#32;DragStateWrap&#32;{&#32;<emphasis role="keyword">get</emphasis>;&#32;<emphasis role="keyword">set</emphasis>;&#32;}&#32;=&#32;<emphasis role="keyword">null</emphasis>!;
+<anchor xml:id="__tab_display_8razor_8cs_source_1l00022"/>00022 &#32;&#32;&#32;&#32;[Inject]
+<anchor xml:id="__tab_display_8razor_8cs_source_1l00023"/>00023 &#32;&#32;&#32;&#32;<emphasis role="keyword">private</emphasis>&#32;IState&lt;AppOptionsState&gt;&#32;AppOptionsStateWrap&#32;{&#32;<emphasis role="keyword">get</emphasis>;&#32;<emphasis role="keyword">set</emphasis>;&#32;}&#32;=&#32;<emphasis role="keyword">null</emphasis>!;
+<anchor xml:id="__tab_display_8razor_8cs_source_1l00024"/>00024 &#32;&#32;&#32;&#32;[Inject]
+<anchor xml:id="__tab_display_8razor_8cs_source_1l00025"/>00025 &#32;&#32;&#32;&#32;<emphasis role="keyword">private</emphasis>&#32;IDispatcher&#32;Dispatcher&#32;{&#32;<emphasis role="keyword">get</emphasis>;&#32;<emphasis role="keyword">set</emphasis>;&#32;}&#32;=&#32;<emphasis role="keyword">null</emphasis>!;
+<anchor xml:id="__tab_display_8razor_8cs_source_1l00026"/>00026 &#32;&#32;&#32;&#32;[Inject]
+<anchor xml:id="__tab_display_8razor_8cs_source_1l00027"/>00027 &#32;&#32;&#32;&#32;<emphasis role="keyword">private</emphasis>&#32;IJSRuntime&#32;JsRuntime&#32;{&#32;<emphasis role="keyword">get</emphasis>;&#32;<emphasis role="keyword">set</emphasis>;&#32;}&#32;=&#32;<emphasis role="keyword">null</emphasis>!;
+<anchor xml:id="__tab_display_8razor_8cs_source_1l00028"/>00028 &#32;&#32;&#32;&#32;[Inject]
+<anchor xml:id="__tab_display_8razor_8cs_source_1l00029"/>00029 &#32;&#32;&#32;&#32;<emphasis role="keyword">private</emphasis>&#32;<link linkend="_interface_luthetus_1_1_common_1_1_razor_lib_1_1_background_tasks_1_1_models_1_1_i_background_task_service">IBackgroundTaskService</link>&#32;BackgroundTaskService&#32;{&#32;<emphasis role="keyword">get</emphasis>;&#32;<emphasis role="keyword">set</emphasis>;&#32;}&#32;=&#32;<emphasis role="keyword">null</emphasis>!;
+<anchor xml:id="__tab_display_8razor_8cs_source_1l00030"/>00030 &#32;&#32;&#32;&#32;[Inject]
+<anchor xml:id="__tab_display_8razor_8cs_source_1l00031"/>00031 &#32;&#32;&#32;&#32;<emphasis role="keyword">private</emphasis>&#32;<link linkend="_interface_luthetus_1_1_common_1_1_razor_lib_1_1_component_renderers_1_1_models_1_1_i_common_component_renderers">ICommonComponentRenderers</link>&#32;CommonComponentRenderers&#32;{&#32;<emphasis role="keyword">get</emphasis>;&#32;<emphasis role="keyword">set</emphasis>;&#32;}&#32;=&#32;<emphasis role="keyword">null</emphasis>!;
+<anchor xml:id="__tab_display_8razor_8cs_source_1l00032"/>00032 
+<anchor xml:id="__tab_display_8razor_8cs_source_1l00033"/>00033 &#32;&#32;&#32;&#32;[CascadingParameter(Name=nameof(<link linkend="_class_luthetus_1_1_common_1_1_razor_lib_1_1_tabs_1_1_displays_1_1_tab_display_1a936aa16924967847dbf22c39deee0120">HandleTabButtonOnContextMenu</link>)),&#32;EditorRequired]
+<anchor xml:id="__tab_display_8razor_8cs_source_1l00034"/><link linkend="_class_luthetus_1_1_common_1_1_razor_lib_1_1_tabs_1_1_displays_1_1_tab_display_1a936aa16924967847dbf22c39deee0120">00034</link> &#32;&#32;&#32;&#32;<emphasis role="keyword">public</emphasis>&#32;Func&lt;TabContextMenuEventArgs,&#32;Task&gt;?&#32;<link linkend="_class_luthetus_1_1_common_1_1_razor_lib_1_1_tabs_1_1_displays_1_1_tab_display_1a936aa16924967847dbf22c39deee0120">HandleTabButtonOnContextMenu</link>&#32;{&#32;<emphasis role="keyword">get</emphasis>;&#32;<emphasis role="keyword">set</emphasis>;&#32;}
+<anchor xml:id="__tab_display_8razor_8cs_source_1l00035"/>00035 
+<anchor xml:id="__tab_display_8razor_8cs_source_1l00036"/>00036 &#32;&#32;&#32;&#32;[Parameter,&#32;EditorRequired]
+<anchor xml:id="__tab_display_8razor_8cs_source_1l00037"/><link linkend="_class_luthetus_1_1_common_1_1_razor_lib_1_1_tabs_1_1_displays_1_1_tab_display_1a073b814801d1f91f18b24cbba6213e41">00037</link> &#32;&#32;&#32;&#32;<emphasis role="keyword">public</emphasis>&#32;<link linkend="_interface_luthetus_1_1_common_1_1_razor_lib_1_1_dynamics_1_1_models_1_1_i_tab">ITab</link>&#32;<link linkend="_class_luthetus_1_1_common_1_1_razor_lib_1_1_tabs_1_1_displays_1_1_tab_display_1a073b814801d1f91f18b24cbba6213e41">Tab</link>&#32;{&#32;<emphasis role="keyword">get</emphasis>;&#32;<emphasis role="keyword">set</emphasis>;&#32;}&#32;=&#32;<emphasis role="keyword">null</emphasis>!;
+<anchor xml:id="__tab_display_8razor_8cs_source_1l00038"/>00038 
+<anchor xml:id="__tab_display_8razor_8cs_source_1l00039"/>00039 &#32;&#32;&#32;&#32;[Parameter]
+<anchor xml:id="__tab_display_8razor_8cs_source_1l00040"/><link linkend="_class_luthetus_1_1_common_1_1_razor_lib_1_1_tabs_1_1_displays_1_1_tab_display_1adaa64898b5b374e38745fe40517cf956">00040</link> &#32;&#32;&#32;&#32;<emphasis role="keyword">public</emphasis>&#32;<emphasis role="keywordtype">string</emphasis>?&#32;<link linkend="_class_luthetus_1_1_common_1_1_razor_lib_1_1_tabs_1_1_displays_1_1_tab_display_1adaa64898b5b374e38745fe40517cf956">CssClassString</link>&#32;{&#32;<emphasis role="keyword">get</emphasis>;&#32;<emphasis role="keyword">set</emphasis>;&#32;}
+<anchor xml:id="__tab_display_8razor_8cs_source_1l00041"/>00041 &#32;&#32;&#32;&#32;[Parameter]
+<anchor xml:id="__tab_display_8razor_8cs_source_1l00042"/><link linkend="_class_luthetus_1_1_common_1_1_razor_lib_1_1_tabs_1_1_displays_1_1_tab_display_1a07e5d6f2fbd7c921d876c9b63a0c655d">00042</link> &#32;&#32;&#32;&#32;<emphasis role="keyword">public</emphasis>&#32;<emphasis role="keywordtype">bool</emphasis>&#32;<link linkend="_class_luthetus_1_1_common_1_1_razor_lib_1_1_tabs_1_1_displays_1_1_tab_display_1a07e5d6f2fbd7c921d876c9b63a0c655d">ShouldDisplayCloseButton</link>&#32;{&#32;<emphasis role="keyword">get</emphasis>;&#32;<emphasis role="keyword">set</emphasis>;&#32;}&#32;=&#32;<emphasis role="keyword">true</emphasis>;
+<anchor xml:id="__tab_display_8razor_8cs_source_1l00043"/>00043 &#32;&#32;&#32;&#32;[Parameter]
+<anchor xml:id="__tab_display_8razor_8cs_source_1l00044"/><link linkend="_class_luthetus_1_1_common_1_1_razor_lib_1_1_tabs_1_1_displays_1_1_tab_display_1ad09b2f6b4abe46ba1d2646197c460410">00044</link> &#32;&#32;&#32;&#32;<emphasis role="keyword">public</emphasis>&#32;<emphasis role="keywordtype">string</emphasis>?&#32;<link linkend="_class_luthetus_1_1_common_1_1_razor_lib_1_1_tabs_1_1_displays_1_1_tab_display_1ad09b2f6b4abe46ba1d2646197c460410">CssStyleString</link>&#32;{&#32;<emphasis role="keyword">get</emphasis>;&#32;<emphasis role="keyword">set</emphasis>;&#32;}
+<anchor xml:id="__tab_display_8razor_8cs_source_1l00045"/>00045 &#32;&#32;&#32;&#32;[Parameter]
+<anchor xml:id="__tab_display_8razor_8cs_source_1l00046"/><link linkend="_class_luthetus_1_1_common_1_1_razor_lib_1_1_tabs_1_1_displays_1_1_tab_display_1ae97f12854f570ac82bdb2fa76f84bc68">00046</link> &#32;&#32;&#32;&#32;<emphasis role="keyword">public</emphasis>&#32;<emphasis role="keywordtype">bool</emphasis>&#32;<link linkend="_class_luthetus_1_1_common_1_1_razor_lib_1_1_tabs_1_1_displays_1_1_tab_display_1ae97f12854f570ac82bdb2fa76f84bc68">IsBeingDragged</link>&#32;{&#32;<emphasis role="keyword">get</emphasis>;&#32;<emphasis role="keyword">set</emphasis>;&#32;}
+<anchor xml:id="__tab_display_8razor_8cs_source_1l00047"/>00047 
+<anchor xml:id="__tab_display_8razor_8cs_source_1l00048"/>00048 &#32;&#32;&#32;&#32;<emphasis role="keyword">private</emphasis>&#32;<emphasis role="keywordtype">bool</emphasis>&#32;_thinksLeftMouseButtonIsDown;
+<anchor xml:id="__tab_display_8razor_8cs_source_1l00049"/>00049 &#32;&#32;&#32;&#32;<emphasis role="keyword">private</emphasis>&#32;Func&lt;(MouseEventArgs&#32;firstMouseEventArgs,&#32;MouseEventArgs&#32;secondMouseEventArgs),&#32;Task&gt;?&#32;_dragEventHandler;
+<anchor xml:id="__tab_display_8razor_8cs_source_1l00050"/>00050 &#32;&#32;&#32;&#32;<emphasis role="keyword">private</emphasis>&#32;MouseEventArgs?&#32;_previousDragMouseEventArgs;
+<anchor xml:id="__tab_display_8razor_8cs_source_1l00051"/>00051 
+<anchor xml:id="__tab_display_8razor_8cs_source_1l00052"/>00052 &#32;&#32;&#32;&#32;<emphasis role="keyword">private</emphasis>&#32;<emphasis role="keywordtype">string</emphasis>&#32;_htmlIdDragged&#32;=&#32;<emphasis role="keyword">null</emphasis>;
+<anchor xml:id="__tab_display_8razor_8cs_source_1l00053"/>00053 &#32;&#32;&#32;&#32;<emphasis role="keyword">private</emphasis>&#32;<emphasis role="keywordtype">string</emphasis>&#32;_htmlId&#32;=&#32;<emphasis role="keyword">null</emphasis>;
+<anchor xml:id="__tab_display_8razor_8cs_source_1l00054"/>00054 
+<anchor xml:id="__tab_display_8razor_8cs_source_1l00055"/>00055 &#32;&#32;&#32;&#32;<emphasis role="keyword">private</emphasis>&#32;ElementReference?&#32;_tabButtonElementReference;
+<anchor xml:id="__tab_display_8razor_8cs_source_1l00056"/>00056 
+<anchor xml:id="__tab_display_8razor_8cs_source_1l00057"/>00057 &#32;&#32;&#32;&#32;<emphasis role="keyword">private</emphasis>&#32;<emphasis role="keywordtype">string</emphasis>&#32;HtmlId&#32;=&gt;&#32;IsBeingDragged
+<anchor xml:id="__tab_display_8razor_8cs_source_1l00058"/>00058 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;?&#32;_htmlId&#32;??=&#32;$<emphasis role="stringliteral">&quot;luth_polymorphic-tab_{Tab.DynamicViewModelKey.Guid}&quot;</emphasis>
+<anchor xml:id="__tab_display_8razor_8cs_source_1l00059"/>00059 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;:&#32;_htmlIdDragged&#32;??=&#32;$<emphasis role="stringliteral">&quot;luth_polymorphic-tab-drag_{Tab.DynamicViewModelKey.Guid}&quot;</emphasis>;
+<anchor xml:id="__tab_display_8razor_8cs_source_1l00060"/>00060 
+<anchor xml:id="__tab_display_8razor_8cs_source_1l00061"/>00061 &#32;&#32;&#32;&#32;<emphasis role="keyword">private</emphasis>&#32;<emphasis role="keywordtype">string</emphasis>&#32;IsActiveCssClass&#32;=&gt;&#32;(Tab.<link linkend="_interface_luthetus_1_1_common_1_1_razor_lib_1_1_dynamics_1_1_models_1_1_i_tab_1ac770e0619702598140c4d6e3f0675e37">TabGroup</link>?.<link linkend="_interface_luthetus_1_1_common_1_1_razor_lib_1_1_dynamics_1_1_models_1_1_i_tab_group_1a8b3e3929e5e416cdefcebaa6ddfdb01f">GetIsActive</link>(Tab)&#32;??&#32;<emphasis role="keyword">false</emphasis>)
+<anchor xml:id="__tab_display_8razor_8cs_source_1l00062"/>00062 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;?&#32;<emphasis role="stringliteral">&quot;luth_active&quot;</emphasis>
+<anchor xml:id="__tab_display_8razor_8cs_source_1l00063"/>00063 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;:&#32;<emphasis role="keywordtype">string</emphasis>.Empty;
+<anchor xml:id="__tab_display_8razor_8cs_source_1l00064"/>00064 
+<anchor xml:id="__tab_display_8razor_8cs_source_1l00065"/><link linkend="_class_luthetus_1_1_common_1_1_razor_lib_1_1_tabs_1_1_displays_1_1_tab_display_1a7e15612719ce63da5f2f7158313b0748">00065</link> &#32;&#32;&#32;&#32;<emphasis role="keyword">protected</emphasis>&#32;<emphasis role="keyword">override</emphasis>&#32;<emphasis role="keywordtype">void</emphasis>&#32;<link linkend="_class_luthetus_1_1_common_1_1_razor_lib_1_1_tabs_1_1_displays_1_1_tab_display_1a7e15612719ce63da5f2f7158313b0748">OnInitialized</link>()
+<anchor xml:id="__tab_display_8razor_8cs_source_1l00066"/>00066 &#32;&#32;&#32;&#32;{
+<anchor xml:id="__tab_display_8razor_8cs_source_1l00067"/>00067 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;DragStateWrap.StateChanged&#32;+=&#32;DragStateWrapOnStateChanged;
+<anchor xml:id="__tab_display_8razor_8cs_source_1l00068"/>00068 
+<anchor xml:id="__tab_display_8razor_8cs_source_1l00069"/>00069 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;base.OnInitialized();
+<anchor xml:id="__tab_display_8razor_8cs_source_1l00070"/>00070 &#32;&#32;&#32;&#32;}
+<anchor xml:id="__tab_display_8razor_8cs_source_1l00071"/>00071 
+<anchor xml:id="__tab_display_8razor_8cs_source_1l00072"/>00072 &#32;&#32;&#32;&#32;<emphasis role="keyword">private</emphasis>&#32;async&#32;<emphasis role="keywordtype">void</emphasis>&#32;DragStateWrapOnStateChanged(<emphasis role="keywordtype">object</emphasis>?&#32;sender,&#32;EventArgs&#32;e)
+<anchor xml:id="__tab_display_8razor_8cs_source_1l00073"/>00073 &#32;&#32;&#32;&#32;{
+<anchor xml:id="__tab_display_8razor_8cs_source_1l00074"/>00074 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">if</emphasis>&#32;(IsBeingDragged)
+<anchor xml:id="__tab_display_8razor_8cs_source_1l00075"/>00075 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>;
+<anchor xml:id="__tab_display_8razor_8cs_source_1l00076"/>00076 
+<anchor xml:id="__tab_display_8razor_8cs_source_1l00077"/>00077 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">if</emphasis>&#32;(!DragStateWrap.Value.ShouldDisplay)
+<anchor xml:id="__tab_display_8razor_8cs_source_1l00078"/>00078 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;{
+<anchor xml:id="__tab_display_8razor_8cs_source_1l00079"/>00079 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;_dragEventHandler&#32;=&#32;<emphasis role="keyword">null</emphasis>;
+<anchor xml:id="__tab_display_8razor_8cs_source_1l00080"/>00080 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;_previousDragMouseEventArgs&#32;=&#32;<emphasis role="keyword">null</emphasis>;
+<anchor xml:id="__tab_display_8razor_8cs_source_1l00081"/>00081 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;_thinksLeftMouseButtonIsDown&#32;=&#32;<emphasis role="keyword">false</emphasis>;
+<anchor xml:id="__tab_display_8razor_8cs_source_1l00082"/>00082 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;}
+<anchor xml:id="__tab_display_8razor_8cs_source_1l00083"/>00083 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">else</emphasis>
+<anchor xml:id="__tab_display_8razor_8cs_source_1l00084"/>00084 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;{
+<anchor xml:id="__tab_display_8razor_8cs_source_1l00085"/>00085 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;var&#32;mouseEventArgs&#32;=&#32;DragStateWrap.Value.MouseEventArgs;
+<anchor xml:id="__tab_display_8razor_8cs_source_1l00086"/>00086 
+<anchor xml:id="__tab_display_8razor_8cs_source_1l00087"/>00087 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">if</emphasis>&#32;(_dragEventHandler&#32;is&#32;not&#32;<emphasis role="keyword">null</emphasis>)
+<anchor xml:id="__tab_display_8razor_8cs_source_1l00088"/>00088 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;{
+<anchor xml:id="__tab_display_8razor_8cs_source_1l00089"/>00089 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">if</emphasis>&#32;(_previousDragMouseEventArgs&#32;is&#32;not&#32;<emphasis role="keyword">null</emphasis>&#32;&amp;&amp;&#32;mouseEventArgs&#32;is&#32;not&#32;<emphasis role="keyword">null</emphasis>)
+<anchor xml:id="__tab_display_8razor_8cs_source_1l00090"/>00090 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;{
+<anchor xml:id="__tab_display_8razor_8cs_source_1l00091"/>00091 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;await&#32;_dragEventHandler
+<anchor xml:id="__tab_display_8razor_8cs_source_1l00092"/>00092 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;.Invoke((_previousDragMouseEventArgs,&#32;mouseEventArgs))
+<anchor xml:id="__tab_display_8razor_8cs_source_1l00093"/>00093 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;.ConfigureAwait(<emphasis role="keyword">false</emphasis>);
+<anchor xml:id="__tab_display_8razor_8cs_source_1l00094"/>00094 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;}
+<anchor xml:id="__tab_display_8razor_8cs_source_1l00095"/>00095 
+<anchor xml:id="__tab_display_8razor_8cs_source_1l00096"/>00096 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;_previousDragMouseEventArgs&#32;=&#32;mouseEventArgs;
+<anchor xml:id="__tab_display_8razor_8cs_source_1l00097"/>00097 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;await&#32;InvokeAsync(StateHasChanged);
+<anchor xml:id="__tab_display_8razor_8cs_source_1l00098"/>00098 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;}
+<anchor xml:id="__tab_display_8razor_8cs_source_1l00099"/>00099 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;}
+<anchor xml:id="__tab_display_8razor_8cs_source_1l00100"/>00100 &#32;&#32;&#32;&#32;}
+<anchor xml:id="__tab_display_8razor_8cs_source_1l00101"/>00101 &#32;&#32;&#32;&#32;
+<anchor xml:id="__tab_display_8razor_8cs_source_1l00102"/>00102 &#32;&#32;&#32;&#32;<emphasis role="keyword">private</emphasis>&#32;async&#32;Task&#32;OnClick(<link linkend="_interface_luthetus_1_1_common_1_1_razor_lib_1_1_dynamics_1_1_models_1_1_i_tab">ITab</link>&#32;localTabViewModel,&#32;MouseEventArgs&#32;e)
+<anchor xml:id="__tab_display_8razor_8cs_source_1l00103"/>00103 &#32;&#32;&#32;&#32;{
+<anchor xml:id="__tab_display_8razor_8cs_source_1l00104"/>00104 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">if</emphasis>&#32;(IsBeingDragged)
+<anchor xml:id="__tab_display_8razor_8cs_source_1l00105"/>00105 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>;
+<anchor xml:id="__tab_display_8razor_8cs_source_1l00106"/>00106 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;
+<anchor xml:id="__tab_display_8razor_8cs_source_1l00107"/>00107 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;var&#32;localTabGroup&#32;=&#32;localTabViewModel.<link linkend="_interface_luthetus_1_1_common_1_1_razor_lib_1_1_dynamics_1_1_models_1_1_i_tab_1ac770e0619702598140c4d6e3f0675e37">TabGroup</link>;
+<anchor xml:id="__tab_display_8razor_8cs_source_1l00108"/>00108 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">if</emphasis>&#32;(localTabGroup&#32;is&#32;<emphasis role="keyword">null</emphasis>)
+<anchor xml:id="__tab_display_8razor_8cs_source_1l00109"/>00109 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>;
+<anchor xml:id="__tab_display_8razor_8cs_source_1l00110"/>00110 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;
+<anchor xml:id="__tab_display_8razor_8cs_source_1l00111"/>00111 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;await&#32;localTabGroup.<link linkend="_interface_luthetus_1_1_common_1_1_razor_lib_1_1_dynamics_1_1_models_1_1_i_tab_group_1ade52d596f687e1ec610b9a7703382ded">OnClickAsync</link>(localTabViewModel,&#32;e).ConfigureAwait(<emphasis role="keyword">false</emphasis>);
+<anchor xml:id="__tab_display_8razor_8cs_source_1l00112"/>00112 &#32;&#32;&#32;&#32;}
+<anchor xml:id="__tab_display_8razor_8cs_source_1l00113"/>00113 
+<anchor xml:id="__tab_display_8razor_8cs_source_1l00114"/>00114 &#32;&#32;&#32;&#32;<emphasis role="keyword">private</emphasis>&#32;async&#32;Task&#32;CloseTabOnClickAsync()
+<anchor xml:id="__tab_display_8razor_8cs_source_1l00115"/>00115 &#32;&#32;&#32;&#32;{
+<anchor xml:id="__tab_display_8razor_8cs_source_1l00116"/>00116 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">if</emphasis>&#32;(IsBeingDragged)
+<anchor xml:id="__tab_display_8razor_8cs_source_1l00117"/>00117 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>;
+<anchor xml:id="__tab_display_8razor_8cs_source_1l00118"/>00118 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;
+<anchor xml:id="__tab_display_8razor_8cs_source_1l00119"/>00119 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;var&#32;localTabViewModel&#32;=&#32;Tab;
+<anchor xml:id="__tab_display_8razor_8cs_source_1l00120"/>00120 
+<anchor xml:id="__tab_display_8razor_8cs_source_1l00121"/>00121 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;var&#32;localTabGroup&#32;=&#32;localTabViewModel.<link linkend="_interface_luthetus_1_1_common_1_1_razor_lib_1_1_dynamics_1_1_models_1_1_i_tab_1ac770e0619702598140c4d6e3f0675e37">TabGroup</link>;
+<anchor xml:id="__tab_display_8razor_8cs_source_1l00122"/>00122 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">if</emphasis>&#32;(localTabGroup&#32;is&#32;<emphasis role="keyword">null</emphasis>)
+<anchor xml:id="__tab_display_8razor_8cs_source_1l00123"/>00123 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>;
+<anchor xml:id="__tab_display_8razor_8cs_source_1l00124"/>00124 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;
+<anchor xml:id="__tab_display_8razor_8cs_source_1l00125"/>00125 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;await&#32;localTabGroup.<link linkend="_interface_luthetus_1_1_common_1_1_razor_lib_1_1_dynamics_1_1_models_1_1_i_tab_group_1aa04e1864f66221b4819362bb0f16b769">CloseAsync</link>(Tab).ConfigureAwait(<emphasis role="keyword">false</emphasis>);
+<anchor xml:id="__tab_display_8razor_8cs_source_1l00126"/>00126 &#32;&#32;&#32;&#32;}
+<anchor xml:id="__tab_display_8razor_8cs_source_1l00127"/>00127 
+<anchor xml:id="__tab_display_8razor_8cs_source_1l00128"/>00128 &#32;&#32;&#32;&#32;<emphasis role="keyword">private</emphasis>&#32;async&#32;Task&#32;HandleOnMouseDownAsync(MouseEventArgs&#32;mouseEventArgs)
+<anchor xml:id="__tab_display_8razor_8cs_source_1l00129"/>00129 &#32;&#32;&#32;&#32;{
+<anchor xml:id="__tab_display_8razor_8cs_source_1l00130"/>00130 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">if</emphasis>&#32;(IsBeingDragged)
+<anchor xml:id="__tab_display_8razor_8cs_source_1l00131"/>00131 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>;
+<anchor xml:id="__tab_display_8razor_8cs_source_1l00132"/>00132 
+<anchor xml:id="__tab_display_8razor_8cs_source_1l00133"/>00133 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">if</emphasis>&#32;(mouseEventArgs.Button&#32;==&#32;0)
+<anchor xml:id="__tab_display_8razor_8cs_source_1l00134"/>00134 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;_thinksLeftMouseButtonIsDown&#32;=&#32;<emphasis role="keyword">true</emphasis>;
+<anchor xml:id="__tab_display_8razor_8cs_source_1l00135"/>00135 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">if</emphasis>&#32;(mouseEventArgs.Button&#32;==&#32;1)
+<anchor xml:id="__tab_display_8razor_8cs_source_1l00136"/>00136 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;await&#32;CloseTabOnClickAsync().ConfigureAwait(<emphasis role="keyword">false</emphasis>);
+<anchor xml:id="__tab_display_8razor_8cs_source_1l00137"/>00137 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">else</emphasis>&#32;<emphasis role="keywordflow">if</emphasis>&#32;(mouseEventArgs.Button&#32;==&#32;2)
+<anchor xml:id="__tab_display_8razor_8cs_source_1l00138"/>00138 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;ManuallyPropagateOnContextMenu(mouseEventArgs,&#32;Tab);
+<anchor xml:id="__tab_display_8razor_8cs_source_1l00139"/>00139 &#32;&#32;&#32;&#32;}
+<anchor xml:id="__tab_display_8razor_8cs_source_1l00140"/>00140 
+<anchor xml:id="__tab_display_8razor_8cs_source_1l00141"/>00141 &#32;&#32;&#32;&#32;<emphasis role="keyword">private</emphasis>&#32;<emphasis role="keywordtype">void</emphasis>&#32;ManuallyPropagateOnContextMenu(
+<anchor xml:id="__tab_display_8razor_8cs_source_1l00142"/>00142 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;MouseEventArgs&#32;mouseEventArgs,
+<anchor xml:id="__tab_display_8razor_8cs_source_1l00143"/>00143 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;ITab&#32;tab)
+<anchor xml:id="__tab_display_8razor_8cs_source_1l00144"/>00144 &#32;&#32;&#32;&#32;{
+<anchor xml:id="__tab_display_8razor_8cs_source_1l00145"/>00145 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;var&#32;localHandleTabButtonOnContextMenu&#32;=&#32;HandleTabButtonOnContextMenu;
+<anchor xml:id="__tab_display_8razor_8cs_source_1l00146"/>00146 
+<anchor xml:id="__tab_display_8razor_8cs_source_1l00147"/>00147 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">if</emphasis>&#32;(localHandleTabButtonOnContextMenu&#32;is&#32;<emphasis role="keyword">null</emphasis>)
+<anchor xml:id="__tab_display_8razor_8cs_source_1l00148"/>00148 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>;
+<anchor xml:id="__tab_display_8razor_8cs_source_1l00149"/>00149 
+<anchor xml:id="__tab_display_8razor_8cs_source_1l00150"/>00150 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;BackgroundTaskService.<link linkend="_interface_luthetus_1_1_common_1_1_razor_lib_1_1_background_tasks_1_1_models_1_1_i_background_task_service_1a758d8cb5de12dcd38a2788cf1010bbb2">Enqueue</link>(
+<anchor xml:id="__tab_display_8razor_8cs_source_1l00151"/>00151 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;Key&lt;IBackgroundTask&gt;.NewKey(),
+<anchor xml:id="__tab_display_8razor_8cs_source_1l00152"/>00152 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;ContinuousBackgroundTaskWorker.GetQueueKey(),
+<anchor xml:id="__tab_display_8razor_8cs_source_1l00153"/>00153 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="stringliteral">&quot;Tab.ManuallyPropagateOnContextMenu&quot;</emphasis>,
+<anchor xml:id="__tab_display_8razor_8cs_source_1l00154"/>00154 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;async&#32;()&#32;=&gt;&#32;await&#32;localHandleTabButtonOnContextMenu
+<anchor xml:id="__tab_display_8razor_8cs_source_1l00155"/>00155 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;.Invoke(<emphasis role="keyword">new</emphasis>&#32;TabContextMenuEventArgs(mouseEventArgs,&#32;tab,&#32;FocusAsync))
+<anchor xml:id="__tab_display_8razor_8cs_source_1l00156"/>00156 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;.ConfigureAwait(<emphasis role="keyword">false</emphasis>));
+<anchor xml:id="__tab_display_8razor_8cs_source_1l00157"/>00157 &#32;&#32;&#32;&#32;}
+<anchor xml:id="__tab_display_8razor_8cs_source_1l00158"/>00158 
+<anchor xml:id="__tab_display_8razor_8cs_source_1l00159"/>00159 &#32;&#32;&#32;&#32;<emphasis role="keyword">private</emphasis>&#32;async&#32;Task&#32;FocusAsync()
+<anchor xml:id="__tab_display_8razor_8cs_source_1l00160"/>00160 &#32;&#32;&#32;&#32;{
+<anchor xml:id="__tab_display_8razor_8cs_source_1l00161"/>00161 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">try</emphasis>
+<anchor xml:id="__tab_display_8razor_8cs_source_1l00162"/>00162 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;{
+<anchor xml:id="__tab_display_8razor_8cs_source_1l00163"/>00163 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;var&#32;localTabButtonElementReference&#32;=&#32;_tabButtonElementReference;
+<anchor xml:id="__tab_display_8razor_8cs_source_1l00164"/>00164 
+<anchor xml:id="__tab_display_8razor_8cs_source_1l00165"/>00165 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">if</emphasis>&#32;(localTabButtonElementReference&#32;is&#32;not&#32;<emphasis role="keyword">null</emphasis>)
+<anchor xml:id="__tab_display_8razor_8cs_source_1l00166"/>00166 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;{
+<anchor xml:id="__tab_display_8razor_8cs_source_1l00167"/>00167 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;await&#32;localTabButtonElementReference.Value
+<anchor xml:id="__tab_display_8razor_8cs_source_1l00168"/>00168 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;.FocusAsync()
+<anchor xml:id="__tab_display_8razor_8cs_source_1l00169"/>00169 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;.ConfigureAwait(<emphasis role="keyword">false</emphasis>);
+<anchor xml:id="__tab_display_8razor_8cs_source_1l00170"/>00170 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;}
+<anchor xml:id="__tab_display_8razor_8cs_source_1l00171"/>00171 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;}
+<anchor xml:id="__tab_display_8razor_8cs_source_1l00172"/>00172 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">catch</emphasis>&#32;(Exception)
+<anchor xml:id="__tab_display_8razor_8cs_source_1l00173"/>00173 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;{
+<anchor xml:id="__tab_display_8razor_8cs_source_1l00174"/>00174 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;2023-04-18:&#32;The&#32;app&#32;has&#32;had&#32;a&#32;bug&#32;where&#32;it&#32;&quot;freezes&quot;&#32;and&#32;must&#32;be&#32;restarted.</emphasis>
+<anchor xml:id="__tab_display_8razor_8cs_source_1l00175"/>00175 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;This&#32;bug&#32;is&#32;seemingly&#32;happening&#32;randomly.&#32;I&#32;have&#32;a&#32;suspicion</emphasis>
+<anchor xml:id="__tab_display_8razor_8cs_source_1l00176"/>00176 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;that&#32;there&#32;are&#32;race-condition&#32;exceptions&#32;occurring&#32;with&#32;&quot;FocusAsync&quot;</emphasis>
+<anchor xml:id="__tab_display_8razor_8cs_source_1l00177"/>00177 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;on&#32;an&#32;ElementReference.</emphasis>
+<anchor xml:id="__tab_display_8razor_8cs_source_1l00178"/>00178 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;}
+<anchor xml:id="__tab_display_8razor_8cs_source_1l00179"/>00179 &#32;&#32;&#32;&#32;}
+<anchor xml:id="__tab_display_8razor_8cs_source_1l00180"/>00180 
+<anchor xml:id="__tab_display_8razor_8cs_source_1l00181"/>00181 &#32;&#32;&#32;&#32;<emphasis role="keyword">private</emphasis>&#32;<emphasis role="keywordtype">void</emphasis>&#32;HandleOnMouseUp()
+<anchor xml:id="__tab_display_8razor_8cs_source_1l00182"/>00182 &#32;&#32;&#32;&#32;{
+<anchor xml:id="__tab_display_8razor_8cs_source_1l00183"/>00183 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">if</emphasis>&#32;(IsBeingDragged)
+<anchor xml:id="__tab_display_8razor_8cs_source_1l00184"/>00184 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>;
+<anchor xml:id="__tab_display_8razor_8cs_source_1l00185"/>00185 
+<anchor xml:id="__tab_display_8razor_8cs_source_1l00186"/>00186 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;_thinksLeftMouseButtonIsDown&#32;=&#32;<emphasis role="keyword">false</emphasis>;
+<anchor xml:id="__tab_display_8razor_8cs_source_1l00187"/>00187 &#32;&#32;&#32;&#32;}
+<anchor xml:id="__tab_display_8razor_8cs_source_1l00188"/>00188 
+<anchor xml:id="__tab_display_8razor_8cs_source_1l00189"/>00189 &#32;&#32;&#32;&#32;<emphasis role="keyword">private</emphasis>&#32;async&#32;Task&#32;HandleOnMouseOutAsync(MouseEventArgs&#32;mouseEventArgs)
+<anchor xml:id="__tab_display_8razor_8cs_source_1l00190"/>00190 &#32;&#32;&#32;&#32;{
+<anchor xml:id="__tab_display_8razor_8cs_source_1l00191"/>00191 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">if</emphasis>&#32;(IsBeingDragged)
+<anchor xml:id="__tab_display_8razor_8cs_source_1l00192"/>00192 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>;
+<anchor xml:id="__tab_display_8razor_8cs_source_1l00193"/>00193 
+<anchor xml:id="__tab_display_8razor_8cs_source_1l00194"/>00194 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">if</emphasis>&#32;(_thinksLeftMouseButtonIsDown&#32;&amp;&amp;&#32;Tab&#32;is&#32;IDrag&#32;draggable)
+<anchor xml:id="__tab_display_8razor_8cs_source_1l00195"/>00195 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;{
+<anchor xml:id="__tab_display_8razor_8cs_source_1l00196"/>00196 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;var&#32;measuredHtmlElementDimensions&#32;=&#32;await&#32;JsRuntime.GetLuthetusCommonApi()
+<anchor xml:id="__tab_display_8razor_8cs_source_1l00197"/>00197 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;.MeasureElementById(HtmlId)
+<anchor xml:id="__tab_display_8razor_8cs_source_1l00198"/>00198 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;.ConfigureAwait(<emphasis role="keyword">false</emphasis>);
+<anchor xml:id="__tab_display_8razor_8cs_source_1l00199"/>00199 
+<anchor xml:id="__tab_display_8razor_8cs_source_1l00200"/>00200 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;await&#32;draggable.OnDragStartAsync().ConfigureAwait(<emphasis role="keyword">false</emphasis>);
+<anchor xml:id="__tab_display_8razor_8cs_source_1l00201"/>00201 
+<anchor xml:id="__tab_display_8razor_8cs_source_1l00202"/>00202 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;Width</emphasis>
+<anchor xml:id="__tab_display_8razor_8cs_source_1l00203"/>00203 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;{
+<anchor xml:id="__tab_display_8razor_8cs_source_1l00204"/>00204 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;var&#32;widthDimensionAttribute&#32;=&#32;draggable.DragElementDimensions.DimensionAttributeList.First(
+<anchor xml:id="__tab_display_8razor_8cs_source_1l00205"/>00205 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;x&#32;=&gt;&#32;x.DimensionAttributeKind&#32;==&#32;<link linkend="_namespace_luthetus_1_1_common_1_1_razor_lib_1_1_dimensions_1_1_models_1ab42cbfab74a6a286a2eb53313a9e37f0">DimensionAttributeKind</link>.Width);
+<anchor xml:id="__tab_display_8razor_8cs_source_1l00206"/>00206 &#32;&#32;&#32;&#32;
+<anchor xml:id="__tab_display_8razor_8cs_source_1l00207"/>00207 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;widthDimensionAttribute.DimensionUnitList.Clear();
+<anchor xml:id="__tab_display_8razor_8cs_source_1l00208"/>00208 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;widthDimensionAttribute.DimensionUnitList.Add(<emphasis role="keyword">new</emphasis>&#32;DimensionUnit
+<anchor xml:id="__tab_display_8razor_8cs_source_1l00209"/>00209 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;{
+<anchor xml:id="__tab_display_8razor_8cs_source_1l00210"/>00210 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;Value&#32;=&#32;measuredHtmlElementDimensions.WidthInPixels,
+<anchor xml:id="__tab_display_8razor_8cs_source_1l00211"/>00211 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<link linkend="_namespace_luthetus_1_1_common_1_1_razor_lib_1_1_dimensions_1_1_models_1ac011df04cfd59ccb7947a4ced86ba4f6">DimensionUnitKind</link>&#32;=&#32;DimensionUnitKind.Pixels
+<anchor xml:id="__tab_display_8razor_8cs_source_1l00212"/>00212 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;});
+<anchor xml:id="__tab_display_8razor_8cs_source_1l00213"/>00213 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;}
+<anchor xml:id="__tab_display_8razor_8cs_source_1l00214"/>00214 
+<anchor xml:id="__tab_display_8razor_8cs_source_1l00215"/>00215 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;Height</emphasis>
+<anchor xml:id="__tab_display_8razor_8cs_source_1l00216"/>00216 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;{
+<anchor xml:id="__tab_display_8razor_8cs_source_1l00217"/>00217 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;var&#32;heightDimensionAttribute&#32;=&#32;draggable.DragElementDimensions.DimensionAttributeList.First(
+<anchor xml:id="__tab_display_8razor_8cs_source_1l00218"/>00218 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;x&#32;=&gt;&#32;x.DimensionAttributeKind&#32;==&#32;<link linkend="_namespace_luthetus_1_1_common_1_1_razor_lib_1_1_dimensions_1_1_models_1ab42cbfab74a6a286a2eb53313a9e37f0">DimensionAttributeKind</link>.Height);
+<anchor xml:id="__tab_display_8razor_8cs_source_1l00219"/>00219 &#32;&#32;&#32;&#32;
+<anchor xml:id="__tab_display_8razor_8cs_source_1l00220"/>00220 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;heightDimensionAttribute.DimensionUnitList.Clear();
+<anchor xml:id="__tab_display_8razor_8cs_source_1l00221"/>00221 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;heightDimensionAttribute.DimensionUnitList.Add(<emphasis role="keyword">new</emphasis>&#32;DimensionUnit
+<anchor xml:id="__tab_display_8razor_8cs_source_1l00222"/>00222 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;{
+<anchor xml:id="__tab_display_8razor_8cs_source_1l00223"/>00223 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;Value&#32;=&#32;measuredHtmlElementDimensions.HeightInPixels,
+<anchor xml:id="__tab_display_8razor_8cs_source_1l00224"/>00224 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<link linkend="_namespace_luthetus_1_1_common_1_1_razor_lib_1_1_dimensions_1_1_models_1ac011df04cfd59ccb7947a4ced86ba4f6">DimensionUnitKind</link>&#32;=&#32;DimensionUnitKind.Pixels
+<anchor xml:id="__tab_display_8razor_8cs_source_1l00225"/>00225 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;});
+<anchor xml:id="__tab_display_8razor_8cs_source_1l00226"/>00226 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;}
+<anchor xml:id="__tab_display_8razor_8cs_source_1l00227"/>00227 
+<anchor xml:id="__tab_display_8razor_8cs_source_1l00228"/>00228 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;Left</emphasis>
+<anchor xml:id="__tab_display_8razor_8cs_source_1l00229"/>00229 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;{
+<anchor xml:id="__tab_display_8razor_8cs_source_1l00230"/>00230 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;var&#32;leftDimensionAttribute&#32;=&#32;draggable.DragElementDimensions.DimensionAttributeList.First(
+<anchor xml:id="__tab_display_8razor_8cs_source_1l00231"/>00231 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;x&#32;=&gt;&#32;x.DimensionAttributeKind&#32;==&#32;<link linkend="_namespace_luthetus_1_1_common_1_1_razor_lib_1_1_dimensions_1_1_models_1ab42cbfab74a6a286a2eb53313a9e37f0">DimensionAttributeKind</link>.Left);
+<anchor xml:id="__tab_display_8razor_8cs_source_1l00232"/>00232 &#32;&#32;&#32;&#32;
+<anchor xml:id="__tab_display_8razor_8cs_source_1l00233"/>00233 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;leftDimensionAttribute.DimensionUnitList.Clear();
+<anchor xml:id="__tab_display_8razor_8cs_source_1l00234"/>00234 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;leftDimensionAttribute.DimensionUnitList.Add(<emphasis role="keyword">new</emphasis>&#32;DimensionUnit
+<anchor xml:id="__tab_display_8razor_8cs_source_1l00235"/>00235 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;{
+<anchor xml:id="__tab_display_8razor_8cs_source_1l00236"/>00236 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;Value&#32;=&#32;mouseEventArgs.ClientX,
+<anchor xml:id="__tab_display_8razor_8cs_source_1l00237"/>00237 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<link linkend="_namespace_luthetus_1_1_common_1_1_razor_lib_1_1_dimensions_1_1_models_1ac011df04cfd59ccb7947a4ced86ba4f6">DimensionUnitKind</link>&#32;=&#32;DimensionUnitKind.Pixels
+<anchor xml:id="__tab_display_8razor_8cs_source_1l00238"/>00238 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;});
+<anchor xml:id="__tab_display_8razor_8cs_source_1l00239"/>00239 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;}
+<anchor xml:id="__tab_display_8razor_8cs_source_1l00240"/>00240 
+<anchor xml:id="__tab_display_8razor_8cs_source_1l00241"/>00241 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;Top</emphasis>
+<anchor xml:id="__tab_display_8razor_8cs_source_1l00242"/>00242 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;{
+<anchor xml:id="__tab_display_8razor_8cs_source_1l00243"/>00243 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;var&#32;topDimensionAttribute&#32;=&#32;draggable.DragElementDimensions.DimensionAttributeList.First(
+<anchor xml:id="__tab_display_8razor_8cs_source_1l00244"/>00244 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;x&#32;=&gt;&#32;x.DimensionAttributeKind&#32;==&#32;<link linkend="_namespace_luthetus_1_1_common_1_1_razor_lib_1_1_dimensions_1_1_models_1ab42cbfab74a6a286a2eb53313a9e37f0">DimensionAttributeKind</link>.Top);
+<anchor xml:id="__tab_display_8razor_8cs_source_1l00245"/>00245 &#32;&#32;&#32;&#32;
+<anchor xml:id="__tab_display_8razor_8cs_source_1l00246"/>00246 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;topDimensionAttribute.DimensionUnitList.Clear();
+<anchor xml:id="__tab_display_8razor_8cs_source_1l00247"/>00247 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;topDimensionAttribute.DimensionUnitList.Add(<emphasis role="keyword">new</emphasis>&#32;DimensionUnit
+<anchor xml:id="__tab_display_8razor_8cs_source_1l00248"/>00248 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;{
+<anchor xml:id="__tab_display_8razor_8cs_source_1l00249"/>00249 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;Value&#32;=&#32;mouseEventArgs.ClientY,
+<anchor xml:id="__tab_display_8razor_8cs_source_1l00250"/>00250 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<link linkend="_namespace_luthetus_1_1_common_1_1_razor_lib_1_1_dimensions_1_1_models_1ac011df04cfd59ccb7947a4ced86ba4f6">DimensionUnitKind</link>&#32;=&#32;DimensionUnitKind.Pixels
+<anchor xml:id="__tab_display_8razor_8cs_source_1l00251"/>00251 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;});
+<anchor xml:id="__tab_display_8razor_8cs_source_1l00252"/>00252 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;}
+<anchor xml:id="__tab_display_8razor_8cs_source_1l00253"/>00253 
+<anchor xml:id="__tab_display_8razor_8cs_source_1l00254"/>00254 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;draggable.DragElementDimensions.ElementPositionKind&#32;=&#32;<link linkend="_namespace_luthetus_1_1_common_1_1_razor_lib_1_1_dimensions_1_1_models_1a798732978998352df76bdb091f17d2b7">ElementPositionKind</link>.Fixed;
+<anchor xml:id="__tab_display_8razor_8cs_source_1l00255"/>00255 
+<anchor xml:id="__tab_display_8razor_8cs_source_1l00256"/>00256 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<link linkend="_class_luthetus_1_1_common_1_1_razor_lib_1_1_tabs_1_1_displays_1_1_tab_display_1ad0e64aadad6b78b39eb74e73136a4e2b">SubscribeToDragEventForScrolling</link>(draggable);
+<anchor xml:id="__tab_display_8razor_8cs_source_1l00257"/>00257 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;}
+<anchor xml:id="__tab_display_8razor_8cs_source_1l00258"/>00258 &#32;&#32;&#32;&#32;}
+<anchor xml:id="__tab_display_8razor_8cs_source_1l00259"/>00259 
+<anchor xml:id="__tab_display_8razor_8cs_source_1l00260"/><link linkend="_class_luthetus_1_1_common_1_1_razor_lib_1_1_tabs_1_1_displays_1_1_tab_display_1ad0e64aadad6b78b39eb74e73136a4e2b">00260</link> &#32;&#32;&#32;&#32;<emphasis role="keyword">public</emphasis>&#32;<emphasis role="keywordtype">void</emphasis>&#32;<link linkend="_class_luthetus_1_1_common_1_1_razor_lib_1_1_tabs_1_1_displays_1_1_tab_display_1ad0e64aadad6b78b39eb74e73136a4e2b">SubscribeToDragEventForScrolling</link>(<link linkend="_interface_luthetus_1_1_common_1_1_razor_lib_1_1_dynamics_1_1_models_1_1_i_drag">IDrag</link>&#32;draggable)
+<anchor xml:id="__tab_display_8razor_8cs_source_1l00261"/>00261 &#32;&#32;&#32;&#32;{
+<anchor xml:id="__tab_display_8razor_8cs_source_1l00262"/>00262 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">if</emphasis>&#32;(<link linkend="_class_luthetus_1_1_common_1_1_razor_lib_1_1_tabs_1_1_displays_1_1_tab_display_1ae97f12854f570ac82bdb2fa76f84bc68">IsBeingDragged</link>)
+<anchor xml:id="__tab_display_8razor_8cs_source_1l00263"/>00263 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>;
+<anchor xml:id="__tab_display_8razor_8cs_source_1l00264"/>00264 
+<anchor xml:id="__tab_display_8razor_8cs_source_1l00265"/>00265 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;_dragEventHandler&#32;=&#32;DragEventHandlerAsync;
+<anchor xml:id="__tab_display_8razor_8cs_source_1l00266"/>00266 
+<anchor xml:id="__tab_display_8razor_8cs_source_1l00267"/>00267 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;Dispatcher.Dispatch(<emphasis role="keyword">new</emphasis>&#32;<link linkend="_namespace_luthetus_1_1_common_1_1_razor_lib_1_1_drags_1_1_displays_1a2158af3f35275731447356de1965b7cb">DragState</link>.ShouldDisplayAndMouseEventArgsAndDragSetAction(<emphasis role="keyword">true</emphasis>,&#32;<emphasis role="keyword">null</emphasis>,&#32;draggable));
+<anchor xml:id="__tab_display_8razor_8cs_source_1l00268"/>00268 &#32;&#32;&#32;&#32;}
+<anchor xml:id="__tab_display_8razor_8cs_source_1l00269"/>00269 
+<anchor xml:id="__tab_display_8razor_8cs_source_1l00270"/>00270 &#32;&#32;&#32;&#32;<emphasis role="keyword">private</emphasis>&#32;Task&#32;DragEventHandlerAsync(
+<anchor xml:id="__tab_display_8razor_8cs_source_1l00271"/>00271 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;(MouseEventArgs&#32;firstMouseEventArgs,&#32;MouseEventArgs&#32;secondMouseEventArgs)&#32;mouseEventArgsTuple)
+<anchor xml:id="__tab_display_8razor_8cs_source_1l00272"/>00272 &#32;&#32;&#32;&#32;{
+<anchor xml:id="__tab_display_8razor_8cs_source_1l00273"/>00273 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">if</emphasis>&#32;(IsBeingDragged)
+<anchor xml:id="__tab_display_8razor_8cs_source_1l00274"/>00274 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;Task.CompletedTask;
+<anchor xml:id="__tab_display_8razor_8cs_source_1l00275"/>00275 
+<anchor xml:id="__tab_display_8razor_8cs_source_1l00276"/>00276 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;var&#32;localThinksLeftMouseButtonIsDown&#32;=&#32;_thinksLeftMouseButtonIsDown;
+<anchor xml:id="__tab_display_8razor_8cs_source_1l00277"/>00277 
+<anchor xml:id="__tab_display_8razor_8cs_source_1l00278"/>00278 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">if</emphasis>&#32;(!localThinksLeftMouseButtonIsDown)
+<anchor xml:id="__tab_display_8razor_8cs_source_1l00279"/>00279 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;Task.CompletedTask;
+<anchor xml:id="__tab_display_8razor_8cs_source_1l00280"/>00280 
+<anchor xml:id="__tab_display_8razor_8cs_source_1l00281"/>00281 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;Buttons&#32;is&#32;a&#32;bit&#32;flag&#32;&apos;&amp;&#32;1&apos;&#32;gets&#32;if&#32;left&#32;mouse&#32;button&#32;is&#32;held</emphasis>
+<anchor xml:id="__tab_display_8razor_8cs_source_1l00282"/>00282 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">if</emphasis>&#32;(Tab&#32;is&#32;<link linkend="_interface_luthetus_1_1_common_1_1_razor_lib_1_1_dynamics_1_1_models_1_1_i_drag">IDrag</link>&#32;draggable&#32;&amp;&amp;
+<anchor xml:id="__tab_display_8razor_8cs_source_1l00283"/>00283 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;localThinksLeftMouseButtonIsDown&#32;&amp;&amp;
+<anchor xml:id="__tab_display_8razor_8cs_source_1l00284"/>00284 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;(mouseEventArgsTuple.secondMouseEventArgs.Buttons&#32;&amp;&#32;1)&#32;==&#32;1)
+<anchor xml:id="__tab_display_8razor_8cs_source_1l00285"/>00285 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;{
+<anchor xml:id="__tab_display_8razor_8cs_source_1l00286"/>00286 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<link linkend="_class_luthetus_1_1_common_1_1_razor_lib_1_1_resizes_1_1_models_1_1_resize_helper">ResizeHelper</link>.<link linkend="_class_luthetus_1_1_common_1_1_razor_lib_1_1_resizes_1_1_models_1_1_resize_helper_1ae8df88f50b78a209616a812a12e3e761">Move</link>(
+<anchor xml:id="__tab_display_8razor_8cs_source_1l00287"/>00287 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;draggable.DragElementDimensions,
+<anchor xml:id="__tab_display_8razor_8cs_source_1l00288"/>00288 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;mouseEventArgsTuple.firstMouseEventArgs,
+<anchor xml:id="__tab_display_8razor_8cs_source_1l00289"/>00289 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;mouseEventArgsTuple.secondMouseEventArgs);
+<anchor xml:id="__tab_display_8razor_8cs_source_1l00290"/>00290 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;}
+<anchor xml:id="__tab_display_8razor_8cs_source_1l00291"/>00291 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">else</emphasis>
+<anchor xml:id="__tab_display_8razor_8cs_source_1l00292"/>00292 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;{
+<anchor xml:id="__tab_display_8razor_8cs_source_1l00293"/>00293 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;_dragEventHandler&#32;=&#32;<emphasis role="keyword">null</emphasis>;
+<anchor xml:id="__tab_display_8razor_8cs_source_1l00294"/>00294 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;_previousDragMouseEventArgs&#32;=&#32;<emphasis role="keyword">null</emphasis>;
+<anchor xml:id="__tab_display_8razor_8cs_source_1l00295"/>00295 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;_thinksLeftMouseButtonIsDown&#32;=&#32;<emphasis role="keyword">false</emphasis>;
+<anchor xml:id="__tab_display_8razor_8cs_source_1l00296"/>00296 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;}
+<anchor xml:id="__tab_display_8razor_8cs_source_1l00297"/>00297 
+<anchor xml:id="__tab_display_8razor_8cs_source_1l00298"/>00298 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;Task.CompletedTask;
+<anchor xml:id="__tab_display_8razor_8cs_source_1l00299"/>00299 &#32;&#32;&#32;&#32;}
+<anchor xml:id="__tab_display_8razor_8cs_source_1l00300"/>00300 
+<anchor xml:id="__tab_display_8razor_8cs_source_1l00301"/>00301 &#32;&#32;&#32;&#32;<emphasis role="keyword">private</emphasis>&#32;<emphasis role="keywordtype">string</emphasis>&#32;GetDraggableCssStyleString()
+<anchor xml:id="__tab_display_8razor_8cs_source_1l00302"/>00302 &#32;&#32;&#32;&#32;{
+<anchor xml:id="__tab_display_8razor_8cs_source_1l00303"/>00303 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">if</emphasis>&#32;(IsBeingDragged&#32;&amp;&amp;&#32;Tab&#32;is&#32;<link linkend="_interface_luthetus_1_1_common_1_1_razor_lib_1_1_dynamics_1_1_models_1_1_i_drag">IDrag</link>&#32;draggable)
+<anchor xml:id="__tab_display_8razor_8cs_source_1l00304"/>00304 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;draggable.DragElementDimensions.StyleString;
+<anchor xml:id="__tab_display_8razor_8cs_source_1l00305"/>00305 
+<anchor xml:id="__tab_display_8razor_8cs_source_1l00306"/>00306 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;<emphasis role="keywordtype">string</emphasis>.Empty;
+<anchor xml:id="__tab_display_8razor_8cs_source_1l00307"/>00307 &#32;&#32;&#32;&#32;}
+<anchor xml:id="__tab_display_8razor_8cs_source_1l00308"/>00308 
+<anchor xml:id="__tab_display_8razor_8cs_source_1l00309"/>00309 &#32;&#32;&#32;&#32;<emphasis role="keyword">private</emphasis>&#32;<emphasis role="keywordtype">string</emphasis>&#32;GetIsBeingDraggedCssClassString()
+<anchor xml:id="__tab_display_8razor_8cs_source_1l00310"/>00310 &#32;&#32;&#32;&#32;{
+<anchor xml:id="__tab_display_8razor_8cs_source_1l00311"/>00311 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;IsBeingDragged
+<anchor xml:id="__tab_display_8razor_8cs_source_1l00312"/>00312 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;?&#32;<emphasis role="stringliteral">&quot;luth_drag&quot;</emphasis>
+<anchor xml:id="__tab_display_8razor_8cs_source_1l00313"/>00313 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;:&#32;<emphasis role="keywordtype">string</emphasis>.Empty;
+<anchor xml:id="__tab_display_8razor_8cs_source_1l00314"/>00314 &#32;&#32;&#32;&#32;}
+<anchor xml:id="__tab_display_8razor_8cs_source_1l00315"/>00315 
+<anchor xml:id="__tab_display_8razor_8cs_source_1l00316"/><link linkend="_class_luthetus_1_1_common_1_1_razor_lib_1_1_tabs_1_1_displays_1_1_tab_display_1ab75d11392ea617f1f4fd2437ba5b9d0a">00316</link> &#32;&#32;&#32;&#32;<emphasis role="keyword">public</emphasis>&#32;<emphasis role="keywordtype">void</emphasis>&#32;<link linkend="_class_luthetus_1_1_common_1_1_razor_lib_1_1_tabs_1_1_displays_1_1_tab_display_1ab75d11392ea617f1f4fd2437ba5b9d0a">Dispose</link>()
+<anchor xml:id="__tab_display_8razor_8cs_source_1l00317"/>00317 &#32;&#32;&#32;&#32;{
+<anchor xml:id="__tab_display_8razor_8cs_source_1l00318"/>00318 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;DragStateWrap.StateChanged&#32;-=&#32;DragStateWrapOnStateChanged;
+<anchor xml:id="__tab_display_8razor_8cs_source_1l00319"/>00319 &#32;&#32;&#32;&#32;}
+<anchor xml:id="__tab_display_8razor_8cs_source_1l00320"/>00320 }
+</programlisting></section>

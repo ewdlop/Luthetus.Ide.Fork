@@ -1,0 +1,4 @@
+var interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1_1_i_tab_text_editor =
+[
+    [ "ViewModelKey", "interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1_1_i_tab_text_editor.html#a966722da9f97ea960cb86bb1361e2517", null ]
+];

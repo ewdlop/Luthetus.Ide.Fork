@@ -1,0 +1,38 @@
+\doxysection{Event\+Utils.\+cs}
+\hypertarget{_common_2_custom_events_2_models_2_event_utils_8cs_source}{}\label{_common_2_custom_events_2_models_2_event_utils_8cs_source}\index{Source/Lib/Common/CustomEvents/Models/EventUtils.cs@{Source/Lib/Common/CustomEvents/Models/EventUtils.cs}}
+\mbox{\hyperlink{_common_2_custom_events_2_models_2_event_utils_8cs}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{_common_2_custom_events_2_models_2_event_utils_8cs_source_l00001}00001\ \textcolor{keyword}{using\ }Microsoft.AspNetCore.Components;}
+\DoxyCodeLine{\Hypertarget{_common_2_custom_events_2_models_2_event_utils_8cs_source_l00002}00002\ }
+\DoxyCodeLine{\Hypertarget{_common_2_custom_events_2_models_2_event_utils_8cs_source_l00003}00003\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespace_luthetus_1_1_common_1_1_razor_lib_1_1_custom_events_1_1_models}{Luthetus.Common.RazorLib.CustomEvents.Models}};}
+\DoxyCodeLine{\Hypertarget{_common_2_custom_events_2_models_2_event_utils_8cs_source_l00004}00004\ }
+\DoxyCodeLine{\Hypertarget{_common_2_custom_events_2_models_2_event_utils_8cs_source_l00015}00015\ \textcolor{keyword}{public}\ \textcolor{keyword}{static}\ \textcolor{keyword}{class\ }EventUtil}
+\DoxyCodeLine{\Hypertarget{_common_2_custom_events_2_models_2_event_utils_8cs_source_l00016}00016\ \{}
+\DoxyCodeLine{\Hypertarget{_common_2_custom_events_2_models_2_event_utils_8cs_source_l00017}00017\ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keyword}{static}\ Action\ AsNonRenderingEventHandler(Action\ callback)}
+\DoxyCodeLine{\Hypertarget{_common_2_custom_events_2_models_2_event_utils_8cs_source_l00018}00018\ \ \ \ \ \ \ \ \ =>\ \textcolor{keyword}{new}\ SyncReceiver(callback).Invoke;}
+\DoxyCodeLine{\Hypertarget{_common_2_custom_events_2_models_2_event_utils_8cs_source_l00019}00019\ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keyword}{static}\ Action<TValue>\ AsNonRenderingEventHandler<TValue>(}
+\DoxyCodeLine{\Hypertarget{_common_2_custom_events_2_models_2_event_utils_8cs_source_l00020}00020\ \ \ \ \ \ \ \ \ \ \ \ \ Action<TValue>\ callback)}
+\DoxyCodeLine{\Hypertarget{_common_2_custom_events_2_models_2_event_utils_8cs_source_l00021}00021\ \ \ \ \ \ \ \ \ =>\ \textcolor{keyword}{new}\ SyncReceiver<TValue>(callback).Invoke;}
+\DoxyCodeLine{\Hypertarget{_common_2_custom_events_2_models_2_event_utils_8cs_source_l00022}00022\ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keyword}{static}\ Func<Task>\ AsNonRenderingEventHandler(Func<Task>\ callback)}
+\DoxyCodeLine{\Hypertarget{_common_2_custom_events_2_models_2_event_utils_8cs_source_l00023}00023\ \ \ \ \ \ \ \ \ =>\ \textcolor{keyword}{new}\ AsyncReceiver(callback).Invoke;}
+\DoxyCodeLine{\Hypertarget{_common_2_custom_events_2_models_2_event_utils_8cs_source_l00024}00024\ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keyword}{static}\ Func<TValue,\ Task>\ AsNonRenderingEventHandler<TValue>(}
+\DoxyCodeLine{\Hypertarget{_common_2_custom_events_2_models_2_event_utils_8cs_source_l00025}00025\ \ \ \ \ \ \ \ \ \ \ \ \ Func<TValue,\ Task>\ callback)}
+\DoxyCodeLine{\Hypertarget{_common_2_custom_events_2_models_2_event_utils_8cs_source_l00026}00026\ \ \ \ \ \ \ \ \ =>\ \textcolor{keyword}{new}\ AsyncReceiver<TValue>(callback).Invoke;}
+\DoxyCodeLine{\Hypertarget{_common_2_custom_events_2_models_2_event_utils_8cs_source_l00027}00027\ }
+\DoxyCodeLine{\Hypertarget{_common_2_custom_events_2_models_2_event_utils_8cs_source_l00028}00028\ \ \ \ \ \textcolor{keyword}{private}\ record\ SyncReceiver(Action\ callback)\ }
+\DoxyCodeLine{\Hypertarget{_common_2_custom_events_2_models_2_event_utils_8cs_source_l00029}00029\ \ \ \ \ \ \ \ \ :\ ReceiverBase\ \{\ public\ void\ Invoke()\ =>\ callback();\ \}}
+\DoxyCodeLine{\Hypertarget{_common_2_custom_events_2_models_2_event_utils_8cs_source_l00030}00030\ \ \ \ \ \textcolor{keyword}{private}\ record\ SyncReceiver<T>(Action<T>\ callback)\ }
+\DoxyCodeLine{\Hypertarget{_common_2_custom_events_2_models_2_event_utils_8cs_source_l00031}00031\ \ \ \ \ \ \ \ \ :\ ReceiverBase\ \{\ public\ void\ Invoke(T\ arg)\ =>\ callback(arg);\ \}}
+\DoxyCodeLine{\Hypertarget{_common_2_custom_events_2_models_2_event_utils_8cs_source_l00032}00032\ \ \ \ \ \textcolor{keyword}{private}\ record\ AsyncReceiver(Func<Task>\ callback)\ }
+\DoxyCodeLine{\Hypertarget{_common_2_custom_events_2_models_2_event_utils_8cs_source_l00033}00033\ \ \ \ \ \ \ \ \ :\ ReceiverBase\ \{\ public\ Task\ Invoke()\ =>\ callback();\ \}}
+\DoxyCodeLine{\Hypertarget{_common_2_custom_events_2_models_2_event_utils_8cs_source_l00034}00034\ \ \ \ \ \textcolor{keyword}{private}\ record\ AsyncReceiver<T>(Func<T,\ Task>\ callback)\ }
+\DoxyCodeLine{\Hypertarget{_common_2_custom_events_2_models_2_event_utils_8cs_source_l00035}00035\ \ \ \ \ \ \ \ \ :\ ReceiverBase\ \{\ public\ Task\ Invoke(T\ arg)\ =>\ callback(arg);\ \}}
+\DoxyCodeLine{\Hypertarget{_common_2_custom_events_2_models_2_event_utils_8cs_source_l00036}00036\ }
+\DoxyCodeLine{\Hypertarget{_common_2_custom_events_2_models_2_event_utils_8cs_source_l00037}00037\ \ \ \ \ \textcolor{keyword}{private}\ record\ ReceiverBase\ :\ IHandleEvent}
+\DoxyCodeLine{\Hypertarget{_common_2_custom_events_2_models_2_event_utils_8cs_source_l00038}00038\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_common_2_custom_events_2_models_2_event_utils_8cs_source_l00039}00039\ \ \ \ \ \ \ \ \ \textcolor{keyword}{public}\ Task\ HandleEventAsync(EventCallbackWorkItem\ item,\ \textcolor{keywordtype}{object}\ arg)\ =>\ }
+\DoxyCodeLine{\Hypertarget{_common_2_custom_events_2_models_2_event_utils_8cs_source_l00040}00040\ \ \ \ \ \ \ \ \ \ \ \ \ item.InvokeAsync(arg);}
+\DoxyCodeLine{\Hypertarget{_common_2_custom_events_2_models_2_event_utils_8cs_source_l00041}00041\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_common_2_custom_events_2_models_2_event_utils_8cs_source_l00042}00042\ \}}
+
+\end{DoxyCode}

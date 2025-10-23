@@ -1,0 +1,4 @@
+var interface_luthetus_1_1_extensions_1_1_dot_net_1_1_nugets_1_1_models_1_1_i_nuget_package_manager_query =
+[
+    [ "Query", "interface_luthetus_1_1_extensions_1_1_dot_net_1_1_nugets_1_1_models_1_1_i_nuget_package_manager_query.html#a7e511e522eebe53b1e443c8b870e775a", null ]
+];

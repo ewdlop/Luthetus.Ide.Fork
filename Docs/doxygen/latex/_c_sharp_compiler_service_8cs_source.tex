@@ -1,0 +1,270 @@
+\doxysection{CSharp\+Compiler\+Service.\+cs}
+\hypertarget{_c_sharp_compiler_service_8cs_source}{}\label{_c_sharp_compiler_service_8cs_source}\index{Source/Lib/CompilerServices/CSharp/CompilerServiceCase/CSharpCompilerService.cs@{Source/Lib/CompilerServices/CSharp/CompilerServiceCase/CSharpCompilerService.cs}}
+\mbox{\hyperlink{_c_sharp_compiler_service_8cs}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{_c_sharp_compiler_service_8cs_source_l00001}00001\ \textcolor{keyword}{using\ }System.Collections.Immutable;}
+\DoxyCodeLine{\Hypertarget{_c_sharp_compiler_service_8cs_source_l00002}00002\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_luthetus_1_1_common_1_1_razor_lib_1_1_keys_1_1_models}{Luthetus.Common.RazorLib.Keys.Models}};}
+\DoxyCodeLine{\Hypertarget{_c_sharp_compiler_service_8cs_source_l00003}00003\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib}{Luthetus.TextEditor.RazorLib}};}
+\DoxyCodeLine{\Hypertarget{_c_sharp_compiler_service_8cs_source_l00004}00004\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_autocompletes_1_1_models}{Luthetus.TextEditor.RazorLib.Autocompletes.Models}};}
+\DoxyCodeLine{\Hypertarget{_c_sharp_compiler_service_8cs_source_l00005}00005\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_implementations}{Luthetus.TextEditor.RazorLib.CompilerServices.Implementations}};}
+\DoxyCodeLine{\Hypertarget{_c_sharp_compiler_service_8cs_source_l00006}00006\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_cursors_1_1_models}{Luthetus.TextEditor.RazorLib.Cursors.Models}};}
+\DoxyCodeLine{\Hypertarget{_c_sharp_compiler_service_8cs_source_l00007}00007\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_lexers_1_1_models}{Luthetus.TextEditor.RazorLib.Lexers.Models}};}
+\DoxyCodeLine{\Hypertarget{_c_sharp_compiler_service_8cs_source_l00008}00008\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models}{Luthetus.TextEditor.RazorLib.TextEditors.Models}};}
+\DoxyCodeLine{\Hypertarget{_c_sharp_compiler_service_8cs_source_l00009}00009\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_luthetus_1_1_compiler_services_1_1_c_sharp_1_1_binder_case}{Luthetus.CompilerServices.CSharp.BinderCase}};}
+\DoxyCodeLine{\Hypertarget{_c_sharp_compiler_service_8cs_source_l00010}00010\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_luthetus_1_1_compiler_services_1_1_c_sharp_1_1_lexer_case}{Luthetus.CompilerServices.CSharp.LexerCase}};}
+\DoxyCodeLine{\Hypertarget{_c_sharp_compiler_service_8cs_source_l00011}00011\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_luthetus_1_1_compiler_services_1_1_c_sharp_1_1_parser_case}{Luthetus.CompilerServices.CSharp.ParserCase}};}
+\DoxyCodeLine{\Hypertarget{_c_sharp_compiler_service_8cs_source_l00012}00012\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_luthetus_1_1_compiler_services_1_1_c_sharp_1_1_runtime_assemblies}{Luthetus.CompilerServices.CSharp.RuntimeAssemblies}};}
+\DoxyCodeLine{\Hypertarget{_c_sharp_compiler_service_8cs_source_l00013}00013\ }
+\DoxyCodeLine{\Hypertarget{_c_sharp_compiler_service_8cs_source_l00014}\mbox{\hyperlink{namespace_luthetus_1_1_compiler_services_1_1_c_sharp_1_1_compiler_service_case}{00014}}\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespace_luthetus_1_1_compiler_services_1_1_c_sharp_1_1_compiler_service_case}{Luthetus.CompilerServices.CSharp.CompilerServiceCase}};}
+\DoxyCodeLine{\Hypertarget{_c_sharp_compiler_service_8cs_source_l00015}00015\ }
+\DoxyCodeLine{\Hypertarget{_c_sharp_compiler_service_8cs_source_l00016}\mbox{\hyperlink{class_luthetus_1_1_compiler_services_1_1_c_sharp_1_1_compiler_service_case_1_1_c_sharp_compiler_service}{00016}}\ \textcolor{keyword}{public}\ \textcolor{keyword}{sealed}\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_luthetus_1_1_compiler_services_1_1_c_sharp_1_1_compiler_service_case_1_1_c_sharp_compiler_service_a2764bcc7f1ab791111d17b892519303a}{CSharpCompilerService}}\ :\ \mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_implementations_1_1_compiler_service_a5b5123cac467989f95d3cce9f095b720}{CompilerService}}}
+\DoxyCodeLine{\Hypertarget{_c_sharp_compiler_service_8cs_source_l00017}00017\ \{}
+\DoxyCodeLine{\Hypertarget{_c_sharp_compiler_service_8cs_source_l00021}\mbox{\hyperlink{class_luthetus_1_1_compiler_services_1_1_c_sharp_1_1_compiler_service_case_1_1_c_sharp_compiler_service_ac8b42b835aeca0b7c546386d308a607c}{00021}}\ \ \ \ \ \textcolor{keyword}{public}\ readonly\ \mbox{\hyperlink{class_luthetus_1_1_compiler_services_1_1_c_sharp_1_1_compiler_service_case_1_1_c_sharp_compiler_service_ac8b42b835aeca0b7c546386d308a607c}{CSharpBinder}}\ \mbox{\hyperlink{class_luthetus_1_1_compiler_services_1_1_c_sharp_1_1_compiler_service_case_1_1_c_sharp_compiler_service_ac8b42b835aeca0b7c546386d308a607c}{CSharpBinder}}\ =\ \textcolor{keyword}{new}();}
+\DoxyCodeLine{\Hypertarget{_c_sharp_compiler_service_8cs_source_l00022}00022\ }
+\DoxyCodeLine{\Hypertarget{_c_sharp_compiler_service_8cs_source_l00023}\mbox{\hyperlink{class_luthetus_1_1_compiler_services_1_1_c_sharp_1_1_compiler_service_case_1_1_c_sharp_compiler_service_a2764bcc7f1ab791111d17b892519303a}{00023}}\ \ \ \ \ \textcolor{keyword}{public}\ \mbox{\hyperlink{class_luthetus_1_1_compiler_services_1_1_c_sharp_1_1_compiler_service_case_1_1_c_sharp_compiler_service_a2764bcc7f1ab791111d17b892519303a}{CSharpCompilerService}}(\mbox{\hyperlink{interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_i_text_editor_service}{ITextEditorService}}\ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_aecfb76d19da117c025734259242d144d}{textEditorService}})}
+\DoxyCodeLine{\Hypertarget{_c_sharp_compiler_service_8cs_source_l00024}00024\ \ \ \ \ \ \ \ \ :\ base(\mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_aecfb76d19da117c025734259242d144d}{textEditorService}})}
+\DoxyCodeLine{\Hypertarget{_c_sharp_compiler_service_8cs_source_l00025}00025\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_c_sharp_compiler_service_8cs_source_l00026}00026\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_implementations_1_1_compiler_service_aced54ac4d1ff9eb5836ad2b777af5d8e}{Binder}}\ =\ \mbox{\hyperlink{class_luthetus_1_1_compiler_services_1_1_c_sharp_1_1_compiler_service_case_1_1_c_sharp_compiler_service_ac8b42b835aeca0b7c546386d308a607c}{CSharpBinder}};}
+\DoxyCodeLine{\Hypertarget{_c_sharp_compiler_service_8cs_source_l00027}00027\ }
+\DoxyCodeLine{\Hypertarget{_c_sharp_compiler_service_8cs_source_l00028}00028\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_implementations_1_1_compiler_service_a7cdeaada9bb0cceb5ebc1dfdc93d7bf5}{\_compilerServiceOptions}}\ =\ \textcolor{keyword}{new}()}
+\DoxyCodeLine{\Hypertarget{_c_sharp_compiler_service_8cs_source_l00029}00029\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_c_sharp_compiler_service_8cs_source_l00030}00030\ \ \ \ \ \ \ \ \ \ \ \ \ RegisterResourceFunc\ =\ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_ae531f6ec8ec05e2493aabf8d17c23e4b}{resourceUri}}\ =>\ \textcolor{keyword}{new}\ \mbox{\hyperlink{class_luthetus_1_1_compiler_services_1_1_c_sharp_1_1_compiler_service_case_1_1_c_sharp_resource}{CSharpResource}}(\mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_ae531f6ec8ec05e2493aabf8d17c23e4b}{resourceUri}},\ \textcolor{keyword}{this}),}
+\DoxyCodeLine{\Hypertarget{_c_sharp_compiler_service_8cs_source_l00031}00031\ \ \ \ \ \ \ \ \ \ \ \ \ GetLexerFunc\ =\ (resource,\ sourceText)\ =>\ \textcolor{keyword}{new}\ \mbox{\hyperlink{class_luthetus_1_1_compiler_services_1_1_c_sharp_1_1_lexer_case_1_1_c_sharp_lexer}{CSharpLexer}}(resource.ResourceUri,\ sourceText),}
+\DoxyCodeLine{\Hypertarget{_c_sharp_compiler_service_8cs_source_l00032}00032\ \ \ \ \ \ \ \ \ \ \ \ \ GetParserFunc\ =\ (resource,\ lexer)\ =>\ \textcolor{keyword}{new}\ \mbox{\hyperlink{class_luthetus_1_1_compiler_services_1_1_c_sharp_1_1_parser_case_1_1_c_sharp_parser}{CSharpParser}}((\mbox{\hyperlink{class_luthetus_1_1_compiler_services_1_1_c_sharp_1_1_lexer_case_1_1_c_sharp_lexer}{CSharpLexer}})lexer),}
+\DoxyCodeLine{\Hypertarget{_c_sharp_compiler_service_8cs_source_l00033}00033\ \ \ \ \ \ \ \ \ \ \ \ \ GetBinderFunc\ =\ (resource,\ parser)\ =>\ \mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_implementations_1_1_compiler_service_aced54ac4d1ff9eb5836ad2b777af5d8e}{Binder}},}
+\DoxyCodeLine{\Hypertarget{_c_sharp_compiler_service_8cs_source_l00034}00034\ \ \ \ \ \ \ \ \ \ \ \ \ OnAfterLexAction\ =\ (resource,\ lexer)\ =>}
+\DoxyCodeLine{\Hypertarget{_c_sharp_compiler_service_8cs_source_l00035}00035\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_c_sharp_compiler_service_8cs_source_l00036}00036\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ var\ cSharpResource\ =\ (\mbox{\hyperlink{class_luthetus_1_1_compiler_services_1_1_c_sharp_1_1_compiler_service_case_1_1_c_sharp_resource}{CSharpResource}})resource;}
+\DoxyCodeLine{\Hypertarget{_c_sharp_compiler_service_8cs_source_l00037}00037\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ var\ cSharpLexer\ =\ (\mbox{\hyperlink{class_luthetus_1_1_compiler_services_1_1_c_sharp_1_1_lexer_case_1_1_c_sharp_lexer}{CSharpLexer}})lexer;}
+\DoxyCodeLine{\Hypertarget{_c_sharp_compiler_service_8cs_source_l00038}00038\ }
+\DoxyCodeLine{\Hypertarget{_c_sharp_compiler_service_8cs_source_l00039}00039\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ cSharpResource.EscapeCharacterList\ =\ cSharpLexer.\mbox{\hyperlink{class_luthetus_1_1_compiler_services_1_1_c_sharp_1_1_lexer_case_1_1_c_sharp_lexer_ab93f201871399e858db852281ff04319}{EscapeCharacterList}};}
+\DoxyCodeLine{\Hypertarget{_c_sharp_compiler_service_8cs_source_l00040}00040\ \ \ \ \ \ \ \ \ \ \ \ \ \},}
+\DoxyCodeLine{\Hypertarget{_c_sharp_compiler_service_8cs_source_l00041}00041\ \ \ \ \ \ \ \ \ \};}
+\DoxyCodeLine{\Hypertarget{_c_sharp_compiler_service_8cs_source_l00042}00042\ }
+\DoxyCodeLine{\Hypertarget{_c_sharp_compiler_service_8cs_source_l00043}00043\ \ \ \ \ \ \ \ \ RuntimeAssembliesLoaderFactory.LoadDotNet6(\mbox{\hyperlink{class_luthetus_1_1_compiler_services_1_1_c_sharp_1_1_compiler_service_case_1_1_c_sharp_compiler_service_ac8b42b835aeca0b7c546386d308a607c}{CSharpBinder}});}
+\DoxyCodeLine{\Hypertarget{_c_sharp_compiler_service_8cs_source_l00044}00044\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_c_sharp_compiler_service_8cs_source_l00045}00045\ }
+\DoxyCodeLine{\Hypertarget{_c_sharp_compiler_service_8cs_source_l00046}\mbox{\hyperlink{class_luthetus_1_1_compiler_services_1_1_c_sharp_1_1_compiler_service_case_1_1_c_sharp_compiler_service_aaf8a422a107edf10a9c3e4ad28379608}{00046}}\ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keyword}{event}\ Action?\ \mbox{\hyperlink{class_luthetus_1_1_compiler_services_1_1_c_sharp_1_1_compiler_service_case_1_1_c_sharp_compiler_service_aaf8a422a107edf10a9c3e4ad28379608}{CursorMovedInSyntaxTree}};}
+\DoxyCodeLine{\Hypertarget{_c_sharp_compiler_service_8cs_source_l00047}00047\ }
+\DoxyCodeLine{\Hypertarget{_c_sharp_compiler_service_8cs_source_l00048}\mbox{\hyperlink{class_luthetus_1_1_compiler_services_1_1_c_sharp_1_1_compiler_service_case_1_1_c_sharp_compiler_service_afe71b07323c9ab163252106584bd219f}{00048}}\ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keyword}{override}\ ImmutableArray<AutocompleteEntry>\ \mbox{\hyperlink{class_luthetus_1_1_compiler_services_1_1_c_sharp_1_1_compiler_service_case_1_1_c_sharp_compiler_service_afe71b07323c9ab163252106584bd219f}{GetAutocompleteEntries}}(\textcolor{keywordtype}{string}\ word,\ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_lexers_1_1_models_a1ffd1a7706dfd364560b76d47467812f}{TextEditorTextSpan}}\ textSpan)}
+\DoxyCodeLine{\Hypertarget{_c_sharp_compiler_service_8cs_source_l00049}00049\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_c_sharp_compiler_service_8cs_source_l00050}00050\ \ \ \ \ \ \ \ \ var\ boundScope\ =\ \mbox{\hyperlink{class_luthetus_1_1_compiler_services_1_1_c_sharp_1_1_compiler_service_case_1_1_c_sharp_compiler_service_ac8b42b835aeca0b7c546386d308a607c}{CSharpBinder}}.GetScope(\textcolor{keyword}{null},\ textSpan);}
+\DoxyCodeLine{\Hypertarget{_c_sharp_compiler_service_8cs_source_l00051}00051\ }
+\DoxyCodeLine{\Hypertarget{_c_sharp_compiler_service_8cs_source_l00052}00052\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (boundScope\ is\ \textcolor{keyword}{null})}
+\DoxyCodeLine{\Hypertarget{_c_sharp_compiler_service_8cs_source_l00053}00053\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ ImmutableArray<AutocompleteEntry>.Empty;}
+\DoxyCodeLine{\Hypertarget{_c_sharp_compiler_service_8cs_source_l00054}00054\ }
+\DoxyCodeLine{\Hypertarget{_c_sharp_compiler_service_8cs_source_l00055}00055\ \ \ \ \ \ \ \ \ var\ autocompleteEntryList\ =\ \textcolor{keyword}{new}\ List<AutocompleteEntry>();}
+\DoxyCodeLine{\Hypertarget{_c_sharp_compiler_service_8cs_source_l00056}00056\ }
+\DoxyCodeLine{\Hypertarget{_c_sharp_compiler_service_8cs_source_l00057}00057\ \ \ \ \ \ \ \ \ var\ targetScope\ =\ boundScope;}
+\DoxyCodeLine{\Hypertarget{_c_sharp_compiler_service_8cs_source_l00058}00058\ }
+\DoxyCodeLine{\Hypertarget{_c_sharp_compiler_service_8cs_source_l00059}00059\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{while}\ (targetScope\ is\ not\ \textcolor{keyword}{null})}
+\DoxyCodeLine{\Hypertarget{_c_sharp_compiler_service_8cs_source_l00060}00060\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_c_sharp_compiler_service_8cs_source_l00061}00061\ \ \ \ \ \ \ \ \ \ \ \ \ autocompleteEntryList.AddRange(}
+\DoxyCodeLine{\Hypertarget{_c_sharp_compiler_service_8cs_source_l00062}00062\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_luthetus_1_1_compiler_services_1_1_c_sharp_1_1_compiler_service_case_1_1_c_sharp_compiler_service_ac8b42b835aeca0b7c546386d308a607c}{CSharpBinder}}.GetVariableDeclarationNodesByScope(model:\ \textcolor{keyword}{null},\ textSpan.ResourceUri,\ targetScope.IndexKey)}
+\DoxyCodeLine{\Hypertarget{_c_sharp_compiler_service_8cs_source_l00063}00063\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ .Select(x\ =>\ x.IdentifierToken.TextSpan.GetText())}
+\DoxyCodeLine{\Hypertarget{_c_sharp_compiler_service_8cs_source_l00064}00064\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ .ToArray()}
+\DoxyCodeLine{\Hypertarget{_c_sharp_compiler_service_8cs_source_l00065}00065\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ .Where(x\ =>\ x.Contains(word,\ StringComparison.InvariantCulture))}
+\DoxyCodeLine{\Hypertarget{_c_sharp_compiler_service_8cs_source_l00066}00066\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ .Distinct()}
+\DoxyCodeLine{\Hypertarget{_c_sharp_compiler_service_8cs_source_l00067}00067\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ .Take(5)}
+\DoxyCodeLine{\Hypertarget{_c_sharp_compiler_service_8cs_source_l00068}00068\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ .Select(x\ =>}
+\DoxyCodeLine{\Hypertarget{_c_sharp_compiler_service_8cs_source_l00069}00069\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_c_sharp_compiler_service_8cs_source_l00070}00070\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ return\ new\ AutocompleteEntry(}
+\DoxyCodeLine{\Hypertarget{_c_sharp_compiler_service_8cs_source_l00071}00071\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ x,}
+\DoxyCodeLine{\Hypertarget{_c_sharp_compiler_service_8cs_source_l00072}00072\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ AutocompleteEntryKind.Variable,}
+\DoxyCodeLine{\Hypertarget{_c_sharp_compiler_service_8cs_source_l00073}00073\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ null);}
+\DoxyCodeLine{\Hypertarget{_c_sharp_compiler_service_8cs_source_l00074}00074\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}));}
+\DoxyCodeLine{\Hypertarget{_c_sharp_compiler_service_8cs_source_l00075}00075\ }
+\DoxyCodeLine{\Hypertarget{_c_sharp_compiler_service_8cs_source_l00076}00076\ \ \ \ \ \ \ \ \ \ \ \ \ autocompleteEntryList.AddRange(}
+\DoxyCodeLine{\Hypertarget{_c_sharp_compiler_service_8cs_source_l00077}00077\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_luthetus_1_1_compiler_services_1_1_c_sharp_1_1_compiler_service_case_1_1_c_sharp_compiler_service_ac8b42b835aeca0b7c546386d308a607c}{CSharpBinder}}.GetFunctionDefinitionNodesByScope(model:\ \textcolor{keyword}{null},\ textSpan.ResourceUri,\ targetScope.IndexKey)}
+\DoxyCodeLine{\Hypertarget{_c_sharp_compiler_service_8cs_source_l00078}00078\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ .Select(x\ =>\ x.FunctionIdentifierToken.TextSpan.GetText())}
+\DoxyCodeLine{\Hypertarget{_c_sharp_compiler_service_8cs_source_l00079}00079\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ .ToArray()}
+\DoxyCodeLine{\Hypertarget{_c_sharp_compiler_service_8cs_source_l00080}00080\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ .Where(x\ =>\ x.Contains(word,\ StringComparison.InvariantCulture))}
+\DoxyCodeLine{\Hypertarget{_c_sharp_compiler_service_8cs_source_l00081}00081\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ .Distinct()}
+\DoxyCodeLine{\Hypertarget{_c_sharp_compiler_service_8cs_source_l00082}00082\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ .Take(5)}
+\DoxyCodeLine{\Hypertarget{_c_sharp_compiler_service_8cs_source_l00083}00083\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ .Select(x\ =>}
+\DoxyCodeLine{\Hypertarget{_c_sharp_compiler_service_8cs_source_l00084}00084\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_c_sharp_compiler_service_8cs_source_l00085}00085\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ return\ new\ AutocompleteEntry(}
+\DoxyCodeLine{\Hypertarget{_c_sharp_compiler_service_8cs_source_l00086}00086\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ x,}
+\DoxyCodeLine{\Hypertarget{_c_sharp_compiler_service_8cs_source_l00087}00087\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ AutocompleteEntryKind.Function,}
+\DoxyCodeLine{\Hypertarget{_c_sharp_compiler_service_8cs_source_l00088}00088\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ null);}
+\DoxyCodeLine{\Hypertarget{_c_sharp_compiler_service_8cs_source_l00089}00089\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}));}
+\DoxyCodeLine{\Hypertarget{_c_sharp_compiler_service_8cs_source_l00090}00090\ }
+\DoxyCodeLine{\Hypertarget{_c_sharp_compiler_service_8cs_source_l00091}00091\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (targetScope.ParentIndexKey\ is\ \textcolor{keyword}{null})}
+\DoxyCodeLine{\Hypertarget{_c_sharp_compiler_service_8cs_source_l00092}00092\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ targetScope\ =\ \textcolor{keyword}{null};}
+\DoxyCodeLine{\Hypertarget{_c_sharp_compiler_service_8cs_source_l00093}00093\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{\Hypertarget{_c_sharp_compiler_service_8cs_source_l00094}00094\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ targetScope\ =\ \mbox{\hyperlink{class_luthetus_1_1_compiler_services_1_1_c_sharp_1_1_compiler_service_case_1_1_c_sharp_compiler_service_ac8b42b835aeca0b7c546386d308a607c}{CSharpBinder}}.GetScopeByScopeIndexKey(model:\ \textcolor{keyword}{null},\ textSpan.ResourceUri,\ targetScope.ParentIndexKey.Value);}
+\DoxyCodeLine{\Hypertarget{_c_sharp_compiler_service_8cs_source_l00095}00095\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_c_sharp_compiler_service_8cs_source_l00096}00096\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_c_sharp_compiler_service_8cs_source_l00097}00097\ \ \ \ \ \ \ \ \ var\ allTypeDefinitions\ =\ \mbox{\hyperlink{class_luthetus_1_1_compiler_services_1_1_c_sharp_1_1_compiler_service_case_1_1_c_sharp_compiler_service_ac8b42b835aeca0b7c546386d308a607c}{CSharpBinder}}.AllTypeDefinitions;}
+\DoxyCodeLine{\Hypertarget{_c_sharp_compiler_service_8cs_source_l00098}00098\ }
+\DoxyCodeLine{\Hypertarget{_c_sharp_compiler_service_8cs_source_l00099}00099\ \ \ \ \ \ \ \ \ autocompleteEntryList.AddRange(}
+\DoxyCodeLine{\Hypertarget{_c_sharp_compiler_service_8cs_source_l00100}00100\ \ \ \ \ \ \ \ \ \ \ \ \ allTypeDefinitions}
+\DoxyCodeLine{\Hypertarget{_c_sharp_compiler_service_8cs_source_l00101}00101\ \ \ \ \ \ \ \ \ \ \ \ \ .Where(x\ =>\ x.Key.TypeIdentifier.Contains(word,\ StringComparison.InvariantCulture))}
+\DoxyCodeLine{\Hypertarget{_c_sharp_compiler_service_8cs_source_l00102}00102\ \ \ \ \ \ \ \ \ \ \ \ \ .Distinct()}
+\DoxyCodeLine{\Hypertarget{_c_sharp_compiler_service_8cs_source_l00103}00103\ \ \ \ \ \ \ \ \ \ \ \ \ .Take(5)}
+\DoxyCodeLine{\Hypertarget{_c_sharp_compiler_service_8cs_source_l00104}00104\ \ \ \ \ \ \ \ \ \ \ \ \ .Select(x\ =>}
+\DoxyCodeLine{\Hypertarget{_c_sharp_compiler_service_8cs_source_l00105}00105\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_c_sharp_compiler_service_8cs_source_l00106}00106\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ return\ new\ AutocompleteEntry(}
+\DoxyCodeLine{\Hypertarget{_c_sharp_compiler_service_8cs_source_l00107}00107\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ x.Key.TypeIdentifier,}
+\DoxyCodeLine{\Hypertarget{_c_sharp_compiler_service_8cs_source_l00108}00108\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ AutocompleteEntryKind.Type,}
+\DoxyCodeLine{\Hypertarget{_c_sharp_compiler_service_8cs_source_l00109}00109\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ()\ =>}
+\DoxyCodeLine{\Hypertarget{_c_sharp_compiler_service_8cs_source_l00110}00110\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_c_sharp_compiler_service_8cs_source_l00111}00111\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ TODO:\ The\ namespace\ code\ is\ buggy\ at\ the\ moment.}}
+\DoxyCodeLine{\Hypertarget{_c_sharp_compiler_service_8cs_source_l00112}00112\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ It\ is\ annoying\ how\ this\ keeps\ adding\ the\ wrong\ namespace.}}
+\DoxyCodeLine{\Hypertarget{_c_sharp_compiler_service_8cs_source_l00113}00113\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ Just\ have\ it\ do\ nothing\ for\ now.\ (2024-\/08-\/24)}}
+\DoxyCodeLine{\Hypertarget{_c_sharp_compiler_service_8cs_source_l00114}00114\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ ===============================================================}}
+\DoxyCodeLine{\Hypertarget{_c_sharp_compiler_service_8cs_source_l00115}00115\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*if\ (boundScope.EncompassingNamespaceStatementNode.IdentifierToken.TextSpan.GetText()\ ==\ x.Key.NamespaceIdentifier\ ||}}
+\DoxyCodeLine{\Hypertarget{_c_sharp_compiler_service_8cs_source_l00116}00116\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ boundScope.CurrentUsingStatementNodeList.Any(usn\ =>\ usn.NamespaceIdentifier.TextSpan.GetText()\ ==\ x.Key.NamespaceIdentifier))}}
+\DoxyCodeLine{\Hypertarget{_c_sharp_compiler_service_8cs_source_l00117}00117\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}}
+\DoxyCodeLine{\Hypertarget{_c_sharp_compiler_service_8cs_source_l00118}00118\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ return\ Task.CompletedTask;}}
+\DoxyCodeLine{\Hypertarget{_c_sharp_compiler_service_8cs_source_l00119}00119\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}}
+\DoxyCodeLine{\Hypertarget{_c_sharp_compiler_service_8cs_source_l00120}00120\ \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{_c_sharp_compiler_service_8cs_source_l00121}00121\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \_textEditorService.PostUnique(}}
+\DoxyCodeLine{\Hypertarget{_c_sharp_compiler_service_8cs_source_l00122}00122\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ "{}Add\ using\ statement"{},}}
+\DoxyCodeLine{\Hypertarget{_c_sharp_compiler_service_8cs_source_l00123}00123\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ editContext\ =>}}
+\DoxyCodeLine{\Hypertarget{_c_sharp_compiler_service_8cs_source_l00124}00124\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}}
+\DoxyCodeLine{\Hypertarget{_c_sharp_compiler_service_8cs_source_l00125}00125\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ var\ modelModifier\ =\ editContext.GetModelModifier(textSpan.ResourceUri);}}
+\DoxyCodeLine{\Hypertarget{_c_sharp_compiler_service_8cs_source_l00126}00126\ \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{_c_sharp_compiler_service_8cs_source_l00127}00127\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ if\ (modelModifier\ is\ null)}}
+\DoxyCodeLine{\Hypertarget{_c_sharp_compiler_service_8cs_source_l00128}00128\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ return\ Task.CompletedTask;}}
+\DoxyCodeLine{\Hypertarget{_c_sharp_compiler_service_8cs_source_l00129}00129\ \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{_c_sharp_compiler_service_8cs_source_l00130}00130\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ var\ viewModelList\ =\ \_textEditorService.ModelApi.GetViewModelsOrEmpty(textSpan.ResourceUri);}}
+\DoxyCodeLine{\Hypertarget{_c_sharp_compiler_service_8cs_source_l00131}00131\ \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{_c_sharp_compiler_service_8cs_source_l00132}00132\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ var\ cursor\ =\ new\ TextEditorCursor(0,\ 0,\ true);}}
+\DoxyCodeLine{\Hypertarget{_c_sharp_compiler_service_8cs_source_l00133}00133\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ var\ cursorModifierBag\ =\ new\ CursorModifierBagTextEditor(}}
+\DoxyCodeLine{\Hypertarget{_c_sharp_compiler_service_8cs_source_l00134}00134\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Key<TextEditorViewModel>.Empty,}}
+\DoxyCodeLine{\Hypertarget{_c_sharp_compiler_service_8cs_source_l00135}00135\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ new\ List<TextEditorCursorModifier>\ \{\ new(cursor)\ \});}}
+\DoxyCodeLine{\Hypertarget{_c_sharp_compiler_service_8cs_source_l00136}00136\ \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{_c_sharp_compiler_service_8cs_source_l00137}00137\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ var\ textToInsert\ =\ \$"{}using\ \{x.Key.NamespaceIdentifier\};\(\backslash\)n"{};}}
+\DoxyCodeLine{\Hypertarget{_c_sharp_compiler_service_8cs_source_l00138}00138\ \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{_c_sharp_compiler_service_8cs_source_l00139}00139\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ modelModifier.Insert(}}
+\DoxyCodeLine{\Hypertarget{_c_sharp_compiler_service_8cs_source_l00140}00140\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ textToInsert,}}
+\DoxyCodeLine{\Hypertarget{_c_sharp_compiler_service_8cs_source_l00141}00141\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ cursorModifierBag,}}
+\DoxyCodeLine{\Hypertarget{_c_sharp_compiler_service_8cs_source_l00142}00142\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ cancellationToken:\ CancellationToken.None);}}
+\DoxyCodeLine{\Hypertarget{_c_sharp_compiler_service_8cs_source_l00143}00143\ \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{_c_sharp_compiler_service_8cs_source_l00144}00144\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ foreach\ (var\ unsafeViewModel\ in\ viewModelList)}}
+\DoxyCodeLine{\Hypertarget{_c_sharp_compiler_service_8cs_source_l00145}00145\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}}
+\DoxyCodeLine{\Hypertarget{_c_sharp_compiler_service_8cs_source_l00146}00146\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ var\ viewModelModifier\ =\ editContext.GetViewModelModifier(unsafeViewModel.ViewModelKey);}}
+\DoxyCodeLine{\Hypertarget{_c_sharp_compiler_service_8cs_source_l00147}00147\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ var\ viewModelCursorModifierBag\ =\ editContext.GetCursorModifierBag(viewModelModifier?.ViewModel);}}
+\DoxyCodeLine{\Hypertarget{_c_sharp_compiler_service_8cs_source_l00148}00148\ \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{_c_sharp_compiler_service_8cs_source_l00149}00149\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ if\ (viewModelModifier\ is\ null\ ||\ viewModelCursorModifierBag\ is\ null)}}
+\DoxyCodeLine{\Hypertarget{_c_sharp_compiler_service_8cs_source_l00150}00150\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ continue;}}
+\DoxyCodeLine{\Hypertarget{_c_sharp_compiler_service_8cs_source_l00151}00151\ \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{_c_sharp_compiler_service_8cs_source_l00152}00152\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ foreach\ (var\ cursorModifier\ in\ viewModelCursorModifierBag.List)}}
+\DoxyCodeLine{\Hypertarget{_c_sharp_compiler_service_8cs_source_l00153}00153\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}}
+\DoxyCodeLine{\Hypertarget{_c_sharp_compiler_service_8cs_source_l00154}00154\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ for\ (int\ i\ =\ 0;\ i\ <\ textToInsert.Length;\ i++)}}
+\DoxyCodeLine{\Hypertarget{_c_sharp_compiler_service_8cs_source_l00155}00155\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}}
+\DoxyCodeLine{\Hypertarget{_c_sharp_compiler_service_8cs_source_l00156}00156\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \_textEditorService.ViewModelApi.MoveCursor(}}
+\DoxyCodeLine{\Hypertarget{_c_sharp_compiler_service_8cs_source_l00157}00157\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ new\ KeyboardEventArgs}}
+\DoxyCodeLine{\Hypertarget{_c_sharp_compiler_service_8cs_source_l00158}00158\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}}
+\DoxyCodeLine{\Hypertarget{_c_sharp_compiler_service_8cs_source_l00159}00159\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Key\ =\ KeyboardKeyFacts.MovementKeys.ARROW\_RIGHT,}}
+\DoxyCodeLine{\Hypertarget{_c_sharp_compiler_service_8cs_source_l00160}00160\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \},}}
+\DoxyCodeLine{\Hypertarget{_c_sharp_compiler_service_8cs_source_l00161}00161\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ editContext,}}
+\DoxyCodeLine{\Hypertarget{_c_sharp_compiler_service_8cs_source_l00162}00162\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ modelModifier,}}
+\DoxyCodeLine{\Hypertarget{_c_sharp_compiler_service_8cs_source_l00163}00163\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ viewModelModifier,}}
+\DoxyCodeLine{\Hypertarget{_c_sharp_compiler_service_8cs_source_l00164}00164\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ viewModelCursorModifierBag);}}
+\DoxyCodeLine{\Hypertarget{_c_sharp_compiler_service_8cs_source_l00165}00165\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}}
+\DoxyCodeLine{\Hypertarget{_c_sharp_compiler_service_8cs_source_l00166}00166\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}}
+\DoxyCodeLine{\Hypertarget{_c_sharp_compiler_service_8cs_source_l00167}00167\ \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{_c_sharp_compiler_service_8cs_source_l00168}00168\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ editContext.TextEditorService.ModelApi.ApplySyntaxHighlighting(}}
+\DoxyCodeLine{\Hypertarget{_c_sharp_compiler_service_8cs_source_l00169}00169\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ editContext,}}
+\DoxyCodeLine{\Hypertarget{_c_sharp_compiler_service_8cs_source_l00170}00170\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ modelModifier);}}
+\DoxyCodeLine{\Hypertarget{_c_sharp_compiler_service_8cs_source_l00171}00171\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}}
+\DoxyCodeLine{\Hypertarget{_c_sharp_compiler_service_8cs_source_l00172}00172\ \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{_c_sharp_compiler_service_8cs_source_l00173}00173\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ return\ Task.CompletedTask;}}
+\DoxyCodeLine{\Hypertarget{_c_sharp_compiler_service_8cs_source_l00174}00174\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \});*/}}
+\DoxyCodeLine{\Hypertarget{_c_sharp_compiler_service_8cs_source_l00175}00175\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ return\ Task.CompletedTask;}
+\DoxyCodeLine{\Hypertarget{_c_sharp_compiler_service_8cs_source_l00176}00176\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \});}
+\DoxyCodeLine{\Hypertarget{_c_sharp_compiler_service_8cs_source_l00177}00177\ \ \ \ \ \ \ \ \ \ \ \ \ \}));}
+\DoxyCodeLine{\Hypertarget{_c_sharp_compiler_service_8cs_source_l00178}00178\ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_c_sharp_compiler_service_8cs_source_l00179}00179\ \ \ \ \ \ \ \ \ AddSnippets(autocompleteEntryList,\ word,\ textSpan);}
+\DoxyCodeLine{\Hypertarget{_c_sharp_compiler_service_8cs_source_l00180}00180\ }
+\DoxyCodeLine{\Hypertarget{_c_sharp_compiler_service_8cs_source_l00181}00181\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ autocompleteEntryList.DistinctBy(x\ =>\ x.DisplayName).ToImmutableArray();}
+\DoxyCodeLine{\Hypertarget{_c_sharp_compiler_service_8cs_source_l00182}00182\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_c_sharp_compiler_service_8cs_source_l00183}00183\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_c_sharp_compiler_service_8cs_source_l00184}00184\ \ \ \ \ \textcolor{keyword}{private}\ \textcolor{keywordtype}{void}\ AddSnippets(List<AutocompleteEntry>\ autocompleteEntryList,\ \textcolor{keywordtype}{string}\ word,\ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_lexers_1_1_models_a1ffd1a7706dfd364560b76d47467812f}{TextEditorTextSpan}}\ textSpan)}
+\DoxyCodeLine{\Hypertarget{_c_sharp_compiler_service_8cs_source_l00185}00185\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_c_sharp_compiler_service_8cs_source_l00186}00186\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\textcolor{stringliteral}{"{}prop"{}}.Contains(word))}
+\DoxyCodeLine{\Hypertarget{_c_sharp_compiler_service_8cs_source_l00187}00187\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_c_sharp_compiler_service_8cs_source_l00188}00188\ \ \ \ \ \ \ \ \ \ \ \ \ autocompleteEntryList.Add(\textcolor{keyword}{new}\ \mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_autocompletes_1_1_models_1_1_autocomplete_entry}{AutocompleteEntry}}(}
+\DoxyCodeLine{\Hypertarget{_c_sharp_compiler_service_8cs_source_l00189}00189\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}prop"{}},}
+\DoxyCodeLine{\Hypertarget{_c_sharp_compiler_service_8cs_source_l00190}00190\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_autocompletes_1_1_models_a1b110edc9b8fb96b60eb301daedef318}{AutocompleteEntryKind}}.Snippet,}
+\DoxyCodeLine{\Hypertarget{_c_sharp_compiler_service_8cs_source_l00191}00191\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ()\ =>\ PropSnippet(word,\ textSpan,\ \textcolor{stringliteral}{"{}public\ TYPE\ NAME\ \{\ get;\ set;\ \}"{}})));}
+\DoxyCodeLine{\Hypertarget{_c_sharp_compiler_service_8cs_source_l00192}00192\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_c_sharp_compiler_service_8cs_source_l00193}00193\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_c_sharp_compiler_service_8cs_source_l00194}00194\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\textcolor{stringliteral}{"{}propnn"{}}.Contains(word))}
+\DoxyCodeLine{\Hypertarget{_c_sharp_compiler_service_8cs_source_l00195}00195\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_c_sharp_compiler_service_8cs_source_l00196}00196\ \ \ \ \ \ \ \ \ \ \ \ \ autocompleteEntryList.Add(\textcolor{keyword}{new}\ \mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_autocompletes_1_1_models_1_1_autocomplete_entry}{AutocompleteEntry}}(}
+\DoxyCodeLine{\Hypertarget{_c_sharp_compiler_service_8cs_source_l00197}00197\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}propnn"{}},}
+\DoxyCodeLine{\Hypertarget{_c_sharp_compiler_service_8cs_source_l00198}00198\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_autocompletes_1_1_models_a1b110edc9b8fb96b60eb301daedef318}{AutocompleteEntryKind}}.Snippet,}
+\DoxyCodeLine{\Hypertarget{_c_sharp_compiler_service_8cs_source_l00199}00199\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ()\ =>\ PropSnippet(word,\ textSpan,\ \textcolor{stringliteral}{"{}public\ TYPE\ NAME\ \{\ get;\ set;\ \}\ =\ null!;"{}})));}
+\DoxyCodeLine{\Hypertarget{_c_sharp_compiler_service_8cs_source_l00200}00200\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_c_sharp_compiler_service_8cs_source_l00201}00201\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_c_sharp_compiler_service_8cs_source_l00202}00202\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_c_sharp_compiler_service_8cs_source_l00203}00203\ \ \ \ \ \textcolor{keyword}{private}\ Task\ PropSnippet(\textcolor{keywordtype}{string}\ word,\ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_lexers_1_1_models_a1ffd1a7706dfd364560b76d47467812f}{TextEditorTextSpan}}\ textSpan,\ \textcolor{keywordtype}{string}\ textToInsert)}
+\DoxyCodeLine{\Hypertarget{_c_sharp_compiler_service_8cs_source_l00204}00204\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_c_sharp_compiler_service_8cs_source_l00205}00205\ \ \ \ \ \ \ \ \ \_textEditorService.PostUnique(}
+\DoxyCodeLine{\Hypertarget{_c_sharp_compiler_service_8cs_source_l00206}00206\ \ \ \ \ \ \ \ \ \ \ \ \ nameof(PropSnippet),}
+\DoxyCodeLine{\Hypertarget{_c_sharp_compiler_service_8cs_source_l00207}00207\ \ \ \ \ \ \ \ \ \ \ \ \ editContext\ =>}
+\DoxyCodeLine{\Hypertarget{_c_sharp_compiler_service_8cs_source_l00208}00208\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_c_sharp_compiler_service_8cs_source_l00209}00209\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ var\ modelModifier\ =\ editContext.GetModelModifier(textSpan.ResourceUri);}
+\DoxyCodeLine{\Hypertarget{_c_sharp_compiler_service_8cs_source_l00210}00210\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_c_sharp_compiler_service_8cs_source_l00211}00211\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (modelModifier\ is\ \textcolor{keyword}{null})}
+\DoxyCodeLine{\Hypertarget{_c_sharp_compiler_service_8cs_source_l00212}00212\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ Task.CompletedTask;}
+\DoxyCodeLine{\Hypertarget{_c_sharp_compiler_service_8cs_source_l00213}00213\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_c_sharp_compiler_service_8cs_source_l00214}00214\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ var\ viewModelList\ =\ \_textEditorService.ModelApi.GetViewModelsOrEmpty(textSpan.ResourceUri);}
+\DoxyCodeLine{\Hypertarget{_c_sharp_compiler_service_8cs_source_l00215}00215\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_c_sharp_compiler_service_8cs_source_l00216}00216\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ var\ viewModel\ =\ viewModelList.FirstOrDefault(x\ =>\ x.Category.Value\ ==\ \textcolor{stringliteral}{"{}main"{}})}
+\DoxyCodeLine{\Hypertarget{_c_sharp_compiler_service_8cs_source_l00217}00217\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ??\ viewModelList.FirstOrDefault();}
+\DoxyCodeLine{\Hypertarget{_c_sharp_compiler_service_8cs_source_l00218}00218\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_c_sharp_compiler_service_8cs_source_l00219}00219\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (viewModel\ is\ \textcolor{keyword}{null})}
+\DoxyCodeLine{\Hypertarget{_c_sharp_compiler_service_8cs_source_l00220}00220\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ Task.CompletedTask;}
+\DoxyCodeLine{\Hypertarget{_c_sharp_compiler_service_8cs_source_l00221}00221\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_c_sharp_compiler_service_8cs_source_l00222}00222\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ var\ viewModelModifier\ =\ editContext.GetViewModelModifier(viewModel.ViewModelKey);}
+\DoxyCodeLine{\Hypertarget{_c_sharp_compiler_service_8cs_source_l00223}00223\ }
+\DoxyCodeLine{\Hypertarget{_c_sharp_compiler_service_8cs_source_l00224}00224\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ var\ primaryCursorModifier\ =\ editContext.GetPrimaryCursorModifier(}
+\DoxyCodeLine{\Hypertarget{_c_sharp_compiler_service_8cs_source_l00225}00225\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ editContext.GetCursorModifierBag(viewModelModifier?.ViewModel));}
+\DoxyCodeLine{\Hypertarget{_c_sharp_compiler_service_8cs_source_l00226}00226\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_c_sharp_compiler_service_8cs_source_l00227}00227\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (viewModelModifier\ is\ \textcolor{keyword}{null}\ ||\ primaryCursorModifier\ is\ \textcolor{keyword}{null})}
+\DoxyCodeLine{\Hypertarget{_c_sharp_compiler_service_8cs_source_l00228}00228\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ Task.CompletedTask;}
+\DoxyCodeLine{\Hypertarget{_c_sharp_compiler_service_8cs_source_l00229}00229\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_c_sharp_compiler_service_8cs_source_l00230}00230\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ var\ cursorModifierBag\ =\ \textcolor{keyword}{new}\ \mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1_1_cursor_modifier_bag_text_editor}{CursorModifierBagTextEditor}}(}
+\DoxyCodeLine{\Hypertarget{_c_sharp_compiler_service_8cs_source_l00231}00231\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Key<TextEditorViewModel>.Empty,}
+\DoxyCodeLine{\Hypertarget{_c_sharp_compiler_service_8cs_source_l00232}00232\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{new}\ List<TextEditorCursorModifier>\ \{\ primaryCursorModifier\ \});}
+\DoxyCodeLine{\Hypertarget{_c_sharp_compiler_service_8cs_source_l00233}00233\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_c_sharp_compiler_service_8cs_source_l00234}00234\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ var\ cursorPositionIndex\ =\ modelModifier.GetPositionIndex(primaryCursorModifier);}
+\DoxyCodeLine{\Hypertarget{_c_sharp_compiler_service_8cs_source_l00235}00235\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ var\ behindPositionIndex\ =\ cursorPositionIndex\ -\/\ 1;}
+\DoxyCodeLine{\Hypertarget{_c_sharp_compiler_service_8cs_source_l00236}00236\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_c_sharp_compiler_service_8cs_source_l00237}00237\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ var\ behindCursor\ =\ \textcolor{keyword}{new}\ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_cursors_1_1_models_a8373e854ca1ddf152a3b5372ea18c20b}{TextEditorCursor}}(}
+\DoxyCodeLine{\Hypertarget{_c_sharp_compiler_service_8cs_source_l00238}00238\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ primaryCursorModifier.LineIndex,}
+\DoxyCodeLine{\Hypertarget{_c_sharp_compiler_service_8cs_source_l00239}00239\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ primaryCursorModifier.ColumnIndex\ -\/\ 1,}
+\DoxyCodeLine{\Hypertarget{_c_sharp_compiler_service_8cs_source_l00240}00240\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ primaryCursorModifier.IsPrimaryCursor);}
+\DoxyCodeLine{\Hypertarget{_c_sharp_compiler_service_8cs_source_l00241}00241\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_c_sharp_compiler_service_8cs_source_l00242}00242\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ modelModifier.Insert(}
+\DoxyCodeLine{\Hypertarget{_c_sharp_compiler_service_8cs_source_l00243}00243\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ textToInsert,}
+\DoxyCodeLine{\Hypertarget{_c_sharp_compiler_service_8cs_source_l00244}00244\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ cursorModifierBag,}
+\DoxyCodeLine{\Hypertarget{_c_sharp_compiler_service_8cs_source_l00245}00245\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ cancellationToken:\ CancellationToken.None);}
+\DoxyCodeLine{\Hypertarget{_c_sharp_compiler_service_8cs_source_l00246}00246\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_c_sharp_compiler_service_8cs_source_l00247}00247\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (behindPositionIndex\ >\ 0\ \&\&\ modelModifier.GetCharacter(behindPositionIndex)\ ==\ \textcolor{charliteral}{'p'})}
+\DoxyCodeLine{\Hypertarget{_c_sharp_compiler_service_8cs_source_l00248}00248\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_c_sharp_compiler_service_8cs_source_l00249}00249\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ modelModifier.Delete(}
+\DoxyCodeLine{\Hypertarget{_c_sharp_compiler_service_8cs_source_l00250}00250\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{new}\ CursorModifierBagTextEditor(}
+\DoxyCodeLine{\Hypertarget{_c_sharp_compiler_service_8cs_source_l00251}00251\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Key<TextEditorViewModel>.Empty,}
+\DoxyCodeLine{\Hypertarget{_c_sharp_compiler_service_8cs_source_l00252}00252\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{new}\ List<TextEditorCursorModifier>\ \{\ \textcolor{keyword}{new}(behindCursor)\ \}),}
+\DoxyCodeLine{\Hypertarget{_c_sharp_compiler_service_8cs_source_l00253}00253\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 1,}
+\DoxyCodeLine{\Hypertarget{_c_sharp_compiler_service_8cs_source_l00254}00254\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ expandWord:\ \textcolor{keyword}{false},}
+\DoxyCodeLine{\Hypertarget{_c_sharp_compiler_service_8cs_source_l00255}00255\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ TextEditorModelModifier.DeleteKind.Delete);}
+\DoxyCodeLine{\Hypertarget{_c_sharp_compiler_service_8cs_source_l00256}00256\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_c_sharp_compiler_service_8cs_source_l00257}00257\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_c_sharp_compiler_service_8cs_source_l00258}00258\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ modelModifier.CompilerService.ResourceWasModified(}
+\DoxyCodeLine{\Hypertarget{_c_sharp_compiler_service_8cs_source_l00259}00259\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ modelModifier.ResourceUri,}
+\DoxyCodeLine{\Hypertarget{_c_sharp_compiler_service_8cs_source_l00260}00260\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ImmutableArray<TextEditorTextSpan>.Empty);}
+\DoxyCodeLine{\Hypertarget{_c_sharp_compiler_service_8cs_source_l00261}00261\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_c_sharp_compiler_service_8cs_source_l00262}00262\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ Task.CompletedTask;}
+\DoxyCodeLine{\Hypertarget{_c_sharp_compiler_service_8cs_source_l00263}00263\ \ \ \ \ \ \ \ \ \ \ \ \ \});}
+\DoxyCodeLine{\Hypertarget{_c_sharp_compiler_service_8cs_source_l00264}00264\ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_c_sharp_compiler_service_8cs_source_l00265}00265\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ Task.CompletedTask;}
+\DoxyCodeLine{\Hypertarget{_c_sharp_compiler_service_8cs_source_l00266}00266\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_c_sharp_compiler_service_8cs_source_l00267}00267\ \}}
+
+\end{DoxyCode}

@@ -1,0 +1,8 @@
+var namespace_luthetus_1_1_common_1_1_razor_lib_1_1_storages_1_1_models =
+[
+    [ "DoNothingStorageService", "class_luthetus_1_1_common_1_1_razor_lib_1_1_storages_1_1_models_1_1_do_nothing_storage_service.html", "class_luthetus_1_1_common_1_1_razor_lib_1_1_storages_1_1_models_1_1_do_nothing_storage_service" ],
+    [ "InMemoryStorageService", "class_luthetus_1_1_common_1_1_razor_lib_1_1_storages_1_1_models_1_1_in_memory_storage_service.html", "class_luthetus_1_1_common_1_1_razor_lib_1_1_storages_1_1_models_1_1_in_memory_storage_service" ],
+    [ "IStorageService", "interface_luthetus_1_1_common_1_1_razor_lib_1_1_storages_1_1_models_1_1_i_storage_service.html", "interface_luthetus_1_1_common_1_1_razor_lib_1_1_storages_1_1_models_1_1_i_storage_service" ],
+    [ "LocalStorageService", "class_luthetus_1_1_common_1_1_razor_lib_1_1_storages_1_1_models_1_1_local_storage_service.html", "class_luthetus_1_1_common_1_1_razor_lib_1_1_storages_1_1_models_1_1_local_storage_service" ],
+    [ "StorageCommonApi", "class_luthetus_1_1_common_1_1_razor_lib_1_1_storages_1_1_models_1_1_storage_common_api.html", "class_luthetus_1_1_common_1_1_razor_lib_1_1_storages_1_1_models_1_1_storage_common_api" ]
+];

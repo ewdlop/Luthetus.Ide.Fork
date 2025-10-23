@@ -1,0 +1,908 @@
+\doxysection{Parse\+Tokens.\+cs}
+\hypertarget{_parse_tokens_8cs_source}{}\label{_parse_tokens_8cs_source}\index{Source/Lib/CompilerServices/CSharp/ParserCase/Internals/ParseTokens.cs@{Source/Lib/CompilerServices/CSharp/ParserCase/Internals/ParseTokens.cs}}
+\mbox{\hyperlink{_parse_tokens_8cs}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00001}00001\ \textcolor{keyword}{using\ }System.Collections.Immutable;}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00002}00002\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_exceptions}{Luthetus.TextEditor.RazorLib.Exceptions}};}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00003}00003\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_interfaces}{Luthetus.TextEditor.RazorLib.CompilerServices.Interfaces}};}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00004}00004\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_1_1_tokens}{Luthetus.TextEditor.RazorLib.CompilerServices.Syntax.Tokens}};}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00005}00005\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_1_1_nodes}{Luthetus.TextEditor.RazorLib.CompilerServices.Syntax.Nodes}};}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00006}00006\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax}{Luthetus.TextEditor.RazorLib.CompilerServices.Syntax}};}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00007}00007\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_1_1_nodes_1_1_interfaces}{Luthetus.TextEditor.RazorLib.CompilerServices.Syntax.Nodes.Interfaces}};}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00008}00008\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_1_1_nodes_1_1_enums}{Luthetus.TextEditor.RazorLib.CompilerServices.Syntax.Nodes.Enums}};}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00009}00009\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_luthetus_1_1_compiler_services_1_1_c_sharp_1_1_facts}{Luthetus.CompilerServices.CSharp.Facts}};}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00010}00010\ }
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00011}00011\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespace_luthetus_1_1_compiler_services_1_1_c_sharp_1_1_parser_case_1_1_internals}{Luthetus.CompilerServices.CSharp.ParserCase.Internals}};}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00012}00012\ }
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00013}00013\ \textcolor{keyword}{public}\ \textcolor{keyword}{static}\ \textcolor{keyword}{class\ }ParseTokens}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00014}00014\ \{}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00015}00015\ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ ParsePreprocessorDirectiveToken(}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00016}00016\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_ae4bcfe414c318a050bbef43ec92f921ba0f9a1de50187b7b7f0dc1faeebe19906}{PreprocessorDirectiveToken}}\ consumedPreprocessorDirectiveToken,}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00017}00017\ \ \ \ \ \ \ \ \ CSharpParserModel\ model)}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00018}00018\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00019}00019\ \ \ \ \ \ \ \ \ var\ consumedToken\ =\ model.TokenWalker.Consume();}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00020}00020\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00021}00021\ }
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00022}00022\ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ ParseIdentifierToken(CSharpParserModel\ model)}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00023}00023\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00024}00024\ \ \ \ \ \ \ \ \ var\ originalTokenIndex\ =\ model.TokenWalker.Index;}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00025}00025\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00026}00026\ \ \ \ \ \ \ \ \ model.TryParseExpressionSyntaxKindList.Add(\mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_ae4bcfe414c318a050bbef43ec92f921b}{SyntaxKind}}.TypeClauseNode);}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00027}00027\ \ \ \ \ \ \ \ \ model.TryParseExpressionSyntaxKindList.Add(\mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_ae4bcfe414c318a050bbef43ec92f921b}{SyntaxKind}}.VariableDeclarationNode);}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00028}00028\ \ \ \ \ \ \ \ \ model.TryParseExpressionSyntaxKindList.Add(\mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_ae4bcfe414c318a050bbef43ec92f921b}{SyntaxKind}}.VariableReferenceNode);}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00029}00029\ \ \ \ \ \ \ \ \ model.TryParseExpressionSyntaxKindList.Add(\mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_ae4bcfe414c318a050bbef43ec92f921b}{SyntaxKind}}.ConstructorInvocationExpressionNode);}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00030}00030\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00031}00031\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (model.CurrentCodeBlockBuilder.CodeBlockOwner\ is\ not\ \textcolor{keyword}{null}\ \&\&}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00032}00032\ \ \ \ \ \ \ \ \ \ \ \ \ model.CurrentCodeBlockBuilder.CodeBlockOwner.SyntaxKind\ !=\ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_ae4bcfe414c318a050bbef43ec92f921b}{SyntaxKind}}.TypeDefinitionNode)}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00033}00033\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00034}00034\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ There\ is\ a\ syntax\ conflict\ between\ a\ ConstructorDefinitionNode\ and\ a\ FunctionInvocationNode.}}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00035}00035\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//}}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00036}00036\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Disambiguation\ is\ done\ based\ on\ the\ 'CodeBlockOwner'\ until\ a\ better\ solution\ is\ found.}}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00037}00037\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//}}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00038}00038\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ If\ the\ supposed\ "{}ConstructorDefinitionNode"{}\ does\ not\ have\ the\ same\ name\ as}}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00039}00039\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ the\ CodeBlockOwner.}}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00040}00040\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//}}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00041}00041\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Then,\ it\ perhaps\ should\ be\ treated\ as\ a\ function\ invocation\ (or\ function\ definition).}}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00042}00042\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ The\ main\ case\ for\ this\ being\ someone\ typing\ out\ pseudo\ code\ within\ a\ CodeBlockOwner}}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00043}00043\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ that\ is\ a\ TypeDefinitionNode.}}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00044}00044\ \ \ \ \ \ \ \ \ \ \ \ \ model.TryParseExpressionSyntaxKindList.Add(\mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_ae4bcfe414c318a050bbef43ec92f921b}{SyntaxKind}}.FunctionInvocationNode);}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00045}00045\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00046}00046\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00047}00047\ \ \ \ \ \ \ \ \ var\ successParse\ =\ ParseOthers.TryParseExpression(\textcolor{keyword}{null},\ model,\ out\ var\ expressionNode);}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00048}00048\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00049}00049\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!successParse)}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00050}00050\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00051}00051\ \ \ \ \ \ \ \ \ \ \ \ \ expressionNode\ =\ ParseOthers.ParseExpression(model);}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00052}00052\ \ \ \ \ \ \ \ \ \ \ \ \ model.StatementBuilder.ChildList.Add(expressionNode);}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00053}00053\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return};}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00054}00054\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00055}00055\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00056}00056\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{switch}\ (expressionNode.SyntaxKind)}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00057}00057\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00058}00058\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_ae4bcfe414c318a050bbef43ec92f921b}{SyntaxKind}}.TypeClauseNode:}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00059}00059\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ MoveToHandleTypeClauseNode(originalTokenIndex,\ (\mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_ae4bcfe414c318a050bbef43ec92f921babf7aa5a37bddb2ef0ea312257a3fa216}{TypeClauseNode}})expressionNode,\ model);}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00060}00060\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return};}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00061}00061\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_ae4bcfe414c318a050bbef43ec92f921b}{SyntaxKind}}.VariableDeclarationNode:}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00062}00062\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (model.TokenWalker.Current.SyntaxKind\ ==\ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_ae4bcfe414c318a050bbef43ec92f921b}{SyntaxKind}}.OpenParenthesisToken\ ||}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00063}00063\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ model.TokenWalker.Current.SyntaxKind\ ==\ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_ae4bcfe414c318a050bbef43ec92f921b}{SyntaxKind}}.OpenAngleBracketToken)}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00064}00064\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00065}00065\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ MoveToHandleFunctionDefinition((\mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_ae4bcfe414c318a050bbef43ec92f921baabbbbd712592a3fd0ed5fb0eb3962238}{VariableDeclarationNode}})expressionNode,\ model);}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00066}00066\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return};}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00067}00067\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00068}00068\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00069}00069\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ MoveToHandleVariableDeclarationNode((\mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_ae4bcfe414c318a050bbef43ec92f921baabbbbd712592a3fd0ed5fb0eb3962238}{VariableDeclarationNode}})expressionNode,\ model);}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00070}00070\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return};}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00071}00071\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_ae4bcfe414c318a050bbef43ec92f921b}{SyntaxKind}}.VariableReferenceNode:}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00072}00072\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_ae4bcfe414c318a050bbef43ec92f921b}{SyntaxKind}}.FunctionInvocationNode:}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00073}00073\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_ae4bcfe414c318a050bbef43ec92f921b}{SyntaxKind}}.ConstructorInvocationExpressionNode:}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00074}00074\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ model.StatementBuilder.ChildList.Add(expressionNode);}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00075}00075\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return};}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00076}00076\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{default}:}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00077}00077\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ model.DiagnosticBag.ReportTodoException(model.TokenWalker.Current.TextSpan,\ \$\textcolor{stringliteral}{"{}nameof(ParseIdentifierToken)\ default\ case"{}});}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00078}00078\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return};}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00079}00079\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00080}00080\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00081}00081\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00082}00082\ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ MoveToHandleFunctionDefinition(\mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_ae4bcfe414c318a050bbef43ec92f921baabbbbd712592a3fd0ed5fb0eb3962238}{VariableDeclarationNode}}\ variableDeclarationNode,\ IParserModel\ model)}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00083}00083\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00084}00084\ \ \ \ \ \ \ \ \ ParseFunctions.HandleFunctionDefinition(}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00085}00085\ \ \ \ \ \ \ \ \ \ \ \ \ variableDeclarationNode.\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_1_1_nodes_1_1_variable_declaration_node_a21c80cf291667e0f86ad811cff37a3c2}{IdentifierToken}},}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00086}00086\ \ \ \ \ \ \ \ \ \ \ \ \ variableDeclarationNode.\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_1_1_nodes_1_1_variable_declaration_node_a9527d6808689c2a12e33e4e4ca72e872}{TypeClauseNode}},}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00087}00087\ \ \ \ \ \ \ \ \ \ \ \ \ consumedGenericArgumentsListingNode:\ \textcolor{keyword}{null},}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00088}00088\ \ \ \ \ \ \ \ \ \ \ \ \ (CSharpParserModel)model);}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00089}00089\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00090}00090\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00091}00091\ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ MoveToHandleVariableDeclarationNode(IVariableDeclarationNode\ variableDeclarationNode,\ IParserModel\ model)}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00092}00092\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00093}00093\ \ \ \ \ \ \ \ \ var\ variableKind\ =\ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_1_1_nodes_1_1_enums_a4cbcf68aea676ee33001aa4912ffbc7e}{VariableKind}}.Local;}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00094}00094\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00095}00095\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (model.\mbox{\hyperlink{interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_interfaces_1_1_i_parser_model_a38ce92822f0b900d2f2c8da6b8ff3cb0}{TokenWalker}}.Current.SyntaxKind\ ==\ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_ae4bcfe414c318a050bbef43ec92f921b}{SyntaxKind}}.OpenBraceToken\ ||}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00096}00096\ \ \ \ \ \ \ \ \ \ \ \ \ (model.\mbox{\hyperlink{interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_interfaces_1_1_i_parser_model_a38ce92822f0b900d2f2c8da6b8ff3cb0}{TokenWalker}}.Current.SyntaxKind\ ==\ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_ae4bcfe414c318a050bbef43ec92f921b}{SyntaxKind}}.EqualsToken\ \&\&}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00097}00097\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ model.\mbox{\hyperlink{interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_interfaces_1_1_i_parser_model_a38ce92822f0b900d2f2c8da6b8ff3cb0}{TokenWalker}}.Next.SyntaxKind\ ==\ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_ae4bcfe414c318a050bbef43ec92f921b}{SyntaxKind}}.CloseAngleBracketToken))}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00098}00098\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00099}00099\ \ \ \ \ \ \ \ \ \ \ \ \ variableKind\ =\ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_1_1_nodes_1_1_enums_a4cbcf68aea676ee33001aa4912ffbc7e}{VariableKind}}.Property;}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00100}00100\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00101}00101\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ (model.\mbox{\hyperlink{interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_interfaces_1_1_i_parser_model_a0c3e2c086f8cad3a7ef5cb036f909a82}{CurrentCodeBlockBuilder}}.CodeBlockOwner\ is\ not\ \textcolor{keyword}{null}\ \&\&}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00102}00102\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ model.\mbox{\hyperlink{interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_interfaces_1_1_i_parser_model_a0c3e2c086f8cad3a7ef5cb036f909a82}{CurrentCodeBlockBuilder}}.CodeBlockOwner.SyntaxKind\ ==\ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_ae4bcfe414c318a050bbef43ec92f921b}{SyntaxKind}}.TypeDefinitionNode)}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00103}00103\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00104}00104\ \ \ \ \ \ \ \ \ \ \ \ \ variableKind\ =\ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_1_1_nodes_1_1_enums_a4cbcf68aea676ee33001aa4912ffbc7e}{VariableKind}}.Field;}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00105}00105\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00106}00106\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00107}00107\ \ \ \ \ \ \ \ \ ((\mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_ae4bcfe414c318a050bbef43ec92f921baabbbbd712592a3fd0ed5fb0eb3962238}{VariableDeclarationNode}})variableDeclarationNode).\mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_1_1_nodes_1_1_enums_a4cbcf68aea676ee33001aa4912ffbc7e}{VariableKind}}\ =\ variableKind;}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00108}00108\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00109}00109\ \ \ \ \ \ \ \ \ model.\mbox{\hyperlink{interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_interfaces_1_1_i_parser_model_a460eb8cee7a48f5ca4e3739e0f460bb7}{Binder}}.\mbox{\hyperlink{interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_interfaces_1_1_i_binder_ac698b838db68a8b255b23bfdfcfaf7a0}{BindVariableDeclarationNode}}(variableDeclarationNode,\ model);}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00110}00110\ \ \ \ \ \ \ \ \ model.\mbox{\hyperlink{interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_interfaces_1_1_i_parser_model_a0c3e2c086f8cad3a7ef5cb036f909a82}{CurrentCodeBlockBuilder}}.ChildList.Add(variableDeclarationNode);}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00111}00111\ \ \ \ \ \ \ \ \ model.\mbox{\hyperlink{interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_interfaces_1_1_i_parser_model_aacc1fe43eb3c6349f7e2d7dfa04ed666}{StatementBuilder}}.ChildList.Add(variableDeclarationNode);}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00112}00112\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00113}00113\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (model.\mbox{\hyperlink{interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_interfaces_1_1_i_parser_model_a38ce92822f0b900d2f2c8da6b8ff3cb0}{TokenWalker}}.Current.SyntaxKind\ ==\ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_ae4bcfe414c318a050bbef43ec92f921b}{SyntaxKind}}.OpenBraceToken)}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00114}00114\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00115}00115\ \ \ \ \ \ \ \ \ \ \ \ \ ParsePropertyDefinition((CSharpParserModel)model);}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00116}00116\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00117}00117\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ (model.\mbox{\hyperlink{interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_interfaces_1_1_i_parser_model_a38ce92822f0b900d2f2c8da6b8ff3cb0}{TokenWalker}}.Current.SyntaxKind\ ==\ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_ae4bcfe414c318a050bbef43ec92f921b}{SyntaxKind}}.EqualsToken\ \&\&}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00118}00118\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ model.\mbox{\hyperlink{interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_interfaces_1_1_i_parser_model_a38ce92822f0b900d2f2c8da6b8ff3cb0}{TokenWalker}}.Next.SyntaxKind\ ==\ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_ae4bcfe414c318a050bbef43ec92f921b}{SyntaxKind}}.CloseAngleBracketToken)}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00119}00119\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00120}00120\ \ \ \ \ \ \ \ \ \ \ \ \ ParsePropertyDefinition\_ExpressionBound((CSharpParserModel)model);}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00121}00121\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00122}00122\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00123}00123\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00124}00124\ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ MoveToHandleTypeClauseNode(\textcolor{keywordtype}{int}\ originalTokenIndex,\ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_ae4bcfe414c318a050bbef43ec92f921babf7aa5a37bddb2ef0ea312257a3fa216}{TypeClauseNode}}\ typeClauseNode,\ IParserModel\ model)}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00125}00125\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00126}00126\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (model.\mbox{\hyperlink{interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_interfaces_1_1_i_parser_model_a38ce92822f0b900d2f2c8da6b8ff3cb0}{TokenWalker}}.Current.SyntaxKind\ ==\ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_ae4bcfe414c318a050bbef43ec92f921b}{SyntaxKind}}.StatementDelimiterToken\ ||}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00127}00127\ \ \ \ \ \ \ \ \ \ \ \ \ model.\mbox{\hyperlink{interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_interfaces_1_1_i_parser_model_a38ce92822f0b900d2f2c8da6b8ff3cb0}{TokenWalker}}.Current.SyntaxKind\ ==\ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_ae4bcfe414c318a050bbef43ec92f921b}{SyntaxKind}}.EndOfFileToken\ ||}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00128}00128\ \ \ \ \ \ \ \ \ \ \ \ \ model.\mbox{\hyperlink{interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_interfaces_1_1_i_parser_model_a38ce92822f0b900d2f2c8da6b8ff3cb0}{TokenWalker}}.Current.SyntaxKind\ ==\ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_ae4bcfe414c318a050bbef43ec92f921b}{SyntaxKind}}.OpenBraceToken\ ||}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00129}00129\ \ \ \ \ \ \ \ \ \ \ \ \ model.\mbox{\hyperlink{interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_interfaces_1_1_i_parser_model_a38ce92822f0b900d2f2c8da6b8ff3cb0}{TokenWalker}}.Current.SyntaxKind\ ==\ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_ae4bcfe414c318a050bbef43ec92f921b}{SyntaxKind}}.CloseBraceToken)}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00130}00130\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00131}00131\ \ \ \ \ \ \ \ \ \ \ \ \ model.\mbox{\hyperlink{interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_interfaces_1_1_i_parser_model_aacc1fe43eb3c6349f7e2d7dfa04ed666}{StatementBuilder}}.ChildList.Add(typeClauseNode);}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00132}00132\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00133}00133\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ (model.\mbox{\hyperlink{interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_interfaces_1_1_i_parser_model_a0c3e2c086f8cad3a7ef5cb036f909a82}{CurrentCodeBlockBuilder}}.CodeBlockOwner\ is\ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_ae4bcfe414c318a050bbef43ec92f921ba38a405ee5bd151ca87cb4f8767d5fdab}{TypeDefinitionNode}}\ typeDefinitionNode\ \&\&}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00134}00134\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ UtilityApi.IsConvertibleToIdentifierToken(typeClauseNode.\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_1_1_nodes_1_1_type_clause_node_a0afdcadfdc54cf9760a16b3ea37db18e}{TypeIdentifierToken}}.\mbox{\hyperlink{interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_1_1_i_syntax_a29fb0ee8667648a748dfdca9d4e71a26}{SyntaxKind}})\ \&\&}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00135}00135\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ model.\mbox{\hyperlink{interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_interfaces_1_1_i_parser_model_a38ce92822f0b900d2f2c8da6b8ff3cb0}{TokenWalker}}.Current.SyntaxKind\ ==\ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_ae4bcfe414c318a050bbef43ec92f921b}{SyntaxKind}}.OpenParenthesisToken\ \&\&}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00136}00136\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ typeDefinitionNode.TypeIdentifierToken.TextSpan.GetText()\ ==\ typeClauseNode.\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_1_1_nodes_1_1_type_clause_node_a0afdcadfdc54cf9760a16b3ea37db18e}{TypeIdentifierToken}}.\mbox{\hyperlink{interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_1_1_i_syntax_token_a042a8b11e8d42825506b0ee02b004f10}{TextSpan}}.GetText())}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00137}00137\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00138}00138\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ ConstructorDefinitionNode}}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00139}00139\ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00140}00140\ \ \ \ \ \ \ \ \ \ \ \ \ var\ identifierToken\ =\ UtilityApi.ConvertToIdentifierToken(typeClauseNode.\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_1_1_nodes_1_1_type_clause_node_a0afdcadfdc54cf9760a16b3ea37db18e}{TypeIdentifierToken}},\ model);}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00141}00141\ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00142}00142\ \ \ \ \ \ \ \ \ \ \ \ \ ParseFunctions.HandleConstructorDefinition(}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00143}00143\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ typeDefinitionNode,}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00144}00144\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ identifierToken,}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00145}00145\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (CSharpParserModel)model);}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00146}00146\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00147}00147\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00148}00148\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00149}00149\ \ \ \ \ \ \ \ \ \ \ \ \ model.\mbox{\hyperlink{interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_interfaces_1_1_i_parser_model_aacc1fe43eb3c6349f7e2d7dfa04ed666}{StatementBuilder}}.ChildList.Add(typeClauseNode);}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00150}00150\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00151}00151\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00152}00152\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return};}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00153}00153\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00154}00154\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00155}00155\ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ ParsePropertyDefinition(CSharpParserModel\ model)}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00156}00156\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00157}00157\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \#if\ DEBUG}}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00158}00158\ \ \ \ \ \ \ \ \ model.TokenWalker.SuppressProtectedSyntaxKindConsumption\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00159}00159\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \#endif}}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00160}00160\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00161}00161\ \ \ \ \ \ \ \ \ var\ openBraceToken\ =\ (\mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_ae4bcfe414c318a050bbef43ec92f921ba183e5291ffb38b02fad8aecbad442a85}{OpenBraceToken}})model.TokenWalker.Consume();}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00162}00162\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00163}00163\ \ \ \ \ \ \ \ \ var\ openBraceCounter\ =\ 1;}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00164}00164\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00165}00165\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{while}\ (\textcolor{keyword}{true})}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00166}00166\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00167}00167\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (model.TokenWalker.IsEof)}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00168}00168\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00169}00169\ }
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00170}00170\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (model.TokenWalker.Current.SyntaxKind\ ==\ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_ae4bcfe414c318a050bbef43ec92f921b}{SyntaxKind}}.OpenBraceToken)}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00171}00171\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00172}00172\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ++openBraceCounter;}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00173}00173\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00174}00174\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ (model.TokenWalker.Current.SyntaxKind\ ==\ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_ae4bcfe414c318a050bbef43ec92f921b}{SyntaxKind}}.CloseBraceToken)}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00175}00175\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00176}00176\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (-\/-\/openBraceCounter\ <=\ 0)}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00177}00177\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00178}00178\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00179}00179\ }
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00180}00180\ \ \ \ \ \ \ \ \ \ \ \ \ \_\ =\ model.TokenWalker.Consume();}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00181}00181\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00182}00182\ }
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00183}00183\ \ \ \ \ \ \ \ \ var\ closeTokenIndex\ =\ model.TokenWalker.Index;}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00184}00184\ \ \ \ \ \ \ \ \ var\ closeBraceToken\ =\ (\mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_ae4bcfe414c318a050bbef43ec92f921baff9fbef572e50c9a0181fe7dfe6d1c44}{CloseBraceToken}})model.TokenWalker.Match(\mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_ae4bcfe414c318a050bbef43ec92f921b}{SyntaxKind}}.CloseBraceToken);}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00185}00185\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00186}00186\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \#if\ DEBUG}}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00187}00187\ \ \ \ \ \ \ \ \ model.TokenWalker.SuppressProtectedSyntaxKindConsumption\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00188}00188\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \#endif}}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00189}00189\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00190}00190\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00191}00191\ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ ParsePropertyDefinition\_ExpressionBound(CSharpParserModel\ model)}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00192}00192\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00193}00193\ \ \ \ \ \ \ \ \ var\ equalsToken\ =\ (\mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_ae4bcfe414c318a050bbef43ec92f921baf00cc77d03e2da77acdbcdc040c56b66}{EqualsToken}})model.TokenWalker.Consume();}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00194}00194\ \ \ \ \ \ \ \ \ var\ closeAngleBracketToken\ =\ (\mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_ae4bcfe414c318a050bbef43ec92f921ba2616fae732947c9a7f0dc61749aa9aaf}{CloseAngleBracketToken}})model.TokenWalker.Consume();}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00195}00195\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00196}00196\ \ \ \ \ \ \ \ \ var\ expressionNode\ =\ ParseOthers.ParseExpression(model);}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00197}00197\ \ \ \ \ \ \ \ \ var\ statementDelimiterToken\ =\ (\mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_ae4bcfe414c318a050bbef43ec92f921ba76cb87feb8e6fd558a7a36748940917a}{StatementDelimiterToken}})model.TokenWalker.Match(\mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_ae4bcfe414c318a050bbef43ec92f921b}{SyntaxKind}}.StatementDelimiterToken);}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00198}00198\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00199}00199\ }
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00200}00200\ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ ParseColonToken(CSharpParserModel\ model)}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00201}00201\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00202}00202\ \ \ \ \ \ \ \ \ var\ colonToken\ =\ (\mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_ae4bcfe414c318a050bbef43ec92f921ba45bff21d89b93c71538ca52e5ca16124}{ColonToken}})model.TokenWalker.Consume();}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00203}00203\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00204}00204\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (model.SyntaxStack.TryPeek(out\ var\ syntax)\ \&\&\ syntax.SyntaxKind\ ==\ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_ae4bcfe414c318a050bbef43ec92f921b}{SyntaxKind}}.TypeDefinitionNode)}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00205}00205\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00206}00206\ \ \ \ \ \ \ \ \ \ \ \ \ var\ typeDefinitionNode\ =\ (\mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_ae4bcfe414c318a050bbef43ec92f921ba38a405ee5bd151ca87cb4f8767d5fdab}{TypeDefinitionNode}})model.SyntaxStack.Pop();}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00207}00207\ \ \ \ \ \ \ \ \ \ \ \ \ var\ inheritedTypeClauseNode\ =\ model.TokenWalker.MatchTypeClauseNode(model);}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00208}00208\ }
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00209}00209\ \ \ \ \ \ \ \ \ \ \ \ \ model.Binder.BindTypeClauseNode(inheritedTypeClauseNode,\ model);}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00210}00210\ }
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00211}00211\ \ \ \ \ \ \ \ \ \ \ \ \ typeDefinitionNode.SetInheritedTypeClauseNode(inheritedTypeClauseNode);}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00212}00212\ }
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00213}00213\ \ \ \ \ \ \ \ \ \ \ \ \ model.SyntaxStack.Push(typeDefinitionNode);}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00214}00214\ \ \ \ \ \ \ \ \ \ \ \ \ model.CurrentCodeBlockBuilder.InnerPendingCodeBlockOwner\ =\ typeDefinitionNode;}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00215}00215\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00216}00216\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00217}00217\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00218}00218\ \ \ \ \ \ \ \ \ \ \ \ \ model.DiagnosticBag.ReportTodoException(colonToken.TextSpan,\ \textcolor{stringliteral}{"{}Colon\ is\ in\ unexpected\ place."{}});}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00219}00219\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00220}00220\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00221}00221\ }
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00226}00226\ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ ParseOpenBraceToken(\mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_ae4bcfe414c318a050bbef43ec92f921ba183e5291ffb38b02fad8aecbad442a85}{OpenBraceToken}}\ openBraceToken,\ CSharpParserModel\ model)}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00227}00227\ \ \ \ \ \{\ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00228}00228\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (model.CurrentCodeBlockBuilder.InnerPendingCodeBlockOwner\ is\ \textcolor{keyword}{null})}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00229}00229\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00230}00230\ \ \ \ \ \ \ \ \ \ \ \ \ var\ arbitraryCodeBlockNode\ =\ \textcolor{keyword}{new}\ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_ae4bcfe414c318a050bbef43ec92f921ba416b65041102507c12441d61470a2d74}{ArbitraryCodeBlockNode}}(model.CurrentCodeBlockBuilder.CodeBlockOwner);}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00231}00231\ \ \ \ \ \ \ \ \ \ \ \ \ model.SyntaxStack.Push(arbitraryCodeBlockNode);}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00232}00232\ \ \ \ \ \ \ \ \ \ \ \ \ model.CurrentCodeBlockBuilder.InnerPendingCodeBlockOwner\ =\ arbitraryCodeBlockNode;}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00233}00233\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00234}00234\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00235}00235\ \ \ \ \ \ \ \ \ model.CurrentCodeBlockBuilder.InnerPendingCodeBlockOwner.SetOpenBraceToken(openBraceToken,\ model);}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00236}00236\ }
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00237}00237\ \ \ \ \ \ \ \ \ var\ parentScopeDirection\ =\ model.CurrentCodeBlockBuilder?.CodeBlockOwner?.ScopeDirectionKind\ ??\ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_1_1_nodes_1_1_enums_a3f799a283f983df73f475648a90cea9d}{ScopeDirectionKind}}.Both;}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00238}00238\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (parentScopeDirection\ ==\ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_1_1_nodes_1_1_enums_a3f799a283f983df73f475648a90cea9d}{ScopeDirectionKind}}.Both)}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00239}00239\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00240}00240\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!model.CurrentCodeBlockBuilder.PermitInnerPendingCodeBlockOwnerToBeParsed)}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00241}00241\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00242}00242\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ model.TokenWalker.DeferParsingOfChildScope(openBraceToken,\ model);}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00243}00243\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return};}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00244}00244\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00245}00245\ }
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00246}00246\ \ \ \ \ \ \ \ \ \ \ \ \ model.CurrentCodeBlockBuilder.PermitInnerPendingCodeBlockOwnerToBeParsed\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00247}00247\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00248}00248\ }
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00249}00249\ \ \ \ \ \ \ \ \ var\ nextCodeBlockOwner\ =\ model.CurrentCodeBlockBuilder.InnerPendingCodeBlockOwner;}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00250}00250\ \ \ \ \ \ \ \ \ var\ nextReturnTypeClauseNode\ =\ nextCodeBlockOwner.GetReturnTypeClauseNode();}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00251}00251\ }
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00252}00252\ \ \ \ \ \ \ \ \ model.Binder.OpenScope(nextCodeBlockOwner,\ nextReturnTypeClauseNode,\ openBraceToken.\mbox{\hyperlink{struct_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_1_1_tokens_1_1_open_brace_token_a763f6c64667e39917576f02a46e6429a}{TextSpan}},\ model);}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00253}00253\ \ \ \ \ \ \ \ \ model.CurrentCodeBlockBuilder\ =\ \textcolor{keyword}{new}(parent:\ model.CurrentCodeBlockBuilder,\ codeBlockOwner:\ nextCodeBlockOwner);}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00254}00254\ \ \ \ \ \ \ \ \ nextCodeBlockOwner.OnBoundScopeCreatedAndSetAsCurrent(model);}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00255}00255\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00256}00256\ }
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00261}00261\ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ ParseCloseBraceToken(\mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_ae4bcfe414c318a050bbef43ec92f921baff9fbef572e50c9a0181fe7dfe6d1c44}{CloseBraceToken}}\ closeBraceToken,\ CSharpParserModel\ model)}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00262}00262\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00263}00263\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (model.CurrentCodeBlockBuilder.ParseChildScopeQueue.TryDequeue(out\ var\ deferredChildScope))}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00264}00264\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00265}00265\ \ \ \ \ \ \ \ \ \ \ \ \ deferredChildScope.PrepareMainParserLoop(model.TokenWalker.Index\ -\/\ 1,\ model);}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00266}00266\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return};}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00267}00267\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00268}00268\ }
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00269}00269\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (model.CurrentCodeBlockBuilder.CodeBlockOwner\ is\ not\ \textcolor{keyword}{null})}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00270}00270\ \ \ \ \ \ \ \ \ \ \ \ \ model.CurrentCodeBlockBuilder.CodeBlockOwner.SetCloseBraceToken(closeBraceToken,\ model);}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00271}00271\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00272}00272\ \ \ \ \ \ \ \ \ model.Binder.CloseScope(closeBraceToken.\mbox{\hyperlink{struct_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_1_1_tokens_1_1_close_brace_token_a8de73f542252de1e2d693895a3b6367b}{TextSpan}},\ model);}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00273}00273\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00274}00274\ }
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00275}00275\ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ ParseOpenParenthesisToken(CSharpParserModel\ model)}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00276}00276\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00277}00277\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00278}00278\ }
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00279}00279\ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ ParseCloseParenthesisToken(}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00280}00280\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_ae4bcfe414c318a050bbef43ec92f921ba73770e6f82abb296e479abc311e83abb}{CloseParenthesisToken}}\ consumedCloseParenthesisToken,}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00281}00281\ \ \ \ \ \ \ \ \ CSharpParserModel\ model)}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00282}00282\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00283}00283\ \ \ \ \ \ \ \ \ var\ closesParenthesisToken\ =\ (\mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_ae4bcfe414c318a050bbef43ec92f921ba73770e6f82abb296e479abc311e83abb}{CloseParenthesisToken}})model.TokenWalker.Consume();}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00284}00284\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00285}00285\ }
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00286}00286\ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ ParseOpenAngleBracketToken(}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00287}00287\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_ae4bcfe414c318a050bbef43ec92f921ba27bf1c1ec7a86ae3186a8fe8d7c69e28}{OpenAngleBracketToken}}\ consumedOpenAngleBracketToken,}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00288}00288\ \ \ \ \ \ \ \ \ CSharpParserModel\ model)}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00289}00289\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00290}00290\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00291}00291\ }
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00292}00292\ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ ParseCloseAngleBracketToken(}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00293}00293\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_ae4bcfe414c318a050bbef43ec92f921ba2616fae732947c9a7f0dc61749aa9aaf}{CloseAngleBracketToken}}\ consumedCloseAngleBracketToken,}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00294}00294\ \ \ \ \ \ \ \ \ CSharpParserModel\ model)}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00295}00295\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00296}00296\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00297}00297\ }
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00298}00298\ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ ParseOpenSquareBracketToken(CSharpParserModel\ model)}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00299}00299\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00300}00300\ \ \ \ \ \ \ \ \ var\ openSquareBracketToken\ =\ (\mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_ae4bcfe414c318a050bbef43ec92f921badc0dbc3f3c9ffc2d9c459ee186557ec8}{OpenSquareBracketToken}})model.TokenWalker.Consume();}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00301}00301\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00302}00302\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (model.StatementBuilder.ChildList.Count\ !=\ 0)}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00303}00303\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00304}00304\ \ \ \ \ \ \ \ \ \ \ \ \ model.DiagnosticBag.ReportTodoException(}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00305}00305\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ openSquareBracketToken.TextSpan,}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00306}00306\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \$\textcolor{stringliteral}{"{}Unexpected\ '\{nameof(OpenSquareBracketToken)\}'"{}});}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00307}00307\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return};}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00308}00308\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00309}00309\ \ \ \ \ \ \ \ \ var\ openSquareBracketCounter\ =\ 1;}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00310}00310\ \ \ \ \ \ \ \ \ var\ corruptState\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00311}00311\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00312}00312\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \#if\ DEBUG}}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00313}00313\ \ \ \ \ \ \ \ \ model.TokenWalker.SuppressProtectedSyntaxKindConsumption\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00314}00314\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \#endif}}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00315}00315\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00316}00316\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{while}\ (!model.TokenWalker.IsEof)}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00317}00317\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00318}00318\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (model.TokenWalker.Current.SyntaxKind\ ==\ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_ae4bcfe414c318a050bbef43ec92f921b}{SyntaxKind}}.OpenSquareBracketToken)}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00319}00319\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00320}00320\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ++openSquareBracketCounter;}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00321}00321\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00322}00322\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ (model.TokenWalker.Current.SyntaxKind\ ==\ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_ae4bcfe414c318a050bbef43ec92f921b}{SyntaxKind}}.CloseSquareBracketToken)}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00323}00323\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00324}00324\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (-\/-\/openSquareBracketCounter\ <=\ 0)}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00325}00325\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00326}00326\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00327}00327\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ (!corruptState)}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00328}00328\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00329}00329\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ var\ tokenIndexOriginal\ =\ model.TokenWalker.Index;}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00330}00330\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00331}00331\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ model.ExpressionList.Add((\mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_ae4bcfe414c318a050bbef43ec92f921b}{SyntaxKind}}.CloseSquareBracketToken,\ \textcolor{keyword}{null}));}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00332}00332\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ model.ExpressionList.Add((\mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_ae4bcfe414c318a050bbef43ec92f921b}{SyntaxKind}}.CommaToken,\ \textcolor{keyword}{null}));}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00333}00333\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ var\ expression\ =\ ParseOthers.ParseExpression(model);}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00334}00334\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00335}00335\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (model.TokenWalker.Current.SyntaxKind\ ==\ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_ae4bcfe414c318a050bbef43ec92f921b}{SyntaxKind}}.CommaToken)}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00336}00336\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \_\ =\ model.TokenWalker.Consume();}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00337}00337\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00338}00338\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (tokenIndexOriginal\ <\ model.TokenWalker.Index)}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00339}00339\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{continue};\ \textcolor{comment}{//\ Already\ consumed\ so\ avoid\ the\ one\ at\ the\ end\ of\ the\ while\ loop}}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00340}00340\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00341}00341\ }
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00342}00342\ \ \ \ \ \ \ \ \ \ \ \ \ \_\ =\ model.TokenWalker.Consume();}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00343}00343\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00344}00344\ }
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00345}00345\ \ \ \ \ \ \ \ \ var\ closeTokenIndex\ =\ model.TokenWalker.Index;}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00346}00346\ \ \ \ \ \ \ \ \ var\ closeSquareBracketToken\ =\ (\mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_ae4bcfe414c318a050bbef43ec92f921baacfda5fbd5f11dc0492a8e47534edc84}{CloseSquareBracketToken}})model.TokenWalker.Match(\mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_ae4bcfe414c318a050bbef43ec92f921b}{SyntaxKind}}.CloseSquareBracketToken);}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00347}00347\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00348}00348\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \#if\ DEBUG}}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00349}00349\ \ \ \ \ \ \ \ \ model.TokenWalker.SuppressProtectedSyntaxKindConsumption\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00350}00350\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \#endif}}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00351}00351\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00352}00352\ }
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00353}00353\ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ ParseCloseSquareBracketToken(}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00354}00354\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_ae4bcfe414c318a050bbef43ec92f921baacfda5fbd5f11dc0492a8e47534edc84}{CloseSquareBracketToken}}\ consumedCloseSquareBracketToken,}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00355}00355\ \ \ \ \ \ \ \ \ CSharpParserModel\ model)}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00356}00356\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00357}00357\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00358}00358\ }
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00359}00359\ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ ParseEqualsToken(CSharpParserModel\ model)}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00360}00360\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00361}00361\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (model.StatementBuilder.ChildList.Count\ ==\ 0)}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00362}00362\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00363}00363\ \ \ \ \ \ \ \ \ \ \ \ \ ParseOthers.StartStatement\_Expression(model);}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00364}00364\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return};}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00365}00365\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00366}00366\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00367}00367\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (model.StatementBuilder.TryPeek(out\ var\ syntax)\ \&\&}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00368}00368\ \ \ \ \ \ \ \ \ \ \ \ \ syntax.SyntaxKind\ ==\ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_ae4bcfe414c318a050bbef43ec92f921b}{SyntaxKind}}.VariableDeclarationNode)}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00369}00369\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00370}00370\ \ \ \ \ \ \ \ \ \ \ \ \ var\ variableDeclarationNode\ =\ (\mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_ae4bcfe414c318a050bbef43ec92f921baabbbbd712592a3fd0ed5fb0eb3962238}{VariableDeclarationNode}})syntax;}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00371}00371\ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00372}00372\ \ \ \ \ \ \ \ \ \ \ \ \ model.TokenWalker.Backtrack();}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00373}00373\ \ \ \ \ \ \ \ \ \ \ \ \ var\ expression\ =\ ParseOthers.ParseExpression(model);}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00374}00374\ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00375}00375\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (expression.SyntaxKind\ !=\ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_ae4bcfe414c318a050bbef43ec92f921b}{SyntaxKind}}.VariableAssignmentExpressionNode)}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00376}00376\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00377}00377\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ TODO:\ Report\ a\ diagnostic}}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00378}00378\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return};}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00379}00379\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00380}00380\ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00381}00381\ \ \ \ \ \ \ \ \ \ \ \ \ model.StatementBuilder.ChildList.Add(expression);}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00382}00382\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00383}00383\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00384}00384\ }
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00385}00385\ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ ParseMemberAccessToken(}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00386}00386\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_ae4bcfe414c318a050bbef43ec92f921ba36fc6f02cdc6f3c9d67ea92bb8d3cffb}{MemberAccessToken}}\ consumedMemberAccessToken,}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00387}00387\ \ \ \ \ \ \ \ \ CSharpParserModel\ model)}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00388}00388\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00389}00389\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00390}00390\ }
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00395}00395\ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ ParseStatementDelimiterToken(\mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_ae4bcfe414c318a050bbef43ec92f921ba76cb87feb8e6fd558a7a36748940917a}{StatementDelimiterToken}}\ statementDelimiterToken,\ CSharpParserModel\ model)}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00396}00396\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00397}00397\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (model.SyntaxStack.TryPeek(out\ var\ syntax)\ \&\&\ syntax.SyntaxKind\ ==\ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_ae4bcfe414c318a050bbef43ec92f921b}{SyntaxKind}}.NamespaceStatementNode)}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00398}00398\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00399}00399\ \ \ \ \ \ \ \ \ \ \ \ \ var\ closureCurrentCompilationUnitBuilder\ =\ model.CurrentCodeBlockBuilder;}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00400}00400\ \ \ \ \ \ \ \ \ \ \ \ \ ICodeBlockOwner?\ nextCodeBlockOwner\ =\ \textcolor{keyword}{null};}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00401}00401\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_ae4bcfe414c318a050bbef43ec92f921babf7aa5a37bddb2ef0ea312257a3fa216}{TypeClauseNode}}?\ scopeReturnTypeClauseNode\ =\ \textcolor{keyword}{null};}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00402}00402\ }
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00403}00403\ \ \ \ \ \ \ \ \ \ \ \ \ var\ namespaceStatementNode\ =\ (\mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_ae4bcfe414c318a050bbef43ec92f921ba0e25c6fef6f3e36692d192871407ff01}{NamespaceStatementNode}})model.SyntaxStack.Pop();}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00404}00404\ \ \ \ \ \ \ \ \ \ \ \ \ nextCodeBlockOwner\ =\ namespaceStatementNode;}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00405}00405\ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00406}00406\ \ \ \ \ \ \ \ \ \ \ \ \ namespaceStatementNode.\mbox{\hyperlink{interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_1_1_nodes_1_1_fbb89b74d57a0670c22846a0a2d85ed6_aabdaa8d91a68e6d908839f83da9c3b5b}{SetStatementDelimiterToken}}(statementDelimiterToken,\ model);}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00407}00407\ }
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00408}00408\ \ \ \ \ \ \ \ \ \ \ \ \ model.Binder.OpenScope(}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00409}00409\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ nextCodeBlockOwner,}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00410}00410\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ scopeReturnTypeClauseNode,}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00411}00411\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ statementDelimiterToken.\mbox{\hyperlink{struct_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_1_1_tokens_1_1_statement_delimiter_token_aa49ba418ba87269529768e0e196a4177}{TextSpan}},}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00412}00412\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ model);}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00413}00413\ }
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00414}00414\ \ \ \ \ \ \ \ \ \ \ \ \ model.Binder.AddNamespaceToCurrentScope(}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00415}00415\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ namespaceStatementNode.IdentifierToken.TextSpan.GetText(),}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00416}00416\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ model);}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00417}00417\ }
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00418}00418\ \ \ \ \ \ \ \ \ \ \ \ \ model.CurrentCodeBlockBuilder\ =\ \textcolor{keyword}{new}(model.CurrentCodeBlockBuilder,\ nextCodeBlockOwner);}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00419}00419\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00420}00420\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ (model.CurrentCodeBlockBuilder.InnerPendingCodeBlockOwner\ is\ not\ \textcolor{keyword}{null}\ \&\&}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00421}00421\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ !model.CurrentCodeBlockBuilder.InnerPendingCodeBlockOwner.OpenBraceToken.ConstructorWasInvoked)}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00422}00422\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00423}00423\ \ \ \ \ \ \ \ \ \ \ \ \ var\ pendingChild\ =\ model.CurrentCodeBlockBuilder.InnerPendingCodeBlockOwner;}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00424}00424\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00425}00425\ \ \ \ \ \ \ \ \ \ \ \ \ model.Binder.OpenScope(pendingChild,\ CSharpFacts.Types.Void.ToTypeClause(),\ statementDelimiterToken.\mbox{\hyperlink{struct_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_1_1_tokens_1_1_statement_delimiter_token_aa49ba418ba87269529768e0e196a4177}{TextSpan}},\ model);}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00426}00426\ \ \ \ \ \ \ \ \ \ \ \ \ model.CurrentCodeBlockBuilder\ =\ \textcolor{keyword}{new}(model.CurrentCodeBlockBuilder,\ pendingChild);}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00427}00427\ \ \ \ \ \ \ \ \ \ \ \ \ pendingChild.OnBoundScopeCreatedAndSetAsCurrent(model);}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00428}00428\ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00429}00429\ \ \ \ \ \ \ \ \ \ \ \ \ model.Binder.CloseScope(statementDelimiterToken.\mbox{\hyperlink{struct_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_1_1_tokens_1_1_statement_delimiter_token_aa49ba418ba87269529768e0e196a4177}{TextSpan}},\ model);}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00430}00430\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00431}00431\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (model.CurrentCodeBlockBuilder.Parent\ is\ not\ \textcolor{keyword}{null})}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00432}00432\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ model.CurrentCodeBlockBuilder\ =\ model.CurrentCodeBlockBuilder.Parent;}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00433}00433\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00434}00434\ \ \ \ \ \ \ \ \ \ \ \ \ model.CurrentCodeBlockBuilder.InnerPendingCodeBlockOwner\ =\ \textcolor{keyword}{null};}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00435}00435\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00436}00436\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00437}00437\ }
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00438}00438\ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ ParseKeywordToken(CSharpParserModel\ model)}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00439}00439\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00440}00440\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ 'return',\ 'if',\ 'get',\ etc...}}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00441}00441\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{switch}\ (model.TokenWalker.Current.SyntaxKind)}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00442}00442\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00443}00443\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_ae4bcfe414c318a050bbef43ec92f921b}{SyntaxKind}}.AsTokenKeyword:}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00444}00444\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ParseDefaultKeywords.HandleAsTokenKeyword(model);}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00445}00445\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00446}00446\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_ae4bcfe414c318a050bbef43ec92f921b}{SyntaxKind}}.BaseTokenKeyword:}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00447}00447\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ParseDefaultKeywords.HandleBaseTokenKeyword(model);}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00448}00448\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00449}00449\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_ae4bcfe414c318a050bbef43ec92f921b}{SyntaxKind}}.BoolTokenKeyword:}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00450}00450\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ParseDefaultKeywords.HandleBoolTokenKeyword(model);}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00451}00451\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00452}00452\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_ae4bcfe414c318a050bbef43ec92f921b}{SyntaxKind}}.BreakTokenKeyword:}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00453}00453\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ParseDefaultKeywords.HandleBreakTokenKeyword(model);}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00454}00454\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00455}00455\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_ae4bcfe414c318a050bbef43ec92f921b}{SyntaxKind}}.ByteTokenKeyword:}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00456}00456\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ParseDefaultKeywords.HandleByteTokenKeyword(model);}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00457}00457\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00458}00458\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_ae4bcfe414c318a050bbef43ec92f921b}{SyntaxKind}}.CaseTokenKeyword:}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00459}00459\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ParseDefaultKeywords.HandleCaseTokenKeyword(model);}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00460}00460\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00461}00461\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_ae4bcfe414c318a050bbef43ec92f921b}{SyntaxKind}}.CatchTokenKeyword:}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00462}00462\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ParseDefaultKeywords.HandleCatchTokenKeyword(model);}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00463}00463\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00464}00464\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_ae4bcfe414c318a050bbef43ec92f921b}{SyntaxKind}}.CharTokenKeyword:}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00465}00465\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ParseDefaultKeywords.HandleCharTokenKeyword(model);}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00466}00466\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00467}00467\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_ae4bcfe414c318a050bbef43ec92f921b}{SyntaxKind}}.CheckedTokenKeyword:}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00468}00468\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ParseDefaultKeywords.HandleCheckedTokenKeyword(model);}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00469}00469\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00470}00470\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_ae4bcfe414c318a050bbef43ec92f921b}{SyntaxKind}}.ConstTokenKeyword:}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00471}00471\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ParseDefaultKeywords.HandleConstTokenKeyword(model);}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00472}00472\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00473}00473\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_ae4bcfe414c318a050bbef43ec92f921b}{SyntaxKind}}.ContinueTokenKeyword:}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00474}00474\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ParseDefaultKeywords.HandleContinueTokenKeyword(model);}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00475}00475\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00476}00476\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_ae4bcfe414c318a050bbef43ec92f921b}{SyntaxKind}}.DecimalTokenKeyword:}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00477}00477\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ParseDefaultKeywords.HandleDecimalTokenKeyword(model);}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00478}00478\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00479}00479\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_ae4bcfe414c318a050bbef43ec92f921b}{SyntaxKind}}.DefaultTokenKeyword:}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00480}00480\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ParseDefaultKeywords.HandleDefaultTokenKeyword(model);}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00481}00481\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00482}00482\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_ae4bcfe414c318a050bbef43ec92f921b}{SyntaxKind}}.DelegateTokenKeyword:}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00483}00483\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ParseDefaultKeywords.HandleDelegateTokenKeyword(model);}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00484}00484\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00485}00485\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_ae4bcfe414c318a050bbef43ec92f921b}{SyntaxKind}}.DoTokenKeyword:}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00486}00486\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ParseDefaultKeywords.HandleDoTokenKeyword(model);}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00487}00487\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00488}00488\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_ae4bcfe414c318a050bbef43ec92f921b}{SyntaxKind}}.DoubleTokenKeyword:}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00489}00489\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ParseDefaultKeywords.HandleDoubleTokenKeyword(model);}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00490}00490\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00491}00491\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_ae4bcfe414c318a050bbef43ec92f921b}{SyntaxKind}}.ElseTokenKeyword:}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00492}00492\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ParseDefaultKeywords.HandleElseTokenKeyword(model);}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00493}00493\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00494}00494\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_ae4bcfe414c318a050bbef43ec92f921b}{SyntaxKind}}.EnumTokenKeyword:}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00495}00495\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ParseDefaultKeywords.HandleEnumTokenKeyword(model);}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00496}00496\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00497}00497\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_ae4bcfe414c318a050bbef43ec92f921b}{SyntaxKind}}.EventTokenKeyword:}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00498}00498\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ParseDefaultKeywords.HandleEventTokenKeyword(model);}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00499}00499\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00500}00500\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_ae4bcfe414c318a050bbef43ec92f921b}{SyntaxKind}}.ExplicitTokenKeyword:}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00501}00501\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ParseDefaultKeywords.HandleExplicitTokenKeyword(model);}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00502}00502\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00503}00503\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_ae4bcfe414c318a050bbef43ec92f921b}{SyntaxKind}}.ExternTokenKeyword:}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00504}00504\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ParseDefaultKeywords.HandleExternTokenKeyword(model);}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00505}00505\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00506}00506\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_ae4bcfe414c318a050bbef43ec92f921b}{SyntaxKind}}.FalseTokenKeyword:}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00507}00507\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ParseDefaultKeywords.HandleFalseTokenKeyword(model);}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00508}00508\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00509}00509\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_ae4bcfe414c318a050bbef43ec92f921b}{SyntaxKind}}.FinallyTokenKeyword:}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00510}00510\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ParseDefaultKeywords.HandleFinallyTokenKeyword(model);}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00511}00511\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00512}00512\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_ae4bcfe414c318a050bbef43ec92f921b}{SyntaxKind}}.FixedTokenKeyword:}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00513}00513\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ParseDefaultKeywords.HandleFixedTokenKeyword(model);}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00514}00514\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00515}00515\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_ae4bcfe414c318a050bbef43ec92f921b}{SyntaxKind}}.FloatTokenKeyword:}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00516}00516\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ParseDefaultKeywords.HandleFloatTokenKeyword(model);}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00517}00517\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00518}00518\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_ae4bcfe414c318a050bbef43ec92f921b}{SyntaxKind}}.ForTokenKeyword:}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00519}00519\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ParseDefaultKeywords.HandleForTokenKeyword(model);}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00520}00520\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00521}00521\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_ae4bcfe414c318a050bbef43ec92f921b}{SyntaxKind}}.ForeachTokenKeyword:}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00522}00522\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ParseDefaultKeywords.HandleForeachTokenKeyword(model);}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00523}00523\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00524}00524\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_ae4bcfe414c318a050bbef43ec92f921b}{SyntaxKind}}.GotoTokenKeyword:}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00525}00525\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ParseDefaultKeywords.HandleGotoTokenKeyword(model);}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00526}00526\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00527}00527\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_ae4bcfe414c318a050bbef43ec92f921b}{SyntaxKind}}.ImplicitTokenKeyword:}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00528}00528\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ParseDefaultKeywords.HandleImplicitTokenKeyword(model);}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00529}00529\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00530}00530\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_ae4bcfe414c318a050bbef43ec92f921b}{SyntaxKind}}.InTokenKeyword:}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00531}00531\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ParseDefaultKeywords.HandleInTokenKeyword(model);}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00532}00532\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00533}00533\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_ae4bcfe414c318a050bbef43ec92f921b}{SyntaxKind}}.IntTokenKeyword:}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00534}00534\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ParseDefaultKeywords.HandleIntTokenKeyword(model);}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00535}00535\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00536}00536\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_ae4bcfe414c318a050bbef43ec92f921b}{SyntaxKind}}.IsTokenKeyword:}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00537}00537\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ParseDefaultKeywords.HandleIsTokenKeyword(model);}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00538}00538\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00539}00539\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_ae4bcfe414c318a050bbef43ec92f921b}{SyntaxKind}}.LockTokenKeyword:}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00540}00540\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ParseDefaultKeywords.HandleLockTokenKeyword(model);}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00541}00541\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00542}00542\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_ae4bcfe414c318a050bbef43ec92f921b}{SyntaxKind}}.LongTokenKeyword:}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00543}00543\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ParseDefaultKeywords.HandleLongTokenKeyword(model);}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00544}00544\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00545}00545\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_ae4bcfe414c318a050bbef43ec92f921b}{SyntaxKind}}.NullTokenKeyword:}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00546}00546\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ParseDefaultKeywords.HandleNullTokenKeyword(model);}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00547}00547\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00548}00548\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_ae4bcfe414c318a050bbef43ec92f921b}{SyntaxKind}}.ObjectTokenKeyword:}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00549}00549\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ParseDefaultKeywords.HandleObjectTokenKeyword(model);}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00550}00550\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00551}00551\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_ae4bcfe414c318a050bbef43ec92f921b}{SyntaxKind}}.OperatorTokenKeyword:}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00552}00552\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ParseDefaultKeywords.HandleOperatorTokenKeyword(model);}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00553}00553\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00554}00554\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_ae4bcfe414c318a050bbef43ec92f921b}{SyntaxKind}}.OutTokenKeyword:}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00555}00555\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ParseDefaultKeywords.HandleOutTokenKeyword(model);}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00556}00556\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00557}00557\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_ae4bcfe414c318a050bbef43ec92f921b}{SyntaxKind}}.ParamsTokenKeyword:}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00558}00558\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ParseDefaultKeywords.HandleParamsTokenKeyword(model);}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00559}00559\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00560}00560\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_ae4bcfe414c318a050bbef43ec92f921b}{SyntaxKind}}.ProtectedTokenKeyword:}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00561}00561\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ParseDefaultKeywords.HandleProtectedTokenKeyword(model);}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00562}00562\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00563}00563\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_ae4bcfe414c318a050bbef43ec92f921b}{SyntaxKind}}.ReadonlyTokenKeyword:}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00564}00564\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ParseDefaultKeywords.HandleReadonlyTokenKeyword(model);}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00565}00565\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00566}00566\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_ae4bcfe414c318a050bbef43ec92f921b}{SyntaxKind}}.RefTokenKeyword:}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00567}00567\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ParseDefaultKeywords.HandleRefTokenKeyword(model);}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00568}00568\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00569}00569\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_ae4bcfe414c318a050bbef43ec92f921b}{SyntaxKind}}.SbyteTokenKeyword:}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00570}00570\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ParseDefaultKeywords.HandleSbyteTokenKeyword(model);}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00571}00571\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00572}00572\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_ae4bcfe414c318a050bbef43ec92f921b}{SyntaxKind}}.ShortTokenKeyword:}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00573}00573\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ParseDefaultKeywords.HandleShortTokenKeyword(model);}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00574}00574\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00575}00575\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_ae4bcfe414c318a050bbef43ec92f921b}{SyntaxKind}}.SizeofTokenKeyword:}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00576}00576\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ParseDefaultKeywords.HandleSizeofTokenKeyword(model);}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00577}00577\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00578}00578\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_ae4bcfe414c318a050bbef43ec92f921b}{SyntaxKind}}.StackallocTokenKeyword:}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00579}00579\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ParseDefaultKeywords.HandleStackallocTokenKeyword(model);}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00580}00580\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00581}00581\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_ae4bcfe414c318a050bbef43ec92f921b}{SyntaxKind}}.StringTokenKeyword:}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00582}00582\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ParseDefaultKeywords.HandleStringTokenKeyword(model);}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00583}00583\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00584}00584\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_ae4bcfe414c318a050bbef43ec92f921b}{SyntaxKind}}.StructTokenKeyword:}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00585}00585\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ParseDefaultKeywords.HandleStructTokenKeyword(model);}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00586}00586\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00587}00587\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_ae4bcfe414c318a050bbef43ec92f921b}{SyntaxKind}}.SwitchTokenKeyword:}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00588}00588\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ParseDefaultKeywords.HandleSwitchTokenKeyword(model);}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00589}00589\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00590}00590\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_ae4bcfe414c318a050bbef43ec92f921b}{SyntaxKind}}.ThisTokenKeyword:}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00591}00591\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ParseDefaultKeywords.HandleThisTokenKeyword(model);}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00592}00592\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00593}00593\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_ae4bcfe414c318a050bbef43ec92f921b}{SyntaxKind}}.ThrowTokenKeyword:}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00594}00594\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ParseDefaultKeywords.HandleThrowTokenKeyword(model);}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00595}00595\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00596}00596\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_ae4bcfe414c318a050bbef43ec92f921b}{SyntaxKind}}.TrueTokenKeyword:}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00597}00597\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ParseDefaultKeywords.HandleTrueTokenKeyword(model);}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00598}00598\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00599}00599\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_ae4bcfe414c318a050bbef43ec92f921b}{SyntaxKind}}.TryTokenKeyword:}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00600}00600\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ParseDefaultKeywords.HandleTryTokenKeyword(model);}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00601}00601\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00602}00602\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_ae4bcfe414c318a050bbef43ec92f921b}{SyntaxKind}}.TypeofTokenKeyword:}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00603}00603\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ParseDefaultKeywords.HandleTypeofTokenKeyword(model);}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00604}00604\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00605}00605\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_ae4bcfe414c318a050bbef43ec92f921b}{SyntaxKind}}.UintTokenKeyword:}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00606}00606\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ParseDefaultKeywords.HandleUintTokenKeyword(model);}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00607}00607\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00608}00608\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_ae4bcfe414c318a050bbef43ec92f921b}{SyntaxKind}}.UlongTokenKeyword:}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00609}00609\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ParseDefaultKeywords.HandleUlongTokenKeyword(model);}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00610}00610\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00611}00611\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_ae4bcfe414c318a050bbef43ec92f921b}{SyntaxKind}}.UncheckedTokenKeyword:}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00612}00612\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ParseDefaultKeywords.HandleUncheckedTokenKeyword(model);}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00613}00613\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00614}00614\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_ae4bcfe414c318a050bbef43ec92f921b}{SyntaxKind}}.UnsafeTokenKeyword:}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00615}00615\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ParseDefaultKeywords.HandleUnsafeTokenKeyword(model);}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00616}00616\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00617}00617\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_ae4bcfe414c318a050bbef43ec92f921b}{SyntaxKind}}.UshortTokenKeyword:}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00618}00618\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ParseDefaultKeywords.HandleUshortTokenKeyword(model);}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00619}00619\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00620}00620\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_ae4bcfe414c318a050bbef43ec92f921b}{SyntaxKind}}.VoidTokenKeyword:}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00621}00621\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ParseDefaultKeywords.HandleVoidTokenKeyword(model);}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00622}00622\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00623}00623\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_ae4bcfe414c318a050bbef43ec92f921b}{SyntaxKind}}.VolatileTokenKeyword:}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00624}00624\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ParseDefaultKeywords.HandleVolatileTokenKeyword(model);}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00625}00625\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00626}00626\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_ae4bcfe414c318a050bbef43ec92f921b}{SyntaxKind}}.WhileTokenKeyword:}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00627}00627\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ParseDefaultKeywords.HandleWhileTokenKeyword(model);}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00628}00628\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00629}00629\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_ae4bcfe414c318a050bbef43ec92f921b}{SyntaxKind}}.UnrecognizedTokenKeyword:}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00630}00630\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ParseDefaultKeywords.HandleUnrecognizedTokenKeyword(model);}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00631}00631\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00632}00632\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_ae4bcfe414c318a050bbef43ec92f921b}{SyntaxKind}}.ReturnTokenKeyword:}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00633}00633\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ParseDefaultKeywords.HandleReturnTokenKeyword(model);}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00634}00634\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00635}00635\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_ae4bcfe414c318a050bbef43ec92f921b}{SyntaxKind}}.NamespaceTokenKeyword:}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00636}00636\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ParseDefaultKeywords.HandleNamespaceTokenKeyword(model);}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00637}00637\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00638}00638\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_ae4bcfe414c318a050bbef43ec92f921b}{SyntaxKind}}.ClassTokenKeyword:}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00639}00639\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ParseDefaultKeywords.HandleClassTokenKeyword(model);}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00640}00640\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00641}00641\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_ae4bcfe414c318a050bbef43ec92f921b}{SyntaxKind}}.InterfaceTokenKeyword:}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00642}00642\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ParseDefaultKeywords.HandleInterfaceTokenKeyword(model);}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00643}00643\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00644}00644\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_ae4bcfe414c318a050bbef43ec92f921b}{SyntaxKind}}.UsingTokenKeyword:}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00645}00645\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ParseDefaultKeywords.HandleUsingTokenKeyword(model);}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00646}00646\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00647}00647\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_ae4bcfe414c318a050bbef43ec92f921b}{SyntaxKind}}.PublicTokenKeyword:}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00648}00648\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ParseDefaultKeywords.HandlePublicTokenKeyword(model);}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00649}00649\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00650}00650\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_ae4bcfe414c318a050bbef43ec92f921b}{SyntaxKind}}.InternalTokenKeyword:}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00651}00651\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ParseDefaultKeywords.HandleInternalTokenKeyword(model);}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00652}00652\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00653}00653\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_ae4bcfe414c318a050bbef43ec92f921b}{SyntaxKind}}.PrivateTokenKeyword:}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00654}00654\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ParseDefaultKeywords.HandlePrivateTokenKeyword(model);}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00655}00655\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00656}00656\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_ae4bcfe414c318a050bbef43ec92f921b}{SyntaxKind}}.StaticTokenKeyword:}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00657}00657\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ParseDefaultKeywords.HandleStaticTokenKeyword(model);}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00658}00658\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00659}00659\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_ae4bcfe414c318a050bbef43ec92f921b}{SyntaxKind}}.OverrideTokenKeyword:}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00660}00660\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ParseDefaultKeywords.HandleOverrideTokenKeyword(model);}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00661}00661\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00662}00662\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_ae4bcfe414c318a050bbef43ec92f921b}{SyntaxKind}}.VirtualTokenKeyword:}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00663}00663\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ParseDefaultKeywords.HandleVirtualTokenKeyword(model);}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00664}00664\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00665}00665\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_ae4bcfe414c318a050bbef43ec92f921b}{SyntaxKind}}.AbstractTokenKeyword:}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00666}00666\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ParseDefaultKeywords.HandleAbstractTokenKeyword(model);}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00667}00667\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00668}00668\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_ae4bcfe414c318a050bbef43ec92f921b}{SyntaxKind}}.SealedTokenKeyword:}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00669}00669\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ParseDefaultKeywords.HandleSealedTokenKeyword(model);}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00670}00670\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00671}00671\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_ae4bcfe414c318a050bbef43ec92f921b}{SyntaxKind}}.IfTokenKeyword:}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00672}00672\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ParseDefaultKeywords.HandleIfTokenKeyword(model);}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00673}00673\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00674}00674\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_ae4bcfe414c318a050bbef43ec92f921b}{SyntaxKind}}.NewTokenKeyword:}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00675}00675\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ParseDefaultKeywords.HandleNewTokenKeyword(model);}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00676}00676\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00677}00677\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{default}:}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00678}00678\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ParseDefaultKeywords.HandleDefault(model);}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00679}00679\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00680}00680\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00681}00681\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00682}00682\ }
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00683}00683\ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ ParseKeywordContextualToken(CSharpParserModel\ model)}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00684}00684\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00685}00685\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{switch}\ (model.TokenWalker.Current.SyntaxKind)}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00686}00686\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00687}00687\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_ae4bcfe414c318a050bbef43ec92f921b}{SyntaxKind}}.VarTokenContextualKeyword:}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00688}00688\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ParseContextualKeywords.HandleVarTokenContextualKeyword(model);}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00689}00689\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00690}00690\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_ae4bcfe414c318a050bbef43ec92f921b}{SyntaxKind}}.PartialTokenContextualKeyword:}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00691}00691\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ParseContextualKeywords.HandlePartialTokenContextualKeyword(model);}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00692}00692\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00693}00693\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_ae4bcfe414c318a050bbef43ec92f921b}{SyntaxKind}}.AddTokenContextualKeyword:}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00694}00694\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ParseContextualKeywords.HandleAddTokenContextualKeyword(model);}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00695}00695\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00696}00696\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_ae4bcfe414c318a050bbef43ec92f921b}{SyntaxKind}}.AndTokenContextualKeyword:}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00697}00697\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ParseContextualKeywords.HandleAndTokenContextualKeyword(model);}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00698}00698\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00699}00699\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_ae4bcfe414c318a050bbef43ec92f921b}{SyntaxKind}}.AliasTokenContextualKeyword:}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00700}00700\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ParseContextualKeywords.HandleAliasTokenContextualKeyword(model);}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00701}00701\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00702}00702\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_ae4bcfe414c318a050bbef43ec92f921b}{SyntaxKind}}.AscendingTokenContextualKeyword:}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00703}00703\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ParseContextualKeywords.HandleAscendingTokenContextualKeyword(model);}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00704}00704\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00705}00705\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_ae4bcfe414c318a050bbef43ec92f921b}{SyntaxKind}}.ArgsTokenContextualKeyword:}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00706}00706\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ParseContextualKeywords.HandleArgsTokenContextualKeyword(model);}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00707}00707\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00708}00708\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_ae4bcfe414c318a050bbef43ec92f921b}{SyntaxKind}}.AsyncTokenContextualKeyword:}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00709}00709\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ParseContextualKeywords.HandleAsyncTokenContextualKeyword(model);}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00710}00710\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00711}00711\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_ae4bcfe414c318a050bbef43ec92f921b}{SyntaxKind}}.AwaitTokenContextualKeyword:}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00712}00712\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ParseContextualKeywords.HandleAwaitTokenContextualKeyword(model);}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00713}00713\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00714}00714\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_ae4bcfe414c318a050bbef43ec92f921b}{SyntaxKind}}.ByTokenContextualKeyword:}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00715}00715\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ParseContextualKeywords.HandleByTokenContextualKeyword(model);}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00716}00716\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00717}00717\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_ae4bcfe414c318a050bbef43ec92f921b}{SyntaxKind}}.DescendingTokenContextualKeyword:}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00718}00718\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ParseContextualKeywords.HandleDescendingTokenContextualKeyword(model);}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00719}00719\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00720}00720\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_ae4bcfe414c318a050bbef43ec92f921b}{SyntaxKind}}.DynamicTokenContextualKeyword:}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00721}00721\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ParseContextualKeywords.HandleDynamicTokenContextualKeyword(model);}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00722}00722\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00723}00723\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_ae4bcfe414c318a050bbef43ec92f921b}{SyntaxKind}}.EqualsTokenContextualKeyword:}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00724}00724\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ParseContextualKeywords.HandleEqualsTokenContextualKeyword(model);}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00725}00725\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00726}00726\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_ae4bcfe414c318a050bbef43ec92f921b}{SyntaxKind}}.FileTokenContextualKeyword:}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00727}00727\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ParseContextualKeywords.HandleFileTokenContextualKeyword(model);}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00728}00728\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00729}00729\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_ae4bcfe414c318a050bbef43ec92f921b}{SyntaxKind}}.FromTokenContextualKeyword:}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00730}00730\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ParseContextualKeywords.HandleFromTokenContextualKeyword(model);}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00731}00731\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00732}00732\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_ae4bcfe414c318a050bbef43ec92f921b}{SyntaxKind}}.GetTokenContextualKeyword:}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00733}00733\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ParseContextualKeywords.HandleGetTokenContextualKeyword(model);}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00734}00734\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00735}00735\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_ae4bcfe414c318a050bbef43ec92f921b}{SyntaxKind}}.GlobalTokenContextualKeyword:}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00736}00736\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ParseContextualKeywords.HandleGlobalTokenContextualKeyword(model);}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00737}00737\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00738}00738\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_ae4bcfe414c318a050bbef43ec92f921b}{SyntaxKind}}.GroupTokenContextualKeyword:}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00739}00739\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ParseContextualKeywords.HandleGroupTokenContextualKeyword(model);}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00740}00740\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00741}00741\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_ae4bcfe414c318a050bbef43ec92f921b}{SyntaxKind}}.InitTokenContextualKeyword:}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00742}00742\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ParseContextualKeywords.HandleInitTokenContextualKeyword(model);}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00743}00743\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00744}00744\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_ae4bcfe414c318a050bbef43ec92f921b}{SyntaxKind}}.IntoTokenContextualKeyword:}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00745}00745\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ParseContextualKeywords.HandleIntoTokenContextualKeyword(model);}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00746}00746\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00747}00747\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_ae4bcfe414c318a050bbef43ec92f921b}{SyntaxKind}}.JoinTokenContextualKeyword:}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00748}00748\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ParseContextualKeywords.HandleJoinTokenContextualKeyword(model);}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00749}00749\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00750}00750\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_ae4bcfe414c318a050bbef43ec92f921b}{SyntaxKind}}.LetTokenContextualKeyword:}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00751}00751\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ParseContextualKeywords.HandleLetTokenContextualKeyword(model);}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00752}00752\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00753}00753\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_ae4bcfe414c318a050bbef43ec92f921b}{SyntaxKind}}.ManagedTokenContextualKeyword:}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00754}00754\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ParseContextualKeywords.HandleManagedTokenContextualKeyword(model);}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00755}00755\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00756}00756\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_ae4bcfe414c318a050bbef43ec92f921b}{SyntaxKind}}.NameofTokenContextualKeyword:}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00757}00757\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ParseContextualKeywords.HandleNameofTokenContextualKeyword(model);}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00758}00758\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00759}00759\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_ae4bcfe414c318a050bbef43ec92f921b}{SyntaxKind}}.NintTokenContextualKeyword:}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00760}00760\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ParseContextualKeywords.HandleNintTokenContextualKeyword(model);}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00761}00761\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00762}00762\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_ae4bcfe414c318a050bbef43ec92f921b}{SyntaxKind}}.NotTokenContextualKeyword:}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00763}00763\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ParseContextualKeywords.HandleNotTokenContextualKeyword(model);}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00764}00764\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00765}00765\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_ae4bcfe414c318a050bbef43ec92f921b}{SyntaxKind}}.NotnullTokenContextualKeyword:}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00766}00766\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ParseContextualKeywords.HandleNotnullTokenContextualKeyword(model);}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00767}00767\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00768}00768\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_ae4bcfe414c318a050bbef43ec92f921b}{SyntaxKind}}.NuintTokenContextualKeyword:}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00769}00769\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ParseContextualKeywords.HandleNuintTokenContextualKeyword(model);}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00770}00770\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00771}00771\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_ae4bcfe414c318a050bbef43ec92f921b}{SyntaxKind}}.OnTokenContextualKeyword:}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00772}00772\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ParseContextualKeywords.HandleOnTokenContextualKeyword(model);}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00773}00773\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00774}00774\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_ae4bcfe414c318a050bbef43ec92f921b}{SyntaxKind}}.OrTokenContextualKeyword:}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00775}00775\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ParseContextualKeywords.HandleOrTokenContextualKeyword(model);}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00776}00776\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00777}00777\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_ae4bcfe414c318a050bbef43ec92f921b}{SyntaxKind}}.OrderbyTokenContextualKeyword:}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00778}00778\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ParseContextualKeywords.HandleOrderbyTokenContextualKeyword(model);}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00779}00779\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00780}00780\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_ae4bcfe414c318a050bbef43ec92f921b}{SyntaxKind}}.RecordTokenContextualKeyword:}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00781}00781\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ParseContextualKeywords.HandleRecordTokenContextualKeyword(model);}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00782}00782\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00783}00783\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_ae4bcfe414c318a050bbef43ec92f921b}{SyntaxKind}}.RemoveTokenContextualKeyword:}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00784}00784\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ParseContextualKeywords.HandleRemoveTokenContextualKeyword(model);}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00785}00785\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00786}00786\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_ae4bcfe414c318a050bbef43ec92f921b}{SyntaxKind}}.RequiredTokenContextualKeyword:}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00787}00787\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ParseContextualKeywords.HandleRequiredTokenContextualKeyword(model);}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00788}00788\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00789}00789\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_ae4bcfe414c318a050bbef43ec92f921b}{SyntaxKind}}.ScopedTokenContextualKeyword:}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00790}00790\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ParseContextualKeywords.HandleScopedTokenContextualKeyword(model);}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00791}00791\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00792}00792\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_ae4bcfe414c318a050bbef43ec92f921b}{SyntaxKind}}.SelectTokenContextualKeyword:}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00793}00793\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ParseContextualKeywords.HandleSelectTokenContextualKeyword(model);}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00794}00794\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00795}00795\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_ae4bcfe414c318a050bbef43ec92f921b}{SyntaxKind}}.SetTokenContextualKeyword:}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00796}00796\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ParseContextualKeywords.HandleSetTokenContextualKeyword(model);}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00797}00797\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00798}00798\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_ae4bcfe414c318a050bbef43ec92f921b}{SyntaxKind}}.UnmanagedTokenContextualKeyword:}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00799}00799\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ParseContextualKeywords.HandleUnmanagedTokenContextualKeyword(model);}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00800}00800\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00801}00801\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_ae4bcfe414c318a050bbef43ec92f921b}{SyntaxKind}}.ValueTokenContextualKeyword:}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00802}00802\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ParseContextualKeywords.HandleValueTokenContextualKeyword(model);}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00803}00803\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00804}00804\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_ae4bcfe414c318a050bbef43ec92f921b}{SyntaxKind}}.WhenTokenContextualKeyword:}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00805}00805\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ParseContextualKeywords.HandleWhenTokenContextualKeyword(model);}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00806}00806\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00807}00807\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_ae4bcfe414c318a050bbef43ec92f921b}{SyntaxKind}}.WhereTokenContextualKeyword:}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00808}00808\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ParseContextualKeywords.HandleWhereTokenContextualKeyword(model);}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00809}00809\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00810}00810\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_ae4bcfe414c318a050bbef43ec92f921b}{SyntaxKind}}.WithTokenContextualKeyword:}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00811}00811\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ParseContextualKeywords.HandleWithTokenContextualKeyword(model);}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00812}00812\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00813}00813\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_ae4bcfe414c318a050bbef43ec92f921b}{SyntaxKind}}.YieldTokenContextualKeyword:}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00814}00814\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ParseContextualKeywords.HandleYieldTokenContextualKeyword(model);}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00815}00815\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00816}00816\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_ae4bcfe414c318a050bbef43ec92f921b}{SyntaxKind}}.UnrecognizedTokenContextualKeyword:}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00817}00817\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ParseContextualKeywords.HandleUnrecognizedTokenContextualKeyword(model);}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00818}00818\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00819}00819\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{default}:}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00820}00820\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ model.DiagnosticBag.ReportTodoException(model.TokenWalker.Current.TextSpan,\ \$\textcolor{stringliteral}{"{}Implement\ the\ \{model.TokenWalker.Current.SyntaxKind.ToString()\}\ contextual\ keyword."{}});}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00821}00821\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00822}00822\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00823}00823\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00824}00824\ \}}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00825}00825\ }
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00826}00826\ \textcolor{comment}{/*}}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00827}00827\ \textcolor{comment}{\ \ \ \ (2024-\/11-\/08)\ The\ issue\ is:}}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00828}00828\ \textcolor{comment}{\ \ \ \ ==========================}}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00829}00829\ \textcolor{comment}{\ \ \ \ 'int[]\ x\ =\ new\ \{\ 1,\ 2,\ 3,\ \};'}}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00830}00830\ \textcolor{comment}{\ \ \ \ 'int[]\ MyMethod()\ \{\ \}'}}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00831}00831\ \textcolor{comment}{\ \ \ \ }}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00832}00832\ \textcolor{comment}{\ \ \ \ In\ my\ mind\ this\ was\ an\ issue,\ but\ it\ wouldn't\ be\ an\ issue\ because\ in\ order}}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00833}00833\ \textcolor{comment}{\ \ \ \ to\ get\ to\ this\ code\ I\ have\ to\ see\ an\ OpenParenthesisToken.}}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00834}00834\ \textcolor{comment}{\ \ \ \ }}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00835}00835\ \textcolor{comment}{\ \ \ \ The\ variable\ assignment\ doesn't\ conflict\ at\ all.}}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00836}00836\ \textcolor{comment}{\ \ \ \ }}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00837}00837\ \textcolor{comment}{\ \ \ \ But:}}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00838}00838\ \textcolor{comment}{\ \ \ \ 'int[]\ x\ =\ new\ \{\ 1,\ 2,\ 3,\ \};'}}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00839}00839\ \textcolor{comment}{\ \ \ \ 'int[2]\ =\ 7;'}}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00840}00840\ \textcolor{comment}{\ \ \ \ }}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00841}00841\ \textcolor{comment}{\ \ \ \ At\ the\ start\ of\ a\ statement,\ there\ can\ be\ a\ conflict\ here,}}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00842}00842\ \textcolor{comment}{\ \ \ \ but\ given\ the\ situation,\ one\ can\ see\ the\ second\ line\ has\ a\ '2'\ in\ the\ array's\ square\ brackets}}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00843}00843\ \textcolor{comment}{\ \ \ \ so\ therefore\ you\ know\ the\ second\ line\ is\ a\ variable\ assignment\ expression.}}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00844}00844\ \textcolor{comment}{\ \ \ \ (the\ first\ line\ is\ a\ variable\ declaration\ statement\ /\ variable\ assignment\ expression).}}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00845}00845\ \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00846}00846\ \textcolor{comment}{\ \ \ \ https://learn.microsoft.com/en-\/us/dotnet/csharp/language-\/reference/builtin-\/types/arrays}}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00847}00847\ \textcolor{comment}{\ \ \ \ =======================================================================================}}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00848}00848\ \textcolor{comment}{\ \ \ \ \ \ \ \ //\ Declare\ a\ single-\/dimensional\ array\ of\ 5\ integers.}}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00849}00849\ \textcolor{comment}{\ \ \ \ \ \ \ \ int[]\ array1\ =\ new\ int[5];}}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00850}00850\ \textcolor{comment}{\ \ \ \ \ \ \ \ }}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00851}00851\ \textcolor{comment}{\ \ \ \ \ \ \ \ //\ Declare\ and\ set\ array\ element\ values.}}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00852}00852\ \textcolor{comment}{\ \ \ \ \ \ \ \ int[]\ array2\ =\ [1,\ 2,\ 3,\ 4,\ 5,\ 6];}}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00853}00853\ \textcolor{comment}{\ \ \ \ \ \ \ \ }}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00854}00854\ \textcolor{comment}{\ \ \ \ \ \ \ \ //\ Declare\ a\ two\ dimensional\ array.}}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00855}00855\ \textcolor{comment}{\ \ \ \ \ \ \ \ int[,]\ multiDimensionalArray1\ =\ new\ int[2,\ 3];}}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00856}00856\ \textcolor{comment}{\ \ \ \ \ \ \ \ }}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00857}00857\ \textcolor{comment}{\ \ \ \ \ \ \ \ //\ Declare\ and\ set\ array\ element\ values.}}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00858}00858\ \textcolor{comment}{\ \ \ \ \ \ \ \ int[,]\ multiDimensionalArray2\ =\ \{\ \{\ 1,\ 2,\ 3\ \},\ \{\ 4,\ 5,\ 6\ \}\ \};}}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00859}00859\ \textcolor{comment}{\ \ \ \ \ \ \ \ }}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00860}00860\ \textcolor{comment}{\ \ \ \ \ \ \ \ //\ Declare\ a\ jagged\ array.}}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00861}00861\ \textcolor{comment}{\ \ \ \ \ \ \ \ int[][]\ jaggedArray\ =\ new\ int[6][];}}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00862}00862\ \textcolor{comment}{\ \ \ \ \ \ \ \ }}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00863}00863\ \textcolor{comment}{\ \ \ \ \ \ \ \ //\ Set\ the\ values\ of\ the\ first\ array\ in\ the\ jagged\ array\ structure.}}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00864}00864\ \textcolor{comment}{\ \ \ \ \ \ \ \ jaggedArray[0]\ =\ [1,\ 2,\ 3,\ 4];}}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00865}00865\ \textcolor{comment}{\ \ \ \ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00866}00866\ \textcolor{comment}{\ \ \ \ }}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00867}00867\ \textcolor{comment}{\ \ \ \ None\ of\ the\ array\ declaration\ examples\ contain\ a\ number\ inside\ the}}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00868}00868\ \textcolor{comment}{\ \ \ \ array\ square\ brackets\ at\ the\ start\ of\ the\ statement.}}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00869}00869\ \textcolor{comment}{\ \ \ \ }}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00870}00870\ \textcolor{comment}{\ \ \ \ When\ dealing\ with\ a\ function\ definition,}}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00871}00871\ \textcolor{comment}{\ \ \ \ the\ TypeClauseNode\ for\ its\ return\ type\ might\ be\ an\ array.}}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00872}00872\ \textcolor{comment}{\ \ \ \ }}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00873}00873\ \textcolor{comment}{\ \ \ \ So\ I\ have\ to\ properly\ make\ sense\ of\ the\ 'int[]'}}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00874}00874\ \textcolor{comment}{\ \ \ \ if\ I\ have\ 'int[]\ MyMethod()\ \{\ \}'.}}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00875}00875\ \textcolor{comment}{\ \ \ \ }}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00876}00876\ \textcolor{comment}{\ \ \ \ But,\ I\ just\ saw\ that\ it\ seems\ I\ can\ check\ inside\ the\ array\ brackets}}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00877}00877\ \textcolor{comment}{\ \ \ \ whether\ there\ is\ a\ number\ or\ not.}}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00878}00878\ \textcolor{comment}{\ \ \ \ }}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00879}00879\ \textcolor{comment}{\ \ \ \ And\ there\ being\ a\ number\ means\ that\ it\ is\ an\ expression\ of\ some\ sort,}}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00880}00880\ \textcolor{comment}{\ \ \ \ whereas\ the\ lack\ or\ one\ means\ it\ is\ a\ statement\ of\ some\ sort.}}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00881}00881\ \textcolor{comment}{\ \ \ \ }}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00882}00882\ \textcolor{comment}{\ \ \ \ In\ the\ case\ of:}}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00883}00883\ \textcolor{comment}{\ \ \ \ 'Person\ MyMethod()\ \{\ \}'}}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00884}00884\ \textcolor{comment}{\ \ \ \ }}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00885}00885\ \textcolor{comment}{\ \ \ \ When\ I\ read\ 'Person',\ is\ there\ any\ ambiguity\ as\ to\ whether\ it\ is}}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00886}00886\ \textcolor{comment}{\ \ \ \ \ \ \ \ -\/\ TypeClauseNode}}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00887}00887\ \textcolor{comment}{\ \ \ \ \ \ \ \ -\/\ IdentifierToken}}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00888}00888\ \textcolor{comment}{\ \ \ \ }}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00889}00889\ \textcolor{comment}{\ \ \ \ I\ think\ the\ question\ is:}}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00890}00890\ \textcolor{comment}{\ \ \ \ "{}At\ what\ points\ do\ I\ convert\ a\ token\ that\ can\ be\ a\ 'TypeClauseNode'\ to\ a\ 'TypeClauseNode'?"{}}}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00891}00891\ \textcolor{comment}{\ \ \ \ }}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00892}00892\ \textcolor{comment}{\ \ \ \ If\ the\ 'TypeClauseNode'\ is\ an\ array,\ then\ the\ array\ square\ brackets\ will\ not}}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00893}00893\ \textcolor{comment}{\ \ \ \ contain\ a\ number,\ and\ this\ is\ the\ sign\ that\ it\ is\ a\ 'TypeClauseNode'.}}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00894}00894\ \textcolor{comment}{\ \ \ \ }}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00895}00895\ \textcolor{comment}{\ \ \ \ If\ the\ 'TypeClauseNode'\ is\ just\ an\ IdentifierToken,\ where\ could\ things\ go\ from\ there?}}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00896}00896\ \textcolor{comment}{\ \ \ \ }}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00897}00897\ \textcolor{comment}{\ \ \ \ ConstructorDefinitionNode\ can\ occur\ from\ the\ following:}}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00898}00898\ \textcolor{comment}{\ \ \ \ \ \ \ \ -\/\ IdentifierToken,\ OpenParenthesisToken}}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00899}00899\ \textcolor{comment}{\ \ \ \ }}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00900}00900\ \textcolor{comment}{\ \ \ \ FunctionDefinitionNode\ can\ occur\ from\ the\ following:}}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00901}00901\ \textcolor{comment}{\ \ \ \ \ \ \ \ -\/\ TypeClauseNode,\ IdentifierToken,\ OpenParenthesisToken}}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00902}00902\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ -\/\ This\ occurs\ when\ the\ first\ token\ initially\ was\ a\ 'IdentifierToken'\ but\ was\ not\ ambiguous\ and\ therefore}}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00903}00903\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ immediately\ interpreted\ as\ a\ 'TypeClauseNode'\ rather\ than\ as\ an\ 'IdentifierToken'.}}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00904}00904\ \textcolor{comment}{\ \ \ \ \ \ \ \ -\/\ IdentifierToken,\ IdentifierToken,\ OpenParenthesisToken}}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00905}00905\ \textcolor{comment}{\ \ \ \ \ \ \ \ }}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00906}00906\ \textcolor{comment}{\ \ \ \ VariableDeclarationNode\ can\ occur\ from\ the\ following:}}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00907}00907\ \textcolor{comment}{\ \ \ \ \ \ \ \ -\/\ TypeClauseNode,\ IdentifierToken,\ EqualsToken}}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00908}00908\ \textcolor{comment}{\ \ \ \ \ \ \ \ }}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00909}00909\ \textcolor{comment}{\ \ \ \ TypeDefinitionNode\ can\ occur\ from\ the\ following:}}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00910}00910\ \textcolor{comment}{\ \ \ \ \ \ \ \ -\/\ SyntaxKind.ClassTokenKeyword,\ IdentifierToken}}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00911}00911\ \textcolor{comment}{\ \ \ \ }}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00912}00912\ \textcolor{comment}{\ \ \ \ TypeDefinitionNode\ can\ occur\ from\ the\ following:}}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00913}00913\ \textcolor{comment}{\ \ \ \ \ \ \ \ -\/\ SyntaxKind.ClassTokenKeyword,\ IdentifierToken}}
+\DoxyCodeLine{\Hypertarget{_parse_tokens_8cs_source_l00914}00914\ \textcolor{comment}{*/}}
+
+\end{DoxyCode}

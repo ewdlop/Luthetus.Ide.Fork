@@ -1,0 +1,694 @@
+.TH "Luthetus.TextEditor.RazorLib.TextEditors.Models.TextEditorModelModifier" 3 "Version 1.0.0" "Luthetus.Ide" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+Luthetus.TextEditor.RazorLib.TextEditors.Models.TextEditorModelModifier \- (2024-06-08) I belive there are too many ways to edit a text editor\&. There should only be 'Insert(\&.\&.\&.)' and 'Remove(\&.\&.\&.)' methods\&. Any code I currently have in 'TextEditorModelModifier\&.cs' that I deem as technical debt or a bad idea will be put in this file\&. Then, once organized I hope to make sense of what the "lean" solution is\&.  
+
+.SH SYNOPSIS
+.br
+.PP
+.PP
+Inherits \fBLuthetus\&.TextEditor\&.RazorLib\&.TextEditors\&.Models\&.ITextEditorModel\fP, \fBLuthetus\&.TextEditor\&.RazorLib\&.TextEditors\&.Models\&.ITextEditorModel\fP, and \fBLuthetus\&.TextEditor\&.RazorLib\&.TextEditors\&.Models\&.ITextEditorModel\fP\&.
+.SS "Public Types"
+
+.in +1c
+.ti -1c
+.RI "enum \fBDeleteKind\fP { \fBBackspace\fP, \fBDelete\fP }"
+.br
+.in -1c
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "void \fBClearContent\fP ()"
+.br
+.ti -1c
+.RI "void \fBHandleKeyboardEvent\fP (\fBKeymapArgs\fP keymapArgs, \fBCursorModifierBagTextEditor\fP cursorModifierBag, CancellationToken cancellationToken)"
+.br
+.ti -1c
+.RI "void \fBDeleteTextByMotion\fP (\fBMotionKind\fP motionKind, \fBCursorModifierBagTextEditor\fP cursorModifierBag, CancellationToken cancellationToken)"
+.br
+.ti -1c
+.RI "void \fBDeleteByRange\fP (int count, \fBCursorModifierBagTextEditor\fP cursorModifierBag, CancellationToken cancellationToken)"
+.br
+.ti -1c
+.RI "void \fBSetContent\fP (string content)"
+.br
+.ti -1c
+.RI "void \fBClearEditBlocks\fP ()"
+.br
+.ti -1c
+.RI "void \fBOpenOtherEdit\fP (\fBTextEditorEditOther\fP editOther)"
+.br
+.ti -1c
+.RI "void \fBCloseOtherEdit\fP (string predictedTag)"
+.br
+.ti -1c
+.RI "void \fBUndoEdit\fP ()"
+.br
+.ti -1c
+.RI "void \fBRedoEdit\fP ()"
+.br
+.ti -1c
+.RI "void \fBClearOnlyRowEndingKind\fP ()"
+.br
+.ti -1c
+.RI "void \fBSetLineEndKindPreference\fP (\fBLineEndKind\fP rowEndingKind)"
+.br
+.ti -1c
+.RI "void \fBSetResourceData\fP (\fBResourceUri\fP \fBresourceUri\fP, DateTime resourceLastWriteTime)"
+.br
+.ti -1c
+.RI "void \fBSetDecorationMapper\fP (\fBIDecorationMapper\fP decorationMapper)"
+.br
+.ti -1c
+.RI "void \fBSetCompilerService\fP (\fBICompilerService\fP compilerService)"
+.br
+.ti -1c
+.RI "void \fBSetTextEditorSaveFileHelper\fP (\fBSaveFileHelper\fP textEditorSaveFileHelper)"
+.br
+.ti -1c
+.RI "void \fBClearAllStatesButKeepEditHistory\fP ()"
+.br
+.ti -1c
+.RI "void \fBSetIsDirtyTrue\fP ()"
+.br
+.ti -1c
+.RI "void \fBSetIsDirtyFalse\fP ()"
+.br
+.ti -1c
+.RI "void \fBPerformRegisterPresentationModelAction\fP (\fBTextEditorPresentationModel\fP presentationModel)"
+.br
+.ti -1c
+.RI "void \fBStartPendingCalculatePresentationModel\fP (Key< \fBTextEditorPresentationModel\fP > presentationKey, \fBTextEditorPresentationModel\fP emptyPresentationModel)"
+.br
+.ti -1c
+.RI "void \fBCompletePendingCalculatePresentationModel\fP (Key< \fBTextEditorPresentationModel\fP > presentationKey, \fBTextEditorPresentationModel\fP emptyPresentationModel, ImmutableArray< \fBTextEditorTextSpan\fP > calculatedTextSpans)"
+.br
+.ti -1c
+.RI "\fBTextEditorModel\fP \fBForceRerenderAction\fP ()"
+.br
+.ti -1c
+.RI "void \fBInsert\fP (string value, \fBCursorModifierBagTextEditor\fP cursorModifierBag, bool useLineEndKindPreference=true, CancellationToken cancellationToken=default, bool shouldCreateEditHistory=true)"
+.br
+.ti -1c
+.RI "void \fBDelete\fP (\fBCursorModifierBagTextEditor\fP cursorModifierBag, int columnCount, bool expandWord, \fBDeleteKind\fP deleteKind, CancellationToken cancellationToken=default, bool shouldCreateEditHistory=true)"
+.br
+.RI "This method allows for a "RemoveRange" like operation on the text editor's contents\&. Any meta-data will automatically be updated (e\&.g\&. ITextEditorModel\&.LineEndKindCountList\&. "
+.ti -1c
+.RI "\fBTextEditorModelModifier\fP (\fBTextEditorModel\fP model)"
+.br
+.ti -1c
+.RI "\fBTextEditorModel\fP \fBToModel\fP ()"
+.br
+.ti -1c
+.RI "void \fB__Insert\fP (int globalPositionIndex, \fBRichCharacter\fP richCharacter)"
+.br
+.ti -1c
+.RI "void \fB__SetItem\fP (int globalPositionIndex, \fBRichCharacter\fP richCharacter)"
+.br
+.RI "If either character or decoration byte are 'null', then the respective collection will be left unchanged\&. "
+.ti -1c
+.RI "void \fB__SetDecorationByte\fP (int globalPositionIndex, byte decorationByte)"
+.br
+.ti -1c
+.RI "void \fB__RemoveAt\fP (int globalPositionIndex)"
+.br
+.ti -1c
+.RI "void \fB__InsertRange\fP (int globalPositionIndex, IEnumerable< \fBRichCharacter\fP > richCharacterList)"
+.br
+.ti -1c
+.RI "void \fB__RemoveRange\fP (int targetGlobalPositionIndex, int targetDeleteCount)"
+.br
+.ti -1c
+.RI "void \fB__Add\fP (\fBRichCharacter\fP richCharacter)"
+.br
+.in -1c
+.SS "Public Attributes"
+
+.in +1c
+.ti -1c
+.RI "int \fBlineIndex\fP"
+.br
+.in -1c
+
+Public Attributes inherited from \fBLuthetus\&.TextEditor\&.RazorLib\&.TextEditors\&.Models\&.ITextEditorModel\fP
+.in +1c
+.ti -1c
+.RI "int \fBlineIndex\fP"
+.br
+.in -1c
+.SS "Static Public Attributes"
+
+.in +1c
+.ti -1c
+.RI "const int \fBMINIMUM_PARTITION_SIZE\fP = 4"
+.br
+.RI "__SplitIntoTwoPartitions(int) will divide by 2 and give the first split the remainder, then add 1 to the first split if there is a multibyte scenario\&. Therefore partition size of 3 would infinitely try to split itself\&. "
+.in -1c
+.SS "Properties"
+
+.in +1c
+.ti -1c
+.RI "\fBRichCharacter\fP[] \fBRichCharacterList\fP\fR [get]\fP"
+.br
+.ti -1c
+.RI "ImmutableList< \fBTextEditorPartition\fP > \fBPartitionList\fP\fR [get]\fP"
+.br
+.ti -1c
+.RI "IList< \fBITextEditorEdit\fP > \fBEditBlockList\fP\fR [get]\fP"
+.br
+.ti -1c
+.RI "IList< \fBLineEnd\fP > \fBLineEndList\fP\fR [get]\fP"
+.br
+.RI "Convert an index for a \fBLineEnd\fP to a \fBLineInformation\fP, use the method: TextEditorModelExtensionMethods\&.GetLineInformation(ITextEditorModel, int)\&. "
+.ti -1c
+.RI "IList<(\fBLineEndKind\fP lineEndKind, int count)> \fBLineEndKindCountList\fP\fR [get]\fP"
+.br
+.ti -1c
+.RI "IList< \fBTextEditorPresentationModel\fP > \fBPresentationModelList\fP\fR [get]\fP"
+.br
+.ti -1c
+.RI "IList< int > \fBTabKeyPositionList\fP\fR [get]\fP"
+.br
+.RI "Provides exact position index of a tab character\&. "
+.ti -1c
+.RI "\fBLineEndKind\fP? \fBOnlyLineEndKind\fP\fR [get]\fP"
+.br
+.RI "If there is a mixture of
+.br
+-Carriage Return
+.br
+-Linefeed
+.br
+-CRLF
+.br
+ Then this will be null\&.
+.br
+
+.br
+ If there are no line endings then this will be null\&. "
+.ti -1c
+.RI "\fBLineEndKind\fP \fBLineEndKindPreference\fP\fR [get]\fP"
+.br
+.ti -1c
+.RI "ResourceUri \fBResourceUri\fP\fR [get]\fP"
+.br
+.RI "TODO: On (2023-10-02) Key<\fBTextEditorModel\fP> was removed, because it felt redundant\&.\&.\&. \&.\&.\&.given only 1 \fBTextEditorModel\fP can exist for a given \fBResourceUri\fP\&. This change however creates an issue regarding 'fake' resource uri's that are used for in-memory files\&. For example, \fBOptions\&.Displays\&.TextEditorSettingsPreview\fP now has the resource URI of "__LUTHETUS_SETTINGS_PREVIEW__"\&. This is an issue because could a user have on their filesystem the file "__LUTHETUS_SETTINGS_PREVIEW__"? (at that exact resource uri)\&. "
+.ti -1c
+.RI "DateTime \fBResourceLastWriteTime\fP\fR [get]\fP"
+.br
+.ti -1c
+.RI "string \fBFileExtension\fP\fR [get]\fP"
+.br
+.RI "This is displayed within theDisplays\&.Internals\&.TextEditorFooter\&. "
+.ti -1c
+.RI "\fBIDecorationMapper\fP \fBDecorationMapper\fP\fR [get]\fP"
+.br
+.ti -1c
+.RI "\fBICompilerService\fP \fBCompilerService\fP\fR [get]\fP"
+.br
+.ti -1c
+.RI "\fBSaveFileHelper\fP \fBTextEditorSaveFileHelper\fP\fR [get]\fP"
+.br
+.ti -1c
+.RI "int \fBEditBlockIndex\fP\fR [get]\fP"
+.br
+.ti -1c
+.RI "bool \fBIsDirty\fP\fR [get]\fP"
+.br
+.ti -1c
+.RI "int int lineLength \fBMostCharactersOnASingleLineTuple\fP\fR [get]\fP"
+.br
+.ti -1c
+.RI "int int lineLength \fBPreviousMostCharactersOnASingleLineTuple\fP\fR [get]\fP"
+.br
+.ti -1c
+.RI "Key< \fBRenderState\fP > \fBRenderStateKey\fP\fR [get]\fP"
+.br
+.ti -1c
+.RI "int \fBLineCount\fP\fR [get]\fP"
+.br
+.ti -1c
+.RI "int \fBPreviousLineCount\fP\fR [get]\fP"
+.br
+.ti -1c
+.RI "int \fBCharCount\fP\fR [get]\fP"
+.br
+.ti -1c
+.RI "Stack< \fBTextEditorEditOther\fP > \fBOtherEditStack\fP = new()\fR [get]\fP"
+.br
+.RI "The \fBTextEditorEditOther\fP works by invoking 'Open' then when finished invoking 'Close'\&. "
+.ti -1c
+.RI "bool \fBWasDirty\fP\fR [get]\fP"
+.br
+.RI "This property optimizes the dirty state tracking\&. If _wasDirty != _isDirty then track the state change\&. This involves writing to dependency injectable state, then triggering a re-render in the \fBEdits\&.Displays\&.DirtyResourceUriInteractiveIconDisplay\fP\&. "
+.ti -1c
+.RI "bool \fBWasModified\fP\fR [get, set]\fP"
+.br
+.RI "This property decides whether or not to replace the existing model in IState<TextEditorState> with the instance that comes from this modifier\&. "
+.ti -1c
+.RI "bool \fBShouldReloadVirtualizationResult\fP\fR [get, set]\fP"
+.br
+.RI "This property decides whether or not to re-calculate the virtualization result that gets displayed on the UI\&. "
+.ti -1c
+.RI "string \fBAllText\fP\fR [get]\fP"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+(2024-06-08) I belive there are too many ways to edit a text editor\&. There should only be 'Insert(\&.\&.\&.)' and 'Remove(\&.\&.\&.)' methods\&. Any code I currently have in 'TextEditorModelModifier\&.cs' that I deem as technical debt or a bad idea will be put in this file\&. Then, once organized I hope to make sense of what the "lean" solution is\&. 
+
+(2024-06-08) I've been dogfooding the IDE, and the 'TextEditorModelModifier\&.cs' file demonstrates some clear issues regarding text editor optimization\&. Im breaking up the 80,000 character file a bit here into partial classes for now\&. TODO: merge the partial classes back?
+
+.PP
+Any modified state needs to be 'null coallesce assigned' to the existing \fBTextEditorModel\fP's value\&.
+
+.PP
+When reading state, if the state had been 'null coallesce assigned' then the field will be read\&. Otherwise, the existing \fBTextEditorModel\fP's value will be read\&. 
+.br
+
+.br
+  
+.PP
+Definition at line \fB20\fP of file \fBTextEditorModelModifier\&.Bad\&.cs\fP\&.
+.SH "Member Enumeration Documentation"
+.PP 
+.SS "enum Luthetus\&.TextEditor\&.RazorLib\&.TextEditors\&.Models\&.TextEditorModelModifier\&.DeleteKind"
+
+.PP
+\fBEnumerator\fP
+.in +1c
+.TP
+\f(BIBackspace \fP
+.TP
+\f(BIDelete \fP
+.PP
+Definition at line \fB173\fP of file \fBTextEditorModelModifier\&.Main\&.cs\fP\&.
+.SH "Constructor & Destructor Documentation"
+.PP 
+.SS "Luthetus\&.TextEditor\&.RazorLib\&.TextEditors\&.Models\&.TextEditorModelModifier\&.TextEditorModelModifier (\fBTextEditorModel\fP model)"
+
+.PP
+Definition at line \fB34\fP of file \fBTextEditorModelModifier\&.Main\&.cs\fP\&.
+.SH "Member Function Documentation"
+.PP 
+.SS "void Luthetus\&.TextEditor\&.RazorLib\&.TextEditors\&.Models\&.TextEditorModelModifier\&.__Add (\fBRichCharacter\fP richCharacter)"
+
+.PP
+Definition at line \fB360\fP of file \fBTextEditorModelModifier\&.Partitions\&.cs\fP\&.
+.SS "void Luthetus\&.TextEditor\&.RazorLib\&.TextEditors\&.Models\&.TextEditorModelModifier\&.__Insert (int globalPositionIndex, \fBRichCharacter\fP richCharacter)"
+
+.PP
+Definition at line \fB8\fP of file \fBTextEditorModelModifier\&.Partitions\&.cs\fP\&.
+.SS "void Luthetus\&.TextEditor\&.RazorLib\&.TextEditors\&.Models\&.TextEditorModelModifier\&.__InsertRange (int globalPositionIndex, IEnumerable< \fBRichCharacter\fP > richCharacterList)"
+
+.PP
+Definition at line \fB245\fP of file \fBTextEditorModelModifier\&.Partitions\&.cs\fP\&.
+.SS "void Luthetus\&.TextEditor\&.RazorLib\&.TextEditors\&.Models\&.TextEditorModelModifier\&.__RemoveAt (int globalPositionIndex)"
+
+.PP
+Definition at line \fB138\fP of file \fBTextEditorModelModifier\&.Partitions\&.cs\fP\&.
+.SS "void Luthetus\&.TextEditor\&.RazorLib\&.TextEditors\&.Models\&.TextEditorModelModifier\&.__RemoveRange (int targetGlobalPositionIndex, int targetDeleteCount)"
+
+.PP
+Definition at line \fB306\fP of file \fBTextEditorModelModifier\&.Partitions\&.cs\fP\&.
+.SS "void Luthetus\&.TextEditor\&.RazorLib\&.TextEditors\&.Models\&.TextEditorModelModifier\&.__SetDecorationByte (int globalPositionIndex, byte decorationByte)"
+
+.PP
+Definition at line \fB99\fP of file \fBTextEditorModelModifier\&.Partitions\&.cs\fP\&.
+.SS "void Luthetus\&.TextEditor\&.RazorLib\&.TextEditors\&.Models\&.TextEditorModelModifier\&.__SetItem (int globalPositionIndex, \fBRichCharacter\fP richCharacter)"
+
+.PP
+If either character or decoration byte are 'null', then the respective collection will be left unchanged\&. i\&.e\&.: to change ONLY a character value invoke this method with decorationByte set to null, and only the CharList will be changed\&. 
+.PP
+Definition at line \fB60\fP of file \fBTextEditorModelModifier\&.Partitions\&.cs\fP\&.
+.SS "void Luthetus\&.TextEditor\&.RazorLib\&.TextEditors\&.Models\&.TextEditorModelModifier\&.ClearAllStatesButKeepEditHistory ()"
+
+.PP
+Definition at line \fB53\fP of file \fBTextEditorModelModifier\&.EditMethods\&.cs\fP\&.
+.SS "void Luthetus\&.TextEditor\&.RazorLib\&.TextEditors\&.Models\&.TextEditorModelModifier\&.ClearContent ()"
+
+.PP
+Definition at line \fB22\fP of file \fBTextEditorModelModifier\&.Bad\&.cs\fP\&.
+.SS "void Luthetus\&.TextEditor\&.RazorLib\&.TextEditors\&.Models\&.TextEditorModelModifier\&.ClearEditBlocks ()"
+
+.PP
+Definition at line \fB335\fP of file \fBTextEditorModelModifier\&.Bad\&.cs\fP\&.
+.SS "void Luthetus\&.TextEditor\&.RazorLib\&.TextEditors\&.Models\&.TextEditorModelModifier\&.ClearOnlyRowEndingKind ()"
+
+.PP
+Definition at line \fB21\fP of file \fBTextEditorModelModifier\&.EditMethods\&.cs\fP\&.
+.SS "void Luthetus\&.TextEditor\&.RazorLib\&.TextEditors\&.Models\&.TextEditorModelModifier\&.CloseOtherEdit (string predictedTag)"
+
+.PP
+Definition at line \fB558\fP of file \fBTextEditorModelModifier\&.Bad\&.cs\fP\&.
+.SS "void Luthetus\&.TextEditor\&.RazorLib\&.TextEditors\&.Models\&.TextEditorModelModifier\&.CompletePendingCalculatePresentationModel (Key< \fBTextEditorPresentationModel\fP > presentationKey, \fBTextEditorPresentationModel\fP emptyPresentationModel, ImmutableArray< \fBTextEditorTextSpan\fP > calculatedTextSpans)"
+
+.PP
+Definition at line \fB108\fP of file \fBTextEditorModelModifier\&.EditMethods\&.cs\fP\&.
+.SS "void Luthetus\&.TextEditor\&.RazorLib\&.TextEditors\&.Models\&.TextEditorModelModifier\&.Delete (\fBCursorModifierBagTextEditor\fP cursorModifierBag, int columnCount, bool expandWord, \fBDeleteKind\fP deleteKind, CancellationToken cancellationToken = \fRdefault\fP, bool shouldCreateEditHistory = \fRtrue\fP)"
+
+.PP
+This method allows for a "RemoveRange" like operation on the text editor's contents\&. Any meta-data will automatically be updated (e\&.g\&. ITextEditorModel\&.LineEndKindCountList\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIcursorModifierBag\fP The list of cursors that indicate the positionIndex to start a "RemoveRange" operation\&. The cursors are iterated backwards, with each cursor being its own "RemoveRange" operation\&. 
+.br
+\fIcolumnCount\fP The amount of columns to delete\&. If a the value of a column is of 2-char length (e\&.g\&. "\\r\\n"), then internally this columnCount will be converted to a 'charCount' of the corrected length\&. 
+.br
+\fIexpandWord\fP Applied after moving by the 'count' parameter\&.
+.br
+ Ex: count of 1, and expandWord of true; will move 1 char-value from the initialPositionIndex\&. Afterwards, if expandWord is true, then the cursor is checked to be within a word, or at the start or end of one\&. If the cursor is at the start or end of one, then the selection to delete is expanded such that it contains the entire word that the cursor ended at\&. 
+.br
+\fIcancellationToken\fP 
+.br
+\fIdeleteKind\fP The default DeleteKind\&.Delete will do logic similar to a "RemoveRange" like operation on a collection type\&.
+.br
+ If one has keyboard input from a user, one might want to have the user's backspace key pass in the DeleteKind\&.Backspace parameter\&. Then, for a user's delete key, pass in DeleteKind\&.Delete\&. 
+.RE
+.PP
+
+.PP
+Definition at line \fB349\fP of file \fBTextEditorModelModifier\&.InProgress\&.cs\fP\&.
+.SS "void Luthetus\&.TextEditor\&.RazorLib\&.TextEditors\&.Models\&.TextEditorModelModifier\&.DeleteByRange (int count, \fBCursorModifierBagTextEditor\fP cursorModifierBag, CancellationToken cancellationToken)"
+
+.PP
+Definition at line \fB191\fP of file \fBTextEditorModelModifier\&.Bad\&.cs\fP\&.
+.SS "void Luthetus\&.TextEditor\&.RazorLib\&.TextEditors\&.Models\&.TextEditorModelModifier\&.DeleteTextByMotion (\fBMotionKind\fP motionKind, \fBCursorModifierBagTextEditor\fP cursorModifierBag, CancellationToken cancellationToken)"
+
+.PP
+Definition at line \fB173\fP of file \fBTextEditorModelModifier\&.Bad\&.cs\fP\&.
+.SS "\fBTextEditorModel\fP Luthetus\&.TextEditor\&.RazorLib\&.TextEditors\&.Models\&.TextEditorModelModifier\&.ForceRerenderAction ()"
+
+.PP
+Definition at line \fB143\fP of file \fBTextEditorModelModifier\&.EditMethods\&.cs\fP\&.
+.SS "void Luthetus\&.TextEditor\&.RazorLib\&.TextEditors\&.Models\&.TextEditorModelModifier\&.HandleKeyboardEvent (\fBKeymapArgs\fP keymapArgs, \fBCursorModifierBagTextEditor\fP cursorModifierBag, CancellationToken cancellationToken)"
+
+.PP
+Definition at line \fB53\fP of file \fBTextEditorModelModifier\&.Bad\&.cs\fP\&.
+.SS "void Luthetus\&.TextEditor\&.RazorLib\&.TextEditors\&.Models\&.TextEditorModelModifier\&.Insert (string value, \fBCursorModifierBagTextEditor\fP cursorModifierBag, bool useLineEndKindPreference = \fRtrue\fP, CancellationToken cancellationToken = \fRdefault\fP, bool shouldCreateEditHistory = \fRtrue\fP)"
+
+.PP
+\fBParameters\fP
+.RS 4
+\fIuseLineEndKindPreference\fP If false, then the string will be inserted as is\&. If true, then the string will have its line endings replaced with the LineEndKindPreference 
+.RE
+.PP
+
+.PP
+Definition at line \fB23\fP of file \fBTextEditorModelModifier\&.InProgress\&.cs\fP\&.
+.SS "void Luthetus\&.TextEditor\&.RazorLib\&.TextEditors\&.Models\&.TextEditorModelModifier\&.OpenOtherEdit (\fBTextEditorEditOther\fP editOther)"
+
+.PP
+Definition at line \fB545\fP of file \fBTextEditorModelModifier\&.Bad\&.cs\fP\&.
+.SS "void Luthetus\&.TextEditor\&.RazorLib\&.TextEditors\&.Models\&.TextEditorModelModifier\&.PerformRegisterPresentationModelAction (\fBTextEditorPresentationModel\fP presentationModel)"
+
+.PP
+Definition at line \fB72\fP of file \fBTextEditorModelModifier\&.EditMethods\&.cs\fP\&.
+.SS "void Luthetus\&.TextEditor\&.RazorLib\&.TextEditors\&.Models\&.TextEditorModelModifier\&.RedoEdit ()"
+
+.PP
+Definition at line \fB662\fP of file \fBTextEditorModelModifier\&.Bad\&.cs\fP\&.
+.SS "void Luthetus\&.TextEditor\&.RazorLib\&.TextEditors\&.Models\&.TextEditorModelModifier\&.SetCompilerService (\fBICompilerService\fP compilerService)"
+
+.PP
+Definition at line \fB43\fP of file \fBTextEditorModelModifier\&.EditMethods\&.cs\fP\&.
+.SS "void Luthetus\&.TextEditor\&.RazorLib\&.TextEditors\&.Models\&.TextEditorModelModifier\&.SetContent (string content)"
+
+.PP
+Definition at line \fB219\fP of file \fBTextEditorModelModifier\&.Bad\&.cs\fP\&.
+.SS "void Luthetus\&.TextEditor\&.RazorLib\&.TextEditors\&.Models\&.TextEditorModelModifier\&.SetDecorationMapper (\fBIDecorationMapper\fP decorationMapper)"
+
+.PP
+Definition at line \fB38\fP of file \fBTextEditorModelModifier\&.EditMethods\&.cs\fP\&.
+.SS "void Luthetus\&.TextEditor\&.RazorLib\&.TextEditors\&.Models\&.TextEditorModelModifier\&.SetIsDirtyFalse ()"
+
+.PP
+Definition at line \fB67\fP of file \fBTextEditorModelModifier\&.EditMethods\&.cs\fP\&.
+.SS "void Luthetus\&.TextEditor\&.RazorLib\&.TextEditors\&.Models\&.TextEditorModelModifier\&.SetIsDirtyTrue ()"
+
+.PP
+Definition at line \fB60\fP of file \fBTextEditorModelModifier\&.EditMethods\&.cs\fP\&.
+.SS "void Luthetus\&.TextEditor\&.RazorLib\&.TextEditors\&.Models\&.TextEditorModelModifier\&.SetLineEndKindPreference (\fBLineEndKind\fP rowEndingKind)"
+
+.PP
+Definition at line \fB27\fP of file \fBTextEditorModelModifier\&.EditMethods\&.cs\fP\&.
+.SS "void Luthetus\&.TextEditor\&.RazorLib\&.TextEditors\&.Models\&.TextEditorModelModifier\&.SetResourceData (\fBResourceUri\fP resourceUri, DateTime resourceLastWriteTime)"
+
+.PP
+Definition at line \fB32\fP of file \fBTextEditorModelModifier\&.EditMethods\&.cs\fP\&.
+.SS "void Luthetus\&.TextEditor\&.RazorLib\&.TextEditors\&.Models\&.TextEditorModelModifier\&.SetTextEditorSaveFileHelper (\fBSaveFileHelper\fP textEditorSaveFileHelper)"
+
+.PP
+Definition at line \fB48\fP of file \fBTextEditorModelModifier\&.EditMethods\&.cs\fP\&.
+.SS "void Luthetus\&.TextEditor\&.RazorLib\&.TextEditors\&.Models\&.TextEditorModelModifier\&.StartPendingCalculatePresentationModel (Key< \fBTextEditorPresentationModel\fP > presentationKey, \fBTextEditorPresentationModel\fP emptyPresentationModel)"
+
+.PP
+Definition at line \fB84\fP of file \fBTextEditorModelModifier\&.EditMethods\&.cs\fP\&.
+.SS "\fBTextEditorModel\fP Luthetus\&.TextEditor\&.RazorLib\&.TextEditors\&.Models\&.TextEditorModelModifier\&.ToModel ()"
+
+.PP
+Definition at line \fB147\fP of file \fBTextEditorModelModifier\&.Main\&.cs\fP\&.
+.SS "void Luthetus\&.TextEditor\&.RazorLib\&.TextEditors\&.Models\&.TextEditorModelModifier\&.UndoEdit ()"
+
+.PP
+Definition at line \fB579\fP of file \fBTextEditorModelModifier\&.Bad\&.cs\fP\&.
+.SH "Member Data Documentation"
+.PP 
+.SS "int Luthetus\&.TextEditor\&.RazorLib\&.TextEditors\&.Models\&.TextEditorModelModifier\&.lineIndex"
+
+.PP
+Definition at line \fB66\fP of file \fBTextEditorModelModifier\&.Main\&.cs\fP\&.
+.SS "const int Luthetus\&.TextEditor\&.RazorLib\&.TextEditors\&.Models\&.TextEditorModelModifier\&.MINIMUM_PARTITION_SIZE = 4\fR [static]\fP"
+
+.PP
+__SplitIntoTwoPartitions(int) will divide by 2 and give the first split the remainder, then add 1 to the first split if there is a multibyte scenario\&. Therefore partition size of 3 would infinitely try to split itself\&. 
+.PP
+Definition at line \fB30\fP of file \fBTextEditorModelModifier\&.Main\&.cs\fP\&.
+.SH "Property Documentation"
+.PP 
+.SS "string Luthetus\&.TextEditor\&.RazorLib\&.TextEditors\&.Models\&.TextEditorModelModifier\&.AllText\fR [get]\fP"
+
+.PP
+Implements \fBLuthetus\&.TextEditor\&.RazorLib\&.TextEditors\&.Models\&.ITextEditorModel\fP\&.
+.PP
+Definition at line \fB145\fP of file \fBTextEditorModelModifier\&.Main\&.cs\fP\&.
+.SS "int Luthetus\&.TextEditor\&.RazorLib\&.TextEditors\&.Models\&.TextEditorModelModifier\&.CharCount\fR [get]\fP"
+
+.PP
+Implements \fBLuthetus\&.TextEditor\&.RazorLib\&.TextEditors\&.Models\&.ITextEditorModel\fP\&.
+.PP
+Definition at line \fB72\fP of file \fBTextEditorModelModifier\&.Main\&.cs\fP\&.
+.SS "\fBICompilerService\fP Luthetus\&.TextEditor\&.RazorLib\&.TextEditors\&.Models\&.TextEditorModelModifier\&.CompilerService\fR [get]\fP"
+
+.PP
+Implements \fBLuthetus\&.TextEditor\&.RazorLib\&.TextEditors\&.Models\&.ITextEditorModel\fP\&.
+.PP
+Definition at line \fB62\fP of file \fBTextEditorModelModifier\&.Main\&.cs\fP\&.
+.SS "\fBIDecorationMapper\fP Luthetus\&.TextEditor\&.RazorLib\&.TextEditors\&.Models\&.TextEditorModelModifier\&.DecorationMapper\fR [get]\fP"
+
+.PP
+Implements \fBLuthetus\&.TextEditor\&.RazorLib\&.TextEditors\&.Models\&.ITextEditorModel\fP\&.
+.PP
+Definition at line \fB61\fP of file \fBTextEditorModelModifier\&.Main\&.cs\fP\&.
+.SS "int Luthetus\&.TextEditor\&.RazorLib\&.TextEditors\&.Models\&.TextEditorModelModifier\&.EditBlockIndex\fR [get]\fP"
+
+.PP
+Implements \fBLuthetus\&.TextEditor\&.RazorLib\&.TextEditors\&.Models\&.ITextEditorModel\fP\&.
+.PP
+Definition at line \fB64\fP of file \fBTextEditorModelModifier\&.Main\&.cs\fP\&.
+.SS "IList<\fBITextEditorEdit\fP> Luthetus\&.TextEditor\&.RazorLib\&.TextEditors\&.Models\&.TextEditorModelModifier\&.EditBlockList\fR [get]\fP"
+
+.PP
+Implements \fBLuthetus\&.TextEditor\&.RazorLib\&.TextEditors\&.Models\&.ITextEditorModel\fP\&.
+.PP
+Definition at line \fB51\fP of file \fBTextEditorModelModifier\&.Main\&.cs\fP\&.
+.SS "string Luthetus\&.TextEditor\&.RazorLib\&.TextEditors\&.Models\&.TextEditorModelModifier\&.FileExtension\fR [get]\fP"
+
+.PP
+This is displayed within theDisplays\&.Internals\&.TextEditorFooter\&. 
+.PP
+Implements \fBLuthetus\&.TextEditor\&.RazorLib\&.TextEditors\&.Models\&.ITextEditorModel\fP\&.
+.PP
+Definition at line \fB60\fP of file \fBTextEditorModelModifier\&.Main\&.cs\fP\&.
+.SS "bool Luthetus\&.TextEditor\&.RazorLib\&.TextEditors\&.Models\&.TextEditorModelModifier\&.IsDirty\fR [get]\fP"
+
+.PP
+Implements \fBLuthetus\&.TextEditor\&.RazorLib\&.TextEditors\&.Models\&.ITextEditorModel\fP\&.
+.PP
+Definition at line \fB65\fP of file \fBTextEditorModelModifier\&.Main\&.cs\fP\&.
+.SS "int Luthetus\&.TextEditor\&.RazorLib\&.TextEditors\&.Models\&.TextEditorModelModifier\&.LineCount\fR [get]\fP"
+
+.PP
+Implements \fBLuthetus\&.TextEditor\&.RazorLib\&.TextEditors\&.Models\&.ITextEditorModel\fP\&.
+.PP
+Definition at line \fB70\fP of file \fBTextEditorModelModifier\&.Main\&.cs\fP\&.
+.SS "IList<(\fBLineEndKind\fP lineEndKind, int count)> Luthetus\&.TextEditor\&.RazorLib\&.TextEditors\&.Models\&.TextEditorModelModifier\&.LineEndKindCountList\fR [get]\fP"
+
+.PP
+Implements \fBLuthetus\&.TextEditor\&.RazorLib\&.TextEditors\&.Models\&.ITextEditorModel\fP\&.
+.PP
+Definition at line \fB53\fP of file \fBTextEditorModelModifier\&.Main\&.cs\fP\&.
+.SS "\fBLineEndKind\fP Luthetus\&.TextEditor\&.RazorLib\&.TextEditors\&.Models\&.TextEditorModelModifier\&.LineEndKindPreference\fR [get]\fP"
+
+.PP
+Implements \fBLuthetus\&.TextEditor\&.RazorLib\&.TextEditors\&.Models\&.ITextEditorModel\fP\&.
+.PP
+Definition at line \fB57\fP of file \fBTextEditorModelModifier\&.Main\&.cs\fP\&.
+.SS "IList<\fBLineEnd\fP> Luthetus\&.TextEditor\&.RazorLib\&.TextEditors\&.Models\&.TextEditorModelModifier\&.LineEndList\fR [get]\fP"
+
+.PP
+Convert an index for a \fBLineEnd\fP to a \fBLineInformation\fP, use the method: TextEditorModelExtensionMethods\&.GetLineInformation(ITextEditorModel, int)\&. 
+.PP
+Implements \fBLuthetus\&.TextEditor\&.RazorLib\&.TextEditors\&.Models\&.ITextEditorModel\fP\&.
+.PP
+Definition at line \fB52\fP of file \fBTextEditorModelModifier\&.Main\&.cs\fP\&.
+.SS "int int lineLength Luthetus\&.TextEditor\&.RazorLib\&.TextEditors\&.Models\&.TextEditorModelModifier\&.MostCharactersOnASingleLineTuple\fR [get]\fP"
+
+.PP
+Implements \fBLuthetus\&.TextEditor\&.RazorLib\&.TextEditors\&.Models\&.ITextEditorModel\fP\&.
+.PP
+Definition at line \fB66\fP of file \fBTextEditorModelModifier\&.Main\&.cs\fP\&.
+.SS "\fBLineEndKind\fP? Luthetus\&.TextEditor\&.RazorLib\&.TextEditors\&.Models\&.TextEditorModelModifier\&.OnlyLineEndKind\fR [get]\fP"
+
+.PP
+If there is a mixture of
+.br
+-Carriage Return
+.br
+-Linefeed
+.br
+-CRLF
+.br
+ Then this will be null\&.
+.br
+
+.br
+ If there are no line endings then this will be null\&. 
+.PP
+Implements \fBLuthetus\&.TextEditor\&.RazorLib\&.TextEditors\&.Models\&.ITextEditorModel\fP\&.
+.PP
+Definition at line \fB56\fP of file \fBTextEditorModelModifier\&.Main\&.cs\fP\&.
+.SS "Stack<\fBTextEditorEditOther\fP> Luthetus\&.TextEditor\&.RazorLib\&.TextEditors\&.Models\&.TextEditorModelModifier\&.OtherEditStack = new()\fR [get]\fP"
+
+.PP
+The \fBTextEditorEditOther\fP works by invoking 'Open' then when finished invoking 'Close'\&. 
+.PP
+Definition at line \fB77\fP of file \fBTextEditorModelModifier\&.Main\&.cs\fP\&.
+.SS "ImmutableList<\fBTextEditorPartition\fP> Luthetus\&.TextEditor\&.RazorLib\&.TextEditors\&.Models\&.TextEditorModelModifier\&.PartitionList\fR [get]\fP"
+
+.PP
+Implements \fBLuthetus\&.TextEditor\&.RazorLib\&.TextEditors\&.Models\&.ITextEditorModel\fP\&.
+.PP
+Definition at line \fB49\fP of file \fBTextEditorModelModifier\&.Main\&.cs\fP\&.
+.SS "IList<\fBTextEditorPresentationModel\fP> Luthetus\&.TextEditor\&.RazorLib\&.TextEditors\&.Models\&.TextEditorModelModifier\&.PresentationModelList\fR [get]\fP"
+
+.PP
+Implements \fBLuthetus\&.TextEditor\&.RazorLib\&.TextEditors\&.Models\&.ITextEditorModel\fP\&.
+.PP
+Definition at line \fB54\fP of file \fBTextEditorModelModifier\&.Main\&.cs\fP\&.
+.SS "int Luthetus\&.TextEditor\&.RazorLib\&.TextEditors\&.Models\&.TextEditorModelModifier\&.PreviousLineCount\fR [get]\fP"
+
+.PP
+Definition at line \fB71\fP of file \fBTextEditorModelModifier\&.Main\&.cs\fP\&.
+.SS "int int lineLength Luthetus\&.TextEditor\&.RazorLib\&.TextEditors\&.Models\&.TextEditorModelModifier\&.PreviousMostCharactersOnASingleLineTuple\fR [get]\fP"
+
+.PP
+Definition at line \fB67\fP of file \fBTextEditorModelModifier\&.Main\&.cs\fP\&.
+.SS "Key<\fBRenderState\fP> Luthetus\&.TextEditor\&.RazorLib\&.TextEditors\&.Models\&.TextEditorModelModifier\&.RenderStateKey\fR [get]\fP"
+
+.PP
+Implements \fBLuthetus\&.TextEditor\&.RazorLib\&.TextEditors\&.Models\&.ITextEditorModel\fP\&.
+.PP
+Definition at line \fB68\fP of file \fBTextEditorModelModifier\&.Main\&.cs\fP\&.
+.SS "DateTime Luthetus\&.TextEditor\&.RazorLib\&.TextEditors\&.Models\&.TextEditorModelModifier\&.ResourceLastWriteTime\fR [get]\fP"
+
+.PP
+Implements \fBLuthetus\&.TextEditor\&.RazorLib\&.TextEditors\&.Models\&.ITextEditorModel\fP\&.
+.PP
+Definition at line \fB59\fP of file \fBTextEditorModelModifier\&.Main\&.cs\fP\&.
+.SS "ResourceUri Luthetus\&.TextEditor\&.RazorLib\&.TextEditors\&.Models\&.TextEditorModelModifier\&.ResourceUri\fR [get]\fP"
+
+.PP
+TODO: On (2023-10-02) Key<\fBTextEditorModel\fP> was removed, because it felt redundant\&.\&.\&. \&.\&.\&.given only 1 \fBTextEditorModel\fP can exist for a given \fBResourceUri\fP\&. This change however creates an issue regarding 'fake' resource uri's that are used for in-memory files\&. For example, \fBOptions\&.Displays\&.TextEditorSettingsPreview\fP now has the resource URI of "__LUTHETUS_SETTINGS_PREVIEW__"\&. This is an issue because could a user have on their filesystem the file "__LUTHETUS_SETTINGS_PREVIEW__"? (at that exact resource uri)\&. 
+.PP
+Implements \fBLuthetus\&.TextEditor\&.RazorLib\&.TextEditors\&.Models\&.ITextEditorModel\fP\&.
+.PP
+Definition at line \fB58\fP of file \fBTextEditorModelModifier\&.Main\&.cs\fP\&.
+.SS "\fBRichCharacter\fP [] Luthetus\&.TextEditor\&.RazorLib\&.TextEditors\&.Models\&.TextEditorModelModifier\&.RichCharacterList\fR [get]\fP"
+
+.SH "Changed this property to an array from an ImmutableList (2024-08-13)\&."
+.PP
+The motivation for this change comes from calculating the virtualization result\&.
+
+.PP
+The storage for the underlying data of a 'ImmutableList' is believed to be more of a 'tree' structure than a contiguous array\&.
+
+.PP
+And therefore, when we virtualize vertically, and then horizontally after, this is an incredible amount of overhead if performed on a 'tree'-like structure\&.
+
+.PP
+A contiguous array is expected to be a dramatic improvement in performance when calculating the virtualization result\&.
+
+.PP
+A side note on this change: could \&.NET internally more easily leverage caching with this now being a contiguous array, rather than a 'tree'?
+
+.PP
+A worry: I'm not quite certain on the details of the idea in my head\&. It is something along lines of an array being treated as a struct and that this could cause a mess somehow? | Copying the entire list of rich characters versus just passing around a pointer kind of thing\&. | But, this array is located on an object, the text editor model, and it is the model that is being passed around in the code base\&. So this shouldn't be an issue\&.
+
+.PP
+Quite non-scientifically I simply took note of the memory usage that the Task Manager on windows reported for the IDE while this used to be an ImmutableList, before I made the change\&. | It was 1,744 MB of memory pre change\&. It is 1,568 MB of memory after change\&.
+
+.PP
+There is 0 control of variables going on here so the change of 200 MB perhaps is completely meaningless\&.
+
+.PP
+More so, I took a simple note of memory usage incase I see that the memory usage doubled or something absurd\&.
+
+.PP
+Would the app's memory go up, or would the so called "\&.NET Host" have its memory go up? I'm seeing in task manager a process called "\&.NET Host", separate to that of "Luthetus\&.Ide\&.Photino"\&.
+
+.PP
+I'm now seeing 643 MB of memory usage after changing \fBRichCharacter\fP to a struct from a class 
+.PP
+Implements \fBLuthetus\&.TextEditor\&.RazorLib\&.TextEditors\&.Models\&.ITextEditorModel\fP\&.
+.PP
+Definition at line \fB48\fP of file \fBTextEditorModelModifier\&.Main\&.cs\fP\&.
+.SS "bool Luthetus\&.TextEditor\&.RazorLib\&.TextEditors\&.Models\&.TextEditorModelModifier\&.ShouldReloadVirtualizationResult\fR [get]\fP, \fR [set]\fP"
+
+.PP
+This property decides whether or not to re-calculate the virtualization result that gets displayed on the UI\&. 
+.PP
+Definition at line \fB143\fP of file \fBTextEditorModelModifier\&.Main\&.cs\fP\&.
+.SS "IList<int> Luthetus\&.TextEditor\&.RazorLib\&.TextEditors\&.Models\&.TextEditorModelModifier\&.TabKeyPositionList\fR [get]\fP"
+
+.PP
+Provides exact position index of a tab character\&. 
+.PP
+Implements \fBLuthetus\&.TextEditor\&.RazorLib\&.TextEditors\&.Models\&.ITextEditorModel\fP\&.
+.PP
+Definition at line \fB55\fP of file \fBTextEditorModelModifier\&.Main\&.cs\fP\&.
+.SS "\fBSaveFileHelper\fP Luthetus\&.TextEditor\&.RazorLib\&.TextEditors\&.Models\&.TextEditorModelModifier\&.TextEditorSaveFileHelper\fR [get]\fP"
+
+.PP
+Implements \fBLuthetus\&.TextEditor\&.RazorLib\&.TextEditors\&.Models\&.ITextEditorModel\fP\&.
+.PP
+Definition at line \fB63\fP of file \fBTextEditorModelModifier\&.Main\&.cs\fP\&.
+.SS "bool Luthetus\&.TextEditor\&.RazorLib\&.TextEditors\&.Models\&.TextEditorModelModifier\&.WasDirty\fR [get]\fP"
+
+.PP
+This property optimizes the dirty state tracking\&. If _wasDirty != _isDirty then track the state change\&. This involves writing to dependency injectable state, then triggering a re-render in the \fBEdits\&.Displays\&.DirtyResourceUriInteractiveIconDisplay\fP\&. 
+.PP
+Definition at line \fB130\fP of file \fBTextEditorModelModifier\&.Main\&.cs\fP\&.
+.SS "bool Luthetus\&.TextEditor\&.RazorLib\&.TextEditors\&.Models\&.TextEditorModelModifier\&.WasModified\fR [get]\fP, \fR [set]\fP"
+
+.PP
+This property decides whether or not to replace the existing model in IState<TextEditorState> with the instance that comes from this modifier\&. 
+.PP
+Definition at line \fB138\fP of file \fBTextEditorModelModifier\&.Main\&.cs\fP\&.
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for Luthetus\&.Ide from the source code\&.

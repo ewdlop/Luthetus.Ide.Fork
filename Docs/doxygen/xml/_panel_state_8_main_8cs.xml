@@ -1,0 +1,144 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
+  <compounddef id="_panel_state_8_main_8cs" kind="file" language="C#">
+    <compoundname>PanelState.Main.cs</compoundname>
+    <innernamespace refid="namespace_luthetus">Luthetus</innernamespace>
+    <innernamespace refid="namespace_luthetus_1_1_common">Luthetus::Common</innernamespace>
+    <innernamespace refid="namespace_luthetus_1_1_common_1_1_razor_lib">Luthetus::Common::RazorLib</innernamespace>
+    <innernamespace refid="namespace_luthetus_1_1_common_1_1_razor_lib_1_1_panels">Luthetus::Common::RazorLib::Panels</innernamespace>
+    <innernamespace refid="namespace_luthetus_1_1_common_1_1_razor_lib_1_1_panels_1_1_states">Luthetus::Common::RazorLib::Panels::States</innernamespace>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="keyword">using<sp/></highlight><highlight class="normal">Fluxor;</highlight></codeline>
+<codeline lineno="2"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="namespace_luthetus_1_1_common_1_1_razor_lib_1_1_dimensions_1_1_models" kindref="compound">Luthetus.Common.RazorLib.Dimensions.Models</ref>;</highlight></codeline>
+<codeline lineno="3"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="namespace_luthetus_1_1_common_1_1_razor_lib_1_1_keys_1_1_models" kindref="compound">Luthetus.Common.RazorLib.Keys.Models</ref>;</highlight></codeline>
+<codeline lineno="4"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="namespace_luthetus_1_1_common_1_1_razor_lib_1_1_panels_1_1_models" kindref="compound">Luthetus.Common.RazorLib.Panels.Models</ref>;</highlight></codeline>
+<codeline lineno="5"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="namespace_luthetus_1_1_common_1_1_razor_lib_1_1_resizes_1_1_displays" kindref="compound">Luthetus.Common.RazorLib.Resizes.Displays</ref>;</highlight></codeline>
+<codeline lineno="6"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">System.Collections.Immutable;</highlight></codeline>
+<codeline lineno="7"><highlight class="normal"></highlight></codeline>
+<codeline lineno="8"><highlight class="normal"></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal"><ref refid="namespace_luthetus_1_1_common_1_1_razor_lib_1_1_panels_1_1_states" kindref="compound">Luthetus.Common.RazorLib.Panels.States</ref>;</highlight></codeline>
+<codeline lineno="9"><highlight class="normal"></highlight></codeline>
+<codeline lineno="13"><highlight class="normal">[FeatureState]</highlight></codeline>
+<codeline lineno="14" refid="namespace_luthetus_1_1_common_1_1_razor_lib_1_1_panels_1_1_states_1a40447e7873efcb95c6294367bf8af59d" refkind="member"><highlight class="normal"></highlight><highlight class="keyword">public</highlight><highlight class="normal"><sp/>partial<sp/>record<sp/><ref refid="namespace_luthetus_1_1_common_1_1_razor_lib_1_1_panels_1_1_states_1a3e69a06f395780138ff06e862f45ee3c" kindref="member">PanelState</ref>(</highlight></codeline>
+<codeline lineno="15"><highlight class="normal"><sp/><sp/><sp/><sp/>ImmutableArray&lt;PanelGroup&gt;<sp/>PanelGroupList,</highlight></codeline>
+<codeline lineno="16"><highlight class="normal"><sp/><sp/><sp/><sp/>ImmutableArray&lt;Panel&gt;<sp/>PanelList)</highlight></codeline>
+<codeline lineno="17"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="18"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal"><sp/><ref refid="namespace_luthetus_1_1_common_1_1_razor_lib_1_1_panels_1_1_states_1a3e69a06f395780138ff06e862f45ee3c" kindref="member">PanelState</ref>()<sp/>:<sp/></highlight><highlight class="keyword">this</highlight><highlight class="normal">(ImmutableArray&lt;PanelGroup&gt;.Empty,<sp/>ImmutableArray&lt;Panel&gt;.Empty)</highlight></codeline>
+<codeline lineno="19"><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="20"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>var<sp/>topLeftGroup<sp/>=<sp/>ConstructTopLeftGroup();</highlight></codeline>
+<codeline lineno="21"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>var<sp/>topRightGroup<sp/>=<sp/>ConstructTopRightGroup();</highlight></codeline>
+<codeline lineno="22"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>var<sp/>bottomGroup<sp/>=<sp/>ConstructBottomGroup();</highlight></codeline>
+<codeline lineno="23"><highlight class="normal"></highlight></codeline>
+<codeline lineno="24"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>PanelGroupList<sp/>=<sp/></highlight><highlight class="keyword">new</highlight><highlight class="normal">[]</highlight></codeline>
+<codeline lineno="25"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="26"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>topLeftGroup,</highlight></codeline>
+<codeline lineno="27"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>topRightGroup,</highlight></codeline>
+<codeline lineno="28"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>bottomGroup,</highlight></codeline>
+<codeline lineno="29"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}.ToImmutableArray();</highlight></codeline>
+<codeline lineno="30"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="31"><highlight class="normal"></highlight></codeline>
+<codeline lineno="32"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal"><sp/>(<ref refid="interface_luthetus_1_1_common_1_1_razor_lib_1_1_panels_1_1_models_1_1_i_panel_tab" kindref="compound">IPanelTab</ref><sp/>PanelTab,<sp/>PanelGroup<sp/>PanelGroup)?<sp/>DragEventArgs<sp/>{<sp/></highlight><highlight class="keyword">get</highlight><highlight class="normal">;<sp/></highlight><highlight class="keyword">set</highlight><highlight class="normal">;<sp/>}</highlight></codeline>
+<codeline lineno="33"><highlight class="normal"></highlight></codeline>
+<codeline lineno="34"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">private</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/>PanelGroup<sp/>ConstructTopLeftGroup()</highlight></codeline>
+<codeline lineno="35"><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="36"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>var<sp/>leftPanelGroup<sp/>=<sp/></highlight><highlight class="keyword">new</highlight><highlight class="normal"><sp/>PanelGroup(</highlight></codeline>
+<codeline lineno="37"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>PanelFacts.LeftPanelGroupKey,</highlight></codeline>
+<codeline lineno="38"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Key&lt;Panel&gt;.Empty,</highlight></codeline>
+<codeline lineno="39"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">new</highlight><highlight class="normal"><sp/><ref refid="class_luthetus_1_1_common_1_1_razor_lib_1_1_dimensions_1_1_models_1_1_element_dimensions" kindref="compound">ElementDimensions</ref>(),</highlight></codeline>
+<codeline lineno="40"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ImmutableArray&lt;IPanelTab&gt;.Empty);</highlight></codeline>
+<codeline lineno="41"><highlight class="normal"></highlight></codeline>
+<codeline lineno="42"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>var<sp/>leftPanelGroupWidth<sp/>=<sp/>leftPanelGroup.ElementDimensions.DimensionAttributeList</highlight></codeline>
+<codeline lineno="43"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>.Single(da<sp/>=&gt;<sp/>da.DimensionAttributeKind<sp/>==<sp/><ref refid="namespace_luthetus_1_1_common_1_1_razor_lib_1_1_dimensions_1_1_models_1ab42cbfab74a6a286a2eb53313a9e37f0" kindref="member">DimensionAttributeKind</ref>.Width);</highlight></codeline>
+<codeline lineno="44"><highlight class="normal"></highlight></codeline>
+<codeline lineno="45"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>leftPanelGroupWidth.DimensionUnitList.AddRange(</highlight><highlight class="keyword">new</highlight><highlight class="normal">[]</highlight></codeline>
+<codeline lineno="46"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="47"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">new</highlight><highlight class="normal"><sp/><ref refid="class_luthetus_1_1_common_1_1_razor_lib_1_1_dimensions_1_1_models_1_1_dimension_unit" kindref="compound">DimensionUnit</ref></highlight></codeline>
+<codeline lineno="48"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="49"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Value<sp/>=<sp/>33.3333,</highlight></codeline>
+<codeline lineno="50"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="namespace_luthetus_1_1_common_1_1_razor_lib_1_1_dimensions_1_1_models_1ac011df04cfd59ccb7947a4ced86ba4f6" kindref="member">DimensionUnitKind</ref><sp/>=<sp/><ref refid="namespace_luthetus_1_1_common_1_1_razor_lib_1_1_dimensions_1_1_models_1ac011df04cfd59ccb7947a4ced86ba4f6a37be07209f53a5d636d5c904ca9ae64c" kindref="member">DimensionUnitKind.Percentage</ref></highlight></codeline>
+<codeline lineno="51"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>},</highlight></codeline>
+<codeline lineno="52"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">new</highlight><highlight class="normal"><sp/><ref refid="class_luthetus_1_1_common_1_1_razor_lib_1_1_dimensions_1_1_models_1_1_dimension_unit" kindref="compound">DimensionUnit</ref></highlight></codeline>
+<codeline lineno="53"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="54"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Value<sp/>=<sp/>0,</highlight></codeline>
+<codeline lineno="55"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="namespace_luthetus_1_1_common_1_1_razor_lib_1_1_dimensions_1_1_models_1ac011df04cfd59ccb7947a4ced86ba4f6" kindref="member">DimensionUnitKind</ref><sp/>=<sp/><ref refid="namespace_luthetus_1_1_common_1_1_razor_lib_1_1_dimensions_1_1_models_1ac011df04cfd59ccb7947a4ced86ba4f6" kindref="member">DimensionUnitKind</ref>.Pixels,</highlight></codeline>
+<codeline lineno="56"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="namespace_luthetus_1_1_common_1_1_razor_lib_1_1_dimensions_1_1_models_1a9685f3cd2b69870157680e43d93c011e" kindref="member">DimensionOperatorKind</ref><sp/>=<sp/><ref refid="namespace_luthetus_1_1_common_1_1_razor_lib_1_1_dimensions_1_1_models_1a9685f3cd2b69870157680e43d93c011e" kindref="member">DimensionOperatorKind</ref>.Subtract,</highlight></codeline>
+<codeline lineno="57"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Purpose<sp/>=<sp/>DimensionUnitFacts.Purposes.OFFSET,</highlight></codeline>
+<codeline lineno="58"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>},</highlight></codeline>
+<codeline lineno="59"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>});</highlight></codeline>
+<codeline lineno="60"><highlight class="normal"></highlight></codeline>
+<codeline lineno="61"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>leftPanelGroup;</highlight></codeline>
+<codeline lineno="62"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="63"><highlight class="normal"></highlight></codeline>
+<codeline lineno="64"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">private</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/>PanelGroup<sp/>ConstructTopRightGroup()</highlight></codeline>
+<codeline lineno="65"><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="66"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>var<sp/>rightPanelGroup<sp/>=<sp/></highlight><highlight class="keyword">new</highlight><highlight class="normal"><sp/>PanelGroup(</highlight></codeline>
+<codeline lineno="67"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>PanelFacts.RightPanelGroupKey,</highlight></codeline>
+<codeline lineno="68"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Key&lt;Panel&gt;.Empty,</highlight></codeline>
+<codeline lineno="69"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">new</highlight><highlight class="normal"><sp/><ref refid="class_luthetus_1_1_common_1_1_razor_lib_1_1_dimensions_1_1_models_1_1_element_dimensions" kindref="compound">ElementDimensions</ref>(),</highlight></codeline>
+<codeline lineno="70"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ImmutableArray&lt;IPanelTab&gt;.Empty);</highlight></codeline>
+<codeline lineno="71"><highlight class="normal"></highlight></codeline>
+<codeline lineno="72"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>var<sp/>rightPanelGroupWidth<sp/>=<sp/>rightPanelGroup.ElementDimensions.DimensionAttributeList</highlight></codeline>
+<codeline lineno="73"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>.Single(da<sp/>=&gt;<sp/>da.DimensionAttributeKind<sp/>==<sp/><ref refid="namespace_luthetus_1_1_common_1_1_razor_lib_1_1_dimensions_1_1_models_1ab42cbfab74a6a286a2eb53313a9e37f0" kindref="member">DimensionAttributeKind</ref>.Width);</highlight></codeline>
+<codeline lineno="74"><highlight class="normal"></highlight></codeline>
+<codeline lineno="75"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>rightPanelGroupWidth.DimensionUnitList.AddRange(</highlight><highlight class="keyword">new</highlight><highlight class="normal">[]</highlight></codeline>
+<codeline lineno="76"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="77"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">new</highlight><highlight class="normal"><sp/><ref refid="class_luthetus_1_1_common_1_1_razor_lib_1_1_dimensions_1_1_models_1_1_dimension_unit" kindref="compound">DimensionUnit</ref></highlight></codeline>
+<codeline lineno="78"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="79"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Value<sp/>=<sp/>33.3333,</highlight></codeline>
+<codeline lineno="80"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="namespace_luthetus_1_1_common_1_1_razor_lib_1_1_dimensions_1_1_models_1ac011df04cfd59ccb7947a4ced86ba4f6" kindref="member">DimensionUnitKind</ref><sp/>=<sp/><ref refid="namespace_luthetus_1_1_common_1_1_razor_lib_1_1_dimensions_1_1_models_1ac011df04cfd59ccb7947a4ced86ba4f6a37be07209f53a5d636d5c904ca9ae64c" kindref="member">DimensionUnitKind.Percentage</ref></highlight></codeline>
+<codeline lineno="81"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>},</highlight></codeline>
+<codeline lineno="82"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">new</highlight><highlight class="normal"><sp/><ref refid="class_luthetus_1_1_common_1_1_razor_lib_1_1_dimensions_1_1_models_1_1_dimension_unit" kindref="compound">DimensionUnit</ref></highlight></codeline>
+<codeline lineno="83"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="84"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Value<sp/>=<sp/>0,</highlight></codeline>
+<codeline lineno="85"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="namespace_luthetus_1_1_common_1_1_razor_lib_1_1_dimensions_1_1_models_1ac011df04cfd59ccb7947a4ced86ba4f6" kindref="member">DimensionUnitKind</ref><sp/>=<sp/><ref refid="namespace_luthetus_1_1_common_1_1_razor_lib_1_1_dimensions_1_1_models_1ac011df04cfd59ccb7947a4ced86ba4f6" kindref="member">DimensionUnitKind</ref>.Pixels,</highlight></codeline>
+<codeline lineno="86"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="namespace_luthetus_1_1_common_1_1_razor_lib_1_1_dimensions_1_1_models_1a9685f3cd2b69870157680e43d93c011e" kindref="member">DimensionOperatorKind</ref><sp/>=<sp/><ref refid="namespace_luthetus_1_1_common_1_1_razor_lib_1_1_dimensions_1_1_models_1a9685f3cd2b69870157680e43d93c011e" kindref="member">DimensionOperatorKind</ref>.Subtract,</highlight></codeline>
+<codeline lineno="87"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Purpose<sp/>=<sp/>DimensionUnitFacts.Purposes.OFFSET,</highlight></codeline>
+<codeline lineno="88"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>},</highlight></codeline>
+<codeline lineno="89"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>});</highlight></codeline>
+<codeline lineno="90"><highlight class="normal"></highlight></codeline>
+<codeline lineno="91"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>rightPanelGroup;</highlight></codeline>
+<codeline lineno="92"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="93"><highlight class="normal"></highlight></codeline>
+<codeline lineno="94"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">private</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/>PanelGroup<sp/>ConstructBottomGroup()</highlight></codeline>
+<codeline lineno="95"><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="96"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>var<sp/>bottomPanelGroup<sp/>=<sp/></highlight><highlight class="keyword">new</highlight><highlight class="normal"><sp/>PanelGroup(</highlight></codeline>
+<codeline lineno="97"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>PanelFacts.BottomPanelGroupKey,</highlight></codeline>
+<codeline lineno="98"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Key&lt;Panel&gt;.Empty,</highlight></codeline>
+<codeline lineno="99"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">new</highlight><highlight class="normal"><sp/><ref refid="class_luthetus_1_1_common_1_1_razor_lib_1_1_dimensions_1_1_models_1_1_element_dimensions" kindref="compound">ElementDimensions</ref>(),</highlight></codeline>
+<codeline lineno="100"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ImmutableArray&lt;IPanelTab&gt;.Empty);</highlight></codeline>
+<codeline lineno="101"><highlight class="normal"></highlight></codeline>
+<codeline lineno="102"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>var<sp/>bottomPanelGroupHeight<sp/>=<sp/>bottomPanelGroup.ElementDimensions.DimensionAttributeList</highlight></codeline>
+<codeline lineno="103"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>.Single(da<sp/>=&gt;<sp/>da.DimensionAttributeKind<sp/>==<sp/><ref refid="namespace_luthetus_1_1_common_1_1_razor_lib_1_1_dimensions_1_1_models_1ab42cbfab74a6a286a2eb53313a9e37f0" kindref="member">DimensionAttributeKind</ref>.Height);</highlight></codeline>
+<codeline lineno="104"><highlight class="normal"></highlight></codeline>
+<codeline lineno="105"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>bottomPanelGroupHeight.DimensionUnitList.AddRange(</highlight><highlight class="keyword">new</highlight><highlight class="normal">[]</highlight></codeline>
+<codeline lineno="106"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="107"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">new</highlight><highlight class="normal"><sp/><ref refid="class_luthetus_1_1_common_1_1_razor_lib_1_1_dimensions_1_1_models_1_1_dimension_unit" kindref="compound">DimensionUnit</ref></highlight></codeline>
+<codeline lineno="108"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="109"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Value<sp/>=<sp/>22,</highlight></codeline>
+<codeline lineno="110"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="namespace_luthetus_1_1_common_1_1_razor_lib_1_1_dimensions_1_1_models_1ac011df04cfd59ccb7947a4ced86ba4f6" kindref="member">DimensionUnitKind</ref><sp/>=<sp/><ref refid="namespace_luthetus_1_1_common_1_1_razor_lib_1_1_dimensions_1_1_models_1ac011df04cfd59ccb7947a4ced86ba4f6a37be07209f53a5d636d5c904ca9ae64c" kindref="member">DimensionUnitKind.Percentage</ref></highlight></codeline>
+<codeline lineno="111"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>},</highlight></codeline>
+<codeline lineno="112"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">new</highlight><highlight class="normal"><sp/><ref refid="class_luthetus_1_1_common_1_1_razor_lib_1_1_dimensions_1_1_models_1_1_dimension_unit" kindref="compound">DimensionUnit</ref></highlight></codeline>
+<codeline lineno="113"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="114"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Value<sp/>=<sp/>0,</highlight></codeline>
+<codeline lineno="115"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="namespace_luthetus_1_1_common_1_1_razor_lib_1_1_dimensions_1_1_models_1ac011df04cfd59ccb7947a4ced86ba4f6" kindref="member">DimensionUnitKind</ref><sp/>=<sp/><ref refid="namespace_luthetus_1_1_common_1_1_razor_lib_1_1_dimensions_1_1_models_1ac011df04cfd59ccb7947a4ced86ba4f6" kindref="member">DimensionUnitKind</ref>.Pixels,</highlight></codeline>
+<codeline lineno="116"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="namespace_luthetus_1_1_common_1_1_razor_lib_1_1_dimensions_1_1_models_1a9685f3cd2b69870157680e43d93c011e" kindref="member">DimensionOperatorKind</ref><sp/>=<sp/><ref refid="namespace_luthetus_1_1_common_1_1_razor_lib_1_1_dimensions_1_1_models_1a9685f3cd2b69870157680e43d93c011e" kindref="member">DimensionOperatorKind</ref>.Subtract,</highlight></codeline>
+<codeline lineno="117"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Purpose<sp/>=<sp/>DimensionUnitFacts.Purposes.OFFSET,</highlight></codeline>
+<codeline lineno="118"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>},</highlight></codeline>
+<codeline lineno="119"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">new</highlight><highlight class="normal"><sp/><ref refid="class_luthetus_1_1_common_1_1_razor_lib_1_1_dimensions_1_1_models_1_1_dimension_unit" kindref="compound">DimensionUnit</ref></highlight></codeline>
+<codeline lineno="120"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="121"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Value<sp/>=<sp/>SizeFacts.Ide.Header.Height.Value<sp/>/<sp/>2,</highlight></codeline>
+<codeline lineno="122"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="namespace_luthetus_1_1_common_1_1_razor_lib_1_1_dimensions_1_1_models_1ac011df04cfd59ccb7947a4ced86ba4f6" kindref="member">DimensionUnitKind</ref><sp/>=<sp/>SizeFacts.Ide.Header.Height.DimensionUnitKind,</highlight></codeline>
+<codeline lineno="123"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="namespace_luthetus_1_1_common_1_1_razor_lib_1_1_dimensions_1_1_models_1a9685f3cd2b69870157680e43d93c011e" kindref="member">DimensionOperatorKind</ref><sp/>=<sp/><ref refid="namespace_luthetus_1_1_common_1_1_razor_lib_1_1_dimensions_1_1_models_1a9685f3cd2b69870157680e43d93c011ea1d9baf077ee87921f57a8fe42d510b65" kindref="member">DimensionOperatorKind.Subtract</ref></highlight></codeline>
+<codeline lineno="124"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="125"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>});</highlight></codeline>
+<codeline lineno="126"><highlight class="normal"></highlight></codeline>
+<codeline lineno="127"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>bottomPanelGroup;</highlight></codeline>
+<codeline lineno="128"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="129"><highlight class="normal">}</highlight></codeline>
+    </programlisting>
+    <location file="Source/Lib/Common/Panels/States/PanelState.Main.cs"/>
+  </compounddef>
+</doxygen>

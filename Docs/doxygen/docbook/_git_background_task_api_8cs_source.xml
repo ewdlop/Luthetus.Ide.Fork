@@ -1,0 +1,60 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="__git_background_task_api_8cs_source" xml:lang="en-US">
+<title>GitBackgroundTaskApi.cs</title>
+<indexterm><primary>Source/Lib/Extensions/Extensions.Git/BackgroundTasks/Models/GitBackgroundTaskApi.cs</primary></indexterm>
+Go to the documentation of this file.<programlisting linenumbering="unnumbered"><anchor xml:id="__git_background_task_api_8cs_source_1l00001"/>00001 <emphasis role="keyword">using&#32;</emphasis>Fluxor;
+<anchor xml:id="__git_background_task_api_8cs_source_1l00002"/>00002 <emphasis role="keyword">using&#32;</emphasis><link linkend="_namespace_luthetus_1_1_common_1_1_razor_lib_1_1_file_systems_1_1_models">Luthetus.Common.RazorLib.FileSystems.Models</link>;
+<anchor xml:id="__git_background_task_api_8cs_source_1l00003"/>00003 <emphasis role="keyword">using&#32;</emphasis><link linkend="_namespace_luthetus_1_1_common_1_1_razor_lib_1_1_component_renderers_1_1_models">Luthetus.Common.RazorLib.ComponentRenderers.Models</link>;
+<anchor xml:id="__git_background_task_api_8cs_source_1l00004"/>00004 <emphasis role="keyword">using&#32;</emphasis><link linkend="_namespace_luthetus_1_1_common_1_1_razor_lib_1_1_background_tasks_1_1_models">Luthetus.Common.RazorLib.BackgroundTasks.Models</link>;
+<anchor xml:id="__git_background_task_api_8cs_source_1l00005"/>00005 <emphasis role="keyword">using&#32;</emphasis><link linkend="_namespace_luthetus_1_1_ide_1_1_razor_lib_1_1_terminals_1_1_states">Luthetus.Ide.RazorLib.Terminals.States</link>;
+<anchor xml:id="__git_background_task_api_8cs_source_1l00006"/>00006 <emphasis role="keyword">using&#32;</emphasis><link linkend="_namespace_luthetus_1_1_ide_1_1_razor_lib_1_1_background_tasks_1_1_models">Luthetus.Ide.RazorLib.BackgroundTasks.Models</link>;
+<anchor xml:id="__git_background_task_api_8cs_source_1l00007"/>00007 <emphasis role="keyword">using&#32;</emphasis><link linkend="_namespace_luthetus_1_1_extensions_1_1_git_1_1_models">Luthetus.Extensions.Git.Models</link>;
+<anchor xml:id="__git_background_task_api_8cs_source_1l00008"/>00008 <emphasis role="keyword">using&#32;</emphasis><link linkend="_namespace_luthetus_1_1_extensions_1_1_git_1_1_states">Luthetus.Extensions.Git.States</link>;
+<anchor xml:id="__git_background_task_api_8cs_source_1l00009"/>00009 
+<anchor xml:id="__git_background_task_api_8cs_source_1l00010"/><link linkend="_namespace_luthetus_1_1_extensions_1_1_git">00010</link> <emphasis role="keyword">namespace&#32;</emphasis><link linkend="_namespace_luthetus_1_1_extensions_1_1_git_1_1_background_tasks_1_1_models">Luthetus.Extensions.Git.BackgroundTasks.Models</link>;
+<anchor xml:id="__git_background_task_api_8cs_source_1l00011"/>00011 
+<anchor xml:id="__git_background_task_api_8cs_source_1l00012"/><link linkend="_class_luthetus_1_1_extensions_1_1_git_1_1_background_tasks_1_1_models_1_1_git_background_task_api">00012</link> <emphasis role="keyword">public</emphasis>&#32;<emphasis role="keyword">class&#32;</emphasis><link linkend="_class_luthetus_1_1_extensions_1_1_git_1_1_background_tasks_1_1_models_1_1_git_background_task_api_1a396ddeb52f08039fd028c1a7c1cc6482">GitBackgroundTaskApi</link>
+<anchor xml:id="__git_background_task_api_8cs_source_1l00013"/>00013 {
+<anchor xml:id="__git_background_task_api_8cs_source_1l00014"/>00014 &#32;&#32;&#32;&#32;<emphasis role="keyword">private</emphasis>&#32;readonly&#32;IState&lt;GitState&gt;&#32;_gitStateWrap;
+<anchor xml:id="__git_background_task_api_8cs_source_1l00015"/>00015 &#32;&#32;&#32;&#32;<emphasis role="keyword">private</emphasis>&#32;readonly&#32;IState&lt;TerminalState&gt;&#32;_terminalStateWrap;
+<anchor xml:id="__git_background_task_api_8cs_source_1l00016"/>00016 &#32;&#32;&#32;&#32;<emphasis role="keyword">private</emphasis>&#32;readonly&#32;<link linkend="_class_luthetus_1_1_ide_1_1_razor_lib_1_1_background_tasks_1_1_models_1_1_ide_background_task_api">IdeBackgroundTaskApi</link>&#32;_ideBackgroundTaskApi;
+<anchor xml:id="__git_background_task_api_8cs_source_1l00017"/>00017 &#32;&#32;&#32;&#32;<emphasis role="keyword">private</emphasis>&#32;readonly&#32;<link linkend="_class_luthetus_1_1_extensions_1_1_git_1_1_models_1_1_git_cli_output_parser">GitCliOutputParser</link>&#32;_gitCliOutputParser;
+<anchor xml:id="__git_background_task_api_8cs_source_1l00018"/>00018 &#32;&#32;&#32;&#32;<emphasis role="keyword">private</emphasis>&#32;readonly&#32;<link linkend="_interface_luthetus_1_1_common_1_1_razor_lib_1_1_file_systems_1_1_models_1_1_i_environment_provider">IEnvironmentProvider</link>&#32;_environmentProvider;
+<anchor xml:id="__git_background_task_api_8cs_source_1l00019"/>00019 &#32;&#32;&#32;&#32;<emphasis role="keyword">private</emphasis>&#32;readonly&#32;<link linkend="_interface_luthetus_1_1_common_1_1_razor_lib_1_1_background_tasks_1_1_models_1_1_i_background_task_service">IBackgroundTaskService</link>&#32;_backgroundTaskService;
+<anchor xml:id="__git_background_task_api_8cs_source_1l00020"/>00020 &#32;&#32;&#32;&#32;<emphasis role="keyword">private</emphasis>&#32;readonly&#32;<link linkend="_interface_luthetus_1_1_common_1_1_razor_lib_1_1_component_renderers_1_1_models_1_1_i_common_component_renderers">ICommonComponentRenderers</link>&#32;_commonComponentRenderers;
+<anchor xml:id="__git_background_task_api_8cs_source_1l00021"/>00021 &#32;&#32;&#32;&#32;<emphasis role="keyword">private</emphasis>&#32;readonly&#32;IDispatcher&#32;_dispatcher;
+<anchor xml:id="__git_background_task_api_8cs_source_1l00022"/>00022 &#32;&#32;&#32;&#32;
+<anchor xml:id="__git_background_task_api_8cs_source_1l00023"/><link linkend="_class_luthetus_1_1_extensions_1_1_git_1_1_background_tasks_1_1_models_1_1_git_background_task_api_1a396ddeb52f08039fd028c1a7c1cc6482">00023</link> &#32;&#32;&#32;&#32;<emphasis role="keyword">public</emphasis>&#32;<link linkend="_class_luthetus_1_1_extensions_1_1_git_1_1_background_tasks_1_1_models_1_1_git_background_task_api_1a396ddeb52f08039fd028c1a7c1cc6482">GitBackgroundTaskApi</link>(
+<anchor xml:id="__git_background_task_api_8cs_source_1l00024"/>00024 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<link linkend="_class_luthetus_1_1_ide_1_1_razor_lib_1_1_background_tasks_1_1_models_1_1_ide_background_task_api">IdeBackgroundTaskApi</link>&#32;ideBackgroundTaskApi,
+<anchor xml:id="__git_background_task_api_8cs_source_1l00025"/>00025 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;IState&lt;GitState&gt;&#32;gitStateWrap,
+<anchor xml:id="__git_background_task_api_8cs_source_1l00026"/>00026 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;IState&lt;TerminalState&gt;&#32;terminalStateWrap,
+<anchor xml:id="__git_background_task_api_8cs_source_1l00027"/>00027 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<link linkend="_class_luthetus_1_1_extensions_1_1_git_1_1_models_1_1_git_cli_output_parser">GitCliOutputParser</link>&#32;gitCliOutputParser,
+<anchor xml:id="__git_background_task_api_8cs_source_1l00028"/>00028 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<link linkend="_interface_luthetus_1_1_common_1_1_razor_lib_1_1_file_systems_1_1_models_1_1_i_environment_provider">IEnvironmentProvider</link>&#32;environmentProvider,
+<anchor xml:id="__git_background_task_api_8cs_source_1l00029"/>00029 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<link linkend="_interface_luthetus_1_1_common_1_1_razor_lib_1_1_background_tasks_1_1_models_1_1_i_background_task_service">IBackgroundTaskService</link>&#32;backgroundTaskService,
+<anchor xml:id="__git_background_task_api_8cs_source_1l00030"/>00030 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<link linkend="_interface_luthetus_1_1_common_1_1_razor_lib_1_1_component_renderers_1_1_models_1_1_i_common_component_renderers">ICommonComponentRenderers</link>&#32;commonComponentRenderers,
+<anchor xml:id="__git_background_task_api_8cs_source_1l00031"/>00031 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;IDispatcher&#32;dispatcher)
+<anchor xml:id="__git_background_task_api_8cs_source_1l00032"/>00032 &#32;&#32;&#32;&#32;{
+<anchor xml:id="__git_background_task_api_8cs_source_1l00033"/>00033 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;_ideBackgroundTaskApi&#32;=&#32;ideBackgroundTaskApi;
+<anchor xml:id="__git_background_task_api_8cs_source_1l00034"/>00034 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;_gitStateWrap&#32;=&#32;gitStateWrap;
+<anchor xml:id="__git_background_task_api_8cs_source_1l00035"/>00035 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;_terminalStateWrap&#32;=&#32;terminalStateWrap;
+<anchor xml:id="__git_background_task_api_8cs_source_1l00036"/>00036 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;_gitCliOutputParser&#32;=&#32;gitCliOutputParser;
+<anchor xml:id="__git_background_task_api_8cs_source_1l00037"/>00037 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;_environmentProvider&#32;=&#32;environmentProvider;
+<anchor xml:id="__git_background_task_api_8cs_source_1l00038"/>00038 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;_backgroundTaskService&#32;=&#32;backgroundTaskService;
+<anchor xml:id="__git_background_task_api_8cs_source_1l00039"/>00039 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;_commonComponentRenderers&#32;=&#32;commonComponentRenderers;
+<anchor xml:id="__git_background_task_api_8cs_source_1l00040"/>00040 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;_dispatcher&#32;=&#32;dispatcher;
+<anchor xml:id="__git_background_task_api_8cs_source_1l00041"/>00041 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;
+<anchor xml:id="__git_background_task_api_8cs_source_1l00042"/>00042 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<link linkend="_class_luthetus_1_1_extensions_1_1_git_1_1_background_tasks_1_1_models_1_1_git_background_task_api_1a2c059afb23ea38591a882933b9972492">Git</link>&#32;=&#32;<emphasis role="keyword">new</emphasis>&#32;<link linkend="_class_luthetus_1_1_extensions_1_1_git_1_1_models_1_1_git_ide_api">GitIdeApi</link>(
+<anchor xml:id="__git_background_task_api_8cs_source_1l00043"/>00043 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keyword">this</emphasis>,
+<anchor xml:id="__git_background_task_api_8cs_source_1l00044"/>00044 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;_ideBackgroundTaskApi,
+<anchor xml:id="__git_background_task_api_8cs_source_1l00045"/>00045 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;_terminalStateWrap,
+<anchor xml:id="__git_background_task_api_8cs_source_1l00046"/>00046 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;_gitStateWrap,
+<anchor xml:id="__git_background_task_api_8cs_source_1l00047"/>00047 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;_gitCliOutputParser,
+<anchor xml:id="__git_background_task_api_8cs_source_1l00048"/>00048 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;_environmentProvider,
+<anchor xml:id="__git_background_task_api_8cs_source_1l00049"/>00049 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;_backgroundTaskService,
+<anchor xml:id="__git_background_task_api_8cs_source_1l00050"/>00050 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;_commonComponentRenderers,
+<anchor xml:id="__git_background_task_api_8cs_source_1l00051"/>00051 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;_dispatcher);
+<anchor xml:id="__git_background_task_api_8cs_source_1l00052"/>00052 &#32;&#32;&#32;&#32;}
+<anchor xml:id="__git_background_task_api_8cs_source_1l00053"/>00053 &#32;&#32;&#32;&#32;
+<anchor xml:id="__git_background_task_api_8cs_source_1l00054"/><link linkend="_class_luthetus_1_1_extensions_1_1_git_1_1_background_tasks_1_1_models_1_1_git_background_task_api_1a2c059afb23ea38591a882933b9972492">00054</link> &#32;&#32;&#32;&#32;<emphasis role="keyword">public</emphasis>&#32;<link linkend="_class_luthetus_1_1_extensions_1_1_git_1_1_models_1_1_git_ide_api">GitIdeApi</link>&#32;<link linkend="_class_luthetus_1_1_extensions_1_1_git_1_1_background_tasks_1_1_models_1_1_git_background_task_api_1a2c059afb23ea38591a882933b9972492">Git</link>&#32;{&#32;<emphasis role="keyword">get</emphasis>;&#32;}
+<anchor xml:id="__git_background_task_api_8cs_source_1l00055"/>00055 }
+</programlisting></section>

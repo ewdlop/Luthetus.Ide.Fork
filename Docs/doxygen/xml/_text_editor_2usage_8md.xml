@@ -1,0 +1,492 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
+  <compounddef id="_text_editor_2usage_8md" kind="file" language="Markdown">
+    <compoundname>usage.md</compoundname>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline><highlight class="normal">#<sp/>Luthetus.TextEditor<sp/>(v2.1.0)</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">##<sp/>Usage</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">###<sp/>Source<sp/>Code</highlight></codeline>
+<codeline><highlight class="normal">The<sp/>.NET<sp/>Solution:<sp/>[Luthetus.Tutorials.sln](../../Source/Tutorials/Luthetus.Tutorials.sln),</highlight></codeline>
+<codeline><highlight class="normal">was<sp/>made<sp/>by<sp/>following<sp/>steps<sp/>described<sp/>here.<sp/>So,<sp/>the<sp/>completed<sp/>result<sp/>can<sp/>be<sp/>found<sp/>there.</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">###<sp/>Goal</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">![tutorial_Usage-CSharpCompilerServiceTextEditor.gif](../../Images/TextEditor/Gifs/text-editor-tutorial-result.gif)</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">-<sp/>Render<sp/>a<sp/>C#<sp/>Text<sp/>Editor<sp/>which<sp/>makes<sp/>use<sp/>of<sp/>the<sp/>CSharpCompilerService</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">###<sp/>Steps</highlight></codeline>
+<codeline><highlight class="normal">-<sp/>Create<sp/>a<sp/>codebehind<sp/>for<sp/>the<sp/>file:<sp/>`Pages/Index.razor`</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">```csharp</highlight></codeline>
+<codeline><highlight class="normal">//<sp/>Pages/Index.razor.cs</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">using<sp/>Microsoft.AspNetCore.Components;</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">namespace<sp/>Luthetus.Tutorials.RazorLib.Pages;</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">public<sp/>partial<sp/>class<sp/>Index<sp/>:<sp/>ComponentBase</highlight></codeline>
+<codeline><highlight class="normal">{</highlight></codeline>
+<codeline><highlight class="normal">}</highlight></codeline>
+<codeline><highlight class="normal">```</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">-<sp/>There<sp/>are<sp/>2<sp/>parts<sp/>to<sp/>rendering<sp/>a<sp/>Text<sp/>Editor.</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">-<sp/>First,<sp/>one<sp/>needs<sp/>to<sp/>make<sp/>a<sp/>[TextEditorModel](/Source/Lib/TextEditor/TextEditors/Models/TextEditorModel.Constructors.cs).</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">-<sp/>Then,<sp/>one<sp/>needs<sp/>to<sp/>make<sp/>a<sp/>[TextEditorViewModel](/Source/Lib/TextEditor/TextEditors/Models/TextEditorViewModel.cs)<sp/>for<sp/>that<sp/>previously<sp/>made<sp/>`model`.</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">-<sp/>In<sp/>Index.razor.cs<sp/>add<sp/>the<sp/>following<sp/>line<sp/>of<sp/>code:</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">```csharp</highlight></codeline>
+<codeline><highlight class="normal">//<sp/>using<sp/>Luthetus.TextEditor.RazorLib.Lexers.Models;</highlight></codeline>
+<codeline><highlight class="normal">public<sp/>static<sp/>ResourceUri<sp/>ResourceUri<sp/>{<sp/>get;<sp/>}<sp/>=<sp/>new(&quot;/index.txt&quot;);</highlight></codeline>
+<codeline><highlight class="normal">```</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">-<sp/>The<sp/>[ResourceUri](/Source/Lib/TextEditor/Lexers/Models/ResourceUri.cs)<sp/>is<sp/>a<sp/>unique<sp/>identifier<sp/>for<sp/>a<sp/>given<sp/>`TextEditorModel`.</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">-<sp/>One<sp/>might<sp/>think<sp/>of<sp/>a<sp/>`TextEditorModel`<sp/>as<sp/>mapping<sp/>to<sp/>a<sp/>file<sp/>on<sp/>their<sp/>filesystem,<sp/>as<sp/>an<sp/>example.</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">-<sp/>Override<sp/>the<sp/>Blazor<sp/>lifecycle<sp/>method<sp/>named:<sp/>`OnInitialized()`</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">```csharp</highlight></codeline>
+<codeline><highlight class="normal">protected<sp/>override<sp/>void<sp/>OnInitialized()</highlight></codeline>
+<codeline><highlight class="normal">{</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>base.OnInitialized();</highlight></codeline>
+<codeline><highlight class="normal">}</highlight></codeline>
+<codeline><highlight class="normal">```</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">-<sp/>Inside<sp/>this<sp/>override,<sp/>and<sp/>above<sp/>the<sp/>`base.OnInitialized();`<sp/>invocation,<sp/>we<sp/>can<sp/>register<sp/>the<sp/>`TextEditorModel`.</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">-<sp/>We<sp/>need<sp/>access<sp/>to<sp/>the<sp/>[ITextEditorService](/Source/Lib/TextEditor/ITextEditorService.cs)<sp/>to<sp/>register<sp/>a<sp/>`TextEditorModel`.<sp/>So,<sp/>inject<sp/>the<sp/>`ITextEditorService`.</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">```csharp</highlight></codeline>
+<codeline><highlight class="normal">//<sp/>using<sp/>Luthetus.TextEditor.RazorLib;</highlight></codeline>
+<codeline><highlight class="normal">[Inject]</highlight></codeline>
+<codeline><highlight class="normal">private<sp/>ITextEditorService<sp/>TextEditorService<sp/>{<sp/>get;<sp/>set;<sp/>}<sp/>=<sp/>null!;</highlight></codeline>
+<codeline><highlight class="normal">```</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">-<sp/>The<sp/>`ITextEditorService`<sp/>has<sp/>public<sp/>properties<sp/>that<sp/>encapsulate<sp/>the<sp/>API<sp/>for<sp/>a<sp/>given<sp/>datatype<sp/>in<sp/>the<sp/>`Luthetus.TextEditor`<sp/>namespace.<sp/>For<sp/>example,<sp/>`TextEditorService.ModelApi`<sp/>accesses<sp/>the<sp/>`ModelApi`<sp/>property,<sp/>which<sp/>has<sp/>all<sp/>of<sp/>the<sp/>API<sp/>related<sp/>to<sp/>the<sp/>`TextEditorModel`<sp/>datatype.</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">-<sp/>By<sp/>invoking<sp/>`TextEditorService.ModelApi.RegisterCustom(...);`,<sp/>we<sp/>can<sp/>create<sp/>register<sp/>a<sp/>TextEditorModel.<sp/>The<sp/>`RegisterCustom(...)`<sp/>method<sp/>takes<sp/>as<sp/>a<sp/>parameter<sp/>an<sp/>instance<sp/>of<sp/>`TextEditorModel`.<sp/>So<sp/>we<sp/>need<sp/>to<sp/>make<sp/>that<sp/>instance.</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">-<sp/>In<sp/>the<sp/>override<sp/>for<sp/>`OnInitialized()`,<sp/>create<sp/>an<sp/>instance<sp/>of<sp/>a<sp/>`TextEditorModel`.<sp/>Then,<sp/>pass<sp/>it<sp/>in<sp/>to<sp/>the<sp/>`TextEditorService.Model.RegisterCustom(...)`<sp/>invocation.</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">```csharp</highlight></codeline>
+<codeline><highlight class="normal">protected<sp/>override<sp/>void<sp/>OnInitialized()</highlight></codeline>
+<codeline><highlight class="normal">{</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>var<sp/>model<sp/>=<sp/>new<sp/>TextEditorModel(</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ResourceUri,</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>DateTime.UtcNow,</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ExtensionNoPeriodFacts.TXT,</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>@&quot;public<sp/>class<sp/>MyClass</highlight></codeline>
+<codeline><highlight class="normal">{</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>public<sp/>MyClass(string<sp/>firstName,<sp/>string<sp/>lastName)</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>FirstName<sp/>=<sp/>firstName;</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>LastName<sp/>=<sp/>lastName;</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>public<sp/>string<sp/>FirstName<sp/>{<sp/>get;<sp/>set;<sp/>}</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>public<sp/>string<sp/>LastName<sp/>{<sp/>get;<sp/>set;<sp/>}</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>public<sp/>string<sp/>DisplayName<sp/>=&gt;<sp/>$&quot;&quot;{{FirstName}}<sp/>{LastName}&quot;&quot;;</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>public<sp/>void<sp/>SomeMethod(int<sp/>arg1,<sp/>MyClass<sp/>arg2)</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>if<sp/>(arg1<sp/>==<sp/>2)</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>return;</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>return;</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline><highlight class="normal">}&quot;,</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>decorationMapper:<sp/>null,</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>compilerService:<sp/>null);</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>TextEditorService.ModelApi.RegisterCustom(model);</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>base.OnInitialized();</highlight></codeline>
+<codeline><highlight class="normal">}</highlight></codeline>
+<codeline><highlight class="normal">```</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">-<sp/>In<sp/>order<sp/>to<sp/>render<sp/>a<sp/>`TextEditorModel`,<sp/>we<sp/>need<sp/>a<sp/>[TextEditorViewModel](/Source/Lib/TextEditor/TextEditors/Models/TextEditorViewModel.cs).<sp/>A<sp/>file<sp/>on<sp/>one&apos;s<sp/>operating<sp/>system<sp/>would<sp/>relate<sp/>to<sp/>a<sp/>`model`.<sp/>Whereas,<sp/>an<sp/>open<sp/>text<sp/>editor<sp/>would<sp/>relate<sp/>to<sp/>a<sp/>`viewModel`.</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">-<sp/>Many<sp/>`TextEditorViewModel`<sp/>can<sp/>reference<sp/>an<sp/>underlying<sp/>`TextEditorModel`.<sp/>But,<sp/>only<sp/>1<sp/>`model`<sp/>for<sp/>a<sp/>given<sp/>file<sp/>on<sp/>one&apos;s<sp/>operating<sp/>system<sp/>can<sp/>exist.</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">&gt;<sp/>*NOTE:*<sp/>I<sp/>use<sp/>an<sp/>example<sp/>of<sp/>a<sp/>operating<sp/>system&apos;s<sp/>file<sp/>system<sp/>but,<sp/>it<sp/>is<sp/>just<sp/>an<sp/>example,<sp/>one<sp/>can<sp/>make<sp/>a<sp/>TextEditorModel<sp/>out<sp/>of<sp/>&quot;thin<sp/>air&quot;<sp/>if<sp/>they&apos;d<sp/>like<sp/>to.</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">-<sp/>We<sp/>need<sp/>a<sp/>TextEditorViewModelKey<sp/>so<sp/>we<sp/>can<sp/>maintain<sp/>the<sp/>TextEditorViewModel<sp/>state<sp/>between<sp/>page<sp/>changes.</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">-<sp/>Add<sp/>the<sp/>following<sp/>line<sp/>of<sp/>code:</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">```csharp</highlight></codeline>
+<codeline><highlight class="normal">public<sp/>static<sp/>Key&lt;TextEditorViewModel&gt;<sp/>ViewModelKey<sp/>{<sp/>get;<sp/>}<sp/>=<sp/>Key&lt;TextEditorViewModel&gt;.NewKey();</highlight></codeline>
+<codeline><highlight class="normal">```</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">-<sp/>Now,<sp/>in<sp/>the<sp/>override<sp/>for<sp/>`OnInitialized()`,<sp/>invoke<sp/>`TextEditorService.ViewModelApi.Register(...)`.</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">&gt;<sp/>*NOTE:*<sp/>The<sp/>argument<sp/>&apos;Category&apos;<sp/>to<sp/>&apos;TextEditorService.ViewModelApi.Register(...)&apos;<sp/>can<sp/>be<sp/>passed<sp/>as<sp/>&apos;new<sp/>Category(&quot;main&quot;)&apos;.<sp/>It<sp/>acts<sp/>only<sp/>as<sp/>a<sp/>way<sp/>to<sp/>filter<sp/>a<sp/>list<sp/>of<sp/>view<sp/>models.</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">```csharp</highlight></codeline>
+<codeline><highlight class="normal">TextEditorService.ViewModelApi.Register(</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>ViewModelKey,</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>ResourceUri,</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>new<sp/>Category(&quot;main&quot;));</highlight></codeline>
+<codeline><highlight class="normal">```</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">-<sp/>My<sp/>`Pages/Index.razor.cs`<sp/>file<sp/>as<sp/>of<sp/>this<sp/>step<sp/>looks<sp/>as<sp/>follows:</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">```csharp</highlight></codeline>
+<codeline><highlight class="normal">using<sp/>Microsoft.AspNetCore.Components;</highlight></codeline>
+<codeline><highlight class="normal">using<sp/>Luthetus.Common.RazorLib.Keys.Models;</highlight></codeline>
+<codeline><highlight class="normal">using<sp/>Luthetus.TextEditor.RazorLib;</highlight></codeline>
+<codeline><highlight class="normal">using<sp/>Luthetus.TextEditor.RazorLib.TextEditors.Models;</highlight></codeline>
+<codeline><highlight class="normal">using<sp/>Luthetus.TextEditor.RazorLib.Lexers.Models;</highlight></codeline>
+<codeline><highlight class="normal">using<sp/>Luthetus.TextEditor.RazorLib.CompilerServices.Interfaces;</highlight></codeline>
+<codeline><highlight class="normal">using<sp/>Luthetus.TextEditor.RazorLib.Decorations.Models;</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">namespace<sp/>Luthetus.Tutorials.RazorLib.Pages;</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">public<sp/>partial<sp/>class<sp/>Index<sp/>:<sp/>ComponentBase</highlight></codeline>
+<codeline><highlight class="normal">{</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>[Inject]</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>private<sp/>ITextEditorService<sp/>TextEditorService<sp/>{<sp/>get;<sp/>set;<sp/>}<sp/>=<sp/>null!;</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>public<sp/>static<sp/>ResourceUri<sp/>ResourceUri<sp/>{<sp/>get;<sp/>}<sp/>=<sp/>new(&quot;/index.txt&quot;);</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>public<sp/>static<sp/>Key&lt;TextEditorViewModel&gt;<sp/>ViewModelKey<sp/>{<sp/>get;<sp/>}<sp/>=<sp/>Key&lt;TextEditorViewModel&gt;.NewKey();</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>protected<sp/>override<sp/>void<sp/>OnInitialized()</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>var<sp/>model<sp/>=<sp/>new<sp/>TextEditorModel(</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ResourceUri,</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>DateTime.UtcNow,</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ExtensionNoPeriodFacts.TXT,</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>@&quot;public<sp/>class<sp/>MyClass</highlight></codeline>
+<codeline><highlight class="normal">{</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>public<sp/>MyClass(string<sp/>firstName,<sp/>string<sp/>lastName)</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>FirstName<sp/>=<sp/>firstName;</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>LastName<sp/>=<sp/>lastName;</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>public<sp/>string<sp/>FirstName<sp/>{<sp/>get;<sp/>set;<sp/>}</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>public<sp/>string<sp/>LastName<sp/>{<sp/>get;<sp/>set;<sp/>}</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>public<sp/>string<sp/>DisplayName<sp/>=&gt;<sp/>$&quot;&quot;{{FirstName}}<sp/>{LastName}&quot;&quot;;</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>public<sp/>void<sp/>SomeMethod(int<sp/>arg1,<sp/>MyClass<sp/>arg2)</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>if<sp/>(arg1<sp/>==<sp/>2)</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>return;</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>return;</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline><highlight class="normal">}&quot;,</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>decorationMapper:<sp/>null,</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>compilerService:<sp/>null);</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>TextEditorService.ModelApi.RegisterCustom(model);</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>TextEditorService.ViewModelApi.Register(</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ViewModelKey,</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ResourceUri,</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>new<sp/>Category(&quot;main&quot;));</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>base.OnInitialized();</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline><highlight class="normal">}</highlight></codeline>
+<codeline><highlight class="normal">```</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">-<sp/>In<sp/>the<sp/>.razor<sp/>markup<sp/>(`Pages/Index.razor`)<sp/>render<sp/>the<sp/>Blazor<sp/>component:<sp/>`&lt;Luthetus.TextEditor.RazorLib.TextEditors.Displays.TextEditorViewModelDisplay/&gt;`</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">-<sp/>This<sp/>component<sp/>takes<sp/>various<sp/>parameters,<sp/>but<sp/>only<sp/>one<sp/>of<sp/>them<sp/>is<sp/>required.<sp/>The<sp/>rest<sp/>of<sp/>the<sp/>parameters<sp/>are<sp/>for<sp/>customization.</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">-<sp/>Pass<sp/>in<sp/>the<sp/>required<sp/>parameter<sp/>`TextEditorViewModelKey`<sp/>to<sp/>have<sp/>the<sp/>value<sp/>of<sp/>the<sp/>`TextEditorViewModelKey`<sp/>property<sp/>from<sp/>the<sp/>codebehind.</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">```csharp</highlight></codeline>
+<codeline><highlight class="normal">@page<sp/>&quot;/&quot;</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">@using<sp/>Luthetus.TextEditor.RazorLib.TextEditors.Displays;</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">&lt;PageTitle&gt;Index&lt;/PageTitle&gt;</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">&lt;h1&gt;Hello,<sp/>world!&lt;/h1&gt;</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">Welcome<sp/>to<sp/>your<sp/>new<sp/>app.</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">&lt;TextEditorViewModelDisplay<sp/>TextEditorViewModelKey=&quot;ViewModelKey&quot;<sp/>/&gt;</highlight></codeline>
+<codeline><highlight class="normal">```</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">-<sp/>A<sp/>plain<sp/>text<sp/>editor<sp/>without<sp/>syntax<sp/>highlighting<sp/>should<sp/>render<sp/>now<sp/>when<sp/>the<sp/>app<sp/>is<sp/>ran.</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">![tutorial_Usage-CSharpCompilerServiceTextEditor.gif](../../Images/TextEditor/Gifs/text-editor-tutorial-midway.gif)</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">&gt;<sp/>*NOTE:*<sp/>Height<sp/>of<sp/>the<sp/>text<sp/>editor<sp/>is<sp/>100%<sp/>of<sp/>the<sp/>parent<sp/>element.<sp/>In<sp/>the<sp/>Blazor<sp/>default<sp/>project<sp/>template<sp/>one<sp/>needs<sp/>the<sp/>following:</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">```<sp/>html</highlight></codeline>
+<codeline><highlight class="normal">&lt;!--<sp/>Example<sp/>for<sp/>more<sp/>height<sp/>in<sp/>the<sp/>Blazor<sp/>default<sp/>project<sp/>template<sp/>(this<sp/>is<sp/>not<sp/>an<sp/>example<sp/>of<sp/>ideal<sp/>responsive<sp/>UI<sp/>css<sp/>but<sp/>it<sp/>gets<sp/>across<sp/>the<sp/>idea<sp/>and<sp/>one<sp/>can<sp/>customize<sp/>as<sp/>needed.)<sp/>--&gt;</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">&lt;!--<sp/>Index.razor<sp/>--&gt;</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">@page<sp/>&quot;/&quot;</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">@using<sp/>Luthetus.TextEditor.RazorLib.TextEditors.Displays;</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">&lt;PageTitle&gt;Index&lt;/PageTitle&gt;</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">&lt;div<sp/>style=&quot;height:<sp/>5em;&quot;&gt;</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>&lt;h1&gt;Hello,<sp/>world!&lt;/h1&gt;</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>Welcome<sp/>to<sp/>your<sp/>new<sp/>app.</highlight></codeline>
+<codeline><highlight class="normal">&lt;/div&gt;</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">@*<sp/>10px<sp/>for<sp/>padding<sp/>*@</highlight></codeline>
+<codeline><highlight class="normal">&lt;div<sp/>style=&quot;height:<sp/>calc(100%<sp/>-<sp/>5em<sp/>-<sp/>10px);&quot;&gt;</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>&lt;TextEditorViewModelDisplay<sp/>TextEditorViewModelKey=&quot;ViewModelKey&quot;/&gt;</highlight></codeline>
+<codeline><highlight class="normal">&lt;/div&gt;</highlight></codeline>
+<codeline></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">```</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">```<sp/>html</highlight></codeline>
+<codeline><highlight class="normal">&lt;!--<sp/>Example<sp/>for<sp/>more<sp/>height<sp/>in<sp/>the<sp/>Blazor<sp/>default<sp/>project<sp/>template<sp/>(this<sp/>is<sp/>not<sp/>an<sp/>example<sp/>of<sp/>ideal<sp/>responsive<sp/>UI<sp/>css<sp/>but<sp/>it<sp/>gets<sp/>across<sp/>the<sp/>idea<sp/>and<sp/>one<sp/>can<sp/>customize<sp/>as<sp/>needed.)<sp/>--&gt;</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">&lt;!--<sp/>MainLayout.razor<sp/>--&gt;</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">@inherits<sp/>LayoutComponentBase</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">&lt;PageTitle&gt;Luthetus.Tutorials&lt;/PageTitle&gt;</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">&lt;div<sp/>class=&quot;page&quot;&gt;</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>&lt;div<sp/>class=&quot;sidebar&quot;&gt;</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>&lt;NavMenu<sp/>/&gt;</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>&lt;/div&gt;</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>&lt;main&gt;</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>&lt;div<sp/>class=&quot;top-row<sp/>px-4&quot;&gt;</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>&lt;a<sp/>href=&quot;https://docs.microsoft.com/aspnet/&quot;<sp/>target=&quot;_blank&quot;&gt;About&lt;/a&gt;</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>&lt;/div&gt;</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>&lt;!--<sp/>THE<sp/>CHANGE<sp/>IS<sp/>HERE<sp/>TO<sp/>THE<sp/>STYLE<sp/>ATTRIBUTE<sp/>OF<sp/>THE<sp/>ARTCILE<sp/>ELEMENT.<sp/>56px<sp/>is<sp/>the<sp/>height<sp/>of<sp/>the<sp/>top-row.<sp/>--&gt;</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>&lt;article<sp/>class=&quot;content<sp/>px-4&quot;<sp/>style=&quot;height:<sp/>calc(100%<sp/>-<sp/>56px);&quot;&gt;</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>@Body</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>&lt;/article&gt;</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>&lt;/main&gt;</highlight></codeline>
+<codeline><highlight class="normal">&lt;/div&gt;</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">```</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">![tutorial_Usage-CSharpCompilerServiceTextEditor.gif](../../Images/TextEditor/Gifs/text-editor-tutorial-resize.gif)</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">-<sp/>Now<sp/>we<sp/>can<sp/>add<sp/>in<sp/>the<sp/>C#<sp/>Compiler<sp/>Service.</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">-<sp/>Reference<sp/>the<sp/>`Luthetus.CompilerServices.CSharp`<sp/>Nuget<sp/>Package</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">Go<sp/>to<sp/>the<sp/>file<sp/>that<sp/>you<sp/>register<sp/>your<sp/>services<sp/>and<sp/>add<sp/>the<sp/>following<sp/>lines<sp/>of<sp/>C#<sp/>code.</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">```csharp</highlight></codeline>
+<codeline><highlight class="normal">using<sp/>Luthetus.TextEditor.RazorLib.CompilerServices.Interfaces;</highlight></codeline>
+<codeline><highlight class="normal">using<sp/>Luthetus.TextEditor.RazorLib.Decorations.Models;</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">//<sp/>NOTE:<sp/>the<sp/>next<sp/>step<sp/>creates<sp/>the<sp/>implementations</highlight></codeline>
+<codeline><highlight class="normal">services</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>.AddScoped&lt;ICompilerServiceRegistry,<sp/>CompilerServiceRegistry&gt;()</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>.AddScoped&lt;IDecorationMapperRegistry,<sp/>DecorationMapperRegistry&gt;();</highlight></codeline>
+<codeline><highlight class="normal">```</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">Add<sp/>CompilerServiceRegistry.cs<sp/>as<sp/>follows:</highlight></codeline>
+<codeline><highlight class="normal">```csharp</highlight></codeline>
+<codeline><highlight class="normal">using<sp/>System.Collections.Immutable;</highlight></codeline>
+<codeline><highlight class="normal">using<sp/>Fluxor;</highlight></codeline>
+<codeline><highlight class="normal">using<sp/>Luthetus.Common.RazorLib.FileSystems.Models;</highlight></codeline>
+<codeline><highlight class="normal">using<sp/>Luthetus.TextEditor.RazorLib;</highlight></codeline>
+<codeline><highlight class="normal">using<sp/>Luthetus.TextEditor.RazorLib.CompilerServices.Implementations;</highlight></codeline>
+<codeline><highlight class="normal">using<sp/>Luthetus.TextEditor.RazorLib.CompilerServices.Interfaces;</highlight></codeline>
+<codeline><highlight class="normal">using<sp/>Luthetus.TextEditor.RazorLib.TextEditors.Models;</highlight></codeline>
+<codeline><highlight class="normal">using<sp/>Luthetus.CompilerServices.CSharp.CompilerServiceCase;</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">namespace<sp/>Luthetus.Tutorials.RazorLib.CompilerServices;</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">public<sp/>class<sp/>CompilerServiceRegistry<sp/>:<sp/>ICompilerServiceRegistry</highlight></codeline>
+<codeline><highlight class="normal">{</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>private<sp/>readonly<sp/>Dictionary&lt;string,<sp/>ICompilerService&gt;<sp/>_map<sp/>=<sp/>new();</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>public<sp/>ImmutableDictionary&lt;string,<sp/>ICompilerService&gt;<sp/>Map<sp/>=&gt;<sp/>_map.ToImmutableDictionary();</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>public<sp/>ImmutableList&lt;ICompilerService&gt;<sp/>CompilerServiceList<sp/>=&gt;<sp/>_map.Select(x<sp/>=&gt;<sp/>x.Value).ToImmutableList();</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>public<sp/>CompilerServiceRegistry(ITextEditorService<sp/>textEditorService)</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>CSharpCompilerService<sp/>=<sp/>new<sp/>CSharpCompilerService(textEditorService);</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>DefaultCompilerService<sp/>=<sp/>new<sp/>CompilerService(textEditorService);</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>_map.Add(ExtensionNoPeriodFacts.C_SHARP_CLASS,<sp/>CSharpCompilerService);</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>public<sp/>CSharpCompilerService<sp/>CSharpCompilerService<sp/>{<sp/>get;<sp/>}</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>public<sp/>CompilerService<sp/>DefaultCompilerService<sp/>{<sp/>get;<sp/>}</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>public<sp/>ICompilerService<sp/>GetCompilerService(string<sp/>extensionNoPeriod)</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>if<sp/>(_map.TryGetValue(extensionNoPeriod,<sp/>out<sp/>var<sp/>compilerService))</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>return<sp/>compilerService;</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>return<sp/>DefaultCompilerService;</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline><highlight class="normal">}</highlight></codeline>
+<codeline><highlight class="normal">```</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">Add<sp/>DecorationMapperRegistry.cs<sp/>as<sp/>follows:</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">```csharp</highlight></codeline>
+<codeline><highlight class="normal">using<sp/>System.Collections.Immutable;</highlight></codeline>
+<codeline><highlight class="normal">using<sp/>Luthetus.TextEditor.RazorLib.CompilerServices.GenericLexer.Decoration;</highlight></codeline>
+<codeline><highlight class="normal">using<sp/>Luthetus.TextEditor.RazorLib.Decorations.Models;</highlight></codeline>
+<codeline><highlight class="normal">using<sp/>Luthetus.TextEditor.RazorLib.TextEditors.Models;</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">namespace<sp/>Luthetus.Tutorials.RazorLib.Decorations;</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">public<sp/>class<sp/>DecorationMapperRegistry<sp/>:<sp/>IDecorationMapperRegistry</highlight></codeline>
+<codeline><highlight class="normal">{</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>private<sp/>Dictionary&lt;string,<sp/>IDecorationMapper&gt;<sp/>_map<sp/>{<sp/>get;<sp/>}<sp/>=<sp/>new();</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>public<sp/>ImmutableDictionary&lt;string,<sp/>IDecorationMapper&gt;<sp/>Map<sp/>=&gt;<sp/>_map.ToImmutableDictionary();</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>public<sp/>DecorationMapperRegistry()</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>GenericDecorationMapper<sp/>=<sp/>new<sp/>GenericDecorationMapper();</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>DefaultDecorationMapper<sp/>=<sp/>new<sp/>TextEditorDecorationMapperDefault();</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>_map.Add(ExtensionNoPeriodFacts.C_SHARP_CLASS,<sp/>GenericDecorationMapper);</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>public<sp/>GenericDecorationMapper<sp/>GenericDecorationMapper<sp/>{<sp/>get;<sp/>}</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>public<sp/>TextEditorDecorationMapperDefault<sp/>DefaultDecorationMapper<sp/>{<sp/>get;<sp/>}</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>public<sp/>IDecorationMapper<sp/>GetDecorationMapper(string<sp/>extensionNoPeriod)</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>if<sp/>(_map.TryGetValue(extensionNoPeriod,<sp/>out<sp/>var<sp/>decorationMapper))</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>return<sp/>decorationMapper;</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>return<sp/>DefaultDecorationMapper;</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline><highlight class="normal">}</highlight></codeline>
+<codeline><highlight class="normal">```</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">-<sp/>In<sp/>the<sp/>`Pages/Index.razor.cs`<sp/>file<sp/>we<sp/>now<sp/>can<sp/>provide<sp/>the<sp/>`CSharpCompilerService`<sp/>when<sp/>instantiating<sp/>a<sp/>`TextEditorModel`.</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">-<sp/>Inject<sp/>the<sp/>`ICompilerServiceRegistry`<sp/>and<sp/>the<sp/>`IDecorationMapperRegistry`</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">```csharp</highlight></codeline>
+<codeline><highlight class="normal">//<sp/>using<sp/>Luthetus.TextEditor.RazorLib.CompilerServices.Interfaces;</highlight></codeline>
+<codeline><highlight class="normal">//<sp/>using<sp/>Luthetus.TextEditor.RazorLib.Decorations.Models;</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">[Inject]</highlight></codeline>
+<codeline><highlight class="normal">private<sp/>ICompilerServiceRegistry<sp/>CompilerServiceRegistry<sp/>{<sp/>get;<sp/>set;<sp/>}<sp/>=<sp/>null!;</highlight></codeline>
+<codeline><highlight class="normal">[Inject]</highlight></codeline>
+<codeline><highlight class="normal">private<sp/>IDecorationMapperRegistry<sp/>DecorationMapperRegistry<sp/>{<sp/>get;<sp/>set;<sp/>}<sp/>=<sp/>null!;</highlight></codeline>
+<codeline><highlight class="normal">```</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">-<sp/>In<sp/>`OnInitialized()`,<sp/>prior<sp/>to<sp/>constructing<sp/>the<sp/>`TextEditorModel`<sp/>we<sp/>can<sp/>get<sp/>the<sp/>decoration<sp/>mapper,<sp/>and<sp/>compiler<sp/>service<sp/>we<sp/>wish<sp/>to<sp/>use.</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">```csharp</highlight></codeline>
+<codeline><highlight class="normal">var<sp/>genericDecorationMapper<sp/>=<sp/>DecorationMapperRegistry.GetDecorationMapper(</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>ExtensionNoPeriodFacts.C_SHARP_CLASS);</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">var<sp/>cSharpCompilerService<sp/>=<sp/>CompilerServiceRegistry.GetCompilerService(</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>ExtensionNoPeriodFacts.C_SHARP_CLASS);</highlight></codeline>
+<codeline><highlight class="normal">```</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">-<sp/>Then<sp/>pass<sp/>in<sp/>`genericDecorationMapper`<sp/>and<sp/>`cSharpCompilerService`<sp/>instead<sp/>of<sp/>the<sp/>nulls<sp/>when<sp/>invoking<sp/>the<sp/>`TextEditorModel`<sp/>constructor.</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">-<sp/>One<sp/>last<sp/>step,<sp/>on<sp/>the<sp/>line<sp/>immediately<sp/>following,<sp/>`TextEditorService.ModelApi.RegisterCustom(model);`<sp/>add<sp/>the<sp/>line:<sp/>`cSharpCompilerService.RegisterResource(model.ResourceUri,<sp/>shouldTriggerResourceWasModified:<sp/>true);`</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">-<sp/>My<sp/>`Pages/Index.razor.cs`<sp/>file<sp/>as<sp/>of<sp/>this<sp/>step<sp/>is<sp/>shown<sp/>in<sp/>the<sp/>following<sp/>code<sp/>snippet:</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">```csharp</highlight></codeline>
+<codeline><highlight class="normal">using<sp/>Luthetus.Common.RazorLib.Keys.Models;</highlight></codeline>
+<codeline><highlight class="normal">using<sp/>Luthetus.TextEditor.RazorLib;</highlight></codeline>
+<codeline><highlight class="normal">using<sp/>Luthetus.TextEditor.RazorLib.CompilerServices.Interfaces;</highlight></codeline>
+<codeline><highlight class="normal">using<sp/>Luthetus.TextEditor.RazorLib.Decorations.Models;</highlight></codeline>
+<codeline><highlight class="normal">using<sp/>Luthetus.TextEditor.RazorLib.Lexers.Models;</highlight></codeline>
+<codeline><highlight class="normal">using<sp/>Luthetus.TextEditor.RazorLib.TextEditors.Models;</highlight></codeline>
+<codeline><highlight class="normal">using<sp/>Microsoft.AspNetCore.Components;</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">namespace<sp/>NugetPackageTest.Pages;</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">public<sp/>partial<sp/>class<sp/>Home<sp/>:<sp/>ComponentBase</highlight></codeline>
+<codeline><highlight class="normal">{</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>[Inject]</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>private<sp/>ITextEditorService<sp/>TextEditorService<sp/>{<sp/>get;<sp/>set;<sp/>}<sp/>=<sp/>null!;</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>[Inject]</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>private<sp/>ICompilerServiceRegistry<sp/>CompilerServiceRegistry<sp/>{<sp/>get;<sp/>set;<sp/>}<sp/>=<sp/>null!;</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>[Inject]</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>private<sp/>IDecorationMapperRegistry<sp/>DecorationMapperRegistry<sp/>{<sp/>get;<sp/>set;<sp/>}<sp/>=<sp/>null!;</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>public<sp/>static<sp/>ResourceUri<sp/>ResourceUri<sp/>{<sp/>get;<sp/>}<sp/>=<sp/>new(&quot;/index.txt&quot;);</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>public<sp/>static<sp/>Key&lt;TextEditorViewModel&gt;<sp/>ViewModelKey<sp/>{<sp/>get;<sp/>}<sp/>=<sp/>Key&lt;TextEditorViewModel&gt;.NewKey();</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>protected<sp/>override<sp/>void<sp/>OnInitialized()</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>var<sp/>genericDecorationMapper<sp/>=<sp/>DecorationMapperRegistry.GetDecorationMapper(</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ExtensionNoPeriodFacts.C_SHARP_CLASS);</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>var<sp/>cSharpCompilerService<sp/>=<sp/>CompilerServiceRegistry.GetCompilerService(</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ExtensionNoPeriodFacts.C_SHARP_CLASS);</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>var<sp/>model<sp/>=<sp/>new<sp/>TextEditorModel(</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ResourceUri,</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>DateTime.UtcNow,</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ExtensionNoPeriodFacts.TXT,</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>@&quot;public<sp/>class<sp/>MyClass</highlight></codeline>
+<codeline><highlight class="normal">{</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>public<sp/>MyClass(string<sp/>firstName,<sp/>string<sp/>lastName)</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>FirstName<sp/>=<sp/>firstName;</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>LastName<sp/>=<sp/>lastName;</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>public<sp/>string<sp/>FirstName<sp/>{<sp/>get;<sp/>set;<sp/>}</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>public<sp/>string<sp/>LastName<sp/>{<sp/>get;<sp/>set;<sp/>}</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>public<sp/>string<sp/>DisplayName<sp/>=&gt;<sp/>$&quot;&quot;{{FirstName}}<sp/>{LastName}&quot;&quot;;</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>public<sp/>void<sp/>SomeMethod(int<sp/>arg1,<sp/>MyClass<sp/>arg2)</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>if<sp/>(arg1<sp/>==<sp/>2)</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>return;</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>return;</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline><highlight class="normal">}&quot;,</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>genericDecorationMapper,</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>cSharpCompilerService);</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>TextEditorService.ModelApi.RegisterCustom(model);</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>cSharpCompilerService.RegisterResource(model.ResourceUri,<sp/>shouldTriggerResourceWasModified:<sp/>true);</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>TextEditorService.ViewModelApi.Register(</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ViewModelKey,</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ResourceUri,</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>new<sp/>Category(&quot;main&quot;));</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>base.OnInitialized();</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline><highlight class="normal">}</highlight></codeline>
+<codeline><highlight class="normal">```</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">-<sp/>Now<sp/>you<sp/>should<sp/>have<sp/>a<sp/>Text<sp/>Editor<sp/>with<sp/>the<sp/>CSharpCompilerService<sp/>as<sp/>shown<sp/>in<sp/>this<sp/>GIF:</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">![tutorial_Usage-CSharpCompilerServiceTextEditor.gif](../../Images/TextEditor/Gifs/text-editor-tutorial-result.gif)</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">#<sp/>Next<sp/>tutorial:<sp/>#TODO:<sp/>Continue</highlight></codeline>
+    </programlisting>
+    <location file="Docs/TextEditor/usage.md"/>
+  </compounddef>
+</doxygen>

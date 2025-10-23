@@ -1,0 +1,191 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_class_luthetus_1_1_text_editor_1_1_tests_1_1_adhoc_1_1_new_keybinds" xml:lang="en-US">
+<title>Luthetus.TextEditor.Tests.Adhoc.NewKeybinds Class Reference</title>
+<indexterm><primary>Luthetus.TextEditor.Tests.Adhoc.NewKeybinds</primary></indexterm>
+<simplesect>
+    <title>Public Member Functions    </title>
+        <itemizedlist>
+            <listitem><para>void <link linkend="_class_luthetus_1_1_text_editor_1_1_tests_1_1_adhoc_1_1_new_keybinds_1a69cc4982f6094d982833dc3f85f6dea1">AltPlusDown_THEN_MoveLineDown</link> ()</para>
+
+<para>[] Alt + Down =&gt; move line down [] see the other version of this </para>
+</listitem>
+            <listitem><para>void <link linkend="_class_luthetus_1_1_text_editor_1_1_tests_1_1_adhoc_1_1_new_keybinds_1abbf5dd6f1253055f630606d3e05324fd">AltPlusUp_THEN_MoveLineUp</link> ()</para>
+
+<para>[] Alt + Up =&gt; move line up [] 2 ways about this? [] Way One [] Determine the start position index of the current line. [] Cut the line above [] Paste the contents at the determined start position index. [] Way Two [] Determine the start position index of the previous line. [] Cut the current line [] Paste the contents at the determined start position index </para>
+</listitem>
+            <listitem><para>void <link linkend="_class_luthetus_1_1_text_editor_1_1_tests_1_1_adhoc_1_1_new_keybinds_1a1f25c59eb41a1afb21d55d0402aebe1d">CtrlPlusAltPlusArrowLeftOrArrowRight_THEN_MoveCamelCase</link> ()</para>
+
+<para>[] Ctrl + Alt + (ArrowLeft | ArrowRight) =&gt; move camel case [] while (LetterOrDigit) if IsCapitalized break; </para>
+</listitem>
+            <listitem><para>void <link linkend="_class_luthetus_1_1_text_editor_1_1_tests_1_1_adhoc_1_1_new_keybinds_1a4bf3c1a3657b869a2411d257cd439aa9">Home_THEN_MoreFunctionality</link> ()</para>
+
+<para>[] Home keystroke [] Should &quot;stop early&quot; at the end of the indentation. [] Go to column 0 [] While (indentation) ++column [] Then repressing the keystroke at the end of the indentation goes to the actual start of the line [] Track current column [] Do the &quot;stop early&quot; logic [] Compare if previous column and new current column are the same [] if the same then go to column 0 [] otherwise stay where you are. [] If at start of line then home takes to end of indentation. [] Do the &quot;stop early&quot; logic [] If within starting indentation then go to the end of the starting indentation. [] Do the &quot;stop early&quot; logic </para>
+</listitem>
+            <listitem><para>void <link linkend="_class_luthetus_1_1_text_editor_1_1_tests_1_1_adhoc_1_1_new_keybinds_1a8789d30e43c004fda39c1e5739fb6194">CtrlPlusEnter_THEN_SupportMatchIndentation</link> ()</para>
+
+<para>[] Match indentation on newline [] insert line above command [] The code to get the indentation is already done in the &apos;HandleOnKeyDown(...)&apos; method, note: I totally spelled the method name wrong. </para>
+</listitem>
+            <listitem><para>void <link linkend="_class_luthetus_1_1_text_editor_1_1_tests_1_1_adhoc_1_1_new_keybinds_1abe6302651eef9274fc6730c0ed74ea3d">ShiftPlusEnter_THEN_SupportMatchIndentation</link> ()</para>
+
+<para>[] Match indentation on newline [] insert line below command [] The code to get the indentation is already done in the &apos;HandleOnKeyDown(...)&apos; method, note: I totally spelled the method name wrong. </para>
+</listitem>
+            <listitem><para>void <link linkend="_class_luthetus_1_1_text_editor_1_1_tests_1_1_adhoc_1_1_new_keybinds_1af5a6cb04b80e38a68e2080f4a28a7856">NoSelectionPlusShiftPlusTabPlusCursorAtIndentation_THEN_IndentLess</link> ()</para>
+
+<para>[] No selection + { Shift + Tab } + Cursor positioned at or in the starting indentation should =&gt; IndentLess [] Go to column 0 [] While (indentation) ++column [] if pass by the cursor, then can break early with success [] if sees !indentation then break with failure </para>
+</listitem>
+            <listitem><para>void <link linkend="_class_luthetus_1_1_text_editor_1_1_tests_1_1_adhoc_1_1_new_keybinds_1add8d56cb194b95c88416ae63e1449081">F7_THEN_RelatedFilesQuickpick</link> ()</para>
+
+<para>[] F7 =&gt; Related Files quickpick [] Read directory which contains the current file [] If there are any direct descendent files of that directory then check the name against a predicate if it &quot;matches&quot; with the active file and add to list if it does [] Show the list to the user [] Open the file they pick [] Or let them cancel with &apos;Escape&apos; key </para>
+</listitem>
+            <listitem><para>void <link linkend="_class_luthetus_1_1_text_editor_1_1_tests_1_1_adhoc_1_1_new_keybinds_1ae5343f7a0962944f91c769f9fd838f3f">CtrlPlusTab_THEN_FileOrContextOrToolQuickpick</link> ()</para>
+
+<para>[] Ctrl + Tab =&gt; Quick Pick file or context/tool [] I can probably make this task first draft far simpler by not closing the menu on-ctrl-key-up [] Visual Studio has where you hold ctrl, but it sounds like a pain to do and it makes me want to procrastinate. [] If I just have Ctrl + Tab open the menu then either enter to select and submit form or escape to close menu then it would be a lot easier. [] I say this because I imagine I need something stateful in order to have on-ctrl-key-up logic work. I have to maintain the state of this and subscribe to the event in a sort of way. </para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<section>
+<title>Detailed Description</title>
+<para>
+Definition at line <link linkend="__new_keybinds_8cs_source_1l00009">9</link> of file <link linkend="__new_keybinds_8cs_source">NewKeybinds.cs</link>.</para>
+</section>
+<section>
+<title>Member Function Documentation</title>
+<anchor xml:id="_class_luthetus_1_1_text_editor_1_1_tests_1_1_adhoc_1_1_new_keybinds_1a69cc4982f6094d982833dc3f85f6dea1"/><section>
+    <title>AltPlusDown_THEN_MoveLineDown()</title>
+<indexterm><primary>AltPlusDown_THEN_MoveLineDown</primary><secondary>Luthetus.TextEditor.Tests.Adhoc.NewKeybinds</secondary></indexterm>
+<indexterm><primary>Luthetus.TextEditor.Tests.Adhoc.NewKeybinds</primary><secondary>AltPlusDown_THEN_MoveLineDown</secondary></indexterm>
+<para><computeroutput>void Luthetus.TextEditor.Tests.Adhoc.NewKeybinds.AltPlusDown_THEN_MoveLineDown ( )</computeroutput></para><para>
+
+<para>[] Alt + Down =&gt; move line down [] see the other version of this </para>
+</para>
+<para>
+Definition at line <link linkend="__new_keybinds_8cs_source_1l00016">16</link> of file <link linkend="__new_keybinds_8cs_source">NewKeybinds.cs</link>.</para>
+</section>
+<anchor xml:id="_class_luthetus_1_1_text_editor_1_1_tests_1_1_adhoc_1_1_new_keybinds_1abbf5dd6f1253055f630606d3e05324fd"/><section>
+    <title>AltPlusUp_THEN_MoveLineUp()</title>
+<indexterm><primary>AltPlusUp_THEN_MoveLineUp</primary><secondary>Luthetus.TextEditor.Tests.Adhoc.NewKeybinds</secondary></indexterm>
+<indexterm><primary>Luthetus.TextEditor.Tests.Adhoc.NewKeybinds</primary><secondary>AltPlusUp_THEN_MoveLineUp</secondary></indexterm>
+<para><computeroutput>void Luthetus.TextEditor.Tests.Adhoc.NewKeybinds.AltPlusUp_THEN_MoveLineUp ( )</computeroutput></para><para>
+
+<para>[] Alt + Up =&gt; move line up [] 2 ways about this? [] Way One [] Determine the start position index of the current line. [] Cut the line above [] Paste the contents at the determined start position index. [] Way Two [] Determine the start position index of the previous line. [] Cut the current line [] Paste the contents at the determined start position index </para>
+</para>
+<para>
+Definition at line <link linkend="__new_keybinds_8cs_source_1l00058">58</link> of file <link linkend="__new_keybinds_8cs_source">NewKeybinds.cs</link>.</para>
+Here is the call graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_luthetus_1_1_text_editor_1_1_tests_1_1_adhoc_1_1_new_keybinds_abbf5dd6f1253055f630606d3e05324fd_cgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+</section>
+<anchor xml:id="_class_luthetus_1_1_text_editor_1_1_tests_1_1_adhoc_1_1_new_keybinds_1a1f25c59eb41a1afb21d55d0402aebe1d"/><section>
+    <title>CtrlPlusAltPlusArrowLeftOrArrowRight_THEN_MoveCamelCase()</title>
+<indexterm><primary>CtrlPlusAltPlusArrowLeftOrArrowRight_THEN_MoveCamelCase</primary><secondary>Luthetus.TextEditor.Tests.Adhoc.NewKeybinds</secondary></indexterm>
+<indexterm><primary>Luthetus.TextEditor.Tests.Adhoc.NewKeybinds</primary><secondary>CtrlPlusAltPlusArrowLeftOrArrowRight_THEN_MoveCamelCase</secondary></indexterm>
+<para><computeroutput>void Luthetus.TextEditor.Tests.Adhoc.NewKeybinds.CtrlPlusAltPlusArrowLeftOrArrowRight_THEN_MoveCamelCase ( )</computeroutput></para><para>
+
+<para>[] Ctrl + Alt + (ArrowLeft | ArrowRight) =&gt; move camel case [] while (LetterOrDigit) if IsCapitalized break; </para>
+</para>
+<para>
+Definition at line <link linkend="__new_keybinds_8cs_source_1l00146">146</link> of file <link linkend="__new_keybinds_8cs_source">NewKeybinds.cs</link>.</para>
+Here is the call graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_luthetus_1_1_text_editor_1_1_tests_1_1_adhoc_1_1_new_keybinds_a1f25c59eb41a1afb21d55d0402aebe1d_cgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+</section>
+<anchor xml:id="_class_luthetus_1_1_text_editor_1_1_tests_1_1_adhoc_1_1_new_keybinds_1a8789d30e43c004fda39c1e5739fb6194"/><section>
+    <title>CtrlPlusEnter_THEN_SupportMatchIndentation()</title>
+<indexterm><primary>CtrlPlusEnter_THEN_SupportMatchIndentation</primary><secondary>Luthetus.TextEditor.Tests.Adhoc.NewKeybinds</secondary></indexterm>
+<indexterm><primary>Luthetus.TextEditor.Tests.Adhoc.NewKeybinds</primary><secondary>CtrlPlusEnter_THEN_SupportMatchIndentation</secondary></indexterm>
+<para><computeroutput>void Luthetus.TextEditor.Tests.Adhoc.NewKeybinds.CtrlPlusEnter_THEN_SupportMatchIndentation ( )</computeroutput></para><para>
+
+<para>[] Match indentation on newline [] insert line above command [] The code to get the indentation is already done in the &apos;HandleOnKeyDown(...)&apos; method, note: I totally spelled the method name wrong. </para>
+</para>
+<para>
+Definition at line <link linkend="__new_keybinds_8cs_source_1l00322">322</link> of file <link linkend="__new_keybinds_8cs_source">NewKeybinds.cs</link>.</para>
+</section>
+<anchor xml:id="_class_luthetus_1_1_text_editor_1_1_tests_1_1_adhoc_1_1_new_keybinds_1ae5343f7a0962944f91c769f9fd838f3f"/><section>
+    <title>CtrlPlusTab_THEN_FileOrContextOrToolQuickpick()</title>
+<indexterm><primary>CtrlPlusTab_THEN_FileOrContextOrToolQuickpick</primary><secondary>Luthetus.TextEditor.Tests.Adhoc.NewKeybinds</secondary></indexterm>
+<indexterm><primary>Luthetus.TextEditor.Tests.Adhoc.NewKeybinds</primary><secondary>CtrlPlusTab_THEN_FileOrContextOrToolQuickpick</secondary></indexterm>
+<para><computeroutput>void Luthetus.TextEditor.Tests.Adhoc.NewKeybinds.CtrlPlusTab_THEN_FileOrContextOrToolQuickpick ( )</computeroutput></para><para>
+
+<para>[] Ctrl + Tab =&gt; Quick Pick file or context/tool [] I can probably make this task first draft far simpler by not closing the menu on-ctrl-key-up [] Visual Studio has where you hold ctrl, but it sounds like a pain to do and it makes me want to procrastinate. [] If I just have Ctrl + Tab open the menu then either enter to select and submit form or escape to close menu then it would be a lot easier. [] I say this because I imagine I need something stateful in order to have on-ctrl-key-up logic work. I have to maintain the state of this and subscribe to the event in a sort of way. </para>
+</para>
+<para>
+Definition at line <link linkend="__new_keybinds_8cs_source_1l00461">461</link> of file <link linkend="__new_keybinds_8cs_source">NewKeybinds.cs</link>.</para>
+</section>
+<anchor xml:id="_class_luthetus_1_1_text_editor_1_1_tests_1_1_adhoc_1_1_new_keybinds_1add8d56cb194b95c88416ae63e1449081"/><section>
+    <title>F7_THEN_RelatedFilesQuickpick()</title>
+<indexterm><primary>F7_THEN_RelatedFilesQuickpick</primary><secondary>Luthetus.TextEditor.Tests.Adhoc.NewKeybinds</secondary></indexterm>
+<indexterm><primary>Luthetus.TextEditor.Tests.Adhoc.NewKeybinds</primary><secondary>F7_THEN_RelatedFilesQuickpick</secondary></indexterm>
+<para><computeroutput>void Luthetus.TextEditor.Tests.Adhoc.NewKeybinds.F7_THEN_RelatedFilesQuickpick ( )</computeroutput></para><para>
+
+<para>[] F7 =&gt; Related Files quickpick [] Read directory which contains the current file [] If there are any direct descendent files of that directory then check the name against a predicate if it &quot;matches&quot; with the active file and add to list if it does [] Show the list to the user [] Open the file they pick [] Or let them cancel with &apos;Escape&apos; key </para>
+</para>
+<para>
+Definition at line <link linkend="__new_keybinds_8cs_source_1l00446">446</link> of file <link linkend="__new_keybinds_8cs_source">NewKeybinds.cs</link>.</para>
+</section>
+<anchor xml:id="_class_luthetus_1_1_text_editor_1_1_tests_1_1_adhoc_1_1_new_keybinds_1a4bf3c1a3657b869a2411d257cd439aa9"/><section>
+    <title>Home_THEN_MoreFunctionality()</title>
+<indexterm><primary>Home_THEN_MoreFunctionality</primary><secondary>Luthetus.TextEditor.Tests.Adhoc.NewKeybinds</secondary></indexterm>
+<indexterm><primary>Luthetus.TextEditor.Tests.Adhoc.NewKeybinds</primary><secondary>Home_THEN_MoreFunctionality</secondary></indexterm>
+<para><computeroutput>void Luthetus.TextEditor.Tests.Adhoc.NewKeybinds.Home_THEN_MoreFunctionality ( )</computeroutput></para><para>
+
+<para>[] Home keystroke [] Should &quot;stop early&quot; at the end of the indentation. [] Go to column 0 [] While (indentation) ++column [] Then repressing the keystroke at the end of the indentation goes to the actual start of the line [] Track current column [] Do the &quot;stop early&quot; logic [] Compare if previous column and new current column are the same [] if the same then go to column 0 [] otherwise stay where you are. [] If at start of line then home takes to end of indentation. [] Do the &quot;stop early&quot; logic [] If within starting indentation then go to the end of the starting indentation. [] Do the &quot;stop early&quot; logic </para>
+</para>
+<para>
+Definition at line <link linkend="__new_keybinds_8cs_source_1l00232">232</link> of file <link linkend="__new_keybinds_8cs_source">NewKeybinds.cs</link>.</para>
+Here is the call graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_luthetus_1_1_text_editor_1_1_tests_1_1_adhoc_1_1_new_keybinds_a4bf3c1a3657b869a2411d257cd439aa9_cgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+</section>
+<anchor xml:id="_class_luthetus_1_1_text_editor_1_1_tests_1_1_adhoc_1_1_new_keybinds_1af5a6cb04b80e38a68e2080f4a28a7856"/><section>
+    <title>NoSelectionPlusShiftPlusTabPlusCursorAtIndentation_THEN_IndentLess()</title>
+<indexterm><primary>NoSelectionPlusShiftPlusTabPlusCursorAtIndentation_THEN_IndentLess</primary><secondary>Luthetus.TextEditor.Tests.Adhoc.NewKeybinds</secondary></indexterm>
+<indexterm><primary>Luthetus.TextEditor.Tests.Adhoc.NewKeybinds</primary><secondary>NoSelectionPlusShiftPlusTabPlusCursorAtIndentation_THEN_IndentLess</secondary></indexterm>
+<para><computeroutput>void Luthetus.TextEditor.Tests.Adhoc.NewKeybinds.NoSelectionPlusShiftPlusTabPlusCursorAtIndentation_THEN_IndentLess ( )</computeroutput></para><para>
+
+<para>[] No selection + { Shift + Tab } + Cursor positioned at or in the starting indentation should =&gt; IndentLess [] Go to column 0 [] While (indentation) ++column [] if pass by the cursor, then can break early with success [] if sees !indentation then break with failure </para>
+</para>
+<para>
+Definition at line <link linkend="__new_keybinds_8cs_source_1l00347">347</link> of file <link linkend="__new_keybinds_8cs_source">NewKeybinds.cs</link>.</para>
+Here is the call graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_luthetus_1_1_text_editor_1_1_tests_1_1_adhoc_1_1_new_keybinds_af5a6cb04b80e38a68e2080f4a28a7856_cgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+</section>
+<anchor xml:id="_class_luthetus_1_1_text_editor_1_1_tests_1_1_adhoc_1_1_new_keybinds_1abe6302651eef9274fc6730c0ed74ea3d"/><section>
+    <title>ShiftPlusEnter_THEN_SupportMatchIndentation()</title>
+<indexterm><primary>ShiftPlusEnter_THEN_SupportMatchIndentation</primary><secondary>Luthetus.TextEditor.Tests.Adhoc.NewKeybinds</secondary></indexterm>
+<indexterm><primary>Luthetus.TextEditor.Tests.Adhoc.NewKeybinds</primary><secondary>ShiftPlusEnter_THEN_SupportMatchIndentation</secondary></indexterm>
+<para><computeroutput>void Luthetus.TextEditor.Tests.Adhoc.NewKeybinds.ShiftPlusEnter_THEN_SupportMatchIndentation ( )</computeroutput></para><para>
+
+<para>[] Match indentation on newline [] insert line below command [] The code to get the indentation is already done in the &apos;HandleOnKeyDown(...)&apos; method, note: I totally spelled the method name wrong. </para>
+</para>
+<para>
+Definition at line <link linkend="__new_keybinds_8cs_source_1l00334">334</link> of file <link linkend="__new_keybinds_8cs_source">NewKeybinds.cs</link>.</para>
+</section>
+<para>
+The documentation for this class was generated from the following file:</para>
+Source/Tests/TextEditor/Adhoc/<link linkend="__new_keybinds_8cs">NewKeybinds.cs</link></section>
+</section>

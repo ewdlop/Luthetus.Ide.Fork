@@ -1,0 +1,367 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
+  <compounddef id="_panel_state_tests_8_reducer_8cs" kind="file" language="C#">
+    <compoundname>PanelStateTests.Reducer.cs</compoundname>
+    <innerclass refid="class_luthetus_1_1_common_1_1_tests_1_1_basis_1_1_panels_1_1_states_1_1_panel_state_reducer_tests" prot="public">Luthetus::Common::Tests::Basis::Panels::States::PanelStateReducerTests</innerclass>
+    <innernamespace refid="namespace_luthetus">Luthetus</innernamespace>
+    <innernamespace refid="namespace_luthetus_1_1_common">Luthetus::Common</innernamespace>
+    <innernamespace refid="namespace_luthetus_1_1_common_1_1_tests">Luthetus::Common::Tests</innernamespace>
+    <innernamespace refid="namespace_luthetus_1_1_common_1_1_tests_1_1_basis">Luthetus::Common::Tests::Basis</innernamespace>
+    <innernamespace refid="namespace_luthetus_1_1_common_1_1_tests_1_1_basis_1_1_panels">Luthetus::Common::Tests::Basis::Panels</innernamespace>
+    <innernamespace refid="namespace_luthetus_1_1_common_1_1_tests_1_1_basis_1_1_panels_1_1_states">Luthetus::Common::Tests::Basis::Panels::States</innernamespace>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="keyword">using<sp/></highlight><highlight class="normal">Fluxor;</highlight></codeline>
+<codeline lineno="2"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="namespace_luthetus_1_1_common_1_1_razor_lib_1_1_background_tasks_1_1_models" kindref="compound">Luthetus.Common.RazorLib.BackgroundTasks.Models</ref>;</highlight></codeline>
+<codeline lineno="3"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="namespace_luthetus_1_1_common_1_1_razor_lib_1_1_contexts_1_1_models" kindref="compound">Luthetus.Common.RazorLib.Contexts.Models</ref>;</highlight></codeline>
+<codeline lineno="4"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="namespace_luthetus_1_1_common_1_1_razor_lib_1_1_dialogs_1_1_models" kindref="compound">Luthetus.Common.RazorLib.Dialogs.Models</ref>;</highlight></codeline>
+<codeline lineno="5"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="namespace_luthetus_1_1_common_1_1_razor_lib_1_1_dimensions_1_1_models" kindref="compound">Luthetus.Common.RazorLib.Dimensions.Models</ref>;</highlight></codeline>
+<codeline lineno="6"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="namespace_luthetus_1_1_common_1_1_razor_lib_1_1_dynamics_1_1_models" kindref="compound">Luthetus.Common.RazorLib.Dynamics.Models</ref>;</highlight></codeline>
+<codeline lineno="7"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">Luthetus.Common.RazorLib.Icons.Displays.Codicon;</highlight></codeline>
+<codeline lineno="8"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="namespace_luthetus_1_1_common_1_1_razor_lib_1_1_installations_1_1_models" kindref="compound">Luthetus.Common.RazorLib.Installations.Models</ref>;</highlight></codeline>
+<codeline lineno="9"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="namespace_luthetus_1_1_common_1_1_razor_lib_1_1_keys_1_1_models" kindref="compound">Luthetus.Common.RazorLib.Keys.Models</ref>;</highlight></codeline>
+<codeline lineno="10"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="namespace_luthetus_1_1_common_1_1_razor_lib_1_1_misc" kindref="compound">Luthetus.Common.RazorLib.Misc</ref>;</highlight></codeline>
+<codeline lineno="11"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="namespace_luthetus_1_1_common_1_1_razor_lib_1_1_panels_1_1_models" kindref="compound">Luthetus.Common.RazorLib.Panels.Models</ref>;</highlight></codeline>
+<codeline lineno="12"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="namespace_luthetus_1_1_common_1_1_razor_lib_1_1_panels_1_1_states" kindref="compound">Luthetus.Common.RazorLib.Panels.States</ref>;</highlight></codeline>
+<codeline lineno="13"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="namespace_luthetus_1_1_common_1_1_razor_lib_1_1_resizes_1_1_displays" kindref="compound">Luthetus.Common.RazorLib.Resizes.Displays</ref>;</highlight></codeline>
+<codeline lineno="14"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">Microsoft.Extensions.DependencyInjection;</highlight></codeline>
+<codeline lineno="15"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">Microsoft.JSInterop;</highlight></codeline>
+<codeline lineno="16"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">System.Collections.Immutable;</highlight></codeline>
+<codeline lineno="17"><highlight class="normal"></highlight></codeline>
+<codeline lineno="18"><highlight class="normal"></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal"><ref refid="namespace_luthetus_1_1_common_1_1_tests_1_1_basis_1_1_panels_1_1_states" kindref="compound">Luthetus.Common.Tests.Basis.Panels.States</ref>;</highlight></codeline>
+<codeline lineno="19"><highlight class="normal"></highlight></codeline>
+<codeline lineno="23" refid="class_luthetus_1_1_common_1_1_tests_1_1_basis_1_1_panels_1_1_states_1_1_panel_state_reducer_tests" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">public</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="class_luthetus_1_1_common_1_1_tests_1_1_basis_1_1_panels_1_1_states_1_1_panel_state_reducer_tests" kindref="compound">PanelStateReducerTests</ref></highlight></codeline>
+<codeline lineno="24"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="28"><highlight class="normal"><sp/><sp/><sp/><sp/>[Fact]</highlight></codeline>
+<codeline lineno="29" refid="class_luthetus_1_1_common_1_1_tests_1_1_basis_1_1_panels_1_1_states_1_1_panel_state_reducer_tests_1ae0ae221b215e8c819fccde5dd06f4710" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="class_luthetus_1_1_common_1_1_tests_1_1_basis_1_1_panels_1_1_states_1_1_panel_state_reducer_tests_1ae0ae221b215e8c819fccde5dd06f4710" kindref="member">ReduceRegisterPanelGroupAction</ref>()</highlight></codeline>
+<codeline lineno="30"><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="31"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>InitializePanelStateReducerTests(</highlight></codeline>
+<codeline lineno="32"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>out<sp/>var<sp/>panelGroup,</highlight></codeline>
+<codeline lineno="33"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>out<sp/>var<sp/>panelTab,</highlight></codeline>
+<codeline lineno="34"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>out<sp/>var<sp/>panelStateWrap,</highlight></codeline>
+<codeline lineno="35"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>out<sp/>var<sp/>dispatcher,</highlight></codeline>
+<codeline lineno="36"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>out<sp/>var<sp/>serviceProvider);</highlight></codeline>
+<codeline lineno="37"><highlight class="normal"></highlight></codeline>
+<codeline lineno="38"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Assert.DoesNotContain(panelStateWrap.Value.PanelGroupList,<sp/>x<sp/>=&gt;<sp/>x<sp/>==<sp/>panelGroup);</highlight></codeline>
+<codeline lineno="39"><highlight class="normal"></highlight></codeline>
+<codeline lineno="40"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>var<sp/>registerPanelGroupAction<sp/>=<sp/></highlight><highlight class="keyword">new</highlight><highlight class="normal"><sp/><ref refid="namespace_luthetus_1_1_common_1_1_razor_lib_1_1_panels_1_1_states_1a3e69a06f395780138ff06e862f45ee3c" kindref="member">PanelState</ref>.RegisterPanelGroupAction(panelGroup);</highlight></codeline>
+<codeline lineno="41"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>dispatcher.Dispatch(registerPanelGroupAction);</highlight></codeline>
+<codeline lineno="42"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Assert.Contains(panelStateWrap.Value.PanelGroupList,<sp/>x<sp/>=&gt;<sp/>x<sp/>==<sp/>panelGroup);</highlight></codeline>
+<codeline lineno="43"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="44"><highlight class="normal"></highlight></codeline>
+<codeline lineno="48"><highlight class="normal"><sp/><sp/><sp/><sp/>[Fact]</highlight></codeline>
+<codeline lineno="49" refid="class_luthetus_1_1_common_1_1_tests_1_1_basis_1_1_panels_1_1_states_1_1_panel_state_reducer_tests_1ae37ea5db02a8ba4275a9f0419b7c07e9" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="class_luthetus_1_1_common_1_1_tests_1_1_basis_1_1_panels_1_1_states_1_1_panel_state_reducer_tests_1ae37ea5db02a8ba4275a9f0419b7c07e9" kindref="member">ReduceDisposePanelGroupAction</ref>()</highlight></codeline>
+<codeline lineno="50"><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="51"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>InitializePanelStateReducerTests(</highlight></codeline>
+<codeline lineno="52"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>out<sp/>var<sp/>panelGroup,</highlight></codeline>
+<codeline lineno="53"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>out<sp/>var<sp/>panelTab,</highlight></codeline>
+<codeline lineno="54"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>out<sp/>var<sp/>panelStateWrap,</highlight></codeline>
+<codeline lineno="55"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>out<sp/>var<sp/>dispatcher,</highlight></codeline>
+<codeline lineno="56"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>out<sp/>var<sp/>serviceProvider);</highlight></codeline>
+<codeline lineno="57"><highlight class="normal"></highlight></codeline>
+<codeline lineno="58"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Assert.DoesNotContain(panelStateWrap.Value.PanelGroupList,<sp/>x<sp/>=&gt;<sp/>x<sp/>==<sp/>panelGroup);</highlight></codeline>
+<codeline lineno="59"><highlight class="normal"></highlight></codeline>
+<codeline lineno="60"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>dispatcher.Dispatch(</highlight><highlight class="keyword">new</highlight><highlight class="normal"><sp/><ref refid="namespace_luthetus_1_1_common_1_1_razor_lib_1_1_panels_1_1_states_1a3e69a06f395780138ff06e862f45ee3c" kindref="member">PanelState</ref>.RegisterPanelGroupAction(panelGroup));</highlight></codeline>
+<codeline lineno="61"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Assert.Contains(panelStateWrap.Value.PanelGroupList,<sp/>x<sp/>=&gt;<sp/>x<sp/>==<sp/>panelGroup);</highlight></codeline>
+<codeline lineno="62"><highlight class="normal"></highlight></codeline>
+<codeline lineno="63"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>dispatcher.Dispatch(</highlight><highlight class="keyword">new</highlight><highlight class="normal"><sp/><ref refid="namespace_luthetus_1_1_common_1_1_razor_lib_1_1_panels_1_1_states_1a3e69a06f395780138ff06e862f45ee3c" kindref="member">PanelState</ref>.DisposePanelGroupAction(panelGroup.Key));</highlight></codeline>
+<codeline lineno="64"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Assert.DoesNotContain(panelStateWrap.Value.PanelGroupList,<sp/>x<sp/>=&gt;<sp/>x<sp/>==<sp/>panelGroup);</highlight></codeline>
+<codeline lineno="65"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="66"><highlight class="normal"></highlight></codeline>
+<codeline lineno="70"><highlight class="normal"><sp/><sp/><sp/><sp/>[Fact]</highlight></codeline>
+<codeline lineno="71" refid="class_luthetus_1_1_common_1_1_tests_1_1_basis_1_1_panels_1_1_states_1_1_panel_state_reducer_tests_1a1a9715612b524a0f94796d26c9b67d10" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="class_luthetus_1_1_common_1_1_tests_1_1_basis_1_1_panels_1_1_states_1_1_panel_state_reducer_tests_1a1a9715612b524a0f94796d26c9b67d10" kindref="member">ReduceRegisterPanelTabAction</ref>()</highlight></codeline>
+<codeline lineno="72"><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="73"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>InitializePanelStateReducerTests(</highlight></codeline>
+<codeline lineno="74"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>out<sp/>var<sp/>panelGroup,</highlight></codeline>
+<codeline lineno="75"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>out<sp/>var<sp/>panelTab,</highlight></codeline>
+<codeline lineno="76"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>out<sp/>var<sp/>panelStateWrap,</highlight></codeline>
+<codeline lineno="77"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>out<sp/>var<sp/>dispatcher,</highlight></codeline>
+<codeline lineno="78"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>out<sp/>var<sp/>serviceProvider);</highlight></codeline>
+<codeline lineno="79"><highlight class="normal"></highlight></codeline>
+<codeline lineno="80"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>dispatcher.Dispatch(</highlight><highlight class="keyword">new</highlight><highlight class="normal"><sp/><ref refid="namespace_luthetus_1_1_common_1_1_razor_lib_1_1_panels_1_1_states_1a3e69a06f395780138ff06e862f45ee3c" kindref="member">PanelState</ref>.RegisterPanelGroupAction(panelGroup));</highlight></codeline>
+<codeline lineno="81"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Assert.Contains(panelStateWrap.Value.PanelGroupList,<sp/>x<sp/>=&gt;<sp/>x<sp/>==<sp/>panelGroup);</highlight></codeline>
+<codeline lineno="82"><highlight class="normal"></highlight></codeline>
+<codeline lineno="83"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>Ensure<sp/>the<sp/>panelGroup<sp/>is<sp/>not<sp/>empty.</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="84"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>This<sp/>allows<sp/>one<sp/>to<sp/>test<sp/>the<sp/>&apos;insertAtIndexZero&apos;<sp/>logic.</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="85"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>That<sp/>is<sp/>to<sp/>say,<sp/>insert<sp/>at<sp/>start<sp/>or<sp/>end<sp/>logic.</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="86"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="87"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>dispatcher.Dispatch(</highlight><highlight class="keyword">new</highlight><highlight class="normal"><sp/><ref refid="namespace_luthetus_1_1_common_1_1_razor_lib_1_1_panels_1_1_states_1a3e69a06f395780138ff06e862f45ee3c" kindref="member">PanelState</ref>.RegisterPanelTabAction(</highlight></codeline>
+<codeline lineno="88"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>panelGroup.Key,</highlight></codeline>
+<codeline lineno="89"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>panelTab,</highlight></codeline>
+<codeline lineno="90"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">));</highlight></codeline>
+<codeline lineno="91"><highlight class="normal"></highlight></codeline>
+<codeline lineno="92"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>var<sp/>localPanelGroup<sp/>=<sp/>panelStateWrap.Value.PanelGroupList.Single(x<sp/>=&gt;<sp/>x.Key<sp/>==<sp/>panelGroup.Key);</highlight></codeline>
+<codeline lineno="93"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Assert.Contains(localPanelGroup.TabList,<sp/>x<sp/>=&gt;<sp/>x<sp/>==<sp/>panelTab);</highlight></codeline>
+<codeline lineno="94"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Assert.NotEmpty(localPanelGroup.TabList);</highlight></codeline>
+<codeline lineno="95"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="96"><highlight class="normal"></highlight></codeline>
+<codeline lineno="97"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>InsertAtIndexZero<sp/>==<sp/>false</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="98"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="99"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>var<sp/>insertAtIndexZero<sp/>=<sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="100"><highlight class="normal"></highlight></codeline>
+<codeline lineno="101"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>var<sp/>localPanelTab<sp/>=<sp/></highlight><highlight class="keyword">new</highlight><highlight class="normal"><sp/><ref refid="namespace_luthetus_1_1_common_1_1_razor_lib_1_1_panels_1_1_models_1a7d7bfac20e261a4775279a1ce23fb6f8" kindref="member">Panel</ref>(</highlight></codeline>
+<codeline lineno="102"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="stringliteral">&quot;Solution<sp/>Explorer&quot;</highlight><highlight class="normal">,</highlight></codeline>
+<codeline lineno="103"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Key&lt;Panel&gt;.NewKey(),</highlight></codeline>
+<codeline lineno="104"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Key&lt;IDynamicViewModel&gt;.NewKey(),</highlight></codeline>
+<codeline lineno="105"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ContextFacts.SolutionExplorerContext.ContextKey,</highlight></codeline>
+<codeline lineno="106"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>typeof(IconCSharpClassFragment),</highlight></codeline>
+<codeline lineno="107"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">new</highlight><highlight class="normal">(),</highlight></codeline>
+<codeline lineno="108"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>dispatcher,</highlight></codeline>
+<codeline lineno="109"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>serviceProvider.GetRequiredService&lt;<ref refid="interface_luthetus_1_1_common_1_1_razor_lib_1_1_dialogs_1_1_models_1_1_i_dialog_service" kindref="compound">IDialogService</ref>&gt;(),</highlight></codeline>
+<codeline lineno="110"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>serviceProvider.GetRequiredService&lt;IJSRuntime&gt;());</highlight></codeline>
+<codeline lineno="111"><highlight class="normal"></highlight></codeline>
+<codeline lineno="112"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>dispatcher.Dispatch(</highlight><highlight class="keyword">new</highlight><highlight class="normal"><sp/><ref refid="namespace_luthetus_1_1_common_1_1_razor_lib_1_1_panels_1_1_states_1a3e69a06f395780138ff06e862f45ee3c" kindref="member">PanelState</ref>.RegisterPanelTabAction(</highlight></codeline>
+<codeline lineno="113"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>panelGroup.Key,</highlight></codeline>
+<codeline lineno="114"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>localPanelTab,</highlight></codeline>
+<codeline lineno="115"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>insertAtIndexZero));</highlight></codeline>
+<codeline lineno="116"><highlight class="normal"></highlight></codeline>
+<codeline lineno="117"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>var<sp/>localPanelGroup<sp/>=<sp/>panelStateWrap.Value.PanelGroupList.Single(x<sp/>=&gt;<sp/>x.Key<sp/>==<sp/>panelGroup.Key);</highlight></codeline>
+<codeline lineno="118"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Assert.Contains(localPanelGroup.TabList,<sp/>x<sp/>=&gt;<sp/>x<sp/>==<sp/>localPanelTab);</highlight></codeline>
+<codeline lineno="119"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Assert.Equal(localPanelGroup.TabList.Last(),<sp/>localPanelTab);</highlight></codeline>
+<codeline lineno="120"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="121"><highlight class="normal"></highlight></codeline>
+<codeline lineno="122"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>InsertAtIndexZero<sp/>==<sp/>true</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="123"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="124"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>var<sp/>insertAtIndexZero<sp/>=<sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="125"><highlight class="normal"></highlight></codeline>
+<codeline lineno="126"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>var<sp/>localPanelTab<sp/>=<sp/></highlight><highlight class="keyword">new</highlight><highlight class="normal"><sp/><ref refid="namespace_luthetus_1_1_common_1_1_razor_lib_1_1_panels_1_1_models_1a7d7bfac20e261a4775279a1ce23fb6f8" kindref="member">Panel</ref>(</highlight></codeline>
+<codeline lineno="127"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="stringliteral">&quot;Solution<sp/>Explorer&quot;</highlight><highlight class="normal">,</highlight></codeline>
+<codeline lineno="128"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Key&lt;Panel&gt;.NewKey(),</highlight></codeline>
+<codeline lineno="129"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Key&lt;IDynamicViewModel&gt;.NewKey(),</highlight></codeline>
+<codeline lineno="130"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ContextFacts.SolutionExplorerContext.ContextKey,</highlight></codeline>
+<codeline lineno="131"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>typeof(IconCSharpClassFragment),</highlight></codeline>
+<codeline lineno="132"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">new</highlight><highlight class="normal">(),</highlight></codeline>
+<codeline lineno="133"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>dispatcher,</highlight></codeline>
+<codeline lineno="134"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>serviceProvider.GetRequiredService&lt;<ref refid="interface_luthetus_1_1_common_1_1_razor_lib_1_1_dialogs_1_1_models_1_1_i_dialog_service" kindref="compound">IDialogService</ref>&gt;(),</highlight></codeline>
+<codeline lineno="135"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>serviceProvider.GetRequiredService&lt;IJSRuntime&gt;());</highlight></codeline>
+<codeline lineno="136"><highlight class="normal"></highlight></codeline>
+<codeline lineno="137"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>dispatcher.Dispatch(</highlight><highlight class="keyword">new</highlight><highlight class="normal"><sp/><ref refid="namespace_luthetus_1_1_common_1_1_razor_lib_1_1_panels_1_1_states_1a3e69a06f395780138ff06e862f45ee3c" kindref="member">PanelState</ref>.RegisterPanelTabAction(</highlight></codeline>
+<codeline lineno="138"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>panelGroup.Key,</highlight></codeline>
+<codeline lineno="139"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>localPanelTab,</highlight></codeline>
+<codeline lineno="140"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>insertAtIndexZero));</highlight></codeline>
+<codeline lineno="141"><highlight class="normal"></highlight></codeline>
+<codeline lineno="142"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>var<sp/>localPanelGroup<sp/>=<sp/>panelStateWrap.Value.PanelGroupList.Single(x<sp/>=&gt;<sp/>x.Key<sp/>==<sp/>panelGroup.Key);</highlight></codeline>
+<codeline lineno="143"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Assert.Contains(localPanelGroup.TabList,<sp/>x<sp/>=&gt;<sp/>x<sp/>==<sp/>localPanelTab);</highlight></codeline>
+<codeline lineno="144"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Assert.Equal(localPanelGroup.TabList.First(),<sp/>localPanelTab);</highlight></codeline>
+<codeline lineno="145"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="146"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="147"><highlight class="normal"></highlight></codeline>
+<codeline lineno="151"><highlight class="normal"><sp/><sp/><sp/><sp/>[Fact]</highlight></codeline>
+<codeline lineno="152" refid="class_luthetus_1_1_common_1_1_tests_1_1_basis_1_1_panels_1_1_states_1_1_panel_state_reducer_tests_1ad5c069c72cd60e0a27575d249389475d" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="class_luthetus_1_1_common_1_1_tests_1_1_basis_1_1_panels_1_1_states_1_1_panel_state_reducer_tests_1ad5c069c72cd60e0a27575d249389475d" kindref="member">ReduceDisposePanelTabAction</ref>()</highlight></codeline>
+<codeline lineno="153"><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="154"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>InitializePanelStateReducerTests(</highlight></codeline>
+<codeline lineno="155"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>out<sp/>var<sp/>panelGroup,</highlight></codeline>
+<codeline lineno="156"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>out<sp/>var<sp/>panelTab,</highlight></codeline>
+<codeline lineno="157"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>out<sp/>var<sp/>panelStateWrap,</highlight></codeline>
+<codeline lineno="158"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>out<sp/>var<sp/>dispatcher,</highlight></codeline>
+<codeline lineno="159"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>out<sp/>var<sp/>serviceProvider);</highlight></codeline>
+<codeline lineno="160"><highlight class="normal"></highlight></codeline>
+<codeline lineno="161"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Assert.Empty(panelGroup.TabList);</highlight></codeline>
+<codeline lineno="162"><highlight class="normal"></highlight></codeline>
+<codeline lineno="163"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>dispatcher.Dispatch(</highlight><highlight class="keyword">new</highlight><highlight class="normal"><sp/><ref refid="namespace_luthetus_1_1_common_1_1_razor_lib_1_1_panels_1_1_states_1a3e69a06f395780138ff06e862f45ee3c" kindref="member">PanelState</ref>.RegisterPanelGroupAction(panelGroup));</highlight></codeline>
+<codeline lineno="164"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Assert.Contains(panelStateWrap.Value.PanelGroupList,<sp/>x<sp/>=&gt;<sp/>x<sp/>==<sp/>panelGroup);</highlight></codeline>
+<codeline lineno="165"><highlight class="normal"></highlight></codeline>
+<codeline lineno="166"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>dispatcher.Dispatch(</highlight><highlight class="keyword">new</highlight><highlight class="normal"><sp/><ref refid="namespace_luthetus_1_1_common_1_1_razor_lib_1_1_panels_1_1_states_1a3e69a06f395780138ff06e862f45ee3c" kindref="member">PanelState</ref>.RegisterPanelTabAction(</highlight></codeline>
+<codeline lineno="167"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>panelGroup.Key,</highlight></codeline>
+<codeline lineno="168"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>panelTab,</highlight></codeline>
+<codeline lineno="169"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">));</highlight></codeline>
+<codeline lineno="170"><highlight class="normal"></highlight></codeline>
+<codeline lineno="171"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>var<sp/>localPanelGroup<sp/>=<sp/>panelStateWrap.Value.PanelGroupList.Single(x<sp/>=&gt;<sp/>x.Key<sp/>==<sp/>panelGroup.Key);</highlight></codeline>
+<codeline lineno="172"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Assert.Contains(localPanelGroup.TabList,<sp/>x<sp/>=&gt;<sp/>x<sp/>==<sp/>panelTab);</highlight></codeline>
+<codeline lineno="173"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Assert.NotEmpty(localPanelGroup.TabList);</highlight></codeline>
+<codeline lineno="174"><highlight class="normal"></highlight></codeline>
+<codeline lineno="175"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>dispatcher.Dispatch(</highlight><highlight class="keyword">new</highlight><highlight class="normal"><sp/><ref refid="namespace_luthetus_1_1_common_1_1_razor_lib_1_1_panels_1_1_states_1a3e69a06f395780138ff06e862f45ee3c" kindref="member">PanelState</ref>.DisposePanelTabAction(</highlight></codeline>
+<codeline lineno="176"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>panelGroup.Key,</highlight></codeline>
+<codeline lineno="177"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>panelTab.Key));</highlight></codeline>
+<codeline lineno="178"><highlight class="normal"></highlight></codeline>
+<codeline lineno="179"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>localPanelGroup<sp/>=<sp/>panelStateWrap.Value.PanelGroupList.Single(x<sp/>=&gt;<sp/>x.Key<sp/>==<sp/>panelGroup.Key);</highlight></codeline>
+<codeline lineno="180"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Assert.DoesNotContain(localPanelGroup.TabList,<sp/>x<sp/>=&gt;<sp/>x<sp/>==<sp/>panelTab);</highlight></codeline>
+<codeline lineno="181"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Assert.Empty(localPanelGroup.TabList);</highlight></codeline>
+<codeline lineno="182"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="183"><highlight class="normal"></highlight></codeline>
+<codeline lineno="187"><highlight class="normal"><sp/><sp/><sp/><sp/>[Fact]</highlight></codeline>
+<codeline lineno="188" refid="class_luthetus_1_1_common_1_1_tests_1_1_basis_1_1_panels_1_1_states_1_1_panel_state_reducer_tests_1a081df75b8ff302322118a9debb714dcf" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="class_luthetus_1_1_common_1_1_tests_1_1_basis_1_1_panels_1_1_states_1_1_panel_state_reducer_tests_1a081df75b8ff302322118a9debb714dcf" kindref="member">ReduceSetActivePanelTabAction</ref>()</highlight></codeline>
+<codeline lineno="189"><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="190"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>InitializePanelStateReducerTests(</highlight></codeline>
+<codeline lineno="191"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>out<sp/>var<sp/>panelGroup,</highlight></codeline>
+<codeline lineno="192"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>out<sp/>var<sp/>panelTab,</highlight></codeline>
+<codeline lineno="193"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>out<sp/>var<sp/>panelStateWrap,</highlight></codeline>
+<codeline lineno="194"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>out<sp/>var<sp/>dispatcher,</highlight></codeline>
+<codeline lineno="195"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>out<sp/>var<sp/>serviceProvider);</highlight></codeline>
+<codeline lineno="196"><highlight class="normal"></highlight></codeline>
+<codeline lineno="197"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Assert.Empty(panelGroup.TabList);</highlight></codeline>
+<codeline lineno="198"><highlight class="normal"></highlight></codeline>
+<codeline lineno="199"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>dispatcher.Dispatch(</highlight><highlight class="keyword">new</highlight><highlight class="normal"><sp/><ref refid="namespace_luthetus_1_1_common_1_1_razor_lib_1_1_panels_1_1_states_1a3e69a06f395780138ff06e862f45ee3c" kindref="member">PanelState</ref>.RegisterPanelGroupAction(panelGroup));</highlight></codeline>
+<codeline lineno="200"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Assert.Contains(panelStateWrap.Value.PanelGroupList,<sp/>x<sp/>=&gt;<sp/>x<sp/>==<sp/>panelGroup);</highlight></codeline>
+<codeline lineno="201"><highlight class="normal"></highlight></codeline>
+<codeline lineno="202"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>dispatcher.Dispatch(</highlight><highlight class="keyword">new</highlight><highlight class="normal"><sp/><ref refid="namespace_luthetus_1_1_common_1_1_razor_lib_1_1_panels_1_1_states_1a3e69a06f395780138ff06e862f45ee3c" kindref="member">PanelState</ref>.RegisterPanelTabAction(</highlight></codeline>
+<codeline lineno="203"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>panelGroup.Key,</highlight></codeline>
+<codeline lineno="204"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>panelTab,</highlight></codeline>
+<codeline lineno="205"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">));</highlight></codeline>
+<codeline lineno="206"><highlight class="normal"></highlight></codeline>
+<codeline lineno="207"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>var<sp/>localPanelGroup<sp/>=<sp/>panelStateWrap.Value.PanelGroupList.Single(x<sp/>=&gt;<sp/>x.Key<sp/>==<sp/>panelGroup.Key);</highlight></codeline>
+<codeline lineno="208"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Assert.Contains(localPanelGroup.TabList,<sp/>x<sp/>=&gt;<sp/>x<sp/>==<sp/>panelTab);</highlight></codeline>
+<codeline lineno="209"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Assert.NotEmpty(localPanelGroup.TabList);</highlight></codeline>
+<codeline lineno="210"><highlight class="normal"></highlight></codeline>
+<codeline lineno="211"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Assert.NotEqual(panelTab.Key,<sp/>localPanelGroup.ActiveTabKey);</highlight></codeline>
+<codeline lineno="212"><highlight class="normal"></highlight></codeline>
+<codeline lineno="213"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>dispatcher.Dispatch(</highlight><highlight class="keyword">new</highlight><highlight class="normal"><sp/><ref refid="namespace_luthetus_1_1_common_1_1_razor_lib_1_1_panels_1_1_states_1a3e69a06f395780138ff06e862f45ee3c" kindref="member">PanelState</ref>.SetActivePanelTabAction(</highlight></codeline>
+<codeline lineno="214"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>panelGroup.Key,</highlight></codeline>
+<codeline lineno="215"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>panelTab.Key));</highlight></codeline>
+<codeline lineno="216"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="217"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>localPanelGroup<sp/>=<sp/>panelStateWrap.Value.PanelGroupList.Single(x<sp/>=&gt;<sp/>x.Key<sp/>==<sp/>panelGroup.Key);</highlight></codeline>
+<codeline lineno="218"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Assert.Equal(panelTab.Key,<sp/>localPanelGroup.ActiveTabKey);</highlight></codeline>
+<codeline lineno="219"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="220"><highlight class="normal"></highlight></codeline>
+<codeline lineno="224"><highlight class="normal"><sp/><sp/><sp/><sp/>[Fact]</highlight></codeline>
+<codeline lineno="225" refid="class_luthetus_1_1_common_1_1_tests_1_1_basis_1_1_panels_1_1_states_1_1_panel_state_reducer_tests_1a23a2b87b87c07efafeb10aedc82b39ca" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="class_luthetus_1_1_common_1_1_tests_1_1_basis_1_1_panels_1_1_states_1_1_panel_state_reducer_tests_1a23a2b87b87c07efafeb10aedc82b39ca" kindref="member">ReduceSetPanelTabAsActiveByContextRecordKeyAction</ref>()</highlight></codeline>
+<codeline lineno="226"><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="227"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>InitializePanelStateReducerTests(</highlight></codeline>
+<codeline lineno="228"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>out<sp/>var<sp/>panelGroup,</highlight></codeline>
+<codeline lineno="229"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>out<sp/>var<sp/>panelTab,</highlight></codeline>
+<codeline lineno="230"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>out<sp/>var<sp/>panelStateWrap,</highlight></codeline>
+<codeline lineno="231"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>out<sp/>var<sp/>dispatcher,</highlight></codeline>
+<codeline lineno="232"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>out<sp/>var<sp/>serviceProvider);</highlight></codeline>
+<codeline lineno="233"><highlight class="normal"></highlight></codeline>
+<codeline lineno="234"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Assert.Empty(panelGroup.TabList);</highlight></codeline>
+<codeline lineno="235"><highlight class="normal"></highlight></codeline>
+<codeline lineno="236"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>dispatcher.Dispatch(</highlight><highlight class="keyword">new</highlight><highlight class="normal"><sp/><ref refid="namespace_luthetus_1_1_common_1_1_razor_lib_1_1_panels_1_1_states_1a3e69a06f395780138ff06e862f45ee3c" kindref="member">PanelState</ref>.RegisterPanelGroupAction(panelGroup));</highlight></codeline>
+<codeline lineno="237"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Assert.Contains(panelStateWrap.Value.PanelGroupList,<sp/>x<sp/>=&gt;<sp/>x<sp/>==<sp/>panelGroup);</highlight></codeline>
+<codeline lineno="238"><highlight class="normal"></highlight></codeline>
+<codeline lineno="239"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>List&lt;(<ref refid="namespace_luthetus_1_1_common_1_1_razor_lib_1_1_contexts_1_1_models_1a8182f995df091e048f3eb6b30360a5bf" kindref="member">ContextRecord</ref><sp/>contextRecord,<sp/><ref refid="interface_luthetus_1_1_common_1_1_razor_lib_1_1_panels_1_1_models_1_1_i_panel_tab" kindref="compound">IPanelTab</ref><sp/>panelTab)&gt;<sp/>panelTabTupleList<sp/>=<sp/></highlight><highlight class="keyword">new</highlight><highlight class="normal">();</highlight></codeline>
+<codeline lineno="240"><highlight class="normal"></highlight></codeline>
+<codeline lineno="241"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">foreach</highlight><highlight class="normal"><sp/>(var<sp/>context<sp/></highlight><highlight class="keywordflow">in</highlight><highlight class="normal"><sp/>ContextFacts.AllContextsList)</highlight></codeline>
+<codeline lineno="242"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="243"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>var<sp/>localPanelTab<sp/>=<sp/></highlight><highlight class="keyword">new</highlight><highlight class="normal"><sp/><ref refid="namespace_luthetus_1_1_common_1_1_razor_lib_1_1_panels_1_1_models_1a7d7bfac20e261a4775279a1ce23fb6f8" kindref="member">Panel</ref>(</highlight></codeline>
+<codeline lineno="244"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="stringliteral">&quot;Solution<sp/>Explorer&quot;</highlight><highlight class="normal">,</highlight></codeline>
+<codeline lineno="245"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Key&lt;Panel&gt;.NewKey(),</highlight></codeline>
+<codeline lineno="246"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Key&lt;IDynamicViewModel&gt;.NewKey(),</highlight></codeline>
+<codeline lineno="247"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>context.ContextKey,</highlight></codeline>
+<codeline lineno="248"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>typeof(IconCSharpClassFragment),</highlight></codeline>
+<codeline lineno="249"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">new</highlight><highlight class="normal">(),</highlight></codeline>
+<codeline lineno="250"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>dispatcher,</highlight></codeline>
+<codeline lineno="251"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>serviceProvider.GetRequiredService&lt;<ref refid="interface_luthetus_1_1_common_1_1_razor_lib_1_1_dialogs_1_1_models_1_1_i_dialog_service" kindref="compound">IDialogService</ref>&gt;(),</highlight></codeline>
+<codeline lineno="252"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>serviceProvider.GetRequiredService&lt;IJSRuntime&gt;());</highlight></codeline>
+<codeline lineno="253"><highlight class="normal"></highlight></codeline>
+<codeline lineno="254"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>panelTabTupleList.Add((context,<sp/>localPanelTab));</highlight></codeline>
+<codeline lineno="255"><highlight class="normal"></highlight></codeline>
+<codeline lineno="256"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>dispatcher.Dispatch(</highlight><highlight class="keyword">new</highlight><highlight class="normal"><sp/><ref refid="namespace_luthetus_1_1_common_1_1_razor_lib_1_1_panels_1_1_states_1a3e69a06f395780138ff06e862f45ee3c" kindref="member">PanelState</ref>.RegisterPanelTabAction(</highlight></codeline>
+<codeline lineno="257"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>panelGroup.Key,</highlight></codeline>
+<codeline lineno="258"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>localPanelTab,</highlight></codeline>
+<codeline lineno="259"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">));</highlight></codeline>
+<codeline lineno="260"><highlight class="normal"></highlight></codeline>
+<codeline lineno="261"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>var<sp/>localPanelGroup<sp/>=<sp/>panelStateWrap.Value.PanelGroupList.Single(x<sp/>=&gt;<sp/>x.Key<sp/>==<sp/>panelGroup.Key);</highlight></codeline>
+<codeline lineno="262"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Assert.Contains(localPanelGroup.TabList,<sp/>x<sp/>=&gt;<sp/>x<sp/>==<sp/>localPanelTab);</highlight></codeline>
+<codeline lineno="263"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="264"><highlight class="normal"></highlight></codeline>
+<codeline lineno="265"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>panelTabTupleList.Reverse();</highlight></codeline>
+<codeline lineno="266"><highlight class="normal"></highlight></codeline>
+<codeline lineno="267"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">foreach</highlight><highlight class="normal"><sp/>(var<sp/>panelTabTuple<sp/></highlight><highlight class="keywordflow">in</highlight><highlight class="normal"><sp/>panelTabTupleList)</highlight></codeline>
+<codeline lineno="268"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="269"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>dispatcher.Dispatch(</highlight><highlight class="keyword">new</highlight><highlight class="normal"><sp/><ref refid="namespace_luthetus_1_1_common_1_1_razor_lib_1_1_panels_1_1_states_1a3e69a06f395780138ff06e862f45ee3c" kindref="member">PanelState</ref>.SetPanelTabAsActiveByContextRecordKeyAction(</highlight></codeline>
+<codeline lineno="270"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>panelTabTuple.contextRecord.ContextKey));</highlight></codeline>
+<codeline lineno="271"><highlight class="normal"></highlight></codeline>
+<codeline lineno="272"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>var<sp/>localPanelGroup<sp/>=<sp/>panelStateWrap.Value.PanelGroupList.Single(x<sp/>=&gt;<sp/>x.Key<sp/>==<sp/>panelGroup.Key);</highlight></codeline>
+<codeline lineno="273"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Assert.Equal(panelTabTuple.panelTab.Key,<sp/>localPanelGroup.ActiveTabKey);</highlight></codeline>
+<codeline lineno="274"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="275"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="276"><highlight class="normal"></highlight></codeline>
+<codeline lineno="280"><highlight class="normal"><sp/><sp/><sp/><sp/>[Fact]</highlight></codeline>
+<codeline lineno="281" refid="class_luthetus_1_1_common_1_1_tests_1_1_basis_1_1_panels_1_1_states_1_1_panel_state_reducer_tests_1a92f263f1ff0d2e3514f9012b7270f2e7" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="class_luthetus_1_1_common_1_1_tests_1_1_basis_1_1_panels_1_1_states_1_1_panel_state_reducer_tests_1a92f263f1ff0d2e3514f9012b7270f2e7" kindref="member">ReduceSetDragEventArgsAction</ref>()</highlight></codeline>
+<codeline lineno="282"><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="283"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>InitializePanelStateReducerTests(</highlight></codeline>
+<codeline lineno="284"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>out<sp/>var<sp/>panelGroup,</highlight></codeline>
+<codeline lineno="285"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>out<sp/>var<sp/>panelTab,</highlight></codeline>
+<codeline lineno="286"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>out<sp/>var<sp/>panelStateWrap,</highlight></codeline>
+<codeline lineno="287"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>out<sp/>var<sp/>dispatcher,</highlight></codeline>
+<codeline lineno="288"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>out<sp/>var<sp/>serviceProvider);</highlight></codeline>
+<codeline lineno="289"><highlight class="normal"></highlight></codeline>
+<codeline lineno="290"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Assert.Empty(panelGroup.TabList);</highlight></codeline>
+<codeline lineno="291"><highlight class="normal"></highlight></codeline>
+<codeline lineno="292"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>dispatcher.Dispatch(</highlight><highlight class="keyword">new</highlight><highlight class="normal"><sp/><ref refid="namespace_luthetus_1_1_common_1_1_razor_lib_1_1_panels_1_1_states_1a3e69a06f395780138ff06e862f45ee3c" kindref="member">PanelState</ref>.RegisterPanelGroupAction(panelGroup));</highlight></codeline>
+<codeline lineno="293"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Assert.Contains(panelStateWrap.Value.PanelGroupList,<sp/>x<sp/>=&gt;<sp/>x<sp/>==<sp/>panelGroup);</highlight></codeline>
+<codeline lineno="294"><highlight class="normal"></highlight></codeline>
+<codeline lineno="295"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>dispatcher.Dispatch(</highlight><highlight class="keyword">new</highlight><highlight class="normal"><sp/><ref refid="namespace_luthetus_1_1_common_1_1_razor_lib_1_1_panels_1_1_states_1a3e69a06f395780138ff06e862f45ee3c" kindref="member">PanelState</ref>.RegisterPanelTabAction(</highlight></codeline>
+<codeline lineno="296"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>panelGroup.Key,</highlight></codeline>
+<codeline lineno="297"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>panelTab,</highlight></codeline>
+<codeline lineno="298"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">));</highlight></codeline>
+<codeline lineno="299"><highlight class="normal"></highlight></codeline>
+<codeline lineno="300"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Assert.Null(panelStateWrap.Value.DragEventArgs);</highlight></codeline>
+<codeline lineno="301"><highlight class="normal"></highlight></codeline>
+<codeline lineno="302"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>var<sp/>dragEventArgs<sp/>=<sp/>(panelTab,<sp/>panelGroup);</highlight></codeline>
+<codeline lineno="303"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="304"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>dispatcher.Dispatch(</highlight><highlight class="keyword">new</highlight><highlight class="normal"><sp/><ref refid="namespace_luthetus_1_1_common_1_1_razor_lib_1_1_panels_1_1_states_1a3e69a06f395780138ff06e862f45ee3c" kindref="member">PanelState</ref>.SetDragEventArgsAction(dragEventArgs));</highlight></codeline>
+<codeline lineno="305"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Assert.Equal(panelStateWrap.Value.DragEventArgs!.Value,<sp/>dragEventArgs);</highlight></codeline>
+<codeline lineno="306"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="307"><highlight class="normal"></highlight></codeline>
+<codeline lineno="308"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">private</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>InitializePanelStateReducerTests(</highlight></codeline>
+<codeline lineno="309"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>out<sp/>PanelGroup<sp/>samplePanelGroup,</highlight></codeline>
+<codeline lineno="310"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>out<sp/><ref refid="interface_luthetus_1_1_common_1_1_razor_lib_1_1_panels_1_1_models_1_1_i_panel_tab" kindref="compound">IPanelTab</ref><sp/>samplePanelTab,</highlight></codeline>
+<codeline lineno="311"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>out<sp/>IState&lt;PanelState&gt;<sp/>panelStateWrap,</highlight></codeline>
+<codeline lineno="312"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>out<sp/>IDispatcher<sp/>dispatcher,</highlight></codeline>
+<codeline lineno="313"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>out<sp/>ServiceProvider<sp/>serviceProvider)</highlight></codeline>
+<codeline lineno="314"><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="315"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>var<sp/>backgroundTaskService<sp/>=<sp/></highlight><highlight class="keyword">new</highlight><highlight class="normal"><sp/><ref refid="class_luthetus_1_1_common_1_1_razor_lib_1_1_background_tasks_1_1_models_1_1_background_task_service_synchronous" kindref="compound">BackgroundTaskServiceSynchronous</ref>();</highlight></codeline>
+<codeline lineno="316"><highlight class="normal"></highlight></codeline>
+<codeline lineno="317"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>var<sp/>serviceCollection<sp/>=<sp/></highlight><highlight class="keyword">new</highlight><highlight class="normal"><sp/>ServiceCollection()</highlight></codeline>
+<codeline lineno="318"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>.AddScoped&lt;IJSRuntime,<sp/><ref refid="class_luthetus_1_1_common_1_1_razor_lib_1_1_misc_1_1_do_nothing_js_runtime" kindref="compound">DoNothingJsRuntime</ref>&gt;()</highlight></codeline>
+<codeline lineno="319"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>.AddLuthetusCommonServices(</highlight></codeline>
+<codeline lineno="320"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">new</highlight><highlight class="normal"><sp/><ref refid="namespace_luthetus_1_1_common_1_1_razor_lib_1_1_installations_1_1_models_1a761f9bfb52cfd9ffaa1a4bbdddf1aebb" kindref="member">LuthetusHostingInformation</ref>(</highlight></codeline>
+<codeline lineno="321"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="namespace_luthetus_1_1_common_1_1_razor_lib_1_1_installations_1_1_models_1a6fa014b5a7072b6304fd9fe595cc2a60" kindref="member">LuthetusHostingKind</ref>.UnitTestingSynchronous,</highlight></codeline>
+<codeline lineno="322"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="namespace_luthetus_1_1_common_1_1_razor_lib_1_1_installations_1_1_models_1a6de164b4b02fa971f5eddc7f274686a6" kindref="member">LuthetusPurposeKind</ref>.Common,</highlight></codeline>
+<codeline lineno="323"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>backgroundTaskService))</highlight></codeline>
+<codeline lineno="324"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>.AddFluxor(options<sp/>=&gt;<sp/>options.ScanAssemblies(typeof(<ref refid="namespace_luthetus_1_1_common_1_1_razor_lib_1_1_installations_1_1_models_1a9c0f5abeb1edd8801378900423cf1f40" kindref="member">LuthetusCommonConfig</ref>).Assembly));</highlight></codeline>
+<codeline lineno="325"><highlight class="normal"></highlight></codeline>
+<codeline lineno="326"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>serviceProvider<sp/>=<sp/>serviceCollection.BuildServiceProvider();</highlight></codeline>
+<codeline lineno="327"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="328"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>var<sp/>store<sp/>=<sp/>serviceProvider.GetRequiredService&lt;IStore&gt;();</highlight></codeline>
+<codeline lineno="329"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>store.InitializeAsync().Wait();</highlight></codeline>
+<codeline lineno="330"><highlight class="normal"></highlight></codeline>
+<codeline lineno="331"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>panelStateWrap<sp/>=<sp/>serviceProvider.GetRequiredService&lt;IState&lt;PanelState&gt;&gt;();</highlight></codeline>
+<codeline lineno="332"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>dispatcher<sp/>=<sp/>serviceProvider.GetRequiredService&lt;IDispatcher&gt;();</highlight></codeline>
+<codeline lineno="333"><highlight class="normal"></highlight></codeline>
+<codeline lineno="334"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>samplePanelGroup<sp/>=<sp/></highlight><highlight class="keyword">new</highlight><highlight class="normal"><sp/>PanelGroup(</highlight></codeline>
+<codeline lineno="335"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Key&lt;PanelGroup&gt;.NewKey(),</highlight></codeline>
+<codeline lineno="336"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Key&lt;Panel&gt;.Empty,</highlight></codeline>
+<codeline lineno="337"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">new</highlight><highlight class="normal"><sp/><ref refid="class_luthetus_1_1_common_1_1_razor_lib_1_1_dimensions_1_1_models_1_1_element_dimensions" kindref="compound">ElementDimensions</ref>(),</highlight></codeline>
+<codeline lineno="338"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ImmutableArray&lt;IPanelTab&gt;.Empty);</highlight></codeline>
+<codeline lineno="339"><highlight class="normal"></highlight></codeline>
+<codeline lineno="340"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>samplePanelGroup.Dispatcher<sp/>=<sp/>dispatcher;</highlight></codeline>
+<codeline lineno="341"><highlight class="normal"></highlight></codeline>
+<codeline lineno="342"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>var<sp/>leftPanelGroupWidth<sp/>=<sp/>samplePanelGroup.ElementDimensions.DimensionAttributeList</highlight></codeline>
+<codeline lineno="343"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>.Single(da<sp/>=&gt;<sp/>da.DimensionAttributeKind<sp/>==<sp/><ref refid="namespace_luthetus_1_1_common_1_1_razor_lib_1_1_dimensions_1_1_models_1ab42cbfab74a6a286a2eb53313a9e37f0" kindref="member">DimensionAttributeKind</ref>.Width);</highlight></codeline>
+<codeline lineno="344"><highlight class="normal"></highlight></codeline>
+<codeline lineno="345"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>leftPanelGroupWidth.DimensionUnitList.AddRange(</highlight><highlight class="keyword">new</highlight><highlight class="normal">[]</highlight></codeline>
+<codeline lineno="346"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="347"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">new</highlight><highlight class="normal"><sp/><ref refid="class_luthetus_1_1_common_1_1_razor_lib_1_1_dimensions_1_1_models_1_1_dimension_unit" kindref="compound">DimensionUnit</ref></highlight></codeline>
+<codeline lineno="348"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="349"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Value<sp/>=<sp/>33.3333,</highlight></codeline>
+<codeline lineno="350"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="namespace_luthetus_1_1_common_1_1_razor_lib_1_1_dimensions_1_1_models_1ac011df04cfd59ccb7947a4ced86ba4f6" kindref="member">DimensionUnitKind</ref><sp/>=<sp/><ref refid="namespace_luthetus_1_1_common_1_1_razor_lib_1_1_dimensions_1_1_models_1ac011df04cfd59ccb7947a4ced86ba4f6a37be07209f53a5d636d5c904ca9ae64c" kindref="member">DimensionUnitKind.Percentage</ref></highlight></codeline>
+<codeline lineno="351"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>},</highlight></codeline>
+<codeline lineno="352"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">new</highlight><highlight class="normal"><sp/><ref refid="class_luthetus_1_1_common_1_1_razor_lib_1_1_dimensions_1_1_models_1_1_dimension_unit" kindref="compound">DimensionUnit</ref></highlight></codeline>
+<codeline lineno="353"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="354"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Value<sp/>=<sp/>ResizableColumn.RESIZE_HANDLE_WIDTH_IN_PIXELS<sp/>/<sp/>2,</highlight></codeline>
+<codeline lineno="355"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="namespace_luthetus_1_1_common_1_1_razor_lib_1_1_dimensions_1_1_models_1ac011df04cfd59ccb7947a4ced86ba4f6" kindref="member">DimensionUnitKind</ref><sp/>=<sp/><ref refid="namespace_luthetus_1_1_common_1_1_razor_lib_1_1_dimensions_1_1_models_1ac011df04cfd59ccb7947a4ced86ba4f6" kindref="member">DimensionUnitKind</ref>.Pixels,</highlight></codeline>
+<codeline lineno="356"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="namespace_luthetus_1_1_common_1_1_razor_lib_1_1_dimensions_1_1_models_1a9685f3cd2b69870157680e43d93c011e" kindref="member">DimensionOperatorKind</ref><sp/>=<sp/><ref refid="namespace_luthetus_1_1_common_1_1_razor_lib_1_1_dimensions_1_1_models_1a9685f3cd2b69870157680e43d93c011ea1d9baf077ee87921f57a8fe42d510b65" kindref="member">DimensionOperatorKind.Subtract</ref></highlight></codeline>
+<codeline lineno="357"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="358"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>});</highlight></codeline>
+<codeline lineno="359"><highlight class="normal"></highlight></codeline>
+<codeline lineno="360"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>samplePanelTab<sp/>=<sp/></highlight><highlight class="keyword">new</highlight><highlight class="normal"><sp/><ref refid="namespace_luthetus_1_1_common_1_1_razor_lib_1_1_panels_1_1_models_1a7d7bfac20e261a4775279a1ce23fb6f8" kindref="member">Panel</ref>(</highlight></codeline>
+<codeline lineno="361"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="stringliteral">&quot;Solution<sp/>Explorer&quot;</highlight><highlight class="normal">,</highlight></codeline>
+<codeline lineno="362"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Key&lt;Panel&gt;.NewKey(),</highlight></codeline>
+<codeline lineno="363"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Key&lt;IDynamicViewModel&gt;.NewKey(),</highlight></codeline>
+<codeline lineno="364"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ContextFacts.SolutionExplorerContext.ContextKey,</highlight></codeline>
+<codeline lineno="365"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>typeof(IconCSharpClassFragment),</highlight></codeline>
+<codeline lineno="366"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">null</highlight><highlight class="normal">,</highlight></codeline>
+<codeline lineno="367"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>dispatcher,</highlight></codeline>
+<codeline lineno="368"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>serviceProvider.GetRequiredService&lt;<ref refid="interface_luthetus_1_1_common_1_1_razor_lib_1_1_dialogs_1_1_models_1_1_i_dialog_service" kindref="compound">IDialogService</ref>&gt;(),</highlight></codeline>
+<codeline lineno="369"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>serviceProvider.GetRequiredService&lt;IJSRuntime&gt;());</highlight></codeline>
+<codeline lineno="370"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="371"><highlight class="normal">}</highlight></codeline>
+    </programlisting>
+    <location file="Source/Tests/Common/Basis/Panels/States/PanelStateTests.Reducer.cs"/>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,166 @@
+.TH "Luthetus.Ide.RazorLib.Terminals.Models.TerminalWebsite" 3 "Version 1.0.0" "Luthetus.Ide" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+Luthetus.Ide.RazorLib.Terminals.Models.TerminalWebsite \- This implementation of \fBITerminal\fP is for the website demo\&.  
+
+.SH SYNOPSIS
+.br
+.PP
+.PP
+Inherits \fBLuthetus\&.Ide\&.RazorLib\&.Terminals\&.Models\&.ITerminal\fP\&.
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBTerminalWebsite\fP (string displayName, Func< TerminalWebsite, \fBITerminalInteractive\fP > terminalInteractiveFactory, Func< TerminalWebsite, \fBITerminalInput\fP > terminalInputFactory, Func< TerminalWebsite, \fBITerminalOutput\fP > terminalOutputFactory, \fBIBackgroundTaskService\fP backgroundTaskService, \fBICommonComponentRenderers\fP commonComponentRenderers, IDispatcher dispatcher)"
+.br
+.ti -1c
+.RI "void \fBEnqueueCommand\fP (\fBTerminalCommandRequest\fP terminalCommandRequest)"
+.br
+.ti -1c
+.RI "Task \fBEnqueueCommandAsync\fP (\fBTerminalCommandRequest\fP terminalCommandRequest)"
+.br
+.ti -1c
+.RI "void \fBClearEnqueue\fP ()"
+.br
+.RI "This will enqueue the command with text "clear"\&. Thus, it will only execute when it is its turn in the queue\&. "
+.ti -1c
+.RI "void \fBClearFireAndForget\fP ()"
+.br
+.RI "This will invoke the ITerminalOutput\&.ClearOutput method, by using '_ = Task\&.Run(\&.\&.\&.)'\&. "
+.ti -1c
+.RI "void \fBKillProcess\fP ()"
+.br
+.ti -1c
+.RI "void \fBDispose\fP ()"
+.br
+.in -1c
+.SS "Properties"
+
+.in +1c
+.ti -1c
+.RI "string \fBDisplayName\fP\fR [get]\fP"
+.br
+.ti -1c
+.RI "\fBITerminalInteractive\fP \fBTerminalInteractive\fP\fR [get]\fP"
+.br
+.ti -1c
+.RI "\fBITerminalInput\fP \fBTerminalInput\fP\fR [get]\fP"
+.br
+.ti -1c
+.RI "\fBITerminalOutput\fP \fBTerminalOutput\fP\fR [get]\fP"
+.br
+.ti -1c
+.RI "Key< \fBITerminal\fP > \fBKey\fP = Key<\fBITerminal\fP>\&.NewKey()\fR [get]\fP"
+.br
+.ti -1c
+.RI "\fBTerminalCommandParsed\fP? \fBActiveTerminalCommandParsed\fP\fR [get]\fP"
+.br
+.ti -1c
+.RI "bool \fBHasExecutingProcess\fP\fR [get]\fP"
+.br
+.RI "NOTE: the following did not work => _process?\&.HasExited ?? false;\&. "
+.in -1c
+.SH "Detailed Description"
+.PP 
+This implementation of \fBITerminal\fP is for the website demo\&. 
+.PP
+Definition at line \fB15\fP of file \fBTerminalWebsite\&.cs\fP\&.
+.SH "Constructor & Destructor Documentation"
+.PP 
+.SS "Luthetus\&.Ide\&.RazorLib\&.Terminals\&.Models\&.TerminalWebsite\&.TerminalWebsite (string displayName, Func< TerminalWebsite, \fBITerminalInteractive\fP > terminalInteractiveFactory, Func< TerminalWebsite, \fBITerminalInput\fP > terminalInputFactory, Func< TerminalWebsite, \fBITerminalOutput\fP > terminalOutputFactory, \fBIBackgroundTaskService\fP backgroundTaskService, \fBICommonComponentRenderers\fP commonComponentRenderers, IDispatcher dispatcher)"
+
+.PP
+Definition at line \fB21\fP of file \fBTerminalWebsite\&.cs\fP\&.
+.SH "Member Function Documentation"
+.PP 
+.SS "void Luthetus\&.Ide\&.RazorLib\&.Terminals\&.Models\&.TerminalWebsite\&.ClearEnqueue ()"
+
+.PP
+This will enqueue the command with text "clear"\&. Thus, it will only execute when it is its turn in the queue\&. 
+.PP
+Implements \fBLuthetus\&.Ide\&.RazorLib\&.Terminals\&.Models\&.ITerminal\fP\&.
+.PP
+Definition at line \fB71\fP of file \fBTerminalWebsite\&.cs\fP\&.
+.SS "void Luthetus\&.Ide\&.RazorLib\&.Terminals\&.Models\&.TerminalWebsite\&.ClearFireAndForget ()"
+
+.PP
+This will invoke the ITerminalOutput\&.ClearOutput method, by using '_ = Task\&.Run(\&.\&.\&.)'\&. This will execute EVEN IF a command in the queue is currently being executed\&.
+
+.PP
+The fire and forget is because the terminal \fBITerminalOutput\fP wraps any state mutation in a 'lock(\&.\&.\&.) { }'\&. So, the fire and forget is to avoid freezing the UI\&. 
+.PP
+Implements \fBLuthetus\&.Ide\&.RazorLib\&.Terminals\&.Models\&.ITerminal\fP\&.
+.PP
+Definition at line \fB76\fP of file \fBTerminalWebsite\&.cs\fP\&.
+.SS "void Luthetus\&.Ide\&.RazorLib\&.Terminals\&.Models\&.TerminalWebsite\&.Dispose ()"
+
+.PP
+Definition at line \fB249\fP of file \fBTerminalWebsite\&.cs\fP\&.
+.SS "void Luthetus\&.Ide\&.RazorLib\&.Terminals\&.Models\&.TerminalWebsite\&.EnqueueCommand (\fBTerminalCommandRequest\fP terminalCommandRequest)"
+
+.PP
+Implements \fBLuthetus\&.Ide\&.RazorLib\&.Terminals\&.Models\&.ITerminal\fP\&.
+.PP
+Definition at line \fB53\fP of file \fBTerminalWebsite\&.cs\fP\&.
+.SS "Task Luthetus\&.Ide\&.RazorLib\&.Terminals\&.Models\&.TerminalWebsite\&.EnqueueCommandAsync (\fBTerminalCommandRequest\fP terminalCommandRequest)"
+
+.PP
+Implements \fBLuthetus\&.Ide\&.RazorLib\&.Terminals\&.Models\&.ITerminal\fP\&.
+.PP
+Definition at line \fB62\fP of file \fBTerminalWebsite\&.cs\fP\&.
+.SS "void Luthetus\&.Ide\&.RazorLib\&.Terminals\&.Models\&.TerminalWebsite\&.KillProcess ()"
+
+.PP
+Implements \fBLuthetus\&.Ide\&.RazorLib\&.Terminals\&.Models\&.ITerminal\fP\&.
+.PP
+Definition at line \fB237\fP of file \fBTerminalWebsite\&.cs\fP\&.
+.SH "Property Documentation"
+.PP 
+.SS "\fBTerminalCommandParsed\fP? Luthetus\&.Ide\&.RazorLib\&.Terminals\&.Models\&.TerminalWebsite\&.ActiveTerminalCommandParsed\fR [get]\fP"
+
+.PP
+Definition at line \fB48\fP of file \fBTerminalWebsite\&.cs\fP\&.
+.SS "string Luthetus\&.Ide\&.RazorLib\&.Terminals\&.Models\&.TerminalWebsite\&.DisplayName\fR [get]\fP"
+
+.PP
+Implements \fBLuthetus\&.Ide\&.RazorLib\&.Terminals\&.Models\&.ITerminal\fP\&.
+.PP
+Definition at line \fB40\fP of file \fBTerminalWebsite\&.cs\fP\&.
+.SS "bool Luthetus\&.Ide\&.RazorLib\&.Terminals\&.Models\&.TerminalWebsite\&.HasExecutingProcess\fR [get]\fP"
+
+.PP
+NOTE: the following did not work => _process?\&.HasExited ?? false;\&. 
+.PP
+Implements \fBLuthetus\&.Ide\&.RazorLib\&.Terminals\&.Models\&.ITerminal\fP\&.
+.PP
+Definition at line \fB51\fP of file \fBTerminalWebsite\&.cs\fP\&.
+.SS "Key<\fBITerminal\fP> Luthetus\&.Ide\&.RazorLib\&.Terminals\&.Models\&.TerminalWebsite\&.Key = Key<\fBITerminal\fP>\&.NewKey()\fR [get]\fP"
+
+.PP
+Implements \fBLuthetus\&.Ide\&.RazorLib\&.Terminals\&.Models\&.ITerminal\fP\&.
+.PP
+Definition at line \fB47\fP of file \fBTerminalWebsite\&.cs\fP\&.
+.SS "\fBITerminalInput\fP Luthetus\&.Ide\&.RazorLib\&.Terminals\&.Models\&.TerminalWebsite\&.TerminalInput\fR [get]\fP"
+
+.PP
+Implements \fBLuthetus\&.Ide\&.RazorLib\&.Terminals\&.Models\&.ITerminal\fP\&.
+.PP
+Definition at line \fB42\fP of file \fBTerminalWebsite\&.cs\fP\&.
+.SS "\fBITerminalInteractive\fP Luthetus\&.Ide\&.RazorLib\&.Terminals\&.Models\&.TerminalWebsite\&.TerminalInteractive\fR [get]\fP"
+
+.PP
+Implements \fBLuthetus\&.Ide\&.RazorLib\&.Terminals\&.Models\&.ITerminal\fP\&.
+.PP
+Definition at line \fB41\fP of file \fBTerminalWebsite\&.cs\fP\&.
+.SS "\fBITerminalOutput\fP Luthetus\&.Ide\&.RazorLib\&.Terminals\&.Models\&.TerminalWebsite\&.TerminalOutput\fR [get]\fP"
+
+.PP
+Implements \fBLuthetus\&.Ide\&.RazorLib\&.Terminals\&.Models\&.ITerminal\fP\&.
+.PP
+Definition at line \fB43\fP of file \fBTerminalWebsite\&.cs\fP\&.
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for Luthetus\&.Ide from the source code\&.

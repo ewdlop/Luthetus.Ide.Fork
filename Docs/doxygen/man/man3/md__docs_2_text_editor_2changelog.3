@@ -1,0 +1,280 @@
+.TH "md__docs_2_text_editor_2changelog" 3 "Version 1.0.0" "Luthetus.Ide" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+md__docs_2_text_editor_2changelog \- Change Log 
+.PP
+
+
+.PP
+All notable changes to the \fR\fBLuthetus\&.TextEditor\fP\fP repository will be documented in this file\&.
+
+.PP
+The format is based on \fRKeep a Changelog\fP, and this project adheres to \fRSemantic Versioning\fP\&.
+.SH "[3\&.2\&.0] - 2024-10-07"
+.PP
+\fBClick to show changes\fP
+.PP
+.PP
+.RS 4
+
+
+.PP
+.RE
+.PP
+.SS "Fixed"
+.IP "\(bu" 2
+ContextMenu goto definition, scroll cursor into view
+.IP "\(bu" 2
+After context menu picked SetCursorShouldBlink(false)
+.IP "\(bu" 2
+C# Parser had Many Changes\&. Goto definition, respect the original cursor's syntax node kind\&. 'record struct' storage modifier kind\&. TypeClauseNode with '?'\&. Ambiguous property definition\&. Constructor invocation within an expression\&. Record struct primary constructor\&. \fBExplicitCastNode\&.cs\fP 'Ex: (\fBMyClass\fP)someObject'\&. Verbatim string progress\&. Constructor ': this(\&.\&.\&.) or base(\&.\&.\&.)'\&. 'params' keyword\&. Constructor where clause (progress)\&. For statement progress\&. Foreach statement progress\&. Lock statement progress\&. While statement progress\&. Do-while statement progress\&. Switch statement progress\&. Try-catch-finally statement progress\&. Breadth first parsing progress (Parse all the definitions in a given scope prior to parsing an inner scope where appropriate i\&.e\&.: class definitions)
+.PP
+.SH "[3\&.1\&.0] - 2024-10-03"
+.PP
+\fBClick to show changes\fP
+.PP
+.PP
+.RS 4
+
+
+.PP
+.RE
+.PP
+.SS "Fixed"
+.IP "\(bu" 2
+Fix null reference exception (is a fatal exception) from v3\&.0\&.0 
+.PP
+.SH "[3\&.0\&.0] - 2024-10-03"
+.PP
+\fBClick to show changes\fP
+.PP
+.PP
+.RS 4
+
+
+.PP
+.RE
+.PP
+.SS "Fixed"
+.IP "\(bu" 2
+Horizontally virtualize on a line by line basis, and only if the individual line is long\&.
+.IP "  \(bu" 4
+Virtualization result is an array of lines (was a list)
+.IP "  \(bu" 4
+Change: SetModelAndViewModelRangeAction to a struct
+.IP "  \(bu" 4
+Change: TextEditorTextSpan to record-struct
+.IP "  \(bu" 4
+\fBTextEditorState\&.Main\&.cs\fP uses private-mutable dictionaries to store text editor models/viewmodels (They used to be ImmutableList(s))\&.
+.PP
+
+.IP "\(bu" 2
+Add: \fBITextEditorDependentComponent\&.cs\fP ("low priority" rendering of accessory components to the text editor)\&. Render header throttled at 1 second\&. Render footer throttled at 250 milliseconds\&. 
+.PP
+.SH "[2\&.7\&.0] - 2024-09-21"
+.PP
+\fBClick to show changes\fP
+.PP
+.PP
+.RS 4
+
+
+.PP
+.RE
+.PP
+.SS "Fixed"
+.IP "\(bu" 2
+User Agent resize events trigger remeasure
+.IP "\(bu" 2
+Changing text editor's font-size triggers re-measure
+.IP "\(bu" 2
+After re-remeasuring, reload the virtualization result\&.
+.IP "\(bu" 2
+BrowserResizeInterop
+.IP "\(bu" 2
+InputTextEditorFontSize\&.razor changes
+.IP "\(bu" 2
+ScrollbarSection\&.razor vertical reset point while dragging
+.IP "\(bu" 2
+DISTANCE_TO_RESET_SCROLL_POSITION is 300px 
+.PP
+.SH "[2\&.6\&.0] - 2024-09-19"
+.PP
+\fBClick to show changes\fP
+.PP
+.PP
+.RS 4
+
+
+.PP
+.RE
+.PP
+.SS "Fixed"
+.IP "\(bu" 2
+Fix: text erroneously written out when holding non-shift modifier(s)\&. (i\&.e\&.: { 'Ctrl' + 'c' } to copy writing out the letter 'c' to the text editor)
+.IP "\(bu" 2
+Fix: maximum scrollWidth and scrollHeight becoming smaller (and how this impacts scrollLeft and scrollTop)
+.IP "\(bu" 2
+Fix: negative scrollLeft and negative scrollTop 
+.PP
+.SH "[2\&.5\&.0] - 2024-09-05"
+.PP
+\fBClick to show changes\fP
+.PP
+.PP
+.RS 4
+
+
+.PP
+.RE
+.PP
+.SS "Fixed"
+.IP "\(bu" 2
+Fix: deletion of text that spans multiple partitions\&. 
+.PP
+.SH "[2\&.4\&.0] - 2024-09-02"
+.PP
+\fBClick to show changes\fP
+.PP
+.PP
+.RS 4
+
+
+.PP
+.RE
+.PP
+.SS "Fixed"
+.IP "\(bu" 2
+Fix: deletion of lines will now scroll by the amount of lines deleted\&. Previously, this was breaking the virtualization result until one triggered a re-calculation\&.
+.IP "\(bu" 2
+Fix: Keybinds first try to match on a JavaScript 'event\&.key' so to speak\&. Then, as a fallback they will now try to match on 'event\&.code' so to speak\&. Previously, on Ubuntu, if one remapped the CapsLock key to Escape, it would not work in the IDE at various places\&. This has been fixed\&.
+.IP "\(bu" 2
+Text editor events now use structs to transmit event data\&. This is expected to be a large optimization, as it tends that high turnover 'class' objects bring performance issues due to the garbage collection overhead\&.
+.IP "\(bu" 2
+Text editor's OnKeyDownLateBatching event uses a fixed size array for batching events, rather than what previously was a List<T>\&. This is expected to be a large optimization, as it tends that high turnover 'class' objects bring performance issues due to the garbage collection overhead\&. As well, it tends to be the case that no more than 3 or 4 keyboard events ever get batched together\&. So the fixed size array is '8' keyboard events can be made into a single batch\&. 
+.PP
+.SH "[2\&.3\&.0] - 2024-08-27"
+.PP
+\fBClick to show changes\fP
+.PP
+.PP
+.RS 4
+
+
+.PP
+.RE
+.PP
+.SS "Fixed"
+.IP "\(bu" 2
+Fix: line endings breaking due to a Post to the ITextEditorService which makes an edit, but then throws an exception within the same Post\&.
+.IP "\(bu" 2
+Fix: Gutter width changes causing the text editor measurements to be incorrect\&.
+.IP "\(bu" 2
+Use more recent dropdown code for text editor autocomplete and context menu\&. The newer dropdown code moves itself so it stays on screen (if it initially rendered offscreen)\&.
+.IP "\(bu" 2
+Fix: return focus to text editor after picking a menu option in autocomplete or context menu\&.
+.IP "\(bu" 2
+Start code snippet logic\&. 
+.PP
+.SH "[2\&.2\&.0] - 2024-08-20"
+.PP
+\fBClick to show changes\fP
+.PP
+.PP
+.RS 4
+
+
+.PP
+.RE
+.PP
+.SS "Fixed"
+.IP "\(bu" 2
+Home keybind understands indentation
+.IP "\(bu" 2
+Fix cursor blinking
+.IP "\(bu" 2
+Fix change keymap without having to reload
+.IP "\(bu" 2
+Track additionally, the 'Key' of a keyboard event args (previously only was tracking the 'Code')
+.IP "\(bu" 2
+Change ITextEditorWork implementations and ResourceUri to structs
+.IP "\(bu" 2
+Fix various 'Vim' keybind bugs\&. It isn't fully functional yet\&. 
+.PP
+.SH "[2\&.1\&.0] - 2024-08-15"
+.PP
+\fBClick to show changes\fP
+.PP
+.PP
+.RS 4
+
+
+.PP
+.RE
+.PP
+.SS "Fixed"
+.IP "\(bu" 2
+Fix text editor context menu crashing when closing
+.IP "\(bu" 2
+Fix out of sync syntax highlighting\&. 
+.PP
+.SH "[2\&.0\&.0] - 2024-08-14"
+.PP
+\fBClick to show changes\fP
+.PP
+.PP
+.RS 4
+
+
+.PP
+.RE
+.PP
+.SS "Fixed"
+.IP "\(bu" 2
+Fix cursor "randomly" losing focus
+.IP "\(bu" 2
+Re-write virtualization in C# (it was previously done with JavaScript)
+.IP "\(bu" 2
+Change \fBRichCharacter\&.cs\fP to a struct (it was previously a class)\&.
+.IP "\(bu" 2
+Change ITextEditorModel\&.RichCharacterList to an array (it was previously an ImmutableList)\&.
+.IP "\(bu" 2
+Fix typing at start of file (position index 0) a non letter or digit\&.
+.IP "\(bu" 2
+Text Editor uses 60% less memory after various struct/array optimizations\&.
+.IP "\(bu" 2
+Text Editor "feels" an order of magnitude faster after various Blazor optimizations and struct/array optimizations (which reduce the garbage collection overhead thus improving performance greatly)\&.
+.PP
+.SS "Bugs"
+.IP "\(bu" 2
+If one opens the text editor's context menu with the dedicated 'ContextMenu' button on the keyboard, or the accessability keybind { Shift + F10 }\&. To then hit the 'Escape' key or the 'ArrowLeft' key to close the context menu, is causing an unhandled exception\&.
+.IP "\(bu" 2
+The syntax highlighting is out of sync\&. (its seems to be "lagging" behind by 1 event) 
+.PP
+.SH "[1\&.3\&.0] - 2023-08-20"
+.PP
+\fBClick to show changes\fP
+.PP
+.PP
+.RS 4
+
+
+.PP
+.RE
+.PP
+.SS "Fixed"
+.IP "\(bu" 2
+Most documentation issues I found are fixed\&.
+.IP "\(bu" 2
+All NuGet Packages mentioned are at version 1\&.3\&.0 as well to avoid confusion\&.
+.IP "\(bu" 2
+\&.NET 6 Blazor-WASM worked after following documentation start to finish\&.
+.IP "\(bu" 2
+\&.NET 6 Blazor-ServerSide after following documentation start to finish\&.
+.PP
+.SS "Bugs"
+.IP "\(bu" 2
+\&.NET 6 is hard-coded as the target framework\&. Therefore, \&.NET 7 apps are not working\&. I need to remedy this in later versions\&. 
+.PP
+

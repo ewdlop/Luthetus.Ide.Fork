@@ -1,0 +1,182 @@
+.TH "md__docs_2_text_editor_2installation" 3 "Version 1.0.0" "Luthetus.Ide" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+md__docs_2_text_editor_2installation \- Luthetus\&.TextEditor (v2\&.1\&.0) 
+.PP
+
+.SH "Installation"
+.PP
+The \&.NET Solution: \fRLuthetus\&.Tutorials\&.sln\fP, was made by following steps described here\&. So, the completed result can be found there\&.
+.SS "Goal"
+
+.PP
+.IP "\(bu" 2
+Reference the \fR\fBLuthetus\&.TextEditor\fP\fP Nuget Package
+.IP "\(bu" 2
+Register the \fRServices\fP
+.IP "\(bu" 2
+Reference the \fRCSS\fP
+.IP "\(bu" 2
+Reference the \fRJavaScript\fP
+.IP "\(bu" 2
+In \fRApp\&.razor\fP render the \fR<Fluxor\&.Blazor\&.Web\&.StoreInitializer/>\fP
+.IP "\(bu" 2
+In \fRMainLayout\&.razor\fP render the \fR<\fBLuthetus\&.Common\&.RazorLib\&.Installations\&.Displays\&.LuthetusCommonInitializer\fP />\fP and the \fR<\fBLuthetus\&.TextEditor\&.RazorLib\&.Installations\&.Displays\&.LuthetusTextEditorInitializer\fP />\fP Blazor components
+.PP
+.SS "Steps"
+.IP "\(bu" 2
+Reference the \fR\fBLuthetus\&.TextEditor\fP\fP NuGet Package
+.PP
+
+.PP
+Use your preferred way to install NuGet Packages to install \fR\fBLuthetus\&.TextEditor\fP\fP\&.
+
+.PP
+The nuget\&.org link to the NuGet Package is here: https://www.nuget.org/packages/Luthetus.TextEditor
+
+.PP
+.IP "\(bu" 2
+Register the \fRServices\fP
+.PP
+
+.PP
+Go to the file that you register your services and add the following lines of C# code\&.
+
+.PP
+.PP
+.nf
+// using Fluxor;
+// using Luthetus\&.Common\&.RazorLib\&.BackgroundTasks\&.Models;
+// using Luthetus\&.Common\&.RazorLib\&.Installations\&.Models;
+// using Luthetus\&.TextEditor\&.RazorLib\&.Installations\&.Models;
+
+// Use either Wasm or ServerSide depending on how your app is being hosted\&.
+// var luthetusHostingKind = LuthetusHostingKind\&.ServerSide;
+var luthetusHostingKind = LuthetusHostingKind\&.Wasm;
+
+var hostingInformation = new LuthetusHostingInformation(
+    luthetusHostingKind,
+    LuthetusPurposeKind\&.TextEditor,
+    new BackgroundTaskService());
+
+services\&.AddLuthetusTextEditor(hostingInformation);
+
+services\&.AddFluxor(options => options\&.ScanAssemblies(
+    typeof(LuthetusCommonConfig)\&.Assembly,
+    typeof(LuthetusTextEditorConfig)\&.Assembly));
+
+// If NOT running ServerSide then one needs to run:
+// 'hostingInformation\&.StartBackgroundTaskWorkers(host\&.Services);'
+//
+// Some builders have 'Build()' invoked then fluent API into their 'Run()' or 'RunAsync()'\&.
+// This might require one to capture the 'Build()' result
+//
+// This can be done anywhere, so long as the services have been built
+// (by "can be done anywhere" this includes even after the app rendered,
+//  I wonder if you could tie it to the lifecycle of a Blazor component with IDisposable?)
+
+/*
+var host = builder\&.Build();
+hostingInformation\&.StartBackgroundTaskWorkers(host\&.Services);
+
+await host\&.RunAsync();
+*/
+.fi
+.PP
+
+.PP
+.IP "\(bu" 2
+Reference the \fRCSS\fP
+.PP
+
+.PP
+Go to the file that you reference CSS files from and add the following CSS references\&.
+
+.PP
+.PP
+.nf
+<link href="_content/Luthetus\&.Common/luthetusCommon\&.css" rel="stylesheet" />
+<link href="_content/Luthetus\&.TextEditor/luthetusTextEditor\&.css" rel="stylesheet" />
+.fi
+.PP
+
+.PP
+.IP "\(bu" 2
+Reference the \fRJavaScript\fP
+.PP
+
+.PP
+Go to the file that you reference JavaScript files from and add the following JavaScript reference below the Blazor framework JavaScript reference
+
+.PP
+.PP
+.nf
+<script src="_content/Luthetus\&.Common/luthetusCommon\&.js"></script>
+<script src="_content/Luthetus\&.TextEditor/luthetusTextEditor\&.js"></script>
+.fi
+.PP
+
+.PP
+.IP "\(bu" 2
+In \fRApp\&.razor\fP add the following towards the top of the file:
+.PP
+
+.PP
+.PP
+.nf
+<Fluxor\&.Blazor\&.Web\&.StoreInitializer />
+
+<!\-\-
+    The Luthetus components here, can be moved wherever\&.
+    Preferably, these are in one's LayoutComponentBase\&.
+    As here they cannot receive any cascading css\&.
+\-\->
+<Luthetus\&.Common\&.RazorLib\&.Installations\&.Displays\&.LuthetusCommonInitializer />
+<Luthetus\&.TextEditor\&.RazorLib\&.Installations\&.Displays\&.LuthetusTextEditorInitializer />
+.fi
+.PP
+
+.PP
+.RS 4
+\fINOTE:\fP \fBLuthetus\fP repositories use the state management library named \fRFluxor\fP (\fRgithub link\fP)\&. 
+.RE
+.PP
+
+.PP
+.IP "\(bu" 2
+My Entire App\&.razor file as of this step:
+.PP
+
+.PP
+.PP
+.nf
+<!\-\- App\&.razor \-\->
+
+<Fluxor\&.Blazor\&.Web\&.StoreInitializer />
+
+<!\-\-
+    The Luthetus components here, can be more wherever\&.
+    Preferably, these are in one's LayoutComponentBase\&.
+    As here they cannot receive any cascading css\&.
+\-\->
+<Luthetus\&.Common\&.RazorLib\&.Installations\&.Displays\&.LuthetusCommonInitializer />
+<Luthetus\&.TextEditor\&.RazorLib\&.Installations\&.Displays\&.LuthetusTextEditorInitializer />
+
+<Router AppAssembly="@typeof(App)\&.Assembly" AdditionalAssemblies="new [] { typeof(MainLayout)\&.Assembly }">
+    <Found Context="routeData">
+        <RouteView RouteData="@routeData" DefaultLayout="@typeof(MainLayout)"/>
+        <FocusOnNavigate RouteData="@routeData" Selector="h1"/>
+    </Found>
+    <NotFound>
+        <PageTitle>Not found</PageTitle>
+        <LayoutView Layout="@typeof(MainLayout)">
+            <p role="alert">Sorry, there's nothing at this address\&.</p>
+        </LayoutView>
+    </NotFound>
+</Router>
+.fi
+.PP
+.SH "Next tutorial: \fBusage\&.md\fP"
+.PP
+

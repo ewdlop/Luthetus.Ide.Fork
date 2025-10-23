@@ -1,0 +1,206 @@
+\doxysection{Context\+State\+Tests.\+Reducer.\+cs}
+\hypertarget{_context_state_tests_8_reducer_8cs_source}{}\label{_context_state_tests_8_reducer_8cs_source}\index{Source/Tests/Common/Basis/Contexts/States/ContextStateTests.Reducer.cs@{Source/Tests/Common/Basis/Contexts/States/ContextStateTests.Reducer.cs}}
+\mbox{\hyperlink{_context_state_tests_8_reducer_8cs}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{_context_state_tests_8_reducer_8cs_source_l00001}00001\ \textcolor{keyword}{using\ }Fluxor;}
+\DoxyCodeLine{\Hypertarget{_context_state_tests_8_reducer_8cs_source_l00002}00002\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_luthetus_1_1_common_1_1_razor_lib_1_1_commands_1_1_models}{Luthetus.Common.RazorLib.Commands.Models}};}
+\DoxyCodeLine{\Hypertarget{_context_state_tests_8_reducer_8cs_source_l00003}00003\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_luthetus_1_1_common_1_1_razor_lib_1_1_contexts_1_1_models}{Luthetus.Common.RazorLib.Contexts.Models}};}
+\DoxyCodeLine{\Hypertarget{_context_state_tests_8_reducer_8cs_source_l00004}00004\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_luthetus_1_1_common_1_1_razor_lib_1_1_contexts_1_1_states}{Luthetus.Common.RazorLib.Contexts.States}};}
+\DoxyCodeLine{\Hypertarget{_context_state_tests_8_reducer_8cs_source_l00005}00005\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_luthetus_1_1_common_1_1_razor_lib_1_1_java_script_objects_1_1_models}{Luthetus.Common.RazorLib.JavaScriptObjects.Models}};}
+\DoxyCodeLine{\Hypertarget{_context_state_tests_8_reducer_8cs_source_l00006}00006\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_luthetus_1_1_common_1_1_razor_lib_1_1_keymaps_1_1_models}{Luthetus.Common.RazorLib.Keymaps.Models}};}
+\DoxyCodeLine{\Hypertarget{_context_state_tests_8_reducer_8cs_source_l00007}00007\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_luthetus_1_1_common_1_1_razor_lib_1_1_keys_1_1_models}{Luthetus.Common.RazorLib.Keys.Models}};}
+\DoxyCodeLine{\Hypertarget{_context_state_tests_8_reducer_8cs_source_l00008}00008\ \textcolor{keyword}{using\ }Microsoft.Extensions.DependencyInjection;}
+\DoxyCodeLine{\Hypertarget{_context_state_tests_8_reducer_8cs_source_l00009}00009\ \textcolor{keyword}{using\ }System.Collections.Immutable;}
+\DoxyCodeLine{\Hypertarget{_context_state_tests_8_reducer_8cs_source_l00010}00010\ }
+\DoxyCodeLine{\Hypertarget{_context_state_tests_8_reducer_8cs_source_l00011}00011\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespace_luthetus_1_1_common_1_1_tests_1_1_basis_1_1_contexts_1_1_states}{Luthetus.Common.Tests.Basis.Contexts.States}};}
+\DoxyCodeLine{\Hypertarget{_context_state_tests_8_reducer_8cs_source_l00012}00012\ }
+\DoxyCodeLine{\Hypertarget{_context_state_tests_8_reducer_8cs_source_l00016}\mbox{\hyperlink{class_luthetus_1_1_common_1_1_tests_1_1_basis_1_1_contexts_1_1_states_1_1_context_state_reducer_tests}{00016}}\ \textcolor{keyword}{public}\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_luthetus_1_1_common_1_1_tests_1_1_basis_1_1_contexts_1_1_states_1_1_context_state_reducer_tests}{ContextStateReducerTests}}}
+\DoxyCodeLine{\Hypertarget{_context_state_tests_8_reducer_8cs_source_l00017}00017\ \{}
+\DoxyCodeLine{\Hypertarget{_context_state_tests_8_reducer_8cs_source_l00021}00021\ \ \ \ \ [Fact]}
+\DoxyCodeLine{\Hypertarget{_context_state_tests_8_reducer_8cs_source_l00022}\mbox{\hyperlink{class_luthetus_1_1_common_1_1_tests_1_1_basis_1_1_contexts_1_1_states_1_1_context_state_reducer_tests_a9c476e831ec2e1f9859c7bcc3619de64}{00022}}\ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_luthetus_1_1_common_1_1_tests_1_1_basis_1_1_contexts_1_1_states_1_1_context_state_reducer_tests_a9c476e831ec2e1f9859c7bcc3619de64}{ReduceSetFocusedContextHeirarchyAction}}()}
+\DoxyCodeLine{\Hypertarget{_context_state_tests_8_reducer_8cs_source_l00023}00023\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_context_state_tests_8_reducer_8cs_source_l00024}00024\ \ \ \ \ \ \ \ \ InitializeContextStateReducerTests(}
+\DoxyCodeLine{\Hypertarget{_context_state_tests_8_reducer_8cs_source_l00025}00025\ \ \ \ \ \ \ \ \ \ \ \ \ out\ var\ serviceProvider,}
+\DoxyCodeLine{\Hypertarget{_context_state_tests_8_reducer_8cs_source_l00026}00026\ \ \ \ \ \ \ \ \ \ \ \ \ out\ var\ contextStateWrap,}
+\DoxyCodeLine{\Hypertarget{_context_state_tests_8_reducer_8cs_source_l00027}00027\ \ \ \ \ \ \ \ \ \ \ \ \ out\ var\ dispatcher,}
+\DoxyCodeLine{\Hypertarget{_context_state_tests_8_reducer_8cs_source_l00028}00028\ \ \ \ \ \ \ \ \ \ \ \ \ out\ var\ contextHeirarchy);}
+\DoxyCodeLine{\Hypertarget{_context_state_tests_8_reducer_8cs_source_l00029}00029\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_context_state_tests_8_reducer_8cs_source_l00030}00030\ \ \ \ \ \ \ \ \ Assert.Equal(}
+\DoxyCodeLine{\Hypertarget{_context_state_tests_8_reducer_8cs_source_l00031}00031\ \ \ \ \ \ \ \ \ \ \ \ \ contextStateWrap.Value.FocusedContextHeirarchy.KeyList.Single(),}
+\DoxyCodeLine{\Hypertarget{_context_state_tests_8_reducer_8cs_source_l00032}00032\ \ \ \ \ \ \ \ \ \ \ \ \ ContextFacts.GlobalContext.ContextKey);}
+\DoxyCodeLine{\Hypertarget{_context_state_tests_8_reducer_8cs_source_l00033}00033\ }
+\DoxyCodeLine{\Hypertarget{_context_state_tests_8_reducer_8cs_source_l00034}00034\ \ \ \ \ \ \ \ \ var\ setFocusedContextHeirarchyAction\ =\ \textcolor{keyword}{new}\ ContextState.SetFocusedContextHeirarchyAction(}
+\DoxyCodeLine{\Hypertarget{_context_state_tests_8_reducer_8cs_source_l00035}00035\ \ \ \ \ \ \ \ \ \ \ \ \ contextHeirarchy);}
+\DoxyCodeLine{\Hypertarget{_context_state_tests_8_reducer_8cs_source_l00036}00036\ }
+\DoxyCodeLine{\Hypertarget{_context_state_tests_8_reducer_8cs_source_l00037}00037\ \ \ \ \ \ \ \ \ dispatcher.Dispatch(setFocusedContextHeirarchyAction);}
+\DoxyCodeLine{\Hypertarget{_context_state_tests_8_reducer_8cs_source_l00038}00038\ }
+\DoxyCodeLine{\Hypertarget{_context_state_tests_8_reducer_8cs_source_l00039}00039\ \ \ \ \ \ \ \ \ Assert.Equal(}
+\DoxyCodeLine{\Hypertarget{_context_state_tests_8_reducer_8cs_source_l00040}00040\ \ \ \ \ \ \ \ \ \ \ \ \ contextStateWrap.Value.FocusedContextHeirarchy.KeyList[0],}
+\DoxyCodeLine{\Hypertarget{_context_state_tests_8_reducer_8cs_source_l00041}00041\ \ \ \ \ \ \ \ \ \ \ \ \ ContextFacts.ActiveContextsContext.ContextKey);}
+\DoxyCodeLine{\Hypertarget{_context_state_tests_8_reducer_8cs_source_l00042}00042\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_context_state_tests_8_reducer_8cs_source_l00043}00043\ \ \ \ \ \ \ \ \ Assert.Equal(}
+\DoxyCodeLine{\Hypertarget{_context_state_tests_8_reducer_8cs_source_l00044}00044\ \ \ \ \ \ \ \ \ \ \ \ \ contextStateWrap.Value.FocusedContextHeirarchy.KeyList[1],}
+\DoxyCodeLine{\Hypertarget{_context_state_tests_8_reducer_8cs_source_l00045}00045\ \ \ \ \ \ \ \ \ \ \ \ \ ContextFacts.GlobalContext.ContextKey);}
+\DoxyCodeLine{\Hypertarget{_context_state_tests_8_reducer_8cs_source_l00046}00046\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_context_state_tests_8_reducer_8cs_source_l00047}00047\ }
+\DoxyCodeLine{\Hypertarget{_context_state_tests_8_reducer_8cs_source_l00051}00051\ \ \ \ \ [Fact]}
+\DoxyCodeLine{\Hypertarget{_context_state_tests_8_reducer_8cs_source_l00052}\mbox{\hyperlink{class_luthetus_1_1_common_1_1_tests_1_1_basis_1_1_contexts_1_1_states_1_1_context_state_reducer_tests_acdef171fb3d08756fb6a28c8cd6c88d4}{00052}}\ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_luthetus_1_1_common_1_1_tests_1_1_basis_1_1_contexts_1_1_states_1_1_context_state_reducer_tests_acdef171fb3d08756fb6a28c8cd6c88d4}{ReduceToggleSelectInspectedContextHeirarchyAction}}()}
+\DoxyCodeLine{\Hypertarget{_context_state_tests_8_reducer_8cs_source_l00053}00053\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_context_state_tests_8_reducer_8cs_source_l00054}00054\ \ \ \ \ \ \ \ \ InitializeContextStateReducerTests(}
+\DoxyCodeLine{\Hypertarget{_context_state_tests_8_reducer_8cs_source_l00055}00055\ \ \ \ \ \ \ \ \ \ \ \ \ out\ var\ serviceProvider,}
+\DoxyCodeLine{\Hypertarget{_context_state_tests_8_reducer_8cs_source_l00056}00056\ \ \ \ \ \ \ \ \ \ \ \ \ out\ var\ contextStateWrap,}
+\DoxyCodeLine{\Hypertarget{_context_state_tests_8_reducer_8cs_source_l00057}00057\ \ \ \ \ \ \ \ \ \ \ \ \ out\ var\ dispatcher,}
+\DoxyCodeLine{\Hypertarget{_context_state_tests_8_reducer_8cs_source_l00058}00058\ \ \ \ \ \ \ \ \ \ \ \ \ out\ var\ contextHeirarchy);}
+\DoxyCodeLine{\Hypertarget{_context_state_tests_8_reducer_8cs_source_l00059}00059\ }
+\DoxyCodeLine{\Hypertarget{_context_state_tests_8_reducer_8cs_source_l00060}00060\ \ \ \ \ \ \ \ \ var\ toggleSelectInspectedContextHeirarchyAction\ =\ \textcolor{keyword}{new}\ ContextState.ToggleSelectInspectedContextHeirarchyAction();}
+\DoxyCodeLine{\Hypertarget{_context_state_tests_8_reducer_8cs_source_l00061}00061\ }
+\DoxyCodeLine{\Hypertarget{_context_state_tests_8_reducer_8cs_source_l00062}00062\ \ \ \ \ \ \ \ \ var\ inIsSelectingInspectionTarget\ =\ contextStateWrap.Value.IsSelectingInspectionTarget;}
+\DoxyCodeLine{\Hypertarget{_context_state_tests_8_reducer_8cs_source_l00063}00063\ }
+\DoxyCodeLine{\Hypertarget{_context_state_tests_8_reducer_8cs_source_l00064}00064\ \ \ \ \ \ \ \ \ dispatcher.Dispatch(toggleSelectInspectedContextHeirarchyAction);}
+\DoxyCodeLine{\Hypertarget{_context_state_tests_8_reducer_8cs_source_l00065}00065\ }
+\DoxyCodeLine{\Hypertarget{_context_state_tests_8_reducer_8cs_source_l00066}00066\ \ \ \ \ \ \ \ \ Assert.NotEqual(}
+\DoxyCodeLine{\Hypertarget{_context_state_tests_8_reducer_8cs_source_l00067}00067\ \ \ \ \ \ \ \ \ \ \ \ \ inIsSelectingInspectionTarget,}
+\DoxyCodeLine{\Hypertarget{_context_state_tests_8_reducer_8cs_source_l00068}00068\ \ \ \ \ \ \ \ \ \ \ \ \ contextStateWrap.Value.IsSelectingInspectionTarget);}
+\DoxyCodeLine{\Hypertarget{_context_state_tests_8_reducer_8cs_source_l00069}00069\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_context_state_tests_8_reducer_8cs_source_l00070}00070\ }
+\DoxyCodeLine{\Hypertarget{_context_state_tests_8_reducer_8cs_source_l00071}00071\ }
+\DoxyCodeLine{\Hypertarget{_context_state_tests_8_reducer_8cs_source_l00075}00075\ \ \ \ \ [Fact]}
+\DoxyCodeLine{\Hypertarget{_context_state_tests_8_reducer_8cs_source_l00076}\mbox{\hyperlink{class_luthetus_1_1_common_1_1_tests_1_1_basis_1_1_contexts_1_1_states_1_1_context_state_reducer_tests_a24c0748192f6a2d79fee0eef6303c91c}{00076}}\ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_luthetus_1_1_common_1_1_tests_1_1_basis_1_1_contexts_1_1_states_1_1_context_state_reducer_tests_a24c0748192f6a2d79fee0eef6303c91c}{ReduceIsSelectingInspectableContextHeirarchyAction}}()}
+\DoxyCodeLine{\Hypertarget{_context_state_tests_8_reducer_8cs_source_l00077}00077\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_context_state_tests_8_reducer_8cs_source_l00078}00078\ \ \ \ \ \ \ \ \ InitializeContextStateReducerTests(}
+\DoxyCodeLine{\Hypertarget{_context_state_tests_8_reducer_8cs_source_l00079}00079\ \ \ \ \ \ \ \ \ \ \ \ \ out\ var\ serviceProvider,}
+\DoxyCodeLine{\Hypertarget{_context_state_tests_8_reducer_8cs_source_l00080}00080\ \ \ \ \ \ \ \ \ \ \ \ \ out\ var\ contextStateWrap,}
+\DoxyCodeLine{\Hypertarget{_context_state_tests_8_reducer_8cs_source_l00081}00081\ \ \ \ \ \ \ \ \ \ \ \ \ out\ var\ dispatcher,}
+\DoxyCodeLine{\Hypertarget{_context_state_tests_8_reducer_8cs_source_l00082}00082\ \ \ \ \ \ \ \ \ \ \ \ \ out\ var\ contextHeirarchy);}
+\DoxyCodeLine{\Hypertarget{_context_state_tests_8_reducer_8cs_source_l00083}00083\ }
+\DoxyCodeLine{\Hypertarget{_context_state_tests_8_reducer_8cs_source_l00084}00084\ \ \ \ \ \ \ \ \ dispatcher.Dispatch(\textcolor{keyword}{new}\ ContextState.IsSelectingInspectableContextHeirarchyAction(}
+\DoxyCodeLine{\Hypertarget{_context_state_tests_8_reducer_8cs_source_l00085}00085\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{true}));}
+\DoxyCodeLine{\Hypertarget{_context_state_tests_8_reducer_8cs_source_l00086}00086\ }
+\DoxyCodeLine{\Hypertarget{_context_state_tests_8_reducer_8cs_source_l00087}00087\ \ \ \ \ \ \ \ \ Assert.True(contextStateWrap.Value.IsSelectingInspectionTarget);}
+\DoxyCodeLine{\Hypertarget{_context_state_tests_8_reducer_8cs_source_l00088}00088\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_context_state_tests_8_reducer_8cs_source_l00089}00089\ \ \ \ \ \ \ \ \ dispatcher.Dispatch(\textcolor{keyword}{new}\ ContextState.IsSelectingInspectableContextHeirarchyAction(}
+\DoxyCodeLine{\Hypertarget{_context_state_tests_8_reducer_8cs_source_l00090}00090\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{false}));}
+\DoxyCodeLine{\Hypertarget{_context_state_tests_8_reducer_8cs_source_l00091}00091\ }
+\DoxyCodeLine{\Hypertarget{_context_state_tests_8_reducer_8cs_source_l00092}00092\ \ \ \ \ \ \ \ \ Assert.False(contextStateWrap.Value.IsSelectingInspectionTarget);}
+\DoxyCodeLine{\Hypertarget{_context_state_tests_8_reducer_8cs_source_l00093}00093\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_context_state_tests_8_reducer_8cs_source_l00094}00094\ }
+\DoxyCodeLine{\Hypertarget{_context_state_tests_8_reducer_8cs_source_l00095}00095\ }
+\DoxyCodeLine{\Hypertarget{_context_state_tests_8_reducer_8cs_source_l00099}00099\ \ \ \ \ [Fact]}
+\DoxyCodeLine{\Hypertarget{_context_state_tests_8_reducer_8cs_source_l00100}\mbox{\hyperlink{class_luthetus_1_1_common_1_1_tests_1_1_basis_1_1_contexts_1_1_states_1_1_context_state_reducer_tests_a09f876779db917a659ca702bba35601d}{00100}}\ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_luthetus_1_1_common_1_1_tests_1_1_basis_1_1_contexts_1_1_states_1_1_context_state_reducer_tests_a09f876779db917a659ca702bba35601d}{ReduceSetInspectedContextHeirarchyAction}}()}
+\DoxyCodeLine{\Hypertarget{_context_state_tests_8_reducer_8cs_source_l00101}00101\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_context_state_tests_8_reducer_8cs_source_l00102}00102\ \ \ \ \ \ \ \ \ InitializeContextStateReducerTests(}
+\DoxyCodeLine{\Hypertarget{_context_state_tests_8_reducer_8cs_source_l00103}00103\ \ \ \ \ \ \ \ \ \ \ \ \ out\ var\ serviceProvider,}
+\DoxyCodeLine{\Hypertarget{_context_state_tests_8_reducer_8cs_source_l00104}00104\ \ \ \ \ \ \ \ \ \ \ \ \ out\ var\ contextStateWrap,}
+\DoxyCodeLine{\Hypertarget{_context_state_tests_8_reducer_8cs_source_l00105}00105\ \ \ \ \ \ \ \ \ \ \ \ \ out\ var\ dispatcher,}
+\DoxyCodeLine{\Hypertarget{_context_state_tests_8_reducer_8cs_source_l00106}00106\ \ \ \ \ \ \ \ \ \ \ \ \ out\ var\ contextHeirarchy);}
+\DoxyCodeLine{\Hypertarget{_context_state_tests_8_reducer_8cs_source_l00107}00107\ }
+\DoxyCodeLine{\Hypertarget{_context_state_tests_8_reducer_8cs_source_l00108}00108\ \ \ \ \ \ \ \ \ Assert.Null(contextStateWrap.Value.InspectedContextHeirarchy);}
+\DoxyCodeLine{\Hypertarget{_context_state_tests_8_reducer_8cs_source_l00109}00109\ }
+\DoxyCodeLine{\Hypertarget{_context_state_tests_8_reducer_8cs_source_l00110}00110\ \ \ \ \ \ \ \ \ var\ setInspectedContextHeirarchyAction\ =\ \textcolor{keyword}{new}\ ContextState.SetInspectedContextHeirarchyAction(}
+\DoxyCodeLine{\Hypertarget{_context_state_tests_8_reducer_8cs_source_l00111}00111\ \ \ \ \ \ \ \ \ \ \ \ \ contextHeirarchy);}
+\DoxyCodeLine{\Hypertarget{_context_state_tests_8_reducer_8cs_source_l00112}00112\ }
+\DoxyCodeLine{\Hypertarget{_context_state_tests_8_reducer_8cs_source_l00113}00113\ \ \ \ \ \ \ \ \ dispatcher.Dispatch(setInspectedContextHeirarchyAction);}
+\DoxyCodeLine{\Hypertarget{_context_state_tests_8_reducer_8cs_source_l00114}00114\ }
+\DoxyCodeLine{\Hypertarget{_context_state_tests_8_reducer_8cs_source_l00115}00115\ \ \ \ \ \ \ \ \ Assert.Equal(}
+\DoxyCodeLine{\Hypertarget{_context_state_tests_8_reducer_8cs_source_l00116}00116\ \ \ \ \ \ \ \ \ \ \ \ \ setInspectedContextHeirarchyAction.InspectedContextHeirarchy,}
+\DoxyCodeLine{\Hypertarget{_context_state_tests_8_reducer_8cs_source_l00117}00117\ \ \ \ \ \ \ \ \ \ \ \ \ contextStateWrap.Value.InspectedContextHeirarchy);}
+\DoxyCodeLine{\Hypertarget{_context_state_tests_8_reducer_8cs_source_l00118}00118\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_context_state_tests_8_reducer_8cs_source_l00119}00119\ }
+\DoxyCodeLine{\Hypertarget{_context_state_tests_8_reducer_8cs_source_l00123}00123\ \ \ \ \ [Fact]}
+\DoxyCodeLine{\Hypertarget{_context_state_tests_8_reducer_8cs_source_l00124}\mbox{\hyperlink{class_luthetus_1_1_common_1_1_tests_1_1_basis_1_1_contexts_1_1_states_1_1_context_state_reducer_tests_a6d3904fdcbcb34984498e9da0c9fb1fa}{00124}}\ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_luthetus_1_1_common_1_1_tests_1_1_basis_1_1_contexts_1_1_states_1_1_context_state_reducer_tests_a6d3904fdcbcb34984498e9da0c9fb1fa}{ReduceAddInspectableContextAction}}()}
+\DoxyCodeLine{\Hypertarget{_context_state_tests_8_reducer_8cs_source_l00125}00125\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_context_state_tests_8_reducer_8cs_source_l00126}00126\ \ \ \ \ \ \ \ \ InitializeContextStateReducerTests(}
+\DoxyCodeLine{\Hypertarget{_context_state_tests_8_reducer_8cs_source_l00127}00127\ \ \ \ \ \ \ \ \ \ \ \ \ out\ var\ serviceProvider,}
+\DoxyCodeLine{\Hypertarget{_context_state_tests_8_reducer_8cs_source_l00128}00128\ \ \ \ \ \ \ \ \ \ \ \ \ out\ var\ contextStateWrap,}
+\DoxyCodeLine{\Hypertarget{_context_state_tests_8_reducer_8cs_source_l00129}00129\ \ \ \ \ \ \ \ \ \ \ \ \ out\ var\ dispatcher,}
+\DoxyCodeLine{\Hypertarget{_context_state_tests_8_reducer_8cs_source_l00130}00130\ \ \ \ \ \ \ \ \ \ \ \ \ out\ var\ contextHeirarchy);}
+\DoxyCodeLine{\Hypertarget{_context_state_tests_8_reducer_8cs_source_l00131}00131\ }
+\DoxyCodeLine{\Hypertarget{_context_state_tests_8_reducer_8cs_source_l00132}00132\ \ \ \ \ \ \ \ \ Assert.Empty(contextStateWrap.Value.InspectableContextList);}
+\DoxyCodeLine{\Hypertarget{_context_state_tests_8_reducer_8cs_source_l00133}00133\ }
+\DoxyCodeLine{\Hypertarget{_context_state_tests_8_reducer_8cs_source_l00134}00134\ \ \ \ \ \ \ \ \ var\ inspectableContext\ =\ \textcolor{keyword}{new}\ \mbox{\hyperlink{namespace_luthetus_1_1_common_1_1_razor_lib_1_1_contexts_1_1_models_a0a237e1c7c02b976276db84b039514eb}{InspectableContext}}(}
+\DoxyCodeLine{\Hypertarget{_context_state_tests_8_reducer_8cs_source_l00135}00135\ \ \ \ \ \ \ \ \ \ \ \ \ contextHeirarchy,}
+\DoxyCodeLine{\Hypertarget{_context_state_tests_8_reducer_8cs_source_l00136}00136\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{new}\ \mbox{\hyperlink{namespace_luthetus_1_1_common_1_1_razor_lib_1_1_java_script_objects_1_1_models_af7cb4b0846c5ea3330de0b00ae2d4407}{MeasuredHtmlElementDimensions}}(0,\ 0,\ 0,\ 0,\ 0));}
+\DoxyCodeLine{\Hypertarget{_context_state_tests_8_reducer_8cs_source_l00137}00137\ }
+\DoxyCodeLine{\Hypertarget{_context_state_tests_8_reducer_8cs_source_l00138}00138\ \ \ \ \ \ \ \ \ var\ addInspectableContextAction\ =\ \textcolor{keyword}{new}\ ContextState.AddInspectableContextAction(}
+\DoxyCodeLine{\Hypertarget{_context_state_tests_8_reducer_8cs_source_l00139}00139\ \ \ \ \ \ \ \ \ \ \ \ \ inspectableContext);}
+\DoxyCodeLine{\Hypertarget{_context_state_tests_8_reducer_8cs_source_l00140}00140\ }
+\DoxyCodeLine{\Hypertarget{_context_state_tests_8_reducer_8cs_source_l00141}00141\ \ \ \ \ \ \ \ \ dispatcher.Dispatch(addInspectableContextAction);}
+\DoxyCodeLine{\Hypertarget{_context_state_tests_8_reducer_8cs_source_l00142}00142\ }
+\DoxyCodeLine{\Hypertarget{_context_state_tests_8_reducer_8cs_source_l00143}00143\ \ \ \ \ \ \ \ \ Assert.Equal(}
+\DoxyCodeLine{\Hypertarget{_context_state_tests_8_reducer_8cs_source_l00144}00144\ \ \ \ \ \ \ \ \ \ \ \ \ addInspectableContextAction.InspectableContext,\ }
+\DoxyCodeLine{\Hypertarget{_context_state_tests_8_reducer_8cs_source_l00145}00145\ \ \ \ \ \ \ \ \ \ \ \ \ contextStateWrap.Value.InspectableContextList.Single());}
+\DoxyCodeLine{\Hypertarget{_context_state_tests_8_reducer_8cs_source_l00146}00146\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_context_state_tests_8_reducer_8cs_source_l00147}00147\ }
+\DoxyCodeLine{\Hypertarget{_context_state_tests_8_reducer_8cs_source_l00148}00148\ }
+\DoxyCodeLine{\Hypertarget{_context_state_tests_8_reducer_8cs_source_l00152}00152\ \ \ \ \ [Fact]}
+\DoxyCodeLine{\Hypertarget{_context_state_tests_8_reducer_8cs_source_l00153}\mbox{\hyperlink{class_luthetus_1_1_common_1_1_tests_1_1_basis_1_1_contexts_1_1_states_1_1_context_state_reducer_tests_a2e53e50299496d65ea15639ff0323c7f}{00153}}\ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_luthetus_1_1_common_1_1_tests_1_1_basis_1_1_contexts_1_1_states_1_1_context_state_reducer_tests_a2e53e50299496d65ea15639ff0323c7f}{ReduceSetContextKeymapAction}}()}
+\DoxyCodeLine{\Hypertarget{_context_state_tests_8_reducer_8cs_source_l00154}00154\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_context_state_tests_8_reducer_8cs_source_l00155}00155\ \ \ \ \ \ \ \ \ InitializeContextStateReducerTests(}
+\DoxyCodeLine{\Hypertarget{_context_state_tests_8_reducer_8cs_source_l00156}00156\ \ \ \ \ \ \ \ \ \ \ \ \ out\ var\ serviceProvider,}
+\DoxyCodeLine{\Hypertarget{_context_state_tests_8_reducer_8cs_source_l00157}00157\ \ \ \ \ \ \ \ \ \ \ \ \ out\ var\ contextStateWrap,}
+\DoxyCodeLine{\Hypertarget{_context_state_tests_8_reducer_8cs_source_l00158}00158\ \ \ \ \ \ \ \ \ \ \ \ \ out\ var\ dispatcher,}
+\DoxyCodeLine{\Hypertarget{_context_state_tests_8_reducer_8cs_source_l00159}00159\ \ \ \ \ \ \ \ \ \ \ \ \ out\ var\ contextHeirarchy);}
+\DoxyCodeLine{\Hypertarget{_context_state_tests_8_reducer_8cs_source_l00160}00160\ }
+\DoxyCodeLine{\Hypertarget{_context_state_tests_8_reducer_8cs_source_l00161}00161\ \ \ \ \ \ \ \ \ var\ globalContext\ =\ contextStateWrap.Value.AllContextsList.Single(}
+\DoxyCodeLine{\Hypertarget{_context_state_tests_8_reducer_8cs_source_l00162}00162\ \ \ \ \ \ \ \ \ \ \ \ \ x\ =>\ x.ContextKey\ ==\ ContextFacts.GlobalContext.ContextKey);}
+\DoxyCodeLine{\Hypertarget{_context_state_tests_8_reducer_8cs_source_l00163}00163\ }
+\DoxyCodeLine{\Hypertarget{_context_state_tests_8_reducer_8cs_source_l00164}00164\ \ \ \ \ \ \ \ \ Assert.Equal(\mbox{\hyperlink{interface_luthetus_1_1_common_1_1_razor_lib_1_1_keymaps_1_1_models_1_1_i_keymap}{IKeymap}}.\mbox{\hyperlink{interface_luthetus_1_1_common_1_1_razor_lib_1_1_keymaps_1_1_models_1_1_i_keymap_ad3393cf94d4e840bb8608e88aa5b7c22}{Empty}},\ globalContext.Keymap);}
+\DoxyCodeLine{\Hypertarget{_context_state_tests_8_reducer_8cs_source_l00165}00165\ }
+\DoxyCodeLine{\Hypertarget{_context_state_tests_8_reducer_8cs_source_l00166}00166\ \ \ \ \ \ \ \ \ var\ command\ =\ \textcolor{keyword}{new}\ \mbox{\hyperlink{class_luthetus_1_1_common_1_1_razor_lib_1_1_commands_1_1_models_1_1_common_command}{CommonCommand}}(}
+\DoxyCodeLine{\Hypertarget{_context_state_tests_8_reducer_8cs_source_l00167}00167\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}Test\ SetContextKeymap\ Action"{}},\ \textcolor{stringliteral}{"{}test-\/set-\/context-\/keymap-\/action"{}},\ \textcolor{keyword}{false},}
+\DoxyCodeLine{\Hypertarget{_context_state_tests_8_reducer_8cs_source_l00168}00168\ \ \ \ \ \ \ \ \ \ \ \ \ commandArgs\ =>\ Task.CompletedTask);}
+\DoxyCodeLine{\Hypertarget{_context_state_tests_8_reducer_8cs_source_l00169}00169\ }
+\DoxyCodeLine{\Hypertarget{_context_state_tests_8_reducer_8cs_source_l00170}00170\ \ \ \ \ \ \ \ \ var\ keymap\ =\ \textcolor{keyword}{new}\ \mbox{\hyperlink{class_luthetus_1_1_common_1_1_razor_lib_1_1_keymaps_1_1_models_1_1_keymap}{Keymap}}(Key<Keymap>.NewKey(),\ \textcolor{stringliteral}{"{}Unit\ Test"{}});}
+\DoxyCodeLine{\Hypertarget{_context_state_tests_8_reducer_8cs_source_l00171}00171\ }
+\DoxyCodeLine{\Hypertarget{_context_state_tests_8_reducer_8cs_source_l00172}00172\ \ \ \ \ \ \ \ \ \_\ =\ keymap.TryRegister(}
+\DoxyCodeLine{\Hypertarget{_context_state_tests_8_reducer_8cs_source_l00173}00173\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{new}\ \mbox{\hyperlink{struct_luthetus_1_1_common_1_1_razor_lib_1_1_keymaps_1_1_models_1_1_keymap_args}{KeymapArgs}}}
+\DoxyCodeLine{\Hypertarget{_context_state_tests_8_reducer_8cs_source_l00174}00174\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_context_state_tests_8_reducer_8cs_source_l00175}00175\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Code\ =\ \textcolor{stringliteral}{"{}KeyF"{}},}
+\DoxyCodeLine{\Hypertarget{_context_state_tests_8_reducer_8cs_source_l00176}00176\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ShiftKey\ =\ \textcolor{keyword}{false},}
+\DoxyCodeLine{\Hypertarget{_context_state_tests_8_reducer_8cs_source_l00177}00177\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ CtrlKey\ =\ \textcolor{keyword}{true},}
+\DoxyCodeLine{\Hypertarget{_context_state_tests_8_reducer_8cs_source_l00178}00178\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ AltKey\ =\ \textcolor{keyword}{true},}
+\DoxyCodeLine{\Hypertarget{_context_state_tests_8_reducer_8cs_source_l00179}00179\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ LayerKey\ =\ Key<KeymapLayer>.Empty,}
+\DoxyCodeLine{\Hypertarget{_context_state_tests_8_reducer_8cs_source_l00180}00180\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \},}
+\DoxyCodeLine{\Hypertarget{_context_state_tests_8_reducer_8cs_source_l00181}00181\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ command);}
+\DoxyCodeLine{\Hypertarget{_context_state_tests_8_reducer_8cs_source_l00182}00182\ }
+\DoxyCodeLine{\Hypertarget{_context_state_tests_8_reducer_8cs_source_l00183}00183\ \ \ \ \ \ \ \ \ var\ setContextKeymapAction\ =\ \textcolor{keyword}{new}\ ContextState.SetContextKeymapAction(}
+\DoxyCodeLine{\Hypertarget{_context_state_tests_8_reducer_8cs_source_l00184}00184\ \ \ \ \ \ \ \ \ \ \ \ \ ContextFacts.GlobalContext.ContextKey,}
+\DoxyCodeLine{\Hypertarget{_context_state_tests_8_reducer_8cs_source_l00185}00185\ \ \ \ \ \ \ \ \ \ \ \ \ keymap);}
+\DoxyCodeLine{\Hypertarget{_context_state_tests_8_reducer_8cs_source_l00186}00186\ }
+\DoxyCodeLine{\Hypertarget{_context_state_tests_8_reducer_8cs_source_l00187}00187\ \ \ \ \ \ \ \ \ dispatcher.Dispatch(setContextKeymapAction);}
+\DoxyCodeLine{\Hypertarget{_context_state_tests_8_reducer_8cs_source_l00188}00188\ }
+\DoxyCodeLine{\Hypertarget{_context_state_tests_8_reducer_8cs_source_l00189}00189\ \ \ \ \ \ \ \ \ globalContext\ =\ contextStateWrap.Value.AllContextsList.Single(}
+\DoxyCodeLine{\Hypertarget{_context_state_tests_8_reducer_8cs_source_l00190}00190\ \ \ \ \ \ \ \ \ \ \ \ \ x\ =>\ x.ContextKey\ ==\ ContextFacts.GlobalContext.ContextKey);}
+\DoxyCodeLine{\Hypertarget{_context_state_tests_8_reducer_8cs_source_l00191}00191\ }
+\DoxyCodeLine{\Hypertarget{_context_state_tests_8_reducer_8cs_source_l00192}00192\ \ \ \ \ \ \ \ \ Assert.NotEqual(\mbox{\hyperlink{interface_luthetus_1_1_common_1_1_razor_lib_1_1_keymaps_1_1_models_1_1_i_keymap}{IKeymap}}.\mbox{\hyperlink{interface_luthetus_1_1_common_1_1_razor_lib_1_1_keymaps_1_1_models_1_1_i_keymap_ad3393cf94d4e840bb8608e88aa5b7c22}{Empty}},\ globalContext.Keymap);}
+\DoxyCodeLine{\Hypertarget{_context_state_tests_8_reducer_8cs_source_l00193}00193\ \ \ \ \ \ \ \ \ Assert.Equal(keymap,\ globalContext.Keymap);}
+\DoxyCodeLine{\Hypertarget{_context_state_tests_8_reducer_8cs_source_l00194}00194\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_context_state_tests_8_reducer_8cs_source_l00195}00195\ }
+\DoxyCodeLine{\Hypertarget{_context_state_tests_8_reducer_8cs_source_l00196}00196\ \ \ \ \ \textcolor{keyword}{private}\ \textcolor{keywordtype}{void}\ InitializeContextStateReducerTests(}
+\DoxyCodeLine{\Hypertarget{_context_state_tests_8_reducer_8cs_source_l00197}00197\ \ \ \ \ \ \ \ \ out\ ServiceProvider\ serviceProvider,}
+\DoxyCodeLine{\Hypertarget{_context_state_tests_8_reducer_8cs_source_l00198}00198\ \ \ \ \ \ \ \ \ out\ IState<ContextState>\ contextStateWrap,}
+\DoxyCodeLine{\Hypertarget{_context_state_tests_8_reducer_8cs_source_l00199}00199\ \ \ \ \ \ \ \ \ out\ IDispatcher\ dispatcher,}
+\DoxyCodeLine{\Hypertarget{_context_state_tests_8_reducer_8cs_source_l00200}00200\ \ \ \ \ \ \ \ \ out\ \mbox{\hyperlink{namespace_luthetus_1_1_common_1_1_razor_lib_1_1_contexts_1_1_models_a323493615ed3eee3ded564126960dc4e}{ContextHeirarchy}}\ sampleContextRecordKeyHeirarchy)}
+\DoxyCodeLine{\Hypertarget{_context_state_tests_8_reducer_8cs_source_l00201}00201\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_context_state_tests_8_reducer_8cs_source_l00202}00202\ \ \ \ \ \ \ \ \ var\ services\ =\ \textcolor{keyword}{new}\ ServiceCollection()}
+\DoxyCodeLine{\Hypertarget{_context_state_tests_8_reducer_8cs_source_l00203}00203\ \ \ \ \ \ \ \ \ \ \ \ \ .AddFluxor(options\ =>\ options.ScanAssemblies(typeof(ContextState).Assembly));}
+\DoxyCodeLine{\Hypertarget{_context_state_tests_8_reducer_8cs_source_l00204}00204\ }
+\DoxyCodeLine{\Hypertarget{_context_state_tests_8_reducer_8cs_source_l00205}00205\ \ \ \ \ \ \ \ \ serviceProvider\ =\ services.BuildServiceProvider();}
+\DoxyCodeLine{\Hypertarget{_context_state_tests_8_reducer_8cs_source_l00206}00206\ }
+\DoxyCodeLine{\Hypertarget{_context_state_tests_8_reducer_8cs_source_l00207}00207\ \ \ \ \ \ \ \ \ var\ store\ =\ serviceProvider.GetRequiredService<IStore>();}
+\DoxyCodeLine{\Hypertarget{_context_state_tests_8_reducer_8cs_source_l00208}00208\ \ \ \ \ \ \ \ \ store.InitializeAsync().Wait();}
+\DoxyCodeLine{\Hypertarget{_context_state_tests_8_reducer_8cs_source_l00209}00209\ }
+\DoxyCodeLine{\Hypertarget{_context_state_tests_8_reducer_8cs_source_l00210}00210\ \ \ \ \ \ \ \ \ contextStateWrap\ =\ serviceProvider.GetRequiredService<IState<ContextState>>();}
+\DoxyCodeLine{\Hypertarget{_context_state_tests_8_reducer_8cs_source_l00211}00211\ }
+\DoxyCodeLine{\Hypertarget{_context_state_tests_8_reducer_8cs_source_l00212}00212\ \ \ \ \ \ \ \ \ dispatcher\ =\ serviceProvider.GetRequiredService<IDispatcher>();}
+\DoxyCodeLine{\Hypertarget{_context_state_tests_8_reducer_8cs_source_l00213}00213\ }
+\DoxyCodeLine{\Hypertarget{_context_state_tests_8_reducer_8cs_source_l00214}00214\ \ \ \ \ \ \ \ \ sampleContextRecordKeyHeirarchy\ =\ \textcolor{keyword}{new}\ \mbox{\hyperlink{namespace_luthetus_1_1_common_1_1_razor_lib_1_1_contexts_1_1_models_a323493615ed3eee3ded564126960dc4e}{ContextHeirarchy}}(}
+\DoxyCodeLine{\Hypertarget{_context_state_tests_8_reducer_8cs_source_l00215}00215\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{new}\ Key<ContextRecord>[]}
+\DoxyCodeLine{\Hypertarget{_context_state_tests_8_reducer_8cs_source_l00216}00216\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_context_state_tests_8_reducer_8cs_source_l00217}00217\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ContextFacts.ActiveContextsContext.ContextKey,}
+\DoxyCodeLine{\Hypertarget{_context_state_tests_8_reducer_8cs_source_l00218}00218\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ContextFacts.GlobalContext.ContextKey,}
+\DoxyCodeLine{\Hypertarget{_context_state_tests_8_reducer_8cs_source_l00219}00219\ \ \ \ \ \ \ \ \ \ \ \ \ \}.ToImmutableArray());}
+\DoxyCodeLine{\Hypertarget{_context_state_tests_8_reducer_8cs_source_l00220}00220\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_context_state_tests_8_reducer_8cs_source_l00221}00221\ \}}
+
+\end{DoxyCode}

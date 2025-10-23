@@ -1,0 +1,67 @@
+\doxysection{Token\+Walker\+Extension\+Methods.\+cs}
+\hypertarget{_token_walker_extension_methods_8cs_source}{}\label{_token_walker_extension_methods_8cs_source}\index{Source/Lib/CompilerServices/CSharp/ParserCase/Internals/TokenWalkerExtensionMethods.cs@{Source/Lib/CompilerServices/CSharp/ParserCase/Internals/TokenWalkerExtensionMethods.cs}}
+\mbox{\hyperlink{_token_walker_extension_methods_8cs}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{_token_walker_extension_methods_8cs_source_l00001}00001\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax}{Luthetus.TextEditor.RazorLib.CompilerServices.Syntax}};}
+\DoxyCodeLine{\Hypertarget{_token_walker_extension_methods_8cs_source_l00002}00002\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_1_1_tokens}{Luthetus.TextEditor.RazorLib.CompilerServices.Syntax.Tokens}};}
+\DoxyCodeLine{\Hypertarget{_token_walker_extension_methods_8cs_source_l00003}00003\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_1_1_nodes}{Luthetus.TextEditor.RazorLib.CompilerServices.Syntax.Nodes}};}
+\DoxyCodeLine{\Hypertarget{_token_walker_extension_methods_8cs_source_l00004}00004\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_utility}{Luthetus.TextEditor.RazorLib.CompilerServices.Utility}};}
+\DoxyCodeLine{\Hypertarget{_token_walker_extension_methods_8cs_source_l00005}00005\ }
+\DoxyCodeLine{\Hypertarget{_token_walker_extension_methods_8cs_source_l00006}00006\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespace_luthetus_1_1_compiler_services_1_1_c_sharp_1_1_parser_case_1_1_internals}{Luthetus.CompilerServices.CSharp.ParserCase.Internals}};}
+\DoxyCodeLine{\Hypertarget{_token_walker_extension_methods_8cs_source_l00007}00007\ }
+\DoxyCodeLine{\Hypertarget{_token_walker_extension_methods_8cs_source_l00008}00008\ \textcolor{keyword}{internal}\ \textcolor{keyword}{static}\ \textcolor{keyword}{class\ }TokenWalkerExtensionMethods}
+\DoxyCodeLine{\Hypertarget{_token_walker_extension_methods_8cs_source_l00009}00009\ \{}
+\DoxyCodeLine{\Hypertarget{_token_walker_extension_methods_8cs_source_l00010}00010\ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keyword}{static}\ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_ae4bcfe414c318a050bbef43ec92f921babf7aa5a37bddb2ef0ea312257a3fa216}{TypeClauseNode}}\ MatchTypeClauseNode(\textcolor{keyword}{this}\ TokenWalker\ tokenWalker,\ CSharpParserModel\ model)}
+\DoxyCodeLine{\Hypertarget{_token_walker_extension_methods_8cs_source_l00011}00011\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_token_walker_extension_methods_8cs_source_l00012}00012\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ ParseTypes.MatchTypeClause(model);}
+\DoxyCodeLine{\Hypertarget{_token_walker_extension_methods_8cs_source_l00013}00013\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_token_walker_extension_methods_8cs_source_l00014}00014\ }
+\DoxyCodeLine{\Hypertarget{_token_walker_extension_methods_8cs_source_l00015}00015\ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ DeferParsingOfChildScope(}
+\DoxyCodeLine{\Hypertarget{_token_walker_extension_methods_8cs_source_l00016}00016\ \ \ \ \ \ \ \ \ \textcolor{keyword}{this}\ TokenWalker\ tokenWalker,}
+\DoxyCodeLine{\Hypertarget{_token_walker_extension_methods_8cs_source_l00017}00017\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_ae4bcfe414c318a050bbef43ec92f921ba183e5291ffb38b02fad8aecbad442a85}{OpenBraceToken}}\ consumedOpenBraceToken,}
+\DoxyCodeLine{\Hypertarget{_token_walker_extension_methods_8cs_source_l00018}00018\ \ \ \ \ \ \ \ \ CSharpParserModel\ model)}
+\DoxyCodeLine{\Hypertarget{_token_walker_extension_methods_8cs_source_l00019}00019\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_token_walker_extension_methods_8cs_source_l00020}00020\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Pop\ off\ the\ 'TypeDefinitionNode',\ then\ push\ it\ back\ on\ when\ later\ dequeued.}}
+\DoxyCodeLine{\Hypertarget{_token_walker_extension_methods_8cs_source_l00021}00021\ \ \ \ \ \ \ \ \ var\ pendingCodeBlockOwner\ =\ model.CurrentCodeBlockBuilder.InnerPendingCodeBlockOwner;}
+\DoxyCodeLine{\Hypertarget{_token_walker_extension_methods_8cs_source_l00022}00022\ }
+\DoxyCodeLine{\Hypertarget{_token_walker_extension_methods_8cs_source_l00023}00023\ \ \ \ \ \ \ \ \ var\ openTokenIndex\ =\ tokenWalker.Index\ -\/\ 1;}
+\DoxyCodeLine{\Hypertarget{_token_walker_extension_methods_8cs_source_l00024}00024\ }
+\DoxyCodeLine{\Hypertarget{_token_walker_extension_methods_8cs_source_l00025}00025\ \ \ \ \ \ \ \ \ var\ openBraceCounter\ =\ 1;}
+\DoxyCodeLine{\Hypertarget{_token_walker_extension_methods_8cs_source_l00026}00026\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_token_walker_extension_methods_8cs_source_l00027}00027\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \#if\ DEBUG}}
+\DoxyCodeLine{\Hypertarget{_token_walker_extension_methods_8cs_source_l00028}00028\ \ \ \ \ \ \ \ \ model.TokenWalker.SuppressProtectedSyntaxKindConsumption\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{\Hypertarget{_token_walker_extension_methods_8cs_source_l00029}00029\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \#endif}}
+\DoxyCodeLine{\Hypertarget{_token_walker_extension_methods_8cs_source_l00030}00030\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_token_walker_extension_methods_8cs_source_l00031}00031\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{while}\ (\textcolor{keyword}{true})}
+\DoxyCodeLine{\Hypertarget{_token_walker_extension_methods_8cs_source_l00032}00032\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_token_walker_extension_methods_8cs_source_l00033}00033\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (tokenWalker.\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_utility_1_1_token_walker_a9842ef38a12b58cff115b74d616431a1}{IsEof}})}
+\DoxyCodeLine{\Hypertarget{_token_walker_extension_methods_8cs_source_l00034}00034\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{_token_walker_extension_methods_8cs_source_l00035}00035\ }
+\DoxyCodeLine{\Hypertarget{_token_walker_extension_methods_8cs_source_l00036}00036\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (tokenWalker.\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_utility_1_1_token_walker_a07e1e9b6dd8dd26efffd31fbd5926206}{Current}}.\mbox{\hyperlink{interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_1_1_i_syntax_a29fb0ee8667648a748dfdca9d4e71a26}{SyntaxKind}}\ ==\ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_ae4bcfe414c318a050bbef43ec92f921b}{SyntaxKind}}.OpenBraceToken)}
+\DoxyCodeLine{\Hypertarget{_token_walker_extension_methods_8cs_source_l00037}00037\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_token_walker_extension_methods_8cs_source_l00038}00038\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ++openBraceCounter;}
+\DoxyCodeLine{\Hypertarget{_token_walker_extension_methods_8cs_source_l00039}00039\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_token_walker_extension_methods_8cs_source_l00040}00040\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ (tokenWalker.\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_utility_1_1_token_walker_a07e1e9b6dd8dd26efffd31fbd5926206}{Current}}.\mbox{\hyperlink{interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_1_1_i_syntax_a29fb0ee8667648a748dfdca9d4e71a26}{SyntaxKind}}\ ==\ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_ae4bcfe414c318a050bbef43ec92f921b}{SyntaxKind}}.CloseBraceToken)}
+\DoxyCodeLine{\Hypertarget{_token_walker_extension_methods_8cs_source_l00041}00041\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_token_walker_extension_methods_8cs_source_l00042}00042\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (-\/-\/openBraceCounter\ <=\ 0)}
+\DoxyCodeLine{\Hypertarget{_token_walker_extension_methods_8cs_source_l00043}00043\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{_token_walker_extension_methods_8cs_source_l00044}00044\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_token_walker_extension_methods_8cs_source_l00045}00045\ }
+\DoxyCodeLine{\Hypertarget{_token_walker_extension_methods_8cs_source_l00046}00046\ \ \ \ \ \ \ \ \ \ \ \ \ \_\ =\ tokenWalker.\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_utility_1_1_token_walker_a2dd37dac143e85a869971bbd4b7c65fe}{Consume}}();}
+\DoxyCodeLine{\Hypertarget{_token_walker_extension_methods_8cs_source_l00047}00047\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_token_walker_extension_methods_8cs_source_l00048}00048\ }
+\DoxyCodeLine{\Hypertarget{_token_walker_extension_methods_8cs_source_l00049}00049\ \ \ \ \ \ \ \ \ var\ closeTokenIndex\ =\ tokenWalker.\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_utility_1_1_token_walker_a46564df36d9290efb81918c98d5c0cff}{Index}};}
+\DoxyCodeLine{\Hypertarget{_token_walker_extension_methods_8cs_source_l00050}00050\ \ \ \ \ \ \ \ \ var\ closeBraceToken\ =\ (\mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_ae4bcfe414c318a050bbef43ec92f921baff9fbef572e50c9a0181fe7dfe6d1c44}{CloseBraceToken}})tokenWalker.\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_utility_1_1_token_walker_a2415a117cdc9cb2bad0270970a2535dd}{Match}}(\mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_ae4bcfe414c318a050bbef43ec92f921b}{SyntaxKind}}.CloseBraceToken);}
+\DoxyCodeLine{\Hypertarget{_token_walker_extension_methods_8cs_source_l00051}00051\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_token_walker_extension_methods_8cs_source_l00052}00052\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \#if\ DEBUG}}
+\DoxyCodeLine{\Hypertarget{_token_walker_extension_methods_8cs_source_l00053}00053\ \ \ \ \ \ \ \ \ model.TokenWalker.SuppressProtectedSyntaxKindConsumption\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{\Hypertarget{_token_walker_extension_methods_8cs_source_l00054}00054\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \#endif}}
+\DoxyCodeLine{\Hypertarget{_token_walker_extension_methods_8cs_source_l00055}00055\ }
+\DoxyCodeLine{\Hypertarget{_token_walker_extension_methods_8cs_source_l00056}00056\ \ \ \ \ \ \ \ \ model.CurrentCodeBlockBuilder.ParseChildScopeQueue.Enqueue(\textcolor{keyword}{new}\ DeferredChildScope(}
+\DoxyCodeLine{\Hypertarget{_token_walker_extension_methods_8cs_source_l00057}00057\ \ \ \ \ \ \ \ \ \ \ \ \ openTokenIndex,}
+\DoxyCodeLine{\Hypertarget{_token_walker_extension_methods_8cs_source_l00058}00058\ \ \ \ \ \ \ \ \ \ \ \ \ closeTokenIndex,}
+\DoxyCodeLine{\Hypertarget{_token_walker_extension_methods_8cs_source_l00059}00059\ \ \ \ \ \ \ \ \ \ \ \ \ pendingCodeBlockOwner));}
+\DoxyCodeLine{\Hypertarget{_token_walker_extension_methods_8cs_source_l00060}00060\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_token_walker_extension_methods_8cs_source_l00061}00061\ \}}
+
+\end{DoxyCode}

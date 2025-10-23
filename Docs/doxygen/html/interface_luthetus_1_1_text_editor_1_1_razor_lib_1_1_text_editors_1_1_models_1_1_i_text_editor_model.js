@@ -1,0 +1,26 @@
+var interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1_1_i_text_editor_model =
+[
+    [ "lineIndex", "interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1_1_i_text_editor_model.html#a9e297ae8a882c3c7218e4a83877fb996", null ],
+    [ "AllText", "interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1_1_i_text_editor_model.html#a4ad582e8c5c47d661a4731eb6f1492a4", null ],
+    [ "CharCount", "interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1_1_i_text_editor_model.html#a5aa04acdc06f54c9a571020753713d78", null ],
+    [ "CompilerService", "interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1_1_i_text_editor_model.html#ad1b642486975beee9fa45c9949735701", null ],
+    [ "DecorationMapper", "interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1_1_i_text_editor_model.html#a88a44614fae3e37d2c4a993fd5afef9c", null ],
+    [ "EditBlockIndex", "interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1_1_i_text_editor_model.html#a8318b13154978cabf32ce587f4835fd8", null ],
+    [ "EditBlockList", "interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1_1_i_text_editor_model.html#ad835c1402eccd1c01228166b445b977a", null ],
+    [ "FileExtension", "interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1_1_i_text_editor_model.html#a6f2724089c197cdc724aea465f35def2", null ],
+    [ "IsDirty", "interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1_1_i_text_editor_model.html#a059ee712512354d954b09d66028e4eae", null ],
+    [ "LineCount", "interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1_1_i_text_editor_model.html#a2b238e94a5e679a44f9b902648b246d4", null ],
+    [ "LineEndKindCountList", "interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1_1_i_text_editor_model.html#aae8f5d286d5b9caf5d9c99ceb39ec711", null ],
+    [ "LineEndKindPreference", "interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1_1_i_text_editor_model.html#a45f155fb49214f3cd49de03f125209d9", null ],
+    [ "LineEndList", "interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1_1_i_text_editor_model.html#ad677f12e730a39494a8c71bcf2696843", null ],
+    [ "MostCharactersOnASingleLineTuple", "interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1_1_i_text_editor_model.html#a25fa685f5a425f7da6ee9ad66ee12711", null ],
+    [ "OnlyLineEndKind", "interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1_1_i_text_editor_model.html#a270c00fcd7f7ddb0e52388bc63134e55", null ],
+    [ "PartitionList", "interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1_1_i_text_editor_model.html#a4c8821ab44f0c4765ad52e34c81296ad", null ],
+    [ "PresentationModelList", "interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1_1_i_text_editor_model.html#abe1014d4920a13cd632b3a3ee6451e97", null ],
+    [ "RenderStateKey", "interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1_1_i_text_editor_model.html#a2f798d6c29dcf7b28351f1fdedf9a7d3", null ],
+    [ "ResourceLastWriteTime", "interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1_1_i_text_editor_model.html#a38c4fd01fd14ec8acce770162263f946", null ],
+    [ "ResourceUri", "interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1_1_i_text_editor_model.html#a430723bab3c99d649428a43362190b63", null ],
+    [ "RichCharacterList", "interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1_1_i_text_editor_model.html#a7c34c6b3ec3ad1053ac3c46af430b627", null ],
+    [ "TabKeyPositionList", "interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1_1_i_text_editor_model.html#ae95748a3a26701e2fefdd900319e0ea3", null ],
+    [ "TextEditorSaveFileHelper", "interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1_1_i_text_editor_model.html#a975683b841890af82d3438b75a9f1161", null ]
+];

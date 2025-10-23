@@ -1,0 +1,4 @@
+var namespace_luthetus_1_1_extensions_1_1_git_1_1_installations_1_1_displays =
+[
+    [ "LuthetusExtensionsGitInitializer", "class_luthetus_1_1_extensions_1_1_git_1_1_installations_1_1_displays_1_1_luthetus_extensions_git_initializer.html", "class_luthetus_1_1_extensions_1_1_git_1_1_installations_1_1_displays_1_1_luthetus_extensions_git_initializer" ]
+];

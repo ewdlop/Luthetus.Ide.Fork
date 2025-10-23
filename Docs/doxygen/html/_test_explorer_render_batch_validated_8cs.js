@@ -1,0 +1,4 @@
+var _test_explorer_render_batch_validated_8cs =
+[
+    [ "Luthetus.Extensions.DotNet.TestExplorers.Models.TestExplorerRenderBatchValidated", "class_luthetus_1_1_extensions_1_1_dot_net_1_1_test_explorers_1_1_models_1_1_test_explorer_render_batch_validated.html", "class_luthetus_1_1_extensions_1_1_dot_net_1_1_test_explorers_1_1_models_1_1_test_explorer_render_batch_validated" ]
+];

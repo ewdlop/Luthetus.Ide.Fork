@@ -1,0 +1,182 @@
+\doxysection{Display\+Tracker.\+cs}
+\hypertarget{_display_tracker_8cs_source}{}\label{_display_tracker_8cs_source}\index{Source/Lib/TextEditor/TextEditors/Models/Internals/DisplayTracker.cs@{Source/Lib/TextEditor/TextEditors/Models/Internals/DisplayTracker.cs}}
+\mbox{\hyperlink{_display_tracker_8cs}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{_display_tracker_8cs_source_l00001}00001\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_luthetus_1_1_common_1_1_razor_lib_1_1_exceptions}{Luthetus.Common.RazorLib.Exceptions}};}
+\DoxyCodeLine{\Hypertarget{_display_tracker_8cs_source_l00002}00002\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_luthetus_1_1_common_1_1_razor_lib_1_1_keys_1_1_models}{Luthetus.Common.RazorLib.Keys.Models}};}
+\DoxyCodeLine{\Hypertarget{_display_tracker_8cs_source_l00003}00003\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_commands_1_1_models}{Luthetus.TextEditor.RazorLib.Commands.Models}};}
+\DoxyCodeLine{\Hypertarget{_display_tracker_8cs_source_l00004}00004\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_commands_1_1_models_1_1_defaults}{Luthetus.TextEditor.RazorLib.Commands.Models.Defaults}};}
+\DoxyCodeLine{\Hypertarget{_display_tracker_8cs_source_l00005}00005\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_lexers_1_1_models}{Luthetus.TextEditor.RazorLib.Lexers.Models}};}
+\DoxyCodeLine{\Hypertarget{_display_tracker_8cs_source_l00006}00006\ }
+\DoxyCodeLine{\Hypertarget{_display_tracker_8cs_source_l00007}\mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1_1_internals}{00007}}\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1_1_internals}{Luthetus.TextEditor.RazorLib.TextEditors.Models.Internals}};}
+\DoxyCodeLine{\Hypertarget{_display_tracker_8cs_source_l00008}00008\ }
+\DoxyCodeLine{\Hypertarget{_display_tracker_8cs_source_l00016}\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1_1_internals_1_1_display_tracker}{00016}}\ \textcolor{keyword}{public}\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1_1_internals_1_1_display_tracker_a9d05a97722858ad6bea496ea50a0e537}{DisplayTracker}}\ :\ IDisposable}
+\DoxyCodeLine{\Hypertarget{_display_tracker_8cs_source_l00017}00017\ \{}
+\DoxyCodeLine{\Hypertarget{_display_tracker_8cs_source_l00018}00018\ \ \ \ \ \textcolor{keyword}{private}\ readonly\ \textcolor{keywordtype}{object}\ \_linksLock\ =\ \textcolor{keyword}{new}();}
+\DoxyCodeLine{\Hypertarget{_display_tracker_8cs_source_l00019}00019\ \ \ \ \ \textcolor{keyword}{private}\ readonly\ \mbox{\hyperlink{interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_i_text_editor_service}{ITextEditorService}}\ \_textEditorService;}
+\DoxyCodeLine{\Hypertarget{_display_tracker_8cs_source_l00020}00020\ \ \ \ \ \textcolor{keyword}{private}\ readonly\ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_a435ccef09e2ba83022e8cf378fc0f690}{ResourceUri}}\ \_resourceUri;}
+\DoxyCodeLine{\Hypertarget{_display_tracker_8cs_source_l00021}00021\ \ \ \ \ \textcolor{keyword}{private}\ readonly\ Key<TextEditorViewModel>\ \_viewModelKey;}
+\DoxyCodeLine{\Hypertarget{_display_tracker_8cs_source_l00022}00022\ }
+\DoxyCodeLine{\Hypertarget{_display_tracker_8cs_source_l00023}\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1_1_internals_1_1_display_tracker_a9d05a97722858ad6bea496ea50a0e537}{00023}}\ \ \ \ \ \textcolor{keyword}{public}\ \mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1_1_internals_1_1_display_tracker_a9d05a97722858ad6bea496ea50a0e537}{DisplayTracker}}(}
+\DoxyCodeLine{\Hypertarget{_display_tracker_8cs_source_l00024}00024\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_i_text_editor_service}{ITextEditorService}}\ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_aecfb76d19da117c025734259242d144d}{textEditorService}},}
+\DoxyCodeLine{\Hypertarget{_display_tracker_8cs_source_l00025}00025\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_a435ccef09e2ba83022e8cf378fc0f690}{ResourceUri}}\ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_ae531f6ec8ec05e2493aabf8d17c23e4b}{resourceUri}},}
+\DoxyCodeLine{\Hypertarget{_display_tracker_8cs_source_l00026}00026\ \ \ \ \ \ \ \ \ Key<TextEditorViewModel>\ viewModelKey)}
+\DoxyCodeLine{\Hypertarget{_display_tracker_8cs_source_l00027}00027\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_display_tracker_8cs_source_l00028}00028\ \ \ \ \ \ \ \ \ \_textEditorService\ =\ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_aecfb76d19da117c025734259242d144d}{textEditorService}};}
+\DoxyCodeLine{\Hypertarget{_display_tracker_8cs_source_l00029}00029\ \ \ \ \ \ \ \ \ \_resourceUri\ =\ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_ae531f6ec8ec05e2493aabf8d17c23e4b}{resourceUri}};}
+\DoxyCodeLine{\Hypertarget{_display_tracker_8cs_source_l00030}00030\ \ \ \ \ \ \ \ \ \_viewModelKey\ =\ viewModelKey;}
+\DoxyCodeLine{\Hypertarget{_display_tracker_8cs_source_l00031}00031\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_display_tracker_8cs_source_l00032}00032\ }
+\DoxyCodeLine{\Hypertarget{_display_tracker_8cs_source_l00044}\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1_1_internals_1_1_display_tracker_a36cec64393abc5efcbddb88a279b81e5}{00044}}\ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1_1_internals_1_1_display_tracker_a36cec64393abc5efcbddb88a279b81e5}{Links}}\ \{\ \textcolor{keyword}{get};\ \textcolor{keyword}{private}\ \textcolor{keyword}{set};\ \}}
+\DoxyCodeLine{\Hypertarget{_display_tracker_8cs_source_l00049}\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1_1_internals_1_1_display_tracker_a4e456d8ba28e12c672aa59e9ab7c2be5}{00049}}\ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1_1_internals_1_1_display_tracker_a4e456d8ba28e12c672aa59e9ab7c2be5}{IsFirstDisplay}}\ \{\ \textcolor{keyword}{get};\ \textcolor{keyword}{private}\ \textcolor{keyword}{set};\ \}\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{\Hypertarget{_display_tracker_8cs_source_l00050}00050\ }
+\DoxyCodeLine{\Hypertarget{_display_tracker_8cs_source_l00051}\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1_1_internals_1_1_display_tracker_a0124f9102a627b5840815e0b353afd64}{00051}}\ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1_1_internals_1_1_display_tracker_a0124f9102a627b5840815e0b353afd64}{IncrementLinks}}()}
+\DoxyCodeLine{\Hypertarget{_display_tracker_8cs_source_l00052}00052\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_display_tracker_8cs_source_l00053}00053\ \ \ \ \ \ \ \ \ var\ becameDisplayed\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{\Hypertarget{_display_tracker_8cs_source_l00054}00054\ }
+\DoxyCodeLine{\Hypertarget{_display_tracker_8cs_source_l00055}00055\ \ \ \ \ \ \ \ \ lock\ (\_linksLock)}
+\DoxyCodeLine{\Hypertarget{_display_tracker_8cs_source_l00056}00056\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_display_tracker_8cs_source_l00057}00057\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1_1_internals_1_1_display_tracker_a36cec64393abc5efcbddb88a279b81e5}{Links}}++;}
+\DoxyCodeLine{\Hypertarget{_display_tracker_8cs_source_l00058}00058\ }
+\DoxyCodeLine{\Hypertarget{_display_tracker_8cs_source_l00059}00059\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1_1_internals_1_1_display_tracker_a36cec64393abc5efcbddb88a279b81e5}{Links}}\ ==\ 1)}
+\DoxyCodeLine{\Hypertarget{_display_tracker_8cs_source_l00060}00060\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_display_tracker_8cs_source_l00061}00061\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ This\ ViewModel\ was\ not\ being\ displayed\ until\ this\ point.}}
+\DoxyCodeLine{\Hypertarget{_display_tracker_8cs_source_l00062}00062\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//}}
+\DoxyCodeLine{\Hypertarget{_display_tracker_8cs_source_l00063}00063\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ The\ goal\ is\ to\ lazily\ update\ the\ UI,\ i.e.:\ only\ when\ a\ given\ view\ model\ is\ being\ displayed\ on\ the\ UI.}}
+\DoxyCodeLine{\Hypertarget{_display_tracker_8cs_source_l00064}00064\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//}}
+\DoxyCodeLine{\Hypertarget{_display_tracker_8cs_source_l00065}00065\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Therefore,\ presume\ that\ the\ UI\ this\ newly\ rendered\ view\ model\ is\ outdated,}}
+\DoxyCodeLine{\Hypertarget{_display_tracker_8cs_source_l00066}00066\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ (perhaps\ the\ font-\/size\ was\ changed\ for\ eample)}}
+\DoxyCodeLine{\Hypertarget{_display_tracker_8cs_source_l00067}00067\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1_1_internals_1_1_display_tracker_a4e456d8ba28e12c672aa59e9ab7c2be5}{IsFirstDisplay}}\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{\Hypertarget{_display_tracker_8cs_source_l00068}00068\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ becameDisplayed\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{\Hypertarget{_display_tracker_8cs_source_l00069}00069\ }
+\DoxyCodeLine{\Hypertarget{_display_tracker_8cs_source_l00070}00070\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Furthermore,\ subscribe\ to\ the\ events\ which\ indicate\ that\ the\ UI\ has\ changed\ (for\ example\ font-\/size)}}
+\DoxyCodeLine{\Hypertarget{_display_tracker_8cs_source_l00071}00071\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ so\ that\ these\ events\ are\ immediately\ handled,\ considering\ that\ this\ view\ model\ is\ being\ rendered\ on\ the\ UI.}}
+\DoxyCodeLine{\Hypertarget{_display_tracker_8cs_source_l00072}00072\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \_textEditorService.AppDimensionStateWrap.StateChanged\ +=\ AppDimensionStateWrap\_StateChanged;}
+\DoxyCodeLine{\Hypertarget{_display_tracker_8cs_source_l00073}00073\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_display_tracker_8cs_source_l00074}00074\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1_1_internals_1_1_display_tracker_a36cec64393abc5efcbddb88a279b81e5}{Links}}\ >\ 1)}
+\DoxyCodeLine{\Hypertarget{_display_tracker_8cs_source_l00075}00075\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_display_tracker_8cs_source_l00076}00076\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ TODO:\ This\ exception\ is\ getting\ commented\ out\ for\ now\ because\ dragging\ a\ text\ editor}}
+\DoxyCodeLine{\Hypertarget{_display_tracker_8cs_source_l00077}00077\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ tab\ off\ the\ text\ editor\ group\ display\ is\ using\ the\ same\ view\ model\ for\ the\ dialog}}
+\DoxyCodeLine{\Hypertarget{_display_tracker_8cs_source_l00078}00078\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ as\ it\ was\ in\ the\ group\ tab.}}
+\DoxyCodeLine{\Hypertarget{_display_tracker_8cs_source_l00079}00079\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//}}
+\DoxyCodeLine{\Hypertarget{_display_tracker_8cs_source_l00080}00080\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//throw\ new\ LuthetusFatalException(\$"{}\{nameof(DisplayTracker)\}\ detected\ a\ \{nameof(TextEditorViewModel)\}"{}\ +}}
+\DoxyCodeLine{\Hypertarget{_display_tracker_8cs_source_l00081}00081\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ "{}\ was\ being\ displayed\ in\ two\ places\ simultaneously."{}\ +}}
+\DoxyCodeLine{\Hypertarget{_display_tracker_8cs_source_l00082}00082\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ "{}\ A\ \{nameof(TextEditorViewModel)\}\ can\ only\ be\ displayed\ by\ a\ single"{}\ +}}
+\DoxyCodeLine{\Hypertarget{_display_tracker_8cs_source_l00083}00083\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ "{}\ \{nameof(TextEditorViewModelDisplay)\}\ at\ a\ time."{});}}
+\DoxyCodeLine{\Hypertarget{_display_tracker_8cs_source_l00084}00084\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_display_tracker_8cs_source_l00085}00085\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_display_tracker_8cs_source_l00086}00086\ }
+\DoxyCodeLine{\Hypertarget{_display_tracker_8cs_source_l00087}00087\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (becameDisplayed)}
+\DoxyCodeLine{\Hypertarget{_display_tracker_8cs_source_l00088}00088\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_display_tracker_8cs_source_l00089}00089\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ TODO:\ If\ the\ 'AppDimensionStateWrap\_StateChanged(...)'\ is\ invoking\ 'PostScrollAndRemeasure()'\ too...}}
+\DoxyCodeLine{\Hypertarget{_display_tracker_8cs_source_l00090}00090\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ ...\ and\ it\ is\ believed\ that\ it\ is\ being\ done\ there\ to\ measure\ the\ UI,\ as\ the}}
+\DoxyCodeLine{\Hypertarget{_display_tracker_8cs_source_l00091}00091\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ newly\ sized\ font\ wouldn't\ be\ guaranteed\ to\ have\ been\ rendered\ in\ time,}}
+\DoxyCodeLine{\Hypertarget{_display_tracker_8cs_source_l00092}00092\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ then\ why\ is\ this\ invoked\ here.}}
+\DoxyCodeLine{\Hypertarget{_display_tracker_8cs_source_l00093}00093\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ |}}
+\DoxyCodeLine{\Hypertarget{_display_tracker_8cs_source_l00094}00094\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ The\ response\ is\ that\ the\ very\ first\ render\ of\ the\ text\ editor\ will\ ignore\ the\ view\ model,}}
+\DoxyCodeLine{\Hypertarget{_display_tracker_8cs_source_l00095}00095\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ and\ only\ serves\ to\ measure\ the\ font\ size.}}
+\DoxyCodeLine{\Hypertarget{_display_tracker_8cs_source_l00096}00096\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ |}}
+\DoxyCodeLine{\Hypertarget{_display_tracker_8cs_source_l00097}00097\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ As\ a\ result\ when\ a\ view\ model\ becomes\ displayed,\ the\ text\ editor\ will\ already\ know\ the\ font-\/size.}}
+\DoxyCodeLine{\Hypertarget{_display_tracker_8cs_source_l00098}00098\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ And\ it\ will\ just\ "{}be\ available"{}\ and\ this\ invocation\ is\ less\ of\ a\ re-\/measure,\ and\ more\ of\ a}}
+\DoxyCodeLine{\Hypertarget{_display_tracker_8cs_source_l00099}00099\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ setting\ of\ what\ the\ current\ font\ measurements\ are\ on\ the\ view\ model\ being\ displayed.}}
+\DoxyCodeLine{\Hypertarget{_display_tracker_8cs_source_l00100}00100\ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_display_tracker_8cs_source_l00101}00101\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Tell\ the\ view\ model\ what\ the\ (already\ known)\ font-\/size\ measurements\ and\ text-\/editor\ measurements\ are.}}
+\DoxyCodeLine{\Hypertarget{_display_tracker_8cs_source_l00102}00102\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1_1_internals_1_1_display_tracker_ad1baa2b5ca6e535e86817b56ed81f508}{PostScrollAndRemeasure}}();}
+\DoxyCodeLine{\Hypertarget{_display_tracker_8cs_source_l00103}00103\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_display_tracker_8cs_source_l00104}00104\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_display_tracker_8cs_source_l00105}00105\ }
+\DoxyCodeLine{\Hypertarget{_display_tracker_8cs_source_l00106}\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1_1_internals_1_1_display_tracker_ae9f1a7c5fa6321db8ee04e408e2a9563}{00106}}\ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1_1_internals_1_1_display_tracker_ae9f1a7c5fa6321db8ee04e408e2a9563}{DecrementLinks}}()}
+\DoxyCodeLine{\Hypertarget{_display_tracker_8cs_source_l00107}00107\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_display_tracker_8cs_source_l00108}00108\ \ \ \ \ \ \ \ \ lock\ (\_linksLock)}
+\DoxyCodeLine{\Hypertarget{_display_tracker_8cs_source_l00109}00109\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_display_tracker_8cs_source_l00110}00110\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1_1_internals_1_1_display_tracker_a36cec64393abc5efcbddb88a279b81e5}{Links}}-\/-\/;}
+\DoxyCodeLine{\Hypertarget{_display_tracker_8cs_source_l00111}00111\ }
+\DoxyCodeLine{\Hypertarget{_display_tracker_8cs_source_l00112}00112\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1_1_internals_1_1_display_tracker_a36cec64393abc5efcbddb88a279b81e5}{Links}}\ ==\ 0)}
+\DoxyCodeLine{\Hypertarget{_display_tracker_8cs_source_l00113}00113\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_display_tracker_8cs_source_l00114}00114\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ This\ ViewModel\ will\ NO\ LONGER\ be\ rendered.}}
+\DoxyCodeLine{\Hypertarget{_display_tracker_8cs_source_l00115}00115\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//}}
+\DoxyCodeLine{\Hypertarget{_display_tracker_8cs_source_l00116}00116\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ The\ goal\ is\ to\ lazily\ update\ the\ UI,\ i.e.:\ only\ when\ a\ given\ view\ model\ is\ being\ displayed\ on\ the\ UI.}}
+\DoxyCodeLine{\Hypertarget{_display_tracker_8cs_source_l00117}00117\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//}}
+\DoxyCodeLine{\Hypertarget{_display_tracker_8cs_source_l00118}00118\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Therefore,\ proceed\ to\ unsubscribe\ from\ presume\ that\ the\ UI\ this\ newly\ rendered\ view\ model\ is\ outdated,}}
+\DoxyCodeLine{\Hypertarget{_display_tracker_8cs_source_l00119}00119\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ (perhaps\ the\ font-\/size\ was\ changed\ for\ eample)}}
+\DoxyCodeLine{\Hypertarget{_display_tracker_8cs_source_l00120}00120\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//}}
+\DoxyCodeLine{\Hypertarget{_display_tracker_8cs_source_l00121}00121\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Due\ to\ lazily\ updating\ the\ UI,\ proceed\ to\ unsubscribe\ from\ the\ events\ which\ indicate\ that\ the\ UI\ has\ changed\ (for\ example\ font-\/size).}}
+\DoxyCodeLine{\Hypertarget{_display_tracker_8cs_source_l00122}00122\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \_textEditorService.AppDimensionStateWrap.StateChanged\ -\/=\ AppDimensionStateWrap\_StateChanged;}
+\DoxyCodeLine{\Hypertarget{_display_tracker_8cs_source_l00123}00123\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_display_tracker_8cs_source_l00124}00124\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1_1_internals_1_1_display_tracker_a36cec64393abc5efcbddb88a279b81e5}{Links}}\ <\ 0)}
+\DoxyCodeLine{\Hypertarget{_display_tracker_8cs_source_l00125}00125\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_display_tracker_8cs_source_l00126}00126\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{throw}\ \textcolor{keyword}{new}\ \mbox{\hyperlink{class_luthetus_1_1_common_1_1_razor_lib_1_1_exceptions_1_1_luthetus_fatal_exception}{LuthetusFatalException}}(\$\textcolor{stringliteral}{"{}\{nameof(DisplayTracker)\}\ has\ \{nameof(Links)\}\ at\ a\ value\ <\ 0:\ '\{Links\}'."{}});}
+\DoxyCodeLine{\Hypertarget{_display_tracker_8cs_source_l00127}00127\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_display_tracker_8cs_source_l00128}00128\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_display_tracker_8cs_source_l00129}00129\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_display_tracker_8cs_source_l00130}00130\ }
+\DoxyCodeLine{\Hypertarget{_display_tracker_8cs_source_l00131}\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1_1_internals_1_1_display_tracker_aaa08334505dc74c51944a79e5d17c3d1}{00131}}\ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1_1_internals_1_1_display_tracker_aaa08334505dc74c51944a79e5d17c3d1}{ConsumeIsFirstDisplay}}()}
+\DoxyCodeLine{\Hypertarget{_display_tracker_8cs_source_l00132}00132\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_display_tracker_8cs_source_l00133}00133\ \ \ \ \ \ \ \ \ lock\ (\_linksLock)}
+\DoxyCodeLine{\Hypertarget{_display_tracker_8cs_source_l00134}00134\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_display_tracker_8cs_source_l00135}00135\ \ \ \ \ \ \ \ \ \ \ \ \ var\ localIsFirstDisplay\ =\ \mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1_1_internals_1_1_display_tracker_a4e456d8ba28e12c672aa59e9ab7c2be5}{IsFirstDisplay}};}
+\DoxyCodeLine{\Hypertarget{_display_tracker_8cs_source_l00136}00136\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1_1_internals_1_1_display_tracker_a4e456d8ba28e12c672aa59e9ab7c2be5}{IsFirstDisplay}}\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{\Hypertarget{_display_tracker_8cs_source_l00137}00137\ }
+\DoxyCodeLine{\Hypertarget{_display_tracker_8cs_source_l00138}00138\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ localIsFirstDisplay;}
+\DoxyCodeLine{\Hypertarget{_display_tracker_8cs_source_l00139}00139\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_display_tracker_8cs_source_l00140}00140\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_display_tracker_8cs_source_l00141}00141\ }
+\DoxyCodeLine{\Hypertarget{_display_tracker_8cs_source_l00142}00142\ \ \ \ \ \textcolor{keyword}{private}\ \textcolor{keywordtype}{void}\ AppDimensionStateWrap\_StateChanged(\textcolor{keywordtype}{object}?\ sender,\ EventArgs\ e)}
+\DoxyCodeLine{\Hypertarget{_display_tracker_8cs_source_l00143}00143\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_display_tracker_8cs_source_l00144}00144\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ The\ UI\ was\ resized,\ and\ therefore\ the\ text-\/editor\ measurements\ need\ to\ be\ re-\/measured.}}
+\DoxyCodeLine{\Hypertarget{_display_tracker_8cs_source_l00145}00145\ \ \ \ \ \ \ \ \ \textcolor{comment}{//}}
+\DoxyCodeLine{\Hypertarget{_display_tracker_8cs_source_l00146}00146\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ The\ font-\/size\ is\ theoretically\ un-\/changed,}}
+\DoxyCodeLine{\Hypertarget{_display_tracker_8cs_source_l00147}00147\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ but\ will\ be\ measured\ anyway\ just\ because\ its\ part\ of\ the\ same\ method\ that\ does\ the\ text-\/editor\ measurements.}}
+\DoxyCodeLine{\Hypertarget{_display_tracker_8cs_source_l00148}00148\ \ \ \ \ \ \ \ \ PostScrollAndRemeasure();}
+\DoxyCodeLine{\Hypertarget{_display_tracker_8cs_source_l00149}00149\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_display_tracker_8cs_source_l00150}00150\ }
+\DoxyCodeLine{\Hypertarget{_display_tracker_8cs_source_l00151}\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1_1_internals_1_1_display_tracker_ad1baa2b5ca6e535e86817b56ed81f508}{00151}}\ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1_1_internals_1_1_display_tracker_ad1baa2b5ca6e535e86817b56ed81f508}{PostScrollAndRemeasure}}()}
+\DoxyCodeLine{\Hypertarget{_display_tracker_8cs_source_l00152}00152\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_display_tracker_8cs_source_l00153}00153\ \ \ \ \ \ \ \ \ var\ model\ =\ \_textEditorService.ModelApi.GetOrDefault(\_resourceUri);}
+\DoxyCodeLine{\Hypertarget{_display_tracker_8cs_source_l00154}00154\ \ \ \ \ \ \ \ \ var\ viewModel\ =\ \_textEditorService.ViewModelApi.GetOrDefault(\_viewModelKey);}
+\DoxyCodeLine{\Hypertarget{_display_tracker_8cs_source_l00155}00155\ }
+\DoxyCodeLine{\Hypertarget{_display_tracker_8cs_source_l00156}00156\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (model\ is\ \textcolor{keyword}{null}\ ||\ viewModel\ is\ \textcolor{keyword}{null})}
+\DoxyCodeLine{\Hypertarget{_display_tracker_8cs_source_l00157}00157\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return};}
+\DoxyCodeLine{\Hypertarget{_display_tracker_8cs_source_l00158}00158\ }
+\DoxyCodeLine{\Hypertarget{_display_tracker_8cs_source_l00159}00159\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ The\ 'Remeasure'\ command\ as\ of\ this\ comment}}
+\DoxyCodeLine{\Hypertarget{_display_tracker_8cs_source_l00160}00160\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ does\ not\ use\ the\ 'commandArgs'\ parameter}}
+\DoxyCodeLine{\Hypertarget{_display_tracker_8cs_source_l00161}00161\ \ \ \ \ \ \ \ \ var\ commandArgs\ =\ (\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_commands_1_1_models_1_1_text_editor_command_args}{TextEditorCommandArgs}}?)\textcolor{keyword}{null};}
+\DoxyCodeLine{\Hypertarget{_display_tracker_8cs_source_l00162}00162\ }
+\DoxyCodeLine{\Hypertarget{_display_tracker_8cs_source_l00163}00163\ \ \ \ \ \ \ \ \ \_textEditorService.PostRedundant(}
+\DoxyCodeLine{\Hypertarget{_display_tracker_8cs_source_l00164}00164\ \ \ \ \ \ \ \ \ \ \ \ \ nameof(AppDimensionStateWrap\_StateChanged),}
+\DoxyCodeLine{\Hypertarget{_display_tracker_8cs_source_l00165}00165\ \ \ \ \ \ \ \ \ \ \ \ \ model.ResourceUri,}
+\DoxyCodeLine{\Hypertarget{_display_tracker_8cs_source_l00166}00166\ \ \ \ \ \ \ \ \ \ \ \ \ viewModel.ViewModelKey,}
+\DoxyCodeLine{\Hypertarget{_display_tracker_8cs_source_l00167}00167\ \ \ \ \ \ \ \ \ \ \ \ \ async\ editContext\ =>}
+\DoxyCodeLine{\Hypertarget{_display_tracker_8cs_source_l00168}00168\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_display_tracker_8cs_source_l00169}00169\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ var\ modelModifier\ =\ editContext.GetModelModifier(viewModel.ResourceUri);}
+\DoxyCodeLine{\Hypertarget{_display_tracker_8cs_source_l00170}00170\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ var\ viewModelModifier\ =\ editContext.GetViewModelModifier(viewModel.ViewModelKey);}
+\DoxyCodeLine{\Hypertarget{_display_tracker_8cs_source_l00171}00171\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_display_tracker_8cs_source_l00172}00172\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ if\ (modelModifier\ is\ null\ ||\ viewModelModifier\ is\ null)}
+\DoxyCodeLine{\Hypertarget{_display_tracker_8cs_source_l00173}00173\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ return;}
+\DoxyCodeLine{\Hypertarget{_display_tracker_8cs_source_l00174}00174\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_display_tracker_8cs_source_l00175}00175\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ var\ textEditorMeasurements\ =\ await\ \_textEditorService.ViewModelApi}
+\DoxyCodeLine{\Hypertarget{_display_tracker_8cs_source_l00176}00176\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ .GetTextEditorMeasurementsAsync(viewModelModifier.ViewModel.BodyElementId)}
+\DoxyCodeLine{\Hypertarget{_display_tracker_8cs_source_l00177}00177\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ .ConfigureAwait(false);}
+\DoxyCodeLine{\Hypertarget{_display_tracker_8cs_source_l00178}00178\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_display_tracker_8cs_source_l00179}00179\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ viewModelModifier.ViewModel\ =\ viewModelModifier.ViewModel\ with}
+\DoxyCodeLine{\Hypertarget{_display_tracker_8cs_source_l00180}00180\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_display_tracker_8cs_source_l00181}00181\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ TextEditorDimensions\ =\ textEditorMeasurements}
+\DoxyCodeLine{\Hypertarget{_display_tracker_8cs_source_l00182}00182\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \};}
+\DoxyCodeLine{\Hypertarget{_display_tracker_8cs_source_l00183}00183\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_display_tracker_8cs_source_l00184}00184\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ viewModelModifier.ShouldReloadVirtualizationResult\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{\Hypertarget{_display_tracker_8cs_source_l00185}00185\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_display_tracker_8cs_source_l00186}00186\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ TODO:\ Where\ does\ the\ method:\ 'ValidateMaximumScrollLeftAndScrollTop(...)'\ belong?}}
+\DoxyCodeLine{\Hypertarget{_display_tracker_8cs_source_l00187}00187\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ((\mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_abe7fad0a7df96f414b675b6af70f260d}{TextEditorService}})\_textEditorService).ValidateMaximumScrollLeftAndScrollTop(editContext,\ viewModelModifier,\ textEditorDimensionsChanged:\ \textcolor{keyword}{true});}
+\DoxyCodeLine{\Hypertarget{_display_tracker_8cs_source_l00188}00188\ \ \ \ \ \ \ \ \ \ \ \ \ \});}
+\DoxyCodeLine{\Hypertarget{_display_tracker_8cs_source_l00189}00189\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_display_tracker_8cs_source_l00190}00190\ }
+\DoxyCodeLine{\Hypertarget{_display_tracker_8cs_source_l00191}\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1_1_internals_1_1_display_tracker_a53443537f8d858c4258a5274eb17352e}{00191}}\ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1_1_internals_1_1_display_tracker_a53443537f8d858c4258a5274eb17352e}{Dispose}}()}
+\DoxyCodeLine{\Hypertarget{_display_tracker_8cs_source_l00192}00192\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_display_tracker_8cs_source_l00193}00193\ \ \ \ \ \ \ \ \ lock\ (\_linksLock)}
+\DoxyCodeLine{\Hypertarget{_display_tracker_8cs_source_l00194}00194\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_display_tracker_8cs_source_l00195}00195\ \ \ \ \ \ \ \ \ \ \ \ \ \_textEditorService.AppDimensionStateWrap.StateChanged\ -\/=\ AppDimensionStateWrap\_StateChanged;}
+\DoxyCodeLine{\Hypertarget{_display_tracker_8cs_source_l00196}00196\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_display_tracker_8cs_source_l00197}00197\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_display_tracker_8cs_source_l00198}00198\ \}}
+
+\end{DoxyCode}

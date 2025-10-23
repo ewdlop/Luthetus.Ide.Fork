@@ -1,0 +1,88 @@
+\doxysection{Luthetus.\+Common.\+Razor\+Lib.\+Reactives.\+Models.\+String\+Builder\+Cache Class Reference}
+\hypertarget{class_luthetus_1_1_common_1_1_razor_lib_1_1_reactives_1_1_models_1_1_string_builder_cache}{}\label{class_luthetus_1_1_common_1_1_razor_lib_1_1_reactives_1_1_models_1_1_string_builder_cache}\index{Luthetus.Common.RazorLib.Reactives.Models.StringBuilderCache@{Luthetus.Common.RazorLib.Reactives.Models.StringBuilderCache}}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{class_luthetus_1_1_common_1_1_razor_lib_1_1_reactives_1_1_models_1_1_string_builder_cache_ab222bb9b6b975b3e9338fb961abcb7f5}{Append}} (string text)
+\item 
+void \mbox{\hyperlink{class_luthetus_1_1_common_1_1_razor_lib_1_1_reactives_1_1_models_1_1_string_builder_cache_a29c3829dab772e906dd5bd88a74fb305}{Append\+Two}} (string first\+Append\+Text, string second\+Append\+Text)
+\begin{DoxyCompactList}\small\item\em The issue this method solves is as follows\+: \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{class_luthetus_1_1_common_1_1_razor_lib_1_1_reactives_1_1_models_1_1_string_builder_cache_ac64bbf8e83810750c5d5f0b8fb19c51d}{Get\+Length}} ()
+\item 
+override string \mbox{\hyperlink{class_luthetus_1_1_common_1_1_razor_lib_1_1_reactives_1_1_models_1_1_string_builder_cache_a1ba114911cf9e30f8fdd6fed3aae684a}{To\+String}} ()
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+
+
+Definition at line \mbox{\hyperlink{_string_builder_cache_8cs_source_l00005}{5}} of file \mbox{\hyperlink{_string_builder_cache_8cs_source}{String\+Builder\+Cache.\+cs}}.
+
+
+
+\label{doc-func-members}
+\Hypertarget{class_luthetus_1_1_common_1_1_razor_lib_1_1_reactives_1_1_models_1_1_string_builder_cache_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_luthetus_1_1_common_1_1_razor_lib_1_1_reactives_1_1_models_1_1_string_builder_cache_ab222bb9b6b975b3e9338fb961abcb7f5}\index{Luthetus.Common.RazorLib.Reactives.Models.StringBuilderCache@{Luthetus.Common.RazorLib.Reactives.Models.StringBuilderCache}!Append@{Append}}
+\index{Append@{Append}!Luthetus.Common.RazorLib.Reactives.Models.StringBuilderCache@{Luthetus.Common.RazorLib.Reactives.Models.StringBuilderCache}}
+\doxysubsubsection{\texorpdfstring{Append()}{Append()}}
+{\footnotesize\ttfamily \label{class_luthetus_1_1_common_1_1_razor_lib_1_1_reactives_1_1_models_1_1_string_builder_cache_ab222bb9b6b975b3e9338fb961abcb7f5} 
+void Luthetus.\+Common.\+Razor\+Lib.\+Reactives.\+Models.\+String\+Builder\+Cache.\+Append (\begin{DoxyParamCaption}\item[{string}]{text}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{_string_builder_cache_8cs_source_l00013}{13}} of file \mbox{\hyperlink{_string_builder_cache_8cs_source}{String\+Builder\+Cache.\+cs}}.
+
+\Hypertarget{class_luthetus_1_1_common_1_1_razor_lib_1_1_reactives_1_1_models_1_1_string_builder_cache_a29c3829dab772e906dd5bd88a74fb305}\index{Luthetus.Common.RazorLib.Reactives.Models.StringBuilderCache@{Luthetus.Common.RazorLib.Reactives.Models.StringBuilderCache}!AppendTwo@{AppendTwo}}
+\index{AppendTwo@{AppendTwo}!Luthetus.Common.RazorLib.Reactives.Models.StringBuilderCache@{Luthetus.Common.RazorLib.Reactives.Models.StringBuilderCache}}
+\doxysubsubsection{\texorpdfstring{AppendTwo()}{AppendTwo()}}
+{\footnotesize\ttfamily \label{class_luthetus_1_1_common_1_1_razor_lib_1_1_reactives_1_1_models_1_1_string_builder_cache_a29c3829dab772e906dd5bd88a74fb305} 
+void Luthetus.\+Common.\+Razor\+Lib.\+Reactives.\+Models.\+String\+Builder\+Cache.\+Append\+Two (\begin{DoxyParamCaption}\item[{string}]{first\+Append\+Text}{, }\item[{string}]{second\+Append\+Text}{}\end{DoxyParamCaption})}
+
+
+
+The issue this method solves is as follows\+: 
+
+If one invokes \doxylink{class_luthetus_1_1_common_1_1_razor_lib_1_1_reactives_1_1_models_1_1_string_builder_cache_ab222bb9b6b975b3e9338fb961abcb7f5}{Append} with the expression\+: (some\+String\+Var + \textquotesingle{}~\newline
+\textquotesingle{}) Then one is saving the concatenation of the destination, BUT, still is creating a concatenation in the middle as \textquotesingle{}some\+String\+Var\textquotesingle{} and \textquotesingle{}~\newline
+\textquotesingle{} would now need to be concatenated before the invocation to Append can occur.
+
+I do not believe it is the case that the compiler will convert Append(some\+String\+Var + \textquotesingle{}~\newline
+\textquotesingle{}) to Append(some\+String\+Var).Append(\textquotesingle{}~\newline
+\textquotesingle{}) because this optimization is highly dependent on the size of \textquotesingle{}some\+String\+Var\textquotesingle{}.
+
+If \textquotesingle{}some\+String\+Var\textquotesingle{} is very short in length, then it can be faster to do the middleman concatenation \href{https://stackoverflow.com/a/22527492/14847452}{\texttt{https\+://stackoverflow.\+com/a/22527492/14847452}}
+
+In the case of terminal output though, I wonder if one could in a single output put out an extremely long length string.
+
+I\textquotesingle{}m wondering now, why am I appending the newline character anyway? The output should be occurring on newline, so the output would end in a newline, I think?
+
+I need to look into this further. 
+
+Definition at line \mbox{\hyperlink{_string_builder_cache_8cs_source_l00049}{49}} of file \mbox{\hyperlink{_string_builder_cache_8cs_source}{String\+Builder\+Cache.\+cs}}.
+
+\Hypertarget{class_luthetus_1_1_common_1_1_razor_lib_1_1_reactives_1_1_models_1_1_string_builder_cache_ac64bbf8e83810750c5d5f0b8fb19c51d}\index{Luthetus.Common.RazorLib.Reactives.Models.StringBuilderCache@{Luthetus.Common.RazorLib.Reactives.Models.StringBuilderCache}!GetLength@{GetLength}}
+\index{GetLength@{GetLength}!Luthetus.Common.RazorLib.Reactives.Models.StringBuilderCache@{Luthetus.Common.RazorLib.Reactives.Models.StringBuilderCache}}
+\doxysubsubsection{\texorpdfstring{GetLength()}{GetLength()}}
+{\footnotesize\ttfamily \label{class_luthetus_1_1_common_1_1_razor_lib_1_1_reactives_1_1_models_1_1_string_builder_cache_ac64bbf8e83810750c5d5f0b8fb19c51d} 
+int Luthetus.\+Common.\+Razor\+Lib.\+Reactives.\+Models.\+String\+Builder\+Cache.\+Get\+Length (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{_string_builder_cache_8cs_source_l00061}{61}} of file \mbox{\hyperlink{_string_builder_cache_8cs_source}{String\+Builder\+Cache.\+cs}}.
+
+\Hypertarget{class_luthetus_1_1_common_1_1_razor_lib_1_1_reactives_1_1_models_1_1_string_builder_cache_a1ba114911cf9e30f8fdd6fed3aae684a}\index{Luthetus.Common.RazorLib.Reactives.Models.StringBuilderCache@{Luthetus.Common.RazorLib.Reactives.Models.StringBuilderCache}!ToString@{ToString}}
+\index{ToString@{ToString}!Luthetus.Common.RazorLib.Reactives.Models.StringBuilderCache@{Luthetus.Common.RazorLib.Reactives.Models.StringBuilderCache}}
+\doxysubsubsection{\texorpdfstring{ToString()}{ToString()}}
+{\footnotesize\ttfamily \label{class_luthetus_1_1_common_1_1_razor_lib_1_1_reactives_1_1_models_1_1_string_builder_cache_a1ba114911cf9e30f8fdd6fed3aae684a} 
+override string Luthetus.\+Common.\+Razor\+Lib.\+Reactives.\+Models.\+String\+Builder\+Cache.\+To\+String (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{_string_builder_cache_8cs_source_l00069}{69}} of file \mbox{\hyperlink{_string_builder_cache_8cs_source}{String\+Builder\+Cache.\+cs}}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Source/\+Lib/\+Common/\+Reactives/\+Models/\mbox{\hyperlink{_string_builder_cache_8cs}{String\+Builder\+Cache.\+cs}}\end{DoxyCompactItemize}

@@ -1,0 +1,185 @@
+.TH "Source/Lib/TextEditor/TextEditors/Displays/Internals Directory Reference" 3 "Version 1.0.0" "Luthetus.Ide" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+Source/Lib/TextEditor/TextEditors/Displays/Internals Directory Reference
+.SH SYNOPSIS
+.br
+.PP
+.SS "Files"
+
+.in +1c
+.ti -1c
+.RI "file \fBAutocompleteMenu\&.razor\&.cs\fP"
+.br
+.ti -1c
+.RI "file \fBBodyDriver\&.cs\fP"
+.br
+.ti -1c
+.RI "file \fBCommandBarDisplay\&.razor\&.cs\fP"
+.br
+.ti -1c
+.RI "file \fBContextMenu\&.razor\&.cs\fP"
+.br
+.ti -1c
+.RI "file \fBCursorDriver\&.cs\fP"
+.br
+.ti -1c
+.RI "file \fBDiagnosticDisplay\&.razor\&.cs\fP"
+.br
+.ti -1c
+.RI "file \fBFindOverlayDisplay\&.razor\&.cs\fP"
+.br
+.ti -1c
+.RI "file \fBFooterDriver\&.cs\fP"
+.br
+.ti -1c
+.RI "file \fBGutterDriver\&.cs\fP"
+.br
+.ti -1c
+.RI "file \fBHeaderDriver\&.cs\fP"
+.br
+.ti -1c
+.RI "file \fBLabelWidgetInlineDisplay\&.razor\&.cs\fP"
+.br
+.ti -1c
+.RI "file \fBPresentationAndSelectionDriver\&.cs\fP"
+.br
+.ti -1c
+.RI "file \fBScrollbarSection\&.razor\&.cs\fP"
+.br
+.ti -1c
+.RI "file \fBSymbolDisplay\&.razor\&.cs\fP"
+.br
+.ti -1c
+.RI "file \fBTextEditorDefaultFooterDisplay\&.razor\&.cs\fP"
+.br
+.ti -1c
+.RI "file \fBTextEditorDefaultHeaderDisplay\&.razor\&.cs\fP"
+.br
+.ti -1c
+.RI "file \fBTextEditorDevToolsAnchorDisplay\&.razor\&.cs\fP"
+.br
+.ti -1c
+.RI "file \fBTextEditorDevToolsDisplay\&.razor\&.cs\fP"
+.br
+.ti -1c
+.RI "file \fBTooltipDisplay\&.razor\&.cs\fP"
+.br
+.ti -1c
+.RI "file \fBVirtualizationDriver\&.cs\fP"
+.br
+.ti -1c
+.RI "file \fBWidgetLayerDisplay\&.razor\&.cs\fP"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+ICONS SHOULD BE STATIC RENDERFRAGMENTS
+
+.PP
+Firstly I want to summarize the "ASP\&.NET Core Blazor performance best practices" for \&.NET 8
+
+.PP
+https://learn.microsoft.com/en-us/aspnet/core/blazor/performance?view=aspnetcore-8.0
+.IP "\(bu" 2
+Avoid unnecessary rendering of component subtrees
+.IP "\(bu" 2
+Virtualization
+.IP "\(bu" 2
+Create lightweight, optimized components
+.IP "\(bu" 2
+Avoid thousands of component instances
+.IP "\(bu" 2
+Inline child components into their parents
+.IP "\(bu" 2
+Define reusable RenderFragments in code
+.IP "\(bu" 2
+Don't receive too many parameters
+.IP "\(bu" 2
+Ensure cascading parameters are fixed
+.IP "\(bu" 2
+Avoid attribute splatting with CaptureUnmatchedValues
+.IP "\(bu" 2
+Implement SetParametersAsync manually
+.IP "\(bu" 2
+Don't trigger events too rapidly
+.IP "\(bu" 2
+Avoid rerendering after handling events without state changes
+.IP "\(bu" 2
+Avoid recreating delegates for many repeated elements or components
+.IP "\(bu" 2
+Optimize JavaScript interop speed
+.IP "  \(bu" 4
+Avoid excessively fine-grained calls
+.IP "  \(bu" 4
+Consider the use of synchronous calls
+.IP "    \(bu" 6
+Call JavaScript from \&.NET (This section only applies to client-side components\&.)
+.IP "    \(bu" 6
+Call \&.NET from JavaScript (This section only applies to client-side components\&.)
+.PP
+
+.IP "  \(bu" 4
+Use JavaScript [JSImport]/[JSExport] interop
+.PP
+
+.IP "\(bu" 2
+Ahead-of-time (AOT) compilation
+.IP "\(bu" 2
+Minimize app download size
+.IP "\(bu" 2
+Runtime relinking
+.IP "\(bu" 2
+Use System\&.Text\&.Json
+.IP "\(bu" 2
+Intermediate Language (IL) trimming
+.IP "\(bu" 2
+Lazy load assemblies
+.IP "\(bu" 2
+Compression
+.IP "\(bu" 2
+Disable unused features
+.PP
+
+.PP
+I have an idea but its not fully thought out\&.
+
+.PP
+I'm imagining that I could turn a Blazor component into a C# class that returns a RenderFragment\&.
+
+.PP
+And that the reason for this would be to avoid the overhead of rendering a Blazor component, when all I want is to compartmentalize my code a bit\&.
+
+.PP
+There is the inline renderfragment template, but I feel that the text editor has an extreme amount of code/markup, and I don't want it all in the same file\&.
+
+.PP
+But\&.\&.\&. I don't want to incur the overhead of a Blazor component just to compartmentalize my text editor logic\&.
+
+.PP
+So instead of 'BodySection\&.razor' I wonder if 'BodySectionDriver\&.cs' could be made such that the class just returns a renderfragment rather than\&.\&.\&.\&.
+
+.PP
+Idea I have me idea
+
+.PP
+What if I make 'BodySectionDriver\&.razor'\&. And it being \&.razor permits me to easily write the renderfragment templates with the <div> syntax\&.
+
+.PP
+Then each renderfragment is static\&. And it takes as parameters the text editor RenderBatch\&.
+
+.PP
+Would this then be equivalent to the existing code without the component overhead? Because 'BodySectionDriver\&.razor' would never be rendered itself\&. Instead you just invoke the static functions that it has to generate the render fragment\&.
+
+.PP
+I'm also not doing the JavaScript interop the new way which they described as more efficient I need to change it
+
+.PP
+I consistently have been making optimizations to the text editor UI logic\&. And I presume I'm getting less and less benefit from continuing to optimize it rather than looking elsewhere\&. But given how frequently the text editor renders, I consider it a "performance critical" UI piece otherwise I wouldn't be as worried about optimizing the UI logic\&.
+
+.PP
+So, since I've consistently been making the optimizations though, I might not make the change I just described yet\&.
+
+.PP
+But having it written down for the future as a possible UI optimization I think is good\&. 

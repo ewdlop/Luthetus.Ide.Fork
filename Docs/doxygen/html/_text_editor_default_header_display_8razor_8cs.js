@@ -1,0 +1,4 @@
+var _text_editor_default_header_display_8razor_8cs =
+[
+    [ "Luthetus.TextEditor.RazorLib.TextEditors.Displays.Internals.TextEditorDefaultHeaderDisplay", "class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_displays_1_1_internals_1_1_text_editor_default_header_display.html", "class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_displays_1_1_internals_1_1_text_editor_default_header_display" ]
+];

@@ -1,0 +1,4 @@
+var _dot_net_solution_state_reducer_tests_8cs =
+[
+    [ "Luthetus.Extensions.DotNet.Tests.Basis.DotNetSolutions.States.DotNetSolutionStateReducerTests", "class_luthetus_1_1_extensions_1_1_dot_net_1_1_tests_1_1_basis_1_1_dot_net_solutions_1_1_states_1308edce444a84b4c3877213e4279272c.html", "class_luthetus_1_1_extensions_1_1_dot_net_1_1_tests_1_1_basis_1_1_dot_net_solutions_1_1_states_1308edce444a84b4c3877213e4279272c" ]
+];

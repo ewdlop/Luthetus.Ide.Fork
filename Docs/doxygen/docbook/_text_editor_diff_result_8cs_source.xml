@@ -1,0 +1,352 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="__text_editor_diff_result_8cs_source" xml:lang="en-US">
+<title>TextEditorDiffResult.cs</title>
+<indexterm><primary>Source/Lib/TextEditor/Diffs/Models/TextEditorDiffResult.cs</primary></indexterm>
+Go to the documentation of this file.<programlisting linenumbering="unnumbered"><anchor xml:id="__text_editor_diff_result_8cs_source_1l00001"/>00001 <emphasis role="keyword">using&#32;</emphasis>System.Collections.Immutable;
+<anchor xml:id="__text_editor_diff_result_8cs_source_1l00002"/>00002 <emphasis role="keyword">using&#32;</emphasis>System.Text;
+<anchor xml:id="__text_editor_diff_result_8cs_source_1l00003"/>00003 <emphasis role="keyword">using&#32;</emphasis><link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_exceptions">Luthetus.TextEditor.RazorLib.Exceptions</link>;
+<anchor xml:id="__text_editor_diff_result_8cs_source_1l00004"/>00004 <emphasis role="keyword">using&#32;</emphasis><link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_lexers_1_1_models">Luthetus.TextEditor.RazorLib.Lexers.Models</link>;
+<anchor xml:id="__text_editor_diff_result_8cs_source_1l00005"/>00005 
+<anchor xml:id="__text_editor_diff_result_8cs_source_1l00006"/>00006 <emphasis role="keyword">namespace&#32;</emphasis><link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_diffs_1_1_models">Luthetus.TextEditor.RazorLib.Diffs.Models</link>;
+<anchor xml:id="__text_editor_diff_result_8cs_source_1l00007"/>00007 
+<anchor xml:id="__text_editor_diff_result_8cs_source_1l00008"/><link linkend="_class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_diffs_1_1_models_1_1_text_editor_diff_result">00008</link> <emphasis role="keyword">public</emphasis>&#32;<emphasis role="keyword">class&#32;</emphasis>TextEditorDiffResult
+<anchor xml:id="__text_editor_diff_result_8cs_source_1l00009"/>00009 {
+<anchor xml:id="__text_editor_diff_result_8cs_source_1l00010"/>00010 &#32;&#32;&#32;&#32;<emphasis role="keyword">private</emphasis>&#32;TextEditorDiffResult(
+<anchor xml:id="__text_editor_diff_result_8cs_source_1l00011"/>00011 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordtype">string</emphasis>&#32;inText,
+<anchor xml:id="__text_editor_diff_result_8cs_source_1l00012"/>00012 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordtype">string</emphasis>&#32;outText,
+<anchor xml:id="__text_editor_diff_result_8cs_source_1l00013"/>00013 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<link linkend="_class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_diffs_1_1_models_1_1_text_editor_diff_cell">TextEditorDiffCell</link>[,]&#32;diffMatrix,
+<anchor xml:id="__text_editor_diff_result_8cs_source_1l00014"/>00014 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;(<emphasis role="keywordtype">int</emphasis>&#32;<link linkend="_class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_diffs_1_1_models_1_1_text_editor_diff_result_1adf1bab4f38cf70c800d039132df34ece">sourceWeight</link>,&#32;<emphasis role="keywordtype">int</emphasis>&#32;inIndex,&#32;<emphasis role="keywordtype">int</emphasis>&#32;outIndex)&#32;highestSourceWeightTuple,
+<anchor xml:id="__text_editor_diff_result_8cs_source_1l00015"/>00015 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordtype">string</emphasis>&#32;longestCommonSubsequence,
+<anchor xml:id="__text_editor_diff_result_8cs_source_1l00016"/>00016 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;ImmutableList&lt;TextEditorTextSpan&gt;&#32;inLongestCommonSubsequenceTextSpanList,
+<anchor xml:id="__text_editor_diff_result_8cs_source_1l00017"/>00017 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;ImmutableList&lt;TextEditorTextSpan&gt;&#32;outLongestCommonSubsequenceTextSpanList)
+<anchor xml:id="__text_editor_diff_result_8cs_source_1l00018"/>00018 &#32;&#32;&#32;&#32;{
+<anchor xml:id="__text_editor_diff_result_8cs_source_1l00019"/>00019 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<link linkend="_class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_diffs_1_1_models_1_1_text_editor_diff_result_1ad543de74ab1813263e16ed2b52207539">InText</link>&#32;=&#32;inText;
+<anchor xml:id="__text_editor_diff_result_8cs_source_1l00020"/>00020 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<link linkend="_class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_diffs_1_1_models_1_1_text_editor_diff_result_1a93731d1aaebd4e6cf55b701853dcd8b9">OutText</link>&#32;=&#32;outText;
+<anchor xml:id="__text_editor_diff_result_8cs_source_1l00021"/>00021 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<link linkend="_class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_diffs_1_1_models_1_1_text_editor_diff_result_1aec6a760d427d46e04978528c6d97a549">DiffMatrix</link>&#32;=&#32;diffMatrix;
+<anchor xml:id="__text_editor_diff_result_8cs_source_1l00022"/>00022 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<link linkend="_class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_diffs_1_1_models_1_1_text_editor_diff_result_1a8c830f8e5d699b49f998adb798917f27">HighestSourceWeightTuple</link>&#32;=&#32;highestSourceWeightTuple;
+<anchor xml:id="__text_editor_diff_result_8cs_source_1l00023"/>00023 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<link linkend="_class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_diffs_1_1_models_1_1_text_editor_diff_result_1ac0deed5412d08270ff78fdf29be45c67">LongestCommonSubsequence</link>&#32;=&#32;longestCommonSubsequence;
+<anchor xml:id="__text_editor_diff_result_8cs_source_1l00024"/>00024 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<link linkend="_class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_diffs_1_1_models_1_1_text_editor_diff_result_1aef255ceadea17edc521682c54473a096">InResultTextSpanList</link>&#32;=&#32;inLongestCommonSubsequenceTextSpanList;
+<anchor xml:id="__text_editor_diff_result_8cs_source_1l00025"/>00025 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<link linkend="_class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_diffs_1_1_models_1_1_text_editor_diff_result_1add8622ae7a22a207c291d4e631bd74c0">OutResultTextSpanList</link>&#32;=&#32;outLongestCommonSubsequenceTextSpanList;
+<anchor xml:id="__text_editor_diff_result_8cs_source_1l00026"/>00026 &#32;&#32;&#32;&#32;}
+<anchor xml:id="__text_editor_diff_result_8cs_source_1l00027"/>00027 
+<anchor xml:id="__text_editor_diff_result_8cs_source_1l00028"/><link linkend="_class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_diffs_1_1_models_1_1_text_editor_diff_result_1ad543de74ab1813263e16ed2b52207539">00028</link> &#32;&#32;&#32;&#32;<emphasis role="keyword">public</emphasis>&#32;<emphasis role="keywordtype">string</emphasis>&#32;<link linkend="_class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_diffs_1_1_models_1_1_text_editor_diff_result_1ad543de74ab1813263e16ed2b52207539">InText</link>&#32;{&#32;<emphasis role="keyword">get</emphasis>;&#32;}
+<anchor xml:id="__text_editor_diff_result_8cs_source_1l00029"/><link linkend="_class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_diffs_1_1_models_1_1_text_editor_diff_result_1a93731d1aaebd4e6cf55b701853dcd8b9">00029</link> &#32;&#32;&#32;&#32;<emphasis role="keyword">public</emphasis>&#32;<emphasis role="keywordtype">string</emphasis>&#32;<link linkend="_class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_diffs_1_1_models_1_1_text_editor_diff_result_1a93731d1aaebd4e6cf55b701853dcd8b9">OutText</link>&#32;{&#32;<emphasis role="keyword">get</emphasis>;&#32;}
+<anchor xml:id="__text_editor_diff_result_8cs_source_1l00030"/><link linkend="_class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_diffs_1_1_models_1_1_text_editor_diff_result_1aec6a760d427d46e04978528c6d97a549">00030</link> &#32;&#32;&#32;&#32;<emphasis role="keyword">public</emphasis>&#32;<link linkend="_class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_diffs_1_1_models_1_1_text_editor_diff_cell">TextEditorDiffCell</link>[,]&#32;<link linkend="_class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_diffs_1_1_models_1_1_text_editor_diff_result_1aec6a760d427d46e04978528c6d97a549">DiffMatrix</link>&#32;{&#32;<emphasis role="keyword">get</emphasis>;&#32;}
+<anchor xml:id="__text_editor_diff_result_8cs_source_1l00031"/><link linkend="_class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_diffs_1_1_models_1_1_text_editor_diff_result_1a04058a5e721f96b31b01e82cfd9735bc">00031</link> &#32;&#32;&#32;&#32;<emphasis role="keyword">public</emphasis>&#32;(<emphasis role="keywordtype">int</emphasis>&#32;<link linkend="_class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_diffs_1_1_models_1_1_text_editor_diff_result_1adf1bab4f38cf70c800d039132df34ece">sourceWeight</link>,&#32;<emphasis role="keywordtype">int</emphasis>&#32;<link linkend="_class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_diffs_1_1_models_1_1_text_editor_diff_result_1a04058a5e721f96b31b01e82cfd9735bc">beforeIndex</link>,&#32;<emphasis role="keywordtype">int</emphasis>&#32;afterIndex)&#32;<link linkend="_class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_diffs_1_1_models_1_1_text_editor_diff_result_1a8c830f8e5d699b49f998adb798917f27">HighestSourceWeightTuple</link>&#32;{&#32;<emphasis role="keyword">get</emphasis>;&#32;}
+<anchor xml:id="__text_editor_diff_result_8cs_source_1l00032"/><link linkend="_class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_diffs_1_1_models_1_1_text_editor_diff_result_1ac0deed5412d08270ff78fdf29be45c67">00032</link> &#32;&#32;&#32;&#32;<emphasis role="keyword">public</emphasis>&#32;<emphasis role="keywordtype">string</emphasis>&#32;<link linkend="_class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_diffs_1_1_models_1_1_text_editor_diff_result_1ac0deed5412d08270ff78fdf29be45c67">LongestCommonSubsequence</link>&#32;{&#32;<emphasis role="keyword">get</emphasis>;&#32;}
+<anchor xml:id="__text_editor_diff_result_8cs_source_1l00033"/><link linkend="_class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_diffs_1_1_models_1_1_text_editor_diff_result_1aef255ceadea17edc521682c54473a096">00033</link> &#32;&#32;&#32;&#32;<emphasis role="keyword">public</emphasis>&#32;ImmutableList&lt;TextEditorTextSpan&gt;&#32;<link linkend="_class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_diffs_1_1_models_1_1_text_editor_diff_result_1aef255ceadea17edc521682c54473a096">InResultTextSpanList</link>&#32;{&#32;<emphasis role="keyword">get</emphasis>;&#32;}
+<anchor xml:id="__text_editor_diff_result_8cs_source_1l00034"/><link linkend="_class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_diffs_1_1_models_1_1_text_editor_diff_result_1add8622ae7a22a207c291d4e631bd74c0">00034</link> &#32;&#32;&#32;&#32;<emphasis role="keyword">public</emphasis>&#32;ImmutableList&lt;TextEditorTextSpan&gt;&#32;<link linkend="_class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_diffs_1_1_models_1_1_text_editor_diff_result_1add8622ae7a22a207c291d4e631bd74c0">OutResultTextSpanList</link>&#32;{&#32;<emphasis role="keyword">get</emphasis>;&#32;}
+<anchor xml:id="__text_editor_diff_result_8cs_source_1l00035"/>00035 
+<anchor xml:id="__text_editor_diff_result_8cs_source_1l00041"/><link linkend="_class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_diffs_1_1_models_1_1_text_editor_diff_result_1a9709abf0e41e55c2c385dbf53138946b">00041</link> &#32;&#32;&#32;&#32;<emphasis role="keyword">public</emphasis>&#32;<emphasis role="keyword">static</emphasis>&#32;TextEditorDiffResult&#32;<link linkend="_class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_diffs_1_1_models_1_1_text_editor_diff_result_1a9709abf0e41e55c2c385dbf53138946b">Calculate</link>(
+<anchor xml:id="__text_editor_diff_result_8cs_source_1l00042"/>00042 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_lexers_1_1_models_1a26a1b63ad28ec7955b30bc6c91571eca">ResourceUri</link>&#32;inResourceUri,
+<anchor xml:id="__text_editor_diff_result_8cs_source_1l00043"/>00043 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordtype">string</emphasis>&#32;inText,
+<anchor xml:id="__text_editor_diff_result_8cs_source_1l00044"/>00044 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_lexers_1_1_models_1a26a1b63ad28ec7955b30bc6c91571eca">ResourceUri</link>&#32;outResourceUri,
+<anchor xml:id="__text_editor_diff_result_8cs_source_1l00045"/>00045 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordtype">string</emphasis>&#32;outText)
+<anchor xml:id="__text_editor_diff_result_8cs_source_1l00046"/>00046 &#32;&#32;&#32;&#32;{
+<anchor xml:id="__text_editor_diff_result_8cs_source_1l00047"/>00047 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;Need&#32;to&#32;build&#32;a&#32;square&#32;two&#32;dimensional&#32;array.</emphasis>
+<anchor xml:id="__text_editor_diff_result_8cs_source_1l00048"/>00048 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="comment">//</emphasis>
+<anchor xml:id="__text_editor_diff_result_8cs_source_1l00049"/>00049 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;Envisioning&#32;that:</emphasis>
+<anchor xml:id="__text_editor_diff_result_8cs_source_1l00050"/>00050 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;&#32;&#32;&#32;&#32;-Each&#32;character&#32;of&#32;&apos;inText&apos;&#32;represents&#32;a&#32;row.</emphasis>
+<anchor xml:id="__text_editor_diff_result_8cs_source_1l00051"/>00051 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;&#32;&#32;&#32;&#32;-Each&#32;character&#32;of&#32;&apos;outText&apos;&#32;represents&#32;a&#32;column.</emphasis>
+<anchor xml:id="__text_editor_diff_result_8cs_source_1l00052"/>00052 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;
+<anchor xml:id="__text_editor_diff_result_8cs_source_1l00053"/>00053 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;var&#32;squaredSize&#32;=&#32;Math.Max(inText.Length,&#32;outText.Length);
+<anchor xml:id="__text_editor_diff_result_8cs_source_1l00054"/>00054 
+<anchor xml:id="__text_editor_diff_result_8cs_source_1l00055"/>00055 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;var&#32;diffMatrix&#32;=&#32;<emphasis role="keyword">new</emphasis>&#32;<link linkend="_class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_diffs_1_1_models_1_1_text_editor_diff_cell">TextEditorDiffCell</link>[squaredSize,&#32;squaredSize];
+<anchor xml:id="__text_editor_diff_result_8cs_source_1l00056"/>00056 
+<anchor xml:id="__text_editor_diff_result_8cs_source_1l00057"/>00057 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;(<emphasis role="keywordtype">int</emphasis>&#32;<link linkend="_class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_diffs_1_1_models_1_1_text_editor_diff_result_1adf1bab4f38cf70c800d039132df34ece">sourceWeight</link>,&#32;<emphasis role="keywordtype">int</emphasis>&#32;inIndex,&#32;<emphasis role="keywordtype">int</emphasis>&#32;outIndex)&#32;highestSourceWeightTuple&#32;=&#32;(-1,&#32;-1,&#32;-1);
+<anchor xml:id="__text_editor_diff_result_8cs_source_1l00058"/>00058 
+<anchor xml:id="__text_editor_diff_result_8cs_source_1l00059"/>00059 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">for</emphasis>&#32;(<emphasis role="keywordtype">int</emphasis>&#32;inIndex&#32;=&#32;0;&#32;inIndex&#32;&lt;&#32;inText.Length;&#32;inIndex++)
+<anchor xml:id="__text_editor_diff_result_8cs_source_1l00060"/>00060 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;{
+<anchor xml:id="__text_editor_diff_result_8cs_source_1l00061"/>00061 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordtype">char</emphasis>&#32;inCharValue&#32;=&#32;inText[inIndex];
+<anchor xml:id="__text_editor_diff_result_8cs_source_1l00062"/>00062 
+<anchor xml:id="__text_editor_diff_result_8cs_source_1l00063"/>00063 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">for</emphasis>&#32;(<emphasis role="keywordtype">int</emphasis>&#32;outIndex&#32;=&#32;0;&#32;outIndex&#32;&lt;&#32;outText.Length;&#32;outIndex++)
+<anchor xml:id="__text_editor_diff_result_8cs_source_1l00064"/>00064 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;{
+<anchor xml:id="__text_editor_diff_result_8cs_source_1l00065"/>00065 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordtype">char</emphasis>&#32;outCharValue&#32;=&#32;outText[outIndex];
+<anchor xml:id="__text_editor_diff_result_8cs_source_1l00066"/>00066 
+<anchor xml:id="__text_editor_diff_result_8cs_source_1l00067"/>00067 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;var&#32;weight&#32;=&#32;GetLargestWeightPriorToCurrentPosition(diffMatrix,&#32;inIndex,&#32;outIndex);
+<anchor xml:id="__text_editor_diff_result_8cs_source_1l00068"/>00068 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;var&#32;isSourceWeight&#32;=&#32;<emphasis role="keyword">false</emphasis>;
+<anchor xml:id="__text_editor_diff_result_8cs_source_1l00069"/>00069 
+<anchor xml:id="__text_editor_diff_result_8cs_source_1l00070"/>00070 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">if</emphasis>&#32;(inCharValue&#32;==&#32;outCharValue)
+<anchor xml:id="__text_editor_diff_result_8cs_source_1l00071"/>00071 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;{
+<anchor xml:id="__text_editor_diff_result_8cs_source_1l00072"/>00072 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;var&#32;cellSourceWeight&#32;=&#32;weight&#32;+&#32;1;
+<anchor xml:id="__text_editor_diff_result_8cs_source_1l00073"/>00073 
+<anchor xml:id="__text_editor_diff_result_8cs_source_1l00074"/>00074 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">if</emphasis>&#32;(cellSourceWeight&#32;&gt;&#32;weight)
+<anchor xml:id="__text_editor_diff_result_8cs_source_1l00075"/>00075 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;{
+<anchor xml:id="__text_editor_diff_result_8cs_source_1l00076"/>00076 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;weight&#32;=&#32;cellSourceWeight;
+<anchor xml:id="__text_editor_diff_result_8cs_source_1l00077"/>00077 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;isSourceWeight&#32;=&#32;<emphasis role="keyword">true</emphasis>;
+<anchor xml:id="__text_editor_diff_result_8cs_source_1l00078"/>00078 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;}
+<anchor xml:id="__text_editor_diff_result_8cs_source_1l00079"/>00079 
+<anchor xml:id="__text_editor_diff_result_8cs_source_1l00080"/>00080 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">if</emphasis>&#32;(cellSourceWeight&#32;&gt;&#32;highestSourceWeightTuple.sourceWeight)
+<anchor xml:id="__text_editor_diff_result_8cs_source_1l00081"/>00081 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;highestSourceWeightTuple&#32;=&#32;(cellSourceWeight,&#32;inIndex,&#32;outIndex);
+<anchor xml:id="__text_editor_diff_result_8cs_source_1l00082"/>00082 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;}
+<anchor xml:id="__text_editor_diff_result_8cs_source_1l00083"/>00083 
+<anchor xml:id="__text_editor_diff_result_8cs_source_1l00084"/>00084 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;diffMatrix[inIndex,&#32;outIndex]&#32;=&#32;<emphasis role="keyword">new</emphasis>&#32;<link linkend="_class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_diffs_1_1_models_1_1_text_editor_diff_cell">TextEditorDiffCell</link>(
+<anchor xml:id="__text_editor_diff_result_8cs_source_1l00085"/>00085 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;inCharValue,&#32;outCharValue,&#32;weight,&#32;isSourceWeight);
+<anchor xml:id="__text_editor_diff_result_8cs_source_1l00086"/>00086 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;}
+<anchor xml:id="__text_editor_diff_result_8cs_source_1l00087"/>00087 
+<anchor xml:id="__text_editor_diff_result_8cs_source_1l00088"/>00088 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">for</emphasis>&#32;(<emphasis role="keywordtype">int</emphasis>&#32;fabricatedOutIndex&#32;=&#32;outText.Length;&#32;fabricatedOutIndex&#32;&lt;&#32;squaredSize;&#32;fabricatedOutIndex++)
+<anchor xml:id="__text_editor_diff_result_8cs_source_1l00089"/>00089 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;{
+<anchor xml:id="__text_editor_diff_result_8cs_source_1l00090"/>00090 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;This&#32;for&#32;loop&#32;sets&#32;the&#32;cells&#32;in&#32;the&#32;fabricated&#32;column&#32;in&#32;order&#32;to&#32;create&#32;a&#32;square&#32;matrix</emphasis>
+<anchor xml:id="__text_editor_diff_result_8cs_source_1l00091"/>00091 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;in&#32;cases&#32;where&#32;(outTextLength&#32;&lt;&#32;inTextLength)</emphasis>
+<anchor xml:id="__text_editor_diff_result_8cs_source_1l00092"/>00092 
+<anchor xml:id="__text_editor_diff_result_8cs_source_1l00093"/>00093 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;var&#32;rowLargestWeightPriorToCurrentColumn&#32;=&#32;GetLargestWeightPriorToCurrentPosition(
+<anchor xml:id="__text_editor_diff_result_8cs_source_1l00094"/>00094 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;diffMatrix,
+<anchor xml:id="__text_editor_diff_result_8cs_source_1l00095"/>00095 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;inIndex,
+<anchor xml:id="__text_editor_diff_result_8cs_source_1l00096"/>00096 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;fabricatedOutIndex);
+<anchor xml:id="__text_editor_diff_result_8cs_source_1l00097"/>00097 
+<anchor xml:id="__text_editor_diff_result_8cs_source_1l00098"/>00098 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;diffMatrix[inIndex,&#32;fabricatedOutIndex]&#32;=&#32;<emphasis role="keyword">new</emphasis>&#32;<link linkend="_class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_diffs_1_1_models_1_1_text_editor_diff_cell">TextEditorDiffCell</link>(
+<anchor xml:id="__text_editor_diff_result_8cs_source_1l00099"/>00099 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;inCharValue,
+<anchor xml:id="__text_editor_diff_result_8cs_source_1l00100"/>00100 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keyword">null</emphasis>,
+<anchor xml:id="__text_editor_diff_result_8cs_source_1l00101"/>00101 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;rowLargestWeightPriorToCurrentColumn,
+<anchor xml:id="__text_editor_diff_result_8cs_source_1l00102"/>00102 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keyword">false</emphasis>);
+<anchor xml:id="__text_editor_diff_result_8cs_source_1l00103"/>00103 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;}
+<anchor xml:id="__text_editor_diff_result_8cs_source_1l00104"/>00104 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;}
+<anchor xml:id="__text_editor_diff_result_8cs_source_1l00105"/>00105 
+<anchor xml:id="__text_editor_diff_result_8cs_source_1l00106"/>00106 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">for</emphasis>&#32;(<emphasis role="keywordtype">int</emphasis>&#32;fabricatedInIndex&#32;=&#32;inText.Length;&#32;fabricatedInIndex&#32;&lt;&#32;squaredSize;&#32;fabricatedInIndex++)
+<anchor xml:id="__text_editor_diff_result_8cs_source_1l00107"/>00107 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;{
+<anchor xml:id="__text_editor_diff_result_8cs_source_1l00108"/>00108 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;This&#32;for&#32;loop&#32;sets&#32;the&#32;cells&#32;in&#32;the&#32;fabricated&#32;row&#32;in&#32;order&#32;to&#32;create&#32;a&#32;square&#32;matrix</emphasis>
+<anchor xml:id="__text_editor_diff_result_8cs_source_1l00109"/>00109 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;in&#32;cases&#32;where&#32;(inTextLength&#32;&lt;&#32;outTextLength)</emphasis>
+<anchor xml:id="__text_editor_diff_result_8cs_source_1l00110"/>00110 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="comment">//</emphasis>
+<anchor xml:id="__text_editor_diff_result_8cs_source_1l00111"/>00111 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;TODO:&#32;This&#32;logic&#32;should&#32;to&#32;be&#32;removed.&#32;Instead&#32;of&#32;looking&#32;at&#32;this&#32;algorithm&#32;from&#32;the&#32;perspective&#32;of&#32;&apos;before&apos;&#32;and&#32;&apos;after&apos;&#32;text.&#32;It&#32;might&#32;be&#32;best&#32;to&#32;have&#32;the&#32;perspective&#32;be&#32;&apos;vertical&apos;&#32;and&#32;&apos;horizontal&apos;&#32;text.&#32;Then&#32;the&#32;&apos;vertical&apos;&#32;text&#32;is&#32;equal&#32;to&#32;the&#32;longer&#32;of&#32;the&#32;two&#32;string&#32;inputs.&#32;By&#32;having&#32;the&#32;row&#32;count&#32;defined&#32;by&#32;the&#32;longer&#32;of&#32;the&#32;two&#32;strings&#32;you&#32;only&#32;would&#32;ever&#32;fabricate&#32;columns.&#32;This&#32;would&#32;allow&#32;for&#32;a&#32;lot&#32;of&#32;code&#32;to&#32;be&#32;removed.</emphasis>
+<anchor xml:id="__text_editor_diff_result_8cs_source_1l00112"/>00112 
+<anchor xml:id="__text_editor_diff_result_8cs_source_1l00113"/>00113 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">for</emphasis>&#32;(<emphasis role="keywordtype">int</emphasis>&#32;fabricatedOutIndex&#32;=&#32;0;&#32;fabricatedOutIndex&#32;&lt;&#32;squaredSize;&#32;fabricatedOutIndex++)
+<anchor xml:id="__text_editor_diff_result_8cs_source_1l00114"/>00114 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;{
+<anchor xml:id="__text_editor_diff_result_8cs_source_1l00115"/>00115 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;var&#32;rowLargestWeightPriorToCurrentColumn&#32;=&#32;GetLargestWeightPriorToCurrentPosition(
+<anchor xml:id="__text_editor_diff_result_8cs_source_1l00116"/>00116 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;diffMatrix,
+<anchor xml:id="__text_editor_diff_result_8cs_source_1l00117"/>00117 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;fabricatedInIndex,
+<anchor xml:id="__text_editor_diff_result_8cs_source_1l00118"/>00118 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;fabricatedOutIndex);
+<anchor xml:id="__text_editor_diff_result_8cs_source_1l00119"/>00119 
+<anchor xml:id="__text_editor_diff_result_8cs_source_1l00120"/>00120 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;diffMatrix[fabricatedInIndex,&#32;fabricatedOutIndex]&#32;=&#32;<emphasis role="keyword">new</emphasis>&#32;<link linkend="_class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_diffs_1_1_models_1_1_text_editor_diff_cell">TextEditorDiffCell</link>(
+<anchor xml:id="__text_editor_diff_result_8cs_source_1l00121"/>00121 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keyword">null</emphasis>,
+<anchor xml:id="__text_editor_diff_result_8cs_source_1l00122"/>00122 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keyword">null</emphasis>,
+<anchor xml:id="__text_editor_diff_result_8cs_source_1l00123"/>00123 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;rowLargestWeightPriorToCurrentColumn,
+<anchor xml:id="__text_editor_diff_result_8cs_source_1l00124"/>00124 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keyword">false</emphasis>);
+<anchor xml:id="__text_editor_diff_result_8cs_source_1l00125"/>00125 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;}
+<anchor xml:id="__text_editor_diff_result_8cs_source_1l00126"/>00126 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;}
+<anchor xml:id="__text_editor_diff_result_8cs_source_1l00127"/>00127 
+<anchor xml:id="__text_editor_diff_result_8cs_source_1l00128"/>00128 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;The&#32;abbreviation&#32;&quot;lcs&quot;&#32;is&#32;to&#32;mean&#32;&quot;Longest&#32;Common&#32;Subsequence&quot;</emphasis>
+<anchor xml:id="__text_editor_diff_result_8cs_source_1l00129"/>00129 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;var&#32;lcsBuilder&#32;=&#32;<emphasis role="keyword">new</emphasis>&#32;StringBuilder();
+<anchor xml:id="__text_editor_diff_result_8cs_source_1l00130"/>00130 
+<anchor xml:id="__text_editor_diff_result_8cs_source_1l00131"/>00131 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;var&#32;inPositionIndicesLcsHashSet&#32;=&#32;<emphasis role="keyword">new</emphasis>&#32;HashSet&lt;int&gt;();
+<anchor xml:id="__text_editor_diff_result_8cs_source_1l00132"/>00132 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;var&#32;outPositionIndicesLcsHashSet&#32;=&#32;<emphasis role="keyword">new</emphasis>&#32;HashSet&lt;int&gt;();
+<anchor xml:id="__text_editor_diff_result_8cs_source_1l00133"/>00133 
+<anchor xml:id="__text_editor_diff_result_8cs_source_1l00134"/>00134 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;var&#32;inPositionIndicesOfDeletionHashSet&#32;=&#32;<emphasis role="keyword">new</emphasis>&#32;HashSet&lt;int&gt;();
+<anchor xml:id="__text_editor_diff_result_8cs_source_1l00135"/>00135 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;var&#32;outPositionIndicesInsertionHashSet&#32;=&#32;<emphasis role="keyword">new</emphasis>&#32;HashSet&lt;int&gt;();
+<anchor xml:id="__text_editor_diff_result_8cs_source_1l00136"/>00136 
+<anchor xml:id="__text_editor_diff_result_8cs_source_1l00137"/>00137 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;var&#32;inPositionIndicesOfModificationHashSet&#32;=&#32;<emphasis role="keyword">new</emphasis>&#32;HashSet&lt;int&gt;();
+<anchor xml:id="__text_editor_diff_result_8cs_source_1l00138"/>00138 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;var&#32;outPositionIndicesOfModificationHashSet&#32;=&#32;<emphasis role="keyword">new</emphasis>&#32;HashSet&lt;int&gt;();
+<anchor xml:id="__text_editor_diff_result_8cs_source_1l00139"/>00139 
+<anchor xml:id="__text_editor_diff_result_8cs_source_1l00140"/>00140 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;Read&#32;the&#32;LongestCommonSubsequence&#32;by&#32;backtracking&#32;to&#32;the&#32;highest&#32;weights</emphasis>
+<anchor xml:id="__text_editor_diff_result_8cs_source_1l00141"/>00141 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;{
+<anchor xml:id="__text_editor_diff_result_8cs_source_1l00142"/>00142 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;var&#32;runningRowIndex&#32;=&#32;highestSourceWeightTuple.inIndex;
+<anchor xml:id="__text_editor_diff_result_8cs_source_1l00143"/>00143 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;var&#32;runningColumnIndex&#32;=&#32;highestSourceWeightTuple.outIndex;
+<anchor xml:id="__text_editor_diff_result_8cs_source_1l00144"/>00144 
+<anchor xml:id="__text_editor_diff_result_8cs_source_1l00145"/>00145 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;var&#32;targetSourceWeight&#32;=&#32;highestSourceWeightTuple.sourceWeight;
+<anchor xml:id="__text_editor_diff_result_8cs_source_1l00146"/>00146 
+<anchor xml:id="__text_editor_diff_result_8cs_source_1l00147"/>00147 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;var&#32;foundLargestWeight&#32;=&#32;<emphasis role="keyword">false</emphasis>;
+<anchor xml:id="__text_editor_diff_result_8cs_source_1l00148"/>00148 
+<anchor xml:id="__text_editor_diff_result_8cs_source_1l00149"/>00149 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;var&#32;restoreColumnIndex&#32;=&#32;runningColumnIndex;
+<anchor xml:id="__text_editor_diff_result_8cs_source_1l00150"/>00150 
+<anchor xml:id="__text_editor_diff_result_8cs_source_1l00151"/>00151 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">while</emphasis>&#32;(runningRowIndex&#32;!=&#32;-1&#32;&amp;&amp;&#32;runningColumnIndex&#32;!=&#32;-1)
+<anchor xml:id="__text_editor_diff_result_8cs_source_1l00152"/>00152 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;{
+<anchor xml:id="__text_editor_diff_result_8cs_source_1l00153"/>00153 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">if</emphasis>&#32;(!foundLargestWeight)
+<anchor xml:id="__text_editor_diff_result_8cs_source_1l00154"/>00154 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;restoreColumnIndex&#32;=&#32;runningColumnIndex;
+<anchor xml:id="__text_editor_diff_result_8cs_source_1l00155"/>00155 
+<anchor xml:id="__text_editor_diff_result_8cs_source_1l00156"/>00156 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;var&#32;cell&#32;=&#32;diffMatrix[runningRowIndex,&#32;runningColumnIndex];
+<anchor xml:id="__text_editor_diff_result_8cs_source_1l00157"/>00157 
+<anchor xml:id="__text_editor_diff_result_8cs_source_1l00158"/>00158 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">if</emphasis>&#32;(cell.IsSourceOfRowWeight&#32;&amp;&amp;
+<anchor xml:id="__text_editor_diff_result_8cs_source_1l00159"/>00159 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;cell.Weight&#32;==&#32;targetSourceWeight)
+<anchor xml:id="__text_editor_diff_result_8cs_source_1l00160"/>00160 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;{
+<anchor xml:id="__text_editor_diff_result_8cs_source_1l00161"/>00161 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;targetSourceWeight--;
+<anchor xml:id="__text_editor_diff_result_8cs_source_1l00162"/>00162 
+<anchor xml:id="__text_editor_diff_result_8cs_source_1l00163"/>00163 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">if</emphasis>&#32;(cell.BeforeCharValue&#32;!=&#32;cell.AfterCharValue)
+<anchor xml:id="__text_editor_diff_result_8cs_source_1l00164"/>00164 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">throw</emphasis>&#32;<emphasis role="keyword">new</emphasis>&#32;<link linkend="_class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_exceptions_1_1_luthetus_text_editor_exception">LuthetusTextEditorException</link>($<emphasis role="stringliteral">&quot;The&#32;{nameof(cell.BeforeCharValue)}:&apos;{cell.BeforeCharValue}&apos;&#32;was&#32;not&#32;equal&#32;to&#32;the&#32;{nameof(cell.AfterCharValue)}:&apos;{cell.AfterCharValue}&apos;&quot;</emphasis>);
+<anchor xml:id="__text_editor_diff_result_8cs_source_1l00165"/>00165 
+<anchor xml:id="__text_editor_diff_result_8cs_source_1l00166"/>00166 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;lcsBuilder.Append(cell.BeforeCharValue);
+<anchor xml:id="__text_editor_diff_result_8cs_source_1l00167"/>00167 
+<anchor xml:id="__text_editor_diff_result_8cs_source_1l00168"/>00168 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;Decoration&#32;logic&#32;for&#32;longest&#32;common&#32;subsequence</emphasis>
+<anchor xml:id="__text_editor_diff_result_8cs_source_1l00169"/>00169 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;{
+<anchor xml:id="__text_editor_diff_result_8cs_source_1l00170"/>00170 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;inPositionIndicesLcsHashSet.Add(runningRowIndex);
+<anchor xml:id="__text_editor_diff_result_8cs_source_1l00171"/>00171 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;outPositionIndicesLcsHashSet.Add(runningColumnIndex);
+<anchor xml:id="__text_editor_diff_result_8cs_source_1l00172"/>00172 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;}
+<anchor xml:id="__text_editor_diff_result_8cs_source_1l00173"/>00173 
+<anchor xml:id="__text_editor_diff_result_8cs_source_1l00174"/>00174 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;restoreColumnIndex&#32;=&#32;runningColumnIndex&#32;-&#32;1;
+<anchor xml:id="__text_editor_diff_result_8cs_source_1l00175"/>00175 
+<anchor xml:id="__text_editor_diff_result_8cs_source_1l00176"/>00176 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;Forces&#32;the&#32;row&#32;index&#32;decrementation&#32;then&#32;a&#32;column&#32;index&#32;restoration.</emphasis>
+<anchor xml:id="__text_editor_diff_result_8cs_source_1l00177"/>00177 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;runningColumnIndex&#32;=&#32;0;
+<anchor xml:id="__text_editor_diff_result_8cs_source_1l00178"/>00178 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;}
+<anchor xml:id="__text_editor_diff_result_8cs_source_1l00179"/>00179 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">else</emphasis>
+<anchor xml:id="__text_editor_diff_result_8cs_source_1l00180"/>00180 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;{
+<anchor xml:id="__text_editor_diff_result_8cs_source_1l00181"/>00181 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;Decoration&#32;logic</emphasis>
+<anchor xml:id="__text_editor_diff_result_8cs_source_1l00182"/>00182 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;{
+<anchor xml:id="__text_editor_diff_result_8cs_source_1l00183"/>00183 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">if</emphasis>&#32;(outText.Length&#32;&gt;&#32;inText.Length&#32;&amp;&amp;&#32;!outPositionIndicesLcsHashSet.Contains(runningColumnIndex))
+<anchor xml:id="__text_editor_diff_result_8cs_source_1l00184"/>00184 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;outPositionIndicesInsertionHashSet.Add(runningColumnIndex);&#32;<emphasis role="comment">//&#32;Insertion</emphasis>
+<anchor xml:id="__text_editor_diff_result_8cs_source_1l00185"/>00185 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">else</emphasis>&#32;<emphasis role="keywordflow">if</emphasis>&#32;(inText.Length&#32;&gt;&#32;outText.Length&#32;&amp;&amp;&#32;runningRowIndex&#32;&gt;=&#32;outText.Length)
+<anchor xml:id="__text_editor_diff_result_8cs_source_1l00186"/>00186 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;inPositionIndicesOfDeletionHashSet.Add(runningRowIndex);&#32;<emphasis role="comment">//&#32;Deletion</emphasis>
+<anchor xml:id="__text_editor_diff_result_8cs_source_1l00187"/>00187 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;TODO:&#32;Else&#32;if&#32;for&#32;modification&#32;is&#32;not&#32;working.</emphasis>
+<anchor xml:id="__text_editor_diff_result_8cs_source_1l00188"/>00188 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="comment">//</emphasis>
+<anchor xml:id="__text_editor_diff_result_8cs_source_1l00189"/>00189 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;else&#32;if&#32;(cell.BeforeCharValue&#32;!=&#32;cell.AfterCharValue)</emphasis>
+<anchor xml:id="__text_editor_diff_result_8cs_source_1l00190"/>00190 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;{</emphasis>
+<anchor xml:id="__text_editor_diff_result_8cs_source_1l00191"/>00191 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;&#32;&#32;&#32;&#32;//&#32;Modification</emphasis>
+<anchor xml:id="__text_editor_diff_result_8cs_source_1l00192"/>00192 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;&#32;&#32;&#32;&#32;beforePositionIndicesOfModificationHashSet.Add(runningRowIndex);</emphasis>
+<anchor xml:id="__text_editor_diff_result_8cs_source_1l00193"/>00193 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;&#32;&#32;&#32;&#32;afterPositionIndicesOfModificationHashSet.Add(runningColumnIndex);</emphasis>
+<anchor xml:id="__text_editor_diff_result_8cs_source_1l00194"/>00194 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;}</emphasis>
+<anchor xml:id="__text_editor_diff_result_8cs_source_1l00195"/>00195 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;}
+<anchor xml:id="__text_editor_diff_result_8cs_source_1l00196"/>00196 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;}
+<anchor xml:id="__text_editor_diff_result_8cs_source_1l00197"/>00197 
+<anchor xml:id="__text_editor_diff_result_8cs_source_1l00198"/>00198 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">if</emphasis>&#32;(runningColumnIndex&#32;==&#32;0)
+<anchor xml:id="__text_editor_diff_result_8cs_source_1l00199"/>00199 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;{
+<anchor xml:id="__text_editor_diff_result_8cs_source_1l00200"/>00200 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;runningColumnIndex&#32;=&#32;restoreColumnIndex;
+<anchor xml:id="__text_editor_diff_result_8cs_source_1l00201"/>00201 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;runningRowIndex--;
+<anchor xml:id="__text_editor_diff_result_8cs_source_1l00202"/>00202 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;}
+<anchor xml:id="__text_editor_diff_result_8cs_source_1l00203"/>00203 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">else</emphasis>
+<anchor xml:id="__text_editor_diff_result_8cs_source_1l00204"/>00204 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;{
+<anchor xml:id="__text_editor_diff_result_8cs_source_1l00205"/>00205 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;runningColumnIndex--;
+<anchor xml:id="__text_editor_diff_result_8cs_source_1l00206"/>00206 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;}
+<anchor xml:id="__text_editor_diff_result_8cs_source_1l00207"/>00207 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;}
+<anchor xml:id="__text_editor_diff_result_8cs_source_1l00208"/>00208 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;}
+<anchor xml:id="__text_editor_diff_result_8cs_source_1l00209"/>00209 
+<anchor xml:id="__text_editor_diff_result_8cs_source_1l00210"/>00210 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;var&#32;longestCommonSubsequenceValue&#32;=&#32;<emphasis role="keyword">new</emphasis>&#32;string(lcsBuilder
+<anchor xml:id="__text_editor_diff_result_8cs_source_1l00211"/>00211 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;.ToString()
+<anchor xml:id="__text_editor_diff_result_8cs_source_1l00212"/>00212 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;.Reverse()
+<anchor xml:id="__text_editor_diff_result_8cs_source_1l00213"/>00213 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;.ToArray());
+<anchor xml:id="__text_editor_diff_result_8cs_source_1l00214"/>00214 
+<anchor xml:id="__text_editor_diff_result_8cs_source_1l00215"/>00215 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;var&#32;inTextSpans&#32;=&#32;<emphasis role="keyword">new</emphasis>&#32;List&lt;TextEditorTextSpan&gt;();
+<anchor xml:id="__text_editor_diff_result_8cs_source_1l00216"/>00216 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;var&#32;outTextSpans&#32;=&#32;<emphasis role="keyword">new</emphasis>&#32;List&lt;TextEditorTextSpan&gt;();
+<anchor xml:id="__text_editor_diff_result_8cs_source_1l00217"/>00217 
+<anchor xml:id="__text_editor_diff_result_8cs_source_1l00218"/>00218 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;Decoration&#32;logic</emphasis>
+<anchor xml:id="__text_editor_diff_result_8cs_source_1l00219"/>00219 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;{
+<anchor xml:id="__text_editor_diff_result_8cs_source_1l00220"/>00220 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;Longest&#32;common&#32;subsequence</emphasis>
+<anchor xml:id="__text_editor_diff_result_8cs_source_1l00221"/>00221 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;{
+<anchor xml:id="__text_editor_diff_result_8cs_source_1l00222"/>00222 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;inTextSpans.AddRange(GetTextSpans(
+<anchor xml:id="__text_editor_diff_result_8cs_source_1l00223"/>00223 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;inResourceUri,
+<anchor xml:id="__text_editor_diff_result_8cs_source_1l00224"/>00224 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;inText,
+<anchor xml:id="__text_editor_diff_result_8cs_source_1l00225"/>00225 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;inPositionIndicesLcsHashSet,
+<anchor xml:id="__text_editor_diff_result_8cs_source_1l00226"/>00226 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;(<emphasis role="keywordtype">byte</emphasis>)<link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_diffs_1_1_models_1aec0409c8bf45dcf893e3cf2eea0f57d3">TextEditorDiffDecorationKind</link>.LongestCommonSubsequence));
+<anchor xml:id="__text_editor_diff_result_8cs_source_1l00227"/>00227 
+<anchor xml:id="__text_editor_diff_result_8cs_source_1l00228"/>00228 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;outTextSpans.AddRange(GetTextSpans(
+<anchor xml:id="__text_editor_diff_result_8cs_source_1l00229"/>00229 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;outResourceUri,
+<anchor xml:id="__text_editor_diff_result_8cs_source_1l00230"/>00230 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;outText,
+<anchor xml:id="__text_editor_diff_result_8cs_source_1l00231"/>00231 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;outPositionIndicesLcsHashSet,
+<anchor xml:id="__text_editor_diff_result_8cs_source_1l00232"/>00232 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;(<emphasis role="keywordtype">byte</emphasis>)<link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_diffs_1_1_models_1aec0409c8bf45dcf893e3cf2eea0f57d3">TextEditorDiffDecorationKind</link>.LongestCommonSubsequence));
+<anchor xml:id="__text_editor_diff_result_8cs_source_1l00233"/>00233 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;}
+<anchor xml:id="__text_editor_diff_result_8cs_source_1l00234"/>00234 
+<anchor xml:id="__text_editor_diff_result_8cs_source_1l00235"/>00235 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;Insertion</emphasis>
+<anchor xml:id="__text_editor_diff_result_8cs_source_1l00236"/>00236 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;{
+<anchor xml:id="__text_editor_diff_result_8cs_source_1l00237"/>00237 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;outTextSpans.AddRange(GetTextSpans(
+<anchor xml:id="__text_editor_diff_result_8cs_source_1l00238"/>00238 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;outResourceUri,
+<anchor xml:id="__text_editor_diff_result_8cs_source_1l00239"/>00239 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;outText,
+<anchor xml:id="__text_editor_diff_result_8cs_source_1l00240"/>00240 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;outPositionIndicesInsertionHashSet,
+<anchor xml:id="__text_editor_diff_result_8cs_source_1l00241"/>00241 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;(<emphasis role="keywordtype">byte</emphasis>)<link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_diffs_1_1_models_1aec0409c8bf45dcf893e3cf2eea0f57d3">TextEditorDiffDecorationKind</link>.Insertion));
+<anchor xml:id="__text_editor_diff_result_8cs_source_1l00242"/>00242 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;}
+<anchor xml:id="__text_editor_diff_result_8cs_source_1l00243"/>00243 
+<anchor xml:id="__text_editor_diff_result_8cs_source_1l00244"/>00244 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;Deletion</emphasis>
+<anchor xml:id="__text_editor_diff_result_8cs_source_1l00245"/>00245 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;{
+<anchor xml:id="__text_editor_diff_result_8cs_source_1l00246"/>00246 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;inTextSpans.AddRange(GetTextSpans(
+<anchor xml:id="__text_editor_diff_result_8cs_source_1l00247"/>00247 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;inResourceUri,
+<anchor xml:id="__text_editor_diff_result_8cs_source_1l00248"/>00248 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;inText,
+<anchor xml:id="__text_editor_diff_result_8cs_source_1l00249"/>00249 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;inPositionIndicesOfDeletionHashSet,
+<anchor xml:id="__text_editor_diff_result_8cs_source_1l00250"/>00250 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;(<emphasis role="keywordtype">byte</emphasis>)<link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_diffs_1_1_models_1aec0409c8bf45dcf893e3cf2eea0f57d3">TextEditorDiffDecorationKind</link>.Deletion));
+<anchor xml:id="__text_editor_diff_result_8cs_source_1l00251"/>00251 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;}
+<anchor xml:id="__text_editor_diff_result_8cs_source_1l00252"/>00252 
+<anchor xml:id="__text_editor_diff_result_8cs_source_1l00253"/>00253 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;Modification</emphasis>
+<anchor xml:id="__text_editor_diff_result_8cs_source_1l00254"/>00254 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;{
+<anchor xml:id="__text_editor_diff_result_8cs_source_1l00255"/>00255 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;inTextSpans.AddRange(GetTextSpans(
+<anchor xml:id="__text_editor_diff_result_8cs_source_1l00256"/>00256 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;inResourceUri,
+<anchor xml:id="__text_editor_diff_result_8cs_source_1l00257"/>00257 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;inText,
+<anchor xml:id="__text_editor_diff_result_8cs_source_1l00258"/>00258 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;inPositionIndicesOfModificationHashSet,
+<anchor xml:id="__text_editor_diff_result_8cs_source_1l00259"/>00259 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;(<emphasis role="keywordtype">byte</emphasis>)<link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_diffs_1_1_models_1aec0409c8bf45dcf893e3cf2eea0f57d3">TextEditorDiffDecorationKind</link>.Modification));
+<anchor xml:id="__text_editor_diff_result_8cs_source_1l00260"/>00260 
+<anchor xml:id="__text_editor_diff_result_8cs_source_1l00261"/>00261 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;outTextSpans.AddRange(GetTextSpans(
+<anchor xml:id="__text_editor_diff_result_8cs_source_1l00262"/>00262 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;outResourceUri,
+<anchor xml:id="__text_editor_diff_result_8cs_source_1l00263"/>00263 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;outText,
+<anchor xml:id="__text_editor_diff_result_8cs_source_1l00264"/>00264 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;outPositionIndicesOfModificationHashSet,
+<anchor xml:id="__text_editor_diff_result_8cs_source_1l00265"/>00265 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;(<emphasis role="keywordtype">byte</emphasis>)<link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_diffs_1_1_models_1aec0409c8bf45dcf893e3cf2eea0f57d3">TextEditorDiffDecorationKind</link>.Modification));
+<anchor xml:id="__text_editor_diff_result_8cs_source_1l00266"/>00266 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;}
+<anchor xml:id="__text_editor_diff_result_8cs_source_1l00267"/>00267 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;}
+<anchor xml:id="__text_editor_diff_result_8cs_source_1l00268"/>00268 
+<anchor xml:id="__text_editor_diff_result_8cs_source_1l00269"/>00269 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;var&#32;diffResult&#32;=&#32;<emphasis role="keyword">new</emphasis>&#32;TextEditorDiffResult(
+<anchor xml:id="__text_editor_diff_result_8cs_source_1l00270"/>00270 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;inText,
+<anchor xml:id="__text_editor_diff_result_8cs_source_1l00271"/>00271 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;outText,
+<anchor xml:id="__text_editor_diff_result_8cs_source_1l00272"/>00272 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;diffMatrix,
+<anchor xml:id="__text_editor_diff_result_8cs_source_1l00273"/>00273 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;highestSourceWeightTuple,
+<anchor xml:id="__text_editor_diff_result_8cs_source_1l00274"/>00274 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;longestCommonSubsequenceValue,
+<anchor xml:id="__text_editor_diff_result_8cs_source_1l00275"/>00275 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;inTextSpans.ToImmutableList(),
+<anchor xml:id="__text_editor_diff_result_8cs_source_1l00276"/>00276 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;outTextSpans.ToImmutableList());
+<anchor xml:id="__text_editor_diff_result_8cs_source_1l00277"/>00277 
+<anchor xml:id="__text_editor_diff_result_8cs_source_1l00278"/>00278 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;diffResult;
+<anchor xml:id="__text_editor_diff_result_8cs_source_1l00279"/>00279 &#32;&#32;&#32;&#32;}
+<anchor xml:id="__text_editor_diff_result_8cs_source_1l00280"/>00280 
+<anchor xml:id="__text_editor_diff_result_8cs_source_1l00281"/>00281 &#32;&#32;&#32;&#32;<emphasis role="keyword">private</emphasis>&#32;<emphasis role="keyword">static</emphasis>&#32;<emphasis role="keywordtype">int</emphasis>&#32;GetLargestWeightPriorToCurrentPosition(
+<anchor xml:id="__text_editor_diff_result_8cs_source_1l00282"/>00282 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<link linkend="_class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_diffs_1_1_models_1_1_text_editor_diff_cell">TextEditorDiffCell</link>[,]&#32;diffMatrix,
+<anchor xml:id="__text_editor_diff_result_8cs_source_1l00283"/>00283 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordtype">int</emphasis>&#32;inIndex,
+<anchor xml:id="__text_editor_diff_result_8cs_source_1l00284"/>00284 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordtype">int</emphasis>&#32;outIndex)
+<anchor xml:id="__text_editor_diff_result_8cs_source_1l00285"/>00285 &#32;&#32;&#32;&#32;{
+<anchor xml:id="__text_editor_diff_result_8cs_source_1l00286"/>00286 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;var&#32;largestWeight&#32;=&#32;0;
+<anchor xml:id="__text_editor_diff_result_8cs_source_1l00287"/>00287 
+<anchor xml:id="__text_editor_diff_result_8cs_source_1l00288"/>00288 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">for</emphasis>&#32;(<emphasis role="keywordtype">int</emphasis>&#32;rowI&#32;=&#32;0;&#32;rowI&#32;&lt;&#32;inIndex;&#32;rowI++)
+<anchor xml:id="__text_editor_diff_result_8cs_source_1l00289"/>00289 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;{
+<anchor xml:id="__text_editor_diff_result_8cs_source_1l00290"/>00290 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">for</emphasis>&#32;(<emphasis role="keywordtype">int</emphasis>&#32;columnI&#32;=&#32;0;&#32;columnI&#32;&lt;&#32;outIndex;&#32;columnI++)
+<anchor xml:id="__text_editor_diff_result_8cs_source_1l00291"/>00291 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;{
+<anchor xml:id="__text_editor_diff_result_8cs_source_1l00292"/>00292 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;var&#32;currentWeight&#32;=&#32;diffMatrix[rowI,&#32;columnI].Weight;
+<anchor xml:id="__text_editor_diff_result_8cs_source_1l00293"/>00293 
+<anchor xml:id="__text_editor_diff_result_8cs_source_1l00294"/>00294 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">if</emphasis>&#32;(currentWeight&#32;&gt;&#32;largestWeight)
+<anchor xml:id="__text_editor_diff_result_8cs_source_1l00295"/>00295 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;largestWeight&#32;=&#32;currentWeight;
+<anchor xml:id="__text_editor_diff_result_8cs_source_1l00296"/>00296 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;}
+<anchor xml:id="__text_editor_diff_result_8cs_source_1l00297"/>00297 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;}
+<anchor xml:id="__text_editor_diff_result_8cs_source_1l00298"/>00298 
+<anchor xml:id="__text_editor_diff_result_8cs_source_1l00299"/>00299 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;largestWeight;
+<anchor xml:id="__text_editor_diff_result_8cs_source_1l00300"/>00300 &#32;&#32;&#32;&#32;}
+<anchor xml:id="__text_editor_diff_result_8cs_source_1l00301"/>00301 
+<anchor xml:id="__text_editor_diff_result_8cs_source_1l00302"/>00302 &#32;&#32;&#32;&#32;<emphasis role="keyword">private</emphasis>&#32;<emphasis role="keyword">static</emphasis>&#32;List&lt;TextEditorTextSpan&gt;&#32;GetTextSpans(
+<anchor xml:id="__text_editor_diff_result_8cs_source_1l00303"/>00303 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_lexers_1_1_models_1a26a1b63ad28ec7955b30bc6c91571eca">ResourceUri</link>&#32;resourceUri,
+<anchor xml:id="__text_editor_diff_result_8cs_source_1l00304"/>00304 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordtype">string</emphasis>&#32;sourceText,
+<anchor xml:id="__text_editor_diff_result_8cs_source_1l00305"/>00305 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;HashSet&lt;int&gt;&#32;positionIndicesHashSet,
+<anchor xml:id="__text_editor_diff_result_8cs_source_1l00306"/>00306 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordtype">byte</emphasis>&#32;decorationByte)
+<anchor xml:id="__text_editor_diff_result_8cs_source_1l00307"/>00307 &#32;&#32;&#32;&#32;{
+<anchor xml:id="__text_editor_diff_result_8cs_source_1l00308"/>00308 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;var&#32;matchTextSpans&#32;=&#32;<emphasis role="keyword">new</emphasis>&#32;List&lt;TextEditorTextSpan&gt;();
+<anchor xml:id="__text_editor_diff_result_8cs_source_1l00309"/>00309 
+<anchor xml:id="__text_editor_diff_result_8cs_source_1l00310"/>00310 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">if</emphasis>&#32;(!positionIndicesHashSet.Any())
+<anchor xml:id="__text_editor_diff_result_8cs_source_1l00311"/>00311 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;matchTextSpans;
+<anchor xml:id="__text_editor_diff_result_8cs_source_1l00312"/>00312 
+<anchor xml:id="__text_editor_diff_result_8cs_source_1l00313"/>00313 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;var&#32;sortedPositionIndicesThatMatch&#32;=&#32;positionIndicesHashSet
+<anchor xml:id="__text_editor_diff_result_8cs_source_1l00314"/>00314 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;.OrderBy(x&#32;=&gt;&#32;x)
+<anchor xml:id="__text_editor_diff_result_8cs_source_1l00315"/>00315 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;.ToList();
+<anchor xml:id="__text_editor_diff_result_8cs_source_1l00316"/>00316 
+<anchor xml:id="__text_editor_diff_result_8cs_source_1l00317"/>00317 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;The&#32;foreach&#32;loop&#32;coalesces&#32;contiguous&#32;indices&#32;into&#32;a&#32;single&#32;TextEditorTextSpan</emphasis>
+<anchor xml:id="__text_editor_diff_result_8cs_source_1l00318"/>00318 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;and&#32;the&#32;logic&#32;that&#32;does&#32;the&#32;coalescing&#32;will&#32;not&#32;write&#32;out&#32;the&#32;final&#32;index&#32;without&#32;this.</emphasis>
+<anchor xml:id="__text_editor_diff_result_8cs_source_1l00319"/>00319 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;sortedPositionIndicesThatMatch.Add(<emphasis role="keywordtype">int</emphasis>.MaxValue);
+<anchor xml:id="__text_editor_diff_result_8cs_source_1l00320"/>00320 
+<anchor xml:id="__text_editor_diff_result_8cs_source_1l00321"/>00321 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;var&#32;startingIndexInclusive&#32;=&#32;sortedPositionIndicesThatMatch.First();
+<anchor xml:id="__text_editor_diff_result_8cs_source_1l00322"/>00322 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;var&#32;endingIndexExclusive&#32;=&#32;startingIndexInclusive&#32;+&#32;1;
+<anchor xml:id="__text_editor_diff_result_8cs_source_1l00323"/>00323 
+<anchor xml:id="__text_editor_diff_result_8cs_source_1l00324"/>00324 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;var&#32;skipFirstIndex&#32;=&#32;sortedPositionIndicesThatMatch
+<anchor xml:id="__text_editor_diff_result_8cs_source_1l00325"/>00325 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;.Skip(1)
+<anchor xml:id="__text_editor_diff_result_8cs_source_1l00326"/>00326 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;.ToArray();
+<anchor xml:id="__text_editor_diff_result_8cs_source_1l00327"/>00327 
+<anchor xml:id="__text_editor_diff_result_8cs_source_1l00328"/>00328 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">foreach</emphasis>&#32;(var&#32;index&#32;<emphasis role="keywordflow">in</emphasis>&#32;skipFirstIndex)
+<anchor xml:id="__text_editor_diff_result_8cs_source_1l00329"/>00329 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;{
+<anchor xml:id="__text_editor_diff_result_8cs_source_1l00330"/>00330 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">if</emphasis>&#32;(index&#32;==&#32;endingIndexExclusive)
+<anchor xml:id="__text_editor_diff_result_8cs_source_1l00331"/>00331 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;{
+<anchor xml:id="__text_editor_diff_result_8cs_source_1l00332"/>00332 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;endingIndexExclusive++;
+<anchor xml:id="__text_editor_diff_result_8cs_source_1l00333"/>00333 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;}
+<anchor xml:id="__text_editor_diff_result_8cs_source_1l00334"/>00334 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">else</emphasis>
+<anchor xml:id="__text_editor_diff_result_8cs_source_1l00335"/>00335 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;{
+<anchor xml:id="__text_editor_diff_result_8cs_source_1l00336"/>00336 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;var&#32;textSpan&#32;=&#32;<emphasis role="keyword">new</emphasis>&#32;<link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_lexers_1_1_models_1a1ffd1a7706dfd364560b76d47467812f">TextEditorTextSpan</link>(
+<anchor xml:id="__text_editor_diff_result_8cs_source_1l00337"/>00337 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;startingIndexInclusive,
+<anchor xml:id="__text_editor_diff_result_8cs_source_1l00338"/>00338 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;endingIndexExclusive,
+<anchor xml:id="__text_editor_diff_result_8cs_source_1l00339"/>00339 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;decorationByte,
+<anchor xml:id="__text_editor_diff_result_8cs_source_1l00340"/>00340 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;resourceUri,
+<anchor xml:id="__text_editor_diff_result_8cs_source_1l00341"/>00341 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;sourceText);
+<anchor xml:id="__text_editor_diff_result_8cs_source_1l00342"/>00342 
+<anchor xml:id="__text_editor_diff_result_8cs_source_1l00343"/>00343 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;matchTextSpans.Add(textSpan);
+<anchor xml:id="__text_editor_diff_result_8cs_source_1l00344"/>00344 
+<anchor xml:id="__text_editor_diff_result_8cs_source_1l00345"/>00345 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;startingIndexInclusive&#32;=&#32;index;
+<anchor xml:id="__text_editor_diff_result_8cs_source_1l00346"/>00346 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;endingIndexExclusive&#32;=&#32;index&#32;+&#32;1;
+<anchor xml:id="__text_editor_diff_result_8cs_source_1l00347"/>00347 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;}
+<anchor xml:id="__text_editor_diff_result_8cs_source_1l00348"/>00348 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;}
+<anchor xml:id="__text_editor_diff_result_8cs_source_1l00349"/>00349 
+<anchor xml:id="__text_editor_diff_result_8cs_source_1l00350"/>00350 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;matchTextSpans;
+<anchor xml:id="__text_editor_diff_result_8cs_source_1l00351"/>00351 &#32;&#32;&#32;&#32;}
+<anchor xml:id="__text_editor_diff_result_8cs_source_1l00352"/>00352 }
+</programlisting></section>

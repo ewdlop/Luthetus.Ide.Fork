@@ -1,0 +1,4 @@
+var _generic_decoration_mapper_8cs =
+[
+    [ "Luthetus.TextEditor.RazorLib.CompilerServices.GenericLexer.Decoration.GenericDecorationMapper", "class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_generic_lexer_1_1_decorat78ccafb1ce12678be58e76a7e584cb2d.html", "class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_generic_lexer_1_1_decorat78ccafb1ce12678be58e76a7e584cb2d" ]
+];

@@ -1,0 +1,133 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="__tree_view_enumerable_8cs_source" xml:lang="en-US">
+<title>TreeViewEnumerable.cs</title>
+<indexterm><primary>Source/Lib/Common/WatchWindows/Models/TreeViewEnumerable.cs</primary></indexterm>
+Go to the documentation of this file.<programlisting linenumbering="unnumbered"><anchor xml:id="__tree_view_enumerable_8cs_source_1l00001"/>00001 <emphasis role="keyword">using&#32;</emphasis>System.Collections;
+<anchor xml:id="__tree_view_enumerable_8cs_source_1l00002"/>00002 <emphasis role="keyword">using&#32;</emphasis><link linkend="_namespace_luthetus_1_1_common_1_1_razor_lib_1_1_component_renderers_1_1_models">Luthetus.Common.RazorLib.ComponentRenderers.Models</link>;
+<anchor xml:id="__tree_view_enumerable_8cs_source_1l00003"/>00003 <emphasis role="keyword">using&#32;</emphasis><link linkend="_namespace_luthetus_1_1_common_1_1_razor_lib_1_1_exceptions">Luthetus.Common.RazorLib.Exceptions</link>;
+<anchor xml:id="__tree_view_enumerable_8cs_source_1l00004"/>00004 <emphasis role="keyword">using&#32;</emphasis><link linkend="_namespace_luthetus_1_1_common_1_1_razor_lib_1_1_tree_views_1_1_models">Luthetus.Common.RazorLib.TreeViews.Models</link>;
+<anchor xml:id="__tree_view_enumerable_8cs_source_1l00005"/>00005 
+<anchor xml:id="__tree_view_enumerable_8cs_source_1l00006"/><link linkend="_namespace_luthetus_1_1_common_1_1_razor_lib_1_1_watch_windows_1_1_models">00006</link> <emphasis role="keyword">namespace&#32;</emphasis><link linkend="_namespace_luthetus_1_1_common_1_1_razor_lib_1_1_watch_windows_1_1_models">Luthetus.Common.RazorLib.WatchWindows.Models</link>;
+<anchor xml:id="__tree_view_enumerable_8cs_source_1l00007"/>00007 
+<anchor xml:id="__tree_view_enumerable_8cs_source_1l00008"/><link linkend="_class_luthetus_1_1_common_1_1_razor_lib_1_1_watch_windows_1_1_models_1_1_tree_view_enumerable">00008</link> <emphasis role="keyword">public</emphasis>&#32;<emphasis role="keyword">class&#32;</emphasis><link linkend="_class_luthetus_1_1_common_1_1_razor_lib_1_1_watch_windows_1_1_models_1_1_tree_view_enumerable_1a7df8215579b5d6029610f28f6a2891e7">TreeViewEnumerable</link>&#32;:&#32;<link linkend="_class_luthetus_1_1_common_1_1_razor_lib_1_1_tree_views_1_1_models_1_1_tree_view_with_type-1-g_1ab51ea55f956ad3ea44708a1984b1e0de">TreeViewWithType</link>&lt;WatchWindowObject&gt;
+<anchor xml:id="__tree_view_enumerable_8cs_source_1l00009"/>00009 {
+<anchor xml:id="__tree_view_enumerable_8cs_source_1l00010"/>00010 &#32;&#32;&#32;&#32;<emphasis role="keyword">private</emphasis>&#32;readonly&#32;<link linkend="_interface_luthetus_1_1_common_1_1_razor_lib_1_1_component_renderers_1_1_models_1_1_i_common_component_renderers">ICommonComponentRenderers</link>&#32;_commonComponentRenderers;
+<anchor xml:id="__tree_view_enumerable_8cs_source_1l00011"/>00011 
+<anchor xml:id="__tree_view_enumerable_8cs_source_1l00012"/><link linkend="_class_luthetus_1_1_common_1_1_razor_lib_1_1_watch_windows_1_1_models_1_1_tree_view_enumerable_1a7df8215579b5d6029610f28f6a2891e7">00012</link> &#32;&#32;&#32;&#32;<emphasis role="keyword">public</emphasis>&#32;<link linkend="_class_luthetus_1_1_common_1_1_razor_lib_1_1_watch_windows_1_1_models_1_1_tree_view_enumerable_1a7df8215579b5d6029610f28f6a2891e7">TreeViewEnumerable</link>(
+<anchor xml:id="__tree_view_enumerable_8cs_source_1l00013"/>00013 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<link linkend="_class_luthetus_1_1_common_1_1_razor_lib_1_1_watch_windows_1_1_models_1_1_watch_window_object">WatchWindowObject</link>&#32;watchWindowObject,
+<anchor xml:id="__tree_view_enumerable_8cs_source_1l00014"/>00014 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordtype">bool</emphasis>&#32;isExpandable,
+<anchor xml:id="__tree_view_enumerable_8cs_source_1l00015"/>00015 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordtype">bool</emphasis>&#32;isExpanded,
+<anchor xml:id="__tree_view_enumerable_8cs_source_1l00016"/>00016 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<link linkend="_interface_luthetus_1_1_common_1_1_razor_lib_1_1_component_renderers_1_1_models_1_1_i_common_component_renderers">ICommonComponentRenderers</link>&#32;commonComponentRenderers)
+<anchor xml:id="__tree_view_enumerable_8cs_source_1l00017"/>00017 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;:&#32;base(watchWindowObject,&#32;isExpandable,&#32;isExpanded)
+<anchor xml:id="__tree_view_enumerable_8cs_source_1l00018"/>00018 &#32;&#32;&#32;&#32;{
+<anchor xml:id="__tree_view_enumerable_8cs_source_1l00019"/>00019 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;_commonComponentRenderers&#32;=&#32;commonComponentRenderers;
+<anchor xml:id="__tree_view_enumerable_8cs_source_1l00020"/>00020 &#32;&#32;&#32;&#32;}
+<anchor xml:id="__tree_view_enumerable_8cs_source_1l00021"/>00021 
+<anchor xml:id="__tree_view_enumerable_8cs_source_1l00022"/><link linkend="_class_luthetus_1_1_common_1_1_razor_lib_1_1_watch_windows_1_1_models_1_1_tree_view_enumerable_1aeb89e1f0d171ff018cb6b5adb77fe39c">00022</link> &#32;&#32;&#32;&#32;<emphasis role="keyword">public</emphasis>&#32;<emphasis role="keyword">override</emphasis>&#32;<emphasis role="keywordtype">bool</emphasis>&#32;<link linkend="_class_luthetus_1_1_common_1_1_razor_lib_1_1_watch_windows_1_1_models_1_1_tree_view_enumerable_1aeb89e1f0d171ff018cb6b5adb77fe39c">Equals</link>(<emphasis role="keywordtype">object</emphasis>?&#32;obj)
+<anchor xml:id="__tree_view_enumerable_8cs_source_1l00023"/>00023 &#32;&#32;&#32;&#32;{
+<anchor xml:id="__tree_view_enumerable_8cs_source_1l00024"/>00024 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">if</emphasis>&#32;(obj&#32;is&#32;not&#32;<link linkend="_class_luthetus_1_1_common_1_1_razor_lib_1_1_watch_windows_1_1_models_1_1_tree_view_enumerable_1a7df8215579b5d6029610f28f6a2891e7">TreeViewEnumerable</link>&#32;treeViewEnumerable)
+<anchor xml:id="__tree_view_enumerable_8cs_source_1l00025"/>00025 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;<emphasis role="keyword">false</emphasis>;
+<anchor xml:id="__tree_view_enumerable_8cs_source_1l00026"/>00026 
+<anchor xml:id="__tree_view_enumerable_8cs_source_1l00027"/>00027 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;treeViewEnumerable.Item&#32;==&#32;<link linkend="_class_luthetus_1_1_common_1_1_razor_lib_1_1_tree_views_1_1_models_1_1_tree_view_with_type-1-g_1a4f46d99a34756894b183f9ce601825bc">Item</link>;
+<anchor xml:id="__tree_view_enumerable_8cs_source_1l00028"/>00028 &#32;&#32;&#32;&#32;}
+<anchor xml:id="__tree_view_enumerable_8cs_source_1l00029"/>00029 
+<anchor xml:id="__tree_view_enumerable_8cs_source_1l00030"/><link linkend="_class_luthetus_1_1_common_1_1_razor_lib_1_1_watch_windows_1_1_models_1_1_tree_view_enumerable_1ab9b052b59df9acec556a5febe105530b">00030</link> &#32;&#32;&#32;&#32;<emphasis role="keyword">public</emphasis>&#32;<emphasis role="keyword">override</emphasis>&#32;<emphasis role="keywordtype">int</emphasis>&#32;<link linkend="_class_luthetus_1_1_common_1_1_razor_lib_1_1_watch_windows_1_1_models_1_1_tree_view_enumerable_1ab9b052b59df9acec556a5febe105530b">GetHashCode</link>()
+<anchor xml:id="__tree_view_enumerable_8cs_source_1l00031"/>00031 &#32;&#32;&#32;&#32;{
+<anchor xml:id="__tree_view_enumerable_8cs_source_1l00032"/>00032 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;<link linkend="_class_luthetus_1_1_common_1_1_razor_lib_1_1_tree_views_1_1_models_1_1_tree_view_with_type-1-g_1a4f46d99a34756894b183f9ce601825bc">Item</link>.GetHashCode();
+<anchor xml:id="__tree_view_enumerable_8cs_source_1l00033"/>00033 &#32;&#32;&#32;&#32;}
+<anchor xml:id="__tree_view_enumerable_8cs_source_1l00034"/>00034 
+<anchor xml:id="__tree_view_enumerable_8cs_source_1l00035"/><link linkend="_class_luthetus_1_1_common_1_1_razor_lib_1_1_watch_windows_1_1_models_1_1_tree_view_enumerable_1a9a77177f2e6cdd3984a5c1071c71dc6d">00035</link> &#32;&#32;&#32;&#32;<emphasis role="keyword">public</emphasis>&#32;<emphasis role="keyword">override</emphasis>&#32;<link linkend="_namespace_luthetus_1_1_common_1_1_razor_lib_1_1_tree_views_1_1_models_1a175eb1286540198880f85c140703f486">TreeViewRenderer</link>&#32;<link linkend="_class_luthetus_1_1_common_1_1_razor_lib_1_1_watch_windows_1_1_models_1_1_tree_view_enumerable_1a9a77177f2e6cdd3984a5c1071c71dc6d">GetTreeViewRenderer</link>()
+<anchor xml:id="__tree_view_enumerable_8cs_source_1l00036"/>00036 &#32;&#32;&#32;&#32;{
+<anchor xml:id="__tree_view_enumerable_8cs_source_1l00037"/>00037 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;<emphasis role="keyword">new</emphasis>&#32;<link linkend="_namespace_luthetus_1_1_common_1_1_razor_lib_1_1_tree_views_1_1_models_1a175eb1286540198880f85c140703f486">TreeViewRenderer</link>(
+<anchor xml:id="__tree_view_enumerable_8cs_source_1l00038"/>00038 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;_commonComponentRenderers.CommonTreeViews.TreeViewEnumerableRenderer,
+<anchor xml:id="__tree_view_enumerable_8cs_source_1l00039"/>00039 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keyword">new</emphasis>&#32;Dictionary&lt;string,&#32;object?&gt;
+<anchor xml:id="__tree_view_enumerable_8cs_source_1l00040"/>00040 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;{
+<anchor xml:id="__tree_view_enumerable_8cs_source_1l00041"/>00041 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;{
+<anchor xml:id="__tree_view_enumerable_8cs_source_1l00042"/>00042 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;nameof(TreeViewEnumerable),
+<anchor xml:id="__tree_view_enumerable_8cs_source_1l00043"/>00043 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;this
+<anchor xml:id="__tree_view_enumerable_8cs_source_1l00044"/>00044 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;},
+<anchor xml:id="__tree_view_enumerable_8cs_source_1l00045"/>00045 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;});
+<anchor xml:id="__tree_view_enumerable_8cs_source_1l00046"/>00046 &#32;&#32;&#32;&#32;}
+<anchor xml:id="__tree_view_enumerable_8cs_source_1l00047"/>00047 
+<anchor xml:id="__tree_view_enumerable_8cs_source_1l00048"/><link linkend="_class_luthetus_1_1_common_1_1_razor_lib_1_1_watch_windows_1_1_models_1_1_tree_view_enumerable_1a23f387361d382e17b2cb95fb974ce2ac">00048</link> &#32;&#32;&#32;&#32;<emphasis role="keyword">public</emphasis>&#32;<emphasis role="keyword">override</emphasis>&#32;Task&#32;<link linkend="_class_luthetus_1_1_common_1_1_razor_lib_1_1_watch_windows_1_1_models_1_1_tree_view_enumerable_1a23f387361d382e17b2cb95fb974ce2ac">LoadChildListAsync</link>()
+<anchor xml:id="__tree_view_enumerable_8cs_source_1l00049"/>00049 &#32;&#32;&#32;&#32;{
+<anchor xml:id="__tree_view_enumerable_8cs_source_1l00050"/>00050 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;var&#32;previousChildren&#32;=&#32;<emphasis role="keyword">new</emphasis>&#32;List&lt;TreeViewNoType&gt;(<link linkend="_class_luthetus_1_1_common_1_1_razor_lib_1_1_tree_views_1_1_models_1_1_tree_view_no_type_1a8b306a73a4bbf27fc2475e3deec43a89">ChildList</link>);
+<anchor xml:id="__tree_view_enumerable_8cs_source_1l00051"/>00051 
+<anchor xml:id="__tree_view_enumerable_8cs_source_1l00052"/>00052 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">try</emphasis>
+<anchor xml:id="__tree_view_enumerable_8cs_source_1l00053"/>00053 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;{
+<anchor xml:id="__tree_view_enumerable_8cs_source_1l00054"/>00054 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<link linkend="_class_luthetus_1_1_common_1_1_razor_lib_1_1_tree_views_1_1_models_1_1_tree_view_no_type_1a8b306a73a4bbf27fc2475e3deec43a89">ChildList</link>.Clear();
+<anchor xml:id="__tree_view_enumerable_8cs_source_1l00055"/>00055 
+<anchor xml:id="__tree_view_enumerable_8cs_source_1l00056"/>00056 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">if</emphasis>&#32;(<link linkend="_class_luthetus_1_1_common_1_1_razor_lib_1_1_tree_views_1_1_models_1_1_tree_view_with_type-1-g_1a4f46d99a34756894b183f9ce601825bc">Item</link>.Item&#32;is&#32;IEnumerable&#32;enumerable)
+<anchor xml:id="__tree_view_enumerable_8cs_source_1l00057"/>00057 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;{
+<anchor xml:id="__tree_view_enumerable_8cs_source_1l00058"/>00058 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;var&#32;enumerator&#32;=&#32;enumerable.GetEnumerator();
+<anchor xml:id="__tree_view_enumerable_8cs_source_1l00059"/>00059 
+<anchor xml:id="__tree_view_enumerable_8cs_source_1l00060"/>00060 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;var&#32;genericArgument&#32;=&#32;GetGenericArgument(<link linkend="_class_luthetus_1_1_common_1_1_razor_lib_1_1_tree_views_1_1_models_1_1_tree_view_with_type-1-g_1a4f46d99a34756894b183f9ce601825bc">Item</link>.Item.GetType());
+<anchor xml:id="__tree_view_enumerable_8cs_source_1l00061"/>00061 
+<anchor xml:id="__tree_view_enumerable_8cs_source_1l00062"/>00062 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">while</emphasis>&#32;(enumerator.MoveNext())
+<anchor xml:id="__tree_view_enumerable_8cs_source_1l00063"/>00063 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;{
+<anchor xml:id="__tree_view_enumerable_8cs_source_1l00064"/>00064 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;var&#32;entry&#32;=&#32;enumerator.Current;
+<anchor xml:id="__tree_view_enumerable_8cs_source_1l00065"/>00065 
+<anchor xml:id="__tree_view_enumerable_8cs_source_1l00066"/>00066 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;var&#32;childNode&#32;=&#32;<emphasis role="keyword">new</emphasis>&#32;<link linkend="_class_luthetus_1_1_common_1_1_razor_lib_1_1_watch_windows_1_1_models_1_1_watch_window_object">WatchWindowObject</link>(
+<anchor xml:id="__tree_view_enumerable_8cs_source_1l00067"/>00067 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;entry,
+<anchor xml:id="__tree_view_enumerable_8cs_source_1l00068"/>00068 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;genericArgument,
+<anchor xml:id="__tree_view_enumerable_8cs_source_1l00069"/>00069 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;genericArgument.Name,
+<anchor xml:id="__tree_view_enumerable_8cs_source_1l00070"/>00070 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<link linkend="_class_luthetus_1_1_common_1_1_razor_lib_1_1_tree_views_1_1_models_1_1_tree_view_with_type-1-g_1a4f46d99a34756894b183f9ce601825bc">Item</link>.IsPubliclyReadable);
+<anchor xml:id="__tree_view_enumerable_8cs_source_1l00071"/>00071 
+<anchor xml:id="__tree_view_enumerable_8cs_source_1l00072"/>00072 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<link linkend="_class_luthetus_1_1_common_1_1_razor_lib_1_1_tree_views_1_1_models_1_1_tree_view_no_type_1a8b306a73a4bbf27fc2475e3deec43a89">ChildList</link>.Add(<emphasis role="keyword">new</emphasis>&#32;<link linkend="_class_luthetus_1_1_common_1_1_razor_lib_1_1_watch_windows_1_1_models_1_1_tree_view_reflection">TreeViewReflection</link>(
+<anchor xml:id="__tree_view_enumerable_8cs_source_1l00073"/>00073 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;childNode,
+<anchor xml:id="__tree_view_enumerable_8cs_source_1l00074"/>00074 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keyword">true</emphasis>,
+<anchor xml:id="__tree_view_enumerable_8cs_source_1l00075"/>00075 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keyword">false</emphasis>,
+<anchor xml:id="__tree_view_enumerable_8cs_source_1l00076"/>00076 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;_commonComponentRenderers));
+<anchor xml:id="__tree_view_enumerable_8cs_source_1l00077"/>00077 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;}
+<anchor xml:id="__tree_view_enumerable_8cs_source_1l00078"/>00078 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;}
+<anchor xml:id="__tree_view_enumerable_8cs_source_1l00079"/>00079 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">else</emphasis>
+<anchor xml:id="__tree_view_enumerable_8cs_source_1l00080"/>00080 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;{
+<anchor xml:id="__tree_view_enumerable_8cs_source_1l00081"/>00081 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">throw</emphasis>&#32;<emphasis role="keyword">new</emphasis>&#32;<link linkend="_class_luthetus_1_1_common_1_1_razor_lib_1_1_exceptions_1_1_luthetus_common_exception">LuthetusCommonException</link>($<emphasis role="stringliteral">&quot;Unexpected&#32;failed&#32;cast&#32;to&#32;the&#32;Type&#32;{nameof(IEnumerable)}.&#32;{nameof(TreeViewEnumerable)}&#32;are&#32;to&#32;have&#32;a&#32;{nameof(Item.Item)}&#32;which&#32;is&#32;castable&#32;as&#32;{nameof(IEnumerable)}&quot;</emphasis>);
+<anchor xml:id="__tree_view_enumerable_8cs_source_1l00082"/>00082 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;}
+<anchor xml:id="__tree_view_enumerable_8cs_source_1l00083"/>00083 
+<anchor xml:id="__tree_view_enumerable_8cs_source_1l00084"/>00084 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">if</emphasis>&#32;(<link linkend="_class_luthetus_1_1_common_1_1_razor_lib_1_1_tree_views_1_1_models_1_1_tree_view_no_type_1a8b306a73a4bbf27fc2475e3deec43a89">ChildList</link>.Count&#32;==&#32;0)
+<anchor xml:id="__tree_view_enumerable_8cs_source_1l00085"/>00085 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;{
+<anchor xml:id="__tree_view_enumerable_8cs_source_1l00086"/>00086 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<link linkend="_class_luthetus_1_1_common_1_1_razor_lib_1_1_tree_views_1_1_models_1_1_tree_view_no_type_1a8b306a73a4bbf27fc2475e3deec43a89">ChildList</link>.Add(<emphasis role="keyword">new</emphasis>&#32;<link linkend="_class_luthetus_1_1_common_1_1_razor_lib_1_1_watch_windows_1_1_models_1_1_tree_view_text">TreeViewText</link>(
+<anchor xml:id="__tree_view_enumerable_8cs_source_1l00087"/>00087 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="stringliteral">&quot;Enumeration&#32;returned&#32;no&#32;results.&quot;</emphasis>,
+<anchor xml:id="__tree_view_enumerable_8cs_source_1l00088"/>00088 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keyword">false</emphasis>,
+<anchor xml:id="__tree_view_enumerable_8cs_source_1l00089"/>00089 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keyword">false</emphasis>,
+<anchor xml:id="__tree_view_enumerable_8cs_source_1l00090"/>00090 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;_commonComponentRenderers));
+<anchor xml:id="__tree_view_enumerable_8cs_source_1l00091"/>00091 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;}
+<anchor xml:id="__tree_view_enumerable_8cs_source_1l00092"/>00092 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;}
+<anchor xml:id="__tree_view_enumerable_8cs_source_1l00093"/>00093 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">catch</emphasis>&#32;(Exception&#32;e)
+<anchor xml:id="__tree_view_enumerable_8cs_source_1l00094"/>00094 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;{
+<anchor xml:id="__tree_view_enumerable_8cs_source_1l00095"/>00095 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<link linkend="_class_luthetus_1_1_common_1_1_razor_lib_1_1_tree_views_1_1_models_1_1_tree_view_no_type_1a8b306a73a4bbf27fc2475e3deec43a89">ChildList</link>.Clear();
+<anchor xml:id="__tree_view_enumerable_8cs_source_1l00096"/>00096 
+<anchor xml:id="__tree_view_enumerable_8cs_source_1l00097"/>00097 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<link linkend="_class_luthetus_1_1_common_1_1_razor_lib_1_1_tree_views_1_1_models_1_1_tree_view_no_type_1a8b306a73a4bbf27fc2475e3deec43a89">ChildList</link>.Add(<emphasis role="keyword">new</emphasis>&#32;<link linkend="_class_luthetus_1_1_common_1_1_razor_lib_1_1_watch_windows_1_1_models_1_1_tree_view_exception">TreeViewException</link>(
+<anchor xml:id="__tree_view_enumerable_8cs_source_1l00098"/>00098 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;e,
+<anchor xml:id="__tree_view_enumerable_8cs_source_1l00099"/>00099 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keyword">false</emphasis>,
+<anchor xml:id="__tree_view_enumerable_8cs_source_1l00100"/>00100 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keyword">false</emphasis>,
+<anchor xml:id="__tree_view_enumerable_8cs_source_1l00101"/>00101 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;_commonComponentRenderers));
+<anchor xml:id="__tree_view_enumerable_8cs_source_1l00102"/>00102 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;}
+<anchor xml:id="__tree_view_enumerable_8cs_source_1l00103"/>00103 
+<anchor xml:id="__tree_view_enumerable_8cs_source_1l00104"/>00104 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<link linkend="_class_luthetus_1_1_common_1_1_razor_lib_1_1_tree_views_1_1_models_1_1_tree_view_no_type_1a569ce774e5b109ccf8425149b18b3e02">LinkChildren</link>(previousChildren,&#32;<link linkend="_class_luthetus_1_1_common_1_1_razor_lib_1_1_tree_views_1_1_models_1_1_tree_view_no_type_1a8b306a73a4bbf27fc2475e3deec43a89">ChildList</link>);
+<anchor xml:id="__tree_view_enumerable_8cs_source_1l00105"/>00105 
+<anchor xml:id="__tree_view_enumerable_8cs_source_1l00106"/>00106 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;Task.CompletedTask;
+<anchor xml:id="__tree_view_enumerable_8cs_source_1l00107"/>00107 &#32;&#32;&#32;&#32;}
+<anchor xml:id="__tree_view_enumerable_8cs_source_1l00108"/>00108 
+<anchor xml:id="__tree_view_enumerable_8cs_source_1l00109"/>00109 &#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;https://stackoverflow.com/questions/906499/getting-type-t-from-ienumerablet</emphasis>
+<anchor xml:id="__tree_view_enumerable_8cs_source_1l00110"/>00110 &#32;&#32;&#32;&#32;<emphasis role="keyword">private</emphasis>&#32;<emphasis role="keyword">static</emphasis>&#32;Type&#32;GetGenericArgument(Type&#32;type)
+<anchor xml:id="__tree_view_enumerable_8cs_source_1l00111"/>00111 &#32;&#32;&#32;&#32;{
+<anchor xml:id="__tree_view_enumerable_8cs_source_1l00112"/>00112 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;Type&#32;is&#32;Array</emphasis>
+<anchor xml:id="__tree_view_enumerable_8cs_source_1l00113"/>00113 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;short-circuit&#32;if&#32;you&#32;expect&#32;lots&#32;of&#32;arrays&#32;</emphasis>
+<anchor xml:id="__tree_view_enumerable_8cs_source_1l00114"/>00114 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">if</emphasis>&#32;(type.IsArray)
+<anchor xml:id="__tree_view_enumerable_8cs_source_1l00115"/>00115 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;type.GetElementType()!;
+<anchor xml:id="__tree_view_enumerable_8cs_source_1l00116"/>00116 
+<anchor xml:id="__tree_view_enumerable_8cs_source_1l00117"/>00117 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;type&#32;is&#32;IEnumerable&lt;T&gt;;</emphasis>
+<anchor xml:id="__tree_view_enumerable_8cs_source_1l00118"/>00118 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">if</emphasis>&#32;(type.IsGenericType&#32;&amp;&amp;&#32;type.GetGenericTypeDefinition()&#32;==&#32;typeof(IEnumerable&lt;&gt;))
+<anchor xml:id="__tree_view_enumerable_8cs_source_1l00119"/>00119 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;type.GetGenericArguments()[0];
+<anchor xml:id="__tree_view_enumerable_8cs_source_1l00120"/>00120 
+<anchor xml:id="__tree_view_enumerable_8cs_source_1l00121"/>00121 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;type&#32;implements/extends&#32;IEnumerable&lt;T&gt;;</emphasis>
+<anchor xml:id="__tree_view_enumerable_8cs_source_1l00122"/>00122 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;var&#32;enumType&#32;=&#32;type.GetInterfaces()
+<anchor xml:id="__tree_view_enumerable_8cs_source_1l00123"/>00123 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;.Where(t&#32;=&gt;&#32;t.IsGenericType&#32;&amp;&amp;
+<anchor xml:id="__tree_view_enumerable_8cs_source_1l00124"/>00124 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;t.GetGenericTypeDefinition()&#32;==&#32;typeof(IEnumerable&lt;&gt;))
+<anchor xml:id="__tree_view_enumerable_8cs_source_1l00125"/>00125 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;.Select(t&#32;=&gt;&#32;t.GenericTypeArguments[0]).FirstOrDefault();
+<anchor xml:id="__tree_view_enumerable_8cs_source_1l00126"/>00126 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;enumType&#32;??&#32;type;
+<anchor xml:id="__tree_view_enumerable_8cs_source_1l00127"/>00127 &#32;&#32;&#32;&#32;}
+<anchor xml:id="__tree_view_enumerable_8cs_source_1l00128"/>00128 }
+</programlisting></section>

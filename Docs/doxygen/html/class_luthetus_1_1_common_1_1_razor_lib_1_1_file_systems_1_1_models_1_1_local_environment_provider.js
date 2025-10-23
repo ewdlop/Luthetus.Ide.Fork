@@ -1,0 +1,25 @@
+var class_luthetus_1_1_common_1_1_razor_lib_1_1_file_systems_1_1_models_1_1_local_environment_provider =
+[
+    [ "LocalEnvironmentProvider", "class_luthetus_1_1_common_1_1_razor_lib_1_1_file_systems_1_1_models_1_1_local_environment_provider.html#a3cde585e451a268bf66b96d1c3354c93", null ],
+    [ "AbsolutePathFactory", "class_luthetus_1_1_common_1_1_razor_lib_1_1_file_systems_1_1_models_1_1_local_environment_provider.html#ae385c2025a5c3ea6188bb8f8f2929da8", null ],
+    [ "AssertDeletionPermitted", "class_luthetus_1_1_common_1_1_razor_lib_1_1_file_systems_1_1_models_1_1_local_environment_provider.html#afbe7178f0056c1235f766f880c1ab1f4", null ],
+    [ "DeletionPermittedDispose", "class_luthetus_1_1_common_1_1_razor_lib_1_1_file_systems_1_1_models_1_1_local_environment_provider.html#ac7e9a2cca56e0e3202b1c0ab68970589", null ],
+    [ "DeletionPermittedRegister", "class_luthetus_1_1_common_1_1_razor_lib_1_1_file_systems_1_1_models_1_1_local_environment_provider.html#a386c931501342647dec58a56a9650b6f", null ],
+    [ "GetRandomFileName", "class_luthetus_1_1_common_1_1_razor_lib_1_1_file_systems_1_1_models_1_1_local_environment_provider.html#a1678e370f34f0bc7c977c70eac1e1713", null ],
+    [ "IsDirectorySeparator", "class_luthetus_1_1_common_1_1_razor_lib_1_1_file_systems_1_1_models_1_1_local_environment_provider.html#a53e3a49443fe8021cf057cfa68f176f7", null ],
+    [ "JoinPaths", "class_luthetus_1_1_common_1_1_razor_lib_1_1_file_systems_1_1_models_1_1_local_environment_provider.html#ad66528141510c634fb73a44dceee6a8c", null ],
+    [ "ProtectedPathsDispose", "class_luthetus_1_1_common_1_1_razor_lib_1_1_file_systems_1_1_models_1_1_local_environment_provider.html#a07f2b0abab9e9e691e84bdcd5fae3689", null ],
+    [ "ProtectedPathsRegister", "class_luthetus_1_1_common_1_1_razor_lib_1_1_file_systems_1_1_models_1_1_local_environment_provider.html#a7ece12480be2b3b2755dda1dbe84962b", null ],
+    [ "RelativePathFactory", "class_luthetus_1_1_common_1_1_razor_lib_1_1_file_systems_1_1_models_1_1_local_environment_provider.html#a7a7a11dc13dde319a8a456a1770223f4", null ],
+    [ "ActualLocalApplicationDataDirectoryAbsolutePath", "class_luthetus_1_1_common_1_1_razor_lib_1_1_file_systems_1_1_models_1_1_local_environment_provider.html#afe618085a891d1dd0118654cb85f2986", null ],
+    [ "ActualRoamingApplicationDataDirectoryAbsolutePath", "class_luthetus_1_1_common_1_1_razor_lib_1_1_file_systems_1_1_models_1_1_local_environment_provider.html#a3d69ca4378cc3824b20efb9e2c759d12", null ],
+    [ "AltDirectorySeparatorChar", "class_luthetus_1_1_common_1_1_razor_lib_1_1_file_systems_1_1_models_1_1_local_environment_provider.html#ad62c6a7b737b78b1f0e118018c7e53e7", null ],
+    [ "DeletionPermittedPathList", "class_luthetus_1_1_common_1_1_razor_lib_1_1_file_systems_1_1_models_1_1_local_environment_provider.html#ac6b69758deb7a480f46bfe86666956b4", null ],
+    [ "DirectorySeparatorChar", "class_luthetus_1_1_common_1_1_razor_lib_1_1_file_systems_1_1_models_1_1_local_environment_provider.html#a81f6a68e61a48b88fd909d01e59882b6", null ],
+    [ "DriveExecutingFromNoDirectorySeparator", "class_luthetus_1_1_common_1_1_razor_lib_1_1_file_systems_1_1_models_1_1_local_environment_provider.html#aa1fe650d67d07574cb33869616a374e5", null ],
+    [ "HomeDirectoryAbsolutePath", "class_luthetus_1_1_common_1_1_razor_lib_1_1_file_systems_1_1_models_1_1_local_environment_provider.html#ac3fc9ba6c8d37a24a515dcb4a6e35dea", null ],
+    [ "ProtectedPathList", "class_luthetus_1_1_common_1_1_razor_lib_1_1_file_systems_1_1_models_1_1_local_environment_provider.html#a310b57dcad6399453dbfdb653eef159c", null ],
+    [ "RootDirectoryAbsolutePath", "class_luthetus_1_1_common_1_1_razor_lib_1_1_file_systems_1_1_models_1_1_local_environment_provider.html#a90cfbccdf44f9f978fa7dd837b867e58", null ],
+    [ "SafeLocalApplicationDataDirectoryAbsolutePath", "class_luthetus_1_1_common_1_1_razor_lib_1_1_file_systems_1_1_models_1_1_local_environment_provider.html#a2ddd6686cb0de351e5af23129870f2a7", null ],
+    [ "SafeRoamingApplicationDataDirectoryAbsolutePath", "class_luthetus_1_1_common_1_1_razor_lib_1_1_file_systems_1_1_models_1_1_local_environment_provider.html#a6973e63bba9f38695707cf887d03bdde", null ]
+];

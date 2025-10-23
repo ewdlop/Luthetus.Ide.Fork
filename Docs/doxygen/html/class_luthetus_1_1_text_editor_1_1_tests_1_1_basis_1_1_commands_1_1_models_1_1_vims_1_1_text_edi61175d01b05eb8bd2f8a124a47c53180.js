@@ -1,0 +1,11 @@
+var class_luthetus_1_1_text_editor_1_1_tests_1_1_basis_1_1_commands_1_1_models_1_1_vims_1_1_text_edi61175d01b05eb8bd2f8a124a47c53180 =
+[
+    [ "ChangeLine", "class_luthetus_1_1_text_editor_1_1_tests_1_1_basis_1_1_commands_1_1_models_1_1_vims_1_1_text_edi61175d01b05eb8bd2f8a124a47c53180.html#a4bbe83f0bb20d1889c6dccdb651062a2", null ],
+    [ "ChangeSelection", "class_luthetus_1_1_text_editor_1_1_tests_1_1_basis_1_1_commands_1_1_models_1_1_vims_1_1_text_edi61175d01b05eb8bd2f8a124a47c53180.html#ae1962fa56d6db96152aeb170d99afeb5", null ],
+    [ "DeleteLine", "class_luthetus_1_1_text_editor_1_1_tests_1_1_basis_1_1_commands_1_1_models_1_1_vims_1_1_text_edi61175d01b05eb8bd2f8a124a47c53180.html#ab783f75af1ec5b45b397c0e2205c58fd", null ],
+    [ "GetChangeMotion", "class_luthetus_1_1_text_editor_1_1_tests_1_1_basis_1_1_commands_1_1_models_1_1_vims_1_1_text_edi61175d01b05eb8bd2f8a124a47c53180.html#ae0f5dca4101758740705a57dbf87de02", null ],
+    [ "GetDeleteMotion", "class_luthetus_1_1_text_editor_1_1_tests_1_1_basis_1_1_commands_1_1_models_1_1_vims_1_1_text_edi61175d01b05eb8bd2f8a124a47c53180.html#a90405d1e28858cafec2e0cce6ca2b884", null ],
+    [ "NewLineAbove", "class_luthetus_1_1_text_editor_1_1_tests_1_1_basis_1_1_commands_1_1_models_1_1_vims_1_1_text_edi61175d01b05eb8bd2f8a124a47c53180.html#a327838695fcdd5a06fb057e1e93509ba", null ],
+    [ "NewLineBelow", "class_luthetus_1_1_text_editor_1_1_tests_1_1_basis_1_1_commands_1_1_models_1_1_vims_1_1_text_edi61175d01b05eb8bd2f8a124a47c53180.html#a7e8e7eaecb1fed0c6514651a3bc86e11", null ],
+    [ "Yank", "class_luthetus_1_1_text_editor_1_1_tests_1_1_basis_1_1_commands_1_1_models_1_1_vims_1_1_text_edi61175d01b05eb8bd2f8a124a47c53180.html#acaf419104ee1dd0d39eb41329e52c85b", null ]
+];

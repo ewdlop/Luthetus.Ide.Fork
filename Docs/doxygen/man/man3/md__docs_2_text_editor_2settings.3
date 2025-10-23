@@ -1,0 +1,209 @@
+.TH "md__docs_2_text_editor_2settings" 3 "Version 1.0.0" "Luthetus.Ide" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+md__docs_2_text_editor_2settings \- Blazor\&.Text\&.Editor (Some parts of this are outdated\&. I think this markdown file was made with v5\&.0\&.0 I will update this markdown file to v7\&.0\&.0 when I find time) 
+.PP
+
+.SH "Settings"
+.PP
+.SS "Goal"
+.IP "\(bu" 2
+Render the optional static dialog containing all the settings available for change\&.
+.IP "\(bu" 2
+Render the resizable and moveable version of the settings dialog\&.
+.IP "\(bu" 2
+Render each setting individually where desired\&.
+.IP "\(bu" 2
+Inform about optional automatic local storage integration for settings\&.
+.PP
+.SS "Steps"
+.IP "\(bu" 2
+I will assume you have seen the previous tutorials during this one\&.
+.IP "\(bu" 2
+In Index\&.razor put an HTML button element with your styling of choice\&. I will put mine above where the \fRTextEditorDisplay\fP was put in previous tutorials\&. See the following code snippet\&.
+.PP
+
+.PP
+.PP
+.nf
+<button class="btn btn\-primary">
+    
+</button>
+
+<TextEditorDisplay TextEditorKey="IndexTextEditorKey"/>
+.fi
+.PP
+
+.PP
+.IP "\(bu" 2
+Give the button text of \fR"Text Editor Settings"\fP\&. As well an @onclick which invokes the unimplemented method \fROpenTextEditorSettingsDialog\fP\&. See the following code snippet\&.
+.PP
+
+.PP
+.PP
+.nf
+<button class="btn btn\-primary"
+        @onclick="OpenTextEditorSettingsDialog">
+    Text Editor Settings
+</button>
+
+<TextEditorDisplay TextEditorKey="IndexTextEditorKey"/>
+.fi
+.PP
+
+.PP
+.PP
+.nf
+@code {
+    [Inject]
+    private ITextEditorService TextEditorService { get; set; } = null!;
+    
+    private static readonly TextEditorKey IndexTextEditorKey = 
+        TextEditorKey\&.NewTextEditorKey();
+
+    protected override void OnInitialized()
+    {
+        TextEditorService\&.RegisterCSharpTextEditor(
+            IndexTextEditorKey,
+            string\&.Empty);
+        
+        base\&.OnInitialized();
+    }
+
+    private void OpenTextEditorSettingsDialog()
+    {
+        throw new NotImplementedException();
+    }
+}
+.fi
+.PP
+
+.PP
+.IP "\(bu" 2
+Implement the method \fROpenTextEditorSettingsDialog\fP to contain \fRTextEditorService\&.ShowSettingsDialog();\fP\&. See the following code snippet
+.PP
+
+.PP
+.PP
+.nf
+private void OpenTextEditorSettingsDialog()
+{
+    TextEditorService\&.ShowSettingsDialog();
+}
+.fi
+.PP
+
+.PP
+.IP "\(bu" 2
+Now run the program and click the button\&. You will see the static settings dialog as shown in this gif\&.
+.PP
+
+.PP
+
+.PP
+.IP "\(bu" 2
+Modify the line \fRTextEditorService\&.ShowSettingsDialog();\fP\&. Pass in as an argument \fRtrue\fP for the optional parameter named \fRisResizable\fP\&.
+.IP "\(bu" 2
+Now run the program and click the button\&. You will see the resizable and moveable settings dialog as shown in this gif\&.
+.PP
+
+.PP
+
+.PP
+.IP "\(bu" 2
+Add the following using statement to Index\&.razor if it is not already there\&.
+.PP
+
+.PP
+.PP
+.nf
+@using BlazorTextEditor\&.RazorLib\&.HelperComponents
+.fi
+.PP
+
+.PP
+.IP "\(bu" 2
+Above where the button is to open the settings dialog\&. Render the razor components shown in the following markup\&.
+.PP
+
+.PP
+.PP
+.nf
+<TextEditorInputFontSize/>
+<TextEditorInputShowNewLines/>
+<TextEditorInputShowWhitespace/>
+<TextEditorInputTheme/>
+.fi
+.PP
+
+.PP
+.IP "\(bu" 2
+Now run the program and you will find every settings input from the dialog will be on the page itself\&. \fRYou can place these inputs wherever\fP you'd like as \fReverything is Dependency Injected\fP\&.
+.PP
+
+.PP
+
+.PP
+.IP "\(bu" 2
+The nuget package by default will integrate with JavaScript local storage\&. One can turn this off inorder to reference the NuGet Package from a C# Project which cannot dependency inject the IJSRuntime\&.
+.IP "\(bu" 2
+Add an HTML button element, with styling of your choice, on the Index\&.razor page\&. Give the button text of \fR"Read Local Storage"\fP and an @onclick that invoke the unimplemented method: \fRasync Task ReadLocalStorage()\fP see the following code snippets\&.
+.PP
+
+.PP
+.PP
+.nf
+<button class="btn btn\-primary"
+        @onclick="ReadLocalStorage">
+    Read Local Storage
+</button>
+.fi
+.PP
+
+.PP
+.PP
+.nf
+private async Task ReadLocalStorage()
+{
+    
+}
+.fi
+.PP
+
+.PP
+.IP "\(bu" 2
+Implement \fRReadLocalStorage()\fP to \fRawait TextEditorService\&.SetTextEditorOptionsFromLocalStorageAsync();\fP\&. See the following code snippet\&.
+.PP
+
+.PP
+.PP
+.nf
+private async Task ReadLocalStorage()
+{
+    await TextEditorService\&.SetTextEditorOptionsFromLocalStorageAsync();
+}
+.fi
+.PP
+
+.PP
+.IP "\(bu" 2
+Run the application and then modify your settings\&. I will set my theme to the light theme\&.
+.IP "\(bu" 2
+Afterwards reload the webpage, but do not clear your cache\&. Once the webpage loads proceed to click the \fRRead Local Storage\fP button\&. Your theme should change to the light theme as the default was dark theme and your local storage had light theme stored\&.
+.IP "\(bu" 2
+As of v5\&.0\&.0 of this NugetPackage the following are stored in local storage @onchange
+.IP "\(bu" 2
+local storage: int? FontSizeInPixels
+.IP "\(bu" 2
+local storage: Theme? Theme
+.IP "\(bu" 2
+local storage: bool? ShowWhitespace
+.IP "\(bu" 2
+local storage: bool? ShowNewlines
+.IP "\(bu" 2
+As of writing this tutorial however, I am suddenly unable to get my theme from local storage\&. It just keeps being unrecognized and using the Unset theme\&.
+.IP "\(bu" 2
+A good way to go about making use of the local storage local\&. Is to OnAfterRenderAsync of a 'top level component'\&. In the if(firstRender) { await readLocalStorage(); } 
+.PP
+

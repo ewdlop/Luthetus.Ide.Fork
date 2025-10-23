@@ -1,0 +1,4 @@
+var _generic_delimination_extended_syntax_8cs =
+[
+    [ "Luthetus.TextEditor.RazorLib.CompilerServices.GenericLexer.SyntaxObjects.GenericDeliminationExtendedSyntax", "class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_generic_lexer_1_1_syntax_58e3c9f6df5cb5fbcfd231374ecb01c9.html", "class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_generic_lexer_1_1_syntax_58e3c9f6df5cb5fbcfd231374ecb01c9" ]
+];

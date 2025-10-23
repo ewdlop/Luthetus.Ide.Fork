@@ -1,0 +1,174 @@
+.TH "Luthetus.Common.RazorLib.BackgroundTasks.Models.BackgroundTaskQueue" 3 "Version 1.0.0" "Luthetus.Ide" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+Luthetus.Common.RazorLib.BackgroundTasks.Models.BackgroundTaskQueue \- This type is thread safe\&.
+.br
+
+.br
+\&.  
+
+.SH SYNOPSIS
+.br
+.PP
+.PP
+Inherits \fBLuthetus\&.Common\&.RazorLib\&.BackgroundTasks\&.Models\&.IBackgroundTaskQueue\fP\&.
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBBackgroundTaskQueue\fP (\fBKey\fP< \fBIBackgroundTaskQueue\fP > key, string displayName)"
+.br
+.ti -1c
+.RI "void \fBEnqueue\fP (\fBIBackgroundTask\fP downstreamEvent)"
+.br
+.RI "When enqueueing an event, a batchFunc is also provided\&.
+.br
+
+.br
+\&. "
+.ti -1c
+.RI "\fBIBackgroundTask\fP? \fBDequeueOrDefault\fP ()"
+.br
+.RI "Returns the first entry in the queue, according to 'first in first out'\&. "
+.in -1c
+.SS "Properties"
+
+.in +1c
+.ti -1c
+.RI "Key< \fBIBackgroundTaskQueue\fP > \fBKey\fP\fR [get]\fP"
+.br
+.ti -1c
+.RI "string \fBDisplayName\fP\fR [get]\fP"
+.br
+.ti -1c
+.RI "\fBIBackgroundTask\fP? \fBExecutingBackgroundTask\fP\fR [get, set]\fP"
+.br
+.ti -1c
+.RI "int \fBCount\fP\fR [get]\fP"
+.br
+.RI "Returns the amount of \fBIBackgroundTask\fP(s) in the queue\&. "
+.ti -1c
+.RI "ImmutableArray< \fBIBackgroundTask\fP > \fBBackgroundTaskList\fP\fR [get]\fP"
+.br
+.ti -1c
+.RI "SemaphoreSlim \fBDequeueSemaphoreSlim\fP = new(0)\fR [get]\fP"
+.br
+.in -1c
+.SS "Events"
+
+.in +1c
+.ti -1c
+.RI "Action? \fBExecutingBackgroundTaskChanged\fP"
+.br
+.in -1c
+
+Events inherited from \fBLuthetus\&.Common\&.RazorLib\&.BackgroundTasks\&.Models\&.IBackgroundTaskQueue\fP
+.in +1c
+.ti -1c
+.RI "Action? \fBExecutingBackgroundTaskChanged\fP"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+This type is thread safe\&.
+.br
+
+.br
+\&. 
+.PP
+Definition at line \fB9\fP of file \fBBackgroundTaskQueue\&.cs\fP\&.
+.SH "Constructor & Destructor Documentation"
+.PP 
+.SS "Luthetus\&.Common\&.RazorLib\&.BackgroundTasks\&.Models\&.BackgroundTaskQueue\&.BackgroundTaskQueue (\fBKey\fP< \fBIBackgroundTaskQueue\fP > key, string displayName)"
+
+.PP
+Definition at line \fB24\fP of file \fBBackgroundTaskQueue\&.cs\fP\&.
+.SH "Member Function Documentation"
+.PP 
+.SS "\fBIBackgroundTask\fP? Luthetus\&.Common\&.RazorLib\&.BackgroundTasks\&.Models\&.BackgroundTaskQueue\&.DequeueOrDefault ()"
+
+.PP
+Returns the first entry in the queue, according to 'first in first out'\&. 
+.PP
+Definition at line \fB101\fP of file \fBBackgroundTaskQueue\&.cs\fP\&.
+.SS "void Luthetus\&.Common\&.RazorLib\&.BackgroundTasks\&.Models\&.BackgroundTaskQueue\&.Enqueue (\fBIBackgroundTask\fP downstreamEvent)"
+
+.PP
+When enqueueing an event, a batchFunc is also provided\&.
+.br
+
+.br
+\&. The batchFunc is to take the 'to-be-queued' entry, and decide if it can merge with the last event in the queue, as to make a batched event\&.
+.br
+
+.br
+
+.PP
+This batchFunc is invoked over and over, until either a null 'batch event' is returned\&. Or, there are no more entries in the queue to merge with\&.
+.br
+
+.br
+
+.PP
+When a null 'batch event' is returned, then the last item in the queue remains unchanged, and after it the 'to-be-queued' is ultimately queued\&.
+.br
+
+.br
+
+.PP
+Each invocation of the 'batchFunc' will replace the 'to-be-queued' unless the 'batch event' returned was null\&.
+.br
+
+.br
+ 
+.PP
+Definition at line \fB70\fP of file \fBBackgroundTaskQueue\&.cs\fP\&.
+.SH "Property Documentation"
+.PP 
+.SS "ImmutableArray<\fBIBackgroundTask\fP> Luthetus\&.Common\&.RazorLib\&.BackgroundTasks\&.Models\&.BackgroundTaskQueue\&.BackgroundTaskList\fR [get]\fP"
+
+.PP
+Implements \fBLuthetus\&.Common\&.RazorLib\&.BackgroundTasks\&.Models\&.IBackgroundTaskQueue\fP\&.
+.PP
+Definition at line \fB50\fP of file \fBBackgroundTaskQueue\&.cs\fP\&.
+.SS "int Luthetus\&.Common\&.RazorLib\&.BackgroundTasks\&.Models\&.BackgroundTaskQueue\&.Count\fR [get]\fP"
+
+.PP
+Returns the amount of \fBIBackgroundTask\fP(s) in the queue\&. 
+.PP
+Implements \fBLuthetus\&.Common\&.RazorLib\&.BackgroundTasks\&.Models\&.IBackgroundTaskQueue\fP\&.
+.PP
+Definition at line \fB48\fP of file \fBBackgroundTaskQueue\&.cs\fP\&.
+.SS "SemaphoreSlim Luthetus\&.Common\&.RazorLib\&.BackgroundTasks\&.Models\&.BackgroundTaskQueue\&.DequeueSemaphoreSlim = new(0)\fR [get]\fP"
+
+.PP
+Definition at line \fB52\fP of file \fBBackgroundTaskQueue\&.cs\fP\&.
+.SS "string Luthetus\&.Common\&.RazorLib\&.BackgroundTasks\&.Models\&.BackgroundTaskQueue\&.DisplayName\fR [get]\fP"
+
+.PP
+Implements \fBLuthetus\&.Common\&.RazorLib\&.BackgroundTasks\&.Models\&.IBackgroundTaskQueue\fP\&.
+.PP
+Definition at line \fB33\fP of file \fBBackgroundTaskQueue\&.cs\fP\&.
+.SS "\fBIBackgroundTask\fP? Luthetus\&.Common\&.RazorLib\&.BackgroundTasks\&.Models\&.BackgroundTaskQueue\&.ExecutingBackgroundTask\fR [get]\fP, \fR [set]\fP"
+
+.PP
+Implements \fBLuthetus\&.Common\&.RazorLib\&.BackgroundTasks\&.Models\&.IBackgroundTaskQueue\fP\&.
+.PP
+Definition at line \fB35\fP of file \fBBackgroundTaskQueue\&.cs\fP\&.
+.SS "Key<\fBIBackgroundTaskQueue\fP> Luthetus\&.Common\&.RazorLib\&.BackgroundTasks\&.Models\&.BackgroundTaskQueue\&.Key\fR [get]\fP"
+
+.PP
+Implements \fBLuthetus\&.Common\&.RazorLib\&.BackgroundTasks\&.Models\&.IBackgroundTaskQueue\fP\&.
+.PP
+Definition at line \fB32\fP of file \fBBackgroundTaskQueue\&.cs\fP\&.
+.SH "Event Documentation"
+.PP 
+.SS "Action? Luthetus\&.Common\&.RazorLib\&.BackgroundTasks\&.Models\&.BackgroundTaskQueue\&.ExecutingBackgroundTaskChanged"
+
+.PP
+Definition at line \fB54\fP of file \fBBackgroundTaskQueue\&.cs\fP\&.
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for Luthetus\&.Ide from the source code\&.

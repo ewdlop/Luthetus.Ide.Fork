@@ -1,0 +1,108 @@
+\doxysection{Folder\+Explorer\+Display.\+razor.\+cs}
+\hypertarget{_folder_explorer_display_8razor_8cs_source}{}\label{_folder_explorer_display_8razor_8cs_source}\index{Source/Lib/Ide/Ide.RazorLib/FolderExplorers/Displays/FolderExplorerDisplay.razor.cs@{Source/Lib/Ide/Ide.RazorLib/FolderExplorers/Displays/FolderExplorerDisplay.razor.cs}}
+\mbox{\hyperlink{_folder_explorer_display_8razor_8cs}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{_folder_explorer_display_8razor_8cs_source_l00001}00001\ \textcolor{keyword}{using\ }Fluxor;}
+\DoxyCodeLine{\Hypertarget{_folder_explorer_display_8razor_8cs_source_l00002}00002\ \textcolor{keyword}{using\ }Microsoft.AspNetCore.Components;}
+\DoxyCodeLine{\Hypertarget{_folder_explorer_display_8razor_8cs_source_l00003}00003\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_luthetus_1_1_common_1_1_razor_lib_1_1_component_renderers_1_1_models}{Luthetus.Common.RazorLib.ComponentRenderers.Models}};}
+\DoxyCodeLine{\Hypertarget{_folder_explorer_display_8razor_8cs_source_l00004}00004\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_luthetus_1_1_common_1_1_razor_lib_1_1_options_1_1_states}{Luthetus.Common.RazorLib.Options.States}};}
+\DoxyCodeLine{\Hypertarget{_folder_explorer_display_8razor_8cs_source_l00005}00005\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_luthetus_1_1_common_1_1_razor_lib_1_1_options_1_1_models}{Luthetus.Common.RazorLib.Options.Models}};}
+\DoxyCodeLine{\Hypertarget{_folder_explorer_display_8razor_8cs_source_l00006}00006\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_luthetus_1_1_common_1_1_razor_lib_1_1_dropdowns_1_1_states}{Luthetus.Common.RazorLib.Dropdowns.States}};}
+\DoxyCodeLine{\Hypertarget{_folder_explorer_display_8razor_8cs_source_l00007}00007\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_luthetus_1_1_common_1_1_razor_lib_1_1_dropdowns_1_1_models}{Luthetus.Common.RazorLib.Dropdowns.Models}};}
+\DoxyCodeLine{\Hypertarget{_folder_explorer_display_8razor_8cs_source_l00008}00008\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_luthetus_1_1_common_1_1_razor_lib_1_1_commands_1_1_models}{Luthetus.Common.RazorLib.Commands.Models}};}
+\DoxyCodeLine{\Hypertarget{_folder_explorer_display_8razor_8cs_source_l00009}00009\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_luthetus_1_1_common_1_1_razor_lib_1_1_tree_views_1_1_models}{Luthetus.Common.RazorLib.TreeViews.Models}};}
+\DoxyCodeLine{\Hypertarget{_folder_explorer_display_8razor_8cs_source_l00010}00010\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_luthetus_1_1_common_1_1_razor_lib_1_1_background_tasks_1_1_models}{Luthetus.Common.RazorLib.BackgroundTasks.Models}};}
+\DoxyCodeLine{\Hypertarget{_folder_explorer_display_8razor_8cs_source_l00011}00011\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_luthetus_1_1_common_1_1_razor_lib_1_1_file_systems_1_1_models}{Luthetus.Common.RazorLib.FileSystems.Models}};}
+\DoxyCodeLine{\Hypertarget{_folder_explorer_display_8razor_8cs_source_l00012}00012\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib}{Luthetus.TextEditor.RazorLib}};}
+\DoxyCodeLine{\Hypertarget{_folder_explorer_display_8razor_8cs_source_l00013}00013\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_luthetus_1_1_ide_1_1_razor_lib_1_1_folder_explorers_1_1_states}{Luthetus.Ide.RazorLib.FolderExplorers.States}};}
+\DoxyCodeLine{\Hypertarget{_folder_explorer_display_8razor_8cs_source_l00014}00014\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_luthetus_1_1_ide_1_1_razor_lib_1_1_folder_explorers_1_1_models}{Luthetus.Ide.RazorLib.FolderExplorers.Models}};}
+\DoxyCodeLine{\Hypertarget{_folder_explorer_display_8razor_8cs_source_l00015}00015\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_luthetus_1_1_ide_1_1_razor_lib_1_1_menus_1_1_models}{Luthetus.Ide.RazorLib.Menus.Models}};}
+\DoxyCodeLine{\Hypertarget{_folder_explorer_display_8razor_8cs_source_l00016}00016\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_luthetus_1_1_ide_1_1_razor_lib_1_1_background_tasks_1_1_models}{Luthetus.Ide.RazorLib.BackgroundTasks.Models}};}
+\DoxyCodeLine{\Hypertarget{_folder_explorer_display_8razor_8cs_source_l00017}00017\ }
+\DoxyCodeLine{\Hypertarget{_folder_explorer_display_8razor_8cs_source_l00018}00018\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespace_luthetus_1_1_ide_1_1_razor_lib_1_1_folder_explorers_1_1_displays}{Luthetus.Ide.RazorLib.FolderExplorers.Displays}};}
+\DoxyCodeLine{\Hypertarget{_folder_explorer_display_8razor_8cs_source_l00019}00019\ }
+\DoxyCodeLine{\Hypertarget{_folder_explorer_display_8razor_8cs_source_l00020}\mbox{\hyperlink{class_luthetus_1_1_ide_1_1_razor_lib_1_1_folder_explorers_1_1_displays_1_1_folder_explorer_display}{00020}}\ \textcolor{keyword}{public}\ \textcolor{keyword}{partial\ class\ }\mbox{\hyperlink{class_luthetus_1_1_ide_1_1_razor_lib_1_1_folder_explorers_1_1_displays_1_1_folder_explorer_display}{FolderExplorerDisplay}}\ :\ ComponentBase,\ IDisposable}
+\DoxyCodeLine{\Hypertarget{_folder_explorer_display_8razor_8cs_source_l00021}00021\ \{}
+\DoxyCodeLine{\Hypertarget{_folder_explorer_display_8razor_8cs_source_l00022}00022\ \ \ \ \ [Inject]}
+\DoxyCodeLine{\Hypertarget{_folder_explorer_display_8razor_8cs_source_l00023}00023\ \ \ \ \ \textcolor{keyword}{private}\ IState<FolderExplorerState>\ FolderExplorerStateWrap\ \{\ \textcolor{keyword}{get};\ \textcolor{keyword}{set};\ \}\ =\ \textcolor{keyword}{null}!;}
+\DoxyCodeLine{\Hypertarget{_folder_explorer_display_8razor_8cs_source_l00024}00024\ \ \ \ \ [Inject]}
+\DoxyCodeLine{\Hypertarget{_folder_explorer_display_8razor_8cs_source_l00025}00025\ \ \ \ \ \textcolor{keyword}{private}\ IState<AppOptionsState>\ AppOptionsStateWrap\ \{\ \textcolor{keyword}{get};\ \textcolor{keyword}{set};\ \}\ =\ \textcolor{keyword}{null}!;}
+\DoxyCodeLine{\Hypertarget{_folder_explorer_display_8razor_8cs_source_l00026}00026\ \ \ \ \ [Inject]}
+\DoxyCodeLine{\Hypertarget{_folder_explorer_display_8razor_8cs_source_l00027}00027\ \ \ \ \ \textcolor{keyword}{private}\ \mbox{\hyperlink{interface_luthetus_1_1_common_1_1_razor_lib_1_1_options_1_1_models_1_1_i_app_options_service}{IAppOptionsService}}\ AppOptionsService\ \{\ \textcolor{keyword}{get};\ \textcolor{keyword}{set};\ \}\ =\ \textcolor{keyword}{null}!;}
+\DoxyCodeLine{\Hypertarget{_folder_explorer_display_8razor_8cs_source_l00028}00028\ \ \ \ \ [Inject]}
+\DoxyCodeLine{\Hypertarget{_folder_explorer_display_8razor_8cs_source_l00029}00029\ \ \ \ \ \textcolor{keyword}{private}\ IDispatcher\ Dispatcher\ \{\ \textcolor{keyword}{get};\ \textcolor{keyword}{set};\ \}\ =\ \textcolor{keyword}{null}!;}
+\DoxyCodeLine{\Hypertarget{_folder_explorer_display_8razor_8cs_source_l00030}00030\ \ \ \ \ [Inject]}
+\DoxyCodeLine{\Hypertarget{_folder_explorer_display_8razor_8cs_source_l00031}00031\ \ \ \ \ \textcolor{keyword}{private}\ \mbox{\hyperlink{interface_luthetus_1_1_common_1_1_razor_lib_1_1_tree_views_1_1_models_1_1_i_tree_view_service}{ITreeViewService}}\ TreeViewService\ \{\ \textcolor{keyword}{get};\ \textcolor{keyword}{set};\ \}\ =\ \textcolor{keyword}{null}!;}
+\DoxyCodeLine{\Hypertarget{_folder_explorer_display_8razor_8cs_source_l00032}00032\ \ \ \ \ [Inject]}
+\DoxyCodeLine{\Hypertarget{_folder_explorer_display_8razor_8cs_source_l00033}00033\ \ \ \ \ \textcolor{keyword}{private}\ \mbox{\hyperlink{interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_i_text_editor_service}{ITextEditorService}}\ TextEditorService\ \{\ \textcolor{keyword}{get};\ \textcolor{keyword}{set};\ \}\ =\ \textcolor{keyword}{null}!;}
+\DoxyCodeLine{\Hypertarget{_folder_explorer_display_8razor_8cs_source_l00034}00034\ \ \ \ \ [Inject]}
+\DoxyCodeLine{\Hypertarget{_folder_explorer_display_8razor_8cs_source_l00035}00035\ \ \ \ \ \textcolor{keyword}{private}\ \mbox{\hyperlink{interface_luthetus_1_1_common_1_1_razor_lib_1_1_component_renderers_1_1_models_1_1_i_common_component_renderers}{ICommonComponentRenderers}}\ CommonComponentRenderers\ \{\ \textcolor{keyword}{get};\ \textcolor{keyword}{set};\ \}\ =\ \textcolor{keyword}{null}!;}
+\DoxyCodeLine{\Hypertarget{_folder_explorer_display_8razor_8cs_source_l00036}00036\ \ \ \ \ [Inject]}
+\DoxyCodeLine{\Hypertarget{_folder_explorer_display_8razor_8cs_source_l00037}00037\ \ \ \ \ \textcolor{keyword}{private}\ \mbox{\hyperlink{interface_luthetus_1_1_ide_1_1_razor_lib_1_1_menus_1_1_models_1_1_i_menu_options_factory}{IMenuOptionsFactory}}\ MenuOptionsFactory\ \{\ \textcolor{keyword}{get};\ \textcolor{keyword}{set};\ \}\ =\ \textcolor{keyword}{null}!;}
+\DoxyCodeLine{\Hypertarget{_folder_explorer_display_8razor_8cs_source_l00038}00038\ \ \ \ \ [Inject]}
+\DoxyCodeLine{\Hypertarget{_folder_explorer_display_8razor_8cs_source_l00039}00039\ \ \ \ \ \textcolor{keyword}{private}\ IdeBackgroundTaskApi\ IdeBackgroundTaskApi\ \{\ \textcolor{keyword}{get};\ \textcolor{keyword}{set};\ \}\ =\ \textcolor{keyword}{null}!;}
+\DoxyCodeLine{\Hypertarget{_folder_explorer_display_8razor_8cs_source_l00040}00040\ \ \ \ \ [Inject]}
+\DoxyCodeLine{\Hypertarget{_folder_explorer_display_8razor_8cs_source_l00041}00041\ \ \ \ \ \textcolor{keyword}{private}\ \mbox{\hyperlink{interface_luthetus_1_1_common_1_1_razor_lib_1_1_background_tasks_1_1_models_1_1_i_background_task_service}{IBackgroundTaskService}}\ BackgroundTaskService\ \{\ \textcolor{keyword}{get};\ \textcolor{keyword}{set};\ \}\ =\ \textcolor{keyword}{null}!;}
+\DoxyCodeLine{\Hypertarget{_folder_explorer_display_8razor_8cs_source_l00042}00042\ \ \ \ \ [Inject]}
+\DoxyCodeLine{\Hypertarget{_folder_explorer_display_8razor_8cs_source_l00043}00043\ \ \ \ \ \textcolor{keyword}{private}\ \mbox{\hyperlink{interface_luthetus_1_1_common_1_1_razor_lib_1_1_file_systems_1_1_models_1_1_i_environment_provider}{IEnvironmentProvider}}\ EnvironmentProvider\ \{\ \textcolor{keyword}{get};\ \textcolor{keyword}{set};\ \}\ =\ \textcolor{keyword}{null}!;}
+\DoxyCodeLine{\Hypertarget{_folder_explorer_display_8razor_8cs_source_l00044}00044\ }
+\DoxyCodeLine{\Hypertarget{_folder_explorer_display_8razor_8cs_source_l00045}00045\ \ \ \ \ \textcolor{keyword}{private}\ \mbox{\hyperlink{class_luthetus_1_1_ide_1_1_razor_lib_1_1_folder_explorers_1_1_models_1_1_folder_explorer_tree_view_mouse_event_handler}{FolderExplorerTreeViewMouseEventHandler}}\ \_treeViewMouseEventHandler\ =\ \textcolor{keyword}{null}!;}
+\DoxyCodeLine{\Hypertarget{_folder_explorer_display_8razor_8cs_source_l00046}00046\ \ \ \ \ \textcolor{keyword}{private}\ \mbox{\hyperlink{class_luthetus_1_1_ide_1_1_razor_lib_1_1_folder_explorers_1_1_models_1_1_folder_explorer_tree_view_keyboard_event_handler}{FolderExplorerTreeViewKeyboardEventHandler}}\ \_treeViewKeyboardEventHandler\ =\ \textcolor{keyword}{null}!;}
+\DoxyCodeLine{\Hypertarget{_folder_explorer_display_8razor_8cs_source_l00047}00047\ }
+\DoxyCodeLine{\Hypertarget{_folder_explorer_display_8razor_8cs_source_l00048}00048\ \ \ \ \ \textcolor{keyword}{private}\ \textcolor{keywordtype}{int}\ OffsetPerDepthInPixels\ =>\ (int)Math.Ceiling(}
+\DoxyCodeLine{\Hypertarget{_folder_explorer_display_8razor_8cs_source_l00049}00049\ \ \ \ \ \ \ \ \ AppOptionsStateWrap.Value.Options.IconSizeInPixels\ *\ (2.0\ /\ 3.0));}
+\DoxyCodeLine{\Hypertarget{_folder_explorer_display_8razor_8cs_source_l00050}00050\ }
+\DoxyCodeLine{\Hypertarget{_folder_explorer_display_8razor_8cs_source_l00051}\mbox{\hyperlink{class_luthetus_1_1_ide_1_1_razor_lib_1_1_folder_explorers_1_1_displays_1_1_folder_explorer_display_aad36c4fd8f493fbc3e4f339aeaaa34a9}{00051}}\ \ \ \ \ \textcolor{keyword}{protected}\ \textcolor{keyword}{override}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_luthetus_1_1_ide_1_1_razor_lib_1_1_folder_explorers_1_1_displays_1_1_folder_explorer_display_aad36c4fd8f493fbc3e4f339aeaaa34a9}{OnInitialized}}()}
+\DoxyCodeLine{\Hypertarget{_folder_explorer_display_8razor_8cs_source_l00052}00052\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_folder_explorer_display_8razor_8cs_source_l00053}00053\ \ \ \ \ \ \ \ \ FolderExplorerStateWrap.StateChanged\ +=\ OnStateChanged;}
+\DoxyCodeLine{\Hypertarget{_folder_explorer_display_8razor_8cs_source_l00054}00054\ \ \ \ \ \ \ \ \ AppOptionsStateWrap.StateChanged\ +=\ OnStateChanged;}
+\DoxyCodeLine{\Hypertarget{_folder_explorer_display_8razor_8cs_source_l00055}00055\ }
+\DoxyCodeLine{\Hypertarget{_folder_explorer_display_8razor_8cs_source_l00056}00056\ \ \ \ \ \ \ \ \ \_treeViewMouseEventHandler\ =\ \textcolor{keyword}{new}\ \mbox{\hyperlink{class_luthetus_1_1_ide_1_1_razor_lib_1_1_folder_explorers_1_1_models_1_1_folder_explorer_tree_view_mouse_event_handler}{FolderExplorerTreeViewMouseEventHandler}}(}
+\DoxyCodeLine{\Hypertarget{_folder_explorer_display_8razor_8cs_source_l00057}00057\ \ \ \ \ \ \ \ \ \ \ \ \ IdeBackgroundTaskApi,}
+\DoxyCodeLine{\Hypertarget{_folder_explorer_display_8razor_8cs_source_l00058}00058\ \ \ \ \ \ \ \ \ \ \ \ \ TextEditorService,}
+\DoxyCodeLine{\Hypertarget{_folder_explorer_display_8razor_8cs_source_l00059}00059\ \ \ \ \ \ \ \ \ \ \ \ \ TreeViewService,}
+\DoxyCodeLine{\Hypertarget{_folder_explorer_display_8razor_8cs_source_l00060}00060\ \ \ \ \ \ \ \ \ \ \ \ \ BackgroundTaskService);}
+\DoxyCodeLine{\Hypertarget{_folder_explorer_display_8razor_8cs_source_l00061}00061\ }
+\DoxyCodeLine{\Hypertarget{_folder_explorer_display_8razor_8cs_source_l00062}00062\ \ \ \ \ \ \ \ \ \_treeViewKeyboardEventHandler\ =\ \textcolor{keyword}{new}\ \mbox{\hyperlink{class_luthetus_1_1_ide_1_1_razor_lib_1_1_folder_explorers_1_1_models_1_1_folder_explorer_tree_view_keyboard_event_handler}{FolderExplorerTreeViewKeyboardEventHandler}}(}
+\DoxyCodeLine{\Hypertarget{_folder_explorer_display_8razor_8cs_source_l00063}00063\ \ \ \ \ \ \ \ \ \ \ \ \ IdeBackgroundTaskApi,}
+\DoxyCodeLine{\Hypertarget{_folder_explorer_display_8razor_8cs_source_l00064}00064\ \ \ \ \ \ \ \ \ \ \ \ \ TextEditorService,}
+\DoxyCodeLine{\Hypertarget{_folder_explorer_display_8razor_8cs_source_l00065}00065\ \ \ \ \ \ \ \ \ \ \ \ \ MenuOptionsFactory,}
+\DoxyCodeLine{\Hypertarget{_folder_explorer_display_8razor_8cs_source_l00066}00066\ \ \ \ \ \ \ \ \ \ \ \ \ CommonComponentRenderers,}
+\DoxyCodeLine{\Hypertarget{_folder_explorer_display_8razor_8cs_source_l00067}00067\ \ \ \ \ \ \ \ \ \ \ \ \ TreeViewService,}
+\DoxyCodeLine{\Hypertarget{_folder_explorer_display_8razor_8cs_source_l00068}00068\ \ \ \ \ \ \ \ \ \ \ \ \ BackgroundTaskService,}
+\DoxyCodeLine{\Hypertarget{_folder_explorer_display_8razor_8cs_source_l00069}00069\ \ \ \ \ \ \ \ \ \ \ \ \ EnvironmentProvider,}
+\DoxyCodeLine{\Hypertarget{_folder_explorer_display_8razor_8cs_source_l00070}00070\ \ \ \ \ \ \ \ \ \ \ \ \ Dispatcher);}
+\DoxyCodeLine{\Hypertarget{_folder_explorer_display_8razor_8cs_source_l00071}00071\ }
+\DoxyCodeLine{\Hypertarget{_folder_explorer_display_8razor_8cs_source_l00072}00072\ \ \ \ \ \ \ \ \ base.OnInitialized();}
+\DoxyCodeLine{\Hypertarget{_folder_explorer_display_8razor_8cs_source_l00073}00073\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_folder_explorer_display_8razor_8cs_source_l00074}00074\ }
+\DoxyCodeLine{\Hypertarget{_folder_explorer_display_8razor_8cs_source_l00075}00075\ \ \ \ \ \textcolor{keyword}{private}\ async\ \textcolor{keywordtype}{void}\ OnStateChanged(\textcolor{keywordtype}{object}?\ sender,\ EventArgs\ e)\ =>\ await\ InvokeAsync(StateHasChanged);}
+\DoxyCodeLine{\Hypertarget{_folder_explorer_display_8razor_8cs_source_l00076}00076\ }
+\DoxyCodeLine{\Hypertarget{_folder_explorer_display_8razor_8cs_source_l00077}00077\ \ \ \ \ \textcolor{keyword}{private}\ Task\ OnTreeViewContextMenuFunc(\mbox{\hyperlink{class_luthetus_1_1_common_1_1_razor_lib_1_1_commands_1_1_models_1_1_tree_view_command_args}{TreeViewCommandArgs}}\ treeViewCommandArgs)}
+\DoxyCodeLine{\Hypertarget{_folder_explorer_display_8razor_8cs_source_l00078}00078\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_folder_explorer_display_8razor_8cs_source_l00079}00079\ \ \ \ \ \ \ \ \ var\ dropdownRecord\ =\ \textcolor{keyword}{new}\ \mbox{\hyperlink{namespace_luthetus_1_1_common_1_1_razor_lib_1_1_dropdowns_1_1_models_a60385d8cd877b93f064b1da738c5ced9}{DropdownRecord}}(}
+\DoxyCodeLine{\Hypertarget{_folder_explorer_display_8razor_8cs_source_l00080}00080\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_luthetus_1_1_ide_1_1_razor_lib_1_1_folder_explorers_1_1_displays_1_1_folder_explorer_context_menu}{FolderExplorerContextMenu}}.\mbox{\hyperlink{class_luthetus_1_1_ide_1_1_razor_lib_1_1_folder_explorers_1_1_displays_1_1_folder_explorer_context_menu_af424b6692cacfa58ff710da96071a92d}{ContextMenuEventDropdownKey}},}
+\DoxyCodeLine{\Hypertarget{_folder_explorer_display_8razor_8cs_source_l00081}00081\ \ \ \ \ \ \ \ \ \ \ \ \ treeViewCommandArgs.\mbox{\hyperlink{class_luthetus_1_1_common_1_1_razor_lib_1_1_commands_1_1_models_1_1_tree_view_command_args_a2f50e2ecbcb85580629516bcebac129c}{ContextMenuFixedPosition}}.LeftPositionInPixels,}
+\DoxyCodeLine{\Hypertarget{_folder_explorer_display_8razor_8cs_source_l00082}00082\ \ \ \ \ \ \ \ \ \ \ \ \ treeViewCommandArgs.\mbox{\hyperlink{class_luthetus_1_1_common_1_1_razor_lib_1_1_commands_1_1_models_1_1_tree_view_command_args_a2f50e2ecbcb85580629516bcebac129c}{ContextMenuFixedPosition}}.TopPositionInPixels,}
+\DoxyCodeLine{\Hypertarget{_folder_explorer_display_8razor_8cs_source_l00083}00083\ \ \ \ \ \ \ \ \ \ \ \ \ typeof(\mbox{\hyperlink{class_luthetus_1_1_ide_1_1_razor_lib_1_1_folder_explorers_1_1_displays_1_1_folder_explorer_context_menu}{FolderExplorerContextMenu}}),}
+\DoxyCodeLine{\Hypertarget{_folder_explorer_display_8razor_8cs_source_l00084}00084\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{new}\ Dictionary<string,\ object?>}
+\DoxyCodeLine{\Hypertarget{_folder_explorer_display_8razor_8cs_source_l00085}00085\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_folder_explorer_display_8razor_8cs_source_l00086}00086\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_folder_explorer_display_8razor_8cs_source_l00087}00087\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ nameof(\mbox{\hyperlink{class_luthetus_1_1_ide_1_1_razor_lib_1_1_folder_explorers_1_1_displays_1_1_folder_explorer_context_menu}{FolderExplorerContextMenu}}.\mbox{\hyperlink{class_luthetus_1_1_ide_1_1_razor_lib_1_1_folder_explorers_1_1_displays_1_1_folder_explorer_context_menu_a24bb2bde78ffc8deaaffb20c3c7acbe8}{TreeViewCommandArgs}}),}
+\DoxyCodeLine{\Hypertarget{_folder_explorer_display_8razor_8cs_source_l00088}00088\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ treeViewCommandArgs}
+\DoxyCodeLine{\Hypertarget{_folder_explorer_display_8razor_8cs_source_l00089}00089\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_folder_explorer_display_8razor_8cs_source_l00090}00090\ \ \ \ \ \ \ \ \ \ \ \ \ \},}
+\DoxyCodeLine{\Hypertarget{_folder_explorer_display_8razor_8cs_source_l00091}00091\ \ \ \ \ \ \ \ \ \ \ \ \ restoreFocusOnClose:\ \textcolor{keyword}{null});}
+\DoxyCodeLine{\Hypertarget{_folder_explorer_display_8razor_8cs_source_l00092}00092\ }
+\DoxyCodeLine{\Hypertarget{_folder_explorer_display_8razor_8cs_source_l00093}00093\ \ \ \ \ \ \ \ \ Dispatcher.Dispatch(\textcolor{keyword}{new}\ \mbox{\hyperlink{namespace_luthetus_1_1_common_1_1_razor_lib_1_1_dropdowns_1_1_states_a6062aa8409aa0032c0334dc5b634498e}{DropdownState}}.RegisterAction(dropdownRecord));}
+\DoxyCodeLine{\Hypertarget{_folder_explorer_display_8razor_8cs_source_l00094}00094\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ Task.CompletedTask;}
+\DoxyCodeLine{\Hypertarget{_folder_explorer_display_8razor_8cs_source_l00095}00095\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_folder_explorer_display_8razor_8cs_source_l00096}00096\ }
+\DoxyCodeLine{\Hypertarget{_folder_explorer_display_8razor_8cs_source_l00097}\mbox{\hyperlink{class_luthetus_1_1_ide_1_1_razor_lib_1_1_folder_explorers_1_1_displays_1_1_folder_explorer_display_a98f66f979fe13ecd8916d5063c2d1285}{00097}}\ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_luthetus_1_1_ide_1_1_razor_lib_1_1_folder_explorers_1_1_displays_1_1_folder_explorer_display_a98f66f979fe13ecd8916d5063c2d1285}{Dispose}}()}
+\DoxyCodeLine{\Hypertarget{_folder_explorer_display_8razor_8cs_source_l00098}00098\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_folder_explorer_display_8razor_8cs_source_l00099}00099\ \ \ \ \ \ \ \ \ FolderExplorerStateWrap.StateChanged\ -\/=\ OnStateChanged;}
+\DoxyCodeLine{\Hypertarget{_folder_explorer_display_8razor_8cs_source_l00100}00100\ \ \ \ \ \ \ \ \ AppOptionsStateWrap.StateChanged\ -\/=\ OnStateChanged;}
+\DoxyCodeLine{\Hypertarget{_folder_explorer_display_8razor_8cs_source_l00101}00101\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_folder_explorer_display_8razor_8cs_source_l00102}00102\ \}}
+
+\end{DoxyCode}

@@ -1,0 +1,16 @@
+var class_luthetus_1_1_extensions_1_1_dot_net_1_1_dot_net_solutions_1_1_models_1_1_internals_1_1_solution_visualization_dimensions =
+[
+    [ "SolutionVisualizationDimensions", "class_luthetus_1_1_extensions_1_1_dot_net_1_1_dot_net_solutions_1_1_models_1_1_internals_1_1_solution_visualization_dimensions.html#aea29ea177a1428f2d4389463a454cdda", null ],
+    [ "DivBoundingClientRect", "class_luthetus_1_1_extensions_1_1_dot_net_1_1_dot_net_solutions_1_1_models_1_1_internals_1_1_solution_visualization_dimensions.html#aca3b6111da50f62f0102df198e28282d", null ],
+    [ "HorizontalPadding", "class_luthetus_1_1_extensions_1_1_dot_net_1_1_dot_net_solutions_1_1_models_1_1_internals_1_1_solution_visualization_dimensions.html#a9f7380771c2409468b7c2e324a8157bb", null ],
+    [ "ScaleX", "class_luthetus_1_1_extensions_1_1_dot_net_1_1_dot_net_solutions_1_1_models_1_1_internals_1_1_solution_visualization_dimensions.html#a63db96ecbe1190f2c2c51565ff97e44f", null ],
+    [ "ScaleY", "class_luthetus_1_1_extensions_1_1_dot_net_1_1_dot_net_solutions_1_1_models_1_1_internals_1_1_solution_visualization_dimensions.html#a98b06886e60f2275dacb84e8a2a38dc2", null ],
+    [ "SvgBoundingClientRect", "class_luthetus_1_1_extensions_1_1_dot_net_1_1_dot_net_solutions_1_1_models_1_1_internals_1_1_solution_visualization_dimensions.html#adc91f11b7fd77e878da510bc823b5ae4", null ],
+    [ "SvgHeight", "class_luthetus_1_1_extensions_1_1_dot_net_1_1_dot_net_solutions_1_1_models_1_1_internals_1_1_solution_visualization_dimensions.html#a844d74749c0caf8c063fd705979bde94", null ],
+    [ "SvgWidth", "class_luthetus_1_1_extensions_1_1_dot_net_1_1_dot_net_solutions_1_1_models_1_1_internals_1_1_solution_visualization_dimensions.html#ab2f0548ce6f27b390fe5fa866f96dbd4", null ],
+    [ "VerticalPadding", "class_luthetus_1_1_extensions_1_1_dot_net_1_1_dot_net_solutions_1_1_models_1_1_internals_1_1_solution_visualization_dimensions.html#a52c1c6e87f3b3a2411f0fff8aaa4e198", null ],
+    [ "ViewBoxHeight", "class_luthetus_1_1_extensions_1_1_dot_net_1_1_dot_net_solutions_1_1_models_1_1_internals_1_1_solution_visualization_dimensions.html#a6c168a0cc4dcb54f440703c8e8d2469c", null ],
+    [ "ViewBoxMinX", "class_luthetus_1_1_extensions_1_1_dot_net_1_1_dot_net_solutions_1_1_models_1_1_internals_1_1_solution_visualization_dimensions.html#acbec6923fc52774d7a776d9caf3935f3", null ],
+    [ "ViewBoxMinY", "class_luthetus_1_1_extensions_1_1_dot_net_1_1_dot_net_solutions_1_1_models_1_1_internals_1_1_solution_visualization_dimensions.html#a3b6b745f9880f80aa5d2a25588e34ee9", null ],
+    [ "ViewBoxWidth", "class_luthetus_1_1_extensions_1_1_dot_net_1_1_dot_net_solutions_1_1_models_1_1_internals_1_1_solution_visualization_dimensions.html#ad3ef981d5fe1e6863ba13b91040cc734", null ]
+];

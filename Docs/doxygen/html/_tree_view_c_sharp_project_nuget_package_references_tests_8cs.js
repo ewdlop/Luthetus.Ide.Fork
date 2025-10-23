@@ -1,0 +1,4 @@
+var _tree_view_c_sharp_project_nuget_package_references_tests_8cs =
+[
+    [ "Luthetus.Extensions.DotNet.Tests.Basis.TreeViewImplementations.Models.TreeViewCSharpProjectNugetPackageReferencesTests", "class_luthetus_1_1_extensions_1_1_dot_net_1_1_tests_1_1_basis_1_1_tree_view_implementations_1_1_1ddb198308df13835434f492d3918960.html", "class_luthetus_1_1_extensions_1_1_dot_net_1_1_tests_1_1_basis_1_1_tree_view_implementations_1_1_1ddb198308df13835434f492d3918960" ]
+];

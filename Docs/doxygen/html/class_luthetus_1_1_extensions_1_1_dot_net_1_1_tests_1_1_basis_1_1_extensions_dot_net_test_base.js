@@ -1,0 +1,4 @@
+var class_luthetus_1_1_extensions_1_1_dot_net_1_1_tests_1_1_basis_1_1_extensions_dot_net_test_base =
+[
+    [ "Test_WellKnownPaths", "class_luthetus_1_1_extensions_1_1_dot_net_1_1_tests_1_1_basis_1_1_extensions_dot_net_test_base_1_1_test___well_known_paths.html", "class_luthetus_1_1_extensions_1_1_dot_net_1_1_tests_1_1_basis_1_1_extensions_dot_net_test_base_1_1_test___well_known_paths" ]
+];

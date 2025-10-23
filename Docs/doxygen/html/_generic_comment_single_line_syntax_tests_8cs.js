@@ -1,0 +1,4 @@
+var _generic_comment_single_line_syntax_tests_8cs =
+[
+    [ "Luthetus.TextEditor.Tests.Basis.CompilerServices.GenericLexer.SyntaxObjects.GenericCommentSingleLineSyntaxTests", "class_luthetus_1_1_text_editor_1_1_tests_1_1_basis_1_1_compiler_services_1_1_generic_lexer_1_1_s590bd40371a1f54abcd5e0374bb51902.html", "class_luthetus_1_1_text_editor_1_1_tests_1_1_basis_1_1_compiler_services_1_1_generic_lexer_1_1_s590bd40371a1f54abcd5e0374bb51902" ]
+];

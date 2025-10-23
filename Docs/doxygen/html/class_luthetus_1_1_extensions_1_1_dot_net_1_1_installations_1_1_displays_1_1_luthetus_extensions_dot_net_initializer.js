@@ -1,0 +1,5 @@
+var class_luthetus_1_1_extensions_1_1_dot_net_1_1_installations_1_1_displays_1_1_luthetus_extensions_dot_net_initializer =
+[
+    [ "OnAfterRender", "class_luthetus_1_1_extensions_1_1_dot_net_1_1_installations_1_1_displays_1_1_luthetus_extensions_dot_net_initializer.html#a998d51279c7781f7d6f8fa275aa7780b", null ],
+    [ "OnInitialized", "class_luthetus_1_1_extensions_1_1_dot_net_1_1_installations_1_1_displays_1_1_luthetus_extensions_dot_net_initializer.html#abd8fba2b2c4aec0321d9d222af1ae4f0", null ]
+];

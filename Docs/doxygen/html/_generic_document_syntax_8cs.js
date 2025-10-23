@@ -1,0 +1,4 @@
+var _generic_document_syntax_8cs =
+[
+    [ "Luthetus.TextEditor.RazorLib.CompilerServices.GenericLexer.SyntaxObjects.GenericDocumentSyntax", "class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_generic_lexer_1_1_syntax_1f5addb531ff24aa4378d03cd469864b.html", "class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_generic_lexer_1_1_syntax_1f5addb531ff24aa4378d03cd469864b" ]
+];

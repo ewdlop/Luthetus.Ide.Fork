@@ -1,0 +1,4 @@
+var namespace_luthetus_1_1_compiler_services_1_1_f_sharp_1_1_syntax_actors =
+[
+    [ "TextEditorFSharpLexer", "class_luthetus_1_1_compiler_services_1_1_f_sharp_1_1_syntax_actors_1_1_text_editor_f_sharp_lexer.html", "class_luthetus_1_1_compiler_services_1_1_f_sharp_1_1_syntax_actors_1_1_text_editor_f_sharp_lexer" ]
+];

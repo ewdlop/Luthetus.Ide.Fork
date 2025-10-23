@@ -1,0 +1,4 @@
+var _lib_2_extensions_2_extensions_8_config_2_compiler_services_2_compiler_service_registry_8cs =
+[
+    [ "Luthetus.Extensions.Config.CompilerServices.CompilerServiceRegistry", "class_luthetus_1_1_extensions_1_1_config_1_1_compiler_services_1_1_compiler_service_registry.html", "class_luthetus_1_1_extensions_1_1_config_1_1_compiler_services_1_1_compiler_service_registry" ]
+];

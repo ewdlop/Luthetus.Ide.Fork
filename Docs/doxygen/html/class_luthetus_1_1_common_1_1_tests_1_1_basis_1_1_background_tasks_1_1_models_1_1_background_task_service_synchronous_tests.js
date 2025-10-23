@@ -1,0 +1,5 @@
+var class_luthetus_1_1_common_1_1_tests_1_1_basis_1_1_background_tasks_1_1_models_1_1_background_task_service_synchronous_tests =
+[
+    [ "EnqueueB", "class_luthetus_1_1_common_1_1_tests_1_1_basis_1_1_background_tasks_1_1_models_1_1_background_task_service_synchronous_tests.html#a8898209d7cd1c4936aad2b79941c2506", null ],
+    [ "ExecutingBackgroundTask", "class_luthetus_1_1_common_1_1_tests_1_1_basis_1_1_background_tasks_1_1_models_1_1_background_task_service_synchronous_tests.html#a1da1b34e948a2bad5e64aabe3271cc4a", null ]
+];

@@ -1,0 +1,120 @@
+.TH "Luthetus.TextEditor.RazorLib.TextEditors.Models.Internals.DisplayTracker" 3 "Version 1.0.0" "Luthetus.Ide" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+Luthetus.TextEditor.RazorLib.TextEditors.Models.Internals.DisplayTracker \- One must track whether the ViewModel is currently being rendered\&.
+.br
+
+.br
+\&.  
+
+.SH SYNOPSIS
+.br
+.PP
+.PP
+Inherits IDisposable\&.
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBDisplayTracker\fP (\fBITextEditorService\fP \fBtextEditorService\fP, \fBResourceUri\fP \fBresourceUri\fP, Key< \fBTextEditorViewModel\fP > viewModelKey)"
+.br
+.ti -1c
+.RI "void \fBIncrementLinks\fP ()"
+.br
+.ti -1c
+.RI "void \fBDecrementLinks\fP ()"
+.br
+.ti -1c
+.RI "bool \fBConsumeIsFirstDisplay\fP ()"
+.br
+.ti -1c
+.RI "void \fBPostScrollAndRemeasure\fP ()"
+.br
+.ti -1c
+.RI "void \fBDispose\fP ()"
+.br
+.in -1c
+.SS "Properties"
+
+.in +1c
+.ti -1c
+.RI "int \fBLinks\fP\fR [get]\fP"
+.br
+.RI "Links refers to a Blazor TextEditorViewModelDisplay having had its OnParametersSet invoked and the ViewModelKey that was passed as a parameter matches this encompasing ViewModel's key\&. In this situation Links would be incremented by 1 in a concurrency safe manner\&.
+.br
+
+.br
+ "
+.ti -1c
+.RI "bool \fBIsFirstDisplay\fP = true\fR [get]\fP"
+.br
+.RI "Since the UI logic is lazily calculated only for ViewModels which are currently rendered to the UI, when a ViewModel becomes rendered it needs to have its calculations performed so it is up to date\&. "
+.in -1c
+.SH "Detailed Description"
+.PP 
+One must track whether the ViewModel is currently being rendered\&.
+.br
+
+.br
+\&. 
+
+The reason for this is that the UI logic is lazily invoked\&. That is to say, if a ViewModel has its underlying Model change, BUT the ViewModel is not currently being rendered\&. Then that ViewModel does not react to the Model having changed\&. 
+.PP
+Definition at line \fB16\fP of file \fBDisplayTracker\&.cs\fP\&.
+.SH "Constructor & Destructor Documentation"
+.PP 
+.SS "Luthetus\&.TextEditor\&.RazorLib\&.TextEditors\&.Models\&.Internals\&.DisplayTracker\&.DisplayTracker (\fBITextEditorService\fP textEditorService, \fBResourceUri\fP resourceUri, Key< \fBTextEditorViewModel\fP > viewModelKey)"
+
+.PP
+Definition at line \fB23\fP of file \fBDisplayTracker\&.cs\fP\&.
+.SH "Member Function Documentation"
+.PP 
+.SS "bool Luthetus\&.TextEditor\&.RazorLib\&.TextEditors\&.Models\&.Internals\&.DisplayTracker\&.ConsumeIsFirstDisplay ()"
+
+.PP
+Definition at line \fB131\fP of file \fBDisplayTracker\&.cs\fP\&.
+.SS "void Luthetus\&.TextEditor\&.RazorLib\&.TextEditors\&.Models\&.Internals\&.DisplayTracker\&.DecrementLinks ()"
+
+.PP
+Definition at line \fB106\fP of file \fBDisplayTracker\&.cs\fP\&.
+.SS "void Luthetus\&.TextEditor\&.RazorLib\&.TextEditors\&.Models\&.Internals\&.DisplayTracker\&.Dispose ()"
+
+.PP
+Definition at line \fB191\fP of file \fBDisplayTracker\&.cs\fP\&.
+.SS "void Luthetus\&.TextEditor\&.RazorLib\&.TextEditors\&.Models\&.Internals\&.DisplayTracker\&.IncrementLinks ()"
+
+.PP
+Definition at line \fB51\fP of file \fBDisplayTracker\&.cs\fP\&.
+.SS "void Luthetus\&.TextEditor\&.RazorLib\&.TextEditors\&.Models\&.Internals\&.DisplayTracker\&.PostScrollAndRemeasure ()"
+
+.PP
+Definition at line \fB151\fP of file \fBDisplayTracker\&.cs\fP\&.
+.SH "Property Documentation"
+.PP 
+.SS "bool Luthetus\&.TextEditor\&.RazorLib\&.TextEditors\&.Models\&.Internals\&.DisplayTracker\&.IsFirstDisplay = true\fR [get]\fP"
+
+.PP
+Since the UI logic is lazily calculated only for ViewModels which are currently rendered to the UI, when a ViewModel becomes rendered it needs to have its calculations performed so it is up to date\&. 
+.PP
+Definition at line \fB49\fP of file \fBDisplayTracker\&.cs\fP\&.
+.SS "int Luthetus\&.TextEditor\&.RazorLib\&.TextEditors\&.Models\&.Internals\&.DisplayTracker\&.Links\fR [get]\fP"
+
+.PP
+Links refers to a Blazor TextEditorViewModelDisplay having had its OnParametersSet invoked and the ViewModelKey that was passed as a parameter matches this encompasing ViewModel's key\&. In this situation Links would be incremented by 1 in a concurrency safe manner\&.
+.br
+
+.br
+ As well OnParametersSet includes the case where the ViewModelKey that was passed as a parameter is changed\&. In this situation the previous ViewModel would have its Links decremented by 1 in a concurrency safe manner\&.
+.br
+
+.br
+
+.PP
+TextEditorViewModelDisplay implements IDisposable\&. In the Dispose implementation, the active ViewModel would have its Links decremented by 1 in a concurrency safe manner\&. 
+.PP
+Definition at line \fB44\fP of file \fBDisplayTracker\&.cs\fP\&.
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for Luthetus\&.Ide from the source code\&.

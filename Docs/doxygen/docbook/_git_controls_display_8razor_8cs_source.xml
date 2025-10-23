@@ -1,0 +1,80 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="__git_controls_display_8razor_8cs_source" xml:lang="en-US">
+<title>GitControlsDisplay.razor.cs</title>
+<indexterm><primary>Source/Lib/Extensions/Extensions.Git/Displays/GitControlsDisplay.razor.cs</primary></indexterm>
+Go to the documentation of this file.<programlisting linenumbering="unnumbered"><anchor xml:id="__git_controls_display_8razor_8cs_source_1l00001"/>00001 <emphasis role="keyword">using&#32;</emphasis>Microsoft.AspNetCore.Components;
+<anchor xml:id="__git_controls_display_8razor_8cs_source_1l00002"/>00002 <emphasis role="keyword">using&#32;</emphasis>Fluxor;
+<anchor xml:id="__git_controls_display_8razor_8cs_source_1l00003"/>00003 <emphasis role="keyword">using&#32;</emphasis><link linkend="_namespace_luthetus_1_1_common_1_1_razor_lib_1_1_dialogs_1_1_models">Luthetus.Common.RazorLib.Dialogs.Models</link>;
+<anchor xml:id="__git_controls_display_8razor_8cs_source_1l00004"/>00004 <emphasis role="keyword">using&#32;</emphasis><link linkend="_namespace_luthetus_1_1_common_1_1_razor_lib_1_1_dialogs_1_1_states">Luthetus.Common.RazorLib.Dialogs.States</link>;
+<anchor xml:id="__git_controls_display_8razor_8cs_source_1l00005"/>00005 <emphasis role="keyword">using&#32;</emphasis><link linkend="_namespace_luthetus_1_1_common_1_1_razor_lib_1_1_dynamics_1_1_models">Luthetus.Common.RazorLib.Dynamics.Models</link>;
+<anchor xml:id="__git_controls_display_8razor_8cs_source_1l00006"/>00006 <emphasis role="keyword">using&#32;</emphasis><link linkend="_namespace_luthetus_1_1_common_1_1_razor_lib_1_1_keys_1_1_models">Luthetus.Common.RazorLib.Keys.Models</link>;
+<anchor xml:id="__git_controls_display_8razor_8cs_source_1l00007"/>00007 <emphasis role="keyword">using&#32;</emphasis><link linkend="_namespace_luthetus_1_1_common_1_1_razor_lib_1_1_options_1_1_states">Luthetus.Common.RazorLib.Options.States</link>;
+<anchor xml:id="__git_controls_display_8razor_8cs_source_1l00008"/>00008 <emphasis role="keyword">using&#32;</emphasis><link linkend="_namespace_luthetus_1_1_ide_1_1_razor_lib_1_1_background_tasks_1_1_models">Luthetus.Ide.RazorLib.BackgroundTasks.Models</link>;
+<anchor xml:id="__git_controls_display_8razor_8cs_source_1l00009"/>00009 <emphasis role="keyword">using&#32;</emphasis><link linkend="_namespace_luthetus_1_1_extensions_1_1_git_1_1_states">Luthetus.Extensions.Git.States</link>;
+<anchor xml:id="__git_controls_display_8razor_8cs_source_1l00010"/>00010 <emphasis role="keyword">using&#32;</emphasis><link linkend="_namespace_luthetus_1_1_extensions_1_1_git_1_1_background_tasks_1_1_models">Luthetus.Extensions.Git.BackgroundTasks.Models</link>;
+<anchor xml:id="__git_controls_display_8razor_8cs_source_1l00011"/>00011 
+<anchor xml:id="__git_controls_display_8razor_8cs_source_1l00012"/>00012 <emphasis role="keyword">namespace&#32;</emphasis><link linkend="_namespace_luthetus_1_1_extensions_1_1_git_1_1_displays">Luthetus.Extensions.Git.Displays</link>;
+<anchor xml:id="__git_controls_display_8razor_8cs_source_1l00013"/>00013 
+<anchor xml:id="__git_controls_display_8razor_8cs_source_1l00014"/><link linkend="_class_luthetus_1_1_extensions_1_1_git_1_1_displays_1_1_git_controls_display">00014</link> <emphasis role="keyword">public</emphasis>&#32;<emphasis role="keyword">partial&#32;class&#32;</emphasis><link linkend="_class_luthetus_1_1_extensions_1_1_git_1_1_displays_1_1_git_controls_display">GitControlsDisplay</link>&#32;:&#32;ComponentBase
+<anchor xml:id="__git_controls_display_8razor_8cs_source_1l00015"/>00015 {
+<anchor xml:id="__git_controls_display_8razor_8cs_source_1l00016"/>00016 &#32;&#32;&#32;&#32;[Inject]
+<anchor xml:id="__git_controls_display_8razor_8cs_source_1l00017"/>00017 &#32;&#32;&#32;&#32;<emphasis role="keyword">private</emphasis>&#32;IState&lt;AppOptionsState&gt;&#32;AppOptionsStateWrap&#32;{&#32;<emphasis role="keyword">get</emphasis>;&#32;<emphasis role="keyword">set</emphasis>;&#32;}&#32;=&#32;<emphasis role="keyword">null</emphasis>!;
+<anchor xml:id="__git_controls_display_8razor_8cs_source_1l00018"/>00018 &#32;&#32;&#32;&#32;[Inject]
+<anchor xml:id="__git_controls_display_8razor_8cs_source_1l00019"/>00019 &#32;&#32;&#32;&#32;<emphasis role="keyword">private</emphasis>&#32;IDispatcher&#32;Dispatcher&#32;{&#32;<emphasis role="keyword">get</emphasis>;&#32;<emphasis role="keyword">set</emphasis>;&#32;}&#32;=&#32;<emphasis role="keyword">null</emphasis>!;
+<anchor xml:id="__git_controls_display_8razor_8cs_source_1l00020"/>00020 &#32;&#32;&#32;&#32;[Inject]
+<anchor xml:id="__git_controls_display_8razor_8cs_source_1l00021"/>00021 &#32;&#32;&#32;&#32;<emphasis role="keyword">private</emphasis>&#32;GitBackgroundTaskApi&#32;GitBackgroundTaskApi&#32;{&#32;<emphasis role="keyword">get</emphasis>;&#32;<emphasis role="keyword">set</emphasis>;&#32;}&#32;=&#32;<emphasis role="keyword">null</emphasis>!;
+<anchor xml:id="__git_controls_display_8razor_8cs_source_1l00022"/>00022 
+<anchor xml:id="__git_controls_display_8razor_8cs_source_1l00023"/>00023 &#32;&#32;&#32;&#32;[CascadingParameter]
+<anchor xml:id="__git_controls_display_8razor_8cs_source_1l00024"/><link linkend="_class_luthetus_1_1_extensions_1_1_git_1_1_displays_1_1_git_controls_display_1a77d775244a7ee0f882097d506ded8bdb">00024</link> &#32;&#32;&#32;&#32;<emphasis role="keyword">public</emphasis>&#32;<link linkend="_class_luthetus_1_1_extensions_1_1_git_1_1_displays_1_1_git_controls_display_1a77d775244a7ee0f882097d506ded8bdb">GitState</link>&#32;<link linkend="_class_luthetus_1_1_extensions_1_1_git_1_1_displays_1_1_git_controls_display_1a77d775244a7ee0f882097d506ded8bdb">GitState</link>&#32;{&#32;<emphasis role="keyword">get</emphasis>;&#32;<emphasis role="keyword">set</emphasis>;&#32;}&#32;=&#32;<emphasis role="keyword">null</emphasis>!;
+<anchor xml:id="__git_controls_display_8razor_8cs_source_1l00025"/>00025 
+<anchor xml:id="__git_controls_display_8razor_8cs_source_1l00026"/>00026 &#32;&#32;&#32;&#32;<emphasis role="keyword">private</emphasis>&#32;<emphasis role="keywordtype">string</emphasis>&#32;_summary&#32;=&#32;<emphasis role="keywordtype">string</emphasis>.Empty;
+<anchor xml:id="__git_controls_display_8razor_8cs_source_1l00027"/>00027 
+<anchor xml:id="__git_controls_display_8razor_8cs_source_1l00028"/>00028 &#32;&#32;&#32;&#32;<emphasis role="keyword">private</emphasis>&#32;<emphasis role="keywordtype">void</emphasis>&#32;ExecuteGitRefreshOnClick(<link linkend="_namespace_luthetus_1_1_extensions_1_1_git_1_1_states_1aca241d2376f4dc9e1660c6f740334159">GitState</link>&#32;localGitState)
+<anchor xml:id="__git_controls_display_8razor_8cs_source_1l00029"/>00029 &#32;&#32;&#32;&#32;{
+<anchor xml:id="__git_controls_display_8razor_8cs_source_1l00030"/>00030 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">if</emphasis>&#32;(localGitState.Repo&#32;is&#32;<emphasis role="keyword">null</emphasis>)
+<anchor xml:id="__git_controls_display_8razor_8cs_source_1l00031"/>00031 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>;
+<anchor xml:id="__git_controls_display_8razor_8cs_source_1l00032"/>00032 
+<anchor xml:id="__git_controls_display_8razor_8cs_source_1l00033"/>00033 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<link linkend="_class_luthetus_1_1_extensions_1_1_git_1_1_background_tasks_1_1_models_1_1_git_background_task_api">GitBackgroundTaskApi</link>.<link linkend="_class_luthetus_1_1_extensions_1_1_git_1_1_background_tasks_1_1_models_1_1_git_background_task_api_1a2c059afb23ea38591a882933b9972492">Git</link>.RefreshEnqueue(localGitState.Repo);
+<anchor xml:id="__git_controls_display_8razor_8cs_source_1l00034"/>00034 &#32;&#32;&#32;&#32;}
+<anchor xml:id="__git_controls_display_8razor_8cs_source_1l00035"/>00035 
+<anchor xml:id="__git_controls_display_8razor_8cs_source_1l00036"/>00036 &#32;&#32;&#32;&#32;<emphasis role="keyword">private</emphasis>&#32;<emphasis role="keywordtype">void</emphasis>&#32;StageOnClick(<link linkend="_namespace_luthetus_1_1_extensions_1_1_git_1_1_states_1aca241d2376f4dc9e1660c6f740334159">GitState</link>&#32;localGitState)
+<anchor xml:id="__git_controls_display_8razor_8cs_source_1l00037"/>00037 &#32;&#32;&#32;&#32;{
+<anchor xml:id="__git_controls_display_8razor_8cs_source_1l00038"/>00038 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">if</emphasis>&#32;(localGitState.Repo&#32;is&#32;<emphasis role="keyword">null</emphasis>)
+<anchor xml:id="__git_controls_display_8razor_8cs_source_1l00039"/>00039 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>;
+<anchor xml:id="__git_controls_display_8razor_8cs_source_1l00040"/>00040 
+<anchor xml:id="__git_controls_display_8razor_8cs_source_1l00041"/>00041 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<link linkend="_class_luthetus_1_1_extensions_1_1_git_1_1_background_tasks_1_1_models_1_1_git_background_task_api">GitBackgroundTaskApi</link>.<link linkend="_class_luthetus_1_1_extensions_1_1_git_1_1_background_tasks_1_1_models_1_1_git_background_task_api_1a2c059afb23ea38591a882933b9972492">Git</link>.AddEnqueue(localGitState.Repo);
+<anchor xml:id="__git_controls_display_8razor_8cs_source_1l00042"/>00042 &#32;&#32;&#32;&#32;}
+<anchor xml:id="__git_controls_display_8razor_8cs_source_1l00043"/>00043 
+<anchor xml:id="__git_controls_display_8razor_8cs_source_1l00044"/>00044 &#32;&#32;&#32;&#32;<emphasis role="keyword">private</emphasis>&#32;<emphasis role="keywordtype">void</emphasis>&#32;UnstageOnClick(<link linkend="_namespace_luthetus_1_1_extensions_1_1_git_1_1_states_1aca241d2376f4dc9e1660c6f740334159">GitState</link>&#32;localGitState)
+<anchor xml:id="__git_controls_display_8razor_8cs_source_1l00045"/>00045 &#32;&#32;&#32;&#32;{
+<anchor xml:id="__git_controls_display_8razor_8cs_source_1l00046"/>00046 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">if</emphasis>&#32;(localGitState.Repo&#32;is&#32;<emphasis role="keyword">null</emphasis>)
+<anchor xml:id="__git_controls_display_8razor_8cs_source_1l00047"/>00047 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>;
+<anchor xml:id="__git_controls_display_8razor_8cs_source_1l00048"/>00048 
+<anchor xml:id="__git_controls_display_8razor_8cs_source_1l00049"/>00049 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<link linkend="_class_luthetus_1_1_extensions_1_1_git_1_1_background_tasks_1_1_models_1_1_git_background_task_api">GitBackgroundTaskApi</link>.<link linkend="_class_luthetus_1_1_extensions_1_1_git_1_1_background_tasks_1_1_models_1_1_git_background_task_api_1a2c059afb23ea38591a882933b9972492">Git</link>.UnstageEnqueue(localGitState.Repo);
+<anchor xml:id="__git_controls_display_8razor_8cs_source_1l00050"/>00050 &#32;&#32;&#32;&#32;}
+<anchor xml:id="__git_controls_display_8razor_8cs_source_1l00051"/>00051 
+<anchor xml:id="__git_controls_display_8razor_8cs_source_1l00052"/>00052 &#32;&#32;&#32;&#32;<emphasis role="keyword">private</emphasis>&#32;<emphasis role="keywordtype">void</emphasis>&#32;CommitChangesOnClick(<link linkend="_namespace_luthetus_1_1_extensions_1_1_git_1_1_states_1aca241d2376f4dc9e1660c6f740334159">GitState</link>&#32;localGitState,&#32;<emphasis role="keywordtype">string</emphasis>&#32;localSummary)
+<anchor xml:id="__git_controls_display_8razor_8cs_source_1l00053"/>00053 &#32;&#32;&#32;&#32;{
+<anchor xml:id="__git_controls_display_8razor_8cs_source_1l00054"/>00054 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">if</emphasis>&#32;(localGitState.Repo&#32;is&#32;<emphasis role="keyword">null</emphasis>)
+<anchor xml:id="__git_controls_display_8razor_8cs_source_1l00055"/>00055 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>;
+<anchor xml:id="__git_controls_display_8razor_8cs_source_1l00056"/>00056 
+<anchor xml:id="__git_controls_display_8razor_8cs_source_1l00057"/>00057 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<link linkend="_class_luthetus_1_1_extensions_1_1_git_1_1_background_tasks_1_1_models_1_1_git_background_task_api">GitBackgroundTaskApi</link>.<link linkend="_class_luthetus_1_1_extensions_1_1_git_1_1_background_tasks_1_1_models_1_1_git_background_task_api_1a2c059afb23ea38591a882933b9972492">Git</link>.CommitEnqueue(localGitState.Repo,&#32;localSummary);
+<anchor xml:id="__git_controls_display_8razor_8cs_source_1l00058"/>00058 
+<anchor xml:id="__git_controls_display_8razor_8cs_source_1l00059"/>00059 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;_summary&#32;=&#32;<emphasis role="keywordtype">string</emphasis>.Empty;
+<anchor xml:id="__git_controls_display_8razor_8cs_source_1l00060"/>00060 &#32;&#32;&#32;&#32;}
+<anchor xml:id="__git_controls_display_8razor_8cs_source_1l00061"/>00061 
+<anchor xml:id="__git_controls_display_8razor_8cs_source_1l00062"/>00062 &#32;&#32;&#32;&#32;<emphasis role="keyword">private</emphasis>&#32;<emphasis role="keywordtype">void</emphasis>&#32;ShowGitOriginDialogOnClick()
+<anchor xml:id="__git_controls_display_8razor_8cs_source_1l00063"/>00063 &#32;&#32;&#32;&#32;{
+<anchor xml:id="__git_controls_display_8razor_8cs_source_1l00064"/>00064 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;var&#32;dialogViewModel&#32;=&#32;<emphasis role="keyword">new</emphasis>&#32;<link linkend="_namespace_luthetus_1_1_common_1_1_razor_lib_1_1_dialogs_1_1_models_1ae2e54632fac386f81ebbbc781bf17fed">DialogViewModel</link>(
+<anchor xml:id="__git_controls_display_8razor_8cs_source_1l00065"/>00065 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;Key&lt;IDynamicViewModel&gt;.NewKey(),
+<anchor xml:id="__git_controls_display_8razor_8cs_source_1l00066"/>00066 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;$<emphasis role="stringliteral">&quot;Git&#32;Origin&quot;</emphasis>,
+<anchor xml:id="__git_controls_display_8razor_8cs_source_1l00067"/>00067 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;typeof(GitOriginDisplay),
+<anchor xml:id="__git_controls_display_8razor_8cs_source_1l00068"/>00068 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keyword">null</emphasis>,
+<anchor xml:id="__git_controls_display_8razor_8cs_source_1l00069"/>00069 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keyword">null</emphasis>,
+<anchor xml:id="__git_controls_display_8razor_8cs_source_1l00070"/>00070 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keyword">true</emphasis>,
+<anchor xml:id="__git_controls_display_8razor_8cs_source_1l00071"/>00071 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keyword">null</emphasis>);
+<anchor xml:id="__git_controls_display_8razor_8cs_source_1l00072"/>00072 
+<anchor xml:id="__git_controls_display_8razor_8cs_source_1l00073"/>00073 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;Dispatcher.Dispatch(<emphasis role="keyword">new</emphasis>&#32;<link linkend="_namespace_luthetus_1_1_common_1_1_razor_lib_1_1_dialogs_1_1_states_1a1c299b7ac4927ba6c5bede4e57cd963f">DialogState</link>.RegisterAction(dialogViewModel));
+<anchor xml:id="__git_controls_display_8razor_8cs_source_1l00074"/>00074 &#32;&#32;&#32;&#32;}
+<anchor xml:id="__git_controls_display_8razor_8cs_source_1l00075"/>00075 }
+</programlisting></section>

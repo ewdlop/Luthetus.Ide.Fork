@@ -1,0 +1,217 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="__ide_import_display_8razor_8cs_source" xml:lang="en-US">
+<title>IdeImportDisplay.razor.cs</title>
+<indexterm><primary>Source/Lib/Ide/Ide.RazorLib/Shareds/Displays/Internals/IdeImportDisplay.razor.cs</primary></indexterm>
+Go to the documentation of this file.<programlisting linenumbering="unnumbered"><anchor xml:id="__ide_import_display_8razor_8cs_source_1l00001"/>00001 <emphasis role="keyword">using&#32;</emphasis>System.IO.Compression;
+<anchor xml:id="__ide_import_display_8razor_8cs_source_1l00002"/>00002 <emphasis role="keyword">using&#32;</emphasis>Microsoft.AspNetCore.Components;
+<anchor xml:id="__ide_import_display_8razor_8cs_source_1l00003"/>00003 <emphasis role="keyword">using&#32;</emphasis>Fluxor;
+<anchor xml:id="__ide_import_display_8razor_8cs_source_1l00004"/>00004 <emphasis role="keyword">using&#32;</emphasis><link linkend="_namespace_luthetus_1_1_common_1_1_razor_lib_1_1_file_systems_1_1_models">Luthetus.Common.RazorLib.FileSystems.Models</link>;
+<anchor xml:id="__ide_import_display_8razor_8cs_source_1l00005"/>00005 <emphasis role="keyword">using&#32;</emphasis><link linkend="_namespace_luthetus_1_1_common_1_1_razor_lib_1_1_options_1_1_states">Luthetus.Common.RazorLib.Options.States</link>;
+<anchor xml:id="__ide_import_display_8razor_8cs_source_1l00006"/>00006 <emphasis role="keyword">using&#32;</emphasis><link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models">Luthetus.TextEditor.RazorLib.TextEditors.Models</link>;
+<anchor xml:id="__ide_import_display_8razor_8cs_source_1l00007"/>00007 <emphasis role="keyword">using&#32;</emphasis><link linkend="_namespace_luthetus_1_1_ide_1_1_razor_lib_1_1_exceptions">Luthetus.Ide.RazorLib.Exceptions</link>;
+<anchor xml:id="__ide_import_display_8razor_8cs_source_1l00008"/>00008 
+<anchor xml:id="__ide_import_display_8razor_8cs_source_1l00009"/>00009 <emphasis role="keyword">namespace&#32;</emphasis><link linkend="_namespace_luthetus_1_1_ide_1_1_razor_lib_1_1_shareds_1_1_displays_1_1_internals">Luthetus.Ide.RazorLib.Shareds.Displays.Internals</link>;
+<anchor xml:id="__ide_import_display_8razor_8cs_source_1l00010"/>00010 
+<anchor xml:id="__ide_import_display_8razor_8cs_source_1l00011"/><link linkend="_class_luthetus_1_1_ide_1_1_razor_lib_1_1_shareds_1_1_displays_1_1_internals_1_1_ide_import_display">00011</link> <emphasis role="keyword">public</emphasis>&#32;<emphasis role="keyword">partial&#32;class&#32;</emphasis><link linkend="_class_luthetus_1_1_ide_1_1_razor_lib_1_1_shareds_1_1_displays_1_1_internals_1_1_ide_import_display">IdeImportDisplay</link>&#32;:&#32;ComponentBase,&#32;IDisposable
+<anchor xml:id="__ide_import_display_8razor_8cs_source_1l00012"/>00012 {
+<anchor xml:id="__ide_import_display_8razor_8cs_source_1l00013"/>00013 &#32;&#32;&#32;&#32;[Inject]
+<anchor xml:id="__ide_import_display_8razor_8cs_source_1l00014"/>00014 &#32;&#32;&#32;&#32;<emphasis role="keyword">private</emphasis>&#32;HttpClient&#32;HttpClient&#32;{&#32;<emphasis role="keyword">get</emphasis>;&#32;<emphasis role="keyword">set</emphasis>;&#32;}&#32;=&#32;<emphasis role="keyword">null</emphasis>!;
+<anchor xml:id="__ide_import_display_8razor_8cs_source_1l00015"/>00015 &#32;&#32;&#32;&#32;[Inject]
+<anchor xml:id="__ide_import_display_8razor_8cs_source_1l00016"/>00016 &#32;&#32;&#32;&#32;<emphasis role="keyword">private</emphasis>&#32;<link linkend="_interface_luthetus_1_1_common_1_1_razor_lib_1_1_file_systems_1_1_models_1_1_i_file_system_provider">IFileSystemProvider</link>&#32;FileSystemProvider&#32;{&#32;<emphasis role="keyword">get</emphasis>;&#32;<emphasis role="keyword">set</emphasis>;&#32;}&#32;=&#32;<emphasis role="keyword">null</emphasis>!;
+<anchor xml:id="__ide_import_display_8razor_8cs_source_1l00017"/>00017 &#32;&#32;&#32;&#32;[Inject]
+<anchor xml:id="__ide_import_display_8razor_8cs_source_1l00018"/>00018 &#32;&#32;&#32;&#32;<emphasis role="keyword">private</emphasis>&#32;<link linkend="_interface_luthetus_1_1_common_1_1_razor_lib_1_1_file_systems_1_1_models_1_1_i_environment_provider">IEnvironmentProvider</link>&#32;EnvironmentProvider&#32;{&#32;<emphasis role="keyword">get</emphasis>;&#32;<emphasis role="keyword">set</emphasis>;&#32;}&#32;=&#32;<emphasis role="keyword">null</emphasis>!;
+<anchor xml:id="__ide_import_display_8razor_8cs_source_1l00019"/>00019 &#32;&#32;&#32;&#32;[Inject]
+<anchor xml:id="__ide_import_display_8razor_8cs_source_1l00020"/>00020 &#32;&#32;&#32;&#32;<emphasis role="keyword">private</emphasis>&#32;IState&lt;AppOptionsState&gt;&#32;AppOptionsStateWrap&#32;{&#32;<emphasis role="keyword">get</emphasis>;&#32;<emphasis role="keyword">set</emphasis>;&#32;}&#32;=&#32;<emphasis role="keyword">null</emphasis>!;
+<anchor xml:id="__ide_import_display_8razor_8cs_source_1l00021"/>00021 &#32;&#32;&#32;&#32;[Inject]
+<anchor xml:id="__ide_import_display_8razor_8cs_source_1l00022"/>00022 &#32;&#32;&#32;&#32;<emphasis role="keyword">private</emphasis>&#32;IDispatcher&#32;Dispatcher&#32;{&#32;<emphasis role="keyword">get</emphasis>;&#32;<emphasis role="keyword">set</emphasis>;&#32;}&#32;=&#32;<emphasis role="keyword">null</emphasis>!;
+<anchor xml:id="__ide_import_display_8razor_8cs_source_1l00023"/>00023 
+<anchor xml:id="__ide_import_display_8razor_8cs_source_1l00024"/>00024 &#32;&#32;&#32;&#32;<emphasis role="keyword">private</emphasis>&#32;readonly&#32;<emphasis role="keywordtype">object</emphasis>&#32;RequestRepoContentLock&#32;=&#32;<emphasis role="keyword">new</emphasis>();
+<anchor xml:id="__ide_import_display_8razor_8cs_source_1l00025"/>00025 
+<anchor xml:id="__ide_import_display_8razor_8cs_source_1l00026"/>00026 &#32;&#32;&#32;&#32;<emphasis role="keyword">private</emphasis>&#32;<emphasis role="keywordtype">string</emphasis>&#32;_owner&#32;=&#32;<emphasis role="stringliteral">&quot;huntercfreeman&quot;</emphasis>;
+<anchor xml:id="__ide_import_display_8razor_8cs_source_1l00027"/>00027 &#32;&#32;&#32;&#32;<emphasis role="keyword">private</emphasis>&#32;<emphasis role="keywordtype">string</emphasis>&#32;_repo&#32;=&#32;<emphasis role="stringliteral">&quot;BlazorApp&quot;</emphasis>;
+<anchor xml:id="__ide_import_display_8razor_8cs_source_1l00028"/>00028 &#32;&#32;&#32;&#32;<emphasis role="keyword">private</emphasis>&#32;<emphasis role="keywordtype">string</emphasis>&#32;_ref&#32;=&#32;<emphasis role="keywordtype">string</emphasis>.Empty;
+<anchor xml:id="__ide_import_display_8razor_8cs_source_1l00029"/>00029 
+<anchor xml:id="__ide_import_display_8razor_8cs_source_1l00030"/>00030 &#32;&#32;&#32;&#32;<emphasis role="keyword">private</emphasis>&#32;<link linkend="_class_luthetus_1_1_ide_1_1_razor_lib_1_1_shareds_1_1_displays_1_1_internals_1_1_ide_import_display_1a3771d9f51bec1abb15877344e85b4c4c">ImportPhase</link>&#32;_activePhase&#32;=&#32;<link linkend="_class_luthetus_1_1_ide_1_1_razor_lib_1_1_shareds_1_1_displays_1_1_internals_1_1_ide_import_display_1a3771d9f51bec1abb15877344e85b4c4c">ImportPhase</link>.None;
+<anchor xml:id="__ide_import_display_8razor_8cs_source_1l00031"/>00031 &#32;&#32;&#32;&#32;<emphasis role="keyword">private</emphasis>&#32;<emphasis role="keywordtype">string</emphasis>&#32;_activeQuery&#32;=&#32;<emphasis role="keywordtype">string</emphasis>.Empty;
+<anchor xml:id="__ide_import_display_8razor_8cs_source_1l00032"/>00032 &#32;&#32;&#32;&#32;<emphasis role="keyword">private</emphasis>&#32;<emphasis role="keywordtype">int</emphasis>&#32;_totalFilesInZipArchive;
+<anchor xml:id="__ide_import_display_8razor_8cs_source_1l00033"/>00033 &#32;&#32;&#32;&#32;<emphasis role="keyword">private</emphasis>&#32;<emphasis role="keywordtype">int</emphasis>&#32;_processedFilesInZipArchive;
+<anchor xml:id="__ide_import_display_8razor_8cs_source_1l00034"/>00034 &#32;&#32;&#32;&#32;<emphasis role="keyword">private</emphasis>&#32;<emphasis role="keywordtype">string</emphasis>&#32;_nameOfEntryMostRecentlyProcessed&#32;=&#32;<emphasis role="keywordtype">string</emphasis>.Empty;
+<anchor xml:id="__ide_import_display_8razor_8cs_source_1l00035"/>00035 &#32;&#32;&#32;&#32;<emphasis role="keyword">private</emphasis>&#32;<emphasis role="keywordtype">string</emphasis>?&#32;_errorMessage;
+<anchor xml:id="__ide_import_display_8razor_8cs_source_1l00036"/>00036 
+<anchor xml:id="__ide_import_display_8razor_8cs_source_1l00037"/>00037 &#32;&#32;&#32;&#32;<emphasis role="keyword">private</emphasis>&#32;CancellationTokenSource&#32;_cancellationTokenSource&#32;=&#32;<emphasis role="keyword">new</emphasis>();
+<anchor xml:id="__ide_import_display_8razor_8cs_source_1l00038"/>00038 &#32;&#32;&#32;&#32;<emphasis role="keyword">private</emphasis>&#32;CancellationToken?&#32;_activeCancellationToken&#32;=&#32;<emphasis role="keyword">null</emphasis>;
+<anchor xml:id="__ide_import_display_8razor_8cs_source_1l00039"/>00039 
+<anchor xml:id="__ide_import_display_8razor_8cs_source_1l00040"/>00040 &#32;&#32;&#32;&#32;<emphasis role="keyword">private</emphasis>&#32;<emphasis role="keywordtype">string</emphasis>&#32;_parametersForFinishedQuery&#32;=&#32;<emphasis role="keywordtype">string</emphasis>.Empty;
+<anchor xml:id="__ide_import_display_8razor_8cs_source_1l00041"/>00041 
+<anchor xml:id="__ide_import_display_8razor_8cs_source_1l00042"/><link linkend="_class_luthetus_1_1_ide_1_1_razor_lib_1_1_shareds_1_1_displays_1_1_internals_1_1_ide_import_display_1a3771d9f51bec1abb15877344e85b4c4c">00042</link> &#32;&#32;&#32;&#32;<emphasis role="keyword">public</emphasis>&#32;<emphasis role="keyword">enum</emphasis>&#32;<link linkend="_class_luthetus_1_1_ide_1_1_razor_lib_1_1_shareds_1_1_displays_1_1_internals_1_1_ide_import_display_1a3771d9f51bec1abb15877344e85b4c4c">ImportPhase</link>
+<anchor xml:id="__ide_import_display_8razor_8cs_source_1l00043"/>00043 &#32;&#32;&#32;&#32;{
+<anchor xml:id="__ide_import_display_8razor_8cs_source_1l00044"/><link linkend="_class_luthetus_1_1_ide_1_1_razor_lib_1_1_shareds_1_1_displays_1_1_internals_1_1_ide_import_display_1a3771d9f51bec1abb15877344e85b4c4ca6adf97f83acf6453d4a6a4b1070f3754">00044</link> &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<link linkend="_class_luthetus_1_1_ide_1_1_razor_lib_1_1_shareds_1_1_displays_1_1_internals_1_1_ide_import_display_1a3771d9f51bec1abb15877344e85b4c4ca6adf97f83acf6453d4a6a4b1070f3754">None</link>,
+<anchor xml:id="__ide_import_display_8razor_8cs_source_1l00045"/><link linkend="_class_luthetus_1_1_ide_1_1_razor_lib_1_1_shareds_1_1_displays_1_1_internals_1_1_ide_import_display_1a3771d9f51bec1abb15877344e85b4c4cadf36574d4bcbfbfa406c7a9f8357500f">00045</link> &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<link linkend="_class_luthetus_1_1_ide_1_1_razor_lib_1_1_shareds_1_1_displays_1_1_internals_1_1_ide_import_display_1a3771d9f51bec1abb15877344e85b4c4cadf36574d4bcbfbfa406c7a9f8357500f">RequestRepoContents</link>,
+<anchor xml:id="__ide_import_display_8razor_8cs_source_1l00046"/><link linkend="_class_luthetus_1_1_ide_1_1_razor_lib_1_1_shareds_1_1_displays_1_1_internals_1_1_ide_import_display_1a3771d9f51bec1abb15877344e85b4c4caa0a7a68d781d3d46a52fedfe82b39eac">00046</link> &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<link linkend="_class_luthetus_1_1_ide_1_1_razor_lib_1_1_shareds_1_1_displays_1_1_internals_1_1_ide_import_display_1a3771d9f51bec1abb15877344e85b4c4caa0a7a68d781d3d46a52fedfe82b39eac">ReadZipArchive</link>,
+<anchor xml:id="__ide_import_display_8razor_8cs_source_1l00047"/><link linkend="_class_luthetus_1_1_ide_1_1_razor_lib_1_1_shareds_1_1_displays_1_1_internals_1_1_ide_import_display_1a3771d9f51bec1abb15877344e85b4c4ca902b0d55fddef6f8d651fe1035b7d4bd">00047</link> &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<link linkend="_class_luthetus_1_1_ide_1_1_razor_lib_1_1_shareds_1_1_displays_1_1_internals_1_1_ide_import_display_1a3771d9f51bec1abb15877344e85b4c4ca902b0d55fddef6f8d651fe1035b7d4bd">Error</link>,
+<anchor xml:id="__ide_import_display_8razor_8cs_source_1l00048"/><link linkend="_class_luthetus_1_1_ide_1_1_razor_lib_1_1_shareds_1_1_displays_1_1_internals_1_1_ide_import_display_1a3771d9f51bec1abb15877344e85b4c4ca8f3d10eb21bd36347c258679eba9e92b">00048</link> &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<link linkend="_class_luthetus_1_1_ide_1_1_razor_lib_1_1_shareds_1_1_displays_1_1_internals_1_1_ide_import_display_1a3771d9f51bec1abb15877344e85b4c4ca8f3d10eb21bd36347c258679eba9e92b">Finished</link>,
+<anchor xml:id="__ide_import_display_8razor_8cs_source_1l00049"/>00049 &#32;&#32;&#32;&#32;}
+<anchor xml:id="__ide_import_display_8razor_8cs_source_1l00050"/>00050 
+<anchor xml:id="__ide_import_display_8razor_8cs_source_1l00051"/>00051 &#32;&#32;&#32;&#32;<emphasis role="keyword">private</emphasis>&#32;async&#32;Task&#32;LoadFromUrlOnClick()
+<anchor xml:id="__ide_import_display_8razor_8cs_source_1l00052"/>00052 &#32;&#32;&#32;&#32;{
+<anchor xml:id="__ide_import_display_8razor_8cs_source_1l00053"/>00053 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;var&#32;localOwner&#32;=&#32;_owner;
+<anchor xml:id="__ide_import_display_8razor_8cs_source_1l00054"/>00054 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;var&#32;localRepo&#32;=&#32;_repo;
+<anchor xml:id="__ide_import_display_8razor_8cs_source_1l00055"/>00055 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;var&#32;localRef&#32;=&#32;_ref;
+<anchor xml:id="__ide_import_display_8razor_8cs_source_1l00056"/>00056 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;var&#32;localActiveQuery&#32;=&#32;<emphasis role="keywordtype">string</emphasis>.Empty;
+<anchor xml:id="__ide_import_display_8razor_8cs_source_1l00057"/>00057 
+<anchor xml:id="__ide_import_display_8razor_8cs_source_1l00058"/>00058 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">if</emphasis>&#32;(_activeCancellationToken&#32;is&#32;not&#32;<emphasis role="keyword">null</emphasis>)
+<anchor xml:id="__ide_import_display_8razor_8cs_source_1l00059"/>00059 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>;
+<anchor xml:id="__ide_import_display_8razor_8cs_source_1l00060"/>00060 
+<anchor xml:id="__ide_import_display_8razor_8cs_source_1l00061"/>00061 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;lock&#32;(RequestRepoContentLock)
+<anchor xml:id="__ide_import_display_8razor_8cs_source_1l00062"/>00062 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;{
+<anchor xml:id="__ide_import_display_8razor_8cs_source_1l00063"/>00063 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">if</emphasis>&#32;(_activeCancellationToken&#32;is&#32;not&#32;<emphasis role="keyword">null</emphasis>)
+<anchor xml:id="__ide_import_display_8razor_8cs_source_1l00064"/>00064 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>;
+<anchor xml:id="__ide_import_display_8razor_8cs_source_1l00065"/>00065 
+<anchor xml:id="__ide_import_display_8razor_8cs_source_1l00066"/>00066 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;_activeCancellationToken&#32;=&#32;_cancellationTokenSource.Token;
+<anchor xml:id="__ide_import_display_8razor_8cs_source_1l00067"/>00067 
+<anchor xml:id="__ide_import_display_8razor_8cs_source_1l00068"/>00068 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;localActiveQuery&#32;=&#32;
+<anchor xml:id="__ide_import_display_8razor_8cs_source_1l00069"/>00069 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;_activeQuery&#32;=
+<anchor xml:id="__ide_import_display_8razor_8cs_source_1l00070"/>00070 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;$<emphasis role="stringliteral">&quot;https://api.github.com/repos/{localOwner}/{localRepo}/zipball/{localRef}&quot;</emphasis>;
+<anchor xml:id="__ide_import_display_8razor_8cs_source_1l00071"/>00071 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;}
+<anchor xml:id="__ide_import_display_8razor_8cs_source_1l00072"/>00072 
+<anchor xml:id="__ide_import_display_8razor_8cs_source_1l00073"/>00073 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">try</emphasis>
+<anchor xml:id="__ide_import_display_8razor_8cs_source_1l00074"/>00074 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;{
+<anchor xml:id="__ide_import_display_8razor_8cs_source_1l00075"/>00075 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;UI&#32;progress&#32;indicator</emphasis>
+<anchor xml:id="__ide_import_display_8razor_8cs_source_1l00076"/>00076 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;{
+<anchor xml:id="__ide_import_display_8razor_8cs_source_1l00077"/>00077 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;_errorMessage&#32;=&#32;<emphasis role="keyword">null</emphasis>;
+<anchor xml:id="__ide_import_display_8razor_8cs_source_1l00078"/>00078 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;_activePhase&#32;=&#32;<link linkend="_class_luthetus_1_1_ide_1_1_razor_lib_1_1_shareds_1_1_displays_1_1_internals_1_1_ide_import_display_1a3771d9f51bec1abb15877344e85b4c4c">ImportPhase</link>.RequestRepoContents;
+<anchor xml:id="__ide_import_display_8razor_8cs_source_1l00079"/>00079 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;await&#32;InvokeAsync(StateHasChanged);
+<anchor xml:id="__ide_import_display_8razor_8cs_source_1l00080"/>00080 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;}
+<anchor xml:id="__ide_import_display_8razor_8cs_source_1l00081"/>00081 
+<anchor xml:id="__ide_import_display_8razor_8cs_source_1l00082"/>00082 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;_activeCancellationToken.Value.ThrowIfCancellationRequested();
+<anchor xml:id="__ide_import_display_8razor_8cs_source_1l00083"/>00083 
+<anchor xml:id="__ide_import_display_8razor_8cs_source_1l00084"/>00084 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;var&#32;request&#32;=&#32;<emphasis role="keyword">new</emphasis>&#32;HttpRequestMessage(
+<anchor xml:id="__ide_import_display_8razor_8cs_source_1l00085"/>00085 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;HttpMethod.Get,
+<anchor xml:id="__ide_import_display_8razor_8cs_source_1l00086"/>00086 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;$<emphasis role="stringliteral">&quot;https://api.github.com/repos/{localOwner}/{localRepo}/zipball/{localRef}&quot;</emphasis>);
+<anchor xml:id="__ide_import_display_8razor_8cs_source_1l00087"/>00087 
+<anchor xml:id="__ide_import_display_8razor_8cs_source_1l00088"/>00088 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;request.Headers.Add(<emphasis role="stringliteral">&quot;Accept&quot;</emphasis>,&#32;<emphasis role="stringliteral">&quot;application/vnd.github+json&quot;</emphasis>);
+<anchor xml:id="__ide_import_display_8razor_8cs_source_1l00089"/>00089 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;request.Headers.Add(<emphasis role="stringliteral">&quot;User-Agent&quot;</emphasis>,&#32;<emphasis role="stringliteral">&quot;Luthetus&quot;</emphasis>);
+<anchor xml:id="__ide_import_display_8razor_8cs_source_1l00090"/>00090 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;request.Headers.Add(&quot;Authorization&quot;,&#32;222&quot;Bearer&#32;&lt;YOUR-TOKEN&gt;&quot;);</emphasis>
+<anchor xml:id="__ide_import_display_8razor_8cs_source_1l00091"/>00091 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;request.Headers.Add(<emphasis role="stringliteral">&quot;X-GitHub-Api-Version&quot;</emphasis>,&#32;<emphasis role="stringliteral">&quot;2022-11-28&quot;</emphasis>);
+<anchor xml:id="__ide_import_display_8razor_8cs_source_1l00092"/>00092 
+<anchor xml:id="__ide_import_display_8razor_8cs_source_1l00093"/>00093 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;var&#32;response&#32;=&#32;await&#32;HttpClient.SendAsync(request).ConfigureAwait(<emphasis role="keyword">false</emphasis>);
+<anchor xml:id="__ide_import_display_8razor_8cs_source_1l00094"/>00094 
+<anchor xml:id="__ide_import_display_8razor_8cs_source_1l00095"/>00095 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">if</emphasis>&#32;(response.IsSuccessStatusCode)
+<anchor xml:id="__ide_import_display_8razor_8cs_source_1l00096"/>00096 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;{
+<anchor xml:id="__ide_import_display_8razor_8cs_source_1l00097"/>00097 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keyword">using&#32;</emphasis>var&#32;responseStream&#32;=&#32;await&#32;response.Content.ReadAsStreamAsync().ConfigureAwait(<emphasis role="keyword">false</emphasis>);
+<anchor xml:id="__ide_import_display_8razor_8cs_source_1l00098"/>00098 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;var&#32;zipArchive&#32;=&#32;<emphasis role="keyword">new</emphasis>&#32;ZipArchive(responseStream);
+<anchor xml:id="__ide_import_display_8razor_8cs_source_1l00099"/>00099 
+<anchor xml:id="__ide_import_display_8razor_8cs_source_1l00100"/>00100 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;UI&#32;progress&#32;indicator</emphasis>
+<anchor xml:id="__ide_import_display_8razor_8cs_source_1l00101"/>00101 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;{
+<anchor xml:id="__ide_import_display_8razor_8cs_source_1l00102"/>00102 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;_processedFilesInZipArchive&#32;=&#32;0;
+<anchor xml:id="__ide_import_display_8razor_8cs_source_1l00103"/>00103 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;_totalFilesInZipArchive&#32;=&#32;zipArchive.Entries.Count;
+<anchor xml:id="__ide_import_display_8razor_8cs_source_1l00104"/>00104 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;_activePhase&#32;=&#32;<link linkend="_class_luthetus_1_1_ide_1_1_razor_lib_1_1_shareds_1_1_displays_1_1_internals_1_1_ide_import_display_1a3771d9f51bec1abb15877344e85b4c4c">ImportPhase</link>.ReadZipArchive;
+<anchor xml:id="__ide_import_display_8razor_8cs_source_1l00105"/>00105 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;await&#32;InvokeAsync(StateHasChanged);
+<anchor xml:id="__ide_import_display_8razor_8cs_source_1l00106"/>00106 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;}
+<anchor xml:id="__ide_import_display_8razor_8cs_source_1l00107"/>00107 
+<anchor xml:id="__ide_import_display_8razor_8cs_source_1l00108"/>00108 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">foreach</emphasis>&#32;(var&#32;entry&#32;<emphasis role="keywordflow">in</emphasis>&#32;zipArchive.Entries)
+<anchor xml:id="__ide_import_display_8razor_8cs_source_1l00109"/>00109 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;{
+<anchor xml:id="__ide_import_display_8razor_8cs_source_1l00110"/>00110 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;_activeCancellationToken.Value.ThrowIfCancellationRequested();
+<anchor xml:id="__ide_import_display_8razor_8cs_source_1l00111"/>00111 
+<anchor xml:id="__ide_import_display_8razor_8cs_source_1l00112"/>00112 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;var&#32;stream&#32;=&#32;entry.Open();
+<anchor xml:id="__ide_import_display_8razor_8cs_source_1l00113"/>00113 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;var&#32;streamReader&#32;=&#32;<emphasis role="keyword">new</emphasis>&#32;StreamReader(stream);
+<anchor xml:id="__ide_import_display_8razor_8cs_source_1l00114"/>00114 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;var&#32;contents&#32;=&#32;await&#32;streamReader.ReadToEndAsync().ConfigureAwait(<emphasis role="keyword">false</emphasis>);
+<anchor xml:id="__ide_import_display_8razor_8cs_source_1l00115"/>00115 
+<anchor xml:id="__ide_import_display_8razor_8cs_source_1l00116"/>00116 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;Add&#32;the&#32;file&#32;to&#32;the&#32;in-memory&#32;filesystem.</emphasis>
+<anchor xml:id="__ide_import_display_8razor_8cs_source_1l00117"/>00117 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;(all&#32;the&#32;code&#32;in&#32;this&#32;file&#32;is&#32;for&#32;the&#32;demo&#32;website)</emphasis>
+<anchor xml:id="__ide_import_display_8razor_8cs_source_1l00118"/>00118 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;{
+<anchor xml:id="__ide_import_display_8razor_8cs_source_1l00119"/>00119 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">if</emphasis>&#32;(<emphasis role="keywordtype">string</emphasis>.IsNullOrWhiteSpace(entry.Name))
+<anchor xml:id="__ide_import_display_8razor_8cs_source_1l00120"/>00120 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">continue</emphasis>;
+<anchor xml:id="__ide_import_display_8razor_8cs_source_1l00121"/>00121 
+<anchor xml:id="__ide_import_display_8razor_8cs_source_1l00122"/>00122 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;var&#32;absoluteFilePathString&#32;=&#32;$<emphasis role="stringliteral">&quot;/{localRepo}/{entry.FullName}&quot;</emphasis>;
+<anchor xml:id="__ide_import_display_8razor_8cs_source_1l00123"/>00123 
+<anchor xml:id="__ide_import_display_8razor_8cs_source_1l00124"/>00124 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;await&#32;FileSystemProvider.File
+<anchor xml:id="__ide_import_display_8razor_8cs_source_1l00125"/>00125 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;.WriteAllTextAsync(
+<anchor xml:id="__ide_import_display_8razor_8cs_source_1l00126"/>00126 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;absoluteFilePathString,
+<anchor xml:id="__ide_import_display_8razor_8cs_source_1l00127"/>00127 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;contents,
+<anchor xml:id="__ide_import_display_8razor_8cs_source_1l00128"/>00128 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;_activeCancellationToken.Value)
+<anchor xml:id="__ide_import_display_8razor_8cs_source_1l00129"/>00129 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;.ConfigureAwait(<emphasis role="keyword">false</emphasis>);
+<anchor xml:id="__ide_import_display_8razor_8cs_source_1l00130"/>00130 
+<anchor xml:id="__ide_import_display_8razor_8cs_source_1l00131"/>00131 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">if</emphasis>&#32;(entry.Name.EndsWith(ExtensionNoPeriodFacts.DOT_NET_SOLUTION))
+<anchor xml:id="__ide_import_display_8razor_8cs_source_1l00132"/>00132 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;PromptUserOpenSolution(absoluteFilePathString);
+<anchor xml:id="__ide_import_display_8razor_8cs_source_1l00133"/>00133 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;}
+<anchor xml:id="__ide_import_display_8razor_8cs_source_1l00134"/>00134 
+<anchor xml:id="__ide_import_display_8razor_8cs_source_1l00135"/>00135 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;UI&#32;progress&#32;indicator</emphasis>
+<anchor xml:id="__ide_import_display_8razor_8cs_source_1l00136"/>00136 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;{
+<anchor xml:id="__ide_import_display_8razor_8cs_source_1l00137"/>00137 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;_processedFilesInZipArchive++;
+<anchor xml:id="__ide_import_display_8razor_8cs_source_1l00138"/>00138 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;_nameOfEntryMostRecentlyProcessed&#32;=&#32;entry.Name;
+<anchor xml:id="__ide_import_display_8razor_8cs_source_1l00139"/>00139 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;await&#32;InvokeAsync(StateHasChanged);
+<anchor xml:id="__ide_import_display_8razor_8cs_source_1l00140"/>00140 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;}
+<anchor xml:id="__ide_import_display_8razor_8cs_source_1l00141"/>00141 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;}
+<anchor xml:id="__ide_import_display_8razor_8cs_source_1l00142"/>00142 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;}
+<anchor xml:id="__ide_import_display_8razor_8cs_source_1l00143"/>00143 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">else</emphasis>
+<anchor xml:id="__ide_import_display_8razor_8cs_source_1l00144"/>00144 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;{
+<anchor xml:id="__ide_import_display_8razor_8cs_source_1l00145"/>00145 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">throw</emphasis>&#32;<emphasis role="keyword">new</emphasis>&#32;LuthetusIdeException(response.ToString());
+<anchor xml:id="__ide_import_display_8razor_8cs_source_1l00146"/>00146 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;}
+<anchor xml:id="__ide_import_display_8razor_8cs_source_1l00147"/>00147 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;}
+<anchor xml:id="__ide_import_display_8razor_8cs_source_1l00148"/>00148 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">catch</emphasis>&#32;(Exception&#32;exception)
+<anchor xml:id="__ide_import_display_8razor_8cs_source_1l00149"/>00149 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;{
+<anchor xml:id="__ide_import_display_8razor_8cs_source_1l00150"/>00150 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;_errorMessage&#32;=&#32;exception.ToString();
+<anchor xml:id="__ide_import_display_8razor_8cs_source_1l00151"/>00151 
+<anchor xml:id="__ide_import_display_8razor_8cs_source_1l00152"/>00152 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;UI&#32;progress&#32;indicator</emphasis>
+<anchor xml:id="__ide_import_display_8razor_8cs_source_1l00153"/>00153 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;{
+<anchor xml:id="__ide_import_display_8razor_8cs_source_1l00154"/>00154 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;_activePhase&#32;=&#32;<link linkend="_class_luthetus_1_1_ide_1_1_razor_lib_1_1_shareds_1_1_displays_1_1_internals_1_1_ide_import_display_1a3771d9f51bec1abb15877344e85b4c4c">ImportPhase</link>.Error;
+<anchor xml:id="__ide_import_display_8razor_8cs_source_1l00155"/>00155 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;await&#32;InvokeAsync(StateHasChanged);
+<anchor xml:id="__ide_import_display_8razor_8cs_source_1l00156"/>00156 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;}
+<anchor xml:id="__ide_import_display_8razor_8cs_source_1l00157"/>00157 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;}
+<anchor xml:id="__ide_import_display_8razor_8cs_source_1l00158"/>00158 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">finally</emphasis>
+<anchor xml:id="__ide_import_display_8razor_8cs_source_1l00159"/>00159 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;{
+<anchor xml:id="__ide_import_display_8razor_8cs_source_1l00160"/>00160 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">if</emphasis>&#32;(_activePhase&#32;!=&#32;<link linkend="_class_luthetus_1_1_ide_1_1_razor_lib_1_1_shareds_1_1_displays_1_1_internals_1_1_ide_import_display_1a3771d9f51bec1abb15877344e85b4c4c">ImportPhase</link>.Error)
+<anchor xml:id="__ide_import_display_8razor_8cs_source_1l00161"/>00161 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;{
+<anchor xml:id="__ide_import_display_8razor_8cs_source_1l00162"/>00162 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;UI&#32;progress&#32;indicator</emphasis>
+<anchor xml:id="__ide_import_display_8razor_8cs_source_1l00163"/>00163 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;{
+<anchor xml:id="__ide_import_display_8razor_8cs_source_1l00164"/>00164 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;_activePhase&#32;=&#32;<link linkend="_class_luthetus_1_1_ide_1_1_razor_lib_1_1_shareds_1_1_displays_1_1_internals_1_1_ide_import_display_1a3771d9f51bec1abb15877344e85b4c4c">ImportPhase</link>.Finished;
+<anchor xml:id="__ide_import_display_8razor_8cs_source_1l00165"/>00165 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;_parametersForFinishedQuery&#32;=&#32;$<emphasis role="stringliteral">&quot;({localOwner}/{localRepo})&quot;</emphasis>;
+<anchor xml:id="__ide_import_display_8razor_8cs_source_1l00166"/>00166 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;await&#32;InvokeAsync(StateHasChanged);
+<anchor xml:id="__ide_import_display_8razor_8cs_source_1l00167"/>00167 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;}
+<anchor xml:id="__ide_import_display_8razor_8cs_source_1l00168"/>00168 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;}
+<anchor xml:id="__ide_import_display_8razor_8cs_source_1l00169"/>00169 
+<anchor xml:id="__ide_import_display_8razor_8cs_source_1l00170"/>00170 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;_activeCancellationToken&#32;=&#32;<emphasis role="keyword">null</emphasis>;
+<anchor xml:id="__ide_import_display_8razor_8cs_source_1l00171"/>00171 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;}
+<anchor xml:id="__ide_import_display_8razor_8cs_source_1l00172"/>00172 &#32;&#32;&#32;&#32;}
+<anchor xml:id="__ide_import_display_8razor_8cs_source_1l00173"/>00173 
+<anchor xml:id="__ide_import_display_8razor_8cs_source_1l00174"/>00174 &#32;&#32;&#32;&#32;<emphasis role="keyword">private</emphasis>&#32;<emphasis role="keywordtype">void</emphasis>&#32;CancelOnClick()
+<anchor xml:id="__ide_import_display_8razor_8cs_source_1l00175"/>00175 &#32;&#32;&#32;&#32;{
+<anchor xml:id="__ide_import_display_8razor_8cs_source_1l00176"/>00176 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;_cancellationTokenSource.Cancel();
+<anchor xml:id="__ide_import_display_8razor_8cs_source_1l00177"/>00177 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;_cancellationTokenSource&#32;=&#32;<emphasis role="keyword">new</emphasis>();
+<anchor xml:id="__ide_import_display_8razor_8cs_source_1l00178"/>00178 &#32;&#32;&#32;&#32;}
+<anchor xml:id="__ide_import_display_8razor_8cs_source_1l00179"/>00179 
+<anchor xml:id="__ide_import_display_8razor_8cs_source_1l00180"/>00180 &#32;&#32;&#32;&#32;<emphasis role="keyword">private</emphasis>&#32;<emphasis role="keywordtype">void</emphasis>&#32;PromptUserOpenSolution(<emphasis role="keywordtype">string</emphasis>&#32;absolutePathString)
+<anchor xml:id="__ide_import_display_8razor_8cs_source_1l00181"/>00181 &#32;&#32;&#32;&#32;{
+<anchor xml:id="__ide_import_display_8razor_8cs_source_1l00182"/>00182 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="comment">/*</emphasis>
+<anchor xml:id="__ide_import_display_8razor_8cs_source_1l00184"/>00184 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;//&#32;=======================================================================
+<anchor xml:id="__ide_import_display_8razor_8cs_source_1l00185"/>00185 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;var&#32;absolutePath&#32;=&#32;EnvironmentProvider.AbsolutePathFactory(
+<anchor xml:id="__ide_import_display_8razor_8cs_source_1l00186"/>00186 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;absolutePathString,
+<anchor xml:id="__ide_import_display_8razor_8cs_source_1l00187"/>00187 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;false);
+<anchor xml:id="__ide_import_display_8razor_8cs_source_1l00188"/>00188 
+<anchor xml:id="__ide_import_display_8razor_8cs_source_1l00189"/>00189 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;var&#32;notificationRecord&#32;=&#32;new&#32;NotificationViewModel(
+<anchor xml:id="__ide_import_display_8razor_8cs_source_1l00190"/>00190 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;Key&lt;IDynamicViewModel&gt;.NewKey(),
+<anchor xml:id="__ide_import_display_8razor_8cs_source_1l00191"/>00191 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&quot;A&#32;.NET&#32;Solution&#32;was&#32;found&quot;,
+<anchor xml:id="__ide_import_display_8razor_8cs_source_1l00192"/>00192 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;typeof(IdePromptOpenSolutionDisplay),
+<anchor xml:id="__ide_import_display_8razor_8cs_source_1l00193"/>00193 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;new&#32;Dictionary&lt;string,&#32;object?&gt;
+<anchor xml:id="__ide_import_display_8razor_8cs_source_1l00194"/>00194 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;{
+<anchor xml:id="__ide_import_display_8razor_8cs_source_1l00195"/>00195 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;{
+<anchor xml:id="__ide_import_display_8razor_8cs_source_1l00196"/>00196 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;nameof(IdePromptOpenSolutionDisplay.AbsolutePath),
+<anchor xml:id="__ide_import_display_8razor_8cs_source_1l00197"/>00197 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;absolutePath
+<anchor xml:id="__ide_import_display_8razor_8cs_source_1l00198"/>00198 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;}
+<anchor xml:id="__ide_import_display_8razor_8cs_source_1l00199"/>00199 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;},
+<anchor xml:id="__ide_import_display_8razor_8cs_source_1l00200"/>00200 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;TimeSpan.FromSeconds(7),
+<anchor xml:id="__ide_import_display_8razor_8cs_source_1l00201"/>00201 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;false,
+<anchor xml:id="__ide_import_display_8razor_8cs_source_1l00202"/>00202 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;null);
+<anchor xml:id="__ide_import_display_8razor_8cs_source_1l00203"/>00203 
+<anchor xml:id="__ide_import_display_8razor_8cs_source_1l00204"/>00204 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;Dispatcher.Dispatch(new&#32;NotificationState.RegisterAction(notificationRecord));
+<anchor xml:id="__ide_import_display_8razor_8cs_source_1l00205"/>00205 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;*/
+<anchor xml:id="__ide_import_display_8razor_8cs_source_1l00206"/>00206 &#32;&#32;&#32;&#32;}
+<anchor xml:id="__ide_import_display_8razor_8cs_source_1l00207"/>00207 
+<anchor xml:id="__ide_import_display_8razor_8cs_source_1l00208"/><link linkend="_class_luthetus_1_1_ide_1_1_razor_lib_1_1_shareds_1_1_displays_1_1_internals_1_1_ide_import_display_1a03f126feb9d714c0e11e36f40ccc904b">00208</link> &#32;&#32;&#32;&#32;<emphasis role="keyword">public</emphasis>&#32;<emphasis role="keywordtype">void</emphasis>&#32;<link linkend="_class_luthetus_1_1_ide_1_1_razor_lib_1_1_shareds_1_1_displays_1_1_internals_1_1_ide_import_display_1a03f126feb9d714c0e11e36f40ccc904b">Dispose</link>()
+<anchor xml:id="__ide_import_display_8razor_8cs_source_1l00209"/>00209 &#32;&#32;&#32;&#32;{
+<anchor xml:id="__ide_import_display_8razor_8cs_source_1l00210"/>00210 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;_cancellationTokenSource.Cancel();
+<anchor xml:id="__ide_import_display_8razor_8cs_source_1l00211"/>00211 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;_cancellationTokenSource.Dispose();
+<anchor xml:id="__ide_import_display_8razor_8cs_source_1l00212"/>00212 &#32;&#32;&#32;&#32;}
+<anchor xml:id="__ide_import_display_8razor_8cs_source_1l00213"/>00213 }
+</programlisting></section>

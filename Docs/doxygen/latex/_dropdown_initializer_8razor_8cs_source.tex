@@ -1,0 +1,54 @@
+\doxysection{Dropdown\+Initializer.\+razor.\+cs}
+\hypertarget{_dropdown_initializer_8razor_8cs_source}{}\label{_dropdown_initializer_8razor_8cs_source}\index{Source/Lib/Common/Dropdowns/Displays/DropdownInitializer.razor.cs@{Source/Lib/Common/Dropdowns/Displays/DropdownInitializer.razor.cs}}
+\mbox{\hyperlink{_dropdown_initializer_8razor_8cs}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{_dropdown_initializer_8razor_8cs_source_l00001}00001\ \textcolor{keyword}{using\ }Microsoft.AspNetCore.Components;}
+\DoxyCodeLine{\Hypertarget{_dropdown_initializer_8razor_8cs_source_l00002}00002\ \textcolor{keyword}{using\ }Fluxor;}
+\DoxyCodeLine{\Hypertarget{_dropdown_initializer_8razor_8cs_source_l00003}00003\ \textcolor{keyword}{using\ }Fluxor.Blazor.Web.Components;}
+\DoxyCodeLine{\Hypertarget{_dropdown_initializer_8razor_8cs_source_l00004}00004\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_luthetus_1_1_common_1_1_razor_lib_1_1_dropdowns_1_1_models}{Luthetus.Common.RazorLib.Dropdowns.Models}};}
+\DoxyCodeLine{\Hypertarget{_dropdown_initializer_8razor_8cs_source_l00005}00005\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_luthetus_1_1_common_1_1_razor_lib_1_1_dropdowns_1_1_states}{Luthetus.Common.RazorLib.Dropdowns.States}};}
+\DoxyCodeLine{\Hypertarget{_dropdown_initializer_8razor_8cs_source_l00006}00006\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_luthetus_1_1_common_1_1_razor_lib_1_1_contexts_1_1_displays}{Luthetus.Common.RazorLib.Contexts.Displays}};}
+\DoxyCodeLine{\Hypertarget{_dropdown_initializer_8razor_8cs_source_l00007}00007\ }
+\DoxyCodeLine{\Hypertarget{_dropdown_initializer_8razor_8cs_source_l00008}00008\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespace_luthetus_1_1_common_1_1_razor_lib_1_1_dropdowns_1_1_displays}{Luthetus.Common.RazorLib.Dropdowns.Displays}};}
+\DoxyCodeLine{\Hypertarget{_dropdown_initializer_8razor_8cs_source_l00009}00009\ }
+\DoxyCodeLine{\Hypertarget{_dropdown_initializer_8razor_8cs_source_l00010}\mbox{\hyperlink{class_luthetus_1_1_common_1_1_razor_lib_1_1_dropdowns_1_1_displays_1_1_dropdown_initializer}{00010}}\ \textcolor{keyword}{public}\ \textcolor{keyword}{partial\ class\ }\mbox{\hyperlink{class_luthetus_1_1_common_1_1_razor_lib_1_1_dropdowns_1_1_displays_1_1_dropdown_initializer}{DropdownInitializer}}\ :\ FluxorComponent}
+\DoxyCodeLine{\Hypertarget{_dropdown_initializer_8razor_8cs_source_l00011}00011\ \{}
+\DoxyCodeLine{\Hypertarget{_dropdown_initializer_8razor_8cs_source_l00012}00012\ \ \ \ \ [Inject]}
+\DoxyCodeLine{\Hypertarget{_dropdown_initializer_8razor_8cs_source_l00013}00013\ \ \ \ \ \textcolor{keyword}{private}\ IState<DropdownState>\ DropdownStateWrap\ \{\ \textcolor{keyword}{get};\ \textcolor{keyword}{set};\ \}\ =\ \textcolor{keyword}{null}!;}
+\DoxyCodeLine{\Hypertarget{_dropdown_initializer_8razor_8cs_source_l00014}00014\ \ \ \ \ [Inject]}
+\DoxyCodeLine{\Hypertarget{_dropdown_initializer_8razor_8cs_source_l00015}00015\ \ \ \ \ \textcolor{keyword}{private}\ IDispatcher\ Dispatcher\ \{\ \textcolor{keyword}{get};\ \textcolor{keyword}{set};\ \}\ =\ \textcolor{keyword}{null}!;}
+\DoxyCodeLine{\Hypertarget{_dropdown_initializer_8razor_8cs_source_l00016}00016\ }
+\DoxyCodeLine{\Hypertarget{_dropdown_initializer_8razor_8cs_source_l00017}00017\ \ \ \ \ \textcolor{keyword}{private}\ \mbox{\hyperlink{class_luthetus_1_1_common_1_1_razor_lib_1_1_contexts_1_1_displays_1_1_context_boundary}{ContextBoundary}}?\ \_dropdownContextBoundary;}
+\DoxyCodeLine{\Hypertarget{_dropdown_initializer_8razor_8cs_source_l00018}00018\ }
+\DoxyCodeLine{\Hypertarget{_dropdown_initializer_8razor_8cs_source_l00019}00019\ \ \ \ \ \textcolor{keyword}{private}\ async\ Task\ ClearActiveKeyList()}
+\DoxyCodeLine{\Hypertarget{_dropdown_initializer_8razor_8cs_source_l00020}00020\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_dropdown_initializer_8razor_8cs_source_l00021}00021\ \ \ \ \ \ \ \ \ var\ firstDropdown\ =\ DropdownStateWrap.Value.DropdownList.FirstOrDefault();}
+\DoxyCodeLine{\Hypertarget{_dropdown_initializer_8razor_8cs_source_l00022}00022\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_dropdown_initializer_8razor_8cs_source_l00023}00023\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (firstDropdown\ is\ not\ \textcolor{keyword}{null})}
+\DoxyCodeLine{\Hypertarget{_dropdown_initializer_8razor_8cs_source_l00024}00024\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_dropdown_initializer_8razor_8cs_source_l00025}00025\ \ \ \ \ \ \ \ \ \ \ \ \ var\ restoreFocusOnCloseFunc\ =\ firstDropdown.RestoreFocusOnClose;}
+\DoxyCodeLine{\Hypertarget{_dropdown_initializer_8razor_8cs_source_l00026}00026\ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_dropdown_initializer_8razor_8cs_source_l00027}00027\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (restoreFocusOnCloseFunc\ is\ not\ \textcolor{keyword}{null})}
+\DoxyCodeLine{\Hypertarget{_dropdown_initializer_8razor_8cs_source_l00028}00028\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ await\ restoreFocusOnCloseFunc.Invoke();}
+\DoxyCodeLine{\Hypertarget{_dropdown_initializer_8razor_8cs_source_l00029}00029\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_dropdown_initializer_8razor_8cs_source_l00030}00030\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_dropdown_initializer_8razor_8cs_source_l00031}00031\ \ \ \ \ \ \ \ \ Dispatcher.Dispatch(\textcolor{keyword}{new}\ \mbox{\hyperlink{namespace_luthetus_1_1_common_1_1_razor_lib_1_1_dropdowns_1_1_states_a6062aa8409aa0032c0334dc5b634498e}{DropdownState}}.ClearAction());}
+\DoxyCodeLine{\Hypertarget{_dropdown_initializer_8razor_8cs_source_l00032}00032\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_dropdown_initializer_8razor_8cs_source_l00033}00033\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_dropdown_initializer_8razor_8cs_source_l00034}00034\ \ \ \ \ \textcolor{keyword}{private}\ Task\ HandleOnFocusIn(\mbox{\hyperlink{namespace_luthetus_1_1_common_1_1_razor_lib_1_1_dropdowns_1_1_models_a60385d8cd877b93f064b1da738c5ced9}{DropdownRecord}}\ dropdown)}
+\DoxyCodeLine{\Hypertarget{_dropdown_initializer_8razor_8cs_source_l00035}00035\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_dropdown_initializer_8razor_8cs_source_l00036}00036\ \ \ \ \ \ \ \ \ var\ localDropdownContextBoundary\ =\ \_dropdownContextBoundary;}
+\DoxyCodeLine{\Hypertarget{_dropdown_initializer_8razor_8cs_source_l00037}00037\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_dropdown_initializer_8razor_8cs_source_l00038}00038\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (localDropdownContextBoundary\ is\ not\ \textcolor{keyword}{null})}
+\DoxyCodeLine{\Hypertarget{_dropdown_initializer_8razor_8cs_source_l00039}00039\ \ \ \ \ \ \ \ \ \ \ \ \ localDropdownContextBoundary.\mbox{\hyperlink{class_luthetus_1_1_common_1_1_razor_lib_1_1_contexts_1_1_displays_1_1_context_boundary_a467a1e23484a300a881ac0d6dd9e6736}{HandleOnFocusIn}}();}
+\DoxyCodeLine{\Hypertarget{_dropdown_initializer_8razor_8cs_source_l00040}00040\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_dropdown_initializer_8razor_8cs_source_l00041}00041\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ Task.CompletedTask;}
+\DoxyCodeLine{\Hypertarget{_dropdown_initializer_8razor_8cs_source_l00042}00042\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_dropdown_initializer_8razor_8cs_source_l00043}00043\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_dropdown_initializer_8razor_8cs_source_l00044}00044\ \ \ \ \ \textcolor{keyword}{private}\ Task\ HandleOnFocusOut(\mbox{\hyperlink{namespace_luthetus_1_1_common_1_1_razor_lib_1_1_dropdowns_1_1_models_a60385d8cd877b93f064b1da738c5ced9}{DropdownRecord}}\ dropdown)}
+\DoxyCodeLine{\Hypertarget{_dropdown_initializer_8razor_8cs_source_l00045}00045\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_dropdown_initializer_8razor_8cs_source_l00046}00046\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ Task.CompletedTask;}
+\DoxyCodeLine{\Hypertarget{_dropdown_initializer_8razor_8cs_source_l00047}00047\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_dropdown_initializer_8razor_8cs_source_l00048}00048\ \}}
+
+\end{DoxyCode}

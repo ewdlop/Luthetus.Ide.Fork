@@ -1,0 +1,69 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="__attribute_node_tests_8cs_source" xml:lang="en-US">
+<title>AttributeNodeTests.cs</title>
+<indexterm><primary>Source/Tests/TextEditor/Basis/CompilerServices/Syntax/SyntaxNodes/AttributeNodeTests.cs</primary></indexterm>
+Go to the documentation of this file.<programlisting linenumbering="unnumbered"><anchor xml:id="__attribute_node_tests_8cs_source_1l00001"/>00001 <emphasis role="keyword">using&#32;</emphasis><link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_1_1_nodes">Luthetus.TextEditor.RazorLib.CompilerServices.Syntax.Nodes</link>;
+<anchor xml:id="__attribute_node_tests_8cs_source_1l00002"/>00002 <emphasis role="keyword">using&#32;</emphasis><link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_1_1_tokens">Luthetus.TextEditor.RazorLib.CompilerServices.Syntax.Tokens</link>;
+<anchor xml:id="__attribute_node_tests_8cs_source_1l00003"/>00003 <emphasis role="keyword">using&#32;</emphasis><link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_lexers_1_1_models">Luthetus.TextEditor.RazorLib.Lexers.Models</link>;
+<anchor xml:id="__attribute_node_tests_8cs_source_1l00004"/>00004 
+<anchor xml:id="__attribute_node_tests_8cs_source_1l00005"/>00005 <emphasis role="keyword">namespace&#32;</emphasis><link linkend="_namespace_luthetus_1_1_text_editor_1_1_tests_1_1_basis_1_1_compiler_services_1_1_syntax_1_1_syntax_nodes">Luthetus.TextEditor.Tests.Basis.CompilerServices.Syntax.SyntaxNodes</link>;
+<anchor xml:id="__attribute_node_tests_8cs_source_1l00006"/>00006 
+<anchor xml:id="__attribute_node_tests_8cs_source_1l00010"/><link linkend="_class_luthetus_1_1_text_editor_1_1_tests_1_1_basis_1_1_compiler_services_1_1_syntax_1_1_syntax_nodes_1_1_attribute_node_tests">00010</link> <emphasis role="keyword">public</emphasis>&#32;<emphasis role="keyword">class&#32;</emphasis><link linkend="_class_luthetus_1_1_text_editor_1_1_tests_1_1_basis_1_1_compiler_services_1_1_syntax_1_1_syntax_nodes_1_1_attribute_node_tests">AttributeNodeTests</link>
+<anchor xml:id="__attribute_node_tests_8cs_source_1l00011"/>00011 {
+<anchor xml:id="__attribute_node_tests_8cs_source_1l00021"/>00021 &#32;&#32;&#32;&#32;[Fact]
+<anchor xml:id="__attribute_node_tests_8cs_source_1l00022"/><link linkend="_class_luthetus_1_1_text_editor_1_1_tests_1_1_basis_1_1_compiler_services_1_1_syntax_1_1_syntax_nodes_1_1_attribute_node_tests_1a9692d4679e4b4e0886510975550adacd">00022</link> &#32;&#32;&#32;&#32;<emphasis role="keyword">public</emphasis>&#32;<emphasis role="keywordtype">void</emphasis>&#32;<link linkend="_class_luthetus_1_1_text_editor_1_1_tests_1_1_basis_1_1_compiler_services_1_1_syntax_1_1_syntax_nodes_1_1_attribute_node_tests_1a9692d4679e4b4e0886510975550adacd">Constructor</link>()
+<anchor xml:id="__attribute_node_tests_8cs_source_1l00023"/>00023 &#32;&#32;&#32;&#32;{
+<anchor xml:id="__attribute_node_tests_8cs_source_1l00024"/>00024 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;var&#32;attributeNodeText&#32;=&#32;<emphasis role="stringliteral">&quot;[Parameter,&#32;EditorRequired]&quot;</emphasis>;
+<anchor xml:id="__attribute_node_tests_8cs_source_1l00025"/>00025 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;var&#32;sourceText&#32;=&#32;<emphasis role="stringliteral">$@&quot;public&#32;partial&#32;class&#32;ContextBoundary&#32;:&#32;ComponentBase</emphasis>
+<anchor xml:id="__attribute_node_tests_8cs_source_1l00026"/>00026 <emphasis role="stringliteral">{{</emphasis>
+<anchor xml:id="__attribute_node_tests_8cs_source_1l00027"/>00027 <emphasis role="stringliteral">&#32;&#32;&#32;&#32;{attributeNodeText}</emphasis>
+<anchor xml:id="__attribute_node_tests_8cs_source_1l00028"/>00028 <emphasis role="stringliteral">&#32;&#32;&#32;&#32;public&#32;ContextRecord&#32;ContextRecord&#32;{{&#32;get;&#32;set;&#32;}}&#32;=&#32;null!;</emphasis>
+<anchor xml:id="__attribute_node_tests_8cs_source_1l00029"/>00029 <emphasis role="stringliteral">}}&quot;</emphasis>;
+<anchor xml:id="__attribute_node_tests_8cs_source_1l00030"/>00030 
+<anchor xml:id="__attribute_node_tests_8cs_source_1l00031"/>00031 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<link linkend="_struct_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_1_1_tokens_1_1_open_square_bracket_token">OpenSquareBracketToken</link>&#32;openSquareBracketToken;
+<anchor xml:id="__attribute_node_tests_8cs_source_1l00032"/>00032 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;{
+<anchor xml:id="__attribute_node_tests_8cs_source_1l00033"/>00033 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;var&#32;openSquareBracketTokenText&#32;=&#32;<emphasis role="stringliteral">&quot;[&quot;</emphasis>;
+<anchor xml:id="__attribute_node_tests_8cs_source_1l00034"/>00034 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;var&#32;openSquareBracketTokenInclusiveStartIndex&#32;=&#32;sourceText.IndexOf(openSquareBracketTokenText);
+<anchor xml:id="__attribute_node_tests_8cs_source_1l00035"/>00035 
+<anchor xml:id="__attribute_node_tests_8cs_source_1l00036"/>00036 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;openSquareBracketToken&#32;=&#32;<emphasis role="keyword">new</emphasis>&#32;<link linkend="_struct_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_1_1_tokens_1_1_open_square_bracket_token">OpenSquareBracketToken</link>(<emphasis role="keyword">new</emphasis>&#32;<link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_lexers_1_1_models_1a1ffd1a7706dfd364560b76d47467812f">TextEditorTextSpan</link>(
+<anchor xml:id="__attribute_node_tests_8cs_source_1l00037"/>00037 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;openSquareBracketTokenInclusiveStartIndex,
+<anchor xml:id="__attribute_node_tests_8cs_source_1l00038"/>00038 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;openSquareBracketTokenInclusiveStartIndex&#32;+&#32;openSquareBracketTokenText.Length,
+<anchor xml:id="__attribute_node_tests_8cs_source_1l00039"/>00039 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;0,
+<anchor xml:id="__attribute_node_tests_8cs_source_1l00040"/>00040 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keyword">new</emphasis>&#32;<link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_lexers_1_1_models_1a26a1b63ad28ec7955b30bc6c91571eca">ResourceUri</link>(<emphasis role="stringliteral">&quot;/unitTesting.txt&quot;</emphasis>),
+<anchor xml:id="__attribute_node_tests_8cs_source_1l00041"/>00041 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;sourceText));
+<anchor xml:id="__attribute_node_tests_8cs_source_1l00042"/>00042 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;}
+<anchor xml:id="__attribute_node_tests_8cs_source_1l00043"/>00043 
+<anchor xml:id="__attribute_node_tests_8cs_source_1l00044"/>00044 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<link linkend="_struct_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_1_1_tokens_1_1_close_square_bracket_token">CloseSquareBracketToken</link>&#32;closeSquareBracketToken;
+<anchor xml:id="__attribute_node_tests_8cs_source_1l00045"/>00045 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;{
+<anchor xml:id="__attribute_node_tests_8cs_source_1l00046"/>00046 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;var&#32;closeSquareBracketTokenText&#32;=&#32;<emphasis role="stringliteral">&quot;]&quot;</emphasis>;
+<anchor xml:id="__attribute_node_tests_8cs_source_1l00047"/>00047 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;var&#32;closeSquareBracketTokenInclusiveStartIndex&#32;=&#32;sourceText.IndexOf(closeSquareBracketTokenText);
+<anchor xml:id="__attribute_node_tests_8cs_source_1l00048"/>00048 
+<anchor xml:id="__attribute_node_tests_8cs_source_1l00049"/>00049 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;closeSquareBracketToken&#32;=&#32;<emphasis role="keyword">new</emphasis>&#32;<link linkend="_struct_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_1_1_tokens_1_1_close_square_bracket_token">CloseSquareBracketToken</link>(<emphasis role="keyword">new</emphasis>&#32;<link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_lexers_1_1_models_1a1ffd1a7706dfd364560b76d47467812f">TextEditorTextSpan</link>(
+<anchor xml:id="__attribute_node_tests_8cs_source_1l00050"/>00050 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;closeSquareBracketTokenInclusiveStartIndex,
+<anchor xml:id="__attribute_node_tests_8cs_source_1l00051"/>00051 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;closeSquareBracketTokenInclusiveStartIndex&#32;+&#32;closeSquareBracketTokenText.Length,
+<anchor xml:id="__attribute_node_tests_8cs_source_1l00052"/>00052 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;0,
+<anchor xml:id="__attribute_node_tests_8cs_source_1l00053"/>00053 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keyword">new</emphasis>&#32;<link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_lexers_1_1_models_1a26a1b63ad28ec7955b30bc6c91571eca">ResourceUri</link>(<emphasis role="stringliteral">&quot;/unitTesting.txt&quot;</emphasis>),
+<anchor xml:id="__attribute_node_tests_8cs_source_1l00054"/>00054 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;sourceText));
+<anchor xml:id="__attribute_node_tests_8cs_source_1l00055"/>00055 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;}
+<anchor xml:id="__attribute_node_tests_8cs_source_1l00056"/>00056 
+<anchor xml:id="__attribute_node_tests_8cs_source_1l00057"/>00057 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;var&#32;attributeNode&#32;=&#32;<emphasis role="keyword">new</emphasis>&#32;<link linkend="_class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_1_1_nodes_1_1_attribute_node">AttributeNode</link>(
+<anchor xml:id="__attribute_node_tests_8cs_source_1l00058"/>00058 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;openSquareBracketToken,
+<anchor xml:id="__attribute_node_tests_8cs_source_1l00059"/>00059 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;This&#32;new&#32;list&#32;is&#32;a&#32;hack&#32;so&#32;the&#32;tests&#32;compile.</emphasis>
+<anchor xml:id="__attribute_node_tests_8cs_source_1l00060"/>00060 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keyword">new</emphasis>(),&#32;
+<anchor xml:id="__attribute_node_tests_8cs_source_1l00061"/>00061 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;closeSquareBracketToken);
+<anchor xml:id="__attribute_node_tests_8cs_source_1l00062"/>00062 
+<anchor xml:id="__attribute_node_tests_8cs_source_1l00063"/>00063 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;Assert.Equal(openSquareBracketToken,&#32;attributeNode.<link linkend="_struct_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_1_1_tokens_1_1_open_square_bracket_token_1aa3fe50a83c10095d32d3e60476b89824">OpenSquareBracketToken</link>);
+<anchor xml:id="__attribute_node_tests_8cs_source_1l00064"/>00064 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;Assert.Equal(closeSquareBracketToken,&#32;attributeNode.<link linkend="_struct_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_1_1_tokens_1_1_close_square_bracket_token_1a1cac1e6f970c82fe9e7085c0c6e3881c">CloseSquareBracketToken</link>);
+<anchor xml:id="__attribute_node_tests_8cs_source_1l00065"/>00065 
+<anchor xml:id="__attribute_node_tests_8cs_source_1l00066"/>00066 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;Assert.Equal(2,&#32;attributeNode.ChildList.Length);
+<anchor xml:id="__attribute_node_tests_8cs_source_1l00067"/>00067 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;Assert.Equal(openSquareBracketToken,&#32;attributeNode.ChildList[0]);
+<anchor xml:id="__attribute_node_tests_8cs_source_1l00068"/>00068 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;Assert.Equal(closeSquareBracketToken,&#32;attributeNode.ChildList[1]);
+<anchor xml:id="__attribute_node_tests_8cs_source_1l00069"/>00069 
+<anchor xml:id="__attribute_node_tests_8cs_source_1l00070"/>00070 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;Assert.False(attributeNode.IsFabricated);
+<anchor xml:id="__attribute_node_tests_8cs_source_1l00071"/>00071 
+<anchor xml:id="__attribute_node_tests_8cs_source_1l00072"/>00072 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;Assert.Equal(
+<anchor xml:id="__attribute_node_tests_8cs_source_1l00073"/>00073 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib">RazorLib</link>.<link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services">CompilerServices</link>.<link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax">Syntax</link>.SyntaxKind.AttributeNode,
+<anchor xml:id="__attribute_node_tests_8cs_source_1l00074"/>00074 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;attributeNode.SyntaxKind);
+<anchor xml:id="__attribute_node_tests_8cs_source_1l00075"/>00075 &#32;&#32;&#32;&#32;}
+<anchor xml:id="__attribute_node_tests_8cs_source_1l00076"/>00076 }
+</programlisting></section>

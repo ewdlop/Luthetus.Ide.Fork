@@ -1,0 +1,5 @@
+var class_luthetus_1_1_ide_1_1_razor_lib_1_1_js_runtimes_1_1_models_1_1_luthetus_ide_java_script_interop_api =
+[
+    [ "LuthetusIdeJavaScriptInteropApi", "class_luthetus_1_1_ide_1_1_razor_lib_1_1_js_runtimes_1_1_models_1_1_luthetus_ide_java_script_interop_api.html#a6eb9f7519759c8a1b7829f6bb236b42a", null ],
+    [ "PreventDefaultBrowserKeybindings", "class_luthetus_1_1_ide_1_1_razor_lib_1_1_js_runtimes_1_1_models_1_1_luthetus_ide_java_script_interop_api.html#a6084f432767325d8b73567e77fc81b11", null ]
+];

@@ -1,0 +1,142 @@
+\doxysection{Luthetus.\+Common.\+Razor\+Lib.\+Reactives.\+Models.\+Throttle\+Async Class Reference}
+\hypertarget{class_luthetus_1_1_common_1_1_razor_lib_1_1_reactives_1_1_models_1_1_throttle_async}{}\label{class_luthetus_1_1_common_1_1_razor_lib_1_1_reactives_1_1_models_1_1_throttle_async}\index{Luthetus.Common.RazorLib.Reactives.Models.ThrottleAsync@{Luthetus.Common.RazorLib.Reactives.Models.ThrottleAsync}}
+
+
+\doxylink{class_luthetus_1_1_common_1_1_razor_lib_1_1_reactives_1_1_models_1_1_throttle_async}{Throttle\+Async} does not achieve the desired result. It blocks itself, and therefore is useless? I like the idea I had with a blocking background task. But it doesn\textquotesingle{}t really extend here much, at least given how its currently written?  
+
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_luthetus_1_1_common_1_1_razor_lib_1_1_reactives_1_1_models_1_1_throttle_async_af1971dc5e9e94fceb853f4d7cece20d8}{Throttle\+Async}} (Time\+Span throttle\+Time\+Span)
+\item 
+Task \mbox{\hyperlink{class_luthetus_1_1_common_1_1_razor_lib_1_1_reactives_1_1_models_1_1_throttle_async_aae9fc2226e3005d308b43781b57db870}{Run\+Async}} (Func$<$ Cancellation\+Token, Task $>$ work\+Item)
+\item 
+async Task \mbox{\hyperlink{class_luthetus_1_1_common_1_1_razor_lib_1_1_reactives_1_1_models_1_1_throttle_async_ae2442663d99f2ab8a42f8b4a0a77200c}{Until\+Is\+Empty}} (Time\+Span? polling\+Time\+Span=null, Cancellation\+Token cancellation\+Token=default)
+\begin{DoxyCompactList}\small\item\em This method awaits the last task prior to returning.~\newline
+~\newline
+. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Properties}
+\begin{DoxyCompactItemize}
+\item 
+Time\+Span \mbox{\hyperlink{class_luthetus_1_1_common_1_1_razor_lib_1_1_reactives_1_1_models_1_1_throttle_async_a334c7f9e5c9e767230183e6791e3349a}{Throttle\+Time\+Span}}\hspace{0.3cm}{\ttfamily  \mbox{[}get\mbox{]}}
+\item 
+Stack$<$ Func$<$ Cancellation\+Token, Task $>$ $>$ \mbox{\hyperlink{class_luthetus_1_1_common_1_1_razor_lib_1_1_reactives_1_1_models_1_1_throttle_async_a49e5e55e3cd54d394c0c420f46f870f7}{Work\+Item\+Stack}} = new()\hspace{0.3cm}{\ttfamily  \mbox{[}get, protected set\mbox{]}}
+\item 
+Task \mbox{\hyperlink{class_luthetus_1_1_common_1_1_razor_lib_1_1_reactives_1_1_models_1_1_throttle_async_a8a301937581614b77e1cf0e6e02cd6e9}{Work\+Item\+Task}} = Task.\+Completed\+Task\hspace{0.3cm}{\ttfamily  \mbox{[}get, protected set\mbox{]}}
+\item 
+bool \mbox{\hyperlink{class_luthetus_1_1_common_1_1_razor_lib_1_1_reactives_1_1_models_1_1_throttle_async_abccf84bc1b5ac11ebb228368ec1dfa26}{Is\+Stopping\+Further\+Pushes}}\hspace{0.3cm}{\ttfamily  \mbox{[}get\mbox{]}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\doxylink{class_luthetus_1_1_common_1_1_razor_lib_1_1_reactives_1_1_models_1_1_throttle_async}{Throttle\+Async} does not achieve the desired result. It blocks itself, and therefore is useless? I like the idea I had with a blocking background task. But it doesn\textquotesingle{}t really extend here much, at least given how its currently written? 
+
+Okay, I see, \doxylink{class_luthetus_1_1_common_1_1_razor_lib_1_1_reactives_1_1_models_1_1_throttle_async}{Throttle\+Async} works SOLELY from the idea that you are using a fire and forget Task.\+Run and want to throttle the logic within the Task.\+Run at a top level. But you cannot use it inside a foreach loop because you are awaiting yourself.
+
+In short \doxylink{class_luthetus_1_1_common_1_1_razor_lib_1_1_reactives_1_1_models_1_1_throttle_async}{Throttle\+Async} is actually useful... because it keeps two invocations of code running concurrently. Because one has to wait for the other to finish.
+
+And that many Task.\+Run will cancel out to the most recent one. But it still seems quite asinine? 
+
+Definition at line \mbox{\hyperlink{_throttle_async_8cs_source_l00020}{20}} of file \mbox{\hyperlink{_throttle_async_8cs_source}{Throttle\+Async.\+cs}}.
+
+
+
+\label{doc-constructors}
+\Hypertarget{class_luthetus_1_1_common_1_1_razor_lib_1_1_reactives_1_1_models_1_1_throttle_async_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{class_luthetus_1_1_common_1_1_razor_lib_1_1_reactives_1_1_models_1_1_throttle_async_af1971dc5e9e94fceb853f4d7cece20d8}\index{Luthetus.Common.RazorLib.Reactives.Models.ThrottleAsync@{Luthetus.Common.RazorLib.Reactives.Models.ThrottleAsync}!ThrottleAsync@{ThrottleAsync}}
+\index{ThrottleAsync@{ThrottleAsync}!Luthetus.Common.RazorLib.Reactives.Models.ThrottleAsync@{Luthetus.Common.RazorLib.Reactives.Models.ThrottleAsync}}
+\doxysubsubsection{\texorpdfstring{ThrottleAsync()}{ThrottleAsync()}}
+{\footnotesize\ttfamily \label{class_luthetus_1_1_common_1_1_razor_lib_1_1_reactives_1_1_models_1_1_throttle_async_af1971dc5e9e94fceb853f4d7cece20d8} 
+Luthetus.\+Common.\+Razor\+Lib.\+Reactives.\+Models.\+Throttle\+Async.\+Throttle\+Async (\begin{DoxyParamCaption}\item[{Time\+Span}]{throttle\+Time\+Span}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{_throttle_async_8cs_source_l00024}{24}} of file \mbox{\hyperlink{_throttle_async_8cs_source}{Throttle\+Async.\+cs}}.
+
+
+
+\label{doc-func-members}
+\Hypertarget{class_luthetus_1_1_common_1_1_razor_lib_1_1_reactives_1_1_models_1_1_throttle_async_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_luthetus_1_1_common_1_1_razor_lib_1_1_reactives_1_1_models_1_1_throttle_async_aae9fc2226e3005d308b43781b57db870}\index{Luthetus.Common.RazorLib.Reactives.Models.ThrottleAsync@{Luthetus.Common.RazorLib.Reactives.Models.ThrottleAsync}!RunAsync@{RunAsync}}
+\index{RunAsync@{RunAsync}!Luthetus.Common.RazorLib.Reactives.Models.ThrottleAsync@{Luthetus.Common.RazorLib.Reactives.Models.ThrottleAsync}}
+\doxysubsubsection{\texorpdfstring{RunAsync()}{RunAsync()}}
+{\footnotesize\ttfamily \label{class_luthetus_1_1_common_1_1_razor_lib_1_1_reactives_1_1_models_1_1_throttle_async_aae9fc2226e3005d308b43781b57db870} 
+Task Luthetus.\+Common.\+Razor\+Lib.\+Reactives.\+Models.\+Throttle\+Async.\+Run\+Async (\begin{DoxyParamCaption}\item[{Func$<$ Cancellation\+Token, Task $>$}]{work\+Item}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{_throttle_async_8cs_source_l00034}{34}} of file \mbox{\hyperlink{_throttle_async_8cs_source}{Throttle\+Async.\+cs}}.
+
+\Hypertarget{class_luthetus_1_1_common_1_1_razor_lib_1_1_reactives_1_1_models_1_1_throttle_async_ae2442663d99f2ab8a42f8b4a0a77200c}\index{Luthetus.Common.RazorLib.Reactives.Models.ThrottleAsync@{Luthetus.Common.RazorLib.Reactives.Models.ThrottleAsync}!UntilIsEmpty@{UntilIsEmpty}}
+\index{UntilIsEmpty@{UntilIsEmpty}!Luthetus.Common.RazorLib.Reactives.Models.ThrottleAsync@{Luthetus.Common.RazorLib.Reactives.Models.ThrottleAsync}}
+\doxysubsubsection{\texorpdfstring{UntilIsEmpty()}{UntilIsEmpty()}}
+{\footnotesize\ttfamily \label{class_luthetus_1_1_common_1_1_razor_lib_1_1_reactives_1_1_models_1_1_throttle_async_ae2442663d99f2ab8a42f8b4a0a77200c} 
+async Task Luthetus.\+Common.\+Razor\+Lib.\+Reactives.\+Models.\+Throttle\+Async.\+Until\+Is\+Empty (\begin{DoxyParamCaption}\item[{Time\+Span?}]{polling\+Time\+Span}{ = {\ttfamily null}, }\item[{Cancellation\+Token}]{cancellation\+Token}{ = {\ttfamily default}}\end{DoxyParamCaption})}
+
+
+
+This method awaits the last task prior to returning.~\newline
+~\newline
+. 
+
+This method does NOT prevent pushes while flushing. To do so, invoke Stop\+Further\+Pushes() prior to invoking this method.~\newline
+~\newline
+
+
+The implementation of this method is a polling solution (as of this comment (2024-\/05-\/09)). 
+
+Definition at line \mbox{\hyperlink{_throttle_async_8cs_source_l00079}{79}} of file \mbox{\hyperlink{_throttle_async_8cs_source}{Throttle\+Async.\+cs}}.
+
+
+
+\label{doc-property-members}
+\Hypertarget{class_luthetus_1_1_common_1_1_razor_lib_1_1_reactives_1_1_models_1_1_throttle_async_doc-property-members}
+\doxysubsection{Property Documentation}
+\Hypertarget{class_luthetus_1_1_common_1_1_razor_lib_1_1_reactives_1_1_models_1_1_throttle_async_abccf84bc1b5ac11ebb228368ec1dfa26}\index{Luthetus.Common.RazorLib.Reactives.Models.ThrottleAsync@{Luthetus.Common.RazorLib.Reactives.Models.ThrottleAsync}!IsStoppingFurtherPushes@{IsStoppingFurtherPushes}}
+\index{IsStoppingFurtherPushes@{IsStoppingFurtherPushes}!Luthetus.Common.RazorLib.Reactives.Models.ThrottleAsync@{Luthetus.Common.RazorLib.Reactives.Models.ThrottleAsync}}
+\doxysubsubsection{\texorpdfstring{IsStoppingFurtherPushes}{IsStoppingFurtherPushes}}
+{\footnotesize\ttfamily \label{class_luthetus_1_1_common_1_1_razor_lib_1_1_reactives_1_1_models_1_1_throttle_async_abccf84bc1b5ac11ebb228368ec1dfa26} 
+bool Luthetus.\+Common.\+Razor\+Lib.\+Reactives.\+Models.\+Throttle\+Async.\+Is\+Stopping\+Further\+Pushes\hspace{0.3cm}{\ttfamily [get]}}
+
+
+
+Definition at line \mbox{\hyperlink{_throttle_async_8cs_source_l00032}{32}} of file \mbox{\hyperlink{_throttle_async_8cs_source}{Throttle\+Async.\+cs}}.
+
+\Hypertarget{class_luthetus_1_1_common_1_1_razor_lib_1_1_reactives_1_1_models_1_1_throttle_async_a334c7f9e5c9e767230183e6791e3349a}\index{Luthetus.Common.RazorLib.Reactives.Models.ThrottleAsync@{Luthetus.Common.RazorLib.Reactives.Models.ThrottleAsync}!ThrottleTimeSpan@{ThrottleTimeSpan}}
+\index{ThrottleTimeSpan@{ThrottleTimeSpan}!Luthetus.Common.RazorLib.Reactives.Models.ThrottleAsync@{Luthetus.Common.RazorLib.Reactives.Models.ThrottleAsync}}
+\doxysubsubsection{\texorpdfstring{ThrottleTimeSpan}{ThrottleTimeSpan}}
+{\footnotesize\ttfamily \label{class_luthetus_1_1_common_1_1_razor_lib_1_1_reactives_1_1_models_1_1_throttle_async_a334c7f9e5c9e767230183e6791e3349a} 
+Time\+Span Luthetus.\+Common.\+Razor\+Lib.\+Reactives.\+Models.\+Throttle\+Async.\+Throttle\+Time\+Span\hspace{0.3cm}{\ttfamily [get]}}
+
+
+
+Definition at line \mbox{\hyperlink{_throttle_async_8cs_source_l00029}{29}} of file \mbox{\hyperlink{_throttle_async_8cs_source}{Throttle\+Async.\+cs}}.
+
+\Hypertarget{class_luthetus_1_1_common_1_1_razor_lib_1_1_reactives_1_1_models_1_1_throttle_async_a49e5e55e3cd54d394c0c420f46f870f7}\index{Luthetus.Common.RazorLib.Reactives.Models.ThrottleAsync@{Luthetus.Common.RazorLib.Reactives.Models.ThrottleAsync}!WorkItemStack@{WorkItemStack}}
+\index{WorkItemStack@{WorkItemStack}!Luthetus.Common.RazorLib.Reactives.Models.ThrottleAsync@{Luthetus.Common.RazorLib.Reactives.Models.ThrottleAsync}}
+\doxysubsubsection{\texorpdfstring{WorkItemStack}{WorkItemStack}}
+{\footnotesize\ttfamily \label{class_luthetus_1_1_common_1_1_razor_lib_1_1_reactives_1_1_models_1_1_throttle_async_a49e5e55e3cd54d394c0c420f46f870f7} 
+Stack$<$Func$<$Cancellation\+Token, Task$>$ $>$ Luthetus.\+Common.\+Razor\+Lib.\+Reactives.\+Models.\+Throttle\+Async.\+Work\+Item\+Stack = new()\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [protected set]}}
+
+
+
+Definition at line \mbox{\hyperlink{_throttle_async_8cs_source_l00030}{30}} of file \mbox{\hyperlink{_throttle_async_8cs_source}{Throttle\+Async.\+cs}}.
+
+\Hypertarget{class_luthetus_1_1_common_1_1_razor_lib_1_1_reactives_1_1_models_1_1_throttle_async_a8a301937581614b77e1cf0e6e02cd6e9}\index{Luthetus.Common.RazorLib.Reactives.Models.ThrottleAsync@{Luthetus.Common.RazorLib.Reactives.Models.ThrottleAsync}!WorkItemTask@{WorkItemTask}}
+\index{WorkItemTask@{WorkItemTask}!Luthetus.Common.RazorLib.Reactives.Models.ThrottleAsync@{Luthetus.Common.RazorLib.Reactives.Models.ThrottleAsync}}
+\doxysubsubsection{\texorpdfstring{WorkItemTask}{WorkItemTask}}
+{\footnotesize\ttfamily \label{class_luthetus_1_1_common_1_1_razor_lib_1_1_reactives_1_1_models_1_1_throttle_async_a8a301937581614b77e1cf0e6e02cd6e9} 
+Task Luthetus.\+Common.\+Razor\+Lib.\+Reactives.\+Models.\+Throttle\+Async.\+Work\+Item\+Task = Task.\+Completed\+Task\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [protected set]}}
+
+
+
+Definition at line \mbox{\hyperlink{_throttle_async_8cs_source_l00031}{31}} of file \mbox{\hyperlink{_throttle_async_8cs_source}{Throttle\+Async.\+cs}}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Source/\+Lib/\+Common/\+Reactives/\+Models/\mbox{\hyperlink{_throttle_async_8cs}{Throttle\+Async.\+cs}}\end{DoxyCompactItemize}

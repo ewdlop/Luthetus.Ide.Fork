@@ -1,0 +1,244 @@
+\doxysection{Synchronization\+Context\+Tests.\+cs}
+\hypertarget{_synchronization_context_tests_8cs_source}{}\label{_synchronization_context_tests_8cs_source}\index{Source/Tests/Ide/Adhoc/SynchronizationContextTests.cs@{Source/Tests/Ide/Adhoc/SynchronizationContextTests.cs}}
+\mbox{\hyperlink{_synchronization_context_tests_8cs}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{_synchronization_context_tests_8cs_source_l00001}\mbox{\hyperlink{namespace_luthetus_1_1_ide_1_1_tests}{00001}}\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespace_luthetus_1_1_ide_1_1_tests_1_1_adhoc}{Luthetus.Ide.Tests.Adhoc}};}
+\DoxyCodeLine{\Hypertarget{_synchronization_context_tests_8cs_source_l00002}00002\ }
+\DoxyCodeLine{\Hypertarget{_synchronization_context_tests_8cs_source_l00032}\mbox{\hyperlink{class_luthetus_1_1_ide_1_1_tests_1_1_adhoc_1_1_synchronization_context_tests}{00032}}\ \textcolor{keyword}{public}\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_luthetus_1_1_ide_1_1_tests_1_1_adhoc_1_1_synchronization_context_tests}{SynchronizationContextTests}}}
+\DoxyCodeLine{\Hypertarget{_synchronization_context_tests_8cs_source_l00033}00033\ \{}
+\DoxyCodeLine{\Hypertarget{_synchronization_context_tests_8cs_source_l00040}00040\ \ \ \ \ [Fact]}
+\DoxyCodeLine{\Hypertarget{_synchronization_context_tests_8cs_source_l00041}\mbox{\hyperlink{class_luthetus_1_1_ide_1_1_tests_1_1_adhoc_1_1_synchronization_context_tests_acd375081173a230d49e43dab7601bbea}{00041}}\ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_luthetus_1_1_ide_1_1_tests_1_1_adhoc_1_1_synchronization_context_tests_acd375081173a230d49e43dab7601bbea}{Synchronous}}()}
+\DoxyCodeLine{\Hypertarget{_synchronization_context_tests_8cs_source_l00042}00042\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_synchronization_context_tests_8cs_source_l00043}00043\ \ \ \ \ \ \ \ \ var\ initialValue\ =\ 2;}
+\DoxyCodeLine{\Hypertarget{_synchronization_context_tests_8cs_source_l00044}00044\ \ \ \ \ \ \ \ \ var\ expectedValue\ =\ 3;}
+\DoxyCodeLine{\Hypertarget{_synchronization_context_tests_8cs_source_l00045}00045\ }
+\DoxyCodeLine{\Hypertarget{_synchronization_context_tests_8cs_source_l00046}00046\ \ \ \ \ \ \ \ \ var\ x\ =\ initialValue;}
+\DoxyCodeLine{\Hypertarget{_synchronization_context_tests_8cs_source_l00047}00047\ \ \ \ \ \ \ \ \ x++;}
+\DoxyCodeLine{\Hypertarget{_synchronization_context_tests_8cs_source_l00048}00048\ }
+\DoxyCodeLine{\Hypertarget{_synchronization_context_tests_8cs_source_l00049}00049\ \ \ \ \ \ \ \ \ Assert.Equal(expectedValue,\ x);}
+\DoxyCodeLine{\Hypertarget{_synchronization_context_tests_8cs_source_l00050}00050\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_synchronization_context_tests_8cs_source_l00051}00051\ }
+\DoxyCodeLine{\Hypertarget{_synchronization_context_tests_8cs_source_l00058}00058\ \ \ \ \ [Fact]}
+\DoxyCodeLine{\Hypertarget{_synchronization_context_tests_8cs_source_l00059}\mbox{\hyperlink{class_luthetus_1_1_ide_1_1_tests_1_1_adhoc_1_1_synchronization_context_tests_a0204609155382c9e2089d20874b2e00a}{00059}}\ \ \ \ \ \textcolor{keyword}{public}\ async\ Task\ \mbox{\hyperlink{class_luthetus_1_1_ide_1_1_tests_1_1_adhoc_1_1_synchronization_context_tests_a0204609155382c9e2089d20874b2e00a}{AsynchronousWithAwait}}()}
+\DoxyCodeLine{\Hypertarget{_synchronization_context_tests_8cs_source_l00060}00060\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_synchronization_context_tests_8cs_source_l00061}00061\ \ \ \ \ \ \ \ \ var\ initialValue\ =\ 2;}
+\DoxyCodeLine{\Hypertarget{_synchronization_context_tests_8cs_source_l00062}00062\ \ \ \ \ \ \ \ \ var\ expectedValue\ =\ 3;}
+\DoxyCodeLine{\Hypertarget{_synchronization_context_tests_8cs_source_l00063}00063\ }
+\DoxyCodeLine{\Hypertarget{_synchronization_context_tests_8cs_source_l00064}00064\ \ \ \ \ \ \ \ \ var\ x\ =\ initialValue;}
+\DoxyCodeLine{\Hypertarget{_synchronization_context_tests_8cs_source_l00065}00065\ \ \ \ \ \ \ \ \ await\ Task.Run(()\ =>\ \{\ x++;\ \});}
+\DoxyCodeLine{\Hypertarget{_synchronization_context_tests_8cs_source_l00066}00066\ }
+\DoxyCodeLine{\Hypertarget{_synchronization_context_tests_8cs_source_l00067}00067\ \ \ \ \ \ \ \ \ Assert.Equal(expectedValue,\ x);}
+\DoxyCodeLine{\Hypertarget{_synchronization_context_tests_8cs_source_l00068}00068\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_synchronization_context_tests_8cs_source_l00069}00069\ }
+\DoxyCodeLine{\Hypertarget{_synchronization_context_tests_8cs_source_l00090}00090\ \ \ \ \ [Fact]}
+\DoxyCodeLine{\Hypertarget{_synchronization_context_tests_8cs_source_l00091}00091\ \textcolor{preprocessor}{\#pragma\ warning\ disable\ CS1998\ }\textcolor{comment}{//\ Async\ method\ lacks\ 'await'\ operators\ and\ will\ run\ synchronously}}
+\DoxyCodeLine{\Hypertarget{_synchronization_context_tests_8cs_source_l00092}\mbox{\hyperlink{class_luthetus_1_1_ide_1_1_tests_1_1_adhoc_1_1_synchronization_context_tests_ac084ebb129deff829b4fc8f6b98f2e04}{00092}}\ \ \ \ \ \textcolor{keyword}{public}\ async\ Task\ \mbox{\hyperlink{class_luthetus_1_1_ide_1_1_tests_1_1_adhoc_1_1_synchronization_context_tests_ac084ebb129deff829b4fc8f6b98f2e04}{AsynchronousNoAwait}}()}
+\DoxyCodeLine{\Hypertarget{_synchronization_context_tests_8cs_source_l00093}00093\ \textcolor{preprocessor}{\#pragma\ warning\ restore\ CS1998\ }\textcolor{comment}{//\ Async\ method\ lacks\ 'await'\ operators\ and\ will\ run\ synchronously}}
+\DoxyCodeLine{\Hypertarget{_synchronization_context_tests_8cs_source_l00094}00094\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_synchronization_context_tests_8cs_source_l00095}00095\ \ \ \ \ \ \ \ \ var\ initialValue\ =\ 2;}
+\DoxyCodeLine{\Hypertarget{_synchronization_context_tests_8cs_source_l00096}00096\ \ \ \ \ \ \ \ \ var\ expectedValue\ =\ 2;}
+\DoxyCodeLine{\Hypertarget{_synchronization_context_tests_8cs_source_l00097}00097\ }
+\DoxyCodeLine{\Hypertarget{_synchronization_context_tests_8cs_source_l00098}00098\ \ \ \ \ \ \ \ \ var\ x\ =\ initialValue;}
+\DoxyCodeLine{\Hypertarget{_synchronization_context_tests_8cs_source_l00099}00099\ \textcolor{preprocessor}{\#pragma\ warning\ disable\ CS4014\ }\textcolor{comment}{//\ Because\ this\ call\ is\ not\ awaited,\ execution\ of\ the\ current\ method\ continues\ before\ the\ call\ is\ completed}}
+\DoxyCodeLine{\Hypertarget{_synchronization_context_tests_8cs_source_l00100}00100\ \ \ \ \ \ \ \ \ Task.Run(()\ =>\ \{\ x++;\ \});}
+\DoxyCodeLine{\Hypertarget{_synchronization_context_tests_8cs_source_l00101}00101\ \textcolor{preprocessor}{\#pragma\ warning\ restore\ CS4014\ }\textcolor{comment}{//\ Because\ this\ call\ is\ not\ awaited,\ execution\ of\ the\ current\ method\ continues\ before\ the\ call\ is\ completed}}
+\DoxyCodeLine{\Hypertarget{_synchronization_context_tests_8cs_source_l00102}00102\ }
+\DoxyCodeLine{\Hypertarget{_synchronization_context_tests_8cs_source_l00103}00103\ \ \ \ \ \ \ \ \ Assert.Equal(expectedValue,\ x);}
+\DoxyCodeLine{\Hypertarget{_synchronization_context_tests_8cs_source_l00104}00104\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_synchronization_context_tests_8cs_source_l00105}00105\ }
+\DoxyCodeLine{\Hypertarget{_synchronization_context_tests_8cs_source_l00111}00111\ \ \ \ \ [Fact]}
+\DoxyCodeLine{\Hypertarget{_synchronization_context_tests_8cs_source_l00112}00112\ \textcolor{preprocessor}{\#pragma\ warning\ disable\ CS1998\ }\textcolor{comment}{//\ Async\ method\ lacks\ 'await'\ operators\ and\ will\ run\ synchronously}}
+\DoxyCodeLine{\Hypertarget{_synchronization_context_tests_8cs_source_l00113}\mbox{\hyperlink{class_luthetus_1_1_ide_1_1_tests_1_1_adhoc_1_1_synchronization_context_tests_aa60f58c443bfaf0e11fea31a65f3fba7}{00113}}\ \ \ \ \ \textcolor{keyword}{public}\ async\ Task\ \mbox{\hyperlink{class_luthetus_1_1_ide_1_1_tests_1_1_adhoc_1_1_synchronization_context_tests_aa60f58c443bfaf0e11fea31a65f3fba7}{AsynchronousNoAwait\_TryToGetTheNotAwaitedTaskToComplete\_ByExecutingSynchronousCodeBetweenItAndTheIncrementation\_LargeForLoopUpperBound}}()}
+\DoxyCodeLine{\Hypertarget{_synchronization_context_tests_8cs_source_l00114}00114\ \textcolor{preprocessor}{\#pragma\ warning\ restore\ CS1998\ }\textcolor{comment}{//\ Async\ method\ lacks\ 'await'\ operators\ and\ will\ run\ synchronously}}
+\DoxyCodeLine{\Hypertarget{_synchronization_context_tests_8cs_source_l00115}00115\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_synchronization_context_tests_8cs_source_l00116}00116\ \ \ \ \ \ \ \ \ var\ initialValue\ =\ 2;}
+\DoxyCodeLine{\Hypertarget{_synchronization_context_tests_8cs_source_l00117}00117\ \ \ \ \ \ \ \ \ var\ expectedValue\ =\ 3;}
+\DoxyCodeLine{\Hypertarget{_synchronization_context_tests_8cs_source_l00118}00118\ }
+\DoxyCodeLine{\Hypertarget{_synchronization_context_tests_8cs_source_l00119}00119\ \ \ \ \ \ \ \ \ var\ x\ =\ initialValue;}
+\DoxyCodeLine{\Hypertarget{_synchronization_context_tests_8cs_source_l00120}00120\ \textcolor{preprocessor}{\#pragma\ warning\ disable\ CS4014\ }\textcolor{comment}{//\ Because\ this\ call\ is\ not\ awaited,\ execution\ of\ the\ current\ method\ continues\ before\ the\ call\ is\ completed}}
+\DoxyCodeLine{\Hypertarget{_synchronization_context_tests_8cs_source_l00121}00121\ \ \ \ \ \ \ \ \ Task.Run(()\ =>\ \{\ x++;\ \});}
+\DoxyCodeLine{\Hypertarget{_synchronization_context_tests_8cs_source_l00122}00122\ \textcolor{preprocessor}{\#pragma\ warning\ restore\ CS4014\ }\textcolor{comment}{//\ Because\ this\ call\ is\ not\ awaited,\ execution\ of\ the\ current\ method\ continues\ before\ the\ call\ is\ completed}}
+\DoxyCodeLine{\Hypertarget{_synchronization_context_tests_8cs_source_l00123}00123\ }
+\DoxyCodeLine{\Hypertarget{_synchronization_context_tests_8cs_source_l00124}00124\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (var\ i\ =\ 0;\ i\ <\ 1\_000\_000;\ i++)}
+\DoxyCodeLine{\Hypertarget{_synchronization_context_tests_8cs_source_l00125}00125\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_synchronization_context_tests_8cs_source_l00126}00126\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ If\ I\ leave\ this\ empty\ could\ the\ compiler\ decide\ to\ 'optimize'\ it\ out,}}
+\DoxyCodeLine{\Hypertarget{_synchronization_context_tests_8cs_source_l00127}00127\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ on\ the\ basis\ that\ it\ has\ an\ empty\ code\ block?}}
+\DoxyCodeLine{\Hypertarget{_synchronization_context_tests_8cs_source_l00128}00128\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_synchronization_context_tests_8cs_source_l00129}00129\ }
+\DoxyCodeLine{\Hypertarget{_synchronization_context_tests_8cs_source_l00130}00130\ \ \ \ \ \ \ \ \ Assert.Equal(expectedValue,\ x);}
+\DoxyCodeLine{\Hypertarget{_synchronization_context_tests_8cs_source_l00131}00131\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_synchronization_context_tests_8cs_source_l00132}00132\ }
+\DoxyCodeLine{\Hypertarget{_synchronization_context_tests_8cs_source_l00172}00172\ \ \ \ \ [Fact]}
+\DoxyCodeLine{\Hypertarget{_synchronization_context_tests_8cs_source_l00173}00173\ \textcolor{preprocessor}{\#pragma\ warning\ disable\ CS1998\ }\textcolor{comment}{//\ Async\ method\ lacks\ 'await'\ operators\ and\ will\ run\ synchronously}}
+\DoxyCodeLine{\Hypertarget{_synchronization_context_tests_8cs_source_l00174}\mbox{\hyperlink{class_luthetus_1_1_ide_1_1_tests_1_1_adhoc_1_1_synchronization_context_tests_a3b1e5f4e5ad4be57203500b92644a4a9}{00174}}\ \ \ \ \ \textcolor{keyword}{public}\ async\ Task\ \mbox{\hyperlink{class_luthetus_1_1_ide_1_1_tests_1_1_adhoc_1_1_synchronization_context_tests_a3b1e5f4e5ad4be57203500b92644a4a9}{AsynchronousNoAwait\_TryToGetTheNotAwaitedTaskToComplete\_ByExecutingSynchronousCodeBetweenItAndTheIncrementation\_SmallForLoopUpperBound}}()}
+\DoxyCodeLine{\Hypertarget{_synchronization_context_tests_8cs_source_l00175}00175\ \textcolor{preprocessor}{\#pragma\ warning\ restore\ CS1998\ }\textcolor{comment}{//\ Async\ method\ lacks\ 'await'\ operators\ and\ will\ run\ synchronously}}
+\DoxyCodeLine{\Hypertarget{_synchronization_context_tests_8cs_source_l00176}00176\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_synchronization_context_tests_8cs_source_l00177}00177\ \ \ \ \ \ \ \ \ var\ initialValue\ =\ 2;}
+\DoxyCodeLine{\Hypertarget{_synchronization_context_tests_8cs_source_l00178}00178\ \ \ \ \ \ \ \ \ var\ expectedValue\ =\ 2;}
+\DoxyCodeLine{\Hypertarget{_synchronization_context_tests_8cs_source_l00179}00179\ }
+\DoxyCodeLine{\Hypertarget{_synchronization_context_tests_8cs_source_l00180}00180\ \ \ \ \ \ \ \ \ var\ x\ =\ initialValue;}
+\DoxyCodeLine{\Hypertarget{_synchronization_context_tests_8cs_source_l00181}00181\ \textcolor{preprocessor}{\#pragma\ warning\ disable\ CS4014\ }\textcolor{comment}{//\ Because\ this\ call\ is\ not\ awaited,\ execution\ of\ the\ current\ method\ continues\ before\ the\ call\ is\ completed}}
+\DoxyCodeLine{\Hypertarget{_synchronization_context_tests_8cs_source_l00182}00182\ \ \ \ \ \ \ \ \ Task.Run(()\ =>\ \{\ x++;\ \});}
+\DoxyCodeLine{\Hypertarget{_synchronization_context_tests_8cs_source_l00183}00183\ \textcolor{preprocessor}{\#pragma\ warning\ restore\ CS4014\ }\textcolor{comment}{//\ Because\ this\ call\ is\ not\ awaited,\ execution\ of\ the\ current\ method\ continues\ before\ the\ call\ is\ completed}}
+\DoxyCodeLine{\Hypertarget{_synchronization_context_tests_8cs_source_l00184}00184\ }
+\DoxyCodeLine{\Hypertarget{_synchronization_context_tests_8cs_source_l00185}00185\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (var\ i\ =\ 0;\ i\ <\ 10;\ i++)}
+\DoxyCodeLine{\Hypertarget{_synchronization_context_tests_8cs_source_l00186}00186\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_synchronization_context_tests_8cs_source_l00187}00187\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ If\ I\ leave\ this\ empty\ could\ the\ compiler\ decide\ to\ 'optimize'\ it\ out,}}
+\DoxyCodeLine{\Hypertarget{_synchronization_context_tests_8cs_source_l00188}00188\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ on\ the\ basis\ that\ it\ has\ an\ empty\ code\ block?}}
+\DoxyCodeLine{\Hypertarget{_synchronization_context_tests_8cs_source_l00189}00189\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_synchronization_context_tests_8cs_source_l00190}00190\ }
+\DoxyCodeLine{\Hypertarget{_synchronization_context_tests_8cs_source_l00191}00191\ \ \ \ \ \ \ \ \ Assert.Equal(expectedValue,\ x);}
+\DoxyCodeLine{\Hypertarget{_synchronization_context_tests_8cs_source_l00192}00192\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_synchronization_context_tests_8cs_source_l00193}00193\ }
+\DoxyCodeLine{\Hypertarget{_synchronization_context_tests_8cs_source_l00197}00197\ \ \ \ \ [Fact]}
+\DoxyCodeLine{\Hypertarget{_synchronization_context_tests_8cs_source_l00198}\mbox{\hyperlink{class_luthetus_1_1_ide_1_1_tests_1_1_adhoc_1_1_synchronization_context_tests_a9a95ae60246c950f91694f80a8357bc9}{00198}}\ \ \ \ \ \textcolor{keyword}{public}\ async\ Task\ \mbox{\hyperlink{class_luthetus_1_1_ide_1_1_tests_1_1_adhoc_1_1_synchronization_context_tests_a9a95ae60246c950f91694f80a8357bc9}{AsynchronousNoAwait\_TryToGetTheNotAwaitedTaskToComplete\_ByAwaitingATaskBetweenItAndTheIncrementation\_TaskDelayNonZero}}()}
+\DoxyCodeLine{\Hypertarget{_synchronization_context_tests_8cs_source_l00199}00199\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_synchronization_context_tests_8cs_source_l00200}00200\ \ \ \ \ \ \ \ \ var\ initialValue\ =\ 2;}
+\DoxyCodeLine{\Hypertarget{_synchronization_context_tests_8cs_source_l00201}00201\ \ \ \ \ \ \ \ \ var\ expectedValue\ =\ 3;}
+\DoxyCodeLine{\Hypertarget{_synchronization_context_tests_8cs_source_l00202}00202\ }
+\DoxyCodeLine{\Hypertarget{_synchronization_context_tests_8cs_source_l00203}00203\ \ \ \ \ \ \ \ \ var\ x\ =\ initialValue;}
+\DoxyCodeLine{\Hypertarget{_synchronization_context_tests_8cs_source_l00204}00204\ \textcolor{preprocessor}{\#pragma\ warning\ disable\ CS4014\ }\textcolor{comment}{//\ Because\ this\ call\ is\ not\ awaited,\ execution\ of\ the\ current\ method\ continues\ before\ the\ call\ is\ completed}}
+\DoxyCodeLine{\Hypertarget{_synchronization_context_tests_8cs_source_l00205}00205\ \ \ \ \ \ \ \ \ Task.Run(()\ =>\ \{\ x++;\ \});}
+\DoxyCodeLine{\Hypertarget{_synchronization_context_tests_8cs_source_l00206}00206\ \textcolor{preprocessor}{\#pragma\ warning\ restore\ CS4014\ }\textcolor{comment}{//\ Because\ this\ call\ is\ not\ awaited,\ execution\ of\ the\ current\ method\ continues\ before\ the\ call\ is\ completed}}
+\DoxyCodeLine{\Hypertarget{_synchronization_context_tests_8cs_source_l00207}00207\ }
+\DoxyCodeLine{\Hypertarget{_synchronization_context_tests_8cs_source_l00208}00208\ \ \ \ \ \ \ \ \ await\ Task.Delay(100);}
+\DoxyCodeLine{\Hypertarget{_synchronization_context_tests_8cs_source_l00209}00209\ }
+\DoxyCodeLine{\Hypertarget{_synchronization_context_tests_8cs_source_l00210}00210\ \ \ \ \ \ \ \ \ Assert.Equal(expectedValue,\ x);}
+\DoxyCodeLine{\Hypertarget{_synchronization_context_tests_8cs_source_l00211}00211\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_synchronization_context_tests_8cs_source_l00212}00212\ }
+\DoxyCodeLine{\Hypertarget{_synchronization_context_tests_8cs_source_l00216}00216\ \ \ \ \ [Fact]}
+\DoxyCodeLine{\Hypertarget{_synchronization_context_tests_8cs_source_l00217}\mbox{\hyperlink{class_luthetus_1_1_ide_1_1_tests_1_1_adhoc_1_1_synchronization_context_tests_a188ba522857c739aa993046d5f2db7f1}{00217}}\ \ \ \ \ \textcolor{keyword}{public}\ async\ Task\ \mbox{\hyperlink{class_luthetus_1_1_ide_1_1_tests_1_1_adhoc_1_1_synchronization_context_tests_a188ba522857c739aa993046d5f2db7f1}{AsynchronousNoAwait\_TryToGetTheNotAwaitedTaskToComplete\_ByAwaitingATaskBetweenItAndTheIncrementationTaskDelayZero}}()}
+\DoxyCodeLine{\Hypertarget{_synchronization_context_tests_8cs_source_l00218}00218\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_synchronization_context_tests_8cs_source_l00219}00219\ \ \ \ \ \ \ \ \ var\ initialValue\ =\ 2;}
+\DoxyCodeLine{\Hypertarget{_synchronization_context_tests_8cs_source_l00220}00220\ \ \ \ \ \ \ \ \ var\ expectedValue\ =\ 2;}
+\DoxyCodeLine{\Hypertarget{_synchronization_context_tests_8cs_source_l00221}00221\ }
+\DoxyCodeLine{\Hypertarget{_synchronization_context_tests_8cs_source_l00222}00222\ \ \ \ \ \ \ \ \ var\ x\ =\ initialValue;}
+\DoxyCodeLine{\Hypertarget{_synchronization_context_tests_8cs_source_l00223}00223\ \textcolor{preprocessor}{\#pragma\ warning\ disable\ CS4014\ }\textcolor{comment}{//\ Because\ this\ call\ is\ not\ awaited,\ execution\ of\ the\ current\ method\ continues\ before\ the\ call\ is\ completed}}
+\DoxyCodeLine{\Hypertarget{_synchronization_context_tests_8cs_source_l00224}00224\ \ \ \ \ \ \ \ \ Task.Run(()\ =>\ \{\ x++;\ \});}
+\DoxyCodeLine{\Hypertarget{_synchronization_context_tests_8cs_source_l00225}00225\ \textcolor{preprocessor}{\#pragma\ warning\ restore\ CS4014\ }\textcolor{comment}{//\ Because\ this\ call\ is\ not\ awaited,\ execution\ of\ the\ current\ method\ continues\ before\ the\ call\ is\ completed}}
+\DoxyCodeLine{\Hypertarget{_synchronization_context_tests_8cs_source_l00226}00226\ }
+\DoxyCodeLine{\Hypertarget{_synchronization_context_tests_8cs_source_l00227}00227\ \ \ \ \ \ \ \ \ await\ Task.Delay(0);}
+\DoxyCodeLine{\Hypertarget{_synchronization_context_tests_8cs_source_l00228}00228\ }
+\DoxyCodeLine{\Hypertarget{_synchronization_context_tests_8cs_source_l00229}00229\ \ \ \ \ \ \ \ \ Assert.Equal(expectedValue,\ x);}
+\DoxyCodeLine{\Hypertarget{_synchronization_context_tests_8cs_source_l00230}00230\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_synchronization_context_tests_8cs_source_l00231}00231\ }
+\DoxyCodeLine{\Hypertarget{_synchronization_context_tests_8cs_source_l00245}00245\ \ \ \ \ [Fact]}
+\DoxyCodeLine{\Hypertarget{_synchronization_context_tests_8cs_source_l00246}\mbox{\hyperlink{class_luthetus_1_1_ide_1_1_tests_1_1_adhoc_1_1_synchronization_context_tests_a6171884db76ec3c2d3426b068743d8f2}{00246}}\ \ \ \ \ \textcolor{keyword}{public}\ async\ Task\ \mbox{\hyperlink{class_luthetus_1_1_ide_1_1_tests_1_1_adhoc_1_1_synchronization_context_tests_a6171884db76ec3c2d3426b068743d8f2}{AsynchronousNoAwait\_TryToGetTheNotAwaitedTaskToComplete\_ByAwaitingATaskBetweenItAndTheIncrementationTaskDelayOne}}()}
+\DoxyCodeLine{\Hypertarget{_synchronization_context_tests_8cs_source_l00247}00247\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_synchronization_context_tests_8cs_source_l00248}00248\ \ \ \ \ \ \ \ \ var\ initialValue\ =\ 2;}
+\DoxyCodeLine{\Hypertarget{_synchronization_context_tests_8cs_source_l00249}00249\ \ \ \ \ \ \ \ \ var\ expectedValue\ =\ 3;}
+\DoxyCodeLine{\Hypertarget{_synchronization_context_tests_8cs_source_l00250}00250\ }
+\DoxyCodeLine{\Hypertarget{_synchronization_context_tests_8cs_source_l00251}00251\ \ \ \ \ \ \ \ \ var\ x\ =\ initialValue;}
+\DoxyCodeLine{\Hypertarget{_synchronization_context_tests_8cs_source_l00252}00252\ \textcolor{preprocessor}{\#pragma\ warning\ disable\ CS4014\ }\textcolor{comment}{//\ Because\ this\ call\ is\ not\ awaited,\ execution\ of\ the\ current\ method\ continues\ before\ the\ call\ is\ completed}}
+\DoxyCodeLine{\Hypertarget{_synchronization_context_tests_8cs_source_l00253}00253\ \ \ \ \ \ \ \ \ Task.Run(()\ =>\ \{\ x++;\ \});}
+\DoxyCodeLine{\Hypertarget{_synchronization_context_tests_8cs_source_l00254}00254\ \textcolor{preprocessor}{\#pragma\ warning\ restore\ CS4014\ }\textcolor{comment}{//\ Because\ this\ call\ is\ not\ awaited,\ execution\ of\ the\ current\ method\ continues\ before\ the\ call\ is\ completed}}
+\DoxyCodeLine{\Hypertarget{_synchronization_context_tests_8cs_source_l00255}00255\ }
+\DoxyCodeLine{\Hypertarget{_synchronization_context_tests_8cs_source_l00256}00256\ \ \ \ \ \ \ \ \ await\ Task.Delay(1);}
+\DoxyCodeLine{\Hypertarget{_synchronization_context_tests_8cs_source_l00257}00257\ }
+\DoxyCodeLine{\Hypertarget{_synchronization_context_tests_8cs_source_l00258}00258\ \ \ \ \ \ \ \ \ Assert.Equal(expectedValue,\ x);}
+\DoxyCodeLine{\Hypertarget{_synchronization_context_tests_8cs_source_l00259}00259\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_synchronization_context_tests_8cs_source_l00260}00260\ }
+\DoxyCodeLine{\Hypertarget{_synchronization_context_tests_8cs_source_l00283}00283\ \ \ \ \ [Fact]}
+\DoxyCodeLine{\Hypertarget{_synchronization_context_tests_8cs_source_l00284}\mbox{\hyperlink{class_luthetus_1_1_ide_1_1_tests_1_1_adhoc_1_1_synchronization_context_tests_a7b892bae8808820a3accf384ec109758}{00284}}\ \ \ \ \ \textcolor{keyword}{public}\ async\ Task\ \mbox{\hyperlink{class_luthetus_1_1_ide_1_1_tests_1_1_adhoc_1_1_synchronization_context_tests_a7b892bae8808820a3accf384ec109758}{Concurrency\_WhenAll}}()}
+\DoxyCodeLine{\Hypertarget{_synchronization_context_tests_8cs_source_l00285}00285\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_synchronization_context_tests_8cs_source_l00286}00286\ \ \ \ \ \ \ \ \ var\ delayOne\ =\ Task.Delay(1\_500);}
+\DoxyCodeLine{\Hypertarget{_synchronization_context_tests_8cs_source_l00287}00287\ \ \ \ \ \ \ \ \ var\ delayTwo\ =\ Task.Delay(1\_500);}
+\DoxyCodeLine{\Hypertarget{_synchronization_context_tests_8cs_source_l00288}00288\ }
+\DoxyCodeLine{\Hypertarget{_synchronization_context_tests_8cs_source_l00289}00289\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ The\ idea\ here\ is\ to\ await\ two\ 'Task.Delay'(s)}}
+\DoxyCodeLine{\Hypertarget{_synchronization_context_tests_8cs_source_l00290}00290\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ and\ see\ that\ the\ duration\ of\ this\ test\ was\ less\ than}}
+\DoxyCodeLine{\Hypertarget{_synchronization_context_tests_8cs_source_l00291}00291\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ the\ sum\ of\ delayOne\ and\ delayTwo.}}
+\DoxyCodeLine{\Hypertarget{_synchronization_context_tests_8cs_source_l00292}00292\ \ \ \ \ \ \ \ \ await\ Task.WhenAll(\textcolor{keyword}{new}[]\ \{\ delayOne,\ delayTwo\ \});}
+\DoxyCodeLine{\Hypertarget{_synchronization_context_tests_8cs_source_l00293}00293\ }
+\DoxyCodeLine{\Hypertarget{_synchronization_context_tests_8cs_source_l00294}00294\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ But,\ is\ this\ even\ concurrency?}}
+\DoxyCodeLine{\Hypertarget{_synchronization_context_tests_8cs_source_l00295}00295\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ This\ unit\ test\ seems\ runnable\ as\ either\ concurrently,}}
+\DoxyCodeLine{\Hypertarget{_synchronization_context_tests_8cs_source_l00296}00296\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ or\ in\ parallel,\ and\ that\ both\ are\ equivalent}}
+\DoxyCodeLine{\Hypertarget{_synchronization_context_tests_8cs_source_l00297}00297\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ from\ the\ perspective\ of\ a\ user.}}
+\DoxyCodeLine{\Hypertarget{_synchronization_context_tests_8cs_source_l00298}00298\ \ \ \ \ \ \ \ \ \textcolor{comment}{//}}
+\DoxyCodeLine{\Hypertarget{_synchronization_context_tests_8cs_source_l00299}00299\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ How\ do\ I\ know\ if\ this\ test\ gets\ ran\ concurrently\ or\ in\ parallel?}}
+\DoxyCodeLine{\Hypertarget{_synchronization_context_tests_8cs_source_l00300}00300\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_synchronization_context_tests_8cs_source_l00301}00301\ }
+\DoxyCodeLine{\Hypertarget{_synchronization_context_tests_8cs_source_l00302}00302\ \ \ \ \ [Fact]}
+\DoxyCodeLine{\Hypertarget{_synchronization_context_tests_8cs_source_l00303}\mbox{\hyperlink{class_luthetus_1_1_ide_1_1_tests_1_1_adhoc_1_1_synchronization_context_tests_a5b85d3fc42489018135560ed815657b6}{00303}}\ \ \ \ \ \textcolor{keyword}{public}\ async\ Task\ \mbox{\hyperlink{class_luthetus_1_1_ide_1_1_tests_1_1_adhoc_1_1_synchronization_context_tests_a5b85d3fc42489018135560ed815657b6}{Concurrency\_OneAtATime}}()}
+\DoxyCodeLine{\Hypertarget{_synchronization_context_tests_8cs_source_l00304}00304\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_synchronization_context_tests_8cs_source_l00305}00305\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ The\ idea\ here\ is\ to\ await\ two\ 'Task.Delay'(s)}}
+\DoxyCodeLine{\Hypertarget{_synchronization_context_tests_8cs_source_l00306}00306\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ and\ see\ that\ the\ duration\ of\ this\ test\ is\ greater\ than\ or\ equal\ to}}
+\DoxyCodeLine{\Hypertarget{_synchronization_context_tests_8cs_source_l00307}00307\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ the\ sum\ of\ delayOne\ and\ delayTwo.}}
+\DoxyCodeLine{\Hypertarget{_synchronization_context_tests_8cs_source_l00308}00308\ \ \ \ \ \ \ \ \ await\ Task.Delay(1\_500);}
+\DoxyCodeLine{\Hypertarget{_synchronization_context_tests_8cs_source_l00309}00309\ \ \ \ \ \ \ \ \ await\ Task.Delay(1\_500);}
+\DoxyCodeLine{\Hypertarget{_synchronization_context_tests_8cs_source_l00310}00310\ }
+\DoxyCodeLine{\Hypertarget{_synchronization_context_tests_8cs_source_l00311}00311\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ I'm\ getting\ 2\ seconds\ for\ both\ of\ these\ tests?}}
+\DoxyCodeLine{\Hypertarget{_synchronization_context_tests_8cs_source_l00312}00312\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Presumably\ because\ the\ 'var\ delayOne\ =\ Task.Delay(...)'}}
+\DoxyCodeLine{\Hypertarget{_synchronization_context_tests_8cs_source_l00313}00313\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ starts\ the\ delay,}}
+\DoxyCodeLine{\Hypertarget{_synchronization_context_tests_8cs_source_l00314}00314\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ I\ need\ to\ instead\ move\ the\ await\ to\ the\ same\ line}}
+\DoxyCodeLine{\Hypertarget{_synchronization_context_tests_8cs_source_l00315}00315\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ where\ the\ variables\ are.}}
+\DoxyCodeLine{\Hypertarget{_synchronization_context_tests_8cs_source_l00316}00316\ \ \ \ \ \ \ \ \ \textcolor{comment}{//}}
+\DoxyCodeLine{\Hypertarget{_synchronization_context_tests_8cs_source_l00317}00317\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ After\ moving\ the\ await\ to\ be\ done\ immediately,}}
+\DoxyCodeLine{\Hypertarget{_synchronization_context_tests_8cs_source_l00318}00318\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ I'm\ getting\ 1.5sec\ vs\ 3sec\ when\ using\ a\ 1,500ms\ delay}}
+\DoxyCodeLine{\Hypertarget{_synchronization_context_tests_8cs_source_l00319}00319\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ with\ both\ invocations.}}
+\DoxyCodeLine{\Hypertarget{_synchronization_context_tests_8cs_source_l00320}00320\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_synchronization_context_tests_8cs_source_l00321}00321\ }
+\DoxyCodeLine{\Hypertarget{_synchronization_context_tests_8cs_source_l00322}00322\ \ \ \ \ \textcolor{comment}{//\ https://learn.microsoft.com/en-\/us/dotnet/api/system.threading.tasks.parallel}}
+\DoxyCodeLine{\Hypertarget{_synchronization_context_tests_8cs_source_l00323}00323\ \ \ \ \ \textcolor{keyword}{class\ }Test}
+\DoxyCodeLine{\Hypertarget{_synchronization_context_tests_8cs_source_l00324}00324\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_synchronization_context_tests_8cs_source_l00325}00325\ \ \ \ \ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{int}\ N\ =\ 1000;}
+\DoxyCodeLine{\Hypertarget{_synchronization_context_tests_8cs_source_l00326}00326\ }
+\DoxyCodeLine{\Hypertarget{_synchronization_context_tests_8cs_source_l00327}00327\ \ \ \ \ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ TestMethod()}
+\DoxyCodeLine{\Hypertarget{_synchronization_context_tests_8cs_source_l00328}00328\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_synchronization_context_tests_8cs_source_l00329}00329\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Using\ a\ named\ method.}}
+\DoxyCodeLine{\Hypertarget{_synchronization_context_tests_8cs_source_l00330}00330\ \ \ \ \ \ \ \ \ \ \ \ \ Parallel.For(0,\ N,\ Method2);}
+\DoxyCodeLine{\Hypertarget{_synchronization_context_tests_8cs_source_l00331}00331\ }
+\DoxyCodeLine{\Hypertarget{_synchronization_context_tests_8cs_source_l00332}00332\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Using\ an\ anonymous\ method.}}
+\DoxyCodeLine{\Hypertarget{_synchronization_context_tests_8cs_source_l00333}00333\ \ \ \ \ \ \ \ \ \ \ \ \ Parallel.For(0,\ N,\ delegate\ (\textcolor{keywordtype}{int}\ i)}
+\DoxyCodeLine{\Hypertarget{_synchronization_context_tests_8cs_source_l00334}00334\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_synchronization_context_tests_8cs_source_l00335}00335\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Do\ Work.}}
+\DoxyCodeLine{\Hypertarget{_synchronization_context_tests_8cs_source_l00336}00336\ \ \ \ \ \ \ \ \ \ \ \ \ \});}
+\DoxyCodeLine{\Hypertarget{_synchronization_context_tests_8cs_source_l00337}00337\ }
+\DoxyCodeLine{\Hypertarget{_synchronization_context_tests_8cs_source_l00338}00338\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Using\ a\ lambda\ expression.}}
+\DoxyCodeLine{\Hypertarget{_synchronization_context_tests_8cs_source_l00339}00339\ \ \ \ \ \ \ \ \ \ \ \ \ Parallel.For(0,\ N,\ i\ =>}
+\DoxyCodeLine{\Hypertarget{_synchronization_context_tests_8cs_source_l00340}00340\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_synchronization_context_tests_8cs_source_l00341}00341\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Do\ Work.}}
+\DoxyCodeLine{\Hypertarget{_synchronization_context_tests_8cs_source_l00342}00342\ \ \ \ \ \ \ \ \ \ \ \ \ \});}
+\DoxyCodeLine{\Hypertarget{_synchronization_context_tests_8cs_source_l00343}00343\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_synchronization_context_tests_8cs_source_l00344}00344\ }
+\DoxyCodeLine{\Hypertarget{_synchronization_context_tests_8cs_source_l00345}00345\ \ \ \ \ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ Method2(\textcolor{keywordtype}{int}\ i)}
+\DoxyCodeLine{\Hypertarget{_synchronization_context_tests_8cs_source_l00346}00346\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_synchronization_context_tests_8cs_source_l00347}00347\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Do\ work.}}
+\DoxyCodeLine{\Hypertarget{_synchronization_context_tests_8cs_source_l00348}00348\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_synchronization_context_tests_8cs_source_l00349}00349\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_synchronization_context_tests_8cs_source_l00350}00350\ }
+\DoxyCodeLine{\Hypertarget{_synchronization_context_tests_8cs_source_l00354}00354\ \ \ \ \ [Fact]}
+\DoxyCodeLine{\Hypertarget{_synchronization_context_tests_8cs_source_l00355}\mbox{\hyperlink{class_luthetus_1_1_ide_1_1_tests_1_1_adhoc_1_1_synchronization_context_tests_aabd5fd38d0b6f33648437452adcd87b7}{00355}}\ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_luthetus_1_1_ide_1_1_tests_1_1_adhoc_1_1_synchronization_context_tests_aabd5fd38d0b6f33648437452adcd87b7}{Parallel\_Sync}}()}
+\DoxyCodeLine{\Hypertarget{_synchronization_context_tests_8cs_source_l00356}00356\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_synchronization_context_tests_8cs_source_l00357}00357\ \ \ \ \ \ \ \ \ var\ lockSecondsWaited\ =\ \textcolor{keyword}{new}\ object();}
+\DoxyCodeLine{\Hypertarget{_synchronization_context_tests_8cs_source_l00358}00358\ \ \ \ \ \ \ \ \ var\ expectedSecondsWaited\ =\ 10;}
+\DoxyCodeLine{\Hypertarget{_synchronization_context_tests_8cs_source_l00359}00359\ \ \ \ \ \ \ \ \ var\ actualSecondsWaited\ =\ 0;}
+\DoxyCodeLine{\Hypertarget{_synchronization_context_tests_8cs_source_l00360}00360\ }
+\DoxyCodeLine{\Hypertarget{_synchronization_context_tests_8cs_source_l00361}00361\ \ \ \ \ \ \ \ \ var\ parallelLoopResult\ =\ Parallel.For(0,\ expectedSecondsWaited,\ iteration\ =>}
+\DoxyCodeLine{\Hypertarget{_synchronization_context_tests_8cs_source_l00362}00362\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_synchronization_context_tests_8cs_source_l00363}00363\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ I\ tried\ 100\ seconds,\ the\ actualSecondsWaited\ was\ 88,}}
+\DoxyCodeLine{\Hypertarget{_synchronization_context_tests_8cs_source_l00364}00364\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ but\ I\ suspect\ that\ some\ 'thread\ safe'\ logic\ is\ needed}}
+\DoxyCodeLine{\Hypertarget{_synchronization_context_tests_8cs_source_l00365}00365\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ when\ incrementing\ the\ 'actualSecondsWaited'.}}
+\DoxyCodeLine{\Hypertarget{_synchronization_context_tests_8cs_source_l00366}00366\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//}}
+\DoxyCodeLine{\Hypertarget{_synchronization_context_tests_8cs_source_l00367}00367\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ After\ adding\ 'thread\ safety'\ to\ the\ incrementation,\ the\ actualSecondsWaited\ was\ 100,}}
+\DoxyCodeLine{\Hypertarget{_synchronization_context_tests_8cs_source_l00368}00368\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ and\ the\ total\ time\ was\ 16.9\ sec.\ I\ will\ lower\ the\ expectedSecondsWaited,\ because\ at\ 100\ it\ takes\ a\ while.}}
+\DoxyCodeLine{\Hypertarget{_synchronization_context_tests_8cs_source_l00369}00369\ \ \ \ \ \ \ \ \ \ \ \ \ Task.Delay(1\_000)}
+\DoxyCodeLine{\Hypertarget{_synchronization_context_tests_8cs_source_l00370}00370\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ .ContinueWith(x\ =>}
+\DoxyCodeLine{\Hypertarget{_synchronization_context_tests_8cs_source_l00371}00371\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{\ }
+\DoxyCodeLine{\Hypertarget{_synchronization_context_tests_8cs_source_l00372}00372\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ lock\ (lockSecondsWaited)}
+\DoxyCodeLine{\Hypertarget{_synchronization_context_tests_8cs_source_l00373}00373\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_synchronization_context_tests_8cs_source_l00374}00374\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ actualSecondsWaited++;}
+\DoxyCodeLine{\Hypertarget{_synchronization_context_tests_8cs_source_l00375}00375\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_synchronization_context_tests_8cs_source_l00376}00376\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}).Wait();}
+\DoxyCodeLine{\Hypertarget{_synchronization_context_tests_8cs_source_l00377}00377\ \ \ \ \ \ \ \ \ \});}
+\DoxyCodeLine{\Hypertarget{_synchronization_context_tests_8cs_source_l00378}00378\ }
+\DoxyCodeLine{\Hypertarget{_synchronization_context_tests_8cs_source_l00379}00379\ \ \ \ \ \ \ \ \ Assert.Equal(expectedSecondsWaited,\ actualSecondsWaited);}
+\DoxyCodeLine{\Hypertarget{_synchronization_context_tests_8cs_source_l00380}00380\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_synchronization_context_tests_8cs_source_l00381}00381\ }
+\DoxyCodeLine{\Hypertarget{_synchronization_context_tests_8cs_source_l00385}00385\ \ \ \ \ [Fact]}
+\DoxyCodeLine{\Hypertarget{_synchronization_context_tests_8cs_source_l00386}\mbox{\hyperlink{class_luthetus_1_1_ide_1_1_tests_1_1_adhoc_1_1_synchronization_context_tests_a0ef8e06e0da6ebd62edaed01c4689ae4}{00386}}\ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_luthetus_1_1_ide_1_1_tests_1_1_adhoc_1_1_synchronization_context_tests_a0ef8e06e0da6ebd62edaed01c4689ae4}{Parallel\_Async}}()}
+\DoxyCodeLine{\Hypertarget{_synchronization_context_tests_8cs_source_l00387}00387\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_synchronization_context_tests_8cs_source_l00388}00388\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ TODO:\ This\ and\ more,\ I\ have\ an\ idea\ about\ the\ application\ and\ want\ to\ look\ into\ that\ before\ continuing\ these.}}
+\DoxyCodeLine{\Hypertarget{_synchronization_context_tests_8cs_source_l00389}00389\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_synchronization_context_tests_8cs_source_l00390}00390\ \}}
+
+\end{DoxyCode}

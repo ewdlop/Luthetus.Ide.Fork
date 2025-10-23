@@ -1,0 +1,12 @@
+var class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_js_runtimes_1_1_models_1_1_luthetus_text_editor_java_script_interop_api =
+[
+    [ "LuthetusTextEditorJavaScriptInteropApi", "class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_js_runtimes_1_1_models_1_1_luthetus_text_editor_java_script_interop_api.html#af1bc95cc74a021ec5f46edbebed08b49", null ],
+    [ "EscapeHtml", "class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_js_runtimes_1_1_models_1_1_luthetus_text_editor_java_script_interop_api.html#aa98e9f278a2753e076d1b10092df0436", null ],
+    [ "GetBoundingClientRect", "class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_js_runtimes_1_1_models_1_1_luthetus_text_editor_java_script_interop_api.html#af57843f40f468eea854d3a8a915bf65a", null ],
+    [ "GetCharAndLineMeasurementsInPixelsById", "class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_js_runtimes_1_1_models_1_1_luthetus_text_editor_java_script_interop_api.html#a7ed95394447dafcc2e6e4a12a11c7e49", null ],
+    [ "GetRelativePosition", "class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_js_runtimes_1_1_models_1_1_luthetus_text_editor_java_script_interop_api.html#ac086e808cfc29fe5bf1e0d69dfa58f91", null ],
+    [ "GetTextEditorMeasurementsInPixelsById", "class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_js_runtimes_1_1_models_1_1_luthetus_text_editor_java_script_interop_api.html#aa784b637c35ae465a55defbd2d57244b", null ],
+    [ "PreventDefaultOnWheelEvents", "class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_js_runtimes_1_1_models_1_1_luthetus_text_editor_java_script_interop_api.html#ae304b744af2b0652966660474b74938d", null ],
+    [ "ScrollElementIntoView", "class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_js_runtimes_1_1_models_1_1_luthetus_text_editor_java_script_interop_api.html#a761924e5e003083a998437640d86f80b", null ],
+    [ "SetScrollPosition", "class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_js_runtimes_1_1_models_1_1_luthetus_text_editor_java_script_interop_api.html#af43f7bb670ab22d13ae304358c4fd9bd", null ]
+];

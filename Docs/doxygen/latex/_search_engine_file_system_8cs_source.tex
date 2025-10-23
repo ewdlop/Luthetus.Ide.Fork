@@ -1,0 +1,113 @@
+\doxysection{Search\+Engine\+File\+System.\+cs}
+\hypertarget{_search_engine_file_system_8cs_source}{}\label{_search_engine_file_system_8cs_source}\index{Source/Lib/TextEditor/FindAlls/Models/SearchEngineFileSystem.cs@{Source/Lib/TextEditor/FindAlls/Models/SearchEngineFileSystem.cs}}
+\mbox{\hyperlink{_search_engine_file_system_8cs}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{_search_engine_file_system_8cs_source_l00001}00001\ \textcolor{keyword}{using\ }Fluxor;}
+\DoxyCodeLine{\Hypertarget{_search_engine_file_system_8cs_source_l00002}00002\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_luthetus_1_1_common_1_1_razor_lib_1_1_keys_1_1_models}{Luthetus.Common.RazorLib.Keys.Models}};}
+\DoxyCodeLine{\Hypertarget{_search_engine_file_system_8cs_source_l00003}00003\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_luthetus_1_1_common_1_1_razor_lib_1_1_file_systems_1_1_models}{Luthetus.Common.RazorLib.FileSystems.Models}};}
+\DoxyCodeLine{\Hypertarget{_search_engine_file_system_8cs_source_l00004}00004\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_find_alls_1_1_states}{Luthetus.TextEditor.RazorLib.FindAlls.States}};}
+\DoxyCodeLine{\Hypertarget{_search_engine_file_system_8cs_source_l00005}00005\ }
+\DoxyCodeLine{\Hypertarget{_search_engine_file_system_8cs_source_l00006}00006\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_find_alls_1_1_models}{Luthetus.TextEditor.RazorLib.FindAlls.Models}};}
+\DoxyCodeLine{\Hypertarget{_search_engine_file_system_8cs_source_l00007}00007\ }
+\DoxyCodeLine{\Hypertarget{_search_engine_file_system_8cs_source_l00008}\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_find_alls_1_1_models_1_1_search_engine_file_system}{00008}}\ \textcolor{keyword}{public}\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_find_alls_1_1_models_1_1_search_engine_file_system_a5ec9e915dc6537d7a46019288eea6e02}{SearchEngineFileSystem}}\ :\ \mbox{\hyperlink{interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_find_alls_1_1_models_1_1_i_text_editor_search_engine}{ITextEditorSearchEngine}}}
+\DoxyCodeLine{\Hypertarget{_search_engine_file_system_8cs_source_l00009}00009\ \{}
+\DoxyCodeLine{\Hypertarget{_search_engine_file_system_8cs_source_l00010}00010\ \ \ \ \ \textcolor{keyword}{private}\ readonly\ \mbox{\hyperlink{interface_luthetus_1_1_common_1_1_razor_lib_1_1_file_systems_1_1_models_1_1_i_file_system_provider}{IFileSystemProvider}}\ \_fileSystemProvider;}
+\DoxyCodeLine{\Hypertarget{_search_engine_file_system_8cs_source_l00011}00011\ \ \ \ \ \textcolor{keyword}{private}\ readonly\ IState<TextEditorFindAllState>\ \_textEditorFindAllStateWrap;}
+\DoxyCodeLine{\Hypertarget{_search_engine_file_system_8cs_source_l00012}00012\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_search_engine_file_system_8cs_source_l00013}00013\ \ \ \ \ \textcolor{keyword}{private}\ \textcolor{keywordtype}{int}\ \_runCount;}
+\DoxyCodeLine{\Hypertarget{_search_engine_file_system_8cs_source_l00014}00014\ }
+\DoxyCodeLine{\Hypertarget{_search_engine_file_system_8cs_source_l00015}\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_find_alls_1_1_models_1_1_search_engine_file_system_a5ec9e915dc6537d7a46019288eea6e02}{00015}}\ \ \ \ \ \textcolor{keyword}{public}\ \mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_find_alls_1_1_models_1_1_search_engine_file_system_a5ec9e915dc6537d7a46019288eea6e02}{SearchEngineFileSystem}}(}
+\DoxyCodeLine{\Hypertarget{_search_engine_file_system_8cs_source_l00016}00016\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{interface_luthetus_1_1_common_1_1_razor_lib_1_1_file_systems_1_1_models_1_1_i_file_system_provider}{IFileSystemProvider}}\ fileSystemProvider,}
+\DoxyCodeLine{\Hypertarget{_search_engine_file_system_8cs_source_l00017}00017\ \ \ \ \ \ \ \ \ IState<TextEditorFindAllState>\ textEditorFindAllStateWrap)}
+\DoxyCodeLine{\Hypertarget{_search_engine_file_system_8cs_source_l00018}00018\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_search_engine_file_system_8cs_source_l00019}00019\ \ \ \ \ \ \ \ \ \_fileSystemProvider\ =\ fileSystemProvider;}
+\DoxyCodeLine{\Hypertarget{_search_engine_file_system_8cs_source_l00020}00020\ \ \ \ \ \ \ \ \ \_textEditorFindAllStateWrap\ =\ textEditorFindAllStateWrap;}
+\DoxyCodeLine{\Hypertarget{_search_engine_file_system_8cs_source_l00021}00021\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_search_engine_file_system_8cs_source_l00022}00022\ }
+\DoxyCodeLine{\Hypertarget{_search_engine_file_system_8cs_source_l00023}\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_find_alls_1_1_models_1_1_search_engine_file_system_afa0e41c20130f4e350ffe96de8cf62fc}{00023}}\ \ \ \ \ \textcolor{keyword}{public}\ \mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_find_alls_1_1_models_1_1_search_engine_file_system_afa0e41c20130f4e350ffe96de8cf62fc}{Key<ITextEditorSearchEngine>}}\ \mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_find_alls_1_1_models_1_1_search_engine_file_system_afa0e41c20130f4e350ffe96de8cf62fc}{Key}}\ \{\ \textcolor{keyword}{get};\ \}\ =}
+\DoxyCodeLine{\Hypertarget{_search_engine_file_system_8cs_source_l00024}00024\ \ \ \ \ \ \ \ \ \textcolor{keyword}{new}\ Key<ITextEditorSearchEngine>(Guid.Parse(\textcolor{stringliteral}{"{}dd38073d-\/b2fb-\/478c-\/844f-\/8af5e61855e7"{}}));}
+\DoxyCodeLine{\Hypertarget{_search_engine_file_system_8cs_source_l00025}00025\ }
+\DoxyCodeLine{\Hypertarget{_search_engine_file_system_8cs_source_l00026}\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_find_alls_1_1_models_1_1_search_engine_file_system_ab496a104167f985168810794ea0e633d}{00026}}\ \ \ \ \ \textcolor{keyword}{public}\ Type\ \mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_find_alls_1_1_models_1_1_search_engine_file_system_ab496a104167f985168810794ea0e633d}{IconComponentRendererType}}\ \{\ \textcolor{keyword}{get};\ \}}
+\DoxyCodeLine{\Hypertarget{_search_engine_file_system_8cs_source_l00027}\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_find_alls_1_1_models_1_1_search_engine_file_system_a220dcf8e8459aed556ac99276050e01c}{00027}}\ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keywordtype}{string}\ \mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_find_alls_1_1_models_1_1_search_engine_file_system_a220dcf8e8459aed556ac99276050e01c}{DisplayName}}\ \{\ \textcolor{keyword}{get};\ \}\ =\ \textcolor{stringliteral}{"{}FileSystem"{}};}
+\DoxyCodeLine{\Hypertarget{_search_engine_file_system_8cs_source_l00028}\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_find_alls_1_1_models_1_1_search_engine_file_system_a74e569fb9a841ea3cc19c9101b37e19b}{00028}}\ \ \ \ \ \textcolor{keyword}{public}\ List<string>\ \mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_find_alls_1_1_models_1_1_search_engine_file_system_a74e569fb9a841ea3cc19c9101b37e19b}{FilePathList}}\ =\ \textcolor{keyword}{new}\ List<string>();}
+\DoxyCodeLine{\Hypertarget{_search_engine_file_system_8cs_source_l00029}\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_find_alls_1_1_models_1_1_search_engine_file_system_a6b6f73b20caf647c09e00e49b57ac60e}{00029}}\ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keyword}{event}\ Action?\ \mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_find_alls_1_1_models_1_1_search_engine_file_system_a6b6f73b20caf647c09e00e49b57ac60e}{ProgressOccurred}};}
+\DoxyCodeLine{\Hypertarget{_search_engine_file_system_8cs_source_l00030}\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_find_alls_1_1_models_1_1_search_engine_file_system_ab97e8fe1a179153b6e7cb6d0bac0a5ec}{00030}}\ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_find_alls_1_1_models_1_1_search_engine_file_system_ab97e8fe1a179153b6e7cb6d0bac0a5ec}{IsSearching}};}
+\DoxyCodeLine{\Hypertarget{_search_engine_file_system_8cs_source_l00031}00031\ }
+\DoxyCodeLine{\Hypertarget{_search_engine_file_system_8cs_source_l00032}\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_find_alls_1_1_models_1_1_search_engine_file_system_a840918ea2ee2101a56bf20700be9ae3c}{00032}}\ \ \ \ \ \textcolor{keyword}{public}\ Task\ \mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_find_alls_1_1_models_1_1_search_engine_file_system_a840918ea2ee2101a56bf20700be9ae3c}{SearchAsync}}(\textcolor{keywordtype}{string}\ searchQuery,\ CancellationToken\ cancellationToken\ =\ \textcolor{keywordflow}{default})}
+\DoxyCodeLine{\Hypertarget{_search_engine_file_system_8cs_source_l00033}00033\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_search_engine_file_system_8cs_source_l00034}00034\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\_runCount\ !=\ 0)}
+\DoxyCodeLine{\Hypertarget{_search_engine_file_system_8cs_source_l00035}00035\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ Task.CompletedTask;}
+\DoxyCodeLine{\Hypertarget{_search_engine_file_system_8cs_source_l00036}00036\ }
+\DoxyCodeLine{\Hypertarget{_search_engine_file_system_8cs_source_l00037}00037\ \ \ \ \ \ \ \ \ \_runCount++;}
+\DoxyCodeLine{\Hypertarget{_search_engine_file_system_8cs_source_l00038}00038\ }
+\DoxyCodeLine{\Hypertarget{_search_engine_file_system_8cs_source_l00039}00039\ \ \ \ \ \ \ \ \ \_\ =\ \ Task.Run(async\ ()\ =>\ }
+\DoxyCodeLine{\Hypertarget{_search_engine_file_system_8cs_source_l00040}00040\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_search_engine_file_system_8cs_source_l00041}00041\ \ \ \ \ \ \ \ \ \ \ \ \ var\ textEditorFindAllState\ =\ \_textEditorFindAllStateWrap.Value;}
+\DoxyCodeLine{\Hypertarget{_search_engine_file_system_8cs_source_l00042}00042\ }
+\DoxyCodeLine{\Hypertarget{_search_engine_file_system_8cs_source_l00043}00043\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_find_alls_1_1_models_1_1_search_engine_file_system_a74e569fb9a841ea3cc19c9101b37e19b}{FilePathList}}.Clear();}
+\DoxyCodeLine{\Hypertarget{_search_engine_file_system_8cs_source_l00044}00044\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_find_alls_1_1_models_1_1_search_engine_file_system_ab97e8fe1a179153b6e7cb6d0bac0a5ec}{IsSearching}}\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{\Hypertarget{_search_engine_file_system_8cs_source_l00045}00045\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_find_alls_1_1_models_1_1_search_engine_file_system_a6b6f73b20caf647c09e00e49b57ac60e}{ProgressOccurred}}?.Invoke();}
+\DoxyCodeLine{\Hypertarget{_search_engine_file_system_8cs_source_l00046}00046\ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_search_engine_file_system_8cs_source_l00047}00047\ \ \ \ \ \ \ \ \ \ \ \ \ await\ RecursiveSearchAsync(textEditorFindAllState.StartingDirectoryPath,\ searchQuery,\ cancellationToken).ConfigureAwait(\textcolor{keyword}{false});}
+\DoxyCodeLine{\Hypertarget{_search_engine_file_system_8cs_source_l00048}00048\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_find_alls_1_1_models_1_1_search_engine_file_system_ab97e8fe1a179153b6e7cb6d0bac0a5ec}{IsSearching}}\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{\Hypertarget{_search_engine_file_system_8cs_source_l00049}00049\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_find_alls_1_1_models_1_1_search_engine_file_system_a6b6f73b20caf647c09e00e49b57ac60e}{ProgressOccurred}}?.Invoke();}
+\DoxyCodeLine{\Hypertarget{_search_engine_file_system_8cs_source_l00050}00050\ \ \ \ \ \ \ \ \ \ \ \ \ \_runCount-\/-\/;}
+\DoxyCodeLine{\Hypertarget{_search_engine_file_system_8cs_source_l00051}00051\ \ \ \ \ \ \ \ \ \}).ConfigureAwait(\textcolor{keyword}{false});}
+\DoxyCodeLine{\Hypertarget{_search_engine_file_system_8cs_source_l00052}00052\ }
+\DoxyCodeLine{\Hypertarget{_search_engine_file_system_8cs_source_l00053}00053\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ Task.CompletedTask;}
+\DoxyCodeLine{\Hypertarget{_search_engine_file_system_8cs_source_l00054}00054\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_search_engine_file_system_8cs_source_l00055}00055\ }
+\DoxyCodeLine{\Hypertarget{_search_engine_file_system_8cs_source_l00056}00056\ \ \ \ \ \textcolor{keyword}{private}\ async\ Task\ RecursiveSearchAsync(\textcolor{keywordtype}{string}\ directoryPath,\ \textcolor{keywordtype}{string}\ searchQuery,\ CancellationToken\ cancellationToken\ =\ \textcolor{keywordflow}{default})}
+\DoxyCodeLine{\Hypertarget{_search_engine_file_system_8cs_source_l00057}00057\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_search_engine_file_system_8cs_source_l00058}00058\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Considering\ the\ use\ a\ breadth\ first\ algorithm}}
+\DoxyCodeLine{\Hypertarget{_search_engine_file_system_8cs_source_l00059}00059\ }
+\DoxyCodeLine{\Hypertarget{_search_engine_file_system_8cs_source_l00060}00060\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Search\ Files}}
+\DoxyCodeLine{\Hypertarget{_search_engine_file_system_8cs_source_l00061}00061\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_search_engine_file_system_8cs_source_l00062}00062\ \ \ \ \ \ \ \ \ \ \ \ \ var\ childFileList\ =\ await\ \_fileSystemProvider.Directory}
+\DoxyCodeLine{\Hypertarget{_search_engine_file_system_8cs_source_l00063}00063\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ .GetFilesAsync(directoryPath)}
+\DoxyCodeLine{\Hypertarget{_search_engine_file_system_8cs_source_l00064}00064\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ .ConfigureAwait(\textcolor{keyword}{false});}
+\DoxyCodeLine{\Hypertarget{_search_engine_file_system_8cs_source_l00065}00065\ }
+\DoxyCodeLine{\Hypertarget{_search_engine_file_system_8cs_source_l00066}00066\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{foreach}\ (var\ childFile\ \textcolor{keywordflow}{in}\ childFileList)}
+\DoxyCodeLine{\Hypertarget{_search_engine_file_system_8cs_source_l00067}00067\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_search_engine_file_system_8cs_source_l00068}00068\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ await\ PerformSearchFileAsync(childFile,\ searchQuery,\ cancellationToken).ConfigureAwait(\textcolor{keyword}{false});}
+\DoxyCodeLine{\Hypertarget{_search_engine_file_system_8cs_source_l00069}00069\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_search_engine_file_system_8cs_source_l00070}00070\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_search_engine_file_system_8cs_source_l00071}00071\ }
+\DoxyCodeLine{\Hypertarget{_search_engine_file_system_8cs_source_l00072}00072\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Update\ UI\ with\ progress}}
+\DoxyCodeLine{\Hypertarget{_search_engine_file_system_8cs_source_l00073}00073\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_search_engine_file_system_8cs_source_l00074}00074\ \ \ \ \ \ \ \ \ \ \ \ \ ProgressOccurred?.Invoke();}
+\DoxyCodeLine{\Hypertarget{_search_engine_file_system_8cs_source_l00075}00075\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_search_engine_file_system_8cs_source_l00076}00076\ }
+\DoxyCodeLine{\Hypertarget{_search_engine_file_system_8cs_source_l00077}00077\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Recurse\ into\ subdirectories}}
+\DoxyCodeLine{\Hypertarget{_search_engine_file_system_8cs_source_l00078}00078\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_search_engine_file_system_8cs_source_l00079}00079\ \ \ \ \ \ \ \ \ \ \ \ \ var\ subdirectoryList\ =\ await\ \_fileSystemProvider.Directory}
+\DoxyCodeLine{\Hypertarget{_search_engine_file_system_8cs_source_l00080}00080\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ .GetDirectoriesAsync(directoryPath)}
+\DoxyCodeLine{\Hypertarget{_search_engine_file_system_8cs_source_l00081}00081\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ .ConfigureAwait(\textcolor{keyword}{false});}
+\DoxyCodeLine{\Hypertarget{_search_engine_file_system_8cs_source_l00082}00082\ }
+\DoxyCodeLine{\Hypertarget{_search_engine_file_system_8cs_source_l00083}00083\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{foreach}\ (var\ subdirectory\ \textcolor{keywordflow}{in}\ subdirectoryList)}
+\DoxyCodeLine{\Hypertarget{_search_engine_file_system_8cs_source_l00084}00084\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_search_engine_file_system_8cs_source_l00085}00085\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (subdirectory.Contains(\textcolor{stringliteral}{"{}.git"{}})\ ||}
+\DoxyCodeLine{\Hypertarget{_search_engine_file_system_8cs_source_l00086}00086\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ subdirectory.Contains(\textcolor{stringliteral}{"{}.vs"{}})\ ||}
+\DoxyCodeLine{\Hypertarget{_search_engine_file_system_8cs_source_l00087}00087\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ subdirectory.Contains(\textcolor{stringliteral}{"{}.vscode"{}})\ ||}
+\DoxyCodeLine{\Hypertarget{_search_engine_file_system_8cs_source_l00088}00088\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ subdirectory.Contains(\textcolor{stringliteral}{"{}.idea"{}})\ ||}
+\DoxyCodeLine{\Hypertarget{_search_engine_file_system_8cs_source_l00089}00089\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ subdirectory.Contains(\textcolor{stringliteral}{"{}bin"{}})\ ||}
+\DoxyCodeLine{\Hypertarget{_search_engine_file_system_8cs_source_l00090}00090\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ subdirectory.Contains(\textcolor{stringliteral}{"{}obj"{}}))}
+\DoxyCodeLine{\Hypertarget{_search_engine_file_system_8cs_source_l00091}00091\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_search_engine_file_system_8cs_source_l00092}00092\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{continue};}
+\DoxyCodeLine{\Hypertarget{_search_engine_file_system_8cs_source_l00093}00093\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_search_engine_file_system_8cs_source_l00094}00094\ }
+\DoxyCodeLine{\Hypertarget{_search_engine_file_system_8cs_source_l00095}00095\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ await\ RecursiveSearchAsync(subdirectory,\ searchQuery,\ cancellationToken).ConfigureAwait(\textcolor{keyword}{false});}
+\DoxyCodeLine{\Hypertarget{_search_engine_file_system_8cs_source_l00096}00096\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_search_engine_file_system_8cs_source_l00097}00097\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_search_engine_file_system_8cs_source_l00098}00098\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_search_engine_file_system_8cs_source_l00099}00099\ }
+\DoxyCodeLine{\Hypertarget{_search_engine_file_system_8cs_source_l00100}00100\ \ \ \ \ \textcolor{keyword}{private}\ async\ Task\ PerformSearchFileAsync(\textcolor{keywordtype}{string}\ filePath,\ \textcolor{keywordtype}{string}\ searchQuery,\ CancellationToken\ cancellationToken\ =\ \textcolor{keywordflow}{default})}
+\DoxyCodeLine{\Hypertarget{_search_engine_file_system_8cs_source_l00101}00101\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_search_engine_file_system_8cs_source_l00102}00102\ \ \ \ \ \ \ \ \ var\ contents\ =\ await\ \_fileSystemProvider.File.ReadAllTextAsync(filePath).ConfigureAwait(\textcolor{keyword}{false});}
+\DoxyCodeLine{\Hypertarget{_search_engine_file_system_8cs_source_l00103}00103\ }
+\DoxyCodeLine{\Hypertarget{_search_engine_file_system_8cs_source_l00104}00104\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (contents.Contains(searchQuery))}
+\DoxyCodeLine{\Hypertarget{_search_engine_file_system_8cs_source_l00105}00105\ \ \ \ \ \ \ \ \ \ \ \ \ FilePathList.Add(filePath);}
+\DoxyCodeLine{\Hypertarget{_search_engine_file_system_8cs_source_l00106}00106\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_search_engine_file_system_8cs_source_l00107}00107\ \}}
+
+\end{DoxyCode}

@@ -1,0 +1,4 @@
+var _i_variable_declaration_node_8cs =
+[
+    [ "Luthetus.TextEditor.RazorLib.CompilerServices.Syntax.Nodes.Interfaces.IVariableDeclarationNode", "interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_1_1_nodes_1_1_fe75dbb5fedb96209546156f80d0cb75.html", "interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_1_1_nodes_1_1_fe75dbb5fedb96209546156f80d0cb75" ]
+];

@@ -1,0 +1,15 @@
+var interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1_1_internals_1_1_i_text_editor_render_batch =
+[
+    [ "ComponentData", "interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1_1_internals_1_1_i_text_editor_render_batch.html#a8485a55717f1252645804e1bfa1686a3", null ],
+    [ "FontFamily", "interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1_1_internals_1_1_i_text_editor_render_batch.html#a6ee417defe24747174c805a7a3a7f4f7", null ],
+    [ "FontFamilyCssStyle", "interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1_1_internals_1_1_i_text_editor_render_batch.html#a2f3c7fcf0d67b39ffae996c8ad76de59", null ],
+    [ "FontSizeInPixels", "interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1_1_internals_1_1_i_text_editor_render_batch.html#a7fc0a435b59b56821e28813e56485cb6", null ],
+    [ "FontSizeInPixelsCssStyle", "interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1_1_internals_1_1_i_text_editor_render_batch.html#ae1a4be28a593d6d4c4b5ad0821e7356e", null ],
+    [ "GutterWidthInPixels", "interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1_1_internals_1_1_i_text_editor_render_batch.html#a3240fc18107a9baeb02e9e5819a263a0", null ],
+    [ "HeightCssStyle", "interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1_1_internals_1_1_i_text_editor_render_batch.html#ad19f0f5829cc8429b86d2d22ac27b1a7", null ],
+    [ "IsValid", "interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1_1_internals_1_1_i_text_editor_render_batch.html#a6c6a109bdda2ff4940f25f4215cea245", null ],
+    [ "Model", "interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1_1_internals_1_1_i_text_editor_render_batch.html#ae47a1d782079baf0db7417933e0d7044", null ],
+    [ "Options", "interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1_1_internals_1_1_i_text_editor_render_batch.html#a3b23771aef575be479368dbeff46954a", null ],
+    [ "ViewModel", "interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1_1_internals_1_1_i_text_editor_render_batch.html#a6d2beefcb8366d542ed2b200b7148f1a", null ],
+    [ "ViewModelDisplayOptions", "interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1_1_internals_1_1_i_text_editor_render_batch.html#a66fb4843105e709fd4512883d597ea95", null ]
+];

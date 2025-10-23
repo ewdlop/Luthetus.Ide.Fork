@@ -1,0 +1,5 @@
+var class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_options_1_1_displays_1_1_input_text_editor_show_whitespace =
+[
+    [ "GlobalShowWhitespace", "class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_options_1_1_displays_1_1_input_text_editor_show_whitespace.html#ab0e0c7f37b9d53ca47d017eb0e7630bc", null ],
+    [ "InputViewModel", "class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_options_1_1_displays_1_1_input_text_editor_show_whitespace.html#aba444342eb85ba39a457177f037000fb", null ]
+];

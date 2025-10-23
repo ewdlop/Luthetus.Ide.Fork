@@ -1,0 +1,4 @@
+var _tree_view_solution_folder_tests_8cs =
+[
+    [ "Luthetus.Extensions.DotNet.Tests.Basis.TreeViewImplementations.Models.TreeViewSolutionFolderTests", "class_luthetus_1_1_extensions_1_1_dot_net_1_1_tests_1_1_basis_1_1_tree_view_implementations_1_1_1cd99073bd96407fd7f1dc6b76bbdf50.html", "class_luthetus_1_1_extensions_1_1_dot_net_1_1_tests_1_1_basis_1_1_tree_view_implementations_1_1_1cd99073bd96407fd7f1dc6b76bbdf50" ]
+];

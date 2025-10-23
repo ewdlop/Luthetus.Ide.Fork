@@ -1,0 +1,112 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="__code_block_builder_tests_8cs_source" xml:lang="en-US">
+<title>CodeBlockBuilderTests.cs</title>
+<indexterm><primary>Source/Tests/TextEditor/Basis/CompilerServices/CodeBlockBuilderTests.cs</primary></indexterm>
+Go to the documentation of this file.<programlisting linenumbering="unnumbered"><anchor xml:id="__code_block_builder_tests_8cs_source_1l00001"/>00001 <emphasis role="keyword">using&#32;</emphasis>System.Collections.Immutable;
+<anchor xml:id="__code_block_builder_tests_8cs_source_1l00002"/>00002 <emphasis role="keyword">using&#32;</emphasis><link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services">Luthetus.TextEditor.RazorLib.CompilerServices</link>;
+<anchor xml:id="__code_block_builder_tests_8cs_source_1l00003"/>00003 <emphasis role="keyword">using&#32;</emphasis><link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_lexers_1_1_models">Luthetus.TextEditor.RazorLib.Lexers.Models</link>;
+<anchor xml:id="__code_block_builder_tests_8cs_source_1l00004"/>00004 <emphasis role="keyword">using&#32;</emphasis><link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_1_1_nodes">Luthetus.TextEditor.RazorLib.CompilerServices.Syntax.Nodes</link>;
+<anchor xml:id="__code_block_builder_tests_8cs_source_1l00005"/>00005 <emphasis role="keyword">using&#32;</emphasis><link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_1_1_tokens">Luthetus.TextEditor.RazorLib.CompilerServices.Syntax.Tokens</link>;
+<anchor xml:id="__code_block_builder_tests_8cs_source_1l00006"/>00006 <emphasis role="keyword">using&#32;</emphasis><link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax">Luthetus.TextEditor.RazorLib.CompilerServices.Syntax</link>;
+<anchor xml:id="__code_block_builder_tests_8cs_source_1l00007"/>00007 <emphasis role="keyword">using&#32;</emphasis><link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_1_1_nodes_1_1_enums">Luthetus.TextEditor.RazorLib.CompilerServices.Syntax.Nodes.Enums</link>;
+<anchor xml:id="__code_block_builder_tests_8cs_source_1l00008"/>00008 <emphasis role="keyword">using&#32;</emphasis><link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_enums">Luthetus.TextEditor.RazorLib.CompilerServices.Enums</link>;
+<anchor xml:id="__code_block_builder_tests_8cs_source_1l00009"/>00009 <emphasis role="keyword">using&#32;</emphasis><link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_utility">Luthetus.TextEditor.RazorLib.CompilerServices.Utility</link>;
+<anchor xml:id="__code_block_builder_tests_8cs_source_1l00010"/>00010 
+<anchor xml:id="__code_block_builder_tests_8cs_source_1l00011"/><link linkend="_namespace_luthetus_1_1_text_editor_1_1_tests_1_1_basis_1_1_compiler_services">00011</link> <emphasis role="keyword">namespace&#32;</emphasis><link linkend="_namespace_luthetus_1_1_text_editor_1_1_tests_1_1_basis_1_1_compiler_services">Luthetus.TextEditor.Tests.Basis.CompilerServices</link>;
+<anchor xml:id="__code_block_builder_tests_8cs_source_1l00012"/>00012 
+<anchor xml:id="__code_block_builder_tests_8cs_source_1l00016"/><link linkend="_class_luthetus_1_1_text_editor_1_1_tests_1_1_basis_1_1_compiler_services_1_1_code_block_builder_tests">00016</link> <emphasis role="keyword">public</emphasis>&#32;<emphasis role="keyword">class&#32;</emphasis><link linkend="_class_luthetus_1_1_text_editor_1_1_tests_1_1_basis_1_1_compiler_services_1_1_code_block_builder_tests">CodeBlockBuilderTests</link>
+<anchor xml:id="__code_block_builder_tests_8cs_source_1l00017"/>00017 {
+<anchor xml:id="__code_block_builder_tests_8cs_source_1l00027"/>00027 &#32;&#32;&#32;&#32;[Fact]
+<anchor xml:id="__code_block_builder_tests_8cs_source_1l00028"/><link linkend="_class_luthetus_1_1_text_editor_1_1_tests_1_1_basis_1_1_compiler_services_1_1_code_block_builder_tests_1aa7421913b6201b3b1ef3070efc445977">00028</link> &#32;&#32;&#32;&#32;<emphasis role="keyword">public</emphasis>&#32;<emphasis role="keywordtype">void</emphasis>&#32;<link linkend="_class_luthetus_1_1_text_editor_1_1_tests_1_1_basis_1_1_compiler_services_1_1_code_block_builder_tests_1aa7421913b6201b3b1ef3070efc445977">Constructor</link>()
+<anchor xml:id="__code_block_builder_tests_8cs_source_1l00029"/>00029 &#32;&#32;&#32;&#32;{
+<anchor xml:id="__code_block_builder_tests_8cs_source_1l00030"/>00030 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;var&#32;globalCodeBlockBuilder&#32;=&#32;<emphasis role="keyword">new</emphasis>&#32;<link linkend="_class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_utility_1_1_code_block_builder">CodeBlockBuilder</link>(<emphasis role="keyword">null</emphasis>,&#32;<emphasis role="keyword">null</emphasis>);
+<anchor xml:id="__code_block_builder_tests_8cs_source_1l00031"/>00031 
+<anchor xml:id="__code_block_builder_tests_8cs_source_1l00032"/>00032 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;Assert.Empty(globalCodeBlockBuilder.ChildList);
+<anchor xml:id="__code_block_builder_tests_8cs_source_1l00033"/>00033 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;Assert.Null(globalCodeBlockBuilder.Parent);
+<anchor xml:id="__code_block_builder_tests_8cs_source_1l00034"/>00034 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;Assert.Null(globalCodeBlockBuilder.CodeBlockOwner);
+<anchor xml:id="__code_block_builder_tests_8cs_source_1l00035"/>00035 
+<anchor xml:id="__code_block_builder_tests_8cs_source_1l00036"/>00036 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;var&#32;typeDefinitionNode&#32;=&#32;ConstructTypeDefinitionNode();
+<anchor xml:id="__code_block_builder_tests_8cs_source_1l00037"/>00037 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;globalCodeBlockBuilder.ChildList.Add(typeDefinitionNode);
+<anchor xml:id="__code_block_builder_tests_8cs_source_1l00038"/>00038 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;Assert.Single(globalCodeBlockBuilder.ChildList);
+<anchor xml:id="__code_block_builder_tests_8cs_source_1l00039"/>00039 
+<anchor xml:id="__code_block_builder_tests_8cs_source_1l00040"/>00040 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;No&#32;Diagnostics</emphasis>
+<anchor xml:id="__code_block_builder_tests_8cs_source_1l00041"/>00041 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;{
+<anchor xml:id="__code_block_builder_tests_8cs_source_1l00042"/>00042 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;var&#32;codeBlockNoDiagnostics&#32;=&#32;globalCodeBlockBuilder.Build();
+<anchor xml:id="__code_block_builder_tests_8cs_source_1l00043"/>00043 
+<anchor xml:id="__code_block_builder_tests_8cs_source_1l00044"/>00044 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;Assert.Empty(codeBlockNoDiagnostics.DiagnosticsList);
+<anchor xml:id="__code_block_builder_tests_8cs_source_1l00045"/>00045 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;Assert.Single(codeBlockNoDiagnostics.ChildList);
+<anchor xml:id="__code_block_builder_tests_8cs_source_1l00046"/>00046 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;Assert.Equal(typeDefinitionNode,&#32;codeBlockNoDiagnostics.ChildList.Single());
+<anchor xml:id="__code_block_builder_tests_8cs_source_1l00047"/>00047 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;Assert.Equal(<link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_1ae4bcfe414c318a050bbef43ec92f921b">SyntaxKind</link>.CodeBlockNode,&#32;codeBlockNoDiagnostics.SyntaxKind);
+<anchor xml:id="__code_block_builder_tests_8cs_source_1l00048"/>00048 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;Assert.False(codeBlockNoDiagnostics.IsFabricated);
+<anchor xml:id="__code_block_builder_tests_8cs_source_1l00049"/>00049 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;}
+<anchor xml:id="__code_block_builder_tests_8cs_source_1l00050"/>00050 
+<anchor xml:id="__code_block_builder_tests_8cs_source_1l00051"/>00051 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;With&#32;Diagnostics</emphasis>
+<anchor xml:id="__code_block_builder_tests_8cs_source_1l00052"/>00052 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;{
+<anchor xml:id="__code_block_builder_tests_8cs_source_1l00053"/>00053 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;var&#32;diagnostic&#32;=&#32;<emphasis role="keyword">new</emphasis>&#32;<link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1a9a73f4ac751a25cd91cce2523e9c166b">TextEditorDiagnostic</link>(
+<anchor xml:id="__code_block_builder_tests_8cs_source_1l00054"/>00054 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_enums_1ad1d66dfc7718c1f9a6bd6852fe2eb9e9">TextEditorDiagnosticLevel</link>.Error,
+<anchor xml:id="__code_block_builder_tests_8cs_source_1l00055"/>00055 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="stringliteral">&quot;Error&quot;</emphasis>,
+<anchor xml:id="__code_block_builder_tests_8cs_source_1l00056"/>00056 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_lexers_1_1_models_1a1ffd1a7706dfd364560b76d47467812f">TextEditorTextSpan</link>.FabricateTextSpan(<emphasis role="stringliteral">&quot;Hello&#32;World!&quot;</emphasis>),
+<anchor xml:id="__code_block_builder_tests_8cs_source_1l00057"/>00057 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;Guid.NewGuid());
+<anchor xml:id="__code_block_builder_tests_8cs_source_1l00058"/>00058 
+<anchor xml:id="__code_block_builder_tests_8cs_source_1l00059"/>00059 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;var&#32;diagnosticList&#32;=&#32;<emphasis role="keyword">new</emphasis>&#32;<link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1a9a73f4ac751a25cd91cce2523e9c166b">TextEditorDiagnostic</link>[]
+<anchor xml:id="__code_block_builder_tests_8cs_source_1l00060"/>00060 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;{
+<anchor xml:id="__code_block_builder_tests_8cs_source_1l00061"/>00061 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;diagnostic
+<anchor xml:id="__code_block_builder_tests_8cs_source_1l00062"/>00062 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;}.ToImmutableArray();
+<anchor xml:id="__code_block_builder_tests_8cs_source_1l00063"/>00063 
+<anchor xml:id="__code_block_builder_tests_8cs_source_1l00064"/>00064 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;var&#32;codeBlockWithDiagnostics&#32;=&#32;globalCodeBlockBuilder.Build(diagnosticList);
+<anchor xml:id="__code_block_builder_tests_8cs_source_1l00065"/>00065 
+<anchor xml:id="__code_block_builder_tests_8cs_source_1l00066"/>00066 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;Assert.Single(codeBlockWithDiagnostics.DiagnosticsList);
+<anchor xml:id="__code_block_builder_tests_8cs_source_1l00067"/>00067 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;Assert.Single(codeBlockWithDiagnostics.ChildList);
+<anchor xml:id="__code_block_builder_tests_8cs_source_1l00068"/>00068 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;Assert.Equal(typeDefinitionNode,&#32;codeBlockWithDiagnostics.ChildList.Single());
+<anchor xml:id="__code_block_builder_tests_8cs_source_1l00069"/>00069 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;Assert.Equal(<link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_1ae4bcfe414c318a050bbef43ec92f921b">SyntaxKind</link>.CodeBlockNode,&#32;codeBlockWithDiagnostics.SyntaxKind);
+<anchor xml:id="__code_block_builder_tests_8cs_source_1l00070"/>00070 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;Assert.False(codeBlockWithDiagnostics.IsFabricated);
+<anchor xml:id="__code_block_builder_tests_8cs_source_1l00071"/>00071 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;}
+<anchor xml:id="__code_block_builder_tests_8cs_source_1l00072"/>00072 
+<anchor xml:id="__code_block_builder_tests_8cs_source_1l00073"/>00073 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;var&#32;typeDefinitionCodeBlockBuilder&#32;=&#32;<emphasis role="keyword">new</emphasis>&#32;<link linkend="_class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_utility_1_1_code_block_builder">CodeBlockBuilder</link>(
+<anchor xml:id="__code_block_builder_tests_8cs_source_1l00074"/>00074 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;globalCodeBlockBuilder,
+<anchor xml:id="__code_block_builder_tests_8cs_source_1l00075"/>00075 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;typeDefinitionNode);
+<anchor xml:id="__code_block_builder_tests_8cs_source_1l00076"/>00076 
+<anchor xml:id="__code_block_builder_tests_8cs_source_1l00077"/>00077 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;Assert.Equal(globalCodeBlockBuilder,&#32;typeDefinitionCodeBlockBuilder.Parent);
+<anchor xml:id="__code_block_builder_tests_8cs_source_1l00078"/>00078 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;Assert.Equal(typeDefinitionNode,&#32;typeDefinitionCodeBlockBuilder.CodeBlockOwner);
+<anchor xml:id="__code_block_builder_tests_8cs_source_1l00079"/>00079 &#32;&#32;&#32;&#32;}
+<anchor xml:id="__code_block_builder_tests_8cs_source_1l00080"/>00080 
+<anchor xml:id="__code_block_builder_tests_8cs_source_1l00081"/>00081 &#32;&#32;&#32;&#32;<emphasis role="keyword">private</emphasis>&#32;<link linkend="_class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_1_1_nodes_1_1_type_definition_node">TypeDefinitionNode</link>&#32;ConstructTypeDefinitionNode()
+<anchor xml:id="__code_block_builder_tests_8cs_source_1l00082"/>00082 &#32;&#32;&#32;&#32;{
+<anchor xml:id="__code_block_builder_tests_8cs_source_1l00083"/>00083 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;var&#32;sourceText&#32;=&#32;<emphasis role="stringliteral">@&quot;public&#32;class&#32;MyClass</emphasis>
+<anchor xml:id="__code_block_builder_tests_8cs_source_1l00084"/>00084 <emphasis role="stringliteral">{</emphasis>
+<anchor xml:id="__code_block_builder_tests_8cs_source_1l00085"/>00085 <emphasis role="stringliteral">}&quot;</emphasis>;
+<anchor xml:id="__code_block_builder_tests_8cs_source_1l00086"/>00086 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<link linkend="_struct_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_1_1_tokens_1_1_identifier_token">IdentifierToken</link>&#32;typeIdentifier;
+<anchor xml:id="__code_block_builder_tests_8cs_source_1l00087"/>00087 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;{
+<anchor xml:id="__code_block_builder_tests_8cs_source_1l00088"/>00088 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;var&#32;typeIdentifierText&#32;=&#32;<emphasis role="stringliteral">&quot;MyClass&quot;</emphasis>;
+<anchor xml:id="__code_block_builder_tests_8cs_source_1l00089"/>00089 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordtype">int</emphasis>&#32;indexOfTypeIdentifierText&#32;=&#32;sourceText.IndexOf(typeIdentifierText);
+<anchor xml:id="__code_block_builder_tests_8cs_source_1l00090"/>00090 
+<anchor xml:id="__code_block_builder_tests_8cs_source_1l00091"/>00091 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;typeIdentifier&#32;=&#32;<emphasis role="keyword">new</emphasis>&#32;<link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_1ae4bcfe414c318a050bbef43ec92f921ba5560a6da7097326a85005e45e838c4cd">IdentifierToken</link>(<emphasis role="keyword">new</emphasis>&#32;<link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_lexers_1_1_models_1a1ffd1a7706dfd364560b76d47467812f">TextEditorTextSpan</link>(
+<anchor xml:id="__code_block_builder_tests_8cs_source_1l00092"/>00092 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;indexOfTypeIdentifierText,
+<anchor xml:id="__code_block_builder_tests_8cs_source_1l00093"/>00093 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;indexOfTypeIdentifierText&#32;+&#32;typeIdentifierText.Length,
+<anchor xml:id="__code_block_builder_tests_8cs_source_1l00094"/>00094 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;0,
+<anchor xml:id="__code_block_builder_tests_8cs_source_1l00095"/>00095 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keyword">new</emphasis>&#32;<link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_lexers_1_1_models_1a26a1b63ad28ec7955b30bc6c91571eca">ResourceUri</link>(<emphasis role="stringliteral">&quot;/unitTesting.txt&quot;</emphasis>),
+<anchor xml:id="__code_block_builder_tests_8cs_source_1l00096"/>00096 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;sourceText));
+<anchor xml:id="__code_block_builder_tests_8cs_source_1l00097"/>00097 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;}
+<anchor xml:id="__code_block_builder_tests_8cs_source_1l00098"/>00098 
+<anchor xml:id="__code_block_builder_tests_8cs_source_1l00099"/>00099 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;Type?&#32;valueType&#32;=&#32;<emphasis role="keyword">null</emphasis>;
+<anchor xml:id="__code_block_builder_tests_8cs_source_1l00100"/>00100 
+<anchor xml:id="__code_block_builder_tests_8cs_source_1l00101"/>00101 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<link linkend="_class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_1_1_nodes_1_1_generic_arguments_listing_node">GenericArgumentsListingNode</link>?&#32;genericArgumentsListingNode&#32;=&#32;<emphasis role="keyword">null</emphasis>;
+<anchor xml:id="__code_block_builder_tests_8cs_source_1l00102"/>00102 
+<anchor xml:id="__code_block_builder_tests_8cs_source_1l00103"/>00103 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<link linkend="_class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_1_1_nodes_1_1_type_clause_node">TypeClauseNode</link>?&#32;inheritedTypeClauseNode&#32;=&#32;<emphasis role="keyword">null</emphasis>;
+<anchor xml:id="__code_block_builder_tests_8cs_source_1l00104"/>00104 
+<anchor xml:id="__code_block_builder_tests_8cs_source_1l00105"/>00105 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<link linkend="_class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_1_1_nodes_1_1_code_block_node">CodeBlockNode</link>?&#32;typeBodyCodeBlockNode&#32;=&#32;<emphasis role="keyword">new</emphasis>(ImmutableArray&lt;ISyntax&gt;.Empty);
+<anchor xml:id="__code_block_builder_tests_8cs_source_1l00106"/>00106 
+<anchor xml:id="__code_block_builder_tests_8cs_source_1l00107"/>00107 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;<emphasis role="keyword">new</emphasis>&#32;<link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_1ae4bcfe414c318a050bbef43ec92f921ba38a405ee5bd151ca87cb4f8767d5fdab">TypeDefinitionNode</link>(
+<anchor xml:id="__code_block_builder_tests_8cs_source_1l00108"/>00108 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_1_1_nodes_1_1_enums_1a78fa21360b3c318d260628803d5c9d14">AccessModifierKind</link>.Public,
+<anchor xml:id="__code_block_builder_tests_8cs_source_1l00109"/>00109 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keyword">false</emphasis>,
+<anchor xml:id="__code_block_builder_tests_8cs_source_1l00110"/>00110 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_1_1_nodes_1_1_enums_1a77f56f3a717590786dc833f24e98e9d1">StorageModifierKind</link>.Class,
+<anchor xml:id="__code_block_builder_tests_8cs_source_1l00111"/>00111 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;typeIdentifier,
+<anchor xml:id="__code_block_builder_tests_8cs_source_1l00112"/>00112 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;valueType,
+<anchor xml:id="__code_block_builder_tests_8cs_source_1l00113"/>00113 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;genericArgumentsListingNode,
+<anchor xml:id="__code_block_builder_tests_8cs_source_1l00114"/>00114 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keyword">null</emphasis>,
+<anchor xml:id="__code_block_builder_tests_8cs_source_1l00115"/>00115 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;inheritedTypeClauseNode,
+<anchor xml:id="__code_block_builder_tests_8cs_source_1l00116"/>00116 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;openBraceToken:&#32;<emphasis role="keyword">null</emphasis>,
+<anchor xml:id="__code_block_builder_tests_8cs_source_1l00117"/>00117 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;typeBodyCodeBlockNode);
+<anchor xml:id="__code_block_builder_tests_8cs_source_1l00118"/>00118 &#32;&#32;&#32;&#32;}
+<anchor xml:id="__code_block_builder_tests_8cs_source_1l00119"/>00119 }
+</programlisting></section>

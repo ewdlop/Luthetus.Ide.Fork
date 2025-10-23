@@ -1,0 +1,4 @@
+var _c_sharp_project_nuget_package_references_8cs =
+[
+    [ "Luthetus.CompilerServices.DotNetSolution.Models.Project.CSharpProjectNugetPackageReferences", "class_luthetus_1_1_compiler_services_1_1_dot_net_solution_1_1_models_1_1_project_1_1_c_sharp_project_nuget_package_references.html", "class_luthetus_1_1_compiler_services_1_1_dot_net_solution_1_1_models_1_1_project_1_1_c_sharp_project_nuget_package_references" ]
+];

@@ -1,0 +1,58 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="__reflective_panel_8razor_8cs_source" xml:lang="en-US">
+<title>ReflectivePanel.razor.cs</title>
+<indexterm><primary>Source/Lib/Common/Reflectives/Displays/ReflectivePanel.razor.cs</primary></indexterm>
+Go to the documentation of this file.<programlisting linenumbering="unnumbered"><anchor xml:id="__reflective_panel_8razor_8cs_source_1l00001"/>00001 <emphasis role="keyword">using&#32;</emphasis>Fluxor;
+<anchor xml:id="__reflective_panel_8razor_8cs_source_1l00002"/>00002 <emphasis role="keyword">using&#32;</emphasis>Fluxor.Blazor.Web.Components;
+<anchor xml:id="__reflective_panel_8razor_8cs_source_1l00003"/>00003 <emphasis role="keyword">using&#32;</emphasis><link linkend="_namespace_luthetus_1_1_common_1_1_razor_lib_1_1_reflectives_1_1_states">Luthetus.Common.RazorLib.Reflectives.States</link>;
+<anchor xml:id="__reflective_panel_8razor_8cs_source_1l00004"/>00004 <emphasis role="keyword">using&#32;</emphasis><link linkend="_namespace_luthetus_1_1_common_1_1_razor_lib_1_1_keys_1_1_models">Luthetus.Common.RazorLib.Keys.Models</link>;
+<anchor xml:id="__reflective_panel_8razor_8cs_source_1l00005"/>00005 <emphasis role="keyword">using&#32;</emphasis>Microsoft.AspNetCore.Components;
+<anchor xml:id="__reflective_panel_8razor_8cs_source_1l00006"/>00006 <emphasis role="keyword">using&#32;</emphasis>System.Reflection;
+<anchor xml:id="__reflective_panel_8razor_8cs_source_1l00007"/>00007 <emphasis role="keyword">using&#32;</emphasis><link linkend="_namespace_luthetus_1_1_common_1_1_razor_lib_1_1_reflectives_1_1_models">Luthetus.Common.RazorLib.Reflectives.Models</link>;
+<anchor xml:id="__reflective_panel_8razor_8cs_source_1l00008"/>00008 
+<anchor xml:id="__reflective_panel_8razor_8cs_source_1l00009"/>00009 <emphasis role="keyword">namespace&#32;</emphasis><link linkend="_namespace_luthetus_1_1_common_1_1_razor_lib_1_1_reflectives_1_1_displays">Luthetus.Common.RazorLib.Reflectives.Displays</link>;
+<anchor xml:id="__reflective_panel_8razor_8cs_source_1l00010"/>00010 
+<anchor xml:id="__reflective_panel_8razor_8cs_source_1l00011"/><link linkend="_class_luthetus_1_1_common_1_1_razor_lib_1_1_reflectives_1_1_displays_1_1_reflective_panel">00011</link> <emphasis role="keyword">public</emphasis>&#32;<emphasis role="keyword">partial&#32;class&#32;</emphasis><link linkend="_class_luthetus_1_1_common_1_1_razor_lib_1_1_reflectives_1_1_displays_1_1_reflective_panel">ReflectivePanel</link>&#32;:&#32;FluxorComponent
+<anchor xml:id="__reflective_panel_8razor_8cs_source_1l00012"/>00012 {
+<anchor xml:id="__reflective_panel_8razor_8cs_source_1l00013"/>00013 &#32;&#32;&#32;&#32;[Inject]
+<anchor xml:id="__reflective_panel_8razor_8cs_source_1l00014"/>00014 &#32;&#32;&#32;&#32;<emphasis role="keyword">private</emphasis>&#32;IState&lt;ReflectiveState&gt;&#32;ReflectiveStateWrap&#32;{&#32;<emphasis role="keyword">get</emphasis>;&#32;<emphasis role="keyword">set</emphasis>;&#32;}&#32;=&#32;<emphasis role="keyword">null</emphasis>!;
+<anchor xml:id="__reflective_panel_8razor_8cs_source_1l00015"/>00015 &#32;&#32;&#32;&#32;[Inject]
+<anchor xml:id="__reflective_panel_8razor_8cs_source_1l00016"/>00016 &#32;&#32;&#32;&#32;<emphasis role="keyword">private</emphasis>&#32;IDispatcher&#32;Dispatcher&#32;{&#32;<emphasis role="keyword">get</emphasis>;&#32;<emphasis role="keyword">set</emphasis>;&#32;}&#32;=&#32;<emphasis role="keyword">null</emphasis>!;
+<anchor xml:id="__reflective_panel_8razor_8cs_source_1l00017"/>00017 
+<anchor xml:id="__reflective_panel_8razor_8cs_source_1l00018"/>00018 &#32;&#32;&#32;&#32;[Parameter,&#32;EditorRequired]
+<anchor xml:id="__reflective_panel_8razor_8cs_source_1l00019"/><link linkend="_class_luthetus_1_1_common_1_1_razor_lib_1_1_reflectives_1_1_displays_1_1_reflective_panel_1abf8d621bdd2d31f2dee61f1b0d1815a1">00019</link> &#32;&#32;&#32;&#32;<emphasis role="keyword">public</emphasis>&#32;List&lt;Type&gt;&#32;<link linkend="_class_luthetus_1_1_common_1_1_razor_lib_1_1_reflectives_1_1_displays_1_1_reflective_panel_1abf8d621bdd2d31f2dee61f1b0d1815a1">ComponentTypeList</link>&#32;{&#32;<emphasis role="keyword">get</emphasis>;&#32;<emphasis role="keyword">set</emphasis>;&#32;}&#32;=&#32;<emphasis role="keyword">null</emphasis>!;
+<anchor xml:id="__reflective_panel_8razor_8cs_source_1l00020"/>00020 
+<anchor xml:id="__reflective_panel_8razor_8cs_source_1l00021"/><link linkend="_class_luthetus_1_1_common_1_1_razor_lib_1_1_reflectives_1_1_displays_1_1_reflective_panel_1a2007af36dd55add7bd1ecf8581deb5d7">00021</link> &#32;&#32;&#32;&#32;<emphasis role="keyword">protected</emphasis>&#32;<emphasis role="keyword">override</emphasis>&#32;Task&#32;<link linkend="_class_luthetus_1_1_common_1_1_razor_lib_1_1_reflectives_1_1_displays_1_1_reflective_panel_1a2007af36dd55add7bd1ecf8581deb5d7">OnAfterRenderAsync</link>(<emphasis role="keywordtype">bool</emphasis>&#32;firstRender)
+<anchor xml:id="__reflective_panel_8razor_8cs_source_1l00022"/>00022 &#32;&#32;&#32;&#32;{
+<anchor xml:id="__reflective_panel_8razor_8cs_source_1l00023"/>00023 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">if</emphasis>&#32;(firstRender)
+<anchor xml:id="__reflective_panel_8razor_8cs_source_1l00024"/>00024 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;{
+<anchor xml:id="__reflective_panel_8razor_8cs_source_1l00025"/>00025 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;var&#32;model&#32;=&#32;<emphasis role="keyword">new</emphasis>&#32;<link linkend="_namespace_luthetus_1_1_common_1_1_razor_lib_1_1_reflectives_1_1_models_1a87d77c11765aadf12d63350b888987e6">ReflectiveModel</link>(
+<anchor xml:id="__reflective_panel_8razor_8cs_source_1l00026"/>00026 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;Key&lt;ReflectiveModel&gt;.NewKey(),
+<anchor xml:id="__reflective_panel_8razor_8cs_source_1l00027"/>00027 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<link linkend="_class_luthetus_1_1_common_1_1_razor_lib_1_1_reflectives_1_1_displays_1_1_reflective_panel_1abf8d621bdd2d31f2dee61f1b0d1815a1">ComponentTypeList</link>,
+<anchor xml:id="__reflective_panel_8razor_8cs_source_1l00028"/>00028 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<link linkend="_class_luthetus_1_1_common_1_1_razor_lib_1_1_reflectives_1_1_displays_1_1_reflective_panel_1abf8d621bdd2d31f2dee61f1b0d1815a1">ComponentTypeList</link>.FirstOrDefault(x&#32;=&gt;&#32;x.Name&#32;==&#32;<emphasis role="stringliteral">&quot;SolutionExplorerDisplay&quot;</emphasis>)?.GUID&#32;??&#32;Guid.Empty,
+<anchor xml:id="__reflective_panel_8razor_8cs_source_1l00029"/>00029 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;Guid.Empty,
+<anchor xml:id="__reflective_panel_8razor_8cs_source_1l00030"/>00030 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;Array.Empty&lt;PropertyInfo&gt;(),
+<anchor xml:id="__reflective_panel_8razor_8cs_source_1l00031"/>00031 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keyword">new</emphasis>(),
+<anchor xml:id="__reflective_panel_8razor_8cs_source_1l00032"/>00032 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;Dispatcher);
+<anchor xml:id="__reflective_panel_8razor_8cs_source_1l00033"/>00033 
+<anchor xml:id="__reflective_panel_8razor_8cs_source_1l00034"/>00034 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;Dispatcher.Dispatch(<emphasis role="keyword">new</emphasis>&#32;<link linkend="_namespace_luthetus_1_1_common_1_1_razor_lib_1_1_reflectives_1_1_states_1acba6b3f1b3436e8855ad1401b1d8718e">ReflectiveState</link>.RegisterAction(model,&#32;0));
+<anchor xml:id="__reflective_panel_8razor_8cs_source_1l00035"/>00035 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;}
+<anchor xml:id="__reflective_panel_8razor_8cs_source_1l00036"/>00036 
+<anchor xml:id="__reflective_panel_8razor_8cs_source_1l00037"/>00037 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;base.OnAfterRenderAsync(firstRender);
+<anchor xml:id="__reflective_panel_8razor_8cs_source_1l00038"/>00038 &#32;&#32;&#32;&#32;}
+<anchor xml:id="__reflective_panel_8razor_8cs_source_1l00039"/>00039 
+<anchor xml:id="__reflective_panel_8razor_8cs_source_1l00040"/>00040 &#32;&#32;&#32;&#32;<emphasis role="keyword">private</emphasis>&#32;<emphasis role="keywordtype">void</emphasis>&#32;DispatchRegisterActionOnClick()
+<anchor xml:id="__reflective_panel_8razor_8cs_source_1l00041"/>00041 &#32;&#32;&#32;&#32;{
+<anchor xml:id="__reflective_panel_8razor_8cs_source_1l00042"/>00042 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;var&#32;model&#32;=&#32;<emphasis role="keyword">new</emphasis>&#32;<link linkend="_namespace_luthetus_1_1_common_1_1_razor_lib_1_1_reflectives_1_1_models_1a87d77c11765aadf12d63350b888987e6">ReflectiveModel</link>(
+<anchor xml:id="__reflective_panel_8razor_8cs_source_1l00043"/>00043 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;Key&lt;ReflectiveModel&gt;.NewKey(),
+<anchor xml:id="__reflective_panel_8razor_8cs_source_1l00044"/>00044 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<link linkend="_class_luthetus_1_1_common_1_1_razor_lib_1_1_reflectives_1_1_displays_1_1_reflective_panel_1abf8d621bdd2d31f2dee61f1b0d1815a1">ComponentTypeList</link>,
+<anchor xml:id="__reflective_panel_8razor_8cs_source_1l00045"/>00045 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;Guid.Empty,
+<anchor xml:id="__reflective_panel_8razor_8cs_source_1l00046"/>00046 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;Guid.Empty,
+<anchor xml:id="__reflective_panel_8razor_8cs_source_1l00047"/>00047 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;Array.Empty&lt;PropertyInfo&gt;(),
+<anchor xml:id="__reflective_panel_8razor_8cs_source_1l00048"/>00048 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keyword">new</emphasis>(),
+<anchor xml:id="__reflective_panel_8razor_8cs_source_1l00049"/>00049 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;Dispatcher);
+<anchor xml:id="__reflective_panel_8razor_8cs_source_1l00050"/>00050 
+<anchor xml:id="__reflective_panel_8razor_8cs_source_1l00051"/>00051 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;Dispatcher.Dispatch(<emphasis role="keyword">new</emphasis>&#32;<link linkend="_namespace_luthetus_1_1_common_1_1_razor_lib_1_1_reflectives_1_1_states_1acba6b3f1b3436e8855ad1401b1d8718e">ReflectiveState</link>.RegisterAction(model,&#32;0));
+<anchor xml:id="__reflective_panel_8razor_8cs_source_1l00052"/>00052 &#32;&#32;&#32;&#32;}
+<anchor xml:id="__reflective_panel_8razor_8cs_source_1l00053"/>00053 }
+</programlisting></section>

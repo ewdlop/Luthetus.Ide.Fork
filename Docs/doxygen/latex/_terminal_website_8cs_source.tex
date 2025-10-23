@@ -1,0 +1,260 @@
+\doxysection{Terminal\+Website.\+cs}
+\hypertarget{_terminal_website_8cs_source}{}\label{_terminal_website_8cs_source}\index{Source/Lib/Ide/Ide.RazorLib/Terminals/Models/TerminalWebsite.cs@{Source/Lib/Ide/Ide.RazorLib/Terminals/Models/TerminalWebsite.cs}}
+\mbox{\hyperlink{_terminal_website_8cs}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{_terminal_website_8cs_source_l00001}00001\ \textcolor{keyword}{using\ }CliWrap.EventStream;}
+\DoxyCodeLine{\Hypertarget{_terminal_website_8cs_source_l00002}00002\ \textcolor{keyword}{using\ }Fluxor;}
+\DoxyCodeLine{\Hypertarget{_terminal_website_8cs_source_l00003}00003\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_luthetus_1_1_common_1_1_razor_lib_1_1_background_tasks_1_1_models}{Luthetus.Common.RazorLib.BackgroundTasks.Models}};}
+\DoxyCodeLine{\Hypertarget{_terminal_website_8cs_source_l00004}00004\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_luthetus_1_1_common_1_1_razor_lib_1_1_component_renderers_1_1_models}{Luthetus.Common.RazorLib.ComponentRenderers.Models}};}
+\DoxyCodeLine{\Hypertarget{_terminal_website_8cs_source_l00005}00005\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_luthetus_1_1_common_1_1_razor_lib_1_1_keys_1_1_models}{Luthetus.Common.RazorLib.Keys.Models}};}
+\DoxyCodeLine{\Hypertarget{_terminal_website_8cs_source_l00006}00006\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_luthetus_1_1_common_1_1_razor_lib_1_1_notifications_1_1_models}{Luthetus.Common.RazorLib.Notifications.Models}};}
+\DoxyCodeLine{\Hypertarget{_terminal_website_8cs_source_l00007}00007\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_luthetus_1_1_ide_1_1_razor_lib_1_1_exceptions}{Luthetus.Ide.RazorLib.Exceptions}};}
+\DoxyCodeLine{\Hypertarget{_terminal_website_8cs_source_l00008}00008\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_luthetus_1_1_ide_1_1_razor_lib_1_1_terminals_1_1_models_1_1_internals}{Luthetus.Ide.RazorLib.Terminals.Models.Internals}};}
+\DoxyCodeLine{\Hypertarget{_terminal_website_8cs_source_l00009}00009\ }
+\DoxyCodeLine{\Hypertarget{_terminal_website_8cs_source_l00010}00010\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespace_luthetus_1_1_ide_1_1_razor_lib_1_1_terminals_1_1_models}{Luthetus.Ide.RazorLib.Terminals.Models}};}
+\DoxyCodeLine{\Hypertarget{_terminal_website_8cs_source_l00011}00011\ }
+\DoxyCodeLine{\Hypertarget{_terminal_website_8cs_source_l00015}\mbox{\hyperlink{class_luthetus_1_1_ide_1_1_razor_lib_1_1_terminals_1_1_models_1_1_terminal_website}{00015}}\ \textcolor{keyword}{public}\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_luthetus_1_1_ide_1_1_razor_lib_1_1_terminals_1_1_models_1_1_terminal_website_a34c741f232bee7ea828449780f5abd33}{TerminalWebsite}}\ :\ \mbox{\hyperlink{interface_luthetus_1_1_ide_1_1_razor_lib_1_1_terminals_1_1_models_1_1_i_terminal}{ITerminal}}}
+\DoxyCodeLine{\Hypertarget{_terminal_website_8cs_source_l00016}00016\ \{}
+\DoxyCodeLine{\Hypertarget{_terminal_website_8cs_source_l00017}00017\ \ \ \ \ \textcolor{keyword}{private}\ readonly\ \mbox{\hyperlink{interface_luthetus_1_1_common_1_1_razor_lib_1_1_background_tasks_1_1_models_1_1_i_background_task_service}{IBackgroundTaskService}}\ \_backgroundTaskService;}
+\DoxyCodeLine{\Hypertarget{_terminal_website_8cs_source_l00018}00018\ \ \ \ \ \textcolor{keyword}{private}\ readonly\ \mbox{\hyperlink{interface_luthetus_1_1_common_1_1_razor_lib_1_1_component_renderers_1_1_models_1_1_i_common_component_renderers}{ICommonComponentRenderers}}\ \_commonComponentRenderers;}
+\DoxyCodeLine{\Hypertarget{_terminal_website_8cs_source_l00019}00019\ \ \ \ \ \textcolor{keyword}{private}\ readonly\ IDispatcher\ \_dispatcher;}
+\DoxyCodeLine{\Hypertarget{_terminal_website_8cs_source_l00020}00020\ }
+\DoxyCodeLine{\Hypertarget{_terminal_website_8cs_source_l00021}\mbox{\hyperlink{class_luthetus_1_1_ide_1_1_razor_lib_1_1_terminals_1_1_models_1_1_terminal_website_a34c741f232bee7ea828449780f5abd33}{00021}}\ \ \ \ \ \textcolor{keyword}{public}\ \mbox{\hyperlink{class_luthetus_1_1_ide_1_1_razor_lib_1_1_terminals_1_1_models_1_1_terminal_website_a34c741f232bee7ea828449780f5abd33}{TerminalWebsite}}(}
+\DoxyCodeLine{\Hypertarget{_terminal_website_8cs_source_l00022}00022\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{string}\ displayName,}
+\DoxyCodeLine{\Hypertarget{_terminal_website_8cs_source_l00023}00023\ \ \ \ \ \ \ \ \ Func<TerminalWebsite,\ ITerminalInteractive>\ terminalInteractiveFactory,}
+\DoxyCodeLine{\Hypertarget{_terminal_website_8cs_source_l00024}00024\ \ \ \ \ \ \ \ \ Func<TerminalWebsite,\ ITerminalInput>\ terminalInputFactory,}
+\DoxyCodeLine{\Hypertarget{_terminal_website_8cs_source_l00025}00025\ \ \ \ \ \ \ \ \ Func<TerminalWebsite,\ ITerminalOutput>\ terminalOutputFactory,}
+\DoxyCodeLine{\Hypertarget{_terminal_website_8cs_source_l00026}00026\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{interface_luthetus_1_1_common_1_1_razor_lib_1_1_background_tasks_1_1_models_1_1_i_background_task_service}{IBackgroundTaskService}}\ backgroundTaskService,}
+\DoxyCodeLine{\Hypertarget{_terminal_website_8cs_source_l00027}00027\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{interface_luthetus_1_1_common_1_1_razor_lib_1_1_component_renderers_1_1_models_1_1_i_common_component_renderers}{ICommonComponentRenderers}}\ commonComponentRenderers,}
+\DoxyCodeLine{\Hypertarget{_terminal_website_8cs_source_l00028}00028\ \ \ \ \ \ \ \ \ IDispatcher\ dispatcher)}
+\DoxyCodeLine{\Hypertarget{_terminal_website_8cs_source_l00029}00029\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_terminal_website_8cs_source_l00030}00030\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_luthetus_1_1_ide_1_1_razor_lib_1_1_terminals_1_1_models_1_1_terminal_website_a01e47ff6aa8bf49d6c9d50465a8bea18}{DisplayName}}\ =\ displayName;}
+\DoxyCodeLine{\Hypertarget{_terminal_website_8cs_source_l00031}00031\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_luthetus_1_1_ide_1_1_razor_lib_1_1_terminals_1_1_models_1_1_terminal_website_a762b5c91e3df851e89f4e01815a04f08}{TerminalInteractive}}\ =\ terminalInteractiveFactory.Invoke(\textcolor{keyword}{this});}
+\DoxyCodeLine{\Hypertarget{_terminal_website_8cs_source_l00032}00032\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_luthetus_1_1_ide_1_1_razor_lib_1_1_terminals_1_1_models_1_1_terminal_website_a762793c7daf66a9614255048ceb24f24}{TerminalInput}}\ =\ terminalInputFactory.Invoke(\textcolor{keyword}{this});}
+\DoxyCodeLine{\Hypertarget{_terminal_website_8cs_source_l00033}00033\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_luthetus_1_1_ide_1_1_razor_lib_1_1_terminals_1_1_models_1_1_terminal_website_a33cd7466ee04a2737d084c88bebde02a}{TerminalOutput}}\ =\ terminalOutputFactory.Invoke(\textcolor{keyword}{this});}
+\DoxyCodeLine{\Hypertarget{_terminal_website_8cs_source_l00034}00034\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_terminal_website_8cs_source_l00035}00035\ \ \ \ \ \ \ \ \ \_backgroundTaskService\ =\ backgroundTaskService;}
+\DoxyCodeLine{\Hypertarget{_terminal_website_8cs_source_l00036}00036\ \ \ \ \ \ \ \ \ \_commonComponentRenderers\ =\ commonComponentRenderers;}
+\DoxyCodeLine{\Hypertarget{_terminal_website_8cs_source_l00037}00037\ \ \ \ \ \ \ \ \ \_dispatcher\ =\ dispatcher;}
+\DoxyCodeLine{\Hypertarget{_terminal_website_8cs_source_l00038}00038\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_terminal_website_8cs_source_l00039}00039\ }
+\DoxyCodeLine{\Hypertarget{_terminal_website_8cs_source_l00040}\mbox{\hyperlink{class_luthetus_1_1_ide_1_1_razor_lib_1_1_terminals_1_1_models_1_1_terminal_website_a01e47ff6aa8bf49d6c9d50465a8bea18}{00040}}\ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keywordtype}{string}\ \mbox{\hyperlink{class_luthetus_1_1_ide_1_1_razor_lib_1_1_terminals_1_1_models_1_1_terminal_website_a01e47ff6aa8bf49d6c9d50465a8bea18}{DisplayName}}\ \{\ \textcolor{keyword}{get};\ \}}
+\DoxyCodeLine{\Hypertarget{_terminal_website_8cs_source_l00041}\mbox{\hyperlink{class_luthetus_1_1_ide_1_1_razor_lib_1_1_terminals_1_1_models_1_1_terminal_website_a762b5c91e3df851e89f4e01815a04f08}{00041}}\ \ \ \ \ \textcolor{keyword}{public}\ \mbox{\hyperlink{interface_luthetus_1_1_ide_1_1_razor_lib_1_1_terminals_1_1_models_1_1_i_terminal_interactive}{ITerminalInteractive}}\ \mbox{\hyperlink{class_luthetus_1_1_ide_1_1_razor_lib_1_1_terminals_1_1_models_1_1_terminal_website_a762b5c91e3df851e89f4e01815a04f08}{TerminalInteractive}}\ \{\ \textcolor{keyword}{get};\ \}}
+\DoxyCodeLine{\Hypertarget{_terminal_website_8cs_source_l00042}\mbox{\hyperlink{class_luthetus_1_1_ide_1_1_razor_lib_1_1_terminals_1_1_models_1_1_terminal_website_a762793c7daf66a9614255048ceb24f24}{00042}}\ \ \ \ \ \textcolor{keyword}{public}\ \mbox{\hyperlink{interface_luthetus_1_1_ide_1_1_razor_lib_1_1_terminals_1_1_models_1_1_i_terminal_input}{ITerminalInput}}\ \mbox{\hyperlink{class_luthetus_1_1_ide_1_1_razor_lib_1_1_terminals_1_1_models_1_1_terminal_website_a762793c7daf66a9614255048ceb24f24}{TerminalInput}}\ \{\ \textcolor{keyword}{get};\ \}}
+\DoxyCodeLine{\Hypertarget{_terminal_website_8cs_source_l00043}\mbox{\hyperlink{class_luthetus_1_1_ide_1_1_razor_lib_1_1_terminals_1_1_models_1_1_terminal_website_a33cd7466ee04a2737d084c88bebde02a}{00043}}\ \ \ \ \ \textcolor{keyword}{public}\ \mbox{\hyperlink{interface_luthetus_1_1_ide_1_1_razor_lib_1_1_terminals_1_1_models_1_1_i_terminal_output}{ITerminalOutput}}\ \mbox{\hyperlink{class_luthetus_1_1_ide_1_1_razor_lib_1_1_terminals_1_1_models_1_1_terminal_website_a33cd7466ee04a2737d084c88bebde02a}{TerminalOutput}}\ \{\ \textcolor{keyword}{get};\ \}}
+\DoxyCodeLine{\Hypertarget{_terminal_website_8cs_source_l00044}00044\ }
+\DoxyCodeLine{\Hypertarget{_terminal_website_8cs_source_l00045}00045\ \ \ \ \ \textcolor{keyword}{private}\ CancellationTokenSource\ \_commandCancellationTokenSource\ =\ \textcolor{keyword}{new}();}
+\DoxyCodeLine{\Hypertarget{_terminal_website_8cs_source_l00046}00046\ }
+\DoxyCodeLine{\Hypertarget{_terminal_website_8cs_source_l00047}\mbox{\hyperlink{class_luthetus_1_1_ide_1_1_razor_lib_1_1_terminals_1_1_models_1_1_terminal_website_ac2cc13f2e705b6cdd3a59fc1a4050848}{00047}}\ \ \ \ \ \textcolor{keyword}{public}\ \mbox{\hyperlink{class_luthetus_1_1_ide_1_1_razor_lib_1_1_terminals_1_1_models_1_1_terminal_website_ac2cc13f2e705b6cdd3a59fc1a4050848}{Key<ITerminal>}}\ \mbox{\hyperlink{class_luthetus_1_1_ide_1_1_razor_lib_1_1_terminals_1_1_models_1_1_terminal_website_ac2cc13f2e705b6cdd3a59fc1a4050848}{Key}}\ \{\ \textcolor{keyword}{get};\ init;\ \}\ =\ Key<ITerminal>.NewKey();}
+\DoxyCodeLine{\Hypertarget{_terminal_website_8cs_source_l00048}\mbox{\hyperlink{class_luthetus_1_1_ide_1_1_razor_lib_1_1_terminals_1_1_models_1_1_terminal_website_a7d1483186e6cb0ebb7fb546c1c9c2305}{00048}}\ \ \ \ \ \textcolor{keyword}{public}\ \mbox{\hyperlink{class_luthetus_1_1_ide_1_1_razor_lib_1_1_terminals_1_1_models_1_1_terminal_command_parsed}{TerminalCommandParsed}}?\ \mbox{\hyperlink{class_luthetus_1_1_ide_1_1_razor_lib_1_1_terminals_1_1_models_1_1_terminal_website_a7d1483186e6cb0ebb7fb546c1c9c2305}{ActiveTerminalCommandParsed}}\ \{\ \textcolor{keyword}{get};\ \textcolor{keyword}{private}\ \textcolor{keyword}{set};\ \}}
+\DoxyCodeLine{\Hypertarget{_terminal_website_8cs_source_l00049}00049\ }
+\DoxyCodeLine{\Hypertarget{_terminal_website_8cs_source_l00051}\mbox{\hyperlink{class_luthetus_1_1_ide_1_1_razor_lib_1_1_terminals_1_1_models_1_1_terminal_website_a2df071e3381d78753efc12f6da98e645}{00051}}\ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_luthetus_1_1_ide_1_1_razor_lib_1_1_terminals_1_1_models_1_1_terminal_website_a2df071e3381d78753efc12f6da98e645}{HasExecutingProcess}}\ \{\ \textcolor{keyword}{get};\ \textcolor{keyword}{private}\ \textcolor{keyword}{set};\ \}}
+\DoxyCodeLine{\Hypertarget{_terminal_website_8cs_source_l00052}00052\ }
+\DoxyCodeLine{\Hypertarget{_terminal_website_8cs_source_l00053}\mbox{\hyperlink{class_luthetus_1_1_ide_1_1_razor_lib_1_1_terminals_1_1_models_1_1_terminal_website_af1c268d2a390ffc9d151880d9e599cab}{00053}}\ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_luthetus_1_1_ide_1_1_razor_lib_1_1_terminals_1_1_models_1_1_terminal_website_af1c268d2a390ffc9d151880d9e599cab}{EnqueueCommand}}(\mbox{\hyperlink{class_luthetus_1_1_ide_1_1_razor_lib_1_1_terminals_1_1_models_1_1_terminal_command_request}{TerminalCommandRequest}}\ terminalCommandRequest)}
+\DoxyCodeLine{\Hypertarget{_terminal_website_8cs_source_l00054}00054\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_terminal_website_8cs_source_l00055}00055\ \ \ \ \ \ \ \ \ \_backgroundTaskService.Enqueue(}
+\DoxyCodeLine{\Hypertarget{_terminal_website_8cs_source_l00056}00056\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_luthetus_1_1_ide_1_1_razor_lib_1_1_terminals_1_1_models_1_1_terminal_website_ac2cc13f2e705b6cdd3a59fc1a4050848}{Key<IBackgroundTask>}}.NewKey(),}
+\DoxyCodeLine{\Hypertarget{_terminal_website_8cs_source_l00057}00057\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_luthetus_1_1_common_1_1_razor_lib_1_1_background_tasks_1_1_models_1_1_blocking_background_task_worker}{BlockingBackgroundTaskWorker}}.\mbox{\hyperlink{class_luthetus_1_1_common_1_1_razor_lib_1_1_background_tasks_1_1_models_1_1_blocking_background_task_worker_a267091acd637305c1ddcfe78bef3343f}{GetQueueKey}}(),}
+\DoxyCodeLine{\Hypertarget{_terminal_website_8cs_source_l00058}00058\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}Enqueue\ Command"{}},}
+\DoxyCodeLine{\Hypertarget{_terminal_website_8cs_source_l00059}00059\ \ \ \ \ \ \ \ \ \ \ \ \ ()\ =>\ HandleCommand(terminalCommandRequest));}
+\DoxyCodeLine{\Hypertarget{_terminal_website_8cs_source_l00060}00060\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_terminal_website_8cs_source_l00061}00061\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_terminal_website_8cs_source_l00062}\mbox{\hyperlink{class_luthetus_1_1_ide_1_1_razor_lib_1_1_terminals_1_1_models_1_1_terminal_website_afcaa92f34d75cb60818055422c2caf8b}{00062}}\ \ \ \ \ \textcolor{keyword}{public}\ Task\ \mbox{\hyperlink{class_luthetus_1_1_ide_1_1_razor_lib_1_1_terminals_1_1_models_1_1_terminal_website_afcaa92f34d75cb60818055422c2caf8b}{EnqueueCommandAsync}}(\mbox{\hyperlink{class_luthetus_1_1_ide_1_1_razor_lib_1_1_terminals_1_1_models_1_1_terminal_command_request}{TerminalCommandRequest}}\ terminalCommandRequest)}
+\DoxyCodeLine{\Hypertarget{_terminal_website_8cs_source_l00063}00063\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_terminal_website_8cs_source_l00064}00064\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \_backgroundTaskService.EnqueueAsync(}
+\DoxyCodeLine{\Hypertarget{_terminal_website_8cs_source_l00065}00065\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_luthetus_1_1_ide_1_1_razor_lib_1_1_terminals_1_1_models_1_1_terminal_website_ac2cc13f2e705b6cdd3a59fc1a4050848}{Key<IBackgroundTask>}}.NewKey(),}
+\DoxyCodeLine{\Hypertarget{_terminal_website_8cs_source_l00066}00066\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_luthetus_1_1_common_1_1_razor_lib_1_1_background_tasks_1_1_models_1_1_blocking_background_task_worker}{BlockingBackgroundTaskWorker}}.\mbox{\hyperlink{class_luthetus_1_1_common_1_1_razor_lib_1_1_background_tasks_1_1_models_1_1_blocking_background_task_worker_a267091acd637305c1ddcfe78bef3343f}{GetQueueKey}}(),}
+\DoxyCodeLine{\Hypertarget{_terminal_website_8cs_source_l00067}00067\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}Enqueue\ Command"{}},}
+\DoxyCodeLine{\Hypertarget{_terminal_website_8cs_source_l00068}00068\ \ \ \ \ \ \ \ \ \ \ \ \ ()\ =>\ HandleCommand(terminalCommandRequest));}
+\DoxyCodeLine{\Hypertarget{_terminal_website_8cs_source_l00069}00069\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_terminal_website_8cs_source_l00070}00070\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_terminal_website_8cs_source_l00071}\mbox{\hyperlink{class_luthetus_1_1_ide_1_1_razor_lib_1_1_terminals_1_1_models_1_1_terminal_website_a8225650b0c03314ab33dccb80fbe33d7}{00071}}\ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_luthetus_1_1_ide_1_1_razor_lib_1_1_terminals_1_1_models_1_1_terminal_website_a8225650b0c03314ab33dccb80fbe33d7}{ClearEnqueue}}()}
+\DoxyCodeLine{\Hypertarget{_terminal_website_8cs_source_l00072}00072\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_terminal_website_8cs_source_l00073}00073\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_luthetus_1_1_ide_1_1_razor_lib_1_1_terminals_1_1_models_1_1_terminal_website_af1c268d2a390ffc9d151880d9e599cab}{EnqueueCommand}}(\textcolor{keyword}{new}\ \mbox{\hyperlink{class_luthetus_1_1_ide_1_1_razor_lib_1_1_terminals_1_1_models_1_1_terminal_command_request}{TerminalCommandRequest}}(\textcolor{stringliteral}{"{}clear"{}},\ \textcolor{keyword}{null}));}
+\DoxyCodeLine{\Hypertarget{_terminal_website_8cs_source_l00074}00074\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_terminal_website_8cs_source_l00075}00075\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_terminal_website_8cs_source_l00076}\mbox{\hyperlink{class_luthetus_1_1_ide_1_1_razor_lib_1_1_terminals_1_1_models_1_1_terminal_website_a455babd2fc0e7381e9cff18692ac4aaf}{00076}}\ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_luthetus_1_1_ide_1_1_razor_lib_1_1_terminals_1_1_models_1_1_terminal_website_a455babd2fc0e7381e9cff18692ac4aaf}{ClearFireAndForget}}()}
+\DoxyCodeLine{\Hypertarget{_terminal_website_8cs_source_l00077}00077\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_terminal_website_8cs_source_l00078}00078\ \ \ \ \ \ \ \ \ var\ localHasExecutingProcess\ =\ \mbox{\hyperlink{class_luthetus_1_1_ide_1_1_razor_lib_1_1_terminals_1_1_models_1_1_terminal_website_a2df071e3381d78753efc12f6da98e645}{HasExecutingProcess}};}
+\DoxyCodeLine{\Hypertarget{_terminal_website_8cs_source_l00079}00079\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_terminal_website_8cs_source_l00080}00080\ \ \ \ \ \ \ \ \ \_\ =\ Task.Run(()\ =>}
+\DoxyCodeLine{\Hypertarget{_terminal_website_8cs_source_l00081}00081\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_terminal_website_8cs_source_l00082}00082\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (localHasExecutingProcess)}
+\DoxyCodeLine{\Hypertarget{_terminal_website_8cs_source_l00083}00083\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_terminal_website_8cs_source_l00084}00084\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_luthetus_1_1_ide_1_1_razor_lib_1_1_terminals_1_1_models_1_1_terminal_website_a33cd7466ee04a2737d084c88bebde02a}{TerminalOutput}}.ClearOutputExceptMostRecentCommand();}
+\DoxyCodeLine{\Hypertarget{_terminal_website_8cs_source_l00085}00085\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_terminal_website_8cs_source_l00086}00086\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{\Hypertarget{_terminal_website_8cs_source_l00087}00087\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_terminal_website_8cs_source_l00088}00088\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_luthetus_1_1_ide_1_1_razor_lib_1_1_terminals_1_1_models_1_1_terminal_website_a33cd7466ee04a2737d084c88bebde02a}{TerminalOutput}}.ClearOutput();}
+\DoxyCodeLine{\Hypertarget{_terminal_website_8cs_source_l00089}00089\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_terminal_website_8cs_source_l00090}00090\ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_terminal_website_8cs_source_l00091}00091\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ Task.CompletedTask;}
+\DoxyCodeLine{\Hypertarget{_terminal_website_8cs_source_l00092}00092\ \ \ \ \ \ \ \ \ \});}
+\DoxyCodeLine{\Hypertarget{_terminal_website_8cs_source_l00093}00093\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_terminal_website_8cs_source_l00094}00094\ }
+\DoxyCodeLine{\Hypertarget{_terminal_website_8cs_source_l00095}00095\ \ \ \ \ \textcolor{keyword}{private}\ async\ Task\ HandleCommand(\mbox{\hyperlink{class_luthetus_1_1_ide_1_1_razor_lib_1_1_terminals_1_1_models_1_1_terminal_command_request}{TerminalCommandRequest}}\ terminalCommandRequest)}
+\DoxyCodeLine{\Hypertarget{_terminal_website_8cs_source_l00096}00096\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_terminal_website_8cs_source_l00097}00097\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_luthetus_1_1_ide_1_1_razor_lib_1_1_terminals_1_1_models_1_1_terminal_output}{TerminalOutput}}.\mbox{\hyperlink{class_luthetus_1_1_ide_1_1_razor_lib_1_1_terminals_1_1_models_1_1_terminal_output_ae61c45ff34c2fb3c76081c01ac55b751}{ClearHistoryWhenExistingOutputTooLong}}();}
+\DoxyCodeLine{\Hypertarget{_terminal_website_8cs_source_l00098}00098\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_terminal_website_8cs_source_l00099}00099\ \ \ \ \ \ \ \ \ var\ parsedCommand\ =\ await\ \mbox{\hyperlink{class_luthetus_1_1_ide_1_1_razor_lib_1_1_terminals_1_1_models_1_1_terminal_interactive}{TerminalInteractive}}.\mbox{\hyperlink{class_luthetus_1_1_ide_1_1_razor_lib_1_1_terminals_1_1_models_1_1_terminal_interactive_aefa9286b3cb6f3454c31329fb9b996c9}{TryHandleCommand}}(terminalCommandRequest);}
+\DoxyCodeLine{\Hypertarget{_terminal_website_8cs_source_l00100}00100\ \ \ \ \ \ \ \ \ ActiveTerminalCommandParsed\ =\ parsedCommand;}
+\DoxyCodeLine{\Hypertarget{_terminal_website_8cs_source_l00101}00101\ }
+\DoxyCodeLine{\Hypertarget{_terminal_website_8cs_source_l00102}00102\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (parsedCommand\ is\ \textcolor{keyword}{null})}
+\DoxyCodeLine{\Hypertarget{_terminal_website_8cs_source_l00103}00103\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return};}
+\DoxyCodeLine{\Hypertarget{_terminal_website_8cs_source_l00104}00104\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_terminal_website_8cs_source_l00105}00105\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{try}}
+\DoxyCodeLine{\Hypertarget{_terminal_website_8cs_source_l00106}00106\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_terminal_website_8cs_source_l00107}00107\ \ \ \ \ \ \ \ \ \ \ \ \ HasExecutingProcess\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{\Hypertarget{_terminal_website_8cs_source_l00108}00108\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_terminal_website_8cs_source_l00109}00109\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (parsedCommand.SourceTerminalCommandRequest.BeginWithFunc\ is\ not\ \textcolor{keyword}{null})}
+\DoxyCodeLine{\Hypertarget{_terminal_website_8cs_source_l00110}00110\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_terminal_website_8cs_source_l00111}00111\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ await\ parsedCommand.SourceTerminalCommandRequest.BeginWithFunc}
+\DoxyCodeLine{\Hypertarget{_terminal_website_8cs_source_l00112}00112\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ .Invoke(parsedCommand)}
+\DoxyCodeLine{\Hypertarget{_terminal_website_8cs_source_l00113}00113\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ .ConfigureAwait(\textcolor{keyword}{false});}
+\DoxyCodeLine{\Hypertarget{_terminal_website_8cs_source_l00114}00114\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_terminal_website_8cs_source_l00115}00115\ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_terminal_website_8cs_source_l00116}00116\ \ \ \ \ \ \ \ \ \ \ \ \ await\ ExecuteWebsiteCliAsync(parsedCommand,\ HandleOutput,\ \_commandCancellationTokenSource.Token)}
+\DoxyCodeLine{\Hypertarget{_terminal_website_8cs_source_l00117}00117\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ .ConfigureAwait(\textcolor{keyword}{false});}
+\DoxyCodeLine{\Hypertarget{_terminal_website_8cs_source_l00118}00118\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_terminal_website_8cs_source_l00119}00119\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{catch}\ (Exception\ e)}
+\DoxyCodeLine{\Hypertarget{_terminal_website_8cs_source_l00120}00120\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_terminal_website_8cs_source_l00121}00121\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ TODO:\ This\ will\ erroneously\ write\ 'StartedCommandEvent'\ out\ twice...}}
+\DoxyCodeLine{\Hypertarget{_terminal_website_8cs_source_l00122}00122\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ ...unless\ a\ check\ is\ added\ to\ see\ WHEN\ the\ exception\ was\ thrown.}}
+\DoxyCodeLine{\Hypertarget{_terminal_website_8cs_source_l00123}00123\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_luthetus_1_1_ide_1_1_razor_lib_1_1_terminals_1_1_models_1_1_terminal_output}{TerminalOutput}}.\mbox{\hyperlink{class_luthetus_1_1_ide_1_1_razor_lib_1_1_terminals_1_1_models_1_1_terminal_output_a32a864e3802374cae4f600415fec0b49}{WriteOutput}}(parsedCommand,\ \textcolor{keyword}{new}\ StartedCommandEvent(-\/1));}
+\DoxyCodeLine{\Hypertarget{_terminal_website_8cs_source_l00124}00124\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_terminal_website_8cs_source_l00125}00125\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_luthetus_1_1_ide_1_1_razor_lib_1_1_terminals_1_1_models_1_1_terminal_output}{TerminalOutput}}.\mbox{\hyperlink{class_luthetus_1_1_ide_1_1_razor_lib_1_1_terminals_1_1_models_1_1_terminal_output_a32a864e3802374cae4f600415fec0b49}{WriteOutput}}(}
+\DoxyCodeLine{\Hypertarget{_terminal_website_8cs_source_l00126}00126\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ parsedCommand,}
+\DoxyCodeLine{\Hypertarget{_terminal_website_8cs_source_l00127}00127\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{new}\ StandardErrorCommandEvent(parsedCommand.SourceTerminalCommandRequest.CommandText\ +\ \textcolor{stringliteral}{"{}\ threw\ an\ exception"{}}\ +\ \textcolor{stringliteral}{"{}\(\backslash\)n"{}}));}
+\DoxyCodeLine{\Hypertarget{_terminal_website_8cs_source_l00128}00128\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_terminal_website_8cs_source_l00129}00129\ \ \ \ \ \ \ \ \ \ \ \ \ NotificationHelper.DispatchError(\textcolor{stringliteral}{"{}Terminal\ Exception"{}},\ e.ToString(),\ \_commonComponentRenderers,\ \_dispatcher,\ TimeSpan.FromSeconds(14));}
+\DoxyCodeLine{\Hypertarget{_terminal_website_8cs_source_l00130}00130\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_terminal_website_8cs_source_l00131}00131\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{finally}}
+\DoxyCodeLine{\Hypertarget{_terminal_website_8cs_source_l00132}00132\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_terminal_website_8cs_source_l00133}00133\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (parsedCommand.SourceTerminalCommandRequest.ContinueWithFunc\ is\ not\ \textcolor{keyword}{null})}
+\DoxyCodeLine{\Hypertarget{_terminal_website_8cs_source_l00134}00134\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_terminal_website_8cs_source_l00135}00135\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ await\ parsedCommand.SourceTerminalCommandRequest.ContinueWithFunc}
+\DoxyCodeLine{\Hypertarget{_terminal_website_8cs_source_l00136}00136\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ .Invoke(parsedCommand)}
+\DoxyCodeLine{\Hypertarget{_terminal_website_8cs_source_l00137}00137\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ .ConfigureAwait(\textcolor{keyword}{false});}
+\DoxyCodeLine{\Hypertarget{_terminal_website_8cs_source_l00138}00138\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_terminal_website_8cs_source_l00139}00139\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_terminal_website_8cs_source_l00140}00140\ \ \ \ \ \ \ \ \ \ \ \ \ HasExecutingProcess\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{\Hypertarget{_terminal_website_8cs_source_l00141}00141\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_terminal_website_8cs_source_l00142}00142\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_terminal_website_8cs_source_l00143}00143\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_terminal_website_8cs_source_l00144}00144\ \ \ \ \ \textcolor{keyword}{private}\ \textcolor{keywordtype}{void}\ HandleOutput(CommandEvent\ commandEvent)}
+\DoxyCodeLine{\Hypertarget{_terminal_website_8cs_source_l00145}00145\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_terminal_website_8cs_source_l00146}00146\ \ \ \ \ \ \ \ \ TerminalOutput.\mbox{\hyperlink{interface_luthetus_1_1_ide_1_1_razor_lib_1_1_terminals_1_1_models_1_1_i_terminal_output_a2396e92f31f7c93d12e1a6cd12ed3703}{WriteOutput}}(ActiveTerminalCommandParsed,\ commandEvent);}
+\DoxyCodeLine{\Hypertarget{_terminal_website_8cs_source_l00147}00147\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_terminal_website_8cs_source_l00148}00148\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_terminal_website_8cs_source_l00149}00149\ \ \ \ \ \textcolor{keyword}{private}\ Task\ ExecuteWebsiteCliAsync(}
+\DoxyCodeLine{\Hypertarget{_terminal_website_8cs_source_l00150}00150\ \ \ \ \ \ \ \ \ TerminalCommandParsed\ parsedCommand,}
+\DoxyCodeLine{\Hypertarget{_terminal_website_8cs_source_l00151}00151\ \ \ \ \ \ \ \ \ Action<CommandEvent>\ handleOutputAction,}
+\DoxyCodeLine{\Hypertarget{_terminal_website_8cs_source_l00152}00152\ \ \ \ \ \ \ \ \ CancellationToken\ cancellationToken)}
+\DoxyCodeLine{\Hypertarget{_terminal_website_8cs_source_l00153}00153\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_terminal_website_8cs_source_l00154}00154\ \ \ \ \ \ \ \ \ TerminalOutput.\mbox{\hyperlink{interface_luthetus_1_1_ide_1_1_razor_lib_1_1_terminals_1_1_models_1_1_i_terminal_output_a2396e92f31f7c93d12e1a6cd12ed3703}{WriteOutput}}(parsedCommand,\ \textcolor{keyword}{new}\ StartedCommandEvent(-\/1));}
+\DoxyCodeLine{\Hypertarget{_terminal_website_8cs_source_l00155}00155\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_terminal_website_8cs_source_l00156}00156\ \ \ \ \ \ \ \ \ TerminalOutput.\mbox{\hyperlink{interface_luthetus_1_1_ide_1_1_razor_lib_1_1_terminals_1_1_models_1_1_i_terminal_output_a2396e92f31f7c93d12e1a6cd12ed3703}{WriteOutput}}(}
+\DoxyCodeLine{\Hypertarget{_terminal_website_8cs_source_l00157}00157\ \ \ \ \ \ \ \ \ \ \ \ \ parsedCommand,\ \textcolor{keyword}{new}\ StandardErrorCommandEvent(\textcolor{stringliteral}{"{}run\ source\ locally\ for\ terminal"{}}));}
+\DoxyCodeLine{\Hypertarget{_terminal_website_8cs_source_l00158}00158\ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_terminal_website_8cs_source_l00159}00159\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ Task.CompletedTask;}
+\DoxyCodeLine{\Hypertarget{_terminal_website_8cs_source_l00160}00160\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_terminal_website_8cs_source_l00161}00161\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_terminal_website_8cs_source_l00162}00162\ \ \ \ \ \textcolor{comment}{/*\ This\ method\ is\ in\ progress}}
+\DoxyCodeLine{\Hypertarget{_terminal_website_8cs_source_l00163}00163\ \textcolor{comment}{\ \ \ \ }}
+\DoxyCodeLine{\Hypertarget{_terminal_website_8cs_source_l00164}00164\ \textcolor{comment}{\ \ \ \ private\ Task\ ExecuteWebsiteCliAsync(}}
+\DoxyCodeLine{\Hypertarget{_terminal_website_8cs_source_l00165}00165\ \textcolor{comment}{\ \ \ \ \ \ \ \ TerminalCommandParsed\ parsedCommand,}}
+\DoxyCodeLine{\Hypertarget{_terminal_website_8cs_source_l00166}00166\ \textcolor{comment}{\ \ \ \ \ \ \ \ Action<CommandEvent>\ handleOutputAction,}}
+\DoxyCodeLine{\Hypertarget{_terminal_website_8cs_source_l00167}00167\ \textcolor{comment}{\ \ \ \ \ \ \ \ CancellationToken\ cancellationToken)}}
+\DoxyCodeLine{\Hypertarget{_terminal_website_8cs_source_l00168}00168\ \textcolor{comment}{\ \ \ \ \{}}
+\DoxyCodeLine{\Hypertarget{_terminal_website_8cs_source_l00169}00169\ \textcolor{comment}{\ \ \ \ \ \ \ \ TerminalOutput.WriteOutput(parsedCommand,\ new\ StartedCommandEvent(-\/1));}}
+\DoxyCodeLine{\Hypertarget{_terminal_website_8cs_source_l00170}00170\ \textcolor{comment}{\ \ \ \ }}
+\DoxyCodeLine{\Hypertarget{_terminal_website_8cs_source_l00171}00171\ \textcolor{comment}{\ \ \ \ \ \ \ \ switch\ (parsedCommand.TargetFileName)}}
+\DoxyCodeLine{\Hypertarget{_terminal_website_8cs_source_l00172}00172\ \textcolor{comment}{\ \ \ \ \ \ \ \ \{}}
+\DoxyCodeLine{\Hypertarget{_terminal_website_8cs_source_l00173}00173\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ case\ TerminalWebsiteFacts.TargetFileNames.DOT\_NET:}}
+\DoxyCodeLine{\Hypertarget{_terminal_website_8cs_source_l00174}00174\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ return\ DotNetWebsiteCliAsync(parsedCommand,\ handleOutputAction,\ cancellationToken);}}
+\DoxyCodeLine{\Hypertarget{_terminal_website_8cs_source_l00175}00175\ \textcolor{comment}{\ \ \ \ \ \ \ \ \}}}
+\DoxyCodeLine{\Hypertarget{_terminal_website_8cs_source_l00176}00176\ \textcolor{comment}{\ \ \ \ \ \ \ \ }}
+\DoxyCodeLine{\Hypertarget{_terminal_website_8cs_source_l00177}00177\ \textcolor{comment}{\ \ \ \ \ \ \ \ TerminalOutput.WriteOutput(}}
+\DoxyCodeLine{\Hypertarget{_terminal_website_8cs_source_l00178}00178\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ parsedCommand,}}
+\DoxyCodeLine{\Hypertarget{_terminal_website_8cs_source_l00179}00179\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ new\ StandardErrorCommandEvent(\$"{}Target\ file\ name:\ '\{parsedCommand.TargetFileName\}'\ was\ not\ recognized."{}));}}
+\DoxyCodeLine{\Hypertarget{_terminal_website_8cs_source_l00180}00180\ \textcolor{comment}{\ \ \ \ \ \ \ \ return\ Task.CompletedTask;}}
+\DoxyCodeLine{\Hypertarget{_terminal_website_8cs_source_l00181}00181\ \textcolor{comment}{\ \ \ \ \}}}
+\DoxyCodeLine{\Hypertarget{_terminal_website_8cs_source_l00182}00182\ \textcolor{comment}{\ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{_terminal_website_8cs_source_l00183}00183\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_terminal_website_8cs_source_l00184}00184\ \ \ \ \ \textcolor{keyword}{private}\ Task\ DotNetWebsiteCliAsync(}
+\DoxyCodeLine{\Hypertarget{_terminal_website_8cs_source_l00185}00185\ \ \ \ \ \ \ \ \ TerminalCommandParsed\ parsedCommand,}
+\DoxyCodeLine{\Hypertarget{_terminal_website_8cs_source_l00186}00186\ \ \ \ \ \ \ \ \ Action<CommandEvent>\ handleOutputAction,}
+\DoxyCodeLine{\Hypertarget{_terminal_website_8cs_source_l00187}00187\ \ \ \ \ \ \ \ \ CancellationToken\ cancellationToken)}
+\DoxyCodeLine{\Hypertarget{_terminal_website_8cs_source_l00188}00188\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_terminal_website_8cs_source_l00189}00189\ \ \ \ \ \ \ \ \ var\ argumentList\ =\ parsedCommand.\mbox{\hyperlink{class_luthetus_1_1_ide_1_1_razor_lib_1_1_terminals_1_1_models_1_1_terminal_command_parsed_afb0db02032ac5f896abda4d7b3a3e010}{Arguments}}.Trim().Split(\textcolor{charliteral}{'\ '});}
+\DoxyCodeLine{\Hypertarget{_terminal_website_8cs_source_l00190}00190\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_terminal_website_8cs_source_l00191}00191\ \ \ \ \ \ \ \ \ var\ firstArgument\ =\ argumentList.FirstOrDefault();}
+\DoxyCodeLine{\Hypertarget{_terminal_website_8cs_source_l00192}00192\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_terminal_website_8cs_source_l00193}00193\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\textcolor{keywordtype}{string}.IsNullOrWhiteSpace(firstArgument))}
+\DoxyCodeLine{\Hypertarget{_terminal_website_8cs_source_l00194}00194\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_terminal_website_8cs_source_l00195}00195\ \ \ \ \ \ \ \ \ \ \ \ \ TerminalOutput.\mbox{\hyperlink{interface_luthetus_1_1_ide_1_1_razor_lib_1_1_terminals_1_1_models_1_1_i_terminal_output_a2396e92f31f7c93d12e1a6cd12ed3703}{WriteOutput}}(parsedCommand,\ \textcolor{keyword}{new}\ StandardErrorCommandEvent(\$\textcolor{stringliteral}{"{}firstArgument\ was\ null\ or\ whitespace."{}}));}
+\DoxyCodeLine{\Hypertarget{_terminal_website_8cs_source_l00196}00196\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_terminal_website_8cs_source_l00197}00197\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_terminal_website_8cs_source_l00198}00198\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{switch}\ (firstArgument)}
+\DoxyCodeLine{\Hypertarget{_terminal_website_8cs_source_l00199}00199\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_terminal_website_8cs_source_l00200}00200\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ TerminalWebsiteFacts.InitialArguments.RUN:}
+\DoxyCodeLine{\Hypertarget{_terminal_website_8cs_source_l00201}00201\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_terminal_website_8cs_source_l00202}00202\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ var\ projectPath\ =\ (\textcolor{keywordtype}{string}?)\textcolor{keyword}{null};}
+\DoxyCodeLine{\Hypertarget{_terminal_website_8cs_source_l00203}00203\ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_terminal_website_8cs_source_l00204}00204\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (argumentList.Length\ ==\ 2)}
+\DoxyCodeLine{\Hypertarget{_terminal_website_8cs_source_l00205}00205\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_terminal_website_8cs_source_l00206}00206\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ projectPath\ =\ argumentList[1];}
+\DoxyCodeLine{\Hypertarget{_terminal_website_8cs_source_l00207}00207\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_terminal_website_8cs_source_l00208}00208\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ (argumentList.Length\ ==\ 3)}
+\DoxyCodeLine{\Hypertarget{_terminal_website_8cs_source_l00209}00209\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_terminal_website_8cs_source_l00210}00210\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (argumentList[1]\ !=\ TerminalWebsiteFacts.Options.PROJECT)}
+\DoxyCodeLine{\Hypertarget{_terminal_website_8cs_source_l00211}00211\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_terminal_website_8cs_source_l00212}00212\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ TerminalOutput.\mbox{\hyperlink{interface_luthetus_1_1_ide_1_1_razor_lib_1_1_terminals_1_1_models_1_1_i_terminal_output_a2396e92f31f7c93d12e1a6cd12ed3703}{WriteOutput}}(parsedCommand,\ \textcolor{keyword}{new}\ StandardErrorCommandEvent(\$\textcolor{stringliteral}{"{}argumentList[1]:\{argumentList[1]\}\ !=\ \{TerminalWebsiteFacts.Options.PROJECT\}"{}}));}
+\DoxyCodeLine{\Hypertarget{_terminal_website_8cs_source_l00213}00213\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ Task.CompletedTask;}
+\DoxyCodeLine{\Hypertarget{_terminal_website_8cs_source_l00214}00214\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_terminal_website_8cs_source_l00215}00215\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_terminal_website_8cs_source_l00216}00216\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ projectPath\ =\ argumentList[2];}
+\DoxyCodeLine{\Hypertarget{_terminal_website_8cs_source_l00217}00217\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_terminal_website_8cs_source_l00218}00218\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{\Hypertarget{_terminal_website_8cs_source_l00219}00219\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_terminal_website_8cs_source_l00220}00220\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ TerminalOutput.\mbox{\hyperlink{interface_luthetus_1_1_ide_1_1_razor_lib_1_1_terminals_1_1_models_1_1_i_terminal_output_a2396e92f31f7c93d12e1a6cd12ed3703}{WriteOutput}}(parsedCommand,\ \textcolor{keyword}{new}\ StandardErrorCommandEvent(\$\textcolor{stringliteral}{"{}Bad\ argument\ count:\ '\{argumentList.Length\}'."{}}));}
+\DoxyCodeLine{\Hypertarget{_terminal_website_8cs_source_l00221}00221\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ Task.CompletedTask;}
+\DoxyCodeLine{\Hypertarget{_terminal_website_8cs_source_l00222}00222\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_terminal_website_8cs_source_l00223}00223\ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_terminal_website_8cs_source_l00224}00224\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ TerminalOutput.\mbox{\hyperlink{interface_luthetus_1_1_ide_1_1_razor_lib_1_1_terminals_1_1_models_1_1_i_terminal_output_a2396e92f31f7c93d12e1a6cd12ed3703}{WriteOutput}}(parsedCommand,\ \textcolor{keyword}{new}\ StandardErrorCommandEvent(\$\textcolor{stringliteral}{"{}projectPath:\{projectPath\}"{}}));}
+\DoxyCodeLine{\Hypertarget{_terminal_website_8cs_source_l00225}00225\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ Task.CompletedTask;}
+\DoxyCodeLine{\Hypertarget{_terminal_website_8cs_source_l00226}00226\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_terminal_website_8cs_source_l00227}00227\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{default}:}
+\DoxyCodeLine{\Hypertarget{_terminal_website_8cs_source_l00228}00228\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_terminal_website_8cs_source_l00229}00229\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ TerminalOutput.\mbox{\hyperlink{interface_luthetus_1_1_ide_1_1_razor_lib_1_1_terminals_1_1_models_1_1_i_terminal_output_a2396e92f31f7c93d12e1a6cd12ed3703}{WriteOutput}}(parsedCommand,\ \textcolor{keyword}{new}\ StandardErrorCommandEvent(\$\textcolor{stringliteral}{"{}First\ argument:\ '\{firstArgument\}'\ was\ not\ recognized."{}}));}
+\DoxyCodeLine{\Hypertarget{_terminal_website_8cs_source_l00230}00230\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ Task.CompletedTask;}
+\DoxyCodeLine{\Hypertarget{_terminal_website_8cs_source_l00231}00231\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_terminal_website_8cs_source_l00232}00232\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_terminal_website_8cs_source_l00233}00233\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_terminal_website_8cs_source_l00234}00234\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{throw}\ \textcolor{keyword}{new}\ LuthetusIdeException(\$\textcolor{stringliteral}{"{}The\ method\ '\{nameof(DotNetWebsiteCliAsync)\}'\ should\ return\ on\ each\ branch\ of\ the\ switch\ statement."{}});}
+\DoxyCodeLine{\Hypertarget{_terminal_website_8cs_source_l00235}00235\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_terminal_website_8cs_source_l00236}00236\ }
+\DoxyCodeLine{\Hypertarget{_terminal_website_8cs_source_l00237}\mbox{\hyperlink{class_luthetus_1_1_ide_1_1_razor_lib_1_1_terminals_1_1_models_1_1_terminal_website_a825689238f002985210167d8372075fd}{00237}}\ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_luthetus_1_1_ide_1_1_razor_lib_1_1_terminals_1_1_models_1_1_terminal_website_a825689238f002985210167d8372075fd}{KillProcess}}()}
+\DoxyCodeLine{\Hypertarget{_terminal_website_8cs_source_l00238}00238\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_terminal_website_8cs_source_l00239}00239\ \ \ \ \ \ \ \ \ \_commandCancellationTokenSource.Cancel();}
+\DoxyCodeLine{\Hypertarget{_terminal_website_8cs_source_l00240}00240\ \ \ \ \ \ \ \ \ \_commandCancellationTokenSource\ =\ \textcolor{keyword}{new}();}
+\DoxyCodeLine{\Hypertarget{_terminal_website_8cs_source_l00241}00241\ \ \ \ \ \ \ \ \ DispatchNewStateKey();}
+\DoxyCodeLine{\Hypertarget{_terminal_website_8cs_source_l00242}00242\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_terminal_website_8cs_source_l00243}00243\ }
+\DoxyCodeLine{\Hypertarget{_terminal_website_8cs_source_l00244}00244\ \ \ \ \ \textcolor{keyword}{private}\ \textcolor{keywordtype}{void}\ DispatchNewStateKey()}
+\DoxyCodeLine{\Hypertarget{_terminal_website_8cs_source_l00245}00245\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_terminal_website_8cs_source_l00246}00246\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ \_dispatcher.Dispatch(new\ TerminalState.NotifyStateChangedAction(Key));}}
+\DoxyCodeLine{\Hypertarget{_terminal_website_8cs_source_l00247}00247\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_terminal_website_8cs_source_l00248}00248\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_terminal_website_8cs_source_l00249}\mbox{\hyperlink{class_luthetus_1_1_ide_1_1_razor_lib_1_1_terminals_1_1_models_1_1_terminal_website_aaaf30690a5c745745e2539addc468425}{00249}}\ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_luthetus_1_1_ide_1_1_razor_lib_1_1_terminals_1_1_models_1_1_terminal_website_aaaf30690a5c745745e2539addc468425}{Dispose}}()}
+\DoxyCodeLine{\Hypertarget{_terminal_website_8cs_source_l00250}00250\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_terminal_website_8cs_source_l00251}00251\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_luthetus_1_1_ide_1_1_razor_lib_1_1_terminals_1_1_models_1_1_terminal_website_a762793c7daf66a9614255048ceb24f24}{TerminalInput}}.Dispose();}
+\DoxyCodeLine{\Hypertarget{_terminal_website_8cs_source_l00252}00252\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_luthetus_1_1_ide_1_1_razor_lib_1_1_terminals_1_1_models_1_1_terminal_website_a33cd7466ee04a2737d084c88bebde02a}{TerminalOutput}}.Dispose();}
+\DoxyCodeLine{\Hypertarget{_terminal_website_8cs_source_l00253}00253\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Input\ and\ output\ are\ dependent\ on\ 'TerminalInteractive'.}}
+\DoxyCodeLine{\Hypertarget{_terminal_website_8cs_source_l00254}00254\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Therefore,\ dispose\ it\ last.}}
+\DoxyCodeLine{\Hypertarget{_terminal_website_8cs_source_l00255}00255\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_luthetus_1_1_ide_1_1_razor_lib_1_1_terminals_1_1_models_1_1_terminal_website_a762b5c91e3df851e89f4e01815a04f08}{TerminalInteractive}}.Dispose();}
+\DoxyCodeLine{\Hypertarget{_terminal_website_8cs_source_l00256}00256\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_terminal_website_8cs_source_l00257}00257\ \}}
+\DoxyCodeLine{\Hypertarget{_terminal_website_8cs_source_l00258}00258\ }
+
+\end{DoxyCode}

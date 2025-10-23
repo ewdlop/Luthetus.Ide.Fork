@@ -1,0 +1,4 @@
+var _nuget_package_manager_provider_azure_search_usnc_8cs =
+[
+    [ "Luthetus.Extensions.DotNet.Nugets.Models.NugetPackageManagerProviderAzureSearchUsnc", "class_luthetus_1_1_extensions_1_1_dot_net_1_1_nugets_1_1_models_1_1_nuget_package_manager_provider_azure_search_usnc.html", "class_luthetus_1_1_extensions_1_1_dot_net_1_1_nugets_1_1_models_1_1_nuget_package_manager_provider_azure_search_usnc" ]
+];

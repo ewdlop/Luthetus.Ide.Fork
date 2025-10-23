@@ -1,0 +1,4 @@
+var _nu_get_package_manager_state_reducer_tests_8cs =
+[
+    [ "Luthetus.Extensions.DotNet.Tests.Basis.Nugets.States.NuGetPackageManagerStateReducerTests", "class_luthetus_1_1_extensions_1_1_dot_net_1_1_tests_1_1_basis_1_1_nugets_1_1_states_1_1_nu_get_pe2985cf04ef98885be156c5cf886f9a2.html", "class_luthetus_1_1_extensions_1_1_dot_net_1_1_tests_1_1_basis_1_1_nugets_1_1_states_1_1_nu_get_pe2985cf04ef98885be156c5cf886f9a2" ]
+];

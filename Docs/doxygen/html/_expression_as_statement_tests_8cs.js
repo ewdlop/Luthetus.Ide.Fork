@@ -1,0 +1,5 @@
+var _expression_as_statement_tests_8cs =
+[
+    [ "Luthetus.CompilerServices.CSharp.Tests.SmokeTests.Parsers.ExpressionAsStatementTests", "class_luthetus_1_1_compiler_services_1_1_c_sharp_1_1_tests_1_1_smoke_tests_1_1_parsers_1_1_expression_as_statement_tests.html", "class_luthetus_1_1_compiler_services_1_1_c_sharp_1_1_tests_1_1_smoke_tests_1_1_parsers_1_1_expression_as_statement_tests" ],
+    [ "Luthetus.CompilerServices.CSharp.Tests.SmokeTests.Parsers.ExpressionAsStatementTests.Test", "class_luthetus_1_1_compiler_services_1_1_c_sharp_1_1_tests_1_1_smoke_tests_1_1_parsers_1_1_expre10768f7fe94da1338014ee9d9ed18d99.html", "class_luthetus_1_1_compiler_services_1_1_c_sharp_1_1_tests_1_1_smoke_tests_1_1_parsers_1_1_expre10768f7fe94da1338014ee9d9ed18d99" ]
+];

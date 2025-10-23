@@ -1,0 +1,127 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_interface_luthetus_1_1_common_1_1_razor_lib_1_1_background_tasks_1_1_models_1_1_i_background_task" xml:lang="en-US">
+<title>Luthetus.Common.RazorLib.BackgroundTasks.Models.IBackgroundTask Interface Reference</title>
+<indexterm><primary>Luthetus.Common.RazorLib.BackgroundTasks.Models.IBackgroundTask</primary></indexterm>
+Inheritance diagram for Luthetus.Common.RazorLib.BackgroundTasks.Models.IBackgroundTask:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="interface_luthetus_1_1_common_1_1_razor_lib_1_1_background_tasks_1_1_models_1_1_i_background_task__inherit__graph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+<simplesect>
+    <title>Public Member Functions    </title>
+        <itemizedlist>
+            <listitem><para><link linkend="_interface_luthetus_1_1_common_1_1_razor_lib_1_1_background_tasks_1_1_models_1_1_i_background_task">IBackgroundTask</link>? <link linkend="_interface_luthetus_1_1_common_1_1_razor_lib_1_1_background_tasks_1_1_models_1_1_i_background_task_1a1297b3be631c1bb2c38c132674f61911">BatchOrDefault</link> (<link linkend="_interface_luthetus_1_1_common_1_1_razor_lib_1_1_background_tasks_1_1_models_1_1_i_background_task">IBackgroundTask</link> oldEvent)</para>
+
+<para>Before a throttle event is enqueued, this method is invoked. This allows for batching of &apos;this&apos; throttle event instance, and the last entry of the queue.<?linebreak?><?linebreak?>. </para>
+</listitem>
+            <listitem><para>Task <link linkend="_interface_luthetus_1_1_common_1_1_razor_lib_1_1_background_tasks_1_1_models_1_1_i_background_task_1a21b25df8bfd1ba84e61469ad757b5085">HandleEvent</link> (CancellationToken cancellationToken)</para>
+
+<para>This method is the actual work item that gets awaited in order to handle the event. </para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Properties    </title>
+        <itemizedlist>
+            <listitem><para>Key&lt; <link linkend="_interface_luthetus_1_1_common_1_1_razor_lib_1_1_background_tasks_1_1_models_1_1_i_background_task">IBackgroundTask</link> &gt; <link linkend="_interface_luthetus_1_1_common_1_1_razor_lib_1_1_background_tasks_1_1_models_1_1_i_background_task_1a44fbf9cbedc72ba1587a5021720c015c">BackgroundTaskKey</link><computeroutput> [get]</computeroutput>
+</para>
+</listitem>
+            <listitem><para>Key&lt; <link linkend="_interface_luthetus_1_1_common_1_1_razor_lib_1_1_background_tasks_1_1_models_1_1_i_background_task_queue">IBackgroundTaskQueue</link> &gt; <link linkend="_interface_luthetus_1_1_common_1_1_razor_lib_1_1_background_tasks_1_1_models_1_1_i_background_task_1aa2f741e09d6826b4dcbe732fe052790d">QueueKey</link><computeroutput> [get]</computeroutput>
+</para>
+</listitem>
+            <listitem><para>string <link linkend="_interface_luthetus_1_1_common_1_1_razor_lib_1_1_background_tasks_1_1_models_1_1_i_background_task_1a0db9af59852fb1de9bbb759e4ec6d96a">Name</link><computeroutput> [get]</computeroutput>
+</para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<section>
+<title>Detailed Description</title>
+<para>
+Definition at line <link linkend="__i_background_task_8cs_source_1l00005">5</link> of file <link linkend="__i_background_task_8cs_source">IBackgroundTask.cs</link>.</para>
+</section>
+<section>
+<title>Member Function Documentation</title>
+<anchor xml:id="_interface_luthetus_1_1_common_1_1_razor_lib_1_1_background_tasks_1_1_models_1_1_i_background_task_1a1297b3be631c1bb2c38c132674f61911"/><section>
+    <title>BatchOrDefault()</title>
+<indexterm><primary>BatchOrDefault</primary><secondary>Luthetus.Common.RazorLib.BackgroundTasks.Models.IBackgroundTask</secondary></indexterm>
+<indexterm><primary>Luthetus.Common.RazorLib.BackgroundTasks.Models.IBackgroundTask</primary><secondary>BatchOrDefault</secondary></indexterm>
+<para><computeroutput><link linkend="_interface_luthetus_1_1_common_1_1_razor_lib_1_1_background_tasks_1_1_models_1_1_i_background_task">IBackgroundTask</link>? Luthetus.Common.RazorLib.BackgroundTasks.Models.IBackgroundTask.BatchOrDefault (<link linkend="_interface_luthetus_1_1_common_1_1_razor_lib_1_1_background_tasks_1_1_models_1_1_i_background_task">IBackgroundTask</link> oldEvent)</computeroutput></para><para>
+
+<para>Before a throttle event is enqueued, this method is invoked. This allows for batching of &apos;this&apos; throttle event instance, and the last entry of the queue.<?linebreak?><?linebreak?>. </para>
+</para>
+
+<para>This method is invoked from within a &apos;lock(_queue) { ... }&apos;.<?linebreak?><?linebreak?></para>
+
+<para>Example use: one reads an entry from the queue, its an event that write out a character. Perhaps this throttle event also writes out a character. Instead of invoking &apos;text.Insert(character)&apos; two times. One might want to invoke &apos;text.InsertRange(bothCharacters)&apos;;<?linebreak?><?linebreak?></para>
+
+<para>Returning null means enqueue the recentEvent without any batching, (leave the old event as it was within the queue) </para>
+<para>
+Implemented in <link linkend="_class_luthetus_1_1_common_1_1_razor_lib_1_1_background_tasks_1_1_models_1_1_background_task_1a603e812ad453e0899f6ec31654bede2e">Luthetus.Common.RazorLib.BackgroundTasks.Models.BackgroundTask</link>, <link linkend="_struct_luthetus_1_1_text_editor_1_1_razor_lib_1_1_background_tasks_1_1_models_1_1_redundant_text_editor_work_1ad3e5eda4c182907f8ff070e1bf1fad22">Luthetus.TextEditor.RazorLib.BackgroundTasks.Models.RedundantTextEditorWork</link>, <link linkend="_struct_luthetus_1_1_text_editor_1_1_razor_lib_1_1_background_tasks_1_1_models_1_1_unique_text_editor_work_1a720d31f545838d7ca3ccd42374ec8037">Luthetus.TextEditor.RazorLib.BackgroundTasks.Models.UniqueTextEditorWork</link>, <link linkend="_struct_luthetus_1_1_text_editor_1_1_razor_lib_1_1_events_1_1_models_1_1_on_double_click_1a744f9a4b0b398457001e1913c6a74a15">Luthetus.TextEditor.RazorLib.Events.Models.OnDoubleClick</link>, <link linkend="_struct_luthetus_1_1_text_editor_1_1_razor_lib_1_1_events_1_1_models_1_1_on_key_down_late_batching_1a623cf8610b7625bf4e4685b1a2b1b1aa">Luthetus.TextEditor.RazorLib.Events.Models.OnKeyDownLateBatching</link>, <link linkend="_struct_luthetus_1_1_text_editor_1_1_razor_lib_1_1_events_1_1_models_1_1_on_mouse_down_1aeaf0e59ae078e679d50a5fdc9393c135">Luthetus.TextEditor.RazorLib.Events.Models.OnMouseDown</link>, <link linkend="_struct_luthetus_1_1_text_editor_1_1_razor_lib_1_1_events_1_1_models_1_1_on_mouse_move_1ad90b7e57c21fd5b1a287f029ef4ecc9a">Luthetus.TextEditor.RazorLib.Events.Models.OnMouseMove</link>, <link linkend="_struct_luthetus_1_1_text_editor_1_1_razor_lib_1_1_events_1_1_models_1_1_on_scroll_horizontal_1a446401fb5cd59b3b59a70f97a4fc84eb">Luthetus.TextEditor.RazorLib.Events.Models.OnScrollHorizontal</link>, <link linkend="_struct_luthetus_1_1_text_editor_1_1_razor_lib_1_1_events_1_1_models_1_1_on_scroll_vertical_1a17a11651ce07832ff9e4bb4fc28384dc">Luthetus.TextEditor.RazorLib.Events.Models.OnScrollVertical</link>, <link linkend="_struct_luthetus_1_1_text_editor_1_1_razor_lib_1_1_events_1_1_models_1_1_on_wheel_1a548e5efcf937051e133d85d21ded566c">Luthetus.TextEditor.RazorLib.Events.Models.OnWheel</link>, and <link linkend="_struct_luthetus_1_1_text_editor_1_1_razor_lib_1_1_events_1_1_models_1_1_on_wheel_batch_1a0bccddd471851ecea8a6473bf41e7f05">Luthetus.TextEditor.RazorLib.Events.Models.OnWheelBatch</link>.</para>
+Here is the caller graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="interface_luthetus_1_1_common_1_1_razor_lib_1_1_background_tasks_1_1_models_1_1_i_background_task_a1297b3be631c1bb2c38c132674f61911_icgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+</section>
+<anchor xml:id="_interface_luthetus_1_1_common_1_1_razor_lib_1_1_background_tasks_1_1_models_1_1_i_background_task_1a21b25df8bfd1ba84e61469ad757b5085"/><section>
+    <title>HandleEvent()</title>
+<indexterm><primary>HandleEvent</primary><secondary>Luthetus.Common.RazorLib.BackgroundTasks.Models.IBackgroundTask</secondary></indexterm>
+<indexterm><primary>Luthetus.Common.RazorLib.BackgroundTasks.Models.IBackgroundTask</primary><secondary>HandleEvent</secondary></indexterm>
+<para><computeroutput>Task Luthetus.Common.RazorLib.BackgroundTasks.Models.IBackgroundTask.HandleEvent (CancellationToken cancellationToken)</computeroutput></para><para>
+
+<para>This method is the actual work item that gets awaited in order to handle the event. </para>
+</para>
+<para>
+Implemented in <link linkend="_class_luthetus_1_1_common_1_1_razor_lib_1_1_background_tasks_1_1_models_1_1_background_task_1a1bc9c49675417d65a45d8fa1df31d491">Luthetus.Common.RazorLib.BackgroundTasks.Models.BackgroundTask</link>, <link linkend="_struct_luthetus_1_1_text_editor_1_1_razor_lib_1_1_background_tasks_1_1_models_1_1_redundant_text_editor_work_1aaecb9a9b3ccb9ac684ed67ddf8ab2ec2">Luthetus.TextEditor.RazorLib.BackgroundTasks.Models.RedundantTextEditorWork</link>, <link linkend="_struct_luthetus_1_1_text_editor_1_1_razor_lib_1_1_background_tasks_1_1_models_1_1_unique_text_editor_work_1a0243d531ec0feb8c33e103de3c27881e">Luthetus.TextEditor.RazorLib.BackgroundTasks.Models.UniqueTextEditorWork</link>, <link linkend="_struct_luthetus_1_1_text_editor_1_1_razor_lib_1_1_events_1_1_models_1_1_on_double_click_1a90eae57bb5ebd29de2dc20bc5c10380e">Luthetus.TextEditor.RazorLib.Events.Models.OnDoubleClick</link>, <link linkend="_struct_luthetus_1_1_text_editor_1_1_razor_lib_1_1_events_1_1_models_1_1_on_key_down_late_batching_1aed11698f02b5363c9041198cd4ebbad5">Luthetus.TextEditor.RazorLib.Events.Models.OnKeyDownLateBatching</link>, <link linkend="_struct_luthetus_1_1_text_editor_1_1_razor_lib_1_1_events_1_1_models_1_1_on_mouse_down_1a8ec90c02d07f9eac1df6543819ceafd0">Luthetus.TextEditor.RazorLib.Events.Models.OnMouseDown</link>, <link linkend="_struct_luthetus_1_1_text_editor_1_1_razor_lib_1_1_events_1_1_models_1_1_on_mouse_move_1ad28344d743593468d4735dab27495518">Luthetus.TextEditor.RazorLib.Events.Models.OnMouseMove</link>, <link linkend="_struct_luthetus_1_1_text_editor_1_1_razor_lib_1_1_events_1_1_models_1_1_on_scroll_horizontal_1acc1845909da4e132501b32b26195be6e">Luthetus.TextEditor.RazorLib.Events.Models.OnScrollHorizontal</link>, <link linkend="_struct_luthetus_1_1_text_editor_1_1_razor_lib_1_1_events_1_1_models_1_1_on_scroll_vertical_1a61fe7a6f7e7aafd3ed99b2e2fa768d8e">Luthetus.TextEditor.RazorLib.Events.Models.OnScrollVertical</link>, <link linkend="_struct_luthetus_1_1_text_editor_1_1_razor_lib_1_1_events_1_1_models_1_1_on_wheel_1a88011f12987bd67465b32c5bc18fcfc9">Luthetus.TextEditor.RazorLib.Events.Models.OnWheel</link>, and <link linkend="_struct_luthetus_1_1_text_editor_1_1_razor_lib_1_1_events_1_1_models_1_1_on_wheel_batch_1aa3ece418e1c6d8ce4bf3ef9dcf637580">Luthetus.TextEditor.RazorLib.Events.Models.OnWheelBatch</link>.</para>
+Here is the caller graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="interface_luthetus_1_1_common_1_1_razor_lib_1_1_background_tasks_1_1_models_1_1_i_background_task_a21b25df8bfd1ba84e61469ad757b5085_icgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+</section>
+</section>
+<section>
+<title>Property Documentation</title>
+<anchor xml:id="_interface_luthetus_1_1_common_1_1_razor_lib_1_1_background_tasks_1_1_models_1_1_i_background_task_1a44fbf9cbedc72ba1587a5021720c015c"/><section>
+    <title>BackgroundTaskKey</title>
+<indexterm><primary>BackgroundTaskKey</primary><secondary>Luthetus.Common.RazorLib.BackgroundTasks.Models.IBackgroundTask</secondary></indexterm>
+<indexterm><primary>Luthetus.Common.RazorLib.BackgroundTasks.Models.IBackgroundTask</primary><secondary>BackgroundTaskKey</secondary></indexterm>
+<para><computeroutput>Key&lt;<link linkend="_interface_luthetus_1_1_common_1_1_razor_lib_1_1_background_tasks_1_1_models_1_1_i_background_task">IBackgroundTask</link>&gt; Luthetus.Common.RazorLib.BackgroundTasks.Models.IBackgroundTask.BackgroundTaskKey<computeroutput>[get]</computeroutput></computeroutput></para><para>
+Implemented in <link linkend="_class_luthetus_1_1_common_1_1_razor_lib_1_1_background_tasks_1_1_models_1_1_background_task_1afad11f42c129e4944aa189b712e9f2ed">Luthetus.Common.RazorLib.BackgroundTasks.Models.BackgroundTask</link>, <link linkend="_struct_luthetus_1_1_text_editor_1_1_razor_lib_1_1_background_tasks_1_1_models_1_1_redundant_text_editor_work_1adb6e5d1326f29d7ff5ecda79ecd2c60d">Luthetus.TextEditor.RazorLib.BackgroundTasks.Models.RedundantTextEditorWork</link>, <link linkend="_struct_luthetus_1_1_text_editor_1_1_razor_lib_1_1_background_tasks_1_1_models_1_1_unique_text_editor_work_1abdea889432346cd12e9844f553cafa40">Luthetus.TextEditor.RazorLib.BackgroundTasks.Models.UniqueTextEditorWork</link>, <link linkend="_struct_luthetus_1_1_text_editor_1_1_razor_lib_1_1_events_1_1_models_1_1_on_double_click_1a3f501c7452f5d05b26be7eb24c0ae973">Luthetus.TextEditor.RazorLib.Events.Models.OnDoubleClick</link>, <link linkend="_struct_luthetus_1_1_text_editor_1_1_razor_lib_1_1_events_1_1_models_1_1_on_key_down_late_batching_1a312246663b2927c881c8fbab5060a584">Luthetus.TextEditor.RazorLib.Events.Models.OnKeyDownLateBatching</link>, <link linkend="_struct_luthetus_1_1_text_editor_1_1_razor_lib_1_1_events_1_1_models_1_1_on_mouse_down_1a58f4b7805fdfec62afed0be434a74454">Luthetus.TextEditor.RazorLib.Events.Models.OnMouseDown</link>, <link linkend="_struct_luthetus_1_1_text_editor_1_1_razor_lib_1_1_events_1_1_models_1_1_on_mouse_move_1a9c1dc4dc2225db3a2e803d0c92780bf8">Luthetus.TextEditor.RazorLib.Events.Models.OnMouseMove</link>, <link linkend="_struct_luthetus_1_1_text_editor_1_1_razor_lib_1_1_events_1_1_models_1_1_on_scroll_horizontal_1a1d16ead2a4e77d62a77a480c16d93509">Luthetus.TextEditor.RazorLib.Events.Models.OnScrollHorizontal</link>, <link linkend="_struct_luthetus_1_1_text_editor_1_1_razor_lib_1_1_events_1_1_models_1_1_on_scroll_vertical_1a05c0f754bdbcd4feca3385543be7e13c">Luthetus.TextEditor.RazorLib.Events.Models.OnScrollVertical</link>, <link linkend="_struct_luthetus_1_1_text_editor_1_1_razor_lib_1_1_events_1_1_models_1_1_on_wheel_1a3a6a9baa5cc3b9127d35dbf300fef6be">Luthetus.TextEditor.RazorLib.Events.Models.OnWheel</link>, and <link linkend="_struct_luthetus_1_1_text_editor_1_1_razor_lib_1_1_events_1_1_models_1_1_on_wheel_batch_1a8b77a951828222a9b6be9af419f7879a">Luthetus.TextEditor.RazorLib.Events.Models.OnWheelBatch</link>.</para>
+<para>
+Definition at line <link linkend="__i_background_task_8cs_source_1l00007">7</link> of file <link linkend="__i_background_task_8cs_source">IBackgroundTask.cs</link>.</para>
+</section>
+<anchor xml:id="_interface_luthetus_1_1_common_1_1_razor_lib_1_1_background_tasks_1_1_models_1_1_i_background_task_1a0db9af59852fb1de9bbb759e4ec6d96a"/><section>
+    <title>Name</title>
+<indexterm><primary>Name</primary><secondary>Luthetus.Common.RazorLib.BackgroundTasks.Models.IBackgroundTask</secondary></indexterm>
+<indexterm><primary>Luthetus.Common.RazorLib.BackgroundTasks.Models.IBackgroundTask</primary><secondary>Name</secondary></indexterm>
+<para><computeroutput>string Luthetus.Common.RazorLib.BackgroundTasks.Models.IBackgroundTask.Name<computeroutput>[get]</computeroutput></computeroutput></para><para>
+Implemented in <link linkend="_class_luthetus_1_1_common_1_1_razor_lib_1_1_background_tasks_1_1_models_1_1_background_task_1a876d997c881ad5b23fbd38339498ec00">Luthetus.Common.RazorLib.BackgroundTasks.Models.BackgroundTask</link>, <link linkend="_struct_luthetus_1_1_text_editor_1_1_razor_lib_1_1_background_tasks_1_1_models_1_1_redundant_text_editor_work_1a024435fb00bc6406b5d69b1d89b44983">Luthetus.TextEditor.RazorLib.BackgroundTasks.Models.RedundantTextEditorWork</link>, <link linkend="_struct_luthetus_1_1_text_editor_1_1_razor_lib_1_1_background_tasks_1_1_models_1_1_unique_text_editor_work_1a9b75203a4e336839a3cf63e35a6553ad">Luthetus.TextEditor.RazorLib.BackgroundTasks.Models.UniqueTextEditorWork</link>, <link linkend="_struct_luthetus_1_1_text_editor_1_1_razor_lib_1_1_events_1_1_models_1_1_on_double_click_1a59bbc80eefe12f7d7fe177cdb10674bb">Luthetus.TextEditor.RazorLib.Events.Models.OnDoubleClick</link>, <link linkend="_struct_luthetus_1_1_text_editor_1_1_razor_lib_1_1_events_1_1_models_1_1_on_key_down_late_batching_1af238356283f6c09121485b1c7ec048bd">Luthetus.TextEditor.RazorLib.Events.Models.OnKeyDownLateBatching</link>, <link linkend="_struct_luthetus_1_1_text_editor_1_1_razor_lib_1_1_events_1_1_models_1_1_on_mouse_down_1ac3dc35f972d6130ba322389bb45c6489">Luthetus.TextEditor.RazorLib.Events.Models.OnMouseDown</link>, <link linkend="_struct_luthetus_1_1_text_editor_1_1_razor_lib_1_1_events_1_1_models_1_1_on_mouse_move_1ac08b60b22292019a8e17058f0c135c36">Luthetus.TextEditor.RazorLib.Events.Models.OnMouseMove</link>, <link linkend="_struct_luthetus_1_1_text_editor_1_1_razor_lib_1_1_events_1_1_models_1_1_on_scroll_horizontal_1a1476def42c53868e9775e50e3fa88508">Luthetus.TextEditor.RazorLib.Events.Models.OnScrollHorizontal</link>, <link linkend="_struct_luthetus_1_1_text_editor_1_1_razor_lib_1_1_events_1_1_models_1_1_on_scroll_vertical_1a585fee293801543c091d3df3fb49f3b8">Luthetus.TextEditor.RazorLib.Events.Models.OnScrollVertical</link>, <link linkend="_struct_luthetus_1_1_text_editor_1_1_razor_lib_1_1_events_1_1_models_1_1_on_wheel_1a056097b84de77313f3225cd5022a6d97">Luthetus.TextEditor.RazorLib.Events.Models.OnWheel</link>, and <link linkend="_struct_luthetus_1_1_text_editor_1_1_razor_lib_1_1_events_1_1_models_1_1_on_wheel_batch_1aeb688fad3b2d14ca74cef73f99f876d4">Luthetus.TextEditor.RazorLib.Events.Models.OnWheelBatch</link>.</para>
+<para>
+Definition at line <link linkend="__i_background_task_8cs_source_1l00009">9</link> of file <link linkend="__i_background_task_8cs_source">IBackgroundTask.cs</link>.</para>
+</section>
+<anchor xml:id="_interface_luthetus_1_1_common_1_1_razor_lib_1_1_background_tasks_1_1_models_1_1_i_background_task_1aa2f741e09d6826b4dcbe732fe052790d"/><section>
+    <title>QueueKey</title>
+<indexterm><primary>QueueKey</primary><secondary>Luthetus.Common.RazorLib.BackgroundTasks.Models.IBackgroundTask</secondary></indexterm>
+<indexterm><primary>Luthetus.Common.RazorLib.BackgroundTasks.Models.IBackgroundTask</primary><secondary>QueueKey</secondary></indexterm>
+<para><computeroutput>Key&lt;<link linkend="_interface_luthetus_1_1_common_1_1_razor_lib_1_1_background_tasks_1_1_models_1_1_i_background_task_queue">IBackgroundTaskQueue</link>&gt; Luthetus.Common.RazorLib.BackgroundTasks.Models.IBackgroundTask.QueueKey<computeroutput>[get]</computeroutput></computeroutput></para><para>
+Implemented in <link linkend="_class_luthetus_1_1_common_1_1_razor_lib_1_1_background_tasks_1_1_models_1_1_background_task_1a12c5ec96d02f196ec5c3c365fb2c73a6">Luthetus.Common.RazorLib.BackgroundTasks.Models.BackgroundTask</link>, <link linkend="_struct_luthetus_1_1_text_editor_1_1_razor_lib_1_1_background_tasks_1_1_models_1_1_redundant_text_editor_work_1a045d0c57437ec556aac90c775bf1c8cd">Luthetus.TextEditor.RazorLib.BackgroundTasks.Models.RedundantTextEditorWork</link>, <link linkend="_struct_luthetus_1_1_text_editor_1_1_razor_lib_1_1_background_tasks_1_1_models_1_1_unique_text_editor_work_1a96edb9c9cc86c2a201eaf4861421f49e">Luthetus.TextEditor.RazorLib.BackgroundTasks.Models.UniqueTextEditorWork</link>, <link linkend="_struct_luthetus_1_1_text_editor_1_1_razor_lib_1_1_events_1_1_models_1_1_on_double_click_1a03cbe461c4d42efa894e9d78f1a07115">Luthetus.TextEditor.RazorLib.Events.Models.OnDoubleClick</link>, <link linkend="_struct_luthetus_1_1_text_editor_1_1_razor_lib_1_1_events_1_1_models_1_1_on_key_down_late_batching_1a9010a95f1b0180e0569bd2ad7d546b0e">Luthetus.TextEditor.RazorLib.Events.Models.OnKeyDownLateBatching</link>, <link linkend="_struct_luthetus_1_1_text_editor_1_1_razor_lib_1_1_events_1_1_models_1_1_on_mouse_down_1a50d61419d97583d1c9631b4c1b8ffbef">Luthetus.TextEditor.RazorLib.Events.Models.OnMouseDown</link>, <link linkend="_struct_luthetus_1_1_text_editor_1_1_razor_lib_1_1_events_1_1_models_1_1_on_mouse_move_1a4b7631aaba701b23e450f830a8f3e8df">Luthetus.TextEditor.RazorLib.Events.Models.OnMouseMove</link>, <link linkend="_struct_luthetus_1_1_text_editor_1_1_razor_lib_1_1_events_1_1_models_1_1_on_scroll_horizontal_1aa8079e179168f002c452fd97b1008d1c">Luthetus.TextEditor.RazorLib.Events.Models.OnScrollHorizontal</link>, <link linkend="_struct_luthetus_1_1_text_editor_1_1_razor_lib_1_1_events_1_1_models_1_1_on_scroll_vertical_1ad3538714b6d2f36f4ca30bc34d1aae27">Luthetus.TextEditor.RazorLib.Events.Models.OnScrollVertical</link>, <link linkend="_struct_luthetus_1_1_text_editor_1_1_razor_lib_1_1_events_1_1_models_1_1_on_wheel_1aaefb34a955d80cb5902b76a262a157c1">Luthetus.TextEditor.RazorLib.Events.Models.OnWheel</link>, and <link linkend="_struct_luthetus_1_1_text_editor_1_1_razor_lib_1_1_events_1_1_models_1_1_on_wheel_batch_1a1d7ef6c8f5f11112469456a3d84e2ccf">Luthetus.TextEditor.RazorLib.Events.Models.OnWheelBatch</link>.</para>
+<para>
+Definition at line <link linkend="__i_background_task_8cs_source_1l00008">8</link> of file <link linkend="__i_background_task_8cs_source">IBackgroundTask.cs</link>.</para>
+</section>
+<para>
+The documentation for this interface was generated from the following file:</para>
+Source/Lib/Common/BackgroundTasks/Models/<link linkend="__i_background_task_8cs">IBackgroundTask.cs</link></section>
+</section>

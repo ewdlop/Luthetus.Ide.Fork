@@ -1,0 +1,4 @@
+var namespace_luthetus_1_1_extensions_1_1_config_1_1_compiler_services =
+[
+    [ "CompilerServiceRegistry", "class_luthetus_1_1_extensions_1_1_config_1_1_compiler_services_1_1_compiler_service_registry.html", "class_luthetus_1_1_extensions_1_1_config_1_1_compiler_services_1_1_compiler_service_registry" ]
+];

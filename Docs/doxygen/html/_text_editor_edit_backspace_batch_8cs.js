@@ -1,0 +1,4 @@
+var _text_editor_edit_backspace_batch_8cs =
+[
+    [ "Luthetus.TextEditor.RazorLib.Edits.Models.TextEditorEditBackspaceBatch", "class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_edits_1_1_models_1_1_text_editor_edit_backspace_batch.html", "class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_edits_1_1_models_1_1_text_editor_edit_backspace_batch" ]
+];

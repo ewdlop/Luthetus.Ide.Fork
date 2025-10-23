@@ -1,0 +1,441 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models" xml:lang="en-US">
+<title>Luthetus.TextEditor.RazorLib.TextEditors.Models Namespace Reference</title>
+<indexterm><primary>Luthetus.TextEditor.RazorLib.TextEditors.Models</primary></indexterm>
+<simplesect>
+    <title>Namespaces    </title>
+        <itemizedlist>
+            <listitem><para>namespace <link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1_1_internals">Internals</link></para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Classes    </title>
+        <itemizedlist>
+            <listitem><para>class <link linkend="_class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1_1_cursor_modifier_bag_text_editor">CursorModifierBagTextEditor</link></para>
+</listitem>
+            <listitem><para>class <link linkend="_class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1_1_dynamic_view_model_adapter_text_editor">DynamicViewModelAdapterTextEditor</link></para>
+
+<para>This type contains all data, and logic, necessary to render a text editor from within a dialog, a panel tab, or a text editor group tab. </para>
+</listitem>
+            <listitem><para>class <emphasis role="strong">ExtensionNoPeriodFacts</emphasis></para>
+
+<para>The constants do not start with a period. </para>
+</listitem>
+            <listitem><para>interface <link linkend="_interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1_1_i_tab_text_editor">ITabTextEditor</link></para>
+</listitem>
+            <listitem><para>interface <link linkend="_interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1_1_i_text_editor_dependent_component">ITextEditorDependentComponent</link></para>
+</listitem>
+            <listitem><para>interface <link linkend="_interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1_1_i_text_editor_edit_context">ITextEditorEditContext</link></para>
+
+<para>If one invokes, &quot;_ = editContext.GetViewModelModifier(viewModelKey);&quot;.<?linebreak?> Then a side effect occurs where the view model with the provided viewModelKey, will be marked as a having been modified.<?linebreak?> After a Post is finished, the text editor service iterates over all &apos;modified&apos; view models and re-renders them.<?linebreak?> This behavior is a bit hacky since it requires some amount of &apos;hidden knowledge&apos;.<?linebreak?> To get a view model without marking it as modified, use the optional parameter, &apos;isReadonly&apos; and set it to &apos;true&apos;.<?linebreak?> The main reason for making this comment, is that I sometimes assign the result of &apos;GetViewModelModifier&apos; to discard.<?linebreak?> When I do this it feels especially hacky, so I want to leave a paper trail of what I mean by that statement.<?linebreak?>. </para>
+</listitem>
+            <listitem><para>interface <link linkend="_interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1_1_i_text_editor_model">ITextEditorModel</link></para>
+
+<para>Stores the <link linkend="_struct_luthetus_1_1_text_editor_1_1_razor_lib_1_1_characters_1_1_models_1_1_rich_character">RichCharacter</link> class instances that represent the text.<?linebreak?><?linebreak?> Each <link linkend="_class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1_1_text_editor_model">TextEditorModel</link> has a unique underlying resource uri.<?linebreak?><?linebreak?> Therefore, if one has a text file named &quot;myHomework.txt&quot;, then only one <link linkend="_class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1_1_text_editor_model">TextEditorModel</link> can exist with the resource uri of &quot;myHomework.txt&quot;.<?linebreak?><?linebreak?>. </para>
+</listitem>
+            <listitem><para>interface <link linkend="_interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1_1_i_text_editor_model_api">ITextEditorModelApi</link></para>
+</listitem>
+            <listitem><para>interface <link linkend="_interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1_1_i_text_editor_view_model_api">ITextEditorViewModelApi</link></para>
+</listitem>
+            <listitem><para>class <link linkend="_class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1_1_text_editor_model">TextEditorModel</link></para>
+</listitem>
+            <listitem><para>class <link linkend="_class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1_1_text_editor_model_api">TextEditorModelApi</link></para>
+</listitem>
+            <listitem><para>class <emphasis role="strong">TextEditorModelExtensionMethods</emphasis></para>
+</listitem>
+            <listitem><para>class <link linkend="_class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1_1_text_editor_model_modifier">TextEditorModelModifier</link></para>
+
+<para>(2024-06-08) I belive there are too many ways to edit a text editor. There should only be &apos;Insert(...)&apos; and &apos;Remove(...)&apos; methods. Any code I currently have in &apos;TextEditorModelModifier.cs&apos; that I deem as technical debt or a bad idea will be put in this file. Then, once organized I hope to make sense of what the &quot;lean&quot; solution is. </para>
+</listitem>
+            <listitem><para>class <link linkend="_class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1_1_text_editor_partition">TextEditorPartition</link></para>
+</listitem>
+            <listitem><para>class <link linkend="_class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1_1_text_editor_view_model_api">TextEditorViewModelApi</link></para>
+</listitem>
+            <listitem><para>class <link linkend="_class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1_1_text_editor_view_model_modifier">TextEditorViewModelModifier</link></para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Enumerations    </title>
+        <itemizedlist>
+            <listitem><para>enum <link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1a6ae5c9d10a22e55cc84906bef2c99328">MotionKind</link> { <link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1a6ae5c9d10a22e55cc84906bef2c99328acd7d13ceea728b08555f7c818cfb13ef">Backspace</link>
+, <link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1a6ae5c9d10a22e55cc84906bef2c99328af2a6c498fb90ee345d997f888fce3b18">Delete</link>
+ }</para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Functions    </title>
+        <itemizedlist>
+            <listitem><para>record <link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1a95663f563f9d12aa199fab4bf5de55b4">Category</link> (string Value)</para>
+
+<para>An optional distinction between many <link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1aa2a2da032900659e3cf98e4b28fc476d">TextEditorViewModel</link>(s) which display the same <link linkend="_class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1_1_text_editor_model">TextEditorModel</link>. <?linebreak?> Example: one might have a &apos;main&apos; text editor. Perhaps this category is named &quot;main&quot;. Furthermore one might have a &apos;peek&apos; window. Perhaps this category is named &quot;peek&quot;. This results in one being able to have two separate view models, which display the same underlying model, and distinguish between them. </para>
+</listitem>
+            <listitem><para>record <link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1aa9c065de43982111d7d0551bde99ea48">ScrollbarDimensions</link> (double ScrollLeft, double ScrollTop, double ScrollWidth, double ScrollHeight, double MarginScrollHeight)</para>
+
+<para>The unit of measurement is Pixels (px) C# controls the scrollbar dimensions. </para>
+</listitem>
+            <listitem><para>record <link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1a55c218009ea8a8cc459c4207cd9f218f">TextEditorDimensions</link> (double Width, double Height, double BoundingClientRectLeft, double BoundingClientRectTop)</para>
+
+<para>The unit of measurement is Pixels (px) JavaScript/Html controls the text editor dimensions. </para>
+</listitem>
+            <listitem><para>Task <link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1ad166293aee0a276e57f06b201684b008">FocusAsync</link> ()</para>
+</listitem>
+            <listitem><para>void <link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1af402300cee2b4a03928758a3577a0ede">Dispose</link> ()</para>
+</listitem>
+            <listitem><para>record <link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1a70108df61e9a559805a772a0fc0891a1">WidgetBlock</link> (Key&lt; WidgetBlock &gt; Key, string Title, string HtmlElementId, int LineIndex, Type ComponentType, Dictionary&lt; string, object?&gt;? ComponentParameterMap)</para>
+
+<para>This type takes up 100% of the width of a text editor row, and therefore shifts the top position of any rows that follow. </para>
+</listitem>
+            <listitem><para>record <link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1af0bf990d182f463bb30a353bfa58fc10">WidgetInline</link> (Key&lt; WidgetInline &gt; Key, string Title, string HtmlElementId, Type ComponentType, Dictionary&lt; string, object?&gt;? ComponentParameterMap)</para>
+
+<para>This type takes up some amount of width of a text editor row, and therefore shifts any the left position of any columns that follow. </para>
+</listitem>
+            <listitem><para>record <link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1add745df1063319c10358ccfa47c3ca1e">WidgetOverlay</link> (Key&lt; WidgetOverlay &gt; Key, string Title, string HtmlElementId, Type ComponentType, Dictionary&lt; string, object?&gt;? ComponentParameterMap)</para>
+
+<para>This type is rendered &apos;on-top&apos; of with respect to &quot;z-index&quot; the content. </para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Variables    </title>
+        <itemizedlist>
+            <listitem><para>record <link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1aa2a2da032900659e3cf98e4b28fc476d">TextEditorViewModel</link></para>
+
+<para>Stores the state of the user interface. For example, the user&apos;s <link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_cursors_1_1_models_1a8373e854ca1ddf152a3b5372ea18c20b">TextEditorCursor</link> instances are stored here.<?linebreak?><?linebreak?>. </para>
+</listitem>
+            <listitem><para>record <link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1a435ccef09e2ba83022e8cf378fc0f690">ResourceUri</link> <link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1ae531f6ec8ec05e2493aabf8d17c23e4b">resourceUri</link></para>
+</listitem>
+            <listitem><para>record <link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1a435ccef09e2ba83022e8cf378fc0f690">ResourceUri</link> <link linkend="_interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_i_text_editor_service">ITextEditorService</link> <link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1aecfb76d19da117c025734259242d144d">textEditorService</link></para>
+</listitem>
+            <listitem><para>record <link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1a435ccef09e2ba83022e8cf378fc0f690">ResourceUri</link> <link linkend="_interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_i_text_editor_service">ITextEditorService</link> IDispatcher <link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1a50f035982e1c206f234851523db5cbc8">dispatcher</link></para>
+</listitem>
+            <listitem><para>record <link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1a435ccef09e2ba83022e8cf378fc0f690">ResourceUri</link> <link linkend="_interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_i_text_editor_service">ITextEditorService</link> IDispatcher <link linkend="_interface_luthetus_1_1_common_1_1_razor_lib_1_1_dialogs_1_1_models_1_1_i_dialog_service">IDialogService</link> <link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1a41ef8059adde5ddfbf288ffddb30a7c0">dialogService</link></para>
+</listitem>
+            <listitem><para>record <link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1a435ccef09e2ba83022e8cf378fc0f690">ResourceUri</link> <link linkend="_interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_i_text_editor_service">ITextEditorService</link> IDispatcher <link linkend="_interface_luthetus_1_1_common_1_1_razor_lib_1_1_dialogs_1_1_models_1_1_i_dialog_service">IDialogService</link> IJSRuntime <link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1a9b516c6b689d02d1a5f28c73390ac908">jsRuntime</link></para>
+</listitem>
+            <listitem><para>record <link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1a435ccef09e2ba83022e8cf378fc0f690">ResourceUri</link> <link linkend="_interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_i_text_editor_service">ITextEditorService</link> IDispatcher <link linkend="_interface_luthetus_1_1_common_1_1_razor_lib_1_1_dialogs_1_1_models_1_1_i_dialog_service">IDialogService</link> IJSRuntime <link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1a479abb7968c44629c9ee977673af1973">VirtualizationResult</link>&lt; <link linkend="_struct_luthetus_1_1_text_editor_1_1_razor_lib_1_1_characters_1_1_models_1_1_rich_character">RichCharacter</link>[]&gt; <link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1a78bf6f6b4690f819d2536c2b3177ebde">virtualizationResult</link></para>
+</listitem>
+            <listitem><para>record <link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1a435ccef09e2ba83022e8cf378fc0f690">ResourceUri</link> <link linkend="_interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_i_text_editor_service">ITextEditorService</link> IDispatcher <link linkend="_interface_luthetus_1_1_common_1_1_razor_lib_1_1_dialogs_1_1_models_1_1_i_dialog_service">IDialogService</link> IJSRuntime <link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1a479abb7968c44629c9ee977673af1973">VirtualizationResult</link>&lt; <link linkend="_struct_luthetus_1_1_text_editor_1_1_razor_lib_1_1_characters_1_1_models_1_1_rich_character">RichCharacter</link>[]&gt; <link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1af1eb54dcb15fe9154a163055233460ec">TextEditorDimensions</link> <link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1aa88b6eb61932a3f0562e94da59125234">textEditorDimensions</link></para>
+</listitem>
+            <listitem><para>record <link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1a435ccef09e2ba83022e8cf378fc0f690">ResourceUri</link> <link linkend="_interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_i_text_editor_service">ITextEditorService</link> IDispatcher <link linkend="_interface_luthetus_1_1_common_1_1_razor_lib_1_1_dialogs_1_1_models_1_1_i_dialog_service">IDialogService</link> IJSRuntime <link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1a479abb7968c44629c9ee977673af1973">VirtualizationResult</link>&lt; <link linkend="_struct_luthetus_1_1_text_editor_1_1_razor_lib_1_1_characters_1_1_models_1_1_rich_character">RichCharacter</link>[]&gt; <link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1af1eb54dcb15fe9154a163055233460ec">TextEditorDimensions</link> <link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1af95b7406fbb23b5589ae2f3a639b572b">ScrollbarDimensions</link> <link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1adff938f4a5c2b32938f2597d52525338">scrollbarDimensions</link></para>
+</listitem>
+            <listitem><para>record <link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1a435ccef09e2ba83022e8cf378fc0f690">ResourceUri</link> <link linkend="_interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_i_text_editor_service">ITextEditorService</link> IDispatcher <link linkend="_interface_luthetus_1_1_common_1_1_razor_lib_1_1_dialogs_1_1_models_1_1_i_dialog_service">IDialogService</link> IJSRuntime <link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1a479abb7968c44629c9ee977673af1973">VirtualizationResult</link>&lt; <link linkend="_struct_luthetus_1_1_text_editor_1_1_razor_lib_1_1_characters_1_1_models_1_1_rich_character">RichCharacter</link>[]&gt; <link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1af1eb54dcb15fe9154a163055233460ec">TextEditorDimensions</link> <link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1af95b7406fbb23b5589ae2f3a639b572b">ScrollbarDimensions</link> <link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1a7bb77f18da211cc58be24a6bcf54ecc3">CharAndLineMeasurements</link> <link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1a47c51efe9864385e5cc288f2c6ec8426">charAndLineMeasurements</link></para>
+</listitem>
+            <listitem><para>record <link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1a435ccef09e2ba83022e8cf378fc0f690">ResourceUri</link> <link linkend="_interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_i_text_editor_service">ITextEditorService</link> IDispatcher <link linkend="_interface_luthetus_1_1_common_1_1_razor_lib_1_1_dialogs_1_1_models_1_1_i_dialog_service">IDialogService</link> IJSRuntime <link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1a479abb7968c44629c9ee977673af1973">VirtualizationResult</link>&lt; <link linkend="_struct_luthetus_1_1_text_editor_1_1_razor_lib_1_1_characters_1_1_models_1_1_rich_character">RichCharacter</link>[]&gt; <link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1af1eb54dcb15fe9154a163055233460ec">TextEditorDimensions</link> <link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1af95b7406fbb23b5589ae2f3a639b572b">ScrollbarDimensions</link> <link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1a7bb77f18da211cc58be24a6bcf54ecc3">CharAndLineMeasurements</link> bool <link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1a3e0df2c9204c363537f0b67bdcca579c">displayCommandBar</link></para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<section>
+<title>Enumeration Type Documentation</title>
+<anchor xml:id="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1a6ae5c9d10a22e55cc84906bef2c99328"/><section>
+    <title>MotionKind</title>
+<indexterm><primary>MotionKind</primary><secondary>Luthetus.TextEditor.RazorLib.TextEditors.Models</secondary></indexterm>
+<indexterm><primary>Luthetus.TextEditor.RazorLib.TextEditors.Models</primary><secondary>MotionKind</secondary></indexterm>
+<para><computeroutput>enum <link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1a6ae5c9d10a22e55cc84906bef2c99328">Luthetus.TextEditor.RazorLib.TextEditors.Models.MotionKind</link></computeroutput></para><informaltable frame="all">
+<title>Enumerator</title>
+    <tgroup cols="2" align="left" colsep="1" rowsep="1">
+      <colspec colname='c1'/>
+      <colspec colname='c2'/>
+<tbody>
+<row><entry><indexterm><primary>Backspace</primary><secondary>Luthetus.TextEditor.RazorLib.TextEditors.Models</secondary></indexterm>
+<indexterm><primary>Luthetus.TextEditor.RazorLib.TextEditors.Models</primary><secondary>Backspace</secondary></indexterm>
+<anchor xml:id="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1a6ae5c9d10a22e55cc84906bef2c99328acd7d13ceea728b08555f7c818cfb13ef"/>Backspace</entry><entry></entry></row><row><entry><indexterm><primary>Delete</primary><secondary>Luthetus.TextEditor.RazorLib.TextEditors.Models</secondary></indexterm>
+<indexterm><primary>Luthetus.TextEditor.RazorLib.TextEditors.Models</primary><secondary>Delete</secondary></indexterm>
+<anchor xml:id="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1a6ae5c9d10a22e55cc84906bef2c99328af2a6c498fb90ee345d997f888fce3b18"/>Delete</entry><entry></entry></row>    </tbody>
+    </tgroup>
+</informaltable>
+<para>
+Definition at line <link linkend="__motion_kind_8cs_source_1l00003">3</link> of file <link linkend="__motion_kind_8cs_source">MotionKind.cs</link>.</para>
+</section>
+</section>
+<section>
+<title>Function Documentation</title>
+<anchor xml:id="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1a95663f563f9d12aa199fab4bf5de55b4"/><section>
+    <title>Category()</title>
+<indexterm><primary>Category</primary><secondary>Luthetus.TextEditor.RazorLib.TextEditors.Models</secondary></indexterm>
+<indexterm><primary>Luthetus.TextEditor.RazorLib.TextEditors.Models</primary><secondary>Category</secondary></indexterm>
+<para><computeroutput>record Luthetus.TextEditor.RazorLib.TextEditors.Models.Category (string Value)</computeroutput></para><para>
+
+<para>An optional distinction between many <link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1aa2a2da032900659e3cf98e4b28fc476d">TextEditorViewModel</link>(s) which display the same <link linkend="_class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1_1_text_editor_model">TextEditorModel</link>. <?linebreak?> Example: one might have a &apos;main&apos; text editor. Perhaps this category is named &quot;main&quot;. Furthermore one might have a &apos;peek&apos; window. Perhaps this category is named &quot;peek&quot;. This results in one being able to have two separate view models, which display the same underlying model, and distinguish between them. </para>
+</para>
+
+<para>
+                <formalpara>
+                    <title>
+Parameters</title>
+                    <para>
+                    <table frame="all">
+                        <tgroup cols="2" align="left" colsep="1" rowsep="1">
+                        <colspec colwidth="1*"/>
+                        <colspec colwidth="4*"/>
+                        <tbody>
+                            <row>
+<entry>Value</entry><entry>
+<para>The category string value itself. </para>
+</entry>
+                            </row>
+                        </tbody>
+                        </tgroup>
+                    </table>
+                    </para>
+                </formalpara>
+                </para>
+</section>
+<anchor xml:id="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1af402300cee2b4a03928758a3577a0ede"/><section>
+    <title>Dispose()</title>
+<indexterm><primary>Dispose</primary><secondary>Luthetus.TextEditor.RazorLib.TextEditors.Models</secondary></indexterm>
+<indexterm><primary>Luthetus.TextEditor.RazorLib.TextEditors.Models</primary><secondary>Dispose</secondary></indexterm>
+<para><computeroutput>void Luthetus.TextEditor.RazorLib.TextEditors.Models.Dispose ( )</computeroutput></para><para>
+Definition at line <link linkend="__text_editor_view_model_8cs_source_1l00199">199</link> of file <link linkend="__text_editor_view_model_8cs_source">TextEditorViewModel.cs</link>.</para>
+</section>
+<anchor xml:id="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1ad166293aee0a276e57f06b201684b008"/><section>
+    <title>FocusAsync()</title>
+<indexterm><primary>FocusAsync</primary><secondary>Luthetus.TextEditor.RazorLib.TextEditors.Models</secondary></indexterm>
+<indexterm><primary>Luthetus.TextEditor.RazorLib.TextEditors.Models</primary><secondary>FocusAsync</secondary></indexterm>
+<para><computeroutput>Task Luthetus.TextEditor.RazorLib.TextEditors.Models.FocusAsync ( )</computeroutput></para><para>
+Definition at line <link linkend="__text_editor_view_model_8cs_source_1l00194">194</link> of file <link linkend="__text_editor_view_model_8cs_source">TextEditorViewModel.cs</link>.</para>
+</section>
+<anchor xml:id="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1aa9c065de43982111d7d0551bde99ea48"/><section>
+    <title>ScrollbarDimensions()</title>
+<indexterm><primary>ScrollbarDimensions</primary><secondary>Luthetus.TextEditor.RazorLib.TextEditors.Models</secondary></indexterm>
+<indexterm><primary>Luthetus.TextEditor.RazorLib.TextEditors.Models</primary><secondary>ScrollbarDimensions</secondary></indexterm>
+<para><computeroutput>record Luthetus.TextEditor.RazorLib.TextEditors.Models.ScrollbarDimensions (double ScrollLeft, double ScrollTop, double ScrollWidth, double ScrollHeight, double MarginScrollHeight)</computeroutput></para><para>
+
+<para>The unit of measurement is Pixels (px) C# controls the scrollbar dimensions. </para>
+</para>
+
+<para>
+                <formalpara>
+                    <title>
+Parameters</title>
+                    <para>
+                    <table frame="all">
+                        <tgroup cols="2" align="left" colsep="1" rowsep="1">
+                        <colspec colwidth="1*"/>
+                        <colspec colwidth="4*"/>
+                        <tbody>
+                            <row>
+<entry>ScrollLeft</entry><entry>
+<para>The unit of measurement is Pixels (px)</para>
+</entry>
+                            </row>
+                            <row>
+<entry>ScrollTop</entry><entry>
+<para>The unit of measurement is Pixels (px)</para>
+</entry>
+                            </row>
+                            <row>
+<entry>ScrollWidth</entry><entry>
+<para>The unit of measurement is Pixels (px)</para>
+</entry>
+                            </row>
+                            <row>
+<entry>ScrollHeight</entry><entry>
+<para>The unit of measurement is Pixels (px)</para>
+</entry>
+                            </row>
+                            <row>
+<entry>MarginScrollHeight</entry><entry>
+<para>The unit of measurement is Pixels (px)</para>
+</entry>
+                            </row>
+                        </tbody>
+                        </tgroup>
+                    </table>
+                    </para>
+                </formalpara>
+                </para>
+<para>
+Definition at line <link linkend="__scrollbar_dimensions_8cs_source_1l00012">12</link> of file <link linkend="__scrollbar_dimensions_8cs_source">ScrollbarDimensions.cs</link>.</para>
+</section>
+<anchor xml:id="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1a55c218009ea8a8cc459c4207cd9f218f"/><section>
+    <title>TextEditorDimensions()</title>
+<indexterm><primary>TextEditorDimensions</primary><secondary>Luthetus.TextEditor.RazorLib.TextEditors.Models</secondary></indexterm>
+<indexterm><primary>Luthetus.TextEditor.RazorLib.TextEditors.Models</primary><secondary>TextEditorDimensions</secondary></indexterm>
+<para><computeroutput>record Luthetus.TextEditor.RazorLib.TextEditors.Models.TextEditorDimensions (double Width, double Height, double BoundingClientRectLeft, double BoundingClientRectTop)</computeroutput></para><para>
+
+<para>The unit of measurement is Pixels (px) JavaScript/Html controls the text editor dimensions. </para>
+</para>
+
+<para>
+                <formalpara>
+                    <title>
+Parameters</title>
+                    <para>
+                    <table frame="all">
+                        <tgroup cols="2" align="left" colsep="1" rowsep="1">
+                        <colspec colwidth="1*"/>
+                        <colspec colwidth="4*"/>
+                        <tbody>
+                            <row>
+<entry>Width</entry><entry>
+<para>The unit of measurement is Pixels (px)</para>
+</entry>
+                            </row>
+                            <row>
+<entry>Height</entry><entry>
+<para>The unit of measurement is Pixels (px)</para>
+</entry>
+                            </row>
+                            <row>
+<entry>BoundingClientRectLeft</entry><entry>
+<para>The unit of measurement is Pixels (px)</para>
+</entry>
+                            </row>
+                            <row>
+<entry>BoundingClientRectTop</entry><entry>
+<para>The unit of measurement is Pixels (px)</para>
+</entry>
+                            </row>
+                        </tbody>
+                        </tgroup>
+                    </table>
+                    </para>
+                </formalpara>
+                </para>
+</section>
+<anchor xml:id="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1a70108df61e9a559805a772a0fc0891a1"/><section>
+    <title>WidgetBlock()</title>
+<indexterm><primary>WidgetBlock</primary><secondary>Luthetus.TextEditor.RazorLib.TextEditors.Models</secondary></indexterm>
+<indexterm><primary>Luthetus.TextEditor.RazorLib.TextEditors.Models</primary><secondary>WidgetBlock</secondary></indexterm>
+<para><computeroutput>record Luthetus.TextEditor.RazorLib.TextEditors.Models.WidgetBlock (Key&lt; WidgetBlock &gt; Key, string Title, string HtmlElementId, int LineIndex, Type ComponentType, Dictionary&lt; string, object?&gt;? ComponentParameterMap)</computeroutput></para><para>
+
+<para>This type takes up 100% of the width of a text editor row, and therefore shifts the top position of any rows that follow. </para>
+</para>
+
+<para>
+                <formalpara>
+                    <title>
+Parameters</title>
+                    <para>
+                    <table frame="all">
+                        <tgroup cols="2" align="left" colsep="1" rowsep="1">
+                        <colspec colwidth="1*"/>
+                        <colspec colwidth="4*"/>
+                        <tbody>
+                            <row>
+<entry>LineIndex</entry><entry>
+<para>When the text editor renders this line, it will then render where the line is, the corresponding widget.</para>
+</entry>
+                            </row>
+                        </tbody>
+                        </tgroup>
+                    </table>
+                    </para>
+                </formalpara>
+                So, the widget block-wise takes the UI row that the line was occupying, and the line content is moved down by the height of the widget.</para>
+
+<para>An index greater than or equal to the count of lines is permitted, to have the widget render at the bottom of the text editor.</para>
+
+<para>If the index is greater than the count of lines, then the index is taken to be the count of lines instead. </para>
+</section>
+<anchor xml:id="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1af0bf990d182f463bb30a353bfa58fc10"/><section>
+    <title>WidgetInline()</title>
+<indexterm><primary>WidgetInline</primary><secondary>Luthetus.TextEditor.RazorLib.TextEditors.Models</secondary></indexterm>
+<indexterm><primary>Luthetus.TextEditor.RazorLib.TextEditors.Models</primary><secondary>WidgetInline</secondary></indexterm>
+<para><computeroutput>record Luthetus.TextEditor.RazorLib.TextEditors.Models.WidgetInline (Key&lt; WidgetInline &gt; Key, string Title, string HtmlElementId, Type ComponentType, Dictionary&lt; string, object?&gt;? ComponentParameterMap)</computeroutput></para><para>
+
+<para>This type takes up some amount of width of a text editor row, and therefore shifts any the left position of any columns that follow. </para>
+</para>
+</section>
+<anchor xml:id="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1add745df1063319c10358ccfa47c3ca1e"/><section>
+    <title>WidgetOverlay()</title>
+<indexterm><primary>WidgetOverlay</primary><secondary>Luthetus.TextEditor.RazorLib.TextEditors.Models</secondary></indexterm>
+<indexterm><primary>Luthetus.TextEditor.RazorLib.TextEditors.Models</primary><secondary>WidgetOverlay</secondary></indexterm>
+<para><computeroutput>record Luthetus.TextEditor.RazorLib.TextEditors.Models.WidgetOverlay (Key&lt; WidgetOverlay &gt; Key, string Title, string HtmlElementId, Type ComponentType, Dictionary&lt; string, object?&gt;? ComponentParameterMap)</computeroutput></para><para>
+
+<para>This type is rendered &apos;on-top&apos; of with respect to &quot;z-index&quot; the content. </para>
+</para>
+</section>
+</section>
+<section>
+<title>Variable Documentation</title>
+<anchor xml:id="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1a47c51efe9864385e5cc288f2c6ec8426"/><section>
+    <title>charAndLineMeasurements</title>
+<indexterm><primary>charAndLineMeasurements</primary><secondary>Luthetus.TextEditor.RazorLib.TextEditors.Models</secondary></indexterm>
+<indexterm><primary>Luthetus.TextEditor.RazorLib.TextEditors.Models</primary><secondary>charAndLineMeasurements</secondary></indexterm>
+<para><computeroutput>record <link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1a435ccef09e2ba83022e8cf378fc0f690">ResourceUri</link> <link linkend="_interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_i_text_editor_service">ITextEditorService</link> IDispatcher <link linkend="_interface_luthetus_1_1_common_1_1_razor_lib_1_1_dialogs_1_1_models_1_1_i_dialog_service">IDialogService</link> IJSRuntime <link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1a479abb7968c44629c9ee977673af1973">VirtualizationResult</link>&lt;<link linkend="_struct_luthetus_1_1_text_editor_1_1_razor_lib_1_1_characters_1_1_models_1_1_rich_character">RichCharacter</link>[]&gt; <link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1af1eb54dcb15fe9154a163055233460ec">TextEditorDimensions</link> <link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1af95b7406fbb23b5589ae2f3a639b572b">ScrollbarDimensions</link> <link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1a7bb77f18da211cc58be24a6bcf54ecc3">CharAndLineMeasurements</link> Luthetus.TextEditor.RazorLib.TextEditors.Models.charAndLineMeasurements</computeroutput></para><para>
+Definition at line <link linkend="__text_editor_view_model_8cs_source_1l00040">40</link> of file <link linkend="__text_editor_view_model_8cs_source">TextEditorViewModel.cs</link>.</para>
+</section>
+<anchor xml:id="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1a41ef8059adde5ddfbf288ffddb30a7c0"/><section>
+    <title>dialogService</title>
+<indexterm><primary>dialogService</primary><secondary>Luthetus.TextEditor.RazorLib.TextEditors.Models</secondary></indexterm>
+<indexterm><primary>Luthetus.TextEditor.RazorLib.TextEditors.Models</primary><secondary>dialogService</secondary></indexterm>
+<para><computeroutput>record <link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1a435ccef09e2ba83022e8cf378fc0f690">ResourceUri</link> <link linkend="_interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_i_text_editor_service">ITextEditorService</link> IDispatcher <link linkend="_interface_luthetus_1_1_common_1_1_razor_lib_1_1_dialogs_1_1_models_1_1_i_dialog_service">IDialogService</link> Luthetus.TextEditor.RazorLib.TextEditors.Models.dialogService</computeroutput></para><para>
+Definition at line <link linkend="__text_editor_view_model_8cs_source_1l00035">35</link> of file <link linkend="__text_editor_view_model_8cs_source">TextEditorViewModel.cs</link>.</para>
+</section>
+<anchor xml:id="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1a50f035982e1c206f234851523db5cbc8"/><section>
+    <title>dispatcher</title>
+<indexterm><primary>dispatcher</primary><secondary>Luthetus.TextEditor.RazorLib.TextEditors.Models</secondary></indexterm>
+<indexterm><primary>Luthetus.TextEditor.RazorLib.TextEditors.Models</primary><secondary>dispatcher</secondary></indexterm>
+<para><computeroutput>record <link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1a435ccef09e2ba83022e8cf378fc0f690">ResourceUri</link> <link linkend="_interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_i_text_editor_service">ITextEditorService</link> IDispatcher Luthetus.TextEditor.RazorLib.TextEditors.Models.dispatcher</computeroutput></para><para>
+Definition at line <link linkend="__text_editor_view_model_8cs_source_1l00034">34</link> of file <link linkend="__text_editor_view_model_8cs_source">TextEditorViewModel.cs</link>.</para>
+</section>
+<anchor xml:id="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1a3e0df2c9204c363537f0b67bdcca579c"/><section>
+    <title>displayCommandBar</title>
+<indexterm><primary>displayCommandBar</primary><secondary>Luthetus.TextEditor.RazorLib.TextEditors.Models</secondary></indexterm>
+<indexterm><primary>Luthetus.TextEditor.RazorLib.TextEditors.Models</primary><secondary>displayCommandBar</secondary></indexterm>
+<para><computeroutput>record <link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1a435ccef09e2ba83022e8cf378fc0f690">ResourceUri</link> <link linkend="_interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_i_text_editor_service">ITextEditorService</link> IDispatcher <link linkend="_interface_luthetus_1_1_common_1_1_razor_lib_1_1_dialogs_1_1_models_1_1_i_dialog_service">IDialogService</link> IJSRuntime <link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1a479abb7968c44629c9ee977673af1973">VirtualizationResult</link>&lt;<link linkend="_struct_luthetus_1_1_text_editor_1_1_razor_lib_1_1_characters_1_1_models_1_1_rich_character">RichCharacter</link>[]&gt; <link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1af1eb54dcb15fe9154a163055233460ec">TextEditorDimensions</link> <link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1af95b7406fbb23b5589ae2f3a639b572b">ScrollbarDimensions</link> <link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1a7bb77f18da211cc58be24a6bcf54ecc3">CharAndLineMeasurements</link> bool Luthetus.TextEditor.RazorLib.TextEditors.Models.displayCommandBar</computeroutput></para><para>
+Definition at line <link linkend="__text_editor_view_model_8cs_source_1l00041">41</link> of file <link linkend="__text_editor_view_model_8cs_source">TextEditorViewModel.cs</link>.</para>
+</section>
+<anchor xml:id="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1a9b516c6b689d02d1a5f28c73390ac908"/><section>
+    <title>jsRuntime</title>
+<indexterm><primary>jsRuntime</primary><secondary>Luthetus.TextEditor.RazorLib.TextEditors.Models</secondary></indexterm>
+<indexterm><primary>Luthetus.TextEditor.RazorLib.TextEditors.Models</primary><secondary>jsRuntime</secondary></indexterm>
+<para><computeroutput>record <link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1a435ccef09e2ba83022e8cf378fc0f690">ResourceUri</link> <link linkend="_interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_i_text_editor_service">ITextEditorService</link> IDispatcher <link linkend="_interface_luthetus_1_1_common_1_1_razor_lib_1_1_dialogs_1_1_models_1_1_i_dialog_service">IDialogService</link> IJSRuntime Luthetus.TextEditor.RazorLib.TextEditors.Models.jsRuntime</computeroutput></para><para>
+Definition at line <link linkend="__text_editor_view_model_8cs_source_1l00036">36</link> of file <link linkend="__text_editor_view_model_8cs_source">TextEditorViewModel.cs</link>.</para>
+</section>
+<anchor xml:id="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1ae531f6ec8ec05e2493aabf8d17c23e4b"/><section>
+    <title>resourceUri</title>
+<indexterm><primary>resourceUri</primary><secondary>Luthetus.TextEditor.RazorLib.TextEditors.Models</secondary></indexterm>
+<indexterm><primary>Luthetus.TextEditor.RazorLib.TextEditors.Models</primary><secondary>resourceUri</secondary></indexterm>
+<para><computeroutput>record <link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1a435ccef09e2ba83022e8cf378fc0f690">ResourceUri</link> Luthetus.TextEditor.RazorLib.TextEditors.Models.resourceUri</computeroutput></para><para>
+Definition at line <link linkend="__text_editor_view_model_8cs_source_1l00032">32</link> of file <link linkend="__text_editor_view_model_8cs_source">TextEditorViewModel.cs</link>.</para>
+</section>
+<anchor xml:id="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1adff938f4a5c2b32938f2597d52525338"/><section>
+    <title>scrollbarDimensions</title>
+<indexterm><primary>scrollbarDimensions</primary><secondary>Luthetus.TextEditor.RazorLib.TextEditors.Models</secondary></indexterm>
+<indexterm><primary>Luthetus.TextEditor.RazorLib.TextEditors.Models</primary><secondary>scrollbarDimensions</secondary></indexterm>
+<para><computeroutput>record <link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1a435ccef09e2ba83022e8cf378fc0f690">ResourceUri</link> <link linkend="_interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_i_text_editor_service">ITextEditorService</link> IDispatcher <link linkend="_interface_luthetus_1_1_common_1_1_razor_lib_1_1_dialogs_1_1_models_1_1_i_dialog_service">IDialogService</link> IJSRuntime <link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1a479abb7968c44629c9ee977673af1973">VirtualizationResult</link>&lt;<link linkend="_struct_luthetus_1_1_text_editor_1_1_razor_lib_1_1_characters_1_1_models_1_1_rich_character">RichCharacter</link>[]&gt; <link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1af1eb54dcb15fe9154a163055233460ec">TextEditorDimensions</link> <link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1af95b7406fbb23b5589ae2f3a639b572b">ScrollbarDimensions</link> Luthetus.TextEditor.RazorLib.TextEditors.Models.scrollbarDimensions</computeroutput></para><para>
+Definition at line <link linkend="__text_editor_view_model_8cs_source_1l00039">39</link> of file <link linkend="__text_editor_view_model_8cs_source">TextEditorViewModel.cs</link>.</para>
+</section>
+<anchor xml:id="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1aa88b6eb61932a3f0562e94da59125234"/><section>
+    <title>textEditorDimensions</title>
+<indexterm><primary>textEditorDimensions</primary><secondary>Luthetus.TextEditor.RazorLib.TextEditors.Models</secondary></indexterm>
+<indexterm><primary>Luthetus.TextEditor.RazorLib.TextEditors.Models</primary><secondary>textEditorDimensions</secondary></indexterm>
+<para><computeroutput>record <link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1a435ccef09e2ba83022e8cf378fc0f690">ResourceUri</link> <link linkend="_interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_i_text_editor_service">ITextEditorService</link> IDispatcher <link linkend="_interface_luthetus_1_1_common_1_1_razor_lib_1_1_dialogs_1_1_models_1_1_i_dialog_service">IDialogService</link> IJSRuntime <link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1a479abb7968c44629c9ee977673af1973">VirtualizationResult</link>&lt;<link linkend="_struct_luthetus_1_1_text_editor_1_1_razor_lib_1_1_characters_1_1_models_1_1_rich_character">RichCharacter</link>[]&gt; <link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1af1eb54dcb15fe9154a163055233460ec">TextEditorDimensions</link> Luthetus.TextEditor.RazorLib.TextEditors.Models.textEditorDimensions</computeroutput></para><para>
+Definition at line <link linkend="__text_editor_view_model_8cs_source_1l00038">38</link> of file <link linkend="__text_editor_view_model_8cs_source">TextEditorViewModel.cs</link>.</para>
+</section>
+<anchor xml:id="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1aecfb76d19da117c025734259242d144d"/><section>
+    <title>textEditorService</title>
+<indexterm><primary>textEditorService</primary><secondary>Luthetus.TextEditor.RazorLib.TextEditors.Models</secondary></indexterm>
+<indexterm><primary>Luthetus.TextEditor.RazorLib.TextEditors.Models</primary><secondary>textEditorService</secondary></indexterm>
+<para><computeroutput>record <link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1a435ccef09e2ba83022e8cf378fc0f690">ResourceUri</link> <link linkend="_interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_i_text_editor_service">ITextEditorService</link> Luthetus.TextEditor.RazorLib.TextEditors.Models.textEditorService</computeroutput></para><para>
+Definition at line <link linkend="__text_editor_view_model_8cs_source_1l00033">33</link> of file <link linkend="__text_editor_view_model_8cs_source">TextEditorViewModel.cs</link>.</para>
+</section>
+<anchor xml:id="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1aa2a2da032900659e3cf98e4b28fc476d"/><section>
+    <title>TextEditorViewModel</title>
+<indexterm><primary>TextEditorViewModel</primary><secondary>Luthetus.TextEditor.RazorLib.TextEditors.Models</secondary></indexterm>
+<indexterm><primary>Luthetus.TextEditor.RazorLib.TextEditors.Models</primary><secondary>TextEditorViewModel</secondary></indexterm>
+<para><computeroutput>record Luthetus.TextEditor.RazorLib.TextEditors.Models.TextEditorViewModel<computeroutput>[sealed]</computeroutput></computeroutput></para><para>
+
+<para>Stores the state of the user interface. For example, the user&apos;s <link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_cursors_1_1_models_1a8373e854ca1ddf152a3b5372ea18c20b">TextEditorCursor</link> instances are stored here.<?linebreak?><?linebreak?>. </para>
+</para>
+
+<para>Each <link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1aa2a2da032900659e3cf98e4b28fc476d">TextEditorViewModel</link> has a unique underlying <link linkend="_class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1_1_text_editor_model">TextEditorModel</link>. Therefore, if one has a <link linkend="_class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1_1_text_editor_model">TextEditorModel</link> of a text file named &quot;myHomework.txt&quot;, then arbitrary amount of <link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1aa2a2da032900659e3cf98e4b28fc476d">TextEditorViewModel</link>(s) can reference that <link linkend="_class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1_1_text_editor_model">TextEditorModel</link>.<?linebreak?><?linebreak?></para>
+
+<para>For example, maybe one has a main text editor, but also a peek window open of the same underlying <link linkend="_class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1_1_text_editor_model">TextEditorModel</link>. The main text editor is one <link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1aa2a2da032900659e3cf98e4b28fc476d">TextEditorViewModel</link> and the peek window is a separate <link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1aa2a2da032900659e3cf98e4b28fc476d">TextEditorViewModel</link>. Both of those <link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1aa2a2da032900659e3cf98e4b28fc476d">TextEditorViewModel</link>(s) are referencing the same <link linkend="_class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1_1_text_editor_model">TextEditorModel</link>. Therefore typing into the peek window will also result in the main text editor re-rendering with the updated text and vice versa. </para>
+<para>
+Definition at line <link linkend="__text_editor_view_model_8cs_source_1l00028">28</link> of file <link linkend="__text_editor_view_model_8cs_source">TextEditorViewModel.cs</link>.</para>
+</section>
+<anchor xml:id="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1a78bf6f6b4690f819d2536c2b3177ebde"/><section>
+    <title>virtualizationResult</title>
+<indexterm><primary>virtualizationResult</primary><secondary>Luthetus.TextEditor.RazorLib.TextEditors.Models</secondary></indexterm>
+<indexterm><primary>Luthetus.TextEditor.RazorLib.TextEditors.Models</primary><secondary>virtualizationResult</secondary></indexterm>
+<para><computeroutput>record <link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1a435ccef09e2ba83022e8cf378fc0f690">ResourceUri</link> <link linkend="_interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_i_text_editor_service">ITextEditorService</link> IDispatcher <link linkend="_interface_luthetus_1_1_common_1_1_razor_lib_1_1_dialogs_1_1_models_1_1_i_dialog_service">IDialogService</link> IJSRuntime <link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1a479abb7968c44629c9ee977673af1973">VirtualizationResult</link>&lt;<link linkend="_struct_luthetus_1_1_text_editor_1_1_razor_lib_1_1_characters_1_1_models_1_1_rich_character">RichCharacter</link>[]&gt; Luthetus.TextEditor.RazorLib.TextEditors.Models.virtualizationResult</computeroutput></para><para>
+Definition at line <link linkend="__text_editor_view_model_8cs_source_1l00037">37</link> of file <link linkend="__text_editor_view_model_8cs_source">TextEditorViewModel.cs</link>.</para>
+</section>
+</section>
+</section>

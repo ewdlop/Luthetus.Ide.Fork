@@ -1,0 +1,4 @@
+var class_luthetus_1_1_ide_1_1_tests_1_1_basis_1_1_shareds_1_1_models_1_1_background_task_dialog_model_tests =
+[
+    [ "Constructor", "class_luthetus_1_1_ide_1_1_tests_1_1_basis_1_1_shareds_1_1_models_1_1_background_task_dialog_model_tests.html#af7c792fbf869b912420c9c11c9a3205b", null ]
+];

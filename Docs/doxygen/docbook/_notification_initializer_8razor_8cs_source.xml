@@ -1,0 +1,59 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="__notification_initializer_8razor_8cs_source" xml:lang="en-US">
+<title>NotificationInitializer.razor.cs</title>
+<indexterm><primary>Source/Lib/Common/Notifications/Displays/NotificationInitializer.razor.cs</primary></indexterm>
+Go to the documentation of this file.<programlisting linenumbering="unnumbered"><anchor xml:id="__notification_initializer_8razor_8cs_source_1l00001"/>00001 <emphasis role="keyword">using&#32;</emphasis>Microsoft.AspNetCore.Components;
+<anchor xml:id="__notification_initializer_8razor_8cs_source_1l00002"/>00002 <emphasis role="keyword">using&#32;</emphasis>Fluxor;
+<anchor xml:id="__notification_initializer_8razor_8cs_source_1l00003"/>00003 <emphasis role="keyword">using&#32;</emphasis>Fluxor.Blazor.Web.Components;
+<anchor xml:id="__notification_initializer_8razor_8cs_source_1l00004"/>00004 <emphasis role="keyword">using&#32;</emphasis><link linkend="_namespace_luthetus_1_1_common_1_1_razor_lib_1_1_notifications_1_1_states">Luthetus.Common.RazorLib.Notifications.States</link>;
+<anchor xml:id="__notification_initializer_8razor_8cs_source_1l00005"/>00005 <emphasis role="keyword">using&#32;</emphasis><link linkend="_namespace_luthetus_1_1_common_1_1_razor_lib_1_1_contexts_1_1_displays">Luthetus.Common.RazorLib.Contexts.Displays</link>;
+<anchor xml:id="__notification_initializer_8razor_8cs_source_1l00006"/>00006 <emphasis role="keyword">using&#32;</emphasis><link linkend="_namespace_luthetus_1_1_common_1_1_razor_lib_1_1_dynamics_1_1_models">Luthetus.Common.RazorLib.Dynamics.Models</link>;
+<anchor xml:id="__notification_initializer_8razor_8cs_source_1l00007"/>00007 
+<anchor xml:id="__notification_initializer_8razor_8cs_source_1l00008"/>00008 <emphasis role="keyword">namespace&#32;</emphasis><link linkend="_namespace_luthetus_1_1_common_1_1_razor_lib_1_1_notifications_1_1_displays">Luthetus.Common.RazorLib.Notifications.Displays</link>;
+<anchor xml:id="__notification_initializer_8razor_8cs_source_1l00009"/>00009 
+<anchor xml:id="__notification_initializer_8razor_8cs_source_1l00010"/><link linkend="_class_luthetus_1_1_common_1_1_razor_lib_1_1_notifications_1_1_displays_1_1_notification_initializer">00010</link> <emphasis role="keyword">public</emphasis>&#32;<emphasis role="keyword">partial&#32;class&#32;</emphasis><link linkend="_class_luthetus_1_1_common_1_1_razor_lib_1_1_notifications_1_1_displays_1_1_notification_initializer">NotificationInitializer</link>&#32;:&#32;FluxorComponent
+<anchor xml:id="__notification_initializer_8razor_8cs_source_1l00011"/>00011 {
+<anchor xml:id="__notification_initializer_8razor_8cs_source_1l00012"/>00012 &#32;&#32;&#32;&#32;[Inject]
+<anchor xml:id="__notification_initializer_8razor_8cs_source_1l00013"/>00013 &#32;&#32;&#32;&#32;<emphasis role="keyword">private</emphasis>&#32;IState&lt;NotificationState&gt;&#32;NotificationStateWrap&#32;{&#32;<emphasis role="keyword">get</emphasis>;&#32;<emphasis role="keyword">set</emphasis>;&#32;}&#32;=&#32;<emphasis role="keyword">null</emphasis>!;
+<anchor xml:id="__notification_initializer_8razor_8cs_source_1l00014"/>00014 &#32;&#32;&#32;&#32;[Inject]
+<anchor xml:id="__notification_initializer_8razor_8cs_source_1l00015"/>00015 &#32;&#32;&#32;&#32;<emphasis role="keyword">private</emphasis>&#32;IDispatcher&#32;Dispatcher&#32;{&#32;<emphasis role="keyword">get</emphasis>;&#32;<emphasis role="keyword">set</emphasis>;&#32;}&#32;=&#32;<emphasis role="keyword">null</emphasis>!;
+<anchor xml:id="__notification_initializer_8razor_8cs_source_1l00016"/>00016 
+<anchor xml:id="__notification_initializer_8razor_8cs_source_1l00017"/>00017 &#32;&#32;&#32;&#32;<emphasis role="keyword">private</emphasis>&#32;<emphasis role="keywordtype">bool</emphasis>&#32;_disposedValue;
+<anchor xml:id="__notification_initializer_8razor_8cs_source_1l00018"/>00018 &#32;&#32;&#32;&#32;<emphasis role="keyword">private</emphasis>&#32;<link linkend="_class_luthetus_1_1_common_1_1_razor_lib_1_1_contexts_1_1_displays_1_1_context_boundary">ContextBoundary</link>?&#32;_notificationContextBoundary;
+<anchor xml:id="__notification_initializer_8razor_8cs_source_1l00019"/>00019 &#32;&#32;&#32;&#32;
+<anchor xml:id="__notification_initializer_8razor_8cs_source_1l00020"/>00020 &#32;&#32;&#32;&#32;<emphasis role="keyword">private</emphasis>&#32;Task&#32;HandleOnFocusIn(<link linkend="_interface_luthetus_1_1_common_1_1_razor_lib_1_1_dynamics_1_1_models_1_1_i_notification">INotification</link>&#32;notification)
+<anchor xml:id="__notification_initializer_8razor_8cs_source_1l00021"/>00021 &#32;&#32;&#32;&#32;{
+<anchor xml:id="__notification_initializer_8razor_8cs_source_1l00022"/>00022 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;var&#32;localNotificationContextBoundary&#32;=&#32;_notificationContextBoundary;
+<anchor xml:id="__notification_initializer_8razor_8cs_source_1l00023"/>00023 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;
+<anchor xml:id="__notification_initializer_8razor_8cs_source_1l00024"/>00024 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">if</emphasis>&#32;(localNotificationContextBoundary&#32;is&#32;not&#32;<emphasis role="keyword">null</emphasis>)
+<anchor xml:id="__notification_initializer_8razor_8cs_source_1l00025"/>00025 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;localNotificationContextBoundary.<link linkend="_class_luthetus_1_1_common_1_1_razor_lib_1_1_contexts_1_1_displays_1_1_context_boundary_1a467a1e23484a300a881ac0d6dd9e6736">HandleOnFocusIn</link>();
+<anchor xml:id="__notification_initializer_8razor_8cs_source_1l00026"/>00026 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;
+<anchor xml:id="__notification_initializer_8razor_8cs_source_1l00027"/>00027 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;Task.CompletedTask;
+<anchor xml:id="__notification_initializer_8razor_8cs_source_1l00028"/>00028 &#32;&#32;&#32;&#32;}
+<anchor xml:id="__notification_initializer_8razor_8cs_source_1l00029"/>00029 &#32;&#32;&#32;&#32;
+<anchor xml:id="__notification_initializer_8razor_8cs_source_1l00030"/>00030 &#32;&#32;&#32;&#32;<emphasis role="keyword">private</emphasis>&#32;Task&#32;HandleOnFocusOut(<link linkend="_interface_luthetus_1_1_common_1_1_razor_lib_1_1_dynamics_1_1_models_1_1_i_notification">INotification</link>&#32;notification)
+<anchor xml:id="__notification_initializer_8razor_8cs_source_1l00031"/>00031 &#32;&#32;&#32;&#32;{
+<anchor xml:id="__notification_initializer_8razor_8cs_source_1l00032"/>00032 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;Task.CompletedTask;
+<anchor xml:id="__notification_initializer_8razor_8cs_source_1l00033"/>00033 &#32;&#32;&#32;&#32;}
+<anchor xml:id="__notification_initializer_8razor_8cs_source_1l00034"/>00034 &#32;&#32;&#32;&#32;
+<anchor xml:id="__notification_initializer_8razor_8cs_source_1l00035"/><link linkend="_class_luthetus_1_1_common_1_1_razor_lib_1_1_notifications_1_1_displays_1_1_notification_initializer_1a48c3777b876a9bafdcda6343f6aaec30">00035</link> &#32;&#32;&#32;&#32;<emphasis role="keyword">protected</emphasis>&#32;<emphasis role="keyword">override</emphasis>&#32;ValueTask&#32;<link linkend="_class_luthetus_1_1_common_1_1_razor_lib_1_1_notifications_1_1_displays_1_1_notification_initializer_1a48c3777b876a9bafdcda6343f6aaec30">DisposeAsyncCore</link>(<emphasis role="keywordtype">bool</emphasis>&#32;disposing)
+<anchor xml:id="__notification_initializer_8razor_8cs_source_1l00036"/>00036 &#32;&#32;&#32;&#32;{
+<anchor xml:id="__notification_initializer_8razor_8cs_source_1l00037"/>00037 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">if</emphasis>&#32;(!_disposedValue)
+<anchor xml:id="__notification_initializer_8razor_8cs_source_1l00038"/>00038 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;{
+<anchor xml:id="__notification_initializer_8razor_8cs_source_1l00039"/>00039 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">if</emphasis>&#32;(disposing)
+<anchor xml:id="__notification_initializer_8razor_8cs_source_1l00040"/>00040 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;{
+<anchor xml:id="__notification_initializer_8razor_8cs_source_1l00041"/>00041 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;var&#32;notificationState&#32;=&#32;NotificationStateWrap.Value;
+<anchor xml:id="__notification_initializer_8razor_8cs_source_1l00042"/>00042 
+<anchor xml:id="__notification_initializer_8razor_8cs_source_1l00043"/>00043 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">foreach</emphasis>&#32;(var&#32;notification&#32;<emphasis role="keywordflow">in</emphasis>&#32;notificationState.DefaultList)
+<anchor xml:id="__notification_initializer_8razor_8cs_source_1l00044"/>00044 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;{
+<anchor xml:id="__notification_initializer_8razor_8cs_source_1l00045"/>00045 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;Dispatcher.Dispatch(<emphasis role="keyword">new</emphasis>&#32;<link linkend="_namespace_luthetus_1_1_common_1_1_razor_lib_1_1_notifications_1_1_states_1a49a95cc8dd6ffc82466513f5bef2d2ad">NotificationState</link>.DisposeAction(notification.DynamicViewModelKey));
+<anchor xml:id="__notification_initializer_8razor_8cs_source_1l00046"/>00046 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;}
+<anchor xml:id="__notification_initializer_8razor_8cs_source_1l00047"/>00047 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;}
+<anchor xml:id="__notification_initializer_8razor_8cs_source_1l00048"/>00048 
+<anchor xml:id="__notification_initializer_8razor_8cs_source_1l00049"/>00049 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;_disposedValue&#32;=&#32;<emphasis role="keyword">true</emphasis>;
+<anchor xml:id="__notification_initializer_8razor_8cs_source_1l00050"/>00050 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;}
+<anchor xml:id="__notification_initializer_8razor_8cs_source_1l00051"/>00051 
+<anchor xml:id="__notification_initializer_8razor_8cs_source_1l00052"/>00052 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;base.DisposeAsyncCore(disposing);
+<anchor xml:id="__notification_initializer_8razor_8cs_source_1l00053"/>00053 &#32;&#32;&#32;&#32;}
+<anchor xml:id="__notification_initializer_8razor_8cs_source_1l00054"/>00054 }
+</programlisting></section>

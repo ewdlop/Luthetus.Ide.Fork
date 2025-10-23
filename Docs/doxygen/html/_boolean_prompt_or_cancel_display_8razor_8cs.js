@@ -1,0 +1,4 @@
+var _boolean_prompt_or_cancel_display_8razor_8cs =
+[
+    [ "Luthetus.Ide.RazorLib.FormsGenerics.Displays.BooleanPromptOrCancelDisplay", "class_luthetus_1_1_ide_1_1_razor_lib_1_1_forms_generics_1_1_displays_1_1_boolean_prompt_or_cancel_display.html", "class_luthetus_1_1_ide_1_1_razor_lib_1_1_forms_generics_1_1_displays_1_1_boolean_prompt_or_cancel_display" ]
+];

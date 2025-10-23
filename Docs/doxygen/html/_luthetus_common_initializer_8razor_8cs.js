@@ -1,0 +1,4 @@
+var _luthetus_common_initializer_8razor_8cs =
+[
+    [ "Luthetus.Common.RazorLib.Installations.Displays.LuthetusCommonInitializer", "class_luthetus_1_1_common_1_1_razor_lib_1_1_installations_1_1_displays_1_1_luthetus_common_initializer.html", "class_luthetus_1_1_common_1_1_razor_lib_1_1_installations_1_1_displays_1_1_luthetus_common_initializer" ]
+];

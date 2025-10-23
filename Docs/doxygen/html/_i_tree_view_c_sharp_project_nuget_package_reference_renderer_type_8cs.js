@@ -1,0 +1,4 @@
+var _i_tree_view_c_sharp_project_nuget_package_reference_renderer_type_8cs =
+[
+    [ "Luthetus.Extensions.DotNet.ComponentRenderers.Models.ITreeViewCSharpProjectNugetPackageReferenceRendererType", "interface_luthetus_1_1_extensions_1_1_dot_net_1_1_component_renderers_1_1_models_1_1_i_tree_view6aac842f8c5f40c0b22a3f5bddf0a252.html", "interface_luthetus_1_1_extensions_1_1_dot_net_1_1_component_renderers_1_1_models_1_1_i_tree_view6aac842f8c5f40c0b22a3f5bddf0a252" ]
+];

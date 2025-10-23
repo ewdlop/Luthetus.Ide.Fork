@@ -1,0 +1,26 @@
+\doxysection{Type\+Script\+Compiler\+Service.\+cs}
+\hypertarget{_type_script_compiler_service_8cs_source}{}\label{_type_script_compiler_service_8cs_source}\index{Source/Lib/CompilerServices/TypeScript/TypeScriptCompilerService.cs@{Source/Lib/CompilerServices/TypeScript/TypeScriptCompilerService.cs}}
+\mbox{\hyperlink{_type_script_compiler_service_8cs}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{_type_script_compiler_service_8cs_source_l00001}00001\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib}{Luthetus.TextEditor.RazorLib}};}
+\DoxyCodeLine{\Hypertarget{_type_script_compiler_service_8cs_source_l00002}00002\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_implementations}{Luthetus.TextEditor.RazorLib.CompilerServices.Implementations}};}
+\DoxyCodeLine{\Hypertarget{_type_script_compiler_service_8cs_source_l00003}00003\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_luthetus_1_1_compiler_services_1_1_type_script_1_1_syntax_actors}{Luthetus.CompilerServices.TypeScript.SyntaxActors}};}
+\DoxyCodeLine{\Hypertarget{_type_script_compiler_service_8cs_source_l00004}00004\ }
+\DoxyCodeLine{\Hypertarget{_type_script_compiler_service_8cs_source_l00005}00005\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespace_luthetus_1_1_compiler_services_1_1_type_script}{Luthetus.CompilerServices.TypeScript}};}
+\DoxyCodeLine{\Hypertarget{_type_script_compiler_service_8cs_source_l00006}00006\ }
+\DoxyCodeLine{\Hypertarget{_type_script_compiler_service_8cs_source_l00007}\mbox{\hyperlink{class_luthetus_1_1_compiler_services_1_1_type_script_1_1_type_script_compiler_service}{00007}}\ \textcolor{keyword}{public}\ \textcolor{keyword}{sealed}\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_luthetus_1_1_compiler_services_1_1_type_script_1_1_type_script_compiler_service_acdda3a1d223ede269520403496607075}{TypeScriptCompilerService}}\ :\ \mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_implementations_1_1_compiler_service_a5b5123cac467989f95d3cce9f095b720}{CompilerService}}}
+\DoxyCodeLine{\Hypertarget{_type_script_compiler_service_8cs_source_l00008}00008\ \{}
+\DoxyCodeLine{\Hypertarget{_type_script_compiler_service_8cs_source_l00009}\mbox{\hyperlink{class_luthetus_1_1_compiler_services_1_1_type_script_1_1_type_script_compiler_service_acdda3a1d223ede269520403496607075}{00009}}\ \ \ \ \ \textcolor{keyword}{public}\ \mbox{\hyperlink{class_luthetus_1_1_compiler_services_1_1_type_script_1_1_type_script_compiler_service_acdda3a1d223ede269520403496607075}{TypeScriptCompilerService}}(\mbox{\hyperlink{interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_i_text_editor_service}{ITextEditorService}}\ textEditorService)}
+\DoxyCodeLine{\Hypertarget{_type_script_compiler_service_8cs_source_l00010}00010\ \ \ \ \ \ \ \ \ :\ base(textEditorService)}
+\DoxyCodeLine{\Hypertarget{_type_script_compiler_service_8cs_source_l00011}00011\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_type_script_compiler_service_8cs_source_l00012}00012\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_implementations_1_1_compiler_service_a7cdeaada9bb0cceb5ebc1dfdc93d7bf5}{\_compilerServiceOptions}}\ =\ \textcolor{keyword}{new}()}
+\DoxyCodeLine{\Hypertarget{_type_script_compiler_service_8cs_source_l00013}00013\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_type_script_compiler_service_8cs_source_l00014}00014\ \ \ \ \ \ \ \ \ \ \ \ \ RegisterResourceFunc\ =\ resourceUri\ =>\ \textcolor{keyword}{new}\ \mbox{\hyperlink{class_luthetus_1_1_compiler_services_1_1_type_script_1_1_type_script_resource}{TypeScriptResource}}(resourceUri,\ \textcolor{keyword}{this}),}
+\DoxyCodeLine{\Hypertarget{_type_script_compiler_service_8cs_source_l00015}00015\ \ \ \ \ \ \ \ \ \ \ \ \ GetLexerFunc\ =\ (resource,\ sourceText)\ =>\ \textcolor{keyword}{new}\ \mbox{\hyperlink{class_luthetus_1_1_compiler_services_1_1_type_script_1_1_syntax_actors_1_1_text_editor_type_script_lexer}{TextEditorTypeScriptLexer}}(resource.ResourceUri,\ sourceText),}
+\DoxyCodeLine{\Hypertarget{_type_script_compiler_service_8cs_source_l00016}00016\ \ \ \ \ \ \ \ \ \ \ \ \ GetParserFunc\ =\ (resource,\ lexer)\ =>\ \textcolor{keyword}{new}\ \mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_implementations_1_1_parser}{Parser}}(lexer),}
+\DoxyCodeLine{\Hypertarget{_type_script_compiler_service_8cs_source_l00017}00017\ \ \ \ \ \ \ \ \ \ \ \ \ GetBinderFunc\ =\ (resource,\ parser)\ =>\ \mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_implementations_1_1_compiler_service_aced54ac4d1ff9eb5836ad2b777af5d8e}{Binder}}}
+\DoxyCodeLine{\Hypertarget{_type_script_compiler_service_8cs_source_l00018}00018\ \ \ \ \ \ \ \ \ \};}
+\DoxyCodeLine{\Hypertarget{_type_script_compiler_service_8cs_source_l00019}00019\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_type_script_compiler_service_8cs_source_l00020}00020\ \}}
+
+\end{DoxyCode}

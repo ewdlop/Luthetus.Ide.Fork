@@ -1,0 +1,51 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
+  <compounddef id="_common_2_custom_events_2_models_2_event_utils_8cs" kind="file" language="C#">
+    <compoundname>EventUtils.cs</compoundname>
+    <innerclass refid="class_luthetus_1_1_common_1_1_razor_lib_1_1_custom_events_1_1_models_1_1_event_util" prot="public">Luthetus::Common::RazorLib::CustomEvents::Models::EventUtil</innerclass>
+    <innernamespace refid="namespace_luthetus">Luthetus</innernamespace>
+    <innernamespace refid="namespace_luthetus_1_1_common">Luthetus::Common</innernamespace>
+    <innernamespace refid="namespace_luthetus_1_1_common_1_1_razor_lib">Luthetus::Common::RazorLib</innernamespace>
+    <innernamespace refid="namespace_luthetus_1_1_common_1_1_razor_lib_1_1_custom_events">Luthetus::Common::RazorLib::CustomEvents</innernamespace>
+    <innernamespace refid="namespace_luthetus_1_1_common_1_1_razor_lib_1_1_custom_events_1_1_models">Luthetus::Common::RazorLib::CustomEvents::Models</innernamespace>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="keyword">using<sp/></highlight><highlight class="normal">Microsoft.AspNetCore.Components;</highlight></codeline>
+<codeline lineno="2"><highlight class="normal"></highlight></codeline>
+<codeline lineno="3"><highlight class="normal"></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal"><ref refid="namespace_luthetus_1_1_common_1_1_razor_lib_1_1_custom_events_1_1_models" kindref="compound">Luthetus.Common.RazorLib.CustomEvents.Models</ref>;</highlight></codeline>
+<codeline lineno="4"><highlight class="normal"></highlight></codeline>
+<codeline lineno="15"><highlight class="normal"></highlight><highlight class="keyword">public</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal">EventUtil</highlight></codeline>
+<codeline lineno="16"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="17"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/>Action<sp/>AsNonRenderingEventHandler(Action<sp/>callback)</highlight></codeline>
+<codeline lineno="18"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>=&gt;<sp/></highlight><highlight class="keyword">new</highlight><highlight class="normal"><sp/>SyncReceiver(callback).Invoke;</highlight></codeline>
+<codeline lineno="19"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/>Action&lt;TValue&gt;<sp/>AsNonRenderingEventHandler&lt;TValue&gt;(</highlight></codeline>
+<codeline lineno="20"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Action&lt;TValue&gt;<sp/>callback)</highlight></codeline>
+<codeline lineno="21"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>=&gt;<sp/></highlight><highlight class="keyword">new</highlight><highlight class="normal"><sp/>SyncReceiver&lt;TValue&gt;(callback).Invoke;</highlight></codeline>
+<codeline lineno="22"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/>Func&lt;Task&gt;<sp/>AsNonRenderingEventHandler(Func&lt;Task&gt;<sp/>callback)</highlight></codeline>
+<codeline lineno="23"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>=&gt;<sp/></highlight><highlight class="keyword">new</highlight><highlight class="normal"><sp/>AsyncReceiver(callback).Invoke;</highlight></codeline>
+<codeline lineno="24"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/>Func&lt;TValue,<sp/>Task&gt;<sp/>AsNonRenderingEventHandler&lt;TValue&gt;(</highlight></codeline>
+<codeline lineno="25"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Func&lt;TValue,<sp/>Task&gt;<sp/>callback)</highlight></codeline>
+<codeline lineno="26"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>=&gt;<sp/></highlight><highlight class="keyword">new</highlight><highlight class="normal"><sp/>AsyncReceiver&lt;TValue&gt;(callback).Invoke;</highlight></codeline>
+<codeline lineno="27"><highlight class="normal"></highlight></codeline>
+<codeline lineno="28"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">private</highlight><highlight class="normal"><sp/>record<sp/>SyncReceiver(Action<sp/>callback)<sp/></highlight></codeline>
+<codeline lineno="29"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>:<sp/>ReceiverBase<sp/>{<sp/>public<sp/>void<sp/>Invoke()<sp/>=&gt;<sp/>callback();<sp/>}</highlight></codeline>
+<codeline lineno="30"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">private</highlight><highlight class="normal"><sp/>record<sp/>SyncReceiver&lt;T&gt;(Action&lt;T&gt;<sp/>callback)<sp/></highlight></codeline>
+<codeline lineno="31"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>:<sp/>ReceiverBase<sp/>{<sp/>public<sp/>void<sp/>Invoke(T<sp/>arg)<sp/>=&gt;<sp/>callback(arg);<sp/>}</highlight></codeline>
+<codeline lineno="32"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">private</highlight><highlight class="normal"><sp/>record<sp/>AsyncReceiver(Func&lt;Task&gt;<sp/>callback)<sp/></highlight></codeline>
+<codeline lineno="33"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>:<sp/>ReceiverBase<sp/>{<sp/>public<sp/>Task<sp/>Invoke()<sp/>=&gt;<sp/>callback();<sp/>}</highlight></codeline>
+<codeline lineno="34"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">private</highlight><highlight class="normal"><sp/>record<sp/>AsyncReceiver&lt;T&gt;(Func&lt;T,<sp/>Task&gt;<sp/>callback)<sp/></highlight></codeline>
+<codeline lineno="35"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>:<sp/>ReceiverBase<sp/>{<sp/>public<sp/>Task<sp/>Invoke(T<sp/>arg)<sp/>=&gt;<sp/>callback(arg);<sp/>}</highlight></codeline>
+<codeline lineno="36"><highlight class="normal"></highlight></codeline>
+<codeline lineno="37"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">private</highlight><highlight class="normal"><sp/>record<sp/>ReceiverBase<sp/>:<sp/>IHandleEvent</highlight></codeline>
+<codeline lineno="38"><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="39"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal"><sp/>Task<sp/>HandleEventAsync(EventCallbackWorkItem<sp/>item,<sp/></highlight><highlight class="keywordtype">object</highlight><highlight class="normal"><sp/>arg)<sp/>=&gt;<sp/></highlight></codeline>
+<codeline lineno="40"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>item.InvokeAsync(arg);</highlight></codeline>
+<codeline lineno="41"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="42"><highlight class="normal">}</highlight></codeline>
+    </programlisting>
+    <location file="Source/Lib/Common/CustomEvents/Models/EventUtils.cs"/>
+  </compounddef>
+</doxygen>

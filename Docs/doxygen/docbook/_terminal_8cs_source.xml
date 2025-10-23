@@ -1,0 +1,222 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="__terminal_8cs_source" xml:lang="en-US">
+<title>Terminal.cs</title>
+<indexterm><primary>Source/Lib/Ide/Ide.RazorLib/Terminals/Models/Terminal.cs</primary></indexterm>
+Go to the documentation of this file.<programlisting linenumbering="unnumbered"><anchor xml:id="__terminal_8cs_source_1l00001"/>00001 <emphasis role="keyword">using&#32;</emphasis>System.Reactive.Linq;
+<anchor xml:id="__terminal_8cs_source_1l00002"/>00002 <emphasis role="keyword">using&#32;</emphasis>CliWrap;
+<anchor xml:id="__terminal_8cs_source_1l00003"/>00003 <emphasis role="keyword">using&#32;</emphasis>CliWrap.EventStream;
+<anchor xml:id="__terminal_8cs_source_1l00004"/>00004 <emphasis role="keyword">using&#32;</emphasis>Fluxor;
+<anchor xml:id="__terminal_8cs_source_1l00005"/>00005 <emphasis role="keyword">using&#32;</emphasis><link linkend="_namespace_luthetus_1_1_common_1_1_razor_lib_1_1_background_tasks_1_1_models">Luthetus.Common.RazorLib.BackgroundTasks.Models</link>;
+<anchor xml:id="__terminal_8cs_source_1l00006"/>00006 <emphasis role="keyword">using&#32;</emphasis><link linkend="_namespace_luthetus_1_1_common_1_1_razor_lib_1_1_component_renderers_1_1_models">Luthetus.Common.RazorLib.ComponentRenderers.Models</link>;
+<anchor xml:id="__terminal_8cs_source_1l00007"/>00007 <emphasis role="keyword">using&#32;</emphasis><link linkend="_namespace_luthetus_1_1_common_1_1_razor_lib_1_1_keys_1_1_models">Luthetus.Common.RazorLib.Keys.Models</link>;
+<anchor xml:id="__terminal_8cs_source_1l00008"/>00008 <emphasis role="keyword">using&#32;</emphasis><link linkend="_namespace_luthetus_1_1_common_1_1_razor_lib_1_1_notifications_1_1_models">Luthetus.Common.RazorLib.Notifications.Models</link>;
+<anchor xml:id="__terminal_8cs_source_1l00009"/>00009 <emphasis role="keyword">using&#32;</emphasis><link linkend="_namespace_luthetus_1_1_common_1_1_razor_lib_1_1_reactives_1_1_models">Luthetus.Common.RazorLib.Reactives.Models</link>;
+<anchor xml:id="__terminal_8cs_source_1l00010"/>00010 <emphasis role="keyword">using&#32;</emphasis><link linkend="_namespace_luthetus_1_1_ide_1_1_razor_lib_1_1_terminals_1_1_states">Luthetus.Ide.RazorLib.Terminals.States</link>;
+<anchor xml:id="__terminal_8cs_source_1l00011"/>00011 
+<anchor xml:id="__terminal_8cs_source_1l00012"/>00012 <emphasis role="keyword">namespace&#32;</emphasis><link linkend="_namespace_luthetus_1_1_ide_1_1_razor_lib_1_1_terminals_1_1_models">Luthetus.Ide.RazorLib.Terminals.Models</link>;
+<anchor xml:id="__terminal_8cs_source_1l00013"/>00013 
+<anchor xml:id="__terminal_8cs_source_1l00017"/><link linkend="_class_luthetus_1_1_ide_1_1_razor_lib_1_1_terminals_1_1_models_1_1_terminal">00017</link> <emphasis role="keyword">public</emphasis>&#32;<emphasis role="keyword">class&#32;</emphasis><link linkend="_class_luthetus_1_1_ide_1_1_razor_lib_1_1_terminals_1_1_models_1_1_terminal_1a12c360db22182f6a45166b5e9337e211">Terminal</link>&#32;:&#32;<link linkend="_interface_luthetus_1_1_ide_1_1_razor_lib_1_1_terminals_1_1_models_1_1_i_terminal">ITerminal</link>
+<anchor xml:id="__terminal_8cs_source_1l00018"/>00018 {
+<anchor xml:id="__terminal_8cs_source_1l00019"/>00019 &#32;&#32;&#32;&#32;<emphasis role="keyword">private</emphasis>&#32;readonly&#32;<link linkend="_interface_luthetus_1_1_common_1_1_razor_lib_1_1_background_tasks_1_1_models_1_1_i_background_task_service">IBackgroundTaskService</link>&#32;_backgroundTaskService;
+<anchor xml:id="__terminal_8cs_source_1l00020"/>00020 &#32;&#32;&#32;&#32;<emphasis role="keyword">private</emphasis>&#32;readonly&#32;<link linkend="_interface_luthetus_1_1_common_1_1_razor_lib_1_1_component_renderers_1_1_models_1_1_i_common_component_renderers">ICommonComponentRenderers</link>&#32;_commonComponentRenderers;
+<anchor xml:id="__terminal_8cs_source_1l00021"/>00021 &#32;&#32;&#32;&#32;<emphasis role="keyword">private</emphasis>&#32;readonly&#32;IDispatcher&#32;_dispatcher;
+<anchor xml:id="__terminal_8cs_source_1l00022"/>00022 &#32;&#32;&#32;&#32;
+<anchor xml:id="__terminal_8cs_source_1l00024"/>00024 &#32;&#32;&#32;&#32;<emphasis role="keyword">private</emphasis>&#32;readonly&#32;ThrottleOptimized&lt;byte&gt;&#32;_throttleUiUpdateFromSetHasExecutingProcess;
+<anchor xml:id="__terminal_8cs_source_1l00025"/>00025 
+<anchor xml:id="__terminal_8cs_source_1l00026"/><link linkend="_class_luthetus_1_1_ide_1_1_razor_lib_1_1_terminals_1_1_models_1_1_terminal_1a12c360db22182f6a45166b5e9337e211">00026</link> &#32;&#32;&#32;&#32;<emphasis role="keyword">public</emphasis>&#32;<link linkend="_class_luthetus_1_1_ide_1_1_razor_lib_1_1_terminals_1_1_models_1_1_terminal_1a12c360db22182f6a45166b5e9337e211">Terminal</link>(
+<anchor xml:id="__terminal_8cs_source_1l00027"/>00027 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordtype">string</emphasis>&#32;displayName,
+<anchor xml:id="__terminal_8cs_source_1l00028"/>00028 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;Func&lt;Terminal,&#32;ITerminalInteractive&gt;&#32;terminalInteractiveFactory,
+<anchor xml:id="__terminal_8cs_source_1l00029"/>00029 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;Func&lt;Terminal,&#32;ITerminalInput&gt;&#32;terminalInputFactory,
+<anchor xml:id="__terminal_8cs_source_1l00030"/>00030 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;Func&lt;Terminal,&#32;ITerminalOutput&gt;&#32;terminalOutputFactory,
+<anchor xml:id="__terminal_8cs_source_1l00031"/>00031 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<link linkend="_interface_luthetus_1_1_common_1_1_razor_lib_1_1_background_tasks_1_1_models_1_1_i_background_task_service">IBackgroundTaskService</link>&#32;backgroundTaskService,
+<anchor xml:id="__terminal_8cs_source_1l00032"/>00032 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<link linkend="_interface_luthetus_1_1_common_1_1_razor_lib_1_1_component_renderers_1_1_models_1_1_i_common_component_renderers">ICommonComponentRenderers</link>&#32;commonComponentRenderers,
+<anchor xml:id="__terminal_8cs_source_1l00033"/>00033 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;IDispatcher&#32;dispatcher)
+<anchor xml:id="__terminal_8cs_source_1l00034"/>00034 &#32;&#32;&#32;&#32;{
+<anchor xml:id="__terminal_8cs_source_1l00035"/>00035 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<link linkend="_class_luthetus_1_1_ide_1_1_razor_lib_1_1_terminals_1_1_models_1_1_terminal_1a5db1fa6e63c3fc65df29b09b8c174cd6">DisplayName</link>&#32;=&#32;displayName;
+<anchor xml:id="__terminal_8cs_source_1l00036"/>00036 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<link linkend="_class_luthetus_1_1_ide_1_1_razor_lib_1_1_terminals_1_1_models_1_1_terminal_1a4f0e311562c358f3848cb13890a91848">TerminalInteractive</link>&#32;=&#32;terminalInteractiveFactory.Invoke(<emphasis role="keyword">this</emphasis>);
+<anchor xml:id="__terminal_8cs_source_1l00037"/>00037 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<link linkend="_class_luthetus_1_1_ide_1_1_razor_lib_1_1_terminals_1_1_models_1_1_terminal_1a1954677efa42e941ee8545d53129cf43">TerminalInput</link>&#32;=&#32;terminalInputFactory.Invoke(<emphasis role="keyword">this</emphasis>);
+<anchor xml:id="__terminal_8cs_source_1l00038"/>00038 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<link linkend="_class_luthetus_1_1_ide_1_1_razor_lib_1_1_terminals_1_1_models_1_1_terminal_1a02a363fbf71e4bc3f338534e8541a84e">TerminalOutput</link>&#32;=&#32;terminalOutputFactory.Invoke(<emphasis role="keyword">this</emphasis>);
+<anchor xml:id="__terminal_8cs_source_1l00039"/>00039 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;
+<anchor xml:id="__terminal_8cs_source_1l00040"/>00040 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;_backgroundTaskService&#32;=&#32;backgroundTaskService;
+<anchor xml:id="__terminal_8cs_source_1l00041"/>00041 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;_commonComponentRenderers&#32;=&#32;commonComponentRenderers;
+<anchor xml:id="__terminal_8cs_source_1l00042"/>00042 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;_dispatcher&#32;=&#32;dispatcher;
+<anchor xml:id="__terminal_8cs_source_1l00043"/>00043 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;
+<anchor xml:id="__terminal_8cs_source_1l00044"/>00044 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;_throttleUiUpdateFromSetHasExecutingProcess&#32;=&#32;<emphasis role="keyword">new</emphasis>(
+<anchor xml:id="__terminal_8cs_source_1l00045"/>00045 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<link linkend="_class_luthetus_1_1_ide_1_1_razor_lib_1_1_terminals_1_1_models_1_1_terminal_1adfa062ec0146b9b7e32d5cfa7e9165bc">DelaySetHasExecutingProcess</link>,
+<anchor xml:id="__terminal_8cs_source_1l00046"/>00046 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;(_,&#32;_)&#32;=&gt;
+<anchor xml:id="__terminal_8cs_source_1l00047"/>00047 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;{
+<anchor xml:id="__terminal_8cs_source_1l00048"/>00048 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;_dispatcher.Dispatch(<emphasis role="keyword">new</emphasis>&#32;<link linkend="_namespace_luthetus_1_1_ide_1_1_razor_lib_1_1_terminals_1_1_states_1a0d5c82aad1c32c30182e5198173b28a7">TerminalState</link>.StateHasChangedAction());
+<anchor xml:id="__terminal_8cs_source_1l00049"/>00049 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;Task.CompletedTask;
+<anchor xml:id="__terminal_8cs_source_1l00050"/>00050 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;});
+<anchor xml:id="__terminal_8cs_source_1l00051"/>00051 &#32;&#32;&#32;&#32;}
+<anchor xml:id="__terminal_8cs_source_1l00052"/>00052 &#32;&#32;&#32;&#32;
+<anchor xml:id="__terminal_8cs_source_1l00053"/><link linkend="_class_luthetus_1_1_ide_1_1_razor_lib_1_1_terminals_1_1_models_1_1_terminal_1adfa062ec0146b9b7e32d5cfa7e9165bc">00053</link> &#32;&#32;&#32;&#32;<emphasis role="keyword">public</emphasis>&#32;<emphasis role="keyword">static</emphasis>&#32;readonly&#32;TimeSpan&#32;<link linkend="_class_luthetus_1_1_ide_1_1_razor_lib_1_1_terminals_1_1_models_1_1_terminal_1adfa062ec0146b9b7e32d5cfa7e9165bc">DelaySetHasExecutingProcess</link>&#32;=&#32;TimeSpan.FromMilliseconds(200);
+<anchor xml:id="__terminal_8cs_source_1l00054"/>00054 
+<anchor xml:id="__terminal_8cs_source_1l00055"/><link linkend="_class_luthetus_1_1_ide_1_1_razor_lib_1_1_terminals_1_1_models_1_1_terminal_1a5db1fa6e63c3fc65df29b09b8c174cd6">00055</link> &#32;&#32;&#32;&#32;<emphasis role="keyword">public</emphasis>&#32;<emphasis role="keywordtype">string</emphasis>&#32;<link linkend="_class_luthetus_1_1_ide_1_1_razor_lib_1_1_terminals_1_1_models_1_1_terminal_1a5db1fa6e63c3fc65df29b09b8c174cd6">DisplayName</link>&#32;{&#32;<emphasis role="keyword">get</emphasis>;&#32;}
+<anchor xml:id="__terminal_8cs_source_1l00056"/><link linkend="_class_luthetus_1_1_ide_1_1_razor_lib_1_1_terminals_1_1_models_1_1_terminal_1a4f0e311562c358f3848cb13890a91848">00056</link> &#32;&#32;&#32;&#32;<emphasis role="keyword">public</emphasis>&#32;<link linkend="_interface_luthetus_1_1_ide_1_1_razor_lib_1_1_terminals_1_1_models_1_1_i_terminal_interactive">ITerminalInteractive</link>&#32;<link linkend="_class_luthetus_1_1_ide_1_1_razor_lib_1_1_terminals_1_1_models_1_1_terminal_1a4f0e311562c358f3848cb13890a91848">TerminalInteractive</link>&#32;{&#32;<emphasis role="keyword">get</emphasis>;&#32;}
+<anchor xml:id="__terminal_8cs_source_1l00057"/><link linkend="_class_luthetus_1_1_ide_1_1_razor_lib_1_1_terminals_1_1_models_1_1_terminal_1a1954677efa42e941ee8545d53129cf43">00057</link> &#32;&#32;&#32;&#32;<emphasis role="keyword">public</emphasis>&#32;<link linkend="_interface_luthetus_1_1_ide_1_1_razor_lib_1_1_terminals_1_1_models_1_1_i_terminal_input">ITerminalInput</link>&#32;<link linkend="_class_luthetus_1_1_ide_1_1_razor_lib_1_1_terminals_1_1_models_1_1_terminal_1a1954677efa42e941ee8545d53129cf43">TerminalInput</link>&#32;{&#32;<emphasis role="keyword">get</emphasis>;&#32;}
+<anchor xml:id="__terminal_8cs_source_1l00058"/><link linkend="_class_luthetus_1_1_ide_1_1_razor_lib_1_1_terminals_1_1_models_1_1_terminal_1a02a363fbf71e4bc3f338534e8541a84e">00058</link> &#32;&#32;&#32;&#32;<emphasis role="keyword">public</emphasis>&#32;<link linkend="_interface_luthetus_1_1_ide_1_1_razor_lib_1_1_terminals_1_1_models_1_1_i_terminal_output">ITerminalOutput</link>&#32;<link linkend="_class_luthetus_1_1_ide_1_1_razor_lib_1_1_terminals_1_1_models_1_1_terminal_1a02a363fbf71e4bc3f338534e8541a84e">TerminalOutput</link>&#32;{&#32;<emphasis role="keyword">get</emphasis>;&#32;}
+<anchor xml:id="__terminal_8cs_source_1l00059"/>00059 
+<anchor xml:id="__terminal_8cs_source_1l00060"/>00060 &#32;&#32;&#32;&#32;<emphasis role="keyword">private</emphasis>&#32;CancellationTokenSource&#32;_commandCancellationTokenSource&#32;=&#32;<emphasis role="keyword">new</emphasis>();
+<anchor xml:id="__terminal_8cs_source_1l00061"/>00061 
+<anchor xml:id="__terminal_8cs_source_1l00062"/><link linkend="_class_luthetus_1_1_ide_1_1_razor_lib_1_1_terminals_1_1_models_1_1_terminal_1ab3343be9b728be95c968cd9f034733f1">00062</link> &#32;&#32;&#32;&#32;<emphasis role="keyword">public</emphasis>&#32;<link linkend="_class_luthetus_1_1_ide_1_1_razor_lib_1_1_terminals_1_1_models_1_1_terminal_1ab3343be9b728be95c968cd9f034733f1">Key&lt;ITerminal&gt;</link>&#32;<link linkend="_class_luthetus_1_1_ide_1_1_razor_lib_1_1_terminals_1_1_models_1_1_terminal_1ab3343be9b728be95c968cd9f034733f1">Key</link>&#32;{&#32;<emphasis role="keyword">get</emphasis>;&#32;init;&#32;}&#32;=&#32;Key&lt;ITerminal&gt;.NewKey();
+<anchor xml:id="__terminal_8cs_source_1l00063"/><link linkend="_class_luthetus_1_1_ide_1_1_razor_lib_1_1_terminals_1_1_models_1_1_terminal_1a6e809bc16ec2dd96842cbec7514b6725">00063</link> &#32;&#32;&#32;&#32;<emphasis role="keyword">public</emphasis>&#32;<link linkend="_class_luthetus_1_1_ide_1_1_razor_lib_1_1_terminals_1_1_models_1_1_terminal_command_parsed">TerminalCommandParsed</link>?&#32;<link linkend="_class_luthetus_1_1_ide_1_1_razor_lib_1_1_terminals_1_1_models_1_1_terminal_1a6e809bc16ec2dd96842cbec7514b6725">ActiveTerminalCommandParsed</link>&#32;{&#32;<emphasis role="keyword">get</emphasis>;&#32;<emphasis role="keyword">private</emphasis>&#32;<emphasis role="keyword">set</emphasis>;&#32;}
+<anchor xml:id="__terminal_8cs_source_1l00064"/>00064 
+<anchor xml:id="__terminal_8cs_source_1l00066"/><link linkend="_class_luthetus_1_1_ide_1_1_razor_lib_1_1_terminals_1_1_models_1_1_terminal_1ab2719a469e49c3d57e4c98187fde33fd">00066</link> &#32;&#32;&#32;&#32;<emphasis role="keyword">public</emphasis>&#32;<emphasis role="keywordtype">bool</emphasis>&#32;<link linkend="_class_luthetus_1_1_ide_1_1_razor_lib_1_1_terminals_1_1_models_1_1_terminal_1ab2719a469e49c3d57e4c98187fde33fd">HasExecutingProcess</link>&#32;{&#32;<emphasis role="keyword">get</emphasis>;&#32;<emphasis role="keyword">private</emphasis>&#32;<emphasis role="keyword">set</emphasis>;&#32;}
+<anchor xml:id="__terminal_8cs_source_1l00067"/>00067 
+<anchor xml:id="__terminal_8cs_source_1l00068"/><link linkend="_class_luthetus_1_1_ide_1_1_razor_lib_1_1_terminals_1_1_models_1_1_terminal_1a1777a72b62544e4a77ffdc9c576d3adf">00068</link> &#32;&#32;&#32;&#32;<emphasis role="keyword">public</emphasis>&#32;<emphasis role="keywordtype">void</emphasis>&#32;<link linkend="_class_luthetus_1_1_ide_1_1_razor_lib_1_1_terminals_1_1_models_1_1_terminal_1a1777a72b62544e4a77ffdc9c576d3adf">EnqueueCommand</link>(<link linkend="_class_luthetus_1_1_ide_1_1_razor_lib_1_1_terminals_1_1_models_1_1_terminal_command_request">TerminalCommandRequest</link>&#32;terminalCommandRequest)
+<anchor xml:id="__terminal_8cs_source_1l00069"/>00069 &#32;&#32;&#32;&#32;{
+<anchor xml:id="__terminal_8cs_source_1l00070"/>00070 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;_backgroundTaskService.Enqueue(
+<anchor xml:id="__terminal_8cs_source_1l00071"/>00071 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<link linkend="_class_luthetus_1_1_ide_1_1_razor_lib_1_1_terminals_1_1_models_1_1_terminal_1ab3343be9b728be95c968cd9f034733f1">Key&lt;IBackgroundTask&gt;</link>.NewKey(),
+<anchor xml:id="__terminal_8cs_source_1l00072"/>00072 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<link linkend="_class_luthetus_1_1_common_1_1_razor_lib_1_1_background_tasks_1_1_models_1_1_blocking_background_task_worker">BlockingBackgroundTaskWorker</link>.<link linkend="_class_luthetus_1_1_common_1_1_razor_lib_1_1_background_tasks_1_1_models_1_1_blocking_background_task_worker_1a267091acd637305c1ddcfe78bef3343f">GetQueueKey</link>(),
+<anchor xml:id="__terminal_8cs_source_1l00073"/>00073 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="stringliteral">&quot;Enqueue&#32;Command&quot;</emphasis>,
+<anchor xml:id="__terminal_8cs_source_1l00074"/>00074 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;()&#32;=&gt;&#32;HandleCommand(terminalCommandRequest));
+<anchor xml:id="__terminal_8cs_source_1l00075"/>00075 &#32;&#32;&#32;&#32;}
+<anchor xml:id="__terminal_8cs_source_1l00076"/>00076 &#32;&#32;&#32;&#32;
+<anchor xml:id="__terminal_8cs_source_1l00077"/><link linkend="_class_luthetus_1_1_ide_1_1_razor_lib_1_1_terminals_1_1_models_1_1_terminal_1a800451b34b93c76714565fa19218ddc7">00077</link> &#32;&#32;&#32;&#32;<emphasis role="keyword">public</emphasis>&#32;Task&#32;<link linkend="_class_luthetus_1_1_ide_1_1_razor_lib_1_1_terminals_1_1_models_1_1_terminal_1a800451b34b93c76714565fa19218ddc7">EnqueueCommandAsync</link>(<link linkend="_class_luthetus_1_1_ide_1_1_razor_lib_1_1_terminals_1_1_models_1_1_terminal_command_request">TerminalCommandRequest</link>&#32;terminalCommandRequest)
+<anchor xml:id="__terminal_8cs_source_1l00078"/>00078 &#32;&#32;&#32;&#32;{
+<anchor xml:id="__terminal_8cs_source_1l00079"/>00079 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;_backgroundTaskService.EnqueueAsync(
+<anchor xml:id="__terminal_8cs_source_1l00080"/>00080 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<link linkend="_class_luthetus_1_1_ide_1_1_razor_lib_1_1_terminals_1_1_models_1_1_terminal_1ab3343be9b728be95c968cd9f034733f1">Key&lt;IBackgroundTask&gt;</link>.NewKey(),
+<anchor xml:id="__terminal_8cs_source_1l00081"/>00081 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<link linkend="_class_luthetus_1_1_common_1_1_razor_lib_1_1_background_tasks_1_1_models_1_1_blocking_background_task_worker">BlockingBackgroundTaskWorker</link>.<link linkend="_class_luthetus_1_1_common_1_1_razor_lib_1_1_background_tasks_1_1_models_1_1_blocking_background_task_worker_1a267091acd637305c1ddcfe78bef3343f">GetQueueKey</link>(),
+<anchor xml:id="__terminal_8cs_source_1l00082"/>00082 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="stringliteral">&quot;Enqueue&#32;Command&quot;</emphasis>,
+<anchor xml:id="__terminal_8cs_source_1l00083"/>00083 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;()&#32;=&gt;&#32;HandleCommand(terminalCommandRequest));
+<anchor xml:id="__terminal_8cs_source_1l00084"/>00084 &#32;&#32;&#32;&#32;}
+<anchor xml:id="__terminal_8cs_source_1l00085"/>00085 &#32;&#32;&#32;&#32;
+<anchor xml:id="__terminal_8cs_source_1l00086"/><link linkend="_class_luthetus_1_1_ide_1_1_razor_lib_1_1_terminals_1_1_models_1_1_terminal_1a7736c6e9726f3f86a938783690968f95">00086</link> &#32;&#32;&#32;&#32;<emphasis role="keyword">public</emphasis>&#32;<emphasis role="keywordtype">void</emphasis>&#32;<link linkend="_class_luthetus_1_1_ide_1_1_razor_lib_1_1_terminals_1_1_models_1_1_terminal_1a7736c6e9726f3f86a938783690968f95">ClearEnqueue</link>()
+<anchor xml:id="__terminal_8cs_source_1l00087"/>00087 &#32;&#32;&#32;&#32;{
+<anchor xml:id="__terminal_8cs_source_1l00088"/>00088 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<link linkend="_class_luthetus_1_1_ide_1_1_razor_lib_1_1_terminals_1_1_models_1_1_terminal_1a1777a72b62544e4a77ffdc9c576d3adf">EnqueueCommand</link>(<emphasis role="keyword">new</emphasis>&#32;<link linkend="_class_luthetus_1_1_ide_1_1_razor_lib_1_1_terminals_1_1_models_1_1_terminal_command_request">TerminalCommandRequest</link>(<emphasis role="stringliteral">&quot;clear&quot;</emphasis>,&#32;<emphasis role="keyword">null</emphasis>));
+<anchor xml:id="__terminal_8cs_source_1l00089"/>00089 &#32;&#32;&#32;&#32;}
+<anchor xml:id="__terminal_8cs_source_1l00090"/>00090 &#32;&#32;&#32;&#32;
+<anchor xml:id="__terminal_8cs_source_1l00091"/><link linkend="_class_luthetus_1_1_ide_1_1_razor_lib_1_1_terminals_1_1_models_1_1_terminal_1aced6c0e2f634498d514224e7ece466f4">00091</link> &#32;&#32;&#32;&#32;<emphasis role="keyword">public</emphasis>&#32;<emphasis role="keywordtype">void</emphasis>&#32;<link linkend="_class_luthetus_1_1_ide_1_1_razor_lib_1_1_terminals_1_1_models_1_1_terminal_1aced6c0e2f634498d514224e7ece466f4">ClearFireAndForget</link>()
+<anchor xml:id="__terminal_8cs_source_1l00092"/>00092 &#32;&#32;&#32;&#32;{
+<anchor xml:id="__terminal_8cs_source_1l00093"/>00093 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;var&#32;localHasExecutingProcess&#32;=&#32;<link linkend="_class_luthetus_1_1_ide_1_1_razor_lib_1_1_terminals_1_1_models_1_1_terminal_1ab2719a469e49c3d57e4c98187fde33fd">HasExecutingProcess</link>;
+<anchor xml:id="__terminal_8cs_source_1l00094"/>00094 &#32;&#32;&#32;&#32;
+<anchor xml:id="__terminal_8cs_source_1l00095"/>00095 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;_&#32;=&#32;Task.Run(()&#32;=&gt;
+<anchor xml:id="__terminal_8cs_source_1l00096"/>00096 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;{
+<anchor xml:id="__terminal_8cs_source_1l00097"/>00097 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">if</emphasis>&#32;(localHasExecutingProcess)
+<anchor xml:id="__terminal_8cs_source_1l00098"/>00098 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;{
+<anchor xml:id="__terminal_8cs_source_1l00099"/>00099 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<link linkend="_class_luthetus_1_1_ide_1_1_razor_lib_1_1_terminals_1_1_models_1_1_terminal_1a02a363fbf71e4bc3f338534e8541a84e">TerminalOutput</link>.ClearOutputExceptMostRecentCommand();
+<anchor xml:id="__terminal_8cs_source_1l00100"/>00100 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;}
+<anchor xml:id="__terminal_8cs_source_1l00101"/>00101 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">else</emphasis>
+<anchor xml:id="__terminal_8cs_source_1l00102"/>00102 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;{
+<anchor xml:id="__terminal_8cs_source_1l00103"/>00103 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<link linkend="_class_luthetus_1_1_ide_1_1_razor_lib_1_1_terminals_1_1_models_1_1_terminal_1a02a363fbf71e4bc3f338534e8541a84e">TerminalOutput</link>.ClearOutput();
+<anchor xml:id="__terminal_8cs_source_1l00104"/>00104 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;}
+<anchor xml:id="__terminal_8cs_source_1l00105"/>00105 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;
+<anchor xml:id="__terminal_8cs_source_1l00106"/>00106 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;Task.CompletedTask;
+<anchor xml:id="__terminal_8cs_source_1l00107"/>00107 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;});
+<anchor xml:id="__terminal_8cs_source_1l00108"/>00108 &#32;&#32;&#32;&#32;}
+<anchor xml:id="__terminal_8cs_source_1l00109"/>00109 
+<anchor xml:id="__terminal_8cs_source_1l00110"/>00110 &#32;&#32;&#32;&#32;<emphasis role="keyword">private</emphasis>&#32;async&#32;Task&#32;HandleCommand(<link linkend="_class_luthetus_1_1_ide_1_1_razor_lib_1_1_terminals_1_1_models_1_1_terminal_command_request">TerminalCommandRequest</link>&#32;terminalCommandRequest)
+<anchor xml:id="__terminal_8cs_source_1l00111"/>00111 &#32;&#32;&#32;&#32;{
+<anchor xml:id="__terminal_8cs_source_1l00112"/>00112 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<link linkend="_class_luthetus_1_1_ide_1_1_razor_lib_1_1_terminals_1_1_models_1_1_terminal_output">TerminalOutput</link>.<link linkend="_class_luthetus_1_1_ide_1_1_razor_lib_1_1_terminals_1_1_models_1_1_terminal_output_1ae61c45ff34c2fb3c76081c01ac55b751">ClearHistoryWhenExistingOutputTooLong</link>();
+<anchor xml:id="__terminal_8cs_source_1l00113"/>00113 &#32;&#32;&#32;&#32;
+<anchor xml:id="__terminal_8cs_source_1l00114"/>00114 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;var&#32;parsedCommand&#32;=&#32;await&#32;<link linkend="_class_luthetus_1_1_ide_1_1_razor_lib_1_1_terminals_1_1_models_1_1_terminal_interactive">TerminalInteractive</link>.<link linkend="_class_luthetus_1_1_ide_1_1_razor_lib_1_1_terminals_1_1_models_1_1_terminal_interactive_1aefa9286b3cb6f3454c31329fb9b996c9">TryHandleCommand</link>(terminalCommandRequest);
+<anchor xml:id="__terminal_8cs_source_1l00115"/>00115 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;ActiveTerminalCommandParsed&#32;=&#32;parsedCommand;
+<anchor xml:id="__terminal_8cs_source_1l00116"/>00116 
+<anchor xml:id="__terminal_8cs_source_1l00117"/>00117 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">if</emphasis>&#32;(parsedCommand&#32;is&#32;<emphasis role="keyword">null</emphasis>)
+<anchor xml:id="__terminal_8cs_source_1l00118"/>00118 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>;
+<anchor xml:id="__terminal_8cs_source_1l00119"/>00119 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;
+<anchor xml:id="__terminal_8cs_source_1l00120"/>00120 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;var&#32;cliWrapCommand&#32;=&#32;Cli.Wrap(parsedCommand.TargetFileName);
+<anchor xml:id="__terminal_8cs_source_1l00121"/>00121 
+<anchor xml:id="__terminal_8cs_source_1l00122"/>00122 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;cliWrapCommand&#32;=&#32;cliWrapCommand.WithWorkingDirectory(<link linkend="_class_luthetus_1_1_ide_1_1_razor_lib_1_1_terminals_1_1_models_1_1_terminal_interactive">TerminalInteractive</link>.<link linkend="_class_luthetus_1_1_ide_1_1_razor_lib_1_1_terminals_1_1_models_1_1_terminal_interactive_1ac4633a70cafeb3580c6ef2bd4f8aff6e">WorkingDirectory</link>);
+<anchor xml:id="__terminal_8cs_source_1l00123"/>00123 
+<anchor xml:id="__terminal_8cs_source_1l00124"/>00124 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">if</emphasis>&#32;(!<emphasis role="keywordtype">string</emphasis>.IsNullOrWhiteSpace(parsedCommand.Arguments))
+<anchor xml:id="__terminal_8cs_source_1l00125"/>00125 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;cliWrapCommand&#32;=&#32;cliWrapCommand.WithArguments(parsedCommand.Arguments);
+<anchor xml:id="__terminal_8cs_source_1l00126"/>00126 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;
+<anchor xml:id="__terminal_8cs_source_1l00127"/>00127 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;TODO:&#32;Decide&#32;where&#32;to&#32;put&#32;invocation&#32;of&#32;&apos;parsedCommand.SourceTerminalCommandRequest.BeginWithFunc&apos;...</emphasis>
+<anchor xml:id="__terminal_8cs_source_1l00128"/>00128 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;&#32;&#32;&#32;&#32;&#32;&#32;...and&#32;invocation&#32;of&#32;&apos;cliWrapCommand&apos;</emphasis>
+<anchor xml:id="__terminal_8cs_source_1l00129"/>00129 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;&#32;&#32;&#32;&#32;&#32;&#32;and&#32;invocation&#32;of&#32;&apos;parsedCommand.SourceTerminalCommandRequest.ContinueWithFunc&apos;</emphasis>
+<anchor xml:id="__terminal_8cs_source_1l00130"/>00130 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;&#32;&#32;&#32;&#32;&#32;&#32;|</emphasis>
+<anchor xml:id="__terminal_8cs_source_1l00131"/>00131 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;&#32;&#32;&#32;This&#32;comment&#32;is&#32;referring&#32;to&#32;the&#32;&apos;try/catch&apos;&#32;block&#32;logic.</emphasis>
+<anchor xml:id="__terminal_8cs_source_1l00132"/>00132 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;&#32;&#32;&#32;&#32;&#32;&#32;If&#32;the&#32;&apos;BeginWithFunc&apos;&#32;throws&#32;an&#32;exception&#32;should&#32;the&#32;&apos;cliWrapCommand&apos;&#32;run?</emphasis>
+<anchor xml:id="__terminal_8cs_source_1l00133"/>00133 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;&#32;&#32;&#32;&#32;&#32;&#32;If&#32;the&#32;&apos;cliWrapCommand&apos;&#32;throws&#32;an&#32;exception&#32;should&#32;the&#32;&apos;ContinueWithFunc&apos;&#32;run?</emphasis>
+<anchor xml:id="__terminal_8cs_source_1l00134"/>00134 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;
+<anchor xml:id="__terminal_8cs_source_1l00135"/>00135 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">try</emphasis>
+<anchor xml:id="__terminal_8cs_source_1l00136"/>00136 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;{
+<anchor xml:id="__terminal_8cs_source_1l00137"/>00137 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;SetHasExecutingProcess(<emphasis role="keyword">true</emphasis>);
+<anchor xml:id="__terminal_8cs_source_1l00138"/>00138 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;
+<anchor xml:id="__terminal_8cs_source_1l00139"/>00139 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">if</emphasis>&#32;(parsedCommand.SourceTerminalCommandRequest.BeginWithFunc&#32;is&#32;not&#32;<emphasis role="keyword">null</emphasis>)
+<anchor xml:id="__terminal_8cs_source_1l00140"/>00140 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;{
+<anchor xml:id="__terminal_8cs_source_1l00141"/>00141 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;await&#32;parsedCommand.SourceTerminalCommandRequest.BeginWithFunc
+<anchor xml:id="__terminal_8cs_source_1l00142"/>00142 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;.Invoke(parsedCommand)
+<anchor xml:id="__terminal_8cs_source_1l00143"/>00143 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;.ConfigureAwait(<emphasis role="keyword">false</emphasis>);
+<anchor xml:id="__terminal_8cs_source_1l00144"/>00144 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;}
+<anchor xml:id="__terminal_8cs_source_1l00145"/>00145 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;
+<anchor xml:id="__terminal_8cs_source_1l00146"/>00146 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;await&#32;cliWrapCommand
+<anchor xml:id="__terminal_8cs_source_1l00147"/>00147 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;.Observe(_commandCancellationTokenSource.Token)
+<anchor xml:id="__terminal_8cs_source_1l00148"/>00148 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;.ForEachAsync(HandleOutput)
+<anchor xml:id="__terminal_8cs_source_1l00149"/>00149 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;.ConfigureAwait(<emphasis role="keyword">false</emphasis>);
+<anchor xml:id="__terminal_8cs_source_1l00150"/>00150 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;}
+<anchor xml:id="__terminal_8cs_source_1l00151"/>00151 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">catch</emphasis>&#32;(Exception&#32;e)
+<anchor xml:id="__terminal_8cs_source_1l00152"/>00152 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;{
+<anchor xml:id="__terminal_8cs_source_1l00153"/>00153 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;TODO:&#32;This&#32;will&#32;erroneously&#32;write&#32;&apos;StartedCommandEvent&apos;&#32;out&#32;twice...</emphasis>
+<anchor xml:id="__terminal_8cs_source_1l00154"/>00154 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;&#32;&#32;&#32;&#32;&#32;&#32;...unless&#32;a&#32;check&#32;is&#32;added&#32;to&#32;see&#32;WHEN&#32;the&#32;exception&#32;was&#32;thrown.</emphasis>
+<anchor xml:id="__terminal_8cs_source_1l00155"/>00155 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;TerminalOutput.<link linkend="_interface_luthetus_1_1_ide_1_1_razor_lib_1_1_terminals_1_1_models_1_1_i_terminal_output_1a2396e92f31f7c93d12e1a6cd12ed3703">WriteOutput</link>(
+<anchor xml:id="__terminal_8cs_source_1l00156"/>00156 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;parsedCommand,
+<anchor xml:id="__terminal_8cs_source_1l00157"/>00157 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keyword">new</emphasis>&#32;StartedCommandEvent(-1));
+<anchor xml:id="__terminal_8cs_source_1l00158"/>00158 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;
+<anchor xml:id="__terminal_8cs_source_1l00159"/>00159 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;TerminalOutput.<link linkend="_interface_luthetus_1_1_ide_1_1_razor_lib_1_1_terminals_1_1_models_1_1_i_terminal_output_1a2396e92f31f7c93d12e1a6cd12ed3703">WriteOutput</link>(
+<anchor xml:id="__terminal_8cs_source_1l00160"/>00160 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;parsedCommand,
+<anchor xml:id="__terminal_8cs_source_1l00161"/>00161 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keyword">new</emphasis>&#32;StandardErrorCommandEvent(
+<anchor xml:id="__terminal_8cs_source_1l00162"/>00162 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;parsedCommand.SourceTerminalCommandRequest.CommandText&#32;+
+<anchor xml:id="__terminal_8cs_source_1l00163"/>00163 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="stringliteral">&quot;&#32;threw&#32;an&#32;exception&quot;</emphasis>&#32;+
+<anchor xml:id="__terminal_8cs_source_1l00164"/>00164 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="stringliteral">&quot;\n&quot;</emphasis>));
+<anchor xml:id="__terminal_8cs_source_1l00165"/>00165 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;
+<anchor xml:id="__terminal_8cs_source_1l00166"/>00166 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;NotificationHelper.DispatchError(<emphasis role="stringliteral">&quot;Terminal&#32;Exception&quot;</emphasis>,&#32;e.ToString(),&#32;_commonComponentRenderers,&#32;_dispatcher,&#32;TimeSpan.FromSeconds(14));
+<anchor xml:id="__terminal_8cs_source_1l00167"/>00167 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;}
+<anchor xml:id="__terminal_8cs_source_1l00168"/>00168 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">finally</emphasis>
+<anchor xml:id="__terminal_8cs_source_1l00169"/>00169 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;{
+<anchor xml:id="__terminal_8cs_source_1l00170"/>00170 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">if</emphasis>&#32;(parsedCommand.SourceTerminalCommandRequest.ContinueWithFunc&#32;is&#32;not&#32;<emphasis role="keyword">null</emphasis>)
+<anchor xml:id="__terminal_8cs_source_1l00171"/>00171 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;{
+<anchor xml:id="__terminal_8cs_source_1l00172"/>00172 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">try</emphasis>
+<anchor xml:id="__terminal_8cs_source_1l00173"/>00173 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;{
+<anchor xml:id="__terminal_8cs_source_1l00174"/>00174 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;The&#32;code&#32;&apos;SetHasExecutingProcess(false);&apos;&#32;needs&#32;to&#32;run</emphasis>
+<anchor xml:id="__terminal_8cs_source_1l00175"/>00175 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;So,&#32;in&#32;the&#32;case&#32;that&#32;their&#32;ContinueWithFunc&#32;throws&#32;an&#32;exception</emphasis>
+<anchor xml:id="__terminal_8cs_source_1l00176"/>00176 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;make&#32;sure&#32;its&#32;wrapped&#32;in&#32;a&#32;try&#32;catch&#32;block.</emphasis>
+<anchor xml:id="__terminal_8cs_source_1l00177"/>00177 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;await&#32;parsedCommand.SourceTerminalCommandRequest.ContinueWithFunc
+<anchor xml:id="__terminal_8cs_source_1l00178"/>00178 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;.Invoke(parsedCommand)
+<anchor xml:id="__terminal_8cs_source_1l00179"/>00179 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;.ConfigureAwait(<emphasis role="keyword">false</emphasis>);
+<anchor xml:id="__terminal_8cs_source_1l00180"/>00180 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;}
+<anchor xml:id="__terminal_8cs_source_1l00181"/>00181 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">catch</emphasis>&#32;(Exception&#32;e)
+<anchor xml:id="__terminal_8cs_source_1l00182"/>00182 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;{
+<anchor xml:id="__terminal_8cs_source_1l00183"/>00183 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;Console.WriteLine(e);
+<anchor xml:id="__terminal_8cs_source_1l00184"/>00184 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;}
+<anchor xml:id="__terminal_8cs_source_1l00185"/>00185 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;}
+<anchor xml:id="__terminal_8cs_source_1l00186"/>00186 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;
+<anchor xml:id="__terminal_8cs_source_1l00187"/>00187 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<link linkend="_class_luthetus_1_1_ide_1_1_razor_lib_1_1_terminals_1_1_models_1_1_terminal_1a559e8f1e8ed60096f6e90850895e7b13">SetHasExecutingProcess</link>(<emphasis role="keyword">false</emphasis>);
+<anchor xml:id="__terminal_8cs_source_1l00188"/>00188 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;}
+<anchor xml:id="__terminal_8cs_source_1l00189"/>00189 &#32;&#32;&#32;&#32;}
+<anchor xml:id="__terminal_8cs_source_1l00190"/>00190 &#32;&#32;&#32;&#32;
+<anchor xml:id="__terminal_8cs_source_1l00191"/>00191 &#32;&#32;&#32;&#32;<emphasis role="keyword">private</emphasis>&#32;<emphasis role="keywordtype">void</emphasis>&#32;HandleOutput(CommandEvent&#32;commandEvent)
+<anchor xml:id="__terminal_8cs_source_1l00192"/>00192 &#32;&#32;&#32;&#32;{
+<anchor xml:id="__terminal_8cs_source_1l00193"/>00193 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;TerminalOutput.<link linkend="_interface_luthetus_1_1_ide_1_1_razor_lib_1_1_terminals_1_1_models_1_1_i_terminal_output_1a2396e92f31f7c93d12e1a6cd12ed3703">WriteOutput</link>(ActiveTerminalCommandParsed,&#32;commandEvent);
+<anchor xml:id="__terminal_8cs_source_1l00194"/>00194 &#32;&#32;&#32;&#32;}
+<anchor xml:id="__terminal_8cs_source_1l00195"/>00195 
+<anchor xml:id="__terminal_8cs_source_1l00196"/><link linkend="_class_luthetus_1_1_ide_1_1_razor_lib_1_1_terminals_1_1_models_1_1_terminal_1a6eefe17f31baf46f094c284b2eaeac42">00196</link> &#32;&#32;&#32;&#32;<emphasis role="keyword">public</emphasis>&#32;<emphasis role="keywordtype">void</emphasis>&#32;<link linkend="_class_luthetus_1_1_ide_1_1_razor_lib_1_1_terminals_1_1_models_1_1_terminal_1a6eefe17f31baf46f094c284b2eaeac42">KillProcess</link>()
+<anchor xml:id="__terminal_8cs_source_1l00197"/>00197 &#32;&#32;&#32;&#32;{
+<anchor xml:id="__terminal_8cs_source_1l00198"/>00198 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;_commandCancellationTokenSource.Cancel();
+<anchor xml:id="__terminal_8cs_source_1l00199"/>00199 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;_commandCancellationTokenSource&#32;=&#32;<emphasis role="keyword">new</emphasis>();
+<anchor xml:id="__terminal_8cs_source_1l00200"/>00200 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;DispatchNewStateKey();
+<anchor xml:id="__terminal_8cs_source_1l00201"/>00201 &#32;&#32;&#32;&#32;}
+<anchor xml:id="__terminal_8cs_source_1l00202"/>00202 
+<anchor xml:id="__terminal_8cs_source_1l00203"/>00203 &#32;&#32;&#32;&#32;<emphasis role="keyword">private</emphasis>&#32;<emphasis role="keywordtype">void</emphasis>&#32;DispatchNewStateKey()
+<anchor xml:id="__terminal_8cs_source_1l00204"/>00204 &#32;&#32;&#32;&#32;{
+<anchor xml:id="__terminal_8cs_source_1l00205"/>00205 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;_dispatcher.Dispatch(new&#32;TerminalState.NotifyStateChangedAction(Key));</emphasis>
+<anchor xml:id="__terminal_8cs_source_1l00206"/>00206 &#32;&#32;&#32;&#32;}
+<anchor xml:id="__terminal_8cs_source_1l00207"/>00207 &#32;&#32;&#32;&#32;
+<anchor xml:id="__terminal_8cs_source_1l00208"/><link linkend="_class_luthetus_1_1_ide_1_1_razor_lib_1_1_terminals_1_1_models_1_1_terminal_1a559e8f1e8ed60096f6e90850895e7b13">00208</link> &#32;&#32;&#32;&#32;<emphasis role="keyword">public</emphasis>&#32;<emphasis role="keywordtype">void</emphasis>&#32;<link linkend="_class_luthetus_1_1_ide_1_1_razor_lib_1_1_terminals_1_1_models_1_1_terminal_1a559e8f1e8ed60096f6e90850895e7b13">SetHasExecutingProcess</link>(<emphasis role="keywordtype">bool</emphasis>&#32;value)
+<anchor xml:id="__terminal_8cs_source_1l00209"/>00209 &#32;&#32;&#32;&#32;{
+<anchor xml:id="__terminal_8cs_source_1l00210"/>00210 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<link linkend="_class_luthetus_1_1_ide_1_1_razor_lib_1_1_terminals_1_1_models_1_1_terminal_1ab2719a469e49c3d57e4c98187fde33fd">HasExecutingProcess</link>&#32;=&#32;value;
+<anchor xml:id="__terminal_8cs_source_1l00211"/>00211 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;_throttleUiUpdateFromSetHasExecutingProcess.Run(<emphasis role="keywordflow">default</emphasis>(<emphasis role="keywordtype">byte</emphasis>));
+<anchor xml:id="__terminal_8cs_source_1l00212"/>00212 &#32;&#32;&#32;&#32;}
+<anchor xml:id="__terminal_8cs_source_1l00213"/>00213 &#32;&#32;&#32;&#32;
+<anchor xml:id="__terminal_8cs_source_1l00214"/><link linkend="_class_luthetus_1_1_ide_1_1_razor_lib_1_1_terminals_1_1_models_1_1_terminal_1a352a63cd31d4a29b81f902bc90977ce1">00214</link> &#32;&#32;&#32;&#32;<emphasis role="keyword">public</emphasis>&#32;<emphasis role="keywordtype">void</emphasis>&#32;<link linkend="_class_luthetus_1_1_ide_1_1_razor_lib_1_1_terminals_1_1_models_1_1_terminal_1a352a63cd31d4a29b81f902bc90977ce1">Dispose</link>()
+<anchor xml:id="__terminal_8cs_source_1l00215"/>00215 &#32;&#32;&#32;&#32;{
+<anchor xml:id="__terminal_8cs_source_1l00216"/>00216 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<link linkend="_class_luthetus_1_1_ide_1_1_razor_lib_1_1_terminals_1_1_models_1_1_terminal_1a1954677efa42e941ee8545d53129cf43">TerminalInput</link>.Dispose();
+<anchor xml:id="__terminal_8cs_source_1l00217"/>00217 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<link linkend="_class_luthetus_1_1_ide_1_1_razor_lib_1_1_terminals_1_1_models_1_1_terminal_1a02a363fbf71e4bc3f338534e8541a84e">TerminalOutput</link>.Dispose();
+<anchor xml:id="__terminal_8cs_source_1l00218"/>00218 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;Input&#32;and&#32;output&#32;are&#32;dependent&#32;on&#32;&apos;TerminalInteractive&apos;.</emphasis>
+<anchor xml:id="__terminal_8cs_source_1l00219"/>00219 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="comment">//&#32;Therefore,&#32;dispose&#32;it&#32;last.</emphasis>
+<anchor xml:id="__terminal_8cs_source_1l00220"/>00220 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<link linkend="_class_luthetus_1_1_ide_1_1_razor_lib_1_1_terminals_1_1_models_1_1_terminal_1a4f0e311562c358f3848cb13890a91848">TerminalInteractive</link>.Dispose();
+<anchor xml:id="__terminal_8cs_source_1l00221"/>00221 &#32;&#32;&#32;&#32;}
+<anchor xml:id="__terminal_8cs_source_1l00222"/>00222 }
+</programlisting></section>

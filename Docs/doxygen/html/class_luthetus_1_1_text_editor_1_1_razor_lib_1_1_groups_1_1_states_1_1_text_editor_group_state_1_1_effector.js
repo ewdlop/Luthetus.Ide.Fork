@@ -1,0 +1,7 @@
+var class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_groups_1_1_states_1_1_text_editor_group_state_1_1_effector =
+[
+    [ "Effector", "class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_groups_1_1_states_1_1_text_editor_group_state_1_1_effector.html#a5510b434ac7798734d08cdf0efb790ef", null ],
+    [ "HandleAddViewModelToGroupAction", "class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_groups_1_1_states_1_1_text_editor_group_state_1_1_effector.html#ae80a35d4dfbcbcb394a5a2e4e48dc558", null ],
+    [ "HandleRemoveViewModelFromGroupAction", "class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_groups_1_1_states_1_1_text_editor_group_state_1_1_effector.html#aa457bb6f0cb35cfc54c1e1140df33dba", null ],
+    [ "HandleSetActiveViewModelOfGroupAction", "class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_groups_1_1_states_1_1_text_editor_group_state_1_1_effector.html#a63101ab729a6fea72e5262440e3e39ad", null ]
+];

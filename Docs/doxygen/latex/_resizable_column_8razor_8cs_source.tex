@@ -1,0 +1,109 @@
+\doxysection{Resizable\+Column.\+razor.\+cs}
+\hypertarget{_resizable_column_8razor_8cs_source}{}\label{_resizable_column_8razor_8cs_source}\index{Source/Lib/Common/Resizes/Displays/ResizableColumn.razor.cs@{Source/Lib/Common/Resizes/Displays/ResizableColumn.razor.cs}}
+\mbox{\hyperlink{_resizable_column_8razor_8cs}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{_resizable_column_8razor_8cs_source_l00001}00001\ \textcolor{keyword}{using\ }Fluxor;}
+\DoxyCodeLine{\Hypertarget{_resizable_column_8razor_8cs_source_l00002}00002\ \textcolor{keyword}{using\ }Microsoft.AspNetCore.Components;}
+\DoxyCodeLine{\Hypertarget{_resizable_column_8razor_8cs_source_l00003}00003\ \textcolor{keyword}{using\ }Microsoft.AspNetCore.Components.Web;}
+\DoxyCodeLine{\Hypertarget{_resizable_column_8razor_8cs_source_l00004}00004\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_luthetus_1_1_common_1_1_razor_lib_1_1_drags_1_1_displays}{Luthetus.Common.RazorLib.Drags.Displays}};}
+\DoxyCodeLine{\Hypertarget{_resizable_column_8razor_8cs_source_l00005}00005\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_luthetus_1_1_common_1_1_razor_lib_1_1_resizes_1_1_models}{Luthetus.Common.RazorLib.Resizes.Models}};}
+\DoxyCodeLine{\Hypertarget{_resizable_column_8razor_8cs_source_l00006}00006\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_luthetus_1_1_common_1_1_razor_lib_1_1_dimensions_1_1_models}{Luthetus.Common.RazorLib.Dimensions.Models}};}
+\DoxyCodeLine{\Hypertarget{_resizable_column_8razor_8cs_source_l00007}00007\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_luthetus_1_1_common_1_1_razor_lib_1_1_dimensions_1_1_states}{Luthetus.Common.RazorLib.Dimensions.States}};}
+\DoxyCodeLine{\Hypertarget{_resizable_column_8razor_8cs_source_l00008}00008\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_luthetus_1_1_common_1_1_razor_lib_1_1_options_1_1_states}{Luthetus.Common.RazorLib.Options.States}};}
+\DoxyCodeLine{\Hypertarget{_resizable_column_8razor_8cs_source_l00009}00009\ }
+\DoxyCodeLine{\Hypertarget{_resizable_column_8razor_8cs_source_l00010}\mbox{\hyperlink{namespace_luthetus_1_1_common_1_1_razor_lib_1_1_resizes}{00010}}\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespace_luthetus_1_1_common_1_1_razor_lib_1_1_resizes_1_1_displays}{Luthetus.Common.RazorLib.Resizes.Displays}};}
+\DoxyCodeLine{\Hypertarget{_resizable_column_8razor_8cs_source_l00011}00011\ }
+\DoxyCodeLine{\Hypertarget{_resizable_column_8razor_8cs_source_l00012}\mbox{\hyperlink{class_luthetus_1_1_common_1_1_razor_lib_1_1_resizes_1_1_displays_1_1_resizable_column}{00012}}\ \textcolor{keyword}{public}\ \textcolor{keyword}{partial\ class\ }\mbox{\hyperlink{class_luthetus_1_1_common_1_1_razor_lib_1_1_resizes_1_1_displays_1_1_resizable_column}{ResizableColumn}}\ :\ ComponentBase,\ IDisposable}
+\DoxyCodeLine{\Hypertarget{_resizable_column_8razor_8cs_source_l00013}00013\ \{}
+\DoxyCodeLine{\Hypertarget{_resizable_column_8razor_8cs_source_l00014}00014\ \ \ \ \ [Inject]}
+\DoxyCodeLine{\Hypertarget{_resizable_column_8razor_8cs_source_l00015}00015\ \ \ \ \ \textcolor{keyword}{private}\ IState<DragState>\ DragStateWrap\ \{\ \textcolor{keyword}{get};\ \textcolor{keyword}{set};\ \}\ =\ \textcolor{keyword}{null}!;}
+\DoxyCodeLine{\Hypertarget{_resizable_column_8razor_8cs_source_l00016}00016\ \ \ \ \ [Inject]}
+\DoxyCodeLine{\Hypertarget{_resizable_column_8razor_8cs_source_l00017}00017\ \ \ \ \ \textcolor{keyword}{private}\ IState<AppOptionsState>\ AppOptionsStateWrap\ \{\ \textcolor{keyword}{get};\ \textcolor{keyword}{set};\ \}\ =\ \textcolor{keyword}{null}!;}
+\DoxyCodeLine{\Hypertarget{_resizable_column_8razor_8cs_source_l00018}00018\ \ \ \ \ [Inject]}
+\DoxyCodeLine{\Hypertarget{_resizable_column_8razor_8cs_source_l00019}00019\ \ \ \ \ \textcolor{keyword}{private}\ IDispatcher\ Dispatcher\ \{\ \textcolor{keyword}{get};\ \textcolor{keyword}{set};\ \}\ =\ \textcolor{keyword}{null}!;}
+\DoxyCodeLine{\Hypertarget{_resizable_column_8razor_8cs_source_l00020}00020\ }
+\DoxyCodeLine{\Hypertarget{_resizable_column_8razor_8cs_source_l00021}00021\ \ \ \ \ [Parameter,\ EditorRequired]}
+\DoxyCodeLine{\Hypertarget{_resizable_column_8razor_8cs_source_l00022}\mbox{\hyperlink{class_luthetus_1_1_common_1_1_razor_lib_1_1_resizes_1_1_displays_1_1_resizable_column_a056c8f410af97d26c7b90787249999a1}{00022}}\ \ \ \ \ \textcolor{keyword}{public}\ \mbox{\hyperlink{class_luthetus_1_1_common_1_1_razor_lib_1_1_dimensions_1_1_models_1_1_element_dimensions}{ElementDimensions}}\ \mbox{\hyperlink{class_luthetus_1_1_common_1_1_razor_lib_1_1_resizes_1_1_displays_1_1_resizable_column_a056c8f410af97d26c7b90787249999a1}{LeftElementDimensions}}\ \{\ \textcolor{keyword}{get};\ \textcolor{keyword}{set};\ \}\ =\ \textcolor{keyword}{null}!;}
+\DoxyCodeLine{\Hypertarget{_resizable_column_8razor_8cs_source_l00023}00023\ \ \ \ \ [Parameter,\ EditorRequired]}
+\DoxyCodeLine{\Hypertarget{_resizable_column_8razor_8cs_source_l00024}\mbox{\hyperlink{class_luthetus_1_1_common_1_1_razor_lib_1_1_resizes_1_1_displays_1_1_resizable_column_a3499abb02a4680513ba4beb62ae17d98}{00024}}\ \ \ \ \ \textcolor{keyword}{public}\ \mbox{\hyperlink{class_luthetus_1_1_common_1_1_razor_lib_1_1_dimensions_1_1_models_1_1_element_dimensions}{ElementDimensions}}\ \mbox{\hyperlink{class_luthetus_1_1_common_1_1_razor_lib_1_1_resizes_1_1_displays_1_1_resizable_column_a3499abb02a4680513ba4beb62ae17d98}{RightElementDimensions}}\ \{\ \textcolor{keyword}{get};\ \textcolor{keyword}{set};\ \}\ =\ \textcolor{keyword}{null}!;}
+\DoxyCodeLine{\Hypertarget{_resizable_column_8razor_8cs_source_l00025}00025\ \ \ \ \ [Parameter,\ EditorRequired]}
+\DoxyCodeLine{\Hypertarget{_resizable_column_8razor_8cs_source_l00026}\mbox{\hyperlink{class_luthetus_1_1_common_1_1_razor_lib_1_1_resizes_1_1_displays_1_1_resizable_column_accf484013985858aed84a55d4f71453a}{00026}}\ \ \ \ \ \textcolor{keyword}{public}\ Func<Task>\ \mbox{\hyperlink{class_luthetus_1_1_common_1_1_razor_lib_1_1_resizes_1_1_displays_1_1_resizable_column_accf484013985858aed84a55d4f71453a}{ReRenderFuncAsync}}\ \{\ \textcolor{keyword}{get};\ \textcolor{keyword}{set};\ \}\ =\ \textcolor{keyword}{null}!;}
+\DoxyCodeLine{\Hypertarget{_resizable_column_8razor_8cs_source_l00027}00027\ }
+\DoxyCodeLine{\Hypertarget{_resizable_column_8razor_8cs_source_l00028}00028\ \ \ \ \ \textcolor{keyword}{private}\ Func<(MouseEventArgs\ firstMouseEventArgs,\ MouseEventArgs\ secondMouseEventArgs),\ Task>?\ \_dragEventHandler;}
+\DoxyCodeLine{\Hypertarget{_resizable_column_8razor_8cs_source_l00029}00029\ \ \ \ \ \textcolor{keyword}{private}\ MouseEventArgs?\ \_previousDragMouseEventArgs;}
+\DoxyCodeLine{\Hypertarget{_resizable_column_8razor_8cs_source_l00030}00030\ }
+\DoxyCodeLine{\Hypertarget{_resizable_column_8razor_8cs_source_l00031}\mbox{\hyperlink{class_luthetus_1_1_common_1_1_razor_lib_1_1_resizes_1_1_displays_1_1_resizable_column_ab8644426c60a0fd9e1d027724b2616c8}{00031}}\ \ \ \ \ \textcolor{keyword}{protected}\ \textcolor{keyword}{override}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_luthetus_1_1_common_1_1_razor_lib_1_1_resizes_1_1_displays_1_1_resizable_column_ab8644426c60a0fd9e1d027724b2616c8}{OnInitialized}}()}
+\DoxyCodeLine{\Hypertarget{_resizable_column_8razor_8cs_source_l00032}00032\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_resizable_column_8razor_8cs_source_l00033}00033\ \ \ \ \ \ \ \ \ DragStateWrap.StateChanged\ +=\ DragStateWrapOnStateChanged;}
+\DoxyCodeLine{\Hypertarget{_resizable_column_8razor_8cs_source_l00034}00034\ \ \ \ \ \ \ \ \ AppOptionsStateWrap.StateChanged\ +=\ OnAppOptionsStateChanged;}
+\DoxyCodeLine{\Hypertarget{_resizable_column_8razor_8cs_source_l00035}00035\ }
+\DoxyCodeLine{\Hypertarget{_resizable_column_8razor_8cs_source_l00036}00036\ \ \ \ \ \ \ \ \ base.OnInitialized();}
+\DoxyCodeLine{\Hypertarget{_resizable_column_8razor_8cs_source_l00037}00037\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_resizable_column_8razor_8cs_source_l00038}00038\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_resizable_column_8razor_8cs_source_l00039}00039\ \ \ \ \ \textcolor{keyword}{private}\ async\ \textcolor{keywordtype}{void}\ OnAppOptionsStateChanged(\textcolor{keywordtype}{object}?\ sender,\ EventArgs\ e)}
+\DoxyCodeLine{\Hypertarget{_resizable_column_8razor_8cs_source_l00040}00040\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_resizable_column_8razor_8cs_source_l00041}00041\ \ \ \ \ \ \ \ \ await\ InvokeAsync(StateHasChanged);}
+\DoxyCodeLine{\Hypertarget{_resizable_column_8razor_8cs_source_l00042}00042\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_resizable_column_8razor_8cs_source_l00043}00043\ }
+\DoxyCodeLine{\Hypertarget{_resizable_column_8razor_8cs_source_l00044}00044\ \ \ \ \ \textcolor{keyword}{private}\ async\ \textcolor{keywordtype}{void}\ DragStateWrapOnStateChanged(\textcolor{keywordtype}{object}?\ sender,\ EventArgs\ e)}
+\DoxyCodeLine{\Hypertarget{_resizable_column_8razor_8cs_source_l00045}00045\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_resizable_column_8razor_8cs_source_l00046}00046\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!DragStateWrap.Value.ShouldDisplay)}
+\DoxyCodeLine{\Hypertarget{_resizable_column_8razor_8cs_source_l00047}00047\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_resizable_column_8razor_8cs_source_l00048}00048\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ wasTargetOfDragging\ =\ \_dragEventHandler\ is\ not\ \textcolor{keyword}{null};}
+\DoxyCodeLine{\Hypertarget{_resizable_column_8razor_8cs_source_l00049}00049\ }
+\DoxyCodeLine{\Hypertarget{_resizable_column_8razor_8cs_source_l00050}00050\ \ \ \ \ \ \ \ \ \ \ \ \ \_dragEventHandler\ =\ \textcolor{keyword}{null};}
+\DoxyCodeLine{\Hypertarget{_resizable_column_8razor_8cs_source_l00051}00051\ \ \ \ \ \ \ \ \ \ \ \ \ \_previousDragMouseEventArgs\ =\ \textcolor{keyword}{null};}
+\DoxyCodeLine{\Hypertarget{_resizable_column_8razor_8cs_source_l00052}00052\ }
+\DoxyCodeLine{\Hypertarget{_resizable_column_8razor_8cs_source_l00053}00053\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (wasTargetOfDragging)}
+\DoxyCodeLine{\Hypertarget{_resizable_column_8razor_8cs_source_l00054}00054\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Dispatcher.Dispatch(\textcolor{keyword}{new}\ \mbox{\hyperlink{namespace_luthetus_1_1_common_1_1_razor_lib_1_1_dimensions_1_1_states_a1dc2ed8953002aa28562e5317bf885f4}{AppDimensionState}}.NotifyIntraAppResizeAction());}
+\DoxyCodeLine{\Hypertarget{_resizable_column_8razor_8cs_source_l00055}00055\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_resizable_column_8razor_8cs_source_l00056}00056\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{\Hypertarget{_resizable_column_8razor_8cs_source_l00057}00057\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_resizable_column_8razor_8cs_source_l00058}00058\ \ \ \ \ \ \ \ \ \ \ \ \ var\ mouseEventArgs\ =\ DragStateWrap.Value.MouseEventArgs;}
+\DoxyCodeLine{\Hypertarget{_resizable_column_8razor_8cs_source_l00059}00059\ }
+\DoxyCodeLine{\Hypertarget{_resizable_column_8razor_8cs_source_l00060}00060\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\_dragEventHandler\ is\ not\ \textcolor{keyword}{null})}
+\DoxyCodeLine{\Hypertarget{_resizable_column_8razor_8cs_source_l00061}00061\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_resizable_column_8razor_8cs_source_l00062}00062\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\_previousDragMouseEventArgs\ is\ not\ \textcolor{keyword}{null}\ \&\&\ mouseEventArgs\ is\ not\ \textcolor{keyword}{null})}
+\DoxyCodeLine{\Hypertarget{_resizable_column_8razor_8cs_source_l00063}00063\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_resizable_column_8razor_8cs_source_l00064}00064\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ await\ \_dragEventHandler}
+\DoxyCodeLine{\Hypertarget{_resizable_column_8razor_8cs_source_l00065}00065\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ .Invoke((\_previousDragMouseEventArgs,\ mouseEventArgs))}
+\DoxyCodeLine{\Hypertarget{_resizable_column_8razor_8cs_source_l00066}00066\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ .ConfigureAwait(\textcolor{keyword}{false});}
+\DoxyCodeLine{\Hypertarget{_resizable_column_8razor_8cs_source_l00067}00067\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_resizable_column_8razor_8cs_source_l00068}00068\ }
+\DoxyCodeLine{\Hypertarget{_resizable_column_8razor_8cs_source_l00069}00069\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \_previousDragMouseEventArgs\ =\ mouseEventArgs;}
+\DoxyCodeLine{\Hypertarget{_resizable_column_8razor_8cs_source_l00070}00070\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ await\ ReRenderFuncAsync.Invoke().ConfigureAwait(\textcolor{keyword}{false});}
+\DoxyCodeLine{\Hypertarget{_resizable_column_8razor_8cs_source_l00071}00071\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_resizable_column_8razor_8cs_source_l00072}00072\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_resizable_column_8razor_8cs_source_l00073}00073\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_resizable_column_8razor_8cs_source_l00074}00074\ }
+\DoxyCodeLine{\Hypertarget{_resizable_column_8razor_8cs_source_l00075}00075\ \ \ \ \ \textcolor{keyword}{private}\ \textcolor{keywordtype}{void}\ SubscribeToDragEvent(}
+\DoxyCodeLine{\Hypertarget{_resizable_column_8razor_8cs_source_l00076}00076\ \ \ \ \ \ \ \ \ Func<(MouseEventArgs\ firstMouseEventArgs,\ MouseEventArgs\ secondMouseEventArgs),\ Task>\ dragEventHandler)}
+\DoxyCodeLine{\Hypertarget{_resizable_column_8razor_8cs_source_l00077}00077\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_resizable_column_8razor_8cs_source_l00078}00078\ \ \ \ \ \ \ \ \ \_dragEventHandler\ =\ dragEventHandler;}
+\DoxyCodeLine{\Hypertarget{_resizable_column_8razor_8cs_source_l00079}00079\ \ \ \ \ \ \ \ \ Dispatcher.Dispatch(\textcolor{keyword}{new}\ \mbox{\hyperlink{namespace_luthetus_1_1_common_1_1_razor_lib_1_1_drags_1_1_displays_a2158af3f35275731447356de1965b7cb}{DragState}}.ShouldDisplayAndMouseEventArgsSetAction(\textcolor{keyword}{true},\ \textcolor{keyword}{null}));}
+\DoxyCodeLine{\Hypertarget{_resizable_column_8razor_8cs_source_l00080}00080\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_resizable_column_8razor_8cs_source_l00081}00081\ }
+\DoxyCodeLine{\Hypertarget{_resizable_column_8razor_8cs_source_l00082}00082\ \ \ \ \ \textcolor{keyword}{private}\ async\ Task\ DragEventHandlerResizeHandleAsync(}
+\DoxyCodeLine{\Hypertarget{_resizable_column_8razor_8cs_source_l00083}00083\ \ \ \ \ \ \ \ \ (MouseEventArgs\ firstMouseEventArgs,\ MouseEventArgs\ secondMouseEventArgs)\ mouseEventArgsTuple)}
+\DoxyCodeLine{\Hypertarget{_resizable_column_8razor_8cs_source_l00084}00084\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_resizable_column_8razor_8cs_source_l00085}00085\ \ \ \ \ \ \ \ \ ResizeHelper.ResizeWest(}
+\DoxyCodeLine{\Hypertarget{_resizable_column_8razor_8cs_source_l00086}00086\ \ \ \ \ \ \ \ \ \ \ \ \ LeftElementDimensions,}
+\DoxyCodeLine{\Hypertarget{_resizable_column_8razor_8cs_source_l00087}00087\ \ \ \ \ \ \ \ \ \ \ \ \ mouseEventArgsTuple.firstMouseEventArgs,}
+\DoxyCodeLine{\Hypertarget{_resizable_column_8razor_8cs_source_l00088}00088\ \ \ \ \ \ \ \ \ \ \ \ \ mouseEventArgsTuple.secondMouseEventArgs);}
+\DoxyCodeLine{\Hypertarget{_resizable_column_8razor_8cs_source_l00089}00089\ }
+\DoxyCodeLine{\Hypertarget{_resizable_column_8razor_8cs_source_l00090}00090\ \ \ \ \ \ \ \ \ ResizeHelper.ResizeEast(}
+\DoxyCodeLine{\Hypertarget{_resizable_column_8razor_8cs_source_l00091}00091\ \ \ \ \ \ \ \ \ \ \ \ \ RightElementDimensions,}
+\DoxyCodeLine{\Hypertarget{_resizable_column_8razor_8cs_source_l00092}00092\ \ \ \ \ \ \ \ \ \ \ \ \ mouseEventArgsTuple.firstMouseEventArgs,}
+\DoxyCodeLine{\Hypertarget{_resizable_column_8razor_8cs_source_l00093}00093\ \ \ \ \ \ \ \ \ \ \ \ \ mouseEventArgsTuple.secondMouseEventArgs);}
+\DoxyCodeLine{\Hypertarget{_resizable_column_8razor_8cs_source_l00094}00094\ }
+\DoxyCodeLine{\Hypertarget{_resizable_column_8razor_8cs_source_l00095}00095\ \ \ \ \ \ \ \ \ await\ InvokeAsync(StateHasChanged);}
+\DoxyCodeLine{\Hypertarget{_resizable_column_8razor_8cs_source_l00096}00096\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_resizable_column_8razor_8cs_source_l00097}00097\ }
+\DoxyCodeLine{\Hypertarget{_resizable_column_8razor_8cs_source_l00098}\mbox{\hyperlink{class_luthetus_1_1_common_1_1_razor_lib_1_1_resizes_1_1_displays_1_1_resizable_column_abab365b203020e5720085f3df2b6208d}{00098}}\ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_luthetus_1_1_common_1_1_razor_lib_1_1_resizes_1_1_displays_1_1_resizable_column_abab365b203020e5720085f3df2b6208d}{Dispose}}()}
+\DoxyCodeLine{\Hypertarget{_resizable_column_8razor_8cs_source_l00099}00099\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_resizable_column_8razor_8cs_source_l00100}00100\ \ \ \ \ \ \ \ \ DragStateWrap.StateChanged\ -\/=\ DragStateWrapOnStateChanged;}
+\DoxyCodeLine{\Hypertarget{_resizable_column_8razor_8cs_source_l00101}00101\ \ \ \ \ \ \ \ \ AppOptionsStateWrap.StateChanged\ -\/=\ OnAppOptionsStateChanged;}
+\DoxyCodeLine{\Hypertarget{_resizable_column_8razor_8cs_source_l00102}00102\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_resizable_column_8razor_8cs_source_l00103}00103\ \}}
+
+\end{DoxyCode}

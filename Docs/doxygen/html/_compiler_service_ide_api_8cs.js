@@ -1,0 +1,4 @@
+var _compiler_service_ide_api_8cs =
+[
+    [ "Luthetus.Extensions.DotNet.CompilerServices.Models.CompilerServiceIdeApi", "class_luthetus_1_1_extensions_1_1_dot_net_1_1_compiler_services_1_1_models_1_1_compiler_service_ide_api.html", "class_luthetus_1_1_extensions_1_1_dot_net_1_1_compiler_services_1_1_models_1_1_compiler_service_ide_api" ]
+];

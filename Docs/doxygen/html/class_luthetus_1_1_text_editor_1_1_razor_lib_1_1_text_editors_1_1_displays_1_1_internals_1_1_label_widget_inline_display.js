@@ -1,0 +1,4 @@
+var class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_displays_1_1_internals_1_1_label_widget_inline_display =
+[
+    [ "Text", "class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_displays_1_1_internals_1_1_label_widget_inline_display.html#a70beaab3073a25343ecae93ae243f57d", null ]
+];

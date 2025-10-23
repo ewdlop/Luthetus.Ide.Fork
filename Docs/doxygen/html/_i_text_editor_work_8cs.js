@@ -1,0 +1,4 @@
+var _i_text_editor_work_8cs =
+[
+    [ "Luthetus.TextEditor.RazorLib.BackgroundTasks.Models.ITextEditorWork", "interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_background_tasks_1_1_models_1_1_i_text_editor_work.html", "interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_background_tasks_1_1_models_1_1_i_text_editor_work" ]
+];

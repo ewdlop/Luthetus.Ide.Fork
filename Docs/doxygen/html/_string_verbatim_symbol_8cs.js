@@ -1,0 +1,4 @@
+var _string_verbatim_symbol_8cs =
+[
+    [ "Luthetus.TextEditor.RazorLib.CompilerServices.Syntax.Symbols.StringVerbatimSymbol", "struct_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_1_1_symbols_1_1_string_verbatim_symbol.html", "struct_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_1_1_symbols_1_1_string_verbatim_symbol" ]
+];

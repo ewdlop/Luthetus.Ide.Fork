@@ -1,0 +1,6 @@
+var class_luthetus_1_1_compiler_services_1_1_dot_net_solution_1_1_models_1_1_project_1_1_c_sharp_project_to_project_reference =
+[
+    [ "CSharpProjectToProjectReference", "class_luthetus_1_1_compiler_services_1_1_dot_net_solution_1_1_models_1_1_project_1_1_c_sharp_project_to_project_reference.html#aa9a5f9e0e1ac048df9dd33db1adcd7bf", null ],
+    [ "ModifyProjectNamespacePath", "class_luthetus_1_1_compiler_services_1_1_dot_net_solution_1_1_models_1_1_project_1_1_c_sharp_project_to_project_reference.html#aae739cd09f9cd795f2d3610a0235e614", null ],
+    [ "ReferenceProjectAbsolutePath", "class_luthetus_1_1_compiler_services_1_1_dot_net_solution_1_1_models_1_1_project_1_1_c_sharp_project_to_project_reference.html#affb98aad159bdbaf12fe4ff1bd4db134", null ]
+];

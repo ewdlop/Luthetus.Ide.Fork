@@ -1,0 +1,4 @@
+var _folder_explorer_state_reducer_tests_8cs =
+[
+    [ "Luthetus.Ide.Tests.Basis.FolderExplorers.States.FolderExplorerStateReducerTests", "class_luthetus_1_1_ide_1_1_tests_1_1_basis_1_1_folder_explorers_1_1_states_1_1_folder_explorer_state_reducer_tests.html", "class_luthetus_1_1_ide_1_1_tests_1_1_basis_1_1_folder_explorers_1_1_states_1_1_folder_explorer_state_reducer_tests" ]
+];

@@ -1,0 +1,74 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="__git_origin_display_8razor_8cs_source" xml:lang="en-US">
+<title>GitOriginDisplay.razor.cs</title>
+<indexterm><primary>Source/Lib/Extensions/Extensions.Git/Displays/GitOriginDisplay.razor.cs</primary></indexterm>
+Go to the documentation of this file.<programlisting linenumbering="unnumbered"><anchor xml:id="__git_origin_display_8razor_8cs_source_1l00001"/>00001 <emphasis role="keyword">using&#32;</emphasis>Fluxor;
+<anchor xml:id="__git_origin_display_8razor_8cs_source_1l00002"/>00002 <emphasis role="keyword">using&#32;</emphasis>Microsoft.AspNetCore.Components;
+<anchor xml:id="__git_origin_display_8razor_8cs_source_1l00003"/>00003 <emphasis role="keyword">using&#32;</emphasis><link linkend="_namespace_luthetus_1_1_common_1_1_razor_lib_1_1_file_systems_1_1_models">Luthetus.Common.RazorLib.FileSystems.Models</link>;
+<anchor xml:id="__git_origin_display_8razor_8cs_source_1l00004"/>00004 <emphasis role="keyword">using&#32;</emphasis><link linkend="_namespace_luthetus_1_1_common_1_1_razor_lib_1_1_keys_1_1_models">Luthetus.Common.RazorLib.Keys.Models</link>;
+<anchor xml:id="__git_origin_display_8razor_8cs_source_1l00005"/>00005 <emphasis role="keyword">using&#32;</emphasis><link linkend="_namespace_luthetus_1_1_ide_1_1_razor_lib_1_1_background_tasks_1_1_models">Luthetus.Ide.RazorLib.BackgroundTasks.Models</link>;
+<anchor xml:id="__git_origin_display_8razor_8cs_source_1l00006"/>00006 <emphasis role="keyword">using&#32;</emphasis><link linkend="_namespace_luthetus_1_1_ide_1_1_razor_lib_1_1_command_lines_1_1_models">Luthetus.Ide.RazorLib.CommandLines.Models</link>;
+<anchor xml:id="__git_origin_display_8razor_8cs_source_1l00007"/>00007 <emphasis role="keyword">using&#32;</emphasis><link linkend="_namespace_luthetus_1_1_ide_1_1_razor_lib_1_1_terminals_1_1_models">Luthetus.Ide.RazorLib.Terminals.Models</link>;
+<anchor xml:id="__git_origin_display_8razor_8cs_source_1l00008"/>00008 <emphasis role="keyword">using&#32;</emphasis><link linkend="_namespace_luthetus_1_1_ide_1_1_razor_lib_1_1_terminals_1_1_states">Luthetus.Ide.RazorLib.Terminals.States</link>;
+<anchor xml:id="__git_origin_display_8razor_8cs_source_1l00009"/>00009 <emphasis role="keyword">using&#32;</emphasis><link linkend="_namespace_luthetus_1_1_extensions_1_1_git_1_1_command_lines_1_1_models">Luthetus.Extensions.Git.CommandLines.Models</link>;
+<anchor xml:id="__git_origin_display_8razor_8cs_source_1l00010"/>00010 <emphasis role="keyword">using&#32;</emphasis><link linkend="_namespace_luthetus_1_1_extensions_1_1_git_1_1_models">Luthetus.Extensions.Git.Models</link>;
+<anchor xml:id="__git_origin_display_8razor_8cs_source_1l00011"/>00011 <emphasis role="keyword">using&#32;</emphasis><link linkend="_namespace_luthetus_1_1_extensions_1_1_git_1_1_states">Luthetus.Extensions.Git.States</link>;
+<anchor xml:id="__git_origin_display_8razor_8cs_source_1l00012"/>00012 <emphasis role="keyword">using&#32;</emphasis><link linkend="_namespace_luthetus_1_1_extensions_1_1_git_1_1_background_tasks_1_1_models">Luthetus.Extensions.Git.BackgroundTasks.Models</link>;
+<anchor xml:id="__git_origin_display_8razor_8cs_source_1l00013"/>00013 
+<anchor xml:id="__git_origin_display_8razor_8cs_source_1l00014"/>00014 <emphasis role="keyword">namespace&#32;</emphasis><link linkend="_namespace_luthetus_1_1_extensions_1_1_git_1_1_displays">Luthetus.Extensions.Git.Displays</link>;
+<anchor xml:id="__git_origin_display_8razor_8cs_source_1l00015"/>00015 
+<anchor xml:id="__git_origin_display_8razor_8cs_source_1l00016"/><link linkend="_class_luthetus_1_1_extensions_1_1_git_1_1_displays_1_1_git_origin_display">00016</link> <emphasis role="keyword">public</emphasis>&#32;<emphasis role="keyword">partial&#32;class&#32;</emphasis><link linkend="_class_luthetus_1_1_extensions_1_1_git_1_1_displays_1_1_git_origin_display">GitOriginDisplay</link>&#32;:&#32;ComponentBase
+<anchor xml:id="__git_origin_display_8razor_8cs_source_1l00017"/>00017 {
+<anchor xml:id="__git_origin_display_8razor_8cs_source_1l00018"/>00018 &#32;&#32;&#32;&#32;[Inject]
+<anchor xml:id="__git_origin_display_8razor_8cs_source_1l00019"/>00019 &#32;&#32;&#32;&#32;<emphasis role="keyword">private</emphasis>&#32;IState&lt;GitState&gt;&#32;GitStateWrap&#32;{&#32;<emphasis role="keyword">get</emphasis>;&#32;<emphasis role="keyword">set</emphasis>;&#32;}&#32;=&#32;<emphasis role="keyword">null</emphasis>!;
+<anchor xml:id="__git_origin_display_8razor_8cs_source_1l00020"/>00020 &#32;&#32;&#32;&#32;[Inject]
+<anchor xml:id="__git_origin_display_8razor_8cs_source_1l00021"/>00021 &#32;&#32;&#32;&#32;<emphasis role="keyword">private</emphasis>&#32;IState&lt;TerminalState&gt;&#32;TerminalStateWrap&#32;{&#32;<emphasis role="keyword">get</emphasis>;&#32;<emphasis role="keyword">set</emphasis>;&#32;}&#32;=&#32;<emphasis role="keyword">null</emphasis>!;
+<anchor xml:id="__git_origin_display_8razor_8cs_source_1l00022"/>00022 &#32;&#32;&#32;&#32;[Inject]
+<anchor xml:id="__git_origin_display_8razor_8cs_source_1l00023"/>00023 &#32;&#32;&#32;&#32;<emphasis role="keyword">private</emphasis>&#32;IDispatcher&#32;Dispatcher&#32;{&#32;<emphasis role="keyword">get</emphasis>;&#32;<emphasis role="keyword">set</emphasis>;&#32;}&#32;=&#32;<emphasis role="keyword">null</emphasis>!;
+<anchor xml:id="__git_origin_display_8razor_8cs_source_1l00024"/>00024 &#32;&#32;&#32;&#32;[Inject]
+<anchor xml:id="__git_origin_display_8razor_8cs_source_1l00025"/>00025 &#32;&#32;&#32;&#32;<emphasis role="keyword">private</emphasis>&#32;<link linkend="_interface_luthetus_1_1_common_1_1_razor_lib_1_1_file_systems_1_1_models_1_1_i_environment_provider">IEnvironmentProvider</link>&#32;EnvironmentProvider&#32;{&#32;<emphasis role="keyword">get</emphasis>;&#32;<emphasis role="keyword">set</emphasis>;&#32;}&#32;=&#32;<emphasis role="keyword">null</emphasis>!;
+<anchor xml:id="__git_origin_display_8razor_8cs_source_1l00026"/>00026 &#32;&#32;&#32;&#32;[Inject]
+<anchor xml:id="__git_origin_display_8razor_8cs_source_1l00027"/>00027 &#32;&#32;&#32;&#32;<emphasis role="keyword">private</emphasis>&#32;GitBackgroundTaskApi&#32;GitBackgroundTaskApi&#32;{&#32;<emphasis role="keyword">get</emphasis>;&#32;<emphasis role="keyword">set</emphasis>;&#32;}&#32;=&#32;<emphasis role="keyword">null</emphasis>!;
+<anchor xml:id="__git_origin_display_8razor_8cs_source_1l00028"/>00028 &#32;&#32;&#32;&#32;[Inject]
+<anchor xml:id="__git_origin_display_8razor_8cs_source_1l00029"/>00029 &#32;&#32;&#32;&#32;<emphasis role="keyword">private</emphasis>&#32;GitCliOutputParser&#32;GitCliOutputParser&#32;{&#32;<emphasis role="keyword">get</emphasis>;&#32;<emphasis role="keyword">set</emphasis>;&#32;}&#32;=&#32;<emphasis role="keyword">null</emphasis>!;
+<anchor xml:id="__git_origin_display_8razor_8cs_source_1l00030"/>00030 
+<anchor xml:id="__git_origin_display_8razor_8cs_source_1l00031"/>00031 &#32;&#32;&#32;&#32;<emphasis role="keyword">private</emphasis>&#32;<emphasis role="keywordtype">string</emphasis>&#32;_gitOrigin&#32;=&#32;<emphasis role="keywordtype">string</emphasis>.Empty;
+<anchor xml:id="__git_origin_display_8razor_8cs_source_1l00032"/>00032 &#32;&#32;&#32;&#32;
+<anchor xml:id="__git_origin_display_8razor_8cs_source_1l00033"/>00033 &#32;&#32;&#32;&#32;<emphasis role="keyword">private</emphasis>&#32;<emphasis role="keywordtype">string</emphasis>&#32;CommandArgs&#32;=&gt;&#32;$<emphasis role="stringliteral">&quot;remote&#32;add&#32;origin&#32;\&quot;{_gitOrigin}\&quot;&quot;</emphasis>;
+<anchor xml:id="__git_origin_display_8razor_8cs_source_1l00034"/>00034 &#32;&#32;&#32;&#32;
+<anchor xml:id="__git_origin_display_8razor_8cs_source_1l00035"/><link linkend="_class_luthetus_1_1_extensions_1_1_git_1_1_displays_1_1_git_origin_display_1ad660e7c5cad633d55bace6410c467e9f">00035</link> &#32;&#32;&#32;&#32;<emphasis role="keyword">public</emphasis>&#32;Key&lt;TerminalCommandRequest&gt;&#32;<link linkend="_class_luthetus_1_1_extensions_1_1_git_1_1_displays_1_1_git_origin_display_1ad660e7c5cad633d55bace6410c467e9f">GitSetOriginTerminalCommandRequestKey</link>&#32;{&#32;<emphasis role="keyword">get</emphasis>;&#32;}&#32;=&#32;Key&lt;TerminalCommandRequest&gt;.NewKey();
+<anchor xml:id="__git_origin_display_8razor_8cs_source_1l00036"/>00036 
+<anchor xml:id="__git_origin_display_8razor_8cs_source_1l00037"/>00037 &#32;&#32;&#32;&#32;<emphasis role="keyword">private</emphasis>&#32;<emphasis role="keywordtype">void</emphasis>&#32;GetOriginOnClick()
+<anchor xml:id="__git_origin_display_8razor_8cs_source_1l00038"/>00038 &#32;&#32;&#32;&#32;{
+<anchor xml:id="__git_origin_display_8razor_8cs_source_1l00039"/>00039 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;var&#32;localGitState&#32;=&#32;GitStateWrap.Value;
+<anchor xml:id="__git_origin_display_8razor_8cs_source_1l00040"/>00040 
+<anchor xml:id="__git_origin_display_8razor_8cs_source_1l00041"/>00041 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">if</emphasis>&#32;(localGitState.Repo&#32;is&#32;<emphasis role="keyword">null</emphasis>)
+<anchor xml:id="__git_origin_display_8razor_8cs_source_1l00042"/>00042 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>;
+<anchor xml:id="__git_origin_display_8razor_8cs_source_1l00043"/>00043 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;
+<anchor xml:id="__git_origin_display_8razor_8cs_source_1l00044"/>00044 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<link linkend="_class_luthetus_1_1_extensions_1_1_git_1_1_background_tasks_1_1_models_1_1_git_background_task_api">GitBackgroundTaskApi</link>.<link linkend="_class_luthetus_1_1_extensions_1_1_git_1_1_background_tasks_1_1_models_1_1_git_background_task_api_1a2c059afb23ea38591a882933b9972492">Git</link>.<link linkend="_class_luthetus_1_1_extensions_1_1_git_1_1_models_1_1_git_ide_api_1a098360b247fcf5e4b2bda5d5b0a0f2ef">GetOriginNameEnqueue</link>(localGitState.Repo);
+<anchor xml:id="__git_origin_display_8razor_8cs_source_1l00045"/>00045 &#32;&#32;&#32;&#32;}
+<anchor xml:id="__git_origin_display_8razor_8cs_source_1l00046"/>00046 
+<anchor xml:id="__git_origin_display_8razor_8cs_source_1l00047"/>00047 &#32;&#32;&#32;&#32;<emphasis role="keyword">private</emphasis>&#32;<emphasis role="keywordtype">void</emphasis>&#32;SetGitOriginOnClick(<emphasis role="keywordtype">string</emphasis>&#32;localCommandArgs)
+<anchor xml:id="__git_origin_display_8razor_8cs_source_1l00048"/>00048 &#32;&#32;&#32;&#32;{
+<anchor xml:id="__git_origin_display_8razor_8cs_source_1l00049"/>00049 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;var&#32;localGitState&#32;=&#32;GitStateWrap.Value;
+<anchor xml:id="__git_origin_display_8razor_8cs_source_1l00050"/>00050 
+<anchor xml:id="__git_origin_display_8razor_8cs_source_1l00051"/>00051 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">if</emphasis>&#32;(localGitState.Repo&#32;is&#32;<emphasis role="keyword">null</emphasis>)
+<anchor xml:id="__git_origin_display_8razor_8cs_source_1l00052"/>00052 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>;
+<anchor xml:id="__git_origin_display_8razor_8cs_source_1l00053"/>00053 
+<anchor xml:id="__git_origin_display_8razor_8cs_source_1l00054"/>00054 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;var&#32;formattedCommand&#32;=&#32;<emphasis role="keyword">new</emphasis>&#32;<link linkend="_class_luthetus_1_1_ide_1_1_razor_lib_1_1_command_lines_1_1_models_1_1_formatted_command">FormattedCommand</link>(
+<anchor xml:id="__git_origin_display_8razor_8cs_source_1l00055"/>00055 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;GitCliFacts.TARGET_FILE_NAME,
+<anchor xml:id="__git_origin_display_8razor_8cs_source_1l00056"/>00056 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keyword">new</emphasis>&#32;<emphasis role="keywordtype">string</emphasis>[]&#32;{&#32;localCommandArgs&#32;})
+<anchor xml:id="__git_origin_display_8razor_8cs_source_1l00057"/>00057 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;{
+<anchor xml:id="__git_origin_display_8razor_8cs_source_1l00058"/>00058 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;HACK_ArgumentsString&#32;=&#32;localCommandArgs,
+<anchor xml:id="__git_origin_display_8razor_8cs_source_1l00059"/>00059 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;Tag&#32;=&#32;<link linkend="_class_luthetus_1_1_extensions_1_1_git_1_1_models_1_1_git_cli_output_parser">GitCliOutputParser</link>.<link linkend="_class_luthetus_1_1_extensions_1_1_git_1_1_models_1_1_git_cli_output_parser_1_1_tag_constants">TagConstants</link>.SetGitOrigin,
+<anchor xml:id="__git_origin_display_8razor_8cs_source_1l00060"/>00060 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;};
+<anchor xml:id="__git_origin_display_8razor_8cs_source_1l00061"/>00061 
+<anchor xml:id="__git_origin_display_8razor_8cs_source_1l00062"/>00062 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;var&#32;terminalCommandRequest&#32;=&#32;<emphasis role="keyword">new</emphasis>&#32;<link linkend="_class_luthetus_1_1_ide_1_1_razor_lib_1_1_terminals_1_1_models_1_1_terminal_command_request">TerminalCommandRequest</link>(
+<anchor xml:id="__git_origin_display_8razor_8cs_source_1l00063"/>00063 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;formattedCommand.Value,
+<anchor xml:id="__git_origin_display_8razor_8cs_source_1l00064"/>00064 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;localGitState.Repo.AbsolutePath.Value,
+<anchor xml:id="__git_origin_display_8razor_8cs_source_1l00065"/>00065 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<link linkend="_class_luthetus_1_1_extensions_1_1_git_1_1_displays_1_1_git_origin_display_1ad660e7c5cad633d55bace6410c467e9f">GitSetOriginTerminalCommandRequestKey</link>);
+<anchor xml:id="__git_origin_display_8razor_8cs_source_1l00066"/>00066 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;
+<anchor xml:id="__git_origin_display_8razor_8cs_source_1l00067"/>00067 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;TerminalStateWrap.Value.TerminalMap[TerminalFacts.GENERAL_KEY].EnqueueCommand(terminalCommandRequest);
+<anchor xml:id="__git_origin_display_8razor_8cs_source_1l00068"/>00068 &#32;&#32;&#32;&#32;}
+<anchor xml:id="__git_origin_display_8razor_8cs_source_1l00069"/>00069 }
+</programlisting></section>

@@ -1,0 +1,142 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
+  <compounddef id="md__docs_2_text_editor_2installation" kind="page">
+    <compoundname>md__docs_2_text_editor_2installation</compoundname>
+    <title>Luthetus.TextEditor (v2.1.0)</title>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+<para><anchor id="md__docs_2_text_editor_2installation_1autotoc_md183"/></para>
+<sect1 id="md__docs_2_text_editor_2installation_1autotoc_md184">
+<title>Installation</title><para>The .NET Solution: <ulink url="../../Source/Tutorials/Luthetus.Tutorials.sln">Luthetus.Tutorials.sln</ulink>, was made by following steps described here. So, the completed result can be found there.</para>
+<sect2 id="md__docs_2_text_editor_2installation_1autotoc_md185">
+<title>Goal</title><para><image type="html" name="../../Images/TextEditor/Gifs/text-editor-tutorial-result.gif" alt="tutorial_Usage-CSharpCompilerServiceTextEditor.gif" inline="yes"></image>
+</para>
+<para><itemizedlist>
+<listitem><para>Reference the <computeroutput><ref refid="namespace_luthetus_1_1_text_editor" kindref="compound">Luthetus.TextEditor</ref></computeroutput> Nuget Package</para>
+</listitem><listitem><para>Register the <computeroutput>Services</computeroutput></para>
+</listitem><listitem><para>Reference the <computeroutput>CSS</computeroutput></para>
+</listitem><listitem><para>Reference the <computeroutput>JavaScript</computeroutput></para>
+</listitem><listitem><para>In <computeroutput>App.razor</computeroutput> render the <computeroutput>&lt;Fluxor.Blazor.Web.StoreInitializer/&gt;</computeroutput></para>
+</listitem><listitem><para>In <computeroutput>MainLayout.razor</computeroutput> render the <computeroutput>&lt;<ref refid="class_luthetus_1_1_common_1_1_razor_lib_1_1_installations_1_1_displays_1_1_luthetus_common_initializer" kindref="compound">Luthetus.Common.RazorLib.Installations.Displays.LuthetusCommonInitializer</ref> /&gt;</computeroutput> and the <computeroutput>&lt;<ref refid="class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_installations_1_1_displays_1_1_luthetus_text_editor_initializer" kindref="compound">Luthetus.TextEditor.RazorLib.Installations.Displays.LuthetusTextEditorInitializer</ref> /&gt;</computeroutput> Blazor components</para>
+</listitem></itemizedlist>
+</para>
+</sect2>
+<sect2 id="md__docs_2_text_editor_2installation_1autotoc_md186">
+<title>Steps</title><para><itemizedlist>
+<listitem><para>Reference the <computeroutput><ref refid="namespace_luthetus_1_1_text_editor" kindref="compound">Luthetus.TextEditor</ref></computeroutput> NuGet Package</para>
+</listitem></itemizedlist>
+</para>
+<para>Use your preferred way to install NuGet Packages to install <computeroutput><ref refid="namespace_luthetus_1_1_text_editor" kindref="compound">Luthetus.TextEditor</ref></computeroutput>.</para>
+<para>The nuget.org link to the NuGet Package is here: <ulink url="https://www.nuget.org/packages/Luthetus.TextEditor">https://www.nuget.org/packages/Luthetus.TextEditor</ulink></para>
+<para><itemizedlist>
+<listitem><para>Register the <computeroutput>Services</computeroutput></para>
+</listitem></itemizedlist>
+</para>
+<para>Go to the file that you register your services and add the following lines of C# code.</para>
+<para><programlisting filename=".cs"><codeline><highlight class="comment">//<sp/>using<sp/>Fluxor;</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="comment">//<sp/>using<sp/>Luthetus.Common.RazorLib.BackgroundTasks.Models;</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="comment">//<sp/>using<sp/>Luthetus.Common.RazorLib.Installations.Models;</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="comment">//<sp/>using<sp/>Luthetus.TextEditor.RazorLib.Installations.Models;</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="comment">//<sp/>Use<sp/>either<sp/>Wasm<sp/>or<sp/>ServerSide<sp/>depending<sp/>on<sp/>how<sp/>your<sp/>app<sp/>is<sp/>being<sp/>hosted.</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="comment">//<sp/>var<sp/>luthetusHostingKind<sp/>=<sp/>LuthetusHostingKind.ServerSide;</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal">var<sp/>luthetusHostingKind<sp/>=<sp/><ref refid="namespace_luthetus_1_1_common_1_1_razor_lib_1_1_installations_1_1_models_1a6fa014b5a7072b6304fd9fe595cc2a60" kindref="member">LuthetusHostingKind</ref>.Wasm;</highlight></codeline>
+<codeline><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal">var<sp/><ref refid="_lib_2_ide_2_host_8_blazor_server_side_2_program_8cs_1aeee0b60aab9a620e5403b5af0d821d4c" kindref="member">hostingInformation</ref><sp/>=<sp/></highlight><highlight class="keyword">new</highlight><highlight class="normal"><sp/><ref refid="namespace_luthetus_1_1_common_1_1_razor_lib_1_1_installations_1_1_models_1a761f9bfb52cfd9ffaa1a4bbdddf1aebb" kindref="member">LuthetusHostingInformation</ref>(</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>luthetusHostingKind,</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="namespace_luthetus_1_1_common_1_1_razor_lib_1_1_installations_1_1_models_1a6de164b4b02fa971f5eddc7f274686a6" kindref="member">LuthetusPurposeKind</ref>.TextEditor,</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">new</highlight><highlight class="normal"><sp/>BackgroundTaskService());</highlight></codeline>
+<codeline><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal">services.AddLuthetusTextEditor(<ref refid="_lib_2_ide_2_host_8_blazor_server_side_2_program_8cs_1aeee0b60aab9a620e5403b5af0d821d4c" kindref="member">hostingInformation</ref>);</highlight></codeline>
+<codeline><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal">services.AddFluxor(options<sp/>=&gt;<sp/>options.ScanAssemblies(</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>typeof(LuthetusCommonConfig).Assembly,</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>typeof(LuthetusTextEditorConfig).Assembly));</highlight></codeline>
+<codeline><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="comment">//<sp/>If<sp/>NOT<sp/>running<sp/>ServerSide<sp/>then<sp/>one<sp/>needs<sp/>to<sp/>run:</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="comment">//<sp/>&apos;hostingInformation.StartBackgroundTaskWorkers(host.Services);&apos;</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="comment">//</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="comment">//<sp/>Some<sp/>builders<sp/>have<sp/>&apos;Build()&apos;<sp/>invoked<sp/>then<sp/>fluent<sp/>API<sp/>into<sp/>their<sp/>&apos;Run()&apos;<sp/>or<sp/>&apos;RunAsync()&apos;.</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="comment">//<sp/>This<sp/>might<sp/>require<sp/>one<sp/>to<sp/>capture<sp/>the<sp/>&apos;Build()&apos;<sp/>result</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="comment">//</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="comment">//<sp/>This<sp/>can<sp/>be<sp/>done<sp/>anywhere,<sp/>so<sp/>long<sp/>as<sp/>the<sp/>services<sp/>have<sp/>been<sp/>built</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="comment">//<sp/>(by<sp/>&quot;can<sp/>be<sp/>done<sp/>anywhere&quot;<sp/>this<sp/>includes<sp/>even<sp/>after<sp/>the<sp/>app<sp/>rendered,</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="comment">//<sp/><sp/>I<sp/>wonder<sp/>if<sp/>you<sp/>could<sp/>tie<sp/>it<sp/>to<sp/>the<sp/>lifecycle<sp/>of<sp/>a<sp/>Blazor<sp/>component<sp/>with<sp/>IDisposable?)</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="comment">/*</highlight></codeline>
+<codeline><highlight class="comment">var<sp/>host<sp/>=<sp/>builder.Build();</highlight></codeline>
+<codeline><highlight class="comment">hostingInformation.StartBackgroundTaskWorkers(host.Services);</highlight></codeline>
+<codeline><highlight class="comment"></highlight></codeline>
+<codeline><highlight class="comment">await<sp/>host.RunAsync();</highlight></codeline>
+<codeline><highlight class="comment">*/</highlight></codeline>
+</programlisting></para>
+<para><itemizedlist>
+<listitem><para>Reference the <computeroutput>CSS</computeroutput></para>
+</listitem></itemizedlist>
+</para>
+<para>Go to the file that you reference CSS files from and add the following CSS references.</para>
+<para><programlisting filename=".html"><codeline><highlight class="normal">&lt;link<sp/>href=&quot;_content/Luthetus.Common/luthetusCommon.css&quot;<sp/>rel=&quot;stylesheet&quot;<sp/>/&gt;</highlight></codeline>
+<codeline><highlight class="normal">&lt;link<sp/>href=&quot;_content/Luthetus.TextEditor/luthetusTextEditor.css&quot;<sp/>rel=&quot;stylesheet&quot;<sp/>/&gt;</highlight></codeline>
+</programlisting></para>
+<para><itemizedlist>
+<listitem><para>Reference the <computeroutput>JavaScript</computeroutput></para>
+</listitem></itemizedlist>
+</para>
+<para>Go to the file that you reference JavaScript files from and add the following JavaScript reference below the Blazor framework JavaScript reference</para>
+<para><programlisting filename=".html"><codeline><highlight class="normal">&lt;script<sp/>src=&quot;_content/Luthetus.Common/luthetusCommon.js&quot;&gt;&lt;/script&gt;</highlight></codeline>
+<codeline><highlight class="normal">&lt;script<sp/>src=&quot;_content/Luthetus.TextEditor/luthetusTextEditor.js&quot;&gt;&lt;/script&gt;</highlight></codeline>
+</programlisting></para>
+<para><itemizedlist>
+<listitem><para>In <computeroutput>App.razor</computeroutput> add the following towards the top of the file:</para>
+</listitem></itemizedlist>
+</para>
+<para><programlisting filename=".html"><codeline><highlight class="normal">&lt;Fluxor.Blazor.Web.StoreInitializer<sp/>/&gt;</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">&lt;!--</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>The<sp/>Luthetus<sp/>components<sp/>here,<sp/>can<sp/>be<sp/>moved<sp/>wherever.</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>Preferably,<sp/>these<sp/>are<sp/>in<sp/>one&apos;s<sp/>LayoutComponentBase.</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>As<sp/>here<sp/>they<sp/>cannot<sp/>receive<sp/>any<sp/>cascading<sp/>css.</highlight></codeline>
+<codeline><highlight class="normal">--&gt;</highlight></codeline>
+<codeline><highlight class="normal">&lt;Luthetus.Common.RazorLib.Installations.Displays.LuthetusCommonInitializer<sp/>/&gt;</highlight></codeline>
+<codeline><highlight class="normal">&lt;Luthetus.TextEditor.RazorLib.Installations.Displays.LuthetusTextEditorInitializer<sp/>/&gt;</highlight></codeline>
+</programlisting></para>
+<para><blockquote><para><emphasis>NOTE:</emphasis> <ref refid="namespace_luthetus" kindref="compound">Luthetus</ref> repositories use the state management library named <computeroutput>Fluxor</computeroutput> (<ulink url="https://github.com/mrpmorris/Fluxor">github link</ulink>). </para>
+</blockquote></para>
+<para><itemizedlist>
+<listitem><para>My Entire App.razor file as of this step:</para>
+</listitem></itemizedlist>
+</para>
+<para><programlisting filename=".html"><codeline><highlight class="normal">&lt;!--<sp/>App.razor<sp/>--&gt;</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">&lt;Fluxor.Blazor.Web.StoreInitializer<sp/>/&gt;</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">&lt;!--</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>The<sp/>Luthetus<sp/>components<sp/>here,<sp/>can<sp/>be<sp/>more<sp/>wherever.</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>Preferably,<sp/>these<sp/>are<sp/>in<sp/>one&apos;s<sp/>LayoutComponentBase.</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>As<sp/>here<sp/>they<sp/>cannot<sp/>receive<sp/>any<sp/>cascading<sp/>css.</highlight></codeline>
+<codeline><highlight class="normal">--&gt;</highlight></codeline>
+<codeline><highlight class="normal">&lt;Luthetus.Common.RazorLib.Installations.Displays.LuthetusCommonInitializer<sp/>/&gt;</highlight></codeline>
+<codeline><highlight class="normal">&lt;Luthetus.TextEditor.RazorLib.Installations.Displays.LuthetusTextEditorInitializer<sp/>/&gt;</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">&lt;Router<sp/>AppAssembly=&quot;@typeof(App).Assembly&quot;<sp/>AdditionalAssemblies=&quot;new<sp/>[]<sp/>{<sp/>typeof(MainLayout).Assembly<sp/>}&quot;&gt;</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>&lt;Found<sp/>Context=&quot;routeData&quot;&gt;</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>&lt;RouteView<sp/>RouteData=&quot;@routeData&quot;<sp/>DefaultLayout=&quot;@typeof(MainLayout)&quot;/&gt;</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>&lt;FocusOnNavigate<sp/>RouteData=&quot;@routeData&quot;<sp/>Selector=&quot;h1&quot;/&gt;</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>&lt;/Found&gt;</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>&lt;NotFound&gt;</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>&lt;PageTitle&gt;Not<sp/>found&lt;/PageTitle&gt;</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>&lt;LayoutView<sp/>Layout=&quot;@typeof(MainLayout)&quot;&gt;</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>&lt;p<sp/>role=&quot;alert&quot;&gt;Sorry,<sp/>there&apos;s<sp/>nothing<sp/>at<sp/>this<sp/>address.&lt;/p&gt;</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>&lt;/LayoutView&gt;</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>&lt;/NotFound&gt;</highlight></codeline>
+<codeline><highlight class="normal">&lt;/Router&gt;</highlight></codeline>
+</programlisting></para>
+</sect2>
+</sect1>
+<sect1 id="md__docs_2_text_editor_2installation_1autotoc_md187">
+<title>Next tutorial: <ref refid="md__docs_2_text_editor_2usage" kindref="compound">usage.md</ref></title></sect1>
+    </detaileddescription>
+    <location file="Docs/TextEditor/installation.md"/>
+  </compounddef>
+</doxygen>

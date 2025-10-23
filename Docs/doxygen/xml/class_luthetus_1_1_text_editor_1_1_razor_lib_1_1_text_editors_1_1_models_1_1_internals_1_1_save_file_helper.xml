@@ -1,0 +1,66 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
+  <compounddef id="class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1_1_internals_1_1_save_file_helper" kind="class" language="C#" prot="public">
+    <compoundname>Luthetus::TextEditor::RazorLib::TextEditors::Models::Internals::SaveFileHelper</compoundname>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1_1_internals_1_1_save_file_helper_1a8cc9f20654e6a53f416f4c77f4d47b2e" prot="private" static="no" mutable="no">
+        <type>object</type>
+        <definition>object Luthetus.TextEditor.RazorLib.TextEditors.Models.Internals.SaveFileHelper._saveLock</definition>
+        <argsstring></argsstring>
+        <name>_saveLock</name>
+        <qualifiedname>Luthetus.TextEditor.RazorLib.TextEditors.Models.Internals.SaveFileHelper._saveLock</qualifiedname>
+        <initializer>= new()</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Lib/TextEditor/TextEditors/Models/Internals/SaveFileHelper.cs" line="8" column="20" bodyfile="Source/Lib/TextEditor/TextEditors/Models/Internals/SaveFileHelper.cs" bodystart="8" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1_1_internals_1_1_save_file_helper_1ae60f2b9a8fea4ef50cdfc0ae86c00c95" prot="private" static="no" mutable="no">
+        <type>CancellationTokenSource</type>
+        <definition>CancellationTokenSource Luthetus.TextEditor.RazorLib.TextEditors.Models.Internals.SaveFileHelper._saveCancellationTokenSource</definition>
+        <argsstring></argsstring>
+        <name>_saveCancellationTokenSource</name>
+        <qualifiedname>Luthetus.TextEditor.RazorLib.TextEditors.Models.Internals.SaveFileHelper._saveCancellationTokenSource</qualifiedname>
+        <initializer>= new()</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Lib/TextEditor/TextEditors/Models/Internals/SaveFileHelper.cs" line="9" column="37" bodyfile="Source/Lib/TextEditor/TextEditors/Models/Internals/SaveFileHelper.cs" bodystart="9" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1_1_internals_1_1_save_file_helper_1a95df762ee62335bf859c96edcec17d00" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>CancellationToken</type>
+        <definition>CancellationToken Luthetus.TextEditor.RazorLib.TextEditors.Models.Internals.SaveFileHelper.GetCancellationToken</definition>
+        <argsstring>()</argsstring>
+        <name>GetCancellationToken</name>
+        <qualifiedname>Luthetus.TextEditor.RazorLib.TextEditors.Models.Internals.SaveFileHelper.GetCancellationToken</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Source/Lib/TextEditor/TextEditors/Models/Internals/SaveFileHelper.cs" line="11" column="30" bodyfile="Source/Lib/TextEditor/TextEditors/Models/Internals/SaveFileHelper.cs" bodystart="11" bodyend="20"/>
+        <referencedby refid="class_luthetus_1_1_ide_1_1_razor_lib_1_1_editors_1_1_models_1_1_editor_ide_api_1ad1c8114d5863a46a6f72780f9c8a65ae" compoundref="_editor_ide_api_8cs" startline="172" endline="274">Luthetus.Ide.RazorLib.Editors.Models.EditorIdeApi.TryRegisterViewModelFunc</referencedby>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>TODO: (2023-06-09) This class is a hacky way to track a cancellation token source per each text editor model. As of this comment, <ref refid="class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1_1_text_editor_model" kindref="compound">TextEditorModel</ref> is a class which is frequently re-constructed with new(). A CancellationTokenSource as a property would therefore not work. One would Cancel() then new() up another CancellationTokenSource and update the property. Yet its possible that instance of <ref refid="class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1_1_text_editor_model" kindref="compound">TextEditorModel</ref> isn&apos;t even being used anymore by that point. So a readonly object wrapper which then contains the CancellationTokenSource ensures it doesn&apos;t get lost. </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="Source/Lib/TextEditor/TextEditors/Models/Internals/SaveFileHelper.cs" line="6" column="7" bodyfile="Source/Lib/TextEditor/TextEditors/Models/Internals/SaveFileHelper.cs" bodystart="7" bodyend="21"/>
+    <listofallmembers>
+      <member refid="class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1_1_internals_1_1_save_file_helper_1ae60f2b9a8fea4ef50cdfc0ae86c00c95" prot="private" virt="non-virtual"><scope>Luthetus::TextEditor::RazorLib::TextEditors::Models::Internals::SaveFileHelper</scope><name>_saveCancellationTokenSource</name></member>
+      <member refid="class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1_1_internals_1_1_save_file_helper_1a8cc9f20654e6a53f416f4c77f4d47b2e" prot="private" virt="non-virtual"><scope>Luthetus::TextEditor::RazorLib::TextEditors::Models::Internals::SaveFileHelper</scope><name>_saveLock</name></member>
+      <member refid="class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1_1_internals_1_1_save_file_helper_1a95df762ee62335bf859c96edcec17d00" prot="public" virt="non-virtual"><scope>Luthetus::TextEditor::RazorLib::TextEditors::Models::Internals::SaveFileHelper</scope><name>GetCancellationToken</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

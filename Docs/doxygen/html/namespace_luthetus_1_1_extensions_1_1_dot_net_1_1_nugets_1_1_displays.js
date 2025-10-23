@@ -1,0 +1,5 @@
+var namespace_luthetus_1_1_extensions_1_1_dot_net_1_1_nugets_1_1_displays =
+[
+    [ "NugetPackageDisplay", "class_luthetus_1_1_extensions_1_1_dot_net_1_1_nugets_1_1_displays_1_1_nuget_package_display.html", "class_luthetus_1_1_extensions_1_1_dot_net_1_1_nugets_1_1_displays_1_1_nuget_package_display" ],
+    [ "NuGetPackageManager", "class_luthetus_1_1_extensions_1_1_dot_net_1_1_nugets_1_1_displays_1_1_nu_get_package_manager.html", "class_luthetus_1_1_extensions_1_1_dot_net_1_1_nugets_1_1_displays_1_1_nu_get_package_manager" ]
+];

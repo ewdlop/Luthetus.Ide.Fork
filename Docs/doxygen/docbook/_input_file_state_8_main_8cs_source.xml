@@ -1,0 +1,38 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="__input_file_state_8_main_8cs_source" xml:lang="en-US">
+<title>InputFileState.Main.cs</title>
+<indexterm><primary>Source/Lib/Ide/Ide.RazorLib/InputFiles/States/InputFileState.Main.cs</primary></indexterm>
+Go to the documentation of this file.<programlisting linenumbering="unnumbered"><anchor xml:id="__input_file_state_8_main_8cs_source_1l00001"/>00001 <emphasis role="keyword">using&#32;</emphasis>System.Collections.Immutable;
+<anchor xml:id="__input_file_state_8_main_8cs_source_1l00002"/>00002 <emphasis role="keyword">using&#32;</emphasis>Fluxor;
+<anchor xml:id="__input_file_state_8_main_8cs_source_1l00003"/>00003 <emphasis role="keyword">using&#32;</emphasis><link linkend="_namespace_luthetus_1_1_common_1_1_razor_lib_1_1_file_systems_1_1_models">Luthetus.Common.RazorLib.FileSystems.Models</link>;
+<anchor xml:id="__input_file_state_8_main_8cs_source_1l00004"/>00004 <emphasis role="keyword">using&#32;</emphasis><link linkend="_namespace_luthetus_1_1_ide_1_1_razor_lib_1_1_file_systems_1_1_models">Luthetus.Ide.RazorLib.FileSystems.Models</link>;
+<anchor xml:id="__input_file_state_8_main_8cs_source_1l00005"/>00005 <emphasis role="keyword">using&#32;</emphasis><link linkend="_namespace_luthetus_1_1_ide_1_1_razor_lib_1_1_input_files_1_1_models">Luthetus.Ide.RazorLib.InputFiles.Models</link>;
+<anchor xml:id="__input_file_state_8_main_8cs_source_1l00006"/>00006 
+<anchor xml:id="__input_file_state_8_main_8cs_source_1l00007"/>00007 <emphasis role="keyword">namespace&#32;</emphasis><link linkend="_namespace_luthetus_1_1_ide_1_1_razor_lib_1_1_input_files_1_1_states">Luthetus.Ide.RazorLib.InputFiles.States</link>;
+<anchor xml:id="__input_file_state_8_main_8cs_source_1l00008"/>00008 
+<anchor xml:id="__input_file_state_8_main_8cs_source_1l00009"/>00009 [FeatureState]
+<anchor xml:id="__input_file_state_8_main_8cs_source_1l00010"/><link linkend="_namespace_luthetus_1_1_ide_1_1_razor_lib_1_1_input_files_1_1_states_1ad0e0044897843fcce58e474b528300d7">00010</link> <emphasis role="keyword">public</emphasis>&#32;partial&#32;record&#32;<link linkend="_namespace_luthetus_1_1_ide_1_1_razor_lib_1_1_input_files_1_1_states_1adea9f28dd37beadbdebbbcda3e108036">InputFileState</link>(
+<anchor xml:id="__input_file_state_8_main_8cs_source_1l00011"/>00011 &#32;&#32;&#32;&#32;<emphasis role="keywordtype">int</emphasis>&#32;IndexInHistory,
+<anchor xml:id="__input_file_state_8_main_8cs_source_1l00012"/>00012 &#32;&#32;&#32;&#32;ImmutableList&lt;TreeViewAbsolutePath&gt;&#32;OpenedTreeViewModelHistoryList,
+<anchor xml:id="__input_file_state_8_main_8cs_source_1l00013"/>00013 &#32;&#32;&#32;&#32;<link linkend="_class_luthetus_1_1_ide_1_1_razor_lib_1_1_file_systems_1_1_models_1_1_tree_view_absolute_path">TreeViewAbsolutePath</link>?&#32;SelectedTreeViewModel,
+<anchor xml:id="__input_file_state_8_main_8cs_source_1l00014"/>00014 &#32;&#32;&#32;&#32;Func&lt;IAbsolutePath?,&#32;Task&gt;&#32;OnAfterSubmitFunc,
+<anchor xml:id="__input_file_state_8_main_8cs_source_1l00015"/>00015 &#32;&#32;&#32;&#32;Func&lt;<link linkend="_interface_luthetus_1_1_common_1_1_razor_lib_1_1_file_systems_1_1_models_1_1_i_absolute_path">IAbsolutePath</link>?,&#32;Task&lt;bool&gt;&gt;&#32;SelectionIsValidFunc,
+<anchor xml:id="__input_file_state_8_main_8cs_source_1l00016"/>00016 &#32;&#32;&#32;&#32;ImmutableArray&lt;InputFilePattern&gt;&#32;InputFilePatternsList,
+<anchor xml:id="__input_file_state_8_main_8cs_source_1l00017"/>00017 &#32;&#32;&#32;&#32;<link linkend="_class_luthetus_1_1_ide_1_1_razor_lib_1_1_input_files_1_1_models_1_1_input_file_pattern">InputFilePattern</link>?&#32;SelectedInputFilePattern,
+<anchor xml:id="__input_file_state_8_main_8cs_source_1l00018"/>00018 &#32;&#32;&#32;&#32;<emphasis role="keywordtype">string</emphasis>&#32;SearchQuery,
+<anchor xml:id="__input_file_state_8_main_8cs_source_1l00019"/>00019 &#32;&#32;&#32;&#32;<emphasis role="keywordtype">string</emphasis>&#32;Message)
+<anchor xml:id="__input_file_state_8_main_8cs_source_1l00020"/>00020 {
+<anchor xml:id="__input_file_state_8_main_8cs_source_1l00021"/>00021 &#32;&#32;&#32;&#32;<emphasis role="keyword">private</emphasis>&#32;<link linkend="_namespace_luthetus_1_1_ide_1_1_razor_lib_1_1_input_files_1_1_states_1adea9f28dd37beadbdebbbcda3e108036">InputFileState</link>()&#32;:&#32;<emphasis role="keyword">this</emphasis>(
+<anchor xml:id="__input_file_state_8_main_8cs_source_1l00022"/>00022 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;-1,
+<anchor xml:id="__input_file_state_8_main_8cs_source_1l00023"/>00023 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;ImmutableList&lt;TreeViewAbsolutePath&gt;.Empty,
+<anchor xml:id="__input_file_state_8_main_8cs_source_1l00024"/>00024 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keyword">null</emphasis>,
+<anchor xml:id="__input_file_state_8_main_8cs_source_1l00025"/>00025 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;_&#32;=&gt;&#32;Task.CompletedTask,
+<anchor xml:id="__input_file_state_8_main_8cs_source_1l00026"/>00026 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;_&#32;=&gt;&#32;Task.FromResult(<emphasis role="keyword">false</emphasis>),
+<anchor xml:id="__input_file_state_8_main_8cs_source_1l00027"/>00027 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;ImmutableArray&lt;InputFilePattern&gt;.<link linkend="_namespace_luthetus_1_1_ide_1_1_razor_lib_1_1_file_systems_1_1_models_1a0b40a703a446468cafaa19d933e88d3face2c8aed9c2fa0cfbed56cbda4d8bf07">Empty</link>,
+<anchor xml:id="__input_file_state_8_main_8cs_source_1l00028"/>00028 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keyword">null</emphasis>,
+<anchor xml:id="__input_file_state_8_main_8cs_source_1l00029"/>00029 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordtype">string</emphasis>.<link linkend="_namespace_luthetus_1_1_ide_1_1_razor_lib_1_1_file_systems_1_1_models_1a0b40a703a446468cafaa19d933e88d3face2c8aed9c2fa0cfbed56cbda4d8bf07">Empty</link>,
+<anchor xml:id="__input_file_state_8_main_8cs_source_1l00030"/>00030 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordtype">string</emphasis>.<link linkend="_namespace_luthetus_1_1_ide_1_1_razor_lib_1_1_file_systems_1_1_models_1a0b40a703a446468cafaa19d933e88d3face2c8aed9c2fa0cfbed56cbda4d8bf07">Empty</link>)
+<anchor xml:id="__input_file_state_8_main_8cs_source_1l00031"/>00031 &#32;&#32;&#32;&#32;{
+<anchor xml:id="__input_file_state_8_main_8cs_source_1l00032"/>00032 &#32;&#32;&#32;&#32;}
+<anchor xml:id="__input_file_state_8_main_8cs_source_1l00033"/>00033 }
+</programlisting></section>

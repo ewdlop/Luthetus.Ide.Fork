@@ -1,0 +1,192 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_md__docs_2_text_editor_2settings" xml:lang="en-US">
+<title>
+<para>Blazor.Text.Editor (Some parts of this are outdated. I think this markdown file was made with v5.0.0 I will update this markdown file to v7.0.0 when I find time) </para>
+</title>
+<indexterm><primary>Blazor.Text.Editor (Some parts of this are outdated. I think this markdown file was made with v5.0.0 I will update this markdown file to v7.0.0 when I find time)</primary></indexterm>
+
+<para><anchor xml:id="_md__docs_2_text_editor_2settings_1autotoc_md199"/></para>
+<section xml:id="_md__docs_2_text_editor_2settings_1autotoc_md200">
+<title>Settings</title><section xml:id="_md__docs_2_text_editor_2settings_1autotoc_md201">
+<title>Goal</title>
+<para><itemizedlist>
+<listitem>
+<para>Render the optional static dialog containing all the settings available for change.</para>
+</listitem><listitem>
+<para>Render the resizable and moveable version of the settings dialog.</para>
+</listitem><listitem>
+<para>Render each setting individually where desired.</para>
+</listitem><listitem>
+<para>Inform about optional automatic local storage integration for settings.</para>
+</listitem></itemizedlist>
+</para>
+</section>
+<section xml:id="_md__docs_2_text_editor_2settings_1autotoc_md202">
+<title>Steps</title>
+<para><itemizedlist>
+<listitem>
+<para>I will assume you have seen the previous tutorials during this one.</para>
+</listitem><listitem>
+<para>In Index.razor put an HTML button element with your styling of choice. I will put mine above where the <computeroutput>TextEditorDisplay</computeroutput> was put in previous tutorials. See the following code snippet.</para>
+</listitem></itemizedlist>
+</para>
+
+<para><literallayout><computeroutput>&lt;button&#32;class=&quot;btn&#32;btn-primary&quot;&gt;
+&#32;&#32;&#32;&#32;
+&lt;/button&gt;
+
+&lt;TextEditorDisplay&#32;TextEditorKey=&quot;IndexTextEditorKey&quot;/&gt;
+</computeroutput></literallayout></para>
+
+<para><itemizedlist>
+<listitem>
+<para>Give the button text of <computeroutput>&quot;Text Editor Settings&quot;</computeroutput>. As well an @onclick which invokes the unimplemented method <computeroutput>OpenTextEditorSettingsDialog</computeroutput>. See the following code snippet.</para>
+</listitem></itemizedlist>
+</para>
+
+<para><literallayout><computeroutput>&lt;button&#32;class=&quot;btn&#32;btn-primary&quot;
+&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;@onclick=&quot;OpenTextEditorSettingsDialog&quot;&gt;
+&#32;&#32;&#32;&#32;Text&#32;Editor&#32;Settings
+&lt;/button&gt;
+
+&lt;TextEditorDisplay&#32;TextEditorKey=&quot;IndexTextEditorKey&quot;/&gt;
+</computeroutput></literallayout></para>
+
+<para><literallayout><computeroutput>@code&#32;{
+&#32;&#32;&#32;&#32;[Inject]
+&#32;&#32;&#32;&#32;private&#32;ITextEditorService&#32;TextEditorService&#32;{&#32;get;&#32;set;&#32;}&#32;=&#32;null!;
+&#32;&#32;&#32;&#32;
+&#32;&#32;&#32;&#32;private&#32;static&#32;readonly&#32;TextEditorKey&#32;IndexTextEditorKey&#32;=&#32;
+&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;TextEditorKey.NewTextEditorKey();
+
+&#32;&#32;&#32;&#32;protected&#32;override&#32;void&#32;OnInitialized()
+&#32;&#32;&#32;&#32;{
+&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;TextEditorService.RegisterCSharpTextEditor(
+&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;IndexTextEditorKey,
+&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;string.Empty);
+&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;
+&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;base.OnInitialized();
+&#32;&#32;&#32;&#32;}
+
+&#32;&#32;&#32;&#32;private&#32;void&#32;OpenTextEditorSettingsDialog()
+&#32;&#32;&#32;&#32;{
+&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;throw&#32;new&#32;NotImplementedException();
+&#32;&#32;&#32;&#32;}
+}
+</computeroutput></literallayout></para>
+
+<para><itemizedlist>
+<listitem>
+<para>Implement the method <computeroutput>OpenTextEditorSettingsDialog</computeroutput> to contain <computeroutput>TextEditorService.ShowSettingsDialog();</computeroutput>. See the following code snippet</para>
+</listitem></itemizedlist>
+</para>
+
+<para><literallayout><computeroutput>private&#32;void&#32;OpenTextEditorSettingsDialog()
+{
+&#32;&#32;&#32;&#32;TextEditorService.ShowSettingsDialog();
+}
+</computeroutput></literallayout></para>
+
+<para><itemizedlist>
+<listitem>
+<para>Now run the program and click the button. You will see the static settings dialog as shown in this gif.</para>
+</listitem></itemizedlist>
+</para>
+
+<para></para>
+
+<para><itemizedlist>
+<listitem>
+<para>Modify the line <computeroutput>TextEditorService.ShowSettingsDialog();</computeroutput>. Pass in as an argument <computeroutput>true</computeroutput> for the optional parameter named <computeroutput>isResizable</computeroutput>.</para>
+</listitem><listitem>
+<para>Now run the program and click the button. You will see the resizable and moveable settings dialog as shown in this gif.</para>
+</listitem></itemizedlist>
+</para>
+
+<para></para>
+
+<para><itemizedlist>
+<listitem>
+<para>Add the following using statement to Index.razor if it is not already there.</para>
+</listitem></itemizedlist>
+</para>
+
+<para><literallayout><computeroutput>@using&#32;BlazorTextEditor.RazorLib.HelperComponents
+</computeroutput></literallayout></para>
+
+<para><itemizedlist>
+<listitem>
+<para>Above where the button is to open the settings dialog. Render the razor components shown in the following markup.</para>
+</listitem></itemizedlist>
+</para>
+
+<para><literallayout><computeroutput>&lt;TextEditorInputFontSize/&gt;
+&lt;TextEditorInputShowNewLines/&gt;
+&lt;TextEditorInputShowWhitespace/&gt;
+&lt;TextEditorInputTheme/&gt;
+</computeroutput></literallayout></para>
+
+<para><itemizedlist>
+<listitem>
+<para>Now run the program and you will find every settings input from the dialog will be on the page itself. <computeroutput>You can place these inputs wherever</computeroutput> you&apos;d like as <computeroutput>everything is Dependency Injected</computeroutput>.</para>
+</listitem></itemizedlist>
+</para>
+
+<para></para>
+
+<para><itemizedlist>
+<listitem>
+<para>The nuget package by default will integrate with JavaScript local storage. One can turn this off inorder to reference the NuGet Package from a C# Project which cannot dependency inject the IJSRuntime.</para>
+</listitem><listitem>
+<para>Add an HTML button element, with styling of your choice, on the Index.razor page. Give the button text of <computeroutput>&quot;Read Local Storage&quot;</computeroutput> and an @onclick that invoke the unimplemented method: <computeroutput>async Task ReadLocalStorage()</computeroutput> see the following code snippets.</para>
+</listitem></itemizedlist>
+</para>
+
+<para><literallayout><computeroutput>&lt;button&#32;class=&quot;btn&#32;btn-primary&quot;
+&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;@onclick=&quot;ReadLocalStorage&quot;&gt;
+&#32;&#32;&#32;&#32;Read&#32;Local&#32;Storage
+&lt;/button&gt;
+</computeroutput></literallayout></para>
+
+<para><literallayout><computeroutput>private&#32;async&#32;Task&#32;ReadLocalStorage()
+{
+&#32;&#32;&#32;&#32;
+}
+</computeroutput></literallayout></para>
+
+<para><itemizedlist>
+<listitem>
+<para>Implement <computeroutput>ReadLocalStorage()</computeroutput> to <computeroutput>await TextEditorService.SetTextEditorOptionsFromLocalStorageAsync();</computeroutput>. See the following code snippet.</para>
+</listitem></itemizedlist>
+</para>
+
+<para><literallayout><computeroutput>private&#32;async&#32;Task&#32;ReadLocalStorage()
+{
+&#32;&#32;&#32;&#32;await&#32;TextEditorService.SetTextEditorOptionsFromLocalStorageAsync();
+}
+</computeroutput></literallayout></para>
+
+<para><itemizedlist>
+<listitem>
+<para>Run the application and then modify your settings. I will set my theme to the light theme.</para>
+</listitem><listitem>
+<para>Afterwards reload the webpage, but do not clear your cache. Once the webpage loads proceed to click the <computeroutput>Read Local Storage</computeroutput> button. Your theme should change to the light theme as the default was dark theme and your local storage had light theme stored.</para>
+</listitem><listitem>
+<para>As of v5.0.0 of this NugetPackage the following are stored in local storage @onchange</para>
+</listitem><listitem>
+<para>local storage: int? FontSizeInPixels</para>
+</listitem><listitem>
+<para>local storage: Theme? Theme</para>
+</listitem><listitem>
+<para>local storage: bool? ShowWhitespace</para>
+</listitem><listitem>
+<para>local storage: bool? ShowNewlines</para>
+</listitem><listitem>
+<para>As of writing this tutorial however, I am suddenly unable to get my theme from local storage. It just keeps being unrecognized and using the Unset theme.</para>
+</listitem><listitem>
+<para>A good way to go about making use of the local storage local. Is to OnAfterRenderAsync of a &apos;top level component&apos;. In the if(firstRender) { await readLocalStorage(); } </para>
+</listitem></itemizedlist>
+</para>
+</section>
+</section>
+</section>

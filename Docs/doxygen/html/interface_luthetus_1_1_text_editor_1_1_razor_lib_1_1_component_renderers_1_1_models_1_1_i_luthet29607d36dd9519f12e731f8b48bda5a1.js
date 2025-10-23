@@ -1,0 +1,5 @@
+var interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_component_renderers_1_1_models_1_1_i_luthet29607d36dd9519f12e731f8b48bda5a1 =
+[
+    [ "DiagnosticRendererType", "interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_component_renderers_1_1_models_1_1_i_luthet29607d36dd9519f12e731f8b48bda5a1.html#af768104e57d88da9af3691f6150666c7", null ],
+    [ "SymbolRendererType", "interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_component_renderers_1_1_models_1_1_i_luthet29607d36dd9519f12e731f8b48bda5a1.html#a6b145fdf64e2fb623f20df03bf95860e", null ]
+];

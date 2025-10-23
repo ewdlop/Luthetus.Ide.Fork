@@ -1,0 +1,94 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_class_luthetus_1_1_common_1_1_razor_lib_1_1_reactives_1_1_models_1_1_throttle_optimized-1-g" xml:lang="en-US">
+<title>Luthetus.Common.RazorLib.Reactives.Models.ThrottleOptimized&lt; TArgs &gt; Class Template Reference</title>
+<indexterm><primary>Luthetus.Common.RazorLib.Reactives.Models.ThrottleOptimized&lt; TArgs &gt;</primary></indexterm>
+<para>
+
+<para>Sometimes when using the <link linkend="_class_luthetus_1_1_common_1_1_razor_lib_1_1_reactives_1_1_models_1_1_throttle">Throttle</link>, one is just re-using the same Func. </para>
+ 
+</para>
+<simplesect>
+    <title>Public Member Functions    </title>
+        <itemizedlist>
+            <listitem><para><link linkend="_class_luthetus_1_1_common_1_1_razor_lib_1_1_reactives_1_1_models_1_1_throttle_optimized-1-g_1a7dd5a4e90b6c6be102d36a7febf1bdcc">ThrottleOptimized</link> (TimeSpan throttleTimeSpan, Func&lt; TArgs, CancellationToken, Task &gt; workItem)</para>
+</listitem>
+            <listitem><para>void <link linkend="_class_luthetus_1_1_common_1_1_razor_lib_1_1_reactives_1_1_models_1_1_throttle_optimized-1-g_1af3fb0c11e976fa6b0782460b97e094a4">Run</link> (TArgs args)</para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Public Attributes    </title>
+        <itemizedlist>
+            <listitem><para>Task <link linkend="_class_luthetus_1_1_common_1_1_razor_lib_1_1_reactives_1_1_models_1_1_throttle_optimized-1-g_1a33cdb6dd905fd0a351448487b98e47ca">_workItemTask</link> = Task.CompletedTask</para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Properties    </title>
+        <itemizedlist>
+            <listitem><para>TimeSpan <link linkend="_class_luthetus_1_1_common_1_1_razor_lib_1_1_reactives_1_1_models_1_1_throttle_optimized-1-g_1a2bc947c6968b700782c65612d8457767">ThrottleTimeSpan</link><computeroutput> [get]</computeroutput>
+</para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<section>
+<title>Detailed Description</title>
+
+<para>Sometimes when using the <link linkend="_class_luthetus_1_1_common_1_1_razor_lib_1_1_reactives_1_1_models_1_1_throttle">Throttle</link>, one is just re-using the same Func. </para>
+
+
+
+<para>The current implementation of <link linkend="_class_luthetus_1_1_common_1_1_razor_lib_1_1_reactives_1_1_models_1_1_throttle">Throttle</link> allows one to &apos;Run&apos; various Func(s) all through the same throttle.</para>
+
+<para>And this has its uses. But, if you only want to run 1 Func each &apos;Run&apos; invocation, why re-allocate a Func object and closure the variables? | Followup: one can use a conditional branch within the singular Func to replicate this logic. Add a property to the TArgs that is a bool, enum, or etc... and then if or switch on it.</para>
+
+<para>So, this verson will take in the constructor, the Func to &apos;Run&apos;.</para>
+
+<para>Then, if any closure is necessary, use the generic argument to this type to define the args.</para>
+
+<para>Preferably, have the args be a struct, and then a pretty sizable optimization (relative to garbage collection CPU usage and memory) is expected.</para>
+
+<para>Side note: why does <link linkend="_class_luthetus_1_1_common_1_1_razor_lib_1_1_reactives_1_1_models_1_1_throttle">Throttle</link> use a Stack for the work items, just to take the top work item, then clear the stack within a lock? | Isn&apos;t it equivalent to just set a field from within a lock which is simply a &apos;Func&lt;CancellationToken, Task&gt;&apos; and avoid the stack entirely? </para>
+<para>
+Definition at line <link linkend="__throttle_optimized_8cs_source_1l00036">36</link> of file <link linkend="__throttle_optimized_8cs_source">ThrottleOptimized.cs</link>.</para>
+</section>
+<section>
+<title>Member Function Documentation</title>
+<anchor xml:id="_class_luthetus_1_1_common_1_1_razor_lib_1_1_reactives_1_1_models_1_1_throttle_optimized-1-g_1af3fb0c11e976fa6b0782460b97e094a4"/><section>
+    <title>Run()</title>
+<indexterm><primary>Run</primary><secondary>Luthetus.Common.RazorLib.Reactives.Models.ThrottleOptimized&lt; TArgs &gt;</secondary></indexterm>
+<indexterm><primary>Luthetus.Common.RazorLib.Reactives.Models.ThrottleOptimized&lt; TArgs &gt;</primary><secondary>Run</secondary></indexterm>
+<para><computeroutput>void Luthetus.Common.RazorLib.Reactives.Models.ThrottleOptimized&lt; TArgs &gt;.Run (TArgs args)</computeroutput></para><para>
+Definition at line <link linkend="__throttle_optimized_8cs_source_1l00074">74</link> of file <link linkend="__throttle_optimized_8cs_source">ThrottleOptimized.cs</link>.</para>
+</section>
+<anchor xml:id="_class_luthetus_1_1_common_1_1_razor_lib_1_1_reactives_1_1_models_1_1_throttle_optimized-1-g_1a7dd5a4e90b6c6be102d36a7febf1bdcc"/><section>
+    <title>ThrottleOptimized()</title>
+<indexterm><primary>ThrottleOptimized</primary><secondary>Luthetus.Common.RazorLib.Reactives.Models.ThrottleOptimized&lt; TArgs &gt;</secondary></indexterm>
+<indexterm><primary>Luthetus.Common.RazorLib.Reactives.Models.ThrottleOptimized&lt; TArgs &gt;</primary><secondary>ThrottleOptimized</secondary></indexterm>
+<para><computeroutput>Luthetus.Common.RazorLib.Reactives.Models.ThrottleOptimized&lt; TArgs &gt;.ThrottleOptimized (TimeSpan throttleTimeSpan, Func&lt; TArgs, CancellationToken, Task &gt; workItem)</computeroutput></para><para>
+Definition at line <link linkend="__throttle_optimized_8cs_source_1l00041">41</link> of file <link linkend="__throttle_optimized_8cs_source">ThrottleOptimized.cs</link>.</para>
+</section>
+</section>
+<section>
+<title>Member Data Documentation</title>
+<anchor xml:id="_class_luthetus_1_1_common_1_1_razor_lib_1_1_reactives_1_1_models_1_1_throttle_optimized-1-g_1a33cdb6dd905fd0a351448487b98e47ca"/><section>
+    <title>_workItemTask</title>
+<indexterm><primary>_workItemTask</primary><secondary>Luthetus.Common.RazorLib.Reactives.Models.ThrottleOptimized&lt; TArgs &gt;</secondary></indexterm>
+<indexterm><primary>Luthetus.Common.RazorLib.Reactives.Models.ThrottleOptimized&lt; TArgs &gt;</primary><secondary>_workItemTask</secondary></indexterm>
+<para><computeroutput>Task Luthetus.Common.RazorLib.Reactives.Models.ThrottleOptimized&lt; TArgs &gt;._workItemTask = Task.CompletedTask</computeroutput></para><para>
+Definition at line <link linkend="__throttle_optimized_8cs_source_1l00070">70</link> of file <link linkend="__throttle_optimized_8cs_source">ThrottleOptimized.cs</link>.</para>
+</section>
+</section>
+<section>
+<title>Property Documentation</title>
+<anchor xml:id="_class_luthetus_1_1_common_1_1_razor_lib_1_1_reactives_1_1_models_1_1_throttle_optimized-1-g_1a2bc947c6968b700782c65612d8457767"/><section>
+    <title>ThrottleTimeSpan</title>
+<indexterm><primary>ThrottleTimeSpan</primary><secondary>Luthetus.Common.RazorLib.Reactives.Models.ThrottleOptimized&lt; TArgs &gt;</secondary></indexterm>
+<indexterm><primary>Luthetus.Common.RazorLib.Reactives.Models.ThrottleOptimized&lt; TArgs &gt;</primary><secondary>ThrottleTimeSpan</secondary></indexterm>
+<para><computeroutput>TimeSpan Luthetus.Common.RazorLib.Reactives.Models.ThrottleOptimized&lt; TArgs &gt;.ThrottleTimeSpan<computeroutput>[get]</computeroutput></computeroutput></para><para>
+Definition at line <link linkend="__throttle_optimized_8cs_source_1l00072">72</link> of file <link linkend="__throttle_optimized_8cs_source">ThrottleOptimized.cs</link>.</para>
+</section>
+<para>
+The documentation for this class was generated from the following file:</para>
+Source/Lib/Common/Reactives/Models/<link linkend="__throttle_optimized_8cs">ThrottleOptimized.cs</link></section>
+</section>

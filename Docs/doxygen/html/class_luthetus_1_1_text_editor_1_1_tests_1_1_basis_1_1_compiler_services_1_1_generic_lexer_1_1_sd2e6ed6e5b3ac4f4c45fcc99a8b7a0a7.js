@@ -1,0 +1,4 @@
+var class_luthetus_1_1_text_editor_1_1_tests_1_1_basis_1_1_compiler_services_1_1_generic_lexer_1_1_sd2e6ed6e5b3ac4f4c45fcc99a8b7a0a7 =
+[
+    [ "Constructor", "class_luthetus_1_1_text_editor_1_1_tests_1_1_basis_1_1_compiler_services_1_1_generic_lexer_1_1_sd2e6ed6e5b3ac4f4c45fcc99a8b7a0a7.html#aed93867123ca6ea985fb621922b8d176", null ]
+];

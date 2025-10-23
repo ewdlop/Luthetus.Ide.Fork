@@ -1,0 +1,247 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="__app_options_service_8cs_source" xml:lang="en-US">
+<title>AppOptionsService.cs</title>
+<indexterm><primary>Source/Lib/Common/Options/Models/AppOptionsService.cs</primary></indexterm>
+Go to the documentation of this file.<programlisting linenumbering="unnumbered"><anchor xml:id="__app_options_service_8cs_source_1l00001"/>00001 <emphasis role="keyword">using&#32;</emphasis>System.Text.Json;
+<anchor xml:id="__app_options_service_8cs_source_1l00002"/>00002 <emphasis role="keyword">using&#32;</emphasis>System.Text;
+<anchor xml:id="__app_options_service_8cs_source_1l00003"/>00003 <emphasis role="keyword">using&#32;</emphasis>Fluxor;
+<anchor xml:id="__app_options_service_8cs_source_1l00004"/>00004 <emphasis role="keyword">using&#32;</emphasis><link linkend="_namespace_luthetus_1_1_common_1_1_razor_lib_1_1_options_1_1_states">Luthetus.Common.RazorLib.Options.States</link>;
+<anchor xml:id="__app_options_service_8cs_source_1l00005"/>00005 <emphasis role="keyword">using&#32;</emphasis><link linkend="_namespace_luthetus_1_1_common_1_1_razor_lib_1_1_themes_1_1_states">Luthetus.Common.RazorLib.Themes.States</link>;
+<anchor xml:id="__app_options_service_8cs_source_1l00006"/>00006 <emphasis role="keyword">using&#32;</emphasis><link linkend="_namespace_luthetus_1_1_common_1_1_razor_lib_1_1_themes_1_1_models">Luthetus.Common.RazorLib.Themes.Models</link>;
+<anchor xml:id="__app_options_service_8cs_source_1l00007"/>00007 <emphasis role="keyword">using&#32;</emphasis><link linkend="_namespace_luthetus_1_1_common_1_1_razor_lib_1_1_keys_1_1_models">Luthetus.Common.RazorLib.Keys.Models</link>;
+<anchor xml:id="__app_options_service_8cs_source_1l00008"/>00008 <emphasis role="keyword">using&#32;</emphasis><link linkend="_namespace_luthetus_1_1_common_1_1_razor_lib_1_1_dimensions_1_1_models">Luthetus.Common.RazorLib.Dimensions.Models</link>;
+<anchor xml:id="__app_options_service_8cs_source_1l00009"/>00009 <emphasis role="keyword">using&#32;</emphasis><link linkend="_namespace_luthetus_1_1_common_1_1_razor_lib_1_1_storages_1_1_models">Luthetus.Common.RazorLib.Storages.Models</link>;
+<anchor xml:id="__app_options_service_8cs_source_1l00010"/>00010 <emphasis role="keyword">using&#32;</emphasis><link linkend="_namespace_luthetus_1_1_common_1_1_razor_lib_1_1_background_tasks_1_1_models">Luthetus.Common.RazorLib.BackgroundTasks.Models</link>;
+<anchor xml:id="__app_options_service_8cs_source_1l00011"/>00011 
+<anchor xml:id="__app_options_service_8cs_source_1l00012"/><link linkend="_namespace_luthetus_1_1_common_1_1_razor_lib_1_1_options_1_1_models">00012</link> <emphasis role="keyword">namespace&#32;</emphasis><link linkend="_namespace_luthetus_1_1_common_1_1_razor_lib_1_1_options_1_1_models">Luthetus.Common.RazorLib.Options.Models</link>;
+<anchor xml:id="__app_options_service_8cs_source_1l00013"/>00013 
+<anchor xml:id="__app_options_service_8cs_source_1l00014"/><link linkend="_class_luthetus_1_1_common_1_1_razor_lib_1_1_options_1_1_models_1_1_app_options_service">00014</link> <emphasis role="keyword">public</emphasis>&#32;<emphasis role="keyword">class&#32;</emphasis><link linkend="_class_luthetus_1_1_common_1_1_razor_lib_1_1_options_1_1_models_1_1_app_options_service_1a1869cf9f545c098152aacb22a5c208cf">AppOptionsService</link>&#32;:&#32;<link linkend="_interface_luthetus_1_1_common_1_1_razor_lib_1_1_options_1_1_models_1_1_i_app_options_service">IAppOptionsService</link>
+<anchor xml:id="__app_options_service_8cs_source_1l00015"/>00015 {
+<anchor xml:id="__app_options_service_8cs_source_1l00016"/>00016 &#32;&#32;&#32;&#32;<emphasis role="keyword">private</emphasis>&#32;readonly&#32;IDispatcher&#32;_dispatcher;
+<anchor xml:id="__app_options_service_8cs_source_1l00017"/>00017 &#32;&#32;&#32;&#32;<emphasis role="keyword">private</emphasis>&#32;readonly&#32;<link linkend="_interface_luthetus_1_1_common_1_1_razor_lib_1_1_storages_1_1_models_1_1_i_storage_service">IStorageService</link>&#32;_storageService;
+<anchor xml:id="__app_options_service_8cs_source_1l00018"/>00018 &#32;&#32;&#32;&#32;<emphasis role="keyword">private</emphasis>&#32;readonly&#32;<link linkend="_class_luthetus_1_1_common_1_1_razor_lib_1_1_background_tasks_1_1_models_1_1_common_background_task_api">CommonBackgroundTaskApi</link>&#32;_commonBackgroundTaskApi;
+<anchor xml:id="__app_options_service_8cs_source_1l00019"/>00019 &#32;&#32;&#32;&#32;<emphasis role="keyword">private</emphasis>&#32;readonly&#32;<link linkend="_interface_luthetus_1_1_common_1_1_razor_lib_1_1_background_tasks_1_1_models_1_1_i_background_task_service">IBackgroundTaskService</link>&#32;_backgroundTaskService;
+<anchor xml:id="__app_options_service_8cs_source_1l00020"/>00020 
+<anchor xml:id="__app_options_service_8cs_source_1l00021"/><link linkend="_class_luthetus_1_1_common_1_1_razor_lib_1_1_options_1_1_models_1_1_app_options_service_1a1869cf9f545c098152aacb22a5c208cf">00021</link> &#32;&#32;&#32;&#32;<emphasis role="keyword">public</emphasis>&#32;<link linkend="_class_luthetus_1_1_common_1_1_razor_lib_1_1_options_1_1_models_1_1_app_options_service_1a1869cf9f545c098152aacb22a5c208cf">AppOptionsService</link>(
+<anchor xml:id="__app_options_service_8cs_source_1l00022"/>00022 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;IState&lt;AppOptionsState&gt;&#32;appOptionsStateWrap,
+<anchor xml:id="__app_options_service_8cs_source_1l00023"/>00023 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;IState&lt;ThemeState&gt;&#32;themeStateWrap,
+<anchor xml:id="__app_options_service_8cs_source_1l00024"/>00024 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;IDispatcher&#32;dispatcher,
+<anchor xml:id="__app_options_service_8cs_source_1l00025"/>00025 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<link linkend="_interface_luthetus_1_1_common_1_1_razor_lib_1_1_storages_1_1_models_1_1_i_storage_service">IStorageService</link>&#32;storageService,
+<anchor xml:id="__app_options_service_8cs_source_1l00026"/>00026 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<link linkend="_class_luthetus_1_1_common_1_1_razor_lib_1_1_background_tasks_1_1_models_1_1_common_background_task_api">CommonBackgroundTaskApi</link>&#32;commonBackgroundTaskApi,
+<anchor xml:id="__app_options_service_8cs_source_1l00027"/>00027 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<link linkend="_interface_luthetus_1_1_common_1_1_razor_lib_1_1_background_tasks_1_1_models_1_1_i_background_task_service">IBackgroundTaskService</link>&#32;backgroundTaskService)
+<anchor xml:id="__app_options_service_8cs_source_1l00028"/>00028 &#32;&#32;&#32;&#32;{
+<anchor xml:id="__app_options_service_8cs_source_1l00029"/>00029 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<link linkend="_class_luthetus_1_1_common_1_1_razor_lib_1_1_options_1_1_models_1_1_app_options_service_1a1d8fe20397b9b2fa2bcfbe6bc9ec67a0">AppOptionsStateWrap</link>&#32;=&#32;appOptionsStateWrap;
+<anchor xml:id="__app_options_service_8cs_source_1l00030"/>00030 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<link linkend="_class_luthetus_1_1_common_1_1_razor_lib_1_1_options_1_1_models_1_1_app_options_service_1afcecda608e490a868296cf0616bc8a4f">ThemeStateWrap</link>&#32;=&#32;themeStateWrap;
+<anchor xml:id="__app_options_service_8cs_source_1l00031"/>00031 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;_dispatcher&#32;=&#32;dispatcher;
+<anchor xml:id="__app_options_service_8cs_source_1l00032"/>00032 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;_storageService&#32;=&#32;storageService;
+<anchor xml:id="__app_options_service_8cs_source_1l00033"/>00033 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;_commonBackgroundTaskApi&#32;=&#32;commonBackgroundTaskApi;
+<anchor xml:id="__app_options_service_8cs_source_1l00034"/>00034 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;_backgroundTaskService&#32;=&#32;backgroundTaskService;
+<anchor xml:id="__app_options_service_8cs_source_1l00035"/>00035 &#32;&#32;&#32;&#32;}
+<anchor xml:id="__app_options_service_8cs_source_1l00036"/>00036 
+<anchor xml:id="__app_options_service_8cs_source_1l00037"/><link linkend="_class_luthetus_1_1_common_1_1_razor_lib_1_1_options_1_1_models_1_1_app_options_service_1a1d8fe20397b9b2fa2bcfbe6bc9ec67a0">00037</link> &#32;&#32;&#32;&#32;<emphasis role="keyword">public</emphasis>&#32;IState&lt;AppOptionsState&gt;&#32;<link linkend="_class_luthetus_1_1_common_1_1_razor_lib_1_1_options_1_1_models_1_1_app_options_service_1a1d8fe20397b9b2fa2bcfbe6bc9ec67a0">AppOptionsStateWrap</link>&#32;{&#32;<emphasis role="keyword">get</emphasis>;&#32;}
+<anchor xml:id="__app_options_service_8cs_source_1l00038"/><link linkend="_class_luthetus_1_1_common_1_1_razor_lib_1_1_options_1_1_models_1_1_app_options_service_1afcecda608e490a868296cf0616bc8a4f">00038</link> &#32;&#32;&#32;&#32;<emphasis role="keyword">public</emphasis>&#32;IState&lt;ThemeState&gt;&#32;<link linkend="_class_luthetus_1_1_common_1_1_razor_lib_1_1_options_1_1_models_1_1_app_options_service_1afcecda608e490a868296cf0616bc8a4f">ThemeStateWrap</link>&#32;{&#32;<emphasis role="keyword">get</emphasis>;&#32;}
+<anchor xml:id="__app_options_service_8cs_source_1l00039"/>00039 
+<anchor xml:id="__app_options_service_8cs_source_1l00040"/>00040 <emphasis role="preprocessor">#if&#32;DEBUG</emphasis>
+<anchor xml:id="__app_options_service_8cs_source_1l00041"/>00041 &#32;&#32;&#32;&#32;<emphasis role="keyword">public</emphasis>&#32;<emphasis role="keywordtype">string</emphasis>&#32;StorageKey&#32;=&gt;&#32;<emphasis role="stringliteral">&quot;luthetus-common_theme-storage-key-debug&quot;</emphasis>;&#32;
+<anchor xml:id="__app_options_service_8cs_source_1l00042"/>00042 <emphasis role="preprocessor">#else</emphasis>
+<anchor xml:id="__app_options_service_8cs_source_1l00043"/><link linkend="_class_luthetus_1_1_common_1_1_razor_lib_1_1_options_1_1_models_1_1_app_options_service_1aa92f3e024f0257198ea666441b7c4dad">00043</link> &#32;&#32;&#32;&#32;<emphasis role="keyword">public</emphasis>&#32;<emphasis role="keywordtype">string</emphasis>&#32;<link linkend="_class_luthetus_1_1_common_1_1_razor_lib_1_1_options_1_1_models_1_1_app_options_service_1aa92f3e024f0257198ea666441b7c4dad">StorageKey</link>&#32;=&gt;&#32;<emphasis role="stringliteral">&quot;luthetus-common_theme-storage-key&quot;</emphasis>;
+<anchor xml:id="__app_options_service_8cs_source_1l00044"/>00044 <emphasis role="preprocessor">#endif</emphasis>
+<anchor xml:id="__app_options_service_8cs_source_1l00045"/>00045 
+<anchor xml:id="__app_options_service_8cs_source_1l00046"/><link linkend="_class_luthetus_1_1_common_1_1_razor_lib_1_1_options_1_1_models_1_1_app_options_service_1aba81ff8d3b289fd754efb7bc879e6ecd">00046</link> &#32;&#32;&#32;&#32;<emphasis role="keyword">public</emphasis>&#32;<emphasis role="keywordtype">string</emphasis>&#32;<link linkend="_class_luthetus_1_1_common_1_1_razor_lib_1_1_options_1_1_models_1_1_app_options_service_1aba81ff8d3b289fd754efb7bc879e6ecd">ThemeCssClassString</link>&#32;=&gt;&#32;<link linkend="_class_luthetus_1_1_common_1_1_razor_lib_1_1_options_1_1_models_1_1_app_options_service_1afcecda608e490a868296cf0616bc8a4f">ThemeStateWrap</link>.Value.ThemeList.FirstOrDefault(
+<anchor xml:id="__app_options_service_8cs_source_1l00047"/>00047 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;x&#32;=&gt;&#32;x.Key&#32;==&#32;<link linkend="_class_luthetus_1_1_common_1_1_razor_lib_1_1_options_1_1_models_1_1_app_options_service_1a1d8fe20397b9b2fa2bcfbe6bc9ec67a0">AppOptionsStateWrap</link>.Value.Options.ThemeKey)
+<anchor xml:id="__app_options_service_8cs_source_1l00048"/>00048 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;?.CssClassString
+<anchor xml:id="__app_options_service_8cs_source_1l00049"/>00049 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;??&#32;ThemeFacts.VisualStudioDarkThemeClone.CssClassString;
+<anchor xml:id="__app_options_service_8cs_source_1l00050"/>00050 
+<anchor xml:id="__app_options_service_8cs_source_1l00051"/><link linkend="_class_luthetus_1_1_common_1_1_razor_lib_1_1_options_1_1_models_1_1_app_options_service_1ade615eaa89cdbe27ffefdd6cce221929">00051</link> &#32;&#32;&#32;&#32;<emphasis role="keyword">public</emphasis>&#32;<emphasis role="keywordtype">string</emphasis>?&#32;<link linkend="_class_luthetus_1_1_common_1_1_razor_lib_1_1_options_1_1_models_1_1_app_options_service_1ade615eaa89cdbe27ffefdd6cce221929">FontFamilyCssStyleString</link>
+<anchor xml:id="__app_options_service_8cs_source_1l00052"/>00052 &#32;&#32;&#32;&#32;{
+<anchor xml:id="__app_options_service_8cs_source_1l00053"/>00053 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keyword">get</emphasis>
+<anchor xml:id="__app_options_service_8cs_source_1l00054"/>00054 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;{
+<anchor xml:id="__app_options_service_8cs_source_1l00055"/>00055 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">if</emphasis>&#32;(<link linkend="_class_luthetus_1_1_common_1_1_razor_lib_1_1_options_1_1_models_1_1_app_options_service_1a1d8fe20397b9b2fa2bcfbe6bc9ec67a0">AppOptionsStateWrap</link>.Value.Options.FontFamily&#32;is&#32;<emphasis role="keyword">null</emphasis>)
+<anchor xml:id="__app_options_service_8cs_source_1l00056"/>00056 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;<emphasis role="keyword">null</emphasis>;
+<anchor xml:id="__app_options_service_8cs_source_1l00057"/>00057 
+<anchor xml:id="__app_options_service_8cs_source_1l00058"/>00058 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;$<emphasis role="stringliteral">&quot;font-family:&#32;{AppOptionsStateWrap.Value.Options.FontFamily};&quot;</emphasis>;
+<anchor xml:id="__app_options_service_8cs_source_1l00059"/>00059 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;}
+<anchor xml:id="__app_options_service_8cs_source_1l00060"/>00060 &#32;&#32;&#32;&#32;}
+<anchor xml:id="__app_options_service_8cs_source_1l00061"/>00061 
+<anchor xml:id="__app_options_service_8cs_source_1l00062"/><link linkend="_class_luthetus_1_1_common_1_1_razor_lib_1_1_options_1_1_models_1_1_app_options_service_1a0e52acbd300a56dffa3cf4a8f867555d">00062</link> &#32;&#32;&#32;&#32;<emphasis role="keyword">public</emphasis>&#32;<emphasis role="keywordtype">string</emphasis>&#32;<link linkend="_class_luthetus_1_1_common_1_1_razor_lib_1_1_options_1_1_models_1_1_app_options_service_1a0e52acbd300a56dffa3cf4a8f867555d">FontSizeCssStyleString</link>
+<anchor xml:id="__app_options_service_8cs_source_1l00063"/>00063 &#32;&#32;&#32;&#32;{
+<anchor xml:id="__app_options_service_8cs_source_1l00064"/>00064 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keyword">get</emphasis>
+<anchor xml:id="__app_options_service_8cs_source_1l00065"/>00065 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;{
+<anchor xml:id="__app_options_service_8cs_source_1l00066"/>00066 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;var&#32;fontSizeInPixels&#32;=&#32;<link linkend="_class_luthetus_1_1_common_1_1_razor_lib_1_1_options_1_1_models_1_1_app_options_service_1a1d8fe20397b9b2fa2bcfbe6bc9ec67a0">AppOptionsStateWrap</link>.Value.Options.FontSizeInPixels;
+<anchor xml:id="__app_options_service_8cs_source_1l00067"/>00067 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;var&#32;fontSizeInPixelsCssValue&#32;=&#32;fontSizeInPixels.ToCssValue();
+<anchor xml:id="__app_options_service_8cs_source_1l00068"/>00068 
+<anchor xml:id="__app_options_service_8cs_source_1l00069"/>00069 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;$<emphasis role="stringliteral">&quot;font-size:&#32;{fontSizeInPixelsCssValue}px;&quot;</emphasis>;
+<anchor xml:id="__app_options_service_8cs_source_1l00070"/>00070 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;}
+<anchor xml:id="__app_options_service_8cs_source_1l00071"/>00071 &#32;&#32;&#32;&#32;}
+<anchor xml:id="__app_options_service_8cs_source_1l00072"/>00072 &#32;&#32;&#32;&#32;
+<anchor xml:id="__app_options_service_8cs_source_1l00073"/><link linkend="_class_luthetus_1_1_common_1_1_razor_lib_1_1_options_1_1_models_1_1_app_options_service_1ae8e44291814ab434b07c53be36ff6cbe">00073</link> &#32;&#32;&#32;&#32;<emphasis role="keyword">public</emphasis>&#32;<emphasis role="keywordtype">bool</emphasis>&#32;<link linkend="_class_luthetus_1_1_common_1_1_razor_lib_1_1_options_1_1_models_1_1_app_options_service_1ae8e44291814ab434b07c53be36ff6cbe">ShowPanelTitles</link>&#32;=&gt;&#32;<link linkend="_class_luthetus_1_1_common_1_1_razor_lib_1_1_options_1_1_models_1_1_app_options_service_1a1d8fe20397b9b2fa2bcfbe6bc9ec67a0">AppOptionsStateWrap</link>.Value.Options.ShowPanelTitles;
+<anchor xml:id="__app_options_service_8cs_source_1l00074"/>00074 &#32;&#32;&#32;&#32;
+<anchor xml:id="__app_options_service_8cs_source_1l00075"/><link linkend="_class_luthetus_1_1_common_1_1_razor_lib_1_1_options_1_1_models_1_1_app_options_service_1ac89599551de4f766e1206b757d0509c5">00075</link> &#32;&#32;&#32;&#32;<emphasis role="keyword">public</emphasis>&#32;<emphasis role="keywordtype">string</emphasis>&#32;<link linkend="_class_luthetus_1_1_common_1_1_razor_lib_1_1_options_1_1_models_1_1_app_options_service_1ac89599551de4f766e1206b757d0509c5">ShowPanelTitlesCssClass</link>&#32;=&gt;&#32;AppOptionsStateWrap.Value.Options.ShowPanelTitles
+<anchor xml:id="__app_options_service_8cs_source_1l00076"/>00076 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;?&#32;string.Empty
+<anchor xml:id="__app_options_service_8cs_source_1l00077"/>00077 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;:&#32;<emphasis role="stringliteral">&quot;luth_ide_section-no-title&quot;</emphasis>;
+<anchor xml:id="__app_options_service_8cs_source_1l00078"/>00078 
+<anchor xml:id="__app_options_service_8cs_source_1l00079"/><link linkend="_class_luthetus_1_1_common_1_1_razor_lib_1_1_options_1_1_models_1_1_app_options_service_1a7bc7ddf623271a3ddf475cd8569d8c59">00079</link> &#32;&#32;&#32;&#32;<emphasis role="keyword">public</emphasis>&#32;<emphasis role="keywordtype">string</emphasis>&#32;<link linkend="_class_luthetus_1_1_common_1_1_razor_lib_1_1_options_1_1_models_1_1_app_options_service_1a7bc7ddf623271a3ddf475cd8569d8c59">ColorSchemeCssStyleString</link>
+<anchor xml:id="__app_options_service_8cs_source_1l00080"/>00080 &#32;&#32;&#32;&#32;{
+<anchor xml:id="__app_options_service_8cs_source_1l00081"/>00081 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keyword">get</emphasis>
+<anchor xml:id="__app_options_service_8cs_source_1l00082"/>00082 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;{
+<anchor xml:id="__app_options_service_8cs_source_1l00083"/>00083 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;var&#32;activeTheme&#32;=&#32;<link linkend="_class_luthetus_1_1_common_1_1_razor_lib_1_1_options_1_1_models_1_1_app_options_service_1afcecda608e490a868296cf0616bc8a4f">ThemeStateWrap</link>.Value.ThemeList.FirstOrDefault(
+<anchor xml:id="__app_options_service_8cs_source_1l00084"/>00084 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;x&#32;=&gt;&#32;x.Key&#32;==&#32;<link linkend="_class_luthetus_1_1_common_1_1_razor_lib_1_1_options_1_1_models_1_1_app_options_service_1a1d8fe20397b9b2fa2bcfbe6bc9ec67a0">AppOptionsStateWrap</link>.Value.Options.ThemeKey)
+<anchor xml:id="__app_options_service_8cs_source_1l00085"/>00085 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;??&#32;ThemeFacts.VisualStudioDarkThemeClone;
+<anchor xml:id="__app_options_service_8cs_source_1l00086"/>00086 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;
+<anchor xml:id="__app_options_service_8cs_source_1l00087"/>00087 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;var&#32;cssStyleStringBuilder&#32;=&#32;<emphasis role="keyword">new</emphasis>&#32;StringBuilder(<emphasis role="stringliteral">&quot;color-scheme:&#32;&quot;</emphasis>);
+<anchor xml:id="__app_options_service_8cs_source_1l00088"/>00088 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;
+<anchor xml:id="__app_options_service_8cs_source_1l00089"/>00089 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">if</emphasis>&#32;(activeTheme.ThemeColorKind&#32;==&#32;<link linkend="_namespace_luthetus_1_1_common_1_1_razor_lib_1_1_themes_1_1_models_1a10222db241ecf500c7283ab15eb0a1b8">ThemeColorKind</link>.Dark)
+<anchor xml:id="__app_options_service_8cs_source_1l00090"/>00090 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;cssStyleStringBuilder.Append(<emphasis role="stringliteral">&quot;dark&quot;</emphasis>);
+<anchor xml:id="__app_options_service_8cs_source_1l00091"/>00091 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">else</emphasis>&#32;<emphasis role="keywordflow">if</emphasis>&#32;(activeTheme.ThemeColorKind&#32;==&#32;<link linkend="_namespace_luthetus_1_1_common_1_1_razor_lib_1_1_themes_1_1_models_1a10222db241ecf500c7283ab15eb0a1b8">ThemeColorKind</link>.Light)
+<anchor xml:id="__app_options_service_8cs_source_1l00092"/>00092 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;cssStyleStringBuilder.Append(<emphasis role="stringliteral">&quot;light&quot;</emphasis>);
+<anchor xml:id="__app_options_service_8cs_source_1l00093"/>00093 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">else</emphasis>
+<anchor xml:id="__app_options_service_8cs_source_1l00094"/>00094 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;cssStyleStringBuilder.Append(<emphasis role="stringliteral">&quot;dark&quot;</emphasis>);
+<anchor xml:id="__app_options_service_8cs_source_1l00095"/>00095 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;
+<anchor xml:id="__app_options_service_8cs_source_1l00096"/>00096 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;cssStyleStringBuilder.Append(<emphasis role="charliteral">&apos;;&apos;</emphasis>);
+<anchor xml:id="__app_options_service_8cs_source_1l00097"/>00097 
+<anchor xml:id="__app_options_service_8cs_source_1l00098"/>00098 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;cssStyleStringBuilder.ToString();
+<anchor xml:id="__app_options_service_8cs_source_1l00099"/>00099 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;}
+<anchor xml:id="__app_options_service_8cs_source_1l00100"/>00100 &#32;&#32;&#32;&#32;}
+<anchor xml:id="__app_options_service_8cs_source_1l00101"/>00101 
+<anchor xml:id="__app_options_service_8cs_source_1l00102"/><link linkend="_class_luthetus_1_1_common_1_1_razor_lib_1_1_options_1_1_models_1_1_app_options_service_1a14d083fc1e0d83b57f7be08a0f389ce9">00102</link> &#32;&#32;&#32;&#32;<emphasis role="keyword">public</emphasis>&#32;<emphasis role="keywordtype">void</emphasis>&#32;<link linkend="_class_luthetus_1_1_common_1_1_razor_lib_1_1_options_1_1_models_1_1_app_options_service_1a14d083fc1e0d83b57f7be08a0f389ce9">SetActiveThemeRecordKey</link>(Key&lt;ThemeRecord&gt;&#32;themeKey,&#32;<emphasis role="keywordtype">bool</emphasis>&#32;updateStorage&#32;=&#32;<emphasis role="keyword">true</emphasis>)
+<anchor xml:id="__app_options_service_8cs_source_1l00103"/>00103 &#32;&#32;&#32;&#32;{
+<anchor xml:id="__app_options_service_8cs_source_1l00104"/>00104 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;_dispatcher.Dispatch(<emphasis role="keyword">new</emphasis>&#32;<link linkend="_namespace_luthetus_1_1_common_1_1_razor_lib_1_1_options_1_1_states_1a9409e10cd8eb433c3eba8da9850c7784">AppOptionsState</link>.WithAction(inState&#32;=&gt;&#32;inState&#32;with
+<anchor xml:id="__app_options_service_8cs_source_1l00105"/>00105 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;{
+<anchor xml:id="__app_options_service_8cs_source_1l00106"/>00106 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;Options&#32;=&#32;inState.Options&#32;with
+<anchor xml:id="__app_options_service_8cs_source_1l00107"/>00107 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;{
+<anchor xml:id="__app_options_service_8cs_source_1l00108"/>00108 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;ThemeKey&#32;=&#32;themeKey
+<anchor xml:id="__app_options_service_8cs_source_1l00109"/>00109 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;}
+<anchor xml:id="__app_options_service_8cs_source_1l00110"/>00110 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;}));
+<anchor xml:id="__app_options_service_8cs_source_1l00111"/>00111 
+<anchor xml:id="__app_options_service_8cs_source_1l00112"/>00112 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">if</emphasis>&#32;(updateStorage)
+<anchor xml:id="__app_options_service_8cs_source_1l00113"/>00113 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;WriteToStorage();
+<anchor xml:id="__app_options_service_8cs_source_1l00114"/>00114 &#32;&#32;&#32;&#32;}
+<anchor xml:id="__app_options_service_8cs_source_1l00115"/>00115 
+<anchor xml:id="__app_options_service_8cs_source_1l00116"/><link linkend="_class_luthetus_1_1_common_1_1_razor_lib_1_1_options_1_1_models_1_1_app_options_service_1a394cc55d0024ef33034e5054481947e5">00116</link> &#32;&#32;&#32;&#32;<emphasis role="keyword">public</emphasis>&#32;<emphasis role="keywordtype">void</emphasis>&#32;<link linkend="_class_luthetus_1_1_common_1_1_razor_lib_1_1_options_1_1_models_1_1_app_options_service_1a394cc55d0024ef33034e5054481947e5">SetTheme</link>(<link linkend="_namespace_luthetus_1_1_common_1_1_razor_lib_1_1_themes_1_1_models_1ae94f1b326aa43638257e7c56bd70f6a6">ThemeRecord</link>&#32;theme,&#32;<emphasis role="keywordtype">bool</emphasis>&#32;updateStorage&#32;=&#32;<emphasis role="keyword">true</emphasis>)
+<anchor xml:id="__app_options_service_8cs_source_1l00117"/>00117 &#32;&#32;&#32;&#32;{
+<anchor xml:id="__app_options_service_8cs_source_1l00118"/>00118 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;_dispatcher.Dispatch(<emphasis role="keyword">new</emphasis>&#32;<link linkend="_namespace_luthetus_1_1_common_1_1_razor_lib_1_1_options_1_1_states_1a9409e10cd8eb433c3eba8da9850c7784">AppOptionsState</link>.WithAction(inState&#32;=&gt;&#32;inState&#32;with
+<anchor xml:id="__app_options_service_8cs_source_1l00119"/>00119 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;{
+<anchor xml:id="__app_options_service_8cs_source_1l00120"/>00120 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;Options&#32;=&#32;inState.Options&#32;with
+<anchor xml:id="__app_options_service_8cs_source_1l00121"/>00121 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;{
+<anchor xml:id="__app_options_service_8cs_source_1l00122"/>00122 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;ThemeKey&#32;=&#32;theme.Key
+<anchor xml:id="__app_options_service_8cs_source_1l00123"/>00123 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;}
+<anchor xml:id="__app_options_service_8cs_source_1l00124"/>00124 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;}));
+<anchor xml:id="__app_options_service_8cs_source_1l00125"/>00125 
+<anchor xml:id="__app_options_service_8cs_source_1l00126"/>00126 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">if</emphasis>&#32;(updateStorage)
+<anchor xml:id="__app_options_service_8cs_source_1l00127"/>00127 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;WriteToStorage();
+<anchor xml:id="__app_options_service_8cs_source_1l00128"/>00128 &#32;&#32;&#32;&#32;}
+<anchor xml:id="__app_options_service_8cs_source_1l00129"/>00129 
+<anchor xml:id="__app_options_service_8cs_source_1l00130"/><link linkend="_class_luthetus_1_1_common_1_1_razor_lib_1_1_options_1_1_models_1_1_app_options_service_1ad2fa51652487a148114c7c43fdb00a0a">00130</link> &#32;&#32;&#32;&#32;<emphasis role="keyword">public</emphasis>&#32;<emphasis role="keywordtype">void</emphasis>&#32;<link linkend="_class_luthetus_1_1_common_1_1_razor_lib_1_1_options_1_1_models_1_1_app_options_service_1ad2fa51652487a148114c7c43fdb00a0a">SetFontFamily</link>(<emphasis role="keywordtype">string</emphasis>?&#32;fontFamily,&#32;<emphasis role="keywordtype">bool</emphasis>&#32;updateStorage&#32;=&#32;<emphasis role="keyword">true</emphasis>)
+<anchor xml:id="__app_options_service_8cs_source_1l00131"/>00131 &#32;&#32;&#32;&#32;{
+<anchor xml:id="__app_options_service_8cs_source_1l00132"/>00132 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;_dispatcher.Dispatch(<emphasis role="keyword">new</emphasis>&#32;<link linkend="_namespace_luthetus_1_1_common_1_1_razor_lib_1_1_options_1_1_states_1a9409e10cd8eb433c3eba8da9850c7784">AppOptionsState</link>.WithAction(inState&#32;=&gt;&#32;inState&#32;with
+<anchor xml:id="__app_options_service_8cs_source_1l00133"/>00133 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;{
+<anchor xml:id="__app_options_service_8cs_source_1l00134"/>00134 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;Options&#32;=&#32;inState.Options&#32;with
+<anchor xml:id="__app_options_service_8cs_source_1l00135"/>00135 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;{
+<anchor xml:id="__app_options_service_8cs_source_1l00136"/>00136 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;FontFamily&#32;=&#32;fontFamily
+<anchor xml:id="__app_options_service_8cs_source_1l00137"/>00137 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;}
+<anchor xml:id="__app_options_service_8cs_source_1l00138"/>00138 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;}));
+<anchor xml:id="__app_options_service_8cs_source_1l00139"/>00139 
+<anchor xml:id="__app_options_service_8cs_source_1l00140"/>00140 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">if</emphasis>&#32;(updateStorage)
+<anchor xml:id="__app_options_service_8cs_source_1l00141"/>00141 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;WriteToStorage();
+<anchor xml:id="__app_options_service_8cs_source_1l00142"/>00142 &#32;&#32;&#32;&#32;}
+<anchor xml:id="__app_options_service_8cs_source_1l00143"/>00143 
+<anchor xml:id="__app_options_service_8cs_source_1l00144"/><link linkend="_class_luthetus_1_1_common_1_1_razor_lib_1_1_options_1_1_models_1_1_app_options_service_1a548ae66fd2a45c2d342c6bb8ba936d00">00144</link> &#32;&#32;&#32;&#32;<emphasis role="keyword">public</emphasis>&#32;<emphasis role="keywordtype">void</emphasis>&#32;<link linkend="_class_luthetus_1_1_common_1_1_razor_lib_1_1_options_1_1_models_1_1_app_options_service_1a548ae66fd2a45c2d342c6bb8ba936d00">SetFontSize</link>(<emphasis role="keywordtype">int</emphasis>&#32;fontSizeInPixels,&#32;<emphasis role="keywordtype">bool</emphasis>&#32;updateStorage&#32;=&#32;<emphasis role="keyword">true</emphasis>)
+<anchor xml:id="__app_options_service_8cs_source_1l00145"/>00145 &#32;&#32;&#32;&#32;{
+<anchor xml:id="__app_options_service_8cs_source_1l00146"/>00146 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;_dispatcher.Dispatch(<emphasis role="keyword">new</emphasis>&#32;<link linkend="_namespace_luthetus_1_1_common_1_1_razor_lib_1_1_options_1_1_states_1a9409e10cd8eb433c3eba8da9850c7784">AppOptionsState</link>.WithAction(inState&#32;=&gt;&#32;inState&#32;with
+<anchor xml:id="__app_options_service_8cs_source_1l00147"/>00147 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;{
+<anchor xml:id="__app_options_service_8cs_source_1l00148"/>00148 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;Options&#32;=&#32;inState.Options&#32;with
+<anchor xml:id="__app_options_service_8cs_source_1l00149"/>00149 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;{
+<anchor xml:id="__app_options_service_8cs_source_1l00150"/>00150 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;FontSizeInPixels&#32;=&#32;fontSizeInPixels
+<anchor xml:id="__app_options_service_8cs_source_1l00151"/>00151 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;}
+<anchor xml:id="__app_options_service_8cs_source_1l00152"/>00152 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;}));
+<anchor xml:id="__app_options_service_8cs_source_1l00153"/>00153 
+<anchor xml:id="__app_options_service_8cs_source_1l00154"/>00154 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">if</emphasis>&#32;(updateStorage)
+<anchor xml:id="__app_options_service_8cs_source_1l00155"/>00155 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;WriteToStorage();
+<anchor xml:id="__app_options_service_8cs_source_1l00156"/>00156 &#32;&#32;&#32;&#32;}
+<anchor xml:id="__app_options_service_8cs_source_1l00157"/>00157 
+<anchor xml:id="__app_options_service_8cs_source_1l00158"/><link linkend="_class_luthetus_1_1_common_1_1_razor_lib_1_1_options_1_1_models_1_1_app_options_service_1a8e4c2cf31aa8715b8700581df9c1ca46">00158</link> &#32;&#32;&#32;&#32;<emphasis role="keyword">public</emphasis>&#32;<emphasis role="keywordtype">void</emphasis>&#32;<link linkend="_class_luthetus_1_1_common_1_1_razor_lib_1_1_options_1_1_models_1_1_app_options_service_1a8e4c2cf31aa8715b8700581df9c1ca46">SetResizeHandleWidth</link>(<emphasis role="keywordtype">int</emphasis>&#32;resizeHandleWidthInPixels,&#32;<emphasis role="keywordtype">bool</emphasis>&#32;updateStorage&#32;=&#32;<emphasis role="keyword">true</emphasis>)
+<anchor xml:id="__app_options_service_8cs_source_1l00159"/>00159 &#32;&#32;&#32;&#32;{
+<anchor xml:id="__app_options_service_8cs_source_1l00160"/>00160 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;_dispatcher.Dispatch(<emphasis role="keyword">new</emphasis>&#32;<link linkend="_namespace_luthetus_1_1_common_1_1_razor_lib_1_1_options_1_1_states_1a9409e10cd8eb433c3eba8da9850c7784">AppOptionsState</link>.WithAction(inState&#32;=&gt;&#32;inState&#32;with
+<anchor xml:id="__app_options_service_8cs_source_1l00161"/>00161 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;{
+<anchor xml:id="__app_options_service_8cs_source_1l00162"/>00162 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;Options&#32;=&#32;inState.Options&#32;with
+<anchor xml:id="__app_options_service_8cs_source_1l00163"/>00163 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;{
+<anchor xml:id="__app_options_service_8cs_source_1l00164"/>00164 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;ResizeHandleWidthInPixels&#32;=&#32;resizeHandleWidthInPixels
+<anchor xml:id="__app_options_service_8cs_source_1l00165"/>00165 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;}
+<anchor xml:id="__app_options_service_8cs_source_1l00166"/>00166 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;}));
+<anchor xml:id="__app_options_service_8cs_source_1l00167"/>00167 
+<anchor xml:id="__app_options_service_8cs_source_1l00168"/>00168 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">if</emphasis>&#32;(updateStorage)
+<anchor xml:id="__app_options_service_8cs_source_1l00169"/>00169 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;WriteToStorage();
+<anchor xml:id="__app_options_service_8cs_source_1l00170"/>00170 &#32;&#32;&#32;&#32;}
+<anchor xml:id="__app_options_service_8cs_source_1l00171"/>00171 
+<anchor xml:id="__app_options_service_8cs_source_1l00172"/><link linkend="_class_luthetus_1_1_common_1_1_razor_lib_1_1_options_1_1_models_1_1_app_options_service_1a02e26987b77af327da9abeef8942278b">00172</link> &#32;&#32;&#32;&#32;<emphasis role="keyword">public</emphasis>&#32;<emphasis role="keywordtype">void</emphasis>&#32;<link linkend="_class_luthetus_1_1_common_1_1_razor_lib_1_1_options_1_1_models_1_1_app_options_service_1a02e26987b77af327da9abeef8942278b">SetResizeHandleHeight</link>(<emphasis role="keywordtype">int</emphasis>&#32;resizeHandleHeightInPixels,&#32;<emphasis role="keywordtype">bool</emphasis>&#32;updateStorage&#32;=&#32;<emphasis role="keyword">true</emphasis>)
+<anchor xml:id="__app_options_service_8cs_source_1l00173"/>00173 &#32;&#32;&#32;&#32;{
+<anchor xml:id="__app_options_service_8cs_source_1l00174"/>00174 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;_dispatcher.Dispatch(<emphasis role="keyword">new</emphasis>&#32;<link linkend="_namespace_luthetus_1_1_common_1_1_razor_lib_1_1_options_1_1_states_1a9409e10cd8eb433c3eba8da9850c7784">AppOptionsState</link>.WithAction(inState&#32;=&gt;&#32;inState&#32;with
+<anchor xml:id="__app_options_service_8cs_source_1l00175"/>00175 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;{
+<anchor xml:id="__app_options_service_8cs_source_1l00176"/>00176 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;Options&#32;=&#32;inState.Options&#32;with
+<anchor xml:id="__app_options_service_8cs_source_1l00177"/>00177 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;{
+<anchor xml:id="__app_options_service_8cs_source_1l00178"/>00178 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;ResizeHandleHeightInPixels&#32;=&#32;resizeHandleHeightInPixels
+<anchor xml:id="__app_options_service_8cs_source_1l00179"/>00179 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;}
+<anchor xml:id="__app_options_service_8cs_source_1l00180"/>00180 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;}));
+<anchor xml:id="__app_options_service_8cs_source_1l00181"/>00181 
+<anchor xml:id="__app_options_service_8cs_source_1l00182"/>00182 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">if</emphasis>&#32;(updateStorage)
+<anchor xml:id="__app_options_service_8cs_source_1l00183"/>00183 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;WriteToStorage();
+<anchor xml:id="__app_options_service_8cs_source_1l00184"/>00184 &#32;&#32;&#32;&#32;}
+<anchor xml:id="__app_options_service_8cs_source_1l00185"/>00185 
+<anchor xml:id="__app_options_service_8cs_source_1l00186"/><link linkend="_class_luthetus_1_1_common_1_1_razor_lib_1_1_options_1_1_models_1_1_app_options_service_1a3e5a466c3688dee9441a51f88520c212">00186</link> &#32;&#32;&#32;&#32;<emphasis role="keyword">public</emphasis>&#32;<emphasis role="keywordtype">void</emphasis>&#32;<link linkend="_class_luthetus_1_1_common_1_1_razor_lib_1_1_options_1_1_models_1_1_app_options_service_1a3e5a466c3688dee9441a51f88520c212">SetIconSize</link>(<emphasis role="keywordtype">int</emphasis>&#32;iconSizeInPixels,&#32;<emphasis role="keywordtype">bool</emphasis>&#32;updateStorage&#32;=&#32;<emphasis role="keyword">true</emphasis>)
+<anchor xml:id="__app_options_service_8cs_source_1l00187"/>00187 &#32;&#32;&#32;&#32;{
+<anchor xml:id="__app_options_service_8cs_source_1l00188"/>00188 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;_dispatcher.Dispatch(<emphasis role="keyword">new</emphasis>&#32;<link linkend="_namespace_luthetus_1_1_common_1_1_razor_lib_1_1_options_1_1_states_1a9409e10cd8eb433c3eba8da9850c7784">AppOptionsState</link>.WithAction(inState&#32;=&gt;&#32;inState&#32;with
+<anchor xml:id="__app_options_service_8cs_source_1l00189"/>00189 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;{
+<anchor xml:id="__app_options_service_8cs_source_1l00190"/>00190 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;Options&#32;=&#32;inState.Options&#32;with
+<anchor xml:id="__app_options_service_8cs_source_1l00191"/>00191 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;{
+<anchor xml:id="__app_options_service_8cs_source_1l00192"/>00192 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;IconSizeInPixels&#32;=&#32;iconSizeInPixels
+<anchor xml:id="__app_options_service_8cs_source_1l00193"/>00193 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;}
+<anchor xml:id="__app_options_service_8cs_source_1l00194"/>00194 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;}));
+<anchor xml:id="__app_options_service_8cs_source_1l00195"/>00195 
+<anchor xml:id="__app_options_service_8cs_source_1l00196"/>00196 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">if</emphasis>&#32;(updateStorage)
+<anchor xml:id="__app_options_service_8cs_source_1l00197"/>00197 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;WriteToStorage();
+<anchor xml:id="__app_options_service_8cs_source_1l00198"/>00198 &#32;&#32;&#32;&#32;}
+<anchor xml:id="__app_options_service_8cs_source_1l00199"/>00199 
+<anchor xml:id="__app_options_service_8cs_source_1l00200"/><link linkend="_class_luthetus_1_1_common_1_1_razor_lib_1_1_options_1_1_models_1_1_app_options_service_1a3696a17c3f620407570fcff6a49cb8e7">00200</link> &#32;&#32;&#32;&#32;<emphasis role="keyword">public</emphasis>&#32;async&#32;Task&#32;<link linkend="_class_luthetus_1_1_common_1_1_razor_lib_1_1_options_1_1_models_1_1_app_options_service_1a3696a17c3f620407570fcff6a49cb8e7">SetFromLocalStorageAsync</link>()
+<anchor xml:id="__app_options_service_8cs_source_1l00201"/>00201 &#32;&#32;&#32;&#32;{
+<anchor xml:id="__app_options_service_8cs_source_1l00202"/>00202 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;var&#32;optionsJsonString&#32;=&#32;await&#32;_storageService.GetValue(<link linkend="_class_luthetus_1_1_common_1_1_razor_lib_1_1_options_1_1_models_1_1_app_options_service_1aa92f3e024f0257198ea666441b7c4dad">StorageKey</link>).ConfigureAwait(<emphasis role="keyword">false</emphasis>)&#32;as&#32;string;
+<anchor xml:id="__app_options_service_8cs_source_1l00203"/>00203 
+<anchor xml:id="__app_options_service_8cs_source_1l00204"/>00204 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">if</emphasis>&#32;(<emphasis role="keywordtype">string</emphasis>.IsNullOrWhiteSpace(optionsJsonString))
+<anchor xml:id="__app_options_service_8cs_source_1l00205"/>00205 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>;
+<anchor xml:id="__app_options_service_8cs_source_1l00206"/>00206 
+<anchor xml:id="__app_options_service_8cs_source_1l00207"/>00207 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;var&#32;optionsJson&#32;=&#32;JsonSerializer.Deserialize&lt;<link linkend="_namespace_luthetus_1_1_common_1_1_razor_lib_1_1_options_1_1_models_1afe06b5ebd34ad9da8ab9612e2decc1be">CommonOptionsJsonDto</link>&gt;(optionsJsonString);
+<anchor xml:id="__app_options_service_8cs_source_1l00208"/>00208 
+<anchor xml:id="__app_options_service_8cs_source_1l00209"/>00209 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">if</emphasis>&#32;(optionsJson&#32;is&#32;<emphasis role="keyword">null</emphasis>)
+<anchor xml:id="__app_options_service_8cs_source_1l00210"/>00210 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>;
+<anchor xml:id="__app_options_service_8cs_source_1l00211"/>00211 
+<anchor xml:id="__app_options_service_8cs_source_1l00212"/>00212 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">if</emphasis>&#32;(optionsJson.ThemeKey&#32;is&#32;not&#32;<emphasis role="keyword">null</emphasis>)
+<anchor xml:id="__app_options_service_8cs_source_1l00213"/>00213 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;{
+<anchor xml:id="__app_options_service_8cs_source_1l00214"/>00214 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;var&#32;matchedTheme&#32;=&#32;<link linkend="_class_luthetus_1_1_common_1_1_razor_lib_1_1_options_1_1_models_1_1_app_options_service_1afcecda608e490a868296cf0616bc8a4f">ThemeStateWrap</link>.Value.ThemeList.FirstOrDefault(
+<anchor xml:id="__app_options_service_8cs_source_1l00215"/>00215 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;x&#32;=&gt;&#32;x.Key&#32;==&#32;optionsJson.ThemeKey);
+<anchor xml:id="__app_options_service_8cs_source_1l00216"/>00216 
+<anchor xml:id="__app_options_service_8cs_source_1l00217"/>00217 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<link linkend="_class_luthetus_1_1_common_1_1_razor_lib_1_1_options_1_1_models_1_1_app_options_service_1a394cc55d0024ef33034e5054481947e5">SetTheme</link>(matchedTheme&#32;??&#32;ThemeFacts.VisualStudioDarkThemeClone,&#32;<emphasis role="keyword">false</emphasis>);
+<anchor xml:id="__app_options_service_8cs_source_1l00218"/>00218 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;}
+<anchor xml:id="__app_options_service_8cs_source_1l00219"/>00219 
+<anchor xml:id="__app_options_service_8cs_source_1l00220"/>00220 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">if</emphasis>&#32;(optionsJson.FontFamily&#32;is&#32;not&#32;<emphasis role="keyword">null</emphasis>)
+<anchor xml:id="__app_options_service_8cs_source_1l00221"/>00221 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<link linkend="_class_luthetus_1_1_common_1_1_razor_lib_1_1_options_1_1_models_1_1_app_options_service_1ad2fa51652487a148114c7c43fdb00a0a">SetFontFamily</link>(optionsJson.FontFamily,&#32;<emphasis role="keyword">false</emphasis>);
+<anchor xml:id="__app_options_service_8cs_source_1l00222"/>00222 
+<anchor xml:id="__app_options_service_8cs_source_1l00223"/>00223 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">if</emphasis>&#32;(optionsJson.FontSizeInPixels&#32;is&#32;not&#32;<emphasis role="keyword">null</emphasis>)
+<anchor xml:id="__app_options_service_8cs_source_1l00224"/>00224 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<link linkend="_class_luthetus_1_1_common_1_1_razor_lib_1_1_options_1_1_models_1_1_app_options_service_1a548ae66fd2a45c2d342c6bb8ba936d00">SetFontSize</link>(optionsJson.FontSizeInPixels.Value,&#32;<emphasis role="keyword">false</emphasis>);
+<anchor xml:id="__app_options_service_8cs_source_1l00225"/>00225 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;
+<anchor xml:id="__app_options_service_8cs_source_1l00226"/>00226 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">if</emphasis>&#32;(optionsJson.ResizeHandleWidthInPixels&#32;is&#32;not&#32;<emphasis role="keyword">null</emphasis>)
+<anchor xml:id="__app_options_service_8cs_source_1l00227"/>00227 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<link linkend="_class_luthetus_1_1_common_1_1_razor_lib_1_1_options_1_1_models_1_1_app_options_service_1a8e4c2cf31aa8715b8700581df9c1ca46">SetResizeHandleWidth</link>(optionsJson.ResizeHandleWidthInPixels.Value,&#32;<emphasis role="keyword">false</emphasis>);
+<anchor xml:id="__app_options_service_8cs_source_1l00228"/>00228 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;
+<anchor xml:id="__app_options_service_8cs_source_1l00229"/>00229 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">if</emphasis>&#32;(optionsJson.ResizeHandleHeightInPixels&#32;is&#32;not&#32;<emphasis role="keyword">null</emphasis>)
+<anchor xml:id="__app_options_service_8cs_source_1l00230"/>00230 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<link linkend="_class_luthetus_1_1_common_1_1_razor_lib_1_1_options_1_1_models_1_1_app_options_service_1a02e26987b77af327da9abeef8942278b">SetResizeHandleHeight</link>(optionsJson.ResizeHandleHeightInPixels.Value,&#32;<emphasis role="keyword">false</emphasis>);
+<anchor xml:id="__app_options_service_8cs_source_1l00231"/>00231 
+<anchor xml:id="__app_options_service_8cs_source_1l00232"/>00232 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">if</emphasis>&#32;(optionsJson.IconSizeInPixels&#32;is&#32;not&#32;<emphasis role="keyword">null</emphasis>)
+<anchor xml:id="__app_options_service_8cs_source_1l00233"/>00233 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<link linkend="_class_luthetus_1_1_common_1_1_razor_lib_1_1_options_1_1_models_1_1_app_options_service_1a3e5a466c3688dee9441a51f88520c212">SetIconSize</link>(optionsJson.IconSizeInPixels.Value,&#32;<emphasis role="keyword">false</emphasis>);
+<anchor xml:id="__app_options_service_8cs_source_1l00234"/>00234 &#32;&#32;&#32;&#32;}
+<anchor xml:id="__app_options_service_8cs_source_1l00235"/>00235 
+<anchor xml:id="__app_options_service_8cs_source_1l00236"/><link linkend="_class_luthetus_1_1_common_1_1_razor_lib_1_1_options_1_1_models_1_1_app_options_service_1acb3b0f7eb1e3f99f81dc875196c4f271">00236</link> &#32;&#32;&#32;&#32;<emphasis role="keyword">public</emphasis>&#32;<emphasis role="keywordtype">void</emphasis>&#32;<link linkend="_class_luthetus_1_1_common_1_1_razor_lib_1_1_options_1_1_models_1_1_app_options_service_1acb3b0f7eb1e3f99f81dc875196c4f271">WriteToStorage</link>()
+<anchor xml:id="__app_options_service_8cs_source_1l00237"/>00237 &#32;&#32;&#32;&#32;{
+<anchor xml:id="__app_options_service_8cs_source_1l00238"/>00238 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;_commonBackgroundTaskApi.Storage.WriteToLocalStorage(
+<anchor xml:id="__app_options_service_8cs_source_1l00239"/>00239 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<link linkend="_class_luthetus_1_1_common_1_1_razor_lib_1_1_options_1_1_models_1_1_app_options_service_1aa92f3e024f0257198ea666441b7c4dad">StorageKey</link>,
+<anchor xml:id="__app_options_service_8cs_source_1l00240"/>00240 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keyword">new</emphasis>&#32;<link linkend="_namespace_luthetus_1_1_common_1_1_razor_lib_1_1_options_1_1_models_1afe06b5ebd34ad9da8ab9612e2decc1be">CommonOptionsJsonDto</link>(<link linkend="_class_luthetus_1_1_common_1_1_razor_lib_1_1_options_1_1_models_1_1_app_options_service_1a1d8fe20397b9b2fa2bcfbe6bc9ec67a0">AppOptionsStateWrap</link>.Value.Options));
+<anchor xml:id="__app_options_service_8cs_source_1l00241"/>00241 &#32;&#32;&#32;&#32;}
+<anchor xml:id="__app_options_service_8cs_source_1l00242"/>00242 }
+</programlisting></section>

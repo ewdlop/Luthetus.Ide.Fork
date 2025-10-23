@@ -1,0 +1,4 @@
+var _luthetus_text_editor_initializer_8razor_8cs =
+[
+    [ "Luthetus.TextEditor.RazorLib.Installations.Displays.LuthetusTextEditorInitializer", "class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_installations_1_1_displays_1_1_luthetus_text_editor_initializer.html", "class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_installations_1_1_displays_1_1_luthetus_text_editor_initializer" ]
+];

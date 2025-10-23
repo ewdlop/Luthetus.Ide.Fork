@@ -1,0 +1,191 @@
+.TH "Luthetus.Common.RazorLib.FileSystems.Models.IPath" 3 "Version 1.0.0" "Luthetus.Ide" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+Luthetus.Common.RazorLib.FileSystems.Models.IPath \- A side comment: Windows allow both '\\' and '/' as file delimiters\&. Be sure to check both System\&.IO\&.Path\&.DirectorySeparatorChar and System\&.IO\&.Path\&.AltDirectorySeparatorChar\&.  
+
+.SH SYNOPSIS
+.br
+.PP
+.PP
+Inherited by \fBLuthetus\&.Common\&.RazorLib\&.FileSystems\&.Models\&.IAbsolutePath\fP, and \fBLuthetus\&.Common\&.RazorLib\&.FileSystems\&.Models\&.IRelativePath\fP\&.
+.SS "Properties"
+
+.in +1c
+.ti -1c
+.RI "\fBPathType\fP \fBPathType\fP\fR [get]\fP"
+.br
+.ti -1c
+.RI "bool \fBIsDirectory\fP\fR [get]\fP"
+.br
+.ti -1c
+.RI "string \fBNameNoExtension\fP\fR [get]\fP"
+.br
+.ti -1c
+.RI "string \fBNameWithExtension\fP\fR [get]\fP"
+.br
+.RI "Given: { "somePath\&.txt", NOT_DIRECTORY }
+.br
+ Then: \fBNameWithExtension\fP is "somePath\&.txt" 
+.br
+
+.br
+ Given: { "somePath\&.txt", IS_DIRECTORY }
+.br
+ Then: \fBNameWithExtension\fP is "somePath\&.txt/" 
+.br
+
+.br
+ Given: { "somePath", NOT_DIRECTORY }
+.br
+ Then: \fBNameWithExtension\fP is "somePath" 
+.br
+
+.br
+ Given: { "somePath", IS_DIRECTORY }
+.br
+ Then: \fBNameWithExtension\fP is "somePath/" 
+.br
+
+.br
+ Given: { "somePath/", NOT_DIRECTORY }
+.br
+ Then: throw new Exception('File names cannot contain directory separators'); 
+.br
+
+.br
+ Given: { "somePath/", IS_DIRECTORY }
+.br
+ Then: \fBNameWithExtension\fP is "somePath/"\&. "
+.ti -1c
+.RI "string \fBExtensionNoPeriod\fP\fR [get]\fP"
+.br
+.ti -1c
+.RI "string? \fBExactInput\fP\fR [get]\fP"
+.br
+.RI "Given: "/Repos\\\\BlazorCrudApp\\\\"<br/>
+Then: <see cref="ExactInput"/> is "/Repos\\BlazorCrudApp\\"<br/><br/>Given: "\\Repos/BlazorCrudApp/"<br/>Then: <see cref="ExactInput"/> is "\\Repos/BlazorCrudApp/"<br/><br/>Overall reasoning: <see cref="ExactInput"/> is to return the user input exactly as they gave it originally\&. "
+.ti -1c
+.RI "string \fBValue\fP\fR [get]\fP"
+.br
+.RI "\fBValue\fP is the path as a string, but with all directory separating characters having been standardized to be \fBIEnvironmentProvider\&.DirectorySeparatorChar\fP\&. "
+.ti -1c
+.RI "\fBAncestorDirectory\fP? \fBParentDirectory\fP\fR [get]\fP"
+.br
+.ti -1c
+.RI "List< \fBAncestorDirectory\fP > \fBAncestorDirectoryList\fP\fR [get]\fP"
+.br
+.ti -1c
+.RI "\fBIEnvironmentProvider\fP \fBEnvironmentProvider\fP\fR [get]\fP"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+A side comment: Windows allow both '\\' and '/' as file delimiters\&. Be sure to check both System\&.IO\&.Path\&.DirectorySeparatorChar and System\&.IO\&.Path\&.AltDirectorySeparatorChar\&. 
+.PP
+Definition at line \fB8\fP of file \fBIPath\&.cs\fP\&.
+.SH "Property Documentation"
+.PP 
+.SS "List<\fBAncestorDirectory\fP> Luthetus\&.Common\&.RazorLib\&.FileSystems\&.Models\&.IPath\&.AncestorDirectoryList\fR [get]\fP"
+
+.PP
+Implemented in \fBLuthetus\&.Common\&.RazorLib\&.FileSystems\&.Models\&.IEnvironmentProvider\&.AbsolutePath\fP, and \fBLuthetus\&.Common\&.RazorLib\&.FileSystems\&.Models\&.IEnvironmentProvider\&.RelativePath\fP\&.
+.PP
+Definition at line \fB52\fP of file \fBIPath\&.cs\fP\&.
+.SS "\fBIEnvironmentProvider\fP Luthetus\&.Common\&.RazorLib\&.FileSystems\&.Models\&.IPath\&.EnvironmentProvider\fR [get]\fP"
+
+.PP
+Implemented in \fBLuthetus\&.Common\&.RazorLib\&.FileSystems\&.Models\&.IEnvironmentProvider\&.AbsolutePath\fP, and \fBLuthetus\&.Common\&.RazorLib\&.FileSystems\&.Models\&.IEnvironmentProvider\&.RelativePath\fP\&.
+.PP
+Definition at line \fB53\fP of file \fBIPath\&.cs\fP\&.
+.SS "string? Luthetus\&.Common\&.RazorLib\&.FileSystems\&.Models\&.IPath\&.ExactInput\fR [get]\fP"
+
+.PP
+Given: "/Repos\\\\BlazorCrudApp\\\\"<br/>
+Then: <see cref="ExactInput"/> is "/Repos\\BlazorCrudApp\\"<br/><br/>Given: "\\Repos/BlazorCrudApp/"<br/>Then: <see cref="ExactInput"/> is "\\Repos/BlazorCrudApp/"<br/><br/>Overall reasoning: <see cref="ExactInput"/> is to return the user input exactly as they gave it originally\&. 
+.PP
+Implemented in \fBLuthetus\&.Common\&.RazorLib\&.FileSystems\&.Models\&.IEnvironmentProvider\&.AbsolutePath\fP, and \fBLuthetus\&.Common\&.RazorLib\&.FileSystems\&.Models\&.IEnvironmentProvider\&.RelativePath\fP\&.
+.PP
+Definition at line \fB44\fP of file \fBIPath\&.cs\fP\&.
+.SS "string Luthetus\&.Common\&.RazorLib\&.FileSystems\&.Models\&.IPath\&.ExtensionNoPeriod\fR [get]\fP"
+
+.PP
+Implemented in \fBLuthetus\&.Common\&.RazorLib\&.FileSystems\&.Models\&.IEnvironmentProvider\&.AbsolutePath\fP, and \fBLuthetus\&.Common\&.RazorLib\&.FileSystems\&.Models\&.IEnvironmentProvider\&.RelativePath\fP\&.
+.PP
+Definition at line \fB33\fP of file \fBIPath\&.cs\fP\&.
+.SS "bool Luthetus\&.Common\&.RazorLib\&.FileSystems\&.Models\&.IPath\&.IsDirectory\fR [get]\fP"
+
+.PP
+Implemented in \fBLuthetus\&.Common\&.RazorLib\&.FileSystems\&.Models\&.IEnvironmentProvider\&.AbsolutePath\fP, and \fBLuthetus\&.Common\&.RazorLib\&.FileSystems\&.Models\&.IEnvironmentProvider\&.RelativePath\fP\&.
+.PP
+Definition at line \fB11\fP of file \fBIPath\&.cs\fP\&.
+.SS "string Luthetus\&.Common\&.RazorLib\&.FileSystems\&.Models\&.IPath\&.NameNoExtension\fR [get]\fP"
+
+.PP
+Implemented in \fBLuthetus\&.Common\&.RazorLib\&.FileSystems\&.Models\&.IEnvironmentProvider\&.AbsolutePath\fP, and \fBLuthetus\&.Common\&.RazorLib\&.FileSystems\&.Models\&.IEnvironmentProvider\&.RelativePath\fP\&.
+.PP
+Definition at line \fB12\fP of file \fBIPath\&.cs\fP\&.
+.SS "string Luthetus\&.Common\&.RazorLib\&.FileSystems\&.Models\&.IPath\&.NameWithExtension\fR [get]\fP"
+
+.PP
+Given: { "somePath\&.txt", NOT_DIRECTORY }
+.br
+ Then: \fBNameWithExtension\fP is "somePath\&.txt" 
+.br
+
+.br
+ Given: { "somePath\&.txt", IS_DIRECTORY }
+.br
+ Then: \fBNameWithExtension\fP is "somePath\&.txt/" 
+.br
+
+.br
+ Given: { "somePath", NOT_DIRECTORY }
+.br
+ Then: \fBNameWithExtension\fP is "somePath" 
+.br
+
+.br
+ Given: { "somePath", IS_DIRECTORY }
+.br
+ Then: \fBNameWithExtension\fP is "somePath/" 
+.br
+
+.br
+ Given: { "somePath/", NOT_DIRECTORY }
+.br
+ Then: throw new Exception('File names cannot contain directory separators'); 
+.br
+
+.br
+ Given: { "somePath/", IS_DIRECTORY }
+.br
+ Then: \fBNameWithExtension\fP is "somePath/"\&. 
+.PP
+Implemented in \fBLuthetus\&.Common\&.RazorLib\&.FileSystems\&.Models\&.IEnvironmentProvider\&.AbsolutePath\fP, and \fBLuthetus\&.Common\&.RazorLib\&.FileSystems\&.Models\&.IEnvironmentProvider\&.RelativePath\fP\&.
+.PP
+Definition at line \fB32\fP of file \fBIPath\&.cs\fP\&.
+.SS "\fBAncestorDirectory\fP? Luthetus\&.Common\&.RazorLib\&.FileSystems\&.Models\&.IPath\&.ParentDirectory\fR [get]\fP"
+
+.PP
+Implemented in \fBLuthetus\&.Common\&.RazorLib\&.FileSystems\&.Models\&.IEnvironmentProvider\&.AbsolutePath\fP, and \fBLuthetus\&.Common\&.RazorLib\&.FileSystems\&.Models\&.IEnvironmentProvider\&.RelativePath\fP\&.
+.PP
+Definition at line \fB51\fP of file \fBIPath\&.cs\fP\&.
+.SS "\fBPathType\fP Luthetus\&.Common\&.RazorLib\&.FileSystems\&.Models\&.IPath\&.PathType\fR [get]\fP"
+
+.PP
+Implemented in \fBLuthetus\&.Common\&.RazorLib\&.FileSystems\&.Models\&.IEnvironmentProvider\&.AbsolutePath\fP, and \fBLuthetus\&.Common\&.RazorLib\&.FileSystems\&.Models\&.IEnvironmentProvider\&.RelativePath\fP\&.
+.PP
+Definition at line \fB10\fP of file \fBIPath\&.cs\fP\&.
+.SS "string Luthetus\&.Common\&.RazorLib\&.FileSystems\&.Models\&.IPath\&.Value\fR [get]\fP"
+
+.PP
+\fBValue\fP is the path as a string, but with all directory separating characters having been standardized to be \fBIEnvironmentProvider\&.DirectorySeparatorChar\fP\&. 
+.PP
+Implemented in \fBLuthetus\&.Common\&.RazorLib\&.FileSystems\&.Models\&.IEnvironmentProvider\&.AbsolutePath\fP, and \fBLuthetus\&.Common\&.RazorLib\&.FileSystems\&.Models\&.IEnvironmentProvider\&.RelativePath\fP\&.
+.PP
+Definition at line \fB50\fP of file \fBIPath\&.cs\fP\&.
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for Luthetus\&.Ide from the source code\&.

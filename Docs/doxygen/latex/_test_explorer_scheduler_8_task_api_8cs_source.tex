@@ -1,0 +1,456 @@
+\doxysection{Test\+Explorer\+Scheduler.\+Task\+Api.\+cs}
+\hypertarget{_test_explorer_scheduler_8_task_api_8cs_source}{}\label{_test_explorer_scheduler_8_task_api_8cs_source}\index{Source/Lib/Extensions/Extensions.DotNet/TestExplorers/States/TestExplorerScheduler.TaskApi.cs@{Source/Lib/Extensions/Extensions.DotNet/TestExplorers/States/TestExplorerScheduler.TaskApi.cs}}
+\mbox{\hyperlink{_test_explorer_scheduler_8_task_api_8cs}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00001}00001\ \textcolor{keyword}{using\ }System.Collections.Immutable;}
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00002}00002\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_luthetus_1_1_common_1_1_razor_lib_1_1_tree_views_1_1_models}{Luthetus.Common.RazorLib.TreeViews.Models}};}
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00003}00003\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_luthetus_1_1_common_1_1_razor_lib_1_1_notifications_1_1_models}{Luthetus.Common.RazorLib.Notifications.Models}};}
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00004}00004\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_luthetus_1_1_common_1_1_razor_lib_1_1_tree_views_1_1_models_1_1_utils}{Luthetus.Common.RazorLib.TreeViews.Models.Utils}};}
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00005}00005\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_luthetus_1_1_common_1_1_razor_lib_1_1_reactives_1_1_models}{Luthetus.Common.RazorLib.Reactives.Models}};}
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00006}00006\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_luthetus_1_1_compiler_services_1_1_dot_net_solution_1_1_models_1_1_project}{Luthetus.CompilerServices.DotNetSolution.Models.Project}};}
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00007}00007\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_luthetus_1_1_ide_1_1_razor_lib_1_1_terminals_1_1_models}{Luthetus.Ide.RazorLib.Terminals.Models}};}
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00008}00008\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_luthetus_1_1_extensions_1_1_dot_net_1_1_test_explorers_1_1_models}{Luthetus.Extensions.DotNet.TestExplorers.Models}};}
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00009}00009\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_luthetus_1_1_extensions_1_1_dot_net_1_1_command_lines_1_1_models}{Luthetus.Extensions.DotNet.CommandLines.Models}};}
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00010}00010\ }
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00011}00011\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespace_luthetus_1_1_extensions_1_1_dot_net_1_1_test_explorers_1_1_states}{Luthetus.Extensions.DotNet.TestExplorers.States}};}
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00012}00012\ }
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00013}00013\ \textcolor{keyword}{public}\ \textcolor{keyword}{partial\ class\ }\mbox{\hyperlink{class_luthetus_1_1_extensions_1_1_dot_net_1_1_test_explorers_1_1_states_1_1_test_explorer_scheduler}{TestExplorerScheduler}}}
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00014}00014\ \{}
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00015}\mbox{\hyperlink{class_luthetus_1_1_extensions_1_1_dot_net_1_1_test_explorers_1_1_states_1_1_test_explorer_scheduler_a830ddde8f6626bba3471afee43f8108c}{00015}}\ \ \ \ \ \textcolor{keyword}{public}\ async\ Task\ \mbox{\hyperlink{class_luthetus_1_1_extensions_1_1_dot_net_1_1_test_explorers_1_1_states_1_1_test_explorer_scheduler_a830ddde8f6626bba3471afee43f8108c}{Task\_ConstructTreeView}}()}
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00016}00016\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00017}00017\ \ \ \ \ \ \ \ \ var\ dotNetSolutionState\ =\ \_dotNetSolutionStateWrap.Value;}
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00018}00018\ \ \ \ \ \ \ \ \ var\ dotNetSolutionModel\ =\ dotNetSolutionState.DotNetSolutionModel;}
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00019}00019\ }
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00020}00020\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (dotNetSolutionModel\ is\ \textcolor{keyword}{null})}
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00021}00021\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return};}
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00022}00022\ }
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00023}00023\ \ \ \ \ \ \ \ \ var\ localDotNetProjectList\ =\ dotNetSolutionModel.DotNetProjectList}
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00024}00024\ \ \ \ \ \ \ \ \ \ \ \ \ .Where(x\ =>\ x.DotNetProjectKind\ ==\ \mbox{\hyperlink{namespace_luthetus_1_1_compiler_services_1_1_dot_net_solution_1_1_models_1_1_project_a8b7dffa208e87fed238434aefc6c237e}{DotNetProjectKind}}.CSharpProject);}
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00025}00025\ }
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00026}00026\ \ \ \ \ \ \ \ \ var\ localProjectTestModelList\ =\ localDotNetProjectList.Select(x\ =>\ \textcolor{keyword}{new}\ \mbox{\hyperlink{class_luthetus_1_1_extensions_1_1_dot_net_1_1_test_explorers_1_1_models_1_1_project_test_model}{ProjectTestModel}}(}
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00027}00027\ \ \ \ \ \ \ \ \ \ \ \ \ x.ProjectIdGuid,}
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00028}00028\ \ \ \ \ \ \ \ \ \ \ \ \ x.AbsolutePath,}
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00029}00029\ \ \ \ \ \ \ \ \ \ \ \ \ callback\ =>\ Task.CompletedTask,}
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00030}00030\ \ \ \ \ \ \ \ \ \ \ \ \ node\ =>\ \_treeViewService.ReRenderNode(\mbox{\hyperlink{namespace_luthetus_1_1_extensions_1_1_dot_net_1_1_test_explorers_1_1_states_a13a87604012e3c931a408383412994df}{TestExplorerState}}.TreeViewTestExplorerKey,\ node)));}
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00031}00031\ }
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00032}00032\ \ \ \ \ \ \ \ \ var\ localFormattedCommand\ =\ DotNetCliCommandFormatter.FormatDotNetTestListTests();}
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00033}00033\ }
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00034}00034\ \ \ \ \ \ \ \ \ var\ localTreeViewProjectTestModelList\ =\ localProjectTestModelList.Select(x\ =>}
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00035}00035\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (\mbox{\hyperlink{class_luthetus_1_1_common_1_1_razor_lib_1_1_tree_views_1_1_models_1_1_tree_view_no_type}{TreeViewNoType}})\textcolor{keyword}{new}\ \mbox{\hyperlink{class_luthetus_1_1_extensions_1_1_dot_net_1_1_test_explorers_1_1_models_1_1_tree_view_project_test_model}{TreeViewProjectTestModel}}(}
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00036}00036\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ x,}
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00037}00037\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \_commonComponentRenderers,}
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00038}00038\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{true},}
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00039}00039\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{false}))}
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00040}00040\ \ \ \ \ \ \ \ \ \ \ \ \ .ToArray();}
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00041}00041\ }
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00042}00042\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{foreach}\ (var\ entry\ \textcolor{keywordflow}{in}\ localTreeViewProjectTestModelList)}
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00043}00043\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00044}00044\ \ \ \ \ \ \ \ \ \ \ \ \ var\ treeViewProjectTestModel\ =\ (\mbox{\hyperlink{class_luthetus_1_1_extensions_1_1_dot_net_1_1_test_explorers_1_1_models_1_1_tree_view_project_test_model}{TreeViewProjectTestModel}})entry;}
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00045}00045\ }
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00046}00046\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\textcolor{keywordtype}{string}.IsNullOrWhiteSpace(treeViewProjectTestModel.Item.DirectoryNameForTestDiscovery))}
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00047}00047\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return};}
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00048}00048\ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00049}00049\ \ \ \ \ \ \ \ \ \ \ \ \ var\ projectFileText\ =\ await\ \_fileSystemProvider.File.ReadAllTextAsync(treeViewProjectTestModel.Item.AbsolutePath.Value);}
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00050}00050\ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00051}00051\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (projectFileText.Contains(\textcolor{stringliteral}{"{}xunit"{}}))}
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00052}00052\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00053}00053\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!\mbox{\hyperlink{class_luthetus_1_1_extensions_1_1_dot_net_1_1_test_explorers_1_1_states_1_1_test_explorer_scheduler_a95d5030eafcebd03666e4e76bb47b677}{NoTestsTreeViewGroup}}.ChildList.Any(x\ =>}
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00054}00054\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ((\mbox{\hyperlink{class_luthetus_1_1_extensions_1_1_dot_net_1_1_test_explorers_1_1_models_1_1_tree_view_project_test_model}{TreeViewProjectTestModel}})x).Item.AbsolutePath.Value\ ==\ treeViewProjectTestModel.Item.AbsolutePath.Value))}
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00055}00055\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00056}00056\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_luthetus_1_1_extensions_1_1_dot_net_1_1_test_explorers_1_1_states_1_1_test_explorer_scheduler_a95d5030eafcebd03666e4e76bb47b677}{NoTestsTreeViewGroup}}.ChildList.Add(treeViewProjectTestModel);}
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00057}00057\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00058}00058\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00059}00059\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00060}00060\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00061}00061\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!\mbox{\hyperlink{class_luthetus_1_1_extensions_1_1_dot_net_1_1_test_explorers_1_1_states_1_1_test_explorer_scheduler_a4b1b4f8d5758b9820914dc1944d93116}{NotValidProjectForUnitTestTreeViewGroup}}.ChildList.Any(x\ =>}
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00062}00062\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ((\mbox{\hyperlink{class_luthetus_1_1_extensions_1_1_dot_net_1_1_test_explorers_1_1_models_1_1_tree_view_project_test_model}{TreeViewProjectTestModel}})x).Item.AbsolutePath.Value\ ==\ treeViewProjectTestModel.Item.AbsolutePath.Value))}
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00063}00063\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00064}00064\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_luthetus_1_1_extensions_1_1_dot_net_1_1_test_explorers_1_1_states_1_1_test_explorer_scheduler_a4b1b4f8d5758b9820914dc1944d93116}{NotValidProjectForUnitTestTreeViewGroup}}.ChildList.Add(treeViewProjectTestModel);}
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00065}00065\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00066}00066\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00067}00067\ }
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00068}00068\ \ \ \ \ \ \ \ \ \ \ \ \ treeViewProjectTestModel.Item.EnqueueDiscoverTestsFunc\ =\ callback\ =>}
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00069}00069\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00070}00070\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ var\ terminalCommandRequest\ =\ \textcolor{keyword}{new}\ \mbox{\hyperlink{class_luthetus_1_1_ide_1_1_razor_lib_1_1_terminals_1_1_models_1_1_terminal_command_request}{TerminalCommandRequest}}(}
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00071}00071\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ localFormattedCommand.Value,}
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00072}00072\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ treeViewProjectTestModel.Item.DirectoryNameForTestDiscovery,}
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00073}00073\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ treeViewProjectTestModel.Item.DotNetTestListTestsTerminalCommandRequestKey)}
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00074}00074\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00075}00075\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ BeginWithFunc\ =\ async\ parsedCommand\ =>}
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00076}00076\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00077}00077\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ treeViewProjectTestModel.Item.TerminalCommandParsed\ =\ parsedCommand;}
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00078}00078\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \},}
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00079}00079\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ContinueWithFunc\ =\ async\ parsedCommand\ =>}
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00080}00080\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00081}00081\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ treeViewProjectTestModel.Item.TerminalCommandParsed\ =\ parsedCommand;}
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00082}00082\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00083}00083\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{try}}
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00084}00084\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00085}00085\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ treeViewProjectTestModel.Item.TestNameFullyQualifiedList\ =\ \_dotNetCliOutputParser.ParseOutputLineDotNetTestListTests(}
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00086}00086\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ treeViewProjectTestModel.Item.TerminalCommandParsed.OutputCache.ToString());}
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00087}00087\ }
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00088}00088\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ THINKING\_ABOUT\_TREE\_VIEW();}}
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00089}00089\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00090}00090\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ var\ splitOutputList\ =\ (treeViewProjectTestModel.Item.TestNameFullyQualifiedList\ ??\ \textcolor{keyword}{new}())}
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00091}00091\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ .Select(x\ =>\ x.Split(\textcolor{charliteral}{'.'}));}
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00092}00092\ }
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00093}00093\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ var\ rootMap\ =\ \textcolor{keyword}{new}\ Dictionary<string,\ StringFragment>();}
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00094}00094\ }
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00095}00095\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{foreach}\ (var\ splitOutput\ \textcolor{keywordflow}{in}\ splitOutputList)}
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00096}00096\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00097}00097\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ var\ targetMap\ =\ rootMap;}
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00098}00098\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ var\ lastSeenStringFragment\ =\ (\mbox{\hyperlink{class_luthetus_1_1_extensions_1_1_dot_net_1_1_test_explorers_1_1_models_1_1_string_fragment}{StringFragment}}?)\textcolor{keyword}{null};}
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00099}00099\ }
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00100}00100\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{foreach}\ (var\ fragment\ \textcolor{keywordflow}{in}\ splitOutput)}
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00101}00101\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00102}00102\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!targetMap.ContainsKey(fragment))}
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00103}00103\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ targetMap.Add(fragment,\ \textcolor{keyword}{new}(fragment));}
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00104}00104\ }
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00105}00105\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ lastSeenStringFragment\ =\ targetMap[fragment];}
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00106}00106\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ targetMap\ =\ lastSeenStringFragment.Map;}
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00107}00107\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00108}00108\ }
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00109}00109\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (lastSeenStringFragment\ is\ not\ \textcolor{keyword}{null})}
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00110}00110\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ lastSeenStringFragment.IsEndpoint\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00111}00111\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00112}00112\ }
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00113}00113\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ treeViewProjectTestModel.Item.RootStringFragmentMap\ =\ rootMap;}
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00114}00114\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ await\ callback.Invoke(rootMap).ConfigureAwait(\textcolor{keyword}{false});}
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00115}00115\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00116}00116\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00117}00117\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{catch}\ (Exception)}
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00118}00118\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00119}00119\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ await\ callback.Invoke(\textcolor{keyword}{new}()).ConfigureAwait(\textcolor{keyword}{false});}
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00120}00120\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{throw};}
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00121}00121\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00122}00122\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00123}00123\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \};}
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00124}00124\ }
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00125}00125\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ treeViewProjectTestModel.Item.TerminalCommandRequest\ =\ terminalCommandRequest;}
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00126}00126\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00127}00127\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \_terminalStateWrap.Value.TerminalMap[TerminalFacts.EXECUTION\_KEY]}
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00128}00128\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ .EnqueueCommandAsync(terminalCommandRequest);}
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00129}00129\ \ \ \ \ \ \ \ \ \ \ \ \ \};}
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00130}00130\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00131}00131\ }
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00132}00132\ \ \ \ \ \ \ \ \ var\ adhocRoot\ =\ \mbox{\hyperlink{class_luthetus_1_1_common_1_1_razor_lib_1_1_tree_views_1_1_models_1_1_tree_view_adhoc}{TreeViewAdhoc}}.\mbox{\hyperlink{class_luthetus_1_1_common_1_1_razor_lib_1_1_tree_views_1_1_models_1_1_tree_view_adhoc_a3dd148b2cb6390af05ed84da0ad21857}{ConstructTreeViewAdhoc}}(\textcolor{keyword}{new}\ []}
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00133}00133\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00134}00134\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_luthetus_1_1_extensions_1_1_dot_net_1_1_test_explorers_1_1_states_1_1_test_explorer_scheduler_a4b0ad0fe3e513a2636475762d458c5f6}{ContainsTestsTreeViewGroup}},}
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00135}00135\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_luthetus_1_1_extensions_1_1_dot_net_1_1_test_explorers_1_1_states_1_1_test_explorer_scheduler_a95d5030eafcebd03666e4e76bb47b677}{NoTestsTreeViewGroup}},}
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00136}00136\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_luthetus_1_1_extensions_1_1_dot_net_1_1_test_explorers_1_1_states_1_1_test_explorer_scheduler_ad1e893d940cfb2302e64e18cae2a57c3}{ThrewAnExceptionTreeViewGroup}},}
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00137}00137\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_luthetus_1_1_extensions_1_1_dot_net_1_1_test_explorers_1_1_states_1_1_test_explorer_scheduler_a4b1b4f8d5758b9820914dc1944d93116}{NotValidProjectForUnitTestTreeViewGroup}}}
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00138}00138\ \ \ \ \ \ \ \ \ \});}
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00139}00139\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00140}00140\ \ \ \ \ \ \ \ \ adhocRoot.\mbox{\hyperlink{class_luthetus_1_1_common_1_1_razor_lib_1_1_tree_views_1_1_models_1_1_tree_view_no_type_a569ce774e5b109ccf8425149b18b3e02}{LinkChildren}}(\textcolor{keyword}{new}(),\ adhocRoot.ChildList);}
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00141}00141\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00142}00142\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_luthetus_1_1_extensions_1_1_dot_net_1_1_test_explorers_1_1_states_1_1_test_explorer_scheduler_a4b0ad0fe3e513a2636475762d458c5f6}{ContainsTestsTreeViewGroup}}.LinkChildren(\textcolor{keyword}{new}(),\ \mbox{\hyperlink{class_luthetus_1_1_extensions_1_1_dot_net_1_1_test_explorers_1_1_states_1_1_test_explorer_scheduler_a4b0ad0fe3e513a2636475762d458c5f6}{ContainsTestsTreeViewGroup}}.ChildList);}
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00143}00143\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_luthetus_1_1_extensions_1_1_dot_net_1_1_test_explorers_1_1_states_1_1_test_explorer_scheduler_a95d5030eafcebd03666e4e76bb47b677}{NoTestsTreeViewGroup}}.LinkChildren(\textcolor{keyword}{new}(),\ \mbox{\hyperlink{class_luthetus_1_1_extensions_1_1_dot_net_1_1_test_explorers_1_1_states_1_1_test_explorer_scheduler_a95d5030eafcebd03666e4e76bb47b677}{NoTestsTreeViewGroup}}.ChildList);}
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00144}00144\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_luthetus_1_1_extensions_1_1_dot_net_1_1_test_explorers_1_1_states_1_1_test_explorer_scheduler_ad1e893d940cfb2302e64e18cae2a57c3}{ThrewAnExceptionTreeViewGroup}}.LinkChildren(\textcolor{keyword}{new}(),\ \mbox{\hyperlink{class_luthetus_1_1_extensions_1_1_dot_net_1_1_test_explorers_1_1_states_1_1_test_explorer_scheduler_ad1e893d940cfb2302e64e18cae2a57c3}{ThrewAnExceptionTreeViewGroup}}.ChildList);}
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00145}00145\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_luthetus_1_1_extensions_1_1_dot_net_1_1_test_explorers_1_1_states_1_1_test_explorer_scheduler_a4b1b4f8d5758b9820914dc1944d93116}{NotValidProjectForUnitTestTreeViewGroup}}.LinkChildren(\textcolor{keyword}{new}(),\ \mbox{\hyperlink{class_luthetus_1_1_extensions_1_1_dot_net_1_1_test_explorers_1_1_states_1_1_test_explorer_scheduler_a4b1b4f8d5758b9820914dc1944d93116}{NotValidProjectForUnitTestTreeViewGroup}}.ChildList);}
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00146}00146\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00147}00147\ \ \ \ \ \ \ \ \ var\ firstNode\ =\ localTreeViewProjectTestModelList.FirstOrDefault();}
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00148}00148\ }
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00149}00149\ \ \ \ \ \ \ \ \ var\ activeNodes\ =\ \textcolor{keyword}{new}\ \mbox{\hyperlink{class_luthetus_1_1_common_1_1_razor_lib_1_1_tree_views_1_1_models_1_1_tree_view_no_type}{TreeViewNoType}}[]\ \{\ \mbox{\hyperlink{class_luthetus_1_1_extensions_1_1_dot_net_1_1_test_explorers_1_1_states_1_1_test_explorer_scheduler_a4b0ad0fe3e513a2636475762d458c5f6}{ContainsTestsTreeViewGroup}}\ \};}
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00150}00150\ }
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00151}00151\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!\_treeViewService.TryGetTreeViewContainer(\mbox{\hyperlink{namespace_luthetus_1_1_extensions_1_1_dot_net_1_1_test_explorers_1_1_states_a13a87604012e3c931a408383412994df}{TestExplorerState}}.TreeViewTestExplorerKey,\ out\ \_))}
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00152}00152\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00153}00153\ \ \ \ \ \ \ \ \ \ \ \ \ \_treeViewService.RegisterTreeViewContainer(\textcolor{keyword}{new}\ \mbox{\hyperlink{namespace_luthetus_1_1_common_1_1_razor_lib_1_1_tree_views_1_1_models_ace4f137317eda265ad6dd976b61de5c6}{TreeViewContainer}}(}
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00154}00154\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespace_luthetus_1_1_extensions_1_1_dot_net_1_1_test_explorers_1_1_states_a13a87604012e3c931a408383412994df}{TestExplorerState}}.TreeViewTestExplorerKey,}
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00155}00155\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ adhocRoot,}
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00156}00156\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ activeNodes.ToImmutableList()));}
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00157}00157\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00158}00158\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00159}00159\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00160}00160\ \ \ \ \ \ \ \ \ \ \ \ \ \_treeViewService.SetRoot(\mbox{\hyperlink{namespace_luthetus_1_1_extensions_1_1_dot_net_1_1_test_explorers_1_1_states_a13a87604012e3c931a408383412994df}{TestExplorerState}}.TreeViewTestExplorerKey,\ adhocRoot);}
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00161}00161\ }
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00162}00162\ \ \ \ \ \ \ \ \ \ \ \ \ \_treeViewService.SetActiveNode(}
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00163}00163\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespace_luthetus_1_1_extensions_1_1_dot_net_1_1_test_explorers_1_1_states_a13a87604012e3c931a408383412994df}{TestExplorerState}}.TreeViewTestExplorerKey,}
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00164}00164\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ firstNode,}
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00165}00165\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{true},}
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00166}00166\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{false});}
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00167}00167\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00168}00168\ }
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00169}00169\ \ \ \ \ \ \ \ \ \_dispatcher.Dispatch(\textcolor{keyword}{new}\ \mbox{\hyperlink{namespace_luthetus_1_1_extensions_1_1_dot_net_1_1_test_explorers_1_1_states_a13a87604012e3c931a408383412994df}{TestExplorerState}}.WithAction(inState\ =>\ inState\ with}
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00170}00170\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00171}00171\ \ \ \ \ \ \ \ \ \ \ \ \ ProjectTestModelList\ =\ localProjectTestModelList.ToImmutableList()}
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00172}00172\ \ \ \ \ \ \ \ \ \}));}
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00173}00173\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00174}00174\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00175}\mbox{\hyperlink{class_luthetus_1_1_extensions_1_1_dot_net_1_1_test_explorers_1_1_states_1_1_test_explorer_scheduler_a95c2d52354bc0c73452eec6cbb9dc8fa}{00175}}\ \ \ \ \ \textcolor{keyword}{public}\ Task\ \mbox{\hyperlink{class_luthetus_1_1_extensions_1_1_dot_net_1_1_test_explorers_1_1_states_1_1_test_explorer_scheduler_a95c2d52354bc0c73452eec6cbb9dc8fa}{Task\_DiscoverTests}}()}
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00176}00176\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00177}00177\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \_throttleDiscoverTests.RunAsync(async\ \_\ =>\ }
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00178}00178\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00179}00179\ \ \ \ \ \ \ \ \ \ \ \ \ var\ dotNetSolutionState\ =\ \_dotNetSolutionStateWrap.Value;}
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00180}00180\ \ \ \ \ \ \ \ \ \ \ \ \ var\ dotNetSolutionModel\ =\ dotNetSolutionState.DotNetSolutionModel;}
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00181}00181\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00182}00182\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (dotNetSolutionModel\ is\ \textcolor{keyword}{null})}
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00183}00183\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return};}
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00184}00184\ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00185}00185\ \ \ \ \ \ \ \ \ \ \ \ \ var\ localTestExplorerState\ =\ \_testExplorerStateWrap.Value;}
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00186}00186\ \ \ \ \ \ \ \ \ \ \ \ \ var\ cancellationTokenSource\ =\ \textcolor{keyword}{new}\ CancellationTokenSource();}
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00187}00187\ \ \ \ \ \ \ \ \ \ \ \ \ var\ cancellationToken\ =\ cancellationTokenSource.Token;}
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00188}00188\ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00189}00189\ \ \ \ \ \ \ \ \ \ \ \ \ var\ progressBarModel\ =\ \textcolor{keyword}{new}\ \mbox{\hyperlink{class_luthetus_1_1_common_1_1_razor_lib_1_1_reactives_1_1_models_1_1_progress_bar_model}{ProgressBarModel}}(0,\ \textcolor{stringliteral}{"{}parsing..."{}})}
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00190}00190\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00191}00191\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ OnCancelFunc\ =\ ()\ =>}
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00192}00192\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00193}00193\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ cancellationTokenSource.Cancel();}
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00194}00194\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ cancellationTokenSource.Dispose();}
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00195}00195\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ Task.CompletedTask;}
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00196}00196\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00197}00197\ \ \ \ \ \ \ \ \ \ \ \ \ \};}
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00198}00198\ }
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00199}00199\ \ \ \ \ \ \ \ \ \ \ \ \ NotificationHelper.DispatchProgress(}
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00200}00200\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \$\textcolor{stringliteral}{"{}Test\ Discovery:\ \{dotNetSolutionModel.AbsolutePath.NameWithExtension\}"{}},}
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00201}00201\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ progressBarModel,}
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00202}00202\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \_commonComponentRenderers,}
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00203}00203\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \_dispatcher,}
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00204}00204\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ TimeSpan.FromMilliseconds(-\/1));}
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00205}00205\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00206}00206\ \ \ \ \ \ \ \ \ \ \ \ \ var\ progressThrottle\ =\ \textcolor{keyword}{new}\ \mbox{\hyperlink{class_luthetus_1_1_common_1_1_razor_lib_1_1_reactives_1_1_models_1_1_throttle}{Throttle}}(TimeSpan.FromMilliseconds(100));}
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00207}00207\ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00208}00208\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{try}}
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00209}00209\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00210}00210\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ progressThrottle.Run(\_\ =>\ }
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00211}00211\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00212}00212\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ progressBarModel.SetProgress(0,\ \textcolor{stringliteral}{"{}Discovering\ tests..."{}});}
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00213}00213\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ return\ Task.CompletedTask;}
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00214}00214\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \});}
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00215}00215\ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00216}00216\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ var\ completionPercentPerProject\ =\ 1.0\ /\ (double)\mbox{\hyperlink{class_luthetus_1_1_extensions_1_1_dot_net_1_1_test_explorers_1_1_states_1_1_test_explorer_scheduler_a95d5030eafcebd03666e4e76bb47b677}{NoTestsTreeViewGroup}}.ChildList.Count;}
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00217}00217\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ var\ projectsHandled\ =\ 0;}
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00218}00218\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00219}00219\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\_treeViewService.TryGetTreeViewContainer(\mbox{\hyperlink{namespace_luthetus_1_1_extensions_1_1_dot_net_1_1_test_explorers_1_1_states_a13a87604012e3c931a408383412994df}{TestExplorerState}}.TreeViewTestExplorerKey,\ out\ var\ treeViewContainer))}
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00220}00220\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00221}00221\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (treeViewContainer.RootNode\ is\ not\ \mbox{\hyperlink{class_luthetus_1_1_common_1_1_razor_lib_1_1_tree_views_1_1_models_1_1_tree_view_adhoc}{TreeViewAdhoc}}\ treeViewAdhoc)}
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00222}00222\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return};}
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00223}00223\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00224}00224\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ var\ dotNetProjectListLength\ =\ \mbox{\hyperlink{class_luthetus_1_1_extensions_1_1_dot_net_1_1_test_explorers_1_1_states_1_1_test_explorer_scheduler_a95d5030eafcebd03666e4e76bb47b677}{NoTestsTreeViewGroup}}.ChildList.Count;}
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00225}00225\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00226}00226\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{foreach}\ (var\ treeViewProject\ \textcolor{keywordflow}{in}\ \mbox{\hyperlink{class_luthetus_1_1_extensions_1_1_dot_net_1_1_test_explorers_1_1_states_1_1_test_explorer_scheduler_a95d5030eafcebd03666e4e76bb47b677}{NoTestsTreeViewGroup}}.ChildList)}
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00227}00227\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00228}00228\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (treeViewProject\ is\ not\ \mbox{\hyperlink{class_luthetus_1_1_extensions_1_1_dot_net_1_1_test_explorers_1_1_models_1_1_tree_view_project_test_model}{TreeViewProjectTestModel}}\ treeViewProjectTestModel)}
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00229}00229\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{continue};}
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00230}00230\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00231}00231\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ var\ currentProgress\ =\ completionPercentPerProject\ *\ projectsHandled;}
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00232}00232\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00233}00233\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ progressThrottle.Run(\_\ =>\ }
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00234}00234\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00235}00235\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ progressBarModel.SetProgress(}
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00236}00236\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ currentProgress,}
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00237}00237\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \$\textcolor{stringliteral}{"{}\{projectsHandled\ +\ 1\}/\{dotNetProjectListLength\}:\ \{treeViewProjectTestModel.Item.AbsolutePath.NameWithExtension\}"{}});}
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00238}00238\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ Task.CompletedTask;}
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00239}00239\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \});}
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00240}00240\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00241}00241\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ cancellationToken.ThrowIfCancellationRequested();}
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00242}00242\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00243}00243\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ await\ treeViewProject.LoadChildListAsync();}
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00244}00244\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ projectsHandled++;}
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00245}00245\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00246}00246\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00247}00247\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ progressThrottle.Run(\_\ =>\ }
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00248}00248\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00249}00249\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ progressBarModel.SetProgress(1,\ \$\textcolor{stringliteral}{"{}Finished\ test\ discovery:\ \{dotNetSolutionModel.AbsolutePath.NameWithExtension\}"{}},\ \textcolor{keywordtype}{string}.Empty);}
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00250}00250\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ progressBarModel.Dispose();}
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00251}00251\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ Task.CompletedTask;}
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00252}00252\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \});\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00253}00253\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ await\ \mbox{\hyperlink{class_luthetus_1_1_extensions_1_1_dot_net_1_1_test_explorers_1_1_states_1_1_test_explorer_scheduler_a8f7a3264b20d02495d1a37cf6c65ade2}{Task\_SumEachProjectTestCount}}();}
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00254}00254\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00255}00255\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00256}00256\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{catch}\ (Exception\ e)}
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00257}00257\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00258}00258\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (e\ is\ OperationCanceledException)}
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00259}00259\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ progressBarModel.IsCancelled\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00260}00260\ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00261}00261\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ var\ currentProgress\ =\ progressBarModel.GetProgress();}
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00262}00262\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00263}00263\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ progressThrottle.Run(\_\ =>\ }
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00264}00264\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00265}00265\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ TODO:\ Set\ message\ 2\ as\ the\ error\ instead\ so\ we\ can\ see\ the\ project...}}
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00266}00266\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ ...\ that\ it\ was\ discovering\ tests\ for\ when\ it\ threw\ exception?}}
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00267}00267\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ progressBarModel.SetProgress(currentProgress,\ e.ToString());}
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00268}00268\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ progressBarModel.Dispose();}
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00269}00269\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ Task.CompletedTask;}
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00270}00270\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \});}
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00271}00271\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00272}00272\ \ \ \ \ \ \ \ \ \});}
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00273}00273\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00274}00274\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00275}\mbox{\hyperlink{class_luthetus_1_1_extensions_1_1_dot_net_1_1_test_explorers_1_1_states_1_1_test_explorer_scheduler_a8f7a3264b20d02495d1a37cf6c65ade2}{00275}}\ \ \ \ \ \textcolor{keyword}{public}\ Task\ \mbox{\hyperlink{class_luthetus_1_1_extensions_1_1_dot_net_1_1_test_explorers_1_1_states_1_1_test_explorer_scheduler_a8f7a3264b20d02495d1a37cf6c65ade2}{Task\_SumEachProjectTestCount}}()}
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00276}00276\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00277}00277\ \ \ \ \ \ \ \ \ var\ dotNetSolutionState\ =\ \_dotNetSolutionStateWrap.Value;}
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00278}00278\ \ \ \ \ \ \ \ \ var\ dotNetSolutionModel\ =\ dotNetSolutionState.DotNetSolutionModel;}
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00279}00279\ }
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00280}00280\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (dotNetSolutionModel\ is\ \textcolor{keyword}{null})}
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00281}00281\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ Task.CompletedTask;}
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00282}00282\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00283}00283\ \ \ \ \ \ \ \ \ var\ totalTestCount\ =\ 0;}
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00284}00284\ \ \ \ \ \ \ \ \ var\ notRanTestHashSet\ =\ ImmutableHashSet<string>.Empty;}
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00285}00285\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00286}00286\ \ \ \ \ \ \ \ \ Console.WriteLine(\$\textcolor{stringliteral}{"{}NoTestsTreeViewGroup.ChildList.Count:\ \{NoTestsTreeViewGroup.ChildList.Count\}"{}});}
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00287}00287\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\_treeViewService.TryGetTreeViewContainer(\mbox{\hyperlink{namespace_luthetus_1_1_extensions_1_1_dot_net_1_1_test_explorers_1_1_states_a13a87604012e3c931a408383412994df}{TestExplorerState}}.TreeViewTestExplorerKey,\ out\ var\ treeViewContainer))}
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00288}00288\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00289}00289\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (treeViewContainer.RootNode\ is\ not\ \mbox{\hyperlink{class_luthetus_1_1_common_1_1_razor_lib_1_1_tree_views_1_1_models_1_1_tree_view_adhoc}{TreeViewAdhoc}}\ treeViewAdhoc)}
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00290}00290\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ Task.CompletedTask;}
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00291}00291\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00292}00292\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{foreach}\ (var\ treeViewProject\ \textcolor{keywordflow}{in}\ \mbox{\hyperlink{class_luthetus_1_1_extensions_1_1_dot_net_1_1_test_explorers_1_1_states_1_1_test_explorer_scheduler_a95d5030eafcebd03666e4e76bb47b677}{NoTestsTreeViewGroup}}.ChildList)}
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00293}00293\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00294}00294\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (treeViewProject\ is\ not\ \mbox{\hyperlink{class_luthetus_1_1_extensions_1_1_dot_net_1_1_test_explorers_1_1_models_1_1_tree_view_project_test_model}{TreeViewProjectTestModel}}\ treeViewProjectTestModel)}
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00295}00295\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ Task.CompletedTask;}
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00296}00296\ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00297}00297\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ totalTestCount\ +=\ treeViewProjectTestModel.Item.TestNameFullyQualifiedList?.Count\ ??\ 0;}
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00298}00298\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00299}00299\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_luthetus_1_1_extensions_1_1_dot_net_1_1_test_explorers_1_1_states_1_1_test_explorer_scheduler_aaa39101e98290e82e68df6ccb40348ef}{MoveNodeToCorrectBranch}}(treeViewProjectTestModel);}
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00300}00300\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00301}00301\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*if\ (treeViewProjectTestModel.Item.TestNameFullyQualifiedList\ is\ not\ null)}}
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00302}00302\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}}
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00303}00303\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ if\ (treeViewProjectTestModel.Item.TestNameFullyQualifiedList.Count\ >\ 0)}}
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00304}00304\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}}
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00305}00305\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ContainsTestsTreeViewGroup.ChildList.Add(treeViewProjectTestModel);}}
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00306}00306\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}}
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00307}00307\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ else}}
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00308}00308\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}}
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00309}00309\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ NoTestsTreeViewGroup.ChildList.Add(treeViewProjectTestModel);}}
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00310}00310\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}}
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00311}00311\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}}
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00312}00312\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ else}}
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00313}00313\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}}
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00314}00314\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ if\ (treeViewProjectTestModel.Item.TerminalCommandParsed\ is\ not\ null\ \&\&}}
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00315}00315\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ treeViewProjectTestModel.Item.TerminalCommandParsed.OutputCache.ToString().Contains("{}threw\ an\ exception"{}))}}
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00316}00316\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}}
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00317}00317\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ThrewAnExceptionTreeViewGroup.ChildList.Add(treeViewProjectTestModel);}}
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00318}00318\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}}
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00319}00319\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ else}}
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00320}00320\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}}
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00321}00321\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ NotValidProjectForUnitTestTreeViewGroup.ChildList.Add(treeViewProjectTestModel);}}
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00322}00322\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}}
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00323}00323\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}*/}}
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00324}00324\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00325}00325\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (treeViewProjectTestModel.Item.TestNameFullyQualifiedList\ is\ not\ \textcolor{keyword}{null})}
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00326}00326\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00327}00327\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{foreach}\ (var\ output\ \textcolor{keywordflow}{in}\ treeViewProjectTestModel.Item.TestNameFullyQualifiedList)}
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00328}00328\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00329}00329\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ notRanTestHashSet\ =\ notRanTestHashSet.Add(output);}
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00330}00330\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00331}00331\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00332}00332\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00333}00333\ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00334}00334\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_luthetus_1_1_extensions_1_1_dot_net_1_1_test_explorers_1_1_states_1_1_test_explorer_scheduler_a4b0ad0fe3e513a2636475762d458c5f6}{ContainsTestsTreeViewGroup}}.LinkChildren(\textcolor{keyword}{new}(),\ \mbox{\hyperlink{class_luthetus_1_1_extensions_1_1_dot_net_1_1_test_explorers_1_1_states_1_1_test_explorer_scheduler_a4b0ad0fe3e513a2636475762d458c5f6}{ContainsTestsTreeViewGroup}}.ChildList);}
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00335}00335\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_luthetus_1_1_extensions_1_1_dot_net_1_1_test_explorers_1_1_states_1_1_test_explorer_scheduler_a95d5030eafcebd03666e4e76bb47b677}{NoTestsTreeViewGroup}}.LinkChildren(\textcolor{keyword}{new}(),\ \mbox{\hyperlink{class_luthetus_1_1_extensions_1_1_dot_net_1_1_test_explorers_1_1_states_1_1_test_explorer_scheduler_a95d5030eafcebd03666e4e76bb47b677}{NoTestsTreeViewGroup}}.ChildList);}
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00336}00336\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_luthetus_1_1_extensions_1_1_dot_net_1_1_test_explorers_1_1_states_1_1_test_explorer_scheduler_ad1e893d940cfb2302e64e18cae2a57c3}{ThrewAnExceptionTreeViewGroup}}.LinkChildren(\textcolor{keyword}{new}(),\ \mbox{\hyperlink{class_luthetus_1_1_extensions_1_1_dot_net_1_1_test_explorers_1_1_states_1_1_test_explorer_scheduler_ad1e893d940cfb2302e64e18cae2a57c3}{ThrewAnExceptionTreeViewGroup}}.ChildList);}
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00337}00337\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_luthetus_1_1_extensions_1_1_dot_net_1_1_test_explorers_1_1_states_1_1_test_explorer_scheduler_a4b1b4f8d5758b9820914dc1944d93116}{NotValidProjectForUnitTestTreeViewGroup}}.LinkChildren(\textcolor{keyword}{new}(),\ \mbox{\hyperlink{class_luthetus_1_1_extensions_1_1_dot_net_1_1_test_explorers_1_1_states_1_1_test_explorer_scheduler_a4b1b4f8d5758b9820914dc1944d93116}{NotValidProjectForUnitTestTreeViewGroup}}.ChildList);}
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00338}00338\ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00339}00339\ \ \ \ \ \ \ \ \ \ \ \ \ var\ nextTreeViewAdhoc\ =\ \mbox{\hyperlink{class_luthetus_1_1_common_1_1_razor_lib_1_1_tree_views_1_1_models_1_1_tree_view_adhoc}{TreeViewAdhoc}}.\mbox{\hyperlink{class_luthetus_1_1_common_1_1_razor_lib_1_1_tree_views_1_1_models_1_1_tree_view_adhoc_a3dd148b2cb6390af05ed84da0ad21857}{ConstructTreeViewAdhoc}}(}
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00340}00340\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_luthetus_1_1_extensions_1_1_dot_net_1_1_test_explorers_1_1_states_1_1_test_explorer_scheduler_a4b0ad0fe3e513a2636475762d458c5f6}{ContainsTestsTreeViewGroup}},}
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00341}00341\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_luthetus_1_1_extensions_1_1_dot_net_1_1_test_explorers_1_1_states_1_1_test_explorer_scheduler_a95d5030eafcebd03666e4e76bb47b677}{NoTestsTreeViewGroup}},}
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00342}00342\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_luthetus_1_1_extensions_1_1_dot_net_1_1_test_explorers_1_1_states_1_1_test_explorer_scheduler_ad1e893d940cfb2302e64e18cae2a57c3}{ThrewAnExceptionTreeViewGroup}},}
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00343}00343\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_luthetus_1_1_extensions_1_1_dot_net_1_1_test_explorers_1_1_states_1_1_test_explorer_scheduler_a4b1b4f8d5758b9820914dc1944d93116}{NotValidProjectForUnitTestTreeViewGroup}});}
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00344}00344\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00345}00345\ \ \ \ \ \ \ \ \ \ \ \ \ nextTreeViewAdhoc.\mbox{\hyperlink{class_luthetus_1_1_common_1_1_razor_lib_1_1_tree_views_1_1_models_1_1_tree_view_no_type_a569ce774e5b109ccf8425149b18b3e02}{LinkChildren}}(\textcolor{keyword}{new}(),\ nextTreeViewAdhoc.ChildList);}
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00346}00346\ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00347}00347\ \ \ \ \ \ \ \ \ \ \ \ \ \_treeViewService.SetRoot(\mbox{\hyperlink{namespace_luthetus_1_1_extensions_1_1_dot_net_1_1_test_explorers_1_1_states_a13a87604012e3c931a408383412994df}{TestExplorerState}}.TreeViewTestExplorerKey,\ nextTreeViewAdhoc);}
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00348}00348\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00349}00349\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00350}00350\ \ \ \ \ \ \ \ \ \_dispatcher.Dispatch(\textcolor{keyword}{new}\ \mbox{\hyperlink{namespace_luthetus_1_1_extensions_1_1_dot_net_1_1_test_explorers_1_1_states_a13a87604012e3c931a408383412994df}{TestExplorerState}}.WithAction(inState\ =>\ inState\ with}
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00351}00351\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00352}00352\ \ \ \ \ \ \ \ \ \ \ \ \ TotalTestCount\ =\ totalTestCount,}
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00353}00353\ \ \ \ \ \ \ \ \ \ \ \ \ NotRanTestHashSet\ =\ notRanTestHashSet,}
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00354}00354\ \ \ \ \ \ \ \ \ \ \ \ \ SolutionFilePath\ =\ dotNetSolutionModel.AbsolutePath.Value}
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00355}00355\ \ \ \ \ \ \ \ \ \}));}
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00356}00356\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00357}00357\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ Task.CompletedTask;}
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00358}00358\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00359}00359\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00364}\mbox{\hyperlink{class_luthetus_1_1_extensions_1_1_dot_net_1_1_test_explorers_1_1_states_1_1_test_explorer_scheduler_aaa39101e98290e82e68df6ccb40348ef}{00364}}\ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_luthetus_1_1_extensions_1_1_dot_net_1_1_test_explorers_1_1_states_1_1_test_explorer_scheduler_aaa39101e98290e82e68df6ccb40348ef}{MoveNodeToCorrectBranch}}(\mbox{\hyperlink{class_luthetus_1_1_extensions_1_1_dot_net_1_1_test_explorers_1_1_models_1_1_tree_view_project_test_model}{TreeViewProjectTestModel}}\ treeViewProjectTestModel)}
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00365}00365\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00366}00366\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (treeViewProjectTestModel.\mbox{\hyperlink{class_luthetus_1_1_common_1_1_razor_lib_1_1_tree_views_1_1_models_1_1_tree_view_no_type_aef3093ce691044a11c5b9969b4b2c29a}{Parent}}\ is\ \textcolor{keyword}{null})}
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00367}00367\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return};}
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00368}00368\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00369}00369\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!\_treeViewService.TryGetTreeViewContainer(\mbox{\hyperlink{namespace_luthetus_1_1_extensions_1_1_dot_net_1_1_test_explorers_1_1_states_a13a87604012e3c931a408383412994df}{TestExplorerState}}.TreeViewTestExplorerKey,\ out\ var\ treeViewContainer))}
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00370}00370\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return};}
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00371}00371\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00372}00372\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ containsTestsTreeViewGroup}}
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00373}00373\ \ \ \ \ \ \ \ \ var\ containsTestsTreeViewGroupList\ =\ treeViewContainer.RootNode.ChildList}
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00374}00374\ \ \ \ \ \ \ \ \ \ \ \ \ .Where(x\ =>}
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00375}00375\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ x\ is\ \mbox{\hyperlink{class_luthetus_1_1_common_1_1_razor_lib_1_1_tree_views_1_1_models_1_1_utils_1_1_tree_view_group}{TreeViewGroup}}\ tvg\ \&\&}
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00376}00376\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ tvg.\mbox{\hyperlink{class_luthetus_1_1_common_1_1_razor_lib_1_1_tree_views_1_1_models_1_1_tree_view_with_type-1-g_a4f46d99a34756894b183f9ce601825bc}{Item}}\ ==\ \textcolor{stringliteral}{"{}Have\ tests"{}});}
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00377}00377\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (containsTestsTreeViewGroupList.Count()\ !=\ 1)}
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00378}00378\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return};}
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00379}00379\ \ \ \ \ \ \ \ \ var\ containsTestsTreeViewGroup\ =\ containsTestsTreeViewGroupList.Single();}
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00380}00380\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00381}00381\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ noTestsTreeViewGroup}}
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00382}00382\ \ \ \ \ \ \ \ \ var\ noTestsTreeViewGroupList\ =\ treeViewContainer.RootNode.ChildList}
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00383}00383\ \ \ \ \ \ \ \ \ \ \ \ \ .Where(x\ =>}
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00384}00384\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ x\ is\ \mbox{\hyperlink{class_luthetus_1_1_common_1_1_razor_lib_1_1_tree_views_1_1_models_1_1_utils_1_1_tree_view_group}{TreeViewGroup}}\ tvg\ \&\&}
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00385}00385\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ tvg.\mbox{\hyperlink{class_luthetus_1_1_common_1_1_razor_lib_1_1_tree_views_1_1_models_1_1_tree_view_with_type-1-g_a4f46d99a34756894b183f9ce601825bc}{Item}}\ ==\ \textcolor{stringliteral}{"{}Have\ tests"{}});}
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00386}00386\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (noTestsTreeViewGroupList.Count()\ !=\ 1)}
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00387}00387\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return};}
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00388}00388\ \ \ \ \ \ \ \ \ var\ noTestsTreeViewGroup\ =\ noTestsTreeViewGroupList.Single();}
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00389}00389\ }
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00390}00390\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ threwAnExceptionTreeViewGroup}}
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00391}00391\ \ \ \ \ \ \ \ \ var\ threwAnExceptionTreeViewGroupList\ =\ treeViewContainer.RootNode.ChildList}
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00392}00392\ \ \ \ \ \ \ \ \ \ \ \ \ .Where(x\ =>}
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00393}00393\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ x\ is\ \mbox{\hyperlink{class_luthetus_1_1_common_1_1_razor_lib_1_1_tree_views_1_1_models_1_1_utils_1_1_tree_view_group}{TreeViewGroup}}\ tvg\ \&\&}
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00394}00394\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ tvg.\mbox{\hyperlink{class_luthetus_1_1_common_1_1_razor_lib_1_1_tree_views_1_1_models_1_1_tree_view_with_type-1-g_a4f46d99a34756894b183f9ce601825bc}{Item}}\ ==\ \textcolor{stringliteral}{"{}Projects\ that\ threw\ an\ exception\ during\ discovery"{}});}
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00395}00395\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (threwAnExceptionTreeViewGroupList.Count()\ !=\ 1)}
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00396}00396\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return};}
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00397}00397\ \ \ \ \ \ \ \ \ var\ threwAnExceptionTreeViewGroup\ =\ threwAnExceptionTreeViewGroupList.Single();\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00398}00398\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00399}00399\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ notValidProjectForUnitTestTreeViewGroup}}
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00400}00400\ \ \ \ \ \ \ \ \ var\ notValidProjectForUnitTestTreeViewGroupList\ =\ treeViewContainer.RootNode.ChildList}
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00401}00401\ \ \ \ \ \ \ \ \ \ \ \ \ .Where(x\ =>}
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00402}00402\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ x\ is\ \mbox{\hyperlink{class_luthetus_1_1_common_1_1_razor_lib_1_1_tree_views_1_1_models_1_1_utils_1_1_tree_view_group}{TreeViewGroup}}\ tvg\ \&\&}
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00403}00403\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ tvg.\mbox{\hyperlink{class_luthetus_1_1_common_1_1_razor_lib_1_1_tree_views_1_1_models_1_1_tree_view_with_type-1-g_a4f46d99a34756894b183f9ce601825bc}{Item}}\ ==\ \textcolor{stringliteral}{"{}Not\ a\ test-\/project"{}});}
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00404}00404\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (notValidProjectForUnitTestTreeViewGroupList.Count()\ !=\ 1)}
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00405}00405\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return};}
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00406}00406\ \ \ \ \ \ \ \ \ var\ notValidProjectForUnitTestTreeViewGroup\ =\ notValidProjectForUnitTestTreeViewGroupList.Single();}
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00407}00407\ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00408}00408\ \ \ \ \ \ \ \ \ treeViewProjectTestModel.\mbox{\hyperlink{class_luthetus_1_1_common_1_1_razor_lib_1_1_tree_views_1_1_models_1_1_tree_view_no_type_aef3093ce691044a11c5b9969b4b2c29a}{Parent}}.\mbox{\hyperlink{class_luthetus_1_1_common_1_1_razor_lib_1_1_tree_views_1_1_models_1_1_tree_view_no_type_a8b306a73a4bbf27fc2475e3deec43a89}{ChildList}}.Remove(treeViewProjectTestModel);}
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00409}00409\ \ \ \ \ \ \ \ \ treeViewProjectTestModel.\mbox{\hyperlink{class_luthetus_1_1_common_1_1_razor_lib_1_1_tree_views_1_1_models_1_1_tree_view_no_type_aef3093ce691044a11c5b9969b4b2c29a}{Parent}}.\mbox{\hyperlink{class_luthetus_1_1_common_1_1_razor_lib_1_1_tree_views_1_1_models_1_1_tree_view_no_type_a569ce774e5b109ccf8425149b18b3e02}{LinkChildren}}(}
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00410}00410\ \ \ \ \ \ \ \ \ \ \ \ \ treeViewProjectTestModel.\mbox{\hyperlink{class_luthetus_1_1_common_1_1_razor_lib_1_1_tree_views_1_1_models_1_1_tree_view_no_type_aef3093ce691044a11c5b9969b4b2c29a}{Parent}}.\mbox{\hyperlink{class_luthetus_1_1_common_1_1_razor_lib_1_1_tree_views_1_1_models_1_1_tree_view_no_type_a8b306a73a4bbf27fc2475e3deec43a89}{ChildList}},}
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00411}00411\ \ \ \ \ \ \ \ \ \ \ \ \ treeViewProjectTestModel.\mbox{\hyperlink{class_luthetus_1_1_common_1_1_razor_lib_1_1_tree_views_1_1_models_1_1_tree_view_no_type_aef3093ce691044a11c5b9969b4b2c29a}{Parent}}.\mbox{\hyperlink{class_luthetus_1_1_common_1_1_razor_lib_1_1_tree_views_1_1_models_1_1_tree_view_no_type_a8b306a73a4bbf27fc2475e3deec43a89}{ChildList}});}
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00412}00412\ \ \ \ \ \ \ \ \ \_treeViewService.ReRenderNode(\mbox{\hyperlink{namespace_luthetus_1_1_extensions_1_1_dot_net_1_1_test_explorers_1_1_states_a13a87604012e3c931a408383412994df}{TestExplorerState}}.TreeViewTestExplorerKey,\ treeViewProjectTestModel.\mbox{\hyperlink{class_luthetus_1_1_common_1_1_razor_lib_1_1_tree_views_1_1_models_1_1_tree_view_no_type_aef3093ce691044a11c5b9969b4b2c29a}{Parent}});}
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00413}00413\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00414}00414\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (treeViewProjectTestModel.\mbox{\hyperlink{class_luthetus_1_1_common_1_1_razor_lib_1_1_tree_views_1_1_models_1_1_tree_view_with_type-1-g_a4f46d99a34756894b183f9ce601825bc}{Item}}.TestNameFullyQualifiedList\ is\ not\ \textcolor{keyword}{null})}
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00415}00415\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00416}00416\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (treeViewProjectTestModel.\mbox{\hyperlink{class_luthetus_1_1_common_1_1_razor_lib_1_1_tree_views_1_1_models_1_1_tree_view_with_type-1-g_a4f46d99a34756894b183f9ce601825bc}{Item}}.TestNameFullyQualifiedList.Count\ >\ 0)}
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00417}00417\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00418}00418\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ containsTestsTreeViewGroup.ChildList.Add(treeViewProjectTestModel);}
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00419}00419\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ containsTestsTreeViewGroup.LinkChildren(}
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00420}00420\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ containsTestsTreeViewGroup.ChildList,}
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00421}00421\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ containsTestsTreeViewGroup.ChildList);}
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00422}00422\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \_treeViewService.ReRenderNode(\mbox{\hyperlink{namespace_luthetus_1_1_extensions_1_1_dot_net_1_1_test_explorers_1_1_states_a13a87604012e3c931a408383412994df}{TestExplorerState}}.TreeViewTestExplorerKey,\ containsTestsTreeViewGroup);}
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00423}00423\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00424}00424\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00425}00425\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00426}00426\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ noTestsTreeViewGroup.ChildList.Add(treeViewProjectTestModel);}
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00427}00427\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ noTestsTreeViewGroup.LinkChildren(}
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00428}00428\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ noTestsTreeViewGroup.ChildList,}
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00429}00429\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ noTestsTreeViewGroup.ChildList);}
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00430}00430\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \_treeViewService.ReRenderNode(\mbox{\hyperlink{namespace_luthetus_1_1_extensions_1_1_dot_net_1_1_test_explorers_1_1_states_a13a87604012e3c931a408383412994df}{TestExplorerState}}.TreeViewTestExplorerKey,\ noTestsTreeViewGroup);}
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00431}00431\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00432}00432\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00433}00433\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00434}00434\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00435}00435\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (treeViewProjectTestModel.\mbox{\hyperlink{class_luthetus_1_1_common_1_1_razor_lib_1_1_tree_views_1_1_models_1_1_tree_view_with_type-1-g_a4f46d99a34756894b183f9ce601825bc}{Item}}.TerminalCommandParsed\ is\ not\ \textcolor{keyword}{null}\ \&\&}
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00436}00436\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ treeViewProjectTestModel.\mbox{\hyperlink{class_luthetus_1_1_common_1_1_razor_lib_1_1_tree_views_1_1_models_1_1_tree_view_with_type-1-g_a4f46d99a34756894b183f9ce601825bc}{Item}}.TerminalCommandParsed.OutputCache.ToString().Contains(\textcolor{stringliteral}{"{}threw\ an\ exception"{}}))}
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00437}00437\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00438}00438\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ threwAnExceptionTreeViewGroup.ChildList.Add(treeViewProjectTestModel);}
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00439}00439\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ threwAnExceptionTreeViewGroup.LinkChildren(}
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00440}00440\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ threwAnExceptionTreeViewGroup.ChildList,}
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00441}00441\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ threwAnExceptionTreeViewGroup.ChildList);}
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00442}00442\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \_treeViewService.ReRenderNode(\mbox{\hyperlink{namespace_luthetus_1_1_extensions_1_1_dot_net_1_1_test_explorers_1_1_states_a13a87604012e3c931a408383412994df}{TestExplorerState}}.TreeViewTestExplorerKey,\ threwAnExceptionTreeViewGroup);}
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00443}00443\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00444}00444\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00445}00445\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00446}00446\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ notValidProjectForUnitTestTreeViewGroup.ChildList.Add(treeViewProjectTestModel);}
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00447}00447\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ notValidProjectForUnitTestTreeViewGroup.LinkChildren(}
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00448}00448\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ notValidProjectForUnitTestTreeViewGroup.ChildList,}
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00449}00449\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ notValidProjectForUnitTestTreeViewGroup.ChildList);}
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00450}00450\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \_treeViewService.ReRenderNode(\mbox{\hyperlink{namespace_luthetus_1_1_extensions_1_1_dot_net_1_1_test_explorers_1_1_states_a13a87604012e3c931a408383412994df}{TestExplorerState}}.TreeViewTestExplorerKey,\ notValidProjectForUnitTestTreeViewGroup);}
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00451}00451\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00452}00452\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00453}00453\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_test_explorer_scheduler_8_task_api_8cs_source_l00454}00454\ \}}
+
+\end{DoxyCode}

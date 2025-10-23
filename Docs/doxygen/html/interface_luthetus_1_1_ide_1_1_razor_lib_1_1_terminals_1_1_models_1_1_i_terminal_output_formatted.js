@@ -1,0 +1,4 @@
+var interface_luthetus_1_1_ide_1_1_razor_lib_1_1_terminals_1_1_models_1_1_i_terminal_output_formatted =
+[
+    [ "Text", "interface_luthetus_1_1_ide_1_1_razor_lib_1_1_terminals_1_1_models_1_1_i_terminal_output_formatted.html#a92efd75cc75a85921df1de2e0430dfd9", null ]
+];

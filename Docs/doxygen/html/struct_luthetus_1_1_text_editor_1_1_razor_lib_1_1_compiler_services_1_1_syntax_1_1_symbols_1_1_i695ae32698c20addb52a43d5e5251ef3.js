@@ -1,0 +1,7 @@
+var struct_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_1_1_symbols_1_1_i695ae32698c20addb52a43d5e5251ef3 =
+[
+    [ "InjectedLanguageComponentSymbol", "struct_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_1_1_symbols_1_1_i695ae32698c20addb52a43d5e5251ef3.html#aa7e2979fd4554e58b87706adca8e01e8", null ],
+    [ "SymbolKindString", "struct_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_1_1_symbols_1_1_i695ae32698c20addb52a43d5e5251ef3.html#a48e031cf2e8c36d345a39e0653f2dbe0", null ],
+    [ "SyntaxKind", "struct_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_1_1_symbols_1_1_i695ae32698c20addb52a43d5e5251ef3.html#adfda88ec47c7111370970ef9b6c11d3f", null ],
+    [ "TextSpan", "struct_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_1_1_symbols_1_1_i695ae32698c20addb52a43d5e5251ef3.html#ac1701fe0f702fa828f4bead1ef7f33bf", null ]
+];

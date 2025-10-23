@@ -1,0 +1,4 @@
+var class_luthetus_1_1_text_editor_1_1_tests_1_1_basis_1_1_installations_1_1_models_1_1_service_collection_extensions_tests =
+[
+    [ "AddLuthetusTextEditor", "class_luthetus_1_1_text_editor_1_1_tests_1_1_basis_1_1_installations_1_1_models_1_1_service_collection_extensions_tests.html#a2e8351ce3e30c917393a325ba1d4cd2e", null ]
+];

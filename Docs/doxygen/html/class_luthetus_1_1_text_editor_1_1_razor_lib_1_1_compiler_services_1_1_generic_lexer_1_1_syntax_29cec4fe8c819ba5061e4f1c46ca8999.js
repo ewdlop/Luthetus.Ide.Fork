@@ -1,0 +1,7 @@
+var class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_generic_lexer_1_1_syntax_29cec4fe8c819ba5061e4f1c46ca8999 =
+[
+    [ "GenericCommentSingleLineSyntax", "class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_generic_lexer_1_1_syntax_29cec4fe8c819ba5061e4f1c46ca8999.html#a975cabff1254d67b0b147da28febcdff", null ],
+    [ "ChildList", "class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_generic_lexer_1_1_syntax_29cec4fe8c819ba5061e4f1c46ca8999.html#a4ee2d511f8611e910a7aef4718540743", null ],
+    [ "GenericSyntaxKind", "class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_generic_lexer_1_1_syntax_29cec4fe8c819ba5061e4f1c46ca8999.html#ae8e5ed00dc652b218bd3e6d8a6adffd2", null ],
+    [ "TextSpan", "class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_generic_lexer_1_1_syntax_29cec4fe8c819ba5061e4f1c46ca8999.html#ae4be56ae6a912bb6578fe3ebe764f720", null ]
+];

@@ -1,0 +1,5 @@
+var class_luthetus_1_1_extensions_1_1_dot_net_1_1_compiler_services_1_1_displays_1_1_internals_1_1_syntax_text_span_display =
+[
+    [ "OnParametersSet", "class_luthetus_1_1_extensions_1_1_dot_net_1_1_compiler_services_1_1_displays_1_1_internals_1_1_syntax_text_span_display.html#a3803cf22e6928afec03d1f11c3051007", null ],
+    [ "TextSpan", "class_luthetus_1_1_extensions_1_1_dot_net_1_1_compiler_services_1_1_displays_1_1_internals_1_1_syntax_text_span_display.html#a7a65fea6b09a5288ef09750cf2e85844", null ]
+];

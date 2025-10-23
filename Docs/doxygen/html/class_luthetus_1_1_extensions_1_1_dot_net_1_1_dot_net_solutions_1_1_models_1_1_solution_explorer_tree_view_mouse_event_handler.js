@@ -1,0 +1,5 @@
+var class_luthetus_1_1_extensions_1_1_dot_net_1_1_dot_net_solutions_1_1_models_1_1_solution_explorer_tree_view_mouse_event_handler =
+[
+    [ "SolutionExplorerTreeViewMouseEventHandler", "class_luthetus_1_1_extensions_1_1_dot_net_1_1_dot_net_solutions_1_1_models_1_1_solution_explorer_tree_view_mouse_event_handler.html#a33ac7098f99c892ae2dd651becc0d367", null ],
+    [ "OnDoubleClickAsync", "class_luthetus_1_1_extensions_1_1_dot_net_1_1_dot_net_solutions_1_1_models_1_1_solution_explorer_tree_view_mouse_event_handler.html#ad6297862ca486457c081e17afb662011", null ]
+];

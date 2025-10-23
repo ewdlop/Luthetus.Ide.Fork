@@ -1,0 +1,186 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_interface_luthetus_1_1_common_1_1_razor_lib_1_1_file_systems_1_1_models_1_1_i_path" xml:lang="en-US">
+<title>Luthetus.Common.RazorLib.FileSystems.Models.IPath Interface Reference</title>
+<indexterm><primary>Luthetus.Common.RazorLib.FileSystems.Models.IPath</primary></indexterm>
+<para>
+
+<para>A side comment: Windows allow both &apos;\&apos; and &apos;/&apos; as file delimiters. Be sure to check both System.IO.Path.DirectorySeparatorChar and System.IO.Path.AltDirectorySeparatorChar. </para>
+ 
+</para>
+Inheritance diagram for Luthetus.Common.RazorLib.FileSystems.Models.IPath:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="interface_luthetus_1_1_common_1_1_razor_lib_1_1_file_systems_1_1_models_1_1_i_path__inherit__graph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+<simplesect>
+    <title>Properties    </title>
+        <itemizedlist>
+            <listitem><para><link linkend="_namespace_luthetus_1_1_common_1_1_razor_lib_1_1_file_systems_1_1_models_1a46fe58b8ad5b8f17a5f867864b8015e3">PathType</link> <link linkend="_interface_luthetus_1_1_common_1_1_razor_lib_1_1_file_systems_1_1_models_1_1_i_path_1a1414a10804a825ff69f3dbfc156416dd">PathType</link><computeroutput> [get]</computeroutput>
+</para>
+</listitem>
+            <listitem><para>bool <link linkend="_interface_luthetus_1_1_common_1_1_razor_lib_1_1_file_systems_1_1_models_1_1_i_path_1aa1176a54aeabfec76c06b11c05ae9686">IsDirectory</link><computeroutput> [get]</computeroutput>
+</para>
+</listitem>
+            <listitem><para>string <link linkend="_interface_luthetus_1_1_common_1_1_razor_lib_1_1_file_systems_1_1_models_1_1_i_path_1a5382a3b10f7620a24fc92ce8fc630286">NameNoExtension</link><computeroutput> [get]</computeroutput>
+</para>
+</listitem>
+            <listitem><para>string <link linkend="_interface_luthetus_1_1_common_1_1_razor_lib_1_1_file_systems_1_1_models_1_1_i_path_1acad5bdc7e6cd108d93a9feeb26427658">NameWithExtension</link><computeroutput> [get]</computeroutput>
+</para>
+
+<para>Given: { &quot;somePath.txt&quot;, NOT_DIRECTORY }<?linebreak?> Then: <link linkend="_interface_luthetus_1_1_common_1_1_razor_lib_1_1_file_systems_1_1_models_1_1_i_path_1acad5bdc7e6cd108d93a9feeb26427658">NameWithExtension</link> is &quot;somePath.txt&quot; <?linebreak?><?linebreak?> Given: { &quot;somePath.txt&quot;, IS_DIRECTORY }<?linebreak?> Then: <link linkend="_interface_luthetus_1_1_common_1_1_razor_lib_1_1_file_systems_1_1_models_1_1_i_path_1acad5bdc7e6cd108d93a9feeb26427658">NameWithExtension</link> is &quot;somePath.txt/&quot; <?linebreak?><?linebreak?> Given: { &quot;somePath&quot;, NOT_DIRECTORY }<?linebreak?> Then: <link linkend="_interface_luthetus_1_1_common_1_1_razor_lib_1_1_file_systems_1_1_models_1_1_i_path_1acad5bdc7e6cd108d93a9feeb26427658">NameWithExtension</link> is &quot;somePath&quot; <?linebreak?><?linebreak?> Given: { &quot;somePath&quot;, IS_DIRECTORY }<?linebreak?> Then: <link linkend="_interface_luthetus_1_1_common_1_1_razor_lib_1_1_file_systems_1_1_models_1_1_i_path_1acad5bdc7e6cd108d93a9feeb26427658">NameWithExtension</link> is &quot;somePath/&quot; <?linebreak?><?linebreak?> Given: { &quot;somePath/&quot;, NOT_DIRECTORY }<?linebreak?> Then: throw new Exception(&apos;File names cannot contain directory separators&apos;); <?linebreak?><?linebreak?> Given: { &quot;somePath/&quot;, IS_DIRECTORY }<?linebreak?> Then: <link linkend="_interface_luthetus_1_1_common_1_1_razor_lib_1_1_file_systems_1_1_models_1_1_i_path_1acad5bdc7e6cd108d93a9feeb26427658">NameWithExtension</link> is &quot;somePath/&quot;. </para>
+</listitem>
+            <listitem><para>string <link linkend="_interface_luthetus_1_1_common_1_1_razor_lib_1_1_file_systems_1_1_models_1_1_i_path_1a2cef66c775dba4a7a5fae8fb9a2c8120">ExtensionNoPeriod</link><computeroutput> [get]</computeroutput>
+</para>
+</listitem>
+            <listitem><para>string? <link linkend="_interface_luthetus_1_1_common_1_1_razor_lib_1_1_file_systems_1_1_models_1_1_i_path_1a89b6449b9fa0d0ae6684b5ac9ed0fec6">ExactInput</link><computeroutput> [get]</computeroutput>
+</para>
+
+<para>Given: &quot;/Repos\\BlazorCrudApp\\&quot;&lt;br/&gt;
+Then: &lt;see cref=&quot;ExactInput&quot;/&gt; is &quot;/Repos\BlazorCrudApp\&quot;
+&lt;br/&gt;&lt;br/&gt;
+Given: &quot;\Repos/BlazorCrudApp/&quot;&lt;br/&gt;
+Then: &lt;see cref=&quot;ExactInput&quot;/&gt; is &quot;\Repos/BlazorCrudApp/&quot;
+&lt;br/&gt;&lt;br/&gt;
+Overall reasoning: &lt;see cref=&quot;ExactInput&quot;/&gt; is to return the user input exactly as they gave it originally. </para>
+</listitem>
+            <listitem><para>string <link linkend="_interface_luthetus_1_1_common_1_1_razor_lib_1_1_file_systems_1_1_models_1_1_i_path_1a7e1355933523ea47e4fd039626b9f34b">Value</link><computeroutput> [get]</computeroutput>
+</para>
+
+<para><link linkend="_interface_luthetus_1_1_common_1_1_razor_lib_1_1_file_systems_1_1_models_1_1_i_path_1a7e1355933523ea47e4fd039626b9f34b">Value</link> is the path as a string, but with all directory separating characters having been standardized to be <link linkend="_interface_luthetus_1_1_common_1_1_razor_lib_1_1_file_systems_1_1_models_1_1_i_environment_provider_1a06cd3615312ecdac270607473fe92ab8">IEnvironmentProvider.DirectorySeparatorChar</link>. </para>
+</listitem>
+            <listitem><para><link linkend="_class_luthetus_1_1_common_1_1_razor_lib_1_1_file_systems_1_1_models_1_1_ancestor_directory">AncestorDirectory</link>? <link linkend="_interface_luthetus_1_1_common_1_1_razor_lib_1_1_file_systems_1_1_models_1_1_i_path_1aa196bb0742a4bd342fb4e10e3144311a">ParentDirectory</link><computeroutput> [get]</computeroutput>
+</para>
+</listitem>
+            <listitem><para>List&lt; <link linkend="_class_luthetus_1_1_common_1_1_razor_lib_1_1_file_systems_1_1_models_1_1_ancestor_directory">AncestorDirectory</link> &gt; <link linkend="_interface_luthetus_1_1_common_1_1_razor_lib_1_1_file_systems_1_1_models_1_1_i_path_1a7f2e007f4dfdc376fcfc7774b7bf9f88">AncestorDirectoryList</link><computeroutput> [get]</computeroutput>
+</para>
+</listitem>
+            <listitem><para><link linkend="_interface_luthetus_1_1_common_1_1_razor_lib_1_1_file_systems_1_1_models_1_1_i_environment_provider">IEnvironmentProvider</link> <link linkend="_interface_luthetus_1_1_common_1_1_razor_lib_1_1_file_systems_1_1_models_1_1_i_path_1a81fa647575ac0066b02b2c636f92e437">EnvironmentProvider</link><computeroutput> [get]</computeroutput>
+</para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<section>
+<title>Detailed Description</title>
+
+<para>A side comment: Windows allow both &apos;\&apos; and &apos;/&apos; as file delimiters. Be sure to check both System.IO.Path.DirectorySeparatorChar and System.IO.Path.AltDirectorySeparatorChar. </para>
+<para>
+Definition at line <link linkend="__i_path_8cs_source_1l00008">8</link> of file <link linkend="__i_path_8cs_source">IPath.cs</link>.</para>
+</section>
+<section>
+<title>Property Documentation</title>
+<anchor xml:id="_interface_luthetus_1_1_common_1_1_razor_lib_1_1_file_systems_1_1_models_1_1_i_path_1a7f2e007f4dfdc376fcfc7774b7bf9f88"/><section>
+    <title>AncestorDirectoryList</title>
+<indexterm><primary>AncestorDirectoryList</primary><secondary>Luthetus.Common.RazorLib.FileSystems.Models.IPath</secondary></indexterm>
+<indexterm><primary>Luthetus.Common.RazorLib.FileSystems.Models.IPath</primary><secondary>AncestorDirectoryList</secondary></indexterm>
+<para><computeroutput>List&lt;<link linkend="_class_luthetus_1_1_common_1_1_razor_lib_1_1_file_systems_1_1_models_1_1_ancestor_directory">AncestorDirectory</link>&gt; Luthetus.Common.RazorLib.FileSystems.Models.IPath.AncestorDirectoryList<computeroutput>[get]</computeroutput></computeroutput></para><para>
+Implemented in <link linkend="_class_luthetus_1_1_common_1_1_razor_lib_1_1_file_systems_1_1_models_1_1_i_environment_provider_1_1_absolute_path_1ad050ae4c556b006df07f2060abc9e755">Luthetus.Common.RazorLib.FileSystems.Models.IEnvironmentProvider.AbsolutePath</link>, and <link linkend="_class_luthetus_1_1_common_1_1_razor_lib_1_1_file_systems_1_1_models_1_1_i_environment_provider_1_1_relative_path_1aa001c68266449f63f617960d0efae75f">Luthetus.Common.RazorLib.FileSystems.Models.IEnvironmentProvider.RelativePath</link>.</para>
+<para>
+Definition at line <link linkend="__i_path_8cs_source_1l00052">52</link> of file <link linkend="__i_path_8cs_source">IPath.cs</link>.</para>
+</section>
+<anchor xml:id="_interface_luthetus_1_1_common_1_1_razor_lib_1_1_file_systems_1_1_models_1_1_i_path_1a81fa647575ac0066b02b2c636f92e437"/><section>
+    <title>EnvironmentProvider</title>
+<indexterm><primary>EnvironmentProvider</primary><secondary>Luthetus.Common.RazorLib.FileSystems.Models.IPath</secondary></indexterm>
+<indexterm><primary>Luthetus.Common.RazorLib.FileSystems.Models.IPath</primary><secondary>EnvironmentProvider</secondary></indexterm>
+<para><computeroutput><link linkend="_interface_luthetus_1_1_common_1_1_razor_lib_1_1_file_systems_1_1_models_1_1_i_environment_provider">IEnvironmentProvider</link> Luthetus.Common.RazorLib.FileSystems.Models.IPath.EnvironmentProvider<computeroutput>[get]</computeroutput></computeroutput></para><para>
+Implemented in <link linkend="_class_luthetus_1_1_common_1_1_razor_lib_1_1_file_systems_1_1_models_1_1_i_environment_provider_1_1_absolute_path_1a2e5465d9971e8df02aa80579bf9585ca">Luthetus.Common.RazorLib.FileSystems.Models.IEnvironmentProvider.AbsolutePath</link>, and <link linkend="_class_luthetus_1_1_common_1_1_razor_lib_1_1_file_systems_1_1_models_1_1_i_environment_provider_1_1_relative_path_1a3fb9dcf10fe5f7bbc46418e173c989d6">Luthetus.Common.RazorLib.FileSystems.Models.IEnvironmentProvider.RelativePath</link>.</para>
+<para>
+Definition at line <link linkend="__i_path_8cs_source_1l00053">53</link> of file <link linkend="__i_path_8cs_source">IPath.cs</link>.</para>
+</section>
+<anchor xml:id="_interface_luthetus_1_1_common_1_1_razor_lib_1_1_file_systems_1_1_models_1_1_i_path_1a89b6449b9fa0d0ae6684b5ac9ed0fec6"/><section>
+    <title>ExactInput</title>
+<indexterm><primary>ExactInput</primary><secondary>Luthetus.Common.RazorLib.FileSystems.Models.IPath</secondary></indexterm>
+<indexterm><primary>Luthetus.Common.RazorLib.FileSystems.Models.IPath</primary><secondary>ExactInput</secondary></indexterm>
+<para><computeroutput>string? Luthetus.Common.RazorLib.FileSystems.Models.IPath.ExactInput<computeroutput>[get]</computeroutput></computeroutput></para><para>
+
+<para>Given: &quot;/Repos\\BlazorCrudApp\\&quot;&lt;br/&gt;
+Then: &lt;see cref=&quot;ExactInput&quot;/&gt; is &quot;/Repos\BlazorCrudApp\&quot;
+&lt;br/&gt;&lt;br/&gt;
+Given: &quot;\Repos/BlazorCrudApp/&quot;&lt;br/&gt;
+Then: &lt;see cref=&quot;ExactInput&quot;/&gt; is &quot;\Repos/BlazorCrudApp/&quot;
+&lt;br/&gt;&lt;br/&gt;
+Overall reasoning: &lt;see cref=&quot;ExactInput&quot;/&gt; is to return the user input exactly as they gave it originally. </para>
+</para>
+<para>
+Implemented in <link linkend="_class_luthetus_1_1_common_1_1_razor_lib_1_1_file_systems_1_1_models_1_1_i_environment_provider_1_1_absolute_path_1a21339609fc65420c0245d455b1c79bd8">Luthetus.Common.RazorLib.FileSystems.Models.IEnvironmentProvider.AbsolutePath</link>, and <link linkend="_class_luthetus_1_1_common_1_1_razor_lib_1_1_file_systems_1_1_models_1_1_i_environment_provider_1_1_relative_path_1afb9ff6be2d6178736061288c83ada692">Luthetus.Common.RazorLib.FileSystems.Models.IEnvironmentProvider.RelativePath</link>.</para>
+<para>
+Definition at line <link linkend="__i_path_8cs_source_1l00044">44</link> of file <link linkend="__i_path_8cs_source">IPath.cs</link>.</para>
+</section>
+<anchor xml:id="_interface_luthetus_1_1_common_1_1_razor_lib_1_1_file_systems_1_1_models_1_1_i_path_1a2cef66c775dba4a7a5fae8fb9a2c8120"/><section>
+    <title>ExtensionNoPeriod</title>
+<indexterm><primary>ExtensionNoPeriod</primary><secondary>Luthetus.Common.RazorLib.FileSystems.Models.IPath</secondary></indexterm>
+<indexterm><primary>Luthetus.Common.RazorLib.FileSystems.Models.IPath</primary><secondary>ExtensionNoPeriod</secondary></indexterm>
+<para><computeroutput>string Luthetus.Common.RazorLib.FileSystems.Models.IPath.ExtensionNoPeriod<computeroutput>[get]</computeroutput></computeroutput></para><para>
+Implemented in <link linkend="_class_luthetus_1_1_common_1_1_razor_lib_1_1_file_systems_1_1_models_1_1_i_environment_provider_1_1_absolute_path_1a4945f0a698c7404dd73a1759104c72b7">Luthetus.Common.RazorLib.FileSystems.Models.IEnvironmentProvider.AbsolutePath</link>, and <link linkend="_class_luthetus_1_1_common_1_1_razor_lib_1_1_file_systems_1_1_models_1_1_i_environment_provider_1_1_relative_path_1a042dcf029be2249883f364355be8080d">Luthetus.Common.RazorLib.FileSystems.Models.IEnvironmentProvider.RelativePath</link>.</para>
+<para>
+Definition at line <link linkend="__i_path_8cs_source_1l00033">33</link> of file <link linkend="__i_path_8cs_source">IPath.cs</link>.</para>
+</section>
+<anchor xml:id="_interface_luthetus_1_1_common_1_1_razor_lib_1_1_file_systems_1_1_models_1_1_i_path_1aa1176a54aeabfec76c06b11c05ae9686"/><section>
+    <title>IsDirectory</title>
+<indexterm><primary>IsDirectory</primary><secondary>Luthetus.Common.RazorLib.FileSystems.Models.IPath</secondary></indexterm>
+<indexterm><primary>Luthetus.Common.RazorLib.FileSystems.Models.IPath</primary><secondary>IsDirectory</secondary></indexterm>
+<para><computeroutput>bool Luthetus.Common.RazorLib.FileSystems.Models.IPath.IsDirectory<computeroutput>[get]</computeroutput></computeroutput></para><para>
+Implemented in <link linkend="_class_luthetus_1_1_common_1_1_razor_lib_1_1_file_systems_1_1_models_1_1_i_environment_provider_1_1_absolute_path_1aad1ba5c4e367c46ff776fcba0d506f78">Luthetus.Common.RazorLib.FileSystems.Models.IEnvironmentProvider.AbsolutePath</link>, and <link linkend="_class_luthetus_1_1_common_1_1_razor_lib_1_1_file_systems_1_1_models_1_1_i_environment_provider_1_1_relative_path_1a65d02f45cbd6b98038dfee3c6b4ec072">Luthetus.Common.RazorLib.FileSystems.Models.IEnvironmentProvider.RelativePath</link>.</para>
+<para>
+Definition at line <link linkend="__i_path_8cs_source_1l00011">11</link> of file <link linkend="__i_path_8cs_source">IPath.cs</link>.</para>
+</section>
+<anchor xml:id="_interface_luthetus_1_1_common_1_1_razor_lib_1_1_file_systems_1_1_models_1_1_i_path_1a5382a3b10f7620a24fc92ce8fc630286"/><section>
+    <title>NameNoExtension</title>
+<indexterm><primary>NameNoExtension</primary><secondary>Luthetus.Common.RazorLib.FileSystems.Models.IPath</secondary></indexterm>
+<indexterm><primary>Luthetus.Common.RazorLib.FileSystems.Models.IPath</primary><secondary>NameNoExtension</secondary></indexterm>
+<para><computeroutput>string Luthetus.Common.RazorLib.FileSystems.Models.IPath.NameNoExtension<computeroutput>[get]</computeroutput></computeroutput></para><para>
+Implemented in <link linkend="_class_luthetus_1_1_common_1_1_razor_lib_1_1_file_systems_1_1_models_1_1_i_environment_provider_1_1_absolute_path_1a989a20003a041b6cfadb8f448eeb65ee">Luthetus.Common.RazorLib.FileSystems.Models.IEnvironmentProvider.AbsolutePath</link>, and <link linkend="_class_luthetus_1_1_common_1_1_razor_lib_1_1_file_systems_1_1_models_1_1_i_environment_provider_1_1_relative_path_1a72544f0c8b09bf0002e6af20182b89e8">Luthetus.Common.RazorLib.FileSystems.Models.IEnvironmentProvider.RelativePath</link>.</para>
+<para>
+Definition at line <link linkend="__i_path_8cs_source_1l00012">12</link> of file <link linkend="__i_path_8cs_source">IPath.cs</link>.</para>
+</section>
+<anchor xml:id="_interface_luthetus_1_1_common_1_1_razor_lib_1_1_file_systems_1_1_models_1_1_i_path_1acad5bdc7e6cd108d93a9feeb26427658"/><section>
+    <title>NameWithExtension</title>
+<indexterm><primary>NameWithExtension</primary><secondary>Luthetus.Common.RazorLib.FileSystems.Models.IPath</secondary></indexterm>
+<indexterm><primary>Luthetus.Common.RazorLib.FileSystems.Models.IPath</primary><secondary>NameWithExtension</secondary></indexterm>
+<para><computeroutput>string Luthetus.Common.RazorLib.FileSystems.Models.IPath.NameWithExtension<computeroutput>[get]</computeroutput></computeroutput></para><para>
+
+<para>Given: { &quot;somePath.txt&quot;, NOT_DIRECTORY }<?linebreak?> Then: <link linkend="_interface_luthetus_1_1_common_1_1_razor_lib_1_1_file_systems_1_1_models_1_1_i_path_1acad5bdc7e6cd108d93a9feeb26427658">NameWithExtension</link> is &quot;somePath.txt&quot; <?linebreak?><?linebreak?> Given: { &quot;somePath.txt&quot;, IS_DIRECTORY }<?linebreak?> Then: <link linkend="_interface_luthetus_1_1_common_1_1_razor_lib_1_1_file_systems_1_1_models_1_1_i_path_1acad5bdc7e6cd108d93a9feeb26427658">NameWithExtension</link> is &quot;somePath.txt/&quot; <?linebreak?><?linebreak?> Given: { &quot;somePath&quot;, NOT_DIRECTORY }<?linebreak?> Then: <link linkend="_interface_luthetus_1_1_common_1_1_razor_lib_1_1_file_systems_1_1_models_1_1_i_path_1acad5bdc7e6cd108d93a9feeb26427658">NameWithExtension</link> is &quot;somePath&quot; <?linebreak?><?linebreak?> Given: { &quot;somePath&quot;, IS_DIRECTORY }<?linebreak?> Then: <link linkend="_interface_luthetus_1_1_common_1_1_razor_lib_1_1_file_systems_1_1_models_1_1_i_path_1acad5bdc7e6cd108d93a9feeb26427658">NameWithExtension</link> is &quot;somePath/&quot; <?linebreak?><?linebreak?> Given: { &quot;somePath/&quot;, NOT_DIRECTORY }<?linebreak?> Then: throw new Exception(&apos;File names cannot contain directory separators&apos;); <?linebreak?><?linebreak?> Given: { &quot;somePath/&quot;, IS_DIRECTORY }<?linebreak?> Then: <link linkend="_interface_luthetus_1_1_common_1_1_razor_lib_1_1_file_systems_1_1_models_1_1_i_path_1acad5bdc7e6cd108d93a9feeb26427658">NameWithExtension</link> is &quot;somePath/&quot;. </para>
+</para>
+<para>
+Implemented in <link linkend="_class_luthetus_1_1_common_1_1_razor_lib_1_1_file_systems_1_1_models_1_1_i_environment_provider_1_1_absolute_path_1a8cd119c03f8aaffeebd7552cfea06449">Luthetus.Common.RazorLib.FileSystems.Models.IEnvironmentProvider.AbsolutePath</link>, and <link linkend="_class_luthetus_1_1_common_1_1_razor_lib_1_1_file_systems_1_1_models_1_1_i_environment_provider_1_1_relative_path_1a4a7a443ffc6ca0fcb4433db2989140c4">Luthetus.Common.RazorLib.FileSystems.Models.IEnvironmentProvider.RelativePath</link>.</para>
+<para>
+Definition at line <link linkend="__i_path_8cs_source_1l00032">32</link> of file <link linkend="__i_path_8cs_source">IPath.cs</link>.</para>
+</section>
+<anchor xml:id="_interface_luthetus_1_1_common_1_1_razor_lib_1_1_file_systems_1_1_models_1_1_i_path_1aa196bb0742a4bd342fb4e10e3144311a"/><section>
+    <title>ParentDirectory</title>
+<indexterm><primary>ParentDirectory</primary><secondary>Luthetus.Common.RazorLib.FileSystems.Models.IPath</secondary></indexterm>
+<indexterm><primary>Luthetus.Common.RazorLib.FileSystems.Models.IPath</primary><secondary>ParentDirectory</secondary></indexterm>
+<para><computeroutput><link linkend="_class_luthetus_1_1_common_1_1_razor_lib_1_1_file_systems_1_1_models_1_1_ancestor_directory">AncestorDirectory</link>? Luthetus.Common.RazorLib.FileSystems.Models.IPath.ParentDirectory<computeroutput>[get]</computeroutput></computeroutput></para><para>
+Implemented in <link linkend="_class_luthetus_1_1_common_1_1_razor_lib_1_1_file_systems_1_1_models_1_1_i_environment_provider_1_1_absolute_path_1a0ed2cfda3aa30fdc24a44f959644d869">Luthetus.Common.RazorLib.FileSystems.Models.IEnvironmentProvider.AbsolutePath</link>, and <link linkend="_class_luthetus_1_1_common_1_1_razor_lib_1_1_file_systems_1_1_models_1_1_i_environment_provider_1_1_relative_path_1a4a15f84947485d852ad5bdc8272f51d8">Luthetus.Common.RazorLib.FileSystems.Models.IEnvironmentProvider.RelativePath</link>.</para>
+<para>
+Definition at line <link linkend="__i_path_8cs_source_1l00051">51</link> of file <link linkend="__i_path_8cs_source">IPath.cs</link>.</para>
+</section>
+<anchor xml:id="_interface_luthetus_1_1_common_1_1_razor_lib_1_1_file_systems_1_1_models_1_1_i_path_1a1414a10804a825ff69f3dbfc156416dd"/><section>
+    <title>PathType</title>
+<indexterm><primary>PathType</primary><secondary>Luthetus.Common.RazorLib.FileSystems.Models.IPath</secondary></indexterm>
+<indexterm><primary>Luthetus.Common.RazorLib.FileSystems.Models.IPath</primary><secondary>PathType</secondary></indexterm>
+<para><computeroutput><link linkend="_namespace_luthetus_1_1_common_1_1_razor_lib_1_1_file_systems_1_1_models_1a46fe58b8ad5b8f17a5f867864b8015e3">PathType</link> Luthetus.Common.RazorLib.FileSystems.Models.IPath.PathType<computeroutput>[get]</computeroutput></computeroutput></para><para>
+Implemented in <link linkend="_class_luthetus_1_1_common_1_1_razor_lib_1_1_file_systems_1_1_models_1_1_i_environment_provider_1_1_absolute_path_1a7ddeb33b3a8289e5a322c96bc6b63006">Luthetus.Common.RazorLib.FileSystems.Models.IEnvironmentProvider.AbsolutePath</link>, and <link linkend="_class_luthetus_1_1_common_1_1_razor_lib_1_1_file_systems_1_1_models_1_1_i_environment_provider_1_1_relative_path_1a8d4dc8989b65222a6f989bffed7f48cd">Luthetus.Common.RazorLib.FileSystems.Models.IEnvironmentProvider.RelativePath</link>.</para>
+<para>
+Definition at line <link linkend="__i_path_8cs_source_1l00010">10</link> of file <link linkend="__i_path_8cs_source">IPath.cs</link>.</para>
+</section>
+<anchor xml:id="_interface_luthetus_1_1_common_1_1_razor_lib_1_1_file_systems_1_1_models_1_1_i_path_1a7e1355933523ea47e4fd039626b9f34b"/><section>
+    <title>Value</title>
+<indexterm><primary>Value</primary><secondary>Luthetus.Common.RazorLib.FileSystems.Models.IPath</secondary></indexterm>
+<indexterm><primary>Luthetus.Common.RazorLib.FileSystems.Models.IPath</primary><secondary>Value</secondary></indexterm>
+<para><computeroutput>string Luthetus.Common.RazorLib.FileSystems.Models.IPath.Value<computeroutput>[get]</computeroutput></computeroutput></para><para>
+
+<para><link linkend="_interface_luthetus_1_1_common_1_1_razor_lib_1_1_file_systems_1_1_models_1_1_i_path_1a7e1355933523ea47e4fd039626b9f34b">Value</link> is the path as a string, but with all directory separating characters having been standardized to be <link linkend="_interface_luthetus_1_1_common_1_1_razor_lib_1_1_file_systems_1_1_models_1_1_i_environment_provider_1a06cd3615312ecdac270607473fe92ab8">IEnvironmentProvider.DirectorySeparatorChar</link>. </para>
+</para>
+<para>
+Implemented in <link linkend="_class_luthetus_1_1_common_1_1_razor_lib_1_1_file_systems_1_1_models_1_1_i_environment_provider_1_1_absolute_path_1ada272e4671e40f0d0661c5af2571778d">Luthetus.Common.RazorLib.FileSystems.Models.IEnvironmentProvider.AbsolutePath</link>, and <link linkend="_class_luthetus_1_1_common_1_1_razor_lib_1_1_file_systems_1_1_models_1_1_i_environment_provider_1_1_relative_path_1ac0e4374811f05e2defe7f69ae3a03e95">Luthetus.Common.RazorLib.FileSystems.Models.IEnvironmentProvider.RelativePath</link>.</para>
+<para>
+Definition at line <link linkend="__i_path_8cs_source_1l00050">50</link> of file <link linkend="__i_path_8cs_source">IPath.cs</link>.</para>
+</section>
+<para>
+The documentation for this interface was generated from the following file:</para>
+Source/Lib/Common/FileSystems/Models/<link linkend="__i_path_8cs">IPath.cs</link></section>
+</section>

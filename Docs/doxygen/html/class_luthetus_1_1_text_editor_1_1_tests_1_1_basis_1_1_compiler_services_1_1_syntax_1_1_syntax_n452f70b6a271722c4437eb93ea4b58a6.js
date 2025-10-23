@@ -1,0 +1,5 @@
+var class_luthetus_1_1_text_editor_1_1_tests_1_1_basis_1_1_compiler_services_1_1_syntax_1_1_syntax_n452f70b6a271722c4437eb93ea4b58a6 =
+[
+    [ "Constructor", "class_luthetus_1_1_text_editor_1_1_tests_1_1_basis_1_1_compiler_services_1_1_syntax_1_1_syntax_n452f70b6a271722c4437eb93ea4b58a6.html#a71778a2c3e155596da0928f8047a35d7", null ],
+    [ "GetTopLevelTypeDefinitionNodes", "class_luthetus_1_1_text_editor_1_1_tests_1_1_basis_1_1_compiler_services_1_1_syntax_1_1_syntax_n452f70b6a271722c4437eb93ea4b58a6.html#a88abea5d807d6f68e00ddc25e4299e55", null ]
+];

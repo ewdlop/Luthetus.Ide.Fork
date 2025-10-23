@@ -1,0 +1,5 @@
+var class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_options_1_1_displays_1_1_input_text_editor_show_new_lines =
+[
+    [ "GlobalShowNewlines", "class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_options_1_1_displays_1_1_input_text_editor_show_new_lines.html#a5432efc3a70cfa7e26dde45fa37c982a", null ],
+    [ "InputViewModel", "class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_options_1_1_displays_1_1_input_text_editor_show_new_lines.html#a72be12b5ffba0389ee57ae47f7ded50b", null ]
+];

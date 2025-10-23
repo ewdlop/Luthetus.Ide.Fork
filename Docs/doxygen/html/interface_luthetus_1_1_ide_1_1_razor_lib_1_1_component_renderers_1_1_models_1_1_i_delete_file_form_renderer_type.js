@@ -1,0 +1,6 @@
+var interface_luthetus_1_1_ide_1_1_razor_lib_1_1_component_renderers_1_1_models_1_1_i_delete_file_form_renderer_type =
+[
+    [ "AbsolutePath", "interface_luthetus_1_1_ide_1_1_razor_lib_1_1_component_renderers_1_1_models_1_1_i_delete_file_form_renderer_type.html#a8a8d0c0469bac0b64472cbcc0a872232", null ],
+    [ "IsDirectory", "interface_luthetus_1_1_ide_1_1_razor_lib_1_1_component_renderers_1_1_models_1_1_i_delete_file_form_renderer_type.html#af55442127773072752884ecb5a588696", null ],
+    [ "OnAfterSubmitFunc", "interface_luthetus_1_1_ide_1_1_razor_lib_1_1_component_renderers_1_1_models_1_1_i_delete_file_form_renderer_type.html#ae4f1a682130cdabab3eb44a4edc541a5", null ]
+];

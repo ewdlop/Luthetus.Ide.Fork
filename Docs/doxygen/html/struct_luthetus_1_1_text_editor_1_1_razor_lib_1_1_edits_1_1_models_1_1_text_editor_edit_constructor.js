@@ -1,0 +1,4 @@
+var struct_luthetus_1_1_text_editor_1_1_razor_lib_1_1_edits_1_1_models_1_1_text_editor_edit_constructor =
+[
+    [ "EditKind", "struct_luthetus_1_1_text_editor_1_1_razor_lib_1_1_edits_1_1_models_1_1_text_editor_edit_constructor.html#a13b86b5f670eb92fa3a3781ab1f524d9", null ]
+];

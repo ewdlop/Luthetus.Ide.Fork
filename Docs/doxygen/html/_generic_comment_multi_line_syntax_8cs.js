@@ -1,0 +1,4 @@
+var _generic_comment_multi_line_syntax_8cs =
+[
+    [ "Luthetus.TextEditor.RazorLib.CompilerServices.GenericLexer.SyntaxObjects.GenericCommentMultiLineSyntax", "class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_generic_lexer_1_1_syntax_530bc8297d68129fa98e0a9dc162f936.html", "class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_generic_lexer_1_1_syntax_530bc8297d68129fa98e0a9dc162f936" ]
+];

@@ -1,0 +1,171 @@
+\doxysection{Startup\+Control\+Display.\+razor.\+cs}
+\hypertarget{_startup_control_display_8razor_8cs_source}{}\label{_startup_control_display_8razor_8cs_source}\index{Source/Lib/Ide/Ide.RazorLib/StartupControls/Displays/StartupControlDisplay.razor.cs@{Source/Lib/Ide/Ide.RazorLib/StartupControls/Displays/StartupControlDisplay.razor.cs}}
+\mbox{\hyperlink{_startup_control_display_8razor_8cs}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{_startup_control_display_8razor_8cs_source_l00001}00001\ \textcolor{keyword}{using\ }System.Collections.Immutable;}
+\DoxyCodeLine{\Hypertarget{_startup_control_display_8razor_8cs_source_l00002}00002\ \textcolor{keyword}{using\ }Microsoft.AspNetCore.Components;}
+\DoxyCodeLine{\Hypertarget{_startup_control_display_8razor_8cs_source_l00003}00003\ \textcolor{keyword}{using\ }Microsoft.JSInterop;}
+\DoxyCodeLine{\Hypertarget{_startup_control_display_8razor_8cs_source_l00004}00004\ \textcolor{keyword}{using\ }Fluxor;}
+\DoxyCodeLine{\Hypertarget{_startup_control_display_8razor_8cs_source_l00005}00005\ \textcolor{keyword}{using\ }Fluxor.Blazor.Web.Components;}
+\DoxyCodeLine{\Hypertarget{_startup_control_display_8razor_8cs_source_l00006}00006\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_luthetus_1_1_common_1_1_razor_lib_1_1_keys_1_1_models}{Luthetus.Common.RazorLib.Keys.Models}};}
+\DoxyCodeLine{\Hypertarget{_startup_control_display_8razor_8cs_source_l00007}00007\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_luthetus_1_1_common_1_1_razor_lib_1_1_dropdowns_1_1_models}{Luthetus.Common.RazorLib.Dropdowns.Models}};}
+\DoxyCodeLine{\Hypertarget{_startup_control_display_8razor_8cs_source_l00008}00008\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_luthetus_1_1_common_1_1_razor_lib_1_1_dropdowns_1_1_states}{Luthetus.Common.RazorLib.Dropdowns.States}};}
+\DoxyCodeLine{\Hypertarget{_startup_control_display_8razor_8cs_source_l00009}00009\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_luthetus_1_1_common_1_1_razor_lib_1_1_menus_1_1_models}{Luthetus.Common.RazorLib.Menus.Models}};}
+\DoxyCodeLine{\Hypertarget{_startup_control_display_8razor_8cs_source_l00010}00010\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_luthetus_1_1_common_1_1_razor_lib_1_1_menus_1_1_displays}{Luthetus.Common.RazorLib.Menus.Displays}};}
+\DoxyCodeLine{\Hypertarget{_startup_control_display_8razor_8cs_source_l00011}00011\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_luthetus_1_1_common_1_1_razor_lib_1_1_panels_1_1_states}{Luthetus.Common.RazorLib.Panels.States}};}
+\DoxyCodeLine{\Hypertarget{_startup_control_display_8razor_8cs_source_l00012}00012\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_luthetus_1_1_common_1_1_razor_lib_1_1_contexts_1_1_models}{Luthetus.Common.RazorLib.Contexts.Models}};}
+\DoxyCodeLine{\Hypertarget{_startup_control_display_8razor_8cs_source_l00013}00013\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_luthetus_1_1_common_1_1_razor_lib_1_1_js_runtimes_1_1_models}{Luthetus.Common.RazorLib.JsRuntimes.Models}};}
+\DoxyCodeLine{\Hypertarget{_startup_control_display_8razor_8cs_source_l00014}00014\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_luthetus_1_1_common_1_1_razor_lib_1_1_options_1_1_states}{Luthetus.Common.RazorLib.Options.States}};}
+\DoxyCodeLine{\Hypertarget{_startup_control_display_8razor_8cs_source_l00015}00015\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_luthetus_1_1_ide_1_1_razor_lib_1_1_terminals_1_1_models}{Luthetus.Ide.RazorLib.Terminals.Models}};}
+\DoxyCodeLine{\Hypertarget{_startup_control_display_8razor_8cs_source_l00016}00016\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_luthetus_1_1_ide_1_1_razor_lib_1_1_terminals_1_1_states}{Luthetus.Ide.RazorLib.Terminals.States}};}
+\DoxyCodeLine{\Hypertarget{_startup_control_display_8razor_8cs_source_l00017}00017\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_luthetus_1_1_ide_1_1_razor_lib_1_1_startup_controls_1_1_states}{Luthetus.Ide.RazorLib.StartupControls.States}};}
+\DoxyCodeLine{\Hypertarget{_startup_control_display_8razor_8cs_source_l00018}00018\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_luthetus_1_1_ide_1_1_razor_lib_1_1_startup_controls_1_1_models}{Luthetus.Ide.RazorLib.StartupControls.Models}};}
+\DoxyCodeLine{\Hypertarget{_startup_control_display_8razor_8cs_source_l00019}00019\ }
+\DoxyCodeLine{\Hypertarget{_startup_control_display_8razor_8cs_source_l00020}\mbox{\hyperlink{namespace_luthetus_1_1_ide_1_1_razor_lib_1_1_startup_controls}{00020}}\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespace_luthetus_1_1_ide_1_1_razor_lib_1_1_startup_controls_1_1_displays}{Luthetus.Ide.RazorLib.StartupControls.Displays}};}
+\DoxyCodeLine{\Hypertarget{_startup_control_display_8razor_8cs_source_l00021}00021\ }
+\DoxyCodeLine{\Hypertarget{_startup_control_display_8razor_8cs_source_l00022}\mbox{\hyperlink{class_luthetus_1_1_ide_1_1_razor_lib_1_1_startup_controls_1_1_displays_1_1_startup_control_display}{00022}}\ \textcolor{keyword}{public}\ \textcolor{keyword}{partial\ class\ }\mbox{\hyperlink{class_luthetus_1_1_ide_1_1_razor_lib_1_1_startup_controls_1_1_displays_1_1_startup_control_display}{StartupControlDisplay}}\ :\ FluxorComponent}
+\DoxyCodeLine{\Hypertarget{_startup_control_display_8razor_8cs_source_l00023}00023\ \{}
+\DoxyCodeLine{\Hypertarget{_startup_control_display_8razor_8cs_source_l00024}00024\ \ \ \ \ [Inject]}
+\DoxyCodeLine{\Hypertarget{_startup_control_display_8razor_8cs_source_l00025}00025\ \ \ \ \ \textcolor{keyword}{private}\ IState<TerminalState>\ TerminalStateWrap\ \{\ \textcolor{keyword}{get};\ \textcolor{keyword}{set};\ \}\ =\ \textcolor{keyword}{null}!;}
+\DoxyCodeLine{\Hypertarget{_startup_control_display_8razor_8cs_source_l00026}00026\ \ \ \ \ [Inject]}
+\DoxyCodeLine{\Hypertarget{_startup_control_display_8razor_8cs_source_l00027}00027\ \ \ \ \ \textcolor{keyword}{private}\ IState<PanelState>\ PanelStateWrap\ \{\ \textcolor{keyword}{get};\ \textcolor{keyword}{set};\ \}\ =\ \textcolor{keyword}{null}!;}
+\DoxyCodeLine{\Hypertarget{_startup_control_display_8razor_8cs_source_l00028}00028\ \ \ \ \ [Inject]}
+\DoxyCodeLine{\Hypertarget{_startup_control_display_8razor_8cs_source_l00029}00029\ \ \ \ \ \textcolor{keyword}{private}\ IState<StartupControlState>\ StartupControlStateWrap\ \{\ \textcolor{keyword}{get};\ \textcolor{keyword}{set};\ \}\ =\ \textcolor{keyword}{null}!;}
+\DoxyCodeLine{\Hypertarget{_startup_control_display_8razor_8cs_source_l00030}00030\ \ \ \ \ [Inject]}
+\DoxyCodeLine{\Hypertarget{_startup_control_display_8razor_8cs_source_l00031}00031\ \ \ \ \ \textcolor{keyword}{private}\ IState<AppOptionsState>\ AppOptionsStateWrap\ \{\ \textcolor{keyword}{get};\ \textcolor{keyword}{set};\ \}\ =\ \textcolor{keyword}{null}!;}
+\DoxyCodeLine{\Hypertarget{_startup_control_display_8razor_8cs_source_l00032}00032\ \ \ \ \ [Inject]}
+\DoxyCodeLine{\Hypertarget{_startup_control_display_8razor_8cs_source_l00033}00033\ \ \ \ \ \textcolor{keyword}{private}\ IJSRuntime\ JsRuntime\ \{\ \textcolor{keyword}{get};\ \textcolor{keyword}{set};\ \}\ =\ \textcolor{keyword}{null}!;}
+\DoxyCodeLine{\Hypertarget{_startup_control_display_8razor_8cs_source_l00034}00034\ \ \ \ \ [Inject]}
+\DoxyCodeLine{\Hypertarget{_startup_control_display_8razor_8cs_source_l00035}00035\ \ \ \ \ \textcolor{keyword}{private}\ IDispatcher\ Dispatcher\ \{\ \textcolor{keyword}{get};\ \textcolor{keyword}{set};\ \}\ =\ \textcolor{keyword}{null}!;}
+\DoxyCodeLine{\Hypertarget{_startup_control_display_8razor_8cs_source_l00036}00036\ }
+\DoxyCodeLine{\Hypertarget{_startup_control_display_8razor_8cs_source_l00037}00037\ \ \ \ \ \textcolor{keyword}{private}\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{string}\ \_startButtonElementId\ =\ \textcolor{stringliteral}{"{}luth\_ide\_startup-\/controls-\/display\_id"{}};}
+\DoxyCodeLine{\Hypertarget{_startup_control_display_8razor_8cs_source_l00038}00038\ }
+\DoxyCodeLine{\Hypertarget{_startup_control_display_8razor_8cs_source_l00039}00039\ \ \ \ \ \textcolor{keyword}{private}\ ElementReference?\ \_startButtonElementReference;}
+\DoxyCodeLine{\Hypertarget{_startup_control_display_8razor_8cs_source_l00040}00040\ \ \ \ \ \textcolor{keyword}{private}\ Key<DropdownRecord>\ \_startButtonDropdownKey\ =\ Key<DropdownRecord>.NewKey();}
+\DoxyCodeLine{\Hypertarget{_startup_control_display_8razor_8cs_source_l00041}00041\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_startup_control_display_8razor_8cs_source_l00042}\mbox{\hyperlink{class_luthetus_1_1_ide_1_1_razor_lib_1_1_startup_controls_1_1_displays_1_1_startup_control_display_a9401260139b4f3790c052bf277347aa1}{00042}}\ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keywordtype}{string}?\ \mbox{\hyperlink{class_luthetus_1_1_ide_1_1_razor_lib_1_1_startup_controls_1_1_displays_1_1_startup_control_display_a9401260139b4f3790c052bf277347aa1}{SelectedStartupControlGuidString}}}
+\DoxyCodeLine{\Hypertarget{_startup_control_display_8razor_8cs_source_l00043}00043\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_startup_control_display_8razor_8cs_source_l00044}00044\ \ \ \ \ \ \ \ \ \textcolor{keyword}{get}\ =>\ StartupControlStateWrap.Value.ActiveStartupControlKey.Guid.ToString();}
+\DoxyCodeLine{\Hypertarget{_startup_control_display_8razor_8cs_source_l00045}00045\ \ \ \ \ \ \ \ \ \textcolor{keyword}{set}}
+\DoxyCodeLine{\Hypertarget{_startup_control_display_8razor_8cs_source_l00046}00046\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_startup_control_display_8razor_8cs_source_l00047}00047\ \ \ \ \ \ \ \ \ \ \ \ \ Key<IStartupControlModel>\ startupControlKey\ =\ Key<IStartupControlModel>.Empty;}
+\DoxyCodeLine{\Hypertarget{_startup_control_display_8razor_8cs_source_l00048}00048\ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_startup_control_display_8razor_8cs_source_l00049}00049\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (value\ is\ not\ \textcolor{keyword}{null}\ \&\&}
+\DoxyCodeLine{\Hypertarget{_startup_control_display_8razor_8cs_source_l00050}00050\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Guid.TryParse(value,\ out\ var\ guid))}
+\DoxyCodeLine{\Hypertarget{_startup_control_display_8razor_8cs_source_l00051}00051\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_startup_control_display_8razor_8cs_source_l00052}00052\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ startupControlKey\ =\ \textcolor{keyword}{new}\ Key<IStartupControlModel>(guid);}
+\DoxyCodeLine{\Hypertarget{_startup_control_display_8razor_8cs_source_l00053}00053\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_startup_control_display_8razor_8cs_source_l00054}00054\ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_startup_control_display_8razor_8cs_source_l00055}00055\ \ \ \ \ \ \ \ \ \ \ \ \ Dispatcher.Dispatch(\textcolor{keyword}{new}\ \mbox{\hyperlink{namespace_luthetus_1_1_ide_1_1_razor_lib_1_1_startup_controls_1_1_states_a901cbb2ae4bd65a99e6d105986de27c4}{StartupControlState}}.SetActiveStartupControlKeyAction(startupControlKey));}
+\DoxyCodeLine{\Hypertarget{_startup_control_display_8razor_8cs_source_l00056}00056\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_startup_control_display_8razor_8cs_source_l00057}00057\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_startup_control_display_8razor_8cs_source_l00058}00058\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_startup_control_display_8razor_8cs_source_l00059}00059\ \ \ \ \ \textcolor{keyword}{private}\ \mbox{\hyperlink{class_luthetus_1_1_common_1_1_razor_lib_1_1_js_runtimes_1_1_models_1_1_luthetus_common_java_script_interop_api}{LuthetusCommonJavaScriptInteropApi}}?\ \_jsRuntimeCommonApi;}
+\DoxyCodeLine{\Hypertarget{_startup_control_display_8razor_8cs_source_l00060}00060\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_startup_control_display_8razor_8cs_source_l00061}00061\ \ \ \ \ \textcolor{keyword}{private}\ \mbox{\hyperlink{class_luthetus_1_1_common_1_1_razor_lib_1_1_js_runtimes_1_1_models_1_1_luthetus_common_java_script_interop_api}{LuthetusCommonJavaScriptInteropApi}}\ JsRuntimeCommonApi\ =>}
+\DoxyCodeLine{\Hypertarget{_startup_control_display_8razor_8cs_source_l00062}00062\ \ \ \ \ \ \ \ \ \_jsRuntimeCommonApi\ ??=\ JsRuntime.GetLuthetusCommonApi();}
+\DoxyCodeLine{\Hypertarget{_startup_control_display_8razor_8cs_source_l00063}00063\ }
+\DoxyCodeLine{\Hypertarget{_startup_control_display_8razor_8cs_source_l00064}00064\ \ \ \ \ \textcolor{keyword}{private}\ async\ Task\ StartProgramWithoutDebuggingOnClick(\textcolor{keywordtype}{bool}\ isExecuting)}
+\DoxyCodeLine{\Hypertarget{_startup_control_display_8razor_8cs_source_l00065}00065\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_startup_control_display_8razor_8cs_source_l00066}00066\ \ \ \ \ \ \ \ \ var\ localStartupControlState\ =\ StartupControlStateWrap.Value;}
+\DoxyCodeLine{\Hypertarget{_startup_control_display_8razor_8cs_source_l00067}00067\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_startup_control_display_8razor_8cs_source_l00068}00068\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (localStartupControlState.ActiveStartupControl\ is\ \textcolor{keyword}{null})}
+\DoxyCodeLine{\Hypertarget{_startup_control_display_8razor_8cs_source_l00069}00069\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return};}
+\DoxyCodeLine{\Hypertarget{_startup_control_display_8razor_8cs_source_l00070}00070\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_startup_control_display_8razor_8cs_source_l00071}00071\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (isExecuting)}
+\DoxyCodeLine{\Hypertarget{_startup_control_display_8razor_8cs_source_l00072}00072\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_startup_control_display_8razor_8cs_source_l00073}00073\ \ \ \ \ \ \ \ \ \ \ \ \ var\ menuOptionList\ =\ \textcolor{keyword}{new}\ List<MenuOptionRecord>();}
+\DoxyCodeLine{\Hypertarget{_startup_control_display_8razor_8cs_source_l00074}00074\ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_startup_control_display_8razor_8cs_source_l00075}00075\ \ \ \ \ \ \ \ \ \ \ \ \ menuOptionList.Add(\textcolor{keyword}{new}\ \mbox{\hyperlink{namespace_luthetus_1_1_common_1_1_razor_lib_1_1_menus_1_1_models_a2d6c930d5bf3cf0cf06f574bf193cf6f}{MenuOptionRecord}}(}
+\DoxyCodeLine{\Hypertarget{_startup_control_display_8razor_8cs_source_l00076}00076\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}View\ Output"{}},}
+\DoxyCodeLine{\Hypertarget{_startup_control_display_8razor_8cs_source_l00077}00077\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespace_luthetus_1_1_common_1_1_razor_lib_1_1_menus_1_1_models_a9d33500a676dda12265b167a400f3df1}{MenuOptionKind}}.Other,}
+\DoxyCodeLine{\Hypertarget{_startup_control_display_8razor_8cs_source_l00078}00078\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ OnClickFunc:\ async\ ()\ =>\ }
+\DoxyCodeLine{\Hypertarget{_startup_control_display_8razor_8cs_source_l00079}00079\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_startup_control_display_8razor_8cs_source_l00080}00080\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ var\ success\ =\ await\ TrySetFocus(ContextFacts.OutputContext).ConfigureAwait(\textcolor{keyword}{false});}
+\DoxyCodeLine{\Hypertarget{_startup_control_display_8razor_8cs_source_l00081}00081\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_startup_control_display_8razor_8cs_source_l00082}00082\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!success)}
+\DoxyCodeLine{\Hypertarget{_startup_control_display_8razor_8cs_source_l00083}00083\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_startup_control_display_8razor_8cs_source_l00084}00084\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Dispatcher.Dispatch(\textcolor{keyword}{new}\ \mbox{\hyperlink{namespace_luthetus_1_1_common_1_1_razor_lib_1_1_panels_1_1_states_a3e69a06f395780138ff06e862f45ee3c}{PanelState}}.SetPanelTabAsActiveByContextRecordKeyAction(}
+\DoxyCodeLine{\Hypertarget{_startup_control_display_8razor_8cs_source_l00085}00085\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ContextFacts.OutputContext.ContextKey));}
+\DoxyCodeLine{\Hypertarget{_startup_control_display_8razor_8cs_source_l00086}00086\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_startup_control_display_8razor_8cs_source_l00087}00087\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \_\ =\ await\ TrySetFocus(ContextFacts.OutputContext).ConfigureAwait(\textcolor{keyword}{false});}
+\DoxyCodeLine{\Hypertarget{_startup_control_display_8razor_8cs_source_l00088}00088\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_startup_control_display_8razor_8cs_source_l00089}00089\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}));}
+\DoxyCodeLine{\Hypertarget{_startup_control_display_8razor_8cs_source_l00090}00090\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_startup_control_display_8razor_8cs_source_l00091}00091\ \ \ \ \ \ \ \ \ \ \ \ \ menuOptionList.Add(\textcolor{keyword}{new}\ \mbox{\hyperlink{namespace_luthetus_1_1_common_1_1_razor_lib_1_1_menus_1_1_models_a2d6c930d5bf3cf0cf06f574bf193cf6f}{MenuOptionRecord}}(}
+\DoxyCodeLine{\Hypertarget{_startup_control_display_8razor_8cs_source_l00092}00092\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}View\ Terminal"{}},}
+\DoxyCodeLine{\Hypertarget{_startup_control_display_8razor_8cs_source_l00093}00093\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespace_luthetus_1_1_common_1_1_razor_lib_1_1_menus_1_1_models_a9d33500a676dda12265b167a400f3df1}{MenuOptionKind}}.Other,}
+\DoxyCodeLine{\Hypertarget{_startup_control_display_8razor_8cs_source_l00094}00094\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ OnClickFunc:\ async\ ()\ =>\ }
+\DoxyCodeLine{\Hypertarget{_startup_control_display_8razor_8cs_source_l00095}00095\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_startup_control_display_8razor_8cs_source_l00096}00096\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ var\ success\ =\ await\ TrySetFocus(ContextFacts.TerminalContext).ConfigureAwait(\textcolor{keyword}{false});}
+\DoxyCodeLine{\Hypertarget{_startup_control_display_8razor_8cs_source_l00097}00097\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_startup_control_display_8razor_8cs_source_l00098}00098\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!success)}
+\DoxyCodeLine{\Hypertarget{_startup_control_display_8razor_8cs_source_l00099}00099\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_startup_control_display_8razor_8cs_source_l00100}00100\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Dispatcher.Dispatch(\textcolor{keyword}{new}\ \mbox{\hyperlink{namespace_luthetus_1_1_common_1_1_razor_lib_1_1_panels_1_1_states_a3e69a06f395780138ff06e862f45ee3c}{PanelState}}.SetPanelTabAsActiveByContextRecordKeyAction(}
+\DoxyCodeLine{\Hypertarget{_startup_control_display_8razor_8cs_source_l00101}00101\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ContextFacts.TerminalContext.ContextKey));}
+\DoxyCodeLine{\Hypertarget{_startup_control_display_8razor_8cs_source_l00102}00102\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_startup_control_display_8razor_8cs_source_l00103}00103\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \_\ =\ await\ TrySetFocus(ContextFacts.TerminalContext).ConfigureAwait(\textcolor{keyword}{false});}
+\DoxyCodeLine{\Hypertarget{_startup_control_display_8razor_8cs_source_l00104}00104\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_startup_control_display_8razor_8cs_source_l00105}00105\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_startup_control_display_8razor_8cs_source_l00106}00106\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Dispatcher.Dispatch(\textcolor{keyword}{new}\ \mbox{\hyperlink{class_luthetus_1_1_ide_1_1_razor_lib_1_1_terminals_1_1_states_1_1_terminal_group_state}{TerminalGroupState}}.SetActiveTerminalAction(TerminalFacts.EXECUTION\_KEY));}
+\DoxyCodeLine{\Hypertarget{_startup_control_display_8razor_8cs_source_l00107}00107\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}));}
+\DoxyCodeLine{\Hypertarget{_startup_control_display_8razor_8cs_source_l00108}00108\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_startup_control_display_8razor_8cs_source_l00109}00109\ \ \ \ \ \ \ \ \ \ \ \ \ menuOptionList.Add(\textcolor{keyword}{new}\ \mbox{\hyperlink{namespace_luthetus_1_1_common_1_1_razor_lib_1_1_menus_1_1_models_a2d6c930d5bf3cf0cf06f574bf193cf6f}{MenuOptionRecord}}(}
+\DoxyCodeLine{\Hypertarget{_startup_control_display_8razor_8cs_source_l00110}00110\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}Stop\ Execution"{}},}
+\DoxyCodeLine{\Hypertarget{_startup_control_display_8razor_8cs_source_l00111}00111\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespace_luthetus_1_1_common_1_1_razor_lib_1_1_menus_1_1_models_a9d33500a676dda12265b167a400f3df1}{MenuOptionKind}}.Other,}
+\DoxyCodeLine{\Hypertarget{_startup_control_display_8razor_8cs_source_l00112}00112\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ OnClickFunc:\ ()\ =>}
+\DoxyCodeLine{\Hypertarget{_startup_control_display_8razor_8cs_source_l00113}00113\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_startup_control_display_8razor_8cs_source_l00114}00114\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ var\ localStartupControlState\ =\ StartupControlStateWrap.Value;}
+\DoxyCodeLine{\Hypertarget{_startup_control_display_8razor_8cs_source_l00115}00115\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_startup_control_display_8razor_8cs_source_l00116}00116\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ if\ (localStartupControlState.ActiveStartupControl\ is\ null)}
+\DoxyCodeLine{\Hypertarget{_startup_control_display_8razor_8cs_source_l00117}00117\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ return\ Task.CompletedTask;}
+\DoxyCodeLine{\Hypertarget{_startup_control_display_8razor_8cs_source_l00118}00118\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_startup_control_display_8razor_8cs_source_l00119}00119\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ return\ localStartupControlState.ActiveStartupControl.StopButtonOnClickTask}
+\DoxyCodeLine{\Hypertarget{_startup_control_display_8razor_8cs_source_l00120}00120\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ .Invoke(localStartupControlState.ActiveStartupControl);}
+\DoxyCodeLine{\Hypertarget{_startup_control_display_8razor_8cs_source_l00121}00121\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}));}
+\DoxyCodeLine{\Hypertarget{_startup_control_display_8razor_8cs_source_l00122}00122\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_startup_control_display_8razor_8cs_source_l00123}00123\ \ \ \ \ \ \ \ \ \ \ \ \ await\ DropdownHelper.RenderDropdownAsync(}
+\DoxyCodeLine{\Hypertarget{_startup_control_display_8razor_8cs_source_l00124}00124\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Dispatcher,}
+\DoxyCodeLine{\Hypertarget{_startup_control_display_8razor_8cs_source_l00125}00125\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ JsRuntimeCommonApi,}
+\DoxyCodeLine{\Hypertarget{_startup_control_display_8razor_8cs_source_l00126}00126\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \_startButtonElementId,}
+\DoxyCodeLine{\Hypertarget{_startup_control_display_8razor_8cs_source_l00127}00127\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespace_luthetus_1_1_common_1_1_razor_lib_1_1_dropdowns_1_1_models_a4b28555f9d704f592f847b053479d8ef}{DropdownOrientation}}.Bottom,}
+\DoxyCodeLine{\Hypertarget{_startup_control_display_8razor_8cs_source_l00128}00128\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \_startButtonDropdownKey,}
+\DoxyCodeLine{\Hypertarget{_startup_control_display_8razor_8cs_source_l00129}00129\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{new}\ \mbox{\hyperlink{namespace_luthetus_1_1_common_1_1_razor_lib_1_1_menus_1_1_models_af436982429af54c4ebdea144108f1672}{MenuRecord}}(menuOptionList.ToImmutableArray()),}
+\DoxyCodeLine{\Hypertarget{_startup_control_display_8razor_8cs_source_l00130}00130\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \_startButtonElementReference);}
+\DoxyCodeLine{\Hypertarget{_startup_control_display_8razor_8cs_source_l00131}00131\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_startup_control_display_8razor_8cs_source_l00132}00132\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{\Hypertarget{_startup_control_display_8razor_8cs_source_l00133}00133\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_startup_control_display_8razor_8cs_source_l00134}00134\ \ \ \ \ \ \ \ \ \ \ \ \ await\ localStartupControlState.ActiveStartupControl.StartButtonOnClickTask}
+\DoxyCodeLine{\Hypertarget{_startup_control_display_8razor_8cs_source_l00135}00135\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ .Invoke(localStartupControlState.ActiveStartupControl)}
+\DoxyCodeLine{\Hypertarget{_startup_control_display_8razor_8cs_source_l00136}00136\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ .ConfigureAwait(\textcolor{keyword}{false});}
+\DoxyCodeLine{\Hypertarget{_startup_control_display_8razor_8cs_source_l00137}00137\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_startup_control_display_8razor_8cs_source_l00138}00138\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_startup_control_display_8razor_8cs_source_l00139}00139\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_startup_control_display_8razor_8cs_source_l00140}00140\ \ \ \ \ \textcolor{keyword}{private}\ async\ Task<bool>\ TrySetFocus(\mbox{\hyperlink{namespace_luthetus_1_1_common_1_1_razor_lib_1_1_contexts_1_1_models_a8182f995df091e048f3eb6b30360a5bf}{ContextRecord}}\ contextRecord)}
+\DoxyCodeLine{\Hypertarget{_startup_control_display_8razor_8cs_source_l00141}00141\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_startup_control_display_8razor_8cs_source_l00142}00142\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ await\ JsRuntimeCommonApi}
+\DoxyCodeLine{\Hypertarget{_startup_control_display_8razor_8cs_source_l00143}00143\ \ \ \ \ \ \ \ \ \ \ \ \ .\mbox{\hyperlink{class_luthetus_1_1_common_1_1_razor_lib_1_1_js_runtimes_1_1_models_1_1_luthetus_common_java_script_interop_api_aff90f224dddb8cd855abf4d4cdc04ce2}{TryFocusHtmlElementById}}(contextRecord.ContextElementId)}
+\DoxyCodeLine{\Hypertarget{_startup_control_display_8razor_8cs_source_l00144}00144\ \ \ \ \ \ \ \ \ \ \ \ \ .ConfigureAwait(\textcolor{keyword}{false});}
+\DoxyCodeLine{\Hypertarget{_startup_control_display_8razor_8cs_source_l00145}00145\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_startup_control_display_8razor_8cs_source_l00146}00146\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_startup_control_display_8razor_8cs_source_l00147}00147\ \ \ \ \ \textcolor{keyword}{private}\ async\ Task\ RestoreFocusToElementReference(ElementReference?\ elementReference)}
+\DoxyCodeLine{\Hypertarget{_startup_control_display_8razor_8cs_source_l00148}00148\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_startup_control_display_8razor_8cs_source_l00149}00149\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{try}}
+\DoxyCodeLine{\Hypertarget{_startup_control_display_8razor_8cs_source_l00150}00150\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_startup_control_display_8razor_8cs_source_l00151}00151\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (elementReference\ is\ not\ \textcolor{keyword}{null})}
+\DoxyCodeLine{\Hypertarget{_startup_control_display_8razor_8cs_source_l00152}00152\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_startup_control_display_8razor_8cs_source_l00153}00153\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ await\ elementReference.Value}
+\DoxyCodeLine{\Hypertarget{_startup_control_display_8razor_8cs_source_l00154}00154\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ .FocusAsync()}
+\DoxyCodeLine{\Hypertarget{_startup_control_display_8razor_8cs_source_l00155}00155\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ .ConfigureAwait(\textcolor{keyword}{false});}
+\DoxyCodeLine{\Hypertarget{_startup_control_display_8razor_8cs_source_l00156}00156\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_startup_control_display_8razor_8cs_source_l00157}00157\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_startup_control_display_8razor_8cs_source_l00158}00158\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{catch}\ (Exception)}
+\DoxyCodeLine{\Hypertarget{_startup_control_display_8razor_8cs_source_l00159}00159\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_startup_control_display_8razor_8cs_source_l00160}00160\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ TODO:\ Capture\ specifically\ the\ exception\ that\ is\ fired\ when\ the\ JsRuntime...}}
+\DoxyCodeLine{\Hypertarget{_startup_control_display_8razor_8cs_source_l00161}00161\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ ...tries\ to\ set\ focus\ to\ an\ HTML\ element,\ but\ that\ HTML\ element}}
+\DoxyCodeLine{\Hypertarget{_startup_control_display_8razor_8cs_source_l00162}00162\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ was\ not\ found.}}
+\DoxyCodeLine{\Hypertarget{_startup_control_display_8razor_8cs_source_l00163}00163\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_startup_control_display_8razor_8cs_source_l00164}00164\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_startup_control_display_8razor_8cs_source_l00165}00165\ \}}
+
+\end{DoxyCode}

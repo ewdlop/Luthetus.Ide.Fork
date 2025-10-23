@@ -1,0 +1,37 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_test_8py_source" xml:lang="en-US">
+<title>test.py</title>
+<indexterm><primary>Source/Lib/Ide/Ide.RazorLib/Pythons/test.py</primary></indexterm>
+Go to the documentation of this file.<programlisting linenumbering="unnumbered"><anchor xml:id="_test_8py_source_1l00001"/><link linkend="_namespacetest">00001</link> <emphasis role="comment">#&#32;https://biriukov.dev/docs/fd-pipe-session-terminal/4-terminals-and-pseudoterminals/</emphasis>
+<anchor xml:id="_test_8py_source_1l00002"/>00002 
+<anchor xml:id="_test_8py_source_1l00003"/>00003 <emphasis role="keyword">import</emphasis>&#32;os
+<anchor xml:id="_test_8py_source_1l00004"/>00004 <emphasis role="keyword">import</emphasis>&#32;time
+<anchor xml:id="_test_8py_source_1l00005"/>00005 <emphasis role="keyword">import</emphasis>&#32;sys
+<anchor xml:id="_test_8py_source_1l00006"/>00006 
+<anchor xml:id="_test_8py_source_1l00007"/>00007 print(f<emphasis role="stringliteral">&quot;parent:&#32;{os.getpid()}&quot;</emphasis>)
+<anchor xml:id="_test_8py_source_1l00008"/>00008 
+<anchor xml:id="_test_8py_source_1l00009"/><link linkend="_namespacetest_1a654965e57b0ddcdcb8b072982a6c36e9">00009</link> ptmx,&#32;secondary&#32;=&#32;os.openpty()
+<anchor xml:id="_test_8py_source_1l00010"/>00010 
+<anchor xml:id="_test_8py_source_1l00011"/><link linkend="_namespacetest_1aaf77a9efa72bcbaab763c3fc2706d35e">00011</link> pid&#32;=&#32;os.fork()
+<anchor xml:id="_test_8py_source_1l00012"/>00012 <emphasis role="keywordflow">if</emphasis>&#32;pid&#32;==&#32;0:
+<anchor xml:id="_test_8py_source_1l00013"/>00013 &#32;&#32;&#32;&#32;print(f<emphasis role="stringliteral">&quot;child:&#32;{os.getpid()}&quot;</emphasis>)
+<anchor xml:id="_test_8py_source_1l00014"/>00014 &#32;&#32;&#32;&#32;os.close(ptmx)
+<anchor xml:id="_test_8py_source_1l00015"/>00015 &#32;&#32;&#32;&#32;os.setsid()
+<anchor xml:id="_test_8py_source_1l00016"/><link linkend="_namespacetest_1ac5ddc75d7029ace1bfb95e457e5c3510">00016</link> &#32;&#32;&#32;&#32;name&#32;=&#32;os.ttyname(secondary)
+<anchor xml:id="_test_8py_source_1l00017"/>00017 &#32;&#32;&#32;&#32;print(name)
+<anchor xml:id="_test_8py_source_1l00018"/><link linkend="_namespacetest_1a91a88df52e09e64ff8cc9e5d8277c8d4">00018</link> &#32;&#32;&#32;&#32;s&#32;=&#32;os.open(name,&#32;os.O_RDWR)
+<anchor xml:id="_test_8py_source_1l00019"/>00019 &#32;&#32;&#32;&#32;os.dup2(s,&#32;0)
+<anchor xml:id="_test_8py_source_1l00020"/>00020 &#32;&#32;&#32;&#32;os.dup2(s,&#32;1)
+<anchor xml:id="_test_8py_source_1l00021"/>00021 &#32;&#32;&#32;&#32;os.dup2(s,&#32;2)
+<anchor xml:id="_test_8py_source_1l00022"/>00022 &#32;&#32;&#32;&#32;os.close(secondary)
+<anchor xml:id="_test_8py_source_1l00023"/>00023 &#32;&#32;&#32;&#32;os.close(s)
+<anchor xml:id="_test_8py_source_1l00024"/>00024 &#32;&#32;&#32;&#32;<emphasis role="keyword">with</emphasis>&#32;open(<emphasis role="stringliteral">&apos;/tmp/file.txt&apos;</emphasis>,&#32;<emphasis role="stringliteral">&quot;w&quot;</emphasis>)&#32;<emphasis role="keyword">as</emphasis>&#32;f:
+<anchor xml:id="_test_8py_source_1l00025"/>00025 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">for</emphasis>&#32;l&#32;<emphasis role="keywordflow">in</emphasis>&#32;sys.stdin:
+<anchor xml:id="_test_8py_source_1l00026"/>00026 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;f.write(l)
+<anchor xml:id="_test_8py_source_1l00027"/>00027 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;f.flush()
+<anchor xml:id="_test_8py_source_1l00028"/>00028 &#32;&#32;&#32;&#32;time.sleep(999999)
+<anchor xml:id="_test_8py_source_1l00029"/>00029 <emphasis role="keywordflow">else</emphasis>:
+<anchor xml:id="_test_8py_source_1l00030"/>00030 &#32;&#32;&#32;&#32;os.close(secondary)
+<anchor xml:id="_test_8py_source_1l00031"/>00031 &#32;&#32;&#32;&#32;os.write(ptmx,&#32;b<emphasis role="stringliteral">&quot;text\n&quot;</emphasis>)
+<anchor xml:id="_test_8py_source_1l00032"/>00032 &#32;&#32;&#32;&#32;os.waitpid(-1,0)
+</programlisting></section>

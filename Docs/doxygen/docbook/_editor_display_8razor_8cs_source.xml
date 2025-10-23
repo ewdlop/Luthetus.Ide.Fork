@@ -1,0 +1,42 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="__editor_display_8razor_8cs_source" xml:lang="en-US">
+<title>EditorDisplay.razor.cs</title>
+<indexterm><primary>Source/Lib/Ide/Ide.RazorLib/Editors/Displays/EditorDisplay.razor.cs</primary></indexterm>
+Go to the documentation of this file.<programlisting linenumbering="unnumbered"><anchor xml:id="__editor_display_8razor_8cs_source_1l00001"/>00001 <emphasis role="keyword">using&#32;</emphasis>System.Collections.Immutable;
+<anchor xml:id="__editor_display_8razor_8cs_source_1l00002"/>00002 <emphasis role="keyword">using&#32;</emphasis>Microsoft.AspNetCore.Components;
+<anchor xml:id="__editor_display_8razor_8cs_source_1l00003"/>00003 <emphasis role="keyword">using&#32;</emphasis><link linkend="_namespace_luthetus_1_1_common_1_1_razor_lib_1_1_dimensions_1_1_models">Luthetus.Common.RazorLib.Dimensions.Models</link>;
+<anchor xml:id="__editor_display_8razor_8cs_source_1l00004"/>00004 <emphasis role="keyword">using&#32;</emphasis><link linkend="_namespace_luthetus_1_1_common_1_1_razor_lib_1_1_options_1_1_models">Luthetus.Common.RazorLib.Options.Models</link>;
+<anchor xml:id="__editor_display_8razor_8cs_source_1l00005"/>00005 <emphasis role="keyword">using&#32;</emphasis><link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1_1_internals">Luthetus.TextEditor.RazorLib.TextEditors.Models.Internals</link>;
+<anchor xml:id="__editor_display_8razor_8cs_source_1l00006"/>00006 <emphasis role="keyword">using&#32;</emphasis><link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_displays_1_1_internals">Luthetus.TextEditor.RazorLib.TextEditors.Displays.Internals</link>;
+<anchor xml:id="__editor_display_8razor_8cs_source_1l00007"/>00007 
+<anchor xml:id="__editor_display_8razor_8cs_source_1l00008"/><link linkend="_namespace_luthetus_1_1_ide_1_1_razor_lib_1_1_editors">00008</link> <emphasis role="keyword">namespace&#32;</emphasis><link linkend="_namespace_luthetus_1_1_ide_1_1_razor_lib_1_1_editors_1_1_displays">Luthetus.Ide.RazorLib.Editors.Displays</link>;
+<anchor xml:id="__editor_display_8razor_8cs_source_1l00009"/>00009 
+<anchor xml:id="__editor_display_8razor_8cs_source_1l00010"/><link linkend="_class_luthetus_1_1_ide_1_1_razor_lib_1_1_editors_1_1_displays_1_1_editor_display">00010</link> <emphasis role="keyword">public</emphasis>&#32;<emphasis role="keyword">partial&#32;class&#32;</emphasis><link linkend="_class_luthetus_1_1_ide_1_1_razor_lib_1_1_editors_1_1_displays_1_1_editor_display">EditorDisplay</link>&#32;:&#32;ComponentBase
+<anchor xml:id="__editor_display_8razor_8cs_source_1l00011"/>00011 {
+<anchor xml:id="__editor_display_8razor_8cs_source_1l00012"/>00012 &#32;&#32;&#32;&#32;[Inject]
+<anchor xml:id="__editor_display_8razor_8cs_source_1l00013"/>00013 &#32;&#32;&#32;&#32;<emphasis role="keyword">private</emphasis>&#32;<link linkend="_interface_luthetus_1_1_common_1_1_razor_lib_1_1_options_1_1_models_1_1_i_app_options_service">IAppOptionsService</link>&#32;AppOptionsService&#32;{&#32;<emphasis role="keyword">get</emphasis>;&#32;<emphasis role="keyword">set</emphasis>;&#32;}&#32;=&#32;<emphasis role="keyword">null</emphasis>!;
+<anchor xml:id="__editor_display_8razor_8cs_source_1l00014"/>00014 
+<anchor xml:id="__editor_display_8razor_8cs_source_1l00015"/>00015 &#32;&#32;&#32;&#32;[Parameter,&#32;EditorRequired]
+<anchor xml:id="__editor_display_8razor_8cs_source_1l00016"/><link linkend="_class_luthetus_1_1_ide_1_1_razor_lib_1_1_editors_1_1_displays_1_1_editor_display_1afff82eedf6fb2a0189d8667e202ec3f0">00016</link> &#32;&#32;&#32;&#32;<emphasis role="keyword">public</emphasis>&#32;<link linkend="_class_luthetus_1_1_common_1_1_razor_lib_1_1_dimensions_1_1_models_1_1_element_dimensions">ElementDimensions</link>&#32;<link linkend="_class_luthetus_1_1_ide_1_1_razor_lib_1_1_editors_1_1_displays_1_1_editor_display_1afff82eedf6fb2a0189d8667e202ec3f0">EditorElementDimensions</link>&#32;{&#32;<emphasis role="keyword">get</emphasis>;&#32;<emphasis role="keyword">set</emphasis>;&#32;}&#32;=&#32;<emphasis role="keyword">null</emphasis>!;
+<anchor xml:id="__editor_display_8razor_8cs_source_1l00017"/>00017 
+<anchor xml:id="__editor_display_8razor_8cs_source_1l00018"/>00018 &#32;&#32;&#32;&#32;<emphasis role="keyword">private</emphasis>&#32;<emphasis role="keyword">static</emphasis>&#32;readonly&#32;ImmutableArray&lt;HeaderButtonKind&gt;&#32;TextEditorHeaderButtonKindsList&#32;=
+<anchor xml:id="__editor_display_8razor_8cs_source_1l00019"/>00019 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;Enum.GetValues(typeof(<link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1_1_internals_1ad80d4c3b227dc5cde23b92ee5c5dc126">HeaderButtonKind</link>))
+<anchor xml:id="__editor_display_8razor_8cs_source_1l00020"/>00020 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;.Cast&lt;<link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1_1_internals_1ad80d4c3b227dc5cde23b92ee5c5dc126">HeaderButtonKind</link>&gt;()
+<anchor xml:id="__editor_display_8razor_8cs_source_1l00021"/>00021 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;.ToImmutableArray();
+<anchor xml:id="__editor_display_8razor_8cs_source_1l00022"/>00022 
+<anchor xml:id="__editor_display_8razor_8cs_source_1l00023"/>00023 &#32;&#32;&#32;&#32;<emphasis role="keyword">private</emphasis>&#32;<link linkend="_class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1_1_internals_1_1_view_model_display_options">ViewModelDisplayOptions</link>&#32;_viewModelDisplayOptions&#32;=&#32;<emphasis role="keyword">null</emphasis>!;
+<anchor xml:id="__editor_display_8razor_8cs_source_1l00024"/>00024 
+<anchor xml:id="__editor_display_8razor_8cs_source_1l00025"/><link linkend="_class_luthetus_1_1_ide_1_1_razor_lib_1_1_editors_1_1_displays_1_1_editor_display_1af1d656e63bf56a0080e5dd8111bf0751">00025</link> &#32;&#32;&#32;&#32;<emphasis role="keyword">protected</emphasis>&#32;<emphasis role="keyword">override</emphasis>&#32;<emphasis role="keywordtype">void</emphasis>&#32;<link linkend="_class_luthetus_1_1_ide_1_1_razor_lib_1_1_editors_1_1_displays_1_1_editor_display_1af1d656e63bf56a0080e5dd8111bf0751">OnInitialized</link>()
+<anchor xml:id="__editor_display_8razor_8cs_source_1l00026"/>00026 &#32;&#32;&#32;&#32;{
+<anchor xml:id="__editor_display_8razor_8cs_source_1l00027"/>00027 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;_viewModelDisplayOptions&#32;=&#32;<emphasis role="keyword">new</emphasis>()
+<anchor xml:id="__editor_display_8razor_8cs_source_1l00028"/>00028 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;{
+<anchor xml:id="__editor_display_8razor_8cs_source_1l00029"/>00029 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;WrapperClassCssString&#32;=&#32;<emphasis role="stringliteral">&quot;luth_te_demo-text-editor&quot;</emphasis>,
+<anchor xml:id="__editor_display_8razor_8cs_source_1l00030"/>00030 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;TabIndex&#32;=&#32;0,
+<anchor xml:id="__editor_display_8razor_8cs_source_1l00031"/>00031 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;HeaderButtonKinds&#32;=&#32;TextEditorHeaderButtonKindsList,
+<anchor xml:id="__editor_display_8razor_8cs_source_1l00032"/>00032 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;HeaderComponentType&#32;=&#32;typeof(<link linkend="_class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_displays_1_1_internals_1_1_tex48c67fae58a55e5925b43b09e019ea33">TextEditorDevToolsAnchorDisplay</link>),
+<anchor xml:id="__editor_display_8razor_8cs_source_1l00033"/>00033 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;};
+<anchor xml:id="__editor_display_8razor_8cs_source_1l00034"/>00034 
+<anchor xml:id="__editor_display_8razor_8cs_source_1l00035"/>00035 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;base.OnInitialized();
+<anchor xml:id="__editor_display_8razor_8cs_source_1l00036"/>00036 &#32;&#32;&#32;&#32;}
+<anchor xml:id="__editor_display_8razor_8cs_source_1l00037"/>00037 }
+</programlisting></section>

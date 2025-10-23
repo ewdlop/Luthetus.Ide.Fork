@@ -1,0 +1,143 @@
+.TH "Luthetus.Common.RazorLib.FileSystems.Models.IAbsolutePath" 3 "Version 1.0.0" "Luthetus.Ide" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+Luthetus.Common.RazorLib.FileSystems.Models.IAbsolutePath
+.SH SYNOPSIS
+.br
+.PP
+.PP
+Inherits \fBLuthetus\&.Common\&.RazorLib\&.FileSystems\&.Models\&.IPath\fP\&.
+.PP
+Inherited by \fBLuthetus\&.Common\&.RazorLib\&.FileSystems\&.Models\&.IEnvironmentProvider\&.AbsolutePath\fP\&.
+.SS "Static Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "static \fBIAbsolutePath\fP \fBFactory\fP (string path, bool isDirectory, \fBIEnvironmentProvider\fP environmentProvider)"
+.br
+.RI "One might prefer \fBIEnvironmentProvider\&.AbsolutePathFactory(string, bool)\fP instead of this method\&.
+.br
+
+.br
+\&. "
+.in -1c
+.SS "Properties"
+
+.in +1c
+.ti -1c
+.RI "\fBIFileSystemDrive\fP? \fBRootDrive\fP\fR [get]\fP"
+.br
+.ti -1c
+.RI "bool \fBIsRootDirectory\fP\fR [get]\fP"
+.br
+.in -1c
+
+Properties inherited from \fBLuthetus\&.Common\&.RazorLib\&.FileSystems\&.Models\&.IPath\fP
+.in +1c
+.ti -1c
+.RI "\fBPathType\fP \fBPathType\fP\fR [get]\fP"
+.br
+.ti -1c
+.RI "bool \fBIsDirectory\fP\fR [get]\fP"
+.br
+.ti -1c
+.RI "string \fBNameNoExtension\fP\fR [get]\fP"
+.br
+.ti -1c
+.RI "string \fBNameWithExtension\fP\fR [get]\fP"
+.br
+.RI "Given: { "somePath\&.txt", NOT_DIRECTORY }
+.br
+ Then: \fBNameWithExtension\fP is "somePath\&.txt" 
+.br
+
+.br
+ Given: { "somePath\&.txt", IS_DIRECTORY }
+.br
+ Then: \fBNameWithExtension\fP is "somePath\&.txt/" 
+.br
+
+.br
+ Given: { "somePath", NOT_DIRECTORY }
+.br
+ Then: \fBNameWithExtension\fP is "somePath" 
+.br
+
+.br
+ Given: { "somePath", IS_DIRECTORY }
+.br
+ Then: \fBNameWithExtension\fP is "somePath/" 
+.br
+
+.br
+ Given: { "somePath/", NOT_DIRECTORY }
+.br
+ Then: throw new Exception('File names cannot contain directory separators'); 
+.br
+
+.br
+ Given: { "somePath/", IS_DIRECTORY }
+.br
+ Then: \fBNameWithExtension\fP is "somePath/"\&. "
+.ti -1c
+.RI "string \fBExtensionNoPeriod\fP\fR [get]\fP"
+.br
+.ti -1c
+.RI "string? \fBExactInput\fP\fR [get]\fP"
+.br
+.RI "Given: "/Repos\\\\BlazorCrudApp\\\\"<br/>
+Then: <see cref="ExactInput"/> is "/Repos\\BlazorCrudApp\\"<br/><br/>Given: "\\Repos/BlazorCrudApp/"<br/>Then: <see cref="ExactInput"/> is "\\Repos/BlazorCrudApp/"<br/><br/>Overall reasoning: <see cref="ExactInput"/> is to return the user input exactly as they gave it originally\&. "
+.ti -1c
+.RI "string \fBValue\fP\fR [get]\fP"
+.br
+.RI "\fBValue\fP is the path as a string, but with all directory separating characters having been standardized to be \fBIEnvironmentProvider\&.DirectorySeparatorChar\fP\&. "
+.ti -1c
+.RI "\fBAncestorDirectory\fP? \fBParentDirectory\fP\fR [get]\fP"
+.br
+.ti -1c
+.RI "List< \fBAncestorDirectory\fP > \fBAncestorDirectoryList\fP\fR [get]\fP"
+.br
+.ti -1c
+.RI "\fBIEnvironmentProvider\fP \fBEnvironmentProvider\fP\fR [get]\fP"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+Definition at line \fB3\fP of file \fBIAbsolutePath\&.cs\fP\&.
+.SH "Member Function Documentation"
+.PP 
+.SS "\fBIAbsolutePath\fP Luthetus\&.Common\&.RazorLib\&.FileSystems\&.Models\&.IAbsolutePath\&.Factory (string path, bool isDirectory, \fBIEnvironmentProvider\fP environmentProvider)\fR [static]\fP"
+
+.PP
+One might prefer \fBIEnvironmentProvider\&.AbsolutePathFactory(string, bool)\fP instead of this method\&.
+.br
+
+.br
+\&. This version adds an extra function invocation for no reason\&. To use \fBIEnvironmentProvider\&.AbsolutePathFactory(string, bool)\fP may be a negligible optimization however\&.
+.br
+
+.br
+
+.PP
+Keep this method here, it provides more clear documentation on how to create an instance of \fBIAbsolutePath\fP\&. Having to invoke a method on the \fBIEnvironmentProvider\fP is a bit hard to find\&. 
+.PP
+Definition at line \fB20\fP of file \fBIAbsolutePath\&.cs\fP\&.
+.SH "Property Documentation"
+.PP 
+.SS "bool Luthetus\&.Common\&.RazorLib\&.FileSystems\&.Models\&.IAbsolutePath\&.IsRootDirectory\fR [get]\fP"
+
+.PP
+Implemented in \fBLuthetus\&.Common\&.RazorLib\&.FileSystems\&.Models\&.IEnvironmentProvider\&.AbsolutePath\fP\&.
+.PP
+Definition at line \fB6\fP of file \fBIAbsolutePath\&.cs\fP\&.
+.SS "\fBIFileSystemDrive\fP? Luthetus\&.Common\&.RazorLib\&.FileSystems\&.Models\&.IAbsolutePath\&.RootDrive\fR [get]\fP"
+
+.PP
+Implemented in \fBLuthetus\&.Common\&.RazorLib\&.FileSystems\&.Models\&.IEnvironmentProvider\&.AbsolutePath\fP\&.
+.PP
+Definition at line \fB5\fP of file \fBIAbsolutePath\&.cs\fP\&.
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for Luthetus\&.Ide from the source code\&.

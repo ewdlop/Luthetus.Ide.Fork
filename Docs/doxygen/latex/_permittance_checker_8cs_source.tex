@@ -1,0 +1,85 @@
+\doxysection{Permittance\+Checker.\+cs}
+\hypertarget{_permittance_checker_8cs_source}{}\label{_permittance_checker_8cs_source}\index{Source/Lib/Common/FileSystems/Models/PermittanceChecker.cs@{Source/Lib/Common/FileSystems/Models/PermittanceChecker.cs}}
+\mbox{\hyperlink{_permittance_checker_8cs}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{_permittance_checker_8cs_source_l00001}00001\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_luthetus_1_1_common_1_1_razor_lib_1_1_exceptions}{Luthetus.Common.RazorLib.Exceptions}};}
+\DoxyCodeLine{\Hypertarget{_permittance_checker_8cs_source_l00002}00002\ }
+\DoxyCodeLine{\Hypertarget{_permittance_checker_8cs_source_l00003}00003\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespace_luthetus_1_1_common_1_1_razor_lib_1_1_file_systems_1_1_models}{Luthetus.Common.RazorLib.FileSystems.Models}};}
+\DoxyCodeLine{\Hypertarget{_permittance_checker_8cs_source_l00004}00004\ }
+\DoxyCodeLine{\Hypertarget{_permittance_checker_8cs_source_l00005}00005\ \textcolor{keyword}{public}\ \textcolor{keyword}{static}\ \textcolor{keyword}{class\ }PermittanceChecker}
+\DoxyCodeLine{\Hypertarget{_permittance_checker_8cs_source_l00006}00006\ \{}
+\DoxyCodeLine{\Hypertarget{_permittance_checker_8cs_source_l00007}00007\ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{string}\ ERROR\_PREFIX\ =\ \textcolor{stringliteral}{"{}FILE\_PERMISSION\_ERROR:"{}};}
+\DoxyCodeLine{\Hypertarget{_permittance_checker_8cs_source_l00008}00008\ }
+\DoxyCodeLine{\Hypertarget{_permittance_checker_8cs_source_l00009}00009\ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ AssertDeletionPermitted(}
+\DoxyCodeLine{\Hypertarget{_permittance_checker_8cs_source_l00010}00010\ \ \ \ \ \ \ \ \ IEnvironmentProvider\ environmentProvider,}
+\DoxyCodeLine{\Hypertarget{_permittance_checker_8cs_source_l00011}00011\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{string}\ path,}
+\DoxyCodeLine{\Hypertarget{_permittance_checker_8cs_source_l00012}00012\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ isDirectory)}
+\DoxyCodeLine{\Hypertarget{_permittance_checker_8cs_source_l00013}00013\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_permittance_checker_8cs_source_l00014}00014\ \ \ \ \ \ \ \ \ var\ simplePath\ =\ \textcolor{keyword}{new}\ \mbox{\hyperlink{namespace_luthetus_1_1_common_1_1_razor_lib_1_1_file_systems_1_1_models_a16adff7a94f1f0102f7e1505a87f5902}{SimplePath}}(path,\ isDirectory);}
+\DoxyCodeLine{\Hypertarget{_permittance_checker_8cs_source_l00015}00015\ }
+\DoxyCodeLine{\Hypertarget{_permittance_checker_8cs_source_l00016}00016\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (environmentProvider.ProtectedPathList.Contains(simplePath))}
+\DoxyCodeLine{\Hypertarget{_permittance_checker_8cs_source_l00017}00017\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{throw}\ NotDeletionPermittedExceptionFactory(path,\ isDirectory);}
+\DoxyCodeLine{\Hypertarget{_permittance_checker_8cs_source_l00018}00018\ }
+\DoxyCodeLine{\Hypertarget{_permittance_checker_8cs_source_l00019}00019\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Double\ check\ obviously\ bad\ scenarios.}}
+\DoxyCodeLine{\Hypertarget{_permittance_checker_8cs_source_l00020}00020\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ These\ should\ already\ be\ protected\ paths,\ but\ this\ is\ an\ extra\ check.}}
+\DoxyCodeLine{\Hypertarget{_permittance_checker_8cs_source_l00021}00021\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_permittance_checker_8cs_source_l00022}00022\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (path\ ==\ \textcolor{stringliteral}{"{}/"{}}\ ||\ path\ ==\ \textcolor{stringliteral}{"{}\(\backslash\)\(\backslash\)"{}}\ ||\ \textcolor{keywordtype}{string}.IsNullOrWhiteSpace(path))}
+\DoxyCodeLine{\Hypertarget{_permittance_checker_8cs_source_l00023}00023\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{throw}\ NotDeletionPermittedExceptionFactory(path,\ isDirectory);}
+\DoxyCodeLine{\Hypertarget{_permittance_checker_8cs_source_l00024}00024\ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_permittance_checker_8cs_source_l00025}00025\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (path\ ==\ environmentProvider.DriveExecutingFromNoDirectorySeparator\ +\ \textcolor{stringliteral}{"{}/"{}}\ ||}
+\DoxyCodeLine{\Hypertarget{_permittance_checker_8cs_source_l00026}00026\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ path\ ==\ environmentProvider.DriveExecutingFromNoDirectorySeparator\ +\ \textcolor{stringliteral}{"{}\(\backslash\)\(\backslash\)"{}})}
+\DoxyCodeLine{\Hypertarget{_permittance_checker_8cs_source_l00027}00027\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_permittance_checker_8cs_source_l00028}00028\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{throw}\ NotDeletionPermittedExceptionFactory(path,\ isDirectory);}
+\DoxyCodeLine{\Hypertarget{_permittance_checker_8cs_source_l00029}00029\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_permittance_checker_8cs_source_l00030}00030\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_permittance_checker_8cs_source_l00031}00031\ }
+\DoxyCodeLine{\Hypertarget{_permittance_checker_8cs_source_l00032}00032\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!environmentProvider.DeletionPermittedPathList.Contains(simplePath))}
+\DoxyCodeLine{\Hypertarget{_permittance_checker_8cs_source_l00033}00033\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_permittance_checker_8cs_source_l00034}00034\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{foreach}\ (var\ deletionPermittedPath\ \textcolor{keywordflow}{in}\ environmentProvider.DeletionPermittedPathList)}
+\DoxyCodeLine{\Hypertarget{_permittance_checker_8cs_source_l00035}00035\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_permittance_checker_8cs_source_l00036}00036\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (deletionPermittedPath.IsDirectory)}
+\DoxyCodeLine{\Hypertarget{_permittance_checker_8cs_source_l00037}00037\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_permittance_checker_8cs_source_l00038}00038\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Check\ if\ the\ path\ is\ encompassed\ by\ a\ directory\ with\ delete\ permission.}}
+\DoxyCodeLine{\Hypertarget{_permittance_checker_8cs_source_l00039}00039\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//}}
+\DoxyCodeLine{\Hypertarget{_permittance_checker_8cs_source_l00040}00040\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ The\ idea\ here\ being:\ if\ a\ directory\ is\ allowed\ to\ be\ deleted,}}
+\DoxyCodeLine{\Hypertarget{_permittance_checker_8cs_source_l00041}00041\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ then\ all\ files\ which\ are\ not\ protected\ are\ able\ to\ be\ deleted\ too.}}
+\DoxyCodeLine{\Hypertarget{_permittance_checker_8cs_source_l00042}00042\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (path.StartsWith(deletionPermittedPath.AbsolutePath))}
+\DoxyCodeLine{\Hypertarget{_permittance_checker_8cs_source_l00043}00043\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return};}
+\DoxyCodeLine{\Hypertarget{_permittance_checker_8cs_source_l00044}00044\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_permittance_checker_8cs_source_l00045}00045\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_permittance_checker_8cs_source_l00046}00046\ }
+\DoxyCodeLine{\Hypertarget{_permittance_checker_8cs_source_l00047}00047\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{throw}\ NotDeletionPermittedExceptionFactory(path,\ isDirectory);}
+\DoxyCodeLine{\Hypertarget{_permittance_checker_8cs_source_l00048}00048\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_permittance_checker_8cs_source_l00049}00049\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_permittance_checker_8cs_source_l00050}00050\ }
+\DoxyCodeLine{\Hypertarget{_permittance_checker_8cs_source_l00057}00057\ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keyword}{static}\ \textcolor{keywordtype}{bool}\ IsRootOrHomeDirectory(}
+\DoxyCodeLine{\Hypertarget{_permittance_checker_8cs_source_l00058}00058\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespace_luthetus_1_1_common_1_1_razor_lib_1_1_file_systems_1_1_models_a16adff7a94f1f0102f7e1505a87f5902}{SimplePath}}\ simplePath,}
+\DoxyCodeLine{\Hypertarget{_permittance_checker_8cs_source_l00059}00059\ \ \ \ \ \ \ \ \ IEnvironmentProvider\ environmentProvider)}
+\DoxyCodeLine{\Hypertarget{_permittance_checker_8cs_source_l00060}00060\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_permittance_checker_8cs_source_l00061}00061\ \ \ \ \ \ \ \ \ var\ absolutePath\ =\ environmentProvider.AbsolutePathFactory(}
+\DoxyCodeLine{\Hypertarget{_permittance_checker_8cs_source_l00062}00062\ \ \ \ \ \ \ \ \ \ \ \ \ simplePath.AbsolutePath,}
+\DoxyCodeLine{\Hypertarget{_permittance_checker_8cs_source_l00063}00063\ \ \ \ \ \ \ \ \ \ \ \ \ simplePath.IsDirectory);}
+\DoxyCodeLine{\Hypertarget{_permittance_checker_8cs_source_l00064}00064\ }
+\DoxyCodeLine{\Hypertarget{_permittance_checker_8cs_source_l00065}00065\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (absolutePath.Value\ ==\ environmentProvider.RootDirectoryAbsolutePath.Value\ ||}
+\DoxyCodeLine{\Hypertarget{_permittance_checker_8cs_source_l00066}00066\ \ \ \ \ \ \ \ \ \ \ \ \ absolutePath.Value\ ==\ environmentProvider.HomeDirectoryAbsolutePath.Value)}
+\DoxyCodeLine{\Hypertarget{_permittance_checker_8cs_source_l00067}00067\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_permittance_checker_8cs_source_l00068}00068\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{true};}
+\DoxyCodeLine{\Hypertarget{_permittance_checker_8cs_source_l00069}00069\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_permittance_checker_8cs_source_l00070}00070\ }
+\DoxyCodeLine{\Hypertarget{_permittance_checker_8cs_source_l00071}00071\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};}
+\DoxyCodeLine{\Hypertarget{_permittance_checker_8cs_source_l00072}00072\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_permittance_checker_8cs_source_l00073}00073\ }
+\DoxyCodeLine{\Hypertarget{_permittance_checker_8cs_source_l00074}00074\ \ \ \ \ \textcolor{keyword}{private}\ \textcolor{keyword}{static}\ LuthetusCommonException\ NotDeletionPermittedExceptionFactory(}
+\DoxyCodeLine{\Hypertarget{_permittance_checker_8cs_source_l00075}00075\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{string}\ path,}
+\DoxyCodeLine{\Hypertarget{_permittance_checker_8cs_source_l00076}00076\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ isDirectory)}
+\DoxyCodeLine{\Hypertarget{_permittance_checker_8cs_source_l00077}00077\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_permittance_checker_8cs_source_l00078}00078\ \ \ \ \ \ \ \ \ var\ entryTypeName\ =\ isDirectory}
+\DoxyCodeLine{\Hypertarget{_permittance_checker_8cs_source_l00079}00079\ \ \ \ \ \ \ \ \ \ \ \ \ ?\ \textcolor{stringliteral}{"{}directory"{}}}
+\DoxyCodeLine{\Hypertarget{_permittance_checker_8cs_source_l00080}00080\ \ \ \ \ \ \ \ \ \ \ \ \ :\ \textcolor{stringliteral}{"{}file"{}};}
+\DoxyCodeLine{\Hypertarget{_permittance_checker_8cs_source_l00081}00081\ }
+\DoxyCodeLine{\Hypertarget{_permittance_checker_8cs_source_l00082}00082\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{new}\ LuthetusCommonException(}
+\DoxyCodeLine{\Hypertarget{_permittance_checker_8cs_source_l00083}00083\ \ \ \ \ \ \ \ \ \ \ \ \ \$\textcolor{stringliteral}{"{}\{ERROR\_PREFIX\}\ The\ \{entryTypeName\}\ with\ path\ '\{path\}'\ was\ not\ permitted\ to\ be\ deleted."{}});}
+\DoxyCodeLine{\Hypertarget{_permittance_checker_8cs_source_l00084}00084\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_permittance_checker_8cs_source_l00085}00085\ \}}
+
+\end{DoxyCode}

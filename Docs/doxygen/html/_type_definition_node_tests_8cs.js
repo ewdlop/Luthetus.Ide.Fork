@@ -1,0 +1,4 @@
+var _type_definition_node_tests_8cs =
+[
+    [ "Luthetus.TextEditor.Tests.Basis.CompilerServices.Syntax.SyntaxNodes.TypeDefinitionNodeTests", "class_luthetus_1_1_text_editor_1_1_tests_1_1_basis_1_1_compiler_services_1_1_syntax_1_1_syntax_n4de09911170e1d829b05ccbe10050221.html", "class_luthetus_1_1_text_editor_1_1_tests_1_1_basis_1_1_compiler_services_1_1_syntax_1_1_syntax_n4de09911170e1d829b05ccbe10050221" ]
+];

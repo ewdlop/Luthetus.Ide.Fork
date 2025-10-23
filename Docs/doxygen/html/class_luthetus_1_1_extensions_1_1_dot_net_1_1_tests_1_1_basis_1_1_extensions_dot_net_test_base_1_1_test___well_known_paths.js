@@ -1,0 +1,5 @@
+var class_luthetus_1_1_extensions_1_1_dot_net_1_1_tests_1_1_basis_1_1_extensions_dot_net_test_base_1_1_test___well_known_paths =
+[
+    [ "Directories", "class_luthetus_1_1_extensions_1_1_dot_net_1_1_tests_1_1_basis_1_1_extensions_dot_net_test_base_15fcea7628a5b1ccf886a57c3c24ab78c.html", null ],
+    [ "Files", "class_luthetus_1_1_extensions_1_1_dot_net_1_1_tests_1_1_basis_1_1_extensions_dot_net_test_base_1de0b503cdaa0d434196362dcd9f3a305.html", null ]
+];

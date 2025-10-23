@@ -1,0 +1,150 @@
+\doxysection{Dialog\+Display.\+razor.\+cs}
+\hypertarget{_dialog_display_8razor_8cs_source}{}\label{_dialog_display_8razor_8cs_source}\index{Source/Lib/Common/Dialogs/Displays/DialogDisplay.razor.cs@{Source/Lib/Common/Dialogs/Displays/DialogDisplay.razor.cs}}
+\mbox{\hyperlink{_dialog_display_8razor_8cs}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{_dialog_display_8razor_8cs_source_l00001}00001\ \textcolor{keyword}{using\ }Microsoft.JSInterop;}
+\DoxyCodeLine{\Hypertarget{_dialog_display_8razor_8cs_source_l00002}00002\ \textcolor{keyword}{using\ }Microsoft.AspNetCore.Components;}
+\DoxyCodeLine{\Hypertarget{_dialog_display_8razor_8cs_source_l00003}00003\ \textcolor{keyword}{using\ }Fluxor;}
+\DoxyCodeLine{\Hypertarget{_dialog_display_8razor_8cs_source_l00004}00004\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_luthetus_1_1_common_1_1_razor_lib_1_1_options_1_1_states}{Luthetus.Common.RazorLib.Options.States}};}
+\DoxyCodeLine{\Hypertarget{_dialog_display_8razor_8cs_source_l00005}00005\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_luthetus_1_1_common_1_1_razor_lib_1_1_htmls_1_1_models}{Luthetus.Common.RazorLib.Htmls.Models}};}
+\DoxyCodeLine{\Hypertarget{_dialog_display_8razor_8cs_source_l00006}00006\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_luthetus_1_1_common_1_1_razor_lib_1_1_dialogs_1_1_models}{Luthetus.Common.RazorLib.Dialogs.Models}};}
+\DoxyCodeLine{\Hypertarget{_dialog_display_8razor_8cs_source_l00007}00007\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_luthetus_1_1_common_1_1_razor_lib_1_1_installations_1_1_models}{Luthetus.Common.RazorLib.Installations.Models}};}
+\DoxyCodeLine{\Hypertarget{_dialog_display_8razor_8cs_source_l00008}00008\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_luthetus_1_1_common_1_1_razor_lib_1_1_dimensions_1_1_models}{Luthetus.Common.RazorLib.Dimensions.Models}};}
+\DoxyCodeLine{\Hypertarget{_dialog_display_8razor_8cs_source_l00009}00009\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_luthetus_1_1_common_1_1_razor_lib_1_1_resizes_1_1_displays}{Luthetus.Common.RazorLib.Resizes.Displays}};}
+\DoxyCodeLine{\Hypertarget{_dialog_display_8razor_8cs_source_l00010}00010\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_luthetus_1_1_common_1_1_razor_lib_1_1_dialogs_1_1_states}{Luthetus.Common.RazorLib.Dialogs.States}};}
+\DoxyCodeLine{\Hypertarget{_dialog_display_8razor_8cs_source_l00011}00011\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_luthetus_1_1_common_1_1_razor_lib_1_1_dynamics_1_1_models}{Luthetus.Common.RazorLib.Dynamics.Models}};}
+\DoxyCodeLine{\Hypertarget{_dialog_display_8razor_8cs_source_l00012}00012\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_luthetus_1_1_common_1_1_razor_lib_1_1_js_runtimes_1_1_models}{Luthetus.Common.RazorLib.JsRuntimes.Models}};}
+\DoxyCodeLine{\Hypertarget{_dialog_display_8razor_8cs_source_l00013}00013\ }
+\DoxyCodeLine{\Hypertarget{_dialog_display_8razor_8cs_source_l00014}\mbox{\hyperlink{namespace_luthetus_1_1_common_1_1_razor_lib_1_1_dialogs}{00014}}\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespace_luthetus_1_1_common_1_1_razor_lib_1_1_dialogs_1_1_displays}{Luthetus.Common.RazorLib.Dialogs.Displays}};}
+\DoxyCodeLine{\Hypertarget{_dialog_display_8razor_8cs_source_l00015}00015\ }
+\DoxyCodeLine{\Hypertarget{_dialog_display_8razor_8cs_source_l00016}\mbox{\hyperlink{class_luthetus_1_1_common_1_1_razor_lib_1_1_dialogs_1_1_displays_1_1_dialog_display}{00016}}\ \textcolor{keyword}{public}\ \textcolor{keyword}{partial\ class\ }\mbox{\hyperlink{class_luthetus_1_1_common_1_1_razor_lib_1_1_dialogs_1_1_displays_1_1_dialog_display}{DialogDisplay}}\ :\ ComponentBase,\ IDisposable}
+\DoxyCodeLine{\Hypertarget{_dialog_display_8razor_8cs_source_l00017}00017\ \{}
+\DoxyCodeLine{\Hypertarget{_dialog_display_8razor_8cs_source_l00018}00018\ \ \ \ \ [Inject]}
+\DoxyCodeLine{\Hypertarget{_dialog_display_8razor_8cs_source_l00019}00019\ \ \ \ \ \textcolor{keyword}{private}\ \mbox{\hyperlink{interface_luthetus_1_1_common_1_1_razor_lib_1_1_dialogs_1_1_models_1_1_i_dialog_service}{IDialogService}}\ DialogService\ \{\ \textcolor{keyword}{get};\ \textcolor{keyword}{set};\ \}\ =\ \textcolor{keyword}{null}!;}
+\DoxyCodeLine{\Hypertarget{_dialog_display_8razor_8cs_source_l00020}00020\ \ \ \ \ [Inject]}
+\DoxyCodeLine{\Hypertarget{_dialog_display_8razor_8cs_source_l00021}00021\ \ \ \ \ \textcolor{keyword}{private}\ IState<AppOptionsState>\ AppOptionsStateWrap\ \{\ \textcolor{keyword}{get};\ \textcolor{keyword}{set};\ \}\ =\ \textcolor{keyword}{null}!;}
+\DoxyCodeLine{\Hypertarget{_dialog_display_8razor_8cs_source_l00022}00022\ \ \ \ \ [Inject]}
+\DoxyCodeLine{\Hypertarget{_dialog_display_8razor_8cs_source_l00023}00023\ \ \ \ \ \textcolor{keyword}{private}\ IStateSelection<DialogState,\ bool>\ DialogStateIsActiveSelection\ \{\ \textcolor{keyword}{get};\ \textcolor{keyword}{set};\ \}\ =\ \textcolor{keyword}{null}!;}
+\DoxyCodeLine{\Hypertarget{_dialog_display_8razor_8cs_source_l00024}00024\ \ \ \ \ [Inject]}
+\DoxyCodeLine{\Hypertarget{_dialog_display_8razor_8cs_source_l00025}00025\ \ \ \ \ \textcolor{keyword}{private}\ IDispatcher\ Dispatcher\ \{\ \textcolor{keyword}{get};\ \textcolor{keyword}{set};\ \}\ =\ \textcolor{keyword}{null}!;}
+\DoxyCodeLine{\Hypertarget{_dialog_display_8razor_8cs_source_l00026}00026\ \ \ \ \ [Inject]}
+\DoxyCodeLine{\Hypertarget{_dialog_display_8razor_8cs_source_l00027}00027\ \ \ \ \ \textcolor{keyword}{private}\ \mbox{\hyperlink{namespace_luthetus_1_1_common_1_1_razor_lib_1_1_installations_1_1_models_a9c0f5abeb1edd8801378900423cf1f40}{LuthetusCommonConfig}}\ CommonConfig\ \{\ \textcolor{keyword}{get};\ \textcolor{keyword}{set};\ \}\ =\ \textcolor{keyword}{null}!;}
+\DoxyCodeLine{\Hypertarget{_dialog_display_8razor_8cs_source_l00028}00028\ \ \ \ \ [Inject]}
+\DoxyCodeLine{\Hypertarget{_dialog_display_8razor_8cs_source_l00029}00029\ \ \ \ \ \textcolor{keyword}{private}\ IJSRuntime\ JsRuntime\ \{\ \textcolor{keyword}{get};\ \textcolor{keyword}{set};\ \}\ =\ \textcolor{keyword}{null}!;}
+\DoxyCodeLine{\Hypertarget{_dialog_display_8razor_8cs_source_l00030}00030\ }
+\DoxyCodeLine{\Hypertarget{_dialog_display_8razor_8cs_source_l00031}00031\ \ \ \ \ [Parameter,\ EditorRequired]}
+\DoxyCodeLine{\Hypertarget{_dialog_display_8razor_8cs_source_l00032}\mbox{\hyperlink{class_luthetus_1_1_common_1_1_razor_lib_1_1_dialogs_1_1_displays_1_1_dialog_display_a5313a6e2c129a7f2c59e1357146e1c28}{00032}}\ \ \ \ \ \textcolor{keyword}{public}\ \mbox{\hyperlink{interface_luthetus_1_1_common_1_1_razor_lib_1_1_dynamics_1_1_models_1_1_i_dialog}{IDialog}}\ \mbox{\hyperlink{class_luthetus_1_1_common_1_1_razor_lib_1_1_dialogs_1_1_displays_1_1_dialog_display_a5313a6e2c129a7f2c59e1357146e1c28}{Dialog}}\ \{\ \textcolor{keyword}{get};\ \textcolor{keyword}{set};\ \}\ =\ \textcolor{keyword}{null}!;}
+\DoxyCodeLine{\Hypertarget{_dialog_display_8razor_8cs_source_l00033}00033\ \ \ \ \ [Parameter,\ EditorRequired]}
+\DoxyCodeLine{\Hypertarget{_dialog_display_8razor_8cs_source_l00034}\mbox{\hyperlink{class_luthetus_1_1_common_1_1_razor_lib_1_1_dialogs_1_1_displays_1_1_dialog_display_aa8c540f47c6dd612a0c5de88f8b9d4ef}{00034}}\ \ \ \ \ \textcolor{keyword}{public}\ Func<IDialog,\ Task>\ \mbox{\hyperlink{class_luthetus_1_1_common_1_1_razor_lib_1_1_dialogs_1_1_displays_1_1_dialog_display_aa8c540f47c6dd612a0c5de88f8b9d4ef}{OnFocusInFunc}}\ \{\ \textcolor{keyword}{get};\ \textcolor{keyword}{set};\ \}\ =\ \textcolor{keyword}{null}!;}
+\DoxyCodeLine{\Hypertarget{_dialog_display_8razor_8cs_source_l00035}00035\ \ \ \ \ [Parameter,\ EditorRequired]}
+\DoxyCodeLine{\Hypertarget{_dialog_display_8razor_8cs_source_l00036}\mbox{\hyperlink{class_luthetus_1_1_common_1_1_razor_lib_1_1_dialogs_1_1_displays_1_1_dialog_display_ae3d16be06ec1b34481ce526d177f33b1}{00036}}\ \ \ \ \ \textcolor{keyword}{public}\ Func<IDialog,\ Task>\ \mbox{\hyperlink{class_luthetus_1_1_common_1_1_razor_lib_1_1_dialogs_1_1_displays_1_1_dialog_display_ae3d16be06ec1b34481ce526d177f33b1}{OnFocusOutFunc}}\ \{\ \textcolor{keyword}{get};\ \textcolor{keyword}{set};\ \}\ =\ \textcolor{keyword}{null}!;}
+\DoxyCodeLine{\Hypertarget{_dialog_display_8razor_8cs_source_l00037}00037\ }
+\DoxyCodeLine{\Hypertarget{_dialog_display_8razor_8cs_source_l00038}00038\ \ \ \ \ \textcolor{keyword}{private}\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ COUNT\_OF\_CONTROL\_BUTTONS\ =\ 2;}
+\DoxyCodeLine{\Hypertarget{_dialog_display_8razor_8cs_source_l00039}00039\ }
+\DoxyCodeLine{\Hypertarget{_dialog_display_8razor_8cs_source_l00040}00040\ \ \ \ \ \textcolor{keyword}{private}\ \mbox{\hyperlink{class_luthetus_1_1_common_1_1_razor_lib_1_1_resizes_1_1_displays_1_1_resizable_display}{ResizableDisplay}}?\ \_resizableDisplay;}
+\DoxyCodeLine{\Hypertarget{_dialog_display_8razor_8cs_source_l00041}00041\ }
+\DoxyCodeLine{\Hypertarget{_dialog_display_8razor_8cs_source_l00042}00042\ \ \ \ \ \textcolor{keyword}{private}\ \textcolor{keywordtype}{string}\ ElementDimensionsStyleCssString\ =>\ Dialog.\mbox{\hyperlink{interface_luthetus_1_1_common_1_1_razor_lib_1_1_dynamics_1_1_models_1_1_i_dialog_a4e90627d116ff25e512acb350d83e6b0}{DialogElementDimensions}}.\mbox{\hyperlink{class_luthetus_1_1_common_1_1_razor_lib_1_1_dimensions_1_1_models_1_1_element_dimensions_ad0344fdaf1caa4143d3ab80c813fcdee}{StyleString}};}
+\DoxyCodeLine{\Hypertarget{_dialog_display_8razor_8cs_source_l00043}00043\ }
+\DoxyCodeLine{\Hypertarget{_dialog_display_8razor_8cs_source_l00044}00044\ \ \ \ \ \textcolor{keyword}{private}\ \textcolor{keywordtype}{string}\ IsMaximizedStyleCssString\ =>\ Dialog.DialogIsMaximized}
+\DoxyCodeLine{\Hypertarget{_dialog_display_8razor_8cs_source_l00045}00045\ \ \ \ \ \ \ \ \ ?\ CommonConfig.DialogServiceOptions.IsMaximizedStyleCssString}
+\DoxyCodeLine{\Hypertarget{_dialog_display_8razor_8cs_source_l00046}00046\ \ \ \ \ \ \ \ \ :\ \textcolor{keywordtype}{string}.Empty;}
+\DoxyCodeLine{\Hypertarget{_dialog_display_8razor_8cs_source_l00047}00047\ }
+\DoxyCodeLine{\Hypertarget{_dialog_display_8razor_8cs_source_l00048}00048\ \ \ \ \ \textcolor{keyword}{private}\ \textcolor{keywordtype}{string}\ IconSizeInPixelsCssValue\ =>}
+\DoxyCodeLine{\Hypertarget{_dialog_display_8razor_8cs_source_l00049}00049\ \ \ \ \ \ \ \ \ \$\textcolor{stringliteral}{"{}\{AppOptionsStateWrap.Value.Options.IconSizeInPixels.ToCssValue()\}"{}};}
+\DoxyCodeLine{\Hypertarget{_dialog_display_8razor_8cs_source_l00050}00050\ }
+\DoxyCodeLine{\Hypertarget{_dialog_display_8razor_8cs_source_l00051}00051\ \ \ \ \ \textcolor{keyword}{private}\ \textcolor{keywordtype}{string}\ DialogTitleCssStyleString\ =>}
+\DoxyCodeLine{\Hypertarget{_dialog_display_8razor_8cs_source_l00052}00052\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}width:\ calc(100\%\ -\/"{}}\ +}
+\DoxyCodeLine{\Hypertarget{_dialog_display_8razor_8cs_source_l00053}00053\ \ \ \ \ \ \ \ \ \$\textcolor{stringliteral}{"{}\ (\{COUNT\_OF\_CONTROL\_BUTTONS\}\ *\ (\{IconSizeInPixelsCssValue\}px))\ -\/"{}}\ +}
+\DoxyCodeLine{\Hypertarget{_dialog_display_8razor_8cs_source_l00054}00054\ \ \ \ \ \ \ \ \ \$\textcolor{stringliteral}{"{}\ (\{COUNT\_OF\_CONTROL\_BUTTONS\}\ *\ (\{HtmlFacts.Button.ButtonPaddingHorizontalTotalInPixelsCssValue\})));"{}};}
+\DoxyCodeLine{\Hypertarget{_dialog_display_8razor_8cs_source_l00055}00055\ }
+\DoxyCodeLine{\Hypertarget{_dialog_display_8razor_8cs_source_l00056}\mbox{\hyperlink{class_luthetus_1_1_common_1_1_razor_lib_1_1_dialogs_1_1_displays_1_1_dialog_display_a8ae080a78bedd3e00fe0fd3f11d501d5}{00056}}\ \ \ \ \ \textcolor{keyword}{protected}\ \textcolor{keyword}{override}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_luthetus_1_1_common_1_1_razor_lib_1_1_dialogs_1_1_displays_1_1_dialog_display_a8ae080a78bedd3e00fe0fd3f11d501d5}{OnInitialized}}()}
+\DoxyCodeLine{\Hypertarget{_dialog_display_8razor_8cs_source_l00057}00057\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_dialog_display_8razor_8cs_source_l00058}00058\ \ \ \ \ \ \ \ \ AppOptionsStateWrap.StateChanged\ +=\ AppOptionsStateWrapOnStateChanged;}
+\DoxyCodeLine{\Hypertarget{_dialog_display_8razor_8cs_source_l00059}00059\ \ \ \ \ \ \ \ \ DialogStateIsActiveSelection.SelectedValueChanged\ +=\ DialogStateIsActiveSelection\_SelectedValueChanged;}
+\DoxyCodeLine{\Hypertarget{_dialog_display_8razor_8cs_source_l00060}00060\ }
+\DoxyCodeLine{\Hypertarget{_dialog_display_8razor_8cs_source_l00061}00061\ \ \ \ \ \ \ \ \ DialogStateIsActiveSelection.Select(dialogState\ =>\ dialogState.ActiveDialogKey\ ==\ \mbox{\hyperlink{class_luthetus_1_1_common_1_1_razor_lib_1_1_dialogs_1_1_displays_1_1_dialog_display_a5313a6e2c129a7f2c59e1357146e1c28}{Dialog}}.DynamicViewModelKey);}
+\DoxyCodeLine{\Hypertarget{_dialog_display_8razor_8cs_source_l00062}00062\ }
+\DoxyCodeLine{\Hypertarget{_dialog_display_8razor_8cs_source_l00063}00063\ \ \ \ \ \ \ \ \ base.OnInitialized();}
+\DoxyCodeLine{\Hypertarget{_dialog_display_8razor_8cs_source_l00064}00064\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_dialog_display_8razor_8cs_source_l00065}00065\ }
+\DoxyCodeLine{\Hypertarget{_dialog_display_8razor_8cs_source_l00066}\mbox{\hyperlink{class_luthetus_1_1_common_1_1_razor_lib_1_1_dialogs_1_1_displays_1_1_dialog_display_a42dafd26bbe9559ebcdab3e6740e32af}{00066}}\ \ \ \ \ \textcolor{keyword}{protected}\ \textcolor{keyword}{override}\ async\ Task\ \mbox{\hyperlink{class_luthetus_1_1_common_1_1_razor_lib_1_1_dialogs_1_1_displays_1_1_dialog_display_a42dafd26bbe9559ebcdab3e6740e32af}{OnAfterRenderAsync}}(\textcolor{keywordtype}{bool}\ firstRender)}
+\DoxyCodeLine{\Hypertarget{_dialog_display_8razor_8cs_source_l00067}00067\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_dialog_display_8razor_8cs_source_l00068}00068\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (firstRender)}
+\DoxyCodeLine{\Hypertarget{_dialog_display_8razor_8cs_source_l00069}00069\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_dialog_display_8razor_8cs_source_l00070}00070\ \ \ \ \ \ \ \ \ \ \ \ \ await\ JsRuntime.GetLuthetusCommonApi()}
+\DoxyCodeLine{\Hypertarget{_dialog_display_8razor_8cs_source_l00071}00071\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ .FocusHtmlElementById(\mbox{\hyperlink{class_luthetus_1_1_common_1_1_razor_lib_1_1_dialogs_1_1_displays_1_1_dialog_display_a5313a6e2c129a7f2c59e1357146e1c28}{Dialog}}.DialogFocusPointHtmlElementId)}
+\DoxyCodeLine{\Hypertarget{_dialog_display_8razor_8cs_source_l00072}00072\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ .ConfigureAwait(\textcolor{keyword}{false});}
+\DoxyCodeLine{\Hypertarget{_dialog_display_8razor_8cs_source_l00073}00073\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_dialog_display_8razor_8cs_source_l00074}00074\ }
+\DoxyCodeLine{\Hypertarget{_dialog_display_8razor_8cs_source_l00075}00075\ \ \ \ \ \ \ \ \ await\ base.OnAfterRenderAsync(firstRender);}
+\DoxyCodeLine{\Hypertarget{_dialog_display_8razor_8cs_source_l00076}00076\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_dialog_display_8razor_8cs_source_l00077}00077\ }
+\DoxyCodeLine{\Hypertarget{_dialog_display_8razor_8cs_source_l00078}00078\ \ \ \ \ \textcolor{keyword}{private}\ async\ \textcolor{keywordtype}{void}\ DialogStateIsActiveSelection\_SelectedValueChanged(\textcolor{keywordtype}{object}?\ sender,\ \textcolor{keywordtype}{bool}\ e)}
+\DoxyCodeLine{\Hypertarget{_dialog_display_8razor_8cs_source_l00079}00079\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_dialog_display_8razor_8cs_source_l00080}00080\ \ \ \ \ \ \ \ \ await\ InvokeAsync(StateHasChanged);}
+\DoxyCodeLine{\Hypertarget{_dialog_display_8razor_8cs_source_l00081}00081\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_dialog_display_8razor_8cs_source_l00082}00082\ }
+\DoxyCodeLine{\Hypertarget{_dialog_display_8razor_8cs_source_l00083}00083\ \ \ \ \ \textcolor{keyword}{private}\ async\ \textcolor{keywordtype}{void}\ AppOptionsStateWrapOnStateChanged(\textcolor{keywordtype}{object}?\ sender,\ EventArgs\ e)}
+\DoxyCodeLine{\Hypertarget{_dialog_display_8razor_8cs_source_l00084}00084\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_dialog_display_8razor_8cs_source_l00085}00085\ \ \ \ \ \ \ \ \ await\ InvokeAsync(StateHasChanged);}
+\DoxyCodeLine{\Hypertarget{_dialog_display_8razor_8cs_source_l00086}00086\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_dialog_display_8razor_8cs_source_l00087}00087\ }
+\DoxyCodeLine{\Hypertarget{_dialog_display_8razor_8cs_source_l00088}00088\ \ \ \ \ \textcolor{keyword}{private}\ Task\ ReRenderAsync()}
+\DoxyCodeLine{\Hypertarget{_dialog_display_8razor_8cs_source_l00089}00089\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_dialog_display_8razor_8cs_source_l00090}00090\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ InvokeAsync(StateHasChanged);}
+\DoxyCodeLine{\Hypertarget{_dialog_display_8razor_8cs_source_l00091}00091\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_dialog_display_8razor_8cs_source_l00092}00092\ }
+\DoxyCodeLine{\Hypertarget{_dialog_display_8razor_8cs_source_l00093}00093\ \ \ \ \ \textcolor{keyword}{private}\ Task\ SubscribeMoveHandleAsync()}
+\DoxyCodeLine{\Hypertarget{_dialog_display_8razor_8cs_source_l00094}00094\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_dialog_display_8razor_8cs_source_l00095}00095\ \ \ \ \ \ \ \ \ \_resizableDisplay?.\mbox{\hyperlink{class_luthetus_1_1_common_1_1_razor_lib_1_1_resizes_1_1_displays_1_1_resizable_display_a547c2b4ab1e0f943c3e7039b892eda07}{SubscribeToDragEventWithMoveHandle}}();}
+\DoxyCodeLine{\Hypertarget{_dialog_display_8razor_8cs_source_l00096}00096\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ Task.CompletedTask;}
+\DoxyCodeLine{\Hypertarget{_dialog_display_8razor_8cs_source_l00097}00097\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_dialog_display_8razor_8cs_source_l00098}00098\ }
+\DoxyCodeLine{\Hypertarget{_dialog_display_8razor_8cs_source_l00099}00099\ \ \ \ \ \textcolor{keyword}{private}\ \textcolor{keywordtype}{void}\ ToggleIsMaximized()}
+\DoxyCodeLine{\Hypertarget{_dialog_display_8razor_8cs_source_l00100}00100\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_dialog_display_8razor_8cs_source_l00101}00101\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_luthetus_1_1_common_1_1_razor_lib_1_1_dialogs_1_1_models_1_1_dialog_service}{DialogService}}.\mbox{\hyperlink{class_luthetus_1_1_common_1_1_razor_lib_1_1_dialogs_1_1_models_1_1_dialog_service_a0d561b1461b14b60eededf67435019f9}{SetDialogRecordIsMaximized}}(}
+\DoxyCodeLine{\Hypertarget{_dialog_display_8razor_8cs_source_l00102}00102\ \ \ \ \ \ \ \ \ \ \ \ \ Dialog.\mbox{\hyperlink{interface_luthetus_1_1_common_1_1_razor_lib_1_1_dynamics_1_1_models_1_1_i_dynamic_view_model_acbfc7146822a1fab72022a8653a8754b}{DynamicViewModelKey}},}
+\DoxyCodeLine{\Hypertarget{_dialog_display_8razor_8cs_source_l00103}00103\ \ \ \ \ \ \ \ \ \ \ \ \ !Dialog.\mbox{\hyperlink{interface_luthetus_1_1_common_1_1_razor_lib_1_1_dynamics_1_1_models_1_1_i_dialog_aa3a83d75907940e8f993fe6652f5af6f}{DialogIsMaximized}});}
+\DoxyCodeLine{\Hypertarget{_dialog_display_8razor_8cs_source_l00104}00104\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_dialog_display_8razor_8cs_source_l00105}00105\ }
+\DoxyCodeLine{\Hypertarget{_dialog_display_8razor_8cs_source_l00106}00106\ \ \ \ \ \textcolor{keyword}{private}\ async\ Task\ DispatchDisposeDialogRecordAction()}
+\DoxyCodeLine{\Hypertarget{_dialog_display_8razor_8cs_source_l00107}00107\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_dialog_display_8razor_8cs_source_l00108}00108\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_luthetus_1_1_common_1_1_razor_lib_1_1_dialogs_1_1_models_1_1_dialog_service}{DialogService}}.\mbox{\hyperlink{class_luthetus_1_1_common_1_1_razor_lib_1_1_dialogs_1_1_models_1_1_dialog_service_a6ad30a53ede20be67e95b168a6323e15}{DisposeDialogRecord}}(Dialog.\mbox{\hyperlink{interface_luthetus_1_1_common_1_1_razor_lib_1_1_dynamics_1_1_models_1_1_i_dynamic_view_model_acbfc7146822a1fab72022a8653a8754b}{DynamicViewModelKey}});}
+\DoxyCodeLine{\Hypertarget{_dialog_display_8razor_8cs_source_l00109}00109\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_dialog_display_8razor_8cs_source_l00110}00110\ \ \ \ \ \ \ \ \ await\ JsRuntime.GetLuthetusCommonApi()}
+\DoxyCodeLine{\Hypertarget{_dialog_display_8razor_8cs_source_l00111}00111\ \ \ \ \ \ \ \ \ \ \ \ \ .FocusHtmlElementById(Dialog.\mbox{\hyperlink{interface_luthetus_1_1_common_1_1_razor_lib_1_1_dynamics_1_1_models_1_1_i_dynamic_view_model_ac248f143de7dd80ec8dfbef7a597d699}{SetFocusOnCloseElementId}}}
+\DoxyCodeLine{\Hypertarget{_dialog_display_8razor_8cs_source_l00112}00112\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ??\ \mbox{\hyperlink{interface_luthetus_1_1_common_1_1_razor_lib_1_1_dynamics_1_1_models_1_1_i_dynamic_view_model}{IDynamicViewModel}}.\mbox{\hyperlink{interface_luthetus_1_1_common_1_1_razor_lib_1_1_dynamics_1_1_models_1_1_i_dynamic_view_model_a1252fdea0dff6ffc0ad07af1c9031723}{DefaultSetFocusOnCloseElementId}})}
+\DoxyCodeLine{\Hypertarget{_dialog_display_8razor_8cs_source_l00113}00113\ \ \ \ \ \ \ \ \ \ \ \ \ .ConfigureAwait(\textcolor{keyword}{false});}
+\DoxyCodeLine{\Hypertarget{_dialog_display_8razor_8cs_source_l00114}00114\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_dialog_display_8razor_8cs_source_l00115}00115\ }
+\DoxyCodeLine{\Hypertarget{_dialog_display_8razor_8cs_source_l00116}00116\ \ \ \ \ \textcolor{keyword}{private}\ \textcolor{keywordtype}{string}\ GetCssClassForDialogStateIsActiveSelection(\textcolor{keywordtype}{bool}\ isActive)}
+\DoxyCodeLine{\Hypertarget{_dialog_display_8razor_8cs_source_l00117}00117\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_dialog_display_8razor_8cs_source_l00118}00118\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ isActive}
+\DoxyCodeLine{\Hypertarget{_dialog_display_8razor_8cs_source_l00119}00119\ \ \ \ \ \ \ \ \ \ \ \ \ ?\ \textcolor{stringliteral}{"{}luth\_active"{}}}
+\DoxyCodeLine{\Hypertarget{_dialog_display_8razor_8cs_source_l00120}00120\ \ \ \ \ \ \ \ \ \ \ \ \ :\ \textcolor{keywordtype}{string}.Empty;}
+\DoxyCodeLine{\Hypertarget{_dialog_display_8razor_8cs_source_l00121}00121\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_dialog_display_8razor_8cs_source_l00122}00122\ }
+\DoxyCodeLine{\Hypertarget{_dialog_display_8razor_8cs_source_l00123}00123\ \ \ \ \ \textcolor{keyword}{private}\ Task\ HandleOnFocusIn()}
+\DoxyCodeLine{\Hypertarget{_dialog_display_8razor_8cs_source_l00124}00124\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_dialog_display_8razor_8cs_source_l00125}00125\ \ \ \ \ \ \ \ \ Dispatcher.Dispatch(\textcolor{keyword}{new}\ \mbox{\hyperlink{namespace_luthetus_1_1_common_1_1_razor_lib_1_1_dialogs_1_1_states_a1c299b7ac4927ba6c5bede4e57cd963f}{DialogState}}.SetActiveDialogKeyAction(Dialog.\mbox{\hyperlink{interface_luthetus_1_1_common_1_1_razor_lib_1_1_dynamics_1_1_models_1_1_i_dynamic_view_model_acbfc7146822a1fab72022a8653a8754b}{DynamicViewModelKey}}));}
+\DoxyCodeLine{\Hypertarget{_dialog_display_8razor_8cs_source_l00126}00126\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ OnFocusInFunc.Invoke(Dialog);}
+\DoxyCodeLine{\Hypertarget{_dialog_display_8razor_8cs_source_l00127}00127\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_dialog_display_8razor_8cs_source_l00128}00128\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_dialog_display_8razor_8cs_source_l00129}00129\ \ \ \ \ \textcolor{keyword}{private}\ Task\ HandleOnFocusOut()}
+\DoxyCodeLine{\Hypertarget{_dialog_display_8razor_8cs_source_l00130}00130\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_dialog_display_8razor_8cs_source_l00131}00131\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ OnFocusOutFunc.Invoke(Dialog);}
+\DoxyCodeLine{\Hypertarget{_dialog_display_8razor_8cs_source_l00132}00132\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_dialog_display_8razor_8cs_source_l00133}00133\ }
+\DoxyCodeLine{\Hypertarget{_dialog_display_8razor_8cs_source_l00134}00134\ \ \ \ \ \textcolor{keyword}{private}\ \textcolor{keywordtype}{void}\ HandleOnMouseDown()}
+\DoxyCodeLine{\Hypertarget{_dialog_display_8razor_8cs_source_l00135}00135\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_dialog_display_8razor_8cs_source_l00136}00136\ \ \ \ \ \ \ \ \ Dispatcher.Dispatch(\textcolor{keyword}{new}\ \mbox{\hyperlink{namespace_luthetus_1_1_common_1_1_razor_lib_1_1_dialogs_1_1_states_a1c299b7ac4927ba6c5bede4e57cd963f}{DialogState}}.SetActiveDialogKeyAction(Dialog.\mbox{\hyperlink{interface_luthetus_1_1_common_1_1_razor_lib_1_1_dynamics_1_1_models_1_1_i_dynamic_view_model_acbfc7146822a1fab72022a8653a8754b}{DynamicViewModelKey}}));}
+\DoxyCodeLine{\Hypertarget{_dialog_display_8razor_8cs_source_l00137}00137\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_dialog_display_8razor_8cs_source_l00138}00138\ }
+\DoxyCodeLine{\Hypertarget{_dialog_display_8razor_8cs_source_l00139}\mbox{\hyperlink{class_luthetus_1_1_common_1_1_razor_lib_1_1_dialogs_1_1_displays_1_1_dialog_display_a7e5c88034f5975c85bee1987db4f1bc7}{00139}}\ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_luthetus_1_1_common_1_1_razor_lib_1_1_dialogs_1_1_displays_1_1_dialog_display_a7e5c88034f5975c85bee1987db4f1bc7}{Dispose}}()}
+\DoxyCodeLine{\Hypertarget{_dialog_display_8razor_8cs_source_l00140}00140\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_dialog_display_8razor_8cs_source_l00141}00141\ \ \ \ \ \ \ \ \ AppOptionsStateWrap.StateChanged\ -\/=\ AppOptionsStateWrapOnStateChanged;}
+\DoxyCodeLine{\Hypertarget{_dialog_display_8razor_8cs_source_l00142}00142\ \ \ \ \ \ \ \ \ DialogStateIsActiveSelection.SelectedValueChanged\ +=\ DialogStateIsActiveSelection\_SelectedValueChanged;}
+\DoxyCodeLine{\Hypertarget{_dialog_display_8razor_8cs_source_l00143}00143\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_dialog_display_8razor_8cs_source_l00144}00144\ \}}
+
+\end{DoxyCode}

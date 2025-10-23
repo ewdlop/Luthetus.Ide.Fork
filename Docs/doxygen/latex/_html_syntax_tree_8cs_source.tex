@@ -1,0 +1,607 @@
+\doxysection{Html\+Syntax\+Tree.\+cs}
+\hypertarget{_html_syntax_tree_8cs_source}{}\label{_html_syntax_tree_8cs_source}\index{Source/Lib/CompilerServices/Xml/Html/SyntaxActors/HtmlSyntaxTree.cs@{Source/Lib/CompilerServices/Xml/Html/SyntaxActors/HtmlSyntaxTree.cs}}
+\mbox{\hyperlink{_html_syntax_tree_8cs}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00001}00001\ \textcolor{keyword}{using\ }System.Collections.Immutable;}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00002}00002\ \textcolor{keyword}{using\ }System.Text;}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00003}00003\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_lexers_1_1_models}{Luthetus.TextEditor.RazorLib.Lexers.Models}};}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00004}00004\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services}{Luthetus.TextEditor.RazorLib.CompilerServices}};}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00005}00005\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_generic_lexer_1_1_decoration}{Luthetus.TextEditor.RazorLib.CompilerServices.GenericLexer.Decoration}};}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00006}00006\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_utility}{Luthetus.TextEditor.RazorLib.CompilerServices.Utility}};}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00007}00007\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_facts}{Luthetus.TextEditor.RazorLib.CompilerServices.Facts}};}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00008}00008\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_luthetus_1_1_compiler_services_1_1_xml_1_1_html_1_1_syntax_objects}{Luthetus.CompilerServices.Xml.Html.SyntaxObjects}};}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00009}00009\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_luthetus_1_1_compiler_services_1_1_xml_1_1_html_1_1_injected_language}{Luthetus.CompilerServices.Xml.Html.InjectedLanguage}};}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00010}00010\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_luthetus_1_1_compiler_services_1_1_xml_1_1_html_1_1_extension_methods}{Luthetus.CompilerServices.Xml.Html.ExtensionMethods}};}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00011}00011\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_luthetus_1_1_compiler_services_1_1_xml_1_1_html_1_1_decoration}{Luthetus.CompilerServices.Xml.Html.Decoration}};}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00012}00012\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_luthetus_1_1_compiler_services_1_1_xml_1_1_html_1_1_syntax_enums}{Luthetus.CompilerServices.Xml.Html.SyntaxEnums}};}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00013}00013\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_luthetus_1_1_compiler_services_1_1_xml_1_1_html_1_1_facts}{Luthetus.CompilerServices.Xml.Html.Facts}};}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00014}00014\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_luthetus_1_1_compiler_services_1_1_xml_1_1_html_1_1_syntax_objects_1_1_builders}{Luthetus.CompilerServices.Xml.Html.SyntaxObjects.Builders}};}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00015}00015\ }
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00016}\mbox{\hyperlink{namespace_luthetus_1_1_compiler_services_1_1_xml_1_1_html_1_1_syntax_actors}{00016}}\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespace_luthetus_1_1_compiler_services_1_1_xml_1_1_html_1_1_syntax_actors}{Luthetus.CompilerServices.Xml.Html.SyntaxActors}};}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00017}00017\ }
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00018}00018\ \textcolor{keyword}{public}\ \textcolor{keyword}{static}\ \textcolor{keyword}{class\ }HtmlSyntaxTree}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00019}00019\ \{}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00020}00020\ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keyword}{static}\ \mbox{\hyperlink{class_luthetus_1_1_compiler_services_1_1_xml_1_1_html_1_1_html_syntax_unit}{HtmlSyntaxUnit}}\ ParseText(}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00021}00021\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_lexers_1_1_models_a26a1b63ad28ec7955b30bc6c91571eca}{ResourceUri}}\ resourceUri,}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00022}00022\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{string}\ content,}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00023}00023\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_luthetus_1_1_compiler_services_1_1_xml_1_1_html_1_1_injected_language_1_1_injected_language_definition}{InjectedLanguageDefinition}}?\ injectedLanguageDefinition\ =\ \textcolor{keyword}{null})}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00024}00024\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00025}00025\ \ \ \ \ \ \ \ \ var\ stringWalker\ =\ \textcolor{keyword}{new}\ \mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_utility_1_1_string_walker}{StringWalker}}(resourceUri,\ content);}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00026}00026\ }
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00027}00027\ \ \ \ \ \ \ \ \ var\ rootTagSyntaxBuilder\ =\ \textcolor{keyword}{new}\ \mbox{\hyperlink{class_luthetus_1_1_compiler_services_1_1_xml_1_1_html_1_1_syntax_objects_1_1_builders_1_1_tag_node_builder}{TagNodeBuilder}}}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00028}00028\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00029}00029\ \ \ \ \ \ \ \ \ \ \ \ \ OpenTagNameSyntax\ =\ \textcolor{keyword}{new}\ \mbox{\hyperlink{namespace_luthetus_1_1_compiler_services_1_1_xml_1_1_html_1_1_syntax_enums_a245136d3341f1287669602a1ed9d72c8af13054b55c49ecf18a0c6d8e5b2737b5}{TagNameNode}}(}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00030}00030\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{new}\ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_lexers_1_1_models_a1ffd1a7706dfd364560b76d47467812f}{TextEditorTextSpan}}(}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00031}00031\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 0,}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00032}00032\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 8,}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00033}00033\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (\textcolor{keywordtype}{byte})\mbox{\hyperlink{namespace_luthetus_1_1_compiler_services_1_1_xml_1_1_html_1_1_decoration_ad2dd5c2a377c0b0dc74dbd441c7a2b25}{HtmlDecorationKind}}.None,}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00034}00034\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_lexers_1_1_models_a26a1b63ad28ec7955b30bc6c91571eca}{ResourceUri}}.Empty,}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00035}00035\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}document"{}})),}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00036}00036\ \ \ \ \ \ \ \ \ \};}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00037}00037\ }
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00038}00038\ \ \ \ \ \ \ \ \ var\ textEditorHtmlDiagnosticBag\ =\ \textcolor{keyword}{new}\ \mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_diagnostic_bag}{DiagnosticBag}}();}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00039}00039\ }
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00040}00040\ \ \ \ \ \ \ \ \ rootTagSyntaxBuilder.Children\ =\ HtmlSyntaxTreeStateMachine}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00041}00041\ \ \ \ \ \ \ \ \ \ \ \ \ .ParseTagChildContent(}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00042}00042\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ stringWalker,}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00043}00043\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ textEditorHtmlDiagnosticBag,}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00044}00044\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ injectedLanguageDefinition);}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00045}00045\ }
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00046}00046\ \ \ \ \ \ \ \ \ var\ htmlSyntaxUnitBuilder\ =\ \textcolor{keyword}{new}\ \mbox{\hyperlink{class_luthetus_1_1_compiler_services_1_1_xml_1_1_html_1_1_html_syntax_unit}{HtmlSyntaxUnit}}.\mbox{\hyperlink{class_luthetus_1_1_compiler_services_1_1_xml_1_1_html_1_1_html_syntax_unit_1_1_html_syntax_unit_builder}{HtmlSyntaxUnitBuilder}}(}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00047}00047\ \ \ \ \ \ \ \ \ \ \ \ \ rootTagSyntaxBuilder.Build(),}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00048}00048\ \ \ \ \ \ \ \ \ \ \ \ \ textEditorHtmlDiagnosticBag);}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00049}00049\ }
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00050}00050\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ htmlSyntaxUnitBuilder.\mbox{\hyperlink{class_luthetus_1_1_compiler_services_1_1_xml_1_1_html_1_1_html_syntax_unit_1_1_html_syntax_unit_builder_a96481cd9879d5258decff9ce247c193d}{Build}}();}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00051}00051\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00052}00052\ }
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00053}00053\ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keyword}{static}\ \textcolor{keyword}{class\ }HtmlSyntaxTreeStateMachine}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00054}00054\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00056}00056\ \ \ \ \ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keyword}{static}\ \mbox{\hyperlink{interface_luthetus_1_1_compiler_services_1_1_xml_1_1_html_1_1_i_html_syntax_node}{IHtmlSyntaxNode}}\ ParseTag(}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00057}00057\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_utility_1_1_string_walker}{StringWalker}}\ stringWalker,}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00058}00058\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_diagnostic_bag}{DiagnosticBag}}\ diagnosticBag,}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00059}00059\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_luthetus_1_1_compiler_services_1_1_xml_1_1_html_1_1_injected_language_1_1_injected_language_definition}{InjectedLanguageDefinition}}?\ injectedLanguageDefinition)}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00060}00060\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00061}00061\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (stringWalker.\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_utility_1_1_string_walker_a292d4713572d97ec249ccc383e1c2fb3}{PeekForSubstring}}(}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00062}00062\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ HtmlFacts.COMMENT\_TAG\_BEGINNING))}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00063}00063\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00064}00064\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ ParseComment(}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00065}00065\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ stringWalker,}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00066}00066\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ diagnosticBag,}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00067}00067\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ injectedLanguageDefinition);}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00068}00068\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00069}00069\ }
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00070}00070\ \ \ \ \ \ \ \ \ \ \ \ \ var\ startingPositionIndex\ =\ stringWalker.\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_utility_1_1_string_walker_a192423c8188b55e1e16376095b7dfc62}{PositionIndex}};}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00071}00071\ }
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00072}00072\ \ \ \ \ \ \ \ \ \ \ \ \ var\ tagBuilder\ =\ \textcolor{keyword}{new}\ \mbox{\hyperlink{class_luthetus_1_1_compiler_services_1_1_xml_1_1_html_1_1_syntax_objects_1_1_builders_1_1_tag_node_builder}{TagNodeBuilder}}();}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00073}00073\ }
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00074}00074\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ HtmlFacts.TAG\_OPENING\_CHARACTER}}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00075}00075\ \ \ \ \ \ \ \ \ \ \ \ \ \_\ =\ stringWalker.\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_utility_1_1_string_walker_a1533f73189c0e55efe7da8278c1d32df}{ReadCharacter}}();}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00076}00076\ }
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00077}00077\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Example:\ <!DOCTYPE\ html>}}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00078}00078\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (stringWalker.\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_utility_1_1_string_walker_a1afce034204ad3dba41bac744ceb01ab}{PeekCharacter}}(0)\ ==\ HtmlFacts.SPECIAL\_HTML\_TAG)}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00079}00079\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00080}00080\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ HtmlFacts.SPECIAL\_HTML\_TAG\_CHARACTER}}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00081}00081\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ stringWalker.\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_utility_1_1_string_walker_a1533f73189c0e55efe7da8278c1d32df}{ReadCharacter}}();}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00082}00082\ }
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00083}00083\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ tagBuilder.HasSpecialHtmlCharacter\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00084}00084\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00085}00085\ }
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00086}00086\ \ \ \ \ \ \ \ \ \ \ \ \ tagBuilder.OpenTagNameSyntax\ =\ ParseTagName(}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00087}00087\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ stringWalker,}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00088}00088\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ diagnosticBag,}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00089}00089\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ injectedLanguageDefinition);}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00090}00090\ }
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00091}00091\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Get\ all\ html\ attributes\ break\ when\ see\ End\ Of\ File\ or\ closing\ of\ the\ tag}}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00092}00092\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{while}\ (\textcolor{keyword}{true})}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00093}00093\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00094}00094\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Skip\ Whitespace}}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00095}00095\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{while}\ (!stringWalker.\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_utility_1_1_string_walker_a7c895ef73ed57523b1a78779cc0e2528}{IsEof}})}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00096}00096\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00097}00097\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (WhitespaceFacts.ALL\_LIST.Contains(stringWalker.\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_utility_1_1_string_walker_abbf32c2054872ff9d6dda8e6697c46ce}{CurrentCharacter}}))}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00098}00098\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \_\ =\ stringWalker.\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_utility_1_1_string_walker_a1533f73189c0e55efe7da8278c1d32df}{ReadCharacter}}();}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00099}00099\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00100}00100\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00101}00101\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00102}00102\ }
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00103}00103\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ End\ Of\ File\ is\ unexpected\ at\ this\ point\ so\ report\ a\ diagnostic.}}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00104}00104\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (stringWalker.\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_utility_1_1_string_walker_abbf32c2054872ff9d6dda8e6697c46ce}{CurrentCharacter}}\ ==\ ParserFacts.END\_OF\_FILE)}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00105}00105\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00106}00106\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ diagnosticBag.\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_diagnostic_bag_a356b5e28089638e9367941a0bd9873ce}{ReportEndOfFileUnexpected}}(}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00107}00107\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{new}\ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_lexers_1_1_models_a1ffd1a7706dfd364560b76d47467812f}{TextEditorTextSpan}}(}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00108}00108\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ startingPositionIndex,}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00109}00109\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ stringWalker.\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_utility_1_1_string_walker_a192423c8188b55e1e16376095b7dfc62}{PositionIndex}},}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00110}00110\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (\textcolor{keywordtype}{byte})\mbox{\hyperlink{namespace_luthetus_1_1_compiler_services_1_1_xml_1_1_html_1_1_decoration_ad2dd5c2a377c0b0dc74dbd441c7a2b25}{HtmlDecorationKind}}.Error,}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00111}00111\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ stringWalker.\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_utility_1_1_string_walker_abf00a8613dfc137bea3c366e277fbde4}{ResourceUri}},}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00112}00112\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ stringWalker.\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_utility_1_1_string_walker_a35f8247f3eea6c6937856215770af815}{SourceText}}));}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00113}00113\ }
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00114}00114\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ tagBuilder.Build();}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00115}00115\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00116}00116\ }
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00117}00117\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (stringWalker.\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_utility_1_1_string_walker_a292d4713572d97ec249ccc383e1c2fb3}{PeekForSubstring}}(HtmlFacts.OPEN\_TAG\_WITH\_CHILD\_CONTENT\_ENDING))}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00118}00118\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00119}00119\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Ending\ of\ opening\ tag}}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00120}00120\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ tagBuilder.HtmlSyntaxKind\ =\ \mbox{\hyperlink{namespace_luthetus_1_1_compiler_services_1_1_xml_1_1_html_1_1_syntax_enums_a245136d3341f1287669602a1ed9d72c8}{HtmlSyntaxKind}}.TagOpeningNode;}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00121}00121\ }
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00122}00122\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Skip\ the\ '>'\ character\ to\ set\ stringWalker\ at\ the\ first\ character\ of\ the\ child\ content}}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00123}00123\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \_\ =\ stringWalker.\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_utility_1_1_string_walker_a1533f73189c0e55efe7da8278c1d32df}{ReadCharacter}}();}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00124}00124\ }
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00125}00125\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ tagBuilder.Children\ =\ ParseTagChildContent(}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00126}00126\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ stringWalker,}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00127}00127\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ diagnosticBag,}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00128}00128\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ injectedLanguageDefinition);}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00129}00129\ }
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00130}00130\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ TODO:\ check\ that\ the\ closing\ tag\ name\ matches\ the\ opening\ tag}}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00131}00131\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00132}00132\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ (stringWalker.\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_utility_1_1_string_walker_a292d4713572d97ec249ccc383e1c2fb3}{PeekForSubstring}}(HtmlFacts.OPEN\_TAG\_SELF\_CLOSING\_ENDING))}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00133}00133\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00134}00134\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \_\ =\ stringWalker.\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_utility_1_1_string_walker_a1c60b2612ff22cdb9e04d858d2d454ff}{ReadRange}}(}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00135}00135\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ HtmlFacts.OPEN\_TAG\_SELF\_CLOSING\_ENDING}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00136}00136\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ .Length);}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00137}00137\ }
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00138}00138\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Ending\ of\ self-\/closing\ tag}}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00139}00139\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ tagBuilder.HtmlSyntaxKind\ =\ \mbox{\hyperlink{namespace_luthetus_1_1_compiler_services_1_1_xml_1_1_html_1_1_syntax_enums_a245136d3341f1287669602a1ed9d72c8}{HtmlSyntaxKind}}.TagSelfClosingNode;}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00140}00140\ }
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00141}00141\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ tagBuilder.Build();}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00142}00142\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00143}00143\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ (stringWalker.\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_utility_1_1_string_walker_a292d4713572d97ec249ccc383e1c2fb3}{PeekForSubstring}}(HtmlFacts.CLOSE\_TAG\_WITH\_CHILD\_CONTENT\_BEGINNING))}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00144}00144\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00145}00145\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ tagBuilder.HtmlSyntaxKind\ =\ \mbox{\hyperlink{namespace_luthetus_1_1_compiler_services_1_1_xml_1_1_html_1_1_syntax_enums_a245136d3341f1287669602a1ed9d72c8}{HtmlSyntaxKind}}.TagClosingNode;}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00146}00146\ }
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00147}00147\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \_\ =\ stringWalker.\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_utility_1_1_string_walker_a1c60b2612ff22cdb9e04d858d2d454ff}{ReadRange}}(}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00148}00148\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ HtmlFacts.CLOSE\_TAG\_WITH\_CHILD\_CONTENT\_BEGINNING}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00149}00149\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ .Length);}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00150}00150\ }
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00151}00151\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ var\ closeTagNameStartingPositionIndex\ =\ stringWalker.\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_utility_1_1_string_walker_a192423c8188b55e1e16376095b7dfc62}{PositionIndex}};}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00152}00152\ }
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00153}00153\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ var\ closeTagNameBuilder\ =\ \textcolor{keyword}{new}\ StringBuilder();}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00154}00154\ }
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00155}00155\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{while}\ (!stringWalker.\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_utility_1_1_string_walker_a7c895ef73ed57523b1a78779cc0e2528}{IsEof}})}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00156}00156\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00157}00157\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (stringWalker.\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_utility_1_1_string_walker_a292d4713572d97ec249ccc383e1c2fb3}{PeekForSubstring}}(HtmlFacts.CLOSE\_TAG\_WITH\_CHILD\_CONTENT\_ENDING))}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00158}00158\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00159}00159\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ tagBuilder.CloseTagNameSyntax\ =\ \textcolor{keyword}{new}\ \mbox{\hyperlink{namespace_luthetus_1_1_compiler_services_1_1_xml_1_1_html_1_1_syntax_enums_a245136d3341f1287669602a1ed9d72c8af13054b55c49ecf18a0c6d8e5b2737b5}{TagNameNode}}(}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00160}00160\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{new}(closeTagNameStartingPositionIndex,\ stringWalker,\ (\textcolor{keywordtype}{byte})\mbox{\hyperlink{namespace_luthetus_1_1_compiler_services_1_1_xml_1_1_html_1_1_decoration_ad2dd5c2a377c0b0dc74dbd441c7a2b25}{HtmlDecorationKind}}.TagName));}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00161}00161\ }
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00162}00162\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \_\ =\ stringWalker.\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_utility_1_1_string_walker_a1c60b2612ff22cdb9e04d858d2d454ff}{ReadRange}}(HtmlFacts.CLOSE\_TAG\_WITH\_CHILD\_CONTENT\_ENDING.Length);}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00163}00163\ }
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00164}00164\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00165}00165\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00166}00166\ }
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00167}00167\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ closeTagNameBuilder.Append(stringWalker.\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_utility_1_1_string_walker_abbf32c2054872ff9d6dda8e6697c46ce}{CurrentCharacter}});}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00168}00168\ }
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00169}00169\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \_\ =\ stringWalker.\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_utility_1_1_string_walker_a1533f73189c0e55efe7da8278c1d32df}{ReadCharacter}}();}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00170}00170\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00171}00171\ }
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00172}00172\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (tagBuilder.CloseTagNameSyntax\ is\ \textcolor{keyword}{null})}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00173}00173\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00174}00174\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ TODO:\ Not\ sure\ if\ this\ can\ happen\ but\ I\ am\ getting\ a\ warning\ about\ this\ and\ aim\ to\ get\ to\ this\ when\ I\ find\ time.}}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00175}00175\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{throw}\ \textcolor{keyword}{new}\ NotImplementedException();}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00176}00176\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00177}00177\ }
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00178}00178\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (tagBuilder.OpenTagNameSyntax.TextEditorTextSpan.GetText()\ !=\ tagBuilder.CloseTagNameSyntax.TextEditorTextSpan.GetText())}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00179}00179\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00180}00180\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ diagnosticBag.\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_diagnostic_bag_a3f7a2a347758889507608043eb407f9c}{ReportOpenTagWithUnMatchedCloseTag}}(}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00181}00181\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ tagBuilder.OpenTagNameSyntax.TextEditorTextSpan.GetText(),}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00182}00182\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ tagBuilder.CloseTagNameSyntax.TextEditorTextSpan.GetText(),}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00183}00183\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{new}\ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_lexers_1_1_models_a1ffd1a7706dfd364560b76d47467812f}{TextEditorTextSpan}}(}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00184}00184\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ closeTagNameStartingPositionIndex,}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00185}00185\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ stringWalker.\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_utility_1_1_string_walker_a192423c8188b55e1e16376095b7dfc62}{PositionIndex}},}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00186}00186\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (\textcolor{keywordtype}{byte})\mbox{\hyperlink{namespace_luthetus_1_1_compiler_services_1_1_xml_1_1_html_1_1_decoration_ad2dd5c2a377c0b0dc74dbd441c7a2b25}{HtmlDecorationKind}}.Error,}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00187}00187\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ stringWalker.\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_utility_1_1_string_walker_abf00a8613dfc137bea3c366e277fbde4}{ResourceUri}},}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00188}00188\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ stringWalker.\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_utility_1_1_string_walker_a35f8247f3eea6c6937856215770af815}{SourceText}}));}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00189}00189\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00190}00190\ }
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00191}00191\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ tagBuilder.Build();}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00192}00192\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00193}00193\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00194}00194\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00195}00195\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ var\ attributeSyntax\ =\ ParseAttribute(stringWalker,\ diagnosticBag,\ injectedLanguageDefinition);}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00196}00196\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ tagBuilder.AttributeSyntaxes.Add(attributeSyntax);}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00197}00197\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00198}00198\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00199}00199\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00200}00200\ }
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00202}00202\ \ \ \ \ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keyword}{static}\ \mbox{\hyperlink{class_luthetus_1_1_compiler_services_1_1_xml_1_1_html_1_1_syntax_objects_1_1_tag_name_node}{TagNameNode}}\ ParseTagName(}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00203}00203\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_utility_1_1_string_walker}{StringWalker}}\ stringWalker,}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00204}00204\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_diagnostic_bag}{DiagnosticBag}}\ diagnosticBag,}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00205}00205\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_luthetus_1_1_compiler_services_1_1_xml_1_1_html_1_1_injected_language_1_1_injected_language_definition}{InjectedLanguageDefinition}}?\ injectedLanguageDefinition)}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00206}00206\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00207}00207\ \ \ \ \ \ \ \ \ \ \ \ \ var\ startingPositionIndex\ =\ stringWalker.\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_utility_1_1_string_walker_a192423c8188b55e1e16376095b7dfc62}{PositionIndex}};}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00208}00208\ }
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00209}00209\ \ \ \ \ \ \ \ \ \ \ \ \ var\ tagNameBuilder\ =\ \textcolor{keyword}{new}\ StringBuilder();}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00210}00210\ }
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00211}00211\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{while}\ (!stringWalker.\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_utility_1_1_string_walker_a7c895ef73ed57523b1a78779cc0e2528}{IsEof}})}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00212}00212\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00213}00213\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (stringWalker.\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_utility_1_1_string_walker_a45c9d49f994e5415c930179fbcdfdd9a}{PeekForSubstringRange}}(HtmlFacts.TAG\_NAME\_STOP\_DELIMITERS,\ out\ var\ matchedOn))}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00214}00214\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00215}00215\ }
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00216}00216\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ tagNameBuilder.Append(stringWalker.\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_utility_1_1_string_walker_abbf32c2054872ff9d6dda8e6697c46ce}{CurrentCharacter}});}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00217}00217\ }
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00218}00218\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \_\ =\ stringWalker.\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_utility_1_1_string_walker_a1533f73189c0e55efe7da8278c1d32df}{ReadCharacter}}();}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00219}00219\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00220}00220\ }
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00221}00221\ \ \ \ \ \ \ \ \ \ \ \ \ var\ tagName\ =\ tagNameBuilder.ToString();}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00222}00222\ }
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00223}00223\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (tagNameBuilder.Length\ ==\ 0)}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00224}00224\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00225}00225\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (stringWalker.\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_utility_1_1_string_walker_abbf32c2054872ff9d6dda8e6697c46ce}{CurrentCharacter}}\ ==\ ParserFacts.END\_OF\_FILE)}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00226}00226\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00227}00227\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ diagnosticBag.\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_diagnostic_bag_a356b5e28089638e9367941a0bd9873ce}{ReportEndOfFileUnexpected}}(}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00228}00228\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{new}\ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_lexers_1_1_models_a1ffd1a7706dfd364560b76d47467812f}{TextEditorTextSpan}}(}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00229}00229\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ startingPositionIndex,}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00230}00230\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ stringWalker.\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_utility_1_1_string_walker_a192423c8188b55e1e16376095b7dfc62}{PositionIndex}},}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00231}00231\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (\textcolor{keywordtype}{byte})\mbox{\hyperlink{namespace_luthetus_1_1_compiler_services_1_1_xml_1_1_html_1_1_decoration_ad2dd5c2a377c0b0dc74dbd441c7a2b25}{HtmlDecorationKind}}.Error,}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00232}00232\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ stringWalker.\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_utility_1_1_string_walker_abf00a8613dfc137bea3c366e277fbde4}{ResourceUri}},}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00233}00233\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ stringWalker.\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_utility_1_1_string_walker_a35f8247f3eea6c6937856215770af815}{SourceText}}));}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00234}00234\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00235}00235\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00236}00236\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00237}00237\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Report\ a\ diagnostic\ for\ the\ missing\ 'tag\ name'}}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00238}00238\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ diagnosticBag.\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_diagnostic_bag_ac52af817a8462ab089c4e8fd1557bfc1}{ReportTagNameMissing}}(}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00239}00239\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{new}\ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_lexers_1_1_models_a1ffd1a7706dfd364560b76d47467812f}{TextEditorTextSpan}}(}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00240}00240\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ startingPositionIndex,}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00241}00241\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ stringWalker.\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_utility_1_1_string_walker_a192423c8188b55e1e16376095b7dfc62}{PositionIndex}},}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00242}00242\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (\textcolor{keywordtype}{byte})\mbox{\hyperlink{namespace_luthetus_1_1_compiler_services_1_1_xml_1_1_html_1_1_decoration_ad2dd5c2a377c0b0dc74dbd441c7a2b25}{HtmlDecorationKind}}.Error,}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00243}00243\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ stringWalker.\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_utility_1_1_string_walker_abf00a8613dfc137bea3c366e277fbde4}{ResourceUri}},}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00244}00244\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ stringWalker.\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_utility_1_1_string_walker_a35f8247f3eea6c6937856215770af815}{SourceText}}));}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00245}00245\ }
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00246}00246\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Fabricate\ a\ value\ for\ the\ string\ variable:\ 'tagName'\ so\ the\ rest\ of\ the\ file\ can\ still\ be\ parsed.}}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00247}00247\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ tagName\ =}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00248}00248\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \$\textcolor{stringliteral}{"{}\_\_\{nameof(diagnosticBag.ReportTagNameMissing)\}\_\_"{}};}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00249}00249\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00250}00250\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00251}00251\ }
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00252}00252\ \ \ \ \ \ \ \ \ \ \ \ \ var\ tagNameTextSpan\ =\ \textcolor{keyword}{new}\ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_lexers_1_1_models_a1ffd1a7706dfd364560b76d47467812f}{TextEditorTextSpan}}(}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00253}00253\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ startingPositionIndex,}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00254}00254\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ stringWalker.\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_utility_1_1_string_walker_a192423c8188b55e1e16376095b7dfc62}{PositionIndex}},}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00255}00255\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (\textcolor{keywordtype}{byte})\mbox{\hyperlink{namespace_luthetus_1_1_compiler_services_1_1_xml_1_1_html_1_1_decoration_ad2dd5c2a377c0b0dc74dbd441c7a2b25}{HtmlDecorationKind}}.TagName,}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00256}00256\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ stringWalker.\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_utility_1_1_string_walker_abf00a8613dfc137bea3c366e277fbde4}{ResourceUri}},}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00257}00257\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ stringWalker.\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_utility_1_1_string_walker_a35f8247f3eea6c6937856215770af815}{SourceText}});}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00258}00258\ }
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00259}00259\ \ \ \ \ \ \ \ \ \ \ \ \ injectedLanguageDefinition?.\mbox{\hyperlink{class_luthetus_1_1_compiler_services_1_1_xml_1_1_html_1_1_injected_language_1_1_injected_language_definition_a571ebf3624483cd2b9f5fe17aa152e32}{ParseTagName}}?.Invoke(}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00260}00260\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ stringWalker,}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00261}00261\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ diagnosticBag,}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00262}00262\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ injectedLanguageDefinition,}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00263}00263\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ tagNameTextSpan);}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00264}00264\ }
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00265}00265\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{new}\ \mbox{\hyperlink{namespace_luthetus_1_1_compiler_services_1_1_xml_1_1_html_1_1_syntax_enums_a245136d3341f1287669602a1ed9d72c8af13054b55c49ecf18a0c6d8e5b2737b5}{TagNameNode}}(tagNameTextSpan);}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00266}00266\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00267}00267\ }
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00268}00268\ \ \ \ \ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keyword}{static}\ List<IHtmlSyntax>\ ParseTagChildContent(}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00269}00269\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_utility_1_1_string_walker}{StringWalker}}\ stringWalker,}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00270}00270\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_diagnostic_bag}{DiagnosticBag}}\ diagnosticBag,}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00271}00271\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_luthetus_1_1_compiler_services_1_1_xml_1_1_html_1_1_injected_language_1_1_injected_language_definition}{InjectedLanguageDefinition}}?\ injectedLanguageDefinition)}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00272}00272\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00273}00273\ \ \ \ \ \ \ \ \ \ \ \ \ var\ startingPositionIndex\ =\ stringWalker.\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_utility_1_1_string_walker_a192423c8188b55e1e16376095b7dfc62}{PositionIndex}};}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00274}00274\ }
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00275}00275\ \ \ \ \ \ \ \ \ \ \ \ \ List<IHtmlSyntax>\ htmlSyntaxes\ =\ \textcolor{keyword}{new}();}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00276}00276\ }
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00277}00277\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}?\ textNodeStartingPositionIndex\ =\ \textcolor{keyword}{null};}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00278}00278\ }
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00279}00279\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Make\ a\ TagTextSyntax\ -\/\ HTML\ TextNode\ if\ there\ was\ anything\ in\ the\ current\ builder}}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00280}00280\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ AddTextNode()}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00281}00281\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00282}00282\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (textNodeStartingPositionIndex\ is\ \textcolor{keyword}{null})}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00283}00283\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return};}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00284}00284\ }
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00285}00285\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ var\ tagTextSyntax\ =\ \textcolor{keyword}{new}\ \mbox{\hyperlink{namespace_luthetus_1_1_compiler_services_1_1_xml_1_1_html_1_1_syntax_enums_a245136d3341f1287669602a1ed9d72c8a4526013cbe40aa574bc5eabc17f61853}{TextNode}}(}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00286}00286\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{new}\ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_lexers_1_1_models_a1ffd1a7706dfd364560b76d47467812f}{TextEditorTextSpan}}(}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00287}00287\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ textNodeStartingPositionIndex.Value,}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00288}00288\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ stringWalker.\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_utility_1_1_string_walker_a192423c8188b55e1e16376095b7dfc62}{PositionIndex}},}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00289}00289\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (\textcolor{keywordtype}{byte})\mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_generic_lexer_1_1_decoration_a7f6068f17a9d3ed70d4b8eefd0fcbcf0}{GenericDecorationKind}}.None,}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00290}00290\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ stringWalker.\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_utility_1_1_string_walker_abf00a8613dfc137bea3c366e277fbde4}{ResourceUri}},}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00291}00291\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ stringWalker.\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_utility_1_1_string_walker_a35f8247f3eea6c6937856215770af815}{SourceText}}));}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00292}00292\ }
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00293}00293\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ htmlSyntaxes.Add(tagTextSyntax);}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00294}00294\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ textNodeStartingPositionIndex\ =\ \textcolor{keyword}{null};}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00295}00295\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00296}00296\ }
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00297}00297\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{while}\ (!stringWalker.\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_utility_1_1_string_walker_a7c895ef73ed57523b1a78779cc0e2528}{IsEof}})}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00298}00298\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00299}00299\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (stringWalker.\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_utility_1_1_string_walker_a292d4713572d97ec249ccc383e1c2fb3}{PeekForSubstring}}(HtmlFacts.CLOSE\_TAG\_WITH\_CHILD\_CONTENT\_BEGINNING))}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00300}00300\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00301}00301\ }
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00302}00302\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (stringWalker.\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_utility_1_1_string_walker_abbf32c2054872ff9d6dda8e6697c46ce}{CurrentCharacter}}\ ==\ HtmlFacts.OPEN\_TAG\_BEGINNING)}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00303}00303\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00304}00304\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ If\ there\ is\ text\ in\ textNodeBuilder\ add\ a\ new\ TextNode\ to\ the\ List\ of\ TagSyntax}}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00305}00305\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ AddTextNode();}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00306}00306\ }
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00307}00307\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (stringWalker.\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_utility_1_1_string_walker_a292d4713572d97ec249ccc383e1c2fb3}{PeekForSubstring}}(HtmlFacts.COMMENT\_TAG\_BEGINNING))}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00308}00308\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00309}00309\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ var\ node\ =\ ParseComment(stringWalker,\ diagnosticBag,\ injectedLanguageDefinition);}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00310}00310\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ htmlSyntaxes.Add(node);}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00311}00311\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00312}00312\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00313}00313\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00314}00314\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ var\ node\ =\ ParseTag(stringWalker,\ diagnosticBag,\ injectedLanguageDefinition);}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00315}00315\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ htmlSyntaxes.Add(node);}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00316}00316\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00317}00317\ }
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00318}00318\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{continue};}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00319}00319\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00320}00320\ }
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00321}00321\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (injectedLanguageDefinition\ is\ not\ \textcolor{keyword}{null}\ \&\&\ stringWalker.AtInjectedLanguageCodeBlockTag(injectedLanguageDefinition))}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00322}00322\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00323}00323\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ If\ there\ is\ text\ in\ textNodeBuilder\ add\ a\ new\ TextNode\ to\ the\ List\ of\ TagSyntax}}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00324}00324\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ AddTextNode();}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00325}00325\ }
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00326}00326\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ var\ nodeBag\ =\ ParseInjectedLanguageCodeBlock(stringWalker,\ diagnosticBag,\ injectedLanguageDefinition);}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00327}00327\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ htmlSyntaxes.AddRange(nodeBag);}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00328}00328\ }
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00329}00329\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{continue};}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00330}00330\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00331}00331\ }
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00332}00332\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ textNodeStartingPositionIndex\ ??=\ stringWalker.\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_utility_1_1_string_walker_a192423c8188b55e1e16376095b7dfc62}{PositionIndex}};}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00333}00333\ }
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00334}00334\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \_\ =\ stringWalker.\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_utility_1_1_string_walker_a1533f73189c0e55efe7da8278c1d32df}{ReadCharacter}}();}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00335}00335\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00336}00336\ }
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00337}00337\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (stringWalker.\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_utility_1_1_string_walker_abbf32c2054872ff9d6dda8e6697c46ce}{CurrentCharacter}}\ ==\ ParserFacts.END\_OF\_FILE)}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00338}00338\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ diagnosticBag.\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_diagnostic_bag_a356b5e28089638e9367941a0bd9873ce}{ReportEndOfFileUnexpected}}(\textcolor{keyword}{new}(startingPositionIndex,\ stringWalker,\ (\textcolor{keywordtype}{byte})\mbox{\hyperlink{namespace_luthetus_1_1_compiler_services_1_1_xml_1_1_html_1_1_decoration_ad2dd5c2a377c0b0dc74dbd441c7a2b25}{HtmlDecorationKind}}.Error));}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00339}00339\ }
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00340}00340\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ If\ there\ is\ text\ in\ textNodeBuilder\ add\ a\ new\ TextNode\ to\ the\ List\ of\ TagSyntax}}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00341}00341\ \ \ \ \ \ \ \ \ \ \ \ \ AddTextNode();}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00342}00342\ }
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00343}00343\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ htmlSyntaxes;}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00344}00344\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00345}00345\ }
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00346}00346\ \ \ \ \ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keyword}{static}\ List<IHtmlSyntaxNode>\ ParseInjectedLanguageCodeBlock(}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00347}00347\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_utility_1_1_string_walker}{StringWalker}}\ stringWalker,}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00348}00348\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_diagnostic_bag}{DiagnosticBag}}\ diagnosticBag,}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00349}00349\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_luthetus_1_1_compiler_services_1_1_xml_1_1_html_1_1_injected_language_1_1_injected_language_definition}{InjectedLanguageDefinition}}\ injectedLanguageDefinition)}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00350}00350\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00351}00351\ \ \ \ \ \ \ \ \ \ \ \ \ var\ injectedLanguageFragmentSyntaxes\ =\ \textcolor{keyword}{new}\ List<IHtmlSyntaxNode>();}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00352}00352\ }
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00353}00353\ \ \ \ \ \ \ \ \ \ \ \ \ var\ injectedLanguageFragmentSyntaxStartingPositionIndex\ =\ stringWalker.\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_utility_1_1_string_walker_a192423c8188b55e1e16376095b7dfc62}{PositionIndex}};}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00354}00354\ }
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00355}00355\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Track\ text\ span\ of\ the\ "{}@"{}\ sign\ (example\ in\ .razor\ files)}}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00356}00356\ \ \ \ \ \ \ \ \ \ \ \ \ injectedLanguageFragmentSyntaxes.Add(}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00357}00357\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{new}\ \mbox{\hyperlink{namespace_luthetus_1_1_compiler_services_1_1_xml_1_1_html_1_1_syntax_enums_a245136d3341f1287669602a1ed9d72c8ae3195eb03a871ec2712c03c3327b69dd}{InjectedLanguageFragmentNode}}(}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00358}00358\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ImmutableArray<IHtmlSyntax>.Empty,}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00359}00359\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{new}\ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_lexers_1_1_models_a1ffd1a7706dfd364560b76d47467812f}{TextEditorTextSpan}}(}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00360}00360\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ injectedLanguageFragmentSyntaxStartingPositionIndex,}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00361}00361\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ stringWalker.\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_utility_1_1_string_walker_a192423c8188b55e1e16376095b7dfc62}{PositionIndex}}\ +\ 1,}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00362}00362\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (\textcolor{keywordtype}{byte})\mbox{\hyperlink{namespace_luthetus_1_1_compiler_services_1_1_xml_1_1_html_1_1_decoration_ad2dd5c2a377c0b0dc74dbd441c7a2b25}{HtmlDecorationKind}}.InjectedLanguageFragment,}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00363}00363\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ stringWalker.\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_utility_1_1_string_walker_abf00a8613dfc137bea3c366e277fbde4}{ResourceUri}},}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00364}00364\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ stringWalker.\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_utility_1_1_string_walker_a35f8247f3eea6c6937856215770af815}{SourceText}})));}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00365}00365\ }
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00366}00366\ \ \ \ \ \ \ \ \ \ \ \ \ injectedLanguageFragmentSyntaxes.AddRange(}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00367}00367\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ injectedLanguageDefinition.\mbox{\hyperlink{class_luthetus_1_1_compiler_services_1_1_xml_1_1_html_1_1_injected_language_1_1_injected_language_definition_a9f00531c0eae09cafd5263eb4bf57f6b}{ParseInjectedLanguageFunc}}}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00368}00368\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ .Invoke(}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00369}00369\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ stringWalker,}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00370}00370\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ diagnosticBag,}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00371}00371\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ injectedLanguageDefinition));}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00372}00372\ }
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00373}00373\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ injectedLanguageFragmentSyntaxes;}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00374}00374\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00375}00375\ }
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00376}00376\ \ \ \ \ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keyword}{static}\ \mbox{\hyperlink{class_luthetus_1_1_compiler_services_1_1_xml_1_1_html_1_1_syntax_objects_1_1_attribute_node}{AttributeNode}}\ ParseAttribute(}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00377}00377\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_utility_1_1_string_walker}{StringWalker}}\ stringWalker,}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00378}00378\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_diagnostic_bag}{DiagnosticBag}}\ diagnosticBag,}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00379}00379\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_luthetus_1_1_compiler_services_1_1_xml_1_1_html_1_1_injected_language_1_1_injected_language_definition}{InjectedLanguageDefinition}}?\ injectedLanguageDefinition)}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00380}00380\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00381}00381\ \ \ \ \ \ \ \ \ \ \ \ \ var\ attributeNameSyntax\ =\ ParseAttributeName(}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00382}00382\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ stringWalker,}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00383}00383\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ diagnosticBag,}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00384}00384\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ injectedLanguageDefinition);}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00385}00385\ }
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00386}00386\ \ \ \ \ \ \ \ \ \ \ \ \ \_\ =\ TryReadAttributeValue(}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00387}00387\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ stringWalker,}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00388}00388\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ diagnosticBag,}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00389}00389\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ injectedLanguageDefinition,}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00390}00390\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ out\ var\ attributeValueSyntax);}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00391}00391\ }
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00392}00392\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{new}\ \mbox{\hyperlink{namespace_luthetus_1_1_compiler_services_1_1_xml_1_1_html_1_1_syntax_enums_a245136d3341f1287669602a1ed9d72c8a83636d4ef3a721cddd173f684b98259d}{AttributeNode}}(}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00393}00393\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ attributeNameSyntax,}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00394}00394\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ attributeValueSyntax);}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00395}00395\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00396}00396\ }
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00398}00398\ \ \ \ \ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keyword}{static}\ \mbox{\hyperlink{class_luthetus_1_1_compiler_services_1_1_xml_1_1_html_1_1_syntax_objects_1_1_attribute_name_node}{AttributeNameNode}}\ ParseAttributeName(}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00399}00399\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_utility_1_1_string_walker}{StringWalker}}\ stringWalker,}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00400}00400\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_diagnostic_bag}{DiagnosticBag}}\ diagnosticBag,}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00401}00401\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_luthetus_1_1_compiler_services_1_1_xml_1_1_html_1_1_injected_language_1_1_injected_language_definition}{InjectedLanguageDefinition}}?\ injectedLanguageDefinition)}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00402}00402\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00403}00403\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ When\ ParseAttributeName\ is\ invoked\ the\ PositionIndex\ is\ always\ 1\ character\ too\ far}}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00404}00404\ \ \ \ \ \ \ \ \ \ \ \ \ \_\ =\ stringWalker.\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_utility_1_1_string_walker_af22e0b0f2c09f4aa85785b519a13f95f}{BacktrackCharacter}}();}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00405}00405\ }
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00406}00406\ \ \ \ \ \ \ \ \ \ \ \ \ var\ startingPositionIndex\ =\ stringWalker.\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_utility_1_1_string_walker_a192423c8188b55e1e16376095b7dfc62}{PositionIndex}};}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00407}00407\ }
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00408}00408\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ firstLoop\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00409}00409\ }
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00410}00410\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{while}\ (!stringWalker.\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_utility_1_1_string_walker_a7c895ef73ed57523b1a78779cc0e2528}{IsEof}})}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00411}00411\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00412}00412\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \_\ =\ stringWalker.\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_utility_1_1_string_walker_a1533f73189c0e55efe7da8278c1d32df}{ReadCharacter}}();}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00413}00413\ }
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00414}00414\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Try\ to\ read\ for\ injected\ language}}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00415}00415\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (firstLoop)}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00416}00416\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00417}00417\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ firstLoop\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00418}00418\ }
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00419}00419\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (injectedLanguageDefinition?.ParseAttributeName\ is\ not\ \textcolor{keyword}{null}\ \&\&}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00420}00420\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ stringWalker.AtInjectedLanguageCodeBlockTag(injectedLanguageDefinition))}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00421}00421\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00422}00422\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ injectedLanguageDefinition.ParseAttributeName}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00423}00423\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ .Invoke(}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00424}00424\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ stringWalker,}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00425}00425\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ diagnosticBag,}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00426}00426\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ injectedLanguageDefinition);}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00427}00427\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00428}00428\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00429}00429\ }
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00430}00430\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (WhitespaceFacts.ALL\_LIST.Contains(stringWalker.\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_utility_1_1_string_walker_abbf32c2054872ff9d6dda8e6697c46ce}{CurrentCharacter}})\ ||}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00431}00431\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ HtmlFacts.SEPARATOR\_FOR\_ATTRIBUTE\_NAME\_AND\_ATTRIBUTE\_VALUE\ ==\ stringWalker.\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_utility_1_1_string_walker_abbf32c2054872ff9d6dda8e6697c46ce}{CurrentCharacter}}\ ||}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00432}00432\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ stringWalker.\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_utility_1_1_string_walker_a45c9d49f994e5415c930179fbcdfdd9a}{PeekForSubstringRange}}(HtmlFacts.OPEN\_TAG\_ENDING\_OPTIONS,\ out\ var\ matchedOn))}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00433}00433\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00434}00434\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00435}00435\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00436}00436\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00437}00437\ }
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00438}00438\ \ \ \ \ \ \ \ \ \ \ \ \ var\ attributeNameTextSpan\ =\ \textcolor{keyword}{new}\ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_lexers_1_1_models_a1ffd1a7706dfd364560b76d47467812f}{TextEditorTextSpan}}(}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00439}00439\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ startingPositionIndex,}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00440}00440\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ stringWalker.\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_utility_1_1_string_walker_a192423c8188b55e1e16376095b7dfc62}{PositionIndex}},}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00441}00441\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (\textcolor{keywordtype}{byte})\mbox{\hyperlink{namespace_luthetus_1_1_compiler_services_1_1_xml_1_1_html_1_1_decoration_ad2dd5c2a377c0b0dc74dbd441c7a2b25}{HtmlDecorationKind}}.AttributeName,}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00442}00442\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ stringWalker.\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_utility_1_1_string_walker_abf00a8613dfc137bea3c366e277fbde4}{ResourceUri}},}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00443}00443\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ stringWalker.\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_utility_1_1_string_walker_a35f8247f3eea6c6937856215770af815}{SourceText}});}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00444}00444\ }
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00445}00445\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{new}\ \mbox{\hyperlink{namespace_luthetus_1_1_compiler_services_1_1_xml_1_1_html_1_1_syntax_enums_a245136d3341f1287669602a1ed9d72c8aac462fdbd6bff2102c7eaed28db3573e}{AttributeNameNode}}(attributeNameTextSpan);}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00446}00446\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00447}00447\ }
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00449}00449\ \ \ \ \ \ \ \ \ \textcolor{keyword}{private}\ \textcolor{keyword}{static}\ \textcolor{keywordtype}{bool}\ TryReadAttributeValue(}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00450}00450\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_utility_1_1_string_walker}{StringWalker}}\ stringWalker,}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00451}00451\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_diagnostic_bag}{DiagnosticBag}}\ diagnosticBag,}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00452}00452\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_luthetus_1_1_compiler_services_1_1_xml_1_1_html_1_1_injected_language_1_1_injected_language_definition}{InjectedLanguageDefinition}}?\ injectedLanguageDefinition,}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00453}00453\ \ \ \ \ \ \ \ \ \ \ \ \ out\ \mbox{\hyperlink{class_luthetus_1_1_compiler_services_1_1_xml_1_1_html_1_1_syntax_objects_1_1_attribute_value_node}{AttributeValueNode}}\ attributeValueSyntax)}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00454}00454\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00455}00455\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (WhitespaceFacts.ALL\_LIST.Contains(stringWalker.\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_utility_1_1_string_walker_abbf32c2054872ff9d6dda8e6697c46ce}{CurrentCharacter}}))}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00456}00456\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00457}00457\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Move\ to\ the\ first\ non-\/whitespace}}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00458}00458\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{while}\ (!stringWalker.\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_utility_1_1_string_walker_a7c895ef73ed57523b1a78779cc0e2528}{IsEof}})}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00459}00459\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00460}00460\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \_\ =\ stringWalker.\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_utility_1_1_string_walker_a1533f73189c0e55efe7da8278c1d32df}{ReadCharacter}}();}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00461}00461\ }
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00462}00462\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!WhitespaceFacts.ALL\_LIST.Contains(stringWalker.\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_utility_1_1_string_walker_abbf32c2054872ff9d6dda8e6697c46ce}{CurrentCharacter}}))}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00463}00463\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00464}00464\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00465}00465\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00466}00466\ }
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00467}00467\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (HtmlFacts.SEPARATOR\_FOR\_ATTRIBUTE\_NAME\_AND\_ATTRIBUTE\_VALUE\ ==\ stringWalker.\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_utility_1_1_string_walker_abbf32c2054872ff9d6dda8e6697c46ce}{CurrentCharacter}})}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00468}00468\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00469}00469\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ attributeValueSyntax\ =\ ParseAttributeValue(}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00470}00470\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ stringWalker,}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00471}00471\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ diagnosticBag,}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00472}00472\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ injectedLanguageDefinition);}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00473}00473\ }
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00474}00474\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{true};}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00475}00475\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00476}00476\ }
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00477}00477\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Set\ out\ variable\ as\ a\ 'matched\ attribute\ value'\ so\ there\ aren't\ any\ cascading\ error\ diagnostics\ due\ to\ having\ expected\ an\ attribute\ value.}}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00478}00478\ \ \ \ \ \ \ \ \ \ \ \ \ var\ attributeValueTextSpan\ =\ \textcolor{keyword}{new}\ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_lexers_1_1_models_a1ffd1a7706dfd364560b76d47467812f}{TextEditorTextSpan}}(}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00479}00479\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 0,}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00480}00480\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 0,}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00481}00481\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (\textcolor{keywordtype}{byte})\mbox{\hyperlink{namespace_luthetus_1_1_compiler_services_1_1_xml_1_1_html_1_1_decoration_ad2dd5c2a377c0b0dc74dbd441c7a2b25}{HtmlDecorationKind}}.AttributeValue,}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00482}00482\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ stringWalker.\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_utility_1_1_string_walker_abf00a8613dfc137bea3c366e277fbde4}{ResourceUri}},}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00483}00483\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ stringWalker.\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_utility_1_1_string_walker_a35f8247f3eea6c6937856215770af815}{SourceText}});}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00484}00484\ }
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00485}00485\ \ \ \ \ \ \ \ \ \ \ \ \ attributeValueSyntax\ =\ \textcolor{keyword}{new}\ \mbox{\hyperlink{namespace_luthetus_1_1_compiler_services_1_1_xml_1_1_html_1_1_syntax_enums_a245136d3341f1287669602a1ed9d72c8a201983ba2eb07a04f9a69ceb6a3a17cf}{AttributeValueNode}}(attributeValueTextSpan);}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00486}00486\ }
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00487}00487\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00488}00488\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00489}00489\ }
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00491}00491\ \ \ \ \ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keyword}{static}\ \mbox{\hyperlink{class_luthetus_1_1_compiler_services_1_1_xml_1_1_html_1_1_syntax_objects_1_1_attribute_value_node}{AttributeValueNode}}\ ParseAttributeValue(}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00492}00492\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_utility_1_1_string_walker}{StringWalker}}\ stringWalker,}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00493}00493\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_diagnostic_bag}{DiagnosticBag}}\ diagnosticBag,}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00494}00494\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_luthetus_1_1_compiler_services_1_1_xml_1_1_html_1_1_injected_language_1_1_injected_language_definition}{InjectedLanguageDefinition}}?\ injectedLanguageDefinition)}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00495}00495\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00496}00496\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Suppress\ these\ unused\ parameters\ because\ all\ 'Parse...()'\ methods\ should\ take\ them\ for\ consistency.}}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00497}00497\ \ \ \ \ \ \ \ \ \ \ \ \ \_\ =\ diagnosticBag;}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00498}00498\ \ \ \ \ \ \ \ \ \ \ \ \ \_\ =\ injectedLanguageDefinition;}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00499}00499\ }
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00500}00500\ \ \ \ \ \ \ \ \ \ \ \ \ var\ startingPositionIndex\ =\ stringWalker.\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_utility_1_1_string_walker_a192423c8188b55e1e16376095b7dfc62}{PositionIndex}};}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00501}00501\ }
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00502}00502\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Move\ to\ the\ first\ non-\/whitespace\ which\ follows\ the\ HtmlFacts.SEPARATOR\_FOR\_ATTRIBUTE\_NAME\_AND\_ATTRIBUTE\_VALUE}}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00503}00503\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{while}\ (!stringWalker.\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_utility_1_1_string_walker_a7c895ef73ed57523b1a78779cc0e2528}{IsEof}})}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00504}00504\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00505}00505\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \_\ =\ stringWalker.\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_utility_1_1_string_walker_a1533f73189c0e55efe7da8278c1d32df}{ReadCharacter}}();}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00506}00506\ }
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00507}00507\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!WhitespaceFacts.ALL\_LIST.Contains(stringWalker.\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_utility_1_1_string_walker_abbf32c2054872ff9d6dda8e6697c46ce}{CurrentCharacter}}))}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00508}00508\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00509}00509\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00510}00510\ }
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00511}00511\ \ \ \ \ \ \ \ \ \ \ \ \ var\ foundOpenTagEnding\ =\ stringWalker.\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_utility_1_1_string_walker_a45c9d49f994e5415c930179fbcdfdd9a}{PeekForSubstringRange}}(}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00512}00512\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ HtmlFacts.OPEN\_TAG\_ENDING\_OPTIONS,}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00513}00513\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ out\ \_);}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00514}00514\ }
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00515}00515\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!foundOpenTagEnding)}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00516}00516\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00517}00517\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ var\ beganWithAttributeValueStarting\ =}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00518}00518\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ HtmlFacts.ATTRIBUTE\_VALUE\_STARTING\ ==\ stringWalker.\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_utility_1_1_string_walker_abbf32c2054872ff9d6dda8e6697c46ce}{CurrentCharacter}};}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00519}00519\ }
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00520}00520\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{while}\ (!stringWalker.\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_utility_1_1_string_walker_a7c895ef73ed57523b1a78779cc0e2528}{IsEof}})}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00521}00521\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00522}00522\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ TODO:\ (2023-\/05-\/31)\ This\ is\ logic\ for\ syntax\ highlighting\ a\ blazor\ event\ handler\ such\ as\ @onclick\ for\ example.\ In\ specific\ it\ would\ be\ the\ method\ group\ provided\ that\ this\ syntax\ highlights.}}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00524}00524\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//if\ (firstLoop)}}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00525}00525\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\{}}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00526}00526\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ \ \ \ firstLoop\ =\ false;}}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00527}00527\ }
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00528}00528\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ \ \ \ if\ (injectedLanguageDefinition?.ParseAttributeValue\ is\ not\ null\ \&\&}}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00529}00529\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ \ stringWalker.CheckForInjectedLanguageCodeBlockTag(injectedLanguageDefinition))}}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00530}00530\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ \ \ \ \{}}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00531}00531\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ \ return\ injectedLanguageDefinition.ParseAttributeValue}}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00532}00532\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ \ \ \ .Invoke(}}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00533}00533\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ stringWalker,}}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00534}00534\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ textEditorHtmlDiagnosticBag,}}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00535}00535\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ injectedLanguageDefinition);}}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00536}00536\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ \ \ \ \}}}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00537}00537\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\}}}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00538}00538\ }
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00539}00539\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \_\ =\ stringWalker.\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_utility_1_1_string_walker_a1533f73189c0e55efe7da8278c1d32df}{ReadCharacter}}();}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00540}00540\ }
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00541}00541\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!beganWithAttributeValueStarting\ \&\&}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00542}00542\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ WhitespaceFacts.ALL\_LIST.Contains(stringWalker.\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_utility_1_1_string_walker_abbf32c2054872ff9d6dda8e6697c46ce}{CurrentCharacter}}))}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00543}00543\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00544}00544\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00545}00545\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00546}00546\ }
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00547}00547\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (stringWalker.\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_utility_1_1_string_walker_a45c9d49f994e5415c930179fbcdfdd9a}{PeekForSubstringRange}}(}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00548}00548\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ HtmlFacts.OPEN\_TAG\_ENDING\_OPTIONS,}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00549}00549\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ out\ \_))}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00550}00550\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00551}00551\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ foundOpenTagEnding\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00552}00552\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00553}00553\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00554}00554\ }
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00555}00555\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (HtmlFacts.ATTRIBUTE\_VALUE\_ENDING\ ==\ stringWalker.\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_utility_1_1_string_walker_abbf32c2054872ff9d6dda8e6697c46ce}{CurrentCharacter}})}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00556}00556\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00557}00557\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00558}00558\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00559}00559\ }
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00560}00560\ \ \ \ \ \ \ \ \ \ \ \ \ var\ endingIndexExclusive\ =\ stringWalker.\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_utility_1_1_string_walker_a192423c8188b55e1e16376095b7dfc62}{PositionIndex}};}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00561}00561\ }
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00562}00562\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!foundOpenTagEnding)}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00563}00563\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ endingIndexExclusive++;}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00564}00564\ }
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00565}00565\ \ \ \ \ \ \ \ \ \ \ \ \ var\ attributeValueTextSpan\ =\ \textcolor{keyword}{new}\ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_lexers_1_1_models_a1ffd1a7706dfd364560b76d47467812f}{TextEditorTextSpan}}(}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00566}00566\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ startingPositionIndex,}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00567}00567\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ endingIndexExclusive,}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00568}00568\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (\textcolor{keywordtype}{byte})\mbox{\hyperlink{namespace_luthetus_1_1_compiler_services_1_1_xml_1_1_html_1_1_decoration_ad2dd5c2a377c0b0dc74dbd441c7a2b25}{HtmlDecorationKind}}.AttributeValue,}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00569}00569\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ stringWalker.\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_utility_1_1_string_walker_abf00a8613dfc137bea3c366e277fbde4}{ResourceUri}},}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00570}00570\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ stringWalker.\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_utility_1_1_string_walker_a35f8247f3eea6c6937856215770af815}{SourceText}});}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00571}00571\ }
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00572}00572\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{new}\ \mbox{\hyperlink{namespace_luthetus_1_1_compiler_services_1_1_xml_1_1_html_1_1_syntax_enums_a245136d3341f1287669602a1ed9d72c8a201983ba2eb07a04f9a69ceb6a3a17cf}{AttributeValueNode}}(attributeValueTextSpan);}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00573}00573\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00574}00574\ }
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00575}00575\ \ \ \ \ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keyword}{static}\ \mbox{\hyperlink{class_luthetus_1_1_compiler_services_1_1_xml_1_1_html_1_1_syntax_objects_1_1_comment_node}{CommentNode}}\ ParseComment(}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00576}00576\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_utility_1_1_string_walker}{StringWalker}}\ stringWalker,}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00577}00577\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_diagnostic_bag}{DiagnosticBag}}\ diagnosticBag,}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00578}00578\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_luthetus_1_1_compiler_services_1_1_xml_1_1_html_1_1_injected_language_1_1_injected_language_definition}{InjectedLanguageDefinition}}?\ injectedLanguageDefinition)}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00579}00579\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00580}00580\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Suppress\ these\ unused\ parameters\ because\ all\ 'Parse...()'\ methods\ should\ take\ them\ for\ consistency.}}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00581}00581\ \ \ \ \ \ \ \ \ \ \ \ \ \_\ =\ diagnosticBag;}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00582}00582\ \ \ \ \ \ \ \ \ \ \ \ \ \_\ =\ injectedLanguageDefinition;}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00583}00583\ }
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00584}00584\ \ \ \ \ \ \ \ \ \ \ \ \ var\ startingPositionIndex\ =\ stringWalker.\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_utility_1_1_string_walker_a192423c8188b55e1e16376095b7dfc62}{PositionIndex}};}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00585}00585\ }
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00586}00586\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{while}\ (!stringWalker.\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_utility_1_1_string_walker_a7c895ef73ed57523b1a78779cc0e2528}{IsEof}})}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00587}00587\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00588}00588\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \_\ =\ stringWalker.\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_utility_1_1_string_walker_a1533f73189c0e55efe7da8278c1d32df}{ReadCharacter}}();}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00589}00589\ }
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00590}00590\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (stringWalker.\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_utility_1_1_string_walker_a292d4713572d97ec249ccc383e1c2fb3}{PeekForSubstring}}(HtmlFacts.COMMENT\_TAG\_ENDING))}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00591}00591\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00592}00592\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00593}00593\ }
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00594}00594\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Skip\ the\ remaining\ characters\ in\ the\ comment\ tag\ ending\ string}}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00595}00595\ \ \ \ \ \ \ \ \ \ \ \ \ \_\ =\ stringWalker.\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_utility_1_1_string_walker_a1c60b2612ff22cdb9e04d858d2d454ff}{ReadRange}}(HtmlFacts.COMMENT\_TAG\_ENDING.Length\ -\/\ 1);}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00596}00596\ }
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00597}00597\ \ \ \ \ \ \ \ \ \ \ \ \ var\ commentTagTextSpan\ =\ \textcolor{keyword}{new}\ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_lexers_1_1_models_a1ffd1a7706dfd364560b76d47467812f}{TextEditorTextSpan}}(}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00598}00598\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ startingPositionIndex,}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00599}00599\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ stringWalker.\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_utility_1_1_string_walker_a192423c8188b55e1e16376095b7dfc62}{PositionIndex}}\ +\ 1,}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00600}00600\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (\textcolor{keywordtype}{byte})\mbox{\hyperlink{namespace_luthetus_1_1_compiler_services_1_1_xml_1_1_html_1_1_decoration_ad2dd5c2a377c0b0dc74dbd441c7a2b25}{HtmlDecorationKind}}.Comment,}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00601}00601\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ stringWalker.\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_utility_1_1_string_walker_abf00a8613dfc137bea3c366e277fbde4}{ResourceUri}},}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00602}00602\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ stringWalker.\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_utility_1_1_string_walker_a35f8247f3eea6c6937856215770af815}{SourceText}});}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00603}00603\ }
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00604}00604\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{new}\ \mbox{\hyperlink{namespace_luthetus_1_1_compiler_services_1_1_xml_1_1_html_1_1_syntax_enums_a245136d3341f1287669602a1ed9d72c8ac7aef10786898f66d5427d26946fa957}{CommentNode}}(commentTagTextSpan);}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00605}00605\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00606}00606\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_html_syntax_tree_8cs_source_l00607}00607\ \}}
+
+\end{DoxyCode}

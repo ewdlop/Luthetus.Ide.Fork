@@ -1,0 +1,4 @@
+var _dynamic_view_model_adapter_text_editor_8cs =
+[
+    [ "Luthetus.TextEditor.RazorLib.TextEditors.Models.DynamicViewModelAdapterTextEditor", "class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1_1_dynamic_view_model_adapter_text_editor.html", "class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1_1_dynamic_view_model_adapter_text_editor" ]
+];

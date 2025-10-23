@@ -1,0 +1,68 @@
+\doxysection{Input\+File\+State.\+Effector.\+cs}
+\hypertarget{_input_file_state_8_effector_8cs_source}{}\label{_input_file_state_8_effector_8cs_source}\index{Source/Lib/Ide/Ide.RazorLib/InputFiles/States/InputFileState.Effector.cs@{Source/Lib/Ide/Ide.RazorLib/InputFiles/States/InputFileState.Effector.cs}}
+\mbox{\hyperlink{_input_file_state_8_effector_8cs}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{_input_file_state_8_effector_8cs_source_l00001}00001\ \textcolor{keyword}{using\ }Fluxor;}
+\DoxyCodeLine{\Hypertarget{_input_file_state_8_effector_8cs_source_l00002}00002\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_luthetus_1_1_common_1_1_razor_lib_1_1_background_tasks_1_1_models}{Luthetus.Common.RazorLib.BackgroundTasks.Models}};}
+\DoxyCodeLine{\Hypertarget{_input_file_state_8_effector_8cs_source_l00003}00003\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_luthetus_1_1_common_1_1_razor_lib_1_1_keys_1_1_models}{Luthetus.Common.RazorLib.Keys.Models}};}
+\DoxyCodeLine{\Hypertarget{_input_file_state_8_effector_8cs_source_l00004}00004\ }
+\DoxyCodeLine{\Hypertarget{_input_file_state_8_effector_8cs_source_l00005}00005\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespace_luthetus_1_1_ide_1_1_razor_lib_1_1_input_files_1_1_states}{Luthetus.Ide.RazorLib.InputFiles.States}};}
+\DoxyCodeLine{\Hypertarget{_input_file_state_8_effector_8cs_source_l00006}00006\ }
+\DoxyCodeLine{\Hypertarget{_input_file_state_8_effector_8cs_source_l00007}00007\ \textcolor{keyword}{public}\ partial\ record\ \mbox{\hyperlink{namespace_luthetus_1_1_ide_1_1_razor_lib_1_1_input_files_1_1_states_adea9f28dd37beadbdebbbcda3e108036}{InputFileState}}}
+\DoxyCodeLine{\Hypertarget{_input_file_state_8_effector_8cs_source_l00008}00008\ \{}
+\DoxyCodeLine{\Hypertarget{_input_file_state_8_effector_8cs_source_l00009}00009\ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keyword}{class\ }Effector}
+\DoxyCodeLine{\Hypertarget{_input_file_state_8_effector_8cs_source_l00010}00010\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_input_file_state_8_effector_8cs_source_l00011}00011\ \ \ \ \ \ \ \ \ [EffectMethod]}
+\DoxyCodeLine{\Hypertarget{_input_file_state_8_effector_8cs_source_l00012}00012\ \ \ \ \ \ \ \ \ \textcolor{keyword}{public}\ Task\ HandleOpenParentDirectoryAction(}
+\DoxyCodeLine{\Hypertarget{_input_file_state_8_effector_8cs_source_l00013}00013\ \ \ \ \ \ \ \ \ \ \ \ \ OpenParentDirectoryAction\ openParentDirectoryAction,}
+\DoxyCodeLine{\Hypertarget{_input_file_state_8_effector_8cs_source_l00014}00014\ \ \ \ \ \ \ \ \ \ \ \ \ IDispatcher\ dispatcher)}
+\DoxyCodeLine{\Hypertarget{_input_file_state_8_effector_8cs_source_l00015}00015\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_input_file_state_8_effector_8cs_source_l00016}00016\ \ \ \ \ \ \ \ \ \ \ \ \ \_\ =\ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_a50f035982e1c206f234851523db5cbc8}{dispatcher}};\ \textcolor{comment}{//\ Suppress\ unused\ parameter}}
+\DoxyCodeLine{\Hypertarget{_input_file_state_8_effector_8cs_source_l00017}00017\ }
+\DoxyCodeLine{\Hypertarget{_input_file_state_8_effector_8cs_source_l00018}00018\ \ \ \ \ \ \ \ \ \ \ \ \ var\ parentDirectoryTreeViewModel\ =\ openParentDirectoryAction.ParentDirectoryTreeViewModel;}
+\DoxyCodeLine{\Hypertarget{_input_file_state_8_effector_8cs_source_l00019}00019\ }
+\DoxyCodeLine{\Hypertarget{_input_file_state_8_effector_8cs_source_l00020}00020\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (parentDirectoryTreeViewModel\ is\ not\ \textcolor{keyword}{null})}
+\DoxyCodeLine{\Hypertarget{_input_file_state_8_effector_8cs_source_l00021}00021\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_input_file_state_8_effector_8cs_source_l00022}00022\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ openParentDirectoryAction.BackgroundTaskService.Enqueue(}
+\DoxyCodeLine{\Hypertarget{_input_file_state_8_effector_8cs_source_l00023}00023\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Key<IBackgroundTask>.NewKey(),}
+\DoxyCodeLine{\Hypertarget{_input_file_state_8_effector_8cs_source_l00024}00024\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ContinuousBackgroundTaskWorker.GetQueueKey(),}
+\DoxyCodeLine{\Hypertarget{_input_file_state_8_effector_8cs_source_l00025}00025\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}Open\ Parent\ Directory"{}},}
+\DoxyCodeLine{\Hypertarget{_input_file_state_8_effector_8cs_source_l00026}00026\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ async\ ()\ =>}
+\DoxyCodeLine{\Hypertarget{_input_file_state_8_effector_8cs_source_l00027}00027\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_input_file_state_8_effector_8cs_source_l00028}00028\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ await\ parentDirectoryTreeViewModel.LoadChildListAsync().ConfigureAwait(\textcolor{keyword}{false});}
+\DoxyCodeLine{\Hypertarget{_input_file_state_8_effector_8cs_source_l00029}00029\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \});}
+\DoxyCodeLine{\Hypertarget{_input_file_state_8_effector_8cs_source_l00030}00030\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_input_file_state_8_effector_8cs_source_l00031}00031\ }
+\DoxyCodeLine{\Hypertarget{_input_file_state_8_effector_8cs_source_l00032}00032\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ Task.CompletedTask;}
+\DoxyCodeLine{\Hypertarget{_input_file_state_8_effector_8cs_source_l00033}00033\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_input_file_state_8_effector_8cs_source_l00034}00034\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_input_file_state_8_effector_8cs_source_l00035}00035\ \ \ \ \ \ \ \ \ [EffectMethod]}
+\DoxyCodeLine{\Hypertarget{_input_file_state_8_effector_8cs_source_l00036}00036\ \ \ \ \ \ \ \ \ \textcolor{keyword}{public}\ Task\ HandleRefreshCurrentSelectionAction(}
+\DoxyCodeLine{\Hypertarget{_input_file_state_8_effector_8cs_source_l00037}00037\ \ \ \ \ \ \ \ \ \ \ \ \ RefreshCurrentSelectionAction\ refreshCurrentSelectionAction,}
+\DoxyCodeLine{\Hypertarget{_input_file_state_8_effector_8cs_source_l00038}00038\ \ \ \ \ \ \ \ \ \ \ \ \ IDispatcher\ dispatcher)}
+\DoxyCodeLine{\Hypertarget{_input_file_state_8_effector_8cs_source_l00039}00039\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_input_file_state_8_effector_8cs_source_l00040}00040\ \ \ \ \ \ \ \ \ \ \ \ \ \_\ =\ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_a50f035982e1c206f234851523db5cbc8}{dispatcher}};\ \textcolor{comment}{//\ Suppress\ unused\ parameter}}
+\DoxyCodeLine{\Hypertarget{_input_file_state_8_effector_8cs_source_l00041}00041\ }
+\DoxyCodeLine{\Hypertarget{_input_file_state_8_effector_8cs_source_l00042}00042\ \ \ \ \ \ \ \ \ \ \ \ \ var\ currentSelection\ =\ refreshCurrentSelectionAction.CurrentSelection;}
+\DoxyCodeLine{\Hypertarget{_input_file_state_8_effector_8cs_source_l00043}00043\ }
+\DoxyCodeLine{\Hypertarget{_input_file_state_8_effector_8cs_source_l00044}00044\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (currentSelection\ is\ not\ \textcolor{keyword}{null})}
+\DoxyCodeLine{\Hypertarget{_input_file_state_8_effector_8cs_source_l00045}00045\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_input_file_state_8_effector_8cs_source_l00046}00046\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ currentSelection.ChildList.Clear();}
+\DoxyCodeLine{\Hypertarget{_input_file_state_8_effector_8cs_source_l00047}00047\ }
+\DoxyCodeLine{\Hypertarget{_input_file_state_8_effector_8cs_source_l00048}00048\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ refreshCurrentSelectionAction.BackgroundTaskService.Enqueue(}
+\DoxyCodeLine{\Hypertarget{_input_file_state_8_effector_8cs_source_l00049}00049\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Key<IBackgroundTask>.NewKey(),}
+\DoxyCodeLine{\Hypertarget{_input_file_state_8_effector_8cs_source_l00050}00050\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ContinuousBackgroundTaskWorker.GetQueueKey(),}
+\DoxyCodeLine{\Hypertarget{_input_file_state_8_effector_8cs_source_l00051}00051\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}Refresh\ Current\ Selection"{}},}
+\DoxyCodeLine{\Hypertarget{_input_file_state_8_effector_8cs_source_l00052}00052\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ async\ ()\ =>}
+\DoxyCodeLine{\Hypertarget{_input_file_state_8_effector_8cs_source_l00053}00053\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_input_file_state_8_effector_8cs_source_l00054}00054\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ await\ currentSelection.LoadChildListAsync().ConfigureAwait(\textcolor{keyword}{false});}
+\DoxyCodeLine{\Hypertarget{_input_file_state_8_effector_8cs_source_l00055}00055\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ TODO:\ This\ still\ needs\ to\ re-\/render.}}
+\DoxyCodeLine{\Hypertarget{_input_file_state_8_effector_8cs_source_l00056}00056\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \});}
+\DoxyCodeLine{\Hypertarget{_input_file_state_8_effector_8cs_source_l00057}00057\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_input_file_state_8_effector_8cs_source_l00058}00058\ }
+\DoxyCodeLine{\Hypertarget{_input_file_state_8_effector_8cs_source_l00059}00059\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ Task.CompletedTask;}
+\DoxyCodeLine{\Hypertarget{_input_file_state_8_effector_8cs_source_l00060}00060\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_input_file_state_8_effector_8cs_source_l00061}00061\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_input_file_state_8_effector_8cs_source_l00062}00062\ \}}
+
+\end{DoxyCode}

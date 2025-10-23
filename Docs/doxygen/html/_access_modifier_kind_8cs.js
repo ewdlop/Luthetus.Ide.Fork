@@ -1,0 +1,11 @@
+var _access_modifier_kind_8cs =
+[
+    [ "Luthetus.TextEditor.RazorLib.CompilerServices.Syntax.Nodes.Enums.AccessModifierKind", "namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_1_1_nodes_1_1_enums.html#a78fa21360b3c318d260628803d5c9d14", [
+      [ "Luthetus.TextEditor.RazorLib.CompilerServices.Syntax.Nodes.Enums.AccessModifierKind.Public", "namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_1_1_nodes_1_1_enums.html#a78fa21360b3c318d260628803d5c9d14a3d067bedfe2f4677470dd6ccf64d05ed", null ],
+      [ "Luthetus.TextEditor.RazorLib.CompilerServices.Syntax.Nodes.Enums.AccessModifierKind.ProtectedInternal", "namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_1_1_nodes_1_1_enums.html#a78fa21360b3c318d260628803d5c9d14a5afb82376068b548b1a0dc758f0f9ae8", null ],
+      [ "Luthetus.TextEditor.RazorLib.CompilerServices.Syntax.Nodes.Enums.AccessModifierKind.Protected", "namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_1_1_nodes_1_1_enums.html#a78fa21360b3c318d260628803d5c9d14a56f0605c9795b173abd2e34fab7fc164", null ],
+      [ "Luthetus.TextEditor.RazorLib.CompilerServices.Syntax.Nodes.Enums.AccessModifierKind.Internal", "namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_1_1_nodes_1_1_enums.html#a78fa21360b3c318d260628803d5c9d14aafbf0897a5a83fdd873dfb032ec695d3", null ],
+      [ "Luthetus.TextEditor.RazorLib.CompilerServices.Syntax.Nodes.Enums.AccessModifierKind.PrivateProtected", "namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_1_1_nodes_1_1_enums.html#a78fa21360b3c318d260628803d5c9d14a3859bd374f6443001ba97fb41ed4324c", null ],
+      [ "Luthetus.TextEditor.RazorLib.CompilerServices.Syntax.Nodes.Enums.AccessModifierKind.Private", "namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_1_1_nodes_1_1_enums.html#a78fa21360b3c318d260628803d5c9d14a47f9082fc380ca62d531096aa1d110f1", null ]
+    ] ]
+];

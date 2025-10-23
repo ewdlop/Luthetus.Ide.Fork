@@ -1,0 +1,4 @@
+var interface_luthetus_1_1_ide_1_1_razor_lib_1_1_file_systems_1_1_models_1_1_i_file_template_provider =
+[
+    [ "FileTemplatesList", "interface_luthetus_1_1_ide_1_1_razor_lib_1_1_file_systems_1_1_models_1_1_i_file_template_provider.html#a6504398cffa868aa9119b601fd83b2e4", null ]
+];

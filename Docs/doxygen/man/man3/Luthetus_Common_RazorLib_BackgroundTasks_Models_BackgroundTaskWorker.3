@@ -1,0 +1,95 @@
+.TH "Luthetus.Common.RazorLib.BackgroundTasks.Models.BackgroundTaskWorker" 3 "Version 1.0.0" "Luthetus.Ide" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+Luthetus.Common.RazorLib.BackgroundTasks.Models.BackgroundTaskWorker
+.SH SYNOPSIS
+.br
+.PP
+.PP
+Inherits BackgroundService\&.
+.PP
+Inherited by \fBLuthetus\&.Common\&.RazorLib\&.BackgroundTasks\&.Models\&.BlockingBackgroundTaskWorker\fP, and \fBLuthetus\&.Common\&.RazorLib\&.BackgroundTasks\&.Models\&.ContinuousBackgroundTaskWorker\fP\&.
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBBackgroundTaskWorker\fP (Key< \fBIBackgroundTaskQueue\fP > queueKey, \fBIBackgroundTaskService\fP backgroundTaskService, ILoggerFactory loggerFactory)"
+.br
+.ti -1c
+.RI "async Task \fBFlushAsync\fP (CancellationToken cancellationToken)"
+.br
+.RI "This method is being created so a unit test can enqueue a background task, and then await its completion\&. "
+.ti -1c
+.RI "override async Task \fBStopAsync\fP (CancellationToken cancellationToken)"
+.br
+.in -1c
+.SS "Protected Member Functions"
+
+.in +1c
+.ti -1c
+.RI "async override Task \fBExecuteAsync\fP (CancellationToken cancellationToken)"
+.br
+.in -1c
+.SS "Properties"
+
+.in +1c
+.ti -1c
+.RI "Key< \fBIBackgroundTaskQueue\fP > \fBQueueKey\fP\fR [get]\fP"
+.br
+.ti -1c
+.RI "\fBIBackgroundTaskService\fP \fBBackgroundTaskService\fP\fR [get]\fP"
+.br
+.ti -1c
+.RI "Task? \fBStartAsyncTask\fP\fR [get, set]\fP"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+Definition at line \fB7\fP of file \fBBackgroundTaskWorker\&.cs\fP\&.
+.SH "Constructor & Destructor Documentation"
+.PP 
+.SS "Luthetus\&.Common\&.RazorLib\&.BackgroundTasks\&.Models\&.BackgroundTaskWorker\&.BackgroundTaskWorker (Key< \fBIBackgroundTaskQueue\fP > queueKey, \fBIBackgroundTaskService\fP backgroundTaskService, ILoggerFactory loggerFactory)"
+
+.PP
+Definition at line \fB12\fP of file \fBBackgroundTaskWorker\&.cs\fP\&.
+.SH "Member Function Documentation"
+.PP 
+.SS "async override Task Luthetus\&.Common\&.RazorLib\&.BackgroundTasks\&.Models\&.BackgroundTaskWorker\&.ExecuteAsync (CancellationToken cancellationToken)\fR [protected]\fP"
+
+.PP
+Definition at line \fB26\fP of file \fBBackgroundTaskWorker\&.cs\fP\&.
+.SS "async Task Luthetus\&.Common\&.RazorLib\&.BackgroundTasks\&.Models\&.BackgroundTaskWorker\&.FlushAsync (CancellationToken cancellationToken)"
+
+.PP
+This method is being created so a unit test can enqueue a background task, and then await its completion\&. At the moment there is 'StopAsync(\&.\&.\&.)' but this does not suffice as it is intended to "permanently" stop the \fBIBackgroundTaskService\fP
+
+.PP
+The usage of this in the application code is not advised because its implementation is simple, naive, and polling\&.
+
+.PP
+Given the proper timing of things, one could infinitely enqueue, such that everytime this method checks if there is a count of 0 background tasks in the \fBIBackgroundTaskQueue\fP, that there could be a newly enqueue'd task therefore this method won't finish\&. 
+.PP
+Definition at line \fB102\fP of file \fBBackgroundTaskWorker\&.cs\fP\&.
+.SS "override async Task Luthetus\&.Common\&.RazorLib\&.BackgroundTasks\&.Models\&.BackgroundTaskWorker\&.StopAsync (CancellationToken cancellationToken)"
+
+.PP
+Definition at line \fB114\fP of file \fBBackgroundTaskWorker\&.cs\fP\&.
+.SH "Property Documentation"
+.PP 
+.SS "\fBIBackgroundTaskService\fP Luthetus\&.Common\&.RazorLib\&.BackgroundTasks\&.Models\&.BackgroundTaskWorker\&.BackgroundTaskService\fR [get]\fP"
+
+.PP
+Definition at line \fB23\fP of file \fBBackgroundTaskWorker\&.cs\fP\&.
+.SS "Key<\fBIBackgroundTaskQueue\fP> Luthetus\&.Common\&.RazorLib\&.BackgroundTasks\&.Models\&.BackgroundTaskWorker\&.QueueKey\fR [get]\fP"
+
+.PP
+Definition at line \fB22\fP of file \fBBackgroundTaskWorker\&.cs\fP\&.
+.SS "Task? Luthetus\&.Common\&.RazorLib\&.BackgroundTasks\&.Models\&.BackgroundTaskWorker\&.StartAsyncTask\fR [get]\fP, \fR [set]\fP"
+
+.PP
+Definition at line \fB24\fP of file \fBBackgroundTaskWorker\&.cs\fP\&.
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for Luthetus\&.Ide from the source code\&.

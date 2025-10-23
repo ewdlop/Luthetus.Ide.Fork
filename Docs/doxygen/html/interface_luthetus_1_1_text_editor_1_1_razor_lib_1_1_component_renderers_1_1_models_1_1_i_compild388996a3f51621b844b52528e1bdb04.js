@@ -1,0 +1,4 @@
+var interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_component_renderers_1_1_models_1_1_i_compild388996a3f51621b844b52528e1bdb04 =
+[
+    [ "BackgroundTask", "interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_component_renderers_1_1_models_1_1_i_compild388996a3f51621b844b52528e1bdb04.html#a4da54974f224ccc920e24e7ccb3d65a8", null ]
+];

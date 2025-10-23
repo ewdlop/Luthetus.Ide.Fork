@@ -1,0 +1,4 @@
+var _compiler_service_explorer_tree_view_mouse_event_handler_8cs =
+[
+    [ "Luthetus.Extensions.DotNet.CompilerServices.Models.CompilerServiceExplorerTreeViewMouseEventHandler", "class_luthetus_1_1_extensions_1_1_dot_net_1_1_compiler_services_1_1_models_1_1_compiler_service_46d29f026b4f9d2de2b1fe51733e5b05.html", "class_luthetus_1_1_extensions_1_1_dot_net_1_1_compiler_services_1_1_models_1_1_compiler_service_46d29f026b4f9d2de2b1fe51733e5b05" ]
+];

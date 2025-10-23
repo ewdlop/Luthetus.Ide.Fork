@@ -1,0 +1,562 @@
+\chapter{Luthetus.\+Text\+Editor (v2.\+1.\+0) }
+\hypertarget{md__docs_2_text_editor_2usage}{}\label{md__docs_2_text_editor_2usage}\index{Luthetus.TextEditor (v2.1.0)@{Luthetus.TextEditor (v2.1.0)}}
+\label{md__docs_2_text_editor_2usage_autotoc_md203}%
+\Hypertarget{md__docs_2_text_editor_2usage_autotoc_md203}%
+\hypertarget{md__docs_2_text_editor_2usage_autotoc_md204}{}\doxysection{\texorpdfstring{Usage}{Usage}}\label{md__docs_2_text_editor_2usage_autotoc_md204}
+\hypertarget{md__docs_2_text_editor_2usage_autotoc_md205}{}\doxysubsection{\texorpdfstring{Source Code}{Source Code}}\label{md__docs_2_text_editor_2usage_autotoc_md205}
+The .NET Solution\+: \href{../../Source/Tutorials/Luthetus.Tutorials.sln}{\texttt{Luthetus.\+Tutorials.\+sln}}, was made by following steps described here. So, the completed result can be found there.\hypertarget{md__docs_2_text_editor_2usage_autotoc_md206}{}\doxysubsection{\texorpdfstring{Goal}{Goal}}\label{md__docs_2_text_editor_2usage_autotoc_md206}
+
+
+
+\begin{DoxyItemize}
+\item Render a C\# Text Editor which makes use of the CSharp\+Compiler\+Service
+\end{DoxyItemize}\hypertarget{md__docs_2_text_editor_2usage_autotoc_md207}{}\doxysubsection{\texorpdfstring{Steps}{Steps}}\label{md__docs_2_text_editor_2usage_autotoc_md207}
+
+\begin{DoxyItemize}
+\item Create a codebehind for the file\+: {\ttfamily Pages/\+Index.\+razor}
+\end{DoxyItemize}
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{comment}{//\ Pages/Index.razor.cs}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keyword}{using\ }Microsoft.AspNetCore.Components;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespace_luthetus_1_1_tutorials_1_1_razor_lib_1_1_pages}{Luthetus.Tutorials.RazorLib.Pages}};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keyword}{public}\ \textcolor{keyword}{partial\ class\ }\mbox{\hyperlink{class_luthetus_1_1_tutorials_1_1_razor_lib_1_1_pages_1_1_index}{Index}}\ :\ ComponentBase}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{\}}
+
+\end{DoxyCode}
+
+
+
+\begin{DoxyItemize}
+\item There are 2 parts to rendering a Text Editor.
+\item First, one needs to make a \href{/Source/Lib/TextEditor/TextEditors/Models/TextEditorModel.Constructors.cs}{\texttt{Text\+Editor\+Model}}.
+\item Then, one needs to make a \href{/Source/Lib/TextEditor/TextEditors/Models/TextEditorViewModel.cs}{\texttt{Text\+Editor\+View\+Model}} for that previously made {\ttfamily model}.
+\item In \doxylink{_index_8razor_8cs}{Index.\+razor.\+cs} add the following line of code\+:
+\end{DoxyItemize}
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{comment}{//\ using\ Luthetus.TextEditor.RazorLib.Lexers.Models;}}
+\DoxyCodeLine{\textcolor{keyword}{public}\ \textcolor{keyword}{static}\ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_a435ccef09e2ba83022e8cf378fc0f690}{ResourceUri}}\ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_a435ccef09e2ba83022e8cf378fc0f690}{ResourceUri}}\ \{\ \textcolor{keyword}{get};\ \}\ =\ \textcolor{keyword}{new}(\textcolor{stringliteral}{"{}/index.txt"{}});}
+
+\end{DoxyCode}
+
+
+
+\begin{DoxyItemize}
+\item The \href{/Source/Lib/TextEditor/Lexers/Models/ResourceUri.cs}{\texttt{Resource\+Uri}} is a unique identifier for a given {\ttfamily Text\+Editor\+Model}.
+\item One might think of a {\ttfamily Text\+Editor\+Model} as mapping to a file on their filesystem, as an example.
+\item Override the Blazor lifecycle method named\+: {\ttfamily On\+Initialized()}
+\end{DoxyItemize}
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keyword}{protected}\ \textcolor{keyword}{override}\ \textcolor{keywordtype}{void}\ OnInitialized()}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{\ \ \ \ base.OnInitialized();}
+\DoxyCodeLine{\}}
+
+\end{DoxyCode}
+
+
+
+\begin{DoxyItemize}
+\item Inside this override, and above the {\ttfamily base.\+On\+Initialized();} invocation, we can register the {\ttfamily Text\+Editor\+Model}.
+\item We need access to the \href{/Source/Lib/TextEditor/ITextEditorService.cs}{\texttt{IText\+Editor\+Service}} to register a {\ttfamily Text\+Editor\+Model}. So, inject the {\ttfamily IText\+Editor\+Service}.
+\end{DoxyItemize}
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{comment}{//\ using\ Luthetus.TextEditor.RazorLib;}}
+\DoxyCodeLine{[Inject]}
+\DoxyCodeLine{\textcolor{keyword}{private}\ ITextEditorService\ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_abe7fad0a7df96f414b675b6af70f260d}{TextEditorService}}\ \{\ \textcolor{keyword}{get};\ \textcolor{keyword}{set};\ \}\ =\ \textcolor{keyword}{null}!;}
+
+\end{DoxyCode}
+
+
+
+\begin{DoxyItemize}
+\item The {\ttfamily IText\+Editor\+Service} has public properties that encapsulate the API for a given datatype in the {\ttfamily \doxylink{namespace_luthetus_1_1_text_editor}{Luthetus.\+Text\+Editor}} namespace. For example, {\ttfamily Text\+Editor\+Service.\+Model\+Api} accesses the {\ttfamily Model\+Api} property, which has all of the API related to the {\ttfamily Text\+Editor\+Model} datatype.
+\item By invoking {\ttfamily Text\+Editor\+Service.\+Model\+Api.\+Register\+Custom(...);}, we can create register a Text\+Editor\+Model. The {\ttfamily Register\+Custom(...)} method takes as a parameter an instance of {\ttfamily Text\+Editor\+Model}. So we need to make that instance.
+\item In the override for {\ttfamily On\+Initialized()}, create an instance of a {\ttfamily Text\+Editor\+Model}. Then, pass it in to the {\ttfamily Text\+Editor\+Service.\+Model.\+Register\+Custom(...)} invocation.
+\end{DoxyItemize}
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keyword}{protected}\ \textcolor{keyword}{override}\ \textcolor{keywordtype}{void}\ OnInitialized()}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{\ \ \ \ var\ model\ =\ \textcolor{keyword}{new}\ TextEditorModel(}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ ResourceUri,}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ DateTime.UtcNow,}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ ExtensionNoPeriodFacts.TXT,}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{@"{}public\ class\ MyClass}}
+\DoxyCodeLine{\textcolor{stringliteral}{\{}}
+\DoxyCodeLine{\textcolor{stringliteral}{\ \ \ \ public\ MyClass(string\ firstName,\ string\ lastName)}}
+\DoxyCodeLine{\textcolor{stringliteral}{\ \ \ \ \{}}
+\DoxyCodeLine{\textcolor{stringliteral}{\ \ \ \ \ \ \ \ FirstName\ =\ firstName;}}
+\DoxyCodeLine{\textcolor{stringliteral}{\ \ \ \ \ \ \ \ LastName\ =\ lastName;}}
+\DoxyCodeLine{\textcolor{stringliteral}{\ \ \ \ \}}}
+\DoxyCodeLine{\textcolor{stringliteral}{\ \ \ \ }}
+\DoxyCodeLine{\textcolor{stringliteral}{\ \ \ \ public\ string\ FirstName\ \{\ get;\ set;\ \}}}
+\DoxyCodeLine{\textcolor{stringliteral}{\ \ \ \ public\ string\ LastName\ \{\ get;\ set;\ \}}}
+\DoxyCodeLine{\textcolor{stringliteral}{\ \ \ \ }}
+\DoxyCodeLine{\textcolor{stringliteral}{\ \ \ \ public\ string\ DisplayName\ =>\ \$"{}"{}\{\{FirstName\}\}\ \{LastName\}"{}"{};}}
+\DoxyCodeLine{\textcolor{stringliteral}{\ \ \ \ }}
+\DoxyCodeLine{\textcolor{stringliteral}{\ \ \ \ public\ void\ SomeMethod(int\ arg1,\ MyClass\ arg2)}}
+\DoxyCodeLine{\textcolor{stringliteral}{\ \ \ \ \{}}
+\DoxyCodeLine{\textcolor{stringliteral}{\ \ \ \ \ \ \ \ if\ (arg1\ ==\ 2)}}
+\DoxyCodeLine{\textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ \ \ return;}}
+\DoxyCodeLine{\textcolor{stringliteral}{\ \ \ \ \ \ \ \ }}
+\DoxyCodeLine{\textcolor{stringliteral}{\ \ \ \ \ \ \ \ return;}}
+\DoxyCodeLine{\textcolor{stringliteral}{\ \ \ \ \}}}
+\DoxyCodeLine{\textcolor{stringliteral}{\}"{}},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ decorationMapper:\ \textcolor{keyword}{null},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ compilerService:\ \textcolor{keyword}{null});}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_abe7fad0a7df96f414b675b6af70f260d}{TextEditorService}}.\mbox{\hyperlink{interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_i_text_editor_service_ae3a0dbf71e296019f79700cb636fdf7e}{ModelApi}}.RegisterCustom(model);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ base.OnInitialized();}
+\DoxyCodeLine{\}}
+
+\end{DoxyCode}
+
+
+
+\begin{DoxyItemize}
+\item In order to render a {\ttfamily Text\+Editor\+Model}, we need a \href{/Source/Lib/TextEditor/TextEditors/Models/TextEditorViewModel.cs}{\texttt{Text\+Editor\+View\+Model}}. A file on one\textquotesingle{}s operating system would relate to a {\ttfamily model}. Whereas, an open text editor would relate to a {\ttfamily view\+Model}.
+\item Many {\ttfamily Text\+Editor\+View\+Model} can reference an underlying {\ttfamily Text\+Editor\+Model}. But, only 1 {\ttfamily model} for a given file on one\textquotesingle{}s operating system can exist.
+\end{DoxyItemize}
+
+\begin{quote}
+{\itshape NOTE\+:} I use an example of a operating system\textquotesingle{}s file system but, it is just an example, one can make a Text\+Editor\+Model out of "{}thin air"{} if they\textquotesingle{}d like to. \end{quote}
+
+
+
+\begin{DoxyItemize}
+\item We need a Text\+Editor\+View\+Model\+Key so we can maintain the Text\+Editor\+View\+Model state between page changes.
+\item Add the following line of code\+:
+\end{DoxyItemize}
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keyword}{public}\ \textcolor{keyword}{static}\ Key<TextEditorViewModel>\ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_af610e3ee35a4bcf6e9fb84479d570b95}{ViewModelKey}}\ \{\ \textcolor{keyword}{get};\ \}\ =\ Key<TextEditorViewModel>.NewKey();}
+
+\end{DoxyCode}
+
+
+
+\begin{DoxyItemize}
+\item Now, in the override for {\ttfamily On\+Initialized()}, invoke {\ttfamily Text\+Editor\+Service.\+View\+Model\+Api.\+Register(...)}.
+\end{DoxyItemize}
+
+\begin{quote}
+{\itshape NOTE\+:} The argument \textquotesingle{}Category\textquotesingle{} to \textquotesingle{}Text\+Editor\+Service.\+View\+Model\+Api.\+Register(...)\textquotesingle{} can be passed as \textquotesingle{}new Category("{}main"{})\textquotesingle{}. It acts only as a way to filter a list of view models. \end{quote}
+
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_abe7fad0a7df96f414b675b6af70f260d}{TextEditorService}}.\mbox{\hyperlink{interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_i_text_editor_service_a7f1a64364e1d4be381e7ec6b7c6df127}{ViewModelApi}}.Register(}
+\DoxyCodeLine{\ \ \ \ ViewModelKey,}
+\DoxyCodeLine{\ \ \ \ ResourceUri,}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{new}\ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_ab53dfba5ef40ddaeca4b8982ea420fd1}{Category}}(\textcolor{stringliteral}{"{}main"{}}));}
+
+\end{DoxyCode}
+
+
+
+\begin{DoxyItemize}
+\item My {\ttfamily \doxylink{_index_8razor_8cs}{Pages/\+Index.\+razor.\+cs}} file as of this step looks as follows\+:
+\end{DoxyItemize}
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keyword}{using\ }Microsoft.AspNetCore.Components;}
+\DoxyCodeLine{\textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_luthetus_1_1_common_1_1_razor_lib_1_1_keys_1_1_models}{Luthetus.Common.RazorLib.Keys.Models}};}
+\DoxyCodeLine{\textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib}{Luthetus.TextEditor.RazorLib}};}
+\DoxyCodeLine{\textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models}{Luthetus.TextEditor.RazorLib.TextEditors.Models}};}
+\DoxyCodeLine{\textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_lexers_1_1_models}{Luthetus.TextEditor.RazorLib.Lexers.Models}};}
+\DoxyCodeLine{\textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_interfaces}{Luthetus.TextEditor.RazorLib.CompilerServices.Interfaces}};}
+\DoxyCodeLine{\textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_decorations_1_1_models}{Luthetus.TextEditor.RazorLib.Decorations.Models}};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespace_luthetus_1_1_tutorials_1_1_razor_lib_1_1_pages}{Luthetus.Tutorials.RazorLib.Pages}};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keyword}{public}\ \textcolor{keyword}{partial\ class\ }\mbox{\hyperlink{class_luthetus_1_1_tutorials_1_1_razor_lib_1_1_pages_1_1_index}{Index}}\ :\ ComponentBase}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{\ \ \ \ [Inject]}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{private}\ ITextEditorService\ TextEditorService\ \{\ \textcolor{keyword}{get};\ \textcolor{keyword}{set};\ \}\ =\ \textcolor{keyword}{null}!;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{public}\ \textcolor{keyword}{static}\ \mbox{\hyperlink{class_luthetus_1_1_tutorials_1_1_razor_lib_1_1_pages_1_1_index_ae47782af3f22455df791ae11a8339f97}{ResourceUri}}\ \mbox{\hyperlink{class_luthetus_1_1_tutorials_1_1_razor_lib_1_1_pages_1_1_index_ae47782af3f22455df791ae11a8339f97}{ResourceUri}}\ \{\ \textcolor{keyword}{get};\ \}\ =\ \textcolor{keyword}{new}(\textcolor{stringliteral}{"{}/index.txt"{}});}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{public}\ \textcolor{keyword}{static}\ Key<TextEditorViewModel>\ \mbox{\hyperlink{class_luthetus_1_1_tutorials_1_1_razor_lib_1_1_pages_1_1_index_a770714dac16773a3a106634fd3b2cb86}{ViewModelKey}}\ \{\ \textcolor{keyword}{get};\ \}\ =\ Key<TextEditorViewModel>.NewKey();}
+\DoxyCodeLine{\ \ \ \ }
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{protected}\ \textcolor{keyword}{override}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_luthetus_1_1_tutorials_1_1_razor_lib_1_1_pages_1_1_index_a204441abf0cc26eebdce6fe385ae6033}{OnInitialized}}()}
+\DoxyCodeLine{\ \ \ \ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ var\ model\ =\ \textcolor{keyword}{new}\ TextEditorModel(}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_luthetus_1_1_tutorials_1_1_razor_lib_1_1_pages_1_1_index_ae47782af3f22455df791ae11a8339f97}{ResourceUri}},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ DateTime.UtcNow,}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ ExtensionNoPeriodFacts.TXT,}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{@"{}public\ class\ MyClass}}
+\DoxyCodeLine{\textcolor{stringliteral}{\{}}
+\DoxyCodeLine{\textcolor{stringliteral}{\ \ \ \ public\ MyClass(string\ firstName,\ string\ lastName)}}
+\DoxyCodeLine{\textcolor{stringliteral}{\ \ \ \ \{}}
+\DoxyCodeLine{\textcolor{stringliteral}{\ \ \ \ \ \ \ \ FirstName\ =\ firstName;}}
+\DoxyCodeLine{\textcolor{stringliteral}{\ \ \ \ \ \ \ \ LastName\ =\ lastName;}}
+\DoxyCodeLine{\textcolor{stringliteral}{\ \ \ \ \}}}
+\DoxyCodeLine{\textcolor{stringliteral}{\ \ \ \ }}
+\DoxyCodeLine{\textcolor{stringliteral}{\ \ \ \ public\ string\ FirstName\ \{\ get;\ set;\ \}}}
+\DoxyCodeLine{\textcolor{stringliteral}{\ \ \ \ public\ string\ LastName\ \{\ get;\ set;\ \}}}
+\DoxyCodeLine{\textcolor{stringliteral}{\ \ \ \ }}
+\DoxyCodeLine{\textcolor{stringliteral}{\ \ \ \ public\ string\ DisplayName\ =>\ \$"{}"{}\{\{FirstName\}\}\ \{LastName\}"{}"{};}}
+\DoxyCodeLine{\textcolor{stringliteral}{\ \ \ \ }}
+\DoxyCodeLine{\textcolor{stringliteral}{\ \ \ \ public\ void\ SomeMethod(int\ arg1,\ MyClass\ arg2)}}
+\DoxyCodeLine{\textcolor{stringliteral}{\ \ \ \ \{}}
+\DoxyCodeLine{\textcolor{stringliteral}{\ \ \ \ \ \ \ \ if\ (arg1\ ==\ 2)}}
+\DoxyCodeLine{\textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ \ \ return;}}
+\DoxyCodeLine{\textcolor{stringliteral}{\ \ \ \ \ \ \ \ }}
+\DoxyCodeLine{\textcolor{stringliteral}{\ \ \ \ \ \ \ \ return;}}
+\DoxyCodeLine{\textcolor{stringliteral}{\ \ \ \ \}}}
+\DoxyCodeLine{\textcolor{stringliteral}{\}"{}},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ decorationMapper:\ \textcolor{keyword}{null},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ compilerService:\ \textcolor{keyword}{null});}
+\DoxyCodeLine{\ \ \ \ }
+\DoxyCodeLine{\ \ \ \ \ \ \ \ TextEditorService.ModelApi.RegisterCustom(model);}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\ \ \ \ \ \ \ \ TextEditorService.ViewModelApi.Register(}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_luthetus_1_1_tutorials_1_1_razor_lib_1_1_pages_1_1_index_a770714dac16773a3a106634fd3b2cb86}{ViewModelKey}},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_luthetus_1_1_tutorials_1_1_razor_lib_1_1_pages_1_1_index_ae47782af3f22455df791ae11a8339f97}{ResourceUri}},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{new}\ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_ab53dfba5ef40ddaeca4b8982ea420fd1}{Category}}(\textcolor{stringliteral}{"{}main"{}}));}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\ \ \ \ \ \ \ \ base.OnInitialized();}
+\DoxyCodeLine{\ \ \ \ \}}
+\DoxyCodeLine{\}}
+
+\end{DoxyCode}
+
+
+
+\begin{DoxyItemize}
+\item In the .razor markup ({\ttfamily Pages/\+Index.\+razor}) render the Blazor component\+: {\ttfamily \texorpdfstring{$<$}{<}\doxylink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_displays_1_1_text_editor_view_model_display}{Luthetus.\+Text\+Editor.\+Razor\+Lib.\+Text\+Editors.\+Displays.\+Text\+Editor\+View\+Model\+Display}/\texorpdfstring{$>$}{>}}
+\item This component takes various parameters, but only one of them is required. The rest of the parameters are for customization.
+\item Pass in the required parameter {\ttfamily Text\+Editor\+View\+Model\+Key} to have the value of the {\ttfamily Text\+Editor\+View\+Model\+Key} property from the codebehind.
+\end{DoxyItemize}
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{@page\ \textcolor{stringliteral}{"{}/"{}}}
+\DoxyCodeLine{}
+\DoxyCodeLine{@\textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_displays}{Luthetus.TextEditor.RazorLib.TextEditors.Displays}};}
+\DoxyCodeLine{}
+\DoxyCodeLine{<PageTitle>Index</PageTitle>}
+\DoxyCodeLine{}
+\DoxyCodeLine{<h1>Hello,\ world!</h1>}
+\DoxyCodeLine{}
+\DoxyCodeLine{Welcome\ to\ your\ \textcolor{keyword}{new}\ \mbox{\hyperlink{_lib_2_ide_2_host_8_blazor_server_side_2_program_8cs_a7b225fcb720e4d5ed2bbf60e28a25e6d}{app}}.}
+\DoxyCodeLine{}
+\DoxyCodeLine{<\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_displays_1_1_text_editor_view_model_display}{TextEditorViewModelDisplay}}\ TextEditorViewModelKey=\textcolor{stringliteral}{"{}ViewModelKey"{}}\ />}
+
+\end{DoxyCode}
+
+
+
+\begin{DoxyItemize}
+\item A plain text editor without syntax highlighting should render now when the app is ran.
+\end{DoxyItemize}
+
+
+
+\begin{quote}
+{\itshape NOTE\+:} Height of the text editor is 100\% of the parent element. In the Blazor default project template one needs the following\+: \end{quote}
+
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\ html}
+\DoxyCodeLine{<!-\/-\/\ Example\ for\ more\ height\ in\ the\ Blazor\ default\ project\ template\ (this\ is\ not\ an\ example\ of\ ideal\ responsive\ UI\ css\ but\ it\ gets\ across\ the\ idea\ and\ one\ can\ customize\ as\ needed.)\ -\/-\/>}
+\DoxyCodeLine{}
+\DoxyCodeLine{<!-\/-\/\ Index.razor\ -\/-\/>}
+\DoxyCodeLine{}
+\DoxyCodeLine{@page\ "{}/"{}}
+\DoxyCodeLine{}
+\DoxyCodeLine{@using\ Luthetus.TextEditor.RazorLib.TextEditors.Displays;}
+\DoxyCodeLine{}
+\DoxyCodeLine{<PageTitle>Index</PageTitle>}
+\DoxyCodeLine{}
+\DoxyCodeLine{<div\ style="{}height:\ 5em;"{}>}
+\DoxyCodeLine{\ \ \ \ <h1>Hello,\ world!</h1>}
+\DoxyCodeLine{\ \ \ \ }
+\DoxyCodeLine{\ \ \ \ Welcome\ to\ your\ new\ app.}
+\DoxyCodeLine{</div>}
+\DoxyCodeLine{}
+\DoxyCodeLine{@*\ 10px\ for\ padding\ *@}
+\DoxyCodeLine{<div\ style="{}height:\ calc(100\%\ -\/\ 5em\ -\/\ 10px);"{}>}
+\DoxyCodeLine{\ \ \ \ <TextEditorViewModelDisplay\ TextEditorViewModelKey="{}ViewModelKey"{}/>}
+\DoxyCodeLine{</div>}
+
+\end{DoxyCode}
+
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\ html}
+\DoxyCodeLine{<!-\/-\/\ Example\ for\ more\ height\ in\ the\ Blazor\ default\ project\ template\ (this\ is\ not\ an\ example\ of\ ideal\ responsive\ UI\ css\ but\ it\ gets\ across\ the\ idea\ and\ one\ can\ customize\ as\ needed.)\ -\/-\/>}
+\DoxyCodeLine{}
+\DoxyCodeLine{<!-\/-\/\ MainLayout.razor\ -\/-\/>}
+\DoxyCodeLine{}
+\DoxyCodeLine{@inherits\ LayoutComponentBase}
+\DoxyCodeLine{}
+\DoxyCodeLine{<PageTitle>Luthetus.Tutorials</PageTitle>}
+\DoxyCodeLine{}
+\DoxyCodeLine{<div\ class="{}page"{}>}
+\DoxyCodeLine{\ \ \ \ <div\ class="{}sidebar"{}>}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ <NavMenu\ />}
+\DoxyCodeLine{\ \ \ \ </div>}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ <main>}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ <div\ class="{}top-\/row\ px-\/4"{}>}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ <a\ href="{}https://docs.microsoft.com/aspnet/"{}\ target="{}\_blank"{}>About</a>}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ </div>}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ <!-\/-\/\ THE\ CHANGE\ IS\ HERE\ TO\ THE\ STYLE\ ATTRIBUTE\ OF\ THE\ ARTCILE\ ELEMENT.\ 56px\ is\ the\ height\ of\ the\ top-\/row.\ -\/-\/>}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ <article\ class="{}content\ px-\/4"{}\ style="{}height:\ calc(100\%\ -\/\ 56px);"{}>}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ @Body}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ </article>}
+\DoxyCodeLine{\ \ \ \ </main>}
+\DoxyCodeLine{</div>}
+
+\end{DoxyCode}
+
+
+
+
+
+\begin{DoxyItemize}
+\item Now we can add in the C\# Compiler Service.
+\item Reference the {\ttfamily \doxylink{namespace_luthetus_1_1_compiler_services_1_1_c_sharp}{Luthetus.\+Compiler\+Services.\+CSharp}} Nuget Package
+\end{DoxyItemize}
+
+Go to the file that you register your services and add the following lines of C\# code.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_interfaces}{Luthetus.TextEditor.RazorLib.CompilerServices.Interfaces}};}
+\DoxyCodeLine{\textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_decorations_1_1_models}{Luthetus.TextEditor.RazorLib.Decorations.Models}};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{//\ NOTE:\ the\ next\ step\ creates\ the\ implementations}}
+\DoxyCodeLine{services}
+\DoxyCodeLine{\ \ \ \ .AddScoped<\mbox{\hyperlink{interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_interfaces_1_1_i_compiler_service_registry}{ICompilerServiceRegistry}},\ CompilerServiceRegistry>()}
+\DoxyCodeLine{\ \ \ \ .\mbox{\hyperlink{_lib_2_ide_2_host_8_blazor_web_assembly_2_program_8cs_ad23e038402085511bf6d150f155199f9}{AddScoped<IDecorationMapperRegistry,\ DecorationMapperRegistry>}}();}
+
+\end{DoxyCode}
+
+
+Add Compiler\+Service\+Registry.\+cs as follows\+: 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keyword}{using\ }System.Collections.Immutable;}
+\DoxyCodeLine{\textcolor{keyword}{using\ }Fluxor;}
+\DoxyCodeLine{\textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_luthetus_1_1_common_1_1_razor_lib_1_1_file_systems_1_1_models}{Luthetus.Common.RazorLib.FileSystems.Models}};}
+\DoxyCodeLine{\textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib}{Luthetus.TextEditor.RazorLib}};}
+\DoxyCodeLine{\textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_implementations}{Luthetus.TextEditor.RazorLib.CompilerServices.Implementations}};}
+\DoxyCodeLine{\textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_interfaces}{Luthetus.TextEditor.RazorLib.CompilerServices.Interfaces}};}
+\DoxyCodeLine{\textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models}{Luthetus.TextEditor.RazorLib.TextEditors.Models}};}
+\DoxyCodeLine{\textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_luthetus_1_1_compiler_services_1_1_c_sharp_1_1_compiler_service_case}{Luthetus.CompilerServices.CSharp.CompilerServiceCase}};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespace_luthetus_1_1_tutorials_1_1_razor_lib_1_1_compiler_services}{Luthetus.Tutorials.RazorLib.CompilerServices}};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keyword}{public}\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_luthetus_1_1_tutorials_1_1_razor_lib_1_1_compiler_services_1_1_compiler_service_registry}{CompilerServiceRegistry}}\ :\ ICompilerServiceRegistry}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{private}\ readonly\ Dictionary<string,\ ICompilerService>\ \_map\ =\ \textcolor{keyword}{new}();}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{public}\ ImmutableDictionary<string,\ ICompilerService>\ \mbox{\hyperlink{class_luthetus_1_1_tutorials_1_1_razor_lib_1_1_compiler_services_1_1_compiler_service_registry_adee43cc7a37d9a72a805c15d97a421cf}{Map}}\ =>\ \_map.ToImmutableDictionary();}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{public}\ ImmutableList<ICompilerService>\ \mbox{\hyperlink{class_luthetus_1_1_tutorials_1_1_razor_lib_1_1_compiler_services_1_1_compiler_service_registry_adeab66bb5ce7d1f1dcc263d6a9dd596d}{CompilerServiceList}}\ =>\ \_map.Select(x\ =>\ x.Value).ToImmutableList();}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{public}\ \mbox{\hyperlink{class_luthetus_1_1_tutorials_1_1_razor_lib_1_1_compiler_services_1_1_compiler_service_registry_aac01aaffa86300d0e5099c4679080ccb}{CompilerServiceRegistry}}(ITextEditorService\ textEditorService)}
+\DoxyCodeLine{\ \ \ \ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \mbox{\hyperlink{class_luthetus_1_1_tutorials_1_1_razor_lib_1_1_compiler_services_1_1_compiler_service_registry_af802fa84ba745c84598ae2cd09902ef1}{CSharpCompilerService}}\ =\ \textcolor{keyword}{new}\ \mbox{\hyperlink{class_luthetus_1_1_tutorials_1_1_razor_lib_1_1_compiler_services_1_1_compiler_service_registry_af802fa84ba745c84598ae2cd09902ef1}{CSharpCompilerService}}(textEditorService);}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \mbox{\hyperlink{class_luthetus_1_1_tutorials_1_1_razor_lib_1_1_compiler_services_1_1_compiler_service_registry_ab1574cb7ed81bc2d59bf37ddda43d052}{DefaultCompilerService}}\ =\ \textcolor{keyword}{new}\ CompilerService(textEditorService);}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \_map.Add(ExtensionNoPeriodFacts.C\_SHARP\_CLASS,\ \mbox{\hyperlink{class_luthetus_1_1_tutorials_1_1_razor_lib_1_1_compiler_services_1_1_compiler_service_registry_af802fa84ba745c84598ae2cd09902ef1}{CSharpCompilerService}});}
+\DoxyCodeLine{\ \ \ \ \}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{public}\ \mbox{\hyperlink{class_luthetus_1_1_tutorials_1_1_razor_lib_1_1_compiler_services_1_1_compiler_service_registry_af802fa84ba745c84598ae2cd09902ef1}{CSharpCompilerService}}\ \mbox{\hyperlink{class_luthetus_1_1_tutorials_1_1_razor_lib_1_1_compiler_services_1_1_compiler_service_registry_af802fa84ba745c84598ae2cd09902ef1}{CSharpCompilerService}}\ \{\ \textcolor{keyword}{get};\ \}}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{public}\ CompilerService\ \mbox{\hyperlink{class_luthetus_1_1_tutorials_1_1_razor_lib_1_1_compiler_services_1_1_compiler_service_registry_ab1574cb7ed81bc2d59bf37ddda43d052}{DefaultCompilerService}}\ \{\ \textcolor{keyword}{get};\ \}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{public}\ ICompilerService\ \mbox{\hyperlink{class_luthetus_1_1_tutorials_1_1_razor_lib_1_1_compiler_services_1_1_compiler_service_registry_a8ceeb143d2a3f5073f65d1e0a5b6f8a2}{GetCompilerService}}(\textcolor{keywordtype}{string}\ extensionNoPeriod)}
+\DoxyCodeLine{\ \ \ \ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\_map.TryGetValue(extensionNoPeriod,\ out\ var\ compilerService))}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ compilerService;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{class_luthetus_1_1_tutorials_1_1_razor_lib_1_1_compiler_services_1_1_compiler_service_registry_ab1574cb7ed81bc2d59bf37ddda43d052}{DefaultCompilerService}};}
+\DoxyCodeLine{\ \ \ \ \}}
+\DoxyCodeLine{\}}
+
+\end{DoxyCode}
+
+
+Add Decoration\+Mapper\+Registry.\+cs as follows\+:
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keyword}{using\ }System.Collections.Immutable;}
+\DoxyCodeLine{\textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_generic_lexer_1_1_decoration}{Luthetus.TextEditor.RazorLib.CompilerServices.GenericLexer.Decoration}};}
+\DoxyCodeLine{\textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_decorations_1_1_models}{Luthetus.TextEditor.RazorLib.Decorations.Models}};}
+\DoxyCodeLine{\textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models}{Luthetus.TextEditor.RazorLib.TextEditors.Models}};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespace_luthetus_1_1_tutorials_1_1_razor_lib_1_1_decorations}{Luthetus.Tutorials.RazorLib.Decorations}};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keyword}{public}\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_luthetus_1_1_tutorials_1_1_razor_lib_1_1_decorations_1_1_decoration_mapper_registry}{DecorationMapperRegistry}}\ :\ IDecorationMapperRegistry}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{private}\ Dictionary<string,\ IDecorationMapper>\ \_map\ \{\ \textcolor{keyword}{get};\ \}\ =\ \textcolor{keyword}{new}();}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{public}\ ImmutableDictionary<string,\ IDecorationMapper>\ \mbox{\hyperlink{class_luthetus_1_1_tutorials_1_1_razor_lib_1_1_decorations_1_1_decoration_mapper_registry_afdc8b87c7dedd8975c6b0a592d60d6ff}{Map}}\ =>\ \_map.ToImmutableDictionary();}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{public}\ \mbox{\hyperlink{class_luthetus_1_1_tutorials_1_1_razor_lib_1_1_decorations_1_1_decoration_mapper_registry_a72d2861442aa20e7640c6a8f7886ddbf}{DecorationMapperRegistry}}()}
+\DoxyCodeLine{\ \ \ \ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \mbox{\hyperlink{class_luthetus_1_1_tutorials_1_1_razor_lib_1_1_decorations_1_1_decoration_mapper_registry_a7e065848d077fd2f732f1df95208a7a1}{GenericDecorationMapper}}\ =\ \textcolor{keyword}{new}\ \mbox{\hyperlink{class_luthetus_1_1_tutorials_1_1_razor_lib_1_1_decorations_1_1_decoration_mapper_registry_a7e065848d077fd2f732f1df95208a7a1}{GenericDecorationMapper}}();}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \mbox{\hyperlink{class_luthetus_1_1_tutorials_1_1_razor_lib_1_1_decorations_1_1_decoration_mapper_registry_ac6547c6cf0d218b298391b09fd442c98}{DefaultDecorationMapper}}\ =\ \textcolor{keyword}{new}\ TextEditorDecorationMapperDefault();}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \_map.Add(ExtensionNoPeriodFacts.C\_SHARP\_CLASS,\ \mbox{\hyperlink{class_luthetus_1_1_tutorials_1_1_razor_lib_1_1_decorations_1_1_decoration_mapper_registry_a7e065848d077fd2f732f1df95208a7a1}{GenericDecorationMapper}});}
+\DoxyCodeLine{\ \ \ \ \}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{public}\ \mbox{\hyperlink{class_luthetus_1_1_tutorials_1_1_razor_lib_1_1_decorations_1_1_decoration_mapper_registry_a7e065848d077fd2f732f1df95208a7a1}{GenericDecorationMapper}}\ \mbox{\hyperlink{class_luthetus_1_1_tutorials_1_1_razor_lib_1_1_decorations_1_1_decoration_mapper_registry_a7e065848d077fd2f732f1df95208a7a1}{GenericDecorationMapper}}\ \{\ \textcolor{keyword}{get};\ \}}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{public}\ TextEditorDecorationMapperDefault\ \mbox{\hyperlink{class_luthetus_1_1_tutorials_1_1_razor_lib_1_1_decorations_1_1_decoration_mapper_registry_ac6547c6cf0d218b298391b09fd442c98}{DefaultDecorationMapper}}\ \{\ \textcolor{keyword}{get};\ \}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{public}\ IDecorationMapper\ \mbox{\hyperlink{class_luthetus_1_1_tutorials_1_1_razor_lib_1_1_decorations_1_1_decoration_mapper_registry_a1069e4f2db87d066cfc1ccde11e851ff}{GetDecorationMapper}}(\textcolor{keywordtype}{string}\ extensionNoPeriod)}
+\DoxyCodeLine{\ \ \ \ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\_map.TryGetValue(extensionNoPeriod,\ out\ var\ decorationMapper))}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ decorationMapper;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{class_luthetus_1_1_tutorials_1_1_razor_lib_1_1_decorations_1_1_decoration_mapper_registry_ac6547c6cf0d218b298391b09fd442c98}{DefaultDecorationMapper}};}
+\DoxyCodeLine{\ \ \ \ \}}
+\DoxyCodeLine{\}}
+
+\end{DoxyCode}
+
+
+
+\begin{DoxyItemize}
+\item In the {\ttfamily \doxylink{_index_8razor_8cs}{Pages/\+Index.\+razor.\+cs}} file we now can provide the {\ttfamily CSharp\+Compiler\+Service} when instantiating a {\ttfamily Text\+Editor\+Model}.
+\item Inject the {\ttfamily ICompiler\+Service\+Registry} and the {\ttfamily IDecoration\+Mapper\+Registry}
+\end{DoxyItemize}
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{comment}{//\ using\ Luthetus.TextEditor.RazorLib.CompilerServices.Interfaces;}}
+\DoxyCodeLine{\textcolor{comment}{//\ using\ Luthetus.TextEditor.RazorLib.Decorations.Models;}}
+\DoxyCodeLine{}
+\DoxyCodeLine{[Inject]}
+\DoxyCodeLine{\textcolor{keyword}{private}\ \mbox{\hyperlink{interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_interfaces_1_1_i_compiler_service_registry}{ICompilerServiceRegistry}}\ CompilerServiceRegistry\ \{\ \textcolor{keyword}{get};\ \textcolor{keyword}{set};\ \}\ =\ \textcolor{keyword}{null}!;}
+\DoxyCodeLine{[Inject]}
+\DoxyCodeLine{\textcolor{keyword}{private}\ \mbox{\hyperlink{interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_decorations_1_1_models_1_1_i_decoration_mapper_registry}{IDecorationMapperRegistry}}\ DecorationMapperRegistry\ \{\ \textcolor{keyword}{get};\ \textcolor{keyword}{set};\ \}\ =\ \textcolor{keyword}{null}!;}
+
+\end{DoxyCode}
+
+
+
+\begin{DoxyItemize}
+\item In {\ttfamily On\+Initialized()}, prior to constructing the {\ttfamily Text\+Editor\+Model} we can get the decoration mapper, and compiler service we wish to use.
+\end{DoxyItemize}
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{var\ genericDecorationMapper\ =\ DecorationMapperRegistry.\mbox{\hyperlink{interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_decorations_1_1_models_1_1_i_decoration_mapper_registry_a000cd34558000251f2c3959104d80a8e}{GetDecorationMapper}}(}
+\DoxyCodeLine{\ \ \ \ ExtensionNoPeriodFacts.C\_SHARP\_CLASS);}
+\DoxyCodeLine{}
+\DoxyCodeLine{var\ cSharpCompilerService\ =\ CompilerServiceRegistry.\mbox{\hyperlink{interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_interfaces_1_1_i_compiler_service_registry_a1682cc381e8bdb2a94cedcb62c90f075}{GetCompilerService}}(}
+\DoxyCodeLine{\ \ \ \ ExtensionNoPeriodFacts.C\_SHARP\_CLASS);}
+
+\end{DoxyCode}
+
+
+
+\begin{DoxyItemize}
+\item Then pass in {\ttfamily generic\+Decoration\+Mapper} and {\ttfamily c\+Sharp\+Compiler\+Service} instead of the nulls when invoking the {\ttfamily Text\+Editor\+Model} constructor.
+\item One last step, on the line immediately following, {\ttfamily Text\+Editor\+Service.\+Model\+Api.\+Register\+Custom(model);} add the line\+: {\ttfamily c\+Sharp\+Compiler\+Service.\+Register\+Resource(model.\+Resource\+Uri, should\+Trigger\+Resource\+Was\+Modified\+: true);}
+\item My {\ttfamily \doxylink{_index_8razor_8cs}{Pages/\+Index.\+razor.\+cs}} file as of this step is shown in the following code snippet\+:
+\end{DoxyItemize}
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_luthetus_1_1_common_1_1_razor_lib_1_1_keys_1_1_models}{Luthetus.Common.RazorLib.Keys.Models}};}
+\DoxyCodeLine{\textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib}{Luthetus.TextEditor.RazorLib}};}
+\DoxyCodeLine{\textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_interfaces}{Luthetus.TextEditor.RazorLib.CompilerServices.Interfaces}};}
+\DoxyCodeLine{\textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_decorations_1_1_models}{Luthetus.TextEditor.RazorLib.Decorations.Models}};}
+\DoxyCodeLine{\textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_lexers_1_1_models}{Luthetus.TextEditor.RazorLib.Lexers.Models}};}
+\DoxyCodeLine{\textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models}{Luthetus.TextEditor.RazorLib.TextEditors.Models}};}
+\DoxyCodeLine{\textcolor{keyword}{using\ }Microsoft.AspNetCore.Components;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keyword}{namespace\ }NugetPackageTest.Pages;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keyword}{public}\ \textcolor{keyword}{partial\ class\ }Home\ :\ ComponentBase}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{\ \ \ \ [Inject]}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{private}\ ITextEditorService\ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_abe7fad0a7df96f414b675b6af70f260d}{TextEditorService}}\ \{\ \textcolor{keyword}{get};\ \textcolor{keyword}{set};\ \}\ =\ \textcolor{keyword}{null}!;}
+\DoxyCodeLine{\ \ \ \ [Inject]}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{private}\ ICompilerServiceRegistry\ CompilerServiceRegistry\ \{\ \textcolor{keyword}{get};\ \textcolor{keyword}{set};\ \}\ =\ \textcolor{keyword}{null}!;}
+\DoxyCodeLine{\ \ \ \ [Inject]}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{private}\ IDecorationMapperRegistry\ DecorationMapperRegistry\ \{\ \textcolor{keyword}{get};\ \textcolor{keyword}{set};\ \}\ =\ \textcolor{keyword}{null}!;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{public}\ \textcolor{keyword}{static}\ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_a435ccef09e2ba83022e8cf378fc0f690}{ResourceUri}}\ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_a435ccef09e2ba83022e8cf378fc0f690}{ResourceUri}}\ \{\ \textcolor{keyword}{get};\ \}\ =\ \textcolor{keyword}{new}(\textcolor{stringliteral}{"{}/index.txt"{}});}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{public}\ \textcolor{keyword}{static}\ Key<TextEditorViewModel>\ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_af610e3ee35a4bcf6e9fb84479d570b95}{ViewModelKey}}\ \{\ \textcolor{keyword}{get};\ \}\ =\ Key<TextEditorViewModel>.NewKey();}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{protected}\ \textcolor{keyword}{override}\ \textcolor{keywordtype}{void}\ OnInitialized()}
+\DoxyCodeLine{\ \ \ \ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ var\ genericDecorationMapper\ =\ DecorationMapperRegistry.\mbox{\hyperlink{interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_decorations_1_1_models_1_1_i_decoration_mapper_registry_a000cd34558000251f2c3959104d80a8e}{GetDecorationMapper}}(}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ ExtensionNoPeriodFacts.C\_SHARP\_CLASS);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ var\ cSharpCompilerService\ =\ CompilerServiceRegistry.\mbox{\hyperlink{interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_interfaces_1_1_i_compiler_service_registry_a1682cc381e8bdb2a94cedcb62c90f075}{GetCompilerService}}(}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ ExtensionNoPeriodFacts.C\_SHARP\_CLASS);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ var\ model\ =\ \textcolor{keyword}{new}\ TextEditorModel(}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ResourceUri,}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ DateTime.UtcNow,}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ExtensionNoPeriodFacts.TXT,}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{@"{}public\ class\ MyClass}}
+\DoxyCodeLine{\textcolor{stringliteral}{\{}}
+\DoxyCodeLine{\textcolor{stringliteral}{\ \ \ \ public\ MyClass(string\ firstName,\ string\ lastName)}}
+\DoxyCodeLine{\textcolor{stringliteral}{\ \ \ \ \{}}
+\DoxyCodeLine{\textcolor{stringliteral}{\ \ \ \ \ \ \ \ FirstName\ =\ firstName;}}
+\DoxyCodeLine{\textcolor{stringliteral}{\ \ \ \ \ \ \ \ LastName\ =\ lastName;}}
+\DoxyCodeLine{\textcolor{stringliteral}{\ \ \ \ \}}}
+\DoxyCodeLine{\textcolor{stringliteral}{\ \ \ \ }}
+\DoxyCodeLine{\textcolor{stringliteral}{\ \ \ \ public\ string\ FirstName\ \{\ get;\ set;\ \}}}
+\DoxyCodeLine{\textcolor{stringliteral}{\ \ \ \ public\ string\ LastName\ \{\ get;\ set;\ \}}}
+\DoxyCodeLine{\textcolor{stringliteral}{\ \ \ \ }}
+\DoxyCodeLine{\textcolor{stringliteral}{\ \ \ \ public\ string\ DisplayName\ =>\ \$"{}"{}\{\{FirstName\}\}\ \{LastName\}"{}"{};}}
+\DoxyCodeLine{\textcolor{stringliteral}{\ \ \ \ }}
+\DoxyCodeLine{\textcolor{stringliteral}{\ \ \ \ public\ void\ SomeMethod(int\ arg1,\ MyClass\ arg2)}}
+\DoxyCodeLine{\textcolor{stringliteral}{\ \ \ \ \{}}
+\DoxyCodeLine{\textcolor{stringliteral}{\ \ \ \ \ \ \ \ if\ (arg1\ ==\ 2)}}
+\DoxyCodeLine{\textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ \ \ return;}}
+\DoxyCodeLine{\textcolor{stringliteral}{\ \ \ \ \ \ \ \ }}
+\DoxyCodeLine{\textcolor{stringliteral}{\ \ \ \ \ \ \ \ return;}}
+\DoxyCodeLine{\textcolor{stringliteral}{\ \ \ \ \}}}
+\DoxyCodeLine{\textcolor{stringliteral}{\}"{}},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ genericDecorationMapper,}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ cSharpCompilerService);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_abe7fad0a7df96f414b675b6af70f260d}{TextEditorService}}.\mbox{\hyperlink{interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_i_text_editor_service_ae3a0dbf71e296019f79700cb636fdf7e}{ModelApi}}.RegisterCustom(model);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ cSharpCompilerService.RegisterResource(model.ResourceUri,\ shouldTriggerResourceWasModified:\ \textcolor{keyword}{true});}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_abe7fad0a7df96f414b675b6af70f260d}{TextEditorService}}.\mbox{\hyperlink{interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_i_text_editor_service_a7f1a64364e1d4be381e7ec6b7c6df127}{ViewModelApi}}.Register(}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ ViewModelKey,}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ ResourceUri,}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{new}\ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_ab53dfba5ef40ddaeca4b8982ea420fd1}{Category}}(\textcolor{stringliteral}{"{}main"{}}));}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ base.OnInitialized();}
+\DoxyCodeLine{\ \ \ \ \}}
+\DoxyCodeLine{\}}
+
+\end{DoxyCode}
+
+
+
+\begin{DoxyItemize}
+\item Now you should have a Text Editor with the CSharp\+Compiler\+Service as shown in this GIF\+:
+\end{DoxyItemize}
+
+\hypertarget{md__docs_2_text_editor_2usage_autotoc_md208}{}\doxysection{\texorpdfstring{Next tutorial\+: \#\+TODO\+: Continue}{Next tutorial\+: \#\+TODO\+: Continue}}\label{md__docs_2_text_editor_2usage_autotoc_md208}

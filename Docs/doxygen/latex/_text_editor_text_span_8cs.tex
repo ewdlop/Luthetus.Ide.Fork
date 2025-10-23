@@ -1,0 +1,20 @@
+\doxysection{Source/\+Lib/\+Text\+Editor/\+Lexers/\+Models/\+Text\+Editor\+Text\+Span.cs File Reference}
+\hypertarget{_text_editor_text_span_8cs}{}\label{_text_editor_text_span_8cs}\index{Source/Lib/TextEditor/Lexers/Models/TextEditorTextSpan.cs@{Source/Lib/TextEditor/Lexers/Models/TextEditorTextSpan.cs}}
+\doxysubsubsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+namespace \mbox{\hyperlink{namespace_luthetus}{Luthetus}}
+\item 
+namespace \mbox{\hyperlink{namespace_luthetus_1_1_text_editor}{Luthetus.\+Text\+Editor}}
+\item 
+namespace \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib}{Luthetus.\+Text\+Editor.\+Razor\+Lib}}
+\item 
+namespace \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_lexers}{Luthetus.\+Text\+Editor.\+Razor\+Lib.\+Lexers}}
+\item 
+namespace \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_lexers_1_1_models}{Luthetus.\+Text\+Editor.\+Razor\+Lib.\+Lexers.\+Models}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+record struct \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_lexers_1_1_models_a1ffd1a7706dfd364560b76d47467812f}{Luthetus.\+Text\+Editor.\+Razor\+Lib.\+Lexers.\+Models.\+Text\+Editor\+Text\+Span}} (int Starting\+Index\+Inclusive, int Ending\+Index\+Exclusive, byte Decoration\+Byte, \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_lexers_1_1_models_a26a1b63ad28ec7955b30bc6c91571eca}{Resource\+Uri}} \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_lexers_1_1_models_a26a1b63ad28ec7955b30bc6c91571eca}{Resource\+Uri}}, string Source\+Text)
+\begin{DoxyCompactList}\small\item\em TODO\+: I have a suspicion that this type takes an absurd amount of memory... ... the initial way of implementing this type was to store the text at the time of constructing the text span. \texorpdfstring{$\vert$}{|} But, it was thought that preferably one would only only create the substring when asked for it. \texorpdfstring{$\vert$}{|} This means one has to store the entirety of the source text. Well, the source text is just a reference not a copy of the value. So this seemed fine enough. \texorpdfstring{$\vert$}{|} But, because the text editor is immutable. The source text is constantly needing to be reconstructed as a string value. \texorpdfstring{$\vert$}{|} As a result, the old string values that pertain to previous iterations of the text editor must be held in memory, because any Text\+Editor\+Text\+Span that is not garbage collected, would have a reference to the old string value. \texorpdfstring{$\vert$}{|} I\textquotesingle{}m thinking of using Span$<$char$>$ or something along the lines. But, wouldn\textquotesingle{}t Span$<$char$>$ still need to maintain the previous string in its entirety? \texorpdfstring{$\vert$}{|} If Span$<$\+T$>$ will somehow track what section of the previous string I have a reference to, and only free the resources pertaining to the sections of the string that don\textquotesingle{}t have a Span$<$\+T$>$ referencing them then that would be amazing. \texorpdfstring{$\vert$}{|} But then again, why am I not just letting the text span capture the substring upon construction? \texorpdfstring{$\vert$}{|} I also wonder, what about a Func$<$string$>$? Does this somehow hide the previous string values of the text editor and permit the resources to be free\textquotesingle{}d? (2024-\/07-\/27). \end{DoxyCompactList}\end{DoxyCompactItemize}

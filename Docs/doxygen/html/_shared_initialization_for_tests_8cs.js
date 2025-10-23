@@ -1,0 +1,4 @@
+var _shared_initialization_for_tests_8cs =
+[
+    [ "Luthetus.BUnit.Tests.SharedInitializationForTests.BackgroundTasksHandle", "class_luthetus_1_1_b_unit_1_1_tests_1_1_shared_initialization_for_tests_1_1_background_tasks_handle.html", "class_luthetus_1_1_b_unit_1_1_tests_1_1_shared_initialization_for_tests_1_1_background_tasks_handle" ]
+];

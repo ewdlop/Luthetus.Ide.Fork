@@ -1,0 +1,8 @@
+var struct_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_1_1_tokens_1_1_numeric_literal_token =
+[
+    [ "NumericLiteralToken", "struct_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_1_1_tokens_1_1_numeric_literal_token.html#af1cfe1849613212b1cbd64f4f10d4733", null ],
+    [ "ConstructorWasInvoked", "struct_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_1_1_tokens_1_1_numeric_literal_token.html#a3b6b9242d1128da0a37c73878a437392", null ],
+    [ "IsFabricated", "struct_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_1_1_tokens_1_1_numeric_literal_token.html#a8cc0ea2e2f6be76eccd88c219d37e7ba", null ],
+    [ "SyntaxKind", "struct_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_1_1_tokens_1_1_numeric_literal_token.html#ae0294818f4816aacc69f4d5f27a93d02", null ],
+    [ "TextSpan", "struct_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_1_1_tokens_1_1_numeric_literal_token.html#ad12279a8b359d3eb148cc3a805cff522", null ]
+];

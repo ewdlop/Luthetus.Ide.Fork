@@ -1,0 +1,4 @@
+var _remove_c_sharp_project_from_solution_display_8razor_8cs =
+[
+    [ "Luthetus.Extensions.DotNet.CSharpProjects.Displays.RemoveCSharpProjectFromSolutionDisplay", "class_luthetus_1_1_extensions_1_1_dot_net_1_1_c_sharp_projects_1_1_displays_1_1_remove_c_sharp_project_from_solution_display.html", "class_luthetus_1_1_extensions_1_1_dot_net_1_1_c_sharp_projects_1_1_displays_1_1_remove_c_sharp_project_from_solution_display" ]
+];

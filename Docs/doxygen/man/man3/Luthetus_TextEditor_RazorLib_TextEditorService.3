@@ -1,0 +1,441 @@
+.TH "Luthetus.TextEditor.RazorLib.TextEditorService" 3 "Version 1.0.0" "Luthetus.Ide" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+Luthetus.TextEditor.RazorLib.TextEditorService
+.SH SYNOPSIS
+.br
+.PP
+.PP
+Inherits \fBLuthetus\&.TextEditor\&.RazorLib\&.ITextEditorService\fP, and \fBLuthetus\&.TextEditor\&.RazorLib\&.ITextEditorService\fP\&.
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBTextEditorEditContext\fP (\fBITextEditorService\fP \fBtextEditorService\fP, Key< \fBTextEditorAuthenticatedAction\fP > authenticatedActionKey)"
+.br
+.ti -1c
+.RI "\fBTextEditorModelModifier\fP? \fBGetModelModifier\fP (\fBResourceUri\fP modelResourceUri, bool isReadonly=false)"
+.br
+.ti -1c
+.RI "\fBTextEditorModelModifier\fP? \fBGetModelModifierByViewModelKey\fP (Key< \fBTextEditorViewModel\fP > viewModelKey, bool isReadonly=false)"
+.br
+.ti -1c
+.RI "\fBTextEditorViewModelModifier\fP? \fBGetViewModelModifier\fP (Key< \fBTextEditorViewModel\fP > viewModelKey, bool isReadonly=false)"
+.br
+.ti -1c
+.RI "\fBCursorModifierBagTextEditor\fP? \fBGetCursorModifierBag\fP (\fBTextEditorViewModel\fP? viewModel)"
+.br
+.ti -1c
+.RI "\fBTextEditorCursorModifier\fP? \fBGetPrimaryCursorModifier\fP (\fBCursorModifierBagTextEditor\fP? cursorModifierBag)"
+.br
+.ti -1c
+.RI "\fBTextEditorDiffModelModifier\fP? \fBGetDiffModelModifier\fP (Key< \fBTextEditorDiffModel\fP > diffModelKey, bool isReadonly=false)"
+.br
+.ti -1c
+.RI "\fBTextEditorService\fP (IState< \fBTextEditorState\fP > textEditorStateWrap, IState< \fBTextEditorGroupState\fP > groupStateWrap, IState< \fBTextEditorDiffState\fP > diffStateWrap, IState< \fBThemeState\fP > themeStateWrap, IState< \fBTextEditorOptionsState\fP > optionsStateWrap, IState< \fBTextEditorFindAllState\fP > findAllStateWrap, \fBIBackgroundTaskService\fP backgroundTaskService, \fBLuthetusTextEditorConfig\fP textEditorConfig, \fBITextEditorRegistryWrap\fP textEditorRegistryWrap, \fBIStorageService\fP storageService, IJSRuntime \fBjsRuntime\fP, \fBCommonBackgroundTaskApi\fP commonBackgroundTaskApi, IDispatcher \fBdispatcher\fP, \fBIDialogService\fP \fBdialogService\fP, \fBIAutocompleteIndexer\fP autocompleteIndexer, \fBIAutocompleteService\fP autocompleteService, IState< \fBAppDimensionState\fP > appDimensionStateWrap, IServiceProvider serviceProvider)"
+.br
+.ti -1c
+.RI "void \fBPostUnique\fP (string name, Func< \fBITextEditorEditContext\fP, Task > textEditorFunc)"
+.br
+.RI "This method will create an instance of UniqueTextEditorTask, and then invoke \fBPost(ITextEditorWork)\fP
+.br
+
+.br
+\&. "
+.ti -1c
+.RI "void \fBPostRedundant\fP (string name, \fBResourceUri\fP \fBresourceUri\fP, Key< \fBTextEditorViewModel\fP > viewModelKey, Func< \fBITextEditorEditContext\fP, Task > textEditorFunc)"
+.br
+.RI "This method will create an instance of RedundantTextEditorTask, and then invoke \fBPost(ITextEditorWork)\fP
+.br
+
+.br
+\&. "
+.ti -1c
+.RI "void \fBPost\fP (\fBITextEditorWork\fP work)"
+.br
+.RI "This method will set the \fBITextEditorWork\&.EditContext\fP property\&. "
+.ti -1c
+.RI "Task \fBPostAsync\fP (\fBITextEditorWork\fP work)"
+.br
+.RI "This method will set the \fBITextEditorWork\&.EditContext\fP property\&. "
+.ti -1c
+.RI "async Task \fBFinalizePost\fP (\fBITextEditorEditContext\fP editContext)"
+.br
+.ti -1c
+.RI "void \fBValidateMaximumScrollLeftAndScrollTop\fP (\fBITextEditorEditContext\fP editContext, \fBTextEditorViewModelModifier\fP viewModelModifier, bool textEditorDimensionsChanged)"
+.br
+.RI "The argument 'bool textEditorDimensionsChanged' was added on (2024-09-20)\&. "
+.ti -1c
+.RI "async Task \fBOpenInEditorAsync\fP (string absolutePath, bool shouldSetFocusToEditor, int? cursorPositionIndex, \fBCategory\fP \fBcategory\fP, Key< \fBTextEditorViewModel\fP > preferredViewModelKey)"
+.br
+.ti -1c
+.RI "async Task \fBOpenInEditorAsync\fP (string absolutePath, bool shouldSetFocusToEditor, int? lineIndex, int? columnIndex, \fBCategory\fP \fBcategory\fP, Key< \fBTextEditorViewModel\fP > preferredViewModelKey)"
+.br
+.in -1c
+.SS "Static Public Attributes"
+
+.in +1c
+.ti -1c
+.RI "static readonly Key< \fBTextEditorAuthenticatedAction\fP > \fBAuthenticatedActionKey\fP = new(Guid\&.Parse('13831968\-9b10\-46d1\-8d47\-842b78238d6a'))"
+.br
+.RI "See explanation of this field at: \fBTextEditorAuthenticatedAction\fP\&. "
+.in -1c
+.SS "Properties"
+
+.in +1c
+.ti -1c
+.RI "Dictionary< Key< \fBTextEditorViewModel\fP >, \fBResourceUri\fP?> \fBViewModelToModelResourceUriCache\fP = new()\fR [get]\fP"
+.br
+.ti -1c
+.RI "Dictionary< Key< \fBTextEditorViewModel\fP >, \fBTextEditorViewModelModifier\fP?> \fBViewModelCache\fP = new()\fR [get]\fP"
+.br
+.ti -1c
+.RI "Dictionary< Key< \fBTextEditorViewModel\fP >, \fBCursorModifierBagTextEditor\fP?> \fBCursorModifierBagCache\fP = new()\fR [get]\fP"
+.br
+.ti -1c
+.RI "Dictionary< Key< \fBTextEditorDiffModel\fP >, \fBTextEditorDiffModelModifier\fP?> \fBDiffModelCache\fP = new()\fR [get]\fP"
+.br
+.ti -1c
+.RI "\fBITextEditorService\fP \fBTextEditorService\fP\fR [get]\fP"
+.br
+.ti -1c
+.RI "Key< \fBTextEditorAuthenticatedAction\fP > \fBAuthenticatedActionKey\fP\fR [get]\fP"
+.br
+.ti -1c
+.RI "IState< \fBTextEditorState\fP > \fBTextEditorStateWrap\fP\fR [get]\fP"
+.br
+.ti -1c
+.RI "IState< \fBTextEditorGroupState\fP > \fBGroupStateWrap\fP\fR [get]\fP"
+.br
+.ti -1c
+.RI "IState< \fBTextEditorDiffState\fP > \fBDiffStateWrap\fP\fR [get]\fP"
+.br
+.ti -1c
+.RI "IState< \fBThemeState\fP > \fBThemeStateWrap\fP\fR [get]\fP"
+.br
+.ti -1c
+.RI "IState< \fBTextEditorOptionsState\fP > \fBOptionsStateWrap\fP\fR [get]\fP"
+.br
+.ti -1c
+.RI "IState< \fBTextEditorFindAllState\fP > \fBFindAllStateWrap\fP\fR [get]\fP"
+.br
+.ti -1c
+.RI "IState< \fBAppDimensionState\fP > \fBAppDimensionStateWrap\fP\fR [get]\fP"
+.br
+.ti -1c
+.RI "\fBLuthetusTextEditorJavaScriptInteropApi\fP \fBJsRuntimeTextEditorApi\fP\fR [get]\fP"
+.br
+.ti -1c
+.RI "\fBLuthetusCommonJavaScriptInteropApi\fP \fBJsRuntimeCommonApi\fP\fR [get]\fP"
+.br
+.ti -1c
+.RI "\fBIAutocompleteIndexer\fP \fBAutocompleteIndexer\fP\fR [get]\fP"
+.br
+.ti -1c
+.RI "\fBIAutocompleteService\fP \fBAutocompleteService\fP\fR [get]\fP"
+.br
+.ti -1c
+.RI "\fBLuthetusTextEditorConfig\fP \fBTextEditorConfig\fP\fR [get]\fP"
+.br
+.ti -1c
+.RI "string \fBStorageKey\fP\fR [get]\fP"
+.br
+.RI "This is used when interacting with the \fBIStorageService\fP to set and get data\&. "
+.ti -1c
+.RI "string \fBThemeCssClassString\fP\fR [get]\fP"
+.br
+.ti -1c
+.RI "\fBITextEditorModelApi\fP \fBModelApi\fP\fR [get]\fP"
+.br
+.ti -1c
+.RI "\fBITextEditorViewModelApi\fP \fBViewModelApi\fP\fR [get]\fP"
+.br
+.ti -1c
+.RI "\fBITextEditorGroupApi\fP \fBGroupApi\fP\fR [get]\fP"
+.br
+.ti -1c
+.RI "\fBITextEditorDiffApi\fP \fBDiffApi\fP\fR [get]\fP"
+.br
+.ti -1c
+.RI "\fBITextEditorOptionsApi\fP \fBOptionsApi\fP\fR [get]\fP"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+Definition at line \fB10\fP of file \fBTextEditorService\&.EditContext\&.cs\fP\&.
+.SH "Constructor & Destructor Documentation"
+.PP 
+.SS "Luthetus\&.TextEditor\&.RazorLib\&.TextEditorService\&.TextEditorService (IState< \fBTextEditorState\fP > textEditorStateWrap, IState< \fBTextEditorGroupState\fP > groupStateWrap, IState< \fBTextEditorDiffState\fP > diffStateWrap, IState< \fBThemeState\fP > themeStateWrap, IState< \fBTextEditorOptionsState\fP > optionsStateWrap, IState< \fBTextEditorFindAllState\fP > findAllStateWrap, \fBIBackgroundTaskService\fP backgroundTaskService, \fBLuthetusTextEditorConfig\fP textEditorConfig, \fBITextEditorRegistryWrap\fP textEditorRegistryWrap, \fBIStorageService\fP storageService, IJSRuntime jsRuntime, \fBCommonBackgroundTaskApi\fP commonBackgroundTaskApi, IDispatcher dispatcher, \fBIDialogService\fP dialogService, \fBIAutocompleteIndexer\fP autocompleteIndexer, \fBIAutocompleteService\fP autocompleteService, IState< \fBAppDimensionState\fP > appDimensionStateWrap, IServiceProvider serviceProvider)"
+
+.PP
+Definition at line \fB48\fP of file \fBTextEditorService\&.Main\&.cs\fP\&.
+.SH "Member Function Documentation"
+.PP 
+.SS "async Task Luthetus\&.TextEditor\&.RazorLib\&.TextEditorService\&.FinalizePost (\fBITextEditorEditContext\fP editContext)"
+<summmary> This method writes any mutated data within the \fBITextEditorWork\&.EditContext\fP to the \fBTextEditorState\fP, and afterwards causes a UI render\&. 
+.PP
+Implements \fBLuthetus\&.TextEditor\&.RazorLib\&.ITextEditorService\fP\&.
+.PP
+Definition at line \fB169\fP of file \fBTextEditorService\&.Main\&.cs\fP\&.
+.SS "\fBCursorModifierBagTextEditor\fP? Luthetus\&.TextEditor\&.RazorLib\&.TextEditorService\&.GetCursorModifierBag (\fBTextEditorViewModel\fP? viewModel)"
+
+.PP
+Definition at line \fB95\fP of file \fBTextEditorService\&.EditContext\&.cs\fP\&.
+.SS "\fBTextEditorDiffModelModifier\fP? Luthetus\&.TextEditor\&.RazorLib\&.TextEditorService\&.GetDiffModelModifier (Key< \fBTextEditorDiffModel\fP > diffModelKey, bool isReadonly = \fRfalse\fP)"
+
+.PP
+Definition at line \fB124\fP of file \fBTextEditorService\&.EditContext\&.cs\fP\&.
+.SS "\fBTextEditorModelModifier\fP? Luthetus\&.TextEditor\&.RazorLib\&.TextEditorService\&.GetModelModifier (\fBResourceUri\fP modelResourceUri, bool isReadonly = \fRfalse\fP)"
+
+.PP
+Definition at line \fB31\fP of file \fBTextEditorService\&.EditContext\&.cs\fP\&.
+.SS "\fBTextEditorModelModifier\fP? Luthetus\&.TextEditor\&.RazorLib\&.TextEditorService\&.GetModelModifierByViewModelKey (Key< \fBTextEditorViewModel\fP > viewModelKey, bool isReadonly = \fRfalse\fP)"
+
+.PP
+Definition at line \fB52\fP of file \fBTextEditorService\&.EditContext\&.cs\fP\&.
+.SS "\fBTextEditorCursorModifier\fP? Luthetus\&.TextEditor\&.RazorLib\&.TextEditorService\&.GetPrimaryCursorModifier (\fBCursorModifierBagTextEditor\fP? cursorModifierBag)"
+
+.PP
+Definition at line \fB114\fP of file \fBTextEditorService\&.EditContext\&.cs\fP\&.
+.SS "\fBTextEditorViewModelModifier\fP? Luthetus\&.TextEditor\&.RazorLib\&.TextEditorService\&.GetViewModelModifier (Key< \fBTextEditorViewModel\fP > viewModelKey, bool isReadonly = \fRfalse\fP)"
+
+.PP
+Definition at line \fB72\fP of file \fBTextEditorService\&.EditContext\&.cs\fP\&.
+.SS "async Task Luthetus\&.TextEditor\&.RazorLib\&.TextEditorService\&.OpenInEditorAsync (string absolutePath, bool shouldSetFocusToEditor, int? cursorPositionIndex, \fBCategory\fP category, Key< \fBTextEditorViewModel\fP > preferredViewModelKey)"
+
+.PP
+Implements \fBLuthetus\&.TextEditor\&.RazorLib\&.ITextEditorService\fP\&.
+.PP
+Definition at line \fB488\fP of file \fBTextEditorService\&.Main\&.cs\fP\&.
+.SS "async Task Luthetus\&.TextEditor\&.RazorLib\&.TextEditorService\&.OpenInEditorAsync (string absolutePath, bool shouldSetFocusToEditor, int? lineIndex, int? columnIndex, \fBCategory\fP category, Key< \fBTextEditorViewModel\fP > preferredViewModelKey)"
+
+.PP
+Implements \fBLuthetus\&.TextEditor\&.RazorLib\&.ITextEditorService\fP\&.
+.PP
+Definition at line \fB534\fP of file \fBTextEditorService\&.Main\&.cs\fP\&.
+.SS "void Luthetus\&.TextEditor\&.RazorLib\&.TextEditorService\&.Post (\fBITextEditorWork\fP textEditorWork)"
+
+.PP
+This method will set the \fBITextEditorWork\&.EditContext\fP property\&. Within the method \fBLuthetus\&.Common\&.RazorLib\&.BackgroundTasks\&.Models\&.IBackgroundTask\&.HandleEvent\fP, invoke \fBFinalizePost\fP to finalize any changes\&. 
+.PP
+Implements \fBLuthetus\&.TextEditor\&.RazorLib\&.ITextEditorService\fP\&.
+.PP
+Definition at line \fB151\fP of file \fBTextEditorService\&.Main\&.cs\fP\&.
+.SS "Task Luthetus\&.TextEditor\&.RazorLib\&.TextEditorService\&.PostAsync (\fBITextEditorWork\fP textEditorWork)"
+
+.PP
+This method will set the \fBITextEditorWork\&.EditContext\fP property\&. Within the method \fBLuthetus\&.Common\&.RazorLib\&.BackgroundTasks\&.Models\&.IBackgroundTask\&.HandleEvent\fP, invoke \fBFinalizePost\fP to finalize any changes\&.
+
+.PP
+This async version will block until the background task is completed\&. 
+.PP
+Implements \fBLuthetus\&.TextEditor\&.RazorLib\&.ITextEditorService\fP\&.
+.PP
+Definition at line \fB160\fP of file \fBTextEditorService\&.Main\&.cs\fP\&.
+.SS "void Luthetus\&.TextEditor\&.RazorLib\&.TextEditorService\&.PostRedundant (string name, \fBResourceUri\fP resourceUri, Key< \fBTextEditorViewModel\fP > viewModelKey, Func< \fBITextEditorEditContext\fP, Task > textEditorFunc)"
+
+.PP
+This method will create an instance of RedundantTextEditorTask, and then invoke \fBPost(ITextEditorWork)\fP
+.br
+
+.br
+\&. 
+.PP
+Implements \fBLuthetus\&.TextEditor\&.RazorLib\&.ITextEditorService\fP\&.
+.PP
+Definition at line \fB138\fP of file \fBTextEditorService\&.Main\&.cs\fP\&.
+.SS "void Luthetus\&.TextEditor\&.RazorLib\&.TextEditorService\&.PostUnique (string name, Func< \fBITextEditorEditContext\fP, Task > textEditorFunc)"
+
+.PP
+This method will create an instance of UniqueTextEditorTask, and then invoke \fBPost(ITextEditorWork)\fP
+.br
+
+.br
+\&. 
+.PP
+Implements \fBLuthetus\&.TextEditor\&.RazorLib\&.ITextEditorService\fP\&.
+.PP
+Definition at line \fB129\fP of file \fBTextEditorService\&.Main\&.cs\fP\&.
+.SS "Luthetus\&.TextEditor\&.RazorLib\&.TextEditorService\&.TextEditorEditContext (\fBITextEditorService\fP textEditorService, Key< \fBTextEditorAuthenticatedAction\fP > authenticatedActionKey)"
+
+.PP
+Definition at line \fB20\fP of file \fBTextEditorService\&.EditContext\&.cs\fP\&.
+.SS "void Luthetus\&.TextEditor\&.RazorLib\&.TextEditorService\&.ValidateMaximumScrollLeftAndScrollTop (\fBITextEditorEditContext\fP editContext, \fBTextEditorViewModelModifier\fP viewModelModifier, bool textEditorDimensionsChanged)"
+
+.PP
+The argument 'bool textEditorDimensionsChanged' was added on (2024-09-20)\&. The issue is that this method was originally written for fixing the scrollLeft or scrollTop when the scrollWidth or scrollHeight changed to a smaller value\&.
+
+.PP
+The if statements therefore check that the originalScrollWidth was higher, because some invokers of this method won't need to take time doing this calculation\&.
+
+.PP
+For example, a pure insertion of text won't need to run this method\&. So the if statements allow for a quick exit\&.
+
+.PP
+But, it was discovered that this same logic is needed when the text editor width changes\&.
+
+.PP
+The text editor width changing results in a very specific event firing\&. So if we could just have a bool here to say, "I'm that specific event" then we can know that the width changed\&.
+
+.PP
+Because we cannot track the before and after of the width from this method since it already was changed\&. We need the specific event to instead tell us that it had changed\&.
+
+.PP
+So, the bool is a bit hacky\&. 
+.PP
+Definition at line \fB379\fP of file \fBTextEditorService\&.Main\&.cs\fP\&.
+.SH "Member Data Documentation"
+.PP 
+.SS "readonly Key<\fBTextEditorAuthenticatedAction\fP> Luthetus\&.TextEditor\&.RazorLib\&.TextEditorService\&.AuthenticatedActionKey = new(Guid\&.Parse('13831968\-9b10\-46d1\-8d47\-842b78238d6a'))\fR [static]\fP"
+
+.PP
+See explanation of this field at: \fBTextEditorAuthenticatedAction\fP\&. 
+.PP
+Definition at line \fB36\fP of file \fBTextEditorService\&.Main\&.cs\fP\&.
+.SH "Property Documentation"
+.PP 
+.SS "IState<\fBAppDimensionState\fP> Luthetus\&.TextEditor\&.RazorLib\&.TextEditorService\&.AppDimensionStateWrap\fR [get]\fP"
+
+.PP
+Implements \fBLuthetus\&.TextEditor\&.RazorLib\&.ITextEditorService\fP\&.
+.PP
+Definition at line \fB104\fP of file \fBTextEditorService\&.Main\&.cs\fP\&.
+.SS "Key<\fBTextEditorAuthenticatedAction\fP> Luthetus\&.TextEditor\&.RazorLib\&.TextEditorService\&.AuthenticatedActionKey\fR [get]\fP"
+
+.PP
+Definition at line \fB29\fP of file \fBTextEditorService\&.EditContext\&.cs\fP\&.
+.SS "\fBIAutocompleteIndexer\fP Luthetus\&.TextEditor\&.RazorLib\&.TextEditorService\&.AutocompleteIndexer\fR [get]\fP"
+
+.PP
+Implements \fBLuthetus\&.TextEditor\&.RazorLib\&.ITextEditorService\fP\&.
+.PP
+Definition at line \fB108\fP of file \fBTextEditorService\&.Main\&.cs\fP\&.
+.SS "\fBIAutocompleteService\fP Luthetus\&.TextEditor\&.RazorLib\&.TextEditorService\&.AutocompleteService\fR [get]\fP"
+
+.PP
+Implements \fBLuthetus\&.TextEditor\&.RazorLib\&.ITextEditorService\fP\&.
+.PP
+Definition at line \fB109\fP of file \fBTextEditorService\&.Main\&.cs\fP\&.
+.SS "Dictionary<Key<\fBTextEditorViewModel\fP>, \fBCursorModifierBagTextEditor\fP?> Luthetus\&.TextEditor\&.RazorLib\&.TextEditorService\&.CursorModifierBagCache = new()\fR [get]\fP"
+
+.PP
+Definition at line \fB17\fP of file \fBTextEditorService\&.EditContext\&.cs\fP\&.
+.SS "\fBITextEditorDiffApi\fP Luthetus\&.TextEditor\&.RazorLib\&.TextEditorService\&.DiffApi\fR [get]\fP"
+
+.PP
+Implements \fBLuthetus\&.TextEditor\&.RazorLib\&.ITextEditorService\fP\&.
+.PP
+Definition at line \fB126\fP of file \fBTextEditorService\&.Main\&.cs\fP\&.
+.SS "Dictionary<Key<\fBTextEditorDiffModel\fP>, \fBTextEditorDiffModelModifier\fP?> Luthetus\&.TextEditor\&.RazorLib\&.TextEditorService\&.DiffModelCache = new()\fR [get]\fP"
+
+.PP
+Definition at line \fB18\fP of file \fBTextEditorService\&.EditContext\&.cs\fP\&.
+.SS "IState<\fBTextEditorDiffState\fP> Luthetus\&.TextEditor\&.RazorLib\&.TextEditorService\&.DiffStateWrap\fR [get]\fP"
+
+.PP
+Implements \fBLuthetus\&.TextEditor\&.RazorLib\&.ITextEditorService\fP\&.
+.PP
+Definition at line \fB100\fP of file \fBTextEditorService\&.Main\&.cs\fP\&.
+.SS "IState<\fBTextEditorFindAllState\fP> Luthetus\&.TextEditor\&.RazorLib\&.TextEditorService\&.FindAllStateWrap\fR [get]\fP"
+
+.PP
+Implements \fBLuthetus\&.TextEditor\&.RazorLib\&.ITextEditorService\fP\&.
+.PP
+Definition at line \fB103\fP of file \fBTextEditorService\&.Main\&.cs\fP\&.
+.SS "\fBITextEditorGroupApi\fP Luthetus\&.TextEditor\&.RazorLib\&.TextEditorService\&.GroupApi\fR [get]\fP"
+
+.PP
+Implements \fBLuthetus\&.TextEditor\&.RazorLib\&.ITextEditorService\fP\&.
+.PP
+Definition at line \fB125\fP of file \fBTextEditorService\&.Main\&.cs\fP\&.
+.SS "IState<\fBTextEditorGroupState\fP> Luthetus\&.TextEditor\&.RazorLib\&.TextEditorService\&.GroupStateWrap\fR [get]\fP"
+
+.PP
+Implements \fBLuthetus\&.TextEditor\&.RazorLib\&.ITextEditorService\fP\&.
+.PP
+Definition at line \fB99\fP of file \fBTextEditorService\&.Main\&.cs\fP\&.
+.SS "\fBLuthetusCommonJavaScriptInteropApi\fP Luthetus\&.TextEditor\&.RazorLib\&.TextEditorService\&.JsRuntimeCommonApi\fR [get]\fP"
+
+.PP
+Implements \fBLuthetus\&.TextEditor\&.RazorLib\&.ITextEditorService\fP\&.
+.PP
+Definition at line \fB107\fP of file \fBTextEditorService\&.Main\&.cs\fP\&.
+.SS "\fBLuthetusTextEditorJavaScriptInteropApi\fP Luthetus\&.TextEditor\&.RazorLib\&.TextEditorService\&.JsRuntimeTextEditorApi\fR [get]\fP"
+
+.PP
+Implements \fBLuthetus\&.TextEditor\&.RazorLib\&.ITextEditorService\fP\&.
+.PP
+Definition at line \fB106\fP of file \fBTextEditorService\&.Main\&.cs\fP\&.
+.SS "\fBITextEditorModelApi\fP Luthetus\&.TextEditor\&.RazorLib\&.TextEditorService\&.ModelApi\fR [get]\fP"
+
+.PP
+Implements \fBLuthetus\&.TextEditor\&.RazorLib\&.ITextEditorService\fP\&.
+.PP
+Definition at line \fB123\fP of file \fBTextEditorService\&.Main\&.cs\fP\&.
+.SS "\fBITextEditorOptionsApi\fP Luthetus\&.TextEditor\&.RazorLib\&.TextEditorService\&.OptionsApi\fR [get]\fP"
+
+.PP
+Implements \fBLuthetus\&.TextEditor\&.RazorLib\&.ITextEditorService\fP\&.
+.PP
+Definition at line \fB127\fP of file \fBTextEditorService\&.Main\&.cs\fP\&.
+.SS "IState<\fBTextEditorOptionsState\fP> Luthetus\&.TextEditor\&.RazorLib\&.TextEditorService\&.OptionsStateWrap\fR [get]\fP"
+
+.PP
+Implements \fBLuthetus\&.TextEditor\&.RazorLib\&.ITextEditorService\fP\&.
+.PP
+Definition at line \fB102\fP of file \fBTextEditorService\&.Main\&.cs\fP\&.
+.SS "string Luthetus\&.TextEditor\&.RazorLib\&.TextEditorService\&.StorageKey\fR [get]\fP"
+
+.PP
+This is used when interacting with the \fBIStorageService\fP to set and get data\&. 
+.PP
+Implements \fBLuthetus\&.TextEditor\&.RazorLib\&.ITextEditorService\fP\&.
+.PP
+Definition at line \fB115\fP of file \fBTextEditorService\&.Main\&.cs\fP\&.
+.SS "\fBLuthetusTextEditorConfig\fP Luthetus\&.TextEditor\&.RazorLib\&.TextEditorService\&.TextEditorConfig\fR [get]\fP"
+
+.PP
+Implements \fBLuthetus\&.TextEditor\&.RazorLib\&.ITextEditorService\fP\&.
+.PP
+Definition at line \fB110\fP of file \fBTextEditorService\&.Main\&.cs\fP\&.
+.SS "\fBITextEditorService\fP Luthetus\&.TextEditor\&.RazorLib\&.TextEditorService\&.TextEditorService\fR [get]\fP"
+
+.PP
+Definition at line \fB28\fP of file \fBTextEditorService\&.EditContext\&.cs\fP\&.
+.SS "IState<\fBTextEditorState\fP> Luthetus\&.TextEditor\&.RazorLib\&.TextEditorService\&.TextEditorStateWrap\fR [get]\fP"
+
+.PP
+Implements \fBLuthetus\&.TextEditor\&.RazorLib\&.ITextEditorService\fP\&.
+.PP
+Definition at line \fB98\fP of file \fBTextEditorService\&.Main\&.cs\fP\&.
+.SS "string Luthetus\&.TextEditor\&.RazorLib\&.TextEditorService\&.ThemeCssClassString\fR [get]\fP"
+
+.PP
+Implements \fBLuthetus\&.TextEditor\&.RazorLib\&.ITextEditorService\fP\&.
+.PP
+Definition at line \fB118\fP of file \fBTextEditorService\&.Main\&.cs\fP\&.
+.SS "IState<\fBThemeState\fP> Luthetus\&.TextEditor\&.RazorLib\&.TextEditorService\&.ThemeStateWrap\fR [get]\fP"
+
+.PP
+Implements \fBLuthetus\&.TextEditor\&.RazorLib\&.ITextEditorService\fP\&.
+.PP
+Definition at line \fB101\fP of file \fBTextEditorService\&.Main\&.cs\fP\&.
+.SS "\fBITextEditorViewModelApi\fP Luthetus\&.TextEditor\&.RazorLib\&.TextEditorService\&.ViewModelApi\fR [get]\fP"
+
+.PP
+Implements \fBLuthetus\&.TextEditor\&.RazorLib\&.ITextEditorService\fP\&.
+.PP
+Definition at line \fB124\fP of file \fBTextEditorService\&.Main\&.cs\fP\&.
+.SS "Dictionary<Key<\fBTextEditorViewModel\fP>, \fBTextEditorViewModelModifier\fP?> Luthetus\&.TextEditor\&.RazorLib\&.TextEditorService\&.ViewModelCache = new()\fR [get]\fP"
+
+.PP
+Definition at line \fB16\fP of file \fBTextEditorService\&.EditContext\&.cs\fP\&.
+.SS "Dictionary<Key<\fBTextEditorViewModel\fP>, \fBResourceUri\fP?> Luthetus\&.TextEditor\&.RazorLib\&.TextEditorService\&.ViewModelToModelResourceUriCache = new()\fR [get]\fP"
+
+.PP
+Definition at line \fB15\fP of file \fBTextEditorService\&.EditContext\&.cs\fP\&.
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for Luthetus\&.Ide from the source code\&.

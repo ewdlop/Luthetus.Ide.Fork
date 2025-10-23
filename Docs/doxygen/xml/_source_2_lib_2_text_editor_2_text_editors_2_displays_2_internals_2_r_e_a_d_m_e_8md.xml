@@ -1,0 +1,95 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
+  <compounddef id="_source_2_lib_2_text_editor_2_text_editors_2_displays_2_internals_2_r_e_a_d_m_e_8md" kind="file" language="Markdown">
+    <compoundname>README.md</compoundname>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline><highlight class="normal">Efficient<sp/>Blazor<sp/>component<sp/>design<sp/>ideas<sp/>for<sp/>&quot;performance<sp/>critical&quot;<sp/>UI<sp/>(2024-08-09)</highlight></codeline>
+<codeline><highlight class="normal">==================================================================================</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">ICONS<sp/>SHOULD<sp/>BE<sp/>STATIC<sp/>RENDERFRAGMENTS</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">Firstly<sp/>I<sp/>want<sp/>to<sp/>summarize<sp/>the<sp/>&quot;ASP.NET<sp/>Core<sp/>Blazor<sp/>performance<sp/>best<sp/>practices&quot;<sp/>for<sp/>.NET<sp/>8</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">https://learn.microsoft.com/en-us/aspnet/core/blazor/performance?view=aspnetcore-8.0</highlight></codeline>
+<codeline><highlight class="normal">-<sp/>Avoid<sp/>unnecessary<sp/>rendering<sp/>of<sp/>component<sp/>subtrees</highlight></codeline>
+<codeline><highlight class="normal">-<sp/>Virtualization</highlight></codeline>
+<codeline><highlight class="normal">-<sp/>Create<sp/>lightweight,<sp/>optimized<sp/>components</highlight></codeline>
+<codeline><highlight class="normal">-<sp/>Avoid<sp/>thousands<sp/>of<sp/>component<sp/>instances</highlight></codeline>
+<codeline><highlight class="normal">-<sp/>Inline<sp/>child<sp/>components<sp/>into<sp/>their<sp/>parents</highlight></codeline>
+<codeline><highlight class="normal">-<sp/>Define<sp/>reusable<sp/>RenderFragments<sp/>in<sp/>code</highlight></codeline>
+<codeline><highlight class="normal">-<sp/>Don&apos;t<sp/>receive<sp/>too<sp/>many<sp/>parameters</highlight></codeline>
+<codeline><highlight class="normal">-<sp/>Ensure<sp/>cascading<sp/>parameters<sp/>are<sp/>fixed</highlight></codeline>
+<codeline><highlight class="normal">-<sp/>Avoid<sp/>attribute<sp/>splatting<sp/>with<sp/>CaptureUnmatchedValues</highlight></codeline>
+<codeline><highlight class="normal">-<sp/>Implement<sp/>SetParametersAsync<sp/>manually</highlight></codeline>
+<codeline><highlight class="normal">-<sp/>Don&apos;t<sp/>trigger<sp/>events<sp/>too<sp/>rapidly</highlight></codeline>
+<codeline><highlight class="normal">-<sp/>Avoid<sp/>rerendering<sp/>after<sp/>handling<sp/>events<sp/>without<sp/>state<sp/>changes</highlight></codeline>
+<codeline><highlight class="normal">-<sp/>Avoid<sp/>recreating<sp/>delegates<sp/>for<sp/>many<sp/>repeated<sp/>elements<sp/>or<sp/>components</highlight></codeline>
+<codeline><highlight class="normal">-<sp/>Optimize<sp/>JavaScript<sp/>interop<sp/>speed</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>-<sp/>Avoid<sp/>excessively<sp/>fine-grained<sp/>calls</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>-<sp/>Consider<sp/>the<sp/>use<sp/>of<sp/>synchronous<sp/>calls</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>-<sp/>Call<sp/>JavaScript<sp/>from<sp/>.NET<sp/>(This<sp/>section<sp/>only<sp/>applies<sp/>to<sp/>client-side<sp/>components.)</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>-<sp/>Call<sp/>.NET<sp/>from<sp/>JavaScript<sp/>(This<sp/>section<sp/>only<sp/>applies<sp/>to<sp/>client-side<sp/>components.)</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>-<sp/>Use<sp/>JavaScript<sp/>[JSImport]/[JSExport]<sp/>interop</highlight></codeline>
+<codeline><highlight class="normal">-<sp/>Ahead-of-time<sp/>(AOT)<sp/>compilation</highlight></codeline>
+<codeline><highlight class="normal">-<sp/>Minimize<sp/>app<sp/>download<sp/>size</highlight></codeline>
+<codeline><highlight class="normal">-<sp/>Runtime<sp/>relinking</highlight></codeline>
+<codeline><highlight class="normal">-<sp/>Use<sp/>System.Text.Json</highlight></codeline>
+<codeline><highlight class="normal">-<sp/>Intermediate<sp/>Language<sp/>(IL)<sp/>trimming</highlight></codeline>
+<codeline><highlight class="normal">-<sp/>Lazy<sp/>load<sp/>assemblies</highlight></codeline>
+<codeline><highlight class="normal">-<sp/>Compression</highlight></codeline>
+<codeline><highlight class="normal">-<sp/>Disable<sp/>unused<sp/>features</highlight></codeline>
+<codeline></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">I<sp/>have<sp/>an<sp/>idea<sp/>but<sp/>its<sp/>not<sp/>fully<sp/>thought<sp/>out.</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">I&apos;m<sp/>imagining<sp/>that<sp/>I<sp/>could<sp/>turn<sp/>a<sp/>Blazor<sp/>component<sp/>into<sp/>a<sp/>C#<sp/>class</highlight></codeline>
+<codeline><highlight class="normal">that<sp/>returns<sp/>a<sp/>RenderFragment.</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">And<sp/>that<sp/>the<sp/>reason<sp/>for<sp/>this<sp/>would<sp/>be<sp/>to<sp/>avoid<sp/>the<sp/>overhead<sp/>of<sp/>rendering<sp/>a<sp/>Blazor</highlight></codeline>
+<codeline><highlight class="normal">component,<sp/>when<sp/>all<sp/>I<sp/>want<sp/>is<sp/>to<sp/>compartmentalize<sp/>my<sp/>code<sp/>a<sp/>bit.</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">There<sp/>is<sp/>the<sp/>inline<sp/>renderfragment<sp/>template,<sp/>but<sp/>I<sp/>feel<sp/>that<sp/>the<sp/>text<sp/>editor</highlight></codeline>
+<codeline><highlight class="normal">has<sp/>an<sp/>extreme<sp/>amount<sp/>of<sp/>code/markup,<sp/>and<sp/>I<sp/>don&apos;t<sp/>want<sp/>it<sp/>all<sp/>in<sp/>the<sp/>same<sp/>file.</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">But...<sp/>I<sp/>don&apos;t<sp/>want<sp/>to<sp/>incur<sp/>the<sp/>overhead<sp/>of<sp/>a<sp/>Blazor<sp/>component<sp/>just<sp/>to<sp/>compartmentalize</highlight></codeline>
+<codeline><highlight class="normal">my<sp/>text<sp/>editor<sp/>logic.</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">So<sp/>instead<sp/>of<sp/>&apos;BodySection.razor&apos;<sp/>I<sp/>wonder<sp/>if<sp/>&apos;BodySectionDriver.cs&apos;<sp/>could<sp/>be<sp/>made</highlight></codeline>
+<codeline><highlight class="normal">such<sp/>that<sp/>the<sp/>class<sp/>just<sp/>returns<sp/>a<sp/>renderfragment<sp/>rather<sp/>than....</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">Idea<sp/>I<sp/>have<sp/>me<sp/>idea</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">What<sp/>if<sp/>I<sp/>make<sp/>&apos;BodySectionDriver.razor&apos;.<sp/>And<sp/>it<sp/>being<sp/>.razor<sp/>permits<sp/>me<sp/>to<sp/>easily</highlight></codeline>
+<codeline><highlight class="normal">write<sp/>the<sp/>renderfragment<sp/>templates<sp/>with<sp/>the<sp/>@&lt;div&gt;&lt;/div&gt;<sp/>syntax.</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">Then<sp/>each<sp/>renderfragment<sp/>is<sp/>static.<sp/>And<sp/>it<sp/>takes<sp/>as<sp/>parameters<sp/>the<sp/>text<sp/>editor<sp/>RenderBatch.</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">Would<sp/>this<sp/>then<sp/>be<sp/>equivalent<sp/>to<sp/>the<sp/>existing<sp/>code<sp/>without<sp/>the<sp/>component<sp/>overhead?</highlight></codeline>
+<codeline><highlight class="normal">Because<sp/>&apos;BodySectionDriver.razor&apos;<sp/>would<sp/>never<sp/>be<sp/>rendered<sp/>itself.<sp/>Instead<sp/>you<sp/>just</highlight></codeline>
+<codeline><highlight class="normal">invoke<sp/>the<sp/>static<sp/>functions<sp/>that<sp/>it<sp/>has<sp/>to<sp/>generate<sp/>the<sp/>render<sp/>fragment.</highlight></codeline>
+<codeline></codeline>
+<codeline></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">I&apos;m<sp/>also<sp/>not<sp/>doing<sp/>the<sp/>JavaScript<sp/>interop<sp/>the<sp/>new<sp/>way<sp/>which<sp/>they<sp/>described<sp/>as<sp/>more<sp/>efficient</highlight></codeline>
+<codeline><highlight class="normal">I<sp/>need<sp/>to<sp/>change<sp/>it</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">I<sp/>consistently<sp/>have<sp/>been<sp/>making<sp/>optimizations<sp/>to<sp/>the<sp/>text<sp/>editor<sp/>UI<sp/>logic.</highlight></codeline>
+<codeline><highlight class="normal">And<sp/>I<sp/>presume<sp/>I&apos;m<sp/>getting<sp/>less<sp/>and<sp/>less<sp/>benefit<sp/>from<sp/>continuing<sp/>to<sp/>optimize<sp/>it</highlight></codeline>
+<codeline><highlight class="normal">rather<sp/>than<sp/>looking<sp/>elsewhere.<sp/>But<sp/>given<sp/>how<sp/>frequently<sp/>the<sp/>text<sp/>editor</highlight></codeline>
+<codeline><highlight class="normal">renders,<sp/>I<sp/>consider<sp/>it<sp/>a<sp/>&quot;performance<sp/>critical&quot;<sp/>UI<sp/>piece<sp/>otherwise</highlight></codeline>
+<codeline><highlight class="normal">I<sp/>wouldn&apos;t<sp/>be<sp/>as<sp/>worried<sp/>about<sp/>optimizing<sp/>the<sp/>UI<sp/>logic.</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">So,<sp/>since<sp/>I&apos;ve<sp/>consistently<sp/>been<sp/>making<sp/>the<sp/>optimizations<sp/>though,<sp/>I<sp/>might<sp/>not</highlight></codeline>
+<codeline><highlight class="normal">make<sp/>the<sp/>change<sp/>I<sp/>just<sp/>described<sp/>yet.</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">But<sp/>having<sp/>it<sp/>written<sp/>down<sp/>for<sp/>the<sp/>future<sp/>as<sp/>a<sp/>possible<sp/>UI<sp/>optimization<sp/>I<sp/>think<sp/>is<sp/>good.</highlight></codeline>
+<codeline></codeline>
+<codeline></codeline>
+    </programlisting>
+    <location file="Source/Lib/TextEditor/TextEditors/Displays/Internals/README.md"/>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,4 @@
+var class_luthetus_1_1_extensions_1_1_dot_net_1_1_tests_1_1_basis_1_1_nugets_1_1_models_1_1_nuget_package_record_tests =
+[
+    [ "Properties", "class_luthetus_1_1_extensions_1_1_dot_net_1_1_tests_1_1_basis_1_1_nugets_1_1_models_1_1_nuget_package_record_tests.html#a393d0c66d6de7379a3218572e58684c4", null ]
+];

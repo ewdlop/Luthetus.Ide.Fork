@@ -1,0 +1,4 @@
+var namespace_luthetus_1_1_compiler_services_1_1_type_script_1_1_syntax_actors =
+[
+    [ "TextEditorTypeScriptLexer", "class_luthetus_1_1_compiler_services_1_1_type_script_1_1_syntax_actors_1_1_text_editor_type_script_lexer.html", "class_luthetus_1_1_compiler_services_1_1_type_script_1_1_syntax_actors_1_1_text_editor_type_script_lexer" ]
+];

@@ -1,0 +1,4 @@
+var _text_editor_dev_tools_decoration_mapper_8cs =
+[
+    [ "Luthetus.TextEditor.RazorLib.TextEditors.Models.Internals.TextEditorDevToolsDecorationMapper", "class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1_1_internals_1_1_text_0db4c367221453353e867ce1036d69e2.html", "class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1_1_internals_1_1_text_0db4c367221453353e867ce1036d69e2" ]
+];

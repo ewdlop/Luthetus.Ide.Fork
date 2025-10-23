@@ -1,0 +1,4 @@
+var _compiler_service_diagnostic_decoration_mapper_tests_8cs =
+[
+    [ "Luthetus.TextEditor.Tests.Basis.CompilerServices.CompilerServiceDiagnosticDecorationMapperTests", "class_luthetus_1_1_text_editor_1_1_tests_1_1_basis_1_1_compiler_services_1_1_compiler_service_di14844050c9113016031e7c57856d55e0.html", "class_luthetus_1_1_text_editor_1_1_tests_1_1_basis_1_1_compiler_services_1_1_compiler_service_di14844050c9113016031e7c57856d55e0" ]
+];

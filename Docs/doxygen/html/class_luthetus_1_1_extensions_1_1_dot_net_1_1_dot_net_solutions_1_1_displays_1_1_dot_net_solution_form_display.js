@@ -1,0 +1,6 @@
+var class_luthetus_1_1_extensions_1_1_dot_net_1_1_dot_net_solutions_1_1_displays_1_1_dot_net_solution_form_display =
+[
+    [ "DialogRecord", "class_luthetus_1_1_extensions_1_1_dot_net_1_1_dot_net_solutions_1_1_displays_1_1_dot_net_solution_form_display.html#aebe93d34aae3e612464c7f796493f296", null ],
+    [ "NewDotNetSolutionCancellationTokenSource", "class_luthetus_1_1_extensions_1_1_dot_net_1_1_dot_net_solutions_1_1_displays_1_1_dot_net_solution_form_display.html#a9c6b85dfd7344c8a451c8e97205010aa", null ],
+    [ "NewDotNetSolutionTerminalCommandRequestKey", "class_luthetus_1_1_extensions_1_1_dot_net_1_1_dot_net_solutions_1_1_displays_1_1_dot_net_solution_form_display.html#a19be44ede93d5c9f195c93b0c5341044", null ]
+];

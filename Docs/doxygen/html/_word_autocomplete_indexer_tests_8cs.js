@@ -1,0 +1,4 @@
+var _word_autocomplete_indexer_tests_8cs =
+[
+    [ "Luthetus.TextEditor.Tests.Basis.Autocompletes.Models.WordAutocompleteIndexerTests", "class_luthetus_1_1_text_editor_1_1_tests_1_1_basis_1_1_autocompletes_1_1_models_1_1_word_autocomplete_indexer_tests.html", "class_luthetus_1_1_text_editor_1_1_tests_1_1_basis_1_1_autocompletes_1_1_models_1_1_word_autocomplete_indexer_tests" ]
+];

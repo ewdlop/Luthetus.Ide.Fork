@@ -1,0 +1,73 @@
+.TH "Luthetus.TextEditor.RazorLib.CompilerServices.Syntax.Nodes.Interfaces.IExpressionNode" 3 "Version 1.0.0" "Luthetus.Ide" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+Luthetus.TextEditor.RazorLib.CompilerServices.Syntax.Nodes.Interfaces.IExpressionNode
+.SH SYNOPSIS
+.br
+.PP
+.PP
+Inherits \fBLuthetus\&.TextEditor\&.RazorLib\&.CompilerServices\&.Syntax\&.ISyntaxNode\fP\&.
+.PP
+Inherited by \fBLuthetus\&.TextEditor\&.RazorLib\&.CompilerServices\&.Syntax\&.Nodes\&.AmbiguousIdentifierExpressionNode\fP, \fBLuthetus\&.TextEditor\&.RazorLib\&.CompilerServices\&.Syntax\&.Nodes\&.BadExpressionNode\fP, \fBLuthetus\&.TextEditor\&.RazorLib\&.CompilerServices\&.Syntax\&.Nodes\&.BinaryExpressionNode\fP, \fBLuthetus\&.TextEditor\&.RazorLib\&.CompilerServices\&.Syntax\&.Nodes\&.CommaSeparatedExpressionNode\fP, \fBLuthetus\&.TextEditor\&.RazorLib\&.CompilerServices\&.Syntax\&.Nodes\&.ConstructorInvocationExpressionNode\fP, \fBLuthetus\&.TextEditor\&.RazorLib\&.CompilerServices\&.Syntax\&.Nodes\&.EmptyExpressionNode\fP, \fBLuthetus\&.TextEditor\&.RazorLib\&.CompilerServices\&.Syntax\&.Nodes\&.ExplicitCastNode\fP, \fBLuthetus\&.TextEditor\&.RazorLib\&.CompilerServices\&.Syntax\&.Nodes\&.FunctionArgumentsListingNode\fP, \fBLuthetus\&.TextEditor\&.RazorLib\&.CompilerServices\&.Syntax\&.Nodes\&.FunctionInvocationNode\fP, \fBLuthetus\&.TextEditor\&.RazorLib\&.CompilerServices\&.Syntax\&.Nodes\&.FunctionParameterEntryNode\fP, \fBLuthetus\&.TextEditor\&.RazorLib\&.CompilerServices\&.Syntax\&.Nodes\&.FunctionParametersListingNode\fP, \fBLuthetus\&.TextEditor\&.RazorLib\&.CompilerServices\&.Syntax\&.Nodes\&.GenericParameterEntryNode\fP, \fBLuthetus\&.TextEditor\&.RazorLib\&.CompilerServices\&.Syntax\&.Nodes\&.GenericParametersListingNode\fP, \fBLuthetus\&.TextEditor\&.RazorLib\&.CompilerServices\&.Syntax\&.Nodes\&.Interfaces\&.IVariableDeclarationNode\fP, \fBLuthetus\&.TextEditor\&.RazorLib\&.CompilerServices\&.Syntax\&.Nodes\&.LambdaExpressionNode\fP, \fBLuthetus\&.TextEditor\&.RazorLib\&.CompilerServices\&.Syntax\&.Nodes\&.LiteralExpressionNode\fP, \fBLuthetus\&.TextEditor\&.RazorLib\&.CompilerServices\&.Syntax\&.Nodes\&.ParenthesizedExpressionNode\fP, \fBLuthetus\&.TextEditor\&.RazorLib\&.CompilerServices\&.Syntax\&.Nodes\&.TupleExpressionNode\fP, \fBLuthetus\&.TextEditor\&.RazorLib\&.CompilerServices\&.Syntax\&.Nodes\&.TypeClauseNode\fP, \fBLuthetus\&.TextEditor\&.RazorLib\&.CompilerServices\&.Syntax\&.Nodes\&.UnaryExpressionNode\fP, \fBLuthetus\&.TextEditor\&.RazorLib\&.CompilerServices\&.Syntax\&.Nodes\&.VariableAssignmentExpressionNode\fP, \fBLuthetus\&.TextEditor\&.RazorLib\&.CompilerServices\&.Syntax\&.Nodes\&.VariableReferenceNode\fP, and \fBLuthetus\&.TextEditor\&.RazorLib\&.CompilerServices\&.Syntax\&.Nodes\&.WithExpressionNode\fP\&.
+.SS "Properties"
+
+.in +1c
+.ti -1c
+.RI "\fBTypeClauseNode\fP \fBResultTypeClauseNode\fP\fR [get]\fP"
+.br
+.RI "When parsing an expression, there may be a \fBFunctionInvocationNode\fP with a \fBGenericParametersListingNode\fP\&. "
+.in -1c
+
+Properties inherited from \fBLuthetus\&.TextEditor\&.RazorLib\&.CompilerServices\&.Syntax\&.ISyntax\fP
+.in +1c
+.ti -1c
+.RI "\fBSyntaxKind\fP \fBSyntaxKind\fP\fR [get]\fP"
+.br
+.ti -1c
+.RI "bool \fBIsFabricated\fP\fR [get]\fP"
+.br
+.RI "\fBIsFabricated\fP refers to when the ParserSession expected a node to be valid, but it wasn't\&.
+.br
+
+.br
+For example, a function invocation on an undefined function will construct a BoundFunctionInvocationNode with \fBIsFabricated\fP set to true\&. "
+.in -1c
+.SS "Additional Inherited Members"
+
+
+Public Member Functions inherited from \fBLuthetus\&.TextEditor\&.RazorLib\&.CompilerServices\&.Syntax\&.ISyntaxNode\fP
+.in +1c
+.ti -1c
+.RI "\fBISyntax\fP[] \fBGetChildList\fP ()"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+Definition at line \fB3\fP of file \fBIExpressionNode\&.cs\fP\&.
+.SH "Property Documentation"
+.PP 
+.SS "\fBTypeClauseNode\fP Luthetus\&.TextEditor\&.RazorLib\&.CompilerServices\&.Syntax\&.Nodes\&.Interfaces\&.IExpressionNode\&.ResultTypeClauseNode\fR [get]\fP"
+
+.PP
+When parsing an expression, there may be a \fBFunctionInvocationNode\fP with a \fBGenericParametersListingNode\fP\&. The expression code works however by passing around an 'IExpression expressionPrimary' and an 'IExpression expressionSeconday'\&.
+
+.PP
+This means we cannot add common logic for parsing a \fBGenericParametersListingNode\fP unless the expression parsing code were modified, or maybe a call to a separate function to parse \fBGenericParametersListingNode\fP could be done\&.
+
+.PP
+But, for now an experiment with making \fBGenericParametersListingNode\fP into a \fBIExpressionNode\fP is being tried out\&.
+
+.PP
+Any \fBIExpressionNode\fP that is part of a complete expression, will have the \fBIExpressionNode\&.ResultTypeClauseNode\fP of Pseudo in order to indicate that the node is part of a expression, but not itself an expression\&.
+
+.PP
+Use '\fBTypeClauseNode\fP \fBIExpressionNode\&.ResultTypeClauseNode\fP => TypeClauseNodeFacts\&.Pseudo;' so that some confusion can be avoided since one has to cast it explicitly as an \fBIExpressionNode\fP in order to access the property\&. (i\&.e\&.: \fBGenericParameterEntryNode\&.TypeClauseNode\fP is not equal to \fBIExpressionNode\&.ResultTypeClauseNode\fP)\&. 
+.PP
+Implemented in \fBLuthetus\&.TextEditor\&.RazorLib\&.CompilerServices\&.Syntax\&.Nodes\&.AmbiguousIdentifierExpressionNode\fP, \fBLuthetus\&.TextEditor\&.RazorLib\&.CompilerServices\&.Syntax\&.Nodes\&.BadExpressionNode\fP, \fBLuthetus\&.TextEditor\&.RazorLib\&.CompilerServices\&.Syntax\&.Nodes\&.BinaryExpressionNode\fP, \fBLuthetus\&.TextEditor\&.RazorLib\&.CompilerServices\&.Syntax\&.Nodes\&.CommaSeparatedExpressionNode\fP, \fBLuthetus\&.TextEditor\&.RazorLib\&.CompilerServices\&.Syntax\&.Nodes\&.ConstructorInvocationExpressionNode\fP, \fBLuthetus\&.TextEditor\&.RazorLib\&.CompilerServices\&.Syntax\&.Nodes\&.EmptyExpressionNode\fP, \fBLuthetus\&.TextEditor\&.RazorLib\&.CompilerServices\&.Syntax\&.Nodes\&.ExplicitCastNode\fP, \fBLuthetus\&.TextEditor\&.RazorLib\&.CompilerServices\&.Syntax\&.Nodes\&.FunctionInvocationNode\fP, \fBLuthetus\&.TextEditor\&.RazorLib\&.CompilerServices\&.Syntax\&.Nodes\&.LambdaExpressionNode\fP, \fBLuthetus\&.TextEditor\&.RazorLib\&.CompilerServices\&.Syntax\&.Nodes\&.LiteralExpressionNode\fP, \fBLuthetus\&.TextEditor\&.RazorLib\&.CompilerServices\&.Syntax\&.Nodes\&.ParenthesizedExpressionNode\fP, \fBLuthetus\&.TextEditor\&.RazorLib\&.CompilerServices\&.Syntax\&.Nodes\&.TupleExpressionNode\fP, \fBLuthetus\&.TextEditor\&.RazorLib\&.CompilerServices\&.Syntax\&.Nodes\&.UnaryExpressionNode\fP, \fBLuthetus\&.TextEditor\&.RazorLib\&.CompilerServices\&.Syntax\&.Nodes\&.VariableAssignmentExpressionNode\fP, \fBLuthetus\&.TextEditor\&.RazorLib\&.CompilerServices\&.Syntax\&.Nodes\&.VariableReferenceNode\fP, and \fBLuthetus\&.TextEditor\&.RazorLib\&.CompilerServices\&.Syntax\&.Nodes\&.WithExpressionNode\fP\&.
+.PP
+Definition at line \fB28\fP of file \fBIExpressionNode\&.cs\fP\&.
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for Luthetus\&.Ide from the source code\&.

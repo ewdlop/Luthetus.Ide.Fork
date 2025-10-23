@@ -1,0 +1,75 @@
+\doxysection{Context\+Boundary\+Measurer.\+razor.\+cs}
+\hypertarget{_context_boundary_measurer_8razor_8cs_source}{}\label{_context_boundary_measurer_8razor_8cs_source}\index{Source/Lib/Common/Contexts/Displays/ContextBoundaryMeasurer.razor.cs@{Source/Lib/Common/Contexts/Displays/ContextBoundaryMeasurer.razor.cs}}
+\mbox{\hyperlink{_context_boundary_measurer_8razor_8cs}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{_context_boundary_measurer_8razor_8cs_source_l00001}00001\ \textcolor{keyword}{using\ }Microsoft.AspNetCore.Components;}
+\DoxyCodeLine{\Hypertarget{_context_boundary_measurer_8razor_8cs_source_l00002}00002\ \textcolor{keyword}{using\ }Fluxor.Blazor.Web.Components;}
+\DoxyCodeLine{\Hypertarget{_context_boundary_measurer_8razor_8cs_source_l00003}00003\ \textcolor{keyword}{using\ }Fluxor;}
+\DoxyCodeLine{\Hypertarget{_context_boundary_measurer_8razor_8cs_source_l00004}00004\ \textcolor{keyword}{using\ }Microsoft.JSInterop;}
+\DoxyCodeLine{\Hypertarget{_context_boundary_measurer_8razor_8cs_source_l00005}00005\ \textcolor{keyword}{using\ }System.Collections.Immutable;}
+\DoxyCodeLine{\Hypertarget{_context_boundary_measurer_8razor_8cs_source_l00006}00006\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_luthetus_1_1_common_1_1_razor_lib_1_1_contexts_1_1_states}{Luthetus.Common.RazorLib.Contexts.States}};}
+\DoxyCodeLine{\Hypertarget{_context_boundary_measurer_8razor_8cs_source_l00007}00007\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_luthetus_1_1_common_1_1_razor_lib_1_1_contexts_1_1_models}{Luthetus.Common.RazorLib.Contexts.Models}};}
+\DoxyCodeLine{\Hypertarget{_context_boundary_measurer_8razor_8cs_source_l00008}00008\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_luthetus_1_1_common_1_1_razor_lib_1_1_keys_1_1_models}{Luthetus.Common.RazorLib.Keys.Models}};}
+\DoxyCodeLine{\Hypertarget{_context_boundary_measurer_8razor_8cs_source_l00009}00009\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_luthetus_1_1_common_1_1_razor_lib_1_1_js_runtimes_1_1_models}{Luthetus.Common.RazorLib.JsRuntimes.Models}};}
+\DoxyCodeLine{\Hypertarget{_context_boundary_measurer_8razor_8cs_source_l00010}00010\ }
+\DoxyCodeLine{\Hypertarget{_context_boundary_measurer_8razor_8cs_source_l00011}00011\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespace_luthetus_1_1_common_1_1_razor_lib_1_1_contexts_1_1_displays}{Luthetus.Common.RazorLib.Contexts.Displays}};}
+\DoxyCodeLine{\Hypertarget{_context_boundary_measurer_8razor_8cs_source_l00012}00012\ }
+\DoxyCodeLine{\Hypertarget{_context_boundary_measurer_8razor_8cs_source_l00013}\mbox{\hyperlink{class_luthetus_1_1_common_1_1_razor_lib_1_1_contexts_1_1_displays_1_1_context_boundary_measurer}{00013}}\ \textcolor{keyword}{public}\ \textcolor{keyword}{partial\ class\ }\mbox{\hyperlink{class_luthetus_1_1_common_1_1_razor_lib_1_1_contexts_1_1_displays_1_1_context_boundary_measurer}{ContextBoundaryMeasurer}}\ :\ FluxorComponent}
+\DoxyCodeLine{\Hypertarget{_context_boundary_measurer_8razor_8cs_source_l00014}00014\ \{}
+\DoxyCodeLine{\Hypertarget{_context_boundary_measurer_8razor_8cs_source_l00015}00015\ \ \ \ \ [Inject]}
+\DoxyCodeLine{\Hypertarget{_context_boundary_measurer_8razor_8cs_source_l00016}00016\ \ \ \ \ \textcolor{keyword}{private}\ IJSRuntime\ JsRuntime\ \{\ \textcolor{keyword}{get};\ \textcolor{keyword}{set};\ \}\ =\ \textcolor{keyword}{null}!;}
+\DoxyCodeLine{\Hypertarget{_context_boundary_measurer_8razor_8cs_source_l00017}00017\ \ \ \ \ [Inject]}
+\DoxyCodeLine{\Hypertarget{_context_boundary_measurer_8razor_8cs_source_l00018}00018\ \ \ \ \ \textcolor{keyword}{private}\ IState<ContextState>\ ContextStateWrap\ \{\ \textcolor{keyword}{get};\ \textcolor{keyword}{set};\ \}\ =\ \textcolor{keyword}{null}!;}
+\DoxyCodeLine{\Hypertarget{_context_boundary_measurer_8razor_8cs_source_l00019}00019\ \ \ \ \ [Inject]}
+\DoxyCodeLine{\Hypertarget{_context_boundary_measurer_8razor_8cs_source_l00020}00020\ \ \ \ \ \textcolor{keyword}{private}\ IDispatcher\ Dispatcher\ \{\ \textcolor{keyword}{get};\ \textcolor{keyword}{set};\ \}\ =\ \textcolor{keyword}{null}!;}
+\DoxyCodeLine{\Hypertarget{_context_boundary_measurer_8razor_8cs_source_l00021}00021\ }
+\DoxyCodeLine{\Hypertarget{_context_boundary_measurer_8razor_8cs_source_l00022}00022\ \ \ \ \ [Parameter,\ EditorRequired]}
+\DoxyCodeLine{\Hypertarget{_context_boundary_measurer_8razor_8cs_source_l00023}\mbox{\hyperlink{class_luthetus_1_1_common_1_1_razor_lib_1_1_contexts_1_1_displays_1_1_context_boundary_measurer_a8534a02407add10f4cdfc74516187079}{00023}}\ \ \ \ \ \textcolor{keyword}{public}\ \mbox{\hyperlink{class_luthetus_1_1_common_1_1_razor_lib_1_1_contexts_1_1_displays_1_1_context_boundary_measurer_a8534a02407add10f4cdfc74516187079}{ContextRecord}}\ \mbox{\hyperlink{class_luthetus_1_1_common_1_1_razor_lib_1_1_contexts_1_1_displays_1_1_context_boundary_measurer_a8534a02407add10f4cdfc74516187079}{ContextRecord}}\ \{\ \textcolor{keyword}{get};\ \textcolor{keyword}{set};\ \}\ =\ \textcolor{keyword}{null}!;}
+\DoxyCodeLine{\Hypertarget{_context_boundary_measurer_8razor_8cs_source_l00024}00024\ \ \ \ \ [Parameter,\ EditorRequired]}
+\DoxyCodeLine{\Hypertarget{_context_boundary_measurer_8razor_8cs_source_l00025}\mbox{\hyperlink{class_luthetus_1_1_common_1_1_razor_lib_1_1_contexts_1_1_displays_1_1_context_boundary_measurer_aee62a40b00d1fe17da870e29931bf2be}{00025}}\ \ \ \ \ \textcolor{keyword}{public}\ Func<ImmutableArray<Key<ContextRecord>>>\ \mbox{\hyperlink{class_luthetus_1_1_common_1_1_razor_lib_1_1_contexts_1_1_displays_1_1_context_boundary_measurer_aee62a40b00d1fe17da870e29931bf2be}{GetContextBoundaryHeirarchy}}\ \{\ \textcolor{keyword}{get};\ \textcolor{keyword}{set};\ \}\ =\ \textcolor{keyword}{null}!;}
+\DoxyCodeLine{\Hypertarget{_context_boundary_measurer_8razor_8cs_source_l00026}00026\ }
+\DoxyCodeLine{\Hypertarget{_context_boundary_measurer_8razor_8cs_source_l00027}00027\ \ \ \ \ \textcolor{keyword}{private}\ \textcolor{keywordtype}{bool}\ \_previousIsSelectingInspectionTarget;}
+\DoxyCodeLine{\Hypertarget{_context_boundary_measurer_8razor_8cs_source_l00028}00028\ }
+\DoxyCodeLine{\Hypertarget{_context_boundary_measurer_8razor_8cs_source_l00029}\mbox{\hyperlink{class_luthetus_1_1_common_1_1_razor_lib_1_1_contexts_1_1_displays_1_1_context_boundary_measurer_af46511678d31d8200ef3f5a453b3c115}{00029}}\ \ \ \ \ \textcolor{keyword}{protected}\ \textcolor{keyword}{override}\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_luthetus_1_1_common_1_1_razor_lib_1_1_contexts_1_1_displays_1_1_context_boundary_measurer_af46511678d31d8200ef3f5a453b3c115}{ShouldRender}}()}
+\DoxyCodeLine{\Hypertarget{_context_boundary_measurer_8razor_8cs_source_l00030}00030\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_context_boundary_measurer_8razor_8cs_source_l00031}00031\ \ \ \ \ \ \ \ \ var\ contextState\ =\ ContextStateWrap.Value;}
+\DoxyCodeLine{\Hypertarget{_context_boundary_measurer_8razor_8cs_source_l00032}00032\ }
+\DoxyCodeLine{\Hypertarget{_context_boundary_measurer_8razor_8cs_source_l00033}00033\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\_previousIsSelectingInspectionTarget\ !=\ contextState.IsSelectingInspectionTarget)}
+\DoxyCodeLine{\Hypertarget{_context_boundary_measurer_8razor_8cs_source_l00034}00034\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{true};}
+\DoxyCodeLine{\Hypertarget{_context_boundary_measurer_8razor_8cs_source_l00035}00035\ }
+\DoxyCodeLine{\Hypertarget{_context_boundary_measurer_8razor_8cs_source_l00036}00036\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};}
+\DoxyCodeLine{\Hypertarget{_context_boundary_measurer_8razor_8cs_source_l00037}00037\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_context_boundary_measurer_8razor_8cs_source_l00038}00038\ }
+\DoxyCodeLine{\Hypertarget{_context_boundary_measurer_8razor_8cs_source_l00039}\mbox{\hyperlink{class_luthetus_1_1_common_1_1_razor_lib_1_1_contexts_1_1_displays_1_1_context_boundary_measurer_a238fba16f9eb8faadbfa65d32b36c280}{00039}}\ \ \ \ \ \textcolor{keyword}{protected}\ \textcolor{keyword}{override}\ async\ Task\ \mbox{\hyperlink{class_luthetus_1_1_common_1_1_razor_lib_1_1_contexts_1_1_displays_1_1_context_boundary_measurer_a238fba16f9eb8faadbfa65d32b36c280}{OnAfterRenderAsync}}(\textcolor{keywordtype}{bool}\ firstRender)}
+\DoxyCodeLine{\Hypertarget{_context_boundary_measurer_8razor_8cs_source_l00040}00040\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_context_boundary_measurer_8razor_8cs_source_l00041}00041\ \ \ \ \ \ \ \ \ var\ contextState\ =\ ContextStateWrap.Value;}
+\DoxyCodeLine{\Hypertarget{_context_boundary_measurer_8razor_8cs_source_l00042}00042\ }
+\DoxyCodeLine{\Hypertarget{_context_boundary_measurer_8razor_8cs_source_l00043}00043\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\_previousIsSelectingInspectionTarget\ !=\ contextState.IsSelectingInspectionTarget)}
+\DoxyCodeLine{\Hypertarget{_context_boundary_measurer_8razor_8cs_source_l00044}00044\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_context_boundary_measurer_8razor_8cs_source_l00045}00045\ \ \ \ \ \ \ \ \ \ \ \ \ \_previousIsSelectingInspectionTarget\ =\ contextState.IsSelectingInspectionTarget;}
+\DoxyCodeLine{\Hypertarget{_context_boundary_measurer_8razor_8cs_source_l00046}00046\ }
+\DoxyCodeLine{\Hypertarget{_context_boundary_measurer_8razor_8cs_source_l00047}00047\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (contextState.IsSelectingInspectionTarget)}
+\DoxyCodeLine{\Hypertarget{_context_boundary_measurer_8razor_8cs_source_l00048}00048\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_context_boundary_measurer_8razor_8cs_source_l00049}00049\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ var\ measuredHtmlElementDimensions\ =\ await\ JsRuntime.GetLuthetusCommonApi()}
+\DoxyCodeLine{\Hypertarget{_context_boundary_measurer_8razor_8cs_source_l00050}00050\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ .MeasureElementById(\mbox{\hyperlink{class_luthetus_1_1_common_1_1_razor_lib_1_1_contexts_1_1_displays_1_1_context_boundary_measurer_a8534a02407add10f4cdfc74516187079}{ContextRecord}}.ContextElementId)}
+\DoxyCodeLine{\Hypertarget{_context_boundary_measurer_8razor_8cs_source_l00051}00051\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ .ConfigureAwait(\textcolor{keyword}{false});}
+\DoxyCodeLine{\Hypertarget{_context_boundary_measurer_8razor_8cs_source_l00052}00052\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_context_boundary_measurer_8razor_8cs_source_l00053}00053\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ var\ contextBoundaryHeirarchy\ =\ \mbox{\hyperlink{class_luthetus_1_1_common_1_1_razor_lib_1_1_contexts_1_1_displays_1_1_context_boundary_measurer_aee62a40b00d1fe17da870e29931bf2be}{GetContextBoundaryHeirarchy}}.Invoke();}
+\DoxyCodeLine{\Hypertarget{_context_boundary_measurer_8razor_8cs_source_l00054}00054\ }
+\DoxyCodeLine{\Hypertarget{_context_boundary_measurer_8razor_8cs_source_l00055}00055\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ measuredHtmlElementDimensions\ =\ measuredHtmlElementDimensions\ with}
+\DoxyCodeLine{\Hypertarget{_context_boundary_measurer_8razor_8cs_source_l00056}00056\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_context_boundary_measurer_8razor_8cs_source_l00057}00057\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ZIndex\ =\ contextBoundaryHeirarchy.Length}
+\DoxyCodeLine{\Hypertarget{_context_boundary_measurer_8razor_8cs_source_l00058}00058\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \};}
+\DoxyCodeLine{\Hypertarget{_context_boundary_measurer_8razor_8cs_source_l00059}00059\ }
+\DoxyCodeLine{\Hypertarget{_context_boundary_measurer_8razor_8cs_source_l00060}00060\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Dispatcher.Dispatch(\textcolor{keyword}{new}\ ContextState.AddInspectableContextAction(}
+\DoxyCodeLine{\Hypertarget{_context_boundary_measurer_8razor_8cs_source_l00061}00061\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{new}\ \mbox{\hyperlink{namespace_luthetus_1_1_common_1_1_razor_lib_1_1_contexts_1_1_models_a0a237e1c7c02b976276db84b039514eb}{InspectableContext}}(}
+\DoxyCodeLine{\Hypertarget{_context_boundary_measurer_8razor_8cs_source_l00062}00062\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{new}(contextBoundaryHeirarchy),}
+\DoxyCodeLine{\Hypertarget{_context_boundary_measurer_8razor_8cs_source_l00063}00063\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ measuredHtmlElementDimensions)));}
+\DoxyCodeLine{\Hypertarget{_context_boundary_measurer_8razor_8cs_source_l00064}00064\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_context_boundary_measurer_8razor_8cs_source_l00065}00065\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_context_boundary_measurer_8razor_8cs_source_l00066}00066\ }
+\DoxyCodeLine{\Hypertarget{_context_boundary_measurer_8razor_8cs_source_l00067}00067\ \ \ \ \ \ \ \ \ await\ base.OnAfterRenderAsync(firstRender);}
+\DoxyCodeLine{\Hypertarget{_context_boundary_measurer_8razor_8cs_source_l00068}00068\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_context_boundary_measurer_8razor_8cs_source_l00069}00069\ \}}
+
+\end{DoxyCode}

@@ -1,0 +1,62 @@
+\doxysection{Tree\+View\+Helper\+Absolute\+Path\+Directory.\+cs}
+\hypertarget{_tree_view_helper_absolute_path_directory_8cs_source}{}\label{_tree_view_helper_absolute_path_directory_8cs_source}\index{Source/Lib/Ide/Ide.RazorLib/FileSystems/Models/TreeViewHelperAbsolutePathDirectory.cs@{Source/Lib/Ide/Ide.RazorLib/FileSystems/Models/TreeViewHelperAbsolutePathDirectory.cs}}
+\mbox{\hyperlink{_tree_view_helper_absolute_path_directory_8cs}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{_tree_view_helper_absolute_path_directory_8cs_source_l00001}00001\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_luthetus_1_1_common_1_1_razor_lib_1_1_keys_1_1_models}{Luthetus.Common.RazorLib.Keys.Models}};}
+\DoxyCodeLine{\Hypertarget{_tree_view_helper_absolute_path_directory_8cs_source_l00002}00002\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_luthetus_1_1_common_1_1_razor_lib_1_1_tree_views_1_1_models}{Luthetus.Common.RazorLib.TreeViews.Models}};}
+\DoxyCodeLine{\Hypertarget{_tree_view_helper_absolute_path_directory_8cs_source_l00003}00003\ }
+\DoxyCodeLine{\Hypertarget{_tree_view_helper_absolute_path_directory_8cs_source_l00004}00004\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespace_luthetus_1_1_ide_1_1_razor_lib_1_1_file_systems_1_1_models}{Luthetus.Ide.RazorLib.FileSystems.Models}};}
+\DoxyCodeLine{\Hypertarget{_tree_view_helper_absolute_path_directory_8cs_source_l00005}00005\ }
+\DoxyCodeLine{\Hypertarget{_tree_view_helper_absolute_path_directory_8cs_source_l00006}\mbox{\hyperlink{class_luthetus_1_1_ide_1_1_razor_lib_1_1_file_systems_1_1_models_1_1_tree_view_helper_absolute_path_directory}{00006}}\ \textcolor{keyword}{public}\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_luthetus_1_1_ide_1_1_razor_lib_1_1_file_systems_1_1_models_1_1_tree_view_helper_absolute_path_directory}{TreeViewHelperAbsolutePathDirectory}}}
+\DoxyCodeLine{\Hypertarget{_tree_view_helper_absolute_path_directory_8cs_source_l00007}00007\ \{}
+\DoxyCodeLine{\Hypertarget{_tree_view_helper_absolute_path_directory_8cs_source_l00008}\mbox{\hyperlink{class_luthetus_1_1_ide_1_1_razor_lib_1_1_file_systems_1_1_models_1_1_tree_view_helper_absolute_path_directory_a9368c25c44125faf52180a03f57d620b}{00008}}\ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keyword}{static}\ async\ Task<List<TreeViewNoType>>\ \mbox{\hyperlink{class_luthetus_1_1_ide_1_1_razor_lib_1_1_file_systems_1_1_models_1_1_tree_view_helper_absolute_path_directory_a9368c25c44125faf52180a03f57d620b}{LoadChildrenAsync}}(\mbox{\hyperlink{class_luthetus_1_1_ide_1_1_razor_lib_1_1_file_systems_1_1_models_1_1_tree_view_absolute_path}{TreeViewAbsolutePath}}\ directoryTreeView)}
+\DoxyCodeLine{\Hypertarget{_tree_view_helper_absolute_path_directory_8cs_source_l00009}00009\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_tree_view_helper_absolute_path_directory_8cs_source_l00010}00010\ \ \ \ \ \ \ \ \ var\ directoryAbsolutePathString\ =\ directoryTreeView.\mbox{\hyperlink{class_luthetus_1_1_common_1_1_razor_lib_1_1_tree_views_1_1_models_1_1_tree_view_with_type-1-g_a4f46d99a34756894b183f9ce601825bc}{Item}}.Value;}
+\DoxyCodeLine{\Hypertarget{_tree_view_helper_absolute_path_directory_8cs_source_l00011}00011\ }
+\DoxyCodeLine{\Hypertarget{_tree_view_helper_absolute_path_directory_8cs_source_l00012}00012\ \ \ \ \ \ \ \ \ var\ directoryPathStringsList\ =\ await\ directoryTreeView.FileSystemProvider.Directory}
+\DoxyCodeLine{\Hypertarget{_tree_view_helper_absolute_path_directory_8cs_source_l00013}00013\ \ \ \ \ \ \ \ \ \ \ \ \ .GetDirectoriesAsync(directoryAbsolutePathString)}
+\DoxyCodeLine{\Hypertarget{_tree_view_helper_absolute_path_directory_8cs_source_l00014}00014\ \ \ \ \ \ \ \ \ \ \ \ \ .ConfigureAwait(\textcolor{keyword}{false});}
+\DoxyCodeLine{\Hypertarget{_tree_view_helper_absolute_path_directory_8cs_source_l00015}00015\ }
+\DoxyCodeLine{\Hypertarget{_tree_view_helper_absolute_path_directory_8cs_source_l00016}00016\ \ \ \ \ \ \ \ \ var\ childDirectoryTreeViewModels\ =\ directoryPathStringsList}
+\DoxyCodeLine{\Hypertarget{_tree_view_helper_absolute_path_directory_8cs_source_l00017}00017\ \ \ \ \ \ \ \ \ \ \ \ \ .OrderBy(pathString\ =>\ pathString)}
+\DoxyCodeLine{\Hypertarget{_tree_view_helper_absolute_path_directory_8cs_source_l00018}00018\ \ \ \ \ \ \ \ \ \ \ \ \ .Select(x\ =>}
+\DoxyCodeLine{\Hypertarget{_tree_view_helper_absolute_path_directory_8cs_source_l00019}00019\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_tree_view_helper_absolute_path_directory_8cs_source_l00020}00020\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ (\mbox{\hyperlink{class_luthetus_1_1_common_1_1_razor_lib_1_1_tree_views_1_1_models_1_1_tree_view_no_type}{TreeViewNoType}})\textcolor{keyword}{new}\ \mbox{\hyperlink{class_luthetus_1_1_ide_1_1_razor_lib_1_1_file_systems_1_1_models_1_1_tree_view_absolute_path}{TreeViewAbsolutePath}}(}
+\DoxyCodeLine{\Hypertarget{_tree_view_helper_absolute_path_directory_8cs_source_l00021}00021\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ directoryTreeView.\mbox{\hyperlink{class_luthetus_1_1_ide_1_1_razor_lib_1_1_file_systems_1_1_models_1_1_tree_view_absolute_path_abc37f58fab04936c279b8ad79496434c}{EnvironmentProvider}}.AbsolutePathFactory(x,\ \textcolor{keyword}{true}),}
+\DoxyCodeLine{\Hypertarget{_tree_view_helper_absolute_path_directory_8cs_source_l00022}00022\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ directoryTreeView.\mbox{\hyperlink{class_luthetus_1_1_ide_1_1_razor_lib_1_1_file_systems_1_1_models_1_1_tree_view_absolute_path_a331183d57b829809a697704b394379ac}{IdeComponentRenderers}},}
+\DoxyCodeLine{\Hypertarget{_tree_view_helper_absolute_path_directory_8cs_source_l00023}00023\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ directoryTreeView.\mbox{\hyperlink{class_luthetus_1_1_ide_1_1_razor_lib_1_1_file_systems_1_1_models_1_1_tree_view_absolute_path_a72d8f6d33ee3842f4ec48258b61d56be}{CommonComponentRenderers}},}
+\DoxyCodeLine{\Hypertarget{_tree_view_helper_absolute_path_directory_8cs_source_l00024}00024\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ directoryTreeView.\mbox{\hyperlink{class_luthetus_1_1_ide_1_1_razor_lib_1_1_file_systems_1_1_models_1_1_tree_view_absolute_path_a8d52d20b191253f6f8c29e14f0f4eb7c}{FileSystemProvider}},}
+\DoxyCodeLine{\Hypertarget{_tree_view_helper_absolute_path_directory_8cs_source_l00025}00025\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ directoryTreeView.\mbox{\hyperlink{class_luthetus_1_1_ide_1_1_razor_lib_1_1_file_systems_1_1_models_1_1_tree_view_absolute_path_abc37f58fab04936c279b8ad79496434c}{EnvironmentProvider}},}
+\DoxyCodeLine{\Hypertarget{_tree_view_helper_absolute_path_directory_8cs_source_l00026}00026\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{true},}
+\DoxyCodeLine{\Hypertarget{_tree_view_helper_absolute_path_directory_8cs_source_l00027}00027\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{false})}
+\DoxyCodeLine{\Hypertarget{_tree_view_helper_absolute_path_directory_8cs_source_l00028}00028\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_tree_view_helper_absolute_path_directory_8cs_source_l00029}00029\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ TreeViewChangedKey\ =\ Key<TreeViewChanged>.NewKey()}
+\DoxyCodeLine{\Hypertarget{_tree_view_helper_absolute_path_directory_8cs_source_l00030}00030\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \};}
+\DoxyCodeLine{\Hypertarget{_tree_view_helper_absolute_path_directory_8cs_source_l00031}00031\ \ \ \ \ \ \ \ \ \ \ \ \ \});}
+\DoxyCodeLine{\Hypertarget{_tree_view_helper_absolute_path_directory_8cs_source_l00032}00032\ }
+\DoxyCodeLine{\Hypertarget{_tree_view_helper_absolute_path_directory_8cs_source_l00033}00033\ \ \ \ \ \ \ \ \ var\ filePathStringsList\ =\ await\ directoryTreeView.FileSystemProvider.Directory}
+\DoxyCodeLine{\Hypertarget{_tree_view_helper_absolute_path_directory_8cs_source_l00034}00034\ \ \ \ \ \ \ \ \ \ \ \ \ .GetFilesAsync(directoryAbsolutePathString)}
+\DoxyCodeLine{\Hypertarget{_tree_view_helper_absolute_path_directory_8cs_source_l00035}00035\ \ \ \ \ \ \ \ \ \ \ \ \ .ConfigureAwait(\textcolor{keyword}{false});}
+\DoxyCodeLine{\Hypertarget{_tree_view_helper_absolute_path_directory_8cs_source_l00036}00036\ }
+\DoxyCodeLine{\Hypertarget{_tree_view_helper_absolute_path_directory_8cs_source_l00037}00037\ \ \ \ \ \ \ \ \ var\ childFileTreeViewModels\ =\ filePathStringsList}
+\DoxyCodeLine{\Hypertarget{_tree_view_helper_absolute_path_directory_8cs_source_l00038}00038\ \ \ \ \ \ \ \ \ \ \ \ \ .OrderBy(pathString\ =>\ pathString)}
+\DoxyCodeLine{\Hypertarget{_tree_view_helper_absolute_path_directory_8cs_source_l00039}00039\ \ \ \ \ \ \ \ \ \ \ \ \ .Select(x\ =>}
+\DoxyCodeLine{\Hypertarget{_tree_view_helper_absolute_path_directory_8cs_source_l00040}00040\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_tree_view_helper_absolute_path_directory_8cs_source_l00041}00041\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ (\mbox{\hyperlink{class_luthetus_1_1_common_1_1_razor_lib_1_1_tree_views_1_1_models_1_1_tree_view_no_type}{TreeViewNoType}})\textcolor{keyword}{new}\ \mbox{\hyperlink{class_luthetus_1_1_ide_1_1_razor_lib_1_1_file_systems_1_1_models_1_1_tree_view_absolute_path}{TreeViewAbsolutePath}}(}
+\DoxyCodeLine{\Hypertarget{_tree_view_helper_absolute_path_directory_8cs_source_l00042}00042\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ directoryTreeView.\mbox{\hyperlink{class_luthetus_1_1_ide_1_1_razor_lib_1_1_file_systems_1_1_models_1_1_tree_view_absolute_path_abc37f58fab04936c279b8ad79496434c}{EnvironmentProvider}}.AbsolutePathFactory(x,\ \textcolor{keyword}{false}),}
+\DoxyCodeLine{\Hypertarget{_tree_view_helper_absolute_path_directory_8cs_source_l00043}00043\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ directoryTreeView.\mbox{\hyperlink{class_luthetus_1_1_ide_1_1_razor_lib_1_1_file_systems_1_1_models_1_1_tree_view_absolute_path_a331183d57b829809a697704b394379ac}{IdeComponentRenderers}},}
+\DoxyCodeLine{\Hypertarget{_tree_view_helper_absolute_path_directory_8cs_source_l00044}00044\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ directoryTreeView.\mbox{\hyperlink{class_luthetus_1_1_ide_1_1_razor_lib_1_1_file_systems_1_1_models_1_1_tree_view_absolute_path_a72d8f6d33ee3842f4ec48258b61d56be}{CommonComponentRenderers}},}
+\DoxyCodeLine{\Hypertarget{_tree_view_helper_absolute_path_directory_8cs_source_l00045}00045\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ directoryTreeView.\mbox{\hyperlink{class_luthetus_1_1_ide_1_1_razor_lib_1_1_file_systems_1_1_models_1_1_tree_view_absolute_path_a8d52d20b191253f6f8c29e14f0f4eb7c}{FileSystemProvider}},}
+\DoxyCodeLine{\Hypertarget{_tree_view_helper_absolute_path_directory_8cs_source_l00046}00046\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ directoryTreeView.\mbox{\hyperlink{class_luthetus_1_1_ide_1_1_razor_lib_1_1_file_systems_1_1_models_1_1_tree_view_absolute_path_abc37f58fab04936c279b8ad79496434c}{EnvironmentProvider}},}
+\DoxyCodeLine{\Hypertarget{_tree_view_helper_absolute_path_directory_8cs_source_l00047}00047\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{false},}
+\DoxyCodeLine{\Hypertarget{_tree_view_helper_absolute_path_directory_8cs_source_l00048}00048\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{false})}
+\DoxyCodeLine{\Hypertarget{_tree_view_helper_absolute_path_directory_8cs_source_l00049}00049\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_tree_view_helper_absolute_path_directory_8cs_source_l00050}00050\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ TreeViewChangedKey\ =\ Key<TreeViewChanged>.NewKey()}
+\DoxyCodeLine{\Hypertarget{_tree_view_helper_absolute_path_directory_8cs_source_l00051}00051\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \};}
+\DoxyCodeLine{\Hypertarget{_tree_view_helper_absolute_path_directory_8cs_source_l00052}00052\ \ \ \ \ \ \ \ \ \ \ \ \ \});}
+\DoxyCodeLine{\Hypertarget{_tree_view_helper_absolute_path_directory_8cs_source_l00053}00053\ }
+\DoxyCodeLine{\Hypertarget{_tree_view_helper_absolute_path_directory_8cs_source_l00054}00054\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ childDirectoryTreeViewModels.Union(childFileTreeViewModels).ToList();}
+\DoxyCodeLine{\Hypertarget{_tree_view_helper_absolute_path_directory_8cs_source_l00055}00055\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_tree_view_helper_absolute_path_directory_8cs_source_l00056}00056\ \}}
+
+\end{DoxyCode}

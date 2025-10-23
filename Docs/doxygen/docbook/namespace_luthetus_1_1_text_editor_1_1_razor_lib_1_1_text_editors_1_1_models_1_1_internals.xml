@@ -1,0 +1,217 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1_1_internals" xml:lang="en-US">
+<title>Luthetus.TextEditor.RazorLib.TextEditors.Models.Internals Namespace Reference</title>
+<indexterm><primary>Luthetus.TextEditor.RazorLib.TextEditors.Models.Internals</primary></indexterm>
+<simplesect>
+    <title>Classes    </title>
+        <itemizedlist>
+            <listitem><para>class <link linkend="_class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1_1_internals_1_1_display_tracker">DisplayTracker</link></para>
+
+<para>One must track whether the ViewModel is currently being rendered.<?linebreak?><?linebreak?>. </para>
+</listitem>
+            <listitem><para>class <link linkend="_class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1_1_internals_1_1_find_overlay_decoration_mapper">FindOverlayDecorationMapper</link></para>
+
+<para>TODO: I copy and pasted <link linkend="_class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_diffs_1_1_models_1_1_text_editor_diff_decoration_mapper">Diffs.Models.TextEditorDiffDecorationMapper</link>... ...to make this class. The decorations need to be made. I only implemented the highlighting itself for now, and pick the colors later.(2024-02-01). </para>
+</listitem>
+            <listitem><para>class <emphasis role="strong">FindOverlayPresentationFacts</emphasis></para>
+</listitem>
+            <listitem><para>interface <link linkend="_interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1_1_internals_1_1_i_text_editor_render_batch">ITextEditorRenderBatch</link></para>
+</listitem>
+            <listitem><para>class <link linkend="_class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1_1_internals_1_1_save_file_helper">SaveFileHelper</link></para>
+
+<para>TODO: (2023-06-09) This class is a hacky way to track a cancellation token source per each text editor model. As of this comment, <link linkend="_class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1_1_text_editor_model">TextEditorModel</link> is a class which is frequently re-constructed with new(). A CancellationTokenSource as a property would therefore not work. One would Cancel() then new() up another CancellationTokenSource and update the property. Yet its possible that instance of <link linkend="_class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1_1_text_editor_model">TextEditorModel</link> isn&apos;t even being used anymore by that point. So a readonly object wrapper which then contains the CancellationTokenSource ensures it doesn&apos;t get lost. </para>
+</listitem>
+            <listitem><para>class <emphasis role="strong">ScrollbarFacts</emphasis></para>
+</listitem>
+            <listitem><para>class <link linkend="_class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1_1_internals_1_1_text_editor_component_data">TextEditorComponentData</link></para>
+
+<para>Everytime one renders a unique <link linkend="_class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_displays_1_1_text_editor_view_model_display">Luthetus.TextEditor.RazorLib.TextEditors.Displays.TextEditorViewModelDisplay</link>, a unique identifier for the HTML elements is created. </para>
+</listitem>
+            <listitem><para>class <link linkend="_class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1_1_internals_1_1_text_0db4c367221453353e867ce1036d69e2">TextEditorDevToolsDecorationMapper</link></para>
+</listitem>
+            <listitem><para>class <emphasis role="strong">TextEditorDevToolsPresentationFacts</emphasis></para>
+</listitem>
+            <listitem><para>class <link linkend="_class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1_1_internals_1_1_text_editor_render_batch_validated">TextEditorRenderBatchValidated</link></para>
+</listitem>
+            <listitem><para>class <link linkend="_class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1_1_internals_1_1_view_model_display_options">ViewModelDisplayOptions</link></para>
+</listitem>
+            <listitem><para>class <link linkend="_class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1_1_internals_1_1_view_model_unsafe_state">ViewModelUnsafeState</link></para>
+
+<para>This class is a hack and was made on (2024-03-09).<?linebreak?><?linebreak?>. </para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Enumerations    </title>
+        <itemizedlist>
+            <listitem><para>enum <link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1_1_internals_1a733b35c261ccafa92c148d4342b12b5c">FindOverlayDecorationKind</link> { <?linebreak?><link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1_1_internals_1a733b35c261ccafa92c148d4342b12b5ca6adf97f83acf6453d4a6a4b1070f3754">None</link>
+, <link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1_1_internals_1a733b35c261ccafa92c148d4342b12b5ca6771bf1b0e5acf3aa33da1e127523926">LongestCommonSubsequence</link>
+, <link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1_1_internals_1a733b35c261ccafa92c148d4342b12b5ca3e8592679127932ad5203da071625c5d">Insertion</link>
+, <link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1_1_internals_1a733b35c261ccafa92c148d4342b12b5caa1998652b01bdc9e7128734efb804780">Deletion</link>
+, <?linebreak?><link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1_1_internals_1a733b35c261ccafa92c148d4342b12b5ca8af1f1c0895c6f9654aa578cfd0a3987">Modification</link>
+ }</para>
+
+<para>TODO: I copy and pasted Diffs.Models.TextEditorDiffDecorationKind... ...to make this class. The decorations need to be made. I only implemented the highlighting itself for now, and pick the colors later.(2024-02-01). </para>
+</listitem>
+            <listitem><para>enum <link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1_1_internals_1ad80d4c3b227dc5cde23b92ee5c5dc126">HeaderButtonKind</link> { <?linebreak?><link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1_1_internals_1ad80d4c3b227dc5cde23b92ee5c5dc126a1cdc076b28f70afac5fcedadf99fa119">Undo</link>
+, <link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1_1_internals_1ad80d4c3b227dc5cde23b92ee5c5dc126a5afeaba074ef570dc720caaa855d49f6">Redo</link>
+, <link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1_1_internals_1ad80d4c3b227dc5cde23b92ee5c5dc126aeb334dca00e390e0d3ebf52d205807d7">Cut</link>
+, <link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1_1_internals_1ad80d4c3b227dc5cde23b92ee5c5dc126a5fb63579fc981698f97d55bfecb213ea">Copy</link>
+, <?linebreak?><link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1_1_internals_1ad80d4c3b227dc5cde23b92ee5c5dc126a36bb6559696dc9124986ae120515984f">Paste</link>
+, <link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1_1_internals_1ad80d4c3b227dc5cde23b92ee5c5dc126ac9cc8cce247e49bae79f15173ce97354">Save</link>
+, <link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1_1_internals_1ad80d4c3b227dc5cde23b92ee5c5dc126a702bbdc91c8e399d7b0807de5b7adc27">SelectAll</link>
+, <link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1_1_internals_1ad80d4c3b227dc5cde23b92ee5c5dc126a2ecbd78c847c76a5d86d89f9ba0ac6a7">PeekWindowDisplay</link>
+ }</para>
+</listitem>
+            <listitem><para>enum <link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1_1_internals_1a27c667fdae3ee1a6426c7d969ca3e09b">MenuKind</link> { <link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1_1_internals_1a27c667fdae3ee1a6426c7d969ca3e09ba6adf97f83acf6453d4a6a4b1070f3754">None</link>
+, <link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1_1_internals_1a27c667fdae3ee1a6426c7d969ca3e09ba765b5c592d27653eb7102ee719640108">ContextMenu</link>
+, <link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1_1_internals_1a27c667fdae3ee1a6426c7d969ca3e09ba393a8786a72b8e1c0594a1c2a6f705a0">AutoCompleteMenu</link>
+ }</para>
+</listitem>
+            <listitem><para>enum <link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1_1_internals_1a7713599664f166008642dbd268022b91">TextEditorDevToolsDecorationKind</link> { <link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1_1_internals_1a7713599664f166008642dbd268022b91a6adf97f83acf6453d4a6a4b1070f3754">None</link>
+, <link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1_1_internals_1a7713599664f166008642dbd268022b91a5d113f2038d289f391614c39043629e8">Scope</link>
+ }</para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Functions    </title>
+        <itemizedlist>
+            <listitem><para>record <link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1_1_internals_1ad2c610f6f62b19a3e674d2fe41cd8004">TooltipViewModel</link> (Type RendererType, Dictionary&lt; string, object?&gt;? ParameterMap, <link linkend="_namespace_luthetus_1_1_common_1_1_razor_lib_1_1_java_script_objects_1_1_models_1afbd8bdfa3b1ad6dd6cf7cea2dc656a3a">RelativeCoordinates</link> <link linkend="_namespace_luthetus_1_1_common_1_1_razor_lib_1_1_java_script_objects_1_1_models_1afbd8bdfa3b1ad6dd6cf7cea2dc656a3a">RelativeCoordinates</link>, string? CssClassString, Func&lt; Task &gt; OnMouseOver)</para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<section>
+<title>Enumeration Type Documentation</title>
+<anchor xml:id="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1_1_internals_1a733b35c261ccafa92c148d4342b12b5c"/><section>
+    <title>FindOverlayDecorationKind</title>
+<indexterm><primary>FindOverlayDecorationKind</primary><secondary>Luthetus.TextEditor.RazorLib.TextEditors.Models.Internals</secondary></indexterm>
+<indexterm><primary>Luthetus.TextEditor.RazorLib.TextEditors.Models.Internals</primary><secondary>FindOverlayDecorationKind</secondary></indexterm>
+<para><computeroutput>enum <link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1_1_internals_1a733b35c261ccafa92c148d4342b12b5c">Luthetus.TextEditor.RazorLib.TextEditors.Models.Internals.FindOverlayDecorationKind</link></computeroutput></para><para>
+
+<para>TODO: I copy and pasted <link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_diffs_1_1_models_1aec0409c8bf45dcf893e3cf2eea0f57d3">Diffs.Models.TextEditorDiffDecorationKind</link>... ...to make this class. The decorations need to be made. I only implemented the highlighting itself for now, and pick the colors later.(2024-02-01). </para>
+</para>
+<informaltable frame="all">
+<title>Enumerator</title>
+    <tgroup cols="2" align="left" colsep="1" rowsep="1">
+      <colspec colname='c1'/>
+      <colspec colname='c2'/>
+<tbody>
+<row><entry><indexterm><primary>None</primary><secondary>Luthetus.TextEditor.RazorLib.TextEditors.Models.Internals</secondary></indexterm>
+<indexterm><primary>Luthetus.TextEditor.RazorLib.TextEditors.Models.Internals</primary><secondary>None</secondary></indexterm>
+<anchor xml:id="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1_1_internals_1a733b35c261ccafa92c148d4342b12b5ca6adf97f83acf6453d4a6a4b1070f3754"/>None</entry><entry></entry></row><row><entry><indexterm><primary>LongestCommonSubsequence</primary><secondary>Luthetus.TextEditor.RazorLib.TextEditors.Models.Internals</secondary></indexterm>
+<indexterm><primary>Luthetus.TextEditor.RazorLib.TextEditors.Models.Internals</primary><secondary>LongestCommonSubsequence</secondary></indexterm>
+<anchor xml:id="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1_1_internals_1a733b35c261ccafa92c148d4342b12b5ca6771bf1b0e5acf3aa33da1e127523926"/>LongestCommonSubsequence</entry><entry></entry></row><row><entry><indexterm><primary>Insertion</primary><secondary>Luthetus.TextEditor.RazorLib.TextEditors.Models.Internals</secondary></indexterm>
+<indexterm><primary>Luthetus.TextEditor.RazorLib.TextEditors.Models.Internals</primary><secondary>Insertion</secondary></indexterm>
+<anchor xml:id="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1_1_internals_1a733b35c261ccafa92c148d4342b12b5ca3e8592679127932ad5203da071625c5d"/>Insertion</entry><entry></entry></row><row><entry><indexterm><primary>Deletion</primary><secondary>Luthetus.TextEditor.RazorLib.TextEditors.Models.Internals</secondary></indexterm>
+<indexterm><primary>Luthetus.TextEditor.RazorLib.TextEditors.Models.Internals</primary><secondary>Deletion</secondary></indexterm>
+<anchor xml:id="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1_1_internals_1a733b35c261ccafa92c148d4342b12b5caa1998652b01bdc9e7128734efb804780"/>Deletion</entry><entry></entry></row><row><entry><indexterm><primary>Modification</primary><secondary>Luthetus.TextEditor.RazorLib.TextEditors.Models.Internals</secondary></indexterm>
+<indexterm><primary>Luthetus.TextEditor.RazorLib.TextEditors.Models.Internals</primary><secondary>Modification</secondary></indexterm>
+<anchor xml:id="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1_1_internals_1a733b35c261ccafa92c148d4342b12b5ca8af1f1c0895c6f9654aa578cfd0a3987"/>Modification</entry><entry></entry></row>    </tbody>
+    </tgroup>
+</informaltable>
+<para>
+Definition at line <link linkend="__find_overlay_decoration_kind_8cs_source_1l00008">8</link> of file <link linkend="__find_overlay_decoration_kind_8cs_source">FindOverlayDecorationKind.cs</link>.</para>
+</section>
+<anchor xml:id="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1_1_internals_1ad80d4c3b227dc5cde23b92ee5c5dc126"/><section>
+    <title>HeaderButtonKind</title>
+<indexterm><primary>HeaderButtonKind</primary><secondary>Luthetus.TextEditor.RazorLib.TextEditors.Models.Internals</secondary></indexterm>
+<indexterm><primary>Luthetus.TextEditor.RazorLib.TextEditors.Models.Internals</primary><secondary>HeaderButtonKind</secondary></indexterm>
+<para><computeroutput>enum <link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1_1_internals_1ad80d4c3b227dc5cde23b92ee5c5dc126">Luthetus.TextEditor.RazorLib.TextEditors.Models.Internals.HeaderButtonKind</link></computeroutput></para><informaltable frame="all">
+<title>Enumerator</title>
+    <tgroup cols="2" align="left" colsep="1" rowsep="1">
+      <colspec colname='c1'/>
+      <colspec colname='c2'/>
+<tbody>
+<row><entry><indexterm><primary>Undo</primary><secondary>Luthetus.TextEditor.RazorLib.TextEditors.Models.Internals</secondary></indexterm>
+<indexterm><primary>Luthetus.TextEditor.RazorLib.TextEditors.Models.Internals</primary><secondary>Undo</secondary></indexterm>
+<anchor xml:id="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1_1_internals_1ad80d4c3b227dc5cde23b92ee5c5dc126a1cdc076b28f70afac5fcedadf99fa119"/>Undo</entry><entry></entry></row><row><entry><indexterm><primary>Redo</primary><secondary>Luthetus.TextEditor.RazorLib.TextEditors.Models.Internals</secondary></indexterm>
+<indexterm><primary>Luthetus.TextEditor.RazorLib.TextEditors.Models.Internals</primary><secondary>Redo</secondary></indexterm>
+<anchor xml:id="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1_1_internals_1ad80d4c3b227dc5cde23b92ee5c5dc126a5afeaba074ef570dc720caaa855d49f6"/>Redo</entry><entry></entry></row><row><entry><indexterm><primary>Cut</primary><secondary>Luthetus.TextEditor.RazorLib.TextEditors.Models.Internals</secondary></indexterm>
+<indexterm><primary>Luthetus.TextEditor.RazorLib.TextEditors.Models.Internals</primary><secondary>Cut</secondary></indexterm>
+<anchor xml:id="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1_1_internals_1ad80d4c3b227dc5cde23b92ee5c5dc126aeb334dca00e390e0d3ebf52d205807d7"/>Cut</entry><entry></entry></row><row><entry><indexterm><primary>Copy</primary><secondary>Luthetus.TextEditor.RazorLib.TextEditors.Models.Internals</secondary></indexterm>
+<indexterm><primary>Luthetus.TextEditor.RazorLib.TextEditors.Models.Internals</primary><secondary>Copy</secondary></indexterm>
+<anchor xml:id="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1_1_internals_1ad80d4c3b227dc5cde23b92ee5c5dc126a5fb63579fc981698f97d55bfecb213ea"/>Copy</entry><entry></entry></row><row><entry><indexterm><primary>Paste</primary><secondary>Luthetus.TextEditor.RazorLib.TextEditors.Models.Internals</secondary></indexterm>
+<indexterm><primary>Luthetus.TextEditor.RazorLib.TextEditors.Models.Internals</primary><secondary>Paste</secondary></indexterm>
+<anchor xml:id="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1_1_internals_1ad80d4c3b227dc5cde23b92ee5c5dc126a36bb6559696dc9124986ae120515984f"/>Paste</entry><entry></entry></row><row><entry><indexterm><primary>Save</primary><secondary>Luthetus.TextEditor.RazorLib.TextEditors.Models.Internals</secondary></indexterm>
+<indexterm><primary>Luthetus.TextEditor.RazorLib.TextEditors.Models.Internals</primary><secondary>Save</secondary></indexterm>
+<anchor xml:id="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1_1_internals_1ad80d4c3b227dc5cde23b92ee5c5dc126ac9cc8cce247e49bae79f15173ce97354"/>Save</entry><entry></entry></row><row><entry><indexterm><primary>SelectAll</primary><secondary>Luthetus.TextEditor.RazorLib.TextEditors.Models.Internals</secondary></indexterm>
+<indexterm><primary>Luthetus.TextEditor.RazorLib.TextEditors.Models.Internals</primary><secondary>SelectAll</secondary></indexterm>
+<anchor xml:id="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1_1_internals_1ad80d4c3b227dc5cde23b92ee5c5dc126a702bbdc91c8e399d7b0807de5b7adc27"/>SelectAll</entry><entry></entry></row><row><entry><indexterm><primary>PeekWindowDisplay</primary><secondary>Luthetus.TextEditor.RazorLib.TextEditors.Models.Internals</secondary></indexterm>
+<indexterm><primary>Luthetus.TextEditor.RazorLib.TextEditors.Models.Internals</primary><secondary>PeekWindowDisplay</secondary></indexterm>
+<anchor xml:id="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1_1_internals_1ad80d4c3b227dc5cde23b92ee5c5dc126a2ecbd78c847c76a5d86d89f9ba0ac6a7"/>PeekWindowDisplay</entry><entry></entry></row>    </tbody>
+    </tgroup>
+</informaltable>
+<para>
+Definition at line <link linkend="__header_button_kind_8cs_source_1l00003">3</link> of file <link linkend="__header_button_kind_8cs_source">HeaderButtonKind.cs</link>.</para>
+</section>
+<anchor xml:id="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1_1_internals_1a27c667fdae3ee1a6426c7d969ca3e09b"/><section>
+    <title>MenuKind</title>
+<indexterm><primary>MenuKind</primary><secondary>Luthetus.TextEditor.RazorLib.TextEditors.Models.Internals</secondary></indexterm>
+<indexterm><primary>Luthetus.TextEditor.RazorLib.TextEditors.Models.Internals</primary><secondary>MenuKind</secondary></indexterm>
+<para><computeroutput>enum <link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1_1_internals_1a27c667fdae3ee1a6426c7d969ca3e09b">Luthetus.TextEditor.RazorLib.TextEditors.Models.Internals.MenuKind</link></computeroutput></para><informaltable frame="all">
+<title>Enumerator</title>
+    <tgroup cols="2" align="left" colsep="1" rowsep="1">
+      <colspec colname='c1'/>
+      <colspec colname='c2'/>
+<tbody>
+<row><entry><indexterm><primary>None</primary><secondary>Luthetus.TextEditor.RazorLib.TextEditors.Models.Internals</secondary></indexterm>
+<indexterm><primary>Luthetus.TextEditor.RazorLib.TextEditors.Models.Internals</primary><secondary>None</secondary></indexterm>
+<anchor xml:id="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1_1_internals_1a27c667fdae3ee1a6426c7d969ca3e09ba6adf97f83acf6453d4a6a4b1070f3754"/>None</entry><entry></entry></row><row><entry><indexterm><primary>ContextMenu</primary><secondary>Luthetus.TextEditor.RazorLib.TextEditors.Models.Internals</secondary></indexterm>
+<indexterm><primary>Luthetus.TextEditor.RazorLib.TextEditors.Models.Internals</primary><secondary>ContextMenu</secondary></indexterm>
+<anchor xml:id="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1_1_internals_1a27c667fdae3ee1a6426c7d969ca3e09ba765b5c592d27653eb7102ee719640108"/>ContextMenu</entry><entry></entry></row><row><entry><indexterm><primary>AutoCompleteMenu</primary><secondary>Luthetus.TextEditor.RazorLib.TextEditors.Models.Internals</secondary></indexterm>
+<indexterm><primary>Luthetus.TextEditor.RazorLib.TextEditors.Models.Internals</primary><secondary>AutoCompleteMenu</secondary></indexterm>
+<anchor xml:id="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1_1_internals_1a27c667fdae3ee1a6426c7d969ca3e09ba393a8786a72b8e1c0594a1c2a6f705a0"/>AutoCompleteMenu</entry><entry></entry></row>    </tbody>
+    </tgroup>
+</informaltable>
+<para>
+Definition at line <link linkend="__menu_kind_8cs_source_1l00003">3</link> of file <link linkend="__menu_kind_8cs_source">MenuKind.cs</link>.</para>
+</section>
+<anchor xml:id="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1_1_internals_1a7713599664f166008642dbd268022b91"/><section>
+    <title>TextEditorDevToolsDecorationKind</title>
+<indexterm><primary>TextEditorDevToolsDecorationKind</primary><secondary>Luthetus.TextEditor.RazorLib.TextEditors.Models.Internals</secondary></indexterm>
+<indexterm><primary>Luthetus.TextEditor.RazorLib.TextEditors.Models.Internals</primary><secondary>TextEditorDevToolsDecorationKind</secondary></indexterm>
+<para><computeroutput>enum <link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1_1_internals_1a7713599664f166008642dbd268022b91">Luthetus.TextEditor.RazorLib.TextEditors.Models.Internals.TextEditorDevToolsDecorationKind</link></computeroutput></para><informaltable frame="all">
+<title>Enumerator</title>
+    <tgroup cols="2" align="left" colsep="1" rowsep="1">
+      <colspec colname='c1'/>
+      <colspec colname='c2'/>
+<tbody>
+<row><entry><indexterm><primary>None</primary><secondary>Luthetus.TextEditor.RazorLib.TextEditors.Models.Internals</secondary></indexterm>
+<indexterm><primary>Luthetus.TextEditor.RazorLib.TextEditors.Models.Internals</primary><secondary>None</secondary></indexterm>
+<anchor xml:id="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1_1_internals_1a7713599664f166008642dbd268022b91a6adf97f83acf6453d4a6a4b1070f3754"/>None</entry><entry></entry></row><row><entry><indexterm><primary>Scope</primary><secondary>Luthetus.TextEditor.RazorLib.TextEditors.Models.Internals</secondary></indexterm>
+<indexterm><primary>Luthetus.TextEditor.RazorLib.TextEditors.Models.Internals</primary><secondary>Scope</secondary></indexterm>
+<anchor xml:id="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1_1_internals_1a7713599664f166008642dbd268022b91a5d113f2038d289f391614c39043629e8"/>Scope</entry><entry></entry></row>    </tbody>
+    </tgroup>
+</informaltable>
+<para>
+Definition at line <link linkend="__text_editor_dev_tools_decoration_kind_8cs_source_1l00003">3</link> of file <link linkend="__text_editor_dev_tools_decoration_kind_8cs_source">TextEditorDevToolsDecorationKind.cs</link>.</para>
+</section>
+</section>
+<section>
+<title>Function Documentation</title>
+<anchor xml:id="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1_1_internals_1ad2c610f6f62b19a3e674d2fe41cd8004"/><section>
+    <title>TooltipViewModel()</title>
+<indexterm><primary>TooltipViewModel</primary><secondary>Luthetus.TextEditor.RazorLib.TextEditors.Models.Internals</secondary></indexterm>
+<indexterm><primary>Luthetus.TextEditor.RazorLib.TextEditors.Models.Internals</primary><secondary>TooltipViewModel</secondary></indexterm>
+<para><computeroutput>record Luthetus.TextEditor.RazorLib.TextEditors.Models.Internals.TooltipViewModel (Type RendererType, Dictionary&lt; string, object?&gt;? ParameterMap, <link linkend="_namespace_luthetus_1_1_common_1_1_razor_lib_1_1_java_script_objects_1_1_models_1afbd8bdfa3b1ad6dd6cf7cea2dc656a3a">RelativeCoordinates</link> RelativeCoordinates, string? CssClassString, Func&lt; Task &gt; OnMouseOver)</computeroutput></para>Here is the call graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1_1_internals_ad2c610f6f62b19a3e674d2fe41cd8004_cgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+Here is the caller graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1_1_internals_ad2c610f6f62b19a3e674d2fe41cd8004_icgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+</section>
+</section>
+</section>

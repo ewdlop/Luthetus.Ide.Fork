@@ -1,0 +1,10 @@
+var class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_1_1_nodes_1_1_variable_reference_node =
+[
+    [ "VariableReferenceNode", "class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_1_1_nodes_1_1_variable_reference_node.html#abe569c062626b6cd739ca392e1e55469", null ],
+    [ "GetChildList", "class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_1_1_nodes_1_1_variable_reference_node.html#ad314cbded7363453fdd0c1f3b515deea", null ],
+    [ "IsFabricated", "class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_1_1_nodes_1_1_variable_reference_node.html#ac890d1a6714576927df88b63cb771874", null ],
+    [ "ResultTypeClauseNode", "class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_1_1_nodes_1_1_variable_reference_node.html#aebee96b8b1fa207f05785cf1a19a04df", null ],
+    [ "SyntaxKind", "class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_1_1_nodes_1_1_variable_reference_node.html#aeb6798581faa5ce4a6023527bd0074aa", null ],
+    [ "VariableDeclarationNode", "class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_1_1_nodes_1_1_variable_reference_node.html#a0c9c60cda99b354feb684700595e3825", null ],
+    [ "VariableIdentifierToken", "class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_1_1_nodes_1_1_variable_reference_node.html#aee3fb7fe1f87890f4b0d94dbf1b67d44", null ]
+];

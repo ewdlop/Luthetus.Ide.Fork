@@ -1,0 +1,102 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="__constraint_node_tests_8cs_source" xml:lang="en-US">
+<title>ConstraintNodeTests.cs</title>
+<indexterm><primary>Source/Tests/TextEditor/Basis/CompilerServices/Syntax/SyntaxNodes/ConstraintNodeTests.cs</primary></indexterm>
+Go to the documentation of this file.<programlisting linenumbering="unnumbered"><anchor xml:id="__constraint_node_tests_8cs_source_1l00001"/>00001 <emphasis role="keyword">using&#32;</emphasis>System.Collections.Immutable;
+<anchor xml:id="__constraint_node_tests_8cs_source_1l00002"/>00002 <emphasis role="keyword">using&#32;</emphasis><link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_1_1_nodes">Luthetus.TextEditor.RazorLib.CompilerServices.Syntax.Nodes</link>;
+<anchor xml:id="__constraint_node_tests_8cs_source_1l00003"/>00003 <emphasis role="keyword">using&#32;</emphasis><link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax">Luthetus.TextEditor.RazorLib.CompilerServices.Syntax</link>;
+<anchor xml:id="__constraint_node_tests_8cs_source_1l00004"/>00004 <emphasis role="keyword">using&#32;</emphasis><link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_1_1_tokens">Luthetus.TextEditor.RazorLib.CompilerServices.Syntax.Tokens</link>;
+<anchor xml:id="__constraint_node_tests_8cs_source_1l00005"/>00005 <emphasis role="keyword">using&#32;</emphasis><link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_lexers_1_1_models">Luthetus.TextEditor.RazorLib.Lexers.Models</link>;
+<anchor xml:id="__constraint_node_tests_8cs_source_1l00006"/>00006 
+<anchor xml:id="__constraint_node_tests_8cs_source_1l00007"/>00007 <emphasis role="keyword">namespace&#32;</emphasis><link linkend="_namespace_luthetus_1_1_text_editor_1_1_tests_1_1_basis_1_1_compiler_services_1_1_syntax_1_1_syntax_nodes">Luthetus.TextEditor.Tests.Basis.CompilerServices.Syntax.SyntaxNodes</link>;
+<anchor xml:id="__constraint_node_tests_8cs_source_1l00008"/>00008 
+<anchor xml:id="__constraint_node_tests_8cs_source_1l00012"/><link linkend="_class_luthetus_1_1_text_editor_1_1_tests_1_1_basis_1_1_compiler_services_1_1_syntax_1_1_syntax_nodes_1_1_constraint_node_tests">00012</link> <emphasis role="keyword">public</emphasis>&#32;<emphasis role="keyword">class&#32;</emphasis><link linkend="_class_luthetus_1_1_text_editor_1_1_tests_1_1_basis_1_1_compiler_services_1_1_syntax_1_1_syntax_nodes_1_1_constraint_node_tests">ConstraintNodeTests</link>
+<anchor xml:id="__constraint_node_tests_8cs_source_1l00013"/>00013 {
+<anchor xml:id="__constraint_node_tests_8cs_source_1l00022"/>00022 &#32;&#32;&#32;&#32;[Fact]
+<anchor xml:id="__constraint_node_tests_8cs_source_1l00023"/><link linkend="_class_luthetus_1_1_text_editor_1_1_tests_1_1_basis_1_1_compiler_services_1_1_syntax_1_1_syntax_nodes_1_1_constraint_node_tests_1a4b7663105cae4063ecfcd8402cc22a52">00023</link> &#32;&#32;&#32;&#32;<emphasis role="keyword">public</emphasis>&#32;<emphasis role="keywordtype">void</emphasis>&#32;<link linkend="_class_luthetus_1_1_text_editor_1_1_tests_1_1_basis_1_1_compiler_services_1_1_syntax_1_1_syntax_nodes_1_1_constraint_node_tests_1a4b7663105cae4063ecfcd8402cc22a52">Constructor</link>()
+<anchor xml:id="__constraint_node_tests_8cs_source_1l00024"/>00024 &#32;&#32;&#32;&#32;{
+<anchor xml:id="__constraint_node_tests_8cs_source_1l00025"/>00025 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;var&#32;constraintText&#32;=&#32;<emphasis role="stringliteral">@&quot;where&#32;T&#32;:&#32;notnull&quot;</emphasis>;
+<anchor xml:id="__constraint_node_tests_8cs_source_1l00026"/>00026 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;var&#32;sourceText&#32;=&#32;<emphasis role="stringliteral">$@&quot;public&#32;abstract&#32;class&#32;TreeViewWithType&lt;T&gt;&#32;:&#32;TreeViewNoType&#32;{constraintText}</emphasis>
+<anchor xml:id="__constraint_node_tests_8cs_source_1l00027"/>00027 <emphasis role="stringliteral">{{</emphasis>
+<anchor xml:id="__constraint_node_tests_8cs_source_1l00028"/>00028 <emphasis role="stringliteral">}}&quot;</emphasis>;
+<anchor xml:id="__constraint_node_tests_8cs_source_1l00029"/>00029 
+<anchor xml:id="__constraint_node_tests_8cs_source_1l00030"/>00030 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<link linkend="_struct_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_1_1_tokens_1_1_keyword_contextual_token">KeywordContextualToken</link>&#32;whereKeywordToken;
+<anchor xml:id="__constraint_node_tests_8cs_source_1l00031"/>00031 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;{
+<anchor xml:id="__constraint_node_tests_8cs_source_1l00032"/>00032 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;var&#32;whereKeywordText&#32;=&#32;<emphasis role="stringliteral">&quot;where&quot;</emphasis>;
+<anchor xml:id="__constraint_node_tests_8cs_source_1l00033"/>00033 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordtype">int</emphasis>&#32;indexOfWhereKeywordText&#32;=&#32;sourceText.IndexOf(whereKeywordText);
+<anchor xml:id="__constraint_node_tests_8cs_source_1l00034"/>00034 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;
+<anchor xml:id="__constraint_node_tests_8cs_source_1l00035"/>00035 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;whereKeywordToken&#32;=&#32;<emphasis role="keyword">new</emphasis>&#32;<link linkend="_struct_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_1_1_tokens_1_1_keyword_contextual_token">KeywordContextualToken</link>(<emphasis role="keyword">new</emphasis>&#32;<link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_lexers_1_1_models_1a1ffd1a7706dfd364560b76d47467812f">TextEditorTextSpan</link>(
+<anchor xml:id="__constraint_node_tests_8cs_source_1l00036"/>00036 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;indexOfWhereKeywordText,
+<anchor xml:id="__constraint_node_tests_8cs_source_1l00037"/>00037 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;indexOfWhereKeywordText&#32;+&#32;whereKeywordText.Length,
+<anchor xml:id="__constraint_node_tests_8cs_source_1l00038"/>00038 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;0,
+<anchor xml:id="__constraint_node_tests_8cs_source_1l00039"/>00039 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keyword">new</emphasis>&#32;<link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_lexers_1_1_models_1a26a1b63ad28ec7955b30bc6c91571eca">ResourceUri</link>(<emphasis role="stringliteral">&quot;/unitTesting.txt&quot;</emphasis>),
+<anchor xml:id="__constraint_node_tests_8cs_source_1l00040"/>00040 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;sourceText),
+<anchor xml:id="__constraint_node_tests_8cs_source_1l00041"/>00041 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_1ae4bcfe414c318a050bbef43ec92f921b">SyntaxKind</link>.WhereTokenContextualKeyword);
+<anchor xml:id="__constraint_node_tests_8cs_source_1l00042"/>00042 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;}
+<anchor xml:id="__constraint_node_tests_8cs_source_1l00043"/>00043 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;
+<anchor xml:id="__constraint_node_tests_8cs_source_1l00044"/>00044 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<link linkend="_struct_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_1_1_tokens_1_1_identifier_token">IdentifierToken</link>&#32;identifierToken;
+<anchor xml:id="__constraint_node_tests_8cs_source_1l00045"/>00045 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;{
+<anchor xml:id="__constraint_node_tests_8cs_source_1l00046"/>00046 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;var&#32;identifierText&#32;=&#32;<emphasis role="stringliteral">&quot;T&quot;</emphasis>;
+<anchor xml:id="__constraint_node_tests_8cs_source_1l00047"/>00047 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordtype">int</emphasis>&#32;indexOfIdentifierText&#32;=&#32;sourceText.IndexOf(identifierText);
+<anchor xml:id="__constraint_node_tests_8cs_source_1l00048"/>00048 
+<anchor xml:id="__constraint_node_tests_8cs_source_1l00049"/>00049 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;identifierToken&#32;=&#32;<emphasis role="keyword">new</emphasis>&#32;<link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_1ae4bcfe414c318a050bbef43ec92f921ba5560a6da7097326a85005e45e838c4cd">IdentifierToken</link>(<emphasis role="keyword">new</emphasis>&#32;<link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_lexers_1_1_models_1a1ffd1a7706dfd364560b76d47467812f">TextEditorTextSpan</link>(
+<anchor xml:id="__constraint_node_tests_8cs_source_1l00050"/>00050 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;indexOfIdentifierText,
+<anchor xml:id="__constraint_node_tests_8cs_source_1l00051"/>00051 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;indexOfIdentifierText&#32;+&#32;identifierText.Length,
+<anchor xml:id="__constraint_node_tests_8cs_source_1l00052"/>00052 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;0,
+<anchor xml:id="__constraint_node_tests_8cs_source_1l00053"/>00053 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keyword">new</emphasis>&#32;<link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_lexers_1_1_models_1a26a1b63ad28ec7955b30bc6c91571eca">ResourceUri</link>(<emphasis role="stringliteral">&quot;/unitTesting.txt&quot;</emphasis>),
+<anchor xml:id="__constraint_node_tests_8cs_source_1l00054"/>00054 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;sourceText));
+<anchor xml:id="__constraint_node_tests_8cs_source_1l00055"/>00055 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;}
+<anchor xml:id="__constraint_node_tests_8cs_source_1l00056"/>00056 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;
+<anchor xml:id="__constraint_node_tests_8cs_source_1l00057"/>00057 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<link linkend="_struct_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_1_1_tokens_1_1_colon_token">ColonToken</link>&#32;colonToken;
+<anchor xml:id="__constraint_node_tests_8cs_source_1l00058"/>00058 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;{
+<anchor xml:id="__constraint_node_tests_8cs_source_1l00059"/>00059 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;var&#32;colonText&#32;=&#32;<emphasis role="stringliteral">&quot;T&quot;</emphasis>;
+<anchor xml:id="__constraint_node_tests_8cs_source_1l00060"/>00060 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordtype">int</emphasis>&#32;indexOfColonText&#32;=&#32;sourceText.IndexOf(colonText);
+<anchor xml:id="__constraint_node_tests_8cs_source_1l00061"/>00061 
+<anchor xml:id="__constraint_node_tests_8cs_source_1l00062"/>00062 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;colonToken&#32;=&#32;<emphasis role="keyword">new</emphasis>&#32;<link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_1ae4bcfe414c318a050bbef43ec92f921ba45bff21d89b93c71538ca52e5ca16124">ColonToken</link>(<emphasis role="keyword">new</emphasis>&#32;<link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_lexers_1_1_models_1a1ffd1a7706dfd364560b76d47467812f">TextEditorTextSpan</link>(
+<anchor xml:id="__constraint_node_tests_8cs_source_1l00063"/>00063 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;indexOfColonText,
+<anchor xml:id="__constraint_node_tests_8cs_source_1l00064"/>00064 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;indexOfColonText&#32;+&#32;colonText.Length,
+<anchor xml:id="__constraint_node_tests_8cs_source_1l00065"/>00065 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;0,
+<anchor xml:id="__constraint_node_tests_8cs_source_1l00066"/>00066 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keyword">new</emphasis>&#32;<link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_lexers_1_1_models_1a26a1b63ad28ec7955b30bc6c91571eca">ResourceUri</link>(<emphasis role="stringliteral">&quot;/unitTesting.txt&quot;</emphasis>),
+<anchor xml:id="__constraint_node_tests_8cs_source_1l00067"/>00067 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;sourceText));
+<anchor xml:id="__constraint_node_tests_8cs_source_1l00068"/>00068 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;}
+<anchor xml:id="__constraint_node_tests_8cs_source_1l00069"/>00069 
+<anchor xml:id="__constraint_node_tests_8cs_source_1l00070"/>00070 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<link linkend="_struct_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_1_1_tokens_1_1_keyword_contextual_token">KeywordContextualToken</link>&#32;notnullKeywordToken;
+<anchor xml:id="__constraint_node_tests_8cs_source_1l00071"/>00071 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;{
+<anchor xml:id="__constraint_node_tests_8cs_source_1l00072"/>00072 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;var&#32;notnullKeywordText&#32;=&#32;<emphasis role="stringliteral">&quot;notnull&quot;</emphasis>;
+<anchor xml:id="__constraint_node_tests_8cs_source_1l00073"/>00073 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordtype">int</emphasis>&#32;indexOfNotnullKeywordText&#32;=&#32;sourceText.IndexOf(notnullKeywordText);
+<anchor xml:id="__constraint_node_tests_8cs_source_1l00074"/>00074 
+<anchor xml:id="__constraint_node_tests_8cs_source_1l00075"/>00075 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;notnullKeywordToken&#32;=&#32;<emphasis role="keyword">new</emphasis>&#32;<link linkend="_struct_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_1_1_tokens_1_1_keyword_contextual_token">KeywordContextualToken</link>(<emphasis role="keyword">new</emphasis>&#32;<link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_lexers_1_1_models_1a1ffd1a7706dfd364560b76d47467812f">TextEditorTextSpan</link>(
+<anchor xml:id="__constraint_node_tests_8cs_source_1l00076"/>00076 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;indexOfNotnullKeywordText,
+<anchor xml:id="__constraint_node_tests_8cs_source_1l00077"/>00077 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;indexOfNotnullKeywordText&#32;+&#32;notnullKeywordText.Length,
+<anchor xml:id="__constraint_node_tests_8cs_source_1l00078"/>00078 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;0,
+<anchor xml:id="__constraint_node_tests_8cs_source_1l00079"/>00079 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keyword">new</emphasis>&#32;<link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_lexers_1_1_models_1a26a1b63ad28ec7955b30bc6c91571eca">ResourceUri</link>(<emphasis role="stringliteral">&quot;/unitTesting.txt&quot;</emphasis>),
+<anchor xml:id="__constraint_node_tests_8cs_source_1l00080"/>00080 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;sourceText),
+<anchor xml:id="__constraint_node_tests_8cs_source_1l00081"/>00081 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_1ae4bcfe414c318a050bbef43ec92f921b">SyntaxKind</link>.NotnullTokenContextualKeyword);
+<anchor xml:id="__constraint_node_tests_8cs_source_1l00082"/>00082 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;}
+<anchor xml:id="__constraint_node_tests_8cs_source_1l00083"/>00083 
+<anchor xml:id="__constraint_node_tests_8cs_source_1l00084"/>00084 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;ImmutableArray&lt;ISyntaxToken&gt;&#32;innerTokens&#32;=&#32;<emphasis role="keyword">new</emphasis>&#32;List&lt;ISyntaxToken&gt;
+<anchor xml:id="__constraint_node_tests_8cs_source_1l00085"/>00085 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;{
+<anchor xml:id="__constraint_node_tests_8cs_source_1l00086"/>00086 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;whereKeywordToken,
+<anchor xml:id="__constraint_node_tests_8cs_source_1l00087"/>00087 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;identifierToken,
+<anchor xml:id="__constraint_node_tests_8cs_source_1l00088"/>00088 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;colonToken,
+<anchor xml:id="__constraint_node_tests_8cs_source_1l00089"/>00089 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;notnullKeywordToken,
+<anchor xml:id="__constraint_node_tests_8cs_source_1l00090"/>00090 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;}.ToImmutableArray();
+<anchor xml:id="__constraint_node_tests_8cs_source_1l00091"/>00091 
+<anchor xml:id="__constraint_node_tests_8cs_source_1l00092"/>00092 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;var&#32;constraintNode&#32;=&#32;<emphasis role="keyword">new</emphasis>&#32;<link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_1ae4bcfe414c318a050bbef43ec92f921ba41513b3c72f71f8b8a176a35b71c33bb">ConstraintNode</link>(innerTokens);
+<anchor xml:id="__constraint_node_tests_8cs_source_1l00093"/>00093 
+<anchor xml:id="__constraint_node_tests_8cs_source_1l00094"/>00094 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;Assert.Equal(innerTokens,&#32;constraintNode.InnerTokens);
+<anchor xml:id="__constraint_node_tests_8cs_source_1l00095"/>00095 
+<anchor xml:id="__constraint_node_tests_8cs_source_1l00096"/>00096 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;Assert.Equal(innerTokens.Length,&#32;constraintNode.ChildList.Length);
+<anchor xml:id="__constraint_node_tests_8cs_source_1l00097"/>00097 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;Assert.Equal(whereKeywordToken,&#32;constraintNode.ChildList[0]);
+<anchor xml:id="__constraint_node_tests_8cs_source_1l00098"/>00098 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;Assert.Equal(identifierToken,&#32;constraintNode.ChildList[1]);
+<anchor xml:id="__constraint_node_tests_8cs_source_1l00099"/>00099 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;Assert.Equal(colonToken,&#32;constraintNode.ChildList[2]);
+<anchor xml:id="__constraint_node_tests_8cs_source_1l00100"/>00100 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;Assert.Equal(notnullKeywordToken,&#32;constraintNode.ChildList[3]);
+<anchor xml:id="__constraint_node_tests_8cs_source_1l00101"/>00101 
+<anchor xml:id="__constraint_node_tests_8cs_source_1l00102"/>00102 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;Assert.False(constraintNode.IsFabricated);
+<anchor xml:id="__constraint_node_tests_8cs_source_1l00103"/>00103 
+<anchor xml:id="__constraint_node_tests_8cs_source_1l00104"/>00104 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;Assert.Equal(
+<anchor xml:id="__constraint_node_tests_8cs_source_1l00105"/>00105 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_1ae4bcfe414c318a050bbef43ec92f921b">SyntaxKind</link>.ConstraintNode,
+<anchor xml:id="__constraint_node_tests_8cs_source_1l00106"/>00106 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;constraintNode.SyntaxKind);
+<anchor xml:id="__constraint_node_tests_8cs_source_1l00107"/>00107 &#32;&#32;&#32;&#32;}
+<anchor xml:id="__constraint_node_tests_8cs_source_1l00108"/>00108 }
+</programlisting></section>

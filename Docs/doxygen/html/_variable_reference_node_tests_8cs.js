@@ -1,0 +1,4 @@
+var _variable_reference_node_tests_8cs =
+[
+    [ "Luthetus.TextEditor.Tests.Basis.CompilerServices.Syntax.SyntaxNodes.VariableReferenceNodeTests", "class_luthetus_1_1_text_editor_1_1_tests_1_1_basis_1_1_compiler_services_1_1_syntax_1_1_syntax_n3816888c73be86e82281bed351d50fe0.html", "class_luthetus_1_1_text_editor_1_1_tests_1_1_basis_1_1_compiler_services_1_1_syntax_1_1_syntax_n3816888c73be86e82281bed351d50fe0" ]
+];

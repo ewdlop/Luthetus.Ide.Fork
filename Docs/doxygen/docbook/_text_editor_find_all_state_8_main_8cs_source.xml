@@ -1,0 +1,35 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="__text_editor_find_all_state_8_main_8cs_source" xml:lang="en-US">
+<title>TextEditorFindAllState.Main.cs</title>
+<indexterm><primary>Source/Lib/TextEditor/FindAlls/States/TextEditorFindAllState.Main.cs</primary></indexterm>
+Go to the documentation of this file.<programlisting linenumbering="unnumbered"><anchor xml:id="__text_editor_find_all_state_8_main_8cs_source_1l00001"/>00001 <emphasis role="keyword">using&#32;</emphasis>System.Collections.Immutable;
+<anchor xml:id="__text_editor_find_all_state_8_main_8cs_source_1l00002"/>00002 <emphasis role="keyword">using&#32;</emphasis>Fluxor;
+<anchor xml:id="__text_editor_find_all_state_8_main_8cs_source_1l00003"/>00003 <emphasis role="keyword">using&#32;</emphasis><link linkend="_namespace_luthetus_1_1_common_1_1_razor_lib_1_1_reactives_1_1_models">Luthetus.Common.RazorLib.Reactives.Models</link>;
+<anchor xml:id="__text_editor_find_all_state_8_main_8cs_source_1l00004"/>00004 <emphasis role="keyword">using&#32;</emphasis><link linkend="_namespace_luthetus_1_1_common_1_1_razor_lib_1_1_keys_1_1_models">Luthetus.Common.RazorLib.Keys.Models</link>;
+<anchor xml:id="__text_editor_find_all_state_8_main_8cs_source_1l00005"/>00005 <emphasis role="keyword">using&#32;</emphasis><link linkend="_namespace_luthetus_1_1_common_1_1_razor_lib_1_1_tree_views_1_1_models">Luthetus.Common.RazorLib.TreeViews.Models</link>;
+<anchor xml:id="__text_editor_find_all_state_8_main_8cs_source_1l00006"/>00006 <emphasis role="keyword">using&#32;</emphasis><link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_lexers_1_1_models">Luthetus.TextEditor.RazorLib.Lexers.Models</link>;
+<anchor xml:id="__text_editor_find_all_state_8_main_8cs_source_1l00007"/>00007 
+<anchor xml:id="__text_editor_find_all_state_8_main_8cs_source_1l00008"/>00008 <emphasis role="keyword">namespace&#32;</emphasis><link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_find_alls_1_1_states">Luthetus.TextEditor.RazorLib.FindAlls.States</link>;
+<anchor xml:id="__text_editor_find_all_state_8_main_8cs_source_1l00009"/>00009 
+<anchor xml:id="__text_editor_find_all_state_8_main_8cs_source_1l00010"/>00010 [FeatureState]
+<anchor xml:id="__text_editor_find_all_state_8_main_8cs_source_1l00011"/><link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_find_alls_1_1_states_1a882c5fe4d3e31e504f8edf91c113d15e">00011</link> <emphasis role="keyword">public</emphasis>&#32;partial&#32;record&#32;<link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_find_alls_1_1_states_1a1adee13447ee501921967a3c4f2b6f01">TextEditorFindAllState</link>(
+<anchor xml:id="__text_editor_find_all_state_8_main_8cs_source_1l00012"/>00012 &#32;&#32;&#32;&#32;<emphasis role="keywordtype">string</emphasis>&#32;SearchQuery,
+<anchor xml:id="__text_editor_find_all_state_8_main_8cs_source_1l00013"/>00013 &#32;&#32;&#32;&#32;<emphasis role="keywordtype">string</emphasis>&#32;StartingDirectoryPath,
+<anchor xml:id="__text_editor_find_all_state_8_main_8cs_source_1l00014"/>00014 &#32;&#32;&#32;&#32;ImmutableList&lt;TextEditorTextSpan&gt;&#32;SearchResultList,
+<anchor xml:id="__text_editor_find_all_state_8_main_8cs_source_1l00015"/>00015 &#32;&#32;&#32;&#32;<link linkend="_class_luthetus_1_1_common_1_1_razor_lib_1_1_reactives_1_1_models_1_1_progress_bar_model">ProgressBarModel</link>?&#32;<link linkend="_class_luthetus_1_1_common_1_1_razor_lib_1_1_reactives_1_1_models_1_1_progress_bar_model">ProgressBarModel</link>)
+<anchor xml:id="__text_editor_find_all_state_8_main_8cs_source_1l00016"/>00016 {
+<anchor xml:id="__text_editor_find_all_state_8_main_8cs_source_1l00017"/>00017 &#32;&#32;&#32;&#32;<emphasis role="keyword">public</emphasis>&#32;<emphasis role="keyword">static</emphasis>&#32;readonly&#32;Key&lt;TreeViewContainer&gt;&#32;TreeViewFindAllContainerKey&#32;=&#32;Key&lt;TreeViewContainer&gt;.NewKey();
+<anchor xml:id="__text_editor_find_all_state_8_main_8cs_source_1l00018"/>00018 &#32;&#32;&#32;&#32;
+<anchor xml:id="__text_editor_find_all_state_8_main_8cs_source_1l00023"/>00023 &#32;&#32;&#32;&#32;<emphasis role="keyword">private</emphasis>&#32;readonly&#32;<emphasis role="keywordtype">object</emphasis>&#32;_flushSearchResultsLock&#32;=&#32;<emphasis role="keyword">new</emphasis>();
+<anchor xml:id="__text_editor_find_all_state_8_main_8cs_source_1l00024"/>00024 
+<anchor xml:id="__text_editor_find_all_state_8_main_8cs_source_1l00025"/>00025 &#32;&#32;&#32;&#32;<emphasis role="keyword">public</emphasis>&#32;<link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_find_alls_1_1_states_1a1adee13447ee501921967a3c4f2b6f01">TextEditorFindAllState</link>()&#32;:&#32;<emphasis role="keyword">this</emphasis>(
+<anchor xml:id="__text_editor_find_all_state_8_main_8cs_source_1l00026"/>00026 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordtype">string</emphasis>.Empty,
+<anchor xml:id="__text_editor_find_all_state_8_main_8cs_source_1l00027"/>00027 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordtype">string</emphasis>.Empty,
+<anchor xml:id="__text_editor_find_all_state_8_main_8cs_source_1l00028"/>00028 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;ImmutableList&lt;TextEditorTextSpan&gt;.Empty,
+<anchor xml:id="__text_editor_find_all_state_8_main_8cs_source_1l00029"/>00029 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keyword">null</emphasis>)
+<anchor xml:id="__text_editor_find_all_state_8_main_8cs_source_1l00030"/>00030 &#32;&#32;&#32;&#32;{
+<anchor xml:id="__text_editor_find_all_state_8_main_8cs_source_1l00031"/>00031 &#32;&#32;&#32;&#32;}
+<anchor xml:id="__text_editor_find_all_state_8_main_8cs_source_1l00032"/>00032 &#32;&#32;&#32;&#32;
+<anchor xml:id="__text_editor_find_all_state_8_main_8cs_source_1l00037"/>00037 &#32;&#32;&#32;&#32;<emphasis role="keyword">private</emphasis>&#32;CancellationTokenSource&#32;_searchCancellationTokenSource&#32;=&#32;<emphasis role="keyword">new</emphasis>();
+<anchor xml:id="__text_editor_find_all_state_8_main_8cs_source_1l00038"/>00038 }
+</programlisting></section>

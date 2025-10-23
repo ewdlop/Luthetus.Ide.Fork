@@ -1,0 +1,4 @@
+var _solution_explorer_tree_view_mouse_event_handler_tests_8cs =
+[
+    [ "Luthetus.Extensions.DotNet.Tests.Basis.DotNetSolutions.Models.SolutionExplorerTreeViewMouseEventHandlerTests", "class_luthetus_1_1_extensions_1_1_dot_net_1_1_tests_1_1_basis_1_1_dot_net_solutions_1_1_models_105610088e38fd1176da6006ffc4c01a9.html", "class_luthetus_1_1_extensions_1_1_dot_net_1_1_tests_1_1_basis_1_1_dot_net_solutions_1_1_models_105610088e38fd1176da6006ffc4c01a9" ]
+];

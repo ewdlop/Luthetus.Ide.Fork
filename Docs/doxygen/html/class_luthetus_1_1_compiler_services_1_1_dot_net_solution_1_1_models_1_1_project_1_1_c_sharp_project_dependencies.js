@@ -1,0 +1,5 @@
+var class_luthetus_1_1_compiler_services_1_1_dot_net_solution_1_1_models_1_1_project_1_1_c_sharp_project_dependencies =
+[
+    [ "CSharpProjectDependencies", "class_luthetus_1_1_compiler_services_1_1_dot_net_solution_1_1_models_1_1_project_1_1_c_sharp_project_dependencies.html#ab3e295894beb52469a121bd1a4928676", null ],
+    [ "CSharpProjectNamespacePath", "class_luthetus_1_1_compiler_services_1_1_dot_net_solution_1_1_models_1_1_project_1_1_c_sharp_project_dependencies.html#ac5207676b9ee03f04563ac28caa2acbd", null ]
+];

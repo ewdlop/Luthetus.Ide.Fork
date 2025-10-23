@@ -1,0 +1,5 @@
+var class_luthetus_1_1_ide_1_1_tests_1_1_basis_1_1_folder_explorers_1_1_models_1_1_folder_explorer_t2b59df16b37941a2e1509eb1fc322fa7 =
+[
+    [ "Constructor", "class_luthetus_1_1_ide_1_1_tests_1_1_basis_1_1_folder_explorers_1_1_models_1_1_folder_explorer_t2b59df16b37941a2e1509eb1fc322fa7.html#a17a51493dfea80c07372d0f632a71e31", null ],
+    [ "OnDoubleClickAsync", "class_luthetus_1_1_ide_1_1_tests_1_1_basis_1_1_folder_explorers_1_1_models_1_1_folder_explorer_t2b59df16b37941a2e1509eb1fc322fa7.html#a81fffbe315fa3801c50c5cf8cd1e0ad8", null ]
+];

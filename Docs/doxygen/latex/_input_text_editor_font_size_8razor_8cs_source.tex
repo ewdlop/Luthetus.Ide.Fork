@@ -1,0 +1,95 @@
+\doxysection{Input\+Text\+Editor\+Font\+Size.\+razor.\+cs}
+\hypertarget{_input_text_editor_font_size_8razor_8cs_source}{}\label{_input_text_editor_font_size_8razor_8cs_source}\index{Source/Lib/TextEditor/Options/Displays/InputTextEditorFontSize.razor.cs@{Source/Lib/TextEditor/Options/Displays/InputTextEditorFontSize.razor.cs}}
+\mbox{\hyperlink{_input_text_editor_font_size_8razor_8cs}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{_input_text_editor_font_size_8razor_8cs_source_l00001}00001\ \textcolor{keyword}{using\ }Microsoft.AspNetCore.Components;}
+\DoxyCodeLine{\Hypertarget{_input_text_editor_font_size_8razor_8cs_source_l00002}00002\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_luthetus_1_1_common_1_1_razor_lib_1_1_options_1_1_models}{Luthetus.Common.RazorLib.Options.Models}};}
+\DoxyCodeLine{\Hypertarget{_input_text_editor_font_size_8razor_8cs_source_l00003}00003\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_luthetus_1_1_common_1_1_razor_lib_1_1_reactives_1_1_models}{Luthetus.Common.RazorLib.Reactives.Models}};}
+\DoxyCodeLine{\Hypertarget{_input_text_editor_font_size_8razor_8cs_source_l00004}00004\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_options_1_1_states}{Luthetus.TextEditor.RazorLib.Options.States}};}
+\DoxyCodeLine{\Hypertarget{_input_text_editor_font_size_8razor_8cs_source_l00005}00005\ }
+\DoxyCodeLine{\Hypertarget{_input_text_editor_font_size_8razor_8cs_source_l00006}00006\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_options_1_1_displays}{Luthetus.TextEditor.RazorLib.Options.Displays}};}
+\DoxyCodeLine{\Hypertarget{_input_text_editor_font_size_8razor_8cs_source_l00007}00007\ }
+\DoxyCodeLine{\Hypertarget{_input_text_editor_font_size_8razor_8cs_source_l00008}\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_options_1_1_displays_1_1_input_text_editor_font_size}{00008}}\ \textcolor{keyword}{public}\ \textcolor{keyword}{partial\ class\ }\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_options_1_1_displays_1_1_input_text_editor_font_size}{InputTextEditorFontSize}}\ :\ ComponentBase,\ IDisposable}
+\DoxyCodeLine{\Hypertarget{_input_text_editor_font_size_8razor_8cs_source_l00009}00009\ \{}
+\DoxyCodeLine{\Hypertarget{_input_text_editor_font_size_8razor_8cs_source_l00010}00010\ \ \ \ \ [Inject]}
+\DoxyCodeLine{\Hypertarget{_input_text_editor_font_size_8razor_8cs_source_l00011}00011\ \ \ \ \ \textcolor{keyword}{private}\ \mbox{\hyperlink{interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_i_text_editor_service}{ITextEditorService}}\ TextEditorService\ \{\ \textcolor{keyword}{get};\ \textcolor{keyword}{set};\ \}\ =\ \textcolor{keyword}{null}!;}
+\DoxyCodeLine{\Hypertarget{_input_text_editor_font_size_8razor_8cs_source_l00012}00012\ }
+\DoxyCodeLine{\Hypertarget{_input_text_editor_font_size_8razor_8cs_source_l00013}00013\ \ \ \ \ [Parameter]}
+\DoxyCodeLine{\Hypertarget{_input_text_editor_font_size_8razor_8cs_source_l00014}\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_options_1_1_displays_1_1_input_text_editor_font_size_a641c0e50cdf621c14cc30e958839d7f6}{00014}}\ \ \ \ \ \textcolor{keyword}{public}\ \mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_options_1_1_displays_1_1_input_text_editor_font_size_a641c0e50cdf621c14cc30e958839d7f6}{InputViewModel}}\ \mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_options_1_1_displays_1_1_input_text_editor_font_size_a641c0e50cdf621c14cc30e958839d7f6}{InputViewModel}}\ \{\ \textcolor{keyword}{get};\ \textcolor{keyword}{set};\ \}\ =\ \mbox{\hyperlink{class_luthetus_1_1_common_1_1_razor_lib_1_1_options_1_1_models_1_1_input_view_model}{InputViewModel}}.\mbox{\hyperlink{class_luthetus_1_1_common_1_1_razor_lib_1_1_options_1_1_models_1_1_input_view_model_a85d19bd411cd56c91f264796fd9447d8}{Empty}};}
+\DoxyCodeLine{\Hypertarget{_input_text_editor_font_size_8razor_8cs_source_l00015}00015\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_input_text_editor_font_size_8razor_8cs_source_l00016}00016\ \ \ \ \ \textcolor{keyword}{private}\ \textcolor{keyword}{static}\ readonly\ TimeSpan\ ThrottleDelay\ =\ TimeSpan.FromMilliseconds(300);\ }
+\DoxyCodeLine{\Hypertarget{_input_text_editor_font_size_8razor_8cs_source_l00017}00017\ \ \ \ \ \textcolor{keyword}{private}\ readonly\ \mbox{\hyperlink{class_luthetus_1_1_common_1_1_razor_lib_1_1_reactives_1_1_models_1_1_throttle}{Throttle}}\ \_throttle\ =\ \textcolor{keyword}{new}\ \mbox{\hyperlink{class_luthetus_1_1_common_1_1_razor_lib_1_1_reactives_1_1_models_1_1_throttle}{Throttle}}(ThrottleDelay);}
+\DoxyCodeLine{\Hypertarget{_input_text_editor_font_size_8razor_8cs_source_l00018}00018\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_input_text_editor_font_size_8razor_8cs_source_l00019}00019\ \ \ \ \ \textcolor{keyword}{private}\ \textcolor{keywordtype}{int}\ \_fontSizeInPixels;}
+\DoxyCodeLine{\Hypertarget{_input_text_editor_font_size_8razor_8cs_source_l00020}00020\ \ \ \ \ \textcolor{keyword}{private}\ \textcolor{keywordtype}{bool}\ \_hasFocus;}
+\DoxyCodeLine{\Hypertarget{_input_text_editor_font_size_8razor_8cs_source_l00021}00021\ }
+\DoxyCodeLine{\Hypertarget{_input_text_editor_font_size_8razor_8cs_source_l00022}\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_options_1_1_displays_1_1_input_text_editor_font_size_a583304b4b5bdca9b9d5ae9d14f409fc2}{00022}}\ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_options_1_1_displays_1_1_input_text_editor_font_size_a583304b4b5bdca9b9d5ae9d14f409fc2}{FontSizeInPixels}}}
+\DoxyCodeLine{\Hypertarget{_input_text_editor_font_size_8razor_8cs_source_l00023}00023\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_input_text_editor_font_size_8razor_8cs_source_l00024}00024\ \ \ \ \ \ \ \ \ \textcolor{keyword}{get}\ =>\ \_fontSizeInPixels;}
+\DoxyCodeLine{\Hypertarget{_input_text_editor_font_size_8razor_8cs_source_l00025}00025\ \ \ \ \ \ \ \ \ \textcolor{keyword}{set}}
+\DoxyCodeLine{\Hypertarget{_input_text_editor_font_size_8razor_8cs_source_l00026}00026\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_input_text_editor_font_size_8razor_8cs_source_l00027}00027\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (value\ <\ \mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_options_1_1_states_1_1_text_editor_options_state}{TextEditorOptionsState}}.\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_options_1_1_states_1_1_text_editor_options_state_a93e2b97945b25a67a7cbe2e2defb02bd}{MINIMUM\_FONT\_SIZE\_IN\_PIXELS}})}
+\DoxyCodeLine{\Hypertarget{_input_text_editor_font_size_8razor_8cs_source_l00028}00028\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ value\ =\ \mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_options_1_1_states_1_1_text_editor_options_state}{TextEditorOptionsState}}.\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_options_1_1_states_1_1_text_editor_options_state_a93e2b97945b25a67a7cbe2e2defb02bd}{MINIMUM\_FONT\_SIZE\_IN\_PIXELS}};}
+\DoxyCodeLine{\Hypertarget{_input_text_editor_font_size_8razor_8cs_source_l00029}00029\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_input_text_editor_font_size_8razor_8cs_source_l00030}00030\ \ \ \ \ \ \ \ \ \ \ \ \ \_fontSizeInPixels\ =\ value;}
+\DoxyCodeLine{\Hypertarget{_input_text_editor_font_size_8razor_8cs_source_l00031}00031\ }
+\DoxyCodeLine{\Hypertarget{_input_text_editor_font_size_8razor_8cs_source_l00032}00032\ \ \ \ \ \ \ \ \ \ \ \ \ \_throttle.Run(\_\ =>}
+\DoxyCodeLine{\Hypertarget{_input_text_editor_font_size_8razor_8cs_source_l00033}00033\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_input_text_editor_font_size_8razor_8cs_source_l00034}00034\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ TextEditorService.OptionsApi.SetFontSize(\_fontSizeInPixels);}
+\DoxyCodeLine{\Hypertarget{_input_text_editor_font_size_8razor_8cs_source_l00035}00035\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ Task.CompletedTask;}
+\DoxyCodeLine{\Hypertarget{_input_text_editor_font_size_8razor_8cs_source_l00036}00036\ \ \ \ \ \ \ \ \ \ \ \ \ \});}
+\DoxyCodeLine{\Hypertarget{_input_text_editor_font_size_8razor_8cs_source_l00037}00037\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_input_text_editor_font_size_8razor_8cs_source_l00038}00038\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_input_text_editor_font_size_8razor_8cs_source_l00039}00039\ }
+\DoxyCodeLine{\Hypertarget{_input_text_editor_font_size_8razor_8cs_source_l00040}\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_options_1_1_displays_1_1_input_text_editor_font_size_a2ce826169431ac5d602cc78d5eab3d24}{00040}}\ \ \ \ \ \textcolor{keyword}{protected}\ \textcolor{keyword}{override}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_options_1_1_displays_1_1_input_text_editor_font_size_a2ce826169431ac5d602cc78d5eab3d24}{OnInitialized}}()}
+\DoxyCodeLine{\Hypertarget{_input_text_editor_font_size_8razor_8cs_source_l00041}00041\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_input_text_editor_font_size_8razor_8cs_source_l00042}00042\ \ \ \ \ \ \ \ \ TextEditorService.OptionsStateWrap.StateChanged\ +=\ OptionsWrapOnStateChanged;}
+\DoxyCodeLine{\Hypertarget{_input_text_editor_font_size_8razor_8cs_source_l00043}00043\ \ \ \ \ \ \ \ \ ReadActualFontSizeInPixels();}
+\DoxyCodeLine{\Hypertarget{_input_text_editor_font_size_8razor_8cs_source_l00044}00044\ }
+\DoxyCodeLine{\Hypertarget{_input_text_editor_font_size_8razor_8cs_source_l00045}00045\ \ \ \ \ \ \ \ \ base.OnInitialized();}
+\DoxyCodeLine{\Hypertarget{_input_text_editor_font_size_8razor_8cs_source_l00046}00046\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_input_text_editor_font_size_8razor_8cs_source_l00047}00047\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_input_text_editor_font_size_8razor_8cs_source_l00048}00048\ \ \ \ \ \textcolor{keyword}{private}\ \textcolor{keywordtype}{void}\ ReadActualFontSizeInPixels()}
+\DoxyCodeLine{\Hypertarget{_input_text_editor_font_size_8razor_8cs_source_l00049}00049\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_input_text_editor_font_size_8razor_8cs_source_l00050}00050\ \ \ \ \ \ \ \ \ var\ temporaryFontSizeInPixels\ =\ \mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editor_service}{TextEditorService}}.\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editor_service_af59be92638fdb051c2a3466fa8995893}{OptionsStateWrap}}.Value.Options.CommonOptions?.FontSizeInPixels;}
+\DoxyCodeLine{\Hypertarget{_input_text_editor_font_size_8razor_8cs_source_l00051}00051\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_input_text_editor_font_size_8razor_8cs_source_l00052}00052\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (temporaryFontSizeInPixels\ is\ \textcolor{keyword}{null})}
+\DoxyCodeLine{\Hypertarget{_input_text_editor_font_size_8razor_8cs_source_l00053}00053\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_input_text_editor_font_size_8razor_8cs_source_l00054}00054\ \ \ \ \ \ \ \ \ \ \ \ \ temporaryFontSizeInPixels\ =\ \mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_options_1_1_states_1_1_text_editor_options_state}{TextEditorOptionsState}}.\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_options_1_1_states_1_1_text_editor_options_state_a3e2081f96b672155679e272a791c3c40}{DEFAULT\_FONT\_SIZE\_IN\_PIXELS}};}
+\DoxyCodeLine{\Hypertarget{_input_text_editor_font_size_8razor_8cs_source_l00055}00055\ }
+\DoxyCodeLine{\Hypertarget{_input_text_editor_font_size_8razor_8cs_source_l00056}00056\ \ \ \ \ \ \ \ \ \ \ \ \ \_throttle.Run(\_\ =>}
+\DoxyCodeLine{\Hypertarget{_input_text_editor_font_size_8razor_8cs_source_l00057}00057\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_input_text_editor_font_size_8razor_8cs_source_l00058}00058\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editor_service}{TextEditorService}}.\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editor_service_a473757bcaab995dec765a9ac1cde21df}{OptionsApi}}.SetFontSize(temporaryFontSizeInPixels.Value);}
+\DoxyCodeLine{\Hypertarget{_input_text_editor_font_size_8razor_8cs_source_l00059}00059\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ Task.CompletedTask;}
+\DoxyCodeLine{\Hypertarget{_input_text_editor_font_size_8razor_8cs_source_l00060}00060\ \ \ \ \ \ \ \ \ \ \ \ \ \});}
+\DoxyCodeLine{\Hypertarget{_input_text_editor_font_size_8razor_8cs_source_l00061}00061\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_input_text_editor_font_size_8razor_8cs_source_l00062}00062\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_input_text_editor_font_size_8razor_8cs_source_l00063}00063\ \ \ \ \ \ \ \ \ \_fontSizeInPixels\ =\ temporaryFontSizeInPixels.Value;}
+\DoxyCodeLine{\Hypertarget{_input_text_editor_font_size_8razor_8cs_source_l00064}00064\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_input_text_editor_font_size_8razor_8cs_source_l00065}00065\ }
+\DoxyCodeLine{\Hypertarget{_input_text_editor_font_size_8razor_8cs_source_l00066}00066\ \ \ \ \ \textcolor{keyword}{private}\ async\ \textcolor{keywordtype}{void}\ OptionsWrapOnStateChanged(\textcolor{keywordtype}{object}?\ sender,\ EventArgs\ e)}
+\DoxyCodeLine{\Hypertarget{_input_text_editor_font_size_8razor_8cs_source_l00067}00067\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_input_text_editor_font_size_8razor_8cs_source_l00068}00068\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!\_hasFocus)}
+\DoxyCodeLine{\Hypertarget{_input_text_editor_font_size_8razor_8cs_source_l00069}00069\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_input_text_editor_font_size_8razor_8cs_source_l00070}00070\ \ \ \ \ \ \ \ \ \ \ \ \ ReadActualFontSizeInPixels();}
+\DoxyCodeLine{\Hypertarget{_input_text_editor_font_size_8razor_8cs_source_l00071}00071\ \ \ \ \ \ \ \ \ \ \ \ \ await\ InvokeAsync(StateHasChanged);}
+\DoxyCodeLine{\Hypertarget{_input_text_editor_font_size_8razor_8cs_source_l00072}00072\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_input_text_editor_font_size_8razor_8cs_source_l00073}00073\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_input_text_editor_font_size_8razor_8cs_source_l00074}00074\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_input_text_editor_font_size_8razor_8cs_source_l00075}00075\ \ \ \ \ \textcolor{keyword}{private}\ \textcolor{keywordtype}{void}\ HandleOnFocus()}
+\DoxyCodeLine{\Hypertarget{_input_text_editor_font_size_8razor_8cs_source_l00076}00076\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_input_text_editor_font_size_8razor_8cs_source_l00077}00077\ \ \ \ \ \ \ \ \ \_hasFocus\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{\Hypertarget{_input_text_editor_font_size_8razor_8cs_source_l00078}00078\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_input_text_editor_font_size_8razor_8cs_source_l00079}00079\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_input_text_editor_font_size_8razor_8cs_source_l00080}00080\ \ \ \ \ \textcolor{keyword}{private}\ \textcolor{keywordtype}{void}\ HandleOnBlur()}
+\DoxyCodeLine{\Hypertarget{_input_text_editor_font_size_8razor_8cs_source_l00081}00081\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_input_text_editor_font_size_8razor_8cs_source_l00082}00082\ \ \ \ \ \ \ \ \ \_hasFocus\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{\Hypertarget{_input_text_editor_font_size_8razor_8cs_source_l00083}00083\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_input_text_editor_font_size_8razor_8cs_source_l00084}00084\ }
+\DoxyCodeLine{\Hypertarget{_input_text_editor_font_size_8razor_8cs_source_l00085}\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_options_1_1_displays_1_1_input_text_editor_font_size_a1946bc604821936fb1f1e407938153cc}{00085}}\ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_options_1_1_displays_1_1_input_text_editor_font_size_a1946bc604821936fb1f1e407938153cc}{Dispose}}()}
+\DoxyCodeLine{\Hypertarget{_input_text_editor_font_size_8razor_8cs_source_l00086}00086\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_input_text_editor_font_size_8razor_8cs_source_l00087}00087\ \ \ \ \ \ \ \ \ TextEditorService.OptionsStateWrap.StateChanged\ -\/=\ OptionsWrapOnStateChanged;}
+\DoxyCodeLine{\Hypertarget{_input_text_editor_font_size_8razor_8cs_source_l00088}00088\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_input_text_editor_font_size_8razor_8cs_source_l00089}00089\ \}}
+
+\end{DoxyCode}

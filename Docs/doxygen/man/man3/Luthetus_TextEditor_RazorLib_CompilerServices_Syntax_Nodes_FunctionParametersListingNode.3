@@ -1,0 +1,112 @@
+.TH "Luthetus.TextEditor.RazorLib.CompilerServices.Syntax.Nodes.FunctionParametersListingNode" 3 "Version 1.0.0" "Luthetus.Ide" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+Luthetus.TextEditor.RazorLib.CompilerServices.Syntax.Nodes.FunctionParametersListingNode \- Used when invoking a function\&.  
+
+.SH SYNOPSIS
+.br
+.PP
+.PP
+Inherits \fBLuthetus\&.TextEditor\&.RazorLib\&.CompilerServices\&.Syntax\&.Nodes\&.Interfaces\&.IExpressionNode\fP\&.
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBFunctionParametersListingNode\fP (\fBOpenParenthesisToken\fP openParenthesisToken, List< \fBFunctionParameterEntryNode\fP > functionParameterEntryNodeList, \fBCloseParenthesisToken\fP closeParenthesisToken)"
+.br
+.ti -1c
+.RI "\fBFunctionParametersListingNode\fP \fBSetCloseParenthesisToken\fP (\fBCloseParenthesisToken\fP closeParenthesisToken)"
+.br
+.ti -1c
+.RI "\fBISyntax\fP[] \fBGetChildList\fP ()"
+.br
+.in -1c
+.SS "Properties"
+
+.in +1c
+.ti -1c
+.RI "OpenParenthesisToken \fBOpenParenthesisToken\fP\fR [get]\fP"
+.br
+.ti -1c
+.RI "List< \fBFunctionParameterEntryNode\fP > \fBFunctionParameterEntryNodeList\fP\fR [get]\fP"
+.br
+.ti -1c
+.RI "CloseParenthesisToken \fBCloseParenthesisToken\fP\fR [get]\fP"
+.br
+.ti -1c
+.RI "bool \fBIsFabricated\fP\fR [get]\fP"
+.br
+.RI "\fBIsFabricated\fP refers to when the ParserSession expected a node to be valid, but it wasn't\&.
+.br
+
+.br
+For example, a function invocation on an undefined function will construct a BoundFunctionInvocationNode with \fBIsFabricated\fP set to true\&. "
+.ti -1c
+.RI "\fBSyntaxKind\fP \fBSyntaxKind\fP\fR [get]\fP"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+Used when invoking a function\&. 
+
+I'm going to experiment with making this a \fBIExpressionNode\fP\&. Because the parameters are exclusive to the expression parsing logic, and having to wrap this in a '\fBBadExpressionNode\fP' when dealing with expressions is very hard to read\&. (2024-10-26)
+
+.PP
+TODO: I don't like how this type has the 'OpenParenthesisToken, and CloseParenthesisToken'\&.\&.\&. \&.\&.\&.It was done this way in order to mirror the generic parameters\&. | Because for generic parameters, the '\fBOpenAngleBracketToken\fP, and \fBCloseAngleBracketToken\fP' are tied to the existance of generic parameters (i\&.e\&.: you must match at least 1 generic parameter if the '\fBOpenAngleBracketToken\fP' is there\&.)\&. | With the function parameters however, the 'OpenParenthesisToken' does not mandate that at least 1 function parameter must be matched\&. 
+.PP
+Definition at line \fB25\fP of file \fBFunctionParametersListingNode\&.cs\fP\&.
+.SH "Constructor & Destructor Documentation"
+.PP 
+.SS "Luthetus\&.TextEditor\&.RazorLib\&.CompilerServices\&.Syntax\&.Nodes\&.FunctionParametersListingNode\&.FunctionParametersListingNode (\fBOpenParenthesisToken\fP openParenthesisToken, List< \fBFunctionParameterEntryNode\fP > functionParameterEntryNodeList, \fBCloseParenthesisToken\fP closeParenthesisToken)"
+
+.PP
+Definition at line \fB27\fP of file \fBFunctionParametersListingNode\&.cs\fP\&.
+.SH "Member Function Documentation"
+.PP 
+.SS "\fBISyntax\fP[] Luthetus\&.TextEditor\&.RazorLib\&.CompilerServices\&.Syntax\&.Nodes\&.FunctionParametersListingNode\&.GetChildList ()"
+
+.PP
+Implements \fBLuthetus\&.TextEditor\&.RazorLib\&.CompilerServices\&.Syntax\&.ISyntaxNode\fP\&.
+.PP
+Definition at line \fB56\fP of file \fBFunctionParametersListingNode\&.cs\fP\&.
+.SS "\fBFunctionParametersListingNode\fP Luthetus\&.TextEditor\&.RazorLib\&.CompilerServices\&.Syntax\&.Nodes\&.FunctionParametersListingNode\&.SetCloseParenthesisToken (\fBCloseParenthesisToken\fP closeParenthesisToken)"
+
+.PP
+Definition at line \fB48\fP of file \fBFunctionParametersListingNode\&.cs\fP\&.
+.SH "Property Documentation"
+.PP 
+.SS "CloseParenthesisToken Luthetus\&.TextEditor\&.RazorLib\&.CompilerServices\&.Syntax\&.Nodes\&.FunctionParametersListingNode\&.CloseParenthesisToken\fR [get]\fP"
+
+.PP
+Definition at line \fB42\fP of file \fBFunctionParametersListingNode\&.cs\fP\&.
+.SS "List<\fBFunctionParameterEntryNode\fP> Luthetus\&.TextEditor\&.RazorLib\&.CompilerServices\&.Syntax\&.Nodes\&.FunctionParametersListingNode\&.FunctionParameterEntryNodeList\fR [get]\fP"
+
+.PP
+Definition at line \fB41\fP of file \fBFunctionParametersListingNode\&.cs\fP\&.
+.SS "bool Luthetus\&.TextEditor\&.RazorLib\&.CompilerServices\&.Syntax\&.Nodes\&.FunctionParametersListingNode\&.IsFabricated\fR [get]\fP"
+
+.PP
+\fBIsFabricated\fP refers to when the ParserSession expected a node to be valid, but it wasn't\&.
+.br
+
+.br
+For example, a function invocation on an undefined function will construct a BoundFunctionInvocationNode with \fBIsFabricated\fP set to true\&. 
+.PP
+Implements \fBLuthetus\&.TextEditor\&.RazorLib\&.CompilerServices\&.Syntax\&.ISyntax\fP\&.
+.PP
+Definition at line \fB45\fP of file \fBFunctionParametersListingNode\&.cs\fP\&.
+.SS "OpenParenthesisToken Luthetus\&.TextEditor\&.RazorLib\&.CompilerServices\&.Syntax\&.Nodes\&.FunctionParametersListingNode\&.OpenParenthesisToken\fR [get]\fP"
+
+.PP
+Definition at line \fB40\fP of file \fBFunctionParametersListingNode\&.cs\fP\&.
+.SS "\fBSyntaxKind\fP Luthetus\&.TextEditor\&.RazorLib\&.CompilerServices\&.Syntax\&.Nodes\&.FunctionParametersListingNode\&.SyntaxKind\fR [get]\fP"
+
+.PP
+Implements \fBLuthetus\&.TextEditor\&.RazorLib\&.CompilerServices\&.Syntax\&.ISyntax\fP\&.
+.PP
+Definition at line \fB46\fP of file \fBFunctionParametersListingNode\&.cs\fP\&.
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for Luthetus\&.Ide from the source code\&.

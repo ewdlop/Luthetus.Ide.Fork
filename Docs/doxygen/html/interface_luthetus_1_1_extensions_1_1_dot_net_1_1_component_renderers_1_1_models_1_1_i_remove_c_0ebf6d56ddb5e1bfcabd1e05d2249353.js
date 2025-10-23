@@ -1,0 +1,5 @@
+var interface_luthetus_1_1_extensions_1_1_dot_net_1_1_component_renderers_1_1_models_1_1_i_remove_c_0ebf6d56ddb5e1bfcabd1e05d2249353 =
+[
+    [ "AbsolutePath", "interface_luthetus_1_1_extensions_1_1_dot_net_1_1_component_renderers_1_1_models_1_1_i_remove_c_0ebf6d56ddb5e1bfcabd1e05d2249353.html#a7f263055c0eaeb7dd56305662419a1a8", null ],
+    [ "OnAfterSubmitFunc", "interface_luthetus_1_1_extensions_1_1_dot_net_1_1_component_renderers_1_1_models_1_1_i_remove_c_0ebf6d56ddb5e1bfcabd1e05d2249353.html#ae609acc952a61478992722a3c13ba1ca", null ]
+];

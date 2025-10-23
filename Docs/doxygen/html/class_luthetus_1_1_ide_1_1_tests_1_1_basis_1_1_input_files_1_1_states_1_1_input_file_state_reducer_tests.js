@@ -1,0 +1,12 @@
+var class_luthetus_1_1_ide_1_1_tests_1_1_basis_1_1_input_files_1_1_states_1_1_input_file_state_reducer_tests =
+[
+    [ "ReduceMoveBackwardsInHistoryAction", "class_luthetus_1_1_ide_1_1_tests_1_1_basis_1_1_input_files_1_1_states_1_1_input_file_state_reducer_tests.html#a290bcf4c38abc045a81cd8d66460f94a", null ],
+    [ "ReduceMoveForwardsInHistoryAction", "class_luthetus_1_1_ide_1_1_tests_1_1_basis_1_1_input_files_1_1_states_1_1_input_file_state_reducer_tests.html#a7e13b9e53348a9c57282bb4c5d69be7a", null ],
+    [ "ReduceOpenParentDirectoryAction", "class_luthetus_1_1_ide_1_1_tests_1_1_basis_1_1_input_files_1_1_states_1_1_input_file_state_reducer_tests.html#a6b6fbb757d8acf4148ae19efc6955dec", null ],
+    [ "ReduceRefreshCurrentSelectionAction", "class_luthetus_1_1_ide_1_1_tests_1_1_basis_1_1_input_files_1_1_states_1_1_input_file_state_reducer_tests.html#abc02014bf5fec1c37dc57dd35f6cf612", null ],
+    [ "ReduceSetOpenedTreeViewModelAction", "class_luthetus_1_1_ide_1_1_tests_1_1_basis_1_1_input_files_1_1_states_1_1_input_file_state_reducer_tests.html#ae81a963373df01d1e325b6895b5dc575", null ],
+    [ "ReduceSetSearchQueryAction", "class_luthetus_1_1_ide_1_1_tests_1_1_basis_1_1_input_files_1_1_states_1_1_input_file_state_reducer_tests.html#ae4a6bdea89ca2d3949893e6447cacaa3", null ],
+    [ "ReduceSetSelectedInputFilePatternAction", "class_luthetus_1_1_ide_1_1_tests_1_1_basis_1_1_input_files_1_1_states_1_1_input_file_state_reducer_tests.html#aa9c62f95fffb84930eba9f2ae7e04bf9", null ],
+    [ "ReduceSetSelectedTreeViewModelAction", "class_luthetus_1_1_ide_1_1_tests_1_1_basis_1_1_input_files_1_1_states_1_1_input_file_state_reducer_tests.html#a787bc61a737c01b2637759d056ad0340", null ],
+    [ "ReduceStartInputFileStateFormAction", "class_luthetus_1_1_ide_1_1_tests_1_1_basis_1_1_input_files_1_1_states_1_1_input_file_state_reducer_tests.html#a52defd426619d0bc18dd4b10fefbe28c", null ]
+];

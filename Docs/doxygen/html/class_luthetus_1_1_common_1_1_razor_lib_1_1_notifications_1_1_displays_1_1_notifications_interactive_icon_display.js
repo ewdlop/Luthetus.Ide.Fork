@@ -1,0 +1,5 @@
+var class_luthetus_1_1_common_1_1_razor_lib_1_1_notifications_1_1_displays_1_1_notifications_interactive_icon_display =
+[
+    [ "CssClassString", "class_luthetus_1_1_common_1_1_razor_lib_1_1_notifications_1_1_displays_1_1_notifications_interactive_icon_display.html#a68fe419317c1432b9b549570f43b9b39", null ],
+    [ "CssStyleString", "class_luthetus_1_1_common_1_1_razor_lib_1_1_notifications_1_1_displays_1_1_notifications_interactive_icon_display.html#ad48498a715040500d770d9c16fb14d6a", null ]
+];

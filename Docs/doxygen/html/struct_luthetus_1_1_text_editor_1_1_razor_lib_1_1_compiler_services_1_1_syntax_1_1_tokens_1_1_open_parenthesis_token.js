@@ -1,0 +1,8 @@
+var struct_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_1_1_tokens_1_1_open_parenthesis_token =
+[
+    [ "OpenParenthesisToken", "struct_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_1_1_tokens_1_1_open_parenthesis_token.html#a8bff06dda9f8bf179e8eeaa8dfc556d4", null ],
+    [ "ConstructorWasInvoked", "struct_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_1_1_tokens_1_1_open_parenthesis_token.html#aabc8e894f4be051545333f2103a2cc9e", null ],
+    [ "IsFabricated", "struct_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_1_1_tokens_1_1_open_parenthesis_token.html#ae7350c3fb52ebeff79a4c8aae868dbc2", null ],
+    [ "SyntaxKind", "struct_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_1_1_tokens_1_1_open_parenthesis_token.html#a3b56f7537961971fcceb18928fb760be", null ],
+    [ "TextSpan", "struct_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_1_1_tokens_1_1_open_parenthesis_token.html#a1cb0bfe8ad28efc4f06a0d5d5a36866a", null ]
+];

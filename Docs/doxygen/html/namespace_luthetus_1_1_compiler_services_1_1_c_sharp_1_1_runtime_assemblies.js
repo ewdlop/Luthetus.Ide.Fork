@@ -1,0 +1,4 @@
+var namespace_luthetus_1_1_compiler_services_1_1_c_sharp_1_1_runtime_assemblies =
+[
+    [ "IRuntimeAssembliesLoader", "interface_luthetus_1_1_compiler_services_1_1_c_sharp_1_1_runtime_assemblies_1_1_i_runtime_assemblies_loader.html", "interface_luthetus_1_1_compiler_services_1_1_c_sharp_1_1_runtime_assemblies_1_1_i_runtime_assemblies_loader" ]
+];

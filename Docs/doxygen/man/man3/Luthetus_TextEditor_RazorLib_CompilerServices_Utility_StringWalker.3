@@ -1,0 +1,383 @@
+.TH "Luthetus.TextEditor.RazorLib.CompilerServices.Utility.StringWalker" 3 "Version 1.0.0" "Luthetus.Ide" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+Luthetus.TextEditor.RazorLib.CompilerServices.Utility.StringWalker \- Provides common API that can be used when implementing an ITextEditorLexer for the TextEditorModel\&.
+.br
+
+.br
+The marker for an out of bounds read is ParserFacts\&.END_OF_FILE\&.  
+
+.SH SYNOPSIS
+.br
+.PP
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBStringWalker\fP (\fBResourceUri\fP resourceUri, string sourceText)"
+.br
+.RI "Pass in the \fBResourceUri\fP of a file, and its text\&. One can pass in string\&.Empty for the \fBResourceUri\fP if they are only working with the text itself\&. "
+.ti -1c
+.RI "char \fBReadCharacter\fP ()"
+.br
+.RI "If \fBPositionIndex\fP is within bounds of the \fBSourceText\fP\&.
+.br
+
+.br
+Then the character within the string \fBSourceText\fP at index of \fBPositionIndex\fP is returned and \fBPositionIndex\fP is incremented by one\&.
+.br
+
+.br
+Otherwise, ParserFacts\&.END_OF_FILE is returned and the value of \fBPositionIndex\fP is unchanged\&. "
+.ti -1c
+.RI "char \fBPeekCharacter\fP (int offset)"
+.br
+.RI "If (\fBPositionIndex\fP + offset) is within bounds of the \fBSourceText\fP\&.
+.br
+
+.br
+Then the character within the string \fBSourceText\fP at index of (\fBPositionIndex\fP + offset) is returned and \fBPositionIndex\fP is unchanged\&.
+.br
+
+.br
+Otherwise, ParserFacts\&.END_OF_FILE is returned and the value of \fBPositionIndex\fP is unchanged\&.
+.br
+
+.br
+offset must be > -1\&. "
+.ti -1c
+.RI "char \fBBacktrackCharacter\fP ()"
+.br
+.RI "If \fBPositionIndex\fP being decremented by 1 would result in \fBPositionIndex\fP being less than 0\&.
+.br
+
+.br
+Then ParserFacts\&.END_OF_FILE will be returned and \fBPositionIndex\fP will be left unchanged\&.
+.br
+
+.br
+Otherwise, \fBPositionIndex\fP will be decremented by one and the character within the string \fBSourceText\fP at index of \fBPositionIndex\fP is returned\&. "
+.ti -1c
+.RI "string \fBReadRange\fP (int length)"
+.br
+.RI "Iterates a counter from 0 until the counter is equal to length\&.
+.br
+
+.br
+Each iteration \fBReadCharacter\fP will be invoked\&.
+.br
+
+.br
+If an iteration's invocation of \fBReadCharacter\fP returned ParserFacts\&.END_OF_FILE then the method will short circuit and return regardless of whether it finished iterating to length or not\&. "
+.ti -1c
+.RI "string \fBPeekRange\fP (int offset, int length)"
+.br
+.RI "Iterates a counter from 0 until the counter is equal to length\&.
+.br
+
+.br
+Each iteration \fBPeekCharacter\fP will be invoked using the (offset + counter)\&.
+.br
+
+.br
+If an iteration's invocation of \fBPeekCharacter\fP returned ParserFacts\&.END_OF_FILE then the method will short circuit and return regardless of whether it finished iterating to length or not\&. "
+.ti -1c
+.RI "string \fBBacktrackRange\fP (int length)"
+.br
+.RI "Iterates a counter from 0 until the counter is equal to length\&.
+.br
+
+.br
+Each iteration \fBBacktrackCharacter\fP will be invoked using the\&.
+.br
+
+.br
+If an iteration's invocation of \fBBacktrackCharacter\fP returned ParserFacts\&.END_OF_FILE then the method will short circuit and return regardless of whether it finished iterating to length or not\&. "
+.ti -1c
+.RI "string \fBPeekNextWord\fP ()"
+.br
+.ti -1c
+.RI "bool \fBPeekForSubstring\fP (string substring)"
+.br
+.RI "Form a substring of the \fBSourceText\fP that starts inclusively at the index \fBPositionIndex\fP and has a maximum length of substring\&.Length\&.
+.br
+
+.br
+This method uses \fBPeekRange\fP internally and therefore will return a string that ends with ParserFacts\&.END_OF_FILE if an index out of bounds read was performed on \fBSourceText\fP\&. "
+.ti -1c
+.RI "bool \fBPeekForSubstringRange\fP (ImmutableArray< string > substringsList, out string? matchedOn)"
+.br
+.ti -1c
+.RI "string \fBReadWhitespace\fP (IEnumerable< char >? whitespaceOverrideList=null)"
+.br
+.RI "Provide whitespaceOverrideList to override the default of what qualifies as whitespace\&. The default whitespace chars are: WhitespaceFacts\&.ALL_LIST\&. "
+.ti -1c
+.RI "\fBNumericLiteralToken\fP \fBReadUnsignedNumericLiteral\fP ()"
+.br
+.ti -1c
+.RI "string \fBReadUntil\fP (char deliminator)"
+.br
+.ti -1c
+.RI "string \fBReadLine\fP ()"
+.br
+.RI "The line ending is NOT included in the returned string\&. "
+.ti -1c
+.RI "\fBTextEditorTextSpan\fP string value \fBReadWordTuple\fP (ImmutableArray< char >? additionalCharactersToBreakOnList=null)"
+.br
+.in -1c
+.SS "Public Attributes"
+
+.in +1c
+.ti -1c
+.RI "\fBTextEditorTextSpan\fP \fBtextSpan\fP"
+.br
+.RI "This method will return immediately upon encountering whitespace\&. Returns a text span with its TextEditorTextSpan\&.StartingIndexInclusive equal to '-1' if no word was found\&. "
+.in -1c
+.SS "Properties"
+
+.in +1c
+.ti -1c
+.RI "int \fBPositionIndex\fP\fR [get]\fP"
+.br
+.RI "The character index within the \fBSourceText\fP\&. "
+.ti -1c
+.RI "ResourceUri \fBResourceUri\fP\fR [get]\fP"
+.br
+.RI "The file that the \fBSourceText\fP came from\&. "
+.ti -1c
+.RI "string \fBSourceText\fP\fR [get]\fP"
+.br
+.RI "The text which is to be stepped through\&. "
+.ti -1c
+.RI "char \fBCurrentCharacter\fP\fR [get]\fP"
+.br
+.RI "Returns \fBPeekCharacter\fP invoked with the value of zero\&. "
+.ti -1c
+.RI "char \fBNextCharacter\fP\fR [get]\fP"
+.br
+.RI "Returns \fBPeekCharacter\fP invoked with the value of one\&. "
+.ti -1c
+.RI "string \fBRemainingText\fP\fR [get]\fP"
+.br
+.RI "Starting with \fBPeekCharacter\fP evaluated at 0 return that and the rest of the \fBSourceText\fP
+.br
+
+.br
+\fBRemainingText\fP => SourceText\&.Substring(PositionIndex);\&. "
+.ti -1c
+.RI "bool \fBIsEof\fP\fR [get]\fP"
+.br
+.RI "Returns if the current character is the end of file character\&. "
+.in -1c
+.SH "Detailed Description"
+.PP 
+Provides common API that can be used when implementing an ITextEditorLexer for the TextEditorModel\&.
+.br
+
+.br
+The marker for an out of bounds read is ParserFacts\&.END_OF_FILE\&. 
+.PP
+Definition at line \fB12\fP of file \fBStringWalker\&.cs\fP\&.
+.SH "Constructor & Destructor Documentation"
+.PP 
+.SS "Luthetus\&.TextEditor\&.RazorLib\&.CompilerServices\&.Utility\&.StringWalker\&.StringWalker (\fBResourceUri\fP resourceUri, string sourceText)"
+
+.PP
+Pass in the \fBResourceUri\fP of a file, and its text\&. One can pass in string\&.Empty for the \fBResourceUri\fP if they are only working with the text itself\&. 
+.PP
+Definition at line \fB15\fP of file \fBStringWalker\&.cs\fP\&.
+.SH "Member Function Documentation"
+.PP 
+.SS "char Luthetus\&.TextEditor\&.RazorLib\&.CompilerServices\&.Utility\&.StringWalker\&.BacktrackCharacter ()"
+
+.PP
+If \fBPositionIndex\fP being decremented by 1 would result in \fBPositionIndex\fP being less than 0\&.
+.br
+
+.br
+Then ParserFacts\&.END_OF_FILE will be returned and \fBPositionIndex\fP will be left unchanged\&.
+.br
+
+.br
+Otherwise, \fBPositionIndex\fP will be decremented by one and the character within the string \fBSourceText\fP at index of \fBPositionIndex\fP is returned\&. 
+.PP
+Definition at line \fB64\fP of file \fBStringWalker\&.cs\fP\&.
+.SS "string Luthetus\&.TextEditor\&.RazorLib\&.CompilerServices\&.Utility\&.StringWalker\&.BacktrackRange (int length)"
+
+.PP
+Iterates a counter from 0 until the counter is equal to length\&.
+.br
+
+.br
+Each iteration \fBBacktrackCharacter\fP will be invoked using the\&.
+.br
+
+.br
+If an iteration's invocation of \fBBacktrackCharacter\fP returned ParserFacts\&.END_OF_FILE then the method will short circuit and return regardless of whether it finished iterating to length or not\&. 
+.PP
+Definition at line \fB111\fP of file \fBStringWalker\&.cs\fP\&.
+.SS "char Luthetus\&.TextEditor\&.RazorLib\&.CompilerServices\&.Utility\&.StringWalker\&.PeekCharacter (int offset)"
+
+.PP
+If (\fBPositionIndex\fP + offset) is within bounds of the \fBSourceText\fP\&.
+.br
+
+.br
+Then the character within the string \fBSourceText\fP at index of (\fBPositionIndex\fP + offset) is returned and \fBPositionIndex\fP is unchanged\&.
+.br
+
+.br
+Otherwise, ParserFacts\&.END_OF_FILE is returned and the value of \fBPositionIndex\fP is unchanged\&.
+.br
+
+.br
+offset must be > -1\&. 
+.PP
+Definition at line \fB52\fP of file \fBStringWalker\&.cs\fP\&.
+.SS "bool Luthetus\&.TextEditor\&.RazorLib\&.CompilerServices\&.Utility\&.StringWalker\&.PeekForSubstring (string substring)"
+
+.PP
+Form a substring of the \fBSourceText\fP that starts inclusively at the index \fBPositionIndex\fP and has a maximum length of substring\&.Length\&.
+.br
+
+.br
+This method uses \fBPeekRange\fP internally and therefore will return a string that ends with ParserFacts\&.END_OF_FILE if an index out of bounds read was performed on \fBSourceText\fP\&. 
+.PP
+Definition at line \fB159\fP of file \fBStringWalker\&.cs\fP\&.
+.SS "bool Luthetus\&.TextEditor\&.RazorLib\&.CompilerServices\&.Utility\&.StringWalker\&.PeekForSubstringRange (ImmutableArray< string > substringsList, out string? matchedOn)"
+
+.PP
+Definition at line \fB164\fP of file \fBStringWalker\&.cs\fP\&.
+.SS "string Luthetus\&.TextEditor\&.RazorLib\&.CompilerServices\&.Utility\&.StringWalker\&.PeekNextWord ()"
+
+.PP
+Definition at line \fB134\fP of file \fBStringWalker\&.cs\fP\&.
+.SS "string Luthetus\&.TextEditor\&.RazorLib\&.CompilerServices\&.Utility\&.StringWalker\&.PeekRange (int offset, int length)"
+
+.PP
+Iterates a counter from 0 until the counter is equal to length\&.
+.br
+
+.br
+Each iteration \fBPeekCharacter\fP will be invoked using the (offset + counter)\&.
+.br
+
+.br
+If an iteration's invocation of \fBPeekCharacter\fP returned ParserFacts\&.END_OF_FILE then the method will short circuit and return regardless of whether it finished iterating to length or not\&. 
+.PP
+Definition at line \fB93\fP of file \fBStringWalker\&.cs\fP\&.
+.SS "char Luthetus\&.TextEditor\&.RazorLib\&.CompilerServices\&.Utility\&.StringWalker\&.ReadCharacter ()"
+
+.PP
+If \fBPositionIndex\fP is within bounds of the \fBSourceText\fP\&.
+.br
+
+.br
+Then the character within the string \fBSourceText\fP at index of \fBPositionIndex\fP is returned and \fBPositionIndex\fP is incremented by one\&.
+.br
+
+.br
+Otherwise, ParserFacts\&.END_OF_FILE is returned and the value of \fBPositionIndex\fP is unchanged\&. 
+.PP
+Definition at line \fB43\fP of file \fBStringWalker\&.cs\fP\&.
+.SS "string Luthetus\&.TextEditor\&.RazorLib\&.CompilerServices\&.Utility\&.StringWalker\&.ReadLine ()"
+
+.PP
+The line ending is NOT included in the returned string\&. 
+.PP
+Definition at line \fB247\fP of file \fBStringWalker\&.cs\fP\&.
+.SS "string Luthetus\&.TextEditor\&.RazorLib\&.CompilerServices\&.Utility\&.StringWalker\&.ReadRange (int length)"
+
+.PP
+Iterates a counter from 0 until the counter is equal to length\&.
+.br
+
+.br
+Each iteration \fBReadCharacter\fP will be invoked\&.
+.br
+
+.br
+If an iteration's invocation of \fBReadCharacter\fP returned ParserFacts\&.END_OF_FILE then the method will short circuit and return regardless of whether it finished iterating to length or not\&. 
+.PP
+Definition at line \fB75\fP of file \fBStringWalker\&.cs\fP\&.
+.SS "\fBNumericLiteralToken\fP Luthetus\&.TextEditor\&.RazorLib\&.CompilerServices\&.Utility\&.StringWalker\&.ReadUnsignedNumericLiteral ()"
+Ex: '1\&.73', positive only\&.
+.br
+ { 0, \&.\&.\&., 1, \&.\&.\&., 2, \&.\&.\&.} 
+.PP
+Definition at line \fB207\fP of file \fBStringWalker\&.cs\fP\&.
+.SS "string Luthetus\&.TextEditor\&.RazorLib\&.CompilerServices\&.Utility\&.StringWalker\&.ReadUntil (char deliminator)"
+
+.PP
+Definition at line \fB229\fP of file \fBStringWalker\&.cs\fP\&.
+.SS "string Luthetus\&.TextEditor\&.RazorLib\&.CompilerServices\&.Utility\&.StringWalker\&.ReadWhitespace (IEnumerable< char >? whitespaceOverrideList = \fRnull\fP)"
+
+.PP
+Provide whitespaceOverrideList to override the default of what qualifies as whitespace\&. The default whitespace chars are: WhitespaceFacts\&.ALL_LIST\&. 
+.PP
+Definition at line \fB184\fP of file \fBStringWalker\&.cs\fP\&.
+.SS "\fBTextEditorTextSpan\fP string value Luthetus\&.TextEditor\&.RazorLib\&.CompilerServices\&.Utility\&.StringWalker\&.ReadWordTuple (ImmutableArray< char >? additionalCharactersToBreakOnList = \fRnull\fP)"
+
+.PP
+Definition at line \fB266\fP of file \fBStringWalker\&.cs\fP\&.
+.SH "Member Data Documentation"
+.PP 
+.SS "\fBTextEditorTextSpan\fP Luthetus\&.TextEditor\&.RazorLib\&.CompilerServices\&.Utility\&.StringWalker\&.textSpan"
+
+.PP
+This method will return immediately upon encountering whitespace\&. Returns a text span with its TextEditorTextSpan\&.StartingIndexInclusive equal to '-1' if no word was found\&. 
+.PP
+Definition at line \fB266\fP of file \fBStringWalker\&.cs\fP\&.
+.SH "Property Documentation"
+.PP 
+.SS "char Luthetus\&.TextEditor\&.RazorLib\&.CompilerServices\&.Utility\&.StringWalker\&.CurrentCharacter\fR [get]\fP"
+
+.PP
+Returns \fBPeekCharacter\fP invoked with the value of zero\&. 
+.PP
+Definition at line \fB31\fP of file \fBStringWalker\&.cs\fP\&.
+.SS "bool Luthetus\&.TextEditor\&.RazorLib\&.CompilerServices\&.Utility\&.StringWalker\&.IsEof\fR [get]\fP"
+
+.PP
+Returns if the current character is the end of file character\&. 
+.PP
+Definition at line \fB40\fP of file \fBStringWalker\&.cs\fP\&.
+.SS "char Luthetus\&.TextEditor\&.RazorLib\&.CompilerServices\&.Utility\&.StringWalker\&.NextCharacter\fR [get]\fP"
+
+.PP
+Returns \fBPeekCharacter\fP invoked with the value of one\&. 
+.PP
+Definition at line \fB34\fP of file \fBStringWalker\&.cs\fP\&.
+.SS "int Luthetus\&.TextEditor\&.RazorLib\&.CompilerServices\&.Utility\&.StringWalker\&.PositionIndex\fR [get]\fP"
+
+.PP
+The character index within the \fBSourceText\fP\&. 
+.PP
+Definition at line \fB22\fP of file \fBStringWalker\&.cs\fP\&.
+.SS "string Luthetus\&.TextEditor\&.RazorLib\&.CompilerServices\&.Utility\&.StringWalker\&.RemainingText\fR [get]\fP"
+
+.PP
+Starting with \fBPeekCharacter\fP evaluated at 0 return that and the rest of the \fBSourceText\fP
+.br
+
+.br
+\fBRemainingText\fP => SourceText\&.Substring(PositionIndex);\&. 
+.PP
+Definition at line \fB37\fP of file \fBStringWalker\&.cs\fP\&.
+.SS "ResourceUri Luthetus\&.TextEditor\&.RazorLib\&.CompilerServices\&.Utility\&.StringWalker\&.ResourceUri\fR [get]\fP"
+
+.PP
+The file that the \fBSourceText\fP came from\&. 
+.PP
+Definition at line \fB25\fP of file \fBStringWalker\&.cs\fP\&.
+.SS "string Luthetus\&.TextEditor\&.RazorLib\&.CompilerServices\&.Utility\&.StringWalker\&.SourceText\fR [get]\fP"
+
+.PP
+The text which is to be stepped through\&. 
+.PP
+Definition at line \fB28\fP of file \fBStringWalker\&.cs\fP\&.
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for Luthetus\&.Ide from the source code\&.

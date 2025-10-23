@@ -1,0 +1,286 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="__options_api_tests_8cs_source" xml:lang="en-US">
+<title>OptionsApiTests.cs</title>
+<indexterm><primary>Source/Tests/TextEditor/Basis/Options/Models/OptionsApiTests.cs</primary></indexterm>
+Go to the documentation of this file.<programlisting linenumbering="unnumbered"><anchor xml:id="__options_api_tests_8cs_source_1l00001"/>00001 <emphasis role="keyword">using&#32;</emphasis><link linkend="_namespace_luthetus_1_1_common_1_1_razor_lib_1_1_keys_1_1_models">Luthetus.Common.RazorLib.Keys.Models</link>;
+<anchor xml:id="__options_api_tests_8cs_source_1l00002"/>00002 <emphasis role="keyword">using&#32;</emphasis><link linkend="_namespace_luthetus_1_1_common_1_1_razor_lib_1_1_options_1_1_states">Luthetus.Common.RazorLib.Options.States</link>;
+<anchor xml:id="__options_api_tests_8cs_source_1l00003"/>00003 <emphasis role="keyword">using&#32;</emphasis><link linkend="_namespace_luthetus_1_1_common_1_1_razor_lib_1_1_render_states_1_1_models">Luthetus.Common.RazorLib.RenderStates.Models</link>;
+<anchor xml:id="__options_api_tests_8cs_source_1l00004"/>00004 <emphasis role="keyword">using&#32;</emphasis><link linkend="_namespace_luthetus_1_1_common_1_1_razor_lib_1_1_themes_1_1_models">Luthetus.Common.RazorLib.Themes.Models</link>;
+<anchor xml:id="__options_api_tests_8cs_source_1l00005"/>00005 <emphasis role="keyword">using&#32;</emphasis><link linkend="_namespace_luthetus_1_1_common_1_1_razor_lib_1_1_storages_1_1_models">Luthetus.Common.RazorLib.Storages.Models</link>;
+<anchor xml:id="__options_api_tests_8cs_source_1l00006"/>00006 <emphasis role="keyword">using&#32;</emphasis><link linkend="_namespace_luthetus_1_1_common_1_1_razor_lib_1_1_keymaps_1_1_models">Luthetus.Common.RazorLib.Keymaps.Models</link>;
+<anchor xml:id="__options_api_tests_8cs_source_1l00007"/>00007 <emphasis role="keyword">using&#32;</emphasis><link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib">Luthetus.TextEditor.RazorLib</link>;
+<anchor xml:id="__options_api_tests_8cs_source_1l00008"/>00008 <emphasis role="keyword">using&#32;</emphasis><link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_installations_1_1_models">Luthetus.TextEditor.RazorLib.Installations.Models</link>;
+<anchor xml:id="__options_api_tests_8cs_source_1l00009"/>00009 <emphasis role="keyword">using&#32;</emphasis><link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_keymaps_1_1_models">Luthetus.TextEditor.RazorLib.Keymaps.Models</link>;
+<anchor xml:id="__options_api_tests_8cs_source_1l00010"/>00010 <emphasis role="keyword">using&#32;</emphasis><link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_options_1_1_models">Luthetus.TextEditor.RazorLib.Options.Models</link>;
+<anchor xml:id="__options_api_tests_8cs_source_1l00011"/>00011 <emphasis role="keyword">using&#32;</emphasis><link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_options_1_1_states">Luthetus.TextEditor.RazorLib.Options.States</link>;
+<anchor xml:id="__options_api_tests_8cs_source_1l00012"/>00012 <emphasis role="keyword">using&#32;</emphasis>Fluxor;
+<anchor xml:id="__options_api_tests_8cs_source_1l00013"/>00013 <emphasis role="keyword">using&#32;</emphasis><link linkend="_namespace_luthetus_1_1_common_1_1_razor_lib_1_1_background_tasks_1_1_models">Luthetus.Common.RazorLib.BackgroundTasks.Models</link>;
+<anchor xml:id="__options_api_tests_8cs_source_1l00014"/>00014 <emphasis role="keyword">using&#32;</emphasis><link linkend="_namespace_luthetus_1_1_common_1_1_razor_lib_1_1_installations_1_1_models">Luthetus.Common.RazorLib.Installations.Models</link>;
+<anchor xml:id="__options_api_tests_8cs_source_1l00015"/>00015 <emphasis role="keyword">using&#32;</emphasis><link linkend="_namespace_luthetus_1_1_common_1_1_razor_lib_1_1_misc">Luthetus.Common.RazorLib.Misc</link>;
+<anchor xml:id="__options_api_tests_8cs_source_1l00016"/>00016 <emphasis role="keyword">using&#32;</emphasis>Microsoft.Extensions.DependencyInjection;
+<anchor xml:id="__options_api_tests_8cs_source_1l00017"/>00017 <emphasis role="keyword">using&#32;</emphasis>Microsoft.JSInterop;
+<anchor xml:id="__options_api_tests_8cs_source_1l00018"/>00018 
+<anchor xml:id="__options_api_tests_8cs_source_1l00019"/><link linkend="_namespace_luthetus_1_1_text_editor_1_1_tests_1_1_basis_1_1_options">00019</link> <emphasis role="keyword">namespace&#32;</emphasis><link linkend="_namespace_luthetus_1_1_text_editor_1_1_tests_1_1_basis_1_1_options_1_1_models">Luthetus.TextEditor.Tests.Basis.Options.Models</link>;
+<anchor xml:id="__options_api_tests_8cs_source_1l00020"/>00020 
+<anchor xml:id="__options_api_tests_8cs_source_1l00024"/><link linkend="_class_luthetus_1_1_text_editor_1_1_tests_1_1_basis_1_1_options_1_1_models_1_1_options_api_tests">00024</link> <emphasis role="keyword">public</emphasis>&#32;<emphasis role="keyword">class&#32;</emphasis><link linkend="_class_luthetus_1_1_text_editor_1_1_tests_1_1_basis_1_1_options_1_1_models_1_1_options_api_tests">OptionsApiTests</link>
+<anchor xml:id="__options_api_tests_8cs_source_1l00025"/>00025 {
+<anchor xml:id="__options_api_tests_8cs_source_1l00029"/>00029 &#32;&#32;&#32;&#32;[Fact]
+<anchor xml:id="__options_api_tests_8cs_source_1l00030"/><link linkend="_class_luthetus_1_1_text_editor_1_1_tests_1_1_basis_1_1_options_1_1_models_1_1_options_api_tests_1aa2b4f00a614727f055bb9e94a877a6b2">00030</link> &#32;&#32;&#32;&#32;<emphasis role="keyword">public</emphasis>&#32;<emphasis role="keywordtype">void</emphasis>&#32;<link linkend="_class_luthetus_1_1_text_editor_1_1_tests_1_1_basis_1_1_options_1_1_models_1_1_options_api_tests_1aa2b4f00a614727f055bb9e94a877a6b2">Constructor</link>()
+<anchor xml:id="__options_api_tests_8cs_source_1l00031"/>00031 &#32;&#32;&#32;&#32;{
+<anchor xml:id="__options_api_tests_8cs_source_1l00032"/>00032 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;InitializeOptionsApiTests(
+<anchor xml:id="__options_api_tests_8cs_source_1l00033"/>00033 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;out&#32;var&#32;textEditorService,
+<anchor xml:id="__options_api_tests_8cs_source_1l00034"/>00034 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;out&#32;var&#32;dispatcher,
+<anchor xml:id="__options_api_tests_8cs_source_1l00035"/>00035 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;out&#32;var&#32;serviceProvider);
+<anchor xml:id="__options_api_tests_8cs_source_1l00036"/>00036 
+<anchor xml:id="__options_api_tests_8cs_source_1l00037"/>00037 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;Assert.NotNull(textEditorService.<link linkend="_interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_i_text_editor_service_1acfaf93c246c51d280f76b5cf1f9386ac">OptionsApi</link>);
+<anchor xml:id="__options_api_tests_8cs_source_1l00038"/>00038 &#32;&#32;&#32;&#32;}
+<anchor xml:id="__options_api_tests_8cs_source_1l00039"/>00039 
+<anchor xml:id="__options_api_tests_8cs_source_1l00043"/>00043 &#32;&#32;&#32;&#32;[Fact]
+<anchor xml:id="__options_api_tests_8cs_source_1l00044"/><link linkend="_class_luthetus_1_1_text_editor_1_1_tests_1_1_basis_1_1_options_1_1_models_1_1_options_api_tests_1a159e30843f46a894ea1ba718c2029649">00044</link> &#32;&#32;&#32;&#32;<emphasis role="keyword">public</emphasis>&#32;<emphasis role="keywordtype">void</emphasis>&#32;<link linkend="_class_luthetus_1_1_text_editor_1_1_tests_1_1_basis_1_1_options_1_1_models_1_1_options_api_tests_1a159e30843f46a894ea1ba718c2029649">SetTheme</link>()
+<anchor xml:id="__options_api_tests_8cs_source_1l00045"/>00045 &#32;&#32;&#32;&#32;{
+<anchor xml:id="__options_api_tests_8cs_source_1l00046"/>00046 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;InitializeOptionsApiTests(
+<anchor xml:id="__options_api_tests_8cs_source_1l00047"/>00047 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;out&#32;var&#32;textEditorService,
+<anchor xml:id="__options_api_tests_8cs_source_1l00048"/>00048 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;out&#32;var&#32;dispatcher,
+<anchor xml:id="__options_api_tests_8cs_source_1l00049"/>00049 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;out&#32;var&#32;serviceProvider);
+<anchor xml:id="__options_api_tests_8cs_source_1l00050"/>00050 
+<anchor xml:id="__options_api_tests_8cs_source_1l00051"/>00051 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;Assert.Equal(
+<anchor xml:id="__options_api_tests_8cs_source_1l00052"/>00052 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;ThemeFacts.VisualStudioDarkThemeClone.Key,
+<anchor xml:id="__options_api_tests_8cs_source_1l00053"/>00053 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;textEditorService.<link linkend="_interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_i_text_editor_service_1acfaf93c246c51d280f76b5cf1f9386ac">OptionsApi</link>.<link linkend="_interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_options_1_1_models_1_1_i_text_editor_options_api_1a64b2485147634bed09cca6d12e6e7d6f">GetOptions</link>().CommonOptions.ThemeKey);
+<anchor xml:id="__options_api_tests_8cs_source_1l00054"/>00054 
+<anchor xml:id="__options_api_tests_8cs_source_1l00055"/>00055 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;textEditorService.<link linkend="_interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_i_text_editor_service_1acfaf93c246c51d280f76b5cf1f9386ac">OptionsApi</link>.<link linkend="_interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_options_1_1_models_1_1_i_text_editor_options_api_1a217bcdb833a14fa82f4ba380266e5aa1">SetTheme</link>(ThemeFacts.VisualStudioLightThemeClone);
+<anchor xml:id="__options_api_tests_8cs_source_1l00056"/>00056 
+<anchor xml:id="__options_api_tests_8cs_source_1l00057"/>00057 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;Assert.Equal(
+<anchor xml:id="__options_api_tests_8cs_source_1l00058"/>00058 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;ThemeFacts.VisualStudioLightThemeClone.Key,
+<anchor xml:id="__options_api_tests_8cs_source_1l00059"/>00059 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;textEditorService.<link linkend="_interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_i_text_editor_service_1acfaf93c246c51d280f76b5cf1f9386ac">OptionsApi</link>.<link linkend="_interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_options_1_1_models_1_1_i_text_editor_options_api_1a64b2485147634bed09cca6d12e6e7d6f">GetOptions</link>().CommonOptions.ThemeKey);
+<anchor xml:id="__options_api_tests_8cs_source_1l00060"/>00060 &#32;&#32;&#32;&#32;}
+<anchor xml:id="__options_api_tests_8cs_source_1l00061"/>00061 
+<anchor xml:id="__options_api_tests_8cs_source_1l00065"/>00065 &#32;&#32;&#32;&#32;[Fact]
+<anchor xml:id="__options_api_tests_8cs_source_1l00066"/><link linkend="_class_luthetus_1_1_text_editor_1_1_tests_1_1_basis_1_1_options_1_1_models_1_1_options_api_tests_1aecbf4d608106fd09de352f43f1aa9c61">00066</link> &#32;&#32;&#32;&#32;<emphasis role="keyword">public</emphasis>&#32;<emphasis role="keywordtype">void</emphasis>&#32;<link linkend="_class_luthetus_1_1_text_editor_1_1_tests_1_1_basis_1_1_options_1_1_models_1_1_options_api_tests_1aecbf4d608106fd09de352f43f1aa9c61">SetShowWhitespace</link>()
+<anchor xml:id="__options_api_tests_8cs_source_1l00067"/>00067 &#32;&#32;&#32;&#32;{
+<anchor xml:id="__options_api_tests_8cs_source_1l00068"/>00068 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;InitializeOptionsApiTests(
+<anchor xml:id="__options_api_tests_8cs_source_1l00069"/>00069 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;out&#32;var&#32;textEditorService,
+<anchor xml:id="__options_api_tests_8cs_source_1l00070"/>00070 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;out&#32;var&#32;dispatcher,
+<anchor xml:id="__options_api_tests_8cs_source_1l00071"/>00071 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;out&#32;var&#32;serviceProvider);
+<anchor xml:id="__options_api_tests_8cs_source_1l00072"/>00072 
+<anchor xml:id="__options_api_tests_8cs_source_1l00073"/>00073 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;Assert.False(textEditorService.<link linkend="_interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_i_text_editor_service_1acfaf93c246c51d280f76b5cf1f9386ac">OptionsApi</link>.<link linkend="_interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_options_1_1_models_1_1_i_text_editor_options_api_1a64b2485147634bed09cca6d12e6e7d6f">GetOptions</link>().ShowWhitespace);
+<anchor xml:id="__options_api_tests_8cs_source_1l00074"/>00074 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;textEditorService.<link linkend="_interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_i_text_editor_service_1acfaf93c246c51d280f76b5cf1f9386ac">OptionsApi</link>.<link linkend="_interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_options_1_1_models_1_1_i_text_editor_options_api_1ae8231eba1b25a45799cecfb88a4d6c81">SetShowWhitespace</link>(<emphasis role="keyword">true</emphasis>);
+<anchor xml:id="__options_api_tests_8cs_source_1l00075"/>00075 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;Assert.True(textEditorService.<link linkend="_interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_i_text_editor_service_1acfaf93c246c51d280f76b5cf1f9386ac">OptionsApi</link>.<link linkend="_interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_options_1_1_models_1_1_i_text_editor_options_api_1a64b2485147634bed09cca6d12e6e7d6f">GetOptions</link>().ShowWhitespace);
+<anchor xml:id="__options_api_tests_8cs_source_1l00076"/>00076 &#32;&#32;&#32;&#32;}
+<anchor xml:id="__options_api_tests_8cs_source_1l00077"/>00077 
+<anchor xml:id="__options_api_tests_8cs_source_1l00081"/>00081 &#32;&#32;&#32;&#32;[Fact]
+<anchor xml:id="__options_api_tests_8cs_source_1l00082"/><link linkend="_class_luthetus_1_1_text_editor_1_1_tests_1_1_basis_1_1_options_1_1_models_1_1_options_api_tests_1af943b169973892d292f7ff0b573c6b5d">00082</link> &#32;&#32;&#32;&#32;<emphasis role="keyword">public</emphasis>&#32;<emphasis role="keywordtype">void</emphasis>&#32;<link linkend="_class_luthetus_1_1_text_editor_1_1_tests_1_1_basis_1_1_options_1_1_models_1_1_options_api_tests_1af943b169973892d292f7ff0b573c6b5d">SetUseMonospaceOptimizations</link>()
+<anchor xml:id="__options_api_tests_8cs_source_1l00083"/>00083 &#32;&#32;&#32;&#32;{
+<anchor xml:id="__options_api_tests_8cs_source_1l00084"/>00084 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;InitializeOptionsApiTests(
+<anchor xml:id="__options_api_tests_8cs_source_1l00085"/>00085 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;out&#32;var&#32;textEditorService,
+<anchor xml:id="__options_api_tests_8cs_source_1l00086"/>00086 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;out&#32;var&#32;dispatcher,
+<anchor xml:id="__options_api_tests_8cs_source_1l00087"/>00087 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;out&#32;var&#32;serviceProvider);
+<anchor xml:id="__options_api_tests_8cs_source_1l00088"/>00088 
+<anchor xml:id="__options_api_tests_8cs_source_1l00089"/>00089 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;Assert.True(textEditorService.<link linkend="_interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_i_text_editor_service_1acfaf93c246c51d280f76b5cf1f9386ac">OptionsApi</link>.<link linkend="_interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_options_1_1_models_1_1_i_text_editor_options_api_1a64b2485147634bed09cca6d12e6e7d6f">GetOptions</link>().UseMonospaceOptimizations);
+<anchor xml:id="__options_api_tests_8cs_source_1l00090"/>00090 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;textEditorService.<link linkend="_interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_i_text_editor_service_1acfaf93c246c51d280f76b5cf1f9386ac">OptionsApi</link>.<link linkend="_interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_options_1_1_models_1_1_i_text_editor_options_api_1a52cfde23cc45e5c432ddf6f7519027a0">SetUseMonospaceOptimizations</link>(<emphasis role="keyword">false</emphasis>);
+<anchor xml:id="__options_api_tests_8cs_source_1l00091"/>00091 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;Assert.False(textEditorService.<link linkend="_interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_i_text_editor_service_1acfaf93c246c51d280f76b5cf1f9386ac">OptionsApi</link>.<link linkend="_interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_options_1_1_models_1_1_i_text_editor_options_api_1a64b2485147634bed09cca6d12e6e7d6f">GetOptions</link>().UseMonospaceOptimizations);
+<anchor xml:id="__options_api_tests_8cs_source_1l00092"/>00092 &#32;&#32;&#32;&#32;}
+<anchor xml:id="__options_api_tests_8cs_source_1l00093"/>00093 
+<anchor xml:id="__options_api_tests_8cs_source_1l00097"/>00097 &#32;&#32;&#32;&#32;[Fact]
+<anchor xml:id="__options_api_tests_8cs_source_1l00098"/><link linkend="_class_luthetus_1_1_text_editor_1_1_tests_1_1_basis_1_1_options_1_1_models_1_1_options_api_tests_1af1e759f41150cdb3f256738c2a25db9e">00098</link> &#32;&#32;&#32;&#32;<emphasis role="keyword">public</emphasis>&#32;<emphasis role="keywordtype">void</emphasis>&#32;<link linkend="_class_luthetus_1_1_text_editor_1_1_tests_1_1_basis_1_1_options_1_1_models_1_1_options_api_tests_1af1e759f41150cdb3f256738c2a25db9e">SetShowNewlines</link>()
+<anchor xml:id="__options_api_tests_8cs_source_1l00099"/>00099 &#32;&#32;&#32;&#32;{
+<anchor xml:id="__options_api_tests_8cs_source_1l00100"/>00100 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;InitializeOptionsApiTests(
+<anchor xml:id="__options_api_tests_8cs_source_1l00101"/>00101 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;out&#32;var&#32;textEditorService,
+<anchor xml:id="__options_api_tests_8cs_source_1l00102"/>00102 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;out&#32;var&#32;dispatcher,
+<anchor xml:id="__options_api_tests_8cs_source_1l00103"/>00103 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;out&#32;var&#32;serviceProvider);
+<anchor xml:id="__options_api_tests_8cs_source_1l00104"/>00104 
+<anchor xml:id="__options_api_tests_8cs_source_1l00105"/>00105 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;Assert.False(textEditorService.<link linkend="_interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_i_text_editor_service_1acfaf93c246c51d280f76b5cf1f9386ac">OptionsApi</link>.<link linkend="_interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_options_1_1_models_1_1_i_text_editor_options_api_1a64b2485147634bed09cca6d12e6e7d6f">GetOptions</link>().ShowNewlines);
+<anchor xml:id="__options_api_tests_8cs_source_1l00106"/>00106 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;textEditorService.<link linkend="_interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_i_text_editor_service_1acfaf93c246c51d280f76b5cf1f9386ac">OptionsApi</link>.<link linkend="_interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_options_1_1_models_1_1_i_text_editor_options_api_1ab922b6a66155d4dc464e9d9516b16373">SetShowNewlines</link>(<emphasis role="keyword">true</emphasis>);
+<anchor xml:id="__options_api_tests_8cs_source_1l00107"/>00107 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;Assert.True(textEditorService.<link linkend="_interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_i_text_editor_service_1acfaf93c246c51d280f76b5cf1f9386ac">OptionsApi</link>.<link linkend="_interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_options_1_1_models_1_1_i_text_editor_options_api_1a64b2485147634bed09cca6d12e6e7d6f">GetOptions</link>().ShowNewlines);
+<anchor xml:id="__options_api_tests_8cs_source_1l00108"/>00108 &#32;&#32;&#32;&#32;}
+<anchor xml:id="__options_api_tests_8cs_source_1l00109"/>00109 
+<anchor xml:id="__options_api_tests_8cs_source_1l00113"/>00113 &#32;&#32;&#32;&#32;[Fact]
+<anchor xml:id="__options_api_tests_8cs_source_1l00114"/><link linkend="_class_luthetus_1_1_text_editor_1_1_tests_1_1_basis_1_1_options_1_1_models_1_1_options_api_tests_1aaa2df1a6f933e9cac15d422600e978c0">00114</link> &#32;&#32;&#32;&#32;<emphasis role="keyword">public</emphasis>&#32;<emphasis role="keywordtype">void</emphasis>&#32;<link linkend="_class_luthetus_1_1_text_editor_1_1_tests_1_1_basis_1_1_options_1_1_models_1_1_options_api_tests_1aaa2df1a6f933e9cac15d422600e978c0">SetKeymap</link>()
+<anchor xml:id="__options_api_tests_8cs_source_1l00115"/>00115 &#32;&#32;&#32;&#32;{
+<anchor xml:id="__options_api_tests_8cs_source_1l00116"/>00116 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;InitializeOptionsApiTests(
+<anchor xml:id="__options_api_tests_8cs_source_1l00117"/>00117 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;out&#32;var&#32;textEditorService,
+<anchor xml:id="__options_api_tests_8cs_source_1l00118"/>00118 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;out&#32;var&#32;dispatcher,
+<anchor xml:id="__options_api_tests_8cs_source_1l00119"/>00119 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;out&#32;var&#32;serviceProvider);
+<anchor xml:id="__options_api_tests_8cs_source_1l00120"/>00120 
+<anchor xml:id="__options_api_tests_8cs_source_1l00121"/>00121 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;Assert.Equal(
+<anchor xml:id="__options_api_tests_8cs_source_1l00122"/>00122 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;TextEditorKeymapFacts.DefaultKeymap.Key,
+<anchor xml:id="__options_api_tests_8cs_source_1l00123"/>00123 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;textEditorService.<link linkend="_interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_i_text_editor_service_1acfaf93c246c51d280f76b5cf1f9386ac">OptionsApi</link>.<link linkend="_interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_options_1_1_models_1_1_i_text_editor_options_api_1a64b2485147634bed09cca6d12e6e7d6f">GetOptions</link>().Keymap.Key);
+<anchor xml:id="__options_api_tests_8cs_source_1l00124"/>00124 
+<anchor xml:id="__options_api_tests_8cs_source_1l00125"/>00125 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;textEditorService.<link linkend="_interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_i_text_editor_service_1acfaf93c246c51d280f76b5cf1f9386ac">OptionsApi</link>.<link linkend="_interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_options_1_1_models_1_1_i_text_editor_options_api_1aaba284e13ddd2825624d11c00f365870">SetKeymap</link>(TextEditorKeymapFacts.VimKeymap);
+<anchor xml:id="__options_api_tests_8cs_source_1l00126"/>00126 
+<anchor xml:id="__options_api_tests_8cs_source_1l00127"/>00127 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;Assert.Equal(
+<anchor xml:id="__options_api_tests_8cs_source_1l00128"/>00128 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;TextEditorKeymapFacts.VimKeymap.Key,
+<anchor xml:id="__options_api_tests_8cs_source_1l00129"/>00129 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;textEditorService.<link linkend="_interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_i_text_editor_service_1acfaf93c246c51d280f76b5cf1f9386ac">OptionsApi</link>.<link linkend="_interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_options_1_1_models_1_1_i_text_editor_options_api_1a64b2485147634bed09cca6d12e6e7d6f">GetOptions</link>().Keymap.Key);
+<anchor xml:id="__options_api_tests_8cs_source_1l00130"/>00130 &#32;&#32;&#32;&#32;}
+<anchor xml:id="__options_api_tests_8cs_source_1l00131"/>00131 
+<anchor xml:id="__options_api_tests_8cs_source_1l00135"/>00135 &#32;&#32;&#32;&#32;[Fact]
+<anchor xml:id="__options_api_tests_8cs_source_1l00136"/><link linkend="_class_luthetus_1_1_text_editor_1_1_tests_1_1_basis_1_1_options_1_1_models_1_1_options_api_tests_1acaa99fccab7038a7666813f7dd45c4d7">00136</link> &#32;&#32;&#32;&#32;<emphasis role="keyword">public</emphasis>&#32;<emphasis role="keywordtype">void</emphasis>&#32;<link linkend="_class_luthetus_1_1_text_editor_1_1_tests_1_1_basis_1_1_options_1_1_models_1_1_options_api_tests_1acaa99fccab7038a7666813f7dd45c4d7">SetHeight</link>()
+<anchor xml:id="__options_api_tests_8cs_source_1l00137"/>00137 &#32;&#32;&#32;&#32;{
+<anchor xml:id="__options_api_tests_8cs_source_1l00138"/>00138 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;InitializeOptionsApiTests(
+<anchor xml:id="__options_api_tests_8cs_source_1l00139"/>00139 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;out&#32;var&#32;textEditorService,
+<anchor xml:id="__options_api_tests_8cs_source_1l00140"/>00140 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;out&#32;var&#32;dispatcher,
+<anchor xml:id="__options_api_tests_8cs_source_1l00141"/>00141 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;out&#32;var&#32;serviceProvider);
+<anchor xml:id="__options_api_tests_8cs_source_1l00142"/>00142 
+<anchor xml:id="__options_api_tests_8cs_source_1l00143"/>00143 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;var&#32;textEditorHeightInPixels&#32;=&#32;500;
+<anchor xml:id="__options_api_tests_8cs_source_1l00144"/>00144 
+<anchor xml:id="__options_api_tests_8cs_source_1l00145"/>00145 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;Assert.Null(textEditorService.<link linkend="_interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_i_text_editor_service_1acfaf93c246c51d280f76b5cf1f9386ac">OptionsApi</link>.<link linkend="_interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_options_1_1_models_1_1_i_text_editor_options_api_1a64b2485147634bed09cca6d12e6e7d6f">GetOptions</link>().TextEditorHeightInPixels);
+<anchor xml:id="__options_api_tests_8cs_source_1l00146"/>00146 
+<anchor xml:id="__options_api_tests_8cs_source_1l00147"/>00147 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;textEditorService.<link linkend="_interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_i_text_editor_service_1acfaf93c246c51d280f76b5cf1f9386ac">OptionsApi</link>.<link linkend="_interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_options_1_1_models_1_1_i_text_editor_options_api_1a357c46935705bf9116e55fc5c826b264">SetHeight</link>(textEditorHeightInPixels);
+<anchor xml:id="__options_api_tests_8cs_source_1l00148"/>00148 
+<anchor xml:id="__options_api_tests_8cs_source_1l00149"/>00149 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;Assert.Equal(
+<anchor xml:id="__options_api_tests_8cs_source_1l00150"/>00150 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;textEditorHeightInPixels,
+<anchor xml:id="__options_api_tests_8cs_source_1l00151"/>00151 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;textEditorService.<link linkend="_interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_i_text_editor_service_1acfaf93c246c51d280f76b5cf1f9386ac">OptionsApi</link>.<link linkend="_interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_options_1_1_models_1_1_i_text_editor_options_api_1a64b2485147634bed09cca6d12e6e7d6f">GetOptions</link>().TextEditorHeightInPixels!.Value);
+<anchor xml:id="__options_api_tests_8cs_source_1l00152"/>00152 &#32;&#32;&#32;&#32;}
+<anchor xml:id="__options_api_tests_8cs_source_1l00153"/>00153 
+<anchor xml:id="__options_api_tests_8cs_source_1l00157"/>00157 &#32;&#32;&#32;&#32;[Fact]
+<anchor xml:id="__options_api_tests_8cs_source_1l00158"/><link linkend="_class_luthetus_1_1_text_editor_1_1_tests_1_1_basis_1_1_options_1_1_models_1_1_options_api_tests_1a2f03278fcf67781cc1bd24baf7199ef1">00158</link> &#32;&#32;&#32;&#32;<emphasis role="keyword">public</emphasis>&#32;<emphasis role="keywordtype">void</emphasis>&#32;<link linkend="_class_luthetus_1_1_text_editor_1_1_tests_1_1_basis_1_1_options_1_1_models_1_1_options_api_tests_1a2f03278fcf67781cc1bd24baf7199ef1">SetFontSize</link>()
+<anchor xml:id="__options_api_tests_8cs_source_1l00159"/>00159 &#32;&#32;&#32;&#32;{
+<anchor xml:id="__options_api_tests_8cs_source_1l00160"/>00160 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;InitializeOptionsApiTests(
+<anchor xml:id="__options_api_tests_8cs_source_1l00161"/>00161 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;out&#32;var&#32;textEditorService,
+<anchor xml:id="__options_api_tests_8cs_source_1l00162"/>00162 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;out&#32;var&#32;dispatcher,
+<anchor xml:id="__options_api_tests_8cs_source_1l00163"/>00163 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;out&#32;var&#32;serviceProvider);
+<anchor xml:id="__options_api_tests_8cs_source_1l00164"/>00164 
+<anchor xml:id="__options_api_tests_8cs_source_1l00165"/>00165 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;Assert.Equal(
+<anchor xml:id="__options_api_tests_8cs_source_1l00166"/>00166 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<link linkend="_namespace_luthetus_1_1_common_1_1_razor_lib_1_1_options_1_1_states_1a9409e10cd8eb433c3eba8da9850c7784">AppOptionsState</link>.DEFAULT_FONT_SIZE_IN_PIXELS,
+<anchor xml:id="__options_api_tests_8cs_source_1l00167"/>00167 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;textEditorService.<link linkend="_interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_i_text_editor_service_1acfaf93c246c51d280f76b5cf1f9386ac">OptionsApi</link>.<link linkend="_interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_options_1_1_models_1_1_i_text_editor_options_api_1a64b2485147634bed09cca6d12e6e7d6f">GetOptions</link>().CommonOptions.FontSizeInPixels);
+<anchor xml:id="__options_api_tests_8cs_source_1l00168"/>00168 
+<anchor xml:id="__options_api_tests_8cs_source_1l00169"/>00169 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;var&#32;fontSizeInPixels&#32;=&#32;1&#32;+&#32;<link linkend="_namespace_luthetus_1_1_common_1_1_razor_lib_1_1_options_1_1_states_1a9409e10cd8eb433c3eba8da9850c7784">AppOptionsState</link>.DEFAULT_FONT_SIZE_IN_PIXELS;
+<anchor xml:id="__options_api_tests_8cs_source_1l00170"/>00170 
+<anchor xml:id="__options_api_tests_8cs_source_1l00171"/>00171 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;textEditorService.<link linkend="_interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_i_text_editor_service_1acfaf93c246c51d280f76b5cf1f9386ac">OptionsApi</link>.<link linkend="_interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_options_1_1_models_1_1_i_text_editor_options_api_1a449acf9cefe2ce09d70ea150edf7d8ca">SetFontSize</link>(fontSizeInPixels);
+<anchor xml:id="__options_api_tests_8cs_source_1l00172"/>00172 
+<anchor xml:id="__options_api_tests_8cs_source_1l00173"/>00173 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;Assert.Equal(
+<anchor xml:id="__options_api_tests_8cs_source_1l00174"/>00174 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;fontSizeInPixels,
+<anchor xml:id="__options_api_tests_8cs_source_1l00175"/>00175 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;textEditorService.<link linkend="_interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_i_text_editor_service_1acfaf93c246c51d280f76b5cf1f9386ac">OptionsApi</link>.<link linkend="_interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_options_1_1_models_1_1_i_text_editor_options_api_1a64b2485147634bed09cca6d12e6e7d6f">GetOptions</link>().CommonOptions.FontSizeInPixels);
+<anchor xml:id="__options_api_tests_8cs_source_1l00176"/>00176 &#32;&#32;&#32;&#32;}
+<anchor xml:id="__options_api_tests_8cs_source_1l00177"/>00177 
+<anchor xml:id="__options_api_tests_8cs_source_1l00181"/>00181 &#32;&#32;&#32;&#32;[Fact]
+<anchor xml:id="__options_api_tests_8cs_source_1l00182"/><link linkend="_class_luthetus_1_1_text_editor_1_1_tests_1_1_basis_1_1_options_1_1_models_1_1_options_api_tests_1af744bd5d6a817eb0f2787415a71cfa38">00182</link> &#32;&#32;&#32;&#32;<emphasis role="keyword">public</emphasis>&#32;<emphasis role="keywordtype">void</emphasis>&#32;<link linkend="_class_luthetus_1_1_text_editor_1_1_tests_1_1_basis_1_1_options_1_1_models_1_1_options_api_tests_1af744bd5d6a817eb0f2787415a71cfa38">SetFontFamily</link>()
+<anchor xml:id="__options_api_tests_8cs_source_1l00183"/>00183 &#32;&#32;&#32;&#32;{
+<anchor xml:id="__options_api_tests_8cs_source_1l00184"/>00184 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;InitializeOptionsApiTests(
+<anchor xml:id="__options_api_tests_8cs_source_1l00185"/>00185 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;out&#32;var&#32;textEditorService,
+<anchor xml:id="__options_api_tests_8cs_source_1l00186"/>00186 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;out&#32;var&#32;dispatcher,
+<anchor xml:id="__options_api_tests_8cs_source_1l00187"/>00187 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;out&#32;var&#32;serviceProvider);
+<anchor xml:id="__options_api_tests_8cs_source_1l00188"/>00188 
+<anchor xml:id="__options_api_tests_8cs_source_1l00189"/>00189 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;Assert.Null(textEditorService.<link linkend="_interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_i_text_editor_service_1acfaf93c246c51d280f76b5cf1f9386ac">OptionsApi</link>.<link linkend="_interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_options_1_1_models_1_1_i_text_editor_options_api_1a64b2485147634bed09cca6d12e6e7d6f">GetOptions</link>().CommonOptions.FontFamily);
+<anchor xml:id="__options_api_tests_8cs_source_1l00190"/>00190 
+<anchor xml:id="__options_api_tests_8cs_source_1l00191"/>00191 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;var&#32;fontFamily&#32;=&#32;<emphasis role="stringliteral">&quot;chiller&quot;</emphasis>;
+<anchor xml:id="__options_api_tests_8cs_source_1l00192"/>00192 
+<anchor xml:id="__options_api_tests_8cs_source_1l00193"/>00193 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;textEditorService.<link linkend="_interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_i_text_editor_service_1acfaf93c246c51d280f76b5cf1f9386ac">OptionsApi</link>.<link linkend="_interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_options_1_1_models_1_1_i_text_editor_options_api_1a7f208e6f2c77aff7a433ab527e7c710e">SetFontFamily</link>(fontFamily);
+<anchor xml:id="__options_api_tests_8cs_source_1l00194"/>00194 
+<anchor xml:id="__options_api_tests_8cs_source_1l00195"/>00195 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;Assert.Equal(
+<anchor xml:id="__options_api_tests_8cs_source_1l00196"/>00196 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;fontFamily,
+<anchor xml:id="__options_api_tests_8cs_source_1l00197"/>00197 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;textEditorService.<link linkend="_interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_i_text_editor_service_1acfaf93c246c51d280f76b5cf1f9386ac">OptionsApi</link>.<link linkend="_interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_options_1_1_models_1_1_i_text_editor_options_api_1a64b2485147634bed09cca6d12e6e7d6f">GetOptions</link>().CommonOptions.FontFamily);
+<anchor xml:id="__options_api_tests_8cs_source_1l00198"/>00198 &#32;&#32;&#32;&#32;}
+<anchor xml:id="__options_api_tests_8cs_source_1l00199"/>00199 
+<anchor xml:id="__options_api_tests_8cs_source_1l00203"/>00203 &#32;&#32;&#32;&#32;[Fact]
+<anchor xml:id="__options_api_tests_8cs_source_1l00204"/><link linkend="_class_luthetus_1_1_text_editor_1_1_tests_1_1_basis_1_1_options_1_1_models_1_1_options_api_tests_1a65b21b1e99e2ae8aff8dc3beff8c93d5">00204</link> &#32;&#32;&#32;&#32;<emphasis role="keyword">public</emphasis>&#32;<emphasis role="keywordtype">void</emphasis>&#32;<link linkend="_class_luthetus_1_1_text_editor_1_1_tests_1_1_basis_1_1_options_1_1_models_1_1_options_api_tests_1a65b21b1e99e2ae8aff8dc3beff8c93d5">SetCursorWidth</link>()
+<anchor xml:id="__options_api_tests_8cs_source_1l00205"/>00205 &#32;&#32;&#32;&#32;{
+<anchor xml:id="__options_api_tests_8cs_source_1l00206"/>00206 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;InitializeOptionsApiTests(
+<anchor xml:id="__options_api_tests_8cs_source_1l00207"/>00207 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;out&#32;var&#32;textEditorService,
+<anchor xml:id="__options_api_tests_8cs_source_1l00208"/>00208 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;out&#32;var&#32;dispatcher,
+<anchor xml:id="__options_api_tests_8cs_source_1l00209"/>00209 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;out&#32;var&#32;serviceProvider);
+<anchor xml:id="__options_api_tests_8cs_source_1l00210"/>00210 
+<anchor xml:id="__options_api_tests_8cs_source_1l00211"/>00211 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;Assert.Equal(
+<anchor xml:id="__options_api_tests_8cs_source_1l00212"/>00212 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<link linkend="_class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_options_1_1_states_1_1_text_editor_options_state">TextEditorOptionsState</link>.<link linkend="_class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_options_1_1_states_1_1_text_editor_options_state_1a13bec90365d494e3ed3f22d00ffb8ed5">DEFAULT_CURSOR_WIDTH_IN_PIXELS</link>,
+<anchor xml:id="__options_api_tests_8cs_source_1l00213"/>00213 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;textEditorService.<link linkend="_interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_i_text_editor_service_1acfaf93c246c51d280f76b5cf1f9386ac">OptionsApi</link>.<link linkend="_interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_options_1_1_models_1_1_i_text_editor_options_api_1a64b2485147634bed09cca6d12e6e7d6f">GetOptions</link>().CursorWidthInPixels);
+<anchor xml:id="__options_api_tests_8cs_source_1l00214"/>00214 
+<anchor xml:id="__options_api_tests_8cs_source_1l00215"/>00215 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;var&#32;cursorWidthInPixels&#32;=&#32;1&#32;+&#32;<link linkend="_class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_options_1_1_states_1_1_text_editor_options_state">TextEditorOptionsState</link>.<link linkend="_class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_options_1_1_states_1_1_text_editor_options_state_1a13bec90365d494e3ed3f22d00ffb8ed5">DEFAULT_CURSOR_WIDTH_IN_PIXELS</link>;
+<anchor xml:id="__options_api_tests_8cs_source_1l00216"/>00216 
+<anchor xml:id="__options_api_tests_8cs_source_1l00217"/>00217 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;textEditorService.<link linkend="_interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_i_text_editor_service_1acfaf93c246c51d280f76b5cf1f9386ac">OptionsApi</link>.<link linkend="_interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_options_1_1_models_1_1_i_text_editor_options_api_1a07331176485993fc8ebbaecdd6f0563c">SetCursorWidth</link>(cursorWidthInPixels);
+<anchor xml:id="__options_api_tests_8cs_source_1l00218"/>00218 
+<anchor xml:id="__options_api_tests_8cs_source_1l00219"/>00219 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;Assert.Equal(
+<anchor xml:id="__options_api_tests_8cs_source_1l00220"/>00220 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;cursorWidthInPixels,
+<anchor xml:id="__options_api_tests_8cs_source_1l00221"/>00221 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;textEditorService.<link linkend="_interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_i_text_editor_service_1acfaf93c246c51d280f76b5cf1f9386ac">OptionsApi</link>.<link linkend="_interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_options_1_1_models_1_1_i_text_editor_options_api_1a64b2485147634bed09cca6d12e6e7d6f">GetOptions</link>().CursorWidthInPixels);
+<anchor xml:id="__options_api_tests_8cs_source_1l00222"/>00222 &#32;&#32;&#32;&#32;}
+<anchor xml:id="__options_api_tests_8cs_source_1l00223"/>00223 
+<anchor xml:id="__options_api_tests_8cs_source_1l00227"/>00227 &#32;&#32;&#32;&#32;[Fact]
+<anchor xml:id="__options_api_tests_8cs_source_1l00228"/><link linkend="_class_luthetus_1_1_text_editor_1_1_tests_1_1_basis_1_1_options_1_1_models_1_1_options_api_tests_1ac4ae6b9725dca0aa43285c5e2ef885c4">00228</link> &#32;&#32;&#32;&#32;<emphasis role="keyword">public</emphasis>&#32;<emphasis role="keywordtype">void</emphasis>&#32;<link linkend="_class_luthetus_1_1_text_editor_1_1_tests_1_1_basis_1_1_options_1_1_models_1_1_options_api_tests_1ac4ae6b9725dca0aa43285c5e2ef885c4">SetRenderStateKey</link>()
+<anchor xml:id="__options_api_tests_8cs_source_1l00229"/>00229 &#32;&#32;&#32;&#32;{
+<anchor xml:id="__options_api_tests_8cs_source_1l00230"/>00230 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;InitializeOptionsApiTests(
+<anchor xml:id="__options_api_tests_8cs_source_1l00231"/>00231 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;out&#32;var&#32;textEditorService,
+<anchor xml:id="__options_api_tests_8cs_source_1l00232"/>00232 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;out&#32;var&#32;dispatcher,
+<anchor xml:id="__options_api_tests_8cs_source_1l00233"/>00233 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;out&#32;var&#32;serviceProvider);
+<anchor xml:id="__options_api_tests_8cs_source_1l00234"/>00234 
+<anchor xml:id="__options_api_tests_8cs_source_1l00235"/>00235 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;var&#32;renderStateKey&#32;=&#32;Key&lt;RenderState&gt;.NewKey();
+<anchor xml:id="__options_api_tests_8cs_source_1l00236"/>00236 
+<anchor xml:id="__options_api_tests_8cs_source_1l00237"/>00237 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;Assert.NotEqual(
+<anchor xml:id="__options_api_tests_8cs_source_1l00238"/>00238 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;renderStateKey,
+<anchor xml:id="__options_api_tests_8cs_source_1l00239"/>00239 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;textEditorService.<link linkend="_interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_i_text_editor_service_1acfaf93c246c51d280f76b5cf1f9386ac">OptionsApi</link>.<link linkend="_interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_options_1_1_models_1_1_i_text_editor_options_api_1a64b2485147634bed09cca6d12e6e7d6f">GetOptions</link>().RenderStateKey);
+<anchor xml:id="__options_api_tests_8cs_source_1l00240"/>00240 
+<anchor xml:id="__options_api_tests_8cs_source_1l00241"/>00241 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;textEditorService.<link linkend="_interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_i_text_editor_service_1acfaf93c246c51d280f76b5cf1f9386ac">OptionsApi</link>.<link linkend="_interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_options_1_1_models_1_1_i_text_editor_options_api_1ae8413153ab6fa569feeba76f2b198855">SetRenderStateKey</link>(renderStateKey);
+<anchor xml:id="__options_api_tests_8cs_source_1l00242"/>00242 
+<anchor xml:id="__options_api_tests_8cs_source_1l00243"/>00243 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;Assert.Equal(
+<anchor xml:id="__options_api_tests_8cs_source_1l00244"/>00244 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;renderStateKey,
+<anchor xml:id="__options_api_tests_8cs_source_1l00245"/>00245 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;textEditorService.<link linkend="_interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_i_text_editor_service_1acfaf93c246c51d280f76b5cf1f9386ac">OptionsApi</link>.<link linkend="_interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_options_1_1_models_1_1_i_text_editor_options_api_1a64b2485147634bed09cca6d12e6e7d6f">GetOptions</link>().RenderStateKey);
+<anchor xml:id="__options_api_tests_8cs_source_1l00246"/>00246 &#32;&#32;&#32;&#32;}
+<anchor xml:id="__options_api_tests_8cs_source_1l00247"/>00247 
+<anchor xml:id="__options_api_tests_8cs_source_1l00251"/>00251 &#32;&#32;&#32;&#32;[Fact]
+<anchor xml:id="__options_api_tests_8cs_source_1l00252"/><link linkend="_class_luthetus_1_1_text_editor_1_1_tests_1_1_basis_1_1_options_1_1_models_1_1_options_api_tests_1a7a3f1bbccfcc5238951d33fbcf2c67d5">00252</link> &#32;&#32;&#32;&#32;<emphasis role="keyword">public</emphasis>&#32;<emphasis role="keywordtype">void</emphasis>&#32;<link linkend="_class_luthetus_1_1_text_editor_1_1_tests_1_1_basis_1_1_options_1_1_models_1_1_options_api_tests_1a7a3f1bbccfcc5238951d33fbcf2c67d5">SetFromLocalStorageAsync</link>()
+<anchor xml:id="__options_api_tests_8cs_source_1l00253"/>00253 &#32;&#32;&#32;&#32;{
+<anchor xml:id="__options_api_tests_8cs_source_1l00254"/>00254 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;InitializeOptionsApiTests(
+<anchor xml:id="__options_api_tests_8cs_source_1l00255"/>00255 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;out&#32;var&#32;textEditorService,
+<anchor xml:id="__options_api_tests_8cs_source_1l00256"/>00256 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;out&#32;var&#32;dispatcher,
+<anchor xml:id="__options_api_tests_8cs_source_1l00257"/>00257 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;out&#32;var&#32;serviceProvider);
+<anchor xml:id="__options_api_tests_8cs_source_1l00258"/>00258 
+<anchor xml:id="__options_api_tests_8cs_source_1l00259"/>00259 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">throw</emphasis>&#32;<emphasis role="keyword">new</emphasis>&#32;NotImplementedException();
+<anchor xml:id="__options_api_tests_8cs_source_1l00260"/>00260 &#32;&#32;&#32;&#32;}
+<anchor xml:id="__options_api_tests_8cs_source_1l00261"/>00261 
+<anchor xml:id="__options_api_tests_8cs_source_1l00265"/>00265 &#32;&#32;&#32;&#32;[Fact]
+<anchor xml:id="__options_api_tests_8cs_source_1l00266"/><link linkend="_class_luthetus_1_1_text_editor_1_1_tests_1_1_basis_1_1_options_1_1_models_1_1_options_api_tests_1a28de8c1625f5537148a7bd5e89e2134f">00266</link> &#32;&#32;&#32;&#32;<emphasis role="keyword">public</emphasis>&#32;<emphasis role="keywordtype">void</emphasis>&#32;<link linkend="_class_luthetus_1_1_text_editor_1_1_tests_1_1_basis_1_1_options_1_1_models_1_1_options_api_tests_1a28de8c1625f5537148a7bd5e89e2134f">WriteToStorage</link>()
+<anchor xml:id="__options_api_tests_8cs_source_1l00267"/>00267 &#32;&#32;&#32;&#32;{
+<anchor xml:id="__options_api_tests_8cs_source_1l00268"/>00268 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;InitializeOptionsApiTests(
+<anchor xml:id="__options_api_tests_8cs_source_1l00269"/>00269 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;out&#32;var&#32;textEditorService,
+<anchor xml:id="__options_api_tests_8cs_source_1l00270"/>00270 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;out&#32;var&#32;dispatcher,
+<anchor xml:id="__options_api_tests_8cs_source_1l00271"/>00271 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;out&#32;var&#32;serviceProvider);
+<anchor xml:id="__options_api_tests_8cs_source_1l00272"/>00272 
+<anchor xml:id="__options_api_tests_8cs_source_1l00273"/>00273 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">throw</emphasis>&#32;<emphasis role="keyword">new</emphasis>&#32;NotImplementedException();
+<anchor xml:id="__options_api_tests_8cs_source_1l00274"/>00274 &#32;&#32;&#32;&#32;}
+<anchor xml:id="__options_api_tests_8cs_source_1l00275"/>00275 
+<anchor xml:id="__options_api_tests_8cs_source_1l00279"/>00279 &#32;&#32;&#32;&#32;[Fact]
+<anchor xml:id="__options_api_tests_8cs_source_1l00280"/><link linkend="_class_luthetus_1_1_text_editor_1_1_tests_1_1_basis_1_1_options_1_1_models_1_1_options_api_tests_1aee43159612be029035b0353203424e01">00280</link> &#32;&#32;&#32;&#32;<emphasis role="keyword">public</emphasis>&#32;<emphasis role="keywordtype">void</emphasis>&#32;<link linkend="_class_luthetus_1_1_text_editor_1_1_tests_1_1_basis_1_1_options_1_1_models_1_1_options_api_tests_1aee43159612be029035b0353203424e01">ShowSettingsDialog</link>()
+<anchor xml:id="__options_api_tests_8cs_source_1l00281"/>00281 &#32;&#32;&#32;&#32;{
+<anchor xml:id="__options_api_tests_8cs_source_1l00282"/>00282 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;InitializeOptionsApiTests(
+<anchor xml:id="__options_api_tests_8cs_source_1l00283"/>00283 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;out&#32;var&#32;textEditorService,
+<anchor xml:id="__options_api_tests_8cs_source_1l00284"/>00284 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;out&#32;var&#32;dispatcher,
+<anchor xml:id="__options_api_tests_8cs_source_1l00285"/>00285 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;out&#32;var&#32;serviceProvider);
+<anchor xml:id="__options_api_tests_8cs_source_1l00286"/>00286 
+<anchor xml:id="__options_api_tests_8cs_source_1l00287"/>00287 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">throw</emphasis>&#32;<emphasis role="keyword">new</emphasis>&#32;NotImplementedException();
+<anchor xml:id="__options_api_tests_8cs_source_1l00288"/>00288 &#32;&#32;&#32;&#32;}
+<anchor xml:id="__options_api_tests_8cs_source_1l00289"/>00289 
+<anchor xml:id="__options_api_tests_8cs_source_1l00293"/>00293 &#32;&#32;&#32;&#32;[Fact]
+<anchor xml:id="__options_api_tests_8cs_source_1l00294"/><link linkend="_class_luthetus_1_1_text_editor_1_1_tests_1_1_basis_1_1_options_1_1_models_1_1_options_api_tests_1ac8be30cb211e4680754cbd1cb124ed29">00294</link> &#32;&#32;&#32;&#32;<emphasis role="keyword">public</emphasis>&#32;<emphasis role="keywordtype">void</emphasis>&#32;<link linkend="_class_luthetus_1_1_text_editor_1_1_tests_1_1_basis_1_1_options_1_1_models_1_1_options_api_tests_1ac8be30cb211e4680754cbd1cb124ed29">ShowFindDialog</link>()
+<anchor xml:id="__options_api_tests_8cs_source_1l00295"/>00295 &#32;&#32;&#32;&#32;{
+<anchor xml:id="__options_api_tests_8cs_source_1l00296"/>00296 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;InitializeOptionsApiTests(
+<anchor xml:id="__options_api_tests_8cs_source_1l00297"/>00297 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;out&#32;var&#32;textEditorService,
+<anchor xml:id="__options_api_tests_8cs_source_1l00298"/>00298 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;out&#32;var&#32;dispatcher,
+<anchor xml:id="__options_api_tests_8cs_source_1l00299"/>00299 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;out&#32;var&#32;serviceProvider);
+<anchor xml:id="__options_api_tests_8cs_source_1l00300"/>00300 
+<anchor xml:id="__options_api_tests_8cs_source_1l00301"/>00301 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">throw</emphasis>&#32;<emphasis role="keyword">new</emphasis>&#32;NotImplementedException();
+<anchor xml:id="__options_api_tests_8cs_source_1l00302"/>00302 &#32;&#32;&#32;&#32;}
+<anchor xml:id="__options_api_tests_8cs_source_1l00303"/>00303 &#32;&#32;&#32;&#32;
+<anchor xml:id="__options_api_tests_8cs_source_1l00304"/>00304 &#32;&#32;&#32;&#32;<emphasis role="keyword">private</emphasis>&#32;<emphasis role="keywordtype">void</emphasis>&#32;InitializeOptionsApiTests(
+<anchor xml:id="__options_api_tests_8cs_source_1l00305"/>00305 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;out&#32;<link linkend="_interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_i_text_editor_service">ITextEditorService</link>&#32;textEditorService,
+<anchor xml:id="__options_api_tests_8cs_source_1l00306"/>00306 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;out&#32;IDispatcher&#32;dispatcher,
+<anchor xml:id="__options_api_tests_8cs_source_1l00307"/>00307 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;out&#32;ServiceProvider&#32;serviceProvider)
+<anchor xml:id="__options_api_tests_8cs_source_1l00308"/>00308 &#32;&#32;&#32;&#32;{
+<anchor xml:id="__options_api_tests_8cs_source_1l00309"/>00309 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;var&#32;backgroundTaskService&#32;=&#32;<emphasis role="keyword">new</emphasis>&#32;<link linkend="_class_luthetus_1_1_common_1_1_razor_lib_1_1_background_tasks_1_1_models_1_1_background_task_service_synchronous">BackgroundTaskServiceSynchronous</link>();
+<anchor xml:id="__options_api_tests_8cs_source_1l00310"/>00310 
+<anchor xml:id="__options_api_tests_8cs_source_1l00311"/>00311 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;var&#32;serviceCollection&#32;=&#32;<emphasis role="keyword">new</emphasis>&#32;ServiceCollection()
+<anchor xml:id="__options_api_tests_8cs_source_1l00312"/>00312 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;.AddScoped&lt;IJSRuntime,&#32;<link linkend="_class_luthetus_1_1_common_1_1_razor_lib_1_1_misc_1_1_do_nothing_js_runtime">DoNothingJsRuntime</link>&gt;()
+<anchor xml:id="__options_api_tests_8cs_source_1l00313"/>00313 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;.AddLuthetusTextEditor(<emphasis role="keyword">new</emphasis>&#32;<link linkend="_namespace_luthetus_1_1_common_1_1_razor_lib_1_1_installations_1_1_models_1a761f9bfb52cfd9ffaa1a4bbdddf1aebb">LuthetusHostingInformation</link>(
+<anchor xml:id="__options_api_tests_8cs_source_1l00314"/>00314 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<link linkend="_namespace_luthetus_1_1_common_1_1_razor_lib_1_1_installations_1_1_models_1a6fa014b5a7072b6304fd9fe595cc2a60">LuthetusHostingKind</link>.UnitTestingSynchronous,
+<anchor xml:id="__options_api_tests_8cs_source_1l00315"/>00315 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<link linkend="_namespace_luthetus_1_1_common_1_1_razor_lib_1_1_installations_1_1_models_1a6de164b4b02fa971f5eddc7f274686a6">LuthetusPurposeKind</link>.TextEditor,
+<anchor xml:id="__options_api_tests_8cs_source_1l00316"/>00316 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;backgroundTaskService))
+<anchor xml:id="__options_api_tests_8cs_source_1l00317"/>00317 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;.AddFluxor(options&#32;=&gt;&#32;options.ScanAssemblies(
+<anchor xml:id="__options_api_tests_8cs_source_1l00318"/>00318 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;typeof(<link linkend="_namespace_luthetus_1_1_common_1_1_razor_lib_1_1_installations_1_1_models_1a9c0f5abeb1edd8801378900423cf1f40">LuthetusCommonConfig</link>).Assembly,
+<anchor xml:id="__options_api_tests_8cs_source_1l00319"/>00319 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;typeof(<link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_installations_1_1_models_1a93aa7bee7cb16431b8752d669a0286dd">LuthetusTextEditorConfig</link>).Assembly));
+<anchor xml:id="__options_api_tests_8cs_source_1l00320"/>00320 
+<anchor xml:id="__options_api_tests_8cs_source_1l00321"/>00321 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;serviceProvider&#32;=&#32;serviceCollection.BuildServiceProvider();
+<anchor xml:id="__options_api_tests_8cs_source_1l00322"/>00322 
+<anchor xml:id="__options_api_tests_8cs_source_1l00323"/>00323 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;var&#32;store&#32;=&#32;serviceProvider.GetRequiredService&lt;IStore&gt;();
+<anchor xml:id="__options_api_tests_8cs_source_1l00324"/>00324 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;store.InitializeAsync().Wait();
+<anchor xml:id="__options_api_tests_8cs_source_1l00325"/>00325 
+<anchor xml:id="__options_api_tests_8cs_source_1l00326"/>00326 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;dispatcher&#32;=&#32;serviceProvider.GetRequiredService&lt;IDispatcher&gt;();
+<anchor xml:id="__options_api_tests_8cs_source_1l00327"/>00327 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;textEditorService&#32;=&#32;serviceProvider.GetRequiredService&lt;<link linkend="_interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_i_text_editor_service">ITextEditorService</link>&gt;();
+<anchor xml:id="__options_api_tests_8cs_source_1l00328"/>00328 &#32;&#32;&#32;&#32;}
+<anchor xml:id="__options_api_tests_8cs_source_1l00329"/>00329 }
+</programlisting></section>

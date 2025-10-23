@@ -1,0 +1,4 @@
+var _generic_language_definition_tests_8cs =
+[
+    [ "Luthetus.TextEditor.Tests.Basis.CompilerServices.GenericLexer.GenericLanguageDefinitionTests", "class_luthetus_1_1_text_editor_1_1_tests_1_1_basis_1_1_compiler_services_1_1_generic_lexer_1_1_gc97dcaf705ffef55706356241856d45c.html", "class_luthetus_1_1_text_editor_1_1_tests_1_1_basis_1_1_compiler_services_1_1_generic_lexer_1_1_gc97dcaf705ffef55706356241856d45c" ]
+];

@@ -1,0 +1,589 @@
+\doxysection{CSharp\+Parser.\+cs}
+\hypertarget{_c_sharp_parser_8cs_source}{}\label{_c_sharp_parser_8cs_source}\index{Source/Lib/CompilerServices/CSharp/ParserCase/CSharpParser.cs@{Source/Lib/CompilerServices/CSharp/ParserCase/CSharpParser.cs}}
+\mbox{\hyperlink{_c_sharp_parser_8cs}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00001}00001\ \textcolor{keyword}{using\ }System.Collections.Immutable;}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00002}00002\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services}{Luthetus.TextEditor.RazorLib.CompilerServices}};}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00003}00003\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_interfaces}{Luthetus.TextEditor.RazorLib.CompilerServices.Interfaces}};}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00004}00004\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax}{Luthetus.TextEditor.RazorLib.CompilerServices.Syntax}};}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00005}00005\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_1_1_nodes}{Luthetus.TextEditor.RazorLib.CompilerServices.Syntax.Nodes}};}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00006}00006\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_1_1_nodes_1_1_interfaces}{Luthetus.TextEditor.RazorLib.CompilerServices.Syntax.Nodes.Interfaces}};}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00007}00007\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_1_1_tokens}{Luthetus.TextEditor.RazorLib.CompilerServices.Syntax.Tokens}};}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00008}00008\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_utility}{Luthetus.TextEditor.RazorLib.CompilerServices.Utility}};}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00009}00009\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_lexers_1_1_models}{Luthetus.TextEditor.RazorLib.Lexers.Models}};}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00010}00010\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_exceptions}{Luthetus.TextEditor.RazorLib.Exceptions}};}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00011}00011\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_luthetus_1_1_compiler_services_1_1_c_sharp_1_1_binder_case}{Luthetus.CompilerServices.CSharp.BinderCase}};}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00012}00012\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_luthetus_1_1_compiler_services_1_1_c_sharp_1_1_lexer_case}{Luthetus.CompilerServices.CSharp.LexerCase}};}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00013}00013\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_luthetus_1_1_compiler_services_1_1_c_sharp_1_1_parser_case_1_1_internals}{Luthetus.CompilerServices.CSharp.ParserCase.Internals}};}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00014}00014\ }
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00015}\mbox{\hyperlink{namespace_luthetus_1_1_compiler_services_1_1_c_sharp_1_1_parser_case}{00015}}\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespace_luthetus_1_1_compiler_services_1_1_c_sharp_1_1_parser_case}{Luthetus.CompilerServices.CSharp.ParserCase}};}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00016}00016\ }
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00017}\mbox{\hyperlink{class_luthetus_1_1_compiler_services_1_1_c_sharp_1_1_parser_case_1_1_c_sharp_parser}{00017}}\ \textcolor{keyword}{public}\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_luthetus_1_1_compiler_services_1_1_c_sharp_1_1_parser_case_1_1_c_sharp_parser_a4597ed8165da59b6936ccb9058007138}{CSharpParser}}\ :\ \mbox{\hyperlink{interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_interfaces_1_1_i_parser}{IParser}}}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00018}00018\ \{}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00019}\mbox{\hyperlink{class_luthetus_1_1_compiler_services_1_1_c_sharp_1_1_parser_case_1_1_c_sharp_parser_a4597ed8165da59b6936ccb9058007138}{00019}}\ \ \ \ \ \textcolor{keyword}{public}\ \mbox{\hyperlink{class_luthetus_1_1_compiler_services_1_1_c_sharp_1_1_parser_case_1_1_c_sharp_parser_a4597ed8165da59b6936ccb9058007138}{CSharpParser}}(\mbox{\hyperlink{class_luthetus_1_1_compiler_services_1_1_c_sharp_1_1_lexer_case_1_1_c_sharp_lexer}{CSharpLexer}}\ lexer)}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00020}00020\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00021}00021\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_luthetus_1_1_compiler_services_1_1_c_sharp_1_1_parser_case_1_1_c_sharp_parser_a5d77d526c52f0483c9eff6d00cf1285a}{Lexer}}\ =\ lexer;}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00022}00022\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_luthetus_1_1_compiler_services_1_1_c_sharp_1_1_parser_case_1_1_c_sharp_parser_adfd3fd236bc417498916e0e00d2ed60c}{Binder}}\ =\ \textcolor{keyword}{new}\ \mbox{\hyperlink{class_luthetus_1_1_compiler_services_1_1_c_sharp_1_1_binder_case_1_1_c_sharp_binder}{CSharpBinder}}();}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00023}00023\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_luthetus_1_1_compiler_services_1_1_c_sharp_1_1_parser_case_1_1_c_sharp_parser_aa4cf0248b23ae7996191d89888868a67}{BinderSession}}\ =\ (\mbox{\hyperlink{class_luthetus_1_1_compiler_services_1_1_c_sharp_1_1_binder_case_1_1_c_sharp_binder_session}{CSharpBinderSession}})\mbox{\hyperlink{class_luthetus_1_1_compiler_services_1_1_c_sharp_1_1_parser_case_1_1_c_sharp_parser_adfd3fd236bc417498916e0e00d2ed60c}{Binder}}.StartBinderSession(lexer.\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_implementations_1_1_lexer_af909da612e3d5ff3ebec5d030292dfc6}{ResourceUri}});}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00024}00024\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00025}00025\ }
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00026}\mbox{\hyperlink{class_luthetus_1_1_compiler_services_1_1_c_sharp_1_1_parser_case_1_1_c_sharp_parser_af3ae456dcaf790c3d082f46a8fb6bdd3}{00026}}\ \ \ \ \ \textcolor{keyword}{public}\ ImmutableArray<TextEditorDiagnostic>\ \mbox{\hyperlink{class_luthetus_1_1_compiler_services_1_1_c_sharp_1_1_parser_case_1_1_c_sharp_parser_af3ae456dcaf790c3d082f46a8fb6bdd3}{DiagnosticsList}}\ \{\ \textcolor{keyword}{get};\ \textcolor{keyword}{private}\ \textcolor{keyword}{set};\ \}\ =\ ImmutableArray<TextEditorDiagnostic>.Empty;}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00027}\mbox{\hyperlink{class_luthetus_1_1_compiler_services_1_1_c_sharp_1_1_parser_case_1_1_c_sharp_parser_adfd3fd236bc417498916e0e00d2ed60c}{00027}}\ \ \ \ \ \textcolor{keyword}{public}\ \mbox{\hyperlink{class_luthetus_1_1_compiler_services_1_1_c_sharp_1_1_binder_case_1_1_c_sharp_binder}{CSharpBinder}}\ \mbox{\hyperlink{class_luthetus_1_1_compiler_services_1_1_c_sharp_1_1_parser_case_1_1_c_sharp_parser_adfd3fd236bc417498916e0e00d2ed60c}{Binder}}\ \{\ \textcolor{keyword}{get};\ \textcolor{keyword}{private}\ \textcolor{keyword}{set};\ \}}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00028}\mbox{\hyperlink{class_luthetus_1_1_compiler_services_1_1_c_sharp_1_1_parser_case_1_1_c_sharp_parser_aa4cf0248b23ae7996191d89888868a67}{00028}}\ \ \ \ \ \textcolor{keyword}{public}\ \mbox{\hyperlink{class_luthetus_1_1_compiler_services_1_1_c_sharp_1_1_binder_case_1_1_c_sharp_binder_session}{CSharpBinderSession}}\ \mbox{\hyperlink{class_luthetus_1_1_compiler_services_1_1_c_sharp_1_1_parser_case_1_1_c_sharp_parser_aa4cf0248b23ae7996191d89888868a67}{BinderSession}}\ \{\ \textcolor{keyword}{get};\ \textcolor{keyword}{private}\ \textcolor{keyword}{set};\ \}}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00029}\mbox{\hyperlink{class_luthetus_1_1_compiler_services_1_1_c_sharp_1_1_parser_case_1_1_c_sharp_parser_a5d77d526c52f0483c9eff6d00cf1285a}{00029}}\ \ \ \ \ \textcolor{keyword}{public}\ \mbox{\hyperlink{class_luthetus_1_1_compiler_services_1_1_c_sharp_1_1_lexer_case_1_1_c_sharp_lexer}{CSharpLexer}}\ \mbox{\hyperlink{class_luthetus_1_1_compiler_services_1_1_c_sharp_1_1_parser_case_1_1_c_sharp_parser_a5d77d526c52f0483c9eff6d00cf1285a}{Lexer}}\ \{\ \textcolor{keyword}{get};\ \}}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00030}00030\ }
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00031}00031\ \ \ \ \ \mbox{\hyperlink{interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_interfaces_1_1_i_binder}{IBinder}}\ \mbox{\hyperlink{interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_interfaces_1_1_i_parser_a88ee55e11232d40801576121a31ec98d}{IParser.Binder}}\ =>\ \mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_binder}{Binder}};}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00032}00032\ \ \ \ \ \mbox{\hyperlink{interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_interfaces_1_1_i_binder_session}{IBinderSession}}\ \mbox{\hyperlink{interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_interfaces_1_1_i_parser_ac4abf83d03f3c5657ad75eee327b5572}{IParser.BinderSession}}\ =>\ BinderSession;}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00033}00033\ \ \ \ \ \mbox{\hyperlink{interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_interfaces_1_1_i_lexer}{ILexer}}\ \mbox{\hyperlink{interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_interfaces_1_1_i_parser_a48a6c9184a52dd05124f6abb0cfd1d70}{IParser.Lexer}}\ =>\ Lexer;}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00034}00034\ }
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00036}\mbox{\hyperlink{class_luthetus_1_1_compiler_services_1_1_c_sharp_1_1_parser_case_1_1_c_sharp_parser_add1e320df4cf2291464d0218cf4c6a38}{00036}}\ \ \ \ \ \textcolor{keyword}{public}\ \mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_1_1_nodes_1_1_compilation_unit}{CompilationUnit}}\ \mbox{\hyperlink{class_luthetus_1_1_compiler_services_1_1_c_sharp_1_1_parser_case_1_1_c_sharp_parser_add1e320df4cf2291464d0218cf4c6a38}{Parse}}(}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00037}00037\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_interfaces_1_1_i_binder}{IBinder}}\ previousBinder,}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00038}00038\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_lexers_1_1_models_a26a1b63ad28ec7955b30bc6c91571eca}{ResourceUri}}\ resourceUri)}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00039}00039\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00040}00040\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_luthetus_1_1_compiler_services_1_1_c_sharp_1_1_parser_case_1_1_c_sharp_parser_adfd3fd236bc417498916e0e00d2ed60c}{Binder}}\ =\ (\mbox{\hyperlink{class_luthetus_1_1_compiler_services_1_1_c_sharp_1_1_binder_case_1_1_c_sharp_binder}{CSharpBinder}})previousBinder;}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00041}00041\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_luthetus_1_1_compiler_services_1_1_c_sharp_1_1_parser_case_1_1_c_sharp_parser_aa4cf0248b23ae7996191d89888868a67}{BinderSession}}\ =\ (\mbox{\hyperlink{class_luthetus_1_1_compiler_services_1_1_c_sharp_1_1_binder_case_1_1_c_sharp_binder_session}{CSharpBinderSession}})\mbox{\hyperlink{class_luthetus_1_1_compiler_services_1_1_c_sharp_1_1_parser_case_1_1_c_sharp_parser_adfd3fd236bc417498916e0e00d2ed60c}{Binder}}.StartBinderSession(resourceUri);}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00042}00042\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{class_luthetus_1_1_compiler_services_1_1_c_sharp_1_1_parser_case_1_1_c_sharp_parser_add1e320df4cf2291464d0218cf4c6a38}{Parse}}();}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00043}00043\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00044}00044\ }
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00045}\mbox{\hyperlink{class_luthetus_1_1_compiler_services_1_1_c_sharp_1_1_parser_case_1_1_c_sharp_parser_a5d562beeacbc346c2427b5fe18fb1517}{00045}}\ \ \ \ \ \textcolor{keyword}{public}\ \mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_1_1_nodes_1_1_compilation_unit}{CompilationUnit}}\ \mbox{\hyperlink{class_luthetus_1_1_compiler_services_1_1_c_sharp_1_1_parser_case_1_1_c_sharp_parser_a5d562beeacbc346c2427b5fe18fb1517}{Parse}}()}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00046}00046\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00047}00047\ \ \ \ \ \ \ \ \ var\ globalCodeBlockBuilder\ =\ \textcolor{keyword}{new}\ \mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_utility_1_1_code_block_builder}{CodeBlockBuilder}}(\textcolor{keyword}{null},\ \textcolor{keyword}{null});}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00048}00048\ \ \ \ \ \ \ \ \ var\ currentCodeBlockBuilder\ =\ globalCodeBlockBuilder;}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00049}00049\ \ \ \ \ \ \ \ \ var\ diagnosticBag\ =\ \textcolor{keyword}{new}\ \mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_diagnostic_bag}{DiagnosticBag}}();}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00050}00050\ }
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00051}00051\ \ \ \ \ \ \ \ \ var\ model\ =\ \textcolor{keyword}{new}\ \mbox{\hyperlink{class_luthetus_1_1_compiler_services_1_1_c_sharp_1_1_parser_case_1_1_c_sharp_parser_model}{CSharpParserModel}}(}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00052}00052\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_luthetus_1_1_compiler_services_1_1_c_sharp_1_1_parser_case_1_1_c_sharp_parser_adfd3fd236bc417498916e0e00d2ed60c}{Binder}},}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00053}00053\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_luthetus_1_1_compiler_services_1_1_c_sharp_1_1_parser_case_1_1_c_sharp_parser_aa4cf0248b23ae7996191d89888868a67}{BinderSession}},}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00054}00054\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{new}\ \mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_utility_1_1_token_walker}{TokenWalker}}(\mbox{\hyperlink{class_luthetus_1_1_compiler_services_1_1_c_sharp_1_1_parser_case_1_1_c_sharp_parser_a5d77d526c52f0483c9eff6d00cf1285a}{Lexer}}.SyntaxTokenList,\ diagnosticBag),}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00055}00055\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{new}\ Stack<ISyntax>(),}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00056}00056\ \ \ \ \ \ \ \ \ \ \ \ \ diagnosticBag,}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00057}00057\ \ \ \ \ \ \ \ \ \ \ \ \ globalCodeBlockBuilder,}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00058}00058\ \ \ \ \ \ \ \ \ \ \ \ \ currentCodeBlockBuilder);}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00059}00059\ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00060}00060\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \#if\ DEBUG}}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00061}00061\ \ \ \ \ \ \ \ \ model.TokenWalker.ProtectedTokenSyntaxKindList\ =\ \textcolor{keyword}{new}()\ \{\ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_ae4bcfe414c318a050bbef43ec92f921b}{SyntaxKind}}.StatementDelimiterToken,\ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_ae4bcfe414c318a050bbef43ec92f921b}{SyntaxKind}}.OpenBraceToken,\ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_ae4bcfe414c318a050bbef43ec92f921b}{SyntaxKind}}.CloseBraceToken,\ \};}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00062}00062\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \#endif}}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00063}00063\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00064}00064\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{while}\ (\textcolor{keyword}{true})}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00065}00065\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00066}00066\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ The\ last\ statement\ in\ this\ while\ loop\ is\ conditionally:\ '\_\ =\ model.TokenWalker.Consume();'.}}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00067}00067\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Knowing\ this\ to\ be\ the\ case\ is\ extremely\ important.}}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00068}00068\ \ \ \ \ \ \ \ \ \ \ \ \ var\ token\ =\ model.TokenWalker.Current;}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00069}00069\ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00070}00070\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \#if\ DEBUG}}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00071}00071\ \ \ \ \ \ \ \ \ \ \ \ \ Console.WriteLine(token.SyntaxKind\ +\ \textcolor{stringliteral}{"{}\_\_\_"{}}\ +\ token.TextSpan.GetText()\ +\ \textcolor{stringliteral}{"{}\_\_\_"{}}\ +\ model.TokenWalker.Index);}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00072}00072\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \#endif}}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00073}00073\ }
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00074}00074\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{switch}\ (token.SyntaxKind)}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00075}00075\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00076}00076\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_ae4bcfe414c318a050bbef43ec92f921b}{SyntaxKind}}.NumericLiteralToken:}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00077}00077\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_ae4bcfe414c318a050bbef43ec92f921b}{SyntaxKind}}.CharLiteralToken:}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00078}00078\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_ae4bcfe414c318a050bbef43ec92f921b}{SyntaxKind}}.StringLiteralToken:}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00079}00079\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_ae4bcfe414c318a050bbef43ec92f921b}{SyntaxKind}}.PlusToken:}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00080}00080\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_ae4bcfe414c318a050bbef43ec92f921b}{SyntaxKind}}.PlusPlusToken:}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00081}00081\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_ae4bcfe414c318a050bbef43ec92f921b}{SyntaxKind}}.MinusToken:}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00082}00082\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_ae4bcfe414c318a050bbef43ec92f921b}{SyntaxKind}}.StarToken:}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00083}00083\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_ae4bcfe414c318a050bbef43ec92f921b}{SyntaxKind}}.DollarSignToken:}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00084}00084\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_ae4bcfe414c318a050bbef43ec92f921b}{SyntaxKind}}.AtToken:}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00085}00085\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (model.StatementBuilder.ChildList.Count\ ==\ 0)}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00086}00086\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00087}00087\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ParseOthers.StartStatement\_Expression(model);}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00088}00088\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00089}00089\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00090}00090\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00091}00091\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ var\ expressionNode\ =\ ParseOthers.ParseExpression(model);}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00092}00092\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ model.StatementBuilder.ChildList.Add(expressionNode);}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00093}00093\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00094}00094\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00095}00095\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_ae4bcfe414c318a050bbef43ec92f921b}{SyntaxKind}}.PreprocessorDirectiveToken:}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00096}00096\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ParseTokens.ParsePreprocessorDirectiveToken((\mbox{\hyperlink{struct_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_1_1_tokens_1_1_preprocessor_directive_token}{PreprocessorDirectiveToken}})token,\ model);}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00097}00097\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00098}00098\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_ae4bcfe414c318a050bbef43ec92f921b}{SyntaxKind}}.IdentifierToken:}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00099}00099\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ParseTokens.ParseIdentifierToken(model);}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00100}00100\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00101}00101\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_ae4bcfe414c318a050bbef43ec92f921b}{SyntaxKind}}.OpenBraceToken:}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00102}00102\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ model.StatementBuilder.FinishStatement(model);}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00103}00103\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00104}00104\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \#if\ DEBUG}}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00105}00105\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ model.TokenWalker.SuppressProtectedSyntaxKindConsumption\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00106}00106\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \#endif}}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00107}00107\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00108}00108\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ var\ openBraceToken\ =\ (\mbox{\hyperlink{struct_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_1_1_tokens_1_1_open_brace_token}{OpenBraceToken}})model.TokenWalker.Consume();}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00109}00109\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00110}00110\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \#if\ DEBUG}}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00111}00111\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ model.TokenWalker.SuppressProtectedSyntaxKindConsumption\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00112}00112\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \#endif}}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00113}00113\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00114}00114\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ParseTokens.ParseOpenBraceToken(openBraceToken,\ model);}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00115}00115\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00116}00116\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_ae4bcfe414c318a050bbef43ec92f921b}{SyntaxKind}}.CloseBraceToken:}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00117}00117\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ model.StatementBuilder.FinishStatement(model);}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00118}00118\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00119}00119\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \#if\ DEBUG}}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00120}00120\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ model.TokenWalker.SuppressProtectedSyntaxKindConsumption\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00121}00121\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \#endif}}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00122}00122\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00123}00123\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ var\ closeBraceToken\ =\ (\mbox{\hyperlink{struct_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_1_1_tokens_1_1_close_brace_token}{CloseBraceToken}})model.TokenWalker.Consume();}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00124}00124\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00125}00125\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \#if\ DEBUG}}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00126}00126\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ model.TokenWalker.SuppressProtectedSyntaxKindConsumption\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00127}00127\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \#endif}}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00128}00128\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00129}00129\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ParseTokens.ParseCloseBraceToken(closeBraceToken,\ model);}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00130}00130\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00131}00131\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_ae4bcfe414c318a050bbef43ec92f921b}{SyntaxKind}}.OpenParenthesisToken:}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00132}00132\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (model.StatementBuilder.ChildList.Count\ ==\ 0)}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00133}00133\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ParseOthers.StartStatement\_Expression(model);}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00134}00134\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00135}00135\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ParseTokens.ParseOpenParenthesisToken(model);}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00136}00136\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00137}00137\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_ae4bcfe414c318a050bbef43ec92f921b}{SyntaxKind}}.CloseParenthesisToken:}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00138}00138\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ParseTokens.ParseCloseParenthesisToken((\mbox{\hyperlink{struct_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_1_1_tokens_1_1_close_parenthesis_token}{CloseParenthesisToken}})token,\ model);}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00139}00139\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00140}00140\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_ae4bcfe414c318a050bbef43ec92f921b}{SyntaxKind}}.OpenAngleBracketToken:}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00141}00141\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (model.StatementBuilder.ChildList.Count\ ==\ 0)}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00142}00142\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ParseOthers.StartStatement\_Expression(model);}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00143}00143\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00144}00144\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ParseTokens.ParseOpenAngleBracketToken((\mbox{\hyperlink{struct_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_1_1_tokens_1_1_open_angle_bracket_token}{OpenAngleBracketToken}})token,\ model);}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00145}00145\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00146}00146\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_ae4bcfe414c318a050bbef43ec92f921b}{SyntaxKind}}.CloseAngleBracketToken:}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00147}00147\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ParseTokens.ParseCloseAngleBracketToken((\mbox{\hyperlink{struct_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_1_1_tokens_1_1_close_angle_bracket_token}{CloseAngleBracketToken}})token,\ model);}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00148}00148\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00149}00149\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_ae4bcfe414c318a050bbef43ec92f921b}{SyntaxKind}}.OpenSquareBracketToken:}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00150}00150\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ParseTokens.ParseOpenSquareBracketToken(model);}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00151}00151\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00152}00152\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_ae4bcfe414c318a050bbef43ec92f921b}{SyntaxKind}}.CloseSquareBracketToken:}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00153}00153\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ParseTokens.ParseCloseSquareBracketToken((\mbox{\hyperlink{struct_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_1_1_tokens_1_1_close_square_bracket_token}{CloseSquareBracketToken}})token,\ model);}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00154}00154\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00155}00155\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_ae4bcfe414c318a050bbef43ec92f921b}{SyntaxKind}}.ColonToken:}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00156}00156\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ParseTokens.ParseColonToken(model);}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00157}00157\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00158}00158\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_ae4bcfe414c318a050bbef43ec92f921b}{SyntaxKind}}.MemberAccessToken:}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00159}00159\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ParseTokens.ParseMemberAccessToken((\mbox{\hyperlink{struct_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_1_1_tokens_1_1_member_access_token}{MemberAccessToken}})token,\ model);}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00160}00160\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00161}00161\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_ae4bcfe414c318a050bbef43ec92f921b}{SyntaxKind}}.EqualsToken:}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00162}00162\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ParseTokens.ParseEqualsToken(model);}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00163}00163\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00164}00164\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_ae4bcfe414c318a050bbef43ec92f921b}{SyntaxKind}}.StatementDelimiterToken:}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00165}00165\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ model.StatementBuilder.FinishStatement(model);}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00166}00166\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00167}00167\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \#if\ DEBUG}}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00168}00168\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ model.TokenWalker.SuppressProtectedSyntaxKindConsumption\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00169}00169\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \#endif}}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00170}00170\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00171}00171\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ var\ statementDelimiterToken\ =\ (\mbox{\hyperlink{struct_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_1_1_tokens_1_1_statement_delimiter_token}{StatementDelimiterToken}})model.TokenWalker.Consume();}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00172}00172\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00173}00173\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \#if\ DEBUG}}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00174}00174\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ model.TokenWalker.SuppressProtectedSyntaxKindConsumption\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00175}00175\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \#endif}}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00176}00176\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00177}00177\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ParseTokens.ParseStatementDelimiterToken(statementDelimiterToken,\ model);}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00178}00178\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00179}00179\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_ae4bcfe414c318a050bbef43ec92f921b}{SyntaxKind}}.EndOfFileToken:}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00180}00180\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (model.SyntaxStack.TryPeek(out\ var\ syntax)\ \&\&}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00181}00181\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ syntax\ is\ \mbox{\hyperlink{struct_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_1_1_tokens_1_1_end_of_file_token}{EndOfFileToken}})}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00182}00182\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00183}00183\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \_\ =\ model.SyntaxStack.Pop();}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00184}00184\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00185}00185\ }
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00186}00186\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (model.SyntaxStack.TryPop(out\ var\ notUsedSyntax))}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00187}00187\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00188}00188\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (notUsedSyntax\ is\ \textcolor{keyword}{null})}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00189}00189\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00190}00190\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00191}00191\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ (notUsedSyntax\ is\ \mbox{\hyperlink{interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_1_1_nodes_1_1_97d7489c2c3077ac339153787f61d38f}{IExpressionNode}})}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00192}00192\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00193}00193\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ model.CurrentCodeBlockBuilder.ChildList.Add(notUsedSyntax);}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00194}00194\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00195}00195\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ (notUsedSyntax.SyntaxKind\ ==\ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_ae4bcfe414c318a050bbef43ec92f921b}{SyntaxKind}}.AmbiguousIdentifierNode)}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00196}00196\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00197}00197\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ var\ ambiguousIdentifierNode\ =\ (\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_1_1_nodes_1_1_ambiguous_identifier_node}{AmbiguousIdentifierNode}})notUsedSyntax;}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00198}00198\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ model.CurrentCodeBlockBuilder.ChildList.Add(notUsedSyntax);}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00199}00199\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ model.DiagnosticBag.ReportUndefinedTypeOrNamespace(}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00200}00200\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ambiguousIdentifierNode.IdentifierToken.TextSpan,}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00201}00201\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ambiguousIdentifierNode.IdentifierToken.TextSpan.GetText());}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00202}00202\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00203}00203\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00204}00204\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ (model.StatementBuilder.ChildList.Any())}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00205}00205\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00206}00206\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{foreach}\ (var\ item\ \textcolor{keywordflow}{in}\ model.StatementBuilder.ChildList)}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00207}00207\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00208}00208\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ model.CurrentCodeBlockBuilder.ChildList.Add(item);}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00209}00209\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00210}00210\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00211}00211\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00212}00212\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{default}:}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00213}00213\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (UtilityApi.IsContextualKeywordSyntaxKind(token.\mbox{\hyperlink{struct_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_1_1_tokens_1_1_preprocessor_directive_token_a0f29fafa58f11ba8c01e84ef0d0c0798}{SyntaxKind}}))}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00214}00214\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ParseTokens.ParseKeywordContextualToken(model);}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00215}00215\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ (UtilityApi.IsKeywordSyntaxKind(token.\mbox{\hyperlink{struct_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_1_1_tokens_1_1_preprocessor_directive_token_a0f29fafa58f11ba8c01e84ef0d0c0798}{SyntaxKind}}))}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00216}00216\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ParseTokens.ParseKeywordToken(model);}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00217}00217\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00218}00218\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00219}00219\ }
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00220}00220\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (token.SyntaxKind\ ==\ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_ae4bcfe414c318a050bbef43ec92f921b}{SyntaxKind}}.EndOfFileToken)}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00221}00221\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00222}00222\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (model.CurrentCodeBlockBuilder.ParseChildScopeQueue.TryDequeue(out\ var\ deferredChildScope))}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00223}00223\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ deferredChildScope.PrepareMainParserLoop(model.TokenWalker.Index,\ model);}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00224}00224\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00225}00225\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00226}00226\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00227}00227\ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00228}00228\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (model.TokenWalker.ConsumeCounter\ ==\ 0)}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00229}00229\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00230}00230\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ This\ means\ either:}}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00231}00231\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ \ -\/\ None\ of\ the\ methods\ for\ syntax\ could\ make\ sense\ of\ the\ token,\ so\ they\ didn't\ consume\ it.}}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00232}00232\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ \ -\/\ For\ whatever\ reason\ the\ method\ that\ handled\ the\ syntax\ made\ sense\ of\ the\ token,\ but\ never\ consumed\ it.}}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00233}00233\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ \ -\/\ The\ token\ was\ consumed,\ then\ for\ some\ reason\ a\ backtrack\ occurred.}}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00234}00234\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//}}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00235}00235\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ To\ avoid\ an\ infinite\ loop,\ this\ will\ ensure\ at\ least\ 1\ token\ is\ consumed\ each\ iteration\ of\ the\ while\ loop.}}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00236}00236\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ }}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00237}00237\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ (and\ that\ the\ token\ index\ increased\ by\ at\ least\ 1\ from\ the\ previous\ loop;\ this\ is\ implicitly\ what\ is\ implied).}}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00238}00238\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \_\ =\ model.TokenWalker.Consume();}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00239}00239\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00240}00240\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ (model.TokenWalker.ConsumeCounter\ <\ 0)}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00241}00241\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00242}00242\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ This\ means\ that\ a\ syntax\ invoked\ 'model.TokenWalker.Backtrack()'.}}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00243}00243\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Without\ invoking\ an\ equal\ amount\ of\ 'model.TokenWalker.Consume()'\ to\ avoid\ an\ infinite\ loop.}}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00244}00244\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{throw}\ \textcolor{keyword}{new}\ \mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_exceptions_1_1_luthetus_text_editor_exception}{LuthetusTextEditorException}}(\$\textcolor{stringliteral}{"{}model.TokenWalker.ConsumeCounter:\{model.TokenWalker.ConsumeCounter\}\ <\ 0"{}});}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00245}00245\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00246}00246\ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00247}00247\ \ \ \ \ \ \ \ \ \ \ \ \ model.TokenWalker.ConsumeCounterReset();}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00248}00248\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00249}00249\ }
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00250}00250\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (model.CurrentCodeBlockBuilder.Parent\ is\ not\ \textcolor{keyword}{null})}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00251}00251\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00252}00252\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ The\ current\ token\ here\ would\ be\ the\ EOF\ token.}}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00253}00253\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_luthetus_1_1_compiler_services_1_1_c_sharp_1_1_parser_case_1_1_c_sharp_parser_adfd3fd236bc417498916e0e00d2ed60c}{Binder}}.CloseScope(model.TokenWalker.Current.TextSpan,\ model);}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00254}00254\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00255}00255\ }
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00256}00256\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_luthetus_1_1_compiler_services_1_1_c_sharp_1_1_parser_case_1_1_c_sharp_parser_af3ae456dcaf790c3d082f46a8fb6bdd3}{DiagnosticsList}}\ =\ \mbox{\hyperlink{class_luthetus_1_1_compiler_services_1_1_c_sharp_1_1_parser_case_1_1_c_sharp_parser_af3ae456dcaf790c3d082f46a8fb6bdd3}{DiagnosticsList}}.AddRange(model.DiagnosticBag.ToImmutableArray());}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00257}00257\ }
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00258}00258\ \ \ \ \ \ \ \ \ var\ topLevelStatementsCodeBlock\ =\ model.CurrentCodeBlockBuilder.Build(}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00259}00259\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_luthetus_1_1_compiler_services_1_1_c_sharp_1_1_parser_case_1_1_c_sharp_parser_af3ae456dcaf790c3d082f46a8fb6bdd3}{DiagnosticsList}}}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00260}00260\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ .Union(\mbox{\hyperlink{class_luthetus_1_1_compiler_services_1_1_c_sharp_1_1_parser_case_1_1_c_sharp_parser_adfd3fd236bc417498916e0e00d2ed60c}{Binder}}.DiagnosticsList)}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00261}00261\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ .Union(\mbox{\hyperlink{class_luthetus_1_1_compiler_services_1_1_c_sharp_1_1_parser_case_1_1_c_sharp_parser_a5d77d526c52f0483c9eff6d00cf1285a}{Lexer}}.DiagnosticList)}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00262}00262\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ .ToImmutableArray());}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00263}00263\ }
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00264}00264\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_luthetus_1_1_compiler_services_1_1_c_sharp_1_1_parser_case_1_1_c_sharp_parser_adfd3fd236bc417498916e0e00d2ed60c}{Binder}}.FinalizeBinderSession(\mbox{\hyperlink{class_luthetus_1_1_compiler_services_1_1_c_sharp_1_1_parser_case_1_1_c_sharp_parser_aa4cf0248b23ae7996191d89888868a67}{BinderSession}});}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00265}00265\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{new}\ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_ae4bcfe414c318a050bbef43ec92f921ba44e27b445ced14370d07d8574abe18b0}{CompilationUnit}}(}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00266}00266\ \ \ \ \ \ \ \ \ \ \ \ \ topLevelStatementsCodeBlock,}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00267}00267\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_luthetus_1_1_compiler_services_1_1_c_sharp_1_1_parser_case_1_1_c_sharp_parser_a5d77d526c52f0483c9eff6d00cf1285a}{Lexer}},}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00268}00268\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{this},}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00269}00269\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_luthetus_1_1_compiler_services_1_1_c_sharp_1_1_parser_case_1_1_c_sharp_parser_adfd3fd236bc417498916e0e00d2ed60c}{Binder}});}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00270}00270\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00271}00271\ \}}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00272}00272\ }
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00273}00273\ \textcolor{comment}{//\ TODO:\ Are\ the\ comments\ below\ still\ of\ value?\ If\ they\ are\ not\ of\ value\ anymore\ then\ delete\ them.}}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00274}00274\ }
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00275}00275\ \textcolor{comment}{//\{}}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00276}00276\ \ \ \ \ \textcolor{comment}{//\ In\ regards\ to\ whether\ to\ '\_\ =\ model.TokenWalker.Consume();'}}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00277}00277\ \ \ \ \ \textcolor{comment}{//\ at\ the\ start\ of\ the\ while\ loop,\ or\ at\ the\ end:}}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00278}00278\ \ \ \ \ \textcolor{comment}{//}}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00279}00279\ \ \ \ \ \textcolor{comment}{//\ The\ end\ is\ better\ because:}}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00280}00280\ \ \ \ \ \textcolor{comment}{//\ }}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00281}00281\ \ \ \ \ \textcolor{comment}{//\ -\/\ Anytime\ one\ wants\ to\ check\ the\ previous\ token,}}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00282}00282\ \ \ \ \ \textcolor{comment}{//\ with\ the\ 'Consume()'\ at\ the\ end\ of\ the\ loop\ then\ one\ can\ use\ 'model.TokenWalker.Previous'.}}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00283}00283\ \ \ \ \ \textcolor{comment}{//\ But,\ if\ 'Consume()'\ is\ at\ the\ start\ of\ the\ loop\ then\ one\ has\ to\ use\ 'model.TokenWalker.Peek(-\/2)'\ and\ that\ feels\ very\ janky.}}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00284}00284\ \ \ \ \ \textcolor{comment}{//\ }}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00285}00285\ \ \ \ \ \textcolor{comment}{//\ -\/\ As\ well,\ helps\ ensure\ a\ "{}handle-\/syntax"{}\ does\ not\ 'Consume()'\ someone\ elses\ syntax.}}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00286}00286\ \ \ \ \ \textcolor{comment}{//\ If\ an\ individual\ "{}syntax"{}\ cannot\ make\ sense\ of\ the\ current\ token,}}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00287}00287\ \ \ \ \ \textcolor{comment}{//\ then\ it\ can\ just\ return\ to\ the\ main\ loop\ and\ the\ main\ loop\ will\ deal\ with\ it.}}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00288}00288\ \ \ \ \ \textcolor{comment}{//}}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00289}00289\ \ \ \ \ \textcolor{comment}{//\ On\ a\ different\ note:}}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00290}00290\ \ \ \ \ \textcolor{comment}{//}}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00291}00291\ \ \ \ \ \textcolor{comment}{//\ 'should\ return\ to\ the\ main\ loop'}}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00292}00292\ \ \ \ \ \textcolor{comment}{//\ -\/\ The\ end\ of\ every\ statement}}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00293}00293\ \ \ \ \ \textcolor{comment}{//\ -\/\ The\ start\ of\ a\ code\ block}}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00294}00294\ \ \ \ \ \textcolor{comment}{//\ -\/\ The\ end\ of\ a\ code\ block}}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00295}00295\ \ \ \ \ \textcolor{comment}{//}}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00296}00296\ \ \ \ \ \textcolor{comment}{//\ The\ goal\ with\ every\ iteration\ of\ the\ main\ loop,}}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00297}00297\ \ \ \ \ \textcolor{comment}{//\ is\ to\ narrow\ down\ the\ possible\ syntax\ that\ is\ occuring.}}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00298}00298\ \ \ \ \ \textcolor{comment}{//\ Then\ to\ invoke\ some\ other\ method\ that\ will\ handle\ that\ syntax}}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00299}00299\ \ \ \ \ \textcolor{comment}{//\ entirely,\ and\ then\ return\ to\ the\ main\ loop\ for\ the\ next\ syntax\ to\ start\ being\ parsed.}}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00300}00300\ \ \ \ \ \textcolor{comment}{//}}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00301}00301\ \ \ \ \ \textcolor{comment}{//\ For\ example,\ multiple\ consecutive\ keywords\ might\ be\ an\ ambiguous\ syntax.}}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00302}00302\ \ \ \ \ \textcolor{comment}{//\ Therefore,\ the\ main\ loop\ should\ push\ these\ keywords\ onto\ the\ 'StatementStack'.}}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00303}00303\ \ \ \ \ \textcolor{comment}{//\ Then,\ eventually\ a\ disambiguating\ token\ will\ be\ encountered.}}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00304}00304\ \ \ \ \ \textcolor{comment}{//\ At\ this\ point,\ the\ corresponding\ method\ to\ handle\ the\ syntax\ can\ be\ invoked,}}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00305}00305\ \ \ \ \ \textcolor{comment}{//\ and\ the\ method\ can\ pop\ off\ the\ 'StatementStack'\ to\ see\ the\ "{}related"{}\ tokens.}}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00306}00306\ \ \ \ \ \textcolor{comment}{//}}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00307}00307\ \ \ \ \ \textcolor{comment}{//\ There\ are\ two\ loops:}}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00308}00308\ \ \ \ \ \textcolor{comment}{//\ -\/\ Statement\ Loop}}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00309}00309\ \ \ \ \ \textcolor{comment}{//\ -\/\ Expression\ Loop}}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00310}00310\ \ \ \ \ \textcolor{comment}{//}}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00311}00311\ \ \ \ \ \textcolor{comment}{//\ Statement\ loop\ exists\ in\ CSharpParser.cs\ (this\ file).}}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00312}00312\ \ \ \ \ \textcolor{comment}{//\ Expression\ loop\ exists\ in\ ParseOthers.cs\ (a\ relative\ path\ from\ this\ file:\ './Internals/ParseOthers.cs').}}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00313}00313\ \ \ \ \ \textcolor{comment}{//}}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00314}00314\ \ \ \ \ \textcolor{comment}{//\ The\ parser\ should\ gracefully\ handle\ syntax\ that\ does\ not\ compile.}}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00315}00315\ \ \ \ \ \textcolor{comment}{//\ i.e.:\ if\ a\ syntactical\ error\ can\ be\ recovered\ from,\ then}}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00316}00316\ \ \ \ \ \textcolor{comment}{//\ the\ parser\ is\ expected\ to\ recover.}}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00317}00317\ \ \ \ \ \textcolor{comment}{//}}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00318}00318\ \ \ \ \ \textcolor{comment}{//\ For\ example,\ "{}(;"{}}}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00319}00319\ \ \ \ \ \textcolor{comment}{//\ For\ the\ sake\ of\ the\ example,\ this\ is\ presumed\ to\ start\ a\ ParenthesizedExpressionNode.}}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00320}00320\ \ \ \ \ \textcolor{comment}{//\ It\ goes\ on\ to\ see\ a\ StatementDelimiterToken\ before\ it\ sees\ a\ CloseParenthesisToken.}}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00321}00321\ \ \ \ \ \textcolor{comment}{//\ Instead\ of\ cascading\ syntactical\ errors\ to\ the\ text\ that\ comes\ after\ this\ (imagine\ this\ is\ part\ of\ a\ source\ code\ file)}}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00322}00322\ \ \ \ \ \textcolor{comment}{//\ the\ ParenthesizedExpressionNode\ should\ report\ a\ diagnostic\ error,}}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00323}00323\ \ \ \ \ \textcolor{comment}{//\ but\ then\ return\ back\ to\ the\ main\ loop.}}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00324}00324\ \ \ \ \ \textcolor{comment}{//\ The\ main\ loop\ will\ see\ a\ StatementDelimiterToken,\ and\ then\ a\ new\ statement\ will\ begin}}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00325}00325\ \ \ \ \ \textcolor{comment}{//\ as\ if\ nothing\ went\ wrong.\ This\ allows\ the\ rest\ of\ the\ text\ file\ to\ parse\ with\ the\ "{}same\ result"{}.}}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00326}00326\ \ \ \ \ \textcolor{comment}{//\ }}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00327}00327\ \ \ \ \ \textcolor{comment}{//\ The\ parsing\ is\ at\ times\ done\ 'breadth\ first'.}}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00328}00328\ \ \ \ \ \textcolor{comment}{//\ Because,\ a\ class\ definition\ might\ be:}}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00329}00329\ \ \ \ \ \textcolor{comment}{//}}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00330}00330\ \ \ \ \ \textcolor{comment}{//\ \`{}\`{}\`{}\`{}public\ class\ MyClass}}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00331}00331\ \ \ \ \ \textcolor{comment}{//\ \`{}\`{}\`{}\`{}\{}}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00332}00332\ \ \ \ \ \textcolor{comment}{//\ \`{}\`{}\`{}\`{}\ public\ MyClass(string\ firstName)}}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00333}00333\ \ \ \ \ \textcolor{comment}{//\ \`{}\`{}\`{}\`{}\ \ \ \ \{}}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00334}00334\ \ \ \ \ \textcolor{comment}{//\ \`{}\`{}\`{}\`{}\ \ \ \ \ FirstName\ =\ firstName;}}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00335}00335\ \ \ \ \ \textcolor{comment}{//\ \`{}\`{}\`{}\`{}\ \}}}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00336}00336\ \ \ \ \ \textcolor{comment}{//\ \`{}\`{}\`{}\`{}}}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00337}00337\ \ \ \ \ \textcolor{comment}{//\ \`{}\`{}\`{}\`{}\ public\ string\ FirstName\ \{\ get;\ set;\ \}}}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00338}00338\ \ \ \ \ \textcolor{comment}{//\ \`{}\`{}\`{}\`{}\}}}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00339}00339\ \ \ \ \ \textcolor{comment}{//}}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00340}00340\ \ \ \ \ \textcolor{comment}{//\ In\ this\ scenario\ the\ 'FirstName'\ property\ is\ being\ referenced\ from\ within\ the\ class's\ constructor.}}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00341}00341\ \ \ \ \ \textcolor{comment}{//\ Yet,\ the\ constructor\ is\ defined\ above\ the\ property\ it\ references.}}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00342}00342\ \ \ \ \ \textcolor{comment}{//}}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00343}00343\ \ \ \ \ \textcolor{comment}{//\ Instead\ of\ parsing\ 'depth\ first',\ in\ this\ scenario\ the\ index\ of\ the\ token\ that}}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00344}00344\ \ \ \ \ \textcolor{comment}{//\ starts\ the\ code\ block\ body\ of\ the\ constructor\ definition\ is\ remembered,}}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00345}00345\ \ \ \ \ \textcolor{comment}{//\ then\ the\ parser\ skips\ until\ it\ finds\ the\ matching\ close\ brace}}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00346}00346\ \ \ \ \ \textcolor{comment}{//\ (by\ counting\ the\ open\ brace\ and\ close\ braces\ until\ it\ evens\ out).}}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00347}00347\ \ \ \ \ \textcolor{comment}{//}}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00348}00348\ \ \ \ \ \textcolor{comment}{//\ Once\ the\ class\ definition\ is\ finished\ being\ parsed,\ then\ the\ deferred\ parsing\ will\ start.}}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00349}00349\ \ \ \ \ \textcolor{comment}{//\ This\ will\ modify\ the\ 'TokenWalker'\ such\ that\ it\ now\ is\ pointing\ at\ the\ previously\ "{}remembered"{}}}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00350}00350\ \ \ \ \ \textcolor{comment}{//\ token\ that\ starts\ the\ code\ block\ of\ the\ constructor\ definition.}}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00351}00351\ \ \ \ \ \textcolor{comment}{//}}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00352}00352\ \ \ \ \ \textcolor{comment}{//\ As\ well,\ the\ 'TokenWalker'\ is\ told\ what\ index\ to\ return\ to\ once\ finished\ parsing\ the\ child\ scope.}}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00353}00353\ \ \ \ \ \textcolor{comment}{//\ In\ this\ case\ the\ 'TokenWalker'\ would\ return\ to\ the\ index\ that\ represents\ the\ 'CloseBraceToken'}}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00354}00354\ \ \ \ \ \textcolor{comment}{//\ of\ the\ class\ definition.}}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00355}00355\ \ \ \ \ \textcolor{comment}{//\ }}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00356}00356\ \ \ \ \ \textcolor{comment}{//\ If\ there\ were\ many\ child\ scopes\ that\ needed\ to\ be\ 'defer\ parsed'\ then\ the\ same}}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00357}00357\ \ \ \ \ \textcolor{comment}{//\ code\ will\ be\ hit\ as\ was\ initially,\ and\ each\ time\ a\ child\ scope\ is\ 'defer\ parsed'}}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00358}00358\ \ \ \ \ \textcolor{comment}{//\ it\ is\ removed\ from\ the\ list\ of\ child\ scopes\ that\ need\ to\ be\ 'defer\ parsed'.}}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00359}00359\ \ \ \ \ \textcolor{comment}{//}}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00360}00360\ \ \ \ \ \textcolor{comment}{//\ Regarding\ StatementDelimiterToken,\ OpenBraceToken,\ and\ CloseBraceToken:}}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00361}00361\ \ \ \ \ \textcolor{comment}{//\ -\/\ These\ syntax\ hold\ a\ greater\ meaning\ than\ the\ "{}individual\ syntax"{}.}}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00362}00362\ \ \ \ \ \textcolor{comment}{//\ For\ example:\ "{}1;"{}.}}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00363}00363\ \ \ \ \ \textcolor{comment}{//\ In\ the\ example\ '1'\ is\ a\ NumericLiteralToken.}}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00364}00364\ \ \ \ \ \textcolor{comment}{//\ Furthermore,\ a\ NumericLiteralToken\ can\ be\ parsed\ as\ a\ 'LiteralExpressionNode'.}}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00365}00365\ \ \ \ \ \textcolor{comment}{//\ But,\ the\ ending\ StatementDelimiterToken\ does\ not\ belong\ to\ the\ 'LiteralExpressionNode'.}}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00366}00366\ \ \ \ \ \textcolor{comment}{//\ It\ is\ to\ be\ "{}provided"{}\ to\ the\ main\ statement\ loop,\ to\ be\ processed\ there.}}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00367}00367\ \ \ \ \ \textcolor{comment}{//\ }}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00368}00368\ \ \ \ \ \textcolor{comment}{//\ In\ short,\ syntax\ shouldn't\ consume\ tokens\ that\ don't\ belong\ to\ them.}}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00369}00369\ \ \ \ \ \textcolor{comment}{//\ And\ it\ is\ being\ stated\ that\ 'StatementDelimiterToken,\ OpenBraceToken,\ and\ CloseBraceToken'}}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00370}00370\ \ \ \ \ \textcolor{comment}{//\ in\ general\ do\ not\ belong\ to\ a\ syntax.}}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00371}00371\ \ \ \ \ \textcolor{comment}{//}}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00372}00372\ \ \ \ \ \textcolor{comment}{//\ Some\ exceptions\ to\ this\ would\ be\ a\ property\ definition\ "{}public\ string\ FirstName\ \{\ get;\ set;\ \}"{}.}}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00373}00373\ \ \ \ \ \textcolor{comment}{//\ Here,\ the\ OpenBraceToken\ and\ CloseBraceToken\ are\ not\ being\ used\ in\ the\ same\ sense}}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00374}00374\ \ \ \ \ \textcolor{comment}{//\ as\ they\ are\ when\ defining\ scope.}}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00375}00375\ \ \ \ \ \textcolor{comment}{//\ }}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00376}00376\ \ \ \ \ \textcolor{comment}{//\ So,\ the\ property\ definition\ should\ consume\ those\ OpenBraceToken\ and\ CloseBraceToken.}}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00377}00377\ \ \ \ \ \textcolor{comment}{//}}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00378}00378\ \ \ \ \ \textcolor{comment}{//\ However,\ consider\ this\ example:}}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00379}00379\ \ \ \ \ \textcolor{comment}{//}}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00380}00380\ \ \ \ \ \textcolor{comment}{//\ \`{}\`{}\`{}\`{}public\ string\ FirstName}}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00381}00381\ \ \ \ \ \textcolor{comment}{//\ \`{}\`{}\`{}\`{}\{}}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00382}00382\ \ \ \ \ \textcolor{comment}{//\ \`{}\`{}\`{}\`{}\ get}}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00383}00383\ \ \ \ \ \textcolor{comment}{//\ \`{}\`{}\`{}\`{}\ \{}}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00384}00384\ \ \ \ \ \textcolor{comment}{//\ \`{}\`{}\`{}\`{}\ \ \ \ \ return\ \_firstName;}}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00385}00385\ \ \ \ \ \textcolor{comment}{//\ \`{}\`{}\`{}\`{}\ \}}}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00386}00386\ \ \ \ \ \textcolor{comment}{//\ \`{}\`{}\`{}\`{}\ set\ =>\ \_firstName\ =\ value;}}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00387}00387\ \ \ \ \ \textcolor{comment}{//\ \`{}\`{}\`{}\`{}\}}}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00388}00388\ \ \ \ \ \textcolor{comment}{//}}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00389}00389\ \ \ \ \ \textcolor{comment}{//\ Here,\ the\ property's\ "{}getter"{}\ is\ defining\ a\ code\ block.}}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00390}00390\ \ \ \ \ \textcolor{comment}{//\ So,\ the\ brace\ tokens\ that\ deliminate\ the\ "{}getter"{},\ ought\ to}}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00391}00391\ \ \ \ \ \textcolor{comment}{//\ "{}visit"{}\ the\ main\ loop\ for\ a\ moment.\ Then\ it\ can\ continue\ on\ with\ the\ property\ syntax.}}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00392}00392\ \textcolor{comment}{//\}}}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00393}00393\ }
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00394}00394\ \textcolor{comment}{//\{}}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00395}00395\ \ \ \ \ \textcolor{comment}{//\ Goal:\ re-\/write\ the\ parser\ a\ bit\ (2024-\/11-\/07)}}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00396}00396\ \ \ \ \ \textcolor{comment}{//\ ============================================}}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00397}00397\ \ \ \ \ \textcolor{comment}{//\ It\ took\ 8\ seconds\ for\ the\ Luthetus.Ide.sln\ to\ parse\ after\ turning\ off\ much\ of\ the\ syntax.}}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00398}00398\ \ \ \ \ \textcolor{comment}{//\ \ (i.e.:\ the\ lexer\ ran\ entirely,\ but\ the\ parser\ was\ just\ iterating\ the\ while\ loop\ without\ doing\ much\ of\ anything).}}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00399}00399\ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ (upon\ further\ inspection\ the\ parser's\ while\ loop\ still\ is\ doing\ a\ bit\ more\ than\ I\ thought,}}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00400}00400\ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ but\ still\ the\ baseline\ time\ of\ 8\ seconds\ can\ be\ compared\ with\ the\ time\ after\ I\ make\ a\ change.)}}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00401}00401\ \ \ \ \ \textcolor{comment}{//}}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00402}00402\ \ \ \ \ \textcolor{comment}{//\ With\ the\ syntax\ on\ it\ was\ taking\ 1\ minute\ 13\ seconds.}}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00403}00403\ \ \ \ \ \textcolor{comment}{//}}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00404}00404\ \ \ \ \ \textcolor{comment}{//\ Task\ Manager\ after\ the\ solution\ was\ parsed\ on\ Windows\ using\ a\ published\ version\ of\ the\ code.}}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00405}00405\ \ \ \ \ \textcolor{comment}{//\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00406}00406\ \ \ \ \ \textcolor{comment}{//\ Apps:}}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00407}00407\ \ \ \ \ \textcolor{comment}{//\ \ '.NET\ Host'\ 278\ MB}}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00408}00408\ \ \ \ \ \textcolor{comment}{//\ Background\ processes}}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00409}00409\ \ \ \ \ \textcolor{comment}{//\ \ '.NET\ Host'\ 492\ MB}}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00410}00410\ \ \ \ \ \textcolor{comment}{//\ \ '.NET\ Host'\ 265\ MB}}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00411}00411\ \ \ \ \ \textcolor{comment}{//}}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00412}00412\ \ \ \ \ \textcolor{comment}{//\ After\ about\ 5\ minutes\ the\ Task\ Manager\ looks\ like\ this\ (5\ minutes\ is\ not\ at\ all\ an\ accurate\ timespan,\ but\ it\ "{}felt"{}\ like\ 5\ minutes\ had\ passed)}}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00413}00413\ \ \ \ \ \textcolor{comment}{//\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00414}00414\ \ \ \ \ \textcolor{comment}{//\ Apps:}}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00415}00415\ \ \ \ \ \textcolor{comment}{//\ \ '.NET\ Host'\ 370\ MB}}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00416}00416\ \ \ \ \ \textcolor{comment}{//\ Background\ processes}}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00417}00417\ \ \ \ \ \textcolor{comment}{//\ \ (these\ are\ gone\ now)}}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00418}00418\ \ \ \ \ \textcolor{comment}{//}}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00419}00419\ \ \ \ \ \textcolor{comment}{//\ So,\ now\ I\ can\ move\ back\ from\ git\ history\ each\ syntax\ one\ by\ one\ and\ see\ the\ impact\ of\ adding\ that\ specific\ syntax\ back.}}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00420}00420\ \ \ \ \ \textcolor{comment}{//}}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00421}00421\ \ \ \ \ \textcolor{comment}{//\ Most\ pressing\ is:}}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00422}00422\ \ \ \ \ \textcolor{comment}{//\ -\/\ Determining\ whether\ syntax\ is\ an\ 'expression'\ or\ 'statement'.}}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00423}00423\ \ \ \ \ \textcolor{comment}{//\ -\/\ As\ well\ the\ handling\ of\ 'ambiguous\ syntax'.}}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00424}00424\ \ \ \ \ \textcolor{comment}{//}}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00425}00425\ \ \ \ \ \textcolor{comment}{//\ Suspicions:}}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00426}00426\ \ \ \ \ \textcolor{comment}{//\ -\/\ Anytime\ a\ 'statement'\ and\ a\ 'expression'\ are\ ambiguous,}}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00427}00427\ \ \ \ \ \textcolor{comment}{//\ \ then\ there\ will\ be\ a\ keyword\ to\ disambiguate.}}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00428}00428\ \ \ \ \ \textcolor{comment}{//\ -\/\ If\ I\ add\ back\ the\ 'expression'\ code\ first,}}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00429}00429\ \ \ \ \ \textcolor{comment}{//\ \ then\ the\ statements\ will\ be\ far\ clearer}}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00430}00430\ \ \ \ \ \textcolor{comment}{//\ \ because\ I\ hadn't\ implemented\ the\ 'expression'\ code}}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00431}00431\ \ \ \ \ \textcolor{comment}{//\ \ with\ any\ "{}complexity"{}\ of\ whether\ it\ actually\ is\ a\ statement.}}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00432}00432\ \ \ \ \ \textcolor{comment}{//\ \ I'll\ have\ a\ very\ "{}simple"{}\ version\ of\ the\ parser\ to\ look\ at,}}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00433}00433\ \ \ \ \ \textcolor{comment}{//\ \ and\ it\ is\ thought\ that\ the\ statement\ disambiguation\ will\ be\ obvious.}}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00434}00434\ \ \ \ \ \textcolor{comment}{//\ -\/\ I\ don't\ think\ I\ can\ rely\ on\ the\ surrounding\ code\ block's\ "{}kind"{}}}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00435}00435\ \ \ \ \ \textcolor{comment}{//\ \ and\ whether\ that\ code\ block\ allows\ a\ certain\ syntax.}}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00436}00436\ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ -\/\ The\ programmer\ can\ type\ any\ syntax\ they\ want,\ and\ do\ so\ anywhere,}}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00437}00437\ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ \ it\ just\ might\ not\ compile.}}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00438}00438\ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ \ But,\ the\ parser\ still\ has\ to\ "{}survive"{}\ the\ ordeal.}}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00439}00439\ \ \ \ \ \textcolor{comment}{//}}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00440}00440\ \ \ \ \ \textcolor{comment}{//\ I\ added\ that\ if\ an\ IdentifierToken\ is\ found\ by\ the\ main\ loop,}}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00441}00441\ \ \ \ \ \textcolor{comment}{//\ and\ the\ 'StatementBuilderStack.Count\ ==\ 0',}}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00442}00442\ \ \ \ \ \textcolor{comment}{//\ that\ ParseExpression(...)\ would\ be\ invoked.}}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00443}00443\ \ \ \ \ \textcolor{comment}{//}}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00444}00444\ \ \ \ \ \textcolor{comment}{//\ It\ went\ from\ 8\ seconds\ for\ entire\ .sln\ to\ 26\ seconds.}}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00445}00445\ \ \ \ \ \textcolor{comment}{//\ As\ well\ a\ lot\ of\ syntax\ highlighting\ began\ to\ appear,}}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00446}00446\ \ \ \ \ \textcolor{comment}{//\ albeit\ seemingly\ incorrect\ because\ definitions\ aren't\ being\ parsed}}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00447}00447\ \ \ \ \ \textcolor{comment}{//\ so\ it\ cannot\ tell\ whether\ an\ identifier\ is\ a\ reference\ to\ a\ type\ or\ a\ local,\ or\ etc...}}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00448}00448\ \ \ \ \ \textcolor{comment}{//}}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00449}00449\ \ \ \ \ \textcolor{comment}{//\ A\ confusion\ I\ remember\ having\ was\ with\ (I\ think\ it\ was)\ function\ definitions.}}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00450}00450\ \ \ \ \ \textcolor{comment}{//\ And\ their\ return\ type.\ Something\ to\ do\ with\ it\ being\ an\ ambiguous\ identifier}}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00451}00451\ \ \ \ \ \textcolor{comment}{//\ while\ you\ are\ stepping\ through\ the\ nodes,\ and\ you\ have\ to\ wait\ to\ decide\ what\ it\ was.}}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00452}00452\ \ \ \ \ \textcolor{comment}{//}}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00453}00453\ \ \ \ \ \textcolor{comment}{//\ I\ sort\ of\ rambled\ when\ I\ said\ that\ but\ I\ am\ fairly\ certain\ that\ two\ ideas\ can\ be\ relied\ on:}}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00454}00454\ \ \ \ \ \textcolor{comment}{//\ -\/\ If\ you\ are\ in\ an\ expression,\ you\ can\ look\ at\ syntax\ through\ the\ lens\ of\ an\ expression}}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00455}00455\ \ \ \ \ \textcolor{comment}{//\ \ until\ you\ are\ given\ syntax\ that\ brings\ you\ back\ to\ the\ possibiity\ of\ statements.}}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00456}00456\ \ \ \ \ \textcolor{comment}{//\ \ A\ lambda\ statement\ is\ confusing.\ Because\ it\ is\ an\ expression\ that\ wants\ to}}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00457}00457\ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ return\ to\ the\ statement\ loop,\ yet\ its\ part\ of\ a\ larger\ expression}}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00458}00458\ \ \ \ \ \textcolor{comment}{//\ \ and\ being\ handled\ by\ the\ expression\ loop.}}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00459}00459\ \ \ \ \ \textcolor{comment}{//\ -\/\ There\ have\ got\ to\ be\ some\ keywords\ that\ when\ you\ come\ across\ them,}}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00460}00460\ \ \ \ \ \textcolor{comment}{//\ \ it\ is\ immediately\ apparent\ that\ you\ aren't\ looking\ at\ an\ expression.}}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00461}00461\ \ \ \ \ \textcolor{comment}{//\ \ Or\ at\ the\ least\ it\ could\ be\ a\ path\ to\ go\ down\ that\ leads\ to\ disambiguation.}}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00462}00462\ \ \ \ \ \textcolor{comment}{//}}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00463}00463\ \ \ \ \ \textcolor{comment}{//\ Function\ definition}}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00464}00464\ \ \ \ \ \textcolor{comment}{//\ ===================}}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00465}00465\ \ \ \ \ \textcolor{comment}{//\ \`{}\`{}\`{}\`{}int\ Aaa()\ =>\ 3;}}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00466}00466\ \ \ \ \ \textcolor{comment}{//\ \`{}\`{}\`{}\`{}}}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00467}00467\ \ \ \ \ \textcolor{comment}{//\ \`{}\`{}\`{}\`{}int\ Bbb()}}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00468}00468\ \ \ \ \ \textcolor{comment}{//\ \`{}\`{}\`{}\`{}\{}}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00469}00469\ \ \ \ \ \textcolor{comment}{//\ \`{}\`{}\`{}\`{}\ return\ 3;}}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00470}00470\ \ \ \ \ \textcolor{comment}{//\ \`{}\`{}\`{}\`{}\}}}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00471}00471\ \ \ \ \ \textcolor{comment}{//\ }}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00472}00472\ \ \ \ \ \textcolor{comment}{//\ Variable\ declaration}}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00473}00473\ \ \ \ \ \textcolor{comment}{//\ ====================}}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00474}00474\ \ \ \ \ \textcolor{comment}{//\ \`{}\`{}\`{}\`{}var\ x\ =\ 2;}}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00475}00475\ \ \ \ \ \textcolor{comment}{//\ \`{}\`{}\`{}\`{}int\ y\ =\ 3;}}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00476}00476\ \ \ \ \ \textcolor{comment}{//\ }}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00477}00477\ \ \ \ \ \textcolor{comment}{//\ Lambda\ expression}}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00478}00478\ \ \ \ \ \textcolor{comment}{//\ =================}}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00479}00479\ \ \ \ \ \textcolor{comment}{//\ \`{}\`{}\`{}\`{}//\ Is\ this\ syntax\ even\ legal?}}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00480}00480\ \ \ \ \ \textcolor{comment}{//\ \`{}\`{}\`{}\`{}int\ x\ =>\ 3;}}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00481}00481\ \ \ \ \ \textcolor{comment}{//\ \`{}\`{}\`{}\`{}}}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00482}00482\ \ \ \ \ \textcolor{comment}{//\ \`{}\`{}\`{}\`{}(int\ x)\ =>\ 3;}}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00483}00483\ \ \ \ \ \textcolor{comment}{//}}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00484}00484\ \ \ \ \ \textcolor{comment}{//\ Comma\ Separated\ Expression}}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00485}00485\ \ \ \ \ \textcolor{comment}{//\ ==========================}}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00486}00486\ \ \ \ \ \textcolor{comment}{//\ \`{}\`{}\`{}\`{}//\ lambda\ expression}}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00487}00487\ \ \ \ \ \textcolor{comment}{//\ \`{}\`{}\`{}\`{}(x,\ y)\ =>\ 2;}}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00488}00488\ \ \ \ \ \textcolor{comment}{//\ \`{}\`{}\`{}\`{}(int\ x,\ Person\ y)\ =>\ 2;}}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00489}00489\ \ \ \ \ \textcolor{comment}{//\ \`{}\`{}\`{}\`{}//\ tuple\ expression}}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00490}00490\ \ \ \ \ \textcolor{comment}{//\ \`{}\`{}\`{}\`{}(int\ X,\ Person\ Y)\ tuple\ =\ (3,\ new\ Person());}}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00491}00491\ \ \ \ \ \textcolor{comment}{//}}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00492}00492\ \ \ \ \ \textcolor{comment}{//\ Explicit\ Cast\ Expression}}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00493}00493\ \ \ \ \ \textcolor{comment}{//\ ==========================}}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00494}00494\ \ \ \ \ \textcolor{comment}{//\ \`{}\`{}\`{}\`{}(Person)someVariable;}}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00495}00495\ \ \ \ \ \textcolor{comment}{//\ }}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00496}00496\ \ \ \ \ \textcolor{comment}{//\ Parenthesized\ Expression}}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00497}00497\ \ \ \ \ \textcolor{comment}{//\ ==========================}}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00498}00498\ \ \ \ \ \textcolor{comment}{//\ \`{}\`{}\`{}\`{}(Person)someVariable;}}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00499}00499\ \ \ \ \ \textcolor{comment}{//}}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00500}00500\ \ \ \ \ \textcolor{comment}{//\ Constructor\ Definition}}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00501}00501\ \ \ \ \ \textcolor{comment}{//\ ======================}}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00502}00502\ \ \ \ \ \textcolor{comment}{//\ \`{}\`{}\`{}\`{}public\ class\ Person}}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00503}00503\ \ \ \ \ \textcolor{comment}{//\ \`{}\`{}\`{}\`{}\{}}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00504}00504\ \ \ \ \ \textcolor{comment}{//\ \`{}\`{}\`{}\`{}\ public\ Person()}}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00505}00505\ \ \ \ \ \textcolor{comment}{//\ \`{}\`{}\`{}\`{}\ \{}}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00506}00506\ \ \ \ \ \textcolor{comment}{//\ \`{}\`{}\`{}\`{}\ \}}}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00507}00507\ \ \ \ \ \textcolor{comment}{//\ \`{}\`{}\`{}\`{}\}}}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00508}00508\ \ \ \ \ \textcolor{comment}{//\ }}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00509}00509\ \ \ \ \ \textcolor{comment}{//\ Constructor\ Invocation}}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00510}00510\ \ \ \ \ \textcolor{comment}{//\ ======================}}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00511}00511\ \ \ \ \ \textcolor{comment}{//\ \`{}\`{}\`{}\`{}new\ Person();}}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00512}00512\ \ \ \ \ \textcolor{comment}{//\ \`{}\`{}\`{}\`{}//\ object\ initialization}}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00513}00513\ \ \ \ \ \textcolor{comment}{//\ \`{}\`{}\`{}\`{}new\ Person();}}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00514}00514\ \ \ \ \ \textcolor{comment}{//\ \`{}\`{}\`{}\`{}new\ Person\ \{\ \};}}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00515}00515\ \ \ \ \ \textcolor{comment}{//\ \`{}\`{}\`{}\`{}new\ Person\ \{\ FirstName\ =\ "{}John"{},\ ...\ \};}}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00516}00516\ \ \ \ \ \textcolor{comment}{//\ \`{}\`{}\`{}\`{}new\ Person(id:\ Guid.NewGuid)\ \{\ FirstName\ =\ "{}John"{},\ ...\ \};}}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00517}00517\ \ \ \ \ \textcolor{comment}{//\ \`{}\`{}\`{}\`{}//\ collection\ initialization}}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00518}00518\ \ \ \ \ \textcolor{comment}{//\ \`{}\`{}\`{}\`{}new\ List<int>\ \{\ 1,\ 2,\ 3,\ \};}}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00519}00519\ \ \ \ \ \textcolor{comment}{//\ \`{}\`{}\`{}\`{}new\ List<int>(capacity:\ 5)\ \{\ 1,\ 2,\ 3,\ \};}}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00520}00520\ \ \ \ \ \textcolor{comment}{//}}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00521}00521\ \ \ \ \ \textcolor{comment}{//\ Class\ definition}}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00522}00522\ \ \ \ \ \textcolor{comment}{//\ ================}}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00523}00523\ \ \ \ \ \textcolor{comment}{//\ \`{}\`{}\`{}\`{}class\ Aaa\ \{\ \}}}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00524}00524\ \ \ \ \ \textcolor{comment}{//\ \`{}\`{}\`{}\`{}class\ Bbb(/*primary\ constructor*/)\ \{\ \}}}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00525}00525\ \ \ \ \ \textcolor{comment}{//}}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00526}00526\ \ \ \ \ \textcolor{comment}{//\ I\ want\ to\ write\ out\ in\ order\ the\ definitions/expressions,\ ordered\ by\ how\ similar\ the\ syntax\ is\ to\ one\ another.}}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00527}00527\ \ \ \ \ \textcolor{comment}{//\ }}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00528}00528\ \ \ \ \ \textcolor{comment}{//\ Types\ are\ a\ "{}simple"{}\ case\ due\ to\ the\ storage\ modifier\ keyword\ 'class,\ interface,\ ...'.}}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00529}00529\ \ \ \ \ \textcolor{comment}{//}}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00530}00530\ \ \ \ \ \textcolor{comment}{//\ It\ went\ from\ 26\ seconds\ to\ 28\ seconds}}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00531}00531\ \ \ \ \ \textcolor{comment}{//\ after\ adding\ TypeDefinitionNode\ parsing.}}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00532}00532\ \ \ \ \ \textcolor{comment}{//}}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00533}00533\ \ \ \ \ \textcolor{comment}{//\ }}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00534}00534\ \textcolor{comment}{//\}}}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00535}00535\ }
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00536}00536\ \textcolor{comment}{//\{}}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00537}00537\ \ \ \ \ \textcolor{comment}{//\ I\ think\ the\ key\ to\ parsing\ this\ properly\ is\ having\ the\ input\ "{}Person"{}\ parse\ properly.}}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00538}00538\ \ \ \ \ \textcolor{comment}{//}}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00539}00539\ \ \ \ \ \textcolor{comment}{//\ An\ expression\ can\ contain\ a\ 'TypeClauseNode',\ so\ it\ ought\ to\ be\ an\ IExpressionNode.}}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00540}00540\ \ \ \ \ \textcolor{comment}{//\ An\ expression\ can\ contain\ a\ 'TypeClauseNode\ IdentifierOrContextualToken',\ so\ it\ ought\ to\ be\ an\ IExpressionNode.}}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00541}00541\ \ \ \ \ \textcolor{comment}{//}}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00542}00542\ \ \ \ \ \textcolor{comment}{//\ If\ I\ open\ Visual\ Studio\ and\ I\ type\ "{}Person"{}\ into\ a\ C\#\ file\ that\ is\ completely\ empty\ other\ than\ that\ text.}}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00543}00543\ \ \ \ \ \textcolor{comment}{//\ will\ it\ be\ treated\ as\ a\ type\ or\ a\ variable\ or\ something\ else?}}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00544}00544\ \ \ \ \ \textcolor{comment}{//}}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00545}00545\ \ \ \ \ \textcolor{comment}{//\ Because\ it\ seems\ that\ there\ is\ a\ pattern\ of\ either\ 'TypeClause'\ or\ 'TypeClauseNode\ IdentifierOrContextualToken'.}}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00546}00546\ \ \ \ \ \textcolor{comment}{//}}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00547}00547\ \ \ \ \ \textcolor{comment}{//\ And,\ the\ 'TypeClauseNode'\ could\ be\ made\ up\ of\ one\ or\ more\ ISyntaxToken.}}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00548}00548\ \ \ \ \ \textcolor{comment}{//\ }}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00549}00549\ \ \ \ \ \textcolor{comment}{//\ It\ almost\ feels\ like\ you'd\ want\ to\ parse\ for\ 'TypeClause'}}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00550}00550\ \ \ \ \ \textcolor{comment}{//\ and\ 'TypeClauseNode\ IdentifierOrContextualToken'.}}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00551}00551\ \ \ \ \ \textcolor{comment}{//\ But\ in\ the\ sense\ of\ they\ both\ get\ the\ same\ starting\ point\ in\ the\ TokenWalker.}}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00552}00552\ \ \ \ \ \textcolor{comment}{//\ All\ the\ state\ is\ separate.}}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00553}00553\ \ \ \ \ \textcolor{comment}{//}}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00554}00554\ \ \ \ \ \textcolor{comment}{//\ Probably\ a\ 'bool\ TryParse\_TypeClause\_IdentifierOrContextualToken(out\ var\ aaa)'}}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00555}00555\ \ \ \ \ \textcolor{comment}{//\ and\ 'bool\ TryParse\_TypeClause(out\ var\ aaa)'.}}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00556}00556\ \ \ \ \ \textcolor{comment}{//}}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00557}00557\ \ \ \ \ \textcolor{comment}{//\ You'd\ maybe\ invoke\ 'TryParse\_TypeClause\_IdentifierOrContextualToken'\ first,}}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00558}00558\ \ \ \ \ \textcolor{comment}{//\ then\ reset\ the\ TokenWalker\ state\ back\ to\ what\ it\ was\ and\ invoke}}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00559}00559\ \ \ \ \ \textcolor{comment}{//\ TryParse\_TypeClause'\ to\ see\ that\ returns\ true/successful.}}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00560}00560\ \ \ \ \ \textcolor{comment}{//}}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00561}00561\ \ \ \ \ \textcolor{comment}{//\ Visual\ Studio\ treats\ the\ text\ "{}Person"{}\ when\ it\ is\ the\ only\ text\ in\ a\ C\#\ file\ to\ be:}}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00562}00562\ \ \ \ \ \textcolor{comment}{//\ "{}The\ type\ or\ namespace\ name\ 'Person'\ could\ not\ be\ found\ (are\ you\ missing\ a\ using\ directive\ or\ an\ assembly\ reference?)}}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00563}00563\ \ \ \ \ \textcolor{comment}{//}}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00564}00564\ \ \ \ \ \textcolor{comment}{//\ If\ I\ open\ the\ demo\ website\ and\ put\ the\ same\ text\ into\ an\ empty\ C\#\ file\ what\ is\ it\ treated\ as?}}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00565}00565\ \ \ \ \ \textcolor{comment}{//\ With\ the\ 'v\ 0.9.7.1\ ::\ Release\ ::\ Luthetus.Ide.RazorLib'\ demo\ it\ is\ a\ Type\ for\ the\ syntax\ highlighting}}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00566}00566\ \ \ \ \ \textcolor{comment}{//\ and\ has\ a\ similar\ error\ diagnostic\ with\ "{}type\ or\ namespace\ could\ not\ be\ found"{}\ wording.}}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00567}00567\ \ \ \ \ \textcolor{comment}{//}}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00568}00568\ \ \ \ \ \textcolor{comment}{//\ Visual\ Studio\ was\ different\ in\ that\ it\ for\ syntax\ highlighting\ "{}did\ not\ give\ the\ text\ a\ color\ -\/\ it\ was\ just\ colored\ as\ default\ text"{}.}}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00569}00569\ \ \ \ \ \textcolor{comment}{//\ Whereas\ the\ demo\ website\ colored\ the\ text\ as\ a\ Type.}}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00570}00570\ \ \ \ \ \textcolor{comment}{//}}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00571}00571\ \ \ \ \ \textcolor{comment}{//\ I\ put\ the\ Visual\ Studio\ part\ about\ default\ text\ color\ in\ quotes\ because\ I\ believe\ that\ is\ also\ the\ color\ they\ use\ for\ namespaces\ (default\ text\ and\ namespaces\ are\ the\ same\ color).}}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00572}00572\ \ \ \ \ \textcolor{comment}{//}}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00573}00573\ \ \ \ \ \textcolor{comment}{//\ I\ changed\ the\ color\ in\ Visual\ Studio\ that\ is\ assigned\ to\ namespaces\ to\ be\ different\ from\ the\ default\ text.}}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00574}00574\ \ \ \ \ \textcolor{comment}{//\ The\ color\ of\ the\ text\ did\ not\ change,\ therefore\ it\ was\ being\ colored\ as\ default\ text\ it\ seems.}}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00575}00575\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00576}00576\ \ \ \ \ \textcolor{comment}{//\ I\ am\ writing\ the\ C\#\ Parser\ statement\ first\ but\ it\ might\ be\ better\ to\ do\ things\ expression\ first.}}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00577}00577\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00578}00578\ \ \ \ \ \textcolor{comment}{//\ Idea:\ "{}Everything\ is\ an\ expression\ unless\ it\ is\ a\ statement"{}?}}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00579}00579\ \ \ \ \ \textcolor{comment}{//}}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00580}00580\ \ \ \ \ \textcolor{comment}{//\ This\ might\ just\ be\ equivalent\ to\ saying\ "{}do\ things\ expression\ first"{}.}}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00581}00581\ \ \ \ \ \textcolor{comment}{//\ But\ for\ some\ reason\ this\ wording\ is\ sticking\ out\ in\ my\ mind.}}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00582}00582\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00583}00583\ \ \ \ \ \textcolor{comment}{//\ But,\ some\ expressions\ can\ be\ a\ statement,\ so\ being\ a\ statement\ does\ not\ stop\ something\ from\ being\ an\ expression.}}
+\DoxyCodeLine{\Hypertarget{_c_sharp_parser_8cs_source_l00584}00584\ \textcolor{comment}{//\}}}
+
+\end{DoxyCode}

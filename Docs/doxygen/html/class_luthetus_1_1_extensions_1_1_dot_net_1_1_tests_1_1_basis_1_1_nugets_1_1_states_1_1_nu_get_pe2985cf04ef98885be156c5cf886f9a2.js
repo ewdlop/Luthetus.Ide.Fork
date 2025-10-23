@@ -1,0 +1,7 @@
+var class_luthetus_1_1_extensions_1_1_dot_net_1_1_tests_1_1_basis_1_1_nugets_1_1_states_1_1_nu_get_pe2985cf04ef98885be156c5cf886f9a2 =
+[
+    [ "ReduceSetIncludePrereleaseAction", "class_luthetus_1_1_extensions_1_1_dot_net_1_1_tests_1_1_basis_1_1_nugets_1_1_states_1_1_nu_get_pe2985cf04ef98885be156c5cf886f9a2.html#a755f41d7ae040df82898cf96921d4f49", null ],
+    [ "ReduceSetMostRecentQueryResultAction", "class_luthetus_1_1_extensions_1_1_dot_net_1_1_tests_1_1_basis_1_1_nugets_1_1_states_1_1_nu_get_pe2985cf04ef98885be156c5cf886f9a2.html#a6cf4a4e209ca01241d1fe8107c31787b", null ],
+    [ "ReduceSetNugetQueryAction", "class_luthetus_1_1_extensions_1_1_dot_net_1_1_tests_1_1_basis_1_1_nugets_1_1_states_1_1_nu_get_pe2985cf04ef98885be156c5cf886f9a2.html#a62b0528d9f166b10dae665cf6aa48e71", null ],
+    [ "ReduceSetSelectedProjectToModifyAction", "class_luthetus_1_1_extensions_1_1_dot_net_1_1_tests_1_1_basis_1_1_nugets_1_1_states_1_1_nu_get_pe2985cf04ef98885be156c5cf886f9a2.html#a51a15d0331d5ad4ede801e07b364228d", null ]
+];

@@ -1,0 +1,147 @@
+.TH "Luthetus.TextEditor.RazorLib.TextEditors.Models.ITextEditorEditContext" 3 "Version 1.0.0" "Luthetus.Ide" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+Luthetus.TextEditor.RazorLib.TextEditors.Models.ITextEditorEditContext \- If one invokes, "_ = editContext\&.GetViewModelModifier(viewModelKey);"\&.
+.br
+ Then a side effect occurs where the view model with the provided viewModelKey, will be marked as a having been modified\&.
+.br
+ After a Post is finished, the text editor service iterates over all 'modified' view models and re-renders them\&.
+.br
+ This behavior is a bit hacky since it requires some amount of 'hidden knowledge'\&.
+.br
+ To get a view model without marking it as modified, use the optional parameter, 'isReadonly' and set it to 'true'\&.
+.br
+ The main reason for making this comment, is that I sometimes assign the result of 'GetViewModelModifier' to discard\&.
+.br
+ When I do this it feels especially hacky, so I want to leave a paper trail of what I mean by that statement\&.
+.br
+\&.  
+
+.SH SYNOPSIS
+.br
+.PP
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBTextEditorModelModifier\fP? \fBGetModelModifier\fP (\fBResourceUri\fP modelResourceUri, bool isReadonly=false)"
+.br
+.ti -1c
+.RI "\fBTextEditorModelModifier\fP? \fBGetModelModifierByViewModelKey\fP (Key< \fBTextEditorViewModel\fP > viewModelKey, bool isReadonly=false)"
+.br
+.ti -1c
+.RI "\fBTextEditorViewModelModifier\fP? \fBGetViewModelModifier\fP (Key< \fBTextEditorViewModel\fP > viewModelKey, bool isReadonly=false)"
+.br
+.ti -1c
+.RI "\fBCursorModifierBagTextEditor\fP? \fBGetCursorModifierBag\fP (\fBTextEditorViewModel\fP? viewModel)"
+.br
+.ti -1c
+.RI "\fBTextEditorCursorModifier\fP? \fBGetPrimaryCursorModifier\fP (\fBCursorModifierBagTextEditor\fP? cursorModifierBag)"
+.br
+.RI "TODO: Caching for this method?
+.br
+ \&. "
+.ti -1c
+.RI "\fBTextEditorDiffModelModifier\fP? \fBGetDiffModelModifier\fP (Key< \fBTextEditorDiffModel\fP > diffModelKey, bool isReadonly=false)"
+.br
+.in -1c
+.SS "Properties"
+
+.in +1c
+.ti -1c
+.RI "Dictionary< \fBResourceUri\fP, \fBTextEditorModelModifier\fP?> \fBModelCache\fP\fR [get]\fP"
+.br
+.ti -1c
+.RI "Dictionary< Key< \fBTextEditorViewModel\fP >, \fBResourceUri\fP?> \fBViewModelToModelResourceUriCache\fP\fR [get]\fP"
+.br
+.ti -1c
+.RI "Dictionary< Key< \fBTextEditorViewModel\fP >, \fBTextEditorViewModelModifier\fP?> \fBViewModelCache\fP\fR [get]\fP"
+.br
+.ti -1c
+.RI "Dictionary< Key< \fBTextEditorViewModel\fP >, \fBCursorModifierBagTextEditor\fP?> \fBCursorModifierBagCache\fP\fR [get]\fP"
+.br
+.ti -1c
+.RI "\fBITextEditorService\fP \fBTextEditorService\fP\fR [get]\fP"
+.br
+.ti -1c
+.RI "Key< \fBTextEditorAuthenticatedAction\fP > \fBAuthenticatedActionKey\fP\fR [get]\fP"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+If one invokes, "_ = editContext\&.GetViewModelModifier(viewModelKey);"\&.
+.br
+ Then a side effect occurs where the view model with the provided viewModelKey, will be marked as a having been modified\&.
+.br
+ After a Post is finished, the text editor service iterates over all 'modified' view models and re-renders them\&.
+.br
+ This behavior is a bit hacky since it requires some amount of 'hidden knowledge'\&.
+.br
+ To get a view model without marking it as modified, use the optional parameter, 'isReadonly' and set it to 'true'\&.
+.br
+ The main reason for making this comment, is that I sometimes assign the result of 'GetViewModelModifier' to discard\&.
+.br
+ When I do this it feels especially hacky, so I want to leave a paper trail of what I mean by that statement\&.
+.br
+\&. 
+.PP
+Definition at line \fB18\fP of file \fBITextEditorEditContext\&.cs\fP\&.
+.SH "Member Function Documentation"
+.PP 
+.SS "\fBCursorModifierBagTextEditor\fP? Luthetus\&.TextEditor\&.RazorLib\&.TextEditors\&.Models\&.ITextEditorEditContext\&.GetCursorModifierBag (\fBTextEditorViewModel\fP? viewModel)"
+
+.PP
+
+.SS "\fBTextEditorDiffModelModifier\fP? Luthetus\&.TextEditor\&.RazorLib\&.TextEditors\&.Models\&.ITextEditorEditContext\&.GetDiffModelModifier (Key< \fBTextEditorDiffModel\fP > diffModelKey, bool isReadonly = \fRfalse\fP)"
+
+.PP
+
+.SS "\fBTextEditorModelModifier\fP? Luthetus\&.TextEditor\&.RazorLib\&.TextEditors\&.Models\&.ITextEditorEditContext\&.GetModelModifier (\fBResourceUri\fP modelResourceUri, bool isReadonly = \fRfalse\fP)"
+
+.PP
+
+.SS "\fBTextEditorModelModifier\fP? Luthetus\&.TextEditor\&.RazorLib\&.TextEditors\&.Models\&.ITextEditorEditContext\&.GetModelModifierByViewModelKey (Key< \fBTextEditorViewModel\fP > viewModelKey, bool isReadonly = \fRfalse\fP)"
+
+.PP
+
+.SS "\fBTextEditorCursorModifier\fP? Luthetus\&.TextEditor\&.RazorLib\&.TextEditors\&.Models\&.ITextEditorEditContext\&.GetPrimaryCursorModifier (\fBCursorModifierBagTextEditor\fP? cursorModifierBag)"
+
+.PP
+TODO: Caching for this method?
+.br
+ \&. 
+.SS "\fBTextEditorViewModelModifier\fP? Luthetus\&.TextEditor\&.RazorLib\&.TextEditors\&.Models\&.ITextEditorEditContext\&.GetViewModelModifier (Key< \fBTextEditorViewModel\fP > viewModelKey, bool isReadonly = \fRfalse\fP)"
+
+.PP
+
+.SH "Property Documentation"
+.PP 
+.SS "Key<\fBTextEditorAuthenticatedAction\fP> Luthetus\&.TextEditor\&.RazorLib\&.TextEditors\&.Models\&.ITextEditorEditContext\&.AuthenticatedActionKey\fR [get]\fP"
+
+.PP
+Definition at line \fB26\fP of file \fBITextEditorEditContext\&.cs\fP\&.
+.SS "Dictionary<Key<\fBTextEditorViewModel\fP>, \fBCursorModifierBagTextEditor\fP?> Luthetus\&.TextEditor\&.RazorLib\&.TextEditors\&.Models\&.ITextEditorEditContext\&.CursorModifierBagCache\fR [get]\fP"
+
+.PP
+Definition at line \fB23\fP of file \fBITextEditorEditContext\&.cs\fP\&.
+.SS "Dictionary<\fBResourceUri\fP, \fBTextEditorModelModifier\fP?> Luthetus\&.TextEditor\&.RazorLib\&.TextEditors\&.Models\&.ITextEditorEditContext\&.ModelCache\fR [get]\fP"
+
+.PP
+Definition at line \fB20\fP of file \fBITextEditorEditContext\&.cs\fP\&.
+.SS "\fBITextEditorService\fP Luthetus\&.TextEditor\&.RazorLib\&.TextEditors\&.Models\&.ITextEditorEditContext\&.TextEditorService\fR [get]\fP"
+
+.PP
+Definition at line \fB25\fP of file \fBITextEditorEditContext\&.cs\fP\&.
+.SS "Dictionary<Key<\fBTextEditorViewModel\fP>, \fBTextEditorViewModelModifier\fP?> Luthetus\&.TextEditor\&.RazorLib\&.TextEditors\&.Models\&.ITextEditorEditContext\&.ViewModelCache\fR [get]\fP"
+
+.PP
+Definition at line \fB22\fP of file \fBITextEditorEditContext\&.cs\fP\&.
+.SS "Dictionary<Key<\fBTextEditorViewModel\fP>, \fBResourceUri\fP?> Luthetus\&.TextEditor\&.RazorLib\&.TextEditors\&.Models\&.ITextEditorEditContext\&.ViewModelToModelResourceUriCache\fR [get]\fP"
+
+.PP
+Definition at line \fB21\fP of file \fBITextEditorEditContext\&.cs\fP\&.
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for Luthetus\&.Ide from the source code\&.

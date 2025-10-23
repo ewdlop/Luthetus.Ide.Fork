@@ -1,0 +1,8 @@
+var class_luthetus_1_1_extensions_1_1_dot_net_1_1_c_sharp_projects_1_1_displays_1_1_remove_c_sharp_project_from_solution_display =
+[
+    [ "OnAfterRenderAsync", "class_luthetus_1_1_extensions_1_1_dot_net_1_1_c_sharp_projects_1_1_displays_1_1_remove_c_sharp_project_from_solution_display.html#a14d6dac384a43e159d749ff62999cd95", null ],
+    [ "OnParametersSetAsync", "class_luthetus_1_1_extensions_1_1_dot_net_1_1_c_sharp_projects_1_1_displays_1_1_remove_c_sharp_project_from_solution_display.html#aa8ef644675d3b22894734be6567ba32f", null ],
+    [ "AbsolutePath", "class_luthetus_1_1_extensions_1_1_dot_net_1_1_c_sharp_projects_1_1_displays_1_1_remove_c_sharp_project_from_solution_display.html#a23469e77e72e37096b5aec0fc20f0cbd", null ],
+    [ "MenuOptionCallbacks", "class_luthetus_1_1_extensions_1_1_dot_net_1_1_c_sharp_projects_1_1_displays_1_1_remove_c_sharp_project_from_solution_display.html#aba8176a235f7a51a088e46bd8ba37768", null ],
+    [ "OnAfterSubmitFunc", "class_luthetus_1_1_extensions_1_1_dot_net_1_1_c_sharp_projects_1_1_displays_1_1_remove_c_sharp_project_from_solution_display.html#ab03c46268ff2466cd99eec263ec66983", null ]
+];

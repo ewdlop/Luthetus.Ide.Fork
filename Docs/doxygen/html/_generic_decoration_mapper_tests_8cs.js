@@ -1,0 +1,4 @@
+var _generic_decoration_mapper_tests_8cs =
+[
+    [ "Luthetus.TextEditor.Tests.Basis.CompilerServices.GenericLexer.Decoration.GenericDecorationMapperTests", "class_luthetus_1_1_text_editor_1_1_tests_1_1_basis_1_1_compiler_services_1_1_generic_lexer_1_1_d64d924ddb4b2bacd550bb069fa43b48e.html", "class_luthetus_1_1_text_editor_1_1_tests_1_1_basis_1_1_compiler_services_1_1_generic_lexer_1_1_d64d924ddb4b2bacd550bb069fa43b48e" ]
+];

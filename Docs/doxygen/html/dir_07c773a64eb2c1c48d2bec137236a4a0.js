@@ -1,0 +1,4 @@
+var dir_07c773a64eb2c1c48d2bec137236a4a0 =
+[
+    [ "DotNetCliOutputParserTests.cs", "_extensions_2_extensions_8_dot_net_8_tests_2_basis_2_command_lines_2_models_2_dot_net_cli_output_parser_tests_8cs.html", "_extensions_2_extensions_8_dot_net_8_tests_2_basis_2_command_lines_2_models_2_dot_net_cli_output_parser_tests_8cs" ]
+];

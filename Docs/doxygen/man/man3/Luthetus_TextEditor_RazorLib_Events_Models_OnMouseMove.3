@@ -1,0 +1,146 @@
+.TH "Luthetus.TextEditor.RazorLib.Events.Models.OnMouseMove" 3 "Version 1.0.0" "Luthetus.Ide" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+Luthetus.TextEditor.RazorLib.Events.Models.OnMouseMove
+.SH SYNOPSIS
+.br
+.PP
+.PP
+Inherits \fBLuthetus\&.TextEditor\&.RazorLib\&.BackgroundTasks\&.Models\&.ITextEditorWork\fP\&.
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBOnMouseMove\fP (\fBMouseEventArgs\fP mouseEventArgs, \fBTextEditorComponentData\fP componentData, \fBResourceUri\fP \fBresourceUri\fP, Key< \fBTextEditorViewModel\fP > viewModelKey)"
+.br
+.ti -1c
+.RI "\fBIBackgroundTask\fP? \fBBatchOrDefault\fP (\fBIBackgroundTask\fP oldEvent)"
+.br
+.RI "Before a throttle event is enqueued, this method is invoked\&. This allows for batching of 'this' throttle event instance, and the last entry of the queue\&.
+.br
+
+.br
+\&. "
+.ti -1c
+.RI "async Task \fBHandleEvent\fP (CancellationToken cancellationToken)"
+.br
+.RI "This method is the actual work item that gets awaited in order to handle the event\&. "
+.in -1c
+.SS "Properties"
+
+.in +1c
+.ti -1c
+.RI "Key< \fBIBackgroundTask\fP > \fBBackgroundTaskKey\fP = Key<\fBIBackgroundTask\fP>\&.NewKey()\fR [get]\fP"
+.br
+.ti -1c
+.RI "Key< \fBIBackgroundTaskQueue\fP > \fBQueueKey\fP = \fBContinuousBackgroundTaskWorker\&.GetQueueKey\fP()\fR [get]\fP"
+.br
+.ti -1c
+.RI "string \fBName\fP = nameof(\fBOnMouseMove\fP)\fR [get]\fP"
+.br
+.ti -1c
+.RI "MouseEventArgs \fBMouseEventArgs\fP\fR [get]\fP"
+.br
+.ti -1c
+.RI "ResourceUri \fBResourceUri\fP\fR [get]\fP"
+.br
+.ti -1c
+.RI "Key< \fBTextEditorViewModel\fP > \fBViewModelKey\fP\fR [get]\fP"
+.br
+.ti -1c
+.RI "\fBTextEditorComponentData\fP \fBComponentData\fP\fR [get]\fP"
+.br
+.ti -1c
+.RI "\fBITextEditorEditContext\fP \fBEditContext\fP\fR [get, set]\fP"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+Definition at line \fB12\fP of file \fBOnMouseMove\&.cs\fP\&.
+.SH "Constructor & Destructor Documentation"
+.PP 
+.SS "Luthetus\&.TextEditor\&.RazorLib\&.Events\&.Models\&.OnMouseMove\&.OnMouseMove (\fBMouseEventArgs\fP mouseEventArgs, \fBTextEditorComponentData\fP componentData, \fBResourceUri\fP resourceUri, Key< \fBTextEditorViewModel\fP > viewModelKey)"
+
+.PP
+Definition at line \fB14\fP of file \fBOnMouseMove\&.cs\fP\&.
+.SH "Member Function Documentation"
+.PP 
+.SS "\fBIBackgroundTask\fP? Luthetus\&.TextEditor\&.RazorLib\&.Events\&.Models\&.OnMouseMove\&.BatchOrDefault (\fBIBackgroundTask\fP oldEvent)"
+
+.PP
+Before a throttle event is enqueued, this method is invoked\&. This allows for batching of 'this' throttle event instance, and the last entry of the queue\&.
+.br
+
+.br
+\&. This method is invoked from within a 'lock(_queue) { \&.\&.\&. }'\&.
+.br
+
+.br
+
+.PP
+Example use: one reads an entry from the queue, its an event that write out a character\&. Perhaps this throttle event also writes out a character\&. Instead of invoking 'text\&.Insert(character)' two times\&. One might want to invoke 'text\&.InsertRange(bothCharacters)';
+.br
+
+.br
+
+.PP
+Returning null means enqueue the recentEvent without any batching, (leave the old event as it was within the queue) 
+.PP
+Implements \fBLuthetus\&.Common\&.RazorLib\&.BackgroundTasks\&.Models\&.IBackgroundTask\fP\&.
+.PP
+Definition at line \fB37\fP of file \fBOnMouseMove\&.cs\fP\&.
+.SS "async Task Luthetus\&.TextEditor\&.RazorLib\&.Events\&.Models\&.OnMouseMove\&.HandleEvent (CancellationToken cancellationToken)"
+
+.PP
+This method is the actual work item that gets awaited in order to handle the event\&. 
+.PP
+Implements \fBLuthetus\&.Common\&.RazorLib\&.BackgroundTasks\&.Models\&.IBackgroundTask\fP\&.
+.PP
+Definition at line \fB50\fP of file \fBOnMouseMove\&.cs\fP\&.
+.SH "Property Documentation"
+.PP 
+.SS "Key<\fBIBackgroundTask\fP> Luthetus\&.TextEditor\&.RazorLib\&.Events\&.Models\&.OnMouseMove\&.BackgroundTaskKey = Key<\fBIBackgroundTask\fP>\&.NewKey()\fR [get]\fP"
+
+.PP
+Implements \fBLuthetus\&.Common\&.RazorLib\&.BackgroundTasks\&.Models\&.IBackgroundTask\fP\&.
+.PP
+Definition at line \fB27\fP of file \fBOnMouseMove\&.cs\fP\&.
+.SS "\fBTextEditorComponentData\fP Luthetus\&.TextEditor\&.RazorLib\&.Events\&.Models\&.OnMouseMove\&.ComponentData\fR [get]\fP"
+
+.PP
+Definition at line \fB33\fP of file \fBOnMouseMove\&.cs\fP\&.
+.SS "\fBITextEditorEditContext\fP Luthetus\&.TextEditor\&.RazorLib\&.Events\&.Models\&.OnMouseMove\&.EditContext\fR [get]\fP, \fR [set]\fP"
+
+.PP
+Implements \fBLuthetus\&.TextEditor\&.RazorLib\&.BackgroundTasks\&.Models\&.ITextEditorWork\fP\&.
+.PP
+Definition at line \fB35\fP of file \fBOnMouseMove\&.cs\fP\&.
+.SS "MouseEventArgs Luthetus\&.TextEditor\&.RazorLib\&.Events\&.Models\&.OnMouseMove\&.MouseEventArgs\fR [get]\fP"
+
+.PP
+Definition at line \fB30\fP of file \fBOnMouseMove\&.cs\fP\&.
+.SS "string Luthetus\&.TextEditor\&.RazorLib\&.Events\&.Models\&.OnMouseMove\&.Name = nameof(\fBOnMouseMove\fP)\fR [get]\fP"
+
+.PP
+Implements \fBLuthetus\&.Common\&.RazorLib\&.BackgroundTasks\&.Models\&.IBackgroundTask\fP\&.
+.PP
+Definition at line \fB29\fP of file \fBOnMouseMove\&.cs\fP\&.
+.SS "Key<\fBIBackgroundTaskQueue\fP> Luthetus\&.TextEditor\&.RazorLib\&.Events\&.Models\&.OnMouseMove\&.QueueKey = \fBContinuousBackgroundTaskWorker\&.GetQueueKey\fP()\fR [get]\fP"
+
+.PP
+Implements \fBLuthetus\&.Common\&.RazorLib\&.BackgroundTasks\&.Models\&.IBackgroundTask\fP\&.
+.PP
+Definition at line \fB28\fP of file \fBOnMouseMove\&.cs\fP\&.
+.SS "ResourceUri Luthetus\&.TextEditor\&.RazorLib\&.Events\&.Models\&.OnMouseMove\&.ResourceUri\fR [get]\fP"
+
+.PP
+Definition at line \fB31\fP of file \fBOnMouseMove\&.cs\fP\&.
+.SS "Key<\fBTextEditorViewModel\fP> Luthetus\&.TextEditor\&.RazorLib\&.Events\&.Models\&.OnMouseMove\&.ViewModelKey\fR [get]\fP"
+
+.PP
+Definition at line \fB32\fP of file \fBOnMouseMove\&.cs\fP\&.
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for Luthetus\&.Ide from the source code\&.

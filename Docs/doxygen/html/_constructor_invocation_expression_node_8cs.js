@@ -1,0 +1,4 @@
+var _constructor_invocation_expression_node_8cs =
+[
+    [ "Luthetus.TextEditor.RazorLib.CompilerServices.Syntax.Nodes.ConstructorInvocationExpressionNode", "class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_1_1_nodes_1_1_cons4f329ee56fa01887314a524cd0be1b79.html", "class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_1_1_nodes_1_1_cons4f329ee56fa01887314a524cd0be1b79" ]
+];

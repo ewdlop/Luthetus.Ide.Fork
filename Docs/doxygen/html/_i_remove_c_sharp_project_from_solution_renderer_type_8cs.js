@@ -1,0 +1,4 @@
+var _i_remove_c_sharp_project_from_solution_renderer_type_8cs =
+[
+    [ "Luthetus.Extensions.DotNet.ComponentRenderers.Models.IRemoveCSharpProjectFromSolutionRendererType", "interface_luthetus_1_1_extensions_1_1_dot_net_1_1_component_renderers_1_1_models_1_1_i_remove_c_0ebf6d56ddb5e1bfcabd1e05d2249353.html", "interface_luthetus_1_1_extensions_1_1_dot_net_1_1_component_renderers_1_1_models_1_1_i_remove_c_0ebf6d56ddb5e1bfcabd1e05d2249353" ]
+];

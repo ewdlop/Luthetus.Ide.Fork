@@ -1,0 +1,4 @@
+var interface_luthetus_1_1_common_1_1_razor_lib_1_1_component_renderers_1_1_models_1_1_i_informative_notification_renderer_type =
+[
+    [ "Message", "interface_luthetus_1_1_common_1_1_razor_lib_1_1_component_renderers_1_1_models_1_1_i_informative_notification_renderer_type.html#a26c48df9e56e35f736868b13772e15e1", null ]
+];

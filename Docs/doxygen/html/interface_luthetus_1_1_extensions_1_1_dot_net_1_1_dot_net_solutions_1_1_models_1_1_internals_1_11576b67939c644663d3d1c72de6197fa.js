@@ -1,0 +1,7 @@
+var interface_luthetus_1_1_extensions_1_1_dot_net_1_1_dot_net_solutions_1_1_models_1_1_internals_1_11576b67939c644663d3d1c72de6197fa =
+[
+    [ "x", "interface_luthetus_1_1_extensions_1_1_dot_net_1_1_dot_net_solutions_1_1_models_1_1_internals_1_11576b67939c644663d3d1c72de6197fa.html#a7947570d9f118a20720d08b928b3759f", null ],
+    [ "EndPoint", "interface_luthetus_1_1_extensions_1_1_dot_net_1_1_dot_net_solutions_1_1_models_1_1_internals_1_11576b67939c644663d3d1c72de6197fa.html#a5229f7e615184a65b4cf6c6df9a60ea3", null ],
+    [ "StartPoint", "interface_luthetus_1_1_extensions_1_1_dot_net_1_1_dot_net_solutions_1_1_models_1_1_internals_1_11576b67939c644663d3d1c72de6197fa.html#a627fc32ab8005abbd085b5b58022e5f2", null ],
+    [ "Stroke", "interface_luthetus_1_1_extensions_1_1_dot_net_1_1_dot_net_solutions_1_1_models_1_1_internals_1_11576b67939c644663d3d1c72de6197fa.html#a38eb3f4a11c081cebdb4386931b48192", null ]
+];

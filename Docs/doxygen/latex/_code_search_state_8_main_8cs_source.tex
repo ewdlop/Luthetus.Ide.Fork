@@ -1,0 +1,84 @@
+\doxysection{Code\+Search\+State.\+Main.\+cs}
+\hypertarget{_code_search_state_8_main_8cs_source}{}\label{_code_search_state_8_main_8cs_source}\index{Source/Lib/Ide/Ide.RazorLib/CodeSearches/States/CodeSearchState.Main.cs@{Source/Lib/Ide/Ide.RazorLib/CodeSearches/States/CodeSearchState.Main.cs}}
+\mbox{\hyperlink{_code_search_state_8_main_8cs}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{_code_search_state_8_main_8cs_source_l00001}00001\ \textcolor{keyword}{using\ }System.Collections.Immutable;}
+\DoxyCodeLine{\Hypertarget{_code_search_state_8_main_8cs_source_l00002}00002\ \textcolor{keyword}{using\ }Fluxor;}
+\DoxyCodeLine{\Hypertarget{_code_search_state_8_main_8cs_source_l00003}00003\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_luthetus_1_1_common_1_1_razor_lib_1_1_keys_1_1_models}{Luthetus.Common.RazorLib.Keys.Models}};}
+\DoxyCodeLine{\Hypertarget{_code_search_state_8_main_8cs_source_l00004}00004\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_luthetus_1_1_common_1_1_razor_lib_1_1_dimensions_1_1_models}{Luthetus.Common.RazorLib.Dimensions.Models}};}
+\DoxyCodeLine{\Hypertarget{_code_search_state_8_main_8cs_source_l00005}00005\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_luthetus_1_1_common_1_1_razor_lib_1_1_resizes_1_1_displays}{Luthetus.Common.RazorLib.Resizes.Displays}};}
+\DoxyCodeLine{\Hypertarget{_code_search_state_8_main_8cs_source_l00006}00006\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_luthetus_1_1_common_1_1_razor_lib_1_1_tree_views_1_1_models}{Luthetus.Common.RazorLib.TreeViews.Models}};}
+\DoxyCodeLine{\Hypertarget{_code_search_state_8_main_8cs_source_l00007}00007\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_luthetus_1_1_ide_1_1_razor_lib_1_1_code_searches_1_1_models}{Luthetus.Ide.RazorLib.CodeSearches.Models}};}
+\DoxyCodeLine{\Hypertarget{_code_search_state_8_main_8cs_source_l00008}00008\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models}{Luthetus.TextEditor.RazorLib.TextEditors.Models}};}
+\DoxyCodeLine{\Hypertarget{_code_search_state_8_main_8cs_source_l00009}00009\ }
+\DoxyCodeLine{\Hypertarget{_code_search_state_8_main_8cs_source_l00010}00010\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespace_luthetus_1_1_ide_1_1_razor_lib_1_1_code_searches_1_1_states}{Luthetus.Ide.RazorLib.CodeSearches.States}};}
+\DoxyCodeLine{\Hypertarget{_code_search_state_8_main_8cs_source_l00011}00011\ }
+\DoxyCodeLine{\Hypertarget{_code_search_state_8_main_8cs_source_l00012}00012\ [FeatureState]}
+\DoxyCodeLine{\Hypertarget{_code_search_state_8_main_8cs_source_l00013}\mbox{\hyperlink{namespace_luthetus_1_1_ide_1_1_razor_lib_1_1_code_searches_1_1_states_ac1d88387c5f728964f2cae3922bb16ac}{00013}}\ \textcolor{keyword}{public}\ partial\ record\ \mbox{\hyperlink{namespace_luthetus_1_1_ide_1_1_razor_lib_1_1_code_searches_1_1_states_a77f3625f64eb29720d2fcade142d2a0c}{CodeSearchState}}(}
+\DoxyCodeLine{\Hypertarget{_code_search_state_8_main_8cs_source_l00014}00014\ \ \ \ \ \textcolor{keywordtype}{string}\ Query,}
+\DoxyCodeLine{\Hypertarget{_code_search_state_8_main_8cs_source_l00015}00015\ \ \ \ \ \textcolor{keywordtype}{string}?\ StartingAbsolutePathForSearch,}
+\DoxyCodeLine{\Hypertarget{_code_search_state_8_main_8cs_source_l00016}00016\ \ \ \ \ \mbox{\hyperlink{namespace_luthetus_1_1_ide_1_1_razor_lib_1_1_code_searches_1_1_models_a39824070c03194e33dc459068a7b66de}{CodeSearchFilterKind}}\ \mbox{\hyperlink{namespace_luthetus_1_1_ide_1_1_razor_lib_1_1_code_searches_1_1_models_a39824070c03194e33dc459068a7b66de}{CodeSearchFilterKind}},}
+\DoxyCodeLine{\Hypertarget{_code_search_state_8_main_8cs_source_l00017}00017\ \ \ \ \ ImmutableList<string>\ ResultList,}
+\DoxyCodeLine{\Hypertarget{_code_search_state_8_main_8cs_source_l00018}00018\ \ \ \ \ \textcolor{keywordtype}{string}\ PreviewFilePath,}
+\DoxyCodeLine{\Hypertarget{_code_search_state_8_main_8cs_source_l00019}00019\ \ \ \ \ Key<TextEditorViewModel>\ PreviewViewModelKey)}
+\DoxyCodeLine{\Hypertarget{_code_search_state_8_main_8cs_source_l00020}00020\ \{}
+\DoxyCodeLine{\Hypertarget{_code_search_state_8_main_8cs_source_l00021}00021\ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keyword}{static}\ readonly\ Key<TreeViewContainer>\ TreeViewCodeSearchContainerKey\ =\ Key<TreeViewContainer>.NewKey();}
+\DoxyCodeLine{\Hypertarget{_code_search_state_8_main_8cs_source_l00022}00022\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_code_search_state_8_main_8cs_source_l00023}00023\ \ \ \ \ \textcolor{keyword}{public}\ \mbox{\hyperlink{namespace_luthetus_1_1_ide_1_1_razor_lib_1_1_code_searches_1_1_states_a77f3625f64eb29720d2fcade142d2a0c}{CodeSearchState}}()\ :\ \textcolor{keyword}{this}(}
+\DoxyCodeLine{\Hypertarget{_code_search_state_8_main_8cs_source_l00024}00024\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{string}.Empty,}
+\DoxyCodeLine{\Hypertarget{_code_search_state_8_main_8cs_source_l00025}00025\ \ \ \ \ \ \ \ \ \textcolor{keyword}{null},}
+\DoxyCodeLine{\Hypertarget{_code_search_state_8_main_8cs_source_l00026}00026\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespace_luthetus_1_1_ide_1_1_razor_lib_1_1_code_searches_1_1_models_a39824070c03194e33dc459068a7b66de}{CodeSearchFilterKind}}.None,}
+\DoxyCodeLine{\Hypertarget{_code_search_state_8_main_8cs_source_l00027}00027\ \ \ \ \ \ \ \ \ ImmutableList<string>.Empty,}
+\DoxyCodeLine{\Hypertarget{_code_search_state_8_main_8cs_source_l00028}00028\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{string}.Empty,}
+\DoxyCodeLine{\Hypertarget{_code_search_state_8_main_8cs_source_l00029}00029\ \ \ \ \ \ \ \ \ Key<TextEditorViewModel>.Empty)}
+\DoxyCodeLine{\Hypertarget{_code_search_state_8_main_8cs_source_l00030}00030\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_code_search_state_8_main_8cs_source_l00031}00031\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ topContentHeight}}
+\DoxyCodeLine{\Hypertarget{_code_search_state_8_main_8cs_source_l00032}00032\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_code_search_state_8_main_8cs_source_l00033}00033\ \ \ \ \ \ \ \ \ \ \ \ \ var\ topContentHeight\ =\ TopContentElementDimensions.DimensionAttributeList.Single(}
+\DoxyCodeLine{\Hypertarget{_code_search_state_8_main_8cs_source_l00034}00034\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ da\ =>\ da.DimensionAttributeKind\ ==\ \mbox{\hyperlink{namespace_luthetus_1_1_common_1_1_razor_lib_1_1_dimensions_1_1_models_ab42cbfab74a6a286a2eb53313a9e37f0}{DimensionAttributeKind}}.Height);}
+\DoxyCodeLine{\Hypertarget{_code_search_state_8_main_8cs_source_l00035}00035\ }
+\DoxyCodeLine{\Hypertarget{_code_search_state_8_main_8cs_source_l00036}00036\ \ \ \ \ \ \ \ \ \ \ \ \ topContentHeight.DimensionUnitList.AddRange(\textcolor{keyword}{new}[]}
+\DoxyCodeLine{\Hypertarget{_code_search_state_8_main_8cs_source_l00037}00037\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_code_search_state_8_main_8cs_source_l00038}00038\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{new}\ \mbox{\hyperlink{class_luthetus_1_1_common_1_1_razor_lib_1_1_dimensions_1_1_models_1_1_dimension_unit}{DimensionUnit}}}
+\DoxyCodeLine{\Hypertarget{_code_search_state_8_main_8cs_source_l00039}00039\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_code_search_state_8_main_8cs_source_l00040}00040\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Value\ =\ 40,}
+\DoxyCodeLine{\Hypertarget{_code_search_state_8_main_8cs_source_l00041}00041\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespace_luthetus_1_1_common_1_1_razor_lib_1_1_dimensions_1_1_models_ac011df04cfd59ccb7947a4ced86ba4f6}{DimensionUnitKind}}\ =\ \mbox{\hyperlink{namespace_luthetus_1_1_common_1_1_razor_lib_1_1_dimensions_1_1_models_ac011df04cfd59ccb7947a4ced86ba4f6a37be07209f53a5d636d5c904ca9ae64c}{DimensionUnitKind.Percentage}}}
+\DoxyCodeLine{\Hypertarget{_code_search_state_8_main_8cs_source_l00042}00042\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \},}
+\DoxyCodeLine{\Hypertarget{_code_search_state_8_main_8cs_source_l00043}00043\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{new}\ \mbox{\hyperlink{class_luthetus_1_1_common_1_1_razor_lib_1_1_dimensions_1_1_models_1_1_dimension_unit}{DimensionUnit}}}
+\DoxyCodeLine{\Hypertarget{_code_search_state_8_main_8cs_source_l00044}00044\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_code_search_state_8_main_8cs_source_l00045}00045\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Value\ =\ 0,}
+\DoxyCodeLine{\Hypertarget{_code_search_state_8_main_8cs_source_l00046}00046\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespace_luthetus_1_1_common_1_1_razor_lib_1_1_dimensions_1_1_models_ac011df04cfd59ccb7947a4ced86ba4f6}{DimensionUnitKind}}\ =\ \mbox{\hyperlink{namespace_luthetus_1_1_common_1_1_razor_lib_1_1_dimensions_1_1_models_ac011df04cfd59ccb7947a4ced86ba4f6}{DimensionUnitKind}}.Pixels,}
+\DoxyCodeLine{\Hypertarget{_code_search_state_8_main_8cs_source_l00047}00047\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespace_luthetus_1_1_common_1_1_razor_lib_1_1_dimensions_1_1_models_a9685f3cd2b69870157680e43d93c011e}{DimensionOperatorKind}}\ =\ \mbox{\hyperlink{namespace_luthetus_1_1_common_1_1_razor_lib_1_1_dimensions_1_1_models_a9685f3cd2b69870157680e43d93c011e}{DimensionOperatorKind}}.Subtract,}
+\DoxyCodeLine{\Hypertarget{_code_search_state_8_main_8cs_source_l00048}00048\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Purpose\ =\ DimensionUnitFacts.Purposes.OFFSET,}
+\DoxyCodeLine{\Hypertarget{_code_search_state_8_main_8cs_source_l00049}00049\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \},}
+\DoxyCodeLine{\Hypertarget{_code_search_state_8_main_8cs_source_l00050}00050\ \ \ \ \ \ \ \ \ \ \ \ \ \});}
+\DoxyCodeLine{\Hypertarget{_code_search_state_8_main_8cs_source_l00051}00051\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_code_search_state_8_main_8cs_source_l00052}00052\ }
+\DoxyCodeLine{\Hypertarget{_code_search_state_8_main_8cs_source_l00053}00053\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ bottomContentHeight}}
+\DoxyCodeLine{\Hypertarget{_code_search_state_8_main_8cs_source_l00054}00054\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_code_search_state_8_main_8cs_source_l00055}00055\ \ \ \ \ \ \ \ \ \ \ \ \ var\ bottomContentHeight\ =\ BottomContentElementDimensions.DimensionAttributeList.Single(}
+\DoxyCodeLine{\Hypertarget{_code_search_state_8_main_8cs_source_l00056}00056\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ da\ =>\ da.DimensionAttributeKind\ ==\ \mbox{\hyperlink{namespace_luthetus_1_1_common_1_1_razor_lib_1_1_dimensions_1_1_models_ab42cbfab74a6a286a2eb53313a9e37f0}{DimensionAttributeKind}}.Height);}
+\DoxyCodeLine{\Hypertarget{_code_search_state_8_main_8cs_source_l00057}00057\ }
+\DoxyCodeLine{\Hypertarget{_code_search_state_8_main_8cs_source_l00058}00058\ \ \ \ \ \ \ \ \ \ \ \ \ bottomContentHeight.DimensionUnitList.AddRange(\textcolor{keyword}{new}[]}
+\DoxyCodeLine{\Hypertarget{_code_search_state_8_main_8cs_source_l00059}00059\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_code_search_state_8_main_8cs_source_l00060}00060\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{new}\ \mbox{\hyperlink{class_luthetus_1_1_common_1_1_razor_lib_1_1_dimensions_1_1_models_1_1_dimension_unit}{DimensionUnit}}}
+\DoxyCodeLine{\Hypertarget{_code_search_state_8_main_8cs_source_l00061}00061\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_code_search_state_8_main_8cs_source_l00062}00062\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Value\ =\ 60,}
+\DoxyCodeLine{\Hypertarget{_code_search_state_8_main_8cs_source_l00063}00063\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespace_luthetus_1_1_common_1_1_razor_lib_1_1_dimensions_1_1_models_ac011df04cfd59ccb7947a4ced86ba4f6}{DimensionUnitKind}}\ =\ \mbox{\hyperlink{namespace_luthetus_1_1_common_1_1_razor_lib_1_1_dimensions_1_1_models_ac011df04cfd59ccb7947a4ced86ba4f6a37be07209f53a5d636d5c904ca9ae64c}{DimensionUnitKind.Percentage}}}
+\DoxyCodeLine{\Hypertarget{_code_search_state_8_main_8cs_source_l00064}00064\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \},}
+\DoxyCodeLine{\Hypertarget{_code_search_state_8_main_8cs_source_l00065}00065\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{new}\ \mbox{\hyperlink{class_luthetus_1_1_common_1_1_razor_lib_1_1_dimensions_1_1_models_1_1_dimension_unit}{DimensionUnit}}}
+\DoxyCodeLine{\Hypertarget{_code_search_state_8_main_8cs_source_l00066}00066\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_code_search_state_8_main_8cs_source_l00067}00067\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Value\ =\ 0,}
+\DoxyCodeLine{\Hypertarget{_code_search_state_8_main_8cs_source_l00068}00068\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespace_luthetus_1_1_common_1_1_razor_lib_1_1_dimensions_1_1_models_ac011df04cfd59ccb7947a4ced86ba4f6}{DimensionUnitKind}}\ =\ \mbox{\hyperlink{namespace_luthetus_1_1_common_1_1_razor_lib_1_1_dimensions_1_1_models_ac011df04cfd59ccb7947a4ced86ba4f6}{DimensionUnitKind}}.Pixels,}
+\DoxyCodeLine{\Hypertarget{_code_search_state_8_main_8cs_source_l00069}00069\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespace_luthetus_1_1_common_1_1_razor_lib_1_1_dimensions_1_1_models_a9685f3cd2b69870157680e43d93c011e}{DimensionOperatorKind}}\ =\ \mbox{\hyperlink{namespace_luthetus_1_1_common_1_1_razor_lib_1_1_dimensions_1_1_models_a9685f3cd2b69870157680e43d93c011e}{DimensionOperatorKind}}.Subtract,}
+\DoxyCodeLine{\Hypertarget{_code_search_state_8_main_8cs_source_l00070}00070\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Purpose\ =\ DimensionUnitFacts.Purposes.OFFSET,}
+\DoxyCodeLine{\Hypertarget{_code_search_state_8_main_8cs_source_l00071}00071\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \},}
+\DoxyCodeLine{\Hypertarget{_code_search_state_8_main_8cs_source_l00072}00072\ \ \ \ \ \ \ \ \ \ \ \ \ \});}
+\DoxyCodeLine{\Hypertarget{_code_search_state_8_main_8cs_source_l00073}00073\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_code_search_state_8_main_8cs_source_l00074}00074\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_code_search_state_8_main_8cs_source_l00075}00075\ }
+\DoxyCodeLine{\Hypertarget{_code_search_state_8_main_8cs_source_l00076}00076\ \ \ \ \ \textcolor{keyword}{public}\ \mbox{\hyperlink{class_luthetus_1_1_common_1_1_razor_lib_1_1_dimensions_1_1_models_1_1_element_dimensions}{ElementDimensions}}\ TopContentElementDimensions\ =\ \textcolor{keyword}{new}();}
+\DoxyCodeLine{\Hypertarget{_code_search_state_8_main_8cs_source_l00077}00077\ \ \ \ \ \textcolor{keyword}{public}\ \mbox{\hyperlink{class_luthetus_1_1_common_1_1_razor_lib_1_1_dimensions_1_1_models_1_1_element_dimensions}{ElementDimensions}}\ BottomContentElementDimensions\ =\ \textcolor{keyword}{new}();}
+\DoxyCodeLine{\Hypertarget{_code_search_state_8_main_8cs_source_l00078}00078\ \}}
+
+\end{DoxyCode}

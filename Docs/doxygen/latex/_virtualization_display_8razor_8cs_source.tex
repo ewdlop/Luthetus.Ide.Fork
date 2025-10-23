@@ -1,0 +1,133 @@
+\doxysection{Virtualization\+Display.\+razor.\+cs}
+\hypertarget{_virtualization_display_8razor_8cs_source}{}\label{_virtualization_display_8razor_8cs_source}\index{Source/Lib/TextEditor/Virtualizations/Displays/VirtualizationDisplay.razor.cs@{Source/Lib/TextEditor/Virtualizations/Displays/VirtualizationDisplay.razor.cs}}
+\mbox{\hyperlink{_virtualization_display_8razor_8cs}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{_virtualization_display_8razor_8cs_source_l00001}00001\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_virtualizations_1_1_models}{Luthetus.TextEditor.RazorLib.Virtualizations.Models}};}
+\DoxyCodeLine{\Hypertarget{_virtualization_display_8razor_8cs_source_l00002}00002\ \textcolor{keyword}{using\ }Microsoft.AspNetCore.Components;}
+\DoxyCodeLine{\Hypertarget{_virtualization_display_8razor_8cs_source_l00003}00003\ \textcolor{keyword}{using\ }Microsoft.JSInterop;}
+\DoxyCodeLine{\Hypertarget{_virtualization_display_8razor_8cs_source_l00004}00004\ }
+\DoxyCodeLine{\Hypertarget{_virtualization_display_8razor_8cs_source_l00005}00005\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_virtualizations_1_1_displays}{Luthetus.TextEditor.RazorLib.Virtualizations.Displays}};}
+\DoxyCodeLine{\Hypertarget{_virtualization_display_8razor_8cs_source_l00006}00006\ }
+\DoxyCodeLine{\Hypertarget{_virtualization_display_8razor_8cs_source_l00007}\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_virtualizations_1_1_displays_1_1_virtualization_display}{00007}}\ \textcolor{keyword}{public}\ \textcolor{keyword}{partial\ class\ }\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_virtualizations_1_1_displays_1_1_virtualization_display}{VirtualizationDisplay}}\ :\ ComponentBase,\ IDisposable}
+\DoxyCodeLine{\Hypertarget{_virtualization_display_8razor_8cs_source_l00008}00008\ \{}
+\DoxyCodeLine{\Hypertarget{_virtualization_display_8razor_8cs_source_l00009}00009\ \ \ \ \ [Inject]}
+\DoxyCodeLine{\Hypertarget{_virtualization_display_8razor_8cs_source_l00010}00010\ \ \ \ \ \textcolor{keyword}{private}\ IJSRuntime\ JsRuntime\ \{\ \textcolor{keyword}{get};\ \textcolor{keyword}{set};\ \}\ =\ \textcolor{keyword}{null}!;}
+\DoxyCodeLine{\Hypertarget{_virtualization_display_8razor_8cs_source_l00011}00011\ \ \ \ \ [Inject]}
+\DoxyCodeLine{\Hypertarget{_virtualization_display_8razor_8cs_source_l00012}00012\ \ \ \ \ \textcolor{keyword}{private}\ \mbox{\hyperlink{interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_i_text_editor_service}{ITextEditorService}}\ TextEditorService\ \{\ \textcolor{keyword}{get};\ \textcolor{keyword}{set};\ \}\ =\ \textcolor{keyword}{null}!;}
+\DoxyCodeLine{\Hypertarget{_virtualization_display_8razor_8cs_source_l00013}00013\ }
+\DoxyCodeLine{\Hypertarget{_virtualization_display_8razor_8cs_source_l00014}00014\ \ \ \ \ [Parameter,\ EditorRequired]}
+\DoxyCodeLine{\Hypertarget{_virtualization_display_8razor_8cs_source_l00015}\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_virtualizations_1_1_displays_1_1_virtualization_display_af81b917d64784c17f06015a5ed1378d4}{00015}}\ \ \ \ \ \textcolor{keyword}{public}\ \mbox{\hyperlink{interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_virtualizations_1_1_models_1_1_i_virtualization_result_without_type_mask}{IVirtualizationResultWithoutTypeMask}}\ \mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_virtualizations_1_1_displays_1_1_virtualization_display_af81b917d64784c17f06015a5ed1378d4}{VirtualizationResultWithoutTypeMask}}\ \{\ \textcolor{keyword}{get};\ \textcolor{keyword}{set};\ \}\ =\ \textcolor{keyword}{null}!;}
+\DoxyCodeLine{\Hypertarget{_virtualization_display_8razor_8cs_source_l00016}00016\ \ \ \ \ [Parameter,\ EditorRequired]}
+\DoxyCodeLine{\Hypertarget{_virtualization_display_8razor_8cs_source_l00017}\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_virtualizations_1_1_displays_1_1_virtualization_display_a8fbea9310f9c58ac681a9c9a4a28268b}{00017}}\ \ \ \ \ \textcolor{keyword}{public}\ Func<VirtualizationRequest,\ Task>?\ \mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_virtualizations_1_1_displays_1_1_virtualization_display_a8fbea9310f9c58ac681a9c9a4a28268b}{ItemsProviderFunc}}\ \{\ \textcolor{keyword}{get};\ \textcolor{keyword}{set};\ \}}
+\DoxyCodeLine{\Hypertarget{_virtualization_display_8razor_8cs_source_l00018}00018\ }
+\DoxyCodeLine{\Hypertarget{_virtualization_display_8razor_8cs_source_l00019}00019\ \ \ \ \ [Parameter]}
+\DoxyCodeLine{\Hypertarget{_virtualization_display_8razor_8cs_source_l00020}\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_virtualizations_1_1_displays_1_1_virtualization_display_a3e8f9d4fbea8be80ecab20d5de4154fa}{00020}}\ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_virtualizations_1_1_displays_1_1_virtualization_display_a3e8f9d4fbea8be80ecab20d5de4154fa}{UseHorizontalVirtualization}}\ \{\ \textcolor{keyword}{get};\ \textcolor{keyword}{set};\ \}\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{\Hypertarget{_virtualization_display_8razor_8cs_source_l00021}00021\ \ \ \ \ [Parameter]}
+\DoxyCodeLine{\Hypertarget{_virtualization_display_8razor_8cs_source_l00022}\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_virtualizations_1_1_displays_1_1_virtualization_display_aea672c304edecc2c8962db57700958f2}{00022}}\ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_virtualizations_1_1_displays_1_1_virtualization_display_aea672c304edecc2c8962db57700958f2}{UseVerticalVirtualization}}\ \{\ \textcolor{keyword}{get};\ \textcolor{keyword}{set};\ \}\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{\Hypertarget{_virtualization_display_8razor_8cs_source_l00026}00026\ \ \ \ \ [Parameter]}
+\DoxyCodeLine{\Hypertarget{_virtualization_display_8razor_8cs_source_l00027}\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_virtualizations_1_1_displays_1_1_virtualization_display_a349214efacdca7b9dad53cde7d6e2e7e}{00027}}\ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_virtualizations_1_1_displays_1_1_virtualization_display_a349214efacdca7b9dad53cde7d6e2e7e}{UseIntersectionObserver}}\ \{\ \textcolor{keyword}{get};\ \textcolor{keyword}{set};\ \}\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{\Hypertarget{_virtualization_display_8razor_8cs_source_l00028}00028\ }
+\DoxyCodeLine{\Hypertarget{_virtualization_display_8razor_8cs_source_l00029}00029\ \ \ \ \ \textcolor{keyword}{private}\ readonly\ Guid\ \_virtualizationDisplayGuid\ =\ Guid.NewGuid();}
+\DoxyCodeLine{\Hypertarget{_virtualization_display_8razor_8cs_source_l00030}00030\ \ \ \ \ \textcolor{keyword}{private}\ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_virtualizations_1_1_models_af39186406fe3f57070e516fc1b225b42}{VirtualizationRequest}}\ \_request\ =\ \textcolor{keyword}{null}!;}
+\DoxyCodeLine{\Hypertarget{_virtualization_display_8razor_8cs_source_l00031}00031\ \ \ \ \ \textcolor{keyword}{private}\ ElementReference\ \_scrollableParentFinder;}
+\DoxyCodeLine{\Hypertarget{_virtualization_display_8razor_8cs_source_l00032}00032\ \ \ \ \ \textcolor{keyword}{private}\ CancellationTokenSource\ \_scrollEventCancellationTokenSource\ =\ \textcolor{keyword}{new}();}
+\DoxyCodeLine{\Hypertarget{_virtualization_display_8razor_8cs_source_l00033}00033\ }
+\DoxyCodeLine{\Hypertarget{_virtualization_display_8razor_8cs_source_l00034}00034\ \ \ \ \ \textcolor{keyword}{private}\ \textcolor{keywordtype}{string}\ LeftBoundaryElementId\ =>\ \$\textcolor{stringliteral}{"{}luth\_te\_left-\/virtualization-\/boundary-\/display-\/\{\_virtualizationDisplayGuid\}"{}};}
+\DoxyCodeLine{\Hypertarget{_virtualization_display_8razor_8cs_source_l00035}00035\ \ \ \ \ \textcolor{keyword}{private}\ \textcolor{keywordtype}{string}\ RightBoundaryElementId\ =>\ \$\textcolor{stringliteral}{"{}luth\_te\_right-\/virtualization-\/boundary-\/display-\/\{\_virtualizationDisplayGuid\}"{}};}
+\DoxyCodeLine{\Hypertarget{_virtualization_display_8razor_8cs_source_l00036}00036\ \ \ \ \ \textcolor{keyword}{private}\ \textcolor{keywordtype}{string}\ TopBoundaryElementId\ =>\ \$\textcolor{stringliteral}{"{}luth\_te\_top-\/virtualization-\/boundary-\/display-\/\{\_virtualizationDisplayGuid\}"{}};}
+\DoxyCodeLine{\Hypertarget{_virtualization_display_8razor_8cs_source_l00037}00037\ \ \ \ \ \textcolor{keyword}{private}\ \textcolor{keywordtype}{string}\ BottomBoundaryElementId\ =>\ \$\textcolor{stringliteral}{"{}luth\_te\_bottom-\/virtualization-\/boundary-\/display-\/\{\_virtualizationDisplayGuid\}"{}};}
+\DoxyCodeLine{\Hypertarget{_virtualization_display_8razor_8cs_source_l00038}00038\ }
+\DoxyCodeLine{\Hypertarget{_virtualization_display_8razor_8cs_source_l00039}\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_virtualizations_1_1_displays_1_1_virtualization_display_af87bbbb144a62a819cbe639cd0d0ca70}{00039}}\ \ \ \ \ \textcolor{keyword}{protected}\ \textcolor{keyword}{override}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_virtualizations_1_1_displays_1_1_virtualization_display_af87bbbb144a62a819cbe639cd0d0ca70}{OnInitialized}}()}
+\DoxyCodeLine{\Hypertarget{_virtualization_display_8razor_8cs_source_l00040}00040\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_virtualization_display_8razor_8cs_source_l00041}00041\ \ \ \ \ \ \ \ \ \_scrollEventCancellationTokenSource.Cancel();}
+\DoxyCodeLine{\Hypertarget{_virtualization_display_8razor_8cs_source_l00042}00042\ \ \ \ \ \ \ \ \ \_scrollEventCancellationTokenSource\ =\ \textcolor{keyword}{new}\ CancellationTokenSource();}
+\DoxyCodeLine{\Hypertarget{_virtualization_display_8razor_8cs_source_l00043}00043\ }
+\DoxyCodeLine{\Hypertarget{_virtualization_display_8razor_8cs_source_l00044}00044\ \ \ \ \ \ \ \ \ \_request\ =\ \textcolor{keyword}{new}(\textcolor{keyword}{new}\ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_virtualizations_1_1_models_a36ebfe6618e7322c5fe8c00a4f7e34e4}{VirtualizationScrollPosition}}(0,\ 0,\ 0,\ 0),\ \_scrollEventCancellationTokenSource.Token);}
+\DoxyCodeLine{\Hypertarget{_virtualization_display_8razor_8cs_source_l00045}00045\ }
+\DoxyCodeLine{\Hypertarget{_virtualization_display_8razor_8cs_source_l00046}00046\ \ \ \ \ \ \ \ \ base.OnInitialized();}
+\DoxyCodeLine{\Hypertarget{_virtualization_display_8razor_8cs_source_l00047}00047\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_virtualization_display_8razor_8cs_source_l00048}00048\ }
+\DoxyCodeLine{\Hypertarget{_virtualization_display_8razor_8cs_source_l00049}\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_virtualizations_1_1_displays_1_1_virtualization_display_aebf2776226391ba9d14716034bcae11f}{00049}}\ \ \ \ \ \textcolor{keyword}{protected}\ \textcolor{keyword}{override}\ async\ Task\ \mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_virtualizations_1_1_displays_1_1_virtualization_display_aebf2776226391ba9d14716034bcae11f}{OnAfterRenderAsync}}(\textcolor{keywordtype}{bool}\ firstRender)}
+\DoxyCodeLine{\Hypertarget{_virtualization_display_8razor_8cs_source_l00050}00050\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_virtualization_display_8razor_8cs_source_l00051}00051\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (firstRender)}
+\DoxyCodeLine{\Hypertarget{_virtualization_display_8razor_8cs_source_l00052}00052\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_virtualization_display_8razor_8cs_source_l00053}00053\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_virtualizations_1_1_displays_1_1_virtualization_display_a349214efacdca7b9dad53cde7d6e2e7e}{UseIntersectionObserver}})}
+\DoxyCodeLine{\Hypertarget{_virtualization_display_8razor_8cs_source_l00054}00054\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_virtualization_display_8razor_8cs_source_l00055}00055\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ var\ boundaryIdList\ =\ \textcolor{keyword}{new}\ List<object>();}
+\DoxyCodeLine{\Hypertarget{_virtualization_display_8razor_8cs_source_l00056}00056\ }
+\DoxyCodeLine{\Hypertarget{_virtualization_display_8razor_8cs_source_l00057}00057\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_virtualizations_1_1_displays_1_1_virtualization_display_a3e8f9d4fbea8be80ecab20d5de4154fa}{UseHorizontalVirtualization}})}
+\DoxyCodeLine{\Hypertarget{_virtualization_display_8razor_8cs_source_l00058}00058\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_virtualization_display_8razor_8cs_source_l00059}00059\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ boundaryIdList.AddRange(\textcolor{keyword}{new}[]}
+\DoxyCodeLine{\Hypertarget{_virtualization_display_8razor_8cs_source_l00060}00060\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_virtualization_display_8razor_8cs_source_l00061}00061\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ LeftBoundaryElementId,}
+\DoxyCodeLine{\Hypertarget{_virtualization_display_8razor_8cs_source_l00062}00062\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ RightBoundaryElementId,}
+\DoxyCodeLine{\Hypertarget{_virtualization_display_8razor_8cs_source_l00063}00063\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \});}
+\DoxyCodeLine{\Hypertarget{_virtualization_display_8razor_8cs_source_l00064}00064\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_virtualization_display_8razor_8cs_source_l00065}00065\ }
+\DoxyCodeLine{\Hypertarget{_virtualization_display_8razor_8cs_source_l00066}00066\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_virtualizations_1_1_displays_1_1_virtualization_display_aea672c304edecc2c8962db57700958f2}{UseVerticalVirtualization}})}
+\DoxyCodeLine{\Hypertarget{_virtualization_display_8razor_8cs_source_l00067}00067\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_virtualization_display_8razor_8cs_source_l00068}00068\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ boundaryIdList.AddRange(\textcolor{keyword}{new}[]}
+\DoxyCodeLine{\Hypertarget{_virtualization_display_8razor_8cs_source_l00069}00069\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_virtualization_display_8razor_8cs_source_l00070}00070\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ TopBoundaryElementId,}
+\DoxyCodeLine{\Hypertarget{_virtualization_display_8razor_8cs_source_l00071}00071\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ BottomBoundaryElementId,}
+\DoxyCodeLine{\Hypertarget{_virtualization_display_8razor_8cs_source_l00072}00072\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \});}
+\DoxyCodeLine{\Hypertarget{_virtualization_display_8razor_8cs_source_l00073}00073\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_virtualization_display_8razor_8cs_source_l00074}00074\ }
+\DoxyCodeLine{\Hypertarget{_virtualization_display_8razor_8cs_source_l00075}00075\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*}}
+\DoxyCodeLine{\Hypertarget{_virtualization_display_8razor_8cs_source_l00076}00076\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ await\ TextEditorService.JsRuntimeTextEditorApi}}
+\DoxyCodeLine{\Hypertarget{_virtualization_display_8razor_8cs_source_l00077}00077\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ .InitializeVirtualizationIntersectionObserver(}}
+\DoxyCodeLine{\Hypertarget{_virtualization_display_8razor_8cs_source_l00078}00078\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \_virtualizationDisplayGuid.ToString(),}}
+\DoxyCodeLine{\Hypertarget{_virtualization_display_8razor_8cs_source_l00079}00079\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ DotNetObjectReference.Create(this),}}
+\DoxyCodeLine{\Hypertarget{_virtualization_display_8razor_8cs_source_l00080}00080\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \_scrollableParentFinder,}}
+\DoxyCodeLine{\Hypertarget{_virtualization_display_8razor_8cs_source_l00081}00081\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ boundaryIdList)}}
+\DoxyCodeLine{\Hypertarget{_virtualization_display_8razor_8cs_source_l00082}00082\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ .ConfigureAwait(false);}}
+\DoxyCodeLine{\Hypertarget{_virtualization_display_8razor_8cs_source_l00083}00083\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{_virtualization_display_8razor_8cs_source_l00084}00084\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_virtualization_display_8razor_8cs_source_l00085}00085\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_virtualization_display_8razor_8cs_source_l00086}00086\ }
+\DoxyCodeLine{\Hypertarget{_virtualization_display_8razor_8cs_source_l00087}00087\ \ \ \ \ \ \ \ \ await\ base.OnAfterRenderAsync(firstRender);}
+\DoxyCodeLine{\Hypertarget{_virtualization_display_8razor_8cs_source_l00088}00088\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_virtualization_display_8razor_8cs_source_l00089}00089\ }
+\DoxyCodeLine{\Hypertarget{_virtualization_display_8razor_8cs_source_l00090}00090\ \ \ \ \ [JSInvokable]}
+\DoxyCodeLine{\Hypertarget{_virtualization_display_8razor_8cs_source_l00091}\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_virtualizations_1_1_displays_1_1_virtualization_display_a764212024a5b69087d1901f66a65aca3}{00091}}\ \ \ \ \ \textcolor{keyword}{public}\ async\ Task\ \mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_virtualizations_1_1_displays_1_1_virtualization_display_a764212024a5b69087d1901f66a65aca3}{OnScrollEventAsync}}(\mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_virtualizations_1_1_models_a36ebfe6618e7322c5fe8c00a4f7e34e4}{VirtualizationScrollPosition}}\ scrollPosition)}
+\DoxyCodeLine{\Hypertarget{_virtualization_display_8razor_8cs_source_l00092}00092\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_virtualization_display_8razor_8cs_source_l00093}00093\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ TODO:\ (this\ is\ more\ so\ just\ an\ idea\ or\ question).\ Should\ JavaScript...}}
+\DoxyCodeLine{\Hypertarget{_virtualization_display_8razor_8cs_source_l00094}00094\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ ...state\ the\ scrollPosition\ to\ be\ used\ in\ a\ 'VirtualizationRequest',}}
+\DoxyCodeLine{\Hypertarget{_virtualization_display_8razor_8cs_source_l00095}00095\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ or\ should\ JavaScript\ just\ notify\ C\#\ that\ the\ rendered\ content\ ran\ out?}}
+\DoxyCodeLine{\Hypertarget{_virtualization_display_8razor_8cs_source_l00096}00096\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ Theres\ some\ code\ that\ takes\ C\#\ word\ for\ what\ the\ scrollPosition\ is,}}
+\DoxyCodeLine{\Hypertarget{_virtualization_display_8razor_8cs_source_l00097}00097\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ and\ there\ is\ code\ that\ takes\ JavaScripts\ word\ for\ what\ the\ scrollPosition\ is.}}
+\DoxyCodeLine{\Hypertarget{_virtualization_display_8razor_8cs_source_l00098}00098\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ |}}
+\DoxyCodeLine{\Hypertarget{_virtualization_display_8razor_8cs_source_l00099}00099\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ One\ can\ at\ times\ randomly\ get\ an\ empty\ part\ of\ the\ text\ editor\ rendered}}
+\DoxyCodeLine{\Hypertarget{_virtualization_display_8razor_8cs_source_l00100}00100\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ because\ of\ a\ discrepancy\ with\ the\ C\#\ scrollPosition\ and\ the\ JavaScript\ scrollPosition.\ (2024-\/05-\/29)}}
+\DoxyCodeLine{\Hypertarget{_virtualization_display_8razor_8cs_source_l00101}00101\ }
+\DoxyCodeLine{\Hypertarget{_virtualization_display_8razor_8cs_source_l00102}00102\ }
+\DoxyCodeLine{\Hypertarget{_virtualization_display_8razor_8cs_source_l00103}00103\ \ \ \ \ \ \ \ \ \_scrollEventCancellationTokenSource.Cancel();}
+\DoxyCodeLine{\Hypertarget{_virtualization_display_8razor_8cs_source_l00104}00104\ \ \ \ \ \ \ \ \ \_scrollEventCancellationTokenSource\ =\ \textcolor{keyword}{new}\ CancellationTokenSource();}
+\DoxyCodeLine{\Hypertarget{_virtualization_display_8razor_8cs_source_l00105}00105\ }
+\DoxyCodeLine{\Hypertarget{_virtualization_display_8razor_8cs_source_l00106}00106\ \ \ \ \ \ \ \ \ \_request\ =\ \textcolor{keyword}{new}\ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_virtualizations_1_1_models_af39186406fe3f57070e516fc1b225b42}{VirtualizationRequest}}(scrollPosition,\ \_scrollEventCancellationTokenSource.Token);}
+\DoxyCodeLine{\Hypertarget{_virtualization_display_8razor_8cs_source_l00107}00107\ }
+\DoxyCodeLine{\Hypertarget{_virtualization_display_8razor_8cs_source_l00108}00108\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_virtualizations_1_1_displays_1_1_virtualization_display_a8fbea9310f9c58ac681a9c9a4a28268b}{ItemsProviderFunc}}\ is\ not\ \textcolor{keyword}{null})}
+\DoxyCodeLine{\Hypertarget{_virtualization_display_8razor_8cs_source_l00109}00109\ \ \ \ \ \ \ \ \ \ \ \ \ await\ \mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_virtualizations_1_1_displays_1_1_virtualization_display_a8fbea9310f9c58ac681a9c9a4a28268b}{ItemsProviderFunc}}.Invoke(\_request).ConfigureAwait(\textcolor{keyword}{false});}
+\DoxyCodeLine{\Hypertarget{_virtualization_display_8razor_8cs_source_l00110}00110\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_virtualization_display_8razor_8cs_source_l00111}00111\ }
+\DoxyCodeLine{\Hypertarget{_virtualization_display_8razor_8cs_source_l00112}\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_virtualizations_1_1_displays_1_1_virtualization_display_a51b0f5d028cd531a968a8288433a544b}{00112}}\ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_virtualizations_1_1_displays_1_1_virtualization_display_a51b0f5d028cd531a968a8288433a544b}{Dispose}}()}
+\DoxyCodeLine{\Hypertarget{_virtualization_display_8razor_8cs_source_l00113}00113\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_virtualization_display_8razor_8cs_source_l00114}00114\ \ \ \ \ \ \ \ \ \_scrollEventCancellationTokenSource.Cancel();}
+\DoxyCodeLine{\Hypertarget{_virtualization_display_8razor_8cs_source_l00115}00115\ }
+\DoxyCodeLine{\Hypertarget{_virtualization_display_8razor_8cs_source_l00116}00116\ \ \ \ \ \ \ \ \ \textcolor{comment}{/*}}
+\DoxyCodeLine{\Hypertarget{_virtualization_display_8razor_8cs_source_l00117}00117\ \textcolor{comment}{\ \ \ \ \ \ \ \ if\ (UseIntersectionObserver)}}
+\DoxyCodeLine{\Hypertarget{_virtualization_display_8razor_8cs_source_l00118}00118\ \textcolor{comment}{\ \ \ \ \ \ \ \ \{}}
+\DoxyCodeLine{\Hypertarget{_virtualization_display_8razor_8cs_source_l00119}00119\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \_\ =\ Task.Run(async\ ()\ =>}}
+\DoxyCodeLine{\Hypertarget{_virtualization_display_8razor_8cs_source_l00120}00120\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \{}}
+\DoxyCodeLine{\Hypertarget{_virtualization_display_8razor_8cs_source_l00121}00121\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ await\ TextEditorService.JsRuntimeTextEditorApi}}
+\DoxyCodeLine{\Hypertarget{_virtualization_display_8razor_8cs_source_l00122}00122\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ .DisposeVirtualizationIntersectionObserver(}}
+\DoxyCodeLine{\Hypertarget{_virtualization_display_8razor_8cs_source_l00123}00123\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ CancellationToken.None,}}
+\DoxyCodeLine{\Hypertarget{_virtualization_display_8razor_8cs_source_l00124}00124\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \_virtualizationDisplayGuid.ToString())}}
+\DoxyCodeLine{\Hypertarget{_virtualization_display_8razor_8cs_source_l00125}00125\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ .ConfigureAwait(false);}}
+\DoxyCodeLine{\Hypertarget{_virtualization_display_8razor_8cs_source_l00126}00126\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \},\ CancellationToken.None).ConfigureAwait(false);}}
+\DoxyCodeLine{\Hypertarget{_virtualization_display_8razor_8cs_source_l00127}00127\ \textcolor{comment}{\ \ \ \ \ \ \ \ \}}}
+\DoxyCodeLine{\Hypertarget{_virtualization_display_8razor_8cs_source_l00128}00128\ \textcolor{comment}{\ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{_virtualization_display_8razor_8cs_source_l00129}00129\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_virtualization_display_8razor_8cs_source_l00130}00130\ \}}
+
+\end{DoxyCode}

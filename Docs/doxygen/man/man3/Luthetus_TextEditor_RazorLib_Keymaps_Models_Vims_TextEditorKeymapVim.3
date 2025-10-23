@@ -1,0 +1,164 @@
+.TH "Luthetus.TextEditor.RazorLib.Keymaps.Models.Vims.TextEditorKeymapVim" 3 "Version 1.0.0" "Luthetus.Ide" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+Luthetus.TextEditor.RazorLib.Keymaps.Models.Vims.TextEditorKeymapVim
+.SH SYNOPSIS
+.br
+.PP
+.PP
+Inherits \fBLuthetus\&.Common\&.RazorLib\&.Keymaps\&.Models\&.Keymap\fP, and \fBLuthetus\&.TextEditor\&.RazorLib\&.Keymaps\&.Models\&.ITextEditorKeymap\fP\&.
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBTextEditorKeymapVim\fP ()"
+.br
+.ti -1c
+.RI "\fBKey\fP< \fBKeymapLayer\fP > \fBGetLayer\fP (bool hasSelection)"
+.br
+.ti -1c
+.RI "string \fBGetCursorCssClassString\fP ()"
+.br
+.ti -1c
+.RI "string \fBGetCursorCssStyleString\fP (\fBTextEditorModel\fP textEditorModel, \fBTextEditorViewModel\fP textEditorViewModel, \fBTextEditorOptions\fP textEditorOptions)"
+.br
+.ti -1c
+.RI "bool \fBTryMap\fP (\fBKeymapArgs\fP keymapArgument, \fBTextEditorComponentData\fP componentData, out \fBCommandNoType\fP? command)"
+.br
+.RI "TODO: (the following comment was copy and pasted from \fBKeymap\fP)\&.\&.\&. \&.\&.\&.This dictionary typed property is an implementation detail and should be hidden behind an interface\&. | Further details: An integrated terminal is currently being written\&. The keymap for the integrated terminal is intended to capture the keyboard event args\&. \&.\&.\&. This would allow the integrated terminal to then check if the cursor is on the final line of the text editor or not\&. \&.\&.\&. If the cursor is on the final line, then write out the text, otherwise treat the text editor as readonly because the cursor is at 'history' \&.\&.\&. But, with all this said, one cannot 'delay' the insertion of the text, because the integrated terminal when intercepting the keystroke does not have access to the keyboard event\&. \&.\&.\&. If an interface \fBIKeymap\fP existed, then the methods: -bool TryRegister(KeyboardEventArgs args, Command command) -bool TryMap(KeyboardEventArgs args, out Command command) Could be made, such that 'TryMap' would have a reference to the 'KeyboardEventArgs'\&. "
+.in -1c
+
+Public Member Functions inherited from \fBLuthetus\&.Common\&.RazorLib\&.Keymaps\&.Models\&.Keymap\fP
+.in +1c
+.ti -1c
+.RI "\fBKeymap\fP (\fBKey\fP< Keymap > key, string displayName)"
+.br
+.ti -1c
+.RI "bool \fBTryRegister\fP (\fBKeymapArgs\fP args, \fBCommandNoType\fP command)"
+.br
+.ti -1c
+.RI "List< \fBKeybind\fP >?? List< \fBKeybind\fP > codeMatchList \fBMapAll\fP (\fBKeymapArgs\fP args)"
+.br
+.ti -1c
+.RI "bool \fBMapFirstOrDefault\fP (\fBKeymapArgs\fP args, out \fBCommandNoType\fP? command)"
+.br
+.ti -1c
+.RI "List< KeyValuePair< \fBKeymapArgs\fP, \fBCommandNoType\fP > > \fBGetKeyValuePairList\fP ()"
+.br
+.ti -1c
+.RI "List< KeyValuePair< \fBKeymapArgs\fP, \fBCommandNoType\fP > > \fBGetKeyKeyValuePairList\fP ()"
+.br
+.ti -1c
+.RI "List< KeyValuePair< \fBKeymapArgs\fP, \fBCommandNoType\fP > > \fBGetCodeKeyValuePairList\fP ()"
+.br
+.in -1c
+.SS "Properties"
+
+.in +1c
+.ti -1c
+.RI "\fBVimMode\fP \fBActiveVimMode\fP = \fBVimMode\&.Normal\fP\fR [get, set]\fP"
+.br
+.ti -1c
+.RI "VimSentence \fBVimSentence\fP = new()\fR [get]\fP"
+.br
+.in -1c
+
+Properties inherited from \fBLuthetus\&.Common\&.RazorLib\&.Keymaps\&.Models\&.Keymap\fP
+.in +1c
+.ti -1c
+.RI "Key< \fBKeymap\fP > \fBKey\fP = Key<\fBKeymap\fP>\&.\fBEmpty\fP\fR [get]\fP"
+.br
+.RI "Unique identifier for the keymap\&. "
+.ti -1c
+.RI "string \fBDisplayName\fP = string\&.Empty\fR [get]\fP"
+.br
+.RI "User facing name for the keymap\&. "
+.in -1c
+.SS "Additional Inherited Members"
+
+
+Public Attributes inherited from \fBLuthetus\&.Common\&.RazorLib\&.Keymaps\&.Models\&.Keymap\fP
+.in +1c
+.ti -1c
+.RI "List< \fBKeybind\fP >? \fBkeyMatchList\fP"
+.br
+.in -1c
+
+Public Attributes inherited from \fBLuthetus\&.Common\&.RazorLib\&.Keymaps\&.Models\&.IKeymap\fP
+.in +1c
+.ti -1c
+.RI "List< \fBKeybind\fP >? \fBkeyMatchList\fP"
+.br
+.in -1c
+
+Static Public Attributes inherited from \fBLuthetus\&.Common\&.RazorLib\&.Keymaps\&.Models\&.IKeymap\fP
+.in +1c
+.ti -1c
+.RI "static readonly \fBIKeymap\fP \fBEmpty\fP = new \fBKeymapDoNothing\fP()"
+.br
+.in -1c
+
+Protected Attributes inherited from \fBLuthetus\&.Common\&.RazorLib\&.Keymaps\&.Models\&.Keymap\fP
+.in +1c
+.ti -1c
+.RI "readonly object \fB_syncRoot\fP = new()"
+.br
+.ti -1c
+.RI "readonly Dictionary< string, List< \fBKeybind\fP > > \fB_mapKey\fP = new()"
+.br
+.ti -1c
+.RI "readonly Dictionary< string, List< \fBKeybind\fP > > \fB_mapCode\fP = new()"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+Definition at line \fB19\fP of file \fBTextEditorKeymapVim\&.cs\fP\&.
+.SH "Constructor & Destructor Documentation"
+.PP 
+.SS "Luthetus\&.TextEditor\&.RazorLib\&.Keymaps\&.Models\&.Vims\&.TextEditorKeymapVim\&.TextEditorKeymapVim ()"
+
+.PP
+Definition at line \fB24\fP of file \fBTextEditorKeymapVim\&.cs\fP\&.
+.SH "Member Function Documentation"
+.PP 
+.SS "string Luthetus\&.TextEditor\&.RazorLib\&.Keymaps\&.Models\&.Vims\&.TextEditorKeymapVim\&.GetCursorCssClassString ()"
+
+.PP
+Implements \fBLuthetus\&.TextEditor\&.RazorLib\&.Keymaps\&.Models\&.ITextEditorKeymap\fP\&.
+.PP
+Definition at line \fB61\fP of file \fBTextEditorKeymapVim\&.cs\fP\&.
+.SS "string Luthetus\&.TextEditor\&.RazorLib\&.Keymaps\&.Models\&.Vims\&.TextEditorKeymapVim\&.GetCursorCssStyleString (\fBTextEditorModel\fP textEditorModel, \fBTextEditorViewModel\fP textEditorViewModel, \fBTextEditorOptions\fP textEditorOptions)"
+
+.PP
+Implements \fBLuthetus\&.TextEditor\&.RazorLib\&.Keymaps\&.Models\&.ITextEditorKeymap\fP\&.
+.PP
+Definition at line \fB74\fP of file \fBTextEditorKeymapVim\&.cs\fP\&.
+.SS "\fBKey\fP< \fBKeymapLayer\fP > Luthetus\&.TextEditor\&.RazorLib\&.Keymaps\&.Models\&.Vims\&.TextEditorKeymapVim\&.GetLayer (bool hasSelection)"
+
+.PP
+Implements \fBLuthetus\&.TextEditor\&.RazorLib\&.Keymaps\&.Models\&.ITextEditorKeymap\fP\&.
+.PP
+Definition at line \fB42\fP of file \fBTextEditorKeymapVim\&.cs\fP\&.
+.SS "bool Luthetus\&.TextEditor\&.RazorLib\&.Keymaps\&.Models\&.Vims\&.TextEditorKeymapVim\&.TryMap (\fBKeymapArgs\fP keymapArgument, \fBTextEditorComponentData\fP componentData, out \fBCommandNoType\fP? command)"
+
+.PP
+TODO: (the following comment was copy and pasted from \fBKeymap\fP)\&.\&.\&. \&.\&.\&.This dictionary typed property is an implementation detail and should be hidden behind an interface\&. | Further details: An integrated terminal is currently being written\&. The keymap for the integrated terminal is intended to capture the keyboard event args\&. \&.\&.\&. This would allow the integrated terminal to then check if the cursor is on the final line of the text editor or not\&. \&.\&.\&. If the cursor is on the final line, then write out the text, otherwise treat the text editor as readonly because the cursor is at 'history' \&.\&.\&. But, with all this said, one cannot 'delay' the insertion of the text, because the integrated terminal when intercepting the keystroke does not have access to the keyboard event\&. \&.\&.\&. If an interface \fBIKeymap\fP existed, then the methods: -bool TryRegister(KeyboardEventArgs args, Command command) -bool TryMap(KeyboardEventArgs args, out Command command) Could be made, such that 'TryMap' would have a reference to the 'KeyboardEventArgs'\&. 
+.PP
+Implements \fBLuthetus\&.TextEditor\&.RazorLib\&.Keymaps\&.Models\&.ITextEditorKeymap\fP\&.
+.PP
+Definition at line \fB1087\fP of file \fBTextEditorKeymapVim\&.cs\fP\&.
+.SH "Property Documentation"
+.PP 
+.SS "\fBVimMode\fP Luthetus\&.TextEditor\&.RazorLib\&.Keymaps\&.Models\&.Vims\&.TextEditorKeymapVim\&.ActiveVimMode = \fBVimMode\&.Normal\fP\fR [get]\fP, \fR [set]\fP"
+
+.PP
+Definition at line \fB39\fP of file \fBTextEditorKeymapVim\&.cs\fP\&.
+.SS "VimSentence Luthetus\&.TextEditor\&.RazorLib\&.Keymaps\&.Models\&.Vims\&.TextEditorKeymapVim\&.VimSentence = new()\fR [get]\fP"
+
+.PP
+Definition at line \fB40\fP of file \fBTextEditorKeymapVim\&.cs\fP\&.
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for Luthetus\&.Ide from the source code\&.

@@ -1,0 +1,5 @@
+var class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_options_1_1_displays_1_1_input_text_editor_use_monospace_optimizations =
+[
+    [ "InputViewModel", "class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_options_1_1_displays_1_1_input_text_editor_use_monospace_optimizations.html#a387042266a6f8af17755b7374aface06", null ],
+    [ "UseMonospaceOptimizations", "class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_options_1_1_displays_1_1_input_text_editor_use_monospace_optimizations.html#a9b49089b3485cf3c6b0fea0e82f2ae03", null ]
+];

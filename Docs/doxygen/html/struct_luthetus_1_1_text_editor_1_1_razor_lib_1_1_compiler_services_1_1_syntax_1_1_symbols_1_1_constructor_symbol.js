@@ -1,0 +1,7 @@
+var struct_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_1_1_symbols_1_1_constructor_symbol =
+[
+    [ "ConstructorSymbol", "struct_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_1_1_symbols_1_1_constructor_symbol.html#a05911db0bc600aac27a67abdf7886612", null ],
+    [ "SymbolKindString", "struct_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_1_1_symbols_1_1_constructor_symbol.html#a8e8db95e77fa0177f369b8a791b13245", null ],
+    [ "SyntaxKind", "struct_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_1_1_symbols_1_1_constructor_symbol.html#ab3629e307fa11f607ba41ea63e33734c", null ],
+    [ "TextSpan", "struct_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_1_1_symbols_1_1_constructor_symbol.html#a1b105c07364f6c1a798d7f84ab51d4b7", null ]
+];

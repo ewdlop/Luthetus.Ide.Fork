@@ -1,0 +1,4 @@
+var _tree_view_solution_folder_display_8razor_8cs =
+[
+    [ "Luthetus.Extensions.DotNet.DotNetSolutions.Displays.TreeViewSolutionFolderDisplay", "class_luthetus_1_1_extensions_1_1_dot_net_1_1_dot_net_solutions_1_1_displays_1_1_tree_view_solution_folder_display.html", "class_luthetus_1_1_extensions_1_1_dot_net_1_1_dot_net_solutions_1_1_displays_1_1_tree_view_solution_folder_display" ]
+];

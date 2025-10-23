@@ -1,0 +1,8 @@
+var struct_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_1_1_tokens_1_1_comment_single_line_token =
+[
+    [ "CommentSingleLineToken", "struct_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_1_1_tokens_1_1_comment_single_line_token.html#af6b6b3569bb9ccfe6b69871a4de65a39", null ],
+    [ "ConstructorWasInvoked", "struct_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_1_1_tokens_1_1_comment_single_line_token.html#abf391a6638457b5fb1209802b1301e2a", null ],
+    [ "IsFabricated", "struct_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_1_1_tokens_1_1_comment_single_line_token.html#afb0b677a86e0875ea1b6a4c52e653bea", null ],
+    [ "SyntaxKind", "struct_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_1_1_tokens_1_1_comment_single_line_token.html#afa5dd1dcf108685db6be18b73f56f110", null ],
+    [ "TextSpan", "struct_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_1_1_tokens_1_1_comment_single_line_token.html#a4785dd4d1d3dd59f89b4a880a9199728", null ]
+];

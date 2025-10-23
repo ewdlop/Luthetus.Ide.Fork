@@ -1,0 +1,148 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_decorations_1_1_models" xml:lang="en-US">
+<title>Luthetus.TextEditor.RazorLib.Decorations.Models Namespace Reference</title>
+<indexterm><primary>Luthetus.TextEditor.RazorLib.Decorations.Models</primary></indexterm>
+<simplesect>
+    <title>Classes    </title>
+        <itemizedlist>
+            <listitem><para>class <link linkend="_class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_decorations_1_1_models_1_1_decoration_mapper_registry_default">DecorationMapperRegistryDefault</link></para>
+</listitem>
+            <listitem><para>interface <link linkend="_interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_decorations_1_1_models_1_1_i_decoration_mapper">IDecorationMapper</link></para>
+</listitem>
+            <listitem><para>interface <link linkend="_interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_decorations_1_1_models_1_1_i_decoration_mapper_registry">IDecorationMapperRegistry</link></para>
+</listitem>
+            <listitem><para>interface <link linkend="_interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_decorations_1_1_models_1_1_i_text_editor_registry_wrap">ITextEditorRegistryWrap</link></para>
+</listitem>
+            <listitem><para>class <link linkend="_class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_decorations_1_1_models_1_1_text_editor_decoration_mapper_default">TextEditorDecorationMapperDefault</link></para>
+</listitem>
+            <listitem><para>class <link linkend="_class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_decorations_1_1_models_1_1_text_editor_registry_wrap">TextEditorRegistryWrap</link></para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Functions    </title>
+        <itemizedlist>
+            <listitem><para>record <link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_decorations_1_1_models_1a0e76562d8ee807d0a1f9c6e6fd0b0d25">TextEditorPresentationModel</link> (Key&lt; TextEditorPresentationModel &gt; TextEditorPresentationKey, int Rank, string CssClassString, <link linkend="_interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_decorations_1_1_models_1_1_i_decoration_mapper">IDecorationMapper</link> DecorationMapper)</para>
+</listitem>
+            <listitem><para>record <link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_decorations_1_1_models_1a26b8e5b2ddff0647d12f6461c73a0184">TextEditorPresentationModelCalculation</link> (string ContentAtRequest)</para>
+
+<para>In a concurrent safe manner, get the content from the TextEditorModel such that no insertions or deletions can occur during the setting of this property. </para>
+</listitem>
+            <listitem><para>record <link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_decorations_1_1_models_1a962b0a96426070423f3b88024e019ba6">TextEditorTextModification</link> (bool WasInsertion, <link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_lexers_1_1_models_1a1ffd1a7706dfd364560b76d47467812f">TextEditorTextSpan</link> <link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_lexers_1_1_models_1a1ffd1a7706dfd364560b76d47467812f">TextEditorTextSpan</link>)</para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<section>
+<title>Function Documentation</title>
+<anchor xml:id="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_decorations_1_1_models_1a0e76562d8ee807d0a1f9c6e6fd0b0d25"/><section>
+    <title>TextEditorPresentationModel()</title>
+<indexterm><primary>TextEditorPresentationModel</primary><secondary>Luthetus.TextEditor.RazorLib.Decorations.Models</secondary></indexterm>
+<indexterm><primary>Luthetus.TextEditor.RazorLib.Decorations.Models</primary><secondary>TextEditorPresentationModel</secondary></indexterm>
+<para><computeroutput>record Luthetus.TextEditor.RazorLib.Decorations.Models.TextEditorPresentationModel (Key&lt; TextEditorPresentationModel &gt; TextEditorPresentationKey, int Rank, string CssClassString, <link linkend="_interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_decorations_1_1_models_1_1_i_decoration_mapper">IDecorationMapper</link> DecorationMapper)</computeroutput></para>
+<para>
+                <formalpara>
+                    <title>
+Parameters</title>
+                    <para>
+                    <table frame="all">
+                        <tgroup cols="2" align="left" colsep="1" rowsep="1">
+                        <colspec colwidth="1*"/>
+                        <colspec colwidth="4*"/>
+                        <tbody>
+                            <row>
+<entry>TextEditorPresentationKey</entry><entry>
+<para>Unique Identifier. Perhaps one wants to repaint the Diff presentation only. They use this to identify the Diff presentation</para>
+</entry>
+                            </row>
+                            <row>
+<entry>Rank</entry><entry>
+<para>The order the presentations get rendered. A given a ranks of [ 7, -3, 1, 2 ] the rendering order is ascending therefore it will be reordered as [ -3, 1, 2, 7 ] when iterating over the containing presentation layer</para>
+</entry>
+                            </row>
+                            <row>
+<entry>CssClassString</entry><entry>
+<para>A div is rendered with this css class. Inside this div are the divs gotten from the text spans. One likely only will use this css class as an identifier while viewing the browser&apos;s debugging tools.</para>
+</entry>
+                            </row>
+                            <row>
+<entry>DecorationMapper</entry><entry>
+<para>The decoration mapper that is responsible for converting a decoration byte to a css class</para>
+</entry>
+                            </row>
+                            <row>
+<entry>TextEditorTextSpans</entry><entry>
+<para>The list of position indices that are to painted with certain decoration bytes.</para>
+</entry>
+                            </row>
+                        </tbody>
+                        </tgroup>
+                    </table>
+                    </para>
+                </formalpara>
+                </para>
+<para>
+Definition at line <link linkend="__text_editor_presentation_model_8cs_source_1l00010">10</link> of file <link linkend="__text_editor_presentation_model_8cs_source">TextEditorPresentationModel.cs</link>.</para>
+Here is the call graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_decorations_1_1_models_a0e76562d8ee807d0a1f9c6e6fd0b0d25_cgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+Here is the caller graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_decorations_1_1_models_a0e76562d8ee807d0a1f9c6e6fd0b0d25_icgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+</section>
+<anchor xml:id="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_decorations_1_1_models_1a26b8e5b2ddff0647d12f6461c73a0184"/><section>
+    <title>TextEditorPresentationModelCalculation()</title>
+<indexterm><primary>TextEditorPresentationModelCalculation</primary><secondary>Luthetus.TextEditor.RazorLib.Decorations.Models</secondary></indexterm>
+<indexterm><primary>Luthetus.TextEditor.RazorLib.Decorations.Models</primary><secondary>TextEditorPresentationModelCalculation</secondary></indexterm>
+<para><computeroutput>record Luthetus.TextEditor.RazorLib.Decorations.Models.TextEditorPresentationModelCalculation (string ContentAtRequest)</computeroutput></para><para>
+
+<para>In a concurrent safe manner, get the content from the TextEditorModel such that no insertions or deletions can occur during the setting of this property. </para>
+</para>
+<para>
+Definition at line <link linkend="__text_editor_presentation_model_calculation_8cs_source_1l00010">10</link> of file <link linkend="__text_editor_presentation_model_calculation_8cs_source">TextEditorPresentationModelCalculation.cs</link>.</para>
+Here is the caller graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_decorations_1_1_models_a26b8e5b2ddff0647d12f6461c73a0184_icgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+</section>
+<anchor xml:id="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_decorations_1_1_models_1a962b0a96426070423f3b88024e019ba6"/><section>
+    <title>TextEditorTextModification()</title>
+<indexterm><primary>TextEditorTextModification</primary><secondary>Luthetus.TextEditor.RazorLib.Decorations.Models</secondary></indexterm>
+<indexterm><primary>Luthetus.TextEditor.RazorLib.Decorations.Models</primary><secondary>TextEditorTextModification</secondary></indexterm>
+<para><computeroutput>record Luthetus.TextEditor.RazorLib.Decorations.Models.TextEditorTextModification (bool WasInsertion, <link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_lexers_1_1_models_1a1ffd1a7706dfd364560b76d47467812f">TextEditorTextSpan</link> TextEditorTextSpan)</computeroutput></para>Here is the call graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_decorations_1_1_models_a962b0a96426070423f3b88024e019ba6_cgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+Here is the caller graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_decorations_1_1_models_a962b0a96426070423f3b88024e019ba6_icgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+</section>
+</section>
+</section>

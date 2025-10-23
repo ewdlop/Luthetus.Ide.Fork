@@ -1,0 +1,179 @@
+.TH "Luthetus.TextEditor.RazorLib.TextEditors.Models.Internals.TextEditorComponentData" 3 "Version 1.0.0" "Luthetus.Ide" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+Luthetus.TextEditor.RazorLib.TextEditors.Models.Internals.TextEditorComponentData \- Everytime one renders a unique \fBLuthetus\&.TextEditor\&.RazorLib\&.TextEditors\&.Displays\&.TextEditorViewModelDisplay\fP, a unique identifier for the HTML elements is created\&.  
+
+.SH SYNOPSIS
+.br
+.PP
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBTextEditorComponentData\fP (Guid textEditorHtmlElementId, \fBViewModelDisplayOptions\fP viewModelDisplayOptions, \fBTextEditorOptions\fP options, \fBTextEditorViewModelDisplay\fP textEditorViewModelDisplay, IDispatcher \fBdispatcher\fP, IServiceProvider serviceProvider)"
+.br
+.ti -1c
+.RI "\fBTextEditorComponentData\fP (TextEditorComponentData otherComponentData, \fBKeymap\fP keymap)"
+.br
+.ti -1c
+.RI "void \fBThrottleApplySyntaxHighlighting\fP (\fBTextEditorModelModifier\fP modelModifier)"
+.br
+.ti -1c
+.RI "Task \fBContinueRenderingTooltipAsync\fP ()"
+.br
+.in -1c
+.SS "Properties"
+
+.in +1c
+.ti -1c
+.RI "static TimeSpan \fBThrottleDelayDefault\fP = TimeSpan\&.FromMilliseconds(60)\fR [get]\fP"
+.br
+.ti -1c
+.RI "static TimeSpan \fBOnMouseOutTooltipDelay\fP = TimeSpan\&.FromMilliseconds(1_000)\fR [get]\fP"
+.br
+.ti -1c
+.RI "static TimeSpan \fBMouseStoppedMovingDelay\fP = TimeSpan\&.FromMilliseconds(400)\fR [get]\fP"
+.br
+.ti -1c
+.RI "\fBTextEditorOptions\fP \fBOptions\fP\fR [get]\fP"
+.br
+.RI "This property contains the global options, with an extra step of overriding any specified options for a specific text editor\&. The current implementation of this is quite hacky and not obvious when reading the code\&. "
+.ti -1c
+.RI "Guid \fBTextEditorHtmlElementId\fP\fR [get]\fP"
+.br
+.ti -1c
+.RI "ViewModelDisplayOptions \fBViewModelDisplayOptions\fP\fR [get]\fP"
+.br
+.ti -1c
+.RI "TextEditorViewModelDisplay \fBTextEditorViewModelDisplay\fP\fR [get]\fP"
+.br
+.ti -1c
+.RI "IDispatcher \fBDispatcher\fP\fR [get]\fP"
+.br
+.ti -1c
+.RI "IServiceProvider \fBServiceProvider\fP\fR [get]\fP"
+.br
+.ti -1c
+.RI "Task \fBMouseStoppedMovingTask\fP = Task\&.CompletedTask\fR [get, set]\fP"
+.br
+.ti -1c
+.RI "Task \fBMouseNoLongerOverTooltipTask\fP = Task\&.CompletedTask\fR [get, set]\fP"
+.br
+.ti -1c
+.RI "CancellationTokenSource \fBMouseNoLongerOverTooltipCancellationTokenSource\fP = new()\fR [get, set]\fP"
+.br
+.ti -1c
+.RI "CancellationTokenSource \fBMouseStoppedMovingCancellationTokenSource\fP = new()\fR [get, set]\fP"
+.br
+.ti -1c
+.RI "bool \fBThinksLeftMouseButtonIsDown\fP\fR [get, set]\fP"
+.br
+.RI "This accounts for one who might hold down Left Mouse Button from outside the TextEditorDisplay's content div then move their mouse over the content div while holding the Left Mouse Button down\&. "
+.ti -1c
+.RI "bool \fBMenuShouldTakeFocus\fP\fR [get, set]\fP"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+Everytime one renders a unique \fBLuthetus\&.TextEditor\&.RazorLib\&.TextEditors\&.Displays\&.TextEditorViewModelDisplay\fP, a unique identifier for the HTML elements is created\&. 
+
+That unique identifier, and other data, is on this class\&.
+
+.PP
+This class is a "ui event broker" in order to avoid unnecessary invocations of <see cref="ITextEditorService\&.Post"/\&.
+
+.PP
+For example, all TextEditorViewModel have a TextEditorViewModel\&.TooltipViewModel\&. A sort of 'on mouse over' like event might set the current TextEditorViewModel\&.TooltipViewModel\&. But, the event logic overhead is not handled by the TextEditorViewModel, but instead this class, then the valid events are passed along to result in the TextEditorViewModel\&.TooltipViewModel being set\&. 
+.PP
+Definition at line \fB26\fP of file \fBTextEditorComponentData\&.cs\fP\&.
+.SH "Constructor & Destructor Documentation"
+.PP 
+.SS "Luthetus\&.TextEditor\&.RazorLib\&.TextEditors\&.Models\&.Internals\&.TextEditorComponentData\&.TextEditorComponentData (Guid textEditorHtmlElementId, \fBViewModelDisplayOptions\fP viewModelDisplayOptions, \fBTextEditorOptions\fP options, \fBTextEditorViewModelDisplay\fP textEditorViewModelDisplay, IDispatcher dispatcher, IServiceProvider serviceProvider)"
+
+.PP
+Definition at line \fB34\fP of file \fBTextEditorComponentData\&.cs\fP\&.
+.SS "Luthetus\&.TextEditor\&.RazorLib\&.TextEditors\&.Models\&.Internals\&.TextEditorComponentData\&.TextEditorComponentData (TextEditorComponentData otherComponentData, \fBKeymap\fP keymap)"
+
+.PP
+Definition at line \fB50\fP of file \fBTextEditorComponentData\&.cs\fP\&.
+.SH "Member Function Documentation"
+.PP 
+.SS "Task Luthetus\&.TextEditor\&.RazorLib\&.TextEditors\&.Models\&.Internals\&.TextEditorComponentData\&.ContinueRenderingTooltipAsync ()"
+
+.PP
+Definition at line \fB101\fP of file \fBTextEditorComponentData\&.cs\fP\&.
+.SS "void Luthetus\&.TextEditor\&.RazorLib\&.TextEditors\&.Models\&.Internals\&.TextEditorComponentData\&.ThrottleApplySyntaxHighlighting (\fBTextEditorModelModifier\fP modelModifier)"
+
+.PP
+Definition at line \fB92\fP of file \fBTextEditorComponentData\&.cs\fP\&.
+.SH "Property Documentation"
+.PP 
+.SS "IDispatcher Luthetus\&.TextEditor\&.RazorLib\&.TextEditors\&.Models\&.Internals\&.TextEditorComponentData\&.Dispatcher\fR [get]\fP"
+
+.PP
+Definition at line \fB77\fP of file \fBTextEditorComponentData\&.cs\fP\&.
+.SS "bool Luthetus\&.TextEditor\&.RazorLib\&.TextEditors\&.Models\&.Internals\&.TextEditorComponentData\&.MenuShouldTakeFocus\fR [get]\fP, \fR [set]\fP"
+
+.PP
+Definition at line \fB90\fP of file \fBTextEditorComponentData\&.cs\fP\&.
+.SS "CancellationTokenSource Luthetus\&.TextEditor\&.RazorLib\&.TextEditors\&.Models\&.Internals\&.TextEditorComponentData\&.MouseNoLongerOverTooltipCancellationTokenSource = new()\fR [get]\fP, \fR [set]\fP"
+
+.PP
+Definition at line \fB81\fP of file \fBTextEditorComponentData\&.cs\fP\&.
+.SS "Task Luthetus\&.TextEditor\&.RazorLib\&.TextEditors\&.Models\&.Internals\&.TextEditorComponentData\&.MouseNoLongerOverTooltipTask = Task\&.CompletedTask\fR [get]\fP, \fR [set]\fP"
+
+.PP
+Definition at line \fB80\fP of file \fBTextEditorComponentData\&.cs\fP\&.
+.SS "CancellationTokenSource Luthetus\&.TextEditor\&.RazorLib\&.TextEditors\&.Models\&.Internals\&.TextEditorComponentData\&.MouseStoppedMovingCancellationTokenSource = new()\fR [get]\fP, \fR [set]\fP"
+
+.PP
+Definition at line \fB82\fP of file \fBTextEditorComponentData\&.cs\fP\&.
+.SS "TimeSpan Luthetus\&.TextEditor\&.RazorLib\&.TextEditors\&.Models\&.Internals\&.TextEditorComponentData\&.MouseStoppedMovingDelay = TimeSpan\&.FromMilliseconds(400)\fR [static]\fP, \fR [get]\fP"
+
+.PP
+Definition at line \fB32\fP of file \fBTextEditorComponentData\&.cs\fP\&.
+.SS "Task Luthetus\&.TextEditor\&.RazorLib\&.TextEditors\&.Models\&.Internals\&.TextEditorComponentData\&.MouseStoppedMovingTask = Task\&.CompletedTask\fR [get]\fP, \fR [set]\fP"
+
+.PP
+Definition at line \fB79\fP of file \fBTextEditorComponentData\&.cs\fP\&.
+.SS "TimeSpan Luthetus\&.TextEditor\&.RazorLib\&.TextEditors\&.Models\&.Internals\&.TextEditorComponentData\&.OnMouseOutTooltipDelay = TimeSpan\&.FromMilliseconds(1_000)\fR [static]\fP, \fR [get]\fP"
+
+.PP
+Definition at line \fB31\fP of file \fBTextEditorComponentData\&.cs\fP\&.
+.SS "\fBTextEditorOptions\fP Luthetus\&.TextEditor\&.RazorLib\&.TextEditors\&.Models\&.Internals\&.TextEditorComponentData\&.Options\fR [get]\fP"
+
+.PP
+This property contains the global options, with an extra step of overriding any specified options for a specific text editor\&. The current implementation of this is quite hacky and not obvious when reading the code\&. 
+.PP
+Definition at line \fB72\fP of file \fBTextEditorComponentData\&.cs\fP\&.
+.SS "IServiceProvider Luthetus\&.TextEditor\&.RazorLib\&.TextEditors\&.Models\&.Internals\&.TextEditorComponentData\&.ServiceProvider\fR [get]\fP"
+
+.PP
+Definition at line \fB78\fP of file \fBTextEditorComponentData\&.cs\fP\&.
+.SS "Guid Luthetus\&.TextEditor\&.RazorLib\&.TextEditors\&.Models\&.Internals\&.TextEditorComponentData\&.TextEditorHtmlElementId\fR [get]\fP"
+
+.PP
+Definition at line \fB74\fP of file \fBTextEditorComponentData\&.cs\fP\&.
+.SS "TextEditorViewModelDisplay Luthetus\&.TextEditor\&.RazorLib\&.TextEditors\&.Models\&.Internals\&.TextEditorComponentData\&.TextEditorViewModelDisplay\fR [get]\fP"
+
+.PP
+Definition at line \fB76\fP of file \fBTextEditorComponentData\&.cs\fP\&.
+.SS "bool Luthetus\&.TextEditor\&.RazorLib\&.TextEditors\&.Models\&.Internals\&.TextEditorComponentData\&.ThinksLeftMouseButtonIsDown\fR [get]\fP, \fR [set]\fP"
+
+.PP
+This accounts for one who might hold down Left Mouse Button from outside the TextEditorDisplay's content div then move their mouse over the content div while holding the Left Mouse Button down\&. 
+.PP
+Definition at line \fB88\fP of file \fBTextEditorComponentData\&.cs\fP\&.
+.SS "TimeSpan Luthetus\&.TextEditor\&.RazorLib\&.TextEditors\&.Models\&.Internals\&.TextEditorComponentData\&.ThrottleDelayDefault = TimeSpan\&.FromMilliseconds(60)\fR [static]\fP, \fR [get]\fP"
+
+.PP
+Definition at line \fB30\fP of file \fBTextEditorComponentData\&.cs\fP\&.
+.SS "ViewModelDisplayOptions Luthetus\&.TextEditor\&.RazorLib\&.TextEditors\&.Models\&.Internals\&.TextEditorComponentData\&.ViewModelDisplayOptions\fR [get]\fP"
+
+.PP
+Definition at line \fB75\fP of file \fBTextEditorComponentData\&.cs\fP\&.
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for Luthetus\&.Ide from the source code\&.

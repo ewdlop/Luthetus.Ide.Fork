@@ -1,0 +1,55 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="__keymap_state_8cs_source" xml:lang="en-US">
+<title>KeymapState.cs</title>
+<indexterm><primary>Source/Lib/Common/Keymaps/States/KeymapState.cs</primary></indexterm>
+Go to the documentation of this file.<programlisting linenumbering="unnumbered"><anchor xml:id="__keymap_state_8cs_source_1l00001"/>00001 <emphasis role="keyword">using&#32;</emphasis>Fluxor;
+<anchor xml:id="__keymap_state_8cs_source_1l00002"/>00002 <emphasis role="keyword">using&#32;</emphasis><link linkend="_namespace_luthetus_1_1_common_1_1_razor_lib_1_1_keymaps_1_1_models">Luthetus.Common.RazorLib.Keymaps.Models</link>;
+<anchor xml:id="__keymap_state_8cs_source_1l00003"/>00003 <emphasis role="keyword">using&#32;</emphasis><link linkend="_namespace_luthetus_1_1_common_1_1_razor_lib_1_1_keys_1_1_models">Luthetus.Common.RazorLib.Keys.Models</link>;
+<anchor xml:id="__keymap_state_8cs_source_1l00004"/>00004 <emphasis role="keyword">using&#32;</emphasis>System.Collections.Immutable;
+<anchor xml:id="__keymap_state_8cs_source_1l00005"/>00005 
+<anchor xml:id="__keymap_state_8cs_source_1l00006"/><link linkend="_namespace_luthetus_1_1_common_1_1_razor_lib_1_1_keymaps_1_1_states">00006</link> <emphasis role="keyword">namespace&#32;</emphasis><link linkend="_namespace_luthetus_1_1_common_1_1_razor_lib_1_1_keymaps_1_1_states">Luthetus.Common.RazorLib.Keymaps.States</link>;
+<anchor xml:id="__keymap_state_8cs_source_1l00007"/>00007 
+<anchor xml:id="__keymap_state_8cs_source_1l00013"/>00013 [FeatureState]
+<anchor xml:id="__keymap_state_8cs_source_1l00014"/><link linkend="_namespace_luthetus_1_1_common_1_1_razor_lib_1_1_keymaps_1_1_states_1a77859f20e64de905d928875f851f9787">00014</link> <emphasis role="keyword">public</emphasis>&#32;record&#32;<link linkend="_namespace_luthetus_1_1_common_1_1_razor_lib_1_1_keymaps_1_1_states_1a77859f20e64de905d928875f851f9787">KeymapState</link>(ImmutableList&lt;KeymapLayer&gt;&#32;KeymapLayerList)
+<anchor xml:id="__keymap_state_8cs_source_1l00015"/>00015 {
+<anchor xml:id="__keymap_state_8cs_source_1l00016"/>00016 &#32;&#32;&#32;&#32;<emphasis role="keyword">public</emphasis>&#32;<link linkend="_namespace_luthetus_1_1_common_1_1_razor_lib_1_1_keymaps_1_1_states_1a77859f20e64de905d928875f851f9787">KeymapState</link>()&#32;:&#32;<emphasis role="keyword">this</emphasis>(ImmutableList&lt;KeymapLayer&gt;.Empty)
+<anchor xml:id="__keymap_state_8cs_source_1l00017"/>00017 &#32;&#32;&#32;&#32;{
+<anchor xml:id="__keymap_state_8cs_source_1l00018"/>00018 &#32;&#32;&#32;&#32;}
+<anchor xml:id="__keymap_state_8cs_source_1l00019"/>00019 
+<anchor xml:id="__keymap_state_8cs_source_1l00020"/>00020 &#32;&#32;&#32;&#32;<emphasis role="keyword">public</emphasis>&#32;record&#32;<emphasis role="keyword">struct&#32;</emphasis>RegisterKeymapLayerAction(<link linkend="_namespace_luthetus_1_1_common_1_1_razor_lib_1_1_keymaps_1_1_models_1aff52c63f33e1f7630735c21eeeb97d23">KeymapLayer</link>&#32;<link linkend="_namespace_luthetus_1_1_common_1_1_razor_lib_1_1_keymaps_1_1_models_1aff52c63f33e1f7630735c21eeeb97d23">KeymapLayer</link>);
+<anchor xml:id="__keymap_state_8cs_source_1l00021"/>00021 &#32;&#32;&#32;&#32;<emphasis role="keyword">public</emphasis>&#32;record&#32;<emphasis role="keyword">struct&#32;</emphasis>DisposeKeymapLayerAction(Key&lt;<link linkend="_namespace_luthetus_1_1_common_1_1_razor_lib_1_1_keymaps_1_1_models_1aff52c63f33e1f7630735c21eeeb97d23">KeymapLayer</link>&gt;&#32;KeymapLayerKey);
+<anchor xml:id="__keymap_state_8cs_source_1l00022"/>00022 
+<anchor xml:id="__keymap_state_8cs_source_1l00023"/>00023 &#32;&#32;&#32;&#32;<emphasis role="keyword">public</emphasis>&#32;<emphasis role="keyword">class&#32;</emphasis>Reducer
+<anchor xml:id="__keymap_state_8cs_source_1l00024"/>00024 &#32;&#32;&#32;&#32;{
+<anchor xml:id="__keymap_state_8cs_source_1l00025"/>00025 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;[ReducerMethod]
+<anchor xml:id="__keymap_state_8cs_source_1l00026"/>00026 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keyword">public</emphasis>&#32;<emphasis role="keyword">static</emphasis>&#32;<link linkend="_namespace_luthetus_1_1_common_1_1_razor_lib_1_1_keymaps_1_1_states_1a77859f20e64de905d928875f851f9787">KeymapState</link>&#32;ReduceRegisterKeymapLayerAction(
+<anchor xml:id="__keymap_state_8cs_source_1l00027"/>00027 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<link linkend="_namespace_luthetus_1_1_common_1_1_razor_lib_1_1_keymaps_1_1_states_1a77859f20e64de905d928875f851f9787">KeymapState</link>&#32;inState,
+<anchor xml:id="__keymap_state_8cs_source_1l00028"/>00028 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;RegisterKeymapLayerAction&#32;registerKeymapLayerAction)
+<anchor xml:id="__keymap_state_8cs_source_1l00029"/>00029 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;{
+<anchor xml:id="__keymap_state_8cs_source_1l00030"/>00030 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">if</emphasis>&#32;(inState.KeymapLayerList.Any(x&#32;=&gt;&#32;x.Key&#32;==&#32;registerKeymapLayerAction.KeymapLayer.Key))
+<anchor xml:id="__keymap_state_8cs_source_1l00031"/>00031 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;inState;
+<anchor xml:id="__keymap_state_8cs_source_1l00032"/>00032 
+<anchor xml:id="__keymap_state_8cs_source_1l00033"/>00033 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;inState&#32;with
+<anchor xml:id="__keymap_state_8cs_source_1l00034"/>00034 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;{
+<anchor xml:id="__keymap_state_8cs_source_1l00035"/>00035 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;KeymapLayerList&#32;=&#32;inState.KeymapLayerList.Add(registerKeymapLayerAction.KeymapLayer)
+<anchor xml:id="__keymap_state_8cs_source_1l00036"/>00036 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;};
+<anchor xml:id="__keymap_state_8cs_source_1l00037"/>00037 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;}
+<anchor xml:id="__keymap_state_8cs_source_1l00038"/>00038 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;
+<anchor xml:id="__keymap_state_8cs_source_1l00039"/>00039 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;[ReducerMethod]
+<anchor xml:id="__keymap_state_8cs_source_1l00040"/>00040 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keyword">public</emphasis>&#32;<emphasis role="keyword">static</emphasis>&#32;<link linkend="_namespace_luthetus_1_1_common_1_1_razor_lib_1_1_keymaps_1_1_states_1a77859f20e64de905d928875f851f9787">KeymapState</link>&#32;ReduceDisposeKeymapLayerAction(
+<anchor xml:id="__keymap_state_8cs_source_1l00041"/>00041 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<link linkend="_namespace_luthetus_1_1_common_1_1_razor_lib_1_1_keymaps_1_1_states_1a77859f20e64de905d928875f851f9787">KeymapState</link>&#32;inState,
+<anchor xml:id="__keymap_state_8cs_source_1l00042"/>00042 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;DisposeKeymapLayerAction&#32;disposeKeymapLayerAction)
+<anchor xml:id="__keymap_state_8cs_source_1l00043"/>00043 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;{
+<anchor xml:id="__keymap_state_8cs_source_1l00044"/>00044 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;var&#32;indexExisting&#32;=&#32;inState.KeymapLayerList.FindIndex(x&#32;=&gt;&#32;x.Key&#32;==&#32;disposeKeymapLayerAction.KeymapLayerKey);
+<anchor xml:id="__keymap_state_8cs_source_1l00045"/>00045 
+<anchor xml:id="__keymap_state_8cs_source_1l00046"/>00046 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">if</emphasis>&#32;(indexExisting&#32;==&#32;-1)
+<anchor xml:id="__keymap_state_8cs_source_1l00047"/>00047 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;inState;
+<anchor xml:id="__keymap_state_8cs_source_1l00048"/>00048 
+<anchor xml:id="__keymap_state_8cs_source_1l00049"/>00049 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;inState&#32;with
+<anchor xml:id="__keymap_state_8cs_source_1l00050"/>00050 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;{
+<anchor xml:id="__keymap_state_8cs_source_1l00051"/>00051 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;KeymapLayerList&#32;=&#32;inState.KeymapLayerList.RemoveAt(indexExisting)
+<anchor xml:id="__keymap_state_8cs_source_1l00052"/>00052 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;};
+<anchor xml:id="__keymap_state_8cs_source_1l00053"/>00053 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;}
+<anchor xml:id="__keymap_state_8cs_source_1l00054"/>00054 &#32;&#32;&#32;&#32;}
+<anchor xml:id="__keymap_state_8cs_source_1l00055"/>00055 }
+</programlisting></section>

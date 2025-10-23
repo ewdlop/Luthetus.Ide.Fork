@@ -1,0 +1,4 @@
+var _close_angle_bracket_token_tests_8cs =
+[
+    [ "Luthetus.TextEditor.Tests.Basis.CompilerServices.Syntax.SyntaxTokens.CloseAngleBracketTokenTests", "class_luthetus_1_1_text_editor_1_1_tests_1_1_basis_1_1_compiler_services_1_1_syntax_1_1_syntax_t999e5e8d637e8eca3a3164bbc95b3b72.html", "class_luthetus_1_1_text_editor_1_1_tests_1_1_basis_1_1_compiler_services_1_1_syntax_1_1_syntax_t999e5e8d637e8eca3a3164bbc95b3b72" ]
+];

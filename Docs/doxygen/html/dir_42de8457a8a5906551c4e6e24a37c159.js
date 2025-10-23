@@ -1,0 +1,28 @@
+var dir_42de8457a8a5906551c4e6e24a37c159 =
+[
+    [ "AncestorDirectory.cs", "_ancestor_directory_8cs.html", "_ancestor_directory_8cs" ],
+    [ "FileSystemDrive.cs", "_file_system_drive_8cs.html", "_file_system_drive_8cs" ],
+    [ "IAbsolutePath.cs", "_i_absolute_path_8cs.html", "_i_absolute_path_8cs" ],
+    [ "IDirectoryHandler.cs", "_i_directory_handler_8cs.html", "_i_directory_handler_8cs" ],
+    [ "IEnvironmentProvider.AbsolutePath.cs", "_i_environment_provider_8_absolute_path_8cs.html", "_i_environment_provider_8_absolute_path_8cs" ],
+    [ "IEnvironmentProvider.Main.cs", "_i_environment_provider_8_main_8cs.html", "_i_environment_provider_8_main_8cs" ],
+    [ "IEnvironmentProvider.RelativePath.cs", "_i_environment_provider_8_relative_path_8cs.html", "_i_environment_provider_8_relative_path_8cs" ],
+    [ "IFileHandler.cs", "_i_file_handler_8cs.html", "_i_file_handler_8cs" ],
+    [ "IFileSystemDrive.cs", "_i_file_system_drive_8cs.html", "_i_file_system_drive_8cs" ],
+    [ "IFileSystemProvider.cs", "_i_file_system_provider_8cs.html", "_i_file_system_provider_8cs" ],
+    [ "InMemoryEnvironmentProvider.cs", "_in_memory_environment_provider_8cs.html", "_in_memory_environment_provider_8cs" ],
+    [ "InMemoryFile.cs", "_in_memory_file_8cs.html", "_in_memory_file_8cs" ],
+    [ "InMemoryFileSystemProvider.DirectoryHandler.cs", "_in_memory_file_system_provider_8_directory_handler_8cs.html", "_in_memory_file_system_provider_8_directory_handler_8cs" ],
+    [ "InMemoryFileSystemProvider.FileHandler.cs", "_in_memory_file_system_provider_8_file_handler_8cs.html", "_in_memory_file_system_provider_8_file_handler_8cs" ],
+    [ "InMemoryFileSystemProvider.Main.cs", "_in_memory_file_system_provider_8_main_8cs.html", "_in_memory_file_system_provider_8_main_8cs" ],
+    [ "IPath.cs", "_i_path_8cs.html", "_i_path_8cs" ],
+    [ "IRelativePath.cs", "_i_relative_path_8cs.html", "_i_relative_path_8cs" ],
+    [ "LocalDirectoryHandler.cs", "_local_directory_handler_8cs.html", "_local_directory_handler_8cs" ],
+    [ "LocalEnvironmentProvider.cs", "_local_environment_provider_8cs.html", "_local_environment_provider_8cs" ],
+    [ "LocalFileHandler.cs", "_local_file_handler_8cs.html", "_local_file_handler_8cs" ],
+    [ "LocalFileSystemProvider.cs", "_local_file_system_provider_8cs.html", "_local_file_system_provider_8cs" ],
+    [ "PathHelper.cs", "_path_helper_8cs.html", null ],
+    [ "PathType.cs", "_path_type_8cs.html", "_path_type_8cs" ],
+    [ "PermittanceChecker.cs", "_permittance_checker_8cs.html", null ],
+    [ "SimplePath.cs", "_simple_path_8cs.html", "_simple_path_8cs" ]
+];

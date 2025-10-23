@@ -1,0 +1,31 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="__text_editor_refactor_functions_8cs" xml:lang="en-US">
+<title>Source/Lib/TextEditor/Commands/Models/Defaults/TextEditorRefactorFunctions.cs File Reference</title>
+<indexterm><primary>Source/Lib/TextEditor/Commands/Models/Defaults/TextEditorRefactorFunctions.cs</primary></indexterm>
+<simplesect>
+    <title>Classes    </title>
+        <itemizedlist>
+            <listitem><para>class <link linkend="_class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_commands_1_1_models_1_1_defaults_1_1_text_editor_refactor_functions">Luthetus.TextEditor.RazorLib.Commands.Models.Defaults.TextEditorRefactorFunctions</link></para>
+
+<para>TODO: Decide on what folder this class belongs in... ...I&apos;m working on the Quick Actions / Refactor context menu (2024-08-16) and the issue is that, the context menu is populated with menu options from within the <link linkend="_interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1_1_i_text_editor_edit_context">ITextEditorEditContext</link>. | But by the time the user picks a context menu option, the text editor may have been edited, thus invalidating any stored Func&lt;Task&gt; that is given for a menu option&apos;s onclick. | So, each menu option needs to make a separate Post to the <link linkend="_interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_i_text_editor_service">ITextEditorService</link> upon onclick. | But, all of the variables that were created to construct the menu options, during the old post, are still within scope when typing out code for the menu option&apos;s onclick if written inline as a lambda function. | So, most importantly this class exists to avoid accidental usage of old text editor state due to the variables being in scope. | But this also probably is nice for readability, and re-usability of the refactor itself. | I don&apos;t want a separate function within <link linkend="_class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_commands_1_1_models_1_1_defaults_1_1_text_editor_command_default_functions">TextEditorCommandDefaultFunctions</link> because it is a nice separation of concern to keep compiler service refactors in a separate file. </para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Namespaces    </title>
+        <itemizedlist>
+            <listitem><para>namespace <link linkend="_namespace_luthetus">Luthetus</link></para>
+</listitem>
+            <listitem><para>namespace <link linkend="_namespace_luthetus_1_1_text_editor">Luthetus.TextEditor</link></para>
+</listitem>
+            <listitem><para>namespace <link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib">Luthetus.TextEditor.RazorLib</link></para>
+</listitem>
+            <listitem><para>namespace <link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_commands">Luthetus.TextEditor.RazorLib.Commands</link></para>
+</listitem>
+            <listitem><para>namespace <link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_commands_1_1_models">Luthetus.TextEditor.RazorLib.Commands.Models</link></para>
+</listitem>
+            <listitem><para>namespace <link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_commands_1_1_models_1_1_defaults">Luthetus.TextEditor.RazorLib.Commands.Models.Defaults</link></para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+</section>

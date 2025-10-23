@@ -1,0 +1,81 @@
+.TH "Luthetus.Common.RazorLib.Reactives.Models.ThrottleOptimized< TArgs >" 3 "Version 1.0.0" "Luthetus.Ide" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+Luthetus.Common.RazorLib.Reactives.Models.ThrottleOptimized< TArgs > \- Sometimes when using the \fBThrottle\fP, one is just re-using the same Func\&.  
+
+.SH SYNOPSIS
+.br
+.PP
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBThrottleOptimized\fP (TimeSpan throttleTimeSpan, Func< TArgs, CancellationToken, Task > workItem)"
+.br
+.ti -1c
+.RI "void \fBRun\fP (TArgs args)"
+.br
+.in -1c
+.SS "Public Attributes"
+
+.in +1c
+.ti -1c
+.RI "Task \fB_workItemTask\fP = Task\&.CompletedTask"
+.br
+.in -1c
+.SS "Properties"
+
+.in +1c
+.ti -1c
+.RI "TimeSpan \fBThrottleTimeSpan\fP\fR [get]\fP"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+Sometimes when using the \fBThrottle\fP, one is just re-using the same Func\&. 
+
+The current implementation of \fBThrottle\fP allows one to 'Run' various Func(s) all through the same throttle\&.
+
+.PP
+And this has its uses\&. But, if you only want to run 1 Func each 'Run' invocation, why re-allocate a Func object and closure the variables? | Followup: one can use a conditional branch within the singular Func to replicate this logic\&. Add a property to the TArgs that is a bool, enum, or etc\&.\&.\&. and then if or switch on it\&.
+
+.PP
+So, this verson will take in the constructor, the Func to 'Run'\&.
+
+.PP
+Then, if any closure is necessary, use the generic argument to this type to define the args\&.
+
+.PP
+Preferably, have the args be a struct, and then a pretty sizable optimization (relative to garbage collection CPU usage and memory) is expected\&.
+
+.PP
+Side note: why does \fBThrottle\fP use a Stack for the work items, just to take the top work item, then clear the stack within a lock? | Isn't it equivalent to just set a field from within a lock which is simply a 'Func<CancellationToken, Task>' and avoid the stack entirely? 
+.PP
+Definition at line \fB36\fP of file \fBThrottleOptimized\&.cs\fP\&.
+.SH "Member Function Documentation"
+.PP 
+.SS "void Luthetus\&.Common\&.RazorLib\&.Reactives\&.Models\&.ThrottleOptimized< TArgs >\&.Run (TArgs args)"
+
+.PP
+Definition at line \fB74\fP of file \fBThrottleOptimized\&.cs\fP\&.
+.SS "Luthetus\&.Common\&.RazorLib\&.Reactives\&.Models\&.ThrottleOptimized< TArgs >\&.ThrottleOptimized (TimeSpan throttleTimeSpan, Func< TArgs, CancellationToken, Task > workItem)"
+
+.PP
+Definition at line \fB41\fP of file \fBThrottleOptimized\&.cs\fP\&.
+.SH "Member Data Documentation"
+.PP 
+.SS "Task Luthetus\&.Common\&.RazorLib\&.Reactives\&.Models\&.ThrottleOptimized< TArgs >\&._workItemTask = Task\&.CompletedTask"
+
+.PP
+Definition at line \fB70\fP of file \fBThrottleOptimized\&.cs\fP\&.
+.SH "Property Documentation"
+.PP 
+.SS "TimeSpan Luthetus\&.Common\&.RazorLib\&.Reactives\&.Models\&.ThrottleOptimized< TArgs >\&.ThrottleTimeSpan\fR [get]\fP"
+
+.PP
+Definition at line \fB72\fP of file \fBThrottleOptimized\&.cs\fP\&.
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for Luthetus\&.Ide from the source code\&.

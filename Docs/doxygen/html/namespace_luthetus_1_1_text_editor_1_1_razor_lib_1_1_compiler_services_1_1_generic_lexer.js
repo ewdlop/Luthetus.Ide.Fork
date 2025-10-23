@@ -1,0 +1,23 @@
+var namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_generic_lexer =
+[
+    [ "Decoration", "namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_generic_lexer_1_1_decoration.html", "namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_generic_lexer_1_1_decoration" ],
+    [ "SyntaxActors", "namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_generic_lexer_1_1_syntax_actors.html", "namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_generic_lexer_1_1_syntax_actors" ],
+    [ "SyntaxEnums", "namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_generic_lexer_1_1_syntax_enums.html", [
+      [ "GenericSyntaxKind", "namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_generic_lexer_1_1_syntax_enums.html#aaf0da3a33ac9209b3d542a3d9493f70e", [
+        [ "CommentSingleLine", "namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_generic_lexer_1_1_syntax_enums.html#aaf0da3a33ac9209b3d542a3d9493f70eac33dd721e22ea980fd9e181cebfaf886", null ],
+        [ "CommentMultiLine", "namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_generic_lexer_1_1_syntax_enums.html#aaf0da3a33ac9209b3d542a3d9493f70ea77d7de40b19a34193ad32b84193acade", null ],
+        [ "StringLiteral", "namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_generic_lexer_1_1_syntax_enums.html#aaf0da3a33ac9209b3d542a3d9493f70ea7029cff17180550e1214f19dba74a32a", null ],
+        [ "Keyword", "namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_generic_lexer_1_1_syntax_enums.html#aaf0da3a33ac9209b3d542a3d9493f70ea220f3d3750583b9db48568a0b5b9a5f1", null ],
+        [ "Function", "namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_generic_lexer_1_1_syntax_enums.html#aaf0da3a33ac9209b3d542a3d9493f70ea86408593c34af77fdd90df932f8b5261", null ],
+        [ "Document", "namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_generic_lexer_1_1_syntax_enums.html#aaf0da3a33ac9209b3d542a3d9493f70ea0945359809dad1fbf3dea1c95a0da951", null ],
+        [ "PreprocessorDirective", "namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_generic_lexer_1_1_syntax_enums.html#aaf0da3a33ac9209b3d542a3d9493f70eaf350e402e58369fdaa9bf1e876500676", null ],
+        [ "DeliminationExtended", "namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_generic_lexer_1_1_syntax_enums.html#aaf0da3a33ac9209b3d542a3d9493f70ea8d29e933a01e57aac228716ff8b581e6", null ]
+      ] ]
+    ] ],
+    [ "SyntaxObjects", "namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_generic_lexer_1_1_syntax_objects.html", "namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_generic_lexer_1_1_syntax_objects" ],
+    [ "DeliminationExtendedSyntaxDefinition", "class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_generic_lexer_1_1_delimin4227f7f6d403839b2744751702436ac8.html", "class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_generic_lexer_1_1_delimin4227f7f6d403839b2744751702436ac8" ],
+    [ "GenericLanguageDefinition", "class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_generic_lexer_1_1_generic_language_definition.html", "class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_generic_lexer_1_1_generic_language_definition" ],
+    [ "GenericPreprocessorDefinition", "class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_generic_lexer_1_1_generic_preprocessor_definition.html", "class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_generic_lexer_1_1_generic_preprocessor_definition" ],
+    [ "GenericSyntaxUnit", "class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_generic_lexer_1_1_generic_syntax_unit.html", "class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_generic_lexer_1_1_generic_syntax_unit" ],
+    [ "IGenericSyntax", "interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_generic_lexer_1_1_i_generic_syntax.html", "interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_generic_lexer_1_1_i_generic_syntax" ]
+];

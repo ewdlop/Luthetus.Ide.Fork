@@ -1,0 +1,4 @@
+var _c_sharp_project_resource_8cs =
+[
+    [ "Luthetus.CompilerServices.CSharpProject.CompilerServiceCase.CSharpProjectResource", "class_luthetus_1_1_compiler_services_1_1_c_sharp_project_1_1_compiler_service_case_1_1_c_sharp_project_resource.html", "class_luthetus_1_1_compiler_services_1_1_c_sharp_project_1_1_compiler_service_case_1_1_c_sharp_project_resource" ]
+];

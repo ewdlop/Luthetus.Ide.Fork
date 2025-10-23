@@ -1,0 +1,142 @@
+\doxysection{Text\+Editor\+Selection\+Helper.\+cs}
+\hypertarget{_text_editor_selection_helper_8cs_source}{}\label{_text_editor_selection_helper_8cs_source}\index{Source/Lib/TextEditor/Cursors/Models/TextEditorSelectionHelper.cs@{Source/Lib/TextEditor/Cursors/Models/TextEditorSelectionHelper.cs}}
+\mbox{\hyperlink{_text_editor_selection_helper_8cs}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{_text_editor_selection_helper_8cs_source_l00001}00001\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_exceptions}{Luthetus.TextEditor.RazorLib.Exceptions}};}
+\DoxyCodeLine{\Hypertarget{_text_editor_selection_helper_8cs_source_l00002}00002\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models}{Luthetus.TextEditor.RazorLib.TextEditors.Models}};}
+\DoxyCodeLine{\Hypertarget{_text_editor_selection_helper_8cs_source_l00003}00003\ }
+\DoxyCodeLine{\Hypertarget{_text_editor_selection_helper_8cs_source_l00004}00004\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_cursors_1_1_models}{Luthetus.TextEditor.RazorLib.Cursors.Models}};}
+\DoxyCodeLine{\Hypertarget{_text_editor_selection_helper_8cs_source_l00005}00005\ }
+\DoxyCodeLine{\Hypertarget{_text_editor_selection_helper_8cs_source_l00006}00006\ \textcolor{keyword}{public}\ \textcolor{keyword}{static}\ \textcolor{keyword}{class\ }TextEditorSelectionHelper}
+\DoxyCodeLine{\Hypertarget{_text_editor_selection_helper_8cs_source_l00007}00007\ \{}
+\DoxyCodeLine{\Hypertarget{_text_editor_selection_helper_8cs_source_l00008}00008\ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keyword}{static}\ \textcolor{keywordtype}{bool}\ HasSelectedText(TextEditorSelection\ textEditorSelection)}
+\DoxyCodeLine{\Hypertarget{_text_editor_selection_helper_8cs_source_l00009}00009\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_text_editor_selection_helper_8cs_source_l00010}00010\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ HasSelectedText(}
+\DoxyCodeLine{\Hypertarget{_text_editor_selection_helper_8cs_source_l00011}00011\ \ \ \ \ \ \ \ \ \ \ \ \ textEditorSelection.AnchorPositionIndex,}
+\DoxyCodeLine{\Hypertarget{_text_editor_selection_helper_8cs_source_l00012}00012\ \ \ \ \ \ \ \ \ \ \ \ \ textEditorSelection.EndingPositionIndex);}
+\DoxyCodeLine{\Hypertarget{_text_editor_selection_helper_8cs_source_l00013}00013\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_text_editor_selection_helper_8cs_source_l00014}00014\ }
+\DoxyCodeLine{\Hypertarget{_text_editor_selection_helper_8cs_source_l00015}00015\ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keyword}{static}\ \textcolor{keywordtype}{bool}\ HasSelectedText(TextEditorCursorModifier\ cursorModifier)}
+\DoxyCodeLine{\Hypertarget{_text_editor_selection_helper_8cs_source_l00016}00016\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_text_editor_selection_helper_8cs_source_l00017}00017\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ HasSelectedText(}
+\DoxyCodeLine{\Hypertarget{_text_editor_selection_helper_8cs_source_l00018}00018\ \ \ \ \ \ \ \ \ \ \ \ \ cursorModifier.SelectionAnchorPositionIndex,}
+\DoxyCodeLine{\Hypertarget{_text_editor_selection_helper_8cs_source_l00019}00019\ \ \ \ \ \ \ \ \ \ \ \ \ cursorModifier.SelectionEndingPositionIndex);}
+\DoxyCodeLine{\Hypertarget{_text_editor_selection_helper_8cs_source_l00020}00020\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_text_editor_selection_helper_8cs_source_l00021}00021\ }
+\DoxyCodeLine{\Hypertarget{_text_editor_selection_helper_8cs_source_l00022}00022\ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keyword}{static}\ \textcolor{keywordtype}{bool}\ HasSelectedText(\textcolor{keywordtype}{int}?\ anchorPositionIndex,\ \textcolor{keywordtype}{int}\ endingPositionIndex)}
+\DoxyCodeLine{\Hypertarget{_text_editor_selection_helper_8cs_source_l00023}00023\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_text_editor_selection_helper_8cs_source_l00024}00024\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (anchorPositionIndex.HasValue\ \&\&\ anchorPositionIndex.Value\ !=\ endingPositionIndex)}
+\DoxyCodeLine{\Hypertarget{_text_editor_selection_helper_8cs_source_l00025}00025\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{true};}
+\DoxyCodeLine{\Hypertarget{_text_editor_selection_helper_8cs_source_l00026}00026\ }
+\DoxyCodeLine{\Hypertarget{_text_editor_selection_helper_8cs_source_l00027}00027\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};}
+\DoxyCodeLine{\Hypertarget{_text_editor_selection_helper_8cs_source_l00028}00028\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_text_editor_selection_helper_8cs_source_l00029}00029\ }
+\DoxyCodeLine{\Hypertarget{_text_editor_selection_helper_8cs_source_l00030}00030\ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keyword}{static}\ \textcolor{keywordtype}{string}?\ GetSelectedText(}
+\DoxyCodeLine{\Hypertarget{_text_editor_selection_helper_8cs_source_l00031}00031\ \ \ \ \ \ \ \ \ TextEditorSelection\ textEditorSelection,}
+\DoxyCodeLine{\Hypertarget{_text_editor_selection_helper_8cs_source_l00032}00032\ \ \ \ \ \ \ \ \ ITextEditorModel\ textEditorModel)}
+\DoxyCodeLine{\Hypertarget{_text_editor_selection_helper_8cs_source_l00033}00033\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_text_editor_selection_helper_8cs_source_l00034}00034\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ GetSelectedText(}
+\DoxyCodeLine{\Hypertarget{_text_editor_selection_helper_8cs_source_l00035}00035\ \ \ \ \ \ \ \ \ \ \ \ \ textEditorSelection.AnchorPositionIndex,}
+\DoxyCodeLine{\Hypertarget{_text_editor_selection_helper_8cs_source_l00036}00036\ \ \ \ \ \ \ \ \ \ \ \ \ textEditorSelection.EndingPositionIndex,}
+\DoxyCodeLine{\Hypertarget{_text_editor_selection_helper_8cs_source_l00037}00037\ \ \ \ \ \ \ \ \ \ \ \ \ textEditorModel);}
+\DoxyCodeLine{\Hypertarget{_text_editor_selection_helper_8cs_source_l00038}00038\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_text_editor_selection_helper_8cs_source_l00039}00039\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_text_editor_selection_helper_8cs_source_l00040}00040\ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keyword}{static}\ \textcolor{keywordtype}{string}?\ GetSelectedText(}
+\DoxyCodeLine{\Hypertarget{_text_editor_selection_helper_8cs_source_l00041}00041\ \ \ \ \ \ \ \ \ TextEditorCursorModifier\ cursorModifier,}
+\DoxyCodeLine{\Hypertarget{_text_editor_selection_helper_8cs_source_l00042}00042\ \ \ \ \ \ \ \ \ ITextEditorModel\ textEditorModel)}
+\DoxyCodeLine{\Hypertarget{_text_editor_selection_helper_8cs_source_l00043}00043\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_text_editor_selection_helper_8cs_source_l00044}00044\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ GetSelectedText(}
+\DoxyCodeLine{\Hypertarget{_text_editor_selection_helper_8cs_source_l00045}00045\ \ \ \ \ \ \ \ \ \ \ \ \ cursorModifier.SelectionAnchorPositionIndex,}
+\DoxyCodeLine{\Hypertarget{_text_editor_selection_helper_8cs_source_l00046}00046\ \ \ \ \ \ \ \ \ \ \ \ \ cursorModifier.SelectionEndingPositionIndex,}
+\DoxyCodeLine{\Hypertarget{_text_editor_selection_helper_8cs_source_l00047}00047\ \ \ \ \ \ \ \ \ \ \ \ \ textEditorModel);}
+\DoxyCodeLine{\Hypertarget{_text_editor_selection_helper_8cs_source_l00048}00048\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_text_editor_selection_helper_8cs_source_l00049}00049\ }
+\DoxyCodeLine{\Hypertarget{_text_editor_selection_helper_8cs_source_l00050}00050\ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keyword}{static}\ \textcolor{keywordtype}{string}?\ GetSelectedText(}
+\DoxyCodeLine{\Hypertarget{_text_editor_selection_helper_8cs_source_l00051}00051\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}?\ anchorPositionIndex,}
+\DoxyCodeLine{\Hypertarget{_text_editor_selection_helper_8cs_source_l00052}00052\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ endingPositionIndex,}
+\DoxyCodeLine{\Hypertarget{_text_editor_selection_helper_8cs_source_l00053}00053\ \ \ \ \ \ \ \ \ ITextEditorModel\ textEditorModel)}
+\DoxyCodeLine{\Hypertarget{_text_editor_selection_helper_8cs_source_l00054}00054\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_text_editor_selection_helper_8cs_source_l00055}00055\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (HasSelectedText(anchorPositionIndex,\ endingPositionIndex))}
+\DoxyCodeLine{\Hypertarget{_text_editor_selection_helper_8cs_source_l00056}00056\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_text_editor_selection_helper_8cs_source_l00057}00057\ \ \ \ \ \ \ \ \ \ \ \ \ var\ selectionBounds\ =\ GetSelectionBounds(anchorPositionIndex,\ endingPositionIndex);}
+\DoxyCodeLine{\Hypertarget{_text_editor_selection_helper_8cs_source_l00058}00058\ }
+\DoxyCodeLine{\Hypertarget{_text_editor_selection_helper_8cs_source_l00059}00059\ \ \ \ \ \ \ \ \ \ \ \ \ var\ result\ =\ textEditorModel.GetString(}
+\DoxyCodeLine{\Hypertarget{_text_editor_selection_helper_8cs_source_l00060}00060\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ selectionBounds.lowerPositionIndexInclusive,}
+\DoxyCodeLine{\Hypertarget{_text_editor_selection_helper_8cs_source_l00061}00061\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ selectionBounds.upperPositionIndexExclusive\ -\/\ selectionBounds.lowerPositionIndexInclusive);}
+\DoxyCodeLine{\Hypertarget{_text_editor_selection_helper_8cs_source_l00062}00062\ }
+\DoxyCodeLine{\Hypertarget{_text_editor_selection_helper_8cs_source_l00063}00063\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ result.Length\ !=\ 0\ ?\ result\ :\ \textcolor{keyword}{null};}
+\DoxyCodeLine{\Hypertarget{_text_editor_selection_helper_8cs_source_l00064}00064\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_text_editor_selection_helper_8cs_source_l00065}00065\ }
+\DoxyCodeLine{\Hypertarget{_text_editor_selection_helper_8cs_source_l00066}00066\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{null};}
+\DoxyCodeLine{\Hypertarget{_text_editor_selection_helper_8cs_source_l00067}00067\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_text_editor_selection_helper_8cs_source_l00068}00068\ }
+\DoxyCodeLine{\Hypertarget{_text_editor_selection_helper_8cs_source_l00069}00069\ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keyword}{static}\ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_cursors_1_1_models_a8373e854ca1ddf152a3b5372ea18c20b}{TextEditorCursor}}\ SelectLinesRange(}
+\DoxyCodeLine{\Hypertarget{_text_editor_selection_helper_8cs_source_l00070}00070\ \ \ \ \ \ \ \ \ ITextEditorModel\ textEditorModel,}
+\DoxyCodeLine{\Hypertarget{_text_editor_selection_helper_8cs_source_l00071}00071\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ startingRowIndex,}
+\DoxyCodeLine{\Hypertarget{_text_editor_selection_helper_8cs_source_l00072}00072\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ count)}
+\DoxyCodeLine{\Hypertarget{_text_editor_selection_helper_8cs_source_l00073}00073\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_text_editor_selection_helper_8cs_source_l00074}00074\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{throw}\ \textcolor{keyword}{new}\ NotImplementedException(\textcolor{stringliteral}{"{}TODO:\ (2023-\/12-\/13)\ Writing\ immutability\ for\ text\ editor"{}});}
+\DoxyCodeLine{\Hypertarget{_text_editor_selection_helper_8cs_source_l00075}00075\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_text_editor_selection_helper_8cs_source_l00076}00076\ }
+\DoxyCodeLine{\Hypertarget{_text_editor_selection_helper_8cs_source_l00077}00077\ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keyword}{static}\ (\textcolor{keywordtype}{int}\ lowerPositionIndexInclusive,\ \textcolor{keywordtype}{int}\ upperPositionIndexExclusive)\ GetSelectionBounds(}
+\DoxyCodeLine{\Hypertarget{_text_editor_selection_helper_8cs_source_l00078}00078\ \ \ \ \ \ \ \ \ TextEditorSelection\ textEditorSelection)}
+\DoxyCodeLine{\Hypertarget{_text_editor_selection_helper_8cs_source_l00079}00079\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_text_editor_selection_helper_8cs_source_l00080}00080\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ GetSelectionBounds(}
+\DoxyCodeLine{\Hypertarget{_text_editor_selection_helper_8cs_source_l00081}00081\ \ \ \ \ \ \ \ \ \ \ \ \ textEditorSelection.AnchorPositionIndex,}
+\DoxyCodeLine{\Hypertarget{_text_editor_selection_helper_8cs_source_l00082}00082\ \ \ \ \ \ \ \ \ \ \ \ \ textEditorSelection.EndingPositionIndex);}
+\DoxyCodeLine{\Hypertarget{_text_editor_selection_helper_8cs_source_l00083}00083\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_text_editor_selection_helper_8cs_source_l00084}00084\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_text_editor_selection_helper_8cs_source_l00085}00085\ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keyword}{static}\ (\textcolor{keywordtype}{int}\ lowerPositionIndexInclusive,\ \textcolor{keywordtype}{int}\ upperPositionIndexExclusive)\ GetSelectionBounds(}
+\DoxyCodeLine{\Hypertarget{_text_editor_selection_helper_8cs_source_l00086}00086\ \ \ \ \ \ \ \ \ TextEditorCursorModifier\ cursorModifier)}
+\DoxyCodeLine{\Hypertarget{_text_editor_selection_helper_8cs_source_l00087}00087\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_text_editor_selection_helper_8cs_source_l00088}00088\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ GetSelectionBounds(}
+\DoxyCodeLine{\Hypertarget{_text_editor_selection_helper_8cs_source_l00089}00089\ \ \ \ \ \ \ \ \ \ \ \ \ cursorModifier.SelectionAnchorPositionIndex,}
+\DoxyCodeLine{\Hypertarget{_text_editor_selection_helper_8cs_source_l00090}00090\ \ \ \ \ \ \ \ \ \ \ \ \ cursorModifier.SelectionEndingPositionIndex);}
+\DoxyCodeLine{\Hypertarget{_text_editor_selection_helper_8cs_source_l00091}00091\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_text_editor_selection_helper_8cs_source_l00092}00092\ }
+\DoxyCodeLine{\Hypertarget{_text_editor_selection_helper_8cs_source_l00093}00093\ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keyword}{static}\ (\textcolor{keywordtype}{int}\ lowerPositionIndexInclusive,\ \textcolor{keywordtype}{int}\ upperPositionIndexExclusive)\ GetSelectionBounds(}
+\DoxyCodeLine{\Hypertarget{_text_editor_selection_helper_8cs_source_l00094}00094\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}?\ anchorPositionIndex,}
+\DoxyCodeLine{\Hypertarget{_text_editor_selection_helper_8cs_source_l00095}00095\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ endingPositionIndex)}
+\DoxyCodeLine{\Hypertarget{_text_editor_selection_helper_8cs_source_l00096}00096\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_text_editor_selection_helper_8cs_source_l00097}00097\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (anchorPositionIndex\ is\ \textcolor{keyword}{null})}
+\DoxyCodeLine{\Hypertarget{_text_editor_selection_helper_8cs_source_l00098}00098\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_text_editor_selection_helper_8cs_source_l00099}00099\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{throw}\ \textcolor{keyword}{new}\ LuthetusTextEditorException(}
+\DoxyCodeLine{\Hypertarget{_text_editor_selection_helper_8cs_source_l00100}00100\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \$\textcolor{stringliteral}{"{}\{nameof(anchorPositionIndex)\}\ was\ null."{}});}
+\DoxyCodeLine{\Hypertarget{_text_editor_selection_helper_8cs_source_l00101}00101\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_text_editor_selection_helper_8cs_source_l00102}00102\ }
+\DoxyCodeLine{\Hypertarget{_text_editor_selection_helper_8cs_source_l00103}00103\ \ \ \ \ \ \ \ \ var\ lowerPositionIndexInclusive\ =\ anchorPositionIndex.Value;}
+\DoxyCodeLine{\Hypertarget{_text_editor_selection_helper_8cs_source_l00104}00104\ \ \ \ \ \ \ \ \ var\ upperPositionIndexExclusive\ =\ endingPositionIndex;}
+\DoxyCodeLine{\Hypertarget{_text_editor_selection_helper_8cs_source_l00105}00105\ }
+\DoxyCodeLine{\Hypertarget{_text_editor_selection_helper_8cs_source_l00106}00106\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (lowerPositionIndexInclusive\ >\ upperPositionIndexExclusive)\ \textcolor{comment}{//\ Swap\ the\ values\ around}}
+\DoxyCodeLine{\Hypertarget{_text_editor_selection_helper_8cs_source_l00107}00107\ \ \ \ \ \ \ \ \ \ \ \ \ (lowerPositionIndexInclusive,\ upperPositionIndexExclusive)\ =\ (upperPositionIndexExclusive,\ lowerPositionIndexInclusive);}
+\DoxyCodeLine{\Hypertarget{_text_editor_selection_helper_8cs_source_l00108}00108\ }
+\DoxyCodeLine{\Hypertarget{_text_editor_selection_helper_8cs_source_l00109}00109\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ (lowerPositionIndexInclusive,\ upperPositionIndexExclusive);}
+\DoxyCodeLine{\Hypertarget{_text_editor_selection_helper_8cs_source_l00110}00110\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_text_editor_selection_helper_8cs_source_l00111}00111\ }
+\DoxyCodeLine{\Hypertarget{_text_editor_selection_helper_8cs_source_l00112}00112\ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keyword}{static}\ (\textcolor{keywordtype}{int}\ lowerRowIndexInclusive,\ \textcolor{keywordtype}{int}\ upperRowIndexExclusive)\ ConvertSelectionOfPositionIndexUnitsToRowIndexUnits(}
+\DoxyCodeLine{\Hypertarget{_text_editor_selection_helper_8cs_source_l00113}00113\ \ \ \ \ \ \ \ \ ITextEditorModel\ textEditorModel,}
+\DoxyCodeLine{\Hypertarget{_text_editor_selection_helper_8cs_source_l00114}00114\ \ \ \ \ \ \ \ \ (\textcolor{keywordtype}{int}\ lowerPositionIndexInclusive,\ \textcolor{keywordtype}{int}\ upperPositionIndexExclusive)\ positionIndexBounds)}
+\DoxyCodeLine{\Hypertarget{_text_editor_selection_helper_8cs_source_l00115}00115\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_text_editor_selection_helper_8cs_source_l00116}00116\ \ \ \ \ \ \ \ \ var\ firstRowToSelectDataInclusive\ =\ textEditorModel.GetLineInformationFromPositionIndex(}
+\DoxyCodeLine{\Hypertarget{_text_editor_selection_helper_8cs_source_l00117}00117\ \ \ \ \ \ \ \ \ \ \ \ \ positionIndexBounds.lowerPositionIndexInclusive);}
+\DoxyCodeLine{\Hypertarget{_text_editor_selection_helper_8cs_source_l00118}00118\ }
+\DoxyCodeLine{\Hypertarget{_text_editor_selection_helper_8cs_source_l00119}00119\ \ \ \ \ \ \ \ \ var\ lastRowToSelectDataExclusive\ =\ textEditorModel.GetLineInformationFromPositionIndex(}
+\DoxyCodeLine{\Hypertarget{_text_editor_selection_helper_8cs_source_l00120}00120\ \ \ \ \ \ \ \ \ \ \ \ \ positionIndexBounds.upperPositionIndexExclusive);}
+\DoxyCodeLine{\Hypertarget{_text_editor_selection_helper_8cs_source_l00121}00121\ }
+\DoxyCodeLine{\Hypertarget{_text_editor_selection_helper_8cs_source_l00122}00122\ \ \ \ \ \ \ \ \ var\ upperRowIndexExclusive\ =\ lastRowToSelectDataExclusive.Index\ +\ 1;}
+\DoxyCodeLine{\Hypertarget{_text_editor_selection_helper_8cs_source_l00123}00123\ }
+\DoxyCodeLine{\Hypertarget{_text_editor_selection_helper_8cs_source_l00124}00124\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (lastRowToSelectDataExclusive.StartPositionIndexInclusive\ ==\ positionIndexBounds.upperPositionIndexExclusive)}
+\DoxyCodeLine{\Hypertarget{_text_editor_selection_helper_8cs_source_l00125}00125\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_text_editor_selection_helper_8cs_source_l00126}00126\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ If\ the\ selection\ ends\ at\ the\ start\ of\ a\ row,\ then\ an\ extra\ row}}
+\DoxyCodeLine{\Hypertarget{_text_editor_selection_helper_8cs_source_l00127}00127\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ will\ be\ erroneously\ indended.\ This\ occurs\ because\ the\ '+1'\ logic}}
+\DoxyCodeLine{\Hypertarget{_text_editor_selection_helper_8cs_source_l00128}00128\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ is\ used\ to\ ensure\ partially\ selected\ rows\ still\ get\ indented.}}
+\DoxyCodeLine{\Hypertarget{_text_editor_selection_helper_8cs_source_l00129}00129\ \ \ \ \ \ \ \ \ \ \ \ \ upperRowIndexExclusive-\/-\/;}
+\DoxyCodeLine{\Hypertarget{_text_editor_selection_helper_8cs_source_l00130}00130\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_text_editor_selection_helper_8cs_source_l00131}00131\ }
+\DoxyCodeLine{\Hypertarget{_text_editor_selection_helper_8cs_source_l00132}00132\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ (}
+\DoxyCodeLine{\Hypertarget{_text_editor_selection_helper_8cs_source_l00133}00133\ \ \ \ \ \ \ \ \ \ \ \ \ firstRowToSelectDataInclusive.Index,}
+\DoxyCodeLine{\Hypertarget{_text_editor_selection_helper_8cs_source_l00134}00134\ \ \ \ \ \ \ \ \ \ \ \ \ upperRowIndexExclusive);}
+\DoxyCodeLine{\Hypertarget{_text_editor_selection_helper_8cs_source_l00135}00135\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_text_editor_selection_helper_8cs_source_l00136}00136\ \}}
+
+\end{DoxyCode}

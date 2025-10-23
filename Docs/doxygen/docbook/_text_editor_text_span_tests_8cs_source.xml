@@ -1,0 +1,90 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="__text_editor_text_span_tests_8cs_source" xml:lang="en-US">
+<title>TextEditorTextSpanTests.cs</title>
+<indexterm><primary>Source/Tests/TextEditor/Basis/Lexes/Models/TextEditorTextSpanTests.cs</primary></indexterm>
+Go to the documentation of this file.<programlisting linenumbering="unnumbered"><anchor xml:id="__text_editor_text_span_tests_8cs_source_1l00001"/>00001 <emphasis role="keyword">using&#32;</emphasis><link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_lexers_1_1_models">Luthetus.TextEditor.RazorLib.Lexers.Models</link>;
+<anchor xml:id="__text_editor_text_span_tests_8cs_source_1l00002"/>00002 <emphasis role="keyword">using&#32;</emphasis><link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_generic_lexer_1_1_decoration">Luthetus.TextEditor.RazorLib.CompilerServices.GenericLexer.Decoration</link>;
+<anchor xml:id="__text_editor_text_span_tests_8cs_source_1l00003"/>00003 <emphasis role="keyword">using&#32;</emphasis><link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_utility">Luthetus.TextEditor.RazorLib.CompilerServices.Utility</link>;
+<anchor xml:id="__text_editor_text_span_tests_8cs_source_1l00004"/>00004 
+<anchor xml:id="__text_editor_text_span_tests_8cs_source_1l00005"/>00005 <emphasis role="keyword">namespace&#32;</emphasis><link linkend="_namespace_luthetus_1_1_text_editor_1_1_tests_1_1_basis_1_1_lexes_1_1_models">Luthetus.TextEditor.Tests.Basis.Lexes.Models</link>;
+<anchor xml:id="__text_editor_text_span_tests_8cs_source_1l00006"/>00006 
+<anchor xml:id="__text_editor_text_span_tests_8cs_source_1l00010"/><link linkend="_class_luthetus_1_1_text_editor_1_1_tests_1_1_basis_1_1_lexes_1_1_models_1_1_text_editor_text_span_tests">00010</link> <emphasis role="keyword">public</emphasis>&#32;<emphasis role="keyword">class&#32;</emphasis><link linkend="_class_luthetus_1_1_text_editor_1_1_tests_1_1_basis_1_1_lexes_1_1_models_1_1_text_editor_text_span_tests">TextEditorTextSpanTests</link>
+<anchor xml:id="__text_editor_text_span_tests_8cs_source_1l00011"/>00011 {
+<anchor xml:id="__text_editor_text_span_tests_8cs_source_1l00023"/>00023 &#32;&#32;&#32;&#32;[Fact]
+<anchor xml:id="__text_editor_text_span_tests_8cs_source_1l00024"/><link linkend="_class_luthetus_1_1_text_editor_1_1_tests_1_1_basis_1_1_lexes_1_1_models_1_1_text_editor_text_span_tests_1ae7fe3c553ab5536e246725210c1df922">00024</link> &#32;&#32;&#32;&#32;<emphasis role="keyword">public</emphasis>&#32;<emphasis role="keywordtype">void</emphasis>&#32;<link linkend="_class_luthetus_1_1_text_editor_1_1_tests_1_1_basis_1_1_lexes_1_1_models_1_1_text_editor_text_span_tests_1ae7fe3c553ab5536e246725210c1df922">Constructor_A</link>()
+<anchor xml:id="__text_editor_text_span_tests_8cs_source_1l00025"/>00025 &#32;&#32;&#32;&#32;{
+<anchor xml:id="__text_editor_text_span_tests_8cs_source_1l00026"/>00026 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;var&#32;resourceUri&#32;=&#32;<emphasis role="keyword">new</emphasis>&#32;<link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_lexers_1_1_models_1a26a1b63ad28ec7955b30bc6c91571eca">ResourceUri</link>(<emphasis role="stringliteral">&quot;/unitTesting.txt&quot;</emphasis>);
+<anchor xml:id="__text_editor_text_span_tests_8cs_source_1l00027"/>00027 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;var&#32;functionIdentifier&#32;=&#32;<emphasis role="stringliteral">&quot;MyFunction&quot;</emphasis>;
+<anchor xml:id="__text_editor_text_span_tests_8cs_source_1l00028"/>00028 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;var&#32;sourceText&#32;=&#32;$<emphasis role="stringliteral">&quot;Abc123&#32;{functionIdentifier}&#32;AppleSoup&quot;</emphasis>;
+<anchor xml:id="__text_editor_text_span_tests_8cs_source_1l00029"/>00029 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;var&#32;indexOfFunctionIdentifier&#32;=&#32;sourceText.IndexOf(functionIdentifier);
+<anchor xml:id="__text_editor_text_span_tests_8cs_source_1l00030"/>00030 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;var&#32;startingIndexInclusive&#32;=&#32;indexOfFunctionIdentifier;
+<anchor xml:id="__text_editor_text_span_tests_8cs_source_1l00031"/>00031 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;var&#32;endingIndexExclusive&#32;=&#32;indexOfFunctionIdentifier&#32;+&#32;functionIdentifier.Length;
+<anchor xml:id="__text_editor_text_span_tests_8cs_source_1l00032"/>00032 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;var&#32;decorationByte&#32;=&#32;(byte)<link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_generic_lexer_1_1_decoration_1a7f6068f17a9d3ed70d4b8eefd0fcbcf0">GenericDecorationKind</link>.Function;
+<anchor xml:id="__text_editor_text_span_tests_8cs_source_1l00033"/>00033 
+<anchor xml:id="__text_editor_text_span_tests_8cs_source_1l00034"/>00034 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;var&#32;textSpan&#32;=&#32;<emphasis role="keyword">new</emphasis>&#32;<link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_lexers_1_1_models_1a1ffd1a7706dfd364560b76d47467812f">TextEditorTextSpan</link>(
+<anchor xml:id="__text_editor_text_span_tests_8cs_source_1l00035"/>00035 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;startingIndexInclusive,
+<anchor xml:id="__text_editor_text_span_tests_8cs_source_1l00036"/>00036 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;endingIndexExclusive,
+<anchor xml:id="__text_editor_text_span_tests_8cs_source_1l00037"/>00037 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;decorationByte,
+<anchor xml:id="__text_editor_text_span_tests_8cs_source_1l00038"/>00038 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;resourceUri,
+<anchor xml:id="__text_editor_text_span_tests_8cs_source_1l00039"/>00039 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;sourceText);
+<anchor xml:id="__text_editor_text_span_tests_8cs_source_1l00040"/>00040 
+<anchor xml:id="__text_editor_text_span_tests_8cs_source_1l00041"/>00041 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;Assert.Equal(startingIndexInclusive,&#32;textSpan.StartingIndexInclusive);
+<anchor xml:id="__text_editor_text_span_tests_8cs_source_1l00042"/>00042 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;Assert.Equal(endingIndexExclusive,&#32;textSpan.EndingIndexExclusive);
+<anchor xml:id="__text_editor_text_span_tests_8cs_source_1l00043"/>00043 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;Assert.Equal(decorationByte,&#32;textSpan.DecorationByte);
+<anchor xml:id="__text_editor_text_span_tests_8cs_source_1l00044"/>00044 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;Assert.Equal(resourceUri,&#32;textSpan.ResourceUri);
+<anchor xml:id="__text_editor_text_span_tests_8cs_source_1l00045"/>00045 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;Assert.Equal(sourceText,&#32;textSpan.SourceText);
+<anchor xml:id="__text_editor_text_span_tests_8cs_source_1l00046"/>00046 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;Assert.Equal(functionIdentifier.Length,&#32;textSpan.Length);
+<anchor xml:id="__text_editor_text_span_tests_8cs_source_1l00047"/>00047 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;Assert.Equal(textSpan.EndingIndexExclusive&#32;-&#32;textSpan.StartingIndexInclusive,&#32;textSpan.Length);
+<anchor xml:id="__text_editor_text_span_tests_8cs_source_1l00048"/>00048 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;Assert.Equal(functionIdentifier,&#32;textSpan.GetText());
+<anchor xml:id="__text_editor_text_span_tests_8cs_source_1l00049"/>00049 &#32;&#32;&#32;&#32;}
+<anchor xml:id="__text_editor_text_span_tests_8cs_source_1l00050"/>00050 
+<anchor xml:id="__text_editor_text_span_tests_8cs_source_1l00062"/>00062 &#32;&#32;&#32;&#32;[Fact]
+<anchor xml:id="__text_editor_text_span_tests_8cs_source_1l00063"/><link linkend="_class_luthetus_1_1_text_editor_1_1_tests_1_1_basis_1_1_lexes_1_1_models_1_1_text_editor_text_span_tests_1a86575135c5bd13a3af355b81ae8bdeea">00063</link> &#32;&#32;&#32;&#32;<emphasis role="keyword">public</emphasis>&#32;<emphasis role="keywordtype">void</emphasis>&#32;<link linkend="_class_luthetus_1_1_text_editor_1_1_tests_1_1_basis_1_1_lexes_1_1_models_1_1_text_editor_text_span_tests_1a86575135c5bd13a3af355b81ae8bdeea">Constructor_B</link>()
+<anchor xml:id="__text_editor_text_span_tests_8cs_source_1l00064"/>00064 &#32;&#32;&#32;&#32;{
+<anchor xml:id="__text_editor_text_span_tests_8cs_source_1l00065"/>00065 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;var&#32;resourceUri&#32;=&#32;<emphasis role="keyword">new</emphasis>&#32;<link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_lexers_1_1_models_1a26a1b63ad28ec7955b30bc6c91571eca">ResourceUri</link>(<emphasis role="stringliteral">&quot;/unitTesting.txt&quot;</emphasis>);
+<anchor xml:id="__text_editor_text_span_tests_8cs_source_1l00066"/>00066 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;var&#32;functionIdentifier&#32;=&#32;<emphasis role="stringliteral">&quot;MyFunction&quot;</emphasis>;
+<anchor xml:id="__text_editor_text_span_tests_8cs_source_1l00067"/>00067 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;var&#32;sourceText&#32;=&#32;$<emphasis role="stringliteral">&quot;Abc123&#32;{functionIdentifier}&#32;AppleSoup&quot;</emphasis>;
+<anchor xml:id="__text_editor_text_span_tests_8cs_source_1l00068"/>00068 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;var&#32;decorationByte&#32;=&#32;(byte)<link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_generic_lexer_1_1_decoration_1a7f6068f17a9d3ed70d4b8eefd0fcbcf0">GenericDecorationKind</link>.Function;
+<anchor xml:id="__text_editor_text_span_tests_8cs_source_1l00069"/>00069 
+<anchor xml:id="__text_editor_text_span_tests_8cs_source_1l00070"/>00070 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;var&#32;stringWalker&#32;=&#32;<emphasis role="keyword">new</emphasis>&#32;<link linkend="_class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_utility_1_1_string_walker">StringWalker</link>(resourceUri,&#32;sourceText);
+<anchor xml:id="__text_editor_text_span_tests_8cs_source_1l00071"/>00071 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;
+<anchor xml:id="__text_editor_text_span_tests_8cs_source_1l00072"/>00072 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;var&#32;firstCharacterOfFunctionIdentifier&#32;=&#32;functionIdentifier.First();
+<anchor xml:id="__text_editor_text_span_tests_8cs_source_1l00073"/>00073 
+<anchor xml:id="__text_editor_text_span_tests_8cs_source_1l00074"/>00074 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">while</emphasis>&#32;(!stringWalker.IsEof)
+<anchor xml:id="__text_editor_text_span_tests_8cs_source_1l00075"/>00075 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;{
+<anchor xml:id="__text_editor_text_span_tests_8cs_source_1l00076"/>00076 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">if</emphasis>&#32;(stringWalker.CurrentCharacter&#32;==&#32;firstCharacterOfFunctionIdentifier)
+<anchor xml:id="__text_editor_text_span_tests_8cs_source_1l00077"/>00077 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;{
+<anchor xml:id="__text_editor_text_span_tests_8cs_source_1l00078"/>00078 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">if</emphasis>&#32;(stringWalker.PeekForSubstring(functionIdentifier))
+<anchor xml:id="__text_editor_text_span_tests_8cs_source_1l00079"/>00079 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">break</emphasis>;
+<anchor xml:id="__text_editor_text_span_tests_8cs_source_1l00080"/>00080 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;}
+<anchor xml:id="__text_editor_text_span_tests_8cs_source_1l00081"/>00081 
+<anchor xml:id="__text_editor_text_span_tests_8cs_source_1l00082"/>00082 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;_&#32;=&#32;stringWalker.ReadCharacter();
+<anchor xml:id="__text_editor_text_span_tests_8cs_source_1l00083"/>00083 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;}
+<anchor xml:id="__text_editor_text_span_tests_8cs_source_1l00084"/>00084 
+<anchor xml:id="__text_editor_text_span_tests_8cs_source_1l00085"/>00085 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;var&#32;startingIndexInclusive&#32;=&#32;stringWalker.PositionIndex;
+<anchor xml:id="__text_editor_text_span_tests_8cs_source_1l00086"/>00086 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;var&#32;endingIndexExclusive&#32;=&#32;startingIndexInclusive&#32;+&#32;functionIdentifier.Length;
+<anchor xml:id="__text_editor_text_span_tests_8cs_source_1l00087"/>00087 
+<anchor xml:id="__text_editor_text_span_tests_8cs_source_1l00088"/>00088 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;_&#32;=&#32;stringWalker.ReadRange(functionIdentifier.Length);
+<anchor xml:id="__text_editor_text_span_tests_8cs_source_1l00089"/>00089 
+<anchor xml:id="__text_editor_text_span_tests_8cs_source_1l00090"/>00090 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;var&#32;textSpan&#32;=&#32;<emphasis role="keyword">new</emphasis>&#32;<link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_lexers_1_1_models_1a1ffd1a7706dfd364560b76d47467812f">TextEditorTextSpan</link>(
+<anchor xml:id="__text_editor_text_span_tests_8cs_source_1l00091"/>00091 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;startingIndexInclusive,
+<anchor xml:id="__text_editor_text_span_tests_8cs_source_1l00092"/>00092 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;stringWalker,
+<anchor xml:id="__text_editor_text_span_tests_8cs_source_1l00093"/>00093 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;decorationByte);
+<anchor xml:id="__text_editor_text_span_tests_8cs_source_1l00094"/>00094 
+<anchor xml:id="__text_editor_text_span_tests_8cs_source_1l00095"/>00095 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;Assert.Equal(startingIndexInclusive,&#32;textSpan.StartingIndexInclusive);
+<anchor xml:id="__text_editor_text_span_tests_8cs_source_1l00096"/>00096 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;Assert.Equal(endingIndexExclusive,&#32;textSpan.EndingIndexExclusive);
+<anchor xml:id="__text_editor_text_span_tests_8cs_source_1l00097"/>00097 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;Assert.Equal(decorationByte,&#32;textSpan.DecorationByte);
+<anchor xml:id="__text_editor_text_span_tests_8cs_source_1l00098"/>00098 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;Assert.Equal(resourceUri,&#32;textSpan.ResourceUri);
+<anchor xml:id="__text_editor_text_span_tests_8cs_source_1l00099"/>00099 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;Assert.Equal(sourceText,&#32;textSpan.SourceText);
+<anchor xml:id="__text_editor_text_span_tests_8cs_source_1l00100"/>00100 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;Assert.Equal(functionIdentifier.Length,&#32;textSpan.Length);
+<anchor xml:id="__text_editor_text_span_tests_8cs_source_1l00101"/>00101 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;Assert.Equal(textSpan.EndingIndexExclusive&#32;-&#32;textSpan.StartingIndexInclusive,&#32;textSpan.Length);
+<anchor xml:id="__text_editor_text_span_tests_8cs_source_1l00102"/>00102 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;Assert.Equal(functionIdentifier,&#32;textSpan.GetText());
+<anchor xml:id="__text_editor_text_span_tests_8cs_source_1l00103"/>00103 &#32;&#32;&#32;&#32;}
+<anchor xml:id="__text_editor_text_span_tests_8cs_source_1l00104"/>00104 
+<anchor xml:id="__text_editor_text_span_tests_8cs_source_1l00108"/>00108 &#32;&#32;&#32;&#32;[Fact]
+<anchor xml:id="__text_editor_text_span_tests_8cs_source_1l00109"/><link linkend="_class_luthetus_1_1_text_editor_1_1_tests_1_1_basis_1_1_lexes_1_1_models_1_1_text_editor_text_span_tests_1afa3ee109df49da8aca760562cc20da05">00109</link> &#32;&#32;&#32;&#32;<emphasis role="keyword">public</emphasis>&#32;<emphasis role="keywordtype">void</emphasis>&#32;<link linkend="_class_luthetus_1_1_text_editor_1_1_tests_1_1_basis_1_1_lexes_1_1_models_1_1_text_editor_text_span_tests_1afa3ee109df49da8aca760562cc20da05">FabricateTextSpan</link>()
+<anchor xml:id="__text_editor_text_span_tests_8cs_source_1l00110"/>00110 &#32;&#32;&#32;&#32;{
+<anchor xml:id="__text_editor_text_span_tests_8cs_source_1l00111"/>00111 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">throw</emphasis>&#32;<emphasis role="keyword">new</emphasis>&#32;NotImplementedException();
+<anchor xml:id="__text_editor_text_span_tests_8cs_source_1l00112"/>00112 &#32;&#32;&#32;&#32;}
+<anchor xml:id="__text_editor_text_span_tests_8cs_source_1l00113"/>00113 }
+</programlisting></section>

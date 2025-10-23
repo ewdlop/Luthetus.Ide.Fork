@@ -1,0 +1,4 @@
+var _folder_explorer_context_menu_8razor_8cs =
+[
+    [ "Luthetus.Ide.RazorLib.FolderExplorers.Displays.FolderExplorerContextMenu", "class_luthetus_1_1_ide_1_1_razor_lib_1_1_folder_explorers_1_1_displays_1_1_folder_explorer_context_menu.html", "class_luthetus_1_1_ide_1_1_razor_lib_1_1_folder_explorers_1_1_displays_1_1_folder_explorer_context_menu" ]
+];

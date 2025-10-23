@@ -1,0 +1,4 @@
+var class_luthetus_1_1_extensions_1_1_dot_net_1_1_tests_1_1_basis_1_1_compiler_services_1_1_states_16dc9e86399b8ab7ce90a0b851a91d808 =
+[
+    [ "ReduceNewAction", "class_luthetus_1_1_extensions_1_1_dot_net_1_1_tests_1_1_basis_1_1_compiler_services_1_1_states_16dc9e86399b8ab7ce90a0b851a91d808.html#a60538100d237939c2a1c8da0f2566ce7", null ]
+];

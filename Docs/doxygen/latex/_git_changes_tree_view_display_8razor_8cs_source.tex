@@ -1,0 +1,78 @@
+\doxysection{Git\+Changes\+Tree\+View\+Display.\+razor.\+cs}
+\hypertarget{_git_changes_tree_view_display_8razor_8cs_source}{}\label{_git_changes_tree_view_display_8razor_8cs_source}\index{Source/Lib/Extensions/Extensions.Git/Displays/GitChangesTreeViewDisplay.razor.cs@{Source/Lib/Extensions/Extensions.Git/Displays/GitChangesTreeViewDisplay.razor.cs}}
+\mbox{\hyperlink{_git_changes_tree_view_display_8razor_8cs}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{_git_changes_tree_view_display_8razor_8cs_source_l00001}00001\ \textcolor{keyword}{using\ }Microsoft.AspNetCore.Components;}
+\DoxyCodeLine{\Hypertarget{_git_changes_tree_view_display_8razor_8cs_source_l00002}00002\ \textcolor{keyword}{using\ }Fluxor;}
+\DoxyCodeLine{\Hypertarget{_git_changes_tree_view_display_8razor_8cs_source_l00003}00003\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_luthetus_1_1_common_1_1_razor_lib_1_1_background_tasks_1_1_models}{Luthetus.Common.RazorLib.BackgroundTasks.Models}};}
+\DoxyCodeLine{\Hypertarget{_git_changes_tree_view_display_8razor_8cs_source_l00004}00004\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_luthetus_1_1_common_1_1_razor_lib_1_1_commands_1_1_models}{Luthetus.Common.RazorLib.Commands.Models}};}
+\DoxyCodeLine{\Hypertarget{_git_changes_tree_view_display_8razor_8cs_source_l00005}00005\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_luthetus_1_1_common_1_1_razor_lib_1_1_dropdowns_1_1_states}{Luthetus.Common.RazorLib.Dropdowns.States}};}
+\DoxyCodeLine{\Hypertarget{_git_changes_tree_view_display_8razor_8cs_source_l00006}00006\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_luthetus_1_1_common_1_1_razor_lib_1_1_dropdowns_1_1_models}{Luthetus.Common.RazorLib.Dropdowns.Models}};}
+\DoxyCodeLine{\Hypertarget{_git_changes_tree_view_display_8razor_8cs_source_l00007}00007\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_luthetus_1_1_common_1_1_razor_lib_1_1_options_1_1_states}{Luthetus.Common.RazorLib.Options.States}};}
+\DoxyCodeLine{\Hypertarget{_git_changes_tree_view_display_8razor_8cs_source_l00008}00008\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_luthetus_1_1_common_1_1_razor_lib_1_1_tree_views_1_1_models}{Luthetus.Common.RazorLib.TreeViews.Models}};}
+\DoxyCodeLine{\Hypertarget{_git_changes_tree_view_display_8razor_8cs_source_l00009}00009\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_luthetus_1_1_extensions_1_1_git_1_1_models}{Luthetus.Extensions.Git.Models}};}
+\DoxyCodeLine{\Hypertarget{_git_changes_tree_view_display_8razor_8cs_source_l00010}00010\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_luthetus_1_1_extensions_1_1_git_1_1_states}{Luthetus.Extensions.Git.States}};}
+\DoxyCodeLine{\Hypertarget{_git_changes_tree_view_display_8razor_8cs_source_l00011}00011\ }
+\DoxyCodeLine{\Hypertarget{_git_changes_tree_view_display_8razor_8cs_source_l00012}00012\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespace_luthetus_1_1_extensions_1_1_git_1_1_displays}{Luthetus.Extensions.Git.Displays}};}
+\DoxyCodeLine{\Hypertarget{_git_changes_tree_view_display_8razor_8cs_source_l00013}00013\ }
+\DoxyCodeLine{\Hypertarget{_git_changes_tree_view_display_8razor_8cs_source_l00014}\mbox{\hyperlink{class_luthetus_1_1_extensions_1_1_git_1_1_displays_1_1_git_changes_tree_view_display}{00014}}\ \textcolor{keyword}{public}\ \textcolor{keyword}{partial\ class\ }\mbox{\hyperlink{class_luthetus_1_1_extensions_1_1_git_1_1_displays_1_1_git_changes_tree_view_display}{GitChangesTreeViewDisplay}}\ :\ ComponentBase}
+\DoxyCodeLine{\Hypertarget{_git_changes_tree_view_display_8razor_8cs_source_l00015}00015\ \{}
+\DoxyCodeLine{\Hypertarget{_git_changes_tree_view_display_8razor_8cs_source_l00021}00021\ \ \ \ \ [Inject]}
+\DoxyCodeLine{\Hypertarget{_git_changes_tree_view_display_8razor_8cs_source_l00022}00022\ \ \ \ \ \textcolor{keyword}{private}\ IState<GitState>\ GitStateWrap\ \{\ \textcolor{keyword}{get};\ \textcolor{keyword}{set};\ \}\ =\ \textcolor{keyword}{null}!;}
+\DoxyCodeLine{\Hypertarget{_git_changes_tree_view_display_8razor_8cs_source_l00023}00023\ \ \ \ \ [Inject]}
+\DoxyCodeLine{\Hypertarget{_git_changes_tree_view_display_8razor_8cs_source_l00024}00024\ \ \ \ \ \textcolor{keyword}{private}\ \mbox{\hyperlink{interface_luthetus_1_1_common_1_1_razor_lib_1_1_tree_views_1_1_models_1_1_i_tree_view_service}{ITreeViewService}}\ TreeViewService\ \{\ \textcolor{keyword}{get};\ \textcolor{keyword}{set};\ \}\ =\ \textcolor{keyword}{null}!;}
+\DoxyCodeLine{\Hypertarget{_git_changes_tree_view_display_8razor_8cs_source_l00025}00025\ \ \ \ \ [Inject]}
+\DoxyCodeLine{\Hypertarget{_git_changes_tree_view_display_8razor_8cs_source_l00026}00026\ \ \ \ \ \textcolor{keyword}{private}\ IDispatcher\ Dispatcher\ \{\ \textcolor{keyword}{get};\ \textcolor{keyword}{set};\ \}\ =\ \textcolor{keyword}{null}!;}
+\DoxyCodeLine{\Hypertarget{_git_changes_tree_view_display_8razor_8cs_source_l00027}00027\ \ \ \ \ [Inject]}
+\DoxyCodeLine{\Hypertarget{_git_changes_tree_view_display_8razor_8cs_source_l00028}00028\ \ \ \ \ \textcolor{keyword}{private}\ IState<AppOptionsState>\ AppOptionsStateWrap\ \{\ \textcolor{keyword}{get};\ \textcolor{keyword}{set};\ \}\ =\ \textcolor{keyword}{null}!;}
+\DoxyCodeLine{\Hypertarget{_git_changes_tree_view_display_8razor_8cs_source_l00029}00029\ \ \ \ \ [Inject]}
+\DoxyCodeLine{\Hypertarget{_git_changes_tree_view_display_8razor_8cs_source_l00030}00030\ \ \ \ \ \textcolor{keyword}{private}\ \mbox{\hyperlink{interface_luthetus_1_1_common_1_1_razor_lib_1_1_background_tasks_1_1_models_1_1_i_background_task_service}{IBackgroundTaskService}}\ BackgroundTaskService\ \{\ \textcolor{keyword}{get};\ \textcolor{keyword}{set};\ \}\ =\ \textcolor{keyword}{null}!;}
+\DoxyCodeLine{\Hypertarget{_git_changes_tree_view_display_8razor_8cs_source_l00031}00031\ }
+\DoxyCodeLine{\Hypertarget{_git_changes_tree_view_display_8razor_8cs_source_l00032}00032\ \ \ \ \ [CascadingParameter]}
+\DoxyCodeLine{\Hypertarget{_git_changes_tree_view_display_8razor_8cs_source_l00033}\mbox{\hyperlink{class_luthetus_1_1_extensions_1_1_git_1_1_displays_1_1_git_changes_tree_view_display_a7a57643efb13f5a571074f2757f87da2}{00033}}\ \ \ \ \ \textcolor{keyword}{public}\ \mbox{\hyperlink{class_luthetus_1_1_extensions_1_1_git_1_1_displays_1_1_git_changes_tree_view_display_a7a57643efb13f5a571074f2757f87da2}{GitState}}\ \mbox{\hyperlink{class_luthetus_1_1_extensions_1_1_git_1_1_displays_1_1_git_changes_tree_view_display_a7a57643efb13f5a571074f2757f87da2}{GitState}}\ \{\ \textcolor{keyword}{get};\ \textcolor{keyword}{set};\ \}\ =\ \textcolor{keyword}{null}!;}
+\DoxyCodeLine{\Hypertarget{_git_changes_tree_view_display_8razor_8cs_source_l00034}00034\ }
+\DoxyCodeLine{\Hypertarget{_git_changes_tree_view_display_8razor_8cs_source_l00035}00035\ \ \ \ \ \textcolor{keyword}{private}\ \mbox{\hyperlink{class_luthetus_1_1_extensions_1_1_git_1_1_models_1_1_git_tree_view_keyboard_event_handler}{GitTreeViewKeyboardEventHandler}}\ \_treeViewKeyboardEventHandler\ =\ \textcolor{keyword}{null}!;}
+\DoxyCodeLine{\Hypertarget{_git_changes_tree_view_display_8razor_8cs_source_l00036}00036\ \ \ \ \ \textcolor{keyword}{private}\ \mbox{\hyperlink{class_luthetus_1_1_extensions_1_1_git_1_1_models_1_1_git_tree_view_mouse_event_handler}{GitTreeViewMouseEventHandler}}\ \_treeViewMouseEventHandler\ =\ \textcolor{keyword}{null}!;}
+\DoxyCodeLine{\Hypertarget{_git_changes_tree_view_display_8razor_8cs_source_l00037}00037\ }
+\DoxyCodeLine{\Hypertarget{_git_changes_tree_view_display_8razor_8cs_source_l00038}00038\ \ \ \ \ \textcolor{keyword}{private}\ \textcolor{keywordtype}{int}\ OffsetPerDepthInPixels\ =>\ (int)Math.Ceiling(}
+\DoxyCodeLine{\Hypertarget{_git_changes_tree_view_display_8razor_8cs_source_l00039}00039\ \ \ \ \ \ \ \ \ AppOptionsStateWrap.Value.Options.IconSizeInPixels\ *\ (2.0\ /\ 3.0));}
+\DoxyCodeLine{\Hypertarget{_git_changes_tree_view_display_8razor_8cs_source_l00040}00040\ }
+\DoxyCodeLine{\Hypertarget{_git_changes_tree_view_display_8razor_8cs_source_l00041}\mbox{\hyperlink{class_luthetus_1_1_extensions_1_1_git_1_1_displays_1_1_git_changes_tree_view_display_a510e6b85c99987358d42ef7e65f8512d}{00041}}\ \ \ \ \ \textcolor{keyword}{protected}\ \textcolor{keyword}{override}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_luthetus_1_1_extensions_1_1_git_1_1_displays_1_1_git_changes_tree_view_display_a510e6b85c99987358d42ef7e65f8512d}{OnInitialized}}()}
+\DoxyCodeLine{\Hypertarget{_git_changes_tree_view_display_8razor_8cs_source_l00042}00042\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_git_changes_tree_view_display_8razor_8cs_source_l00043}00043\ \ \ \ \ \ \ \ \ \_treeViewKeyboardEventHandler\ =\ \textcolor{keyword}{new}\ \mbox{\hyperlink{class_luthetus_1_1_extensions_1_1_git_1_1_models_1_1_git_tree_view_keyboard_event_handler}{GitTreeViewKeyboardEventHandler}}(}
+\DoxyCodeLine{\Hypertarget{_git_changes_tree_view_display_8razor_8cs_source_l00044}00044\ \ \ \ \ \ \ \ \ \ \ \ \ TreeViewService,}
+\DoxyCodeLine{\Hypertarget{_git_changes_tree_view_display_8razor_8cs_source_l00045}00045\ \ \ \ \ \ \ \ \ \ \ \ \ BackgroundTaskService,}
+\DoxyCodeLine{\Hypertarget{_git_changes_tree_view_display_8razor_8cs_source_l00046}00046\ \ \ \ \ \ \ \ \ \ \ \ \ GitStateWrap,}
+\DoxyCodeLine{\Hypertarget{_git_changes_tree_view_display_8razor_8cs_source_l00047}00047\ \ \ \ \ \ \ \ \ \ \ \ \ Dispatcher);}
+\DoxyCodeLine{\Hypertarget{_git_changes_tree_view_display_8razor_8cs_source_l00048}00048\ }
+\DoxyCodeLine{\Hypertarget{_git_changes_tree_view_display_8razor_8cs_source_l00049}00049\ \ \ \ \ \ \ \ \ \_treeViewMouseEventHandler\ =\ \textcolor{keyword}{new}\ \mbox{\hyperlink{class_luthetus_1_1_extensions_1_1_git_1_1_models_1_1_git_tree_view_mouse_event_handler}{GitTreeViewMouseEventHandler}}(}
+\DoxyCodeLine{\Hypertarget{_git_changes_tree_view_display_8razor_8cs_source_l00050}00050\ \ \ \ \ \ \ \ \ \ \ \ \ TreeViewService,}
+\DoxyCodeLine{\Hypertarget{_git_changes_tree_view_display_8razor_8cs_source_l00051}00051\ \ \ \ \ \ \ \ \ \ \ \ \ BackgroundTaskService,}
+\DoxyCodeLine{\Hypertarget{_git_changes_tree_view_display_8razor_8cs_source_l00052}00052\ \ \ \ \ \ \ \ \ \ \ \ \ GitStateWrap,}
+\DoxyCodeLine{\Hypertarget{_git_changes_tree_view_display_8razor_8cs_source_l00053}00053\ \ \ \ \ \ \ \ \ \ \ \ \ Dispatcher);}
+\DoxyCodeLine{\Hypertarget{_git_changes_tree_view_display_8razor_8cs_source_l00054}00054\ }
+\DoxyCodeLine{\Hypertarget{_git_changes_tree_view_display_8razor_8cs_source_l00055}00055\ \ \ \ \ \ \ \ \ base.OnInitialized();}
+\DoxyCodeLine{\Hypertarget{_git_changes_tree_view_display_8razor_8cs_source_l00056}00056\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_git_changes_tree_view_display_8razor_8cs_source_l00057}00057\ }
+\DoxyCodeLine{\Hypertarget{_git_changes_tree_view_display_8razor_8cs_source_l00058}00058\ \ \ \ \ \textcolor{keyword}{private}\ Task\ OnTreeViewContextMenuFunc(\mbox{\hyperlink{class_luthetus_1_1_common_1_1_razor_lib_1_1_commands_1_1_models_1_1_tree_view_command_args}{TreeViewCommandArgs}}\ treeViewCommandArgs)}
+\DoxyCodeLine{\Hypertarget{_git_changes_tree_view_display_8razor_8cs_source_l00059}00059\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_git_changes_tree_view_display_8razor_8cs_source_l00060}00060\ \ \ \ \ \ \ \ \ var\ dropdownRecord\ =\ \textcolor{keyword}{new}\ \mbox{\hyperlink{namespace_luthetus_1_1_common_1_1_razor_lib_1_1_dropdowns_1_1_models_a60385d8cd877b93f064b1da738c5ced9}{DropdownRecord}}(}
+\DoxyCodeLine{\Hypertarget{_git_changes_tree_view_display_8razor_8cs_source_l00061}00061\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_luthetus_1_1_extensions_1_1_git_1_1_displays_1_1_git_changes_context_menu}{GitChangesContextMenu}}.\mbox{\hyperlink{class_luthetus_1_1_extensions_1_1_git_1_1_displays_1_1_git_changes_context_menu_a48eb9cf4fffb0c14f77a5fe7397e99f4}{ContextMenuEventDropdownKey}},}
+\DoxyCodeLine{\Hypertarget{_git_changes_tree_view_display_8razor_8cs_source_l00062}00062\ \ \ \ \ \ \ \ \ \ \ \ \ treeViewCommandArgs.\mbox{\hyperlink{class_luthetus_1_1_common_1_1_razor_lib_1_1_commands_1_1_models_1_1_tree_view_command_args_a2f50e2ecbcb85580629516bcebac129c}{ContextMenuFixedPosition}}.LeftPositionInPixels,}
+\DoxyCodeLine{\Hypertarget{_git_changes_tree_view_display_8razor_8cs_source_l00063}00063\ \ \ \ \ \ \ \ \ \ \ \ \ treeViewCommandArgs.\mbox{\hyperlink{class_luthetus_1_1_common_1_1_razor_lib_1_1_commands_1_1_models_1_1_tree_view_command_args_a2f50e2ecbcb85580629516bcebac129c}{ContextMenuFixedPosition}}.TopPositionInPixels,}
+\DoxyCodeLine{\Hypertarget{_git_changes_tree_view_display_8razor_8cs_source_l00064}00064\ \ \ \ \ \ \ \ \ \ \ \ \ typeof(\mbox{\hyperlink{class_luthetus_1_1_extensions_1_1_git_1_1_displays_1_1_git_changes_context_menu}{GitChangesContextMenu}}),}
+\DoxyCodeLine{\Hypertarget{_git_changes_tree_view_display_8razor_8cs_source_l00065}00065\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{new}\ Dictionary<string,\ object?>}
+\DoxyCodeLine{\Hypertarget{_git_changes_tree_view_display_8razor_8cs_source_l00066}00066\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_git_changes_tree_view_display_8razor_8cs_source_l00067}00067\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_git_changes_tree_view_display_8razor_8cs_source_l00068}00068\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ nameof(\mbox{\hyperlink{class_luthetus_1_1_extensions_1_1_git_1_1_displays_1_1_git_changes_context_menu}{GitChangesContextMenu}}.\mbox{\hyperlink{class_luthetus_1_1_extensions_1_1_git_1_1_displays_1_1_git_changes_context_menu_a5ada357e3ff158576734d16694f026b4}{TreeViewCommandArgs}}),}
+\DoxyCodeLine{\Hypertarget{_git_changes_tree_view_display_8razor_8cs_source_l00069}00069\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ treeViewCommandArgs}
+\DoxyCodeLine{\Hypertarget{_git_changes_tree_view_display_8razor_8cs_source_l00070}00070\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_git_changes_tree_view_display_8razor_8cs_source_l00071}00071\ \ \ \ \ \ \ \ \ \ \ \ \ \},}
+\DoxyCodeLine{\Hypertarget{_git_changes_tree_view_display_8razor_8cs_source_l00072}00072\ \ \ \ \ \ \ \ \ \ \ \ \ restoreFocusOnClose:\ \textcolor{keyword}{null});}
+\DoxyCodeLine{\Hypertarget{_git_changes_tree_view_display_8razor_8cs_source_l00073}00073\ }
+\DoxyCodeLine{\Hypertarget{_git_changes_tree_view_display_8razor_8cs_source_l00074}00074\ \ \ \ \ \ \ \ \ Dispatcher.Dispatch(\textcolor{keyword}{new}\ \mbox{\hyperlink{namespace_luthetus_1_1_common_1_1_razor_lib_1_1_dropdowns_1_1_states_a6062aa8409aa0032c0334dc5b634498e}{DropdownState}}.RegisterAction(dropdownRecord));}
+\DoxyCodeLine{\Hypertarget{_git_changes_tree_view_display_8razor_8cs_source_l00075}00075\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ Task.CompletedTask;}
+\DoxyCodeLine{\Hypertarget{_git_changes_tree_view_display_8razor_8cs_source_l00076}00076\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_git_changes_tree_view_display_8razor_8cs_source_l00077}00077\ \}}
+
+\end{DoxyCode}

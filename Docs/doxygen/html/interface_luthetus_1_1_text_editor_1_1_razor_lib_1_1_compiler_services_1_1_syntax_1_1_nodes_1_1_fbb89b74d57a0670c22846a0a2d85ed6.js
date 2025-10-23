@@ -1,0 +1,15 @@
+var interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_1_1_nodes_1_1_fbb89b74d57a0670c22846a0a2d85ed6 =
+[
+    [ "GetReturnTypeClauseNode", "interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_1_1_nodes_1_1_fbb89b74d57a0670c22846a0a2d85ed6.html#a1ad6ee822309bd6dcb3e0e0115d5db74", null ],
+    [ "OnBoundScopeCreatedAndSetAsCurrent", "interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_1_1_nodes_1_1_fbb89b74d57a0670c22846a0a2d85ed6.html#a16e51b762a4eed73fad0f96a3453d4c6", null ],
+    [ "SetCloseBraceToken", "interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_1_1_nodes_1_1_fbb89b74d57a0670c22846a0a2d85ed6.html#a55787c2a5c09fa1bb98803871329af67", null ],
+    [ "SetCodeBlockNode", "interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_1_1_nodes_1_1_fbb89b74d57a0670c22846a0a2d85ed6.html#ab093236d2d7b5d24eea5c87aaeb62668", null ],
+    [ "SetOpenBraceToken", "interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_1_1_nodes_1_1_fbb89b74d57a0670c22846a0a2d85ed6.html#a657b613a8bed40a8413ba643d35cbadc", null ],
+    [ "SetStatementDelimiterToken", "interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_1_1_nodes_1_1_fbb89b74d57a0670c22846a0a2d85ed6.html#aabdaa8d91a68e6d908839f83da9c3b5b", null ],
+    [ "CloseBraceToken", "interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_1_1_nodes_1_1_fbb89b74d57a0670c22846a0a2d85ed6.html#aee83d67b35ee9a1df9e32f8bb88ba86e", null ],
+    [ "CodeBlockNode", "interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_1_1_nodes_1_1_fbb89b74d57a0670c22846a0a2d85ed6.html#ae4636f133b26ae61714bd7bee308dfe5", null ],
+    [ "IsSingleStatementBody", "interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_1_1_nodes_1_1_fbb89b74d57a0670c22846a0a2d85ed6.html#a2073bd74e4b19a4db653ef76858c4fc7", null ],
+    [ "OpenBraceToken", "interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_1_1_nodes_1_1_fbb89b74d57a0670c22846a0a2d85ed6.html#a6943c092908f72b7cd126022210bbe17", null ],
+    [ "ScopeDirectionKind", "interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_1_1_nodes_1_1_fbb89b74d57a0670c22846a0a2d85ed6.html#a4f75bc6d5940d93391d50e0981f0e6eb", null ],
+    [ "StatementDelimiterToken", "interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_1_1_nodes_1_1_fbb89b74d57a0670c22846a0a2d85ed6.html#a6cad0e1535a7e4a8aebb9529d3d35e87", null ]
+];

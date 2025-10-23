@@ -1,0 +1,621 @@
+\doxysection{Luthetus.\+Text\+Editor.\+Razor\+Lib.\+Compiler\+Services.\+Utility.\+String\+Walker Class Reference}
+\hypertarget{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_utility_1_1_string_walker}{}\label{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_utility_1_1_string_walker}\index{Luthetus.TextEditor.RazorLib.CompilerServices.Utility.StringWalker@{Luthetus.TextEditor.RazorLib.CompilerServices.Utility.StringWalker}}
+
+
+Provides common API that can be used when implementing an IText\+Editor\+Lexer for the Text\+Editor\+Model.~\newline
+~\newline
+The marker for an out of bounds read is Parser\+Facts.\+END\+\_\+\+OF\+\_\+\+FILE.  
+
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_utility_1_1_string_walker_af4f7ec78a648766c09ef75d5955a670e}{String\+Walker}} (\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_utility_1_1_string_walker_abf00a8613dfc137bea3c366e277fbde4}{Resource\+Uri}} resource\+Uri, string source\+Text)
+\begin{DoxyCompactList}\small\item\em Pass in the \doxylink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_utility_1_1_string_walker_abf00a8613dfc137bea3c366e277fbde4}{Resource\+Uri} of a file, and its text. One can pass in string.\+Empty for the \doxylink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_utility_1_1_string_walker_abf00a8613dfc137bea3c366e277fbde4}{Resource\+Uri} if they are only working with the text itself. \end{DoxyCompactList}\item 
+char \mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_utility_1_1_string_walker_a1533f73189c0e55efe7da8278c1d32df}{Read\+Character}} ()
+\begin{DoxyCompactList}\small\item\em If \doxylink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_utility_1_1_string_walker_a192423c8188b55e1e16376095b7dfc62}{Position\+Index} is within bounds of the \doxylink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_utility_1_1_string_walker_a35f8247f3eea6c6937856215770af815}{Source\+Text}.~\newline
+~\newline
+Then the character within the string \doxylink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_utility_1_1_string_walker_a35f8247f3eea6c6937856215770af815}{Source\+Text} at index of \doxylink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_utility_1_1_string_walker_a192423c8188b55e1e16376095b7dfc62}{Position\+Index} is returned and \doxylink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_utility_1_1_string_walker_a192423c8188b55e1e16376095b7dfc62}{Position\+Index} is incremented by one.~\newline
+~\newline
+Otherwise, Parser\+Facts.\+END\+\_\+\+OF\+\_\+\+FILE is returned and the value of \doxylink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_utility_1_1_string_walker_a192423c8188b55e1e16376095b7dfc62}{Position\+Index} is unchanged. \end{DoxyCompactList}\item 
+char \mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_utility_1_1_string_walker_a1afce034204ad3dba41bac744ceb01ab}{Peek\+Character}} (int offset)
+\begin{DoxyCompactList}\small\item\em If (\doxylink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_utility_1_1_string_walker_a192423c8188b55e1e16376095b7dfc62}{Position\+Index} + offset) is within bounds of the \doxylink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_utility_1_1_string_walker_a35f8247f3eea6c6937856215770af815}{Source\+Text}.~\newline
+~\newline
+Then the character within the string \doxylink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_utility_1_1_string_walker_a35f8247f3eea6c6937856215770af815}{Source\+Text} at index of (\doxylink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_utility_1_1_string_walker_a192423c8188b55e1e16376095b7dfc62}{Position\+Index} + offset) is returned and \doxylink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_utility_1_1_string_walker_a192423c8188b55e1e16376095b7dfc62}{Position\+Index} is unchanged.~\newline
+~\newline
+Otherwise, Parser\+Facts.\+END\+\_\+\+OF\+\_\+\+FILE is returned and the value of \doxylink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_utility_1_1_string_walker_a192423c8188b55e1e16376095b7dfc62}{Position\+Index} is unchanged.~\newline
+~\newline
+offset must be \texorpdfstring{$>$}{>} -\/1. \end{DoxyCompactList}\item 
+char \mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_utility_1_1_string_walker_af22e0b0f2c09f4aa85785b519a13f95f}{Backtrack\+Character}} ()
+\begin{DoxyCompactList}\small\item\em If \doxylink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_utility_1_1_string_walker_a192423c8188b55e1e16376095b7dfc62}{Position\+Index} being decremented by 1 would result in \doxylink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_utility_1_1_string_walker_a192423c8188b55e1e16376095b7dfc62}{Position\+Index} being less than 0.~\newline
+~\newline
+Then Parser\+Facts.\+END\+\_\+\+OF\+\_\+\+FILE will be returned and \doxylink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_utility_1_1_string_walker_a192423c8188b55e1e16376095b7dfc62}{Position\+Index} will be left unchanged.~\newline
+~\newline
+Otherwise, \doxylink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_utility_1_1_string_walker_a192423c8188b55e1e16376095b7dfc62}{Position\+Index} will be decremented by one and the character within the string \doxylink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_utility_1_1_string_walker_a35f8247f3eea6c6937856215770af815}{Source\+Text} at index of \doxylink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_utility_1_1_string_walker_a192423c8188b55e1e16376095b7dfc62}{Position\+Index} is returned. \end{DoxyCompactList}\item 
+string \mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_utility_1_1_string_walker_a1c60b2612ff22cdb9e04d858d2d454ff}{Read\+Range}} (int length)
+\begin{DoxyCompactList}\small\item\em Iterates a counter from 0 until the counter is equal to length.~\newline
+~\newline
+Each iteration \doxylink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_utility_1_1_string_walker_a1533f73189c0e55efe7da8278c1d32df}{Read\+Character} will be invoked.~\newline
+~\newline
+If an iteration\textquotesingle{}s invocation of \doxylink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_utility_1_1_string_walker_a1533f73189c0e55efe7da8278c1d32df}{Read\+Character} returned Parser\+Facts.\+END\+\_\+\+OF\+\_\+\+FILE then the method will short circuit and return regardless of whether it finished iterating to length or not. \end{DoxyCompactList}\item 
+string \mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_utility_1_1_string_walker_acc3b78d22d744dcf1ea97c7a12d6e62f}{Peek\+Range}} (int offset, int length)
+\begin{DoxyCompactList}\small\item\em Iterates a counter from 0 until the counter is equal to length.~\newline
+~\newline
+Each iteration \doxylink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_utility_1_1_string_walker_a1afce034204ad3dba41bac744ceb01ab}{Peek\+Character} will be invoked using the (offset + counter).~\newline
+~\newline
+If an iteration\textquotesingle{}s invocation of \doxylink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_utility_1_1_string_walker_a1afce034204ad3dba41bac744ceb01ab}{Peek\+Character} returned Parser\+Facts.\+END\+\_\+\+OF\+\_\+\+FILE then the method will short circuit and return regardless of whether it finished iterating to length or not. \end{DoxyCompactList}\item 
+string \mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_utility_1_1_string_walker_a56cf417b76ed47752797a36ef2499c7b}{Backtrack\+Range}} (int length)
+\begin{DoxyCompactList}\small\item\em Iterates a counter from 0 until the counter is equal to length.~\newline
+~\newline
+Each iteration \doxylink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_utility_1_1_string_walker_af22e0b0f2c09f4aa85785b519a13f95f}{Backtrack\+Character} will be invoked using the.~\newline
+~\newline
+If an iteration\textquotesingle{}s invocation of \doxylink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_utility_1_1_string_walker_af22e0b0f2c09f4aa85785b519a13f95f}{Backtrack\+Character} returned Parser\+Facts.\+END\+\_\+\+OF\+\_\+\+FILE then the method will short circuit and return regardless of whether it finished iterating to length or not. \end{DoxyCompactList}\item 
+string \mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_utility_1_1_string_walker_ae5708f8b3defb3c1e5662065572e3aff}{Peek\+Next\+Word}} ()
+\item 
+bool \mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_utility_1_1_string_walker_a292d4713572d97ec249ccc383e1c2fb3}{Peek\+For\+Substring}} (string substring)
+\begin{DoxyCompactList}\small\item\em Form a substring of the \doxylink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_utility_1_1_string_walker_a35f8247f3eea6c6937856215770af815}{Source\+Text} that starts inclusively at the index \doxylink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_utility_1_1_string_walker_a192423c8188b55e1e16376095b7dfc62}{Position\+Index} and has a maximum length of substring.Length.~\newline
+~\newline
+This method uses \doxylink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_utility_1_1_string_walker_acc3b78d22d744dcf1ea97c7a12d6e62f}{Peek\+Range} internally and therefore will return a string that ends with Parser\+Facts.\+END\+\_\+\+OF\+\_\+\+FILE if an index out of bounds read was performed on \doxylink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_utility_1_1_string_walker_a35f8247f3eea6c6937856215770af815}{Source\+Text}. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_utility_1_1_string_walker_a45c9d49f994e5415c930179fbcdfdd9a}{Peek\+For\+Substring\+Range}} (Immutable\+Array$<$ string $>$ substrings\+List, out string? matched\+On)
+\item 
+string \mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_utility_1_1_string_walker_a13f7c7b447325d20f7d249d649e098b3}{Read\+Whitespace}} (IEnumerable$<$ char $>$? whitespace\+Override\+List=null)
+\begin{DoxyCompactList}\small\item\em Provide whitespace\+Override\+List to override the default of what qualifies as whitespace. The default whitespace chars are\+: Whitespace\+Facts.\+ALL\+\_\+\+LIST. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{struct_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_1_1_tokens_1_1_numeric_literal_token}{Numeric\+Literal\+Token}} \mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_utility_1_1_string_walker_a06ac8e4966cf456828a0679117cb01b8}{Read\+Unsigned\+Numeric\+Literal}} ()
+\item 
+string \mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_utility_1_1_string_walker_a35063c6f032d9d0de6c5f5c33c806239}{Read\+Until}} (char deliminator)
+\item 
+string \mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_utility_1_1_string_walker_a139a7646b982e85f584b918b4b60af84}{Read\+Line}} ()
+\begin{DoxyCompactList}\small\item\em The line ending is NOT included in the returned string. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_lexers_1_1_models_a1ffd1a7706dfd364560b76d47467812f}{Text\+Editor\+Text\+Span}} string value \mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_utility_1_1_string_walker_a2838308b224f8503d8fcf8d286727b89}{Read\+Word\+Tuple}} (Immutable\+Array$<$ char $>$? additional\+Characters\+To\+Break\+On\+List=null)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_lexers_1_1_models_a1ffd1a7706dfd364560b76d47467812f}{Text\+Editor\+Text\+Span}} \mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_utility_1_1_string_walker_ab467dcfbc3c2ccc500fe875d014fdb7d}{text\+Span}}
+\begin{DoxyCompactList}\small\item\em This method will return immediately upon encountering whitespace. Returns a text span with its Text\+Editor\+Text\+Span.\+Starting\+Index\+Inclusive equal to \textquotesingle{}-\/1\textquotesingle{} if no word was found. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Properties}
+\begin{DoxyCompactItemize}
+\item 
+int \mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_utility_1_1_string_walker_a192423c8188b55e1e16376095b7dfc62}{Position\+Index}}\hspace{0.3cm}{\ttfamily  \mbox{[}get\mbox{]}}
+\begin{DoxyCompactList}\small\item\em The character index within the \doxylink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_utility_1_1_string_walker_a35f8247f3eea6c6937856215770af815}{Source\+Text}. \end{DoxyCompactList}\item 
+Resource\+Uri \mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_utility_1_1_string_walker_abf00a8613dfc137bea3c366e277fbde4}{Resource\+Uri}}\hspace{0.3cm}{\ttfamily  \mbox{[}get\mbox{]}}
+\begin{DoxyCompactList}\small\item\em The file that the \doxylink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_utility_1_1_string_walker_a35f8247f3eea6c6937856215770af815}{Source\+Text} came from. \end{DoxyCompactList}\item 
+string \mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_utility_1_1_string_walker_a35f8247f3eea6c6937856215770af815}{Source\+Text}}\hspace{0.3cm}{\ttfamily  \mbox{[}get\mbox{]}}
+\begin{DoxyCompactList}\small\item\em The text which is to be stepped through. \end{DoxyCompactList}\item 
+char \mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_utility_1_1_string_walker_abbf32c2054872ff9d6dda8e6697c46ce}{Current\+Character}}\hspace{0.3cm}{\ttfamily  \mbox{[}get\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Returns \doxylink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_utility_1_1_string_walker_a1afce034204ad3dba41bac744ceb01ab}{Peek\+Character} invoked with the value of zero. \end{DoxyCompactList}\item 
+char \mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_utility_1_1_string_walker_ad8fb94055d57f3352197e322a4df5c27}{Next\+Character}}\hspace{0.3cm}{\ttfamily  \mbox{[}get\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Returns \doxylink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_utility_1_1_string_walker_a1afce034204ad3dba41bac744ceb01ab}{Peek\+Character} invoked with the value of one. \end{DoxyCompactList}\item 
+string \mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_utility_1_1_string_walker_a33fdfdb7d54b7fcc742a40bc20a29d06}{Remaining\+Text}}\hspace{0.3cm}{\ttfamily  \mbox{[}get\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Starting with \doxylink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_utility_1_1_string_walker_a1afce034204ad3dba41bac744ceb01ab}{Peek\+Character} evaluated at 0 return that and the rest of the \doxylink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_utility_1_1_string_walker_a35f8247f3eea6c6937856215770af815}{Source\+Text}~\newline
+~\newline
+\doxylink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_utility_1_1_string_walker_a33fdfdb7d54b7fcc742a40bc20a29d06}{Remaining\+Text} =\texorpdfstring{$>$}{>} Source\+Text.\+Substring(\+Position\+Index);. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_utility_1_1_string_walker_a7c895ef73ed57523b1a78779cc0e2528}{Is\+Eof}}\hspace{0.3cm}{\ttfamily  \mbox{[}get\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Returns if the current character is the end of file character. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Provides common API that can be used when implementing an IText\+Editor\+Lexer for the Text\+Editor\+Model.~\newline
+~\newline
+The marker for an out of bounds read is Parser\+Facts.\+END\+\_\+\+OF\+\_\+\+FILE. 
+
+Definition at line \mbox{\hyperlink{_string_walker_8cs_source_l00012}{12}} of file \mbox{\hyperlink{_string_walker_8cs_source}{String\+Walker.\+cs}}.
+
+
+
+\label{doc-constructors}
+\Hypertarget{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_utility_1_1_string_walker_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_utility_1_1_string_walker_af4f7ec78a648766c09ef75d5955a670e}\index{Luthetus.TextEditor.RazorLib.CompilerServices.Utility.StringWalker@{Luthetus.TextEditor.RazorLib.CompilerServices.Utility.StringWalker}!StringWalker@{StringWalker}}
+\index{StringWalker@{StringWalker}!Luthetus.TextEditor.RazorLib.CompilerServices.Utility.StringWalker@{Luthetus.TextEditor.RazorLib.CompilerServices.Utility.StringWalker}}
+\doxysubsubsection{\texorpdfstring{StringWalker()}{StringWalker()}}
+{\footnotesize\ttfamily \label{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_utility_1_1_string_walker_af4f7ec78a648766c09ef75d5955a670e} 
+Luthetus.\+Text\+Editor.\+Razor\+Lib.\+Compiler\+Services.\+Utility.\+String\+Walker.\+String\+Walker (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_utility_1_1_string_walker_abf00a8613dfc137bea3c366e277fbde4}{Resource\+Uri}}}]{resource\+Uri}{, }\item[{string}]{source\+Text}{}\end{DoxyParamCaption})}
+
+
+
+Pass in the \doxylink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_utility_1_1_string_walker_abf00a8613dfc137bea3c366e277fbde4}{Resource\+Uri} of a file, and its text. One can pass in string.\+Empty for the \doxylink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_utility_1_1_string_walker_abf00a8613dfc137bea3c366e277fbde4}{Resource\+Uri} if they are only working with the text itself. 
+
+
+
+Definition at line \mbox{\hyperlink{_string_walker_8cs_source_l00015}{15}} of file \mbox{\hyperlink{_string_walker_8cs_source}{String\+Walker.\+cs}}.
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_utility_1_1_string_walker_af4f7ec78a648766c09ef75d5955a670e_icgraph}
+\end{center}
+\end{figure}
+
+
+\label{doc-func-members}
+\Hypertarget{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_utility_1_1_string_walker_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_utility_1_1_string_walker_af22e0b0f2c09f4aa85785b519a13f95f}\index{Luthetus.TextEditor.RazorLib.CompilerServices.Utility.StringWalker@{Luthetus.TextEditor.RazorLib.CompilerServices.Utility.StringWalker}!BacktrackCharacter@{BacktrackCharacter}}
+\index{BacktrackCharacter@{BacktrackCharacter}!Luthetus.TextEditor.RazorLib.CompilerServices.Utility.StringWalker@{Luthetus.TextEditor.RazorLib.CompilerServices.Utility.StringWalker}}
+\doxysubsubsection{\texorpdfstring{BacktrackCharacter()}{BacktrackCharacter()}}
+{\footnotesize\ttfamily \label{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_utility_1_1_string_walker_af22e0b0f2c09f4aa85785b519a13f95f} 
+char Luthetus.\+Text\+Editor.\+Razor\+Lib.\+Compiler\+Services.\+Utility.\+String\+Walker.\+Backtrack\+Character (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+If \doxylink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_utility_1_1_string_walker_a192423c8188b55e1e16376095b7dfc62}{Position\+Index} being decremented by 1 would result in \doxylink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_utility_1_1_string_walker_a192423c8188b55e1e16376095b7dfc62}{Position\+Index} being less than 0.~\newline
+~\newline
+Then Parser\+Facts.\+END\+\_\+\+OF\+\_\+\+FILE will be returned and \doxylink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_utility_1_1_string_walker_a192423c8188b55e1e16376095b7dfc62}{Position\+Index} will be left unchanged.~\newline
+~\newline
+Otherwise, \doxylink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_utility_1_1_string_walker_a192423c8188b55e1e16376095b7dfc62}{Position\+Index} will be decremented by one and the character within the string \doxylink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_utility_1_1_string_walker_a35f8247f3eea6c6937856215770af815}{Source\+Text} at index of \doxylink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_utility_1_1_string_walker_a192423c8188b55e1e16376095b7dfc62}{Position\+Index} is returned. 
+
+
+
+Definition at line \mbox{\hyperlink{_string_walker_8cs_source_l00064}{64}} of file \mbox{\hyperlink{_string_walker_8cs_source}{String\+Walker.\+cs}}.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_utility_1_1_string_walker_af22e0b0f2c09f4aa85785b519a13f95f_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_utility_1_1_string_walker_af22e0b0f2c09f4aa85785b519a13f95f_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_utility_1_1_string_walker_a56cf417b76ed47752797a36ef2499c7b}\index{Luthetus.TextEditor.RazorLib.CompilerServices.Utility.StringWalker@{Luthetus.TextEditor.RazorLib.CompilerServices.Utility.StringWalker}!BacktrackRange@{BacktrackRange}}
+\index{BacktrackRange@{BacktrackRange}!Luthetus.TextEditor.RazorLib.CompilerServices.Utility.StringWalker@{Luthetus.TextEditor.RazorLib.CompilerServices.Utility.StringWalker}}
+\doxysubsubsection{\texorpdfstring{BacktrackRange()}{BacktrackRange()}}
+{\footnotesize\ttfamily \label{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_utility_1_1_string_walker_a56cf417b76ed47752797a36ef2499c7b} 
+string Luthetus.\+Text\+Editor.\+Razor\+Lib.\+Compiler\+Services.\+Utility.\+String\+Walker.\+Backtrack\+Range (\begin{DoxyParamCaption}\item[{int}]{length}{}\end{DoxyParamCaption})}
+
+
+
+Iterates a counter from 0 until the counter is equal to length.~\newline
+~\newline
+Each iteration \doxylink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_utility_1_1_string_walker_af22e0b0f2c09f4aa85785b519a13f95f}{Backtrack\+Character} will be invoked using the.~\newline
+~\newline
+If an iteration\textquotesingle{}s invocation of \doxylink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_utility_1_1_string_walker_af22e0b0f2c09f4aa85785b519a13f95f}{Backtrack\+Character} returned Parser\+Facts.\+END\+\_\+\+OF\+\_\+\+FILE then the method will short circuit and return regardless of whether it finished iterating to length or not. 
+
+
+
+Definition at line \mbox{\hyperlink{_string_walker_8cs_source_l00111}{111}} of file \mbox{\hyperlink{_string_walker_8cs_source}{String\+Walker.\+cs}}.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_utility_1_1_string_walker_a56cf417b76ed47752797a36ef2499c7b_cgraph}
+\end{center}
+\end{figure}
+\Hypertarget{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_utility_1_1_string_walker_a1afce034204ad3dba41bac744ceb01ab}\index{Luthetus.TextEditor.RazorLib.CompilerServices.Utility.StringWalker@{Luthetus.TextEditor.RazorLib.CompilerServices.Utility.StringWalker}!PeekCharacter@{PeekCharacter}}
+\index{PeekCharacter@{PeekCharacter}!Luthetus.TextEditor.RazorLib.CompilerServices.Utility.StringWalker@{Luthetus.TextEditor.RazorLib.CompilerServices.Utility.StringWalker}}
+\doxysubsubsection{\texorpdfstring{PeekCharacter()}{PeekCharacter()}}
+{\footnotesize\ttfamily \label{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_utility_1_1_string_walker_a1afce034204ad3dba41bac744ceb01ab} 
+char Luthetus.\+Text\+Editor.\+Razor\+Lib.\+Compiler\+Services.\+Utility.\+String\+Walker.\+Peek\+Character (\begin{DoxyParamCaption}\item[{int}]{offset}{}\end{DoxyParamCaption})}
+
+
+
+If (\doxylink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_utility_1_1_string_walker_a192423c8188b55e1e16376095b7dfc62}{Position\+Index} + offset) is within bounds of the \doxylink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_utility_1_1_string_walker_a35f8247f3eea6c6937856215770af815}{Source\+Text}.~\newline
+~\newline
+Then the character within the string \doxylink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_utility_1_1_string_walker_a35f8247f3eea6c6937856215770af815}{Source\+Text} at index of (\doxylink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_utility_1_1_string_walker_a192423c8188b55e1e16376095b7dfc62}{Position\+Index} + offset) is returned and \doxylink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_utility_1_1_string_walker_a192423c8188b55e1e16376095b7dfc62}{Position\+Index} is unchanged.~\newline
+~\newline
+Otherwise, Parser\+Facts.\+END\+\_\+\+OF\+\_\+\+FILE is returned and the value of \doxylink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_utility_1_1_string_walker_a192423c8188b55e1e16376095b7dfc62}{Position\+Index} is unchanged.~\newline
+~\newline
+offset must be \texorpdfstring{$>$}{>} -\/1. 
+
+
+
+Definition at line \mbox{\hyperlink{_string_walker_8cs_source_l00052}{52}} of file \mbox{\hyperlink{_string_walker_8cs_source}{String\+Walker.\+cs}}.
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_utility_1_1_string_walker_a1afce034204ad3dba41bac744ceb01ab_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_utility_1_1_string_walker_a292d4713572d97ec249ccc383e1c2fb3}\index{Luthetus.TextEditor.RazorLib.CompilerServices.Utility.StringWalker@{Luthetus.TextEditor.RazorLib.CompilerServices.Utility.StringWalker}!PeekForSubstring@{PeekForSubstring}}
+\index{PeekForSubstring@{PeekForSubstring}!Luthetus.TextEditor.RazorLib.CompilerServices.Utility.StringWalker@{Luthetus.TextEditor.RazorLib.CompilerServices.Utility.StringWalker}}
+\doxysubsubsection{\texorpdfstring{PeekForSubstring()}{PeekForSubstring()}}
+{\footnotesize\ttfamily \label{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_utility_1_1_string_walker_a292d4713572d97ec249ccc383e1c2fb3} 
+bool Luthetus.\+Text\+Editor.\+Razor\+Lib.\+Compiler\+Services.\+Utility.\+String\+Walker.\+Peek\+For\+Substring (\begin{DoxyParamCaption}\item[{string}]{substring}{}\end{DoxyParamCaption})}
+
+
+
+Form a substring of the \doxylink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_utility_1_1_string_walker_a35f8247f3eea6c6937856215770af815}{Source\+Text} that starts inclusively at the index \doxylink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_utility_1_1_string_walker_a192423c8188b55e1e16376095b7dfc62}{Position\+Index} and has a maximum length of substring.Length.~\newline
+~\newline
+This method uses \doxylink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_utility_1_1_string_walker_acc3b78d22d744dcf1ea97c7a12d6e62f}{Peek\+Range} internally and therefore will return a string that ends with Parser\+Facts.\+END\+\_\+\+OF\+\_\+\+FILE if an index out of bounds read was performed on \doxylink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_utility_1_1_string_walker_a35f8247f3eea6c6937856215770af815}{Source\+Text}. 
+
+
+
+Definition at line \mbox{\hyperlink{_string_walker_8cs_source_l00159}{159}} of file \mbox{\hyperlink{_string_walker_8cs_source}{String\+Walker.\+cs}}.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_utility_1_1_string_walker_a292d4713572d97ec249ccc383e1c2fb3_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_utility_1_1_string_walker_a292d4713572d97ec249ccc383e1c2fb3_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_utility_1_1_string_walker_a45c9d49f994e5415c930179fbcdfdd9a}\index{Luthetus.TextEditor.RazorLib.CompilerServices.Utility.StringWalker@{Luthetus.TextEditor.RazorLib.CompilerServices.Utility.StringWalker}!PeekForSubstringRange@{PeekForSubstringRange}}
+\index{PeekForSubstringRange@{PeekForSubstringRange}!Luthetus.TextEditor.RazorLib.CompilerServices.Utility.StringWalker@{Luthetus.TextEditor.RazorLib.CompilerServices.Utility.StringWalker}}
+\doxysubsubsection{\texorpdfstring{PeekForSubstringRange()}{PeekForSubstringRange()}}
+{\footnotesize\ttfamily \label{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_utility_1_1_string_walker_a45c9d49f994e5415c930179fbcdfdd9a} 
+bool Luthetus.\+Text\+Editor.\+Razor\+Lib.\+Compiler\+Services.\+Utility.\+String\+Walker.\+Peek\+For\+Substring\+Range (\begin{DoxyParamCaption}\item[{Immutable\+Array$<$ string $>$}]{substrings\+List}{, }\item[{out string?}]{matched\+On}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{_string_walker_8cs_source_l00164}{164}} of file \mbox{\hyperlink{_string_walker_8cs_source}{String\+Walker.\+cs}}.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_utility_1_1_string_walker_a45c9d49f994e5415c930179fbcdfdd9a_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_utility_1_1_string_walker_a45c9d49f994e5415c930179fbcdfdd9a_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_utility_1_1_string_walker_ae5708f8b3defb3c1e5662065572e3aff}\index{Luthetus.TextEditor.RazorLib.CompilerServices.Utility.StringWalker@{Luthetus.TextEditor.RazorLib.CompilerServices.Utility.StringWalker}!PeekNextWord@{PeekNextWord}}
+\index{PeekNextWord@{PeekNextWord}!Luthetus.TextEditor.RazorLib.CompilerServices.Utility.StringWalker@{Luthetus.TextEditor.RazorLib.CompilerServices.Utility.StringWalker}}
+\doxysubsubsection{\texorpdfstring{PeekNextWord()}{PeekNextWord()}}
+{\footnotesize\ttfamily \label{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_utility_1_1_string_walker_ae5708f8b3defb3c1e5662065572e3aff} 
+string Luthetus.\+Text\+Editor.\+Razor\+Lib.\+Compiler\+Services.\+Utility.\+String\+Walker.\+Peek\+Next\+Word (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{_string_walker_8cs_source_l00134}{134}} of file \mbox{\hyperlink{_string_walker_8cs_source}{String\+Walker.\+cs}}.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_utility_1_1_string_walker_ae5708f8b3defb3c1e5662065572e3aff_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_utility_1_1_string_walker_ae5708f8b3defb3c1e5662065572e3aff_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_utility_1_1_string_walker_acc3b78d22d744dcf1ea97c7a12d6e62f}\index{Luthetus.TextEditor.RazorLib.CompilerServices.Utility.StringWalker@{Luthetus.TextEditor.RazorLib.CompilerServices.Utility.StringWalker}!PeekRange@{PeekRange}}
+\index{PeekRange@{PeekRange}!Luthetus.TextEditor.RazorLib.CompilerServices.Utility.StringWalker@{Luthetus.TextEditor.RazorLib.CompilerServices.Utility.StringWalker}}
+\doxysubsubsection{\texorpdfstring{PeekRange()}{PeekRange()}}
+{\footnotesize\ttfamily \label{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_utility_1_1_string_walker_acc3b78d22d744dcf1ea97c7a12d6e62f} 
+string Luthetus.\+Text\+Editor.\+Razor\+Lib.\+Compiler\+Services.\+Utility.\+String\+Walker.\+Peek\+Range (\begin{DoxyParamCaption}\item[{int}]{offset}{, }\item[{int}]{length}{}\end{DoxyParamCaption})}
+
+
+
+Iterates a counter from 0 until the counter is equal to length.~\newline
+~\newline
+Each iteration \doxylink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_utility_1_1_string_walker_a1afce034204ad3dba41bac744ceb01ab}{Peek\+Character} will be invoked using the (offset + counter).~\newline
+~\newline
+If an iteration\textquotesingle{}s invocation of \doxylink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_utility_1_1_string_walker_a1afce034204ad3dba41bac744ceb01ab}{Peek\+Character} returned Parser\+Facts.\+END\+\_\+\+OF\+\_\+\+FILE then the method will short circuit and return regardless of whether it finished iterating to length or not. 
+
+
+
+Definition at line \mbox{\hyperlink{_string_walker_8cs_source_l00093}{93}} of file \mbox{\hyperlink{_string_walker_8cs_source}{String\+Walker.\+cs}}.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_utility_1_1_string_walker_acc3b78d22d744dcf1ea97c7a12d6e62f_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_utility_1_1_string_walker_acc3b78d22d744dcf1ea97c7a12d6e62f_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_utility_1_1_string_walker_a1533f73189c0e55efe7da8278c1d32df}\index{Luthetus.TextEditor.RazorLib.CompilerServices.Utility.StringWalker@{Luthetus.TextEditor.RazorLib.CompilerServices.Utility.StringWalker}!ReadCharacter@{ReadCharacter}}
+\index{ReadCharacter@{ReadCharacter}!Luthetus.TextEditor.RazorLib.CompilerServices.Utility.StringWalker@{Luthetus.TextEditor.RazorLib.CompilerServices.Utility.StringWalker}}
+\doxysubsubsection{\texorpdfstring{ReadCharacter()}{ReadCharacter()}}
+{\footnotesize\ttfamily \label{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_utility_1_1_string_walker_a1533f73189c0e55efe7da8278c1d32df} 
+char Luthetus.\+Text\+Editor.\+Razor\+Lib.\+Compiler\+Services.\+Utility.\+String\+Walker.\+Read\+Character (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+If \doxylink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_utility_1_1_string_walker_a192423c8188b55e1e16376095b7dfc62}{Position\+Index} is within bounds of the \doxylink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_utility_1_1_string_walker_a35f8247f3eea6c6937856215770af815}{Source\+Text}.~\newline
+~\newline
+Then the character within the string \doxylink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_utility_1_1_string_walker_a35f8247f3eea6c6937856215770af815}{Source\+Text} at index of \doxylink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_utility_1_1_string_walker_a192423c8188b55e1e16376095b7dfc62}{Position\+Index} is returned and \doxylink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_utility_1_1_string_walker_a192423c8188b55e1e16376095b7dfc62}{Position\+Index} is incremented by one.~\newline
+~\newline
+Otherwise, Parser\+Facts.\+END\+\_\+\+OF\+\_\+\+FILE is returned and the value of \doxylink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_utility_1_1_string_walker_a192423c8188b55e1e16376095b7dfc62}{Position\+Index} is unchanged. 
+
+
+
+Definition at line \mbox{\hyperlink{_string_walker_8cs_source_l00043}{43}} of file \mbox{\hyperlink{_string_walker_8cs_source}{String\+Walker.\+cs}}.
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_utility_1_1_string_walker_a1533f73189c0e55efe7da8278c1d32df_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_utility_1_1_string_walker_a139a7646b982e85f584b918b4b60af84}\index{Luthetus.TextEditor.RazorLib.CompilerServices.Utility.StringWalker@{Luthetus.TextEditor.RazorLib.CompilerServices.Utility.StringWalker}!ReadLine@{ReadLine}}
+\index{ReadLine@{ReadLine}!Luthetus.TextEditor.RazorLib.CompilerServices.Utility.StringWalker@{Luthetus.TextEditor.RazorLib.CompilerServices.Utility.StringWalker}}
+\doxysubsubsection{\texorpdfstring{ReadLine()}{ReadLine()}}
+{\footnotesize\ttfamily \label{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_utility_1_1_string_walker_a139a7646b982e85f584b918b4b60af84} 
+string Luthetus.\+Text\+Editor.\+Razor\+Lib.\+Compiler\+Services.\+Utility.\+String\+Walker.\+Read\+Line (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+The line ending is NOT included in the returned string. 
+
+
+
+Definition at line \mbox{\hyperlink{_string_walker_8cs_source_l00247}{247}} of file \mbox{\hyperlink{_string_walker_8cs_source}{String\+Walker.\+cs}}.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_utility_1_1_string_walker_a139a7646b982e85f584b918b4b60af84_cgraph}
+\end{center}
+\end{figure}
+\Hypertarget{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_utility_1_1_string_walker_a1c60b2612ff22cdb9e04d858d2d454ff}\index{Luthetus.TextEditor.RazorLib.CompilerServices.Utility.StringWalker@{Luthetus.TextEditor.RazorLib.CompilerServices.Utility.StringWalker}!ReadRange@{ReadRange}}
+\index{ReadRange@{ReadRange}!Luthetus.TextEditor.RazorLib.CompilerServices.Utility.StringWalker@{Luthetus.TextEditor.RazorLib.CompilerServices.Utility.StringWalker}}
+\doxysubsubsection{\texorpdfstring{ReadRange()}{ReadRange()}}
+{\footnotesize\ttfamily \label{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_utility_1_1_string_walker_a1c60b2612ff22cdb9e04d858d2d454ff} 
+string Luthetus.\+Text\+Editor.\+Razor\+Lib.\+Compiler\+Services.\+Utility.\+String\+Walker.\+Read\+Range (\begin{DoxyParamCaption}\item[{int}]{length}{}\end{DoxyParamCaption})}
+
+
+
+Iterates a counter from 0 until the counter is equal to length.~\newline
+~\newline
+Each iteration \doxylink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_utility_1_1_string_walker_a1533f73189c0e55efe7da8278c1d32df}{Read\+Character} will be invoked.~\newline
+~\newline
+If an iteration\textquotesingle{}s invocation of \doxylink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_utility_1_1_string_walker_a1533f73189c0e55efe7da8278c1d32df}{Read\+Character} returned Parser\+Facts.\+END\+\_\+\+OF\+\_\+\+FILE then the method will short circuit and return regardless of whether it finished iterating to length or not. 
+
+
+
+Definition at line \mbox{\hyperlink{_string_walker_8cs_source_l00075}{75}} of file \mbox{\hyperlink{_string_walker_8cs_source}{String\+Walker.\+cs}}.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_utility_1_1_string_walker_a1c60b2612ff22cdb9e04d858d2d454ff_cgraph}
+\end{center}
+\end{figure}
+\Hypertarget{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_utility_1_1_string_walker_a06ac8e4966cf456828a0679117cb01b8}\index{Luthetus.TextEditor.RazorLib.CompilerServices.Utility.StringWalker@{Luthetus.TextEditor.RazorLib.CompilerServices.Utility.StringWalker}!ReadUnsignedNumericLiteral@{ReadUnsignedNumericLiteral}}
+\index{ReadUnsignedNumericLiteral@{ReadUnsignedNumericLiteral}!Luthetus.TextEditor.RazorLib.CompilerServices.Utility.StringWalker@{Luthetus.TextEditor.RazorLib.CompilerServices.Utility.StringWalker}}
+\doxysubsubsection{\texorpdfstring{ReadUnsignedNumericLiteral()}{ReadUnsignedNumericLiteral()}}
+{\footnotesize\ttfamily \label{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_utility_1_1_string_walker_a06ac8e4966cf456828a0679117cb01b8} 
+\mbox{\hyperlink{struct_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_syntax_1_1_tokens_1_1_numeric_literal_token}{Numeric\+Literal\+Token}} Luthetus.\+Text\+Editor.\+Razor\+Lib.\+Compiler\+Services.\+Utility.\+String\+Walker.\+Read\+Unsigned\+Numeric\+Literal (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+Ex\+: \textquotesingle{}1.\+73\textquotesingle{}, positive only.~\newline
+ \{ 0, ..., 1, ..., 2, ...\} 
+
+Definition at line \mbox{\hyperlink{_string_walker_8cs_source_l00207}{207}} of file \mbox{\hyperlink{_string_walker_8cs_source}{String\+Walker.\+cs}}.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_utility_1_1_string_walker_a06ac8e4966cf456828a0679117cb01b8_cgraph}
+\end{center}
+\end{figure}
+\Hypertarget{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_utility_1_1_string_walker_a35063c6f032d9d0de6c5f5c33c806239}\index{Luthetus.TextEditor.RazorLib.CompilerServices.Utility.StringWalker@{Luthetus.TextEditor.RazorLib.CompilerServices.Utility.StringWalker}!ReadUntil@{ReadUntil}}
+\index{ReadUntil@{ReadUntil}!Luthetus.TextEditor.RazorLib.CompilerServices.Utility.StringWalker@{Luthetus.TextEditor.RazorLib.CompilerServices.Utility.StringWalker}}
+\doxysubsubsection{\texorpdfstring{ReadUntil()}{ReadUntil()}}
+{\footnotesize\ttfamily \label{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_utility_1_1_string_walker_a35063c6f032d9d0de6c5f5c33c806239} 
+string Luthetus.\+Text\+Editor.\+Razor\+Lib.\+Compiler\+Services.\+Utility.\+String\+Walker.\+Read\+Until (\begin{DoxyParamCaption}\item[{char}]{deliminator}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{_string_walker_8cs_source_l00229}{229}} of file \mbox{\hyperlink{_string_walker_8cs_source}{String\+Walker.\+cs}}.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_utility_1_1_string_walker_a35063c6f032d9d0de6c5f5c33c806239_cgraph}
+\end{center}
+\end{figure}
+\Hypertarget{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_utility_1_1_string_walker_a13f7c7b447325d20f7d249d649e098b3}\index{Luthetus.TextEditor.RazorLib.CompilerServices.Utility.StringWalker@{Luthetus.TextEditor.RazorLib.CompilerServices.Utility.StringWalker}!ReadWhitespace@{ReadWhitespace}}
+\index{ReadWhitespace@{ReadWhitespace}!Luthetus.TextEditor.RazorLib.CompilerServices.Utility.StringWalker@{Luthetus.TextEditor.RazorLib.CompilerServices.Utility.StringWalker}}
+\doxysubsubsection{\texorpdfstring{ReadWhitespace()}{ReadWhitespace()}}
+{\footnotesize\ttfamily \label{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_utility_1_1_string_walker_a13f7c7b447325d20f7d249d649e098b3} 
+string Luthetus.\+Text\+Editor.\+Razor\+Lib.\+Compiler\+Services.\+Utility.\+String\+Walker.\+Read\+Whitespace (\begin{DoxyParamCaption}\item[{IEnumerable$<$ char $>$?}]{whitespace\+Override\+List}{ = {\ttfamily null}}\end{DoxyParamCaption})}
+
+
+
+Provide whitespace\+Override\+List to override the default of what qualifies as whitespace. The default whitespace chars are\+: Whitespace\+Facts.\+ALL\+\_\+\+LIST. 
+
+
+
+Definition at line \mbox{\hyperlink{_string_walker_8cs_source_l00184}{184}} of file \mbox{\hyperlink{_string_walker_8cs_source}{String\+Walker.\+cs}}.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_utility_1_1_string_walker_a13f7c7b447325d20f7d249d649e098b3_cgraph}
+\end{center}
+\end{figure}
+\Hypertarget{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_utility_1_1_string_walker_a2838308b224f8503d8fcf8d286727b89}\index{Luthetus.TextEditor.RazorLib.CompilerServices.Utility.StringWalker@{Luthetus.TextEditor.RazorLib.CompilerServices.Utility.StringWalker}!ReadWordTuple@{ReadWordTuple}}
+\index{ReadWordTuple@{ReadWordTuple}!Luthetus.TextEditor.RazorLib.CompilerServices.Utility.StringWalker@{Luthetus.TextEditor.RazorLib.CompilerServices.Utility.StringWalker}}
+\doxysubsubsection{\texorpdfstring{ReadWordTuple()}{ReadWordTuple()}}
+{\footnotesize\ttfamily \label{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_utility_1_1_string_walker_a2838308b224f8503d8fcf8d286727b89} 
+\mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_lexers_1_1_models_a1ffd1a7706dfd364560b76d47467812f}{Text\+Editor\+Text\+Span}} string value Luthetus.\+Text\+Editor.\+Razor\+Lib.\+Compiler\+Services.\+Utility.\+String\+Walker.\+Read\+Word\+Tuple (\begin{DoxyParamCaption}\item[{Immutable\+Array$<$ char $>$?}]{additional\+Characters\+To\+Break\+On\+List}{ = {\ttfamily null}}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{_string_walker_8cs_source_l00266}{266}} of file \mbox{\hyperlink{_string_walker_8cs_source}{String\+Walker.\+cs}}.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_utility_1_1_string_walker_a2838308b224f8503d8fcf8d286727b89_cgraph}
+\end{center}
+\end{figure}
+
+
+\label{doc-variable-members}
+\Hypertarget{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_utility_1_1_string_walker_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_utility_1_1_string_walker_ab467dcfbc3c2ccc500fe875d014fdb7d}\index{Luthetus.TextEditor.RazorLib.CompilerServices.Utility.StringWalker@{Luthetus.TextEditor.RazorLib.CompilerServices.Utility.StringWalker}!textSpan@{textSpan}}
+\index{textSpan@{textSpan}!Luthetus.TextEditor.RazorLib.CompilerServices.Utility.StringWalker@{Luthetus.TextEditor.RazorLib.CompilerServices.Utility.StringWalker}}
+\doxysubsubsection{\texorpdfstring{textSpan}{textSpan}}
+{\footnotesize\ttfamily \label{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_utility_1_1_string_walker_ab467dcfbc3c2ccc500fe875d014fdb7d} 
+\mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_lexers_1_1_models_a1ffd1a7706dfd364560b76d47467812f}{Text\+Editor\+Text\+Span}} Luthetus.\+Text\+Editor.\+Razor\+Lib.\+Compiler\+Services.\+Utility.\+String\+Walker.\+text\+Span}
+
+
+
+This method will return immediately upon encountering whitespace. Returns a text span with its Text\+Editor\+Text\+Span.\+Starting\+Index\+Inclusive equal to \textquotesingle{}-\/1\textquotesingle{} if no word was found. 
+
+
+
+Definition at line \mbox{\hyperlink{_string_walker_8cs_source_l00266}{266}} of file \mbox{\hyperlink{_string_walker_8cs_source}{String\+Walker.\+cs}}.
+
+
+
+\label{doc-property-members}
+\Hypertarget{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_utility_1_1_string_walker_doc-property-members}
+\doxysubsection{Property Documentation}
+\Hypertarget{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_utility_1_1_string_walker_abbf32c2054872ff9d6dda8e6697c46ce}\index{Luthetus.TextEditor.RazorLib.CompilerServices.Utility.StringWalker@{Luthetus.TextEditor.RazorLib.CompilerServices.Utility.StringWalker}!CurrentCharacter@{CurrentCharacter}}
+\index{CurrentCharacter@{CurrentCharacter}!Luthetus.TextEditor.RazorLib.CompilerServices.Utility.StringWalker@{Luthetus.TextEditor.RazorLib.CompilerServices.Utility.StringWalker}}
+\doxysubsubsection{\texorpdfstring{CurrentCharacter}{CurrentCharacter}}
+{\footnotesize\ttfamily \label{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_utility_1_1_string_walker_abbf32c2054872ff9d6dda8e6697c46ce} 
+char Luthetus.\+Text\+Editor.\+Razor\+Lib.\+Compiler\+Services.\+Utility.\+String\+Walker.\+Current\+Character\hspace{0.3cm}{\ttfamily [get]}}
+
+
+
+Returns \doxylink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_utility_1_1_string_walker_a1afce034204ad3dba41bac744ceb01ab}{Peek\+Character} invoked with the value of zero. 
+
+
+
+Definition at line \mbox{\hyperlink{_string_walker_8cs_source_l00031}{31}} of file \mbox{\hyperlink{_string_walker_8cs_source}{String\+Walker.\+cs}}.
+
+\Hypertarget{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_utility_1_1_string_walker_a7c895ef73ed57523b1a78779cc0e2528}\index{Luthetus.TextEditor.RazorLib.CompilerServices.Utility.StringWalker@{Luthetus.TextEditor.RazorLib.CompilerServices.Utility.StringWalker}!IsEof@{IsEof}}
+\index{IsEof@{IsEof}!Luthetus.TextEditor.RazorLib.CompilerServices.Utility.StringWalker@{Luthetus.TextEditor.RazorLib.CompilerServices.Utility.StringWalker}}
+\doxysubsubsection{\texorpdfstring{IsEof}{IsEof}}
+{\footnotesize\ttfamily \label{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_utility_1_1_string_walker_a7c895ef73ed57523b1a78779cc0e2528} 
+bool Luthetus.\+Text\+Editor.\+Razor\+Lib.\+Compiler\+Services.\+Utility.\+String\+Walker.\+Is\+Eof\hspace{0.3cm}{\ttfamily [get]}}
+
+
+
+Returns if the current character is the end of file character. 
+
+
+
+Definition at line \mbox{\hyperlink{_string_walker_8cs_source_l00040}{40}} of file \mbox{\hyperlink{_string_walker_8cs_source}{String\+Walker.\+cs}}.
+
+\Hypertarget{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_utility_1_1_string_walker_ad8fb94055d57f3352197e322a4df5c27}\index{Luthetus.TextEditor.RazorLib.CompilerServices.Utility.StringWalker@{Luthetus.TextEditor.RazorLib.CompilerServices.Utility.StringWalker}!NextCharacter@{NextCharacter}}
+\index{NextCharacter@{NextCharacter}!Luthetus.TextEditor.RazorLib.CompilerServices.Utility.StringWalker@{Luthetus.TextEditor.RazorLib.CompilerServices.Utility.StringWalker}}
+\doxysubsubsection{\texorpdfstring{NextCharacter}{NextCharacter}}
+{\footnotesize\ttfamily \label{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_utility_1_1_string_walker_ad8fb94055d57f3352197e322a4df5c27} 
+char Luthetus.\+Text\+Editor.\+Razor\+Lib.\+Compiler\+Services.\+Utility.\+String\+Walker.\+Next\+Character\hspace{0.3cm}{\ttfamily [get]}}
+
+
+
+Returns \doxylink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_utility_1_1_string_walker_a1afce034204ad3dba41bac744ceb01ab}{Peek\+Character} invoked with the value of one. 
+
+
+
+Definition at line \mbox{\hyperlink{_string_walker_8cs_source_l00034}{34}} of file \mbox{\hyperlink{_string_walker_8cs_source}{String\+Walker.\+cs}}.
+
+\Hypertarget{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_utility_1_1_string_walker_a192423c8188b55e1e16376095b7dfc62}\index{Luthetus.TextEditor.RazorLib.CompilerServices.Utility.StringWalker@{Luthetus.TextEditor.RazorLib.CompilerServices.Utility.StringWalker}!PositionIndex@{PositionIndex}}
+\index{PositionIndex@{PositionIndex}!Luthetus.TextEditor.RazorLib.CompilerServices.Utility.StringWalker@{Luthetus.TextEditor.RazorLib.CompilerServices.Utility.StringWalker}}
+\doxysubsubsection{\texorpdfstring{PositionIndex}{PositionIndex}}
+{\footnotesize\ttfamily \label{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_utility_1_1_string_walker_a192423c8188b55e1e16376095b7dfc62} 
+int Luthetus.\+Text\+Editor.\+Razor\+Lib.\+Compiler\+Services.\+Utility.\+String\+Walker.\+Position\+Index\hspace{0.3cm}{\ttfamily [get]}}
+
+
+
+The character index within the \doxylink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_utility_1_1_string_walker_a35f8247f3eea6c6937856215770af815}{Source\+Text}. 
+
+
+
+Definition at line \mbox{\hyperlink{_string_walker_8cs_source_l00022}{22}} of file \mbox{\hyperlink{_string_walker_8cs_source}{String\+Walker.\+cs}}.
+
+\Hypertarget{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_utility_1_1_string_walker_a33fdfdb7d54b7fcc742a40bc20a29d06}\index{Luthetus.TextEditor.RazorLib.CompilerServices.Utility.StringWalker@{Luthetus.TextEditor.RazorLib.CompilerServices.Utility.StringWalker}!RemainingText@{RemainingText}}
+\index{RemainingText@{RemainingText}!Luthetus.TextEditor.RazorLib.CompilerServices.Utility.StringWalker@{Luthetus.TextEditor.RazorLib.CompilerServices.Utility.StringWalker}}
+\doxysubsubsection{\texorpdfstring{RemainingText}{RemainingText}}
+{\footnotesize\ttfamily \label{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_utility_1_1_string_walker_a33fdfdb7d54b7fcc742a40bc20a29d06} 
+string Luthetus.\+Text\+Editor.\+Razor\+Lib.\+Compiler\+Services.\+Utility.\+String\+Walker.\+Remaining\+Text\hspace{0.3cm}{\ttfamily [get]}}
+
+
+
+Starting with \doxylink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_utility_1_1_string_walker_a1afce034204ad3dba41bac744ceb01ab}{Peek\+Character} evaluated at 0 return that and the rest of the \doxylink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_utility_1_1_string_walker_a35f8247f3eea6c6937856215770af815}{Source\+Text}~\newline
+~\newline
+\doxylink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_utility_1_1_string_walker_a33fdfdb7d54b7fcc742a40bc20a29d06}{Remaining\+Text} =\texorpdfstring{$>$}{>} Source\+Text.\+Substring(\+Position\+Index);. 
+
+
+
+Definition at line \mbox{\hyperlink{_string_walker_8cs_source_l00037}{37}} of file \mbox{\hyperlink{_string_walker_8cs_source}{String\+Walker.\+cs}}.
+
+\Hypertarget{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_utility_1_1_string_walker_abf00a8613dfc137bea3c366e277fbde4}\index{Luthetus.TextEditor.RazorLib.CompilerServices.Utility.StringWalker@{Luthetus.TextEditor.RazorLib.CompilerServices.Utility.StringWalker}!ResourceUri@{ResourceUri}}
+\index{ResourceUri@{ResourceUri}!Luthetus.TextEditor.RazorLib.CompilerServices.Utility.StringWalker@{Luthetus.TextEditor.RazorLib.CompilerServices.Utility.StringWalker}}
+\doxysubsubsection{\texorpdfstring{ResourceUri}{ResourceUri}}
+{\footnotesize\ttfamily \label{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_utility_1_1_string_walker_abf00a8613dfc137bea3c366e277fbde4} 
+Resource\+Uri Luthetus.\+Text\+Editor.\+Razor\+Lib.\+Compiler\+Services.\+Utility.\+String\+Walker.\+Resource\+Uri\hspace{0.3cm}{\ttfamily [get]}}
+
+
+
+The file that the \doxylink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_utility_1_1_string_walker_a35f8247f3eea6c6937856215770af815}{Source\+Text} came from. 
+
+
+
+Definition at line \mbox{\hyperlink{_string_walker_8cs_source_l00025}{25}} of file \mbox{\hyperlink{_string_walker_8cs_source}{String\+Walker.\+cs}}.
+
+\Hypertarget{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_utility_1_1_string_walker_a35f8247f3eea6c6937856215770af815}\index{Luthetus.TextEditor.RazorLib.CompilerServices.Utility.StringWalker@{Luthetus.TextEditor.RazorLib.CompilerServices.Utility.StringWalker}!SourceText@{SourceText}}
+\index{SourceText@{SourceText}!Luthetus.TextEditor.RazorLib.CompilerServices.Utility.StringWalker@{Luthetus.TextEditor.RazorLib.CompilerServices.Utility.StringWalker}}
+\doxysubsubsection{\texorpdfstring{SourceText}{SourceText}}
+{\footnotesize\ttfamily \label{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_utility_1_1_string_walker_a35f8247f3eea6c6937856215770af815} 
+string Luthetus.\+Text\+Editor.\+Razor\+Lib.\+Compiler\+Services.\+Utility.\+String\+Walker.\+Source\+Text\hspace{0.3cm}{\ttfamily [get]}}
+
+
+
+The text which is to be stepped through. 
+
+
+
+Definition at line \mbox{\hyperlink{_string_walker_8cs_source_l00028}{28}} of file \mbox{\hyperlink{_string_walker_8cs_source}{String\+Walker.\+cs}}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Source/\+Lib/\+Text\+Editor/\+Compiler\+Services/\+Utility/\mbox{\hyperlink{_string_walker_8cs}{String\+Walker.\+cs}}\end{DoxyCompactItemize}

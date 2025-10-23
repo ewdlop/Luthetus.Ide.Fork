@@ -1,0 +1,154 @@
+.TH "Luthetus.TextEditor.RazorLib.CompilerServices.Utility.TokenWalker" 3 "Version 1.0.0" "Luthetus.Ide" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+Luthetus.TextEditor.RazorLib.CompilerServices.Utility.TokenWalker
+.SH SYNOPSIS
+.br
+.PP
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBTokenWalker\fP (ImmutableArray< \fBISyntaxToken\fP > tokenList, \fBDiagnosticBag\fP diagnosticBag)"
+.br
+.ti -1c
+.RI "\fBISyntaxToken\fP \fBPeek\fP (int offset)"
+.br
+.RI "The input to this method can be positive OR negative\&.
+.br
+
+.br
+Returns \fBBadToken\fP when an index out of bounds error would've occurred\&. "
+.ti -1c
+.RI "\fBISyntaxToken\fP \fBConsume\fP ()"
+.br
+.ti -1c
+.RI "\fBISyntaxToken\fP \fBBacktrack\fP ()"
+.br
+.ti -1c
+.RI "\fBISyntaxToken\fP \fBMatch\fP (\fBSyntaxKind\fP expectedSyntaxKind)"
+.br
+.RI "If the syntaxKind passed in does not match the current token, then a syntax token with that syntax kind will be fabricated and then returned instead\&. "
+.ti -1c
+.RI "\fBISyntaxToken\fP \fBMatchRange\fP (IEnumerable< \fBSyntaxKind\fP > validSyntaxKinds, \fBSyntaxKind\fP fabricationKind)"
+.br
+.RI "If the syntaxKind passed in does not match the current token, then a syntax token with that syntax kind will be fabricated and then returned instead\&. "
+.ti -1c
+.RI "void \fBDeferredParsing\fP (int openTokenIndex, int closeTokenIndex, int tokenIndexToRestore)"
+.br
+.RI "TODO: This method is being added to support breadth first parsing\&.\&.\&. \&.\&.\&.Having this be a public method is a bit hacky, preferably deferring the parsing of a child scope would be done entirely from this class, so the _index cannot be changed externally (2024-06-18)\&. "
+.ti -1c
+.RI "void \fBConsumeCounterReset\fP ()"
+.br
+.in -1c
+.SS "Properties"
+
+.in +1c
+.ti -1c
+.RI "int \fBConsumeCounter\fP\fR [get]\fP"
+.br
+.ti -1c
+.RI "ImmutableArray< \fBISyntaxToken\fP > \fBTokenList\fP\fR [get]\fP"
+.br
+.ti -1c
+.RI "\fBISyntaxToken\fP \fBCurrent\fP\fR [get]\fP"
+.br
+.ti -1c
+.RI "\fBISyntaxToken\fP \fBNext\fP\fR [get]\fP"
+.br
+.ti -1c
+.RI "\fBISyntaxToken\fP \fBPrevious\fP\fR [get]\fP"
+.br
+.ti -1c
+.RI "bool \fBIsEof\fP\fR [get]\fP"
+.br
+.ti -1c
+.RI "int \fBIndex\fP\fR [get]\fP"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+Definition at line \fB9\fP of file \fBTokenWalker\&.cs\fP\&.
+.SH "Constructor & Destructor Documentation"
+.PP 
+.SS "Luthetus\&.TextEditor\&.RazorLib\&.CompilerServices\&.Utility\&.TokenWalker\&.TokenWalker (ImmutableArray< \fBISyntaxToken\fP > tokenList, \fBDiagnosticBag\fP diagnosticBag)"
+
+.PP
+Definition at line \fB17\fP of file \fBTokenWalker\&.cs\fP\&.
+.SH "Member Function Documentation"
+.PP 
+.SS "\fBISyntaxToken\fP Luthetus\&.TextEditor\&.RazorLib\&.CompilerServices\&.Utility\&.TokenWalker\&.Backtrack ()"
+
+.PP
+Definition at line \fB93\fP of file \fBTokenWalker\&.cs\fP\&.
+.SS "\fBISyntaxToken\fP Luthetus\&.TextEditor\&.RazorLib\&.CompilerServices\&.Utility\&.TokenWalker\&.Consume ()"
+
+.PP
+Definition at line \fB61\fP of file \fBTokenWalker\&.cs\fP\&.
+.SS "void Luthetus\&.TextEditor\&.RazorLib\&.CompilerServices\&.Utility\&.TokenWalker\&.ConsumeCounterReset ()"
+
+.PP
+Definition at line \fB164\fP of file \fBTokenWalker\&.cs\fP\&.
+.SS "void Luthetus\&.TextEditor\&.RazorLib\&.CompilerServices\&.Utility\&.TokenWalker\&.DeferredParsing (int openTokenIndex, int closeTokenIndex, int tokenIndexToRestore)"
+
+.PP
+TODO: This method is being added to support breadth first parsing\&.\&.\&. \&.\&.\&.Having this be a public method is a bit hacky, preferably deferring the parsing of a child scope would be done entirely from this class, so the _index cannot be changed externally (2024-06-18)\&. 
+.PP
+Definition at line \fB154\fP of file \fBTokenWalker\&.cs\fP\&.
+.SS "\fBISyntaxToken\fP Luthetus\&.TextEditor\&.RazorLib\&.CompilerServices\&.Utility\&.TokenWalker\&.Match (\fBSyntaxKind\fP expectedSyntaxKind)"
+
+.PP
+If the syntaxKind passed in does not match the current token, then a syntax token with that syntax kind will be fabricated and then returned instead\&. 
+.PP
+Definition at line \fB105\fP of file \fBTokenWalker\&.cs\fP\&.
+.SS "\fBISyntaxToken\fP Luthetus\&.TextEditor\&.RazorLib\&.CompilerServices\&.Utility\&.TokenWalker\&.MatchRange (IEnumerable< \fBSyntaxKind\fP > validSyntaxKinds, \fBSyntaxKind\fP fabricationKind)"
+
+.PP
+If the syntaxKind passed in does not match the current token, then a syntax token with that syntax kind will be fabricated and then returned instead\&. 
+.PP
+Definition at line \fB130\fP of file \fBTokenWalker\&.cs\fP\&.
+.SS "\fBISyntaxToken\fP Luthetus\&.TextEditor\&.RazorLib\&.CompilerServices\&.Utility\&.TokenWalker\&.Peek (int offset)"
+
+.PP
+The input to this method can be positive OR negative\&.
+.br
+
+.br
+Returns \fBBadToken\fP when an index out of bounds error would've occurred\&. 
+.PP
+Definition at line \fB49\fP of file \fBTokenWalker\&.cs\fP\&.
+.SH "Property Documentation"
+.PP 
+.SS "int Luthetus\&.TextEditor\&.RazorLib\&.CompilerServices\&.Utility\&.TokenWalker\&.ConsumeCounter\fR [get]\fP"
+
+.PP
+Definition at line \fB29\fP of file \fBTokenWalker\&.cs\fP\&.
+.SS "\fBISyntaxToken\fP Luthetus\&.TextEditor\&.RazorLib\&.CompilerServices\&.Utility\&.TokenWalker\&.Current\fR [get]\fP"
+
+.PP
+Definition at line \fB37\fP of file \fBTokenWalker\&.cs\fP\&.
+.SS "int Luthetus\&.TextEditor\&.RazorLib\&.CompilerServices\&.Utility\&.TokenWalker\&.Index\fR [get]\fP"
+
+.PP
+Definition at line \fB41\fP of file \fBTokenWalker\&.cs\fP\&.
+.SS "bool Luthetus\&.TextEditor\&.RazorLib\&.CompilerServices\&.Utility\&.TokenWalker\&.IsEof\fR [get]\fP"
+
+.PP
+Definition at line \fB40\fP of file \fBTokenWalker\&.cs\fP\&.
+.SS "\fBISyntaxToken\fP Luthetus\&.TextEditor\&.RazorLib\&.CompilerServices\&.Utility\&.TokenWalker\&.Next\fR [get]\fP"
+
+.PP
+Definition at line \fB38\fP of file \fBTokenWalker\&.cs\fP\&.
+.SS "\fBISyntaxToken\fP Luthetus\&.TextEditor\&.RazorLib\&.CompilerServices\&.Utility\&.TokenWalker\&.Previous\fR [get]\fP"
+
+.PP
+Definition at line \fB39\fP of file \fBTokenWalker\&.cs\fP\&.
+.SS "ImmutableArray<\fBISyntaxToken\fP> Luthetus\&.TextEditor\&.RazorLib\&.CompilerServices\&.Utility\&.TokenWalker\&.TokenList\fR [get]\fP"
+
+.PP
+Definition at line \fB36\fP of file \fBTokenWalker\&.cs\fP\&.
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for Luthetus\&.Ide from the source code\&.

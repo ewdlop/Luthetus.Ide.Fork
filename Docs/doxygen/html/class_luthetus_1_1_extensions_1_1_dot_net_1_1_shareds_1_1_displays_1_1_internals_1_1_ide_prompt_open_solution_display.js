@@ -1,0 +1,4 @@
+var class_luthetus_1_1_extensions_1_1_dot_net_1_1_shareds_1_1_displays_1_1_internals_1_1_ide_prompt_open_solution_display =
+[
+    [ "AbsolutePath", "class_luthetus_1_1_extensions_1_1_dot_net_1_1_shareds_1_1_displays_1_1_internals_1_1_ide_prompt_open_solution_display.html#af519ac6b09643929fe07ab5fdd0f877f", null ]
+];

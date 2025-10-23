@@ -1,0 +1,4 @@
+var _text_editor_keymap_default_8cs =
+[
+    [ "Luthetus.TextEditor.RazorLib.Keymaps.Models.Defaults.TextEditorKeymapDefault", "class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_keymaps_1_1_models_1_1_defaults_1_1_text_editor_keymap_default.html", "class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_keymaps_1_1_models_1_1_defaults_1_1_text_editor_keymap_default" ]
+];

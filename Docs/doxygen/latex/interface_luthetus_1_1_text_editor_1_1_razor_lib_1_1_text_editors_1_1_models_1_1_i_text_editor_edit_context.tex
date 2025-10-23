@@ -1,0 +1,227 @@
+\doxysection{Luthetus.\+Text\+Editor.\+Razor\+Lib.\+Text\+Editors.\+Models.\+IText\+Editor\+Edit\+Context Interface Reference}
+\hypertarget{interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1_1_i_text_editor_edit_context}{}\label{interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1_1_i_text_editor_edit_context}\index{Luthetus.TextEditor.RazorLib.TextEditors.Models.ITextEditorEditContext@{Luthetus.TextEditor.RazorLib.TextEditors.Models.ITextEditorEditContext}}
+
+
+If one invokes, "{}\+\_\+ = edit\+Context.\+Get\+View\+Model\+Modifier(view\+Model\+Key);"{}.~\newline
+ Then a side effect occurs where the view model with the provided view\+Model\+Key, will be marked as a having been modified.~\newline
+ After a Post is finished, the text editor service iterates over all \textquotesingle{}modified\textquotesingle{} view models and re-\/renders them.~\newline
+ This behavior is a bit hacky since it requires some amount of \textquotesingle{}hidden knowledge\textquotesingle{}.~\newline
+ To get a view model without marking it as modified, use the optional parameter, \textquotesingle{}is\+Readonly\textquotesingle{} and set it to \textquotesingle{}true\textquotesingle{}.~\newline
+ The main reason for making this comment, is that I sometimes assign the result of \textquotesingle{}Get\+View\+Model\+Modifier\textquotesingle{} to discard.~\newline
+ When I do this it feels especially hacky, so I want to leave a paper trail of what I mean by that statement.~\newline
+.  
+
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1_1_text_editor_model_modifier}{Text\+Editor\+Model\+Modifier}}? \mbox{\hyperlink{interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1_1_i_text_editor_edit_context_abbb3422d11e529e2b7cc76ebc2f77c4a}{Get\+Model\+Modifier}} (\mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_a435ccef09e2ba83022e8cf378fc0f690}{Resource\+Uri}} model\+Resource\+Uri, bool is\+Readonly=false)
+\item 
+\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1_1_text_editor_model_modifier}{Text\+Editor\+Model\+Modifier}}? \mbox{\hyperlink{interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1_1_i_text_editor_edit_context_ac9718d322043aac2aec212493b255eb7}{Get\+Model\+Modifier\+By\+View\+Model\+Key}} (Key$<$ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_aa2a2da032900659e3cf98e4b28fc476d}{Text\+Editor\+View\+Model}} $>$ view\+Model\+Key, bool is\+Readonly=false)
+\item 
+\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1_1_text_editor_view_model_modifier}{Text\+Editor\+View\+Model\+Modifier}}? \mbox{\hyperlink{interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1_1_i_text_editor_edit_context_a08b90b3e0e901e358bf743b65ce7be20}{Get\+View\+Model\+Modifier}} (Key$<$ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_aa2a2da032900659e3cf98e4b28fc476d}{Text\+Editor\+View\+Model}} $>$ view\+Model\+Key, bool is\+Readonly=false)
+\item 
+\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1_1_cursor_modifier_bag_text_editor}{Cursor\+Modifier\+Bag\+Text\+Editor}}? \mbox{\hyperlink{interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1_1_i_text_editor_edit_context_ae1dacadacf9cadeedfa848bd15439b38}{Get\+Cursor\+Modifier\+Bag}} (\mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_aa2a2da032900659e3cf98e4b28fc476d}{Text\+Editor\+View\+Model}}? view\+Model)
+\item 
+\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_cursors_1_1_models_1_1_text_editor_cursor_modifier}{Text\+Editor\+Cursor\+Modifier}}? \mbox{\hyperlink{interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1_1_i_text_editor_edit_context_a354a51269d220c10592c6cf330f0ddf4}{Get\+Primary\+Cursor\+Modifier}} (\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1_1_cursor_modifier_bag_text_editor}{Cursor\+Modifier\+Bag\+Text\+Editor}}? cursor\+Modifier\+Bag)
+\begin{DoxyCompactList}\small\item\em TODO\+: Caching for this method?~\newline
+ . \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_diffs_1_1_models_1_1_text_editor_diff_model_modifier}{Text\+Editor\+Diff\+Model\+Modifier}}? \mbox{\hyperlink{interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1_1_i_text_editor_edit_context_a83179c4d0a4ea26493920765e2c8e477}{Get\+Diff\+Model\+Modifier}} (Key$<$ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_diffs_1_1_models_a4b914e1483447921bb0289a2d1fc20d7}{Text\+Editor\+Diff\+Model}} $>$ diff\+Model\+Key, bool is\+Readonly=false)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Properties}
+\begin{DoxyCompactItemize}
+\item 
+Dictionary$<$ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_a435ccef09e2ba83022e8cf378fc0f690}{Resource\+Uri}}, \mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1_1_text_editor_model_modifier}{Text\+Editor\+Model\+Modifier}}?$>$ \mbox{\hyperlink{interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1_1_i_text_editor_edit_context_a709df9262c19db440d9a50f56a272e59}{Model\+Cache}}\hspace{0.3cm}{\ttfamily  \mbox{[}get\mbox{]}}
+\item 
+Dictionary$<$ Key$<$ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_aa2a2da032900659e3cf98e4b28fc476d}{Text\+Editor\+View\+Model}} $>$, \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_a435ccef09e2ba83022e8cf378fc0f690}{Resource\+Uri}}?$>$ \mbox{\hyperlink{interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1_1_i_text_editor_edit_context_a27ea457f8bed07d5f6a229cdaabe60f6}{View\+Model\+To\+Model\+Resource\+Uri\+Cache}}\hspace{0.3cm}{\ttfamily  \mbox{[}get\mbox{]}}
+\item 
+Dictionary$<$ Key$<$ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_aa2a2da032900659e3cf98e4b28fc476d}{Text\+Editor\+View\+Model}} $>$, \mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1_1_text_editor_view_model_modifier}{Text\+Editor\+View\+Model\+Modifier}}?$>$ \mbox{\hyperlink{interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1_1_i_text_editor_edit_context_aa420fe261337a0c3022df270703be762}{View\+Model\+Cache}}\hspace{0.3cm}{\ttfamily  \mbox{[}get\mbox{]}}
+\item 
+Dictionary$<$ Key$<$ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_aa2a2da032900659e3cf98e4b28fc476d}{Text\+Editor\+View\+Model}} $>$, \mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1_1_cursor_modifier_bag_text_editor}{Cursor\+Modifier\+Bag\+Text\+Editor}}?$>$ \mbox{\hyperlink{interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1_1_i_text_editor_edit_context_aba1b4e9f7f45ba89d4f23c6bcdddb95e}{Cursor\+Modifier\+Bag\+Cache}}\hspace{0.3cm}{\ttfamily  \mbox{[}get\mbox{]}}
+\item 
+\mbox{\hyperlink{interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_i_text_editor_service}{IText\+Editor\+Service}} \mbox{\hyperlink{interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1_1_i_text_editor_edit_context_a88ea6b9c0a12d44730e133c864e28ac2}{Text\+Editor\+Service}}\hspace{0.3cm}{\ttfamily  \mbox{[}get\mbox{]}}
+\item 
+Key$<$ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_states_a6a2ec19dac2b03c9354d04b880bfe184}{Text\+Editor\+Authenticated\+Action}} $>$ \mbox{\hyperlink{interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1_1_i_text_editor_edit_context_ac7a733c6f09a1963081ee2dc3e220fc1}{Authenticated\+Action\+Key}}\hspace{0.3cm}{\ttfamily  \mbox{[}get\mbox{]}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+If one invokes, "{}\+\_\+ = edit\+Context.\+Get\+View\+Model\+Modifier(view\+Model\+Key);"{}.~\newline
+ Then a side effect occurs where the view model with the provided view\+Model\+Key, will be marked as a having been modified.~\newline
+ After a Post is finished, the text editor service iterates over all \textquotesingle{}modified\textquotesingle{} view models and re-\/renders them.~\newline
+ This behavior is a bit hacky since it requires some amount of \textquotesingle{}hidden knowledge\textquotesingle{}.~\newline
+ To get a view model without marking it as modified, use the optional parameter, \textquotesingle{}is\+Readonly\textquotesingle{} and set it to \textquotesingle{}true\textquotesingle{}.~\newline
+ The main reason for making this comment, is that I sometimes assign the result of \textquotesingle{}Get\+View\+Model\+Modifier\textquotesingle{} to discard.~\newline
+ When I do this it feels especially hacky, so I want to leave a paper trail of what I mean by that statement.~\newline
+. 
+
+Definition at line \mbox{\hyperlink{_i_text_editor_edit_context_8cs_source_l00018}{18}} of file \mbox{\hyperlink{_i_text_editor_edit_context_8cs_source}{IText\+Editor\+Edit\+Context.\+cs}}.
+
+
+
+\label{doc-func-members}
+\Hypertarget{interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1_1_i_text_editor_edit_context_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1_1_i_text_editor_edit_context_ae1dacadacf9cadeedfa848bd15439b38}\index{Luthetus.TextEditor.RazorLib.TextEditors.Models.ITextEditorEditContext@{Luthetus.TextEditor.RazorLib.TextEditors.Models.ITextEditorEditContext}!GetCursorModifierBag@{GetCursorModifierBag}}
+\index{GetCursorModifierBag@{GetCursorModifierBag}!Luthetus.TextEditor.RazorLib.TextEditors.Models.ITextEditorEditContext@{Luthetus.TextEditor.RazorLib.TextEditors.Models.ITextEditorEditContext}}
+\doxysubsubsection{\texorpdfstring{GetCursorModifierBag()}{GetCursorModifierBag()}}
+{\footnotesize\ttfamily \label{interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1_1_i_text_editor_edit_context_ae1dacadacf9cadeedfa848bd15439b38} 
+\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1_1_cursor_modifier_bag_text_editor}{Cursor\+Modifier\+Bag\+Text\+Editor}}? Luthetus.\+Text\+Editor.\+Razor\+Lib.\+Text\+Editors.\+Models.\+IText\+Editor\+Edit\+Context.\+Get\+Cursor\+Modifier\+Bag (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_aa2a2da032900659e3cf98e4b28fc476d}{Text\+Editor\+View\+Model}}?}]{view\+Model}{}\end{DoxyParamCaption})}
+
+
+
+
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1_1_i_text_editor_edit_context_ae1dacadacf9cadeedfa848bd15439b38_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1_1_i_text_editor_edit_context_a83179c4d0a4ea26493920765e2c8e477}\index{Luthetus.TextEditor.RazorLib.TextEditors.Models.ITextEditorEditContext@{Luthetus.TextEditor.RazorLib.TextEditors.Models.ITextEditorEditContext}!GetDiffModelModifier@{GetDiffModelModifier}}
+\index{GetDiffModelModifier@{GetDiffModelModifier}!Luthetus.TextEditor.RazorLib.TextEditors.Models.ITextEditorEditContext@{Luthetus.TextEditor.RazorLib.TextEditors.Models.ITextEditorEditContext}}
+\doxysubsubsection{\texorpdfstring{GetDiffModelModifier()}{GetDiffModelModifier()}}
+{\footnotesize\ttfamily \label{interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1_1_i_text_editor_edit_context_a83179c4d0a4ea26493920765e2c8e477} 
+\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_diffs_1_1_models_1_1_text_editor_diff_model_modifier}{Text\+Editor\+Diff\+Model\+Modifier}}? Luthetus.\+Text\+Editor.\+Razor\+Lib.\+Text\+Editors.\+Models.\+IText\+Editor\+Edit\+Context.\+Get\+Diff\+Model\+Modifier (\begin{DoxyParamCaption}\item[{Key$<$ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_diffs_1_1_models_a4b914e1483447921bb0289a2d1fc20d7}{Text\+Editor\+Diff\+Model}} $>$}]{diff\+Model\+Key}{, }\item[{bool}]{is\+Readonly}{ = {\ttfamily false}}\end{DoxyParamCaption})}
+
+
+
+
+
+\Hypertarget{interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1_1_i_text_editor_edit_context_abbb3422d11e529e2b7cc76ebc2f77c4a}\index{Luthetus.TextEditor.RazorLib.TextEditors.Models.ITextEditorEditContext@{Luthetus.TextEditor.RazorLib.TextEditors.Models.ITextEditorEditContext}!GetModelModifier@{GetModelModifier}}
+\index{GetModelModifier@{GetModelModifier}!Luthetus.TextEditor.RazorLib.TextEditors.Models.ITextEditorEditContext@{Luthetus.TextEditor.RazorLib.TextEditors.Models.ITextEditorEditContext}}
+\doxysubsubsection{\texorpdfstring{GetModelModifier()}{GetModelModifier()}}
+{\footnotesize\ttfamily \label{interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1_1_i_text_editor_edit_context_abbb3422d11e529e2b7cc76ebc2f77c4a} 
+\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1_1_text_editor_model_modifier}{Text\+Editor\+Model\+Modifier}}? Luthetus.\+Text\+Editor.\+Razor\+Lib.\+Text\+Editors.\+Models.\+IText\+Editor\+Edit\+Context.\+Get\+Model\+Modifier (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_a435ccef09e2ba83022e8cf378fc0f690}{Resource\+Uri}}}]{model\+Resource\+Uri}{, }\item[{bool}]{is\+Readonly}{ = {\ttfamily false}}\end{DoxyParamCaption})}
+
+
+
+
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1_1_i_text_editor_edit_context_abbb3422d11e529e2b7cc76ebc2f77c4a_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1_1_i_text_editor_edit_context_ac9718d322043aac2aec212493b255eb7}\index{Luthetus.TextEditor.RazorLib.TextEditors.Models.ITextEditorEditContext@{Luthetus.TextEditor.RazorLib.TextEditors.Models.ITextEditorEditContext}!GetModelModifierByViewModelKey@{GetModelModifierByViewModelKey}}
+\index{GetModelModifierByViewModelKey@{GetModelModifierByViewModelKey}!Luthetus.TextEditor.RazorLib.TextEditors.Models.ITextEditorEditContext@{Luthetus.TextEditor.RazorLib.TextEditors.Models.ITextEditorEditContext}}
+\doxysubsubsection{\texorpdfstring{GetModelModifierByViewModelKey()}{GetModelModifierByViewModelKey()}}
+{\footnotesize\ttfamily \label{interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1_1_i_text_editor_edit_context_ac9718d322043aac2aec212493b255eb7} 
+\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1_1_text_editor_model_modifier}{Text\+Editor\+Model\+Modifier}}? Luthetus.\+Text\+Editor.\+Razor\+Lib.\+Text\+Editors.\+Models.\+IText\+Editor\+Edit\+Context.\+Get\+Model\+Modifier\+By\+View\+Model\+Key (\begin{DoxyParamCaption}\item[{Key$<$ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_aa2a2da032900659e3cf98e4b28fc476d}{Text\+Editor\+View\+Model}} $>$}]{view\+Model\+Key}{, }\item[{bool}]{is\+Readonly}{ = {\ttfamily false}}\end{DoxyParamCaption})}
+
+
+
+
+
+\Hypertarget{interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1_1_i_text_editor_edit_context_a354a51269d220c10592c6cf330f0ddf4}\index{Luthetus.TextEditor.RazorLib.TextEditors.Models.ITextEditorEditContext@{Luthetus.TextEditor.RazorLib.TextEditors.Models.ITextEditorEditContext}!GetPrimaryCursorModifier@{GetPrimaryCursorModifier}}
+\index{GetPrimaryCursorModifier@{GetPrimaryCursorModifier}!Luthetus.TextEditor.RazorLib.TextEditors.Models.ITextEditorEditContext@{Luthetus.TextEditor.RazorLib.TextEditors.Models.ITextEditorEditContext}}
+\doxysubsubsection{\texorpdfstring{GetPrimaryCursorModifier()}{GetPrimaryCursorModifier()}}
+{\footnotesize\ttfamily \label{interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1_1_i_text_editor_edit_context_a354a51269d220c10592c6cf330f0ddf4} 
+\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_cursors_1_1_models_1_1_text_editor_cursor_modifier}{Text\+Editor\+Cursor\+Modifier}}? Luthetus.\+Text\+Editor.\+Razor\+Lib.\+Text\+Editors.\+Models.\+IText\+Editor\+Edit\+Context.\+Get\+Primary\+Cursor\+Modifier (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1_1_cursor_modifier_bag_text_editor}{Cursor\+Modifier\+Bag\+Text\+Editor}}?}]{cursor\+Modifier\+Bag}{}\end{DoxyParamCaption})}
+
+
+
+TODO\+: Caching for this method?~\newline
+ . 
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=550pt]{interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1_1_i_text_editor_edit_context_a354a51269d220c10592c6cf330f0ddf4_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1_1_i_text_editor_edit_context_a08b90b3e0e901e358bf743b65ce7be20}\index{Luthetus.TextEditor.RazorLib.TextEditors.Models.ITextEditorEditContext@{Luthetus.TextEditor.RazorLib.TextEditors.Models.ITextEditorEditContext}!GetViewModelModifier@{GetViewModelModifier}}
+\index{GetViewModelModifier@{GetViewModelModifier}!Luthetus.TextEditor.RazorLib.TextEditors.Models.ITextEditorEditContext@{Luthetus.TextEditor.RazorLib.TextEditors.Models.ITextEditorEditContext}}
+\doxysubsubsection{\texorpdfstring{GetViewModelModifier()}{GetViewModelModifier()}}
+{\footnotesize\ttfamily \label{interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1_1_i_text_editor_edit_context_a08b90b3e0e901e358bf743b65ce7be20} 
+\mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1_1_text_editor_view_model_modifier}{Text\+Editor\+View\+Model\+Modifier}}? Luthetus.\+Text\+Editor.\+Razor\+Lib.\+Text\+Editors.\+Models.\+IText\+Editor\+Edit\+Context.\+Get\+View\+Model\+Modifier (\begin{DoxyParamCaption}\item[{Key$<$ \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_aa2a2da032900659e3cf98e4b28fc476d}{Text\+Editor\+View\+Model}} $>$}]{view\+Model\+Key}{, }\item[{bool}]{is\+Readonly}{ = {\ttfamily false}}\end{DoxyParamCaption})}
+
+
+
+
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1_1_i_text_editor_edit_context_a08b90b3e0e901e358bf743b65ce7be20_icgraph}
+\end{center}
+\end{figure}
+
+
+\label{doc-property-members}
+\Hypertarget{interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1_1_i_text_editor_edit_context_doc-property-members}
+\doxysubsection{Property Documentation}
+\Hypertarget{interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1_1_i_text_editor_edit_context_ac7a733c6f09a1963081ee2dc3e220fc1}\index{Luthetus.TextEditor.RazorLib.TextEditors.Models.ITextEditorEditContext@{Luthetus.TextEditor.RazorLib.TextEditors.Models.ITextEditorEditContext}!AuthenticatedActionKey@{AuthenticatedActionKey}}
+\index{AuthenticatedActionKey@{AuthenticatedActionKey}!Luthetus.TextEditor.RazorLib.TextEditors.Models.ITextEditorEditContext@{Luthetus.TextEditor.RazorLib.TextEditors.Models.ITextEditorEditContext}}
+\doxysubsubsection{\texorpdfstring{AuthenticatedActionKey}{AuthenticatedActionKey}}
+{\footnotesize\ttfamily \label{interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1_1_i_text_editor_edit_context_ac7a733c6f09a1963081ee2dc3e220fc1} 
+Key$<$\mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_states_a6a2ec19dac2b03c9354d04b880bfe184}{Text\+Editor\+Authenticated\+Action}}$>$ Luthetus.\+Text\+Editor.\+Razor\+Lib.\+Text\+Editors.\+Models.\+IText\+Editor\+Edit\+Context.\+Authenticated\+Action\+Key\hspace{0.3cm}{\ttfamily [get]}}
+
+
+
+Definition at line \mbox{\hyperlink{_i_text_editor_edit_context_8cs_source_l00026}{26}} of file \mbox{\hyperlink{_i_text_editor_edit_context_8cs_source}{IText\+Editor\+Edit\+Context.\+cs}}.
+
+\Hypertarget{interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1_1_i_text_editor_edit_context_aba1b4e9f7f45ba89d4f23c6bcdddb95e}\index{Luthetus.TextEditor.RazorLib.TextEditors.Models.ITextEditorEditContext@{Luthetus.TextEditor.RazorLib.TextEditors.Models.ITextEditorEditContext}!CursorModifierBagCache@{CursorModifierBagCache}}
+\index{CursorModifierBagCache@{CursorModifierBagCache}!Luthetus.TextEditor.RazorLib.TextEditors.Models.ITextEditorEditContext@{Luthetus.TextEditor.RazorLib.TextEditors.Models.ITextEditorEditContext}}
+\doxysubsubsection{\texorpdfstring{CursorModifierBagCache}{CursorModifierBagCache}}
+{\footnotesize\ttfamily \label{interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1_1_i_text_editor_edit_context_aba1b4e9f7f45ba89d4f23c6bcdddb95e} 
+Dictionary$<$Key$<$\mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_aa2a2da032900659e3cf98e4b28fc476d}{Text\+Editor\+View\+Model}}$>$, \mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1_1_cursor_modifier_bag_text_editor}{Cursor\+Modifier\+Bag\+Text\+Editor}}?$>$ Luthetus.\+Text\+Editor.\+Razor\+Lib.\+Text\+Editors.\+Models.\+IText\+Editor\+Edit\+Context.\+Cursor\+Modifier\+Bag\+Cache\hspace{0.3cm}{\ttfamily [get]}}
+
+
+
+Definition at line \mbox{\hyperlink{_i_text_editor_edit_context_8cs_source_l00023}{23}} of file \mbox{\hyperlink{_i_text_editor_edit_context_8cs_source}{IText\+Editor\+Edit\+Context.\+cs}}.
+
+\Hypertarget{interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1_1_i_text_editor_edit_context_a709df9262c19db440d9a50f56a272e59}\index{Luthetus.TextEditor.RazorLib.TextEditors.Models.ITextEditorEditContext@{Luthetus.TextEditor.RazorLib.TextEditors.Models.ITextEditorEditContext}!ModelCache@{ModelCache}}
+\index{ModelCache@{ModelCache}!Luthetus.TextEditor.RazorLib.TextEditors.Models.ITextEditorEditContext@{Luthetus.TextEditor.RazorLib.TextEditors.Models.ITextEditorEditContext}}
+\doxysubsubsection{\texorpdfstring{ModelCache}{ModelCache}}
+{\footnotesize\ttfamily \label{interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1_1_i_text_editor_edit_context_a709df9262c19db440d9a50f56a272e59} 
+Dictionary$<$\mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_a435ccef09e2ba83022e8cf378fc0f690}{Resource\+Uri}}, \mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1_1_text_editor_model_modifier}{Text\+Editor\+Model\+Modifier}}?$>$ Luthetus.\+Text\+Editor.\+Razor\+Lib.\+Text\+Editors.\+Models.\+IText\+Editor\+Edit\+Context.\+Model\+Cache\hspace{0.3cm}{\ttfamily [get]}}
+
+
+
+Definition at line \mbox{\hyperlink{_i_text_editor_edit_context_8cs_source_l00020}{20}} of file \mbox{\hyperlink{_i_text_editor_edit_context_8cs_source}{IText\+Editor\+Edit\+Context.\+cs}}.
+
+\Hypertarget{interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1_1_i_text_editor_edit_context_a88ea6b9c0a12d44730e133c864e28ac2}\index{Luthetus.TextEditor.RazorLib.TextEditors.Models.ITextEditorEditContext@{Luthetus.TextEditor.RazorLib.TextEditors.Models.ITextEditorEditContext}!TextEditorService@{TextEditorService}}
+\index{TextEditorService@{TextEditorService}!Luthetus.TextEditor.RazorLib.TextEditors.Models.ITextEditorEditContext@{Luthetus.TextEditor.RazorLib.TextEditors.Models.ITextEditorEditContext}}
+\doxysubsubsection{\texorpdfstring{TextEditorService}{TextEditorService}}
+{\footnotesize\ttfamily \label{interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1_1_i_text_editor_edit_context_a88ea6b9c0a12d44730e133c864e28ac2} 
+\mbox{\hyperlink{interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_i_text_editor_service}{IText\+Editor\+Service}} Luthetus.\+Text\+Editor.\+Razor\+Lib.\+Text\+Editors.\+Models.\+IText\+Editor\+Edit\+Context.\+Text\+Editor\+Service\hspace{0.3cm}{\ttfamily [get]}}
+
+
+
+Definition at line \mbox{\hyperlink{_i_text_editor_edit_context_8cs_source_l00025}{25}} of file \mbox{\hyperlink{_i_text_editor_edit_context_8cs_source}{IText\+Editor\+Edit\+Context.\+cs}}.
+
+\Hypertarget{interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1_1_i_text_editor_edit_context_aa420fe261337a0c3022df270703be762}\index{Luthetus.TextEditor.RazorLib.TextEditors.Models.ITextEditorEditContext@{Luthetus.TextEditor.RazorLib.TextEditors.Models.ITextEditorEditContext}!ViewModelCache@{ViewModelCache}}
+\index{ViewModelCache@{ViewModelCache}!Luthetus.TextEditor.RazorLib.TextEditors.Models.ITextEditorEditContext@{Luthetus.TextEditor.RazorLib.TextEditors.Models.ITextEditorEditContext}}
+\doxysubsubsection{\texorpdfstring{ViewModelCache}{ViewModelCache}}
+{\footnotesize\ttfamily \label{interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1_1_i_text_editor_edit_context_aa420fe261337a0c3022df270703be762} 
+Dictionary$<$Key$<$\mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_aa2a2da032900659e3cf98e4b28fc476d}{Text\+Editor\+View\+Model}}$>$, \mbox{\hyperlink{class_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1_1_text_editor_view_model_modifier}{Text\+Editor\+View\+Model\+Modifier}}?$>$ Luthetus.\+Text\+Editor.\+Razor\+Lib.\+Text\+Editors.\+Models.\+IText\+Editor\+Edit\+Context.\+View\+Model\+Cache\hspace{0.3cm}{\ttfamily [get]}}
+
+
+
+Definition at line \mbox{\hyperlink{_i_text_editor_edit_context_8cs_source_l00022}{22}} of file \mbox{\hyperlink{_i_text_editor_edit_context_8cs_source}{IText\+Editor\+Edit\+Context.\+cs}}.
+
+\Hypertarget{interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1_1_i_text_editor_edit_context_a27ea457f8bed07d5f6a229cdaabe60f6}\index{Luthetus.TextEditor.RazorLib.TextEditors.Models.ITextEditorEditContext@{Luthetus.TextEditor.RazorLib.TextEditors.Models.ITextEditorEditContext}!ViewModelToModelResourceUriCache@{ViewModelToModelResourceUriCache}}
+\index{ViewModelToModelResourceUriCache@{ViewModelToModelResourceUriCache}!Luthetus.TextEditor.RazorLib.TextEditors.Models.ITextEditorEditContext@{Luthetus.TextEditor.RazorLib.TextEditors.Models.ITextEditorEditContext}}
+\doxysubsubsection{\texorpdfstring{ViewModelToModelResourceUriCache}{ViewModelToModelResourceUriCache}}
+{\footnotesize\ttfamily \label{interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1_1_i_text_editor_edit_context_a27ea457f8bed07d5f6a229cdaabe60f6} 
+Dictionary$<$Key$<$\mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_aa2a2da032900659e3cf98e4b28fc476d}{Text\+Editor\+View\+Model}}$>$, \mbox{\hyperlink{namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_a435ccef09e2ba83022e8cf378fc0f690}{Resource\+Uri}}?$>$ Luthetus.\+Text\+Editor.\+Razor\+Lib.\+Text\+Editors.\+Models.\+IText\+Editor\+Edit\+Context.\+View\+Model\+To\+Model\+Resource\+Uri\+Cache\hspace{0.3cm}{\ttfamily [get]}}
+
+
+
+Definition at line \mbox{\hyperlink{_i_text_editor_edit_context_8cs_source_l00021}{21}} of file \mbox{\hyperlink{_i_text_editor_edit_context_8cs_source}{IText\+Editor\+Edit\+Context.\+cs}}.
+
+
+
+The documentation for this interface was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Source/\+Lib/\+Text\+Editor/\+Text\+Editors/\+Models/\mbox{\hyperlink{_i_text_editor_edit_context_8cs}{IText\+Editor\+Edit\+Context.\+cs}}\end{DoxyCompactItemize}

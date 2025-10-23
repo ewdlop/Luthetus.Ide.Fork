@@ -1,0 +1,40 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="__output_scheduler_8_main_8cs_source" xml:lang="en-US">
+<title>OutputScheduler.Main.cs</title>
+<indexterm><primary>Source/Lib/Extensions/Extensions.DotNet/Outputs/States/OutputScheduler.Main.cs</primary></indexterm>
+Go to the documentation of this file.<programlisting linenumbering="unnumbered"><anchor xml:id="__output_scheduler_8_main_8cs_source_1l00001"/>00001 <emphasis role="keyword">using&#32;</emphasis>Fluxor;
+<anchor xml:id="__output_scheduler_8_main_8cs_source_1l00002"/>00002 <emphasis role="keyword">using&#32;</emphasis><link linkend="_namespace_luthetus_1_1_common_1_1_razor_lib_1_1_reactives_1_1_models">Luthetus.Common.RazorLib.Reactives.Models</link>;
+<anchor xml:id="__output_scheduler_8_main_8cs_source_1l00003"/>00003 <emphasis role="keyword">using&#32;</emphasis><link linkend="_namespace_luthetus_1_1_common_1_1_razor_lib_1_1_background_tasks_1_1_models">Luthetus.Common.RazorLib.BackgroundTasks.Models</link>;
+<anchor xml:id="__output_scheduler_8_main_8cs_source_1l00004"/>00004 <emphasis role="keyword">using&#32;</emphasis><link linkend="_namespace_luthetus_1_1_common_1_1_razor_lib_1_1_tree_views_1_1_models">Luthetus.Common.RazorLib.TreeViews.Models</link>;
+<anchor xml:id="__output_scheduler_8_main_8cs_source_1l00005"/>00005 <emphasis role="keyword">using&#32;</emphasis><link linkend="_namespace_luthetus_1_1_common_1_1_razor_lib_1_1_file_systems_1_1_models">Luthetus.Common.RazorLib.FileSystems.Models</link>;
+<anchor xml:id="__output_scheduler_8_main_8cs_source_1l00006"/>00006 <emphasis role="keyword">using&#32;</emphasis><link linkend="_namespace_luthetus_1_1_extensions_1_1_dot_net_1_1_background_tasks_1_1_models">Luthetus.Extensions.DotNet.BackgroundTasks.Models</link>;
+<anchor xml:id="__output_scheduler_8_main_8cs_source_1l00007"/>00007 <emphasis role="keyword">using&#32;</emphasis><link linkend="_namespace_luthetus_1_1_extensions_1_1_dot_net_1_1_command_lines_1_1_models">Luthetus.Extensions.DotNet.CommandLines.Models</link>;
+<anchor xml:id="__output_scheduler_8_main_8cs_source_1l00008"/>00008 
+<anchor xml:id="__output_scheduler_8_main_8cs_source_1l00009"/>00009 <emphasis role="keyword">namespace&#32;</emphasis><link linkend="_namespace_luthetus_1_1_extensions_1_1_dot_net_1_1_outputs_1_1_states">Luthetus.Extensions.DotNet.Outputs.States</link>;
+<anchor xml:id="__output_scheduler_8_main_8cs_source_1l00010"/>00010 
+<anchor xml:id="__output_scheduler_8_main_8cs_source_1l00012"/>00012 <emphasis role="keyword">public</emphasis>&#32;<emphasis role="keyword">partial&#32;class&#32;</emphasis><link linkend="_class_luthetus_1_1_extensions_1_1_dot_net_1_1_outputs_1_1_states_1_1_output_scheduler">OutputScheduler</link>&#32;:&#32;IStateScheduler
+<anchor xml:id="__output_scheduler_8_main_8cs_source_1l00013"/>00013 {
+<anchor xml:id="__output_scheduler_8_main_8cs_source_1l00014"/>00014 &#32;&#32;&#32;&#32;<emphasis role="keyword">private</emphasis>&#32;readonly&#32;DotNetBackgroundTaskApi&#32;_dotNetBackgroundTaskApi;
+<anchor xml:id="__output_scheduler_8_main_8cs_source_1l00015"/>00015 &#32;&#32;&#32;&#32;<emphasis role="keyword">private</emphasis>&#32;readonly&#32;IBackgroundTaskService&#32;_backgroundTaskService;
+<anchor xml:id="__output_scheduler_8_main_8cs_source_1l00016"/>00016 &#32;&#32;&#32;&#32;<emphasis role="keyword">private</emphasis>&#32;readonly&#32;DotNetCliOutputParser&#32;_dotNetCliOutputParser;
+<anchor xml:id="__output_scheduler_8_main_8cs_source_1l00017"/>00017 &#32;&#32;&#32;&#32;<emphasis role="keyword">private</emphasis>&#32;readonly&#32;ITreeViewService&#32;_treeViewService;
+<anchor xml:id="__output_scheduler_8_main_8cs_source_1l00018"/>00018 &#32;&#32;&#32;&#32;<emphasis role="keyword">private</emphasis>&#32;readonly&#32;IEnvironmentProvider&#32;_environmentProvider;
+<anchor xml:id="__output_scheduler_8_main_8cs_source_1l00019"/>00019 &#32;&#32;&#32;&#32;<emphasis role="keyword">private</emphasis>&#32;readonly&#32;IDispatcher&#32;_dispatcher;
+<anchor xml:id="__output_scheduler_8_main_8cs_source_1l00020"/>00020 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;
+<anchor xml:id="__output_scheduler_8_main_8cs_source_1l00021"/><link linkend="_class_luthetus_1_1_extensions_1_1_dot_net_1_1_outputs_1_1_states_1_1_output_scheduler_1a477ffe056e74d4142bef4a66ce0d2e3f">00021</link> &#32;&#32;&#32;&#32;<emphasis role="keyword">public</emphasis>&#32;<link linkend="_class_luthetus_1_1_extensions_1_1_dot_net_1_1_outputs_1_1_states_1_1_output_scheduler_1a477ffe056e74d4142bef4a66ce0d2e3f">OutputScheduler</link>(
+<anchor xml:id="__output_scheduler_8_main_8cs_source_1l00022"/>00022 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<link linkend="_class_luthetus_1_1_extensions_1_1_dot_net_1_1_background_tasks_1_1_models_1_1_dot_net_background_task_api">DotNetBackgroundTaskApi</link>&#32;dotNetBackgroundTaskApi,
+<anchor xml:id="__output_scheduler_8_main_8cs_source_1l00023"/>00023 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<link linkend="_interface_luthetus_1_1_common_1_1_razor_lib_1_1_background_tasks_1_1_models_1_1_i_background_task_service">IBackgroundTaskService</link>&#32;backgroundTaskService,
+<anchor xml:id="__output_scheduler_8_main_8cs_source_1l00024"/>00024 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<link linkend="_class_luthetus_1_1_extensions_1_1_dot_net_1_1_command_lines_1_1_models_1_1_dot_net_cli_output_parser">DotNetCliOutputParser</link>&#32;dotNetCliOutputParser,
+<anchor xml:id="__output_scheduler_8_main_8cs_source_1l00025"/>00025 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<link linkend="_interface_luthetus_1_1_common_1_1_razor_lib_1_1_tree_views_1_1_models_1_1_i_tree_view_service">ITreeViewService</link>&#32;treeViewService,
+<anchor xml:id="__output_scheduler_8_main_8cs_source_1l00026"/>00026 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<link linkend="_interface_luthetus_1_1_common_1_1_razor_lib_1_1_file_systems_1_1_models_1_1_i_environment_provider">IEnvironmentProvider</link>&#32;environmentProvider,
+<anchor xml:id="__output_scheduler_8_main_8cs_source_1l00027"/>00027 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;IDispatcher&#32;dispatcher)
+<anchor xml:id="__output_scheduler_8_main_8cs_source_1l00028"/>00028 &#32;&#32;&#32;&#32;{
+<anchor xml:id="__output_scheduler_8_main_8cs_source_1l00029"/>00029 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;_dotNetBackgroundTaskApi&#32;=&#32;dotNetBackgroundTaskApi;
+<anchor xml:id="__output_scheduler_8_main_8cs_source_1l00030"/>00030 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;_backgroundTaskService&#32;=&#32;backgroundTaskService;
+<anchor xml:id="__output_scheduler_8_main_8cs_source_1l00031"/>00031 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;_dotNetCliOutputParser&#32;=&#32;dotNetCliOutputParser;
+<anchor xml:id="__output_scheduler_8_main_8cs_source_1l00032"/>00032 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;_treeViewService&#32;=&#32;treeViewService;
+<anchor xml:id="__output_scheduler_8_main_8cs_source_1l00033"/>00033 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;_environmentProvider&#32;=&#32;environmentProvider;
+<anchor xml:id="__output_scheduler_8_main_8cs_source_1l00034"/>00034 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;_dispatcher&#32;=&#32;dispatcher;
+<anchor xml:id="__output_scheduler_8_main_8cs_source_1l00035"/>00035 &#32;&#32;&#32;&#32;}
+<anchor xml:id="__output_scheduler_8_main_8cs_source_1l00036"/>00036 }
+</programlisting></section>

@@ -1,0 +1,4 @@
+var _common_2_basis_2_installations_2_models_2_service_collection_extensions_tests_8cs =
+[
+    [ "Luthetus.Common.Tests.Basis.Installations.Models.ServiceCollectionExtensionsTests", "class_luthetus_1_1_common_1_1_tests_1_1_basis_1_1_installations_1_1_models_1_1_service_collection_extensions_tests.html", "class_luthetus_1_1_common_1_1_tests_1_1_basis_1_1_installations_1_1_models_1_1_service_collection_extensions_tests" ]
+];

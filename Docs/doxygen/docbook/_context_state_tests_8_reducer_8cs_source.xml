@@ -1,0 +1,205 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="__context_state_tests_8_reducer_8cs_source" xml:lang="en-US">
+<title>ContextStateTests.Reducer.cs</title>
+<indexterm><primary>Source/Tests/Common/Basis/Contexts/States/ContextStateTests.Reducer.cs</primary></indexterm>
+Go to the documentation of this file.<programlisting linenumbering="unnumbered"><anchor xml:id="__context_state_tests_8_reducer_8cs_source_1l00001"/>00001 <emphasis role="keyword">using&#32;</emphasis>Fluxor;
+<anchor xml:id="__context_state_tests_8_reducer_8cs_source_1l00002"/>00002 <emphasis role="keyword">using&#32;</emphasis><link linkend="_namespace_luthetus_1_1_common_1_1_razor_lib_1_1_commands_1_1_models">Luthetus.Common.RazorLib.Commands.Models</link>;
+<anchor xml:id="__context_state_tests_8_reducer_8cs_source_1l00003"/>00003 <emphasis role="keyword">using&#32;</emphasis><link linkend="_namespace_luthetus_1_1_common_1_1_razor_lib_1_1_contexts_1_1_models">Luthetus.Common.RazorLib.Contexts.Models</link>;
+<anchor xml:id="__context_state_tests_8_reducer_8cs_source_1l00004"/>00004 <emphasis role="keyword">using&#32;</emphasis><link linkend="_namespace_luthetus_1_1_common_1_1_razor_lib_1_1_contexts_1_1_states">Luthetus.Common.RazorLib.Contexts.States</link>;
+<anchor xml:id="__context_state_tests_8_reducer_8cs_source_1l00005"/>00005 <emphasis role="keyword">using&#32;</emphasis><link linkend="_namespace_luthetus_1_1_common_1_1_razor_lib_1_1_java_script_objects_1_1_models">Luthetus.Common.RazorLib.JavaScriptObjects.Models</link>;
+<anchor xml:id="__context_state_tests_8_reducer_8cs_source_1l00006"/>00006 <emphasis role="keyword">using&#32;</emphasis><link linkend="_namespace_luthetus_1_1_common_1_1_razor_lib_1_1_keymaps_1_1_models">Luthetus.Common.RazorLib.Keymaps.Models</link>;
+<anchor xml:id="__context_state_tests_8_reducer_8cs_source_1l00007"/>00007 <emphasis role="keyword">using&#32;</emphasis><link linkend="_namespace_luthetus_1_1_common_1_1_razor_lib_1_1_keys_1_1_models">Luthetus.Common.RazorLib.Keys.Models</link>;
+<anchor xml:id="__context_state_tests_8_reducer_8cs_source_1l00008"/>00008 <emphasis role="keyword">using&#32;</emphasis>Microsoft.Extensions.DependencyInjection;
+<anchor xml:id="__context_state_tests_8_reducer_8cs_source_1l00009"/>00009 <emphasis role="keyword">using&#32;</emphasis>System.Collections.Immutable;
+<anchor xml:id="__context_state_tests_8_reducer_8cs_source_1l00010"/>00010 
+<anchor xml:id="__context_state_tests_8_reducer_8cs_source_1l00011"/>00011 <emphasis role="keyword">namespace&#32;</emphasis><link linkend="_namespace_luthetus_1_1_common_1_1_tests_1_1_basis_1_1_contexts_1_1_states">Luthetus.Common.Tests.Basis.Contexts.States</link>;
+<anchor xml:id="__context_state_tests_8_reducer_8cs_source_1l00012"/>00012 
+<anchor xml:id="__context_state_tests_8_reducer_8cs_source_1l00016"/><link linkend="_class_luthetus_1_1_common_1_1_tests_1_1_basis_1_1_contexts_1_1_states_1_1_context_state_reducer_tests">00016</link> <emphasis role="keyword">public</emphasis>&#32;<emphasis role="keyword">class&#32;</emphasis><link linkend="_class_luthetus_1_1_common_1_1_tests_1_1_basis_1_1_contexts_1_1_states_1_1_context_state_reducer_tests">ContextStateReducerTests</link>
+<anchor xml:id="__context_state_tests_8_reducer_8cs_source_1l00017"/>00017 {
+<anchor xml:id="__context_state_tests_8_reducer_8cs_source_1l00021"/>00021 &#32;&#32;&#32;&#32;[Fact]
+<anchor xml:id="__context_state_tests_8_reducer_8cs_source_1l00022"/><link linkend="_class_luthetus_1_1_common_1_1_tests_1_1_basis_1_1_contexts_1_1_states_1_1_context_state_reducer_tests_1a9c476e831ec2e1f9859c7bcc3619de64">00022</link> &#32;&#32;&#32;&#32;<emphasis role="keyword">public</emphasis>&#32;<emphasis role="keywordtype">void</emphasis>&#32;<link linkend="_class_luthetus_1_1_common_1_1_tests_1_1_basis_1_1_contexts_1_1_states_1_1_context_state_reducer_tests_1a9c476e831ec2e1f9859c7bcc3619de64">ReduceSetFocusedContextHeirarchyAction</link>()
+<anchor xml:id="__context_state_tests_8_reducer_8cs_source_1l00023"/>00023 &#32;&#32;&#32;&#32;{
+<anchor xml:id="__context_state_tests_8_reducer_8cs_source_1l00024"/>00024 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;InitializeContextStateReducerTests(
+<anchor xml:id="__context_state_tests_8_reducer_8cs_source_1l00025"/>00025 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;out&#32;var&#32;serviceProvider,
+<anchor xml:id="__context_state_tests_8_reducer_8cs_source_1l00026"/>00026 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;out&#32;var&#32;contextStateWrap,
+<anchor xml:id="__context_state_tests_8_reducer_8cs_source_1l00027"/>00027 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;out&#32;var&#32;dispatcher,
+<anchor xml:id="__context_state_tests_8_reducer_8cs_source_1l00028"/>00028 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;out&#32;var&#32;contextHeirarchy);
+<anchor xml:id="__context_state_tests_8_reducer_8cs_source_1l00029"/>00029 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;
+<anchor xml:id="__context_state_tests_8_reducer_8cs_source_1l00030"/>00030 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;Assert.Equal(
+<anchor xml:id="__context_state_tests_8_reducer_8cs_source_1l00031"/>00031 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;contextStateWrap.Value.FocusedContextHeirarchy.KeyList.Single(),
+<anchor xml:id="__context_state_tests_8_reducer_8cs_source_1l00032"/>00032 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;ContextFacts.GlobalContext.ContextKey);
+<anchor xml:id="__context_state_tests_8_reducer_8cs_source_1l00033"/>00033 
+<anchor xml:id="__context_state_tests_8_reducer_8cs_source_1l00034"/>00034 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;var&#32;setFocusedContextHeirarchyAction&#32;=&#32;<emphasis role="keyword">new</emphasis>&#32;ContextState.SetFocusedContextHeirarchyAction(
+<anchor xml:id="__context_state_tests_8_reducer_8cs_source_1l00035"/>00035 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;contextHeirarchy);
+<anchor xml:id="__context_state_tests_8_reducer_8cs_source_1l00036"/>00036 
+<anchor xml:id="__context_state_tests_8_reducer_8cs_source_1l00037"/>00037 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;dispatcher.Dispatch(setFocusedContextHeirarchyAction);
+<anchor xml:id="__context_state_tests_8_reducer_8cs_source_1l00038"/>00038 
+<anchor xml:id="__context_state_tests_8_reducer_8cs_source_1l00039"/>00039 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;Assert.Equal(
+<anchor xml:id="__context_state_tests_8_reducer_8cs_source_1l00040"/>00040 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;contextStateWrap.Value.FocusedContextHeirarchy.KeyList[0],
+<anchor xml:id="__context_state_tests_8_reducer_8cs_source_1l00041"/>00041 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;ContextFacts.ActiveContextsContext.ContextKey);
+<anchor xml:id="__context_state_tests_8_reducer_8cs_source_1l00042"/>00042 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;
+<anchor xml:id="__context_state_tests_8_reducer_8cs_source_1l00043"/>00043 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;Assert.Equal(
+<anchor xml:id="__context_state_tests_8_reducer_8cs_source_1l00044"/>00044 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;contextStateWrap.Value.FocusedContextHeirarchy.KeyList[1],
+<anchor xml:id="__context_state_tests_8_reducer_8cs_source_1l00045"/>00045 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;ContextFacts.GlobalContext.ContextKey);
+<anchor xml:id="__context_state_tests_8_reducer_8cs_source_1l00046"/>00046 &#32;&#32;&#32;&#32;}
+<anchor xml:id="__context_state_tests_8_reducer_8cs_source_1l00047"/>00047 
+<anchor xml:id="__context_state_tests_8_reducer_8cs_source_1l00051"/>00051 &#32;&#32;&#32;&#32;[Fact]
+<anchor xml:id="__context_state_tests_8_reducer_8cs_source_1l00052"/><link linkend="_class_luthetus_1_1_common_1_1_tests_1_1_basis_1_1_contexts_1_1_states_1_1_context_state_reducer_tests_1acdef171fb3d08756fb6a28c8cd6c88d4">00052</link> &#32;&#32;&#32;&#32;<emphasis role="keyword">public</emphasis>&#32;<emphasis role="keywordtype">void</emphasis>&#32;<link linkend="_class_luthetus_1_1_common_1_1_tests_1_1_basis_1_1_contexts_1_1_states_1_1_context_state_reducer_tests_1acdef171fb3d08756fb6a28c8cd6c88d4">ReduceToggleSelectInspectedContextHeirarchyAction</link>()
+<anchor xml:id="__context_state_tests_8_reducer_8cs_source_1l00053"/>00053 &#32;&#32;&#32;&#32;{
+<anchor xml:id="__context_state_tests_8_reducer_8cs_source_1l00054"/>00054 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;InitializeContextStateReducerTests(
+<anchor xml:id="__context_state_tests_8_reducer_8cs_source_1l00055"/>00055 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;out&#32;var&#32;serviceProvider,
+<anchor xml:id="__context_state_tests_8_reducer_8cs_source_1l00056"/>00056 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;out&#32;var&#32;contextStateWrap,
+<anchor xml:id="__context_state_tests_8_reducer_8cs_source_1l00057"/>00057 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;out&#32;var&#32;dispatcher,
+<anchor xml:id="__context_state_tests_8_reducer_8cs_source_1l00058"/>00058 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;out&#32;var&#32;contextHeirarchy);
+<anchor xml:id="__context_state_tests_8_reducer_8cs_source_1l00059"/>00059 
+<anchor xml:id="__context_state_tests_8_reducer_8cs_source_1l00060"/>00060 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;var&#32;toggleSelectInspectedContextHeirarchyAction&#32;=&#32;<emphasis role="keyword">new</emphasis>&#32;ContextState.ToggleSelectInspectedContextHeirarchyAction();
+<anchor xml:id="__context_state_tests_8_reducer_8cs_source_1l00061"/>00061 
+<anchor xml:id="__context_state_tests_8_reducer_8cs_source_1l00062"/>00062 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;var&#32;inIsSelectingInspectionTarget&#32;=&#32;contextStateWrap.Value.IsSelectingInspectionTarget;
+<anchor xml:id="__context_state_tests_8_reducer_8cs_source_1l00063"/>00063 
+<anchor xml:id="__context_state_tests_8_reducer_8cs_source_1l00064"/>00064 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;dispatcher.Dispatch(toggleSelectInspectedContextHeirarchyAction);
+<anchor xml:id="__context_state_tests_8_reducer_8cs_source_1l00065"/>00065 
+<anchor xml:id="__context_state_tests_8_reducer_8cs_source_1l00066"/>00066 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;Assert.NotEqual(
+<anchor xml:id="__context_state_tests_8_reducer_8cs_source_1l00067"/>00067 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;inIsSelectingInspectionTarget,
+<anchor xml:id="__context_state_tests_8_reducer_8cs_source_1l00068"/>00068 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;contextStateWrap.Value.IsSelectingInspectionTarget);
+<anchor xml:id="__context_state_tests_8_reducer_8cs_source_1l00069"/>00069 &#32;&#32;&#32;&#32;}
+<anchor xml:id="__context_state_tests_8_reducer_8cs_source_1l00070"/>00070 
+<anchor xml:id="__context_state_tests_8_reducer_8cs_source_1l00071"/>00071 
+<anchor xml:id="__context_state_tests_8_reducer_8cs_source_1l00075"/>00075 &#32;&#32;&#32;&#32;[Fact]
+<anchor xml:id="__context_state_tests_8_reducer_8cs_source_1l00076"/><link linkend="_class_luthetus_1_1_common_1_1_tests_1_1_basis_1_1_contexts_1_1_states_1_1_context_state_reducer_tests_1a24c0748192f6a2d79fee0eef6303c91c">00076</link> &#32;&#32;&#32;&#32;<emphasis role="keyword">public</emphasis>&#32;<emphasis role="keywordtype">void</emphasis>&#32;<link linkend="_class_luthetus_1_1_common_1_1_tests_1_1_basis_1_1_contexts_1_1_states_1_1_context_state_reducer_tests_1a24c0748192f6a2d79fee0eef6303c91c">ReduceIsSelectingInspectableContextHeirarchyAction</link>()
+<anchor xml:id="__context_state_tests_8_reducer_8cs_source_1l00077"/>00077 &#32;&#32;&#32;&#32;{
+<anchor xml:id="__context_state_tests_8_reducer_8cs_source_1l00078"/>00078 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;InitializeContextStateReducerTests(
+<anchor xml:id="__context_state_tests_8_reducer_8cs_source_1l00079"/>00079 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;out&#32;var&#32;serviceProvider,
+<anchor xml:id="__context_state_tests_8_reducer_8cs_source_1l00080"/>00080 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;out&#32;var&#32;contextStateWrap,
+<anchor xml:id="__context_state_tests_8_reducer_8cs_source_1l00081"/>00081 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;out&#32;var&#32;dispatcher,
+<anchor xml:id="__context_state_tests_8_reducer_8cs_source_1l00082"/>00082 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;out&#32;var&#32;contextHeirarchy);
+<anchor xml:id="__context_state_tests_8_reducer_8cs_source_1l00083"/>00083 
+<anchor xml:id="__context_state_tests_8_reducer_8cs_source_1l00084"/>00084 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;dispatcher.Dispatch(<emphasis role="keyword">new</emphasis>&#32;ContextState.IsSelectingInspectableContextHeirarchyAction(
+<anchor xml:id="__context_state_tests_8_reducer_8cs_source_1l00085"/>00085 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keyword">true</emphasis>));
+<anchor xml:id="__context_state_tests_8_reducer_8cs_source_1l00086"/>00086 
+<anchor xml:id="__context_state_tests_8_reducer_8cs_source_1l00087"/>00087 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;Assert.True(contextStateWrap.Value.IsSelectingInspectionTarget);
+<anchor xml:id="__context_state_tests_8_reducer_8cs_source_1l00088"/>00088 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;
+<anchor xml:id="__context_state_tests_8_reducer_8cs_source_1l00089"/>00089 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;dispatcher.Dispatch(<emphasis role="keyword">new</emphasis>&#32;ContextState.IsSelectingInspectableContextHeirarchyAction(
+<anchor xml:id="__context_state_tests_8_reducer_8cs_source_1l00090"/>00090 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keyword">false</emphasis>));
+<anchor xml:id="__context_state_tests_8_reducer_8cs_source_1l00091"/>00091 
+<anchor xml:id="__context_state_tests_8_reducer_8cs_source_1l00092"/>00092 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;Assert.False(contextStateWrap.Value.IsSelectingInspectionTarget);
+<anchor xml:id="__context_state_tests_8_reducer_8cs_source_1l00093"/>00093 &#32;&#32;&#32;&#32;}
+<anchor xml:id="__context_state_tests_8_reducer_8cs_source_1l00094"/>00094 
+<anchor xml:id="__context_state_tests_8_reducer_8cs_source_1l00095"/>00095 
+<anchor xml:id="__context_state_tests_8_reducer_8cs_source_1l00099"/>00099 &#32;&#32;&#32;&#32;[Fact]
+<anchor xml:id="__context_state_tests_8_reducer_8cs_source_1l00100"/><link linkend="_class_luthetus_1_1_common_1_1_tests_1_1_basis_1_1_contexts_1_1_states_1_1_context_state_reducer_tests_1a09f876779db917a659ca702bba35601d">00100</link> &#32;&#32;&#32;&#32;<emphasis role="keyword">public</emphasis>&#32;<emphasis role="keywordtype">void</emphasis>&#32;<link linkend="_class_luthetus_1_1_common_1_1_tests_1_1_basis_1_1_contexts_1_1_states_1_1_context_state_reducer_tests_1a09f876779db917a659ca702bba35601d">ReduceSetInspectedContextHeirarchyAction</link>()
+<anchor xml:id="__context_state_tests_8_reducer_8cs_source_1l00101"/>00101 &#32;&#32;&#32;&#32;{
+<anchor xml:id="__context_state_tests_8_reducer_8cs_source_1l00102"/>00102 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;InitializeContextStateReducerTests(
+<anchor xml:id="__context_state_tests_8_reducer_8cs_source_1l00103"/>00103 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;out&#32;var&#32;serviceProvider,
+<anchor xml:id="__context_state_tests_8_reducer_8cs_source_1l00104"/>00104 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;out&#32;var&#32;contextStateWrap,
+<anchor xml:id="__context_state_tests_8_reducer_8cs_source_1l00105"/>00105 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;out&#32;var&#32;dispatcher,
+<anchor xml:id="__context_state_tests_8_reducer_8cs_source_1l00106"/>00106 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;out&#32;var&#32;contextHeirarchy);
+<anchor xml:id="__context_state_tests_8_reducer_8cs_source_1l00107"/>00107 
+<anchor xml:id="__context_state_tests_8_reducer_8cs_source_1l00108"/>00108 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;Assert.Null(contextStateWrap.Value.InspectedContextHeirarchy);
+<anchor xml:id="__context_state_tests_8_reducer_8cs_source_1l00109"/>00109 
+<anchor xml:id="__context_state_tests_8_reducer_8cs_source_1l00110"/>00110 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;var&#32;setInspectedContextHeirarchyAction&#32;=&#32;<emphasis role="keyword">new</emphasis>&#32;ContextState.SetInspectedContextHeirarchyAction(
+<anchor xml:id="__context_state_tests_8_reducer_8cs_source_1l00111"/>00111 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;contextHeirarchy);
+<anchor xml:id="__context_state_tests_8_reducer_8cs_source_1l00112"/>00112 
+<anchor xml:id="__context_state_tests_8_reducer_8cs_source_1l00113"/>00113 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;dispatcher.Dispatch(setInspectedContextHeirarchyAction);
+<anchor xml:id="__context_state_tests_8_reducer_8cs_source_1l00114"/>00114 
+<anchor xml:id="__context_state_tests_8_reducer_8cs_source_1l00115"/>00115 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;Assert.Equal(
+<anchor xml:id="__context_state_tests_8_reducer_8cs_source_1l00116"/>00116 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;setInspectedContextHeirarchyAction.InspectedContextHeirarchy,
+<anchor xml:id="__context_state_tests_8_reducer_8cs_source_1l00117"/>00117 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;contextStateWrap.Value.InspectedContextHeirarchy);
+<anchor xml:id="__context_state_tests_8_reducer_8cs_source_1l00118"/>00118 &#32;&#32;&#32;&#32;}
+<anchor xml:id="__context_state_tests_8_reducer_8cs_source_1l00119"/>00119 
+<anchor xml:id="__context_state_tests_8_reducer_8cs_source_1l00123"/>00123 &#32;&#32;&#32;&#32;[Fact]
+<anchor xml:id="__context_state_tests_8_reducer_8cs_source_1l00124"/><link linkend="_class_luthetus_1_1_common_1_1_tests_1_1_basis_1_1_contexts_1_1_states_1_1_context_state_reducer_tests_1a6d3904fdcbcb34984498e9da0c9fb1fa">00124</link> &#32;&#32;&#32;&#32;<emphasis role="keyword">public</emphasis>&#32;<emphasis role="keywordtype">void</emphasis>&#32;<link linkend="_class_luthetus_1_1_common_1_1_tests_1_1_basis_1_1_contexts_1_1_states_1_1_context_state_reducer_tests_1a6d3904fdcbcb34984498e9da0c9fb1fa">ReduceAddInspectableContextAction</link>()
+<anchor xml:id="__context_state_tests_8_reducer_8cs_source_1l00125"/>00125 &#32;&#32;&#32;&#32;{
+<anchor xml:id="__context_state_tests_8_reducer_8cs_source_1l00126"/>00126 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;InitializeContextStateReducerTests(
+<anchor xml:id="__context_state_tests_8_reducer_8cs_source_1l00127"/>00127 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;out&#32;var&#32;serviceProvider,
+<anchor xml:id="__context_state_tests_8_reducer_8cs_source_1l00128"/>00128 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;out&#32;var&#32;contextStateWrap,
+<anchor xml:id="__context_state_tests_8_reducer_8cs_source_1l00129"/>00129 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;out&#32;var&#32;dispatcher,
+<anchor xml:id="__context_state_tests_8_reducer_8cs_source_1l00130"/>00130 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;out&#32;var&#32;contextHeirarchy);
+<anchor xml:id="__context_state_tests_8_reducer_8cs_source_1l00131"/>00131 
+<anchor xml:id="__context_state_tests_8_reducer_8cs_source_1l00132"/>00132 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;Assert.Empty(contextStateWrap.Value.InspectableContextList);
+<anchor xml:id="__context_state_tests_8_reducer_8cs_source_1l00133"/>00133 
+<anchor xml:id="__context_state_tests_8_reducer_8cs_source_1l00134"/>00134 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;var&#32;inspectableContext&#32;=&#32;<emphasis role="keyword">new</emphasis>&#32;<link linkend="_namespace_luthetus_1_1_common_1_1_razor_lib_1_1_contexts_1_1_models_1a0a237e1c7c02b976276db84b039514eb">InspectableContext</link>(
+<anchor xml:id="__context_state_tests_8_reducer_8cs_source_1l00135"/>00135 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;contextHeirarchy,
+<anchor xml:id="__context_state_tests_8_reducer_8cs_source_1l00136"/>00136 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keyword">new</emphasis>&#32;<link linkend="_namespace_luthetus_1_1_common_1_1_razor_lib_1_1_java_script_objects_1_1_models_1af7cb4b0846c5ea3330de0b00ae2d4407">MeasuredHtmlElementDimensions</link>(0,&#32;0,&#32;0,&#32;0,&#32;0));
+<anchor xml:id="__context_state_tests_8_reducer_8cs_source_1l00137"/>00137 
+<anchor xml:id="__context_state_tests_8_reducer_8cs_source_1l00138"/>00138 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;var&#32;addInspectableContextAction&#32;=&#32;<emphasis role="keyword">new</emphasis>&#32;ContextState.AddInspectableContextAction(
+<anchor xml:id="__context_state_tests_8_reducer_8cs_source_1l00139"/>00139 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;inspectableContext);
+<anchor xml:id="__context_state_tests_8_reducer_8cs_source_1l00140"/>00140 
+<anchor xml:id="__context_state_tests_8_reducer_8cs_source_1l00141"/>00141 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;dispatcher.Dispatch(addInspectableContextAction);
+<anchor xml:id="__context_state_tests_8_reducer_8cs_source_1l00142"/>00142 
+<anchor xml:id="__context_state_tests_8_reducer_8cs_source_1l00143"/>00143 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;Assert.Equal(
+<anchor xml:id="__context_state_tests_8_reducer_8cs_source_1l00144"/>00144 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;addInspectableContextAction.InspectableContext,&#32;
+<anchor xml:id="__context_state_tests_8_reducer_8cs_source_1l00145"/>00145 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;contextStateWrap.Value.InspectableContextList.Single());
+<anchor xml:id="__context_state_tests_8_reducer_8cs_source_1l00146"/>00146 &#32;&#32;&#32;&#32;}
+<anchor xml:id="__context_state_tests_8_reducer_8cs_source_1l00147"/>00147 
+<anchor xml:id="__context_state_tests_8_reducer_8cs_source_1l00148"/>00148 
+<anchor xml:id="__context_state_tests_8_reducer_8cs_source_1l00152"/>00152 &#32;&#32;&#32;&#32;[Fact]
+<anchor xml:id="__context_state_tests_8_reducer_8cs_source_1l00153"/><link linkend="_class_luthetus_1_1_common_1_1_tests_1_1_basis_1_1_contexts_1_1_states_1_1_context_state_reducer_tests_1a2e53e50299496d65ea15639ff0323c7f">00153</link> &#32;&#32;&#32;&#32;<emphasis role="keyword">public</emphasis>&#32;<emphasis role="keywordtype">void</emphasis>&#32;<link linkend="_class_luthetus_1_1_common_1_1_tests_1_1_basis_1_1_contexts_1_1_states_1_1_context_state_reducer_tests_1a2e53e50299496d65ea15639ff0323c7f">ReduceSetContextKeymapAction</link>()
+<anchor xml:id="__context_state_tests_8_reducer_8cs_source_1l00154"/>00154 &#32;&#32;&#32;&#32;{
+<anchor xml:id="__context_state_tests_8_reducer_8cs_source_1l00155"/>00155 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;InitializeContextStateReducerTests(
+<anchor xml:id="__context_state_tests_8_reducer_8cs_source_1l00156"/>00156 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;out&#32;var&#32;serviceProvider,
+<anchor xml:id="__context_state_tests_8_reducer_8cs_source_1l00157"/>00157 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;out&#32;var&#32;contextStateWrap,
+<anchor xml:id="__context_state_tests_8_reducer_8cs_source_1l00158"/>00158 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;out&#32;var&#32;dispatcher,
+<anchor xml:id="__context_state_tests_8_reducer_8cs_source_1l00159"/>00159 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;out&#32;var&#32;contextHeirarchy);
+<anchor xml:id="__context_state_tests_8_reducer_8cs_source_1l00160"/>00160 
+<anchor xml:id="__context_state_tests_8_reducer_8cs_source_1l00161"/>00161 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;var&#32;globalContext&#32;=&#32;contextStateWrap.Value.AllContextsList.Single(
+<anchor xml:id="__context_state_tests_8_reducer_8cs_source_1l00162"/>00162 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;x&#32;=&gt;&#32;x.ContextKey&#32;==&#32;ContextFacts.GlobalContext.ContextKey);
+<anchor xml:id="__context_state_tests_8_reducer_8cs_source_1l00163"/>00163 
+<anchor xml:id="__context_state_tests_8_reducer_8cs_source_1l00164"/>00164 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;Assert.Equal(<link linkend="_interface_luthetus_1_1_common_1_1_razor_lib_1_1_keymaps_1_1_models_1_1_i_keymap">IKeymap</link>.<link linkend="_interface_luthetus_1_1_common_1_1_razor_lib_1_1_keymaps_1_1_models_1_1_i_keymap_1ad3393cf94d4e840bb8608e88aa5b7c22">Empty</link>,&#32;globalContext.Keymap);
+<anchor xml:id="__context_state_tests_8_reducer_8cs_source_1l00165"/>00165 
+<anchor xml:id="__context_state_tests_8_reducer_8cs_source_1l00166"/>00166 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;var&#32;command&#32;=&#32;<emphasis role="keyword">new</emphasis>&#32;<link linkend="_class_luthetus_1_1_common_1_1_razor_lib_1_1_commands_1_1_models_1_1_common_command">CommonCommand</link>(
+<anchor xml:id="__context_state_tests_8_reducer_8cs_source_1l00167"/>00167 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="stringliteral">&quot;Test&#32;SetContextKeymap&#32;Action&quot;</emphasis>,&#32;<emphasis role="stringliteral">&quot;test-set-context-keymap-action&quot;</emphasis>,&#32;<emphasis role="keyword">false</emphasis>,
+<anchor xml:id="__context_state_tests_8_reducer_8cs_source_1l00168"/>00168 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;commandArgs&#32;=&gt;&#32;Task.CompletedTask);
+<anchor xml:id="__context_state_tests_8_reducer_8cs_source_1l00169"/>00169 
+<anchor xml:id="__context_state_tests_8_reducer_8cs_source_1l00170"/>00170 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;var&#32;keymap&#32;=&#32;<emphasis role="keyword">new</emphasis>&#32;<link linkend="_class_luthetus_1_1_common_1_1_razor_lib_1_1_keymaps_1_1_models_1_1_keymap">Keymap</link>(Key&lt;Keymap&gt;.NewKey(),&#32;<emphasis role="stringliteral">&quot;Unit&#32;Test&quot;</emphasis>);
+<anchor xml:id="__context_state_tests_8_reducer_8cs_source_1l00171"/>00171 
+<anchor xml:id="__context_state_tests_8_reducer_8cs_source_1l00172"/>00172 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;_&#32;=&#32;keymap.TryRegister(
+<anchor xml:id="__context_state_tests_8_reducer_8cs_source_1l00173"/>00173 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keyword">new</emphasis>&#32;<link linkend="_struct_luthetus_1_1_common_1_1_razor_lib_1_1_keymaps_1_1_models_1_1_keymap_args">KeymapArgs</link>
+<anchor xml:id="__context_state_tests_8_reducer_8cs_source_1l00174"/>00174 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;{
+<anchor xml:id="__context_state_tests_8_reducer_8cs_source_1l00175"/>00175 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;Code&#32;=&#32;<emphasis role="stringliteral">&quot;KeyF&quot;</emphasis>,
+<anchor xml:id="__context_state_tests_8_reducer_8cs_source_1l00176"/>00176 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;ShiftKey&#32;=&#32;<emphasis role="keyword">false</emphasis>,
+<anchor xml:id="__context_state_tests_8_reducer_8cs_source_1l00177"/>00177 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;CtrlKey&#32;=&#32;<emphasis role="keyword">true</emphasis>,
+<anchor xml:id="__context_state_tests_8_reducer_8cs_source_1l00178"/>00178 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;AltKey&#32;=&#32;<emphasis role="keyword">true</emphasis>,
+<anchor xml:id="__context_state_tests_8_reducer_8cs_source_1l00179"/>00179 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;LayerKey&#32;=&#32;Key&lt;KeymapLayer&gt;.Empty,
+<anchor xml:id="__context_state_tests_8_reducer_8cs_source_1l00180"/>00180 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;},
+<anchor xml:id="__context_state_tests_8_reducer_8cs_source_1l00181"/>00181 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;command);
+<anchor xml:id="__context_state_tests_8_reducer_8cs_source_1l00182"/>00182 
+<anchor xml:id="__context_state_tests_8_reducer_8cs_source_1l00183"/>00183 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;var&#32;setContextKeymapAction&#32;=&#32;<emphasis role="keyword">new</emphasis>&#32;ContextState.SetContextKeymapAction(
+<anchor xml:id="__context_state_tests_8_reducer_8cs_source_1l00184"/>00184 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;ContextFacts.GlobalContext.ContextKey,
+<anchor xml:id="__context_state_tests_8_reducer_8cs_source_1l00185"/>00185 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;keymap);
+<anchor xml:id="__context_state_tests_8_reducer_8cs_source_1l00186"/>00186 
+<anchor xml:id="__context_state_tests_8_reducer_8cs_source_1l00187"/>00187 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;dispatcher.Dispatch(setContextKeymapAction);
+<anchor xml:id="__context_state_tests_8_reducer_8cs_source_1l00188"/>00188 
+<anchor xml:id="__context_state_tests_8_reducer_8cs_source_1l00189"/>00189 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;globalContext&#32;=&#32;contextStateWrap.Value.AllContextsList.Single(
+<anchor xml:id="__context_state_tests_8_reducer_8cs_source_1l00190"/>00190 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;x&#32;=&gt;&#32;x.ContextKey&#32;==&#32;ContextFacts.GlobalContext.ContextKey);
+<anchor xml:id="__context_state_tests_8_reducer_8cs_source_1l00191"/>00191 
+<anchor xml:id="__context_state_tests_8_reducer_8cs_source_1l00192"/>00192 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;Assert.NotEqual(<link linkend="_interface_luthetus_1_1_common_1_1_razor_lib_1_1_keymaps_1_1_models_1_1_i_keymap">IKeymap</link>.<link linkend="_interface_luthetus_1_1_common_1_1_razor_lib_1_1_keymaps_1_1_models_1_1_i_keymap_1ad3393cf94d4e840bb8608e88aa5b7c22">Empty</link>,&#32;globalContext.Keymap);
+<anchor xml:id="__context_state_tests_8_reducer_8cs_source_1l00193"/>00193 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;Assert.Equal(keymap,&#32;globalContext.Keymap);
+<anchor xml:id="__context_state_tests_8_reducer_8cs_source_1l00194"/>00194 &#32;&#32;&#32;&#32;}
+<anchor xml:id="__context_state_tests_8_reducer_8cs_source_1l00195"/>00195 
+<anchor xml:id="__context_state_tests_8_reducer_8cs_source_1l00196"/>00196 &#32;&#32;&#32;&#32;<emphasis role="keyword">private</emphasis>&#32;<emphasis role="keywordtype">void</emphasis>&#32;InitializeContextStateReducerTests(
+<anchor xml:id="__context_state_tests_8_reducer_8cs_source_1l00197"/>00197 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;out&#32;ServiceProvider&#32;serviceProvider,
+<anchor xml:id="__context_state_tests_8_reducer_8cs_source_1l00198"/>00198 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;out&#32;IState&lt;ContextState&gt;&#32;contextStateWrap,
+<anchor xml:id="__context_state_tests_8_reducer_8cs_source_1l00199"/>00199 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;out&#32;IDispatcher&#32;dispatcher,
+<anchor xml:id="__context_state_tests_8_reducer_8cs_source_1l00200"/>00200 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;out&#32;<link linkend="_namespace_luthetus_1_1_common_1_1_razor_lib_1_1_contexts_1_1_models_1a323493615ed3eee3ded564126960dc4e">ContextHeirarchy</link>&#32;sampleContextRecordKeyHeirarchy)
+<anchor xml:id="__context_state_tests_8_reducer_8cs_source_1l00201"/>00201 &#32;&#32;&#32;&#32;{
+<anchor xml:id="__context_state_tests_8_reducer_8cs_source_1l00202"/>00202 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;var&#32;services&#32;=&#32;<emphasis role="keyword">new</emphasis>&#32;ServiceCollection()
+<anchor xml:id="__context_state_tests_8_reducer_8cs_source_1l00203"/>00203 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;.AddFluxor(options&#32;=&gt;&#32;options.ScanAssemblies(typeof(ContextState).Assembly));
+<anchor xml:id="__context_state_tests_8_reducer_8cs_source_1l00204"/>00204 
+<anchor xml:id="__context_state_tests_8_reducer_8cs_source_1l00205"/>00205 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;serviceProvider&#32;=&#32;services.BuildServiceProvider();
+<anchor xml:id="__context_state_tests_8_reducer_8cs_source_1l00206"/>00206 
+<anchor xml:id="__context_state_tests_8_reducer_8cs_source_1l00207"/>00207 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;var&#32;store&#32;=&#32;serviceProvider.GetRequiredService&lt;IStore&gt;();
+<anchor xml:id="__context_state_tests_8_reducer_8cs_source_1l00208"/>00208 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;store.InitializeAsync().Wait();
+<anchor xml:id="__context_state_tests_8_reducer_8cs_source_1l00209"/>00209 
+<anchor xml:id="__context_state_tests_8_reducer_8cs_source_1l00210"/>00210 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;contextStateWrap&#32;=&#32;serviceProvider.GetRequiredService&lt;IState&lt;ContextState&gt;&gt;();
+<anchor xml:id="__context_state_tests_8_reducer_8cs_source_1l00211"/>00211 
+<anchor xml:id="__context_state_tests_8_reducer_8cs_source_1l00212"/>00212 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;dispatcher&#32;=&#32;serviceProvider.GetRequiredService&lt;IDispatcher&gt;();
+<anchor xml:id="__context_state_tests_8_reducer_8cs_source_1l00213"/>00213 
+<anchor xml:id="__context_state_tests_8_reducer_8cs_source_1l00214"/>00214 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;sampleContextRecordKeyHeirarchy&#32;=&#32;<emphasis role="keyword">new</emphasis>&#32;<link linkend="_namespace_luthetus_1_1_common_1_1_razor_lib_1_1_contexts_1_1_models_1a323493615ed3eee3ded564126960dc4e">ContextHeirarchy</link>(
+<anchor xml:id="__context_state_tests_8_reducer_8cs_source_1l00215"/>00215 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keyword">new</emphasis>&#32;Key&lt;ContextRecord&gt;[]
+<anchor xml:id="__context_state_tests_8_reducer_8cs_source_1l00216"/>00216 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;{
+<anchor xml:id="__context_state_tests_8_reducer_8cs_source_1l00217"/>00217 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;ContextFacts.ActiveContextsContext.ContextKey,
+<anchor xml:id="__context_state_tests_8_reducer_8cs_source_1l00218"/>00218 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;ContextFacts.GlobalContext.ContextKey,
+<anchor xml:id="__context_state_tests_8_reducer_8cs_source_1l00219"/>00219 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;}.ToImmutableArray());
+<anchor xml:id="__context_state_tests_8_reducer_8cs_source_1l00220"/>00220 &#32;&#32;&#32;&#32;}
+<anchor xml:id="__context_state_tests_8_reducer_8cs_source_1l00221"/>00221 }
+</programlisting></section>

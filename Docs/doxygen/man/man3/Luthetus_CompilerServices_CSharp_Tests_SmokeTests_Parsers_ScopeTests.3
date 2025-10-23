@@ -1,0 +1,255 @@
+.TH "Luthetus.CompilerServices.CSharp.Tests.SmokeTests.Parsers.ScopeTests" 3 "Version 1.0.0" "Luthetus.Ide" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+Luthetus.CompilerServices.CSharp.Tests.SmokeTests.Parsers.ScopeTests \- Scope being incorrectly parsed is an error that cascades further errors in large throughout the rest of the file\&.  
+
+.SH SYNOPSIS
+.br
+.PP
+.SS "Classes"
+
+.in +1c
+.ti -1c
+.RI "class \fBTest\fP"
+.br
+.in -1c
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "void \fBGlobalScope\fP ()"
+.br
+.ti -1c
+.RI "void \fBGlobalScope_ArbitraryScope\fP ()"
+.br
+.ti -1c
+.RI "void \fBGlobalScope_ArbitraryScope_ArbitraryScope\fP ()"
+.br
+.ti -1c
+.RI "void \fBGlobalScope_ArbitraryScope_Depth_ArbitraryScope_ArbitraryScope\fP ()"
+.br
+.ti -1c
+.RI "void \fBGlobalScope_TypeDefinitionNode\fP ()"
+.br
+.ti -1c
+.RI "void \fBGlobalScope_TypeDefinitionNode_Depth_ConstructorDefinitionNode\fP ()"
+.br
+.ti -1c
+.RI "void \fBGlobalScope_TypeDefinitionNode_Depth_ConstructorDefinitionNode_PropertyInitialized\fP ()"
+.br
+.ti -1c
+.RI "void \fBGlobalScope_TypeDefinitionNode_Depth_PropertyDefinitionNode\fP ()"
+.br
+.ti -1c
+.RI "void \fBGlobalScope_TypeDefinitionNode_Depth_PropertyDefinitionNodeWithAttribute\fP ()"
+.br
+.ti -1c
+.RI "void \fBGlobalScope_TypeDefinitionNode_Depth_PropertyDefinitionNodeWithAttributeThatInvokesConstructor\fP ()"
+.br
+.RI "When I copy and paste this tests input string to a locally running WASM website of the IDE\&. I can paste in the code and it works as it is currently being asserted\&. But it keeps saying\&. "
+.ti -1c
+.RI "void \fBGlobalScope_TypeDefinitionNode_Depth_PropertyDefinitionNodeGetterAndSetterCodeBlock\fP ()"
+.br
+.ti -1c
+.RI "void \fBGlobalScope_TypeDefinitionNode_Depth_FunctionDefinitionNode\fP ()"
+.br
+.ti -1c
+.RI "void \fBGlobalScope_TypeDefinitionNode_Depth_ArbitraryCodeBlock\fP ()"
+.br
+.ti -1c
+.RI "void \fBGlobalScope_FunctionDefinitionNode\fP ()"
+.br
+.ti -1c
+.RI "void \fBGlobalScope_ConstructorDefinitionNode\fP ()"
+.br
+.RI "A constructor is only sensible when defined within a type\&. "
+.ti -1c
+.RI "void \fBGlobalScope_FunctionDefinitionNode_Depth_ArbitraryCodeBlock\fP ()"
+.br
+.ti -1c
+.RI "void \fBGlobalScope_PropertyDefinitionNode_ArbitraryScope\fP ()"
+.br
+.ti -1c
+.RI "void \fBGlobalScope_PropertyDefinitionNodeGetterAndSetterCodeBlock_ArbitraryScope\fP ()"
+.br
+.ti -1c
+.RI "void \fBGlobalScope_RecordWith_ArbitraryScope\fP ()"
+.br
+.ti -1c
+.RI "void \fBGlobalScope_ObjectInitialization_ArbitraryScope\fP ()"
+.br
+.ti -1c
+.RI "void \fBGlobalScope_CollectionInitialization_ArbitraryScope\fP ()"
+.br
+.ti -1c
+.RI "void \fBGlobalScope_CollectionInitializationFromArray_ArbitraryScope\fP ()"
+.br
+.ti -1c
+.RI "void \fBFind_VariableDeclaration_ThatWasDeclaredInParentScope\fP ()"
+.br
+.ti -1c
+.RI "void \fBKeyword_CreatesScopeWithOpenAndCloseBraceToken_ButGetsSingleStatementBody\fP ()"
+.br
+.ti -1c
+.RI "void \fBIf_IsPatternMatchVariableDefinition_Misses_OpenBraceToken\fP ()"
+.br
+.ti -1c
+.RI "void \fBStatement_Inside_If_CodeBlock_Causes_Miss_CloseBraceToken_CaseA\fP ()"
+.br
+.ti -1c
+.RI "void \fBStatement_Inside_If_CodeBlock_Causes_Miss_CloseBraceToken_CaseB\fP ()"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+Scope being incorrectly parsed is an error that cascades further errors in large throughout the rest of the file\&. 
+
+If a singular statement is incorrectly parsed, it is intended to have no impact on the rest of the file, because once the '\fBStatementDelimiterToken\fP' or etc\&.\&.\&. is found to mark the end of the statement\&. Then the state related to statements should reset\&.
+
+.PP
+It is believed that the number 1 most important detail when writing a programming language parser is parsing the scope properly\&.
+
+.PP
+Following that, every statement, or expression, can be treated as their own "black box"\&. If you cannot parse it, just continue on to the next statement or expression\&.
+
+.PP
+(not that this is ideal, but in terms of programming, having these well defined start and end points to every issue you encounter is vital)\&.
+
+.PP
+You then (likely) won't have to worry about the entirety of a file when a statement fails to parse\&. Instead, you can look at that (relatively) tiny snippet of code by itself\&. 
+.PP
+Definition at line \fB36\fP of file \fBScopeTests\&.cs\fP\&.
+.SH "Member Function Documentation"
+.PP 
+.SS "void Luthetus\&.CompilerServices\&.CSharp\&.Tests\&.SmokeTests\&.Parsers\&.ScopeTests\&.Find_VariableDeclaration_ThatWasDeclaredInParentScope ()"
+
+.PP
+Definition at line \fB896\fP of file \fBScopeTests\&.cs\fP\&.
+.SS "void Luthetus\&.CompilerServices\&.CSharp\&.Tests\&.SmokeTests\&.Parsers\&.ScopeTests\&.GlobalScope ()"
+
+.PP
+Definition at line \fB59\fP of file \fBScopeTests\&.cs\fP\&.
+.SS "void Luthetus\&.CompilerServices\&.CSharp\&.Tests\&.SmokeTests\&.Parsers\&.ScopeTests\&.GlobalScope_ArbitraryScope ()"
+
+.PP
+Definition at line \fB81\fP of file \fBScopeTests\&.cs\fP\&.
+.SS "void Luthetus\&.CompilerServices\&.CSharp\&.Tests\&.SmokeTests\&.Parsers\&.ScopeTests\&.GlobalScope_ArbitraryScope_ArbitraryScope ()"
+
+.PP
+Definition at line \fB109\fP of file \fBScopeTests\&.cs\fP\&.
+.SS "void Luthetus\&.CompilerServices\&.CSharp\&.Tests\&.SmokeTests\&.Parsers\&.ScopeTests\&.GlobalScope_ArbitraryScope_Depth_ArbitraryScope_ArbitraryScope ()"
+
+.PP
+Definition at line \fB146\fP of file \fBScopeTests\&.cs\fP\&.
+.SS "void Luthetus\&.CompilerServices\&.CSharp\&.Tests\&.SmokeTests\&.Parsers\&.ScopeTests\&.GlobalScope_CollectionInitialization_ArbitraryScope ()"
+
+.PP
+Definition at line \fB810\fP of file \fBScopeTests\&.cs\fP\&.
+.SS "void Luthetus\&.CompilerServices\&.CSharp\&.Tests\&.SmokeTests\&.Parsers\&.ScopeTests\&.GlobalScope_CollectionInitializationFromArray_ArbitraryScope ()"
+
+.PP
+Definition at line \fB853\fP of file \fBScopeTests\&.cs\fP\&.
+.SS "void Luthetus\&.CompilerServices\&.CSharp\&.Tests\&.SmokeTests\&.Parsers\&.ScopeTests\&.GlobalScope_ConstructorDefinitionNode ()"
+
+.PP
+A constructor is only sensible when defined within a type\&. But the parser still needs to not crash if someone were ever to define a function without a return type that exists outside a type definition\&.
+
+.PP
+If the function's name is equal to that of the encompasing code block owner, and that code block owner is a \fBTypeDefinitionNode\fP, then create a constructor symbol instead of a function symbol\&. 
+.PP
+Definition at line \fB572\fP of file \fBScopeTests\&.cs\fP\&.
+.SS "void Luthetus\&.CompilerServices\&.CSharp\&.Tests\&.SmokeTests\&.Parsers\&.ScopeTests\&.GlobalScope_FunctionDefinitionNode ()"
+
+.PP
+Definition at line \fB534\fP of file \fBScopeTests\&.cs\fP\&.
+.SS "void Luthetus\&.CompilerServices\&.CSharp\&.Tests\&.SmokeTests\&.Parsers\&.ScopeTests\&.GlobalScope_FunctionDefinitionNode_Depth_ArbitraryCodeBlock ()"
+
+.PP
+Definition at line \fB600\fP of file \fBScopeTests\&.cs\fP\&.
+.SS "void Luthetus\&.CompilerServices\&.CSharp\&.Tests\&.SmokeTests\&.Parsers\&.ScopeTests\&.GlobalScope_ObjectInitialization_ArbitraryScope ()"
+
+.PP
+Definition at line \fB767\fP of file \fBScopeTests\&.cs\fP\&.
+.SS "void Luthetus\&.CompilerServices\&.CSharp\&.Tests\&.SmokeTests\&.Parsers\&.ScopeTests\&.GlobalScope_PropertyDefinitionNode_ArbitraryScope ()"
+
+.PP
+Definition at line \fB637\fP of file \fBScopeTests\&.cs\fP\&.
+.SS "void Luthetus\&.CompilerServices\&.CSharp\&.Tests\&.SmokeTests\&.Parsers\&.ScopeTests\&.GlobalScope_PropertyDefinitionNodeGetterAndSetterCodeBlock_ArbitraryScope ()"
+
+.PP
+Definition at line \fB673\fP of file \fBScopeTests\&.cs\fP\&.
+.SS "void Luthetus\&.CompilerServices\&.CSharp\&.Tests\&.SmokeTests\&.Parsers\&.ScopeTests\&.GlobalScope_RecordWith_ArbitraryScope ()"
+
+.PP
+Definition at line \fB722\fP of file \fBScopeTests\&.cs\fP\&.
+.SS "void Luthetus\&.CompilerServices\&.CSharp\&.Tests\&.SmokeTests\&.Parsers\&.ScopeTests\&.GlobalScope_TypeDefinitionNode ()"
+
+.PP
+Definition at line \fB194\fP of file \fBScopeTests\&.cs\fP\&.
+.SS "void Luthetus\&.CompilerServices\&.CSharp\&.Tests\&.SmokeTests\&.Parsers\&.ScopeTests\&.GlobalScope_TypeDefinitionNode_Depth_ArbitraryCodeBlock ()"
+
+.PP
+Definition at line \fB497\fP of file \fBScopeTests\&.cs\fP\&.
+.SS "void Luthetus\&.CompilerServices\&.CSharp\&.Tests\&.SmokeTests\&.Parsers\&.ScopeTests\&.GlobalScope_TypeDefinitionNode_Depth_ConstructorDefinitionNode ()"
+
+.PP
+Definition at line \fB222\fP of file \fBScopeTests\&.cs\fP\&.
+.SS "void Luthetus\&.CompilerServices\&.CSharp\&.Tests\&.SmokeTests\&.Parsers\&.ScopeTests\&.GlobalScope_TypeDefinitionNode_Depth_ConstructorDefinitionNode_PropertyInitialized ()"
+
+.PP
+Definition at line \fB259\fP of file \fBScopeTests\&.cs\fP\&.
+.SS "void Luthetus\&.CompilerServices\&.CSharp\&.Tests\&.SmokeTests\&.Parsers\&.ScopeTests\&.GlobalScope_TypeDefinitionNode_Depth_FunctionDefinitionNode ()"
+
+.PP
+Definition at line \fB460\fP of file \fBScopeTests\&.cs\fP\&.
+.SS "void Luthetus\&.CompilerServices\&.CSharp\&.Tests\&.SmokeTests\&.Parsers\&.ScopeTests\&.GlobalScope_TypeDefinitionNode_Depth_PropertyDefinitionNode ()"
+
+.PP
+Definition at line \fB289\fP of file \fBScopeTests\&.cs\fP\&.
+.SS "void Luthetus\&.CompilerServices\&.CSharp\&.Tests\&.SmokeTests\&.Parsers\&.ScopeTests\&.GlobalScope_TypeDefinitionNode_Depth_PropertyDefinitionNodeGetterAndSetterCodeBlock ()"
+
+.PP
+Definition at line \fB404\fP of file \fBScopeTests\&.cs\fP\&.
+.SS "void Luthetus\&.CompilerServices\&.CSharp\&.Tests\&.SmokeTests\&.Parsers\&.ScopeTests\&.GlobalScope_TypeDefinitionNode_Depth_PropertyDefinitionNodeWithAttribute ()"
+
+.PP
+Definition at line \fB317\fP of file \fBScopeTests\&.cs\fP\&.
+.SS "void Luthetus\&.CompilerServices\&.CSharp\&.Tests\&.SmokeTests\&.Parsers\&.ScopeTests\&.GlobalScope_TypeDefinitionNode_Depth_PropertyDefinitionNodeWithAttributeThatInvokesConstructor ()"
+
+.PP
+When I copy and paste this tests input string to a locally running WASM website of the IDE\&. I can paste in the code and it works as it is currently being asserted\&. But it keeps saying\&. 
+.PP
+.nf
+Expected: 108
+Actual:   106
+
+.fi
+.PP
+
+.PP
+When I run this test??? I checked the line ending kinds, that they were all line feed '
+.br
+'\&. 
+.PP
+Definition at line \fB366\fP of file \fBScopeTests\&.cs\fP\&.
+.SS "void Luthetus\&.CompilerServices\&.CSharp\&.Tests\&.SmokeTests\&.Parsers\&.ScopeTests\&.If_IsPatternMatchVariableDefinition_Misses_OpenBraceToken ()"
+
+.PP
+Definition at line \fB1014\fP of file \fBScopeTests\&.cs\fP\&.
+.SS "void Luthetus\&.CompilerServices\&.CSharp\&.Tests\&.SmokeTests\&.Parsers\&.ScopeTests\&.Keyword_CreatesScopeWithOpenAndCloseBraceToken_ButGetsSingleStatementBody ()"
+
+.PP
+Definition at line \fB942\fP of file \fBScopeTests\&.cs\fP\&.
+.SS "void Luthetus\&.CompilerServices\&.CSharp\&.Tests\&.SmokeTests\&.Parsers\&.ScopeTests\&.Statement_Inside_If_CodeBlock_Causes_Miss_CloseBraceToken_CaseA ()"
+
+.PP
+Definition at line \fB1030\fP of file \fBScopeTests\&.cs\fP\&.
+.SS "void Luthetus\&.CompilerServices\&.CSharp\&.Tests\&.SmokeTests\&.Parsers\&.ScopeTests\&.Statement_Inside_If_CodeBlock_Causes_Miss_CloseBraceToken_CaseB ()"
+
+.PP
+Definition at line \fB1086\fP of file \fBScopeTests\&.cs\fP\&.
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for Luthetus\&.Ide from the source code\&.

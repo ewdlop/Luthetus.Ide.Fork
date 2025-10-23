@@ -1,0 +1,55 @@
+\doxysection{Input\+File\+Tree\+View\+Mouse\+Event\+Handler.\+cs}
+\hypertarget{_input_file_tree_view_mouse_event_handler_8cs_source}{}\label{_input_file_tree_view_mouse_event_handler_8cs_source}\index{Source/Lib/Ide/Ide.RazorLib/InputFiles/Models/InputFileTreeViewMouseEventHandler.cs@{Source/Lib/Ide/Ide.RazorLib/InputFiles/Models/InputFileTreeViewMouseEventHandler.cs}}
+\mbox{\hyperlink{_input_file_tree_view_mouse_event_handler_8cs}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{_input_file_tree_view_mouse_event_handler_8cs_source_l00001}00001\ \textcolor{keyword}{using\ }Fluxor;}
+\DoxyCodeLine{\Hypertarget{_input_file_tree_view_mouse_event_handler_8cs_source_l00002}00002\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_luthetus_1_1_common_1_1_razor_lib_1_1_commands_1_1_models}{Luthetus.Common.RazorLib.Commands.Models}};}
+\DoxyCodeLine{\Hypertarget{_input_file_tree_view_mouse_event_handler_8cs_source_l00003}00003\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_luthetus_1_1_common_1_1_razor_lib_1_1_file_systems_1_1_models}{Luthetus.Common.RazorLib.FileSystems.Models}};}
+\DoxyCodeLine{\Hypertarget{_input_file_tree_view_mouse_event_handler_8cs_source_l00004}00004\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_luthetus_1_1_common_1_1_razor_lib_1_1_tree_views_1_1_models}{Luthetus.Common.RazorLib.TreeViews.Models}};}
+\DoxyCodeLine{\Hypertarget{_input_file_tree_view_mouse_event_handler_8cs_source_l00005}00005\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_luthetus_1_1_common_1_1_razor_lib_1_1_background_tasks_1_1_models}{Luthetus.Common.RazorLib.BackgroundTasks.Models}};}
+\DoxyCodeLine{\Hypertarget{_input_file_tree_view_mouse_event_handler_8cs_source_l00006}00006\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_luthetus_1_1_ide_1_1_razor_lib_1_1_input_files_1_1_states}{Luthetus.Ide.RazorLib.InputFiles.States}};}
+\DoxyCodeLine{\Hypertarget{_input_file_tree_view_mouse_event_handler_8cs_source_l00007}00007\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_luthetus_1_1_ide_1_1_razor_lib_1_1_file_systems_1_1_models}{Luthetus.Ide.RazorLib.FileSystems.Models}};}
+\DoxyCodeLine{\Hypertarget{_input_file_tree_view_mouse_event_handler_8cs_source_l00008}00008\ }
+\DoxyCodeLine{\Hypertarget{_input_file_tree_view_mouse_event_handler_8cs_source_l00009}00009\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespace_luthetus_1_1_ide_1_1_razor_lib_1_1_input_files_1_1_models}{Luthetus.Ide.RazorLib.InputFiles.Models}};}
+\DoxyCodeLine{\Hypertarget{_input_file_tree_view_mouse_event_handler_8cs_source_l00010}00010\ }
+\DoxyCodeLine{\Hypertarget{_input_file_tree_view_mouse_event_handler_8cs_source_l00011}\mbox{\hyperlink{class_luthetus_1_1_ide_1_1_razor_lib_1_1_input_files_1_1_models_1_1_input_file_tree_view_mouse_event_handler}{00011}}\ \textcolor{keyword}{public}\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_luthetus_1_1_ide_1_1_razor_lib_1_1_input_files_1_1_models_1_1_input_file_tree_view_mouse_event_handler_a009b39e6cda95d3b56ab0ad2a5c9cd1c}{InputFileTreeViewMouseEventHandler}}\ :\ \mbox{\hyperlink{class_luthetus_1_1_common_1_1_razor_lib_1_1_tree_views_1_1_models_1_1_tree_view_mouse_event_handler_a438da39839bbf2a486bccc99b98d9e34}{TreeViewMouseEventHandler}}}
+\DoxyCodeLine{\Hypertarget{_input_file_tree_view_mouse_event_handler_8cs_source_l00012}00012\ \{}
+\DoxyCodeLine{\Hypertarget{_input_file_tree_view_mouse_event_handler_8cs_source_l00013}00013\ \ \ \ \ \textcolor{keyword}{private}\ readonly\ IDispatcher\ \_dispatcher;}
+\DoxyCodeLine{\Hypertarget{_input_file_tree_view_mouse_event_handler_8cs_source_l00014}00014\ \ \ \ \ \textcolor{keyword}{private}\ readonly\ Func<IAbsolutePath,\ Task>\ \_setInputFileContentTreeViewRootFunc;}
+\DoxyCodeLine{\Hypertarget{_input_file_tree_view_mouse_event_handler_8cs_source_l00015}00015\ }
+\DoxyCodeLine{\Hypertarget{_input_file_tree_view_mouse_event_handler_8cs_source_l00016}\mbox{\hyperlink{class_luthetus_1_1_ide_1_1_razor_lib_1_1_input_files_1_1_models_1_1_input_file_tree_view_mouse_event_handler_a009b39e6cda95d3b56ab0ad2a5c9cd1c}{00016}}\ \ \ \ \ \textcolor{keyword}{public}\ \mbox{\hyperlink{class_luthetus_1_1_ide_1_1_razor_lib_1_1_input_files_1_1_models_1_1_input_file_tree_view_mouse_event_handler_a009b39e6cda95d3b56ab0ad2a5c9cd1c}{InputFileTreeViewMouseEventHandler}}(}
+\DoxyCodeLine{\Hypertarget{_input_file_tree_view_mouse_event_handler_8cs_source_l00017}00017\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{interface_luthetus_1_1_common_1_1_razor_lib_1_1_tree_views_1_1_models_1_1_i_tree_view_service}{ITreeViewService}}\ treeViewService,}
+\DoxyCodeLine{\Hypertarget{_input_file_tree_view_mouse_event_handler_8cs_source_l00018}00018\ \ \ \ \ \ \ \ \ IDispatcher\ dispatcher,}
+\DoxyCodeLine{\Hypertarget{_input_file_tree_view_mouse_event_handler_8cs_source_l00019}00019\ \ \ \ \ \ \ \ \ Func<IAbsolutePath,\ Task>\ setInputFileContentTreeViewRootFunc,}
+\DoxyCodeLine{\Hypertarget{_input_file_tree_view_mouse_event_handler_8cs_source_l00020}00020\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{interface_luthetus_1_1_common_1_1_razor_lib_1_1_background_tasks_1_1_models_1_1_i_background_task_service}{IBackgroundTaskService}}\ backgroundTaskService)}
+\DoxyCodeLine{\Hypertarget{_input_file_tree_view_mouse_event_handler_8cs_source_l00021}00021\ \ \ \ \ \ \ \ \ :\ base(treeViewService,\ backgroundTaskService)}
+\DoxyCodeLine{\Hypertarget{_input_file_tree_view_mouse_event_handler_8cs_source_l00022}00022\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_input_file_tree_view_mouse_event_handler_8cs_source_l00023}00023\ \ \ \ \ \ \ \ \ \_dispatcher\ =\ dispatcher;}
+\DoxyCodeLine{\Hypertarget{_input_file_tree_view_mouse_event_handler_8cs_source_l00024}00024\ \ \ \ \ \ \ \ \ \_setInputFileContentTreeViewRootFunc\ =\ setInputFileContentTreeViewRootFunc;}
+\DoxyCodeLine{\Hypertarget{_input_file_tree_view_mouse_event_handler_8cs_source_l00025}00025\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_input_file_tree_view_mouse_event_handler_8cs_source_l00026}00026\ }
+\DoxyCodeLine{\Hypertarget{_input_file_tree_view_mouse_event_handler_8cs_source_l00027}\mbox{\hyperlink{class_luthetus_1_1_ide_1_1_razor_lib_1_1_input_files_1_1_models_1_1_input_file_tree_view_mouse_event_handler_a3194ff93405f019198784ab48ea7a68d}{00027}}\ \ \ \ \ \textcolor{keyword}{protected}\ \textcolor{keyword}{override}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_luthetus_1_1_ide_1_1_razor_lib_1_1_input_files_1_1_models_1_1_input_file_tree_view_mouse_event_handler_a3194ff93405f019198784ab48ea7a68d}{OnClick}}(\mbox{\hyperlink{class_luthetus_1_1_common_1_1_razor_lib_1_1_commands_1_1_models_1_1_tree_view_command_args}{TreeViewCommandArgs}}\ commandArgs)}
+\DoxyCodeLine{\Hypertarget{_input_file_tree_view_mouse_event_handler_8cs_source_l00028}00028\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_input_file_tree_view_mouse_event_handler_8cs_source_l00029}00029\ \ \ \ \ \ \ \ \ base.OnClick(commandArgs);}
+\DoxyCodeLine{\Hypertarget{_input_file_tree_view_mouse_event_handler_8cs_source_l00030}00030\ }
+\DoxyCodeLine{\Hypertarget{_input_file_tree_view_mouse_event_handler_8cs_source_l00031}00031\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (commandArgs.\mbox{\hyperlink{class_luthetus_1_1_common_1_1_razor_lib_1_1_commands_1_1_models_1_1_tree_view_command_args_afc74aa0582f67604f3c2127d52ac6558}{NodeThatReceivedMouseEvent}}\ is\ not\ \mbox{\hyperlink{class_luthetus_1_1_ide_1_1_razor_lib_1_1_file_systems_1_1_models_1_1_tree_view_absolute_path}{TreeViewAbsolutePath}}\ treeViewAbsolutePath)}
+\DoxyCodeLine{\Hypertarget{_input_file_tree_view_mouse_event_handler_8cs_source_l00032}00032\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return};}
+\DoxyCodeLine{\Hypertarget{_input_file_tree_view_mouse_event_handler_8cs_source_l00033}00033\ }
+\DoxyCodeLine{\Hypertarget{_input_file_tree_view_mouse_event_handler_8cs_source_l00034}00034\ \ \ \ \ \ \ \ \ var\ setSelectedTreeViewModelAction\ =\ \textcolor{keyword}{new}\ InputFileState.SetSelectedTreeViewModelAction(treeViewAbsolutePath);}
+\DoxyCodeLine{\Hypertarget{_input_file_tree_view_mouse_event_handler_8cs_source_l00035}00035\ }
+\DoxyCodeLine{\Hypertarget{_input_file_tree_view_mouse_event_handler_8cs_source_l00036}00036\ \ \ \ \ \ \ \ \ \_dispatcher.Dispatch(setSelectedTreeViewModelAction);}
+\DoxyCodeLine{\Hypertarget{_input_file_tree_view_mouse_event_handler_8cs_source_l00037}00037\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_input_file_tree_view_mouse_event_handler_8cs_source_l00038}00038\ }
+\DoxyCodeLine{\Hypertarget{_input_file_tree_view_mouse_event_handler_8cs_source_l00039}\mbox{\hyperlink{class_luthetus_1_1_ide_1_1_razor_lib_1_1_input_files_1_1_models_1_1_input_file_tree_view_mouse_event_handler_afccce16f3906fd2105dfac2eea5fd571}{00039}}\ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keyword}{override}\ Task\ \mbox{\hyperlink{class_luthetus_1_1_ide_1_1_razor_lib_1_1_input_files_1_1_models_1_1_input_file_tree_view_mouse_event_handler_afccce16f3906fd2105dfac2eea5fd571}{OnDoubleClickAsync}}(\mbox{\hyperlink{class_luthetus_1_1_common_1_1_razor_lib_1_1_commands_1_1_models_1_1_tree_view_command_args}{TreeViewCommandArgs}}\ commandArgs)}
+\DoxyCodeLine{\Hypertarget{_input_file_tree_view_mouse_event_handler_8cs_source_l00040}00040\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_input_file_tree_view_mouse_event_handler_8cs_source_l00041}00041\ \ \ \ \ \ \ \ \ base.OnDoubleClickAsync(commandArgs);}
+\DoxyCodeLine{\Hypertarget{_input_file_tree_view_mouse_event_handler_8cs_source_l00042}00042\ }
+\DoxyCodeLine{\Hypertarget{_input_file_tree_view_mouse_event_handler_8cs_source_l00043}00043\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (commandArgs.\mbox{\hyperlink{class_luthetus_1_1_common_1_1_razor_lib_1_1_commands_1_1_models_1_1_tree_view_command_args_afc74aa0582f67604f3c2127d52ac6558}{NodeThatReceivedMouseEvent}}\ is\ not\ \mbox{\hyperlink{class_luthetus_1_1_ide_1_1_razor_lib_1_1_file_systems_1_1_models_1_1_tree_view_absolute_path}{TreeViewAbsolutePath}}\ treeViewAbsolutePath)}
+\DoxyCodeLine{\Hypertarget{_input_file_tree_view_mouse_event_handler_8cs_source_l00044}00044\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ Task.CompletedTask;}
+\DoxyCodeLine{\Hypertarget{_input_file_tree_view_mouse_event_handler_8cs_source_l00045}00045\ }
+\DoxyCodeLine{\Hypertarget{_input_file_tree_view_mouse_event_handler_8cs_source_l00046}00046\ \ \ \ \ \ \ \ \ \_setInputFileContentTreeViewRootFunc.Invoke(treeViewAbsolutePath.Item);}
+\DoxyCodeLine{\Hypertarget{_input_file_tree_view_mouse_event_handler_8cs_source_l00047}00047\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ Task.CompletedTask;}
+\DoxyCodeLine{\Hypertarget{_input_file_tree_view_mouse_event_handler_8cs_source_l00048}00048\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_input_file_tree_view_mouse_event_handler_8cs_source_l00049}00049\ \}}
+
+\end{DoxyCode}

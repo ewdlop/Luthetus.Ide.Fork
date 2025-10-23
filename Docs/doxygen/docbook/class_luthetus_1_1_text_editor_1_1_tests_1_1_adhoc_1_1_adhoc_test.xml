@@ -1,0 +1,155 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_class_luthetus_1_1_text_editor_1_1_tests_1_1_adhoc_1_1_adhoc_test" xml:lang="en-US">
+<title>Luthetus.TextEditor.Tests.Adhoc.AdhocTest Class Reference</title>
+<indexterm><primary>Luthetus.TextEditor.Tests.Adhoc.AdhocTest</primary></indexterm>
+<simplesect>
+    <title>Public Member Functions    </title>
+        <itemizedlist>
+            <listitem><para>void <link linkend="_class_luthetus_1_1_text_editor_1_1_tests_1_1_adhoc_1_1_adhoc_test_1a5f4440704a7cac5cd3101f6693a89bac">Why_Is_Command_Cut_Very_Slow</link> ()</para>
+</listitem>
+            <listitem><para>void <link linkend="_class_luthetus_1_1_text_editor_1_1_tests_1_1_adhoc_1_1_adhoc_test_1a6ebf6370a47dde729c51b2ede9af618b">Insert_Into_Empty_Model_A_LetterOrDigit</link> ()</para>
+</listitem>
+            <listitem><para>void <link linkend="_class_luthetus_1_1_text_editor_1_1_tests_1_1_adhoc_1_1_adhoc_test_1a94b089c35dc0ef8a0297887a15da864f">Insert_Into_Empty_Model_A_LineFeed</link> ()</para>
+</listitem>
+            <listitem><para>void <link linkend="_class_luthetus_1_1_text_editor_1_1_tests_1_1_adhoc_1_1_adhoc_test_1ab1e5b00f5302f2110ddc5af79b018667">Insert_Into_Empty_Model_A_CarriageReturn</link> ()</para>
+</listitem>
+            <listitem><para>void <link linkend="_class_luthetus_1_1_text_editor_1_1_tests_1_1_adhoc_1_1_adhoc_test_1aafc61425a9959dc443a4f2698d17aff2">Insert_Into_Empty_Model_A_CarriageReturnNewLine</link> ()</para>
+</listitem>
+            <listitem><para>void <link linkend="_class_luthetus_1_1_text_editor_1_1_tests_1_1_adhoc_1_1_adhoc_test_1a0e05b02cbf3b8b889e6458e0b04cd52b">ContentList_Change</link> ()</para>
+
+<para>ITextEditorModel.ContentList<?linebreak?><?linebreak?> TODO: This needs to be separated out into an IReadOnlyList&lt;char&gt;... ...and a IReadOnlyList&lt;byte&gt; | This change is needed because, a large part of optimizing the text editor is to reduce the operations done on the entirety of the text editor. | And, currently one invokes textEditorModel.GetAllText() rather frequently, and redundantly. | This invocation of &apos;GetAllText()&apos; needs to iterate over every character in the text editor, and select its &apos;Value&apos; property. | This is an operation done on the entirety of the text editor, and therefore it should be optimized. | The result of the change will make &apos;GetAllText()&apos; simply return a reference </para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Static Public Attributes    </title>
+        <itemizedlist>
+            <listitem><para>const string <link linkend="_class_luthetus_1_1_text_editor_1_1_tests_1_1_adhoc_1_1_adhoc_test_1a21674b19a4eea348351e41f0a732da9e">_bigString</link></para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<section>
+<title>Detailed Description</title>
+<para>
+Definition at line <link linkend="__adhoc_test_8_data_8cs_source_1l00003">3</link> of file <link linkend="__adhoc_test_8_data_8cs_source">AdhocTest.Data.cs</link>.</para>
+</section>
+<section>
+<title>Member Function Documentation</title>
+<anchor xml:id="_class_luthetus_1_1_text_editor_1_1_tests_1_1_adhoc_1_1_adhoc_test_1a0e05b02cbf3b8b889e6458e0b04cd52b"/><section>
+    <title>ContentList_Change()</title>
+<indexterm><primary>ContentList_Change</primary><secondary>Luthetus.TextEditor.Tests.Adhoc.AdhocTest</secondary></indexterm>
+<indexterm><primary>Luthetus.TextEditor.Tests.Adhoc.AdhocTest</primary><secondary>ContentList_Change</secondary></indexterm>
+<para><computeroutput>void Luthetus.TextEditor.Tests.Adhoc.AdhocTest.ContentList_Change ( )</computeroutput></para><para>
+
+<para>ITextEditorModel.ContentList<?linebreak?><?linebreak?> TODO: This needs to be separated out into an IReadOnlyList&lt;char&gt;... ...and a IReadOnlyList&lt;byte&gt; | This change is needed because, a large part of optimizing the text editor is to reduce the operations done on the entirety of the text editor. | And, currently one invokes textEditorModel.GetAllText() rather frequently, and redundantly. | This invocation of &apos;GetAllText()&apos; needs to iterate over every character in the text editor, and select its &apos;Value&apos; property. | This is an operation done on the entirety of the text editor, and therefore it should be optimized. | The result of the change will make &apos;GetAllText()&apos; simply return a reference </para>
+</para>
+<section xml:id="_class_luthetus_1_1_text_editor_1_1_tests_1_1_adhoc_1_1_adhoc_test_1autotoc_md284">
+<title>to the underlying list of characters.</title>
+<para>What might break with this change?: -<link linkend="_namespace_luthetus_1_1_text_editor_1_1_razor_lib_1_1_compiler_services_1_1_generic_lexer_1_1_decoration">Decoration</link>, more specifically syntax highlighting, could break with this change. -Could I, prior to making the change, write a unit test that applies syntax highlighting to a simple C# class definition. The, run this test throughout the time I&apos;m making the change, and afterwards to ensure that syntax highlighting was (seemingly) not broken? -SampleText: &quot;public class MyClass { }&quot; -Determine what the Lexer&apos;s syntax tokens are after the &apos;Lex()&apos; method invocation. As well, dermine result of the Parser, CompilationUnit, and <link linkend="_class_luthetus_1_1_compiler_services_1_1_c_sharp_1_1_compiler_service_case_1_1_c_sharp_resource">CSharpResource</link>. -Save the data so it can be compared against for future tests, to see if the result erroneously changed. -Regarding &apos;GetAllText()&apos; method on &apos;<link linkend="_interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1_1_i_text_editor_model">ITextEditorModel</link>&apos;. -What will become of the &apos;GetAllText()&apos; method after these changes? -Regarding &apos;PartitionList&apos; property on &apos;<link linkend="_interface_luthetus_1_1_text_editor_1_1_razor_lib_1_1_text_editors_1_1_models_1_1_i_text_editor_model">ITextEditorModel</link>&apos;. -This is currently an &apos;ImmutableList&lt;ImmutableList&lt;RichCharacter&gt;&gt;&apos; -This would need be changed to an &apos;ImmutableList&lt;ImmutableList&lt;char&gt;&gt;&apos; -NOTE: The &apos;PartitionList&apos; is supposed to encompase all the metadata for the text within that partition. -This is quite difficult, so to start, I moved the RichCharacters to be partitioned. and am &quot;globally&quot; tracking the metadata. -The metadata meaning: -RowEndingPositionsList -RowEndingKindCountsList -TabKeyPositionsList -OnlyRowEndingKind -UsingRowEndingKind -EditBlockIndex -MostCharactersOnASingleRowTuple -RowCount -PartitionLength -NOTE: Should &apos;PresentationModelsList&apos; be part of a partition? -If one were to have a sufficiently-large file C# file. Then there might be an overwhelming amount of &quot;squigglies&quot; (diagnostics), if they were stored &quot;globally&quot;. -How would one lookup the decoration byte for a given character after this change? -The &apos;CharDecorationByteList&apos; would have an index which is 1 to 1 with the character&apos;s index in the list of characters. -Could implicit conversions between byte and char (or vice versa) cause hard to debug confusion? -The implicit conversion of byte and char (and vice versa) should be checked. -A char is 2 bytes in C#, so it isn&apos;t believed that any implicit conversion would be done (vice versa). -What properties will replace the &apos;IReadOnlyList&lt;RichCharacter&gt; ContentList&apos; property? -IReadOnlyList&lt;char&gt; CharList -IReadOnlyList&lt;byte&gt; DecorationByteList </para>
+</section>
+<para>
+Definition at line <link linkend="__adhoc_test_8_main_8cs_source_1l00395">395</link> of file <link linkend="__adhoc_test_8_main_8cs_source">AdhocTest.Main.cs</link>.</para>
+Here is the call graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_luthetus_1_1_text_editor_1_1_tests_1_1_adhoc_1_1_adhoc_test_a0e05b02cbf3b8b889e6458e0b04cd52b_cgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+Here is the caller graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_luthetus_1_1_text_editor_1_1_tests_1_1_adhoc_1_1_adhoc_test_a0e05b02cbf3b8b889e6458e0b04cd52b_icgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+</section>
+<anchor xml:id="_class_luthetus_1_1_text_editor_1_1_tests_1_1_adhoc_1_1_adhoc_test_1ab1e5b00f5302f2110ddc5af79b018667"/><section>
+    <title>Insert_Into_Empty_Model_A_CarriageReturn()</title>
+<indexterm><primary>Insert_Into_Empty_Model_A_CarriageReturn</primary><secondary>Luthetus.TextEditor.Tests.Adhoc.AdhocTest</secondary></indexterm>
+<indexterm><primary>Luthetus.TextEditor.Tests.Adhoc.AdhocTest</primary><secondary>Insert_Into_Empty_Model_A_CarriageReturn</secondary></indexterm>
+<para><computeroutput>void Luthetus.TextEditor.Tests.Adhoc.AdhocTest.Insert_Into_Empty_Model_A_CarriageReturn ( )</computeroutput></para><para>
+Definition at line <link linkend="__adhoc_test_8_main_8cs_source_1l00186">186</link> of file <link linkend="__adhoc_test_8_main_8cs_source">AdhocTest.Main.cs</link>.</para>
+Here is the call graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_luthetus_1_1_text_editor_1_1_tests_1_1_adhoc_1_1_adhoc_test_ab1e5b00f5302f2110ddc5af79b018667_cgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+</section>
+<anchor xml:id="_class_luthetus_1_1_text_editor_1_1_tests_1_1_adhoc_1_1_adhoc_test_1aafc61425a9959dc443a4f2698d17aff2"/><section>
+    <title>Insert_Into_Empty_Model_A_CarriageReturnNewLine()</title>
+<indexterm><primary>Insert_Into_Empty_Model_A_CarriageReturnNewLine</primary><secondary>Luthetus.TextEditor.Tests.Adhoc.AdhocTest</secondary></indexterm>
+<indexterm><primary>Luthetus.TextEditor.Tests.Adhoc.AdhocTest</primary><secondary>Insert_Into_Empty_Model_A_CarriageReturnNewLine</secondary></indexterm>
+<para><computeroutput>void Luthetus.TextEditor.Tests.Adhoc.AdhocTest.Insert_Into_Empty_Model_A_CarriageReturnNewLine ( )</computeroutput></para><para>
+Definition at line <link linkend="__adhoc_test_8_main_8cs_source_1l00259">259</link> of file <link linkend="__adhoc_test_8_main_8cs_source">AdhocTest.Main.cs</link>.</para>
+Here is the call graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_luthetus_1_1_text_editor_1_1_tests_1_1_adhoc_1_1_adhoc_test_aafc61425a9959dc443a4f2698d17aff2_cgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+</section>
+<anchor xml:id="_class_luthetus_1_1_text_editor_1_1_tests_1_1_adhoc_1_1_adhoc_test_1a6ebf6370a47dde729c51b2ede9af618b"/><section>
+    <title>Insert_Into_Empty_Model_A_LetterOrDigit()</title>
+<indexterm><primary>Insert_Into_Empty_Model_A_LetterOrDigit</primary><secondary>Luthetus.TextEditor.Tests.Adhoc.AdhocTest</secondary></indexterm>
+<indexterm><primary>Luthetus.TextEditor.Tests.Adhoc.AdhocTest</primary><secondary>Insert_Into_Empty_Model_A_LetterOrDigit</secondary></indexterm>
+<para><computeroutput>void Luthetus.TextEditor.Tests.Adhoc.AdhocTest.Insert_Into_Empty_Model_A_LetterOrDigit ( )</computeroutput></para><para>
+Definition at line <link linkend="__adhoc_test_8_main_8cs_source_1l00052">52</link> of file <link linkend="__adhoc_test_8_main_8cs_source">AdhocTest.Main.cs</link>.</para>
+Here is the call graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_luthetus_1_1_text_editor_1_1_tests_1_1_adhoc_1_1_adhoc_test_a6ebf6370a47dde729c51b2ede9af618b_cgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+</section>
+<anchor xml:id="_class_luthetus_1_1_text_editor_1_1_tests_1_1_adhoc_1_1_adhoc_test_1a94b089c35dc0ef8a0297887a15da864f"/><section>
+    <title>Insert_Into_Empty_Model_A_LineFeed()</title>
+<indexterm><primary>Insert_Into_Empty_Model_A_LineFeed</primary><secondary>Luthetus.TextEditor.Tests.Adhoc.AdhocTest</secondary></indexterm>
+<indexterm><primary>Luthetus.TextEditor.Tests.Adhoc.AdhocTest</primary><secondary>Insert_Into_Empty_Model_A_LineFeed</secondary></indexterm>
+<para><computeroutput>void Luthetus.TextEditor.Tests.Adhoc.AdhocTest.Insert_Into_Empty_Model_A_LineFeed ( )</computeroutput></para><para>
+Definition at line <link linkend="__adhoc_test_8_main_8cs_source_1l00119">119</link> of file <link linkend="__adhoc_test_8_main_8cs_source">AdhocTest.Main.cs</link>.</para>
+Here is the call graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_luthetus_1_1_text_editor_1_1_tests_1_1_adhoc_1_1_adhoc_test_a94b089c35dc0ef8a0297887a15da864f_cgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+</section>
+<anchor xml:id="_class_luthetus_1_1_text_editor_1_1_tests_1_1_adhoc_1_1_adhoc_test_1a5f4440704a7cac5cd3101f6693a89bac"/><section>
+    <title>Why_Is_Command_Cut_Very_Slow()</title>
+<indexterm><primary>Why_Is_Command_Cut_Very_Slow</primary><secondary>Luthetus.TextEditor.Tests.Adhoc.AdhocTest</secondary></indexterm>
+<indexterm><primary>Luthetus.TextEditor.Tests.Adhoc.AdhocTest</primary><secondary>Why_Is_Command_Cut_Very_Slow</secondary></indexterm>
+<para><computeroutput>void Luthetus.TextEditor.Tests.Adhoc.AdhocTest.Why_Is_Command_Cut_Very_Slow ( )</computeroutput></para><para>
+Definition at line <link linkend="__adhoc_test_8_main_8cs_source_1l00028">28</link> of file <link linkend="__adhoc_test_8_main_8cs_source">AdhocTest.Main.cs</link>.</para>
+</section>
+</section>
+<section>
+<title>Member Data Documentation</title>
+<anchor xml:id="_class_luthetus_1_1_text_editor_1_1_tests_1_1_adhoc_1_1_adhoc_test_1a21674b19a4eea348351e41f0a732da9e"/><section>
+    <title>_bigString</title>
+<indexterm><primary>_bigString</primary><secondary>Luthetus.TextEditor.Tests.Adhoc.AdhocTest</secondary></indexterm>
+<indexterm><primary>Luthetus.TextEditor.Tests.Adhoc.AdhocTest</primary><secondary>_bigString</secondary></indexterm>
+<para><computeroutput>const string Luthetus.TextEditor.Tests.Adhoc.AdhocTest._bigString<computeroutput>[static]</computeroutput></computeroutput></para><para>
+Definition at line <link linkend="__adhoc_test_8_data_8cs_source_1l00005">5</link> of file <link linkend="__adhoc_test_8_data_8cs_source">AdhocTest.Data.cs</link>.</para>
+</section>
+<para>
+The documentation for this class was generated from the following files:</para>
+Source/Tests/TextEditor/Adhoc/<link linkend="__adhoc_test_8_data_8cs">AdhocTest.Data.cs</link>Source/Tests/TextEditor/Adhoc/<link linkend="__adhoc_test_8_main_8cs">AdhocTest.Main.cs</link></section>
+</section>
