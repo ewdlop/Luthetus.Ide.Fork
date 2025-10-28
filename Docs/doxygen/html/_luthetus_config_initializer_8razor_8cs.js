@@ -1,4 +1,0 @@
-var _luthetus_config_initializer_8razor_8cs =
-[
-    [ "Luthetus.Extensions.Config.Installations.Displays.LuthetusConfigInitializer", "class_luthetus_1_1_extensions_1_1_config_1_1_installations_1_1_displays_1_1_luthetus_config_initializer.html", "class_luthetus_1_1_extensions_1_1_config_1_1_installations_1_1_displays_1_1_luthetus_config_initializer" ]
-];

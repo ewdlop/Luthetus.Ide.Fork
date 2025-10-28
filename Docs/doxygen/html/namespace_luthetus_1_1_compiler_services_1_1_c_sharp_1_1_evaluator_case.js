@@ -1,4 +1,0 @@
-var namespace_luthetus_1_1_compiler_services_1_1_c_sharp_1_1_evaluator_case =
-[
-    [ "CSharpEvaluator", "class_luthetus_1_1_compiler_services_1_1_c_sharp_1_1_evaluator_case_1_1_c_sharp_evaluator.html", "class_luthetus_1_1_compiler_services_1_1_c_sharp_1_1_evaluator_case_1_1_c_sharp_evaluator" ]
-];
