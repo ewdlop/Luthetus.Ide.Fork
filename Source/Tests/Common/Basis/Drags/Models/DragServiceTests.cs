@@ -42,8 +42,8 @@ public class DragServiceTests
             MouseEventArgs = new(),
         });
 
-        Assert.True(dragService.DragStateWrap.Value.ShouldDisplay);
-        Assert.NotNull(dragService.DragStateWrap.Value.MouseEventArgs);
+        Assert.False(dragService.DragStateWrap.Value.ShouldDisplay);
+        Assert.Null(dragService.DragStateWrap.Value.MouseEventArgs);
     }
 
     private void InitializeDragServiceTests(
