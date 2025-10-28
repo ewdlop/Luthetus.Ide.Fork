@@ -127,9 +127,9 @@ public class FunctionInvocationNodeTests
         Assert.Equal(genericParametersListingNode, functionInvocationNode.GenericParametersListingNode);
         Assert.Equal(functionParametersListingNode, functionInvocationNode.FunctionParametersListingNode);
 
-        Assert.Equal(2, functionInvocationNode.ChildList.Length);
-        Assert.Equal(functionInvocationIdentifierToken, functionInvocationNode.ChildList[0]);
-        Assert.Equal(functionParametersListingNode, functionInvocationNode.ChildList[1]);
+        Assert.Equal(2, functionInvocationNode.GetChildList().Length);
+        Assert.Equal(functionInvocationIdentifierToken, functionInvocationNode.GetChildList()[0]);
+        Assert.Equal(functionParametersListingNode, functionInvocationNode.GetChildList()[1]);
 
         Assert.False(functionInvocationNode.IsFabricated);
 

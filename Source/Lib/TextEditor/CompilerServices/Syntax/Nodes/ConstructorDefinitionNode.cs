@@ -6,6 +6,8 @@ using Luthetus.TextEditor.RazorLib.CompilerServices.Interfaces;
 
 namespace Luthetus.TextEditor.RazorLib.CompilerServices.Syntax.Nodes;
 
+using FunctionBodyCodeBlockNode = Luthetus.TextEditor.RazorLib.CompilerServices.Syntax.Nodes.CodeBlockNode;
+
 public sealed class ConstructorDefinitionNode : ICodeBlockOwner
 {
     public ConstructorDefinitionNode(
@@ -13,14 +15,14 @@ public sealed class ConstructorDefinitionNode : ICodeBlockOwner
         IdentifierToken functionIdentifier,
         GenericArgumentsListingNode? genericArgumentsListingNode,
         FunctionArgumentsListingNode functionArgumentsListingNode,
-        CodeBlockNode? codeBlockNode,
+        FunctionBodyCodeBlockNode? functionBodyCodeBlockNode,
         ConstraintNode? constraintNode)
     {
         ReturnTypeClauseNode = returnTypeClauseNode;
         FunctionIdentifier = functionIdentifier;
         GenericArgumentsListingNode = genericArgumentsListingNode;
         FunctionArgumentsListingNode = functionArgumentsListingNode;
-        CodeBlockNode = codeBlockNode;
+        CodeBlockNode = functionBodyCodeBlockNode;
         ConstraintNode = constraintNode;
     }
 
@@ -31,7 +33,7 @@ public sealed class ConstructorDefinitionNode : ICodeBlockOwner
     public IdentifierToken FunctionIdentifier { get; }
     public GenericArgumentsListingNode? GenericArgumentsListingNode { get; }
     public FunctionArgumentsListingNode FunctionArgumentsListingNode { get; }
-    public CodeBlockNode? CodeBlockNode { get; private set; }
+    public FunctionBodyCodeBlockNode? CodeBlockNode { get; private set; }
     public ConstraintNode? ConstraintNode { get; }
     
     // (2024-11-08)

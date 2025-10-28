@@ -20,6 +20,7 @@
 @using Luthetus.TextEditor.RazorLib.Virtualizations.Models
 @using Luthetus.TextEditor.RazorLib.Exceptions
 @using Luthetus.Ide.RazorLib.Installations.Models
+@using OneOf
 
 @inherits EditLogicTestBase
 @code
@@ -84,14 +85,15 @@
 		Console.WriteLine($"EntryList.Length: {viewModel.VirtualizationResult.EntryList.Length}");
 	}
 
-	public void ConsoleWriteVirtualizationResultToString(VirtualizationResult<List<RichCharacter>> virtualizationResult)
+	public void ConsoleWriteVirtualizationResultToString(OneOf<VirtualizationResult<RichCharacter[]>, VirtualizationResult<List<RichCharacter>>> virtualizationResult)
 	{
+
 		Console.WriteLine("==============");
 		Console.WriteLine($"{nameof(VirtualizationResult<List<RichCharacter>>)}:");
 
 		var stringBuilder = new StringBuilder();
 
-		foreach (var entry in virtualizationResult.EntryList)
+		foreach (var entry in virtualizationResult.AsT1.EntryList)
 		{
 			foreach (var richCharacter in entry.Item)
 			{

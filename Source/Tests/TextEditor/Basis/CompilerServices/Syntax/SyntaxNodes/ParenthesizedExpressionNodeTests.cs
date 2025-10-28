@@ -88,11 +88,11 @@ public class ParenthesizedExpressionNodeTests
         Assert.Equal(closeParenthesisToken, parenthesizedExpressionNode.CloseParenthesisToken);
         Assert.Equal(innerExpression.ResultTypeClauseNode, parenthesizedExpressionNode.ResultTypeClauseNode);
 
-        Assert.Equal(4, parenthesizedExpressionNode.ChildList.Length);
-        Assert.Equal(openParenthesisToken, parenthesizedExpressionNode.ChildList[0]);
-        Assert.Equal(innerExpression, parenthesizedExpressionNode.ChildList[1]);
-        Assert.Equal(closeParenthesisToken, parenthesizedExpressionNode.ChildList[2]);
-        Assert.Equal(innerExpression.ResultTypeClauseNode, parenthesizedExpressionNode.ChildList[3]);
+        Assert.Equal(4, parenthesizedExpressionNode.GetChildList().Length);
+        Assert.Equal(openParenthesisToken, parenthesizedExpressionNode.GetChildList()[0]);
+        Assert.Equal(innerExpression, parenthesizedExpressionNode.GetChildList()[1]);
+        Assert.Equal(closeParenthesisToken, parenthesizedExpressionNode.GetChildList()[2]);
+        Assert.Equal(innerExpression.ResultTypeClauseNode, parenthesizedExpressionNode.GetChildList()[3]);
 
         Assert.False(parenthesizedExpressionNode.IsFabricated);
 

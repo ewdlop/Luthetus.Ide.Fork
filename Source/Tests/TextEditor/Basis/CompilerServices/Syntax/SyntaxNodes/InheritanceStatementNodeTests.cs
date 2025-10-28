@@ -42,8 +42,8 @@ public class InheritanceStatementNodeTests
 
         Assert.Equal(componentBaseTypeClauseNode, inheritanceStatementNode.ParentTypeClauseNode);
 
-        Assert.Single(inheritanceStatementNode.ChildList);
-        Assert.Equal(componentBaseTypeClauseNode, inheritanceStatementNode.ChildList[0]);
+        Assert.Single(inheritanceStatementNode.GetChildList());
+        Assert.Equal(componentBaseTypeClauseNode, inheritanceStatementNode.GetChildList()[0]);
 
         Assert.False(inheritanceStatementNode.IsFabricated);
 

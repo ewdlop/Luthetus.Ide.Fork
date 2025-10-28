@@ -2,7 +2,7 @@
 
 namespace Luthetus.TextEditor.RazorLib.CompilerServices.GenericLexer;
 
-public class GenericLanguageDefinition
+public record GenericLanguageDefinition
 {
     public GenericLanguageDefinition(
         string stringStart,

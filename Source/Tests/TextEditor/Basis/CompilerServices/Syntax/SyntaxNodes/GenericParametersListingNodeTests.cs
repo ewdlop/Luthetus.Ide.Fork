@@ -87,10 +87,10 @@ public class GenericParametersListingNodeTests
         Assert.Equal(genericParameterEntryNodeList, genericParametersListingNode.GenericParameterEntryNodeList);
         Assert.Equal(closeAngleBracketToken, genericParametersListingNode.CloseAngleBracketToken);
 
-        Assert.Equal(3, genericParametersListingNode.ChildList.Length);
-        Assert.Equal(openAngleBracketToken, genericParametersListingNode.ChildList[0]);
-        Assert.Equal(genericParameterEntryNodeList.Single(), genericParametersListingNode.ChildList[1]);
-        Assert.Equal(closeAngleBracketToken, genericParametersListingNode.ChildList[2]);
+        Assert.Equal(3, genericParametersListingNode.GetChildList().Length);
+        Assert.Equal(openAngleBracketToken, genericParametersListingNode.GetChildList()[0]);
+        Assert.Equal(genericParameterEntryNodeList.Single(), genericParametersListingNode.GetChildList()[1]);
+        Assert.Equal(closeAngleBracketToken, genericParametersListingNode.GetChildList()[2]);
 
         Assert.False(genericParametersListingNode.IsFabricated);
 

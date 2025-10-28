@@ -38,8 +38,8 @@ public class AmbiguousIdentifierNodeTests
 
 		Assert.Equal(identifierToken, ambiguousIdentifierNode.IdentifierToken);
 		
-		Assert.Single(ambiguousIdentifierNode.ChildList);
-		Assert.Equal(identifierToken, ambiguousIdentifierNode.ChildList.Single());
+		Assert.Single(ambiguousIdentifierNode.GetChildList());
+		Assert.Equal(identifierToken, ambiguousIdentifierNode.GetChildList().Single());
 
 		Assert.False(ambiguousIdentifierNode.IsFabricated);
 

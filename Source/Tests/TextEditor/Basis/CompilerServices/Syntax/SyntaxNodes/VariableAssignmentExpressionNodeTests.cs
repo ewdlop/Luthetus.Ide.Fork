@@ -88,10 +88,10 @@ public class VariableAssignmentExpressionNodeTests
         Assert.Equal(equalsToken, variableAssignmentExpressionNode.EqualsToken);
         Assert.Equal(expressionNode, variableAssignmentExpressionNode.ExpressionNode);
 
-        Assert.Equal(3, variableAssignmentExpressionNode.ChildList.Length);
-        Assert.Equal(variableIdentifierToken, variableAssignmentExpressionNode.ChildList[0]);
-        Assert.Equal(equalsToken, variableAssignmentExpressionNode.ChildList[1]);
-        Assert.Equal(expressionNode, variableAssignmentExpressionNode.ChildList[2]);
+        Assert.Equal(3, variableAssignmentExpressionNode.GetChildList().Length);
+        Assert.Equal(variableIdentifierToken, variableAssignmentExpressionNode.GetChildList()[0]);
+        Assert.Equal(equalsToken, variableAssignmentExpressionNode.GetChildList()[1]);
+        Assert.Equal(expressionNode, variableAssignmentExpressionNode.GetChildList()[2]);
 
         Assert.False(variableAssignmentExpressionNode.IsFabricated);
 

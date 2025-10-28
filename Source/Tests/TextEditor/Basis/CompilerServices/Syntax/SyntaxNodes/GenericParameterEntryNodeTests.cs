@@ -45,8 +45,8 @@ public class GenericParameterEntryNodeTests
 
         Assert.Equal(genericTypeClauseNode, genericParameterEntryNode.TypeClauseNode);
 
-        Assert.Single(genericParameterEntryNode.ChildList);
-        Assert.Equal(genericTypeClauseNode, genericParameterEntryNode.ChildList.Single());
+        Assert.Single(genericParameterEntryNode.GetChildList());
+        Assert.Equal(genericTypeClauseNode, genericParameterEntryNode.GetChildList().Single());
 
         Assert.False(genericParameterEntryNode.IsFabricated);
 

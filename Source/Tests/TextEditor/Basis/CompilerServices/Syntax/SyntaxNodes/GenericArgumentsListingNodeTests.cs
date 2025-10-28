@@ -87,10 +87,10 @@ public class GenericArgumentsListingNodeTests
         Assert.Equal(genericArgumentEntryNodeList, genericArgumentsListingNode.GenericArgumentEntryNodeList);
         Assert.Equal(closeAngleBracketToken, genericArgumentsListingNode.CloseAngleBracketToken);
 
-        Assert.Equal(3, genericArgumentsListingNode.ChildList.Length);
-        Assert.Equal(openAngleBracketToken, genericArgumentsListingNode.ChildList[0]);
-        Assert.Equal(genericArgumentEntryNodeList.Single(), genericArgumentsListingNode.ChildList[1]);
-        Assert.Equal(closeAngleBracketToken, genericArgumentsListingNode.ChildList[2]);
+        Assert.Equal(3, genericArgumentsListingNode.GetChildList().Length);
+        Assert.Equal(openAngleBracketToken, genericArgumentsListingNode.GetChildList()[0]);
+        Assert.Equal(genericArgumentEntryNodeList.Single(), genericArgumentsListingNode.GetChildList()[1]);
+        Assert.Equal(closeAngleBracketToken, genericArgumentsListingNode.GetChildList()[2]);
 
         Assert.False(genericArgumentsListingNode.IsFabricated);
 

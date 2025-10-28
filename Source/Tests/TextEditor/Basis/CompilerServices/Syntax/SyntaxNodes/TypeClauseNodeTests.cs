@@ -44,8 +44,8 @@ public class TypeClauseNodeTests
         Assert.Equal(valueType, intTypeClauseNode.ValueType);
         Assert.Equal(genericParametersListingNode, intTypeClauseNode.GenericParametersListingNode);
 
-        Assert.Single(intTypeClauseNode.ChildList);
-        Assert.Equal(intTypeIdentifier, intTypeClauseNode.ChildList.Single());
+        Assert.Single(intTypeClauseNode.GetChildList());
+        Assert.Equal(intTypeIdentifier, intTypeClauseNode.GetChildList().Single());
 
         Assert.False(intTypeClauseNode.IsFabricated);
 

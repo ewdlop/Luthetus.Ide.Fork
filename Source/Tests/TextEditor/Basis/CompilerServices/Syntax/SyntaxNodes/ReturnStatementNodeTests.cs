@@ -74,9 +74,9 @@ public class ReturnStatementNodeTests
         Assert.Equal(returnKeywordToken, returnStatementNode.KeywordToken);
         Assert.Equal(expressionNode, returnStatementNode.ExpressionNode);
 
-        Assert.Equal(2, returnStatementNode.ChildList.Length);
-        Assert.Equal(returnKeywordToken, returnStatementNode.ChildList[0]);
-        Assert.Equal(expressionNode, returnStatementNode.ChildList[1]);
+        Assert.Equal(2, returnStatementNode.GetChildList().Length);
+        Assert.Equal(returnKeywordToken, returnStatementNode.GetChildList()[0]);
+        Assert.Equal(expressionNode, returnStatementNode.GetChildList()[1]);
 
         Assert.False(returnStatementNode.IsFabricated);
 

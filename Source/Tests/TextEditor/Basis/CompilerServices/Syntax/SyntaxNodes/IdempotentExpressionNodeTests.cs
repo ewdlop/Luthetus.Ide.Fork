@@ -36,8 +36,8 @@ public class EmptyExpressionNodeTests
 
         Assert.Equal(voidTypeClauseNode, emptyExpressionNode.ResultTypeClauseNode);
 
-        Assert.Single(emptyExpressionNode.ChildList);
-        Assert.Equal(voidTypeClauseNode, emptyExpressionNode.ChildList.Single());
+        Assert.Single(emptyExpressionNode.GetChildList());
+        Assert.Equal(voidTypeClauseNode, emptyExpressionNode.GetChildList().Single());
 
         Assert.False(emptyExpressionNode.IsFabricated);
 

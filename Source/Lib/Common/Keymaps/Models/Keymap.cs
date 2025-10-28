@@ -47,6 +47,32 @@ public class Keymap : IKeymap
         return true;
     }
 
+    public bool TryMap(KeymapArgs args, out CommandNoType command)
+    {
+        lock (_syncRoot)
+        {
+            var keybind = new Keybind(args, command);
+
+            if (args.Key is not null)
+            {
+                if (!_mapKey.ContainsKey(args.Key))
+                    _mapKey.Add(args.Key, new());
+
+                _mapKey[args.Key].Add(keybind);
+            }
+
+            if (args.Code is not null)
+            {
+                if (!_mapCode.ContainsKey(args.Code))
+                    _mapCode.Add(args.Code, new());
+
+                _mapCode[args.Code].Add(keybind);
+            }
+        }
+
+        return true;
+    }
+
     public (List<Keybind>? keyMatchList, List<Keybind>? codeMatchList) MapAll(KeymapArgs args)
     {
         List<Keybind>? keyMatchList = null;

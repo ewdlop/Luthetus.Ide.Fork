@@ -11,7 +11,7 @@ public sealed class FunctionArgumentsListingNode : IExpressionNode
 {
     public FunctionArgumentsListingNode(
         OpenParenthesisToken openParenthesisToken,
-        List<FunctionArgumentEntryNode> functionArgumentEntryNodeList,
+        IList<FunctionArgumentEntryNode> functionArgumentEntryNodeList,
         CloseParenthesisToken closeParenthesisToken)
     {
         OpenParenthesisToken = openParenthesisToken;
@@ -23,7 +23,7 @@ public sealed class FunctionArgumentsListingNode : IExpressionNode
 	private bool _childListIsDirty = true;
 
     public OpenParenthesisToken OpenParenthesisToken { get; }
-    public List<FunctionArgumentEntryNode> FunctionArgumentEntryNodeList { get; }
+    public IList<FunctionArgumentEntryNode> FunctionArgumentEntryNodeList { get; }
     public CloseParenthesisToken CloseParenthesisToken { get; }
     TypeClauseNode IExpressionNode.ResultTypeClauseNode => TypeFacts.Pseudo.ToTypeClause();
 

@@ -71,9 +71,9 @@ public class VariableDeclarationNodeTests
         Assert.Equal(variableKind, variableDeclarationNode.VariableKind);
         Assert.Equal(isInitialized, variableDeclarationNode.IsInitialized);
 
-        Assert.Equal(2, variableDeclarationNode.ChildList.Length);
-        Assert.Equal(intTypeClauseNode, variableDeclarationNode.ChildList[0]);
-        Assert.Equal(variableIdentifierToken, variableDeclarationNode.ChildList[1]);
+        Assert.Equal(2, variableDeclarationNode.GetChildList().Length);
+        Assert.Equal(intTypeClauseNode, variableDeclarationNode.GetChildList()[0]);
+        Assert.Equal(variableIdentifierToken, variableDeclarationNode.GetChildList()[1]);
 
         Assert.False(variableDeclarationNode.IsFabricated);
 

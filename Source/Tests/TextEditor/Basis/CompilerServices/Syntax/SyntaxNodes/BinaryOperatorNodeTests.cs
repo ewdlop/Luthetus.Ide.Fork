@@ -61,8 +61,8 @@ public class BinaryOperatorNodeTests
         Assert.Equal(intTypeClauseNode, binaryOperatorNode.RightOperandTypeClauseNode);
         Assert.Equal(intTypeClauseNode, binaryOperatorNode.ResultTypeClauseNode);
 
-        Assert.Single(binaryOperatorNode.ChildList);
-        Assert.Equal(plusToken, binaryOperatorNode.ChildList.Single());
+        Assert.Single(binaryOperatorNode.GetChildList());
+        Assert.Equal(plusToken, binaryOperatorNode.GetChildList().Single());
 
         Assert.False(binaryOperatorNode.IsFabricated);
 

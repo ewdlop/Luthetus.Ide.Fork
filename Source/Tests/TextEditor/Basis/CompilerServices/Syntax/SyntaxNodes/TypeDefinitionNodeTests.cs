@@ -77,9 +77,9 @@ public class TypeDefinitionNodeTests
         Assert.Equal(valueType, typeDefinitionNode.ToTypeClause().ValueType);
         Assert.Null(typeDefinitionNode.ToTypeClause().GenericParametersListingNode);
 
-        Assert.Equal(2, typeDefinitionNode.ChildList.Length);
-        Assert.Equal(typeIdentifier, typeDefinitionNode.ChildList[0]);
-        Assert.Equal(typeBodyCodeBlockNode, typeDefinitionNode.ChildList[1]);
+        Assert.Equal(2, typeDefinitionNode.GetChildList().Length);
+        Assert.Equal(typeIdentifier, typeDefinitionNode.GetChildList()[0]);
+        Assert.Equal(typeBodyCodeBlockNode, typeDefinitionNode.GetChildList()[1]);
 
         Assert.False(typeDefinitionNode.IsFabricated);
 

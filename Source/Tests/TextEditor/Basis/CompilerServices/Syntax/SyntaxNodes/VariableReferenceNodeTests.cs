@@ -87,9 +87,9 @@ MyMethod(x)";
         Assert.Equal(variableDeclarationNode, variableReferenceNode.VariableDeclarationNode);
         Assert.Equal(variableDeclarationNode.TypeClauseNode, variableReferenceNode.ResultTypeClauseNode);
 
-        Assert.Equal(2, variableReferenceNode.ChildList.Length);
-        Assert.Equal(referenceVariableIdentifierToken, variableReferenceNode.ChildList[0]);
-        Assert.Equal(variableDeclarationNode, variableReferenceNode.ChildList[1]);
+        Assert.Equal(2, variableReferenceNode.GetChildList().Length);
+        Assert.Equal(referenceVariableIdentifierToken, variableReferenceNode.GetChildList()[0]);
+        Assert.Equal(variableDeclarationNode, variableReferenceNode.GetChildList()[1]);
 
         Assert.False(variableReferenceNode.IsFabricated);
 

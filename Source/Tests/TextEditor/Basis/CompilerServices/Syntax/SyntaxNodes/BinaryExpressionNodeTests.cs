@@ -102,10 +102,10 @@ public class BinaryExpressionNodeTests
         Assert.Equal(rightExpressionNode, binaryExpressionNode.RightExpressionNode);
         Assert.Equal(binaryOperatorNode.ResultTypeClauseNode, binaryExpressionNode.ResultTypeClauseNode);
 
-        Assert.Equal(3, binaryExpressionNode.ChildList.Length);
-        Assert.Equal(leftExpressionNode, binaryExpressionNode.ChildList[0]);
-        Assert.Equal(binaryOperatorNode, binaryExpressionNode.ChildList[1]);
-        Assert.Equal(rightExpressionNode, binaryExpressionNode.ChildList[2]);
+        Assert.Equal(3, binaryExpressionNode.GetChildList().Length);
+        Assert.Equal(leftExpressionNode, binaryExpressionNode.GetChildList()[0]);
+        Assert.Equal(binaryOperatorNode, binaryExpressionNode.GetChildList()[1]);
+        Assert.Equal(rightExpressionNode, binaryExpressionNode.GetChildList()[2]);
 
         Assert.False(binaryExpressionNode.IsFabricated);
 

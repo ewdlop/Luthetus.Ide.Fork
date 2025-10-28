@@ -66,8 +66,8 @@ public class FunctionParameterEntryNodeTests
         Assert.Equal(hasInKeyword, functionParameterEntryNode.HasInKeyword);
         Assert.Equal(hasRefKeyword, functionParameterEntryNode.HasRefKeyword);
 
-        Assert.Single(functionParameterEntryNode.ChildList);
-        Assert.Equal(expressionNode, functionParameterEntryNode.ChildList.Single());
+        Assert.Single(functionParameterEntryNode.GetChildList());
+        Assert.Equal(expressionNode, functionParameterEntryNode.GetChildList().Single());
 
         Assert.False(functionParameterEntryNode.IsFabricated);
 

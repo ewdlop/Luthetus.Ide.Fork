@@ -1,8 +1,9 @@
-using System.Collections.Immutable;
 using Fluxor;
 using Luthetus.Common.RazorLib.Keys.Models;
-using Luthetus.TextEditor.RazorLib.TextEditors.Models;
 using Luthetus.TextEditor.RazorLib.Lexers.Models;
+using Luthetus.TextEditor.RazorLib.TextEditors.Models;
+using System.Collections.Immutable;
+using System.Linq;
 
 namespace Luthetus.TextEditor.RazorLib.TextEditors.States;
 
@@ -58,7 +59,7 @@ namespace Luthetus.TextEditor.RazorLib.TextEditors.States;
 public partial record TextEditorState
 {
 	private readonly Dictionary<ResourceUri, TextEditorModel> _modelMap = new();
-	private readonly Dictionary<Key<TextEditorViewModel>, TextEditorViewModel> _viewModelMap = new();
+    private readonly Dictionary<Key<TextEditorViewModel>, TextEditorViewModel> _viewModelMap = new();
 	
 	public (TextEditorModel? TextEditorModel, TextEditorViewModel? TextEditorViewModel) GetModelAndViewModelOrDefault(
 		ResourceUri resourceUri, Key<TextEditorViewModel> viewModelKey)
@@ -149,7 +150,10 @@ public partial record TextEditorState
 		
 		return 0;
     }
-    
+
+    public ImmutableList<KeyValuePair<ResourceUri, TextEditorModel>> ModelList => [.. ModelGetModels()];
+
+
     public ImmutableArray<TextEditorViewModel> ModelGetViewModelsOrEmpty(ResourceUri resourceUri)
     {
     	try

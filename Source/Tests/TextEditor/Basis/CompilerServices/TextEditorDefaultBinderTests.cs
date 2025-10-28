@@ -2,6 +2,7 @@ using System.Collections.Immutable;
 using Luthetus.TextEditor.RazorLib.CompilerServices;
 using Luthetus.TextEditor.RazorLib.Lexers.Models;
 using Luthetus.TextEditor.RazorLib.CompilerServices.Interfaces;
+using Moq;
 
 namespace Luthetus.TextEditor.Tests.Basis.CompilerServices;
 
@@ -21,10 +22,10 @@ public class TextEditorDefaultBinderTests
 	public void DiagnosticsList()
 	{
         var defaultBinder = new Binder();
-
+        Mock<ICompilerServiceResource> mockCompilerServiceResource = new();
         Assert.Equal(ImmutableArray<TextEditorDiagnostic>.Empty, defaultBinder.DiagnosticsList);
         Assert.Equal(ImmutableArray<ITextEditorSymbol>.Empty, defaultBinder.SymbolsList);
-        Assert.Null(defaultBinder.GetDefinition(TextEditorTextSpan.FabricateTextSpan("unit-test")));
+        Assert.Null(defaultBinder.GetDefinition(TextEditorTextSpan.FabricateTextSpan("unit-test"), mockCompilerServiceResource.Object));
         Assert.Null(defaultBinder.GetBoundScope(TextEditorTextSpan.FabricateTextSpan("unit-test")));
     }
 }

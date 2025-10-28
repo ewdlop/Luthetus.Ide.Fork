@@ -45,8 +45,8 @@ public class GenericArgumentEntryNodeTests
 
         Assert.Equal(genericTypeClauseNode, genericArgumentEntryNode.TypeClauseNode);
 
-        Assert.Single(genericArgumentEntryNode.ChildList);
-        Assert.Equal(genericTypeClauseNode, genericArgumentEntryNode.ChildList.Single());
+        Assert.Single(genericArgumentEntryNode.GetChildList());
+        Assert.Equal(genericTypeClauseNode, genericArgumentEntryNode.GetChildList().Single());
 
         Assert.False(genericArgumentEntryNode.IsFabricated);
 

@@ -6,6 +6,8 @@ using Luthetus.TextEditor.RazorLib.CompilerServices.Interfaces;
 
 namespace Luthetus.TextEditor.RazorLib.CompilerServices.Syntax.Nodes;
 
+using FunctionBodyCodeBlockNode = CodeBlockNode;
+
 /// <summary>
 /// TODO: Track the open and close braces for the function body.
 /// </summary>
@@ -17,7 +19,7 @@ public sealed class FunctionDefinitionNode : ICodeBlockOwner
         IdentifierToken functionIdentifierToken,
         GenericParametersListingNode? genericArgumentsListingNode,
         FunctionArgumentsListingNode functionArgumentsListingNode,
-        CodeBlockNode? codeBlockNode,
+        FunctionBodyCodeBlockNode? codeBlockNode,
         ConstraintNode? constraintNode)
     {
         AccessModifierKind = accessModifierKind;

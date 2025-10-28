@@ -156,11 +156,11 @@ public class FunctionDefinitionNodeTests
         Assert.Equal(codeBlockNode, functionDefinitionNode.FunctionBodyCodeBlockNode);
         Assert.Equal(constraintNode, functionDefinitionNode.ConstraintNode);
 
-        Assert.Equal(4, functionDefinitionNode.ChildList.Length);
-        Assert.Equal(returnTypeClauseNode, functionDefinitionNode.ChildList[0]);
-        Assert.Equal(functionIdentifierToken, functionDefinitionNode.ChildList[1]);
-        Assert.Equal(functionArgumentsListingNode, functionDefinitionNode.ChildList[2]);
-        Assert.Equal(codeBlockNode, functionDefinitionNode.ChildList[3]);
+        Assert.Equal(4, functionDefinitionNode.GetChildList().Length);
+        Assert.Equal(returnTypeClauseNode, functionDefinitionNode.GetChildList()[0]);
+        Assert.Equal(functionIdentifierToken, functionDefinitionNode.GetChildList()[1]);
+        Assert.Equal(functionArgumentsListingNode, functionDefinitionNode.GetChildList()[2]);
+        Assert.Equal(codeBlockNode, functionDefinitionNode.GetChildList()[3]);
 
         Assert.False(functionDefinitionNode.IsFabricated);
 

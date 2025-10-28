@@ -74,8 +74,8 @@ public class FunctionArgumentEntryNodeTests
         Assert.Equal(hasInKeyword, functionArgumentEntryNode.HasInKeyword);
         Assert.Equal(hasRefKeyword, functionArgumentEntryNode.HasRefKeyword);
 
-        Assert.Single(functionArgumentEntryNode.ChildList);
-        Assert.Equal(variableDeclarationNode, functionArgumentEntryNode.ChildList.Single());
+        Assert.Single(functionArgumentEntryNode.GetChildList());
+        Assert.Equal(variableDeclarationNode, functionArgumentEntryNode.GetChildList().Single());
 
         Assert.False(functionArgumentEntryNode.IsFabricated);
 

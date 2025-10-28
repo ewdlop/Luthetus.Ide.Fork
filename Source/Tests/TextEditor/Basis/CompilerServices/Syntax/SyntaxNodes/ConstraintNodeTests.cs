@@ -93,11 +93,11 @@ public class ConstraintNodeTests
 
         Assert.Equal(innerTokens, constraintNode.InnerTokens);
 
-        Assert.Equal(innerTokens.Length, constraintNode.ChildList.Length);
-        Assert.Equal(whereKeywordToken, constraintNode.ChildList[0]);
-        Assert.Equal(identifierToken, constraintNode.ChildList[1]);
-        Assert.Equal(colonToken, constraintNode.ChildList[2]);
-        Assert.Equal(notnullKeywordToken, constraintNode.ChildList[3]);
+        Assert.Equal(innerTokens.Length, constraintNode.GetChildList().Length);
+        Assert.Equal(whereKeywordToken, constraintNode.GetChildList()[0]);
+        Assert.Equal(identifierToken, constraintNode.GetChildList()[1]);
+        Assert.Equal(colonToken, constraintNode.GetChildList()[2]);
+        Assert.Equal(notnullKeywordToken, constraintNode.GetChildList()[3]);
 
         Assert.False(constraintNode.IsFabricated);
 

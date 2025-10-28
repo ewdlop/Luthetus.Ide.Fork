@@ -103,10 +103,10 @@ public class FunctionArgumentsListingNodeTests
         Assert.Equal(functionArgumentEntryNodeList, functionArgumentsListingNode.FunctionArgumentEntryNodeList);
         Assert.Equal(closeParenthesisToken, functionArgumentsListingNode.CloseParenthesisToken);
 
-        Assert.Equal(3, functionArgumentsListingNode.ChildList.Length);
-        Assert.Equal(openParenthesisToken, functionArgumentsListingNode.ChildList[0]);
-        Assert.Equal(functionArgumentEntryNodeList.Single(), functionArgumentsListingNode.ChildList[1]);
-        Assert.Equal(closeParenthesisToken, functionArgumentsListingNode.ChildList[2]);
+        Assert.Equal(3, functionArgumentsListingNode.GetChildList().Length);
+        Assert.Equal(openParenthesisToken, functionArgumentsListingNode.GetChildList()[0]);
+        Assert.Equal(functionArgumentEntryNodeList.Single(), functionArgumentsListingNode.GetChildList()[1]);
+        Assert.Equal(closeParenthesisToken, functionArgumentsListingNode.GetChildList()[2]);
 
         Assert.False(functionArgumentsListingNode.IsFabricated);
 

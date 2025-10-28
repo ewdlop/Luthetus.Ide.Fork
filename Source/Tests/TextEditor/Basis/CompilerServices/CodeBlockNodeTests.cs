@@ -34,8 +34,8 @@ public class CodeBlockNodeTests
             var codeBlockNoDiagnostics = new CodeBlockNode(childList);
 
             Assert.Empty(codeBlockNoDiagnostics.DiagnosticsList);
-            Assert.Single(codeBlockNoDiagnostics.ChildList);
-            Assert.Equal(typeDefinitionNode, codeBlockNoDiagnostics.ChildList.Single());
+            Assert.Single(codeBlockNoDiagnostics.GetChildList());
+            Assert.Equal(typeDefinitionNode, codeBlockNoDiagnostics.GetChildList().Single());
             Assert.Equal(SyntaxKind.CodeBlockNode, codeBlockNoDiagnostics.SyntaxKind);
             Assert.False(codeBlockNoDiagnostics.IsFabricated);
         }
@@ -56,8 +56,8 @@ public class CodeBlockNodeTests
             var codeBlockWithDiagnostics = new CodeBlockNode(childList, diagnosticList);
 
             Assert.Single(codeBlockWithDiagnostics.DiagnosticsList);
-            Assert.Single(codeBlockWithDiagnostics.ChildList);
-            Assert.Equal(typeDefinitionNode, codeBlockWithDiagnostics.ChildList.Single());
+            Assert.Single(codeBlockWithDiagnostics.GetChildList());
+            Assert.Equal(typeDefinitionNode, codeBlockWithDiagnostics.GetChildList().Single());
             Assert.Equal(SyntaxKind.CodeBlockNode, codeBlockWithDiagnostics.SyntaxKind);
             Assert.False(codeBlockWithDiagnostics.IsFabricated);
         }

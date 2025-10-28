@@ -97,10 +97,10 @@ public class FunctionParametersListingNodeTests
         Assert.Equal(functionParameterEntryNodeList, functionParametersListingNode.FunctionParameterEntryNodeList);
         Assert.Equal(closeParenthesisToken, functionParametersListingNode.CloseParenthesisToken);
 
-        Assert.Equal(3, functionParametersListingNode.ChildList.Length);
-        Assert.Equal(openParenthesisToken, functionParametersListingNode.ChildList[0]);
-        Assert.Equal(functionParameterEntryNodeList.Single(), functionParametersListingNode.ChildList[1]);
-        Assert.Equal(closeParenthesisToken, functionParametersListingNode.ChildList[2]);
+        Assert.Equal(3, functionParametersListingNode.GetChildList().Length);
+        Assert.Equal(openParenthesisToken, functionParametersListingNode.GetChildList()[0]);
+        Assert.Equal(functionParameterEntryNodeList.Single(), functionParametersListingNode.GetChildList()[1]);
+        Assert.Equal(closeParenthesisToken, functionParametersListingNode.GetChildList()[2]);
 
         Assert.False(functionParametersListingNode.IsFabricated);
 

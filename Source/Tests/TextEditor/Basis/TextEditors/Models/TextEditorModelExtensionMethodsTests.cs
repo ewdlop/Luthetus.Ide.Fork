@@ -637,10 +637,10 @@ public class TextEditorModelExtensionMethodsTests : TextEditorTestBase
         {
             var textSpan = modelModifier.GetWordTextSpan(2);
             Assert.NotNull(textSpan);
-            Assert.Equal(1, textSpan!.StartingIndexInclusive);
-            Assert.Equal(3, textSpan.EndingIndexExclusive);
-            Assert.Equal("b9", textSpan.GetText());
-            Assert.Equal(2, textSpan.Length);
+            Assert.Equal(1, textSpan!.GetValueOrDefault().StartingIndexInclusive);
+            Assert.Equal(3, textSpan.GetValueOrDefault().EndingIndexExclusive);
+            Assert.Equal("b9", textSpan.GetValueOrDefault().GetText());
+            Assert.Equal(2, textSpan.GetValueOrDefault().Length);
         }
 
         // "\nb9\r9B\r\n\t$; "
@@ -648,10 +648,10 @@ public class TextEditorModelExtensionMethodsTests : TextEditorTestBase
         {
             var textSpan = modelModifier.GetWordTextSpan(4);
             Assert.NotNull(textSpan);
-            Assert.Equal(4, textSpan!.StartingIndexInclusive);
-            Assert.Equal(6, textSpan.EndingIndexExclusive);
-            Assert.Equal("9B", textSpan.GetText());
-            Assert.Equal(2, textSpan.Length);
+            Assert.Equal(4, textSpan!.GetValueOrDefault().StartingIndexInclusive);
+            Assert.Equal(6, textSpan.GetValueOrDefault().EndingIndexExclusive);
+            Assert.Equal("9B", textSpan.GetValueOrDefault().GetText());
+            Assert.Equal(2, textSpan.GetValueOrDefault().Length);
         }
 
         // "\nb9\r9B\r\n\t$; "
@@ -659,10 +659,10 @@ public class TextEditorModelExtensionMethodsTests : TextEditorTestBase
         {
             var textSpan = modelModifier.GetWordTextSpan(6);
             Assert.NotNull(textSpan);
-            Assert.Equal(4, textSpan!.StartingIndexInclusive);
-            Assert.Equal(6, textSpan.EndingIndexExclusive);
-            Assert.Equal("9B", textSpan.GetText());
-            Assert.Equal(2, textSpan.Length);
+            Assert.Equal(4, textSpan!.GetValueOrDefault().StartingIndexInclusive);
+            Assert.Equal(6, textSpan.GetValueOrDefault().EndingIndexExclusive);
+            Assert.Equal("9B", textSpan.GetValueOrDefault().GetText());
+            Assert.Equal(2, textSpan.GetValueOrDefault().Length);
         }
 
         // Out-of-bounds small number

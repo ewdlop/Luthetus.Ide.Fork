@@ -74,15 +74,15 @@ public class ConstructorDefinitionNodeTests
 
             functionArgumentsListingNode = new FunctionArgumentsListingNode(
                 openParenthesisToken,
-                functionArgumentEntryNodes,
+                functionArgumentEntryNodes.AsReadOnly(),
                 closeParenthesisToken);
         }
 
         GenericArgumentsListingNode? genericArgumentsListingNode = null;
 
-        CodeBlockNode functionBodyCodeBlockNode;
+        CodeBlockNode codeBlockNode;
         {
-            functionBodyCodeBlockNode = new CodeBlockNode(
+            codeBlockNode = new CodeBlockNode(
                 ImmutableArray<RazorLib.CompilerServices.Syntax.ISyntax>.Empty);
         }
 
@@ -93,21 +93,21 @@ public class ConstructorDefinitionNodeTests
             functionIdentifierToken,
             genericArgumentsListingNode,
             functionArgumentsListingNode,
-            functionBodyCodeBlockNode,
+            codeBlockNode,
             constraintNode);
 
         Assert.Equal(myClassTypeClauseNode, constructorDefinitionNode.ReturnTypeClauseNode);
         Assert.Equal(functionIdentifierToken, constructorDefinitionNode.FunctionIdentifier);
         Assert.Equal(genericArgumentsListingNode, constructorDefinitionNode.GenericArgumentsListingNode);
         Assert.Equal(functionArgumentsListingNode, constructorDefinitionNode.FunctionArgumentsListingNode);
-        Assert.Equal(functionBodyCodeBlockNode, constructorDefinitionNode.FunctionBodyCodeBlockNode);
+        Assert.Equal(codeBlockNode, constructorDefinitionNode.FunctionBodyCodeBlockNode);
         Assert.Equal(constraintNode, constructorDefinitionNode.ConstraintNode);
 
-        Assert.Equal(4, constructorDefinitionNode.ChildList.Length);
-        Assert.Equal(myClassTypeClauseNode, constructorDefinitionNode.ChildList[0]);
-        Assert.Equal(functionIdentifierToken, constructorDefinitionNode.ChildList[1]);
-        Assert.Equal(functionArgumentsListingNode, constructorDefinitionNode.ChildList[2]);
-        Assert.Equal(functionBodyCodeBlockNode, constructorDefinitionNode.ChildList[3]);
+        Assert.Equal(4, constructorDefinitionNode.GetChildList().Length);
+        Assert.Equal(myClassTypeClauseNode, constructorDefinitionNode.GetChildList()[0]);
+        Assert.Equal(functionIdentifierToken, constructorDefinitionNode.GetChildList()[1]);
+        Assert.Equal(functionArgumentsListingNode, constructorDefinitionNode.GetChildList()[2]);
+        Assert.Equal(codeBlockNode, constructorDefinitionNode.GetChildList()[3]);
 
         Assert.False(constructorDefinitionNode.IsFabricated);
 

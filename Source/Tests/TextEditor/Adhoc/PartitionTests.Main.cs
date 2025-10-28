@@ -36,8 +36,6 @@ public partial class PartitionTests
 		var test = TestInitialize();
 		
 		var sourceText = "\r\n\r\n\r\n";
-		
-		var modelList = test.TextEditorService.TextEditorStateWrap.Value.ModelList;
 
 		var model = new TextEditorModel(
 			new ResourceUri($"/unitTesting.cs"),
@@ -89,15 +87,16 @@ public partial class PartitionTests
 					// Do this by selecting the text then insert an enter key.
 					
 					var cursor = new TextEditorCursor(isPrimaryCursor: true);
-					var cursorModifier = new TextEditorCursorModifier(cursor);
-					
-					cursorModifier.SelectionAnchorPositionIndex = 0;
-					cursorModifier.SelectionEndingPositionIndex = 4;
-					
-					cursorModifier.LineIndex = 2;
-					cursorModifier.ColumnIndex = 0;
-					
-					var cursorModifierBag = new CursorModifierBagTextEditor(
+                    var cursorModifier = new TextEditorCursorModifier(cursor)
+                    {
+                        SelectionAnchorPositionIndex = 0,
+                        SelectionEndingPositionIndex = 4,
+
+                        LineIndex = 2,
+                        ColumnIndex = 0
+                    };
+
+                    var cursorModifierBag = new CursorModifierBagTextEditor(
 						Key<TextEditorViewModel>.Empty,
 						new List<TextEditorCursorModifier> { cursorModifier });
 						
@@ -134,8 +133,6 @@ public partial class PartitionTests
 		var test = TestInitialize();
 		
 		var sourceText = "\r\n\r\n\r\n";
-		
-		var modelList = test.TextEditorService.TextEditorStateWrap.Value.ModelList;
 
 		var model = new TextEditorModel(
 			new ResourceUri($"/unitTesting.cs"),
@@ -187,15 +184,16 @@ public partial class PartitionTests
 					// Do this by selecting the text then insert an enter key.
 					
 					var cursor = new TextEditorCursor(isPrimaryCursor: true);
-					var cursorModifier = new TextEditorCursorModifier(cursor);
-					
-					cursorModifier.SelectionAnchorPositionIndex = 0;
-					cursorModifier.SelectionEndingPositionIndex = 4;
-					
-					cursorModifier.LineIndex = 2;
-					cursorModifier.ColumnIndex = 0;
-					
-					var cursorModifierBag = new CursorModifierBagTextEditor(
+                    var cursorModifier = new TextEditorCursorModifier(cursor)
+                    {
+                        SelectionAnchorPositionIndex = 0,
+                        SelectionEndingPositionIndex = 4,
+
+                        LineIndex = 2,
+                        ColumnIndex = 0
+                    };
+
+                    var cursorModifierBag = new CursorModifierBagTextEditor(
 						Key<TextEditorViewModel>.Empty,
 						new List<TextEditorCursorModifier> { cursorModifier });
 						
@@ -228,8 +226,6 @@ public partial class PartitionTests
 		var test = TestInitialize();
 		
 		var sourceText = "\r\n\r\n\r\n";
-		
-		var modelList = test.TextEditorService.TextEditorStateWrap.Value.ModelList;
 
 		var model = new TextEditorModel(
 			new ResourceUri($"/unitTesting.cs"),
@@ -281,15 +277,16 @@ public partial class PartitionTests
 					// Do this by selecting the text then insert an enter key.
 					
 					var cursor = new TextEditorCursor(isPrimaryCursor: true);
-					var cursorModifier = new TextEditorCursorModifier(cursor);
-					
-					cursorModifier.SelectionAnchorPositionIndex = 0;
-					cursorModifier.SelectionEndingPositionIndex = 4;
-					
-					cursorModifier.LineIndex = 2;
-					cursorModifier.ColumnIndex = 0;
-					
-					var cursorModifierBag = new CursorModifierBagTextEditor(
+                    var cursorModifier = new TextEditorCursorModifier(cursor)
+                    {
+                        SelectionAnchorPositionIndex = 0,
+                        SelectionEndingPositionIndex = 4,
+
+                        LineIndex = 2,
+                        ColumnIndex = 0
+                    };
+
+                    var cursorModifierBag = new CursorModifierBagTextEditor(
 						Key<TextEditorViewModel>.Empty,
 						new List<TextEditorCursorModifier> { cursorModifier });
 					
@@ -358,8 +355,6 @@ public partial class PartitionTests
         var test = TestInitialize();
 		
 		var sourceText = "\r\n\r\n\r\n\r\n";
-		
-		var modelList = test.TextEditorService.TextEditorStateWrap.Value.ModelList;
 
 		var model = new TextEditorModel(
 			new ResourceUri($"/unitTesting.cs"),
@@ -411,15 +406,16 @@ public partial class PartitionTests
 					// Do this by selecting the text then insert an enter key.
 					
 					var cursor = new TextEditorCursor(isPrimaryCursor: true);
-					var cursorModifier = new TextEditorCursorModifier(cursor);
-					
-					cursorModifier.SelectionAnchorPositionIndex = 0;
-					cursorModifier.SelectionEndingPositionIndex = 6;
-					
-					cursorModifier.LineIndex = 3;
-					cursorModifier.ColumnIndex = 0;
-					
-					var cursorModifierBag = new CursorModifierBagTextEditor(
+                    var cursorModifier = new TextEditorCursorModifier(cursor)
+                    {
+                        SelectionAnchorPositionIndex = 0,
+                        SelectionEndingPositionIndex = 6,
+
+                        LineIndex = 3,
+                        ColumnIndex = 0
+                    };
+
+                    var cursorModifierBag = new CursorModifierBagTextEditor(
 						Key<TextEditorViewModel>.Empty,
 						new List<TextEditorCursorModifier> { cursorModifier });
 					
@@ -569,7 +565,6 @@ PartitionSize = 4
         
 	        for (int indexPartitionSize = 4; indexPartitionSize < testText.Length + 1; indexPartitionSize++)
 			{
-				var modelList = test.TextEditorService.TextEditorStateWrap.Value.ModelList;
 	
 				var model = new TextEditorModel(
 					new ResourceUri($"/unitTesting_{lineEndingText}_{indexPartitionSize}.cs"),
@@ -599,11 +594,12 @@ PartitionSize = 4
 							}
 	
 							var cursor = new TextEditorCursor(isPrimaryCursor: true);
-							var cursorModifier = new TextEditorCursorModifier(cursor);
-	
-							cursorModifier.LineIndex = 2;
-							cursorModifier.ColumnIndex = 0;
-							var startLineIndexTwoPositionIndex = modelModifier.GetPositionIndex(cursorModifier);
+                            var cursorModifier = new TextEditorCursorModifier(cursor)
+                            {
+                                LineIndex = 2,
+                                ColumnIndex = 0
+                            };
+                            var startLineIndexTwoPositionIndex = modelModifier.GetPositionIndex(cursorModifier);
 	
 							cursorModifier.LineIndex = 3;
 							cursorModifier.ColumnIndex = 0;
@@ -735,10 +731,11 @@ PartitionSize = 4
                             }
 
                             var cursor = new TextEditorCursor(isPrimaryCursor: true);
-                            var cursorModifier = new TextEditorCursorModifier(cursor);
-
-                            cursorModifier.LineIndex = 39;
-                            cursorModifier.ColumnIndex = 1;
+                            var cursorModifier = new TextEditorCursorModifier(cursor)
+                            {
+                                LineIndex = 39,
+                                ColumnIndex = 1
+                            };
                             var anchorPositionIndex = modelModifier.GetPositionIndex(cursorModifier);
 
                             cursorModifier.LineIndex = 754;
@@ -901,10 +898,11 @@ public class DotNetSolutionIdeApi
                             }
 
                             var cursor = new TextEditorCursor(isPrimaryCursor: true);
-                            var cursorModifier = new TextEditorCursorModifier(cursor);
-
-                            cursorModifier.LineIndex = 39;
-                            cursorModifier.ColumnIndex = 1;
+                            var cursorModifier = new TextEditorCursorModifier(cursor)
+                            {
+                                LineIndex = 39,
+                                ColumnIndex = 1
+                            };
                             var anchorPositionIndex = modelModifier.GetPositionIndex(cursorModifier);
 
                             cursorModifier.LineIndex = 754;
@@ -1067,10 +1065,11 @@ public class DotNetSolutionIdeApi
                             }
 
                             var cursor = new TextEditorCursor(isPrimaryCursor: true);
-                            var cursorModifier = new TextEditorCursorModifier(cursor);
-
-                            cursorModifier.LineIndex = 39;
-                            cursorModifier.ColumnIndex = 1;
+                            var cursorModifier = new TextEditorCursorModifier(cursor)
+                            {
+                                LineIndex = 39,
+                                ColumnIndex = 1
+                            };
                             var anchorPositionIndex = modelModifier.GetPositionIndex(cursorModifier);
 
                             cursorModifier.LineIndex = 754;

@@ -83,10 +83,10 @@ public class IfStatementNodeTests
         Assert.Equal(expressionNode, ifStatementNode.ExpressionNode);
         Assert.Equal(ifStatementBodyCodeBlockNode, ifStatementNode.IfStatementBodyCodeBlockNode);
 
-        Assert.Equal(3, ifStatementNode.ChildList.Length);
-        Assert.Equal(ifKeywordToken, ifStatementNode.ChildList[0]);
-        Assert.Equal(expressionNode, ifStatementNode.ChildList[1]);
-        Assert.Equal(ifStatementBodyCodeBlockNode, ifStatementNode.ChildList[2]);
+        Assert.Equal(3, ifStatementNode.GetChildList().Length);
+        Assert.Equal(ifKeywordToken, ifStatementNode.GetChildList()[0]);
+        Assert.Equal(expressionNode, ifStatementNode.GetChildList()[1]);
+        Assert.Equal(ifStatementBodyCodeBlockNode, ifStatementNode.GetChildList()[2]);
 
         Assert.False(ifStatementNode.IsFabricated);
 
